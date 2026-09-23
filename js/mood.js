@@ -256,5 +256,6 @@
       if (layer) { layer.remove(); layer = null; }
     },
     sound() { syncAmb(cur ? MG.byId[cur] : null); },
+    duck(on) { if (bus && ax) bus.gain.setTargetAtTime(on ? 0.25 : 0.8, ax.currentTime, 0.25); }, // 목소리가 나오는 동안 배경음을 낮춘다
   };
 })();
