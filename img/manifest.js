@@ -62,6 +62,7 @@ window.MG.images = {
   "c05/cipherimg": "img/c05/cipherimg.webp",
   "c05/cover": "img/c05/cover.webp",
   "c05/depot": "img/c05/depot.webp",
+  "c05/letter1": "img/c05/letter1.webp",
   "c05/lighthouse": "img/c05/lighthouse.webp",
   "c05/masonhill": "img/c05/masonhill.webp",
   "c05/payphone": "img/c05/payphone.webp",
