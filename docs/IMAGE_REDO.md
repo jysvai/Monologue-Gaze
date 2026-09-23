@@ -2,7 +2,7 @@
 
 > `node tools/prompts.js` 가 자동으로 만든다. 사건 파일 `art` 항목의 `redo` 표시를 모은 것이다.
 
-총 **7장** (필수 2 · 선택 5). 같은 경로·같은 이름으로 넣으면 게임 그림이 자동으로 바뀐다. 바꾼 뒤에는 그 항목의 `redo` 표시를 지운다.
+총 **8장** (필수 2 · 선택 6). 같은 경로·같은 이름으로 넣으면 게임 그림이 자동으로 바뀐다. 바꾼 뒤에는 그 항목의 `redo` 표시를 지운다.
 
 | 그림 | 급함 | 이유 |
 |---|---|---|
@@ -13,6 +13,7 @@
 | `c02/lock` | 선택 | 「새 자물쇠」인데 녹슨 헌 자물쇠처럼 보인다. |
 | `c03/p_radio` | 선택 | 캡션은 「스위치 켜진 채」인데 다이얼 불이 안 보이고, 표지 라디오와 모양이 다르다. |
 | `c04/montage` | 필수 | 너무 사실적인 한 사람의 깨끗한 증명사진처럼 나왔다. 신문 망점 느낌이 없고, 실제 사건 몽타주와 닮아 보일 위험이 있다. |
+| `c05/cipherimg` | 선택 | 기호가 네 가지뿐이고 규칙적으로 되풀이돼 무늬처럼 보인다. 게임 속 암호문(글자마다 다른 기호)과 안 맞는다. |
 
 ## c01/q_thread — 경찰의 소견 — 증거물 붉은 무명실 (필수)
 - 저장 경로: `img/c01/q_thread.png` · 비율: 4:3
@@ -67,4 +68,12 @@ Police photograph of the same 1930s wooden cathedral-style vacuum-tube radio as 
 - 주의: 실존 인물(특히 실제 사건 몽타주의 얼굴)을 닮지 않게. 여러 얼굴을 조합한 듯 어색하게.
 ```
 A 1960s police photo-composite portrait printed in a newspaper: a generic young man in a white open-face helmet and black leather jacket, face assembled from mismatched photo fragments with faint seams, coarse halftone dots, flat grey tones, deliberately generic features that resemble no real person. Make the composite obvious: eyes, nose and mouth come from three different photos that do not match in scale or tone, with visible cut lines, and the whole print is coarse, blurry newspaper halftone on yellowed newsprint rather than a clean photo. Late-1960s Japanese press and police evidence photography, Tokyo suburbs in the rainy season of 1968: black-and-white 35mm Tri-X film, pushed grain, slightly soft focus, flat overcast light, wet asphalt sheen, muted grey tonality; evidence-card shots on a plain board with a small ruler, occasionally as faded early color prints with a cyan shift. Showa-era details only. No readable text, no logos, no recognizable faces. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them.
+```
+
+## c05/cipherimg — 1면에 실린 암호문 (기호만, 뜻 없는 도형 배열) (선택)
+- 저장 경로: `img/c05/cipherimg.png` · 비율: 4:3
+- 이유: 기호가 네 가지뿐이고 규칙적으로 되풀이돼 무늬처럼 보인다. 게임 속 암호문(글자마다 다른 기호)과 안 맞는다.
+- **꼭 보여야 할 것**: 기호 종류가 많고 불규칙하게 (4 가지가 되풀이되면 암호로 안 보인다)
+```
+A newspaper front-page detail printed in halftone: a block of simple geometric hand-drawn symbols (circles, triangles, crossed circles, diamonds) arranged in three uneven rows like a cipher, no letters or readable words, slightly smudged ink, folded newsprint texture. Use about fifteen different symbol shapes (squares with crosses, circles with bars, arrows, half-moons, hourglass marks and so on) in an irregular, non-repeating sequence, like a real substitution cipher. 1969 American newspaper wire photo and police file photography, Northern California coast: black-and-white 35mm Tri-X, heavy grain, harsh on-camera flash at night, coastal fog and sodium streetlight glow, halftone dot texture when reproduced in the newspaper, late-1960s cars, phone booths and street furniture without brand logos. No readable text, no recognizable faces, no bodies, no blood, no weapons shown. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them.
 ```

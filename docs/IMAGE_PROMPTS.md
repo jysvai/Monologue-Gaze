@@ -517,11 +517,12 @@ A coastal road leading to a small white lighthouse before dawn, thick fog, the l
 A newspaper distribution warehouse on a waterfront street late on a Saturday night, three loading bays lit with bare bulbs, workers in silhouette stacking tied bundles of thick Sunday newspapers onto trucks, wet pavement, 1969, grainy press photo.
 ```
 
-### c05/cipherimg — 1면에 실린 암호문 (기호만, 뜻 없는 도형 배열)
+### c05/cipherimg — 1면에 실린 암호문 (기호만, 뜻 없는 도형 배열) 🔁 다시 뽑기
 - 저장 경로: `img/c05/cipherimg.webp` · 비율: 4:3
 ```
-A newspaper front-page detail printed in halftone: a block of simple geometric hand-drawn symbols (circles, triangles, crossed circles, diamonds) arranged in three uneven rows like a cipher, no letters or readable words, slightly smudged ink, folded newsprint texture.
+A newspaper front-page detail printed in halftone: a block of simple geometric hand-drawn symbols (circles, triangles, crossed circles, diamonds) arranged in three uneven rows like a cipher, no letters or readable words, slightly smudged ink, folded newsprint texture. Use about fifteen different symbol shapes (squares with crosses, circles with bars, arrows, half-moons, hourglass marks and so on) in an irregular, non-repeating sequence, like a real substitution cipher.
 ```
+- **꼭 보여야 할 것**: 기호 종류가 많고 불규칙하게 (4 가지가 되풀이되면 암호로 안 보인다)
 
 ## CASE 06 · 크비트달의 여인 (1969, 노르웨이 서해안 헬레순 (가상 지명))
 
