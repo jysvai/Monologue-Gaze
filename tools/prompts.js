@@ -53,7 +53,7 @@ function main() {
 
   let total = GLOBAL.length;
   const out = [];
-  const redo = [];
+  const redo = [], swap = [];
   out.push('# Monologue Gaze — 이미지 프롬프트 모음');
   out.push('');
   out.push('> 이 파일은 `node tools/prompts.js` 로 자동 생성됩니다. 프롬프트를 고치려면 각 사건 파일(`cases/*.js`)의 `art` 항목을 고친 뒤 다시 생성하세요.');
@@ -98,11 +98,14 @@ function main() {
     if (c.no >= V2_FROM && arts.length) out.push('- **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.');
     out.push('');
     if (!arts.length) { out.push('_이미지 프롬프트 없음 (전부 SVG 로 그린 도면·지도)_'); out.push(''); }
+    Object.entries(c.art || {}).forEach(([key, a]) => { if (a && a.swap && a.made) swap.push({ c, key, a }); }); // 직접 만드는 그림 (프롬프트 없음)
     arts.forEach(([key, a]) => {
       total++;
       out.push(`### ${c.id}/${key} — ${a.use || ''}${a.sensitive ? ' 🔞 열람 주의' : ''}${a.redo ? ' 🔁 다시 뽑기' : ''}`);
       if (a.redo) redo.push({ c, key, a });
+      if (a.swap) swap.push({ c, key, a });
       out.push(`- 저장 경로: \`img/${c.id}/${key}.webp\` · 비율: ${a.ratio || '4:3'}${a.where ? ` · 쓰이는 곳: ${a.where}` : ''}`);
+      if (a.own) out.push('- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치라 프롬프트 안에 그림체가 들어 있다).');
       out.push(block(a.prompt));
       if (a.must) out.push(`- **꼭 보여야 할 것**: ${a.must}`);
       if (a.avoid) out.push(`- 주의: ${a.avoid}`);
@@ -115,6 +118,7 @@ function main() {
   fs.writeFileSync(dest, out.join('\n'), 'utf8');
   console.log(`${path.relative(root, dest)} 작성 — 이미지 ${total}장`);
   writeRedo(redo);
+  writeSwap(swap);
 }
 
 // 검수에서 걸린 그림(art 의 redo 표시)만 모은 목록. 프롬프트는 [그림 + 사건 공통 스타일 + v2 추가 스타일] 을 합쳐 두어 그대로 붙여 넣으면 된다.
@@ -144,6 +148,42 @@ function writeRedo(list) {
   const dest = path.join(root, 'docs', 'IMAGE_REDO.md');
   fs.writeFileSync(dest, o.join('\n'), 'utf8');
   console.log(`${path.relative(root, dest)} 작성 — 다시 뽑을 이미지 ${list.length}장`);
+}
+
+// SVG 임시 그림을 이미지로 바꿀 목록 (art 의 swap: 'svg'). 지도·관찰 사진·대조 시료라서 단서의 자리와 특징이 맞아야 한다.
+const SWAP_TAIL = 'This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.';
+function writeSwap(list) {
+  const have = k => ['.webp', '.png', '.jpg'].some(e => fs.existsSync(path.join(root, 'img', k + e)));
+  const make = list.filter(r => !r.a.made), made = list.filter(r => r.a.made);
+  const left = make.filter(r => !have(`${r.c.id}/${r.key}`));
+  const kind = a => (/지도/.test(a.use) ? '지도' : /대조/.test(a.use) ? '대조 시료' : '관찰 사진');
+  const o = ['# SVG → 이미지로 바꿀 그림', ''];
+  o.push("> `node tools/prompts.js` 가 자동으로 만든다. 사건 파일 `art` 항목 가운데 `swap: 'svg'` 표시가 붙은 것 — 지금은 게임에서 단순한 SVG 도형으로 그려지는 지도·현장 관찰 사진·대조 감정 시료다.");
+  o.push('');
+  o.push(`총 **${make.length}장** · 남은 것 **${left.length}장**. 성문 스펙트로그램 ${made.length}장은 합성음으로 직접 만들어 넣으므로 여기서 뽑지 않는다.`);
+  o.push('');
+  o.push('## 뽑을 때 지킬 것');
+  o.push('');
+  o.push('1. 아래 코드 블록 하나가 그림 하나의 **완성 프롬프트**다 (그림 설명 + 사건 공통 스타일 + 규칙). 그대로 붙여 넣는다.');
+  o.push('2. **글자를 넣지 않는다.** 지도의 지명, 사진 속 번호표 숫자는 게임이 그림 위에 따로 얹는다. 또렷한 가짜 글자가 생기면 다시 뽑는다.');
+  o.push('3. **단서의 자리**를 지킨다. 프롬프트가 「왼쪽 위」「오른쪽 아래」라고 한 물건은 그 자리에 있어야 한다. 게임은 그 자리를 눌러 단서를 찾게 한다. 조금 어긋나는 것은 검수 때 게임 쪽 좌표를 그림에 맞춰 고친다.');
+  o.push('4. **꼭 보여야 할 것**은 프롬프트의 다른 부분보다 우선한다. 대조 시료는 서로 다른 점(우표가 거꾸로인지, 접힌 자국 수, 줄무늬 간격)이 정답을 가르므로 특히 정확해야 한다.');
+  o.push('5. 비율은 표에 적힌 대로. 저장은 `img/<사건>/<키>.png`.');
+  o.push('');
+  o.push('| 그림 | 종류 | 비율 | 상태 |', '|---|---|---|---|');
+  make.forEach(({ c, key, a }) => o.push(`| \`${c.id}/${key}\` | ${kind(a)} | ${a.ratio || '4:3'} | ${have(`${c.id}/${key}`) ? '✅ 들어옴' : '⬜ 뽑을 것'} |`));
+  o.push('');
+  make.forEach(({ c, key, a }) => {
+    o.push(`## ${c.id}/${key} — ${kind(a)} · ${c.title}${have(`${c.id}/${key}`) ? ' ✅' : ''}`);
+    o.push(`- 저장 경로: \`img/${c.id}/${key}.png\` · 비율: ${a.ratio || '4:3'}`);
+    if (a.must) o.push(`- **꼭 보여야 할 것**: ${a.must}`);
+    if (a.labels) o.push(`- 게임이 얹을 글자: ${a.labels.map(l => l[0]).join(' · ')}`);
+    o.push(block((a.own ? [a.prompt, SWAP_TAIL] : [a.prompt, c.artStyle, c.no >= V2_FROM ? V2_TAIL : '', SWAP_TAIL]).filter(Boolean).join(' ')));
+    o.push('');
+  });
+  const dest = path.join(root, 'docs', 'IMAGE_SVG.md');
+  fs.writeFileSync(dest, o.join('\n'), 'utf8');
+  console.log(`${path.relative(root, dest)} 작성 — SVG 를 바꿀 이미지 ${make.length}장 (남은 것 ${left.length})`);
 }
 
 if (require.main === module) main();
