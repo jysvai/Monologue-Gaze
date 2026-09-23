@@ -264,6 +264,8 @@ function check(c) {
     if (d.skin && !SKINS.has(d.skin)) warn(`${w}: skin "${d.skin}" 은 기본 스킨이 아님`);
     (d.find || []).forEach(k => { if (!K[k]) err(`${w}.find: 없는 단어 ${k}`); });
     needCheck(d.need, w);
+    if (d.blood != null && ![true, false, 'heavy'].includes(d.blood)) err(`${w}: blood 는 true | false | 'heavy'`);
+    if (d.blood && !c.graphic) warn(`${w}: blood 는 graphic 사건에서만 보인다`);
     const s = srcById[d.src];
     if (s && s.type === 'query' && !(s.records || []).some(r => r.doc === id)) err(`${w}: 조회(query) 문서인데 어느 record 도 가리키지 않음`);
     if (s && s.type === 'archive' && !(d.find || []).length && !(s.start || []).includes(id)) err(`${w}: 자료실(archive) 문서인데 find 도 없고 start 도 아님 → 찾을 방법이 없음`);
@@ -315,6 +317,7 @@ function check(c) {
     if (a && typeof a === 'object') {
       if (a.prompt && !a.use) warn(`art ${k}: prompt 는 있는데 use(용도 설명)가 없음`);
       if (a.prompt && !a.ratio) warn(`art ${k}: ratio 가 없음`);
+      if (a.sensitive != null && typeof a.sensitive !== 'boolean') err(`art ${k}: sensitive 는 true/false`);
     }
   });
 

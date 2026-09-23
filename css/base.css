@@ -352,3 +352,34 @@ img{max-width:100%}
 .ph-found li.fresh{animation:write .5s ease-out}
 .ph-l{margin:0 0 2px;font:700 13px var(--f-web);color:var(--red)}
 @media (prefers-reduced-motion:reduce){.ph-miss,.ph-found li.fresh{animation:none}}
+
+/* ── 혐오감 주의 사건: 마른 핏자국 · 열람 주의 사진 */
+.stain{position:absolute;left:var(--x);top:var(--y);width:calc(150px * var(--s));height:calc(150px * var(--s));background-repeat:no-repeat;background-position:center;background-size:contain;transform:translate(-30%,-20%) rotate(var(--r));mix-blend-mode:multiply;opacity:.66;pointer-events:none;z-index:3}
+.st-b{width:calc(230px * var(--s));height:calc(100px * var(--s))}
+.st-c{width:calc(90px * var(--s));height:calc(130px * var(--s));transform:translate(-30%,0) rotate(calc(var(--r) * .03))}
+.st-d{width:calc(60px * var(--s));height:calc(76px * var(--s));opacity:.55}
+.case-view[data-graphic] .doc{overflow:hidden}
+.case-view[data-graphic] .doc-b{position:relative;z-index:1}
+.case-view{position:relative;z-index:1}
+.gore-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 48%,rgba(60,3,1,.42) 100%)}
+.gore-bg .stain{width:calc(320px * var(--s));height:calc(320px * var(--s));opacity:.5}
+.gore-bg .st-b{width:calc(460px * var(--s));height:calc(200px * var(--s))}
+.gore-bg .st-c{top:-10px;width:calc(160px * var(--s));height:calc(230px * var(--s))}
+.case-view[data-graphic] .stage-frame{box-shadow:0 30px 60px -20px rgba(0,0,0,.85),0 0 0 1px rgba(80,8,4,.35)}
+.brief .stain{opacity:.5}
+.f-blood{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
+.f-blood .stain{opacity:.55}
+.cw-card{position:relative;overflow:hidden}
+.cw-card>*:not(.stain){position:relative;z-index:4}
+.snd.mild[aria-pressed="true"]{color:#e08a7f}
+.cens{position:relative;display:block;overflow:hidden;cursor:pointer;background:#1c1412}
+.cens>svg,.cens>img{display:block;width:100%;height:auto;filter:blur(14px) grayscale(.6) brightness(.5);transform:scale(1.08);transition:filter .6s ease,transform .6s ease}
+.cens.open{cursor:inherit}
+.cens.open>svg,.cens.open>img{filter:none;transform:none}
+.cens-l{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#f3e9e4;font:12px var(--f-mono);letter-spacing:.1em;text-align:center;background:repeating-linear-gradient(135deg,rgba(0,0,0,.2) 0 10px,rgba(0,0,0,.34) 10px 20px)}
+.cens-l b{padding:3px 10px;border:2px solid #d8584c;background:#8c1e16;color:#fff;font:800 13px var(--f-web);letter-spacing:.08em}
+.cens.open .cens-l{display:none}
+@media (prefers-reduced-motion:reduce){.cens>svg,.cens>img{transition:none}}
+.nb-back{white-space:nowrap}
+.nb-case{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:2px 6px;text-align:right}
+.nb-case .snd{margin-right:0}

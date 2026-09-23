@@ -48,7 +48,7 @@ function main() {
   out.push('2. 받은 이미지를 표에 적힌 경로(`img/<사건>/<키>.webp`)로 저장한다. `.png`, `.jpg` 도 된다. 가능하면 webp 로 바꿔 한 장에 300KB 이하로 줄이면 GitHub 에 올리기 좋다.');
   out.push('3. `node tools/manifest.js` 를 실행하면 게임이 SVG 임시 그림 대신 그 이미지를 쓴다.');
   out.push('');
-  out.push('**모든 이미지 공통 원칙**: 실제 인물·실제 피해자의 얼굴을 닮게 만들지 않는다 / 시신·피·상처 묘사 없음 / 실제 상표·로고 없음 / 글자는 넣지 않는다 (신문 제목, 간판 글씨 등은 게임이 HTML 로 따로 쓴다). 글자가 꼭 필요해 보이는 자리는 "no readable text" 를 유지하고 흐릿한 형태만 둔다.');
+  out.push('**모든 이미지 공통 원칙**: 실제 인물·실제 피해자의 얼굴을 닮게 만들지 않는다 / 보통 사건의 시신은 가리거나 암시만 / 혐오감 주의 사건은 마른 핏자국과 가려진 시신의 일부까지 (절단면·장기·훼손 부위 클로즈업은 없음) / 실제 상표·로고 없음 / 글자는 넣지 않는다 (신문 제목, 간판 글씨 등은 게임이 HTML 로 따로 쓴다). 글자가 꼭 필요해 보이는 자리는 "no readable text" 를 유지하고 흐릿한 형태만 둔다.');
   out.push('');
   out.push('## 공통 이미지');
   out.push('');
@@ -64,7 +64,7 @@ function main() {
     out.push(`## CASE ${String(c.no).padStart(2, '0')} · ${c.title} (${c.year}, ${c.place})`);
     out.push('');
     out.push(`- 사건 파일: \`cases/${files.find(f => f.startsWith(c.id)) || c.id}\` · 이미지 ${arts.length}장${c.stars ? ` · 난이도 ${'★'.repeat(c.stars)}` : ''}`);
-    if (c.graphic) out.push('- **혐오감 주의 사건**: 표지(cover) 위에는 게임이 「혐오감 주의」 스티커(`_global/warn`)를 겹쳐 붙이고 흐리게 처리한다. 그래도 그림 자체에는 시신·피·상처를 절대 넣지 말 것 — 비닐봉투, 현장 테이프, 빈 공원 같은 것으로만 암시.');
+    if (c.graphic) out.push('- **혐오감 주의 사건**: 폴더 표지(cover) 위에는 게임이 「혐오감 주의」 스티커(`_global/warn`)를 겹쳐 붙이고 흐리게 처리한다. 마른 핏자국, 가려진 시신의 일부(방수포 밖의 손, 자루 속 형체)까지는 괜찮다. 절단면·장기·훼손 부위 클로즈업은 넣지 않는다. 🔞 표시가 붙은 그림은 게임에서 흐리게 가려진 채 나오고 눌러야 보인다.');
     if (c.artStyle) {
       out.push('- **공통 스타일** (각 프롬프트 뒤에 붙이기):');
       out.push(block(c.artStyle));
@@ -73,7 +73,7 @@ function main() {
     if (!arts.length) { out.push('_이미지 프롬프트 없음 (전부 SVG 로 그린 도면·지도)_'); out.push(''); }
     arts.forEach(([key, a]) => {
       total++;
-      out.push(`### ${c.id}/${key} — ${a.use || ''}`);
+      out.push(`### ${c.id}/${key} — ${a.use || ''}${a.sensitive ? ' 🔞 열람 주의' : ''}`);
       out.push(`- 저장 경로: \`img/${c.id}/${key}.webp\` · 비율: ${a.ratio || '4:3'}${a.where ? ` · 쓰이는 곳: ${a.where}` : ''}`);
       out.push(block(a.prompt));
       if (a.avoid) out.push(`- 주의: ${a.avoid}`);

@@ -31,6 +31,34 @@
   const lv = () => (C && C.stars) || 3;
   const starsHtml = c => c.kind === 'tutorial' || !c.stars ? '' : `<span class="stars${c.graphic ? ' red' : ''}" role="img" aria-label="난이도 ${c.stars} / 5${c.graphic ? ' · 혐오감 주의' : ''}">${'★'.repeat(c.stars)}<i>${'★'.repeat(5 - c.stars)}</i></span>`;
 
+  /* ── 혐오감 주의 사건의 마른 핏자국 (S.mild 이면 끈다) */
+  const STAIN_SVG = {
+    a: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='.07' numOctaves='2' seed='3'/><feDisplacementMap in='SourceGraphic' scale='16'/></filter><radialGradient id='g' cx='.45' cy='.42' r='.62'><stop offset='0' stop-color='#72140b'/><stop offset='.75' stop-color='#5a0e07'/><stop offset='1' stop-color='#3b0804'/></radialGradient></defs><g filter='url(#r)' fill='url(#g)'><ellipse cx='98' cy='102' rx='40' ry='34'/><path d='M126 116 q34 10 50 34 q-28 -6 -54 -24z'/><path d='M70 80 q-26 -22 -34 -46 q18 16 42 36z'/><circle cx='150' cy='70' r='8'/><circle cx='163' cy='57' r='4'/><circle cx='40' cy='142' r='7'/><circle cx='28' cy='155' r='3.5'/><circle cx='137' cy='154' r='5'/><circle cx='62' cy='150' r='3'/><circle cx='174' cy='120' r='3'/><circle cx='118' cy='38' r='3'/><circle cx='90' cy='176' r='4'/></g></svg>",
+    b: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 130'><defs><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='.09' numOctaves='2' seed='7'/><feDisplacementMap in='SourceGraphic' scale='9'/></filter></defs><g filter='url(#r)' fill='none' stroke='#5e0f08' stroke-linecap='round'><path d='M18 42 C90 28 170 34 282 56' stroke-width='15' opacity='.9'/><path d='M22 66 C100 58 180 62 262 80' stroke-width='12' opacity='.8'/><path d='M28 88 C110 84 172 88 232 100' stroke-width='9' opacity='.7'/><path d='M34 108 C100 106 150 110 196 116' stroke-width='6' opacity='.6'/></g></svg>",
+    c: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 230'><defs><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='.06' numOctaves='2' seed='5'/><feDisplacementMap in='SourceGraphic' scale='6'/></filter></defs><g filter='url(#r)' fill='#5c0e08'><path d='M8 0 H152 C152 20 142 26 130 28 C126 64 128 124 122 156 C120 168 108 168 106 156 C102 112 104 62 96 36 C90 44 88 72 84 96 C82 104 74 104 72 96 C70 72 70 46 62 36 C54 42 52 56 48 66 C46 72 40 72 38 66 C36 52 34 36 22 30 C14 26 8 18 8 0 Z'/><circle cx='114' cy='174' r='6'/><circle cx='78' cy='112' r='4'/></g></svg>",
+    d: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 150'><defs><clipPath id='c'><ellipse cx='60' cy='75' rx='42' ry='58'/></clipPath><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='.2' numOctaves='1' seed='2'/><feDisplacementMap in='SourceGraphic' scale='5'/></filter></defs><g clip-path='url(#c)' filter='url(#r)' fill='none' stroke='#6a120a' stroke-width='3.4'><ellipse cx='60' cy='84' rx='7' ry='9'/><ellipse cx='60' cy='82' rx='13' ry='17'/><ellipse cx='60' cy='80' rx='19' ry='25'/><ellipse cx='60' cy='78' rx='25' ry='33'/><ellipse cx='60' cy='76' rx='31' ry='41'/><ellipse cx='60' cy='74' rx='37' ry='49'/><ellipse cx='60' cy='72' rx='43' ry='57'/></g></svg>",
+  };
+  const gore = () => !!(C && C.graphic && !S.mild);
+  // kinds: 문자열 'abcd' 중에서 고른다. seed 로 위치·각도를 정한다 (같은 문서는 늘 같은 자리).
+  function stains(seed, n, kinds, edge) {
+    let out = '';
+    for (let i = 0; i < n; i++) {
+      const h = hash(seed + ':' + i);
+      const k = kinds[h % kinds.length];
+      const side = (h >> 3) % 2;
+      const x = edge ? (side ? 78 + (h % 17) : -6 + (h % 14)) : 8 + (h % 80);
+      const y = -4 + ((h >> 5) % 90);
+      out += `<span class="stain st-${k}" style="--x:${x}%;--y:${y}%;--r:${(h >> 7) % 360}deg;--s:${(0.6 + ((h >> 9) % 60) / 100).toFixed(2)}" aria-hidden="true"></span>`;
+    }
+    return out;
+  }
+  function docStains(d) {
+    if (!gore() || d.blood === false) return '';
+    if (d.blood === 'heavy') return stains(d.id, 3, 'aacbd', false);
+    if (d.blood === true || hash(d.id) % 3 === 0) return stains(d.id, 1 + (hash(d.id) % 2), 'abd', true);
+    return '';
+  }
+
   /* ───────── save ───────── */
   const KEY = 'mg-save-v1';
   let S = { cases: {}, current: null, intro: false };
@@ -59,6 +87,7 @@
     st.tl ??= {};
     st.found ??= {};
     st.cmp ??= {};
+    st.cens ??= [];
     st.m ??= false;
     st.nid ??= 0;
     return st;
@@ -93,6 +122,10 @@
   }
 
   function injectCss() {
+    const st = document.createElement('style');
+    st.id = 'stain-css';
+    st.textContent = Object.entries(STAIN_SVG).map(([k, v]) => `.st-${k}{background-image:url("data:image/svg+xml,${encodeURIComponent(v)}")}`).join('\n');
+    document.head.appendChild(st);
     const css = MG.cases.map(c => c.css || '').join('\n');
     if (!css.trim()) return;
     const el = document.createElement('style');
@@ -150,8 +183,10 @@
     if (a == null) return '';
     const file = svgOnly && !(a && a.raster) ? null : MG.images[`${C.id}/${key}`];
     const alt = (a && a.alt) || (a && a.use) || '';
-    if (file) return `<img class="${cls || 'art'}" src="${esc(file)}" alt="${esc(alt)}" loading="lazy">`;
-    return typeof a === 'string' ? a : a.svg || '';
+    const body = file ? `<img class="${cls || 'art'}" src="${esc(file)}" alt="${esc(alt)}" loading="lazy">` : typeof a === 'string' ? a : a.svg || '';
+    if (!(a && a.sensitive) || !ST) return body;
+    const open = ST.cens.includes(key) && !S.mild;
+    return `<span class="cens${open ? ' open' : ''}" data-cens="${esc(key)}">${body}<span class="cens-l"><b>열람 주의</b>${S.mild ? '잔혹 표현을 끈 상태' : '눌러서 보기'}</span></span>`;
   }
 
   function pinBtn(ref, t, f, src) {
@@ -220,7 +255,7 @@
     if (!ST.seen.includes(d.id)) { ST.seen.push(d.id); save(); }
     const skin = d.skin || s.skin || 'plain';
     const paper = d.paper || s.paper;
-    return `<article class="doc skin-${esc(skin)}${d.cls ? ' ' + esc(d.cls) : ''}"${d.bar ? ` style="--bar:${esc(d.bar)}"` : ''}>
+    return `<article class="doc skin-${esc(skin)}${d.cls ? ' ' + esc(d.cls) : ''}"${d.bar ? ` style="--bar:${esc(d.bar)}"` : ''}>${docStains(d)}
       <header class="doc-h">${paper ? `<p class="doc-paper">${inline(paper)}</p>` : ''}${d.kicker ? `<p class="doc-k">${inline(d.kicker)}</p>` : ''}<h3 class="doc-t">${inline(d.title)}</h3>${d.meta ? `<p class="doc-m">${inline(d.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(d.body, d.id, plain(d.title))}</div></article>`;
   }
@@ -499,9 +534,9 @@
     const top = nb.scrollTop;
     nb.innerHTML = `
       <div class="nb-rings" aria-hidden="true"></div>
-      <div class="nb-top"><button type="button" class="nb-back" data-cabinet>← 기록실</button><span class="nb-case">${soundBtn()} ${starsHtml(C)} CASE ${pad(C.no)}</span></div>
+      <div class="nb-top"><button type="button" class="nb-back" data-cabinet>← 기록실</button><span class="nb-case">${soundBtn()}${C.graphic ? mildBtn() : ''} ${starsHtml(C)} CASE ${pad(C.no)}</span></div>
       <article class="brief"><svg class="clip" viewBox="0 0 24 64" aria-hidden="true"><path d="M8 20 V50 a6 6 0 0 0 12 0 V12 a8 8 0 0 0 -16 0 V46" fill="none" stroke="#8d918f" stroke-width="2.6" stroke-linecap="round"/></svg>
-        <h2>${esc(b.title || C.title)} <small>${esc(b.no || '')}</small></h2>
+        ${gore() ? stains(C.id + 'brief', 1, 'bd', true) : ''}<h2>${esc(b.title || C.title)} <small>${esc(b.no || '')}</small></h2>
         <dl>${(b.lines || []).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${inline(v)}</dd>`).join('')}</dl>${b.scrawl ? `<p class="scrawl">${inline(b.scrawl)}</p>` : ''}</article>
       <section class="ruled nb-sec"><h3 class="hh">단어 <small>${keys.length}</small></h3>
         ${groups.map(([t, a]) => `<p class="kg"><span class="kg-t">${KTYPE[t]}</span> ${a.map(k => `<button type="button" class="kchip" data-chip="${k}">${esc(C.keywords[k].label)}</button>`).join(' ')}</p>`).join('')}
@@ -525,7 +560,7 @@
   /* ───────── screens ───────── */
   function renderCase() {
     document.body.dataset.screen = 'case';
-    app.innerHTML = `<div class="case-view" data-case="${esc(C.id)}" data-frame="${esc(C.frame || 'papers')}">
+    app.innerHTML = `${gore() ? `<div class="gore-bg" aria-hidden="true">${stains(C.id + 'bg', 5, 'aacb', true)}</div>` : ''}<div class="case-view" data-case="${esc(C.id)}" data-frame="${esc(C.frame || 'papers')}"${gore() ? ' data-graphic' : ''}>
       <main class="stage" aria-label="조사 자료">
         <div class="stage-frame"><span class="cam" aria-hidden="true"></span>
           <div class="screen">
@@ -554,8 +589,8 @@
   function warnScreen(c) {
     C = null; ST = null; S.current = null; save();
     document.body.dataset.screen = 'cabinet';
-    app.innerHTML = `<div class="cw"><div class="cw-card"><p class="cw-t">혐오감 주의</p><h2>CASE ${pad(c.no)} 「${esc(c.title)}」 ${starsHtml(c)}</h2>
-      <p>${esc(c.warn || '이 사건 기록에는 시신 훼손 같은 잔혹한 내용과 강한 묘사가 들어 있습니다.')}</p><p class="cw-s">모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다.</p>
+    app.innerHTML = `<div class="cw"><div class="cw-card">${S.mild ? '' : stains(c.id + 'cw', 2, 'acd', true)}<p class="cw-t">혐오감 주의</p><h2>CASE ${pad(c.no)} 「${esc(c.title)}」 ${starsHtml(c)}</h2>
+      <p>${esc(c.warn || '이 사건 기록에는 시신 훼손 같은 잔혹한 내용과 강한 묘사가 들어 있습니다.')}</p><p class="cw-s">모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국 같은 화면 연출과 사진은 「잔혹 표현」 단추로 끌 수 있습니다.</p><p>${mildBtn()}</p>
       <p class="cw-b"><button type="button" class="btn-hand" data-cw-ok="${esc(c.id)}">기록을 연다</button> <button type="button" class="reset" data-cabinet>돌아간다</button></p></div></div>`;
     window.scrollTo(0, 0);
   }
@@ -573,7 +608,7 @@
       const coverFile = MG.images[`${c.id}/cover`];
       const cover = coverFile ? `<img src="${esc(coverFile)}" alt="" loading="lazy">` : c.art && c.art.cover ? (typeof c.art.cover === 'string' ? c.art.cover : c.art.cover.svg || '') : '';
       return `<button type="button" class="folder ${status}${c.kind === 'tutorial' ? ' tutorial' : ''}" data-open="${esc(c.id)}" style="--tilt:${(hash(c.id) % 7 - 3) * 0.4}deg">
-        ${cover ? `<span class="f-cover${c.graphic ? ' graphic' : ''}" aria-hidden="true">${cover}</span>` : ''}${c.graphic ? '<span class="f-warn">혐오감 주의</span>' : ''}
+        ${cover ? `<span class="f-cover${c.graphic ? ' graphic' : ''}" aria-hidden="true">${cover}</span>` : ''}${c.graphic && !S.mild ? `<span class="f-blood" aria-hidden="true">${stains(c.id + 'f', 2, 'dac', false)}</span>` : ''}${c.graphic ? '<span class="f-warn">혐오감 주의</span>' : ''}
         <span class="f-tab">CASE ${pad(c.no)}</span>
         <span class="f-body"><span class="f-kind">${kind} · ${esc(c.year)} ${c.kind === 'tutorial' ? '<span class="stars t">연습</span>' : starsHtml(c)}</span><span class="f-label"><span class="f-title">${esc(c.title)}</span><span class="f-place">${esc(c.place)}</span></span>
         <span class="f-motif">${esc(c.motif || '')}</span>${c.length ? `<span class="f-len">${esc(c.length)}</span>` : ''}
@@ -585,7 +620,7 @@
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt=""></div>` : ''}
       <header class="cab-top"><p class="cab-kicker">서울서부경찰서 강력2팀 · 미제사건 기록실</p><h1 class="cab-title">Monologue Gaze</h1><p class="cab-sub">기록은 혼잣말을 한다. 들어주는 건 당신이다.</p>
-        ${soundBtn()}<p class="cab-stat">종결 <b>${solvedMain}</b> / ${main.length} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}</p></header>
+        ${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}<p class="cab-stat">종결 <b>${solvedMain}</b> / ${main.length} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}</p></header>
       ${intro}
       <section class="drawer" aria-label="사건 파일">${MG.cases.map(folder).join('')}</section>
       ${mList.length ? `<section class="mbox"><h2>M의 메모</h2><p class="mbox-sub">기록 여백에 남아 있던, 선배의 글씨.</p><ul>${mList.map(c => `<li><span class="mbox-case">CASE ${pad(c.no)}</span> ${esc(plain(c._m))}</li>`).join('')}</ul></section>` : ''}
@@ -622,6 +657,7 @@
       } else if (kind === 'lock') noise(0.05, 'highpass', 4000, 0.8, 0.15);
     } catch (e) { /* audio unavailable */ }
   }
+  const mildBtn = () => `<button type="button" class="snd mild" data-mild aria-pressed="${!S.mild}">${S.mild ? '잔혹 표현 꺼짐' : '잔혹 표현 켜짐'}</button>`;
   const soundBtn = () => `<button type="button" class="snd" data-sound aria-pressed="${!!S.sound}">${S.sound ? '소리 켜짐' : '소리 꺼짐'}</button>`;
 
   /* ───────── actions ───────── */
@@ -875,6 +911,7 @@
       if ((el = t.closest('[data-open]'))) return openCase(el.dataset.open);
       if ((el = t.closest('[data-cw-ok]'))) { const c = MG.byId[el.dataset.cwOk]; if (c) { cs(c).cw = true; save(); openCase(c.id); } return; }
       if (t.closest('[data-cabinet]')) { cabinet(); window.scrollTo(0, 0); return; }
+      if ((el = t.closest('[data-mild]'))) { S.mild = !S.mild; save(); if (C) renderCase(); else if (t.closest('.cw')) { const id = app.querySelector('[data-cw-ok]'); if (id) warnScreen(MG.byId[id.dataset.cwOk]); } else cabinet(); return; }
       if ((el = t.closest('[data-sound]'))) { S.sound = !S.sound; save(); el.outerHTML = soundBtn(); if (S.sound) sfx('pen'); return; }
       if (t.closest('[data-intro-ok]')) { S.intro = true; save(); cabinet(); return; }
       if ((el = t.closest('[data-wipe]'))) return armed(el, '한 번 더 누르면 전부 지워진다', () => { S = { cases: {}, current: null, intro: false }; save(); cabinet(); });
@@ -905,6 +942,12 @@
       if ((el = t.closest('[data-scene]'))) return openItem({ t: 'photo', id: el.dataset.scene });
       if ((el = t.closest('[data-ph-cell]'))) return photoCell(el.dataset.phCell);
       if (t.closest('[data-ph-grid]')) { const g = $('.ph-grid'); if (g) g.hidden = !g.hidden; return; }
+      if ((el = t.closest('[data-cens]')) && !el.classList.contains('open')) {
+        if (S.mild) { toast('잔혹 표현이 꺼져 있다'); return; }
+        if (!ST.cens.includes(el.dataset.cens)) ST.cens.push(el.dataset.cens);
+        save(); $$(`[data-cens="${el.dataset.cens}"]`).forEach(x => x.classList.add('open'));
+        return;
+      }
       if ((el = t.closest('[data-ph]'))) return photoClick(el, e);
       if ((el = t.closest('[data-ask]'))) return ask(el.dataset.ask);
       if ((el = t.closest('[data-search]'))) return search(el.dataset.search);
