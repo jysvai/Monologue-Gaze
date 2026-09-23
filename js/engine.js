@@ -54,7 +54,7 @@
   }
   function docStains(d) {
     if (!gore() || d.blood === false) return '';
-    if (d.blood === 'heavy') return stains(d.id, 3, 'aacbd', false);
+    if (d.blood === 'heavy') return stains(d.id, 4, 'aacbd', false);
     if (d.blood === true || hash(d.id) % 3 === 0) return stains(d.id, 1 + (hash(d.id) % 2), 'abd', true);
     return '';
   }
@@ -656,6 +656,13 @@
         o.connect(g).connect(actx.destination); o.start(t); o.stop(t + 0.26);
         noise(0.12, 'lowpass', 900, 0.8, 0.3);
       } else if (kind === 'lock') noise(0.05, 'highpass', 4000, 0.8, 0.15);
+      else if (kind === 'dread') { // 🔞 사진을 열 때: 낮게 가라앉는 울림
+        const o = actx.createOscillator(); const g = actx.createGain();
+        o.type = 'sine'; o.frequency.setValueAtTime(64, t); o.frequency.exponentialRampToValueAtTime(40, t + 1.9);
+        g.gain.setValueAtTime(0.001, t); g.gain.exponentialRampToValueAtTime(0.34, t + 0.35); g.gain.exponentialRampToValueAtTime(0.001, t + 2.1);
+        o.connect(g).connect(actx.destination); o.start(t); o.stop(t + 2.15);
+        noise(1.4, 'lowpass', 260, 0.6, 0.14);
+      }
     } catch (e) { /* audio unavailable */ }
   }
   const mildBtn = () => `<button type="button" class="snd mild" data-mild aria-pressed="${!S.mild}">${S.mild ? '잔혹 표현 꺼짐' : '잔혹 표현 켜짐'}</button>`;
@@ -947,7 +954,7 @@
       if ((el = t.closest('[data-cens]')) && !el.classList.contains('open') && !(S.mild && el.closest('[data-ph]'))) {
         if (S.mild) { toast('잔혹 표현이 꺼져 있다'); return; }
         if (!ST.cens.includes(el.dataset.cens)) ST.cens.push(el.dataset.cens);
-        save(); $$(`[data-cens="${el.dataset.cens}"]`).forEach(x => x.classList.add('open'));
+        save(); $$(`[data-cens="${el.dataset.cens}"]`).forEach(x => x.classList.add('open', 'reveal')); sfx('dread');
         return;
       }
       if ((el = t.closest('[data-ph]'))) return photoClick(el, e);

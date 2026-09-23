@@ -385,3 +385,13 @@ img{max-width:100%}
 .nb-back{white-space:nowrap}
 .nb-case{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:2px 6px;text-align:right}
 .nb-case .snd{margin-right:0}
+
+/* 빨간 별 사건 — 화면을 더 어둡게, 🔞 사진은 붉게 떠오르게. 잔혹 표현을 끄면 data-graphic 이 빠져 모두 사라진다 */
+.gore-bg{background:radial-gradient(ellipse at 50% 42%,rgba(10,2,1,.16) 30%,rgba(58,3,1,.62) 100%)}
+.gore-bg::before{content:"";position:absolute;inset:0;background:rgba(6,2,1,.3)}
+body:has(.case-view[data-graphic])::before{background:radial-gradient(ellipse at 50% 45%,transparent 52%,rgba(46,3,1,.55) 100%)}
+.cens.reveal>svg,.cens.reveal>img{animation:cens-reveal 2.4s ease-out}
+.cens.reveal::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,rgba(120,8,0,.12),rgba(66,0,0,.78));animation:cens-flash 2.4s ease-out forwards}
+@keyframes cens-reveal{0%{filter:blur(14px) brightness(.3) sepia(1) saturate(5) hue-rotate(-38deg);transform:scale(1.08)}45%{filter:blur(2px) brightness(.55) sepia(.8) saturate(3) hue-rotate(-38deg);transform:scale(1.02)}100%{filter:none;transform:none}}
+@keyframes cens-flash{from{opacity:1}to{opacity:0}}
+@media (prefers-reduced-motion:reduce){.cens.reveal>svg,.cens.reveal>img{animation:none}.cens.reveal::after{display:none}}
