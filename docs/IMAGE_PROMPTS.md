@@ -12,6 +12,23 @@
 
 **모든 이미지 공통 원칙**: 실제 인물·실제 피해자의 얼굴을 닮게 만들지 않는다 / 보통 사건의 시신은 가리거나 암시만 / 혐오감 주의 사건은 마른 핏자국과 가려진 시신의 일부까지 (절단면·장기·훼손 부위 클로즈업은 없음) / 실제 상표·로고 없음 / 글자는 넣지 않는다 (신문 제목, 간판 글씨 등은 게임이 HTML 로 따로 쓴다). 글자가 꼭 필요해 보이는 자리는 "no readable text" 를 유지하고 흐릿한 형태만 둔다.
 
+## 생성 규칙 v2 — CASE 03 부터 적용
+
+CASE 00~02 를 실제로 뽑아 보고 보강한 규칙이다. 00~02 는 나중에 필요한 것만 다시 뽑는다.
+
+1. 제목 줄의 설명과 **꼭 보여야 할 것** 이 그 그림의 단서다. 프롬프트의 다른 부분보다 우선한다. 개수(벽돌 네 장, 촛불 세 개)·색·위치를 정확히 지킨다.
+2. 흑백 스타일 사건이라도, 프롬프트가 색을 말하는 증거물(붉은 실, 파란 가방 같은)은 그 색이 보여야 한다. 그 물건만 손으로 색칠한 듯 부분 채색하거나 바랜 컬러 사진으로 만든다. (01 의 붉은 무명실이 회색으로 나와 단서가 사라졌다.)
+3. 정물·증거물 사진에는 창밖 거리, 걸어가는 사람 실루엣, 먼 도시 스카이라인을 넣지 않는다. 배경은 책상·증거물 판·벽처럼 단순하게. (01 에서 거의 모든 정물 뒤에 같은 창밖 풍경이 반복됐다.)
+4. 한 장에 장면 하나. 작은 삽입 칸, 여러 칸 조합, 카탈로그식 칸 나누기는 프롬프트가 요구할 때만.
+5. 모두 가상 지명이다. 실존 랜드마크(유명 성당 돔, 타워, 다리)는 프롬프트가 이름을 댈 때만 넣는다.
+6. 한 사건 안에서 같은 장소·물건·인물이 여러 장에 나오면 같은 모습으로 맞춘다 (같은 방, 같은 가방 색, 같은 옷 실루엣).
+7. 한 장 만들 때마다 위 규칙을 스스로 확인하고, 단서가 빠졌으면 한 번 다시 만든다.
+
+- **추가 스타일** (CASE 03 부터, 공통 스타일 뒤에 이어 붙이기):
+```
+Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. One single image, no inset panels or collage. No recognizable real landmarks unless the prompt names them.
+```
+
 ## 공통 이미지
 
 ### _global/hero — 기록실(첫 화면) 맨 위에 까는 대표 이미지
@@ -185,8 +202,9 @@ An open common lodging-house register on a scrubbed kitchen table, columns ruled
 ### c01/q_thread — 경찰의 소견 — 증거물 붉은 무명실
 - 저장 경로: `img/c01/q_thread.webp` · 비율: 4:3
 ```
-A short length of red cotton thread tied in a small knot, laid on a plain white evidence card with a blank paper label, on a police surgeon's wooden table beside a magnifying glass, clinical still life.
+A short length of red cotton thread tied in a small knot, laid on a plain white evidence card with a blank paper label, on a police surgeon's wooden table beside a magnifying glass, clinical still life. The thread is bright red, the only colour in the image, as if hand-tinted.
 ```
+- **꼭 보여야 할 것**: 실은 붉은색 (흑백 판화라도 실만 붉게)
 
 ## CASE 02 · 하젤외드의 열흘 (1923, 바이에른 켈바흐 군 오버뢰딩 (가상 지명))
 
@@ -281,6 +299,7 @@ A new hand-forged iron box lock for a farmhouse door with two large iron keys, l
 ```
 Colonial-era Gyeongseong (Seoul), autumn 1935. Newspaper pictures look like 1930s Korean newspaper halftone photographs on cheap yellowed newsprint: coarse dot screen, heavy black ink, slight misregistration, faded contrast. Police photographs look like grainy silver gelatin prints with soft vignetting. Tiled-roof hanok shopfronts, narrow dirt alleys, electric poles, trams, paper-covered lattice doors. People only as silhouettes, from behind or blurred. No faces, no blood, no bodies, no readable text or signage, no real brands.
 ```
+- **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.
 
 ### c03/cover — 기록실 폴더 표지 — 증거물 꼬리표가 달린 1930년대 진공관 라디오와 전보 뢰신지
 - 저장 경로: `img/c03/cover.webp` · 비율: 4:3
@@ -349,6 +368,7 @@ Interior of a small 1930s Seoul cafe at night: bentwood chairs, round marble tab
 ```
 Late-1960s Japanese press and police evidence photography, Tokyo suburbs in the rainy season of 1968: black-and-white 35mm Tri-X film, pushed grain, slightly soft focus, flat overcast light, wet asphalt sheen, muted grey tonality; evidence-card shots on a plain board with a small ruler, occasionally as faded early color prints with a cyan shift. Showa-era details only. No readable text, no logos, no recognizable faces.
 ```
+- **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.
 
 ### c04/cover — 기록실 폴더 표지 — 빗속에 버려진 흰 오토바이
 - 저장 경로: `img/c04/cover.webp` · 비율: 4:3
@@ -359,8 +379,9 @@ A white-painted 250cc motorcycle left alone on a narrow wet road beside a tall g
 ### c04/bike — 유류품 카드 No.1 — 붓으로 흰색 덧칠한 가짜 백바이 (증거 사진)
 - 저장 경로: `img/c04/bike.webp` · 비율: 4:3
 ```
-Police evidence photograph of a 1960s 250cc two-cylinder motorcycle crudely hand-painted white with visible brush strokes, dark green original paint peeking out under the fender, a small clear acrylic windshield, an empty wooden box strapped to the rear rack, parked against a plain grey wall in a police garage, a scale ruler on the floor, flat flash lighting.
+Police evidence photograph of a 1960s 250cc two-cylinder motorcycle crudely hand-painted white with visible brush strokes, dark green original paint peeking out under the fender, a small clear acrylic windshield, an empty wooden box strapped to the rear rack, parked against a plain grey wall in a police garage, a scale ruler on the floor, flat flash lighting. The dark green original paint under the white brush strokes must stay clearly visible: make this a faded early colour print, or hand-tint only that green.
 ```
+- **꼭 보여야 할 것**: 흰 붓칠 사이로 보이는 원래 색(암녹색). 흑백으로 뽑으면 이 단서가 사라진다.
 
 ### c04/montage — 신문에 실린 몽타주 사진 (특정 인물 아님)
 - 저장 경로: `img/c04/montage.webp` · 비율: 3:4
@@ -425,6 +446,7 @@ A black four-door 1960s sedan abandoned on a muddy forest path behind a small Sh
 ```
 1969 American newspaper wire photo and police file photography, Northern California coast: black-and-white 35mm Tri-X, heavy grain, harsh on-camera flash at night, coastal fog and sodium streetlight glow, halftone dot texture when reproduced in the newspaper, late-1960s cars, phone booths and street furniture without brand logos. No readable text, no recognizable faces, no bodies, no blood, no weapons shown.
 ```
+- **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.
 
 ### c05/cover — 기록실 폴더 표지 — 편집국 책상 위의 봉투 더미와 모래시계
 - 저장 경로: `img/c05/cover.webp` · 비율: 4:3
@@ -435,8 +457,9 @@ Night-time newsroom desk under a single green-shaded desk lamp: a small pile of 
 ### c05/letter1 — 편지 (1) — 파란 볼펜 대문자 편지와 봉투 (글자 흐리게)
 - 저장 경로: `img/c05/letter1.webp` · 비율: 4:3
 ```
-Photostat copy of a one-page handwritten letter in blue ballpoint block capitals, completely illegible and blurred, with its envelope beside it showing a 6-cent stamp and a round postmark, lying on a grey police evidence table, a small hand-drawn hourglass shape at the bottom of the letter, harsh overhead light.
+Photostat copy of a one-page handwritten letter in blue ballpoint block capitals, completely illegible and blurred, with its envelope beside it showing a 6-cent stamp and a round postmark, lying on a grey police evidence table, a small hand-drawn hourglass shape at the bottom of the letter, harsh overhead light. The ballpoint ink must read as blue: a colour photostat, or hand-tint only the ink blue.
 ```
+- **꼭 보여야 할 것**: 파란 볼펜 글씨 (글자는 여전히 읽히지 않게)
 - 주의: 글자는 읽을 수 없게.
 
 ### c05/typed — 편지 (3) — 타자로 친 가짜 편지
@@ -501,6 +524,7 @@ A newspaper front-page detail printed in halftone: a block of simple geometric h
 ```
 1969 Norwegian police and press photography on 35mm film: Tri-X style black-and-white grain for police documentation, faded early colour film with a cool blue-green cast for everything else; overcast west-coast light, wet rock, heather and harbour mist. Documentary and quiet. No readable text, no faces, no bodies.
 ```
+- **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.
 
 ### c06/cover — 기록실 폴더 표지 — 증거물 꼬리표가 달린 가방 두 개
 - 저장 경로: `img/c06/cover.webp` · 비율: 4:3
@@ -581,6 +605,7 @@ A small roadside petrol station on a rural Norwegian road in 1969: a white woode
 ```
 1971 Seoul in black-and-white: Tri-X 35mm police and press photography, coarse grain, harsh on-camera flash or dim tungsten light, slight motion blur, printed look with a coarse newspaper halftone dot screen and yellowed newsprint tones where it appears in a newspaper. Early-1970s Korean details: unpaved riverside embankment roads, willow trees, wooden utility poles, tile-roofed hanok and tin-roofed shacks, late-1960s four-door sedans with round headlights. No faces (backs, silhouettes or out-of-focus figures only), no readable text, no logos or emblems, no blood or injuries.
 ```
+- **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.
 
 ### c07/cover — 기록실 폴더 표지 — 갱지 서류철 위에 놓인 흑백 현장 사진과 장부
 - 저장 경로: `img/c07/cover.webp` · 비율: 4:3
@@ -662,6 +687,7 @@ Black-and-white photo of a modest tile-roofed single-storey house in an early-19
 ```
 Early-1990s Seoul, shot on a consumer compact 35mm film camera: color negative film look, on-camera flash at night, slight green-orange color cast from sodium street lamps, visible grain, soft focus; police evidence photos are flat flash on grey paper; newspaper images are coarse black-and-white halftone. 1991 Korean street details: card-and-coin public phone booths, an elevated steel subway bridge, red-brick multi-family houses, small corner shops with sliding aluminium-glass doors, tangled utility wires, a church bell tower with a red neon cross. No faces (backs, silhouettes or blurred figures only), no readable text, no logos or brand marks.
 ```
+- **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.
 
 ### c08/cover — 기록실 폴더 표지 — 카세트 녹음기와 라벨 붙은 테이프, 전화기
 - 저장 경로: `img/c08/cover.webp` · 비율: 4:3
@@ -754,6 +780,7 @@ A 1991 photocopied missing-person flyer lying on a police desk: the student ID p
 ```
 Photo taken in 2006 with a cheap compact digital camera: 3-megapixel, visible sensor noise, flat on-camera flash at night with dark falloff behind the subject, slightly blown highlights, cool white balance, mild JPEG blockiness, casual amateur framing like a Korean mini-homepage photo album or a police canvass snapshot. Seoul low-rise residential alleys of the late 1980s–90s: red-brick multi-family houses with external iron staircases. People only from behind, blurred or out of frame; no faces, no readable text, no logos, nothing graphic.
 ```
+- **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.
 
 ### c09/cover — 기록실 폴더 표지 — 비 오는 밤, 다가구 주택의 바깥 철계단
 - 저장 경로: `img/c09/cover.webp` · 비율: 4:3
@@ -852,6 +879,7 @@ Police canvass snapshot at night, 2006: an older brick house with a tall externa
 ```
 Stills from a 2014 Korean provincial port city. Dashcam and CCTV frames: wide-angle fisheye distortion, low-light sensor noise, sodium-vapor orange streetlights, smeared headlight flare, H.264 compression blocking, slightly washed-out blacks. Smartphone photos: early-2010s phone camera, over-sharpened, mild HDR haze, cool grey sea light. Wet concrete, container cranes, apartment parking lots. No on-screen timestamps or overlays, no readable text or license plates, no logos, no identifiable faces (people only from behind or as silhouettes), nothing graphic.
 ```
+- **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.
 
 ### c10/cover — 기록실 폴더 표지 — 증거물 꼬리표가 달린 노트북과 항구 불빛
 - 저장 경로: `img/c10/cover.webp` · 비율: 4:3
@@ -921,6 +949,7 @@ Overcast daytime smartphone photo of an unfinished container pier in a Korean po
 ```
 Provincial South Korea in 1986, a slow river city in late autumn: 35mm press and police photography on Kodak Tri-X black-and-white or faded Fujicolor negative film, coarse grain, harsh on-camera flash or flat overcast light, slightly lifted blacks, a coarse newspaper halftone dot screen and yellowed newsprint where it appears in print. Period details: cement-block and tin-roof houses, stacks of coal briquettes, reed beds, concrete bridges on piers, an old iron sluice gate, hand carts, white woven polypropylene rice sacks, green-and-cream city buses with round headlights. No readable text, no logos or emblems, no recognizable faces (backs, silhouettes or out-of-focus figures only). Graphic content is limited to dried bloodstains on surfaces and covered or sacked remains seen at a distance: no wounds, no cut surfaces, no gore close-ups.
 ```
+- **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.
 
 ### c11/cover — 기록실 폴더 표지 — 새벽 강가의 포대와 통제선 (사진 한 장이 서류철에 클립으로 끼워져 있다)
 - 저장 경로: `img/c11/cover.webp` · 비율: 4:3
@@ -950,8 +979,9 @@ Cold dawn on the muddy bank of a slow, misty river in a 1986 provincial Korean c
 ### c11/news_divers — 신문 사진 — 목골 나루에서 네 번째 포대를 건지는 잠수부
 - 저장 경로: `img/c11/news_divers.webp` · 비율: 4:3
 ```
-1986 Korean newspaper photograph with halftone dots: an old stone ferry landing on a riverbank at midday, two divers in black wetsuits climbing out of cold water, a closed dripping white rice sack and four red clay bricks tied together with twine laid on a tarp on the landing stones, a timber sawmill with stacked logs and a tin roof behind, policemen and onlookers kept at a distance, flat light.
+1986 Korean newspaper photograph with halftone dots: an old stone ferry landing on a riverbank at midday, two divers in black wetsuits climbing out of cold water, a closed dripping white rice sack and four red clay bricks tied together with twine laid on a tarp on the landing stones, a timber sawmill with stacked logs and a tin roof behind, policemen and onlookers kept at a distance, flat light. The four bricks must read as red: a faded colour newspaper print, or hand-tint only the bricks.
 ```
+- **꼭 보여야 할 것**: 포대에 묶인 붉은 벽돌 네 장
 
 ### c11/news_workshop — 신문 연재 사진 — 청학 나전칠기 작업장 (지면에 실린 것)
 - 저장 경로: `img/c11/news_workshop.webp` · 비율: 4:3
@@ -962,8 +992,9 @@ Cold dawn on the muddy bank of a slow, misty river in a 1986 provincial Korean c
 ### c11/photo_sack — 감식 사진 — 벽돌이 달린 넷째 포대 🔞 열람 주의
 - 저장 경로: `img/c11/photo_sack.webp` · 비율: 4:3
 ```
-Black-and-white 1986 police evidence photograph under flat flash, seen from above: a wet white woven polypropylene rice sack lying on a grey tarp on a concrete floor, its mouth tied tightly with twine that runs on to four red bricks bound together beside it, the heavy lumpy outline of what is inside pressing against the weave, a faded rust-brown stain soaked through one lower corner, a small numbered evidence card and a wooden folding ruler, grain.
+Black-and-white 1986 police evidence photograph under flat flash, seen from above: a wet white woven polypropylene rice sack lying on a grey tarp on a concrete floor, its mouth tied tightly with twine that runs on to four red bricks bound together beside it, the heavy lumpy outline of what is inside pressing against the weave, a faded rust-brown stain soaked through one lower corner, a small numbered evidence card and a wooden folding ruler, grain. The bricks are the only colour in the image, hand-tinted brick red.
 ```
+- **꼭 보여야 할 것**: 붉은 벽돌 네 장 (사진은 흑백이어도 벽돌만 붉게)
 - 주의: 포대는 닫힌 채로. 안의 내용물은 윤곽만.
 
 ### c11/autopsy_room — 은천의료원 부검실 — 흰 천 아래 수습된 시신 🔞 열람 주의
@@ -1000,8 +1031,9 @@ Close photograph of an open hand-ruled private loan ledger from 1980s Korea on a
 ### c11/bus — 11번 버스 목골 종점의 밤
 - 저장 경로: `img/c11/bus.webp` · 비율: 4:3
 ```
-Night photograph from 1986 at a provincial city bus terminus on a dirt lot: a green-and-cream city bus with round headlights parked under a single street lamp, a young female bus conductor in uniform and cap seen from behind at the rear door, a man carrying a small blue vinyl bag under his arm walking away into a dark narrow alley between cement-block houses, grain, sodium and tungsten light.
+Night photograph from 1986 at a provincial city bus terminus on a dirt lot: a green-and-cream city bus with round headlights parked under a single street lamp, a young female bus conductor in uniform and cap seen from behind at the rear door, a man carrying a small blue vinyl bag under his arm walking away into a dark narrow alley between cement-block houses, grain, sodium and tungsten light. Faded colour film, so the small vinyl bag reads clearly as blue.
 ```
+- **꼭 보여야 할 것**: 남자가 옆구리에 낀 파란 비닐 가방 (피해자의 수금 가방)
 
 ### c11/workshop_floor — 재조사 — 빈 작업장 바닥과 번호표 🔞 열람 주의
 - 저장 경로: `img/c11/workshop_floor.webp` · 비율: 4:3
@@ -1017,6 +1049,7 @@ Photograph of an empty abandoned small workshop in early spring 1987: a bare cem
 ```
 Tokyo, autumn 1994 (Heisei 6), Japanese police and press documentation: 35mm color negative film with slightly faded Fuji-like greens and magentas, fine grain, harsh on-camera flash for night and interior shots, flat grey dawn light outdoors; press photos reproduced as coarse black-and-white newspaper halftone. Period details only: milky semi-transparent garbage bags, green wire-mesh park trash bins, pink coin payphones, VHS tapes, dedicated word processors, pagers, wooden sento lockers and tiled washing floors. No readable text, no logos, no recognizable faces.
 ```
+- **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.
 
 ### c12/cover — 기록실 폴더 표지 — 새벽 공원길의 쓰레기통과 폴리스 라인
 - 저장 경로: `img/c12/cover.webp` · 비율: 4:3

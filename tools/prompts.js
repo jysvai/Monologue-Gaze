@@ -28,6 +28,19 @@ const GLOBAL = [
   },
 ];
 
+// CASE 00~02 를 실제로 뽑아 보고 정한 보강 규칙. CASE 03 부터 적용한다.
+const V2_FROM = 3;
+const V2_RULES = [
+  '제목 줄의 설명과 **꼭 보여야 할 것** 이 그 그림의 단서다. 프롬프트의 다른 부분보다 우선한다. 개수(벽돌 네 장, 촛불 세 개)·색·위치를 정확히 지킨다.',
+  '흑백 스타일 사건이라도, 프롬프트가 색을 말하는 증거물(붉은 실, 파란 가방 같은)은 그 색이 보여야 한다. 그 물건만 손으로 색칠한 듯 부분 채색하거나 바랜 컬러 사진으로 만든다. (01 의 붉은 무명실이 회색으로 나와 단서가 사라졌다.)',
+  '정물·증거물 사진에는 창밖 거리, 걸어가는 사람 실루엣, 먼 도시 스카이라인을 넣지 않는다. 배경은 책상·증거물 판·벽처럼 단순하게. (01 에서 거의 모든 정물 뒤에 같은 창밖 풍경이 반복됐다.)',
+  '한 장에 장면 하나. 작은 삽입 칸, 여러 칸 조합, 카탈로그식 칸 나누기는 프롬프트가 요구할 때만.',
+  '모두 가상 지명이다. 실존 랜드마크(유명 성당 돔, 타워, 다리)는 프롬프트가 이름을 댈 때만 넣는다.',
+  '한 사건 안에서 같은 장소·물건·인물이 여러 장에 나오면 같은 모습으로 맞춘다 (같은 방, 같은 가방 색, 같은 옷 실루엣).',
+  '한 장 만들 때마다 위 규칙을 스스로 확인하고, 단서가 빠졌으면 한 번 다시 만든다.',
+];
+const V2_TAIL = 'Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. One single image, no inset panels or collage. No recognizable real landmarks unless the prompt names them.';
+
 function block(lines) { return '```\n' + lines + '\n```'; }
 
 function main() {
@@ -50,6 +63,15 @@ function main() {
   out.push('');
   out.push('**모든 이미지 공통 원칙**: 실제 인물·실제 피해자의 얼굴을 닮게 만들지 않는다 / 보통 사건의 시신은 가리거나 암시만 / 혐오감 주의 사건은 마른 핏자국과 가려진 시신의 일부까지 (절단면·장기·훼손 부위 클로즈업은 없음) / 실제 상표·로고 없음 / 글자는 넣지 않는다 (신문 제목, 간판 글씨 등은 게임이 HTML 로 따로 쓴다). 글자가 꼭 필요해 보이는 자리는 "no readable text" 를 유지하고 흐릿한 형태만 둔다.');
   out.push('');
+  out.push(`## 생성 규칙 v2 — CASE ${String(V2_FROM).padStart(2, '0')} 부터 적용`);
+  out.push('');
+  out.push('CASE 00~02 를 실제로 뽑아 보고 보강한 규칙이다. 00~02 는 나중에 필요한 것만 다시 뽑는다.');
+  out.push('');
+  V2_RULES.forEach((r, i) => out.push(`${i + 1}. ${r}`));
+  out.push('');
+  out.push(`- **추가 스타일** (CASE ${String(V2_FROM).padStart(2, '0')} 부터, 공통 스타일 뒤에 이어 붙이기):`);
+  out.push(block(V2_TAIL));
+  out.push('');
   out.push('## 공통 이미지');
   out.push('');
   GLOBAL.forEach(g => {
@@ -69,6 +91,7 @@ function main() {
       out.push('- **공통 스타일** (각 프롬프트 뒤에 붙이기):');
       out.push(block(c.artStyle));
     }
+    if (c.no >= V2_FROM && arts.length) out.push('- **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.');
     out.push('');
     if (!arts.length) { out.push('_이미지 프롬프트 없음 (전부 SVG 로 그린 도면·지도)_'); out.push(''); }
     arts.forEach(([key, a]) => {
@@ -76,6 +99,7 @@ function main() {
       out.push(`### ${c.id}/${key} — ${a.use || ''}${a.sensitive ? ' 🔞 열람 주의' : ''}`);
       out.push(`- 저장 경로: \`img/${c.id}/${key}.webp\` · 비율: ${a.ratio || '4:3'}${a.where ? ` · 쓰이는 곳: ${a.where}` : ''}`);
       out.push(block(a.prompt));
+      if (a.must) out.push(`- **꼭 보여야 할 것**: ${a.must}`);
       if (a.avoid) out.push(`- 주의: ${a.avoid}`);
       out.push('');
     });
