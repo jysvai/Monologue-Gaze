@@ -1,0 +1,155 @@
+/* Monologue Gaze — 문서 스킨. 사건 파일의 css 로 [data-case="cXX"] 아래에서 덮어쓸 수 있다. */
+
+/* ───────── 공통 블록 ───────── */
+.doc{position:relative;padding:24px 26px 26px;background-color:var(--sheet);background-image:var(--noise);color:var(--sheet-ink);box-shadow:0 2px 10px rgba(0,0,0,.28)}
+.doc-h{margin-bottom:14px}
+.doc-paper{margin:0 0 6px}
+.doc-k{margin:0 0 4px;font:11.5px/1.4 var(--f-mono);letter-spacing:.06em;opacity:.75}
+.doc-t{margin:0;font:800 20px/1.35 var(--f-doc);text-wrap:balance}
+.doc-m{margin:6px 0 0;font:12px/1.5 var(--f-mono);opacity:.75}
+.doc-b{font:14.5px/1.8 var(--f-web)}
+.b-p{margin:0 0 12px;text-wrap:pretty}
+.b-h{margin:18px 0 8px;font:800 15.5px/1.4 var(--f-doc)}
+.b-note{margin:0 0 10px;font:12px/1.6 var(--f-mono);opacity:.72}
+.b-stamp{margin:12px 0}
+.b-stamp span{display:inline-block;padding:3px 10px;border:2.5px solid var(--red);color:var(--red);font:800 15px/1.3 var(--f-doc);transform:rotate(-4deg);opacity:.85;mix-blend-mode:multiply}
+.b-sign{margin:14px 0 0;text-align:right;font:22px/1.2 var(--f-hand2)}
+.b-m{position:relative;margin:18px 0 8px;padding:6px 12px 4px;transform:rotate(-1.2deg);border-left:3px solid rgba(122,40,24,.55);color:#7a2818;font:23px/1.25 var(--f-hand2);background:rgba(255,248,225,.4)}
+.b-m-sig{display:block;text-align:right;font-size:19px}
+.b-img{margin:14px 0}
+.b-img>svg,.b-img>img{display:block;width:100%;height:auto;background:#ddd6c4}
+.b-img figcaption{margin-top:6px;font:12.5px/1.5 var(--f-web);opacity:.85}
+.b-tbl{margin:10px 0 16px;overflow-x:auto}
+.b-tbl table{width:100%;border-collapse:collapse;font:13px/1.45 var(--f-web)}
+.b-tbl caption{text-align:left;padding-bottom:6px;font:700 12.5px var(--f-web)}
+.b-tbl th,.b-tbl td{padding:6px 8px;border-bottom:1px solid rgba(0,0,0,.14);text-align:left;vertical-align:top}
+.b-tbl th{font:700 11.5px var(--f-mono);letter-spacing:.03em;background:rgba(0,0,0,.05)}
+.b-tbl td{font-variant-numeric:tabular-nums}
+.b-tbl .pc{width:34px;text-align:right}
+.b-tbl .pin{margin:0}
+.b-list{margin:4px 0 14px;padding-left:20px}
+.b-list li{margin:3px 0}
+.b-div{display:flex;align-items:center;gap:10px;margin:16px 0 10px;font:11.5px var(--f-mono);opacity:.75}
+.b-div::before,.b-div::after{content:"";flex:1;height:1px;background:currentColor;opacity:.35}
+.b-sep{margin:18px 0;border:0;border-top:1px dashed rgba(0,0,0,.3)}
+.b-say{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 10px;align-items:baseline;margin:0 0 10px}
+.b-say time{grid-column:1/-1;font:11px var(--f-mono);opacity:.65}
+.b-say .b-who{font:700 13px var(--f-web);white-space:nowrap}
+.b-say .b-line{min-width:0}
+.b-cipher{margin:12px 0;padding:12px;font:20px/1.6 var(--f-mono);letter-spacing:.2em;word-break:break-all;background:rgba(0,0,0,.05)}
+.b-msg{margin:8px 0}
+.b-msg .b-who{display:block;margin:0 0 2px 4px;font:12px var(--f-web);opacity:.8}
+.b-row{display:flex;align-items:flex-end;gap:6px}
+.b-msg.me .b-row{flex-direction:row-reverse}
+.b-bub{max-width:74%;padding:7px 11px;border-radius:12px;background:#fff;color:#1d2328;font:13.5px/1.55 var(--f-web);overflow-wrap:anywhere;box-shadow:0 1px 1px rgba(0,0,0,.12)}
+.b-msg.me .b-bub{background:#d3e5c8}
+.b-msg time{flex:none;font:10.5px var(--f-mono);opacity:.7}
+
+/* ───────── plain / report (수사 서류, 진술조서) ───────── */
+.skin-report{background-color:#ecebe2;font-family:var(--f-mono)}
+.skin-report .doc-h{padding-bottom:10px;border-bottom:2px solid #2b2823}
+.skin-report .doc-t{font:800 19px/1.35 var(--f-doc);letter-spacing:.04em}
+.skin-report .doc-b{font:13.5px/1.9 var(--f-mono)}
+.skin-report .b-say .b-who{font-family:var(--f-mono)}
+.skin-report::after{content:"";position:absolute;top:18px;right:18px;width:64px;height:64px;border:2px solid rgba(176,52,42,.35);border-radius:50%;transform:rotate(-12deg);pointer-events:none}
+
+/* ───────── news (신문) ───────── */
+.skin-news{padding:22px 26px 28px;background-color:#ede5d0;background-image:var(--noise),linear-gradient(180deg,rgba(120,90,40,.06),rgba(120,90,40,.14))}
+.skin-news .doc-paper{padding-bottom:6px;border-bottom:3px double #2b2823;text-align:center;font:400 30px/1.1 var(--f-latin);letter-spacing:.02em}
+.skin-news .doc-k{text-align:center;font-size:11px;border-bottom:1px solid #2b2823;padding-bottom:4px}
+.skin-news .doc-t{margin-top:10px;font:900 24px/1.3 var(--f-old);text-align:center}
+.skin-news .doc-m{text-align:center}
+.skin-news .doc-b{font:15px/1.85 var(--f-old);text-align:justify}
+@container stage (min-width:900px){.skin-news .doc-b{column-count:2;column-gap:28px;column-rule:1px solid rgba(0,0,0,.2)}}
+.skin-news .b-img{break-inside:avoid;filter:grayscale(1) contrast(1.1)}
+.skin-news .b-h{font-family:var(--f-old);text-align:center}
+.skin-news.vertical .doc-b{writing-mode:vertical-rl;column-count:auto;height:min(62vh,540px);overflow-x:auto;text-align:start;line-height:2}
+.skin-news.vertical .b-p{margin:0 0 0 14px}
+.skin-news.vertical .pin{writing-mode:horizontal-tb;margin:6px 0 0}
+
+/* ───────── letter (편지, 손글씨) ───────── */
+.skin-letter{background-color:#f1e9d4;background-image:var(--noise),linear-gradient(90deg,transparent 49.6%,rgba(0,0,0,.06) 50%,transparent 50.4%),linear-gradient(180deg,transparent 33%,rgba(0,0,0,.05) 33.3%,transparent 33.6%,transparent 66.3%,rgba(0,0,0,.05) 66.6%,transparent 67%)}
+.skin-letter .doc-t{font:400 26px/1.25 var(--f-hand2)}
+.skin-letter .doc-m{font-size:11.5px}
+.skin-letter .doc-b{font:23px/1.55 var(--f-hand2);color:#2b2a3a}
+.skin-letter .b-p{margin-bottom:10px}
+
+/* ───────── telegram (전보) ───────── */
+.skin-telegram{background-color:#efe4b8;border-top:10px solid #c9b46a}
+.skin-telegram .doc-t{font:700 15px/1.4 var(--f-type);letter-spacing:.12em;text-transform:uppercase}
+.skin-telegram .doc-b .b-p{display:inline;padding:3px 8px;margin:0 0 6px;line-height:2.4;background:#fbf8ec;font:14px/2.4 var(--f-mono);letter-spacing:.08em;box-decoration-break:clone;-webkit-box-decoration-break:clone;box-shadow:0 1px 1px rgba(0,0,0,.2)}
+.skin-telegram .doc-b .b-p::after{content:"";display:block;height:6px}
+
+/* ───────── ledger (장부, 숙박부, 출입 기록) ───────── */
+.skin-ledger{background-color:#ebe3cb}
+.skin-ledger .doc-t{font:700 18px/1.3 var(--f-doc)}
+.skin-ledger .b-tbl table{font:14px/1.5 var(--f-hand2);font-size:18px}
+.skin-ledger .b-tbl th{font:700 11px var(--f-mono);background:rgba(90,60,20,.12)}
+.skin-ledger .b-tbl td{border-bottom:1px solid rgba(84,116,158,.45);border-right:1px solid rgba(176,52,42,.2)}
+
+/* ───────── card (증거물 카드) ───────── */
+.skin-card{max-width:560px;background-color:#f7f3e8;border:1px solid #bdb39b;box-shadow:0 3px 12px rgba(0,0,0,.3)}
+.skin-card .doc-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;align-items:baseline;border-bottom:1px solid #2b2823;padding-bottom:8px}
+.skin-card .doc-t{font:800 17px/1.3 var(--f-doc)}
+.skin-card .doc-m{margin:0;font:12px var(--f-mono);color:var(--red)}
+.skin-card .b-img>svg,.skin-card .b-img>img{border:6px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.skin-card .doc-b{font:13.5px/1.8 var(--f-mono)}
+
+/* ───────── transcript (녹취록) ───────── */
+.skin-transcript{background-color:#eeeee6;background-image:var(--noise),repeating-linear-gradient(180deg,transparent 0 27px,rgba(0,0,0,.05) 27px 28px)}
+.skin-transcript .doc-t{font:700 17px/1.35 var(--f-mono)}
+.skin-transcript .doc-b{font:13.5px/1.85 var(--f-mono)}
+.skin-transcript .b-say .b-who{font-family:var(--f-mono);color:#3c4b60}
+
+/* ───────── memo (쪽지) ───────── */
+.skin-memo{max-width:460px;transform:rotate(-.8deg);background-color:#f3e7a6;box-shadow:0 6px 14px rgba(0,0,0,.3)}
+.skin-memo .doc-t{font:400 26px/1.2 var(--f-hand)}
+.skin-memo .doc-b{font:22px/1.45 var(--f-hand)}
+
+/* ───────── photo (사진 인화) ───────── */
+.skin-photo{max-width:560px;padding:16px 16px 20px;background:#fbfaf5}
+.skin-photo .doc-h{order:2}
+.skin-photo .doc-t{font:400 24px/1.2 var(--f-hand)}
+.skin-photo .b-img{margin:0 0 12px}
+
+/* ───────── web (현대 웹) ───────── */
+.skin-web{padding:0;background:#fffdf9;color:#262521;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.skin-web .doc-h{margin:0;padding:12px 18px 10px;background:var(--bar,#3f5a6b);color:#fff}
+.skin-web .doc-paper{margin:0 0 4px;font:800 13px/1 var(--f-web);letter-spacing:.02em;opacity:.9}
+.skin-web .doc-t{font:800 17px/1.35 var(--f-web)}
+.skin-web .doc-m{opacity:.85}
+.skin-web .doc-b{padding:14px 18px 18px;font:14px/1.7 var(--f-web)}
+.skin-web .b-img>svg,.skin-web .b-img>img{max-width:420px}
+
+/* ───────── chat (메신저) ───────── */
+.skin-chat{padding:0;background:#b7c6cf;color:#1d2328}
+.skin-chat .doc-h{margin:0;padding:10px 14px;background:#c9d5dc}
+.skin-chat .doc-t{font:800 15px/1.3 var(--f-web)}
+.skin-chat .doc-b{padding:6px 12px 16px}
+
+/* ───────── sms (2000년대 폴더폰) ───────── */
+.skin-sms{max-width:360px;padding:18px 16px 22px;border-radius:26px;background:linear-gradient(180deg,#5b5f66,#3b3e44);color:#1b2a12;box-shadow:0 8px 20px rgba(0,0,0,.4)}
+.skin-sms .doc-h{margin:0 0 8px;padding:6px 10px;border-radius:6px 6px 0 0;background:#9fb07a;font:12px var(--f-mono)}
+.skin-sms .doc-t{font:700 13px/1.3 var(--f-mono)}
+.skin-sms .doc-m{margin:2px 0 0;font-size:11px}
+.skin-sms .doc-b{padding:10px;border-radius:0 0 6px 6px;background:#b8c890;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.04) 0 1px,transparent 1px 2px);font:13px/1.6 var(--f-mono)}
+.skin-sms .b-bub{background:transparent;box-shadow:none;border:1px solid rgba(27,42,18,.4);border-radius:3px;font:13px/1.55 var(--f-mono);color:#1b2a12}
+.skin-sms .b-msg.me .b-bub{background:rgba(27,42,18,.1)}
+
+/* ───────── home (2000년대 미니홈피) ───────── */
+.skin-home{padding:14px;border-radius:10px;background:linear-gradient(135deg,#9bc3e6,#c9b3e0);box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.skin-home .doc-h{margin:0;padding:10px 14px;border-radius:8px 8px 0 0;background:#fff;border-bottom:1px dashed #f1a7c1}
+.skin-home .doc-paper{margin:0;font:700 12px var(--f-web);color:#ff6f9c}
+.skin-home .doc-t{font:700 15px/1.4 var(--f-web);color:#3a5f9e}
+.skin-home .doc-m{font:11px var(--f-web);color:#888}
+.skin-home .doc-b{padding:12px 14px;border-radius:0 0 8px 8px;background:#fff;font:13px/1.7 var(--f-web);color:#333}
+.skin-home .b-h{font:700 12.5px var(--f-web);color:#ff6f9c}
+
+/* ───────── files (탐색기) ───────── */
+.skin-files{background:#fffdf8}
+.skin-files .doc-t{font:700 15px/1.3 var(--f-web)}
+.skin-files .doc-b{font:13px/1.7 var(--f-web)}
+
+/* ───────── cipher (암호 해독지) ───────── */
+.skin-cipher{background-color:#e7e4d8;background-image:var(--noise),linear-gradient(90deg,rgba(84,116,158,.1) 1px,transparent 1px),linear-gradient(rgba(84,116,158,.1) 1px,transparent 1px);background-size:auto,20px 20px,20px 20px}
+.skin-cipher .doc-t{font:700 17px var(--f-type);letter-spacing:.06em}

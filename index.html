@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Monologue Gaze</title>
+<meta name="description" content="한 세기에 걸친 미제 사건 열 건을 기록만으로 쫓는 웹 추리 게임">
+<style>[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Gothic+Coding:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Pen+Script&family=Nanum+Brush+Script&family=Song+Myung&family=Old+Standard+TT:wght@400;700&family=UnifrakturMaguntia&family=Special+Elite&family=Noto+Serif+JP:wght@700;900&display=swap">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/skins.css">
+</head>
+<body>
+<div id="app"></div>
+
+<script src="js/engine.js"></script>
+<script src="js/finale.js"></script>
+<script src="img/manifest.js"></script>
+<script src="cases/c00-cheongun.js"></script>
+<script src="cases/c01-london-1888.js"></script>
+<script src="cases/c02-bavaria-1922.js"></script>
+<script src="cases/c03-gyeongseong-1930s.js"></script>
+<script src="cases/c04-tokyo-1968.js"></script>
+<script src="cases/c05-westcoast-1969.js"></script>
+<script src="cases/c06-norway-1970.js"></script>
+<script src="cases/c07-seoul-1970.js"></script>
+<script src="cases/c08-seoul-1991.js"></script>
+<script src="cases/c09-seoul-2006.js"></script>
+<script src="cases/c10-harbor-2014.js"></script>
+<script>
+(function () {
+  function start(data) { window.MG.boot(data); }
+  try { window.claude && window.claude.hot && window.claude.hot.snapshot && window.claude.hot.snapshot(function () { return { S: window.MG.state() }; }); } catch (e) {}
+  if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(start);
+  else start((window.claude && window.claude.hot && window.claude.hot.data) || {});
+})();
+</script>
+</body>
+</html>

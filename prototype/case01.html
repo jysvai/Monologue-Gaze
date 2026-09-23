@@ -1,0 +1,810 @@
+<title>청운하이츠 504호</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Gothic+Coding:wght@400;700&family=Nanum+Myeongjo:wght@700;800&family=Nanum+Pen+Script&display=swap">
+<style>
+:root{
+  --desk:#1c1815;
+  --paper:#ece2c6; --paper-deep:#dccfa9; --memo:#f3eee0;
+  --rule:rgba(84,116,158,.32); --margin:rgba(196,106,96,.6);
+  --ink:#26303f; --ink-soft:#586071; --pencil:#7a7466; --red:#b0342a;
+  --tag:#dfb64c;
+  --wall-a:#6b8581; --wall-b:#4a605c;
+  --chrome:#d4cab1; --chrome-hi:#f1ebdb; --chrome-lo:#8c826c; --chrome-dk:#2b2822;
+  --title-a:#3a4960; --title-b:#62708a;
+  --web-bg:#f8f5ee; --web-card:#fffdf9; --web-ink:#262521; --web-soft:#6f6a60; --web-line:#dcd4c3; --web-link:#2342a0;
+  --f-hand:"Nanum Pen Script","Gaegu",cursive;
+  --f-web:"Nanum Gothic","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-mono:"Nanum Gothic Coding",ui-monospace,Consolas,monospace;
+  --f-doc:"Nanum Myeongjo","AppleMyungjo","Batang",serif;
+  --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .24 0 0 0 0 .12 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;padding-inline:16px;padding-block:16px;
+  background-color:var(--desk);
+  background-image:radial-gradient(ellipse at 28% 18%,#3a3029 0%,transparent 62%),radial-gradient(ellipse at 85% 95%,#2b231d 0%,transparent 55%),repeating-linear-gradient(91deg,rgba(255,255,255,.014) 0 2px,transparent 2px 9px);
+  color:var(--ink);font-family:var(--f-web);font-size:14px;-webkit-font-smoothing:antialiased;
+}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:49;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(0,0,0,.42) 100%)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;background-image:var(--noise);opacity:.32;mix-blend-mode:multiply}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+.room{height:100%;max-width:1520px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,390px);gap:28px}
+
+/* ───────── laptop ───────── */
+.laptop{display:flex;flex-direction:column;min-height:0;min-width:0}
+.bezel{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;padding:20px 18px 8px;border-radius:18px 18px 8px 8px;background:linear-gradient(180deg,#303033,#1d1d1f);box-shadow:0 34px 60px -22px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.08),inset 0 0 0 1px rgba(0,0,0,.6)}
+.cam{position:absolute;top:7px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#0b0b0c;box-shadow:0 0 0 2px #29292b}
+.bezel-foot{padding-top:7px;text-align:center;font:700 9px/1 var(--f-mono);letter-spacing:.42em;color:#66666a}
+.deck{position:relative;height:16px;margin-inline:-2.5%;border-radius:2px 2px 14px 14px;background:linear-gradient(180deg,#3d3d40,#232325 60%,#151516)}
+.deck::before{content:"";position:absolute;left:50%;top:0;width:18%;height:6px;transform:translateX(-50%);border-radius:0 0 8px 8px;background:#18181a}
+.evtag{position:relative;align-self:flex-start;margin:-4px 0 0 28px;padding:8px 12px 8px 28px;max-width:calc(100% - 40px);transform:rotate(-2.2deg);border-radius:3px;background-color:var(--tag);background-image:var(--noise);color:#2d2512;font:11px/1.5 var(--f-mono);box-shadow:0 6px 14px rgba(0,0,0,.5)}
+.evtag::before{content:"";position:absolute;left:10px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--desk);box-shadow:inset 0 0 0 2px #b2913b}
+.evtag::after{content:"";position:absolute;left:13px;top:-22px;width:2px;height:28px;background:#c9c2ad;transform:rotate(14deg);transform-origin:bottom}
+.evtag b{font-weight:700;letter-spacing:.04em}
+
+.screen{position:relative;flex:1;min-height:0;overflow:hidden;border-radius:3px;background:var(--wall-b);box-shadow:inset 0 0 0 2px #0b0b0c}
+.screen::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;mix-blend-mode:multiply;background:repeating-linear-gradient(0deg,rgba(0,0,0,.03) 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,transparent 58%,rgba(46,28,6,.3) 100%),linear-gradient(rgba(176,128,52,.08),rgba(176,128,52,.08))}
+
+.desktop{position:absolute;inset:0 0 34px 0;overflow:hidden;background:linear-gradient(160deg,var(--wall-a),var(--wall-b))}
+.wall-cat{position:absolute;right:6%;bottom:8%;width:min(42%,300px);opacity:.16}
+.icons{position:relative;display:grid;grid-template-columns:repeat(auto-fill,86px);gap:6px;padding:12px;align-content:start}
+.dicon{display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px 4px;border:1px dotted transparent;background:none;color:#fff;font:12px/1.3 var(--f-web);text-shadow:0 1px 2px rgba(0,0,0,.75);cursor:pointer}
+.dicon svg{width:40px;height:40px}
+.dicon:hover,.dicon:focus-visible{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.7);outline:none}
+.sticky{position:absolute;top:14px;right:16px;width:120px;padding:10px 10px 12px;transform:rotate(2deg);background:#f2e27e;color:#3b3413;font:18px/1.15 var(--f-hand);box-shadow:0 4px 10px rgba(0,0,0,.3)}
+
+.window{position:absolute;inset:10px 10px 44px 10px;z-index:10;display:flex;flex-direction:column;background:var(--chrome);border:1px solid var(--chrome-dk);box-shadow:inset 1px 1px 0 var(--chrome-hi),inset -1px -1px 0 var(--chrome-lo),0 12px 30px rgba(0,0,0,.38)}
+.titlebar{flex:none;display:flex;align-items:center;gap:4px;height:28px;padding:0 4px 0 10px;background:linear-gradient(90deg,var(--title-a),var(--title-b));color:#f3efe6;font:700 12px/1 var(--f-web)}
+.titlebar .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wbtn,.br-btn{display:grid;place-items:center;width:22px;height:20px;padding:0;border:0;background:var(--chrome);color:#222;font:700 12px/1 var(--f-mono);box-shadow:inset 1px 1px 0 var(--chrome-hi),inset -1px -1px 0 var(--chrome-lo);cursor:pointer}
+.wbtn:active,.br-btn:active{box-shadow:inset -1px -1px 0 var(--chrome-hi),inset 1px 1px 0 var(--chrome-lo)}
+.winbody{flex:1;min-height:0;display:flex;flex-direction:column;container-type:inline-size}
+
+.taskbar{position:absolute;left:0;right:0;bottom:0;z-index:20;display:flex;align-items:center;gap:6px;height:34px;padding:0 6px;background:var(--chrome);box-shadow:inset 0 1px 0 var(--chrome-hi),0 -1px 0 var(--chrome-lo)}
+.tb-start,.tb-task{height:24px;padding:0 10px;border:0;background:var(--chrome);font:700 12px/1 var(--f-web);box-shadow:inset 1px 1px 0 var(--chrome-hi),inset -1px -1px 0 var(--chrome-dk);cursor:pointer;white-space:nowrap}
+.tb-task{font-weight:400;max-width:160px;overflow:hidden;text-overflow:ellipsis}
+.tb-task.on{box-shadow:inset 1px 1px 0 var(--chrome-dk),inset -1px -1px 0 var(--chrome-hi);background:#e2d9c3}
+.tb-tasks{display:flex;min-width:0}
+.tray{margin-left:auto;display:flex;gap:10px;padding:4px 8px;font:11px/1 var(--f-mono);white-space:nowrap;box-shadow:inset 1px 1px 0 var(--chrome-lo),inset -1px -1px 0 var(--chrome-hi)}
+
+.toast{position:absolute;left:50%;bottom:48px;z-index:30;padding:8px 14px 6px;transform:translate(-50%,8px) rotate(-1deg);opacity:0;pointer-events:none;background-color:var(--paper);background-image:var(--noise);color:var(--ink);font:20px/1 var(--f-hand);white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.35);transition:opacity .25s,transform .25s}
+.toast.on{opacity:1;transform:translate(-50%,0) rotate(-1deg)}
+
+/* ───────── browser chrome ───────── */
+.br-nav{flex:none;display:flex;align-items:center;gap:5px;padding:6px;border-bottom:1px solid var(--chrome-lo)}
+.br-btn{width:28px;height:24px}
+.br-btn:disabled{color:#9a917c;cursor:default}
+.addr{flex:1;min-width:0;padding:5px 8px;background:#fffdf7;border:1px solid var(--chrome-lo);box-shadow:inset 1px 1px 0 rgba(0,0,0,.14);font:12px/1.2 var(--f-mono);color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.addr span{color:#8a8272}
+.br-marks{flex:none;display:flex;align-items:center;gap:2px;padding:3px 6px;border-bottom:1px solid var(--chrome-lo);overflow-x:auto}
+.mk-label{font:11px var(--f-web);color:#6f6655;padding-right:4px;white-space:nowrap}
+.mark{padding:3px 8px;border:1px solid transparent;background:none;font:12px var(--f-web);white-space:nowrap;cursor:pointer}
+.mark:hover{border-color:var(--chrome-lo);background:var(--chrome-hi)}
+.page{flex:1;min-height:0;overflow:auto;background:var(--web-bg);color:var(--web-ink);font:13.5px/1.6 var(--f-web)}
+.page p{margin:0 0 6px}
+.lnk{padding:0;border:0;background:none;color:var(--web-link);font:inherit;text-decoration:underline;text-underline-offset:2px;text-align:left;cursor:pointer}
+.lnk:visited{color:#5b2a86}
+.muted{color:var(--web-soft);font-size:12px}
+.site-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 12px;padding:10px 16px;color:#fff;font:12px var(--f-web)}
+.site-bar .logo{font:800 18px/1 var(--f-web);letter-spacing:-.02em}
+.hg{background:#a8452f}.hk{background:#3f5a6b}.hk .logo{font-size:14px;letter-spacing:.14em}
+.bd{background:#5d6b3a}.ct{background:#2f6a66}.fr{background:#a67c26}.fr .logo{font-size:14px;letter-spacing:.1em}
+.nw{background:#24344d}.nw .logo{font-family:var(--f-doc)}.kn{background:#5f4a82}
+.site-main{max-width:640px;margin:0 auto;padding:16px}
+.site-h{margin:2px 0 4px;font:800 18px/1.35 var(--f-web);text-wrap:balance}
+
+/* pin button (detective's action, lives in the notebook's world) */
+.pin{display:inline-block;margin:6px 0 2px;padding:4px 10px 2px;border:1px dashed #a8955a;border-radius:2px;background:#f4ebc6;color:var(--ink);font:18px/1 var(--f-hand);transform:rotate(-1deg);cursor:pointer;white-space:nowrap}
+.pin:hover{background:#efe1a8}
+.pin.done{border-color:transparent;background:transparent;color:#6f7f4d;cursor:default}
+
+/* 누리 검색 */
+.nuri-home{max-width:520px;margin:0 auto;padding:36px 16px 20px}
+.nuri-logo{font:800 46px/1 var(--f-web);letter-spacing:-.04em;color:#c35c28;text-align:center;margin-bottom:16px}
+.nuri-logo span{font-size:16px;color:#9b9281;letter-spacing:0}
+.nuri-logo.sm{font-size:24px;margin:0}
+.nuri-form{display:flex;border:2px solid #c35c28;background:#fff}
+.nuri-form input{flex:1;min-width:0;padding:9px 10px;border:0;background:transparent;font:15px var(--f-web);color:var(--web-ink);outline:none}
+.nuri-form button{padding:0 16px;border:0;background:#c35c28;color:#fff;font:700 14px var(--f-web);cursor:pointer}
+.nuri-hist{margin-top:18px;padding:12px 14px;border:1px solid var(--web-line);background:var(--web-card)}
+.nuri-hist h3{margin:0 0 6px;font:700 13px var(--f-web);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.nuri-hist h3 small{font-weight:400;color:var(--web-soft)}
+.nuri-hist ul{list-style:none;margin:0;padding:0}
+.nuri-hist li{display:flex;flex-wrap:wrap;align-items:center;gap:2px 10px;padding:5px 0;border-top:1px dotted var(--web-line)}
+.nuri-hist time{margin-left:auto;font:11px var(--f-mono);color:var(--web-soft)}
+.nuri-hist .pin{margin:0}
+.nuri-foot{margin-top:14px;text-align:center;color:var(--web-soft);font-size:12px}
+.nuri-top{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--web-line);background:var(--web-card)}
+.nuri-top .nuri-form{flex:1;max-width:520px}
+.nuri-res{max-width:640px;padding:6px 16px 20px}
+.res{margin:16px 0}
+.res .site{font-size:12px;color:#3f7a4c}
+.res .ttl{font-weight:700;font-size:15px}
+.res .snip{color:#555049}
+.nores{padding:24px 0;color:#555049}
+.nores ul{padding-left:18px;font-size:12.5px}
+
+/* 스냅로그 */
+.snap-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 16px;background:#fffdf9;border-bottom:1px solid var(--web-line)}
+.snap-logo{font:800 19px/1 var(--f-doc);color:#9c4f5e}
+.snap-me{font:11px var(--f-mono);color:var(--web-soft)}
+.snap-main{max-width:520px;margin:0 auto;padding:14px 12px 24px}
+.snap-prof{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;margin-bottom:12px}
+.snap-prof h2{margin:0;font:800 16px/1.2 var(--f-web)}
+.snap-prof .bio{grid-column:1/-1;margin:6px 0 0}
+.stats{display:flex;gap:14px;font-size:12.5px}
+.stats b{font-weight:800}
+.ava{display:inline-grid;place-items:center;flex:none;width:30px;height:30px;border-radius:50%;background:var(--c);color:#fff;font:700 13px/1 var(--f-web)}
+.ava.lg{width:64px;height:64px;font-size:24px}
+.ava.sm{width:28px;height:28px;font-size:12px}
+.friends{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:0 0 12px;padding:8px 10px;border:1px solid var(--web-line);background:var(--web-card);font-size:12.5px}
+.snap-tabs{display:flex;border-top:1px solid var(--web-line);margin-bottom:12px}
+.snap-tabs button{flex:1;padding:9px 0;border:0;border-top:2px solid transparent;margin-top:-1px;background:none;font:700 12.5px var(--f-web);color:var(--web-soft);cursor:pointer}
+.snap-tabs button.on{border-top-color:var(--web-ink);color:var(--web-ink)}
+.post{margin-bottom:16px;border:1px solid var(--web-line);background:var(--web-card)}
+.post-h{display:flex;align-items:center;gap:8px;padding:8px 10px}
+.post-h div{display:flex;flex-direction:column;line-height:1.3}
+.post-h small{font-size:11px;color:var(--web-soft)}
+.post-img svg{display:block;width:100%;height:auto}
+.post-b{padding:8px 12px 10px}
+.likes{font-weight:700}
+.cmt{font-size:12.5px}
+.cmt time,.post-d time{font:11px var(--f-mono);color:var(--web-soft)}
+.post-d{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;margin-top:4px!important}
+.private{padding:40px 16px;text-align:center;color:var(--web-soft)}
+.devices h3{margin:0 0 2px;font:800 15px var(--f-web)}
+.devices ul{list-style:none;margin:10px 0 0;padding:0}
+.devices li{display:flex;gap:12px;padding:12px;border:1px solid var(--web-line);background:var(--web-card);margin-bottom:8px}
+.devices li div{display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-width:0}
+.devices small{font-size:12px;color:var(--web-soft)}
+.dev-ic{flex:none;display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--web-line);background:#f1ece1;font:700 11px var(--f-mono);color:#555}
+
+/* 한그릇 */
+.order{margin:12px 0;padding:12px 14px;border:1px solid var(--web-line);background:var(--web-card)}
+.order header{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.order .st{font-size:12px;color:#a8452f;font-weight:700}
+.kv{display:grid;grid-template-columns:5.5em minmax(0,1fr);gap:2px 10px;margin:6px 0 0;font-size:12.5px}
+.kv dt{color:var(--web-soft)}
+.kv dd{margin:0}
+.photo{margin-top:8px}
+.photo summary{cursor:pointer;color:var(--web-link);font-size:12.5px}
+.photo svg{display:block;width:100%;max-width:280px;height:auto;margin-top:6px}
+
+/* 홈키퍼 / tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--web-line);background:var(--web-card)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:7px 10px;border-bottom:1px solid var(--web-line);text-align:left;white-space:nowrap}
+th{font-weight:700;font-size:12px;color:var(--web-soft);background:#f1ece1}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+td .pin{margin:0}
+
+/* 게시판 */
+.bpost{padding:12px 0;border-bottom:1px solid var(--web-line)}
+.bpost h3{margin:0 0 2px;font:700 14.5px/1.4 var(--f-web)}
+.bmeta{font:11.5px var(--f-mono);color:var(--web-soft)}
+.bcmts{list-style:none;margin:6px 0 0;padding:6px 10px;background:#f1ece1;font-size:12.5px}
+.bcmts li{padding:2px 0}
+
+/* 공모전 / 페어 / 뉴스 / 지식 */
+.award{margin:12px 0 4px}
+.award-img svg{display:block;width:100%;height:auto}
+.award figcaption{padding-top:8px}
+.badge{display:inline-block;padding:1px 7px;background:#2f6a66;color:#fff;font:700 11px/1.6 var(--f-web)}
+.badge.sub{background:#8a9c98}
+.others{list-style:none;padding:0;margin:10px 0}
+.booths{list-style:none;padding:0;margin:6px 0 10px;font:12.5px/1.9 var(--f-mono)}
+.booths .hl{background:#f3e7c2}
+.news-h{margin:4px 0 6px;font:800 21px/1.4 var(--f-doc);text-wrap:balance}
+.news p{margin-bottom:10px}
+.qa{padding:12px 14px;border:1px solid var(--web-line);background:var(--web-card);margin:10px 0}
+.qa b{color:#5f4a82}
+
+/* 도란톡 */
+.talk-lock{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px 16px;background:#dfe6ea;color:#1f2a33;text-align:center}
+.talk-logo{font:800 30px/1 var(--f-web);color:#335a7a;letter-spacing:-.03em}
+.talk-lock form{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;width:min(100%,320px)}
+.talk-lock label{width:100%;font-size:12px;text-align:left}
+.talk-lock input{flex:1;min-width:0;padding:8px 10px;border:1px solid #8ea3b3;background:#fff;font:14px var(--f-mono)}
+.talk-lock button{padding:0 14px;border:0;background:#335a7a;color:#fff;font:700 13px var(--f-web);cursor:pointer}
+.hint{font-size:12px;color:#4d5d6a;margin:0}
+.err{min-height:1.4em;margin:0;font-size:12px;color:var(--red)}
+.hand-hint{margin:0;font:20px/1.2 var(--f-hand);color:var(--ink)}
+.talk{flex:1;min-height:0;display:flex;background:#dfe6ea}
+.talk-list{flex:none;width:210px;overflow:auto;background:#f6f7f4;border-right:1px solid #c2ccd2}
+.chat-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:2px 8px;width:100%;padding:10px;border:0;border-bottom:1px solid #e1e5e3;background:none;text-align:left;cursor:pointer}
+.chat-item.on{background:#e3eaee}
+.ci-t{display:flex;flex-direction:column;min-width:0}
+.ci-t b{font-size:13px}
+.ci-t small{font-size:11.5px;color:#6a7680;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-item time{font:10px var(--f-mono);color:#7b8791;align-self:start}
+.ub{grid-column:3;justify-self:end;min-width:18px;padding:1px 5px;border-radius:9px;background:#c4523f;color:#fff;font:700 10px/1.4 var(--f-mono);text-align:center}
+.talk-room{flex:1;min-width:0;display:flex;flex-direction:column}
+.room-h{flex:none;padding:9px 12px;background:#c9d5dc;font-size:13.5px}
+.room-msgs{flex:1;min-height:0;overflow:auto;padding:8px 12px 14px;background:#b7c6cf}
+.day{width:fit-content;margin:12px auto;padding:2px 10px;border-radius:10px;background:rgba(255,255,255,.45);font-size:11px;color:#34434e}
+.unread-line{display:flex;align-items:center;gap:8px;margin:12px 0;font-size:11px;color:#7b3226}
+.unread-line::before,.unread-line::after{content:"";flex:1;height:1px;background:rgba(123,50,38,.4)}
+.msg{display:flex;align-items:flex-end;gap:6px;margin:6px 0}
+.msg.me{flex-direction:row-reverse}
+.bubble{max-width:72%;padding:7px 10px;border-radius:10px;background:#fff;font:13px/1.55 var(--f-web);color:#1d2328;overflow-wrap:anywhere}
+.msg.me .bubble{background:#d3e5c8}
+.msg time{font:10px var(--f-mono);color:#3e4d57;flex:none}
+.msg-pin{margin:-2px 0 6px 34px}
+.msg-pin.me{text-align:right;margin-left:0}
+.room-in{flex:none;padding:10px 12px;background:#eef1ef;font-size:12px;color:#7a8389}
+@container (max-width:560px){
+  .talk{flex-direction:column}
+  .talk-list{width:auto;display:flex;overflow-x:auto;overflow-y:hidden;border-right:0;border-bottom:1px solid #c2ccd2}
+  .chat-item{flex:none;width:170px;border-bottom:0;border-right:1px solid #e1e5e3}
+}
+
+/* 내 문서 */
+.docs{flex:1;min-height:0;overflow:auto;background:#fffdf8;color:var(--web-ink);font:13px/1.55 var(--f-web)}
+.docs-path{padding:6px 10px;border-bottom:1px solid var(--chrome-lo);background:#efe9da;font:12px var(--f-mono)}
+.docs .tbl-wrap{border-width:0 0 1px}
+.docs tr.on td{background:#dde6ef}
+.docs td button{padding:0;border:0;background:none;font:inherit;color:var(--web-ink);cursor:pointer;text-align:left}
+.docs td button:hover{text-decoration:underline}
+.pv{padding:14px 16px 24px;max-width:560px}
+.pv h3{margin:0 0 8px;font:700 14px var(--f-web)}
+.pv-img svg{display:block;width:100%;max-width:420px;height:auto;border:1px solid var(--web-line)}
+.txt{margin:0;padding:12px 14px;background:#fff;border:1px solid var(--web-line);font:13px/1.8 var(--f-mono);white-space:pre-wrap}
+
+/* ───────── notebook ───────── */
+.notebook{position:relative;min-height:0;overflow:auto;border-radius:4px 10px 10px 4px;background-color:var(--paper);background-image:var(--noise),radial-gradient(circle at 90% 5%,transparent 0 30px,rgba(140,95,40,.2) 31px 34px,transparent 36px),linear-gradient(180deg,rgba(255,255,255,.18),transparent 30%,rgba(120,85,30,.12));box-shadow:0 34px 60px -22px rgba(0,0,0,.8),inset 0 0 70px rgba(140,100,40,.28);color:var(--ink)}
+.rings{height:24px;background:radial-gradient(circle at 11px 12px,var(--desk) 0 4.5px,rgba(0,0,0,.25) 5.5px,transparent 6.5px) 6px 0/24px 24px repeat-x;border-bottom:1px solid rgba(120,90,40,.25)}
+.cases{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px 0}
+.case{padding:5px 10px 4px;border-radius:5px 5px 0 0;font:11px/1.2 var(--f-mono);color:#4a4231;background:#d8c493;box-shadow:inset 0 -1px 0 rgba(0,0,0,.12)}
+.case.off{background:#cfd2c4;color:#7b7d70}
+.case .solved{margin-left:6px;color:var(--red);font-weight:700}
+.casefile{position:relative;margin:0 14px 18px;padding:18px 16px 14px;transform:rotate(-.5deg);background-color:var(--memo);background-image:var(--noise);box-shadow:0 2px 7px rgba(60,40,10,.28);font:12.5px/1.65 var(--f-mono);color:#2d2a25}
+.clip{position:absolute;top:-14px;left:18px;width:18px;height:48px}
+.casefile h2{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 10px;margin:0 0 8px;padding-bottom:6px;border-bottom:1px solid #b9ae97;font:800 17px/1.3 var(--f-doc)}
+.casefile h2 small{font:11px var(--f-mono);color:#6a6254}
+.casefile dl{display:grid;grid-template-columns:4.8em minmax(0,1fr);gap:3px 10px;margin:0}
+.casefile dt{color:#6a6254}
+.casefile dd{margin:0}
+.scrawl{margin:10px 0 0;transform:rotate(-2deg);font:23px/1.15 var(--f-hand);color:var(--red)}
+
+.ruled{position:relative;padding:0 16px 32px 52px;font:21px/32px var(--f-hand);background-image:linear-gradient(90deg,transparent 40px,var(--margin) 40px 41px,transparent 41px),repeating-linear-gradient(180deg,transparent 0 25px,var(--rule) 25px 26px,transparent 26px 32px)}
+.hand-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0;font:28px/32px var(--f-hand);font-weight:400}
+.hand-h .count{font-size:19px;color:var(--pencil)}
+.hand-h .count b{color:var(--ink);font-weight:400}
+.notes ol{list-style:none;margin:0;padding:0}
+.notes li{transform:rotate(var(--r,0deg))}
+.notes li.tip{color:var(--ink-soft)}
+.notes li.red{color:var(--red)}
+.notes .n{color:var(--pencil)}
+.notes .src{color:var(--pencil);font-size:16px}
+.notes li.fresh{animation:write .9s ease-out both}
+@keyframes write{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+
+.report form p{margin:0}
+.report .no{color:var(--pencil)}
+.blank{max-width:100%;height:28px;padding:0 2px;border:0;border-bottom:2px dashed rgba(38,48,63,.5);border-radius:0;background:transparent;color:var(--ink);font:20px/1 var(--f-hand);cursor:pointer}
+.blank option{font-family:var(--f-web);font-size:14px}
+.submit-row{display:flex;flex-wrap:wrap;align-items:center;gap:0 12px;height:auto;min-height:32px;margin-top:0}
+.btn-hand{height:28px;padding:0 16px;border:0;border-radius:2px;background:var(--ink);color:var(--paper);font:21px/28px var(--f-hand);transform:rotate(-1deg);cursor:pointer}
+.btn-hand:hover{background:#34405a}
+.tries{font-size:17px;color:var(--pencil)}
+.verdict{margin:0;min-height:32px;color:var(--red)}
+.stamp{position:absolute;right:12px;top:20px;display:grid;place-items:center;width:112px;height:112px;border:4px double var(--red);border-radius:50%;color:var(--red);font:800 19px/1.15 var(--f-doc);text-align:center;opacity:.82;mix-blend-mode:multiply;transform:rotate(-14deg);animation:stamp .38s cubic-bezier(.2,1.5,.45,1) both}
+.stamp small{display:block;margin-top:4px;font:10px var(--f-mono)}
+@keyframes stamp{from{opacity:0;transform:rotate(-14deg) scale(2.2)}to{opacity:.82;transform:rotate(-14deg) scale(1)}}
+.epi p{margin:0;font-size:19px}
+.epi .next{color:var(--red)}
+.nb-foot{padding:14px 16px 20px;border-top:1px dashed rgba(120,90,40,.35);font:11px/1.6 var(--f-mono);color:#6d6552}
+.nb-foot p{margin:6px 0 0}
+.reset{padding:4px 10px;border:1px solid #a89b78;background:transparent;font:11px var(--f-mono);color:#5c5442;cursor:pointer}
+.reset.arm{border-color:var(--red);color:var(--red)}
+
+@media (max-width:1023px){
+  html,body{height:auto}
+  .room{height:auto;grid-template-columns:minmax(0,1fr)}
+  .laptop{height:560px;height:max(560px,78svh)}
+}
+@media (max-width:640px){
+  .bezel{padding:14px 8px 6px;border-radius:12px 12px 6px 6px}
+  .window{inset:0 0 34px 0}
+  .sticky{display:none}
+  .tray span{display:none}
+  .evtag{margin-left:14px;font-size:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .notes li.fresh,.stamp{animation:none}
+  .toast{transition:none}
+}
+</style>
+
+<div class="room">
+  <main class="laptop" aria-label="증거물 07, 피해자 노트북">
+    <div class="bezel">
+      <span class="cam" aria-hidden="true"></span>
+      <div class="screen" id="screen">
+        <div class="desktop">
+          <svg class="wall-cat" viewBox="0 0 200 120" aria-hidden="true"><ellipse cx="112" cy="88" rx="70" ry="30" fill="#fff"/><circle cx="52" cy="66" r="28" fill="#fff"/><path d="M30 50 L34 22 L52 42 Z M56 40 L74 22 L76 50 Z" fill="#fff"/><path d="M178 92 q22 -6 14 -40" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round"/></svg>
+          <div class="icons">
+            <button type="button" class="dicon" data-app="browser"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#4f86a8" stroke="#1e3a4c" stroke-width="2"/><path d="M5 20h30M20 5c-7 8-7 22 0 30M20 5c7 8 7 22 0 30" stroke="#dcecf3" stroke-width="1.6" fill="none"/><path d="M11 12c3 2 6 1 8 4s-2 5 1 8 6 1 7 5" stroke="#9cc77f" stroke-width="3" fill="none" stroke-linecap="round"/></svg><span>누리 브라우저</span></button>
+            <button type="button" class="dicon" data-app="talk"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 8h28a3 3 0 0 1 3 3v15a3 3 0 0 1-3 3H16l-7 6v-6H6a3 3 0 0 1-3-3V11a3 3 0 0 1 3-3z" fill="#7aa6c9" stroke="#20384c" stroke-width="2"/><rect x="22" y="20" width="14" height="12" rx="2" fill="#e3bb4f" stroke="#4a3a10" stroke-width="1.5"/><path d="M25 20v-3a4 4 0 0 1 8 0v3" fill="none" stroke="#4a3a10" stroke-width="1.5"/></svg><span>도란톡</span></button>
+            <button type="button" class="dicon" data-app="docs"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 10h12l3 4h17v20H4z" fill="#e2b650" stroke="#6b4f12" stroke-width="2"/><path d="M4 16h32" stroke="#6b4f12" stroke-width="1.5"/></svg><span>내 문서</span></button>
+          </div>
+          <div class="sticky">마감 B<br>10/10까지!!<br><s>두부 사료</s></div>
+        </div>
+        <section class="window" id="win" aria-labelledby="winTitle" hidden>
+          <header class="titlebar"><span class="t" id="winTitle"></span><button type="button" class="wbtn" id="winMin" aria-label="최소화">_</button><button type="button" class="wbtn" id="winClose" aria-label="닫기">×</button></header>
+          <div class="winbody" id="winBody"></div>
+        </section>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        <footer class="taskbar">
+          <button type="button" class="tb-start" id="tbDesk">바탕화면</button>
+          <div class="tb-tasks" id="tbTasks"></div>
+          <div class="tray"><span>한</span><time>10.15 (수) 10:42</time></div>
+        </footer>
+      </div>
+      <div class="bezel-foot" aria-hidden="true">HANBIT</div>
+    </div>
+    <div class="deck" aria-hidden="true"></div>
+    <div class="evtag"><b>증거물 07</b> · 사건 2025-서부-0137<br>피해자 소유 노트북 · 압수 2025.10.15 강력2팀</div>
+  </main>
+
+  <aside class="notebook" aria-label="형사 수첩">
+    <div class="rings" aria-hidden="true"></div>
+    <div class="cases">
+      <span class="case">CASE 01 · 504호<span class="solved" id="c1mark"></span></span>
+      <span class="case off" id="case2">CASE 02 · 잠김</span>
+      <span class="case off">CASE 03 · 잠김</span>
+    </div>
+    <article class="casefile">
+      <svg class="clip" viewBox="0 0 24 64" aria-hidden="true"><path d="M8 20 V50 a6 6 0 0 0 12 0 V12 a8 8 0 0 0 -16 0 V46" fill="none" stroke="#8d918f" stroke-width="2.6" stroke-linecap="round"/></svg>
+      <h2>변사사건 개요 <small>2025-서부-0137</small></h2>
+      <dl>
+        <dt>피해자</dt><dd>한서윤 (29) · 프리랜서 일러스트레이터</dd>
+        <dt>장소</dt><dd>서대문구 청운하이츠 504호 · 1인 가구 (반려묘 1, 생존)</dd>
+        <dt>발견</dt><dd>10.14(화) 15:32 · 관리인 마스터키 개문, 지인 윤재희 동행·신고</dd>
+        <dt>검안</dt><dd>부패 진행, 사망 시각 특정 곤란 (10.9 ~ 10.12)</dd>
+        <dt>초동</dt><dd>10.11 SNS 게시 · 10.12 배달 주문 → "12일 이후 사망" 가닥</dd>
+        <dt>진술</dt><dd>윤재희: "9일 밤 9시 반쯤 들러 얘기하다 10시쯤 나왔다. 그 뒤로 SNS에 글이 올라와서 괜찮은 줄 알았다."</dd>
+        <dt>압수</dt><dd>피해자 노트북 1대 (휴대폰 미발견)</dd>
+      </dl>
+      <p class="scrawl">진짜 마지막 날은 언제인가?</p>
+    </article>
+    <section class="ruled notes">
+      <h2 class="hand-h">수첩 <span class="count">단서 <b id="clueCount">0</b> / <span id="clueTotal">15</span></span></h2>
+      <ol id="notes"></ol>
+    </section>
+    <section class="ruled report" id="reportSec">
+      <h2 class="hand-h">수사 보고서</h2>
+      <form id="report" autocomplete="off"></form>
+      <p class="verdict" id="verdict" role="status"></p>
+      <div id="solved" hidden></div>
+    </section>
+    <footer class="nb-foot">
+      <button type="button" class="reset" id="reset">수첩 지우고 처음부터</button>
+      <p>이 사건의 인물·장소·기관·사이트는 모두 지어낸 것입니다.</p>
+    </footer>
+  </aside>
+</div>
+
+<script>
+(() => {
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const KEY = 'cheongun504-v1';
+let S = { pins: [], talk: false, tries: 0, solved: false, report: {} };
+try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d && typeof d === 'object') S = Object.assign(S, d); } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+
+/* ───────── clues ───────── */
+const CLUES = {
+  noise:   { t: '10.9(목) 밤 11시 10분쯤 5층에서 "쿵" 큰 소리. 그 뒤로 조용.', s: '입주민 게시판' },
+  bag:     { t: '10.12 점심에 온 배달봉지가 10.13 아침까지 504호 앞에 그대로.', s: '입주민 게시판' },
+  door_night: { t: '도어락: 10.9 21:34 손님 들임 → 23:26 안에서 열림. 그 뒤 10.14까지 한 번도 안 열림.', s: '홈키퍼' },
+  door_fail:  { t: '10.9 새벽 2:13 비번 오류 3회. 누가 옛 비번으로?', s: '홈키퍼' },
+  device:  { t: '10.11 14:20 "집콕" 게시물 작성 기기 = JH의 iPad (경기 고양시)', s: '스냅로그 로그인 기기' },
+  order:   { t: '10.12 12:05 죽 배달 주문 기기 = JH의 iPad. "벨 누르지 마세요"', s: '한그릇 주문내역' },
+  fair:    { t: '윤재희: 10.11~12 고양 킨텍스 일러스트 페어, 부스 C-12 상주', s: '페어 안내 / 스냅로그' },
+  award:   { t: '윤재희, 9.20 공모전 대상 〈푸른 정류장〉: 비 오는 정류장, 우산 든 사람', s: '청록일러스트 공모전' },
+  sketch:  { t: '서윤, 2024.11.03 "버스정류장 연작 #1" 스케치 공개 (재희가 댓글 닮)', s: '스냅로그 @seoyun.draws' },
+  psd:     { t: '원본 버스정류장_연작01.psd: 2024.11.02 작성, 레이어 14개 (14번 = 서명 SY)', s: '노트북 내 문서' },
+  threat:  { t: '10.9 20:43 서윤 → 재희 "내일까지 말 안 하면 내가 원본 올릴게"', s: '도란톡' },
+  lastmsg: { t: '10.9 21:02 재희 → 서윤 "오늘 밤에 갈게. 얼굴 보고 얘기하자."', s: '도란톡' },
+  pw:      { t: '9.28 서윤이 재희에게 스냅로그 비번을 알려줌 (늘 쓰는 비번)', s: '도란톡' },
+  alibi:   { t: '강도현: 10.9 22:40 부산 광안리 (위치 태그)', s: '스냅로그 @dohyun.k' },
+  hist:    { t: '서윤 검색기록 10.9 18:12 "공모전 표절 신고 방법"', s: '누리검색 기록' },
+};
+const TOTAL = Object.keys(CLUES).length;
+const pinBtn = id => `<button type="button" class="pin" data-pin="${id}">✎ 수첩에 적기</button>`;
+
+/* ───────── pictures (drawn, no photos) ───────── */
+function busStop(c) {
+  const rain = [[20,20],[50,34],[80,14],[110,40],[140,60],[30,72],[95,80],[182,68],[64,52],[125,12],[188,104],[14,100],[172,28]]
+    .map(([x, y]) => `<line x1="${x}" y1="${y}" x2="${x - 4}" y2="${y + 10}"/>`).join('');
+  return `<svg viewBox="0 0 200 150" role="img" aria-label="비 오는 버스 정류장 그림"><rect width="200" height="150" fill="${c.bg}"/><circle cx="162" cy="30" r="11" fill="${c.moon}"/><g stroke="${c.rain}" stroke-width="1.2" stroke-linecap="round">${rain}</g><line x1="0" y1="120" x2="200" y2="120" stroke="${c.line}" stroke-width="2"/><rect x="36" y="58" width="86" height="5" fill="${c.line}"/><rect x="40" y="63" width="4" height="57" fill="${c.line}"/><rect x="114" y="63" width="4" height="57" fill="${c.line}"/><rect x="50" y="98" width="56" height="4" fill="${c.line}"/><rect x="56" y="102" width="3" height="18" fill="${c.line}"/><rect x="97" y="102" width="3" height="18" fill="${c.line}"/><rect x="140" y="52" width="3" height="68" fill="${c.line}"/><circle cx="141.5" cy="47" r="8" fill="none" stroke="${c.line}" stroke-width="3"/><path d="M150 90 Q164 72 178 90 Z" fill="${c.acc}"/><line x1="164" y1="90" x2="164" y2="100" stroke="${c.line}" stroke-width="1.5"/><circle cx="165" cy="97" r="4" fill="${c.line}"/><path d="M160 102 h10 l2 18 h-14 z" fill="${c.line}"/>${c.sig ? `<text x="184" y="142" font-size="9" fill="${c.line}" font-family="cursive" font-style="italic">SY</text>` : ''}</svg>`;
+}
+const keys = (() => { let s = ''; for (let r = 0; r < 3; r++) for (let c = 0; c < 11; c++) s += `<rect x="${29 + c * 13.2}" y="${99 + r * 10}" width="10" height="7" rx="1"/>`; return s; })();
+const bridgeLights = Array.from({ length: 16 }, (_, i) => `<circle cx="${8 + i * 12}" cy="84" r="1.6"/>`).join('');
+const IMG = {
+  sketch: busStop({ bg: '#f1ece0', line: '#6e6a62', acc: '#a7a299', rain: '#c2bdb2', moon: '#dcd6c8', sig: true }),
+  award:  busStop({ bg: '#1e3a56', line: '#d7e5ef', acc: '#e6b54a', rain: '#6f93b3', moon: '#f1e4b3' }),
+  cake: `<svg viewBox="0 0 200 150" role="img" aria-label="생일 케이크"><rect width="200" height="150" fill="#f3dfd8"/><ellipse cx="100" cy="118" rx="62" ry="10" fill="#fbf7f2"/><rect x="58" y="78" width="84" height="38" rx="4" fill="#fff6ec"/><rect x="58" y="94" width="84" height="6" fill="#e59aa0"/><rect x="58" y="72" width="84" height="10" rx="4" fill="#f7c9cc"/><g fill="#8fb1d9"><rect x="78" y="56" width="4" height="16"/><rect x="98" y="52" width="4" height="20"/><rect x="118" y="56" width="4" height="16"/></g><g fill="#f2b440"><ellipse cx="80" cy="51" rx="3" ry="5"/><ellipse cx="100" cy="47" rx="3" ry="5"/><ellipse cx="120" cy="51" rx="3" ry="5"/></g><circle cx="170" cy="118" r="9" fill="#f7f4ec"/><path d="M163 111 l2 -7 5 5 M177 111 l-2 -7 -5 5" fill="#f7f4ec"/></svg>`,
+  cat: `<svg viewBox="0 0 200 150" role="img" aria-label="키보드 위의 흰 고양이"><rect width="200" height="150" fill="#dcd5c6"/><rect x="20" y="92" width="160" height="40" rx="6" fill="#3b3a38"/><g fill="#57554f">${keys}</g><ellipse cx="104" cy="94" rx="46" ry="20" fill="#f7f4ec"/><circle cx="64" cy="80" r="17" fill="#f7f4ec"/><path d="M50 72 L52 56 L63 67 Z M66 67 L76 56 L78 72 Z" fill="#f7f4ec"/><circle cx="58" cy="80" r="2" fill="#333"/><circle cx="69" cy="80" r="2" fill="#333"/><path d="M150 94 q22 -2 20 -26" stroke="#f7f4ec" stroke-width="8" fill="none" stroke-linecap="round"/></svg>`,
+  cup: `<svg viewBox="0 0 200 150" role="img" aria-label="창가의 커피잔"><rect width="200" height="150" fill="#cdbb9c"/><rect width="200" height="60" fill="#e9dcc2"/><path d="M0 60 H200" stroke="#b9a684"/><ellipse cx="100" cy="122" rx="50" ry="8" fill="#b19f7e"/><path d="M70 70 h60 v36 a30 18 0 0 1 -60 0z" fill="#f5efe4"/><ellipse cx="100" cy="70" rx="30" ry="6" fill="#6b4a33"/><path d="M130 80 q16 0 14 14 q-2 10 -16 10" stroke="#f5efe4" stroke-width="6" fill="none"/><path d="M92 58 q-6 -10 2 -18 M106 58 q-6 -10 2 -18" stroke="#fff" stroke-opacity=".7" stroke-width="2" fill="none"/></svg>`,
+  desk: `<svg viewBox="0 0 200 150" role="img" aria-label="작업 중인 태블릿"><rect width="200" height="150" fill="#8a7a66"/><rect x="40" y="30" width="120" height="86" rx="8" fill="#222"/><rect x="48" y="38" width="104" height="70" fill="#e9e3d6"/><path d="M60 90 q20 -40 40 -10 t40 -20" stroke="#6b6a66" stroke-width="2" fill="none"/><rect x="150" y="100" width="44" height="5" rx="2" transform="rotate(-30 150 100)" fill="#ddd"/><circle cx="30" cy="124" r="14" fill="#f3efe7"/><circle cx="30" cy="124" r="10" fill="#5a3b24"/></svg>`,
+  bridge: `<svg viewBox="0 0 200 150" role="img" aria-label="밤바다 위 다리"><rect width="200" height="150" fill="#141e33"/><rect y="100" width="200" height="50" fill="#0e1628"/><path d="M0 84 H200" stroke="#9fb4d8" stroke-width="2"/><rect x="62" y="40" width="4" height="60" fill="#9fb4d8"/><rect x="134" y="40" width="4" height="60" fill="#9fb4d8"/><path d="M0 80 Q32 44 64 40 Q100 78 136 40 Q168 44 200 80" stroke="#9fb4d8" fill="none" stroke-width="1.5"/><g fill="#f0c36b">${bridgeLights}</g><g stroke="#f0c36b" stroke-opacity=".35" stroke-width="1.5"><path d="M20 110 h10 M50 118 h14 M90 112 h8 M120 124 h16 M160 114 h10"/></g><circle cx="170" cy="22" r="1.5" fill="#fff"/><circle cx="40" cy="16" r="1" fill="#fff"/></svg>`,
+  booth: `<svg viewBox="0 0 200 150" role="img" aria-label="일러스트 페어 부스"><rect width="200" height="150" fill="#ece3d0"/><rect x="30" y="18" width="140" height="24" fill="#2f5d62"/><text x="100" y="35" font-size="12" text-anchor="middle" fill="#fff" font-family="sans-serif" font-weight="700">C-12 JAEHEE</text><g><rect x="40" y="52" width="30" height="36" fill="#1e3a56"/><rect x="85" y="52" width="30" height="36" fill="#c77d5b"/><rect x="130" y="52" width="30" height="36" fill="#7a9a6a"/></g><rect x="20" y="98" width="160" height="40" fill="#b88a5e"/><g><rect x="32" y="92" width="16" height="10" fill="#fff"/><rect x="56" y="90" width="16" height="12" fill="#e6b54a"/><rect x="80" y="92" width="16" height="10" fill="#fff"/><rect x="104" y="90" width="16" height="12" fill="#6f93b3"/><rect x="128" y="92" width="16" height="10" fill="#fff"/><rect x="152" y="90" width="16" height="12" fill="#c77d5b"/></g></svg>`,
+  doorbag: `<svg viewBox="0 0 200 150" role="img" aria-label="504호 문 앞의 배달봉지"><rect width="200" height="150" fill="#cfc7b6"/><rect y="124" width="200" height="26" fill="#a99f8b"/><rect x="60" y="14" width="80" height="112" fill="#5f5a52"/><rect x="66" y="20" width="68" height="100" fill="none" stroke="#4d4943"/><rect x="88" y="28" width="24" height="10" fill="#e8e1cf"/><text x="100" y="36" font-size="8" text-anchor="middle" fill="#333" font-family="monospace">504</text><rect x="122" y="64" width="9" height="20" rx="2" fill="#2a2a2a"/><path d="M84 104 h32 l4 24 h-40z" fill="#f6f3ea"/><path d="M91 104 q9 -12 18 0" stroke="#f6f3ea" stroke-width="3" fill="none"/><text x="100" y="121" font-size="7" text-anchor="middle" fill="#a8452f" font-family="sans-serif" font-weight="700">한그릇</text></svg>`,
+  studio: `<svg viewBox="0 0 200 150" role="img" aria-label="정리된 작업실"><rect width="200" height="150" fill="#e4ddd0"/><rect x="20" y="30" width="70" height="4" fill="#8b7355"/><rect x="20" y="70" width="70" height="4" fill="#8b7355"/><g fill="#6f93b3"><rect x="26" y="12" width="8" height="18"/><rect x="36" y="16" width="8" height="14" fill="#c77d5b"/><rect x="46" y="12" width="8" height="18" fill="#7a9a6a"/></g><rect x="110" y="40" width="70" height="50" fill="#fff" stroke="#b8ad98"/><rect x="100" y="110" width="90" height="6" fill="#8b7355"/><rect x="30" y="100" width="44" height="30" fill="#b8ad98"/><text x="52" y="119" font-size="8" text-anchor="middle" fill="#fff" font-family="sans-serif">버림</text></svg>`,
+  gym: `<svg viewBox="0 0 200 150" role="img" aria-label="아령"><rect width="200" height="150" fill="#d6d9dc"/><rect x="50" y="70" width="100" height="10" fill="#444"/><rect x="36" y="52" width="16" height="46" rx="3" fill="#222"/><rect x="148" y="52" width="16" height="46" rx="3" fill="#222"/><text x="100" y="128" font-size="14" text-anchor="middle" fill="#555" font-family="sans-serif" font-weight="700">D+100</text></svg>`,
+};
+
+/* ───────── data ───────── */
+const PROFILES = {
+  seoyun: { handle: 'seoyun.draws', name: '한서윤', c: '#b56a5c', bio: '그림 그리는 사람 · 두부 집사 🐈', followers: '1,284', following: '311', own: true, posts: [
+    { d: '2025.10.11 (토) 14:20', img: 'cup', cap: '오늘은 집콕. 아무도 연락하지 마 ☕', likes: 87, cmts: [['jaehee.draws', '푹 쉬어!! 🫶', '10.11 14:31'], ['minji_0404', '서윤아 전화 좀 받아 ㅠㅠ', '10.13 11:24']] },
+    { d: '2025.09.28 (일) 13:50', img: 'desk', cap: '마감 3개 동시에… 이번 주는 폰 안 봄. 급한 건 재희한테 연락 주세요', likes: 142 },
+    { d: '2025.06.02 (월) 22:10', img: 'cat', cap: '우리 집 막내 두부 🐈 오늘도 키보드 점령', likes: 311, cmts: [['jaehee.draws', '두부 최고 ㅋㅋㅋ', '06.02 22:30']] },
+    { d: '2025.03.17 (월) 23:05', img: 'cake', cap: '생일 축하해준 사람들 고마워 🎂 두부도 옆에서 축하해줌', likes: 204 },
+    { d: '2024.11.03 (일) 02:12', img: 'sketch', cap: '작업 중인 스케치. 버스정류장 연작 #1 — 완성하면 공모전에 낼 거임 ☔', likes: 96, pin: 'sketch', cmts: [['jaehee.draws', '와 구도 미쳤다', '11.03 09:40']] },
+  ] },
+  jaehee: { handle: 'jaehee.draws', name: '윤재희', c: '#3f6f73', bio: 'illustrator · 제3회 청록일러스트 대상 · 10.11–12 일산 일러스트 페어 C-12', followers: '8,902', following: '420', posts: [
+    { d: '2025.10.12 (일) 19:30', img: 'booth', loc: '고양 킨텍스', cap: '페어 2일차 끝! 엽서 전부 완판 🥹 와주신 분들 감사해요', likes: 233 },
+    { d: '2025.10.11 (토) 10:50', img: 'booth', loc: '고양 킨텍스 제2전시장', cap: '일산 일러스트 페어 D-day! 이틀 내내 부스 C-12에 있어요', likes: 198, pin: 'fair' },
+    { d: '2025.09.20 (토) 18:02', img: 'award', cap: '제3회 청록일러스트 공모전 대상 🏆 〈푸른 정류장〉 아직도 안 믿겨요', likes: '1,021', pin: 'award', cmts: [['minji_0404', '재희 대박!!!', '09.20 18:10']] },
+    { d: '2025.08.14 (목) 16:44', img: 'studio', cap: '작업실 대청소. 옛날 스케치북 싹 다 버림', likes: 77 },
+  ] },
+  dohyun: { handle: 'dohyun.k', name: '강도현', c: '#5a5f78', bio: '.', followers: '203', following: '198', posts: [
+    { d: '2025.10.09 (목) 22:40', img: 'bridge', loc: '부산 수영구 · 광안리해수욕장', cap: '출장 첫날부터 야근… 그래도 바다는 좋네', likes: 31, pin: 'alibi' },
+    { d: '2025.09.01 (월) 07:15', img: 'gym', cap: '운동 100일', likes: 18 },
+  ] },
+  minji: { handle: 'minji_0404', name: '민지', c: '#8a6aa0', private: true },
+};
+const HANDLE_ROUTE = { 'seoyun.draws': 'snap:seoyun', 'jaehee.draws': 'snap:jaehee', 'dohyun.k': 'snap:dohyun', 'minji_0404': 'snap:minji' };
+const userLink = h => HANDLE_ROUTE[h] ? `<button type="button" class="lnk" data-go="${HANDLE_ROUTE[h]}"><b>${esc(h)}</b></button>` : `<b>${esc(h)}</b>`;
+
+const DEVICES = [
+  { ic: 'PC', name: 'Galaxy Book · Chrome', where: '서울 서대문구', last: '이 기기 · 지금 사용 중' },
+  { ic: '폰', name: 'iPhone 13 · 스냅로그 앱', where: '서울 서대문구', last: '마지막 활동 2025.10.09 (목) 22:47' },
+  { ic: '패드', name: 'JH의 iPad · 스냅로그 앱', where: '경기 고양시', last: '마지막 활동 2025.10.11 (토) 14:20', extra: '처음 로그인 2025.09.28 · 최근 활동: 게시물 작성 (10.11 14:20)', pin: 'device' },
+];
+const ORDERS = [
+  { d: '2025.10.12 (일) 12:05', shop: '소담죽 신촌점', menu: '전복죽 + 야채죽 세트', price: '18,500원', req: '문 앞에 두고 벨 누르지 마세요', dev: 'JH의 iPad', status: '배달 완료 12:51', photo: true, pin: 'order' },
+  { d: '2025.10.09 (목) 19:40', shop: '할매김치찌개', menu: '김치찌개 1인분 + 공깃밥', price: '9,000원', dev: 'Galaxy Book', status: '배달 완료 20:22' },
+  { d: '2025.10.07 (화) 21:10', shop: '떡볶이연구소 홍대점', menu: '로제떡볶이 1인', price: '14,000원', dev: 'iPhone 13', status: '배달 완료 21:52' },
+  { d: '2025.10.03 (금) 12:30', shop: '샐러드하우스', menu: '연어 샐러드', price: '11,900원', dev: 'iPhone 13', status: '배달 완료 13:04' },
+];
+const DOOR = [
+  ['10.14 (화)', '15:32', '관리자 마스터키로 열림', '바깥'],
+  ['10.09 (목)', '23:26', '안에서 열림', '안쪽', 'door_night'],
+  ['10.09 (목)', '21:34', '안에서 열림', '안쪽'],
+  ['10.09 (목)', '21:33', '초인종 호출', '바깥'],
+  ['10.09 (목)', '18:48', '비밀번호로 열림', '바깥'],
+  ['10.09 (목)', '13:20', '안에서 열림', '안쪽'],
+  ['10.09 (목)', '02:13', '비밀번호 오류 ×3 · 10분 잠금', '바깥', 'door_fail'],
+  ['10.08 (수)', '20:15', '비밀번호 변경', '앱'],
+  ['10.07 (화)', '22:04', '비밀번호로 열림', '바깥'],
+  ['10.07 (화)', '08:55', '안에서 열림', '안쪽'],
+];
+const BOARD = [
+  { t: '504호 앞 배달봉지 며칠째 그대로예요', who: '오층사람', d: '10.13 (월) 09:02', body: '일요일 점심쯤 온 것 같은데 아직도 문 앞에 있어요. 504호 분 괜찮으신 건지… 관리실에 말씀드렸어요.', cmts: [['4층주민', '그 집 원래 밤마다 음악 소리 나던 집인데 요 며칠 엄청 조용하더라고요'], ['관리실', '확인 후 세대에 연락드리겠습니다']], pin: 'bag' },
+  { t: '방금 5층 쿵 소리 들으신 분?', who: '오층사람', d: '10.09 (목) 23:18', body: '11시 10분쯤 엄청 크게 쿵 했어요. 가구 넘어지는 소리 같았는데 그 뒤로는 조용하네요.', cmts: [['4층주민', '4층까지 울렸어요 ㄷㄷ'], ['익명', '공사 소리 아닌가요? 오늘 휴일인데']], pin: 'noise' },
+  { t: 'B2 주차장 전등 나갔어요', who: '202호', d: '10.06 (월) 20:11', body: '기둥 C 근처요. 어두워서 무섭네요.' },
+  { t: '분리수거 요일 목 → 수로 바뀐대요', who: '관리실', d: '10.02 (목) 10:00', body: '10월부터 재활용품은 매주 수요일에 내놓아 주세요.' },
+];
+const HIST = [
+  ['원본 파일 레이어 증거 효력', '10.09 18:20'],
+  ['공모전 표절 신고 방법', '10.09 18:12', 'hist'],
+  ['도어락 비밀번호 바꾸는 법', '10.08 20:02'],
+  ['고양이 사료 추천', '10.03 23:41'],
+  ['청록일러스트 공모전 결과', '09.21 00:37'],
+];
+const SEARCH = [
+  { k: ['한서윤', '서윤', 'seoyun'], r: ['news', 'snap:seoyun'] },
+  { k: ['청운하이츠', '청운동', '504호', '504', '오피스텔', '서대문'], r: ['board', 'news'] },
+  { k: ['강도현', '도현', 'dohyun'], r: ['snap:dohyun'] },
+  { k: ['윤재희', '재희', 'jaehee', 'jh'], r: ['snap:jaehee', 'contest'] },
+  { k: ['푸른정류장', '청록일러스트', '공모전', '버스정류장'], r: ['contest'] },
+  { k: ['일러스트페어', '킨텍스', 'kintex', '페어', '일산', '고양시'], r: ['fair'] },
+  { k: ['표절', '원본', '레이어'], r: ['kin:plag'] },
+  { k: ['도어락', '비밀번호', '홈키퍼'], r: ['kin:door'] },
+  { k: ['한그릇', '배달'], r: ['order'] },
+  { k: ['두부'], r: ['tofu'] },
+  { k: ['고양이', '사료'], r: ['cat'] },
+];
+const RESULTS = {
+  news: [{ site: '누리뉴스 · 2025.10.15', title: '서대문구 오피스텔서 20대 여성 숨진 채 발견… 경찰 "12일 이후 사망 추정"', snip: '서울 서대문구의 한 오피스텔에서 20대 여성 A씨가 숨진 채 발견돼 경찰이 수사에 나섰다…', go: 'news' }],
+  'snap:seoyun': [{ site: '스냅로그', title: '한서윤 (@seoyun.draws)', snip: '그림 그리는 사람 · 두부 집사 · 게시물 5 · 팔로워 1,284', go: 'snap:seoyun' }],
+  'snap:jaehee': [{ site: '스냅로그', title: '윤재희 (@jaehee.draws)', snip: 'illustrator · 제3회 청록일러스트 대상 · 팔로워 8,902', go: 'snap:jaehee' }],
+  'snap:dohyun': [{ site: '스냅로그', title: '강도현 (@dohyun.k)', snip: '게시물 2 · 최근 위치: 부산 수영구', go: 'snap:dohyun' }],
+  board: [{ site: '청운동 이웃', title: '청운하이츠 입주민 게시판', snip: '"504호 앞 배달봉지 며칠째 그대로예요" · "방금 5층 쿵 소리 들으신 분?" 외 2건', go: 'board' }],
+  contest: [{ site: '청록일러스트 공모전', title: '제3회 청록일러스트 공모전 수상작 발표', snip: '대상 — 윤재희 〈푸른 정류장〉 · 응모작 1,146점 · 2025.09.20', go: 'contest' }],
+  fair: [{ site: '일산 일러스트 페어', title: '2025 일산 일러스트 페어 · 10.11(토) – 10.12(일) · 고양 킨텍스', snip: '참가 작가 180팀 · 부스 배치도 안내', go: 'fair' }],
+  'kin:plag': [{ site: '누리지식in', title: 'Q. 공모전에 제 그림을 베낀 작품이 상을 받았어요. 어떻게 신고하나요?', snip: 'A. 원본 파일(작성일·레이어 기록)이 가장 강력한 증거예요…', go: 'kin:plag' }],
+  'kin:door': [{ site: '누리지식in', title: 'Q. 헤어진 사람이 우리 집 도어락 비번을 알아요. 바로 바꾸는 법?', snip: 'A. 스마트 도어락이라면 앱에서 바로 바꿀 수 있고, 출입 기록도 볼 수 있어요…', go: 'kin:door' }],
+  order: [{ site: '한그릇', title: '한그릇 — 우리 동네 배달', snip: 'seoyun.draws 님으로 로그인됨 · 주문내역', go: 'order' }],
+  tofu: [{ site: '누리레시피', title: '밥도둑 두부조림 황금레시피', snip: '두부 1모, 간장 3큰술, 고춧가루 1큰술, 다진 마늘…' }, { site: '누리쇼핑', title: '국산콩 부침두부 300g', snip: '1,980원 · 무료배송' }],
+  cat: [{ site: '누리지식in', title: 'Q. 7살 고양이 사료 추천 부탁드려요', snip: 'A. 나이 드는 고양이는 단백질 함량과 인 함량을 같이 보세요…' }],
+};
+
+const CHATS = [
+  { id: 'jh', name: '윤재희', ch: '재', c: '#3f6f73', last: '서윤아 답장 좀 ㅠ 걱정돼', when: '10.11', unread: 2, msgs: [
+    { day: '2025년 9월 28일 일요일' },
+    { me: 1, t: '재희야 나 이번 주 마감 지옥이라 폰도 못 볼 듯 ㅠ', at: '14:02' },
+    { me: 1, t: '스냅로그 공모전 공지 좀 대신 올려줄 수 있어? 아이디 seoyun.draws, 비번은 늘 쓰는 그거 (두부 + 내 생일)', at: '14:03', pin: 'pw' },
+    { t: 'ㅇㅋ 맡겨 👍', at: '14:10' },
+    { day: '2025년 10월 9일 목요일' },
+    { me: 1, t: '재희야.', at: '20:41' },
+    { me: 1, t: '〈푸른 정류장〉 그거 내가 작년에 그린 스케치잖아. 구도도, 우산 든 사람도, 레이어 순서까지 똑같아.', at: '20:41' },
+    { me: 1, t: '내일까지 네가 주최 측에 말 안 하면 내가 원본 파일 올릴게.', at: '20:43', pin: 'threat' },
+    { t: '오늘 밤에 갈게. 얼굴 보고 얘기하자.', at: '21:02', pin: 'lastmsg' },
+    { me: 1, t: '그래. 와.', at: '21:05' },
+    { day: '2025년 10월 11일 토요일' },
+    { t: '서윤아 나 오늘 페어 가 ㅎㅎ 끝나고 연락할게', at: '09:14', unread: 1 },
+    { t: '서윤아 답장 좀 ㅠ 걱정돼', at: '21:40', unread: 1 },
+  ] },
+  { id: 'dh', name: '강도현', ch: '도', c: '#5a5f78', last: '나 오늘 저녁부터 부산 출장이야…', when: '10.09', msgs: [
+    { day: '2025년 10월 8일 수요일' },
+    { t: '내 짐 아직 너네 집에 있잖아. 가지러 갈게.', at: '23:50' },
+    { me: 1, t: '택배로 보낼게. 오지 마.', at: '23:52' },
+    { me: 1, t: '도어락 비번도 바꿨어.', at: '23:52' },
+    { t: '너 진짜 이러다 후회한다', at: '23:58' },
+    { day: '2025년 10월 9일 목요일' },
+    { t: '나 오늘 저녁부터 부산 출장이야. 다녀와서 짐 얘기하자.', at: '17:30' },
+  ] },
+  { id: 'mj', name: '민지', ch: '민', c: '#8a6aa0', last: '재희도 너랑 연락 안 된대…', when: '10.13', unread: 2, msgs: [
+    { day: '2025년 10월 13일 월요일' },
+    { t: '서윤아 전화 왜 안 받아?', at: '11:20', unread: 1 },
+    { t: '재희도 너랑 연락 안 된대. 내일 재희랑 같이 가볼게', at: '11:21', unread: 1 },
+  ] },
+  { id: 'mg', name: '청운하이츠 관리실', ch: '관', c: '#6b7a5a', last: '504호 세대 현관 앞에…', when: '10.13', unread: 1, msgs: [
+    { day: '2025년 10월 13일 월요일' },
+    { t: '504호 세대 현관 앞에 배달 물품이 방치되어 있어 연락드립니다. 확인 부탁드립니다.', at: '16:05', unread: 1 },
+  ] },
+];
+const FILES = [
+  { id: 'psd', name: '버스정류장_연작01.psd', dir: '작업\\', d: '2024-11-02 01:47', size: '48.2MB', kind: 'Photoshop 이미지' },
+  { id: 'b3', name: '마감B_시안_v3.png', dir: '작업\\', d: '2025-10-09 16:20', size: '3.1MB', kind: 'PNG 이미지' },
+  { id: 'todo', name: '할일.txt', dir: '', d: '2025-10-09 17:55', size: '1KB', kind: '텍스트 문서' },
+  { id: 'vax', name: '두부_접종기록.pdf', dir: '', d: '2025-04-11 11:02', size: '212KB', kind: 'PDF 문서' },
+];
+
+/* ───────── browser pages ───────── */
+const norm = s => s.toLowerCase().replace(/[\s'".,!?·()\-_/@]/g, '');
+const searchForm = (v = '') => `<form class="nuri-form" data-search role="search"><input id="nuriQ" name="q" value="${esc(v)}" placeholder="사람, 장소, 무엇이든" aria-label="검색어"><button type="submit">검색</button></form>`;
+
+function searchHome() {
+  return `<div class="nuri-home"><div class="nuri-logo" aria-hidden="true">누리<span>.kr</span></div>${searchForm()}
+  <section class="nuri-hist"><h3>최근 검색어 <small>seoyun.draws 님의 기록</small></h3><ul>${HIST.map(([q, t, p]) => `<li><button type="button" class="lnk" data-go="search:${esc(q)}">${esc(q)}</button><time>${t}</time>${p ? pinBtn(p) : ''}</li>`).join('')}</ul></section>
+  <p class="nuri-foot">서울 14℃ 흐림 · 누리 검색</p></div>`;
+}
+function searchResults(q) {
+  const n = norm(q), hits = [];
+  if (n) SEARCH.forEach(e => {
+    if (e.k.some(k => n === k || (k.length >= 2 && n.includes(k)) || (n.length >= 2 && k.includes(n))))
+      e.r.forEach(x => { if (!hits.includes(x)) hits.push(x); });
+  });
+  const items = hits.flatMap(h => RESULTS[h] || []);
+  const body = items.length
+    ? items.map(i => `<div class="res"><div class="site">${esc(i.site)}</div><div class="ttl">${i.go ? `<button type="button" class="lnk" data-go="${i.go}">${esc(i.title)}</button>` : esc(i.title)}</div><p class="snip">${esc(i.snip)}</p></div>`).join('')
+    : `<div class="nores"><p><b>'${esc(q)}'</b>에 대한 검색 결과가 없습니다.</p><ul><li>단어의 철자가 정확한지 확인해 보세요.</li><li>사람 이름, 장소 이름처럼 구체적인 단어로 검색해 보세요.</li></ul></div>`;
+  return `<div class="nuri-top"><div class="nuri-logo sm" aria-hidden="true">누리</div>${searchForm(q)}</div><div class="nuri-res"><p class="muted">검색결과 ${items.length}건</p>${body}</div>`;
+}
+function postHtml(p, o) {
+  return `<article class="post"><header class="post-h"><span class="ava" style="--c:${o.c}">${o.name[1]}</span><div><b>${esc(o.handle)}</b>${p.loc ? `<small>📍 ${esc(p.loc)}</small>` : ''}</div></header>
+  <div class="post-img">${IMG[p.img]}</div>
+  <div class="post-b"><p class="likes">좋아요 ${p.likes}개</p><p><b>${esc(o.handle)}</b> ${esc(p.cap)}</p>
+  ${(p.cmts || []).map(([w, t, d]) => `<p class="cmt">${userLink(w)} ${esc(t)} <time>${d}</time></p>`).join('')}
+  <p class="post-d"><time>${p.d}</time>${p.pin ? pinBtn(p.pin) : ''}</p></div></article>`;
+}
+function snapPage(who, tab) {
+  const o = PROFILES[who];
+  const bar = `<header class="snap-bar"><span class="snap-logo">스냅로그</span><span class="snap-me">로그인: seoyun.draws</span></header>`;
+  if (!o) return { url: 'snaplog.kr', title: '스냅로그', html: bar + `<p class="private">없는 계정입니다.</p>` };
+  const url = `snaplog.kr/@${o.handle}` + (tab === 'devices' ? '/settings/devices' : '');
+  const head = `<section class="snap-prof"><span class="ava lg" style="--c:${o.c}">${o.name[1]}</span><div><h2>${esc(o.handle)}</h2><div>${esc(o.name)}</div>${o.private ? '' : `<div class="stats"><span>게시물 <b>${o.posts.length}</b></span><span>팔로워 <b>${o.followers}</b></span><span>팔로잉 <b>${o.following}</b></span></div>`}</div>${o.bio ? `<p class="bio">${esc(o.bio)}</p>` : ''}</section>`;
+  if (o.private) return { url, title: `${o.name} (@${o.handle})`, html: bar + `<div class="snap-main">${head}<p class="private">🔒 비공개 계정입니다.<br>팔로우를 수락한 사람만 게시물을 볼 수 있어요.</p></div>` };
+  let body = '';
+  if (o.own) {
+    body += `<div class="friends"><span class="muted">자주 소통하는 친구</span>${userLink('jaehee.draws')}${userLink('minji_0404')}${userLink('dohyun.k')}</div>`;
+    body += `<nav class="snap-tabs"><button type="button" class="${tab ? '' : 'on'}" data-go="snap:seoyun">게시물</button><button type="button" class="${tab ? 'on' : ''}" data-go="snap:seoyun:devices">⚙ 로그인 기기</button></nav>`;
+  }
+  if (tab === 'devices') {
+    body += `<section class="devices"><h3>로그인 기기 관리</h3><p class="muted">내 계정에 로그인된 기기입니다. 모르는 기기가 있다면 로그아웃하세요.</p><ul>${DEVICES.map(d => `<li><span class="dev-ic">${d.ic}</span><div><b>${esc(d.name)}</b><small>${esc(d.where)}</small><small>${esc(d.last)}</small>${d.extra ? `<small>${esc(d.extra)}</small>` : ''}${d.pin ? pinBtn(d.pin) : ''}</div></li>`).join('')}</ul></section>`;
+  } else {
+    body += o.posts.map(p => postHtml(p, o)).join('');
+  }
+  return { url, title: `${o.name} (@${o.handle}) · 스냅로그`, html: bar + `<div class="snap-main">${head}${body}</div>` };
+}
+const PAGES = {
+  order: () => ({ url: 'hangreut.co.kr/my/orders', title: '주문내역 | 한그릇', html: `<header class="site-bar hg"><span class="logo">한그릇</span><span>seoyun.draws 님</span></header><div class="site-main"><h2 class="site-h">주문내역</h2>${ORDERS.map(o => `<article class="order"><header><b>${esc(o.shop)}</b><span class="st">${o.status}</span></header><p>${esc(o.menu)} · ${o.price}</p><dl class="kv"><dt>주문 일시</dt><dd>${o.d}</dd><dt>배달 주소</dt><dd>서대문구 청운로 12, 청운하이츠 504호</dd>${o.req ? `<dt>요청사항</dt><dd>${esc(o.req)}</dd>` : ''}<dt>주문 기기</dt><dd>${esc(o.dev)}</dd></dl>${o.photo ? `<details class="photo"><summary>배달 완료 사진 보기</summary>${IMG.doorbag}<small class="muted">12:51 · 문 앞에 두고 갑니다 (라이더 촬영)</small></details>` : ''}${o.pin ? pinBtn(o.pin) : ''}</article>`).join('')}</div>` }),
+  door: () => ({ url: 'my.homekeeper.kr/504/log', title: '출입 기록 - 홈키퍼', html: `<header class="site-bar hk"><span class="logo">HOMEKEEPER</span><span>청운하이츠 504호 · HK-300 · 배터리 62%</span></header><div class="site-main"><h2 class="site-h">출입 기록</h2><p class="muted">최근 10건 · 최신순</p><div class="tbl-wrap"><table><thead><tr><th>날짜</th><th>시각</th><th>내용</th><th>위치</th><th></th></tr></thead><tbody>${DOOR.map(r => `<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4] ? pinBtn(r[4]) : ''}</td></tr>`).join('')}</tbody></table></div></div>` }),
+  board: () => ({ url: 'cheongun.town/board/heights', title: '청운하이츠 입주민 게시판 - 청운동 이웃', html: `<header class="site-bar bd"><span class="logo">청운동 이웃</span><span>청운하이츠 입주민 게시판</span></header><div class="site-main">${BOARD.map(b => `<article class="bpost"><h3>${esc(b.t)}</h3><p class="bmeta">${esc(b.who)} · ${b.d}</p><p>${esc(b.body)}</p>${b.cmts ? `<ul class="bcmts">${b.cmts.map(([w, t]) => `<li><b>${esc(w)}</b> ${esc(t)}</li>`).join('')}</ul>` : ''}${b.pin ? pinBtn(b.pin) : ''}</article>`).join('')}</div>` }),
+  contest: () => ({ url: 'cheongrok-illust.kr/2025/winners', title: '수상작 발표 - 청록일러스트 공모전', html: `<header class="site-bar ct"><span class="logo">청록일러스트 공모전</span><span>제3회 · 2025</span></header><div class="site-main"><h2 class="site-h">수상작 발표</h2><p class="muted">2025.09.20 · 응모작 1,146점</p><figure class="award"><div class="award-img">${IMG.award}</div><figcaption><span class="badge">대상</span> <b>〈푸른 정류장〉</b> 윤재희 · 디지털 페인팅<br><span class="muted">심사평: 비 오는 정류장에 선 한 사람. 절제된 구도와 여백이 돋보인다.</span></figcaption></figure>${pinBtn('award')}<ul class="others"><li><span class="badge sub">최우수</span> 〈세탁소의 밤〉 오한결</li><li><span class="badge sub">우수</span> 〈골목 끝 여름〉 서다온</li></ul><p class="muted">※ 수상작의 표절·도용이 확인되면 수상이 취소될 수 있습니다.</p></div>` }),
+  fair: () => ({ url: 'ilsan-illustfair.kr', title: '2025 일산 일러스트 페어', html: `<header class="site-bar fr"><span class="logo">ILSAN ILLUST FAIR</span><span>2025</span></header><div class="site-main"><h2 class="site-h">2025 일산 일러스트 페어</h2><dl class="kv"><dt>기간</dt><dd>10.11(토) – 10.12(일) · 10:00–19:00</dd><dt>장소</dt><dd>경기 고양시 킨텍스 제2전시장 7홀</dd><dt>참가</dt><dd>작가 180팀</dd></dl><h3 class="site-h" style="font-size:14px;margin-top:14px">C열 부스 배치</h3><ul class="booths"><li>C-10 · 모래시계 스튜디오</li><li>C-11 · 한여름 문구</li><li class="hl">C-12 · 윤재희 (@jaehee.draws)</li><li>C-13 · 곰곰 드로잉</li></ul><p class="muted">※ 참가 작가는 운영 시간 동안 부스에 상주해야 합니다.</p>${pinBtn('fair')}</div>` }),
+  news: () => ({ url: 'news.nuri.kr/society/20251015-0712', title: '서대문구 오피스텔서 20대 여성 숨진 채 발견 - 누리뉴스', html: `<header class="site-bar nw"><span class="logo">누리뉴스</span><span>사회 · 사건사고</span></header><div class="site-main news"><h2 class="news-h">서대문구 오피스텔서 20대 여성 숨진 채 발견… 경찰 "12일 이후 사망 추정"</h2><p class="muted">입력 2025.10.15 07:12 · 누리뉴스 사회부</p><p>서울 서대문구의 한 오피스텔에서 20대 여성 A씨가 숨진 채 발견돼 경찰이 수사에 나섰다.</p><p>15일 서울서부경찰서에 따르면 A씨는 지난 14일 오후, 연락이 닿지 않는다며 찾아온 지인과 건물 관리인에 의해 발견됐다. 현장에서 외부 침입 흔적은 나오지 않았다.</p><p>경찰은 A씨가 11일까지 SNS에 글을 올렸고 12일에도 음식을 주문한 기록이 있는 점으로 미뤄, 12일 이후 숨진 것으로 보고 정확한 경위를 조사하고 있다.</p><p class="muted">ⓒ 누리뉴스 · 무단 전재 및 재배포 금지</p></div>` }),
+  'kin:plag': () => ({ url: 'kin.nuri.kr/qna/88213', title: '공모전 표절 신고 - 누리지식in', html: `<header class="site-bar kn"><span class="logo">누리지식in</span><span>저작권 · 법률</span></header><div class="site-main"><div class="qa"><p><b>Q.</b> 공모전에 제 그림을 베낀 작품이 상을 받았어요. 어떻게 신고하나요?</p><p class="muted">비공개 · 2025.03.02</p></div><div class="qa"><p><b>A.</b> 주최 측 신고가 먼저입니다. 원본 파일(작성일·레이어 기록)이 가장 강력한 증거예요. 파일은 외부 저장소에 꼭 백업해 두세요.</p><p>그리고 상대방과 단둘이 만나서 해결하려는 건 추천하지 않습니다.</p><p class="muted">채택된 답변 · 지식파트너</p></div></div>` }),
+  'kin:door': () => ({ url: 'kin.nuri.kr/qna/77120', title: '도어락 비밀번호 변경 - 누리지식in', html: `<header class="site-bar kn"><span class="logo">누리지식in</span><span>생활</span></header><div class="site-main"><div class="qa"><p><b>Q.</b> 헤어진 사람이 우리 집 도어락 비번을 알아요. 바로 바꾸는 법?</p><p class="muted">비공개 · 2024.12.19</p></div><div class="qa"><p><b>A.</b> 스마트 도어락이면 앱 설정 › 비밀번호 변경에서 바로 됩니다. 앱의 <b>출입 기록</b> 메뉴에서 누가 언제 열고 나갔는지도 확인할 수 있어요. (예: 홈키퍼 앱)</p><p class="muted">채택된 답변 · 생활달인</p></div></div>` }),
+};
+function page(r) {
+  if (r === 'search') return { url: 'nuri.kr', title: '누리', html: searchHome() };
+  if (r.startsWith('search:')) { const q = r.slice(7); return { url: 'nuri.kr/search?q=' + q, title: `${q} : 누리 검색`, html: searchResults(q) }; }
+  if (r.startsWith('snap:')) { const [, who, tab] = r.split(':'); return snapPage(who, tab); }
+  return PAGES[r] ? PAGES[r]() : { url: 'about:blank', title: '빈 페이지', html: '<p class="private">페이지를 찾을 수 없습니다.</p>' };
+}
+
+/* ───────── window manager ───────── */
+let cur = null, minimized = false, chatId = 'jh', docSel = 'psd', talkFails = 0;
+const nav = { stack: ['search'], i: 0 };
+const APP_NAMES = { browser: '누리 브라우저', talk: '도란톡', docs: '내 문서' };
+
+function openApp(id) { cur = id; minimized = false; renderWindow(); }
+function go(r) {
+  nav.stack = nav.stack.slice(0, nav.i + 1); nav.stack.push(r); nav.i = nav.stack.length - 1;
+  cur = 'browser'; minimized = false; renderWindow();
+}
+function renderTasks() {
+  $('#tbTasks').innerHTML = cur ? `<button type="button" class="tb-task ${minimized ? '' : 'on'}" id="tbTask">${APP_NAMES[cur]}</button>` : '';
+}
+function renderWindow() {
+  $('#win').hidden = !cur || minimized;
+  renderTasks();
+  if (!cur || minimized) return;
+  if (cur === 'browser') renderBrowser();
+  else if (cur === 'talk') renderTalk();
+  else if (cur === 'docs') renderDocs();
+  syncPins($('#winBody'));
+}
+function renderBrowser() {
+  const pg = page(nav.stack[nav.i]);
+  $('#winTitle').textContent = `${pg.title} - 누리 브라우저`;
+  $('#winBody').innerHTML = `<div class="br-nav"><button type="button" class="br-btn" id="brBack" aria-label="뒤로" ${nav.i === 0 ? 'disabled' : ''}>◀</button><button type="button" class="br-btn" id="brFwd" aria-label="앞으로" ${nav.i >= nav.stack.length - 1 ? 'disabled' : ''}>▶</button><div class="addr" title="${esc(pg.url)}"><span>http://</span>${esc(pg.url)}</div></div>
+  <div class="br-marks"><span class="mk-label">즐겨찾기</span><button type="button" class="mark" data-go="search">누리검색</button><button type="button" class="mark" data-go="snap:seoyun">스냅로그</button><button type="button" class="mark" data-go="order">한그릇</button><button type="button" class="mark" data-go="door">홈키퍼</button></div>
+  <div class="page" id="page">${pg.html}</div>`;
+}
+function renderTalk() {
+  $('#winTitle').textContent = '도란톡';
+  const b = $('#winBody');
+  if (!S.talk) {
+    b.innerHTML = `<div class="talk-lock"><div class="talk-logo">도란톡</div><p class="hint">seoyun.draws 님, 다시 로그인해 주세요.</p><form id="talkLogin"><label for="talkPw">비밀번호</label><input id="talkPw" type="password" autocomplete="off"><button type="submit">로그인</button></form><p class="hint">비밀번호 힌트: 우리 집 막내 이름(영문) + 내 생일 4자리</p><p class="err" id="talkErr"></p>${talkFails >= 3 ? `<p class="hand-hint">생일은… 케이크 사진 올린 날?</p>` : ''}</div>`;
+    return;
+  }
+  const c = CHATS.find(x => x.id === chatId);
+  let msgs = '', ur = false;
+  for (const m of c.msgs) {
+    if (m.day) { msgs += `<p class="day">${m.day}</p>`; continue; }
+    if (m.unread && !ur) { ur = true; msgs += `<p class="unread-line"><span>여기서부터 읽지 않은 메시지</span></p>`; }
+    msgs += `<div class="msg ${m.me ? 'me' : ''}">${m.me ? '' : `<span class="ava sm" style="--c:${c.c}">${c.ch}</span>`}<div class="bubble">${esc(m.t)}</div><time>${m.at}</time></div>`;
+    if (m.pin) msgs += `<div class="msg-pin ${m.me ? 'me' : ''}">${pinBtn(m.pin)}</div>`;
+  }
+  b.innerHTML = `<div class="talk"><nav class="talk-list" aria-label="대화 목록">${CHATS.map(x => `<button type="button" class="chat-item ${x.id === chatId ? 'on' : ''}" data-chat="${x.id}"><span class="ava" style="--c:${x.c}">${x.ch}</span><span class="ci-t"><b>${esc(x.name)}</b><small>${esc(x.last)}</small></span><time>${x.when}</time>${x.unread ? `<span class="ub">${x.unread}</span>` : ''}</button>`).join('')}</nav>
+  <section class="talk-room"><header class="room-h"><b>${esc(c.name)}</b></header><div class="room-msgs">${msgs}</div><footer class="room-in">증거 보존 중: 메시지를 보낼 수 없습니다</footer></section></div>`;
+}
+function renderDocs() {
+  $('#winTitle').textContent = '내 문서';
+  const f = FILES.find(x => x.id === docSel);
+  const PV = {
+    psd: `<div class="pv-img">${IMG.sketch}</div><dl class="kv"><dt>만든 날짜</dt><dd>2024-11-02 01:47</dd><dt>수정한 날짜</dt><dd>2024-11-02 01:47</dd><dt>크기</dt><dd>2400 × 1800 px · 48.2MB</dd><dt>레이어</dt><dd>14개: 01 가이드선 · 02 하늘 · 03 달 · 04 빗줄기 · 05 지평선 · 06 정류장 지붕 · 07 기둥 · 08 벤치 · 09 표지판 · 10 우산 · 11 우산 든 사람 · 12 그림자 · 13 질감 · 14 서명(SY)</dd></dl>${pinBtn('psd')}`,
+    b3: `<div class="pv-img">${IMG.desk}</div><p class="muted">카페 메뉴판 일러스트 시안 B · 3차</p>`,
+    todo: `<pre class="txt">10/9 (한글날)
+- 두부 병원 예약 (토 11시)
+- 마감 B 시안 2개 보내기
+- 원본 psd 외장하드에 백업
+- 재희한테 말하기. 오늘은 꼭.</pre>`,
+    vax: `<pre class="txt">청운동물병원 · 접종 확인서
+반려묘  두부 (코리안 숏헤어, 암컷)
+보호자  한서윤
+2025-04-11  종합백신 3차 접종 완료</pre>`,
+  };
+  $('#winBody').innerHTML = `<div class="docs"><div class="docs-path">C:\\사용자\\서윤\\내 문서</div><div class="tbl-wrap"><table><thead><tr><th>이름</th><th>수정한 날짜</th><th>유형</th><th>크기</th></tr></thead><tbody>${FILES.map(x => `<tr class="${x.id === docSel ? 'on' : ''}"><td><button type="button" data-file="${x.id}">${esc(x.dir + x.name)}</button></td><td class="num">${x.d}</td><td>${x.kind}</td><td class="num">${x.size}</td></tr>`).join('')}</tbody></table></div><section class="pv"><h3>${esc(f.name)}</h3>${PV[f.id]}</section></div>`;
+}
+function tryTalk(v) {
+  const n = String(v).toLowerCase().replace(/\s/g, '');
+  if (/^(dubu|doobu|tofu|두부)0317$/.test(n)) { S.talk = true; save(); renderWindow(); toast('도란톡 로그인 성공'); return; }
+  talkFails++;
+  renderWindow();
+  $('#talkErr').textContent = `비밀번호가 일치하지 않습니다. (${talkFails}회)`;
+}
+
+/* ───────── notebook ───────── */
+const rot = id => (((id.split('').reduce((a, c) => a + c.charCodeAt(0), 0)) % 5) - 2) * 0.3;
+function syncPins(root = document) {
+  root.querySelectorAll('[data-pin]').forEach(b => {
+    const on = S.pins.includes(b.dataset.pin);
+    b.classList.toggle('done', on); b.disabled = on;
+    b.textContent = on ? '✓ 수첩에 적음' : '✎ 수첩에 적기';
+  });
+}
+function renderNotes(fresh) {
+  const tips = `<li class="tip">※ 검색창엔 사람 이름·장소를 직접 쳐볼 것</li><li class="tip">※ 노트북의 다른 프로그램도 열어볼 것</li><li class="red">※ 재희: "10시쯤 나왔다" ← 확인!</li>`;
+  $('#notes').innerHTML = tips + S.pins.filter(id => CLUES[id]).map((id, i) => `<li class="${id === fresh ? 'fresh' : ''}" style="--r:${rot(id)}deg"><span class="n">${i + 1}.</span> ${esc(CLUES[id].t)} <span class="src">— ${esc(CLUES[id].s)}</span></li>`).join('');
+  $('#clueCount').textContent = S.pins.length;
+  $('#clueTotal').textContent = TOTAL;
+}
+function pin(id) {
+  if (!CLUES[id] || S.pins.includes(id)) return;
+  S.pins.push(id); save(); syncPins(); renderNotes(id);
+  toast(`수첩에 적었다 · 단서 ${S.pins.length}/${TOTAL}`);
+}
+
+const Q = [
+  { id: 'time', label: '사망 시각', opts: [['d9', '10월 9일 밤 11시쯤'], ['d10', '10월 10일 새벽'], ['d11', '10월 11일 오후'], ['d12', '10월 12일 점심 이후']], a: 'd9' },
+  { id: 'who', label: '범인', opts: [['dh', '전 남자친구 강도현'], ['jh', '친구 윤재희'], ['nb', '503호 이웃'], ['mg', '건물 관리인']], a: 'jh' },
+  { id: 'how', label: '위장 수법', opts: [['phone', '피해자 휴대폰으로 직접 올림'], ['ipad', '자기 태블릿으로 피해자 계정 접속'], ['sched', '예약 게시를 미리 걸어 둠'], ['help', '다른 사람에게 부탁함']], a: 'ipad' },
+  { id: 'why', label: '동기', opts: [['love', '이별 뒤의 앙심'], ['noise', '층간소음 다툼'], ['plag', '표절이 드러날 위기'], ['money', '돈 문제']], a: 'plag' },
+];
+function renderReport() {
+  $('#report').innerHTML = Q.map((q, i) => `<p><span class="no">${i + 1}.</span> <label for="r-${q.id}">${q.label}:</label> <select class="blank" id="r-${q.id}" data-q="${q.id}"><option value="">— 고르기 —</option>${q.opts.map(([v, t]) => `<option value="${v}" ${S.report[q.id] === v ? 'selected' : ''}>${t}</option>`).join('')}</select></p>`).join('')
+    + `<p class="submit-row"><button type="submit" class="btn-hand">보고서 올리기</button><span class="tries" id="tries">${S.tries ? `제출 ${S.tries}회` : ''}</span></p>`;
+}
+function submitReport() {
+  const vals = Q.map(q => $('#r-' + q.id).value);
+  const v = $('#verdict');
+  if (vals.some(x => !x)) { v.textContent = '빈칸이 남아 있다.'; return; }
+  S.tries++;
+  const ok = Q.filter((q, i) => vals[i] === q.a).length;
+  if (ok === Q.length) { S.solved = true; v.textContent = ''; }
+  else if (ok === Q.length - 1) v.textContent = '딱 하나가 어긋난다. 어디일까?';
+  else v.textContent = '아직 앞뒤가 안 맞는다. 증거를 더 모으자.';
+  save(); $('#tries').textContent = `제출 ${S.tries}회`; renderSolved(ok === Q.length);
+}
+function renderSolved(fresh) {
+  const el = $('#solved');
+  el.hidden = !S.solved;
+  $('#c1mark').textContent = S.solved ? '해결' : '';
+  $('#case2').textContent = S.solved ? 'CASE 02 · 준비 중' : 'CASE 02 · 잠김';
+  if (!S.solved) { el.innerHTML = ''; return; }
+  el.innerHTML = `<div class="stamp" ${fresh ? '' : 'style="animation:none"'}><div>사건<br>종결<small>2025.10.17 · 강력2팀</small></div></div>
+  <div class="epi"><p>10월 9일 밤 9시 34분, 서윤은 문을 열어 재희를 들였다. 11시 10분의 "쿵" 소리 뒤로, 504호의 문은 11시 26분에 딱 한 번 열렸고 다시는 열리지 않았다.</p>
+  <p>재희는 9월에 받아 둔 비밀번호로 서윤의 계정에 들어가, 페어 부스에서 "집콕" 글을 올리고 죽을 주문했다. 그 죽은 끝내 문 앞에서 식었다.</p>
+  <p>〈푸른 정류장〉의 원본, 레이어 14개짜리 파일은 서윤의 '작업' 폴더에 그대로 남아 있었다.</p>
+  <p class="next">보고서를 올리자 팀장이 파일 하나를 책상에 던졌다. "2019년 마포. 같은 수법이야. 미제로 남았지." → CASE 02 준비 중</p></div>`;
+}
+
+/* ───────── events ───────── */
+let tt;
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('on'), 1900); }
+
+document.addEventListener('click', e => {
+  const t = e.target;
+  const p = t.closest('[data-pin]'); if (p) { pin(p.dataset.pin); return; }
+  const g = t.closest('[data-go]'); if (g) { go(g.dataset.go); return; }
+  const a = t.closest('[data-app]'); if (a) { openApp(a.dataset.app); return; }
+  const c = t.closest('[data-chat]'); if (c) { chatId = c.dataset.chat; renderWindow(); return; }
+  const f = t.closest('[data-file]'); if (f) { docSel = f.dataset.file; renderWindow(); return; }
+  if (t.closest('#brBack') && nav.i > 0) { nav.i--; renderWindow(); return; }
+  if (t.closest('#brFwd') && nav.i < nav.stack.length - 1) { nav.i++; renderWindow(); return; }
+  if (t.closest('#winMin')) { minimized = true; renderWindow(); return; }
+  if (t.closest('#winClose')) { cur = null; renderWindow(); return; }
+  if (t.closest('#tbTask')) { minimized = !minimized; renderWindow(); return; }
+  if (t.closest('#tbDesk')) { if (cur) { minimized = true; renderWindow(); } return; }
+  const r = t.closest('#reset');
+  if (r) {
+    if (!r.classList.contains('arm')) { r.classList.add('arm'); r.textContent = '한 번 더 누르면 전부 지워집니다'; setTimeout(() => { r.classList.remove('arm'); r.textContent = '수첩 지우고 처음부터'; }, 3000); return; }
+    S = { pins: [], talk: false, tries: 0, solved: false, report: {} }; save();
+    r.classList.remove('arm'); r.textContent = '수첩 지우고 처음부터';
+    talkFails = 0; nav.stack = ['search']; nav.i = 0; $('#verdict').textContent = '';
+    renderNotes(); renderReport(); renderSolved(false); openApp('browser'); toast('처음부터 다시');
+  }
+});
+document.addEventListener('submit', e => {
+  const f = e.target;
+  if (f.matches('[data-search]')) { e.preventDefault(); const q = f.querySelector('input').value.trim(); if (q) go('search:' + q); }
+  else if (f.id === 'talkLogin') { e.preventDefault(); tryTalk(f.querySelector('input').value); }
+  else if (f.id === 'report') { e.preventDefault(); submitReport(); }
+});
+document.addEventListener('change', e => {
+  const s = e.target.closest('[data-q]');
+  if (s) { S.report[s.dataset.q] = s.value; save(); }
+});
+
+function start(data) {
+  if (data && data.S && typeof data.S === 'object') S = Object.assign(S, data.S);
+  renderNotes(); renderReport(); renderSolved(false); openApp('browser');
+}
+try { window.claude?.hot?.snapshot?.(() => ({ S })); } catch (e) {}
+if (window.claude?.hot?.ready) window.claude.hot.ready(start); else start(window.claude?.hot?.data ?? {});
+})();
+</script>
