@@ -1005,14 +1005,14 @@ Police canvass snapshot at night, 2006: a multi-family house with a poured concr
 Police canvass snapshot at night, 2006: a multi-family house on an uphill alley with a long external iron staircase turning once, many potted plants crowded in the small front yard below, a metal door with keypad lock. Harsh flash.
 ```
 
-### c09/ph217 — 정밀 관찰 사진
+### c09/ph217 — 정밀 관찰 사진 🔁 다시 뽑기
 - 저장 경로: `img/c09/ph217.webp` · 비율: 4:3
 ```
 Photograph taken from a narrow alley in Seoul in 2006, looking up at a two-storey red-brick multi-family house on a damp evening. An exterior steel staircase climbs the right half of the façade: eight rusty steel treads up to a narrow landing, then it turns and five more treads up to a wooden front door on the second floor at the upper right. The door has a single keyhole and no digital lock, and at eye height a round faded patch where a sticker was peeled off. On the landing six square soil marks in a row with white styrofoam crumbs. A black telephone wire comes down from a pole and enters the wall beside a second-floor window at the upper left. At the foot of the wall at the lower left, dumped soil with dried scallion roots and pepper stems, half washed away. A bicycle under the stairs.
 ```
 - **꼭 보여야 할 것**: 철계단 여덟 칸 → 계단참 → 다섯 칸 (모두 열셋) · 계단참의 네모난 흙 자국 여섯 · 오른쪽 위 2층 나무문 (도어락 없음, 스티커 뗀 자국) · 왼쪽 위 전화선 · 왼쪽 아래 담 밑 흙
 
-### c09/ph219 — 정밀 관찰 사진
+### c09/ph219 — 정밀 관찰 사진 🔁 다시 뽑기
 - 저장 경로: `img/c09/ph219.webp` · 비율: 4:3
 ```
 Photograph taken from a small front yard in Seoul in 2006 of a two-storey rendered concrete house: an exterior CONCRETE staircase with only a steel handrail, seven steps up to a landing, then it turns and six more steps. On the landing three geranium pots. At the top of the stairs, to the LEFT, a steel door on the second floor at the upper left with a digital keypad lock and a small yellow square sticker. A window at the upper right, a first-floor door at the right. Dull evening light.
@@ -1211,7 +1211,7 @@ Darkroom luminol photograph from 1986, a 30-second exposure inside a tiny market
 ```
 - **꼭 보여야 할 것**: 불 끈 가게 바닥 거의 전체가 푸르게 빛난다
 
-### c11/cut_ev — 대조 감정 시료
+### c11/cut_ev — 대조 감정 시료 🔁 다시 뽑기
 - 저장 경로: `img/c11/cut_ev.webp` · 비율: 3:2
 ```
 Macro forensic photograph under low raking light of a grey silicone cast taken from a saw-cut surface, an oval about the size of a coin, on a black background with a tiny scale bar. The saw striations are spaced fairly wide (about 2.5 to 3 mm apart), bowed into a curve and dragged to one side; the kerf is wide; at one edge several false-start notches where the saw was re-set again and again. Clinical, grey, no blood.

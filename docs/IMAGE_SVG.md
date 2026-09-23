@@ -2,7 +2,7 @@
 
 > `node tools/prompts.js` 가 자동으로 만든다. 사건 파일 `art` 항목 가운데 `swap: 'svg'` 표시가 붙은 것 — 지금은 게임에서 단순한 SVG 도형으로 그려지는 지도·현장 관찰 사진·대조 감정 시료다.
 
-총 **30장** · 남은 것 **30장**. 성문 스펙트로그램 5장은 합성음으로 직접 만들어 넣으므로 여기서 뽑지 않는다.
+총 **30장** · 남은 것 **0장**. 성문 스펙트로그램 5장은 합성음으로 직접 만들어 넣으므로 여기서 뽑지 않는다.
 
 ## 뽑을 때 지킬 것
 
@@ -14,53 +14,53 @@
 
 | 그림 | 종류 | 비율 | 상태 |
 |---|---|---|---|
-| `c00/desk` | 관찰 사진 | 3:2 | ⬜ 뽑을 것 |
-| `c01/map` | 지도 | 4:3 | ⬜ 뽑을 것 |
-| `c02/plan` | 지도 | 3:2 | ⬜ 뽑을 것 |
-| `c02/sk_kitchen` | 관찰 사진 | 3:2 | ⬜ 뽑을 것 |
-| `c02/sk_stall` | 관찰 사진 | 3:2 | ⬜ 뽑을 것 |
-| `c03/map` | 지도 | 4:3 | ⬜ 뽑을 것 |
-| `c04/bikephoto` | 관찰 사진 | 16:10 | ⬜ 뽑을 것 |
-| `c04/map` | 지도 | 3:2 | ⬜ 뽑을 것 |
-| `c05/env_ref` | 대조 시료 | 16:9 | ⬜ 뽑을 것 |
-| `c05/env_typed` | 대조 시료 | 16:9 | ⬜ 뽑을 것 |
-| `c05/env_star` | 대조 시료 | 16:9 | ⬜ 뽑을 것 |
-| `c05/env_four` | 대조 시료 | 16:9 | ⬜ 뽑을 것 |
-| `c05/env_sheriff` | 대조 시료 | 16:9 | ⬜ 뽑을 것 |
-| `c06/bags_table` | 관찰 사진 | 4:3 | ⬜ 뽑을 것 |
-| `c07/scene_map` | 지도 | 4:3 | ⬜ 뽑을 것 |
-| `c08/map` | 지도 | 4:3 | ⬜ 뽑을 것 |
-| `c09/map` | 지도 | 4:3 | ⬜ 뽑을 것 |
-| `c09/ph217` | 관찰 사진 | 4:3 | ⬜ 뽑을 것 |
-| `c09/ph219` | 관찰 사진 | 4:3 | ⬜ 뽑을 것 |
-| `c11/cut_ev` | 대조 시료 | 3:2 | ⬜ 뽑을 것 |
-| `c11/cut_a` | 대조 시료 | 3:2 | ⬜ 뽑을 것 |
-| `c11/cut_b` | 대조 시료 | 3:2 | ⬜ 뽑을 것 |
-| `c11/cut_c` | 대조 시료 | 3:2 | ⬜ 뽑을 것 |
-| `c11/cut_d` | 대조 시료 | 3:2 | ⬜ 뽑을 것 |
-| `c11/ph_match` | 관찰 사진 | 3:2 | ⬜ 뽑을 것 |
-| `c11/ph_print` | 관찰 사진 | 3:2 | ⬜ 뽑을 것 |
-| `c11/ph_lumi` | 관찰 사진 | 3:2 | ⬜ 뽑을 것 |
-| `c12/sk_east` | 관찰 사진 | 16:10 | ⬜ 뽑을 것 |
-| `c12/sk_sento` | 관찰 사진 | 16:10 | ⬜ 뽑을 것 |
-| `c12/sk_lum` | 관찰 사진 | 16:10 | ⬜ 뽑을 것 |
+| `c00/desk` | 관찰 사진 | 3:2 | ✅ 들어옴 |
+| `c01/map` | 지도 | 4:3 | ✅ 들어옴 |
+| `c02/plan` | 지도 | 3:2 | ✅ 들어옴 |
+| `c02/sk_kitchen` | 관찰 사진 | 3:2 | ✅ 들어옴 |
+| `c02/sk_stall` | 관찰 사진 | 3:2 | ✅ 들어옴 |
+| `c03/map` | 지도 | 4:3 | ✅ 들어옴 |
+| `c04/bikephoto` | 관찰 사진 | 16:10 | ✅ 들어옴 |
+| `c04/map` | 지도 | 3:2 | ✅ 들어옴 |
+| `c05/env_ref` | 대조 시료 | 16:9 | ✅ 들어옴 |
+| `c05/env_typed` | 대조 시료 | 16:9 | ✅ 들어옴 |
+| `c05/env_star` | 대조 시료 | 16:9 | ✅ 들어옴 |
+| `c05/env_four` | 대조 시료 | 16:9 | ✅ 들어옴 |
+| `c05/env_sheriff` | 대조 시료 | 16:9 | ✅ 들어옴 |
+| `c06/bags_table` | 관찰 사진 | 4:3 | ✅ 들어옴 |
+| `c07/scene_map` | 지도 | 4:3 | ✅ 들어옴 |
+| `c08/map` | 지도 | 4:3 | ✅ 들어옴 |
+| `c09/map` | 지도 | 4:3 | ✅ 들어옴 |
+| `c09/ph217` | 관찰 사진 | 4:3 | ✅ 들어옴 |
+| `c09/ph219` | 관찰 사진 | 4:3 | ✅ 들어옴 |
+| `c11/cut_ev` | 대조 시료 | 3:2 | ✅ 들어옴 |
+| `c11/cut_a` | 대조 시료 | 3:2 | ✅ 들어옴 |
+| `c11/cut_b` | 대조 시료 | 3:2 | ✅ 들어옴 |
+| `c11/cut_c` | 대조 시료 | 3:2 | ✅ 들어옴 |
+| `c11/cut_d` | 대조 시료 | 3:2 | ✅ 들어옴 |
+| `c11/ph_match` | 관찰 사진 | 3:2 | ✅ 들어옴 |
+| `c11/ph_print` | 관찰 사진 | 3:2 | ✅ 들어옴 |
+| `c11/ph_lumi` | 관찰 사진 | 3:2 | ✅ 들어옴 |
+| `c12/sk_east` | 관찰 사진 | 16:10 | ✅ 들어옴 |
+| `c12/sk_sento` | 관찰 사진 | 16:10 | ✅ 들어옴 |
+| `c12/sk_lum` | 관찰 사진 | 16:10 | ✅ 들어옴 |
 
-## c00/desk — 관찰 사진 · 청운하이츠 504호
+## c00/desk — 관찰 사진 · 청운하이츠 504호 ✅
 - 저장 경로: `img/c00/desk.png` · 비율: 3:2
 - **꼭 보여야 할 것**: 노트북 왼쪽 위 포스트잇 · 오른쪽 위 뜯지 않은 택배 상자 · 오른쪽 아래 머그잔 두 개 (한 잔에만 립밤 자국)
 ```
 Top-down photograph of a freelance illustrator's work desk in a small Seoul studio apartment, left exactly as it was found: an open laptop in the middle, a yellow sticky note stuck on the desk just left of the laptop near the top edge with a short handwritten line (blurred, unreadable), an unopened small cardboard delivery box at the upper right with a shipping label and its packing tape still sealed, two mugs of cold coffee side by side at the lower right, one with a faint lip-balm mark on the rim, a drawing tablet and pens, a few cat hairs, dull daylight through blinds, a still, stale feeling. Casual smartphone photo taken in 2025 Seoul, natural window light, slightly soft focus, subtle JPEG compression, warm muted colors, social-media snapshot feel. No faces, no readable text, no logos. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c01/map — 지도 · 화이트게이트의 편지
+## c01/map — 지도 · 화이트게이트의 편지 ✅
 - 저장 경로: `img/c01/map.png` · 비율: 4:3
 - **꼭 보여야 할 것**: 블록 한 바퀴를 도는 붉은 점선 순찰로 · 위쪽 가운데 선술집 오른쪽 벽의 작은 붉은 네모 (뒷문) · 글자 없음 (지명은 게임이 얹는다)
-- 게임이 얹을 글자: 하이 스트리트 · 솔트 레인 · 스리 키스 · 로프워크 코트 · 블루 랜턴 · 세인트 에드윈 · 스타 신문사 · 우체통 · 석탄 광
+- 게임이 얹을 글자: 하이 스트리트 · 솔트 레인 · 스리 키스 · 로프워크 코트 · 블루 랜턴 · 세인트 에드윈 · 스타 신문사 · 우체통 · 석탄 광 · 교회 길 · 아치 골목
 ```
 Hand-drawn 1888 London police beat map, pen and ink with pale watercolour washes on yellowed paper, seen straight from above like a plan. A main street runs across the top; a narrow lane runs down the left side; another lane runs along the bottom; a narrow alley runs down the right side from the main street. Buildings are small washed rectangles: a newspaper office above the main street at the top right, a public house in the upper middle with a small red square marking its back door on its right wall, a small enclosed courtyard with a dot at the right, a church with a tiny cross at the left middle, a larger building at the bottom middle, a tiny coal shed at the lower right of the block, a pillar box at the top left corner. A red dashed line traces one rectangular patrol loop around the whole block along the four streets. Leave all building and street names blank: no words, no letters anywhere. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c02/plan — 지도 · 하젤외드의 열흘
+## c02/plan — 지도 · 하젤외드의 열흘 ✅
 - 저장 경로: `img/c02/plan.png` · 비율: 3:2
 - **꼭 보여야 할 것**: 위쪽 숲 · 가운데 왼쪽 살림채 네 칸 + 붙은 외양간 · 오른쪽에 따로 선 헛간 · 살림채 위 점선 다락 · 아래 가운데 대문 우편함까지 점선 길 · 글자 없음
 - 게임이 얹을 글자: 태넨슐라크 (숲) · 현관 · 오버뢰딩 →
@@ -68,36 +68,36 @@ Hand-drawn 1888 London police beat map, pen and ink with pale watercolour washes
 A 1923 Bavarian gendarme's ink floor plan of an isolated farmhouse, drawn on squared paper with a ruler, slightly smudged, top-down. Across the top edge a row of small fir-tree symbols for the forest. In the middle left a long farmhouse block: the living part on the left divided into four rooms in a two-by-two grid, the stable attached on its right, and a dashed rectangle above the living part for the attic. A separate barn stands to the right with a gap between. From the front door a dotted path runs down to a small gate with a mailbox at the bottom middle. A small arrow at the bottom right points toward the village. No words, no letters, no numbers. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c02/sk_kitchen — 관찰 사진 · 하젤외드의 열흘
+## c02/sk_kitchen — 관찰 사진 · 하젤외드의 열흘 ✅
 - 저장 경로: `img/c02/sk_kitchen.png` · 비율: 3:2
 - **꼭 보여야 할 것**: 왼쪽 아래 넘친 재받이와 빈 장작 궤짝 · 가운데 식탁 위 접힌 신문 · 오른쪽 위 층계 끝 다락 문 · 오른쪽 아래 문간의 나무 개 밥그릇
 ```
 A court clerk's pencil sketch from February 1923 of a Bavarian farmhouse kitchen, drawn from the doorway "as seen, nothing moved": loose graphite lines on off-white paper with light hatching. On the left a big tiled wood-fired stove whose ash drawer overflows, grey ash spilling onto the floor, an empty firewood crate beside it. In the middle a kitchen table with a folded newspaper lying on it, never opened, and a loaf of bread. On the right a steep wooden ladder-stair rising to a plank trapdoor-door at the top right, its bolt drawn on the far side. At the far right the doorway, and on the floor right in the doorway at the lower right a wooden dog bowl with dried crusts. A small window at the top middle, pots hanging on the wall. Tiny margin notes appear only as unreadable pencil squiggles. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c02/sk_stall — 관찰 사진 · 하젤외드의 열흘
+## c02/sk_stall — 관찰 사진 · 하젤외드의 열흘 ✅
 - 저장 경로: `img/c02/sk_stall.png` · 비율: 3:2
 - **꼭 보여야 할 것**: 왼쪽 구유와 수북이 흘린 건초 · 오른쪽 아래 돼지우리 쪽을 본 착유 의자와 엎어진 우유 통 · 맨 오른쪽 기둥의 흰 말털과 말똥
 ```
 A court clerk's pencil sketch from February 1923 of a Bavarian farmhouse cow stable opening into the barn, loose graphite on off-white paper. On the left a long wooden feeding trough with three cows' heads behind it; hay heaped thickly on the trough rim and spilled over the aisle floor in front, far more than one day's feed. In the middle a ladder to the hayloft and a hanging lantern. On the right a small pig pen; in front of it at the lower right an overturned milk can and a three-legged milking stool that faces the pig pen, not the cows. At the far right edge, in the barn's west bay, a wooden post with a few long white horse hairs caught on a nail, a heap of horse droppings and spilled oats at its foot. A cart wheel leaning at the lower left. Unreadable pencil squiggles only, no words. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c03/map — 지도 · 백난초 사건
+## c03/map — 지도 · 백난초 사건 ✅
 - 저장 경로: `img/c03/map.png` · 비율: 4:3
 - **꼭 보여야 할 것**: 위쪽 큰길과 왼쪽 위 붉은 점 (전차 정류장) · 가운데 골목 · 오른쪽 위 여관 · 아래 나란한 두 가게와 안쪽 두 방 · 두 방 뒷문의 붉은 표시 · 뒷마당 우물 · 맨 아래 점선 샛길 · 글자 없음
-- 게임이 얹을 글자: 종로 3정목 (전차 정류장) · 수남골 · 송학여관 · 보춘당 · 서광양복점 · 뒷마당 우물 · 샛길 (야경꾼 순라) · → 우편국 6분 · 안방 · 작업실 · 덧문
+- 게임이 얹을 글자: 종로 3정목 (전차 정류장) · → 우편국 6분 · 송학여관 · 수남골 · 보춘당 · 서광양복점 · 덧문 · 안방 · 작업실 · 뒷마당 우물 · 샛길 (야경꾼 순라)
 ```
 A 1935 Keijo (colonial Seoul) police site sketch drawn in brush-pen ink and red ink on thin ruled Japanese government paper, top-down. Across the top a main street with a small red dot for the tram stop at the upper left. A narrow alley runs across the middle from the left. Above the alley at the right a large inn building. Below the alley two joined shop-houses side by side: a herbal medicine shop on the left and a tailor shop on the right; inside them two small back rooms next to each other, each with a small red mark at its back door, and a black bar for a shutter on the tailor shop roof line. Behind them a back yard with a round well at the lower left of centre. A dotted night-watchman path runs across the very bottom. No words, no letters, no numbers. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c04/bikephoto — 관찰 사진 · 빗속의 흰 오토바이
+## c04/bikephoto — 관찰 사진 · 빗속의 흰 오토바이 ✅
 - 저장 경로: `img/c04/bikephoto.png` · 비율: 16:10
 - **꼭 보여야 할 것**: 붓으로 흰 칠한 오토바이 · 왼쪽 위 짐받이 나무 상자 (칠 밑으로 비치는 획, 읽히지 않게) · 오른쪽 위 바람막이 아래 긁어낸 스티커 · 오른쪽 가운데 앞 흙받이 안쪽 암녹색 · 왼쪽 아래 흰 칠 방울 · 가운데 아래 줄로 간 번호 자리
 ```
 Police evidence photograph of a motorcycle standing side-on in front of a plain garage wall: it has been hastily brush-painted white by hand, visible brush strokes, while the inner curve of the front mudguard still shows the original dark green paint. A wooden box is strapped to the rear rack at the upper left of the bike; under its white paint, in raking light, the ghost of large stencil strokes shows faintly (unreadable). At the lower corner of the windscreen at the upper right, a scraped-off price sticker leaves torn paper fibres. Hardened white paint drips hang under the rear mudguard at the lower left. The frame and engine number plate area in the lower middle has been filed flat with even file marks. A folding ruler on the floor and a blank evidence card. Late-1960s Japanese press and police evidence photography, Tokyo suburbs in the rainy season of 1968: black-and-white 35mm Tri-X film, pushed grain, slightly soft focus, flat overcast light, wet asphalt sheen, muted grey tonality; evidence-card shots on a plain board with a small ruler, occasionally as faded early color prints with a cyan shift. Showa-era details only. No readable text, no logos, no recognizable faces. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c04/map — 지도 · 빗속의 흰 오토바이
+## c04/map — 지도 · 빗속의 흰 오토바이 ✅
 - 저장 경로: `img/c04/map.png` · 비율: 3:2
 - **꼭 보여야 할 것**: 왼쪽 은행 · 아래 가운데 큰 정수장 (연한 파랑)과 북쪽 담장길을 따라 붉은 선 · 위쪽 공사 현장 · 가운데 오른쪽 신사 숲 · 오른쪽 위 공영주택 · 글자 없음
 - 게임이 얹을 글자: 정수장 · 공장 · 사카에초
@@ -105,57 +105,57 @@ Police evidence photograph of a motorcycle standing side-on in front of a plain 
 A detective's hand-drawn map of a Tokyo suburb in 1968, pencil and coloured pencil on pale graph paper, top-down. A small bank building at the far left, upper middle. A road runs from the bank across to the right. In the lower middle a large pale-blue rectangle for a water purification plant, with a long walled road running along its north side; that walled road is traced in red. A small construction site at the top left of centre with a short side road. A round clump of green trees for a shrine at the right of centre. A block of public housing at the top right, a factory building at the bottom right. No words, no letters. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c05/env_ref — 대조 시료 · 모래시계의 편지
+## c05/env_ref — 대조 시료 · 모래시계의 편지 ✅
 - 저장 경로: `img/c05/env_ref.png` · 비율: 16:9
 - **꼭 보여야 할 것**: 파란 볼펜 대문자 (읽히지 않게) · 오른쪽 위 거꾸로 붙은 우표 · 편지지 접힌 자국 가로 세 번 + 세로 한 번 · 불룩한 봉투
 ```
 Evidence photograph on a grey board, 1969: on the left a plain white envelope, front side, addressed in blue ballpoint block capitals (the address itself blurred and unreadable), a postage stamp at the upper right glued UPSIDE DOWN (its picture clearly inverted), a round postmark with wavy cancel lines beside it; the envelope bulges. On the right the letter sheet taken out and opened, showing its crease pattern: folded three times across and then once down the middle. Flat light, grain. 1969 American newspaper wire photo and police file photography, Northern California coast: black-and-white 35mm Tri-X, heavy grain, harsh on-camera flash at night, coastal fog and sodium streetlight glow, halftone dot texture when reproduced in the newspaper, late-1960s cars, phone booths and street furniture without brand logos. No readable text, no recognizable faces, no bodies, no blood, no weapons shown. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c05/env_typed — 대조 시료 · 모래시계의 편지
+## c05/env_typed — 대조 시료 · 모래시계의 편지 ✅
 - 저장 경로: `img/c05/env_typed.png` · 비율: 16:9
 - **꼭 보여야 할 것**: 타자로 친 주소 (읽히지 않게) · 똑바로 붙은 우표 · 편지지 가로로 두 번만 접은 자국
 ```
 Evidence photograph on a grey board, 1969: on the left a plain white envelope, front side, its address TYPEWRITTEN (unreadable), the postage stamp at the upper right glued upright and straight, a round postmark beside it; the envelope lies flat. On the right the letter sheet opened, creased by only two folds across. Flat light, grain. 1969 American newspaper wire photo and police file photography, Northern California coast: black-and-white 35mm Tri-X, heavy grain, harsh on-camera flash at night, coastal fog and sodium streetlight glow, halftone dot texture when reproduced in the newspaper, late-1960s cars, phone booths and street furniture without brand logos. No readable text, no recognizable faces, no bodies, no blood, no weapons shown. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c05/env_star — 대조 시료 · 모래시계의 편지
+## c05/env_star — 대조 시료 · 모래시계의 편지 ✅
 - 저장 경로: `img/c05/env_star.png` · 비율: 16:9
 - **꼭 보여야 할 것**: 파란 볼펜 대문자 (읽히지 않게) · 똑바로 붙은 우표 · 편지지 가로 세 번 + 세로 한 번
 ```
 Evidence photograph on a grey board, 1969: on the left a plain white envelope, front side, addressed in blue ballpoint block capitals (unreadable), the postage stamp at the upper right glued upright and straight, a round postmark beside it; the envelope bulges. On the right the letter sheet opened, folded three times across and once down the middle. Flat light, grain. 1969 American newspaper wire photo and police file photography, Northern California coast: black-and-white 35mm Tri-X, heavy grain, harsh on-camera flash at night, coastal fog and sodium streetlight glow, halftone dot texture when reproduced in the newspaper, late-1960s cars, phone booths and street furniture without brand logos. No readable text, no recognizable faces, no bodies, no blood, no weapons shown. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c05/env_four — 대조 시료 · 모래시계의 편지
+## c05/env_four — 대조 시료 · 모래시계의 편지 ✅
 - 저장 경로: `img/c05/env_four.png` · 비율: 16:9
 - **꼭 보여야 할 것**: 파란 볼펜 대문자 (읽히지 않게) · 오른쪽 위 거꾸로 붙은 우표 · 편지지 가로 세 번 + 세로 한 번 · 불룩한 봉투
 ```
 Evidence photograph on a grey board, 1969: on the left a plain white envelope, front side, addressed in blue ballpoint block capitals (unreadable), the postage stamp at the upper right glued UPSIDE DOWN (its picture clearly inverted), a round postmark beside it; the envelope bulges. On the right the letter sheet opened, folded three times across and once down the middle. Flat light, grain. Same kind of envelope and hand as the reference letter. 1969 American newspaper wire photo and police file photography, Northern California coast: black-and-white 35mm Tri-X, heavy grain, harsh on-camera flash at night, coastal fog and sodium streetlight glow, halftone dot texture when reproduced in the newspaper, late-1960s cars, phone booths and street furniture without brand logos. No readable text, no recognizable faces, no bodies, no blood, no weapons shown. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c05/env_sheriff — 대조 시료 · 모래시계의 편지
+## c05/env_sheriff — 대조 시료 · 모래시계의 편지 ✅
 - 저장 경로: `img/c05/env_sheriff.png` · 비율: 16:9
 - **꼭 보여야 할 것**: 연필 대문자 (읽히지 않게) · 거꾸로 붙은 우표 · 편지지 가로 세 번만 (세로 접힘 없음)
 ```
 Evidence photograph on a grey board, 1969: on the left a plain white envelope, front side, addressed in grey PENCIL block capitals (unreadable), the postage stamp at the upper right glued UPSIDE DOWN (its picture clearly inverted), a round postmark beside it. On the right the letter sheet opened, folded three times across only, with no fold down the middle. Flat light, grain. 1969 American newspaper wire photo and police file photography, Northern California coast: black-and-white 35mm Tri-X, heavy grain, harsh on-camera flash at night, coastal fog and sodium streetlight glow, halftone dot texture when reproduced in the newspaper, late-1960s cars, phone booths and street furniture without brand logos. No readable text, no recognizable faces, no bodies, no blood, no weapons shown. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c06/bags_table — 관찰 사진 · 크비트달의 여인
+## c06/bags_table — 관찰 사진 · 크비트달의 여인 ✅
 - 저장 경로: `img/c06/bags_table.png` · 비율: 4:3
 - **꼭 보여야 할 것**: 세 줄 배열 — 위: 가발 셋·안경 둘·쌍안경·카메라·상표를 오려 낸 옷 / 가운데: 수첩·관광 지도·놋쇠 열쇠고리·구겨진 비누 포장지·빈 신발 상자 / 아래: 돈 봉투 둘·기차표
 ```
 Top-down police evidence photograph from 1969: the contents of two suitcases laid out in three neat rows on a grey table, each object with a small blank paper tag, the two empty open suitcases along the top edge. Top row from left to right: three wigs (a black bob, a long chestnut one, a grey one pinned up), two pairs of glasses (horn-rimmed and wire-rimmed), a pair of 8x30 binoculars with a worn leather strap, a small 35mm camera, folded clothes (blouse, skirt, sweater) with small squares cut out at the collar where the labels were. Middle row: a palm-sized notebook, a folded tourist map, a brass hotel key tag with a key, a crumpled soap wrapper, an empty shoe box. Bottom row: two envelopes with banknotes, one train ticket. A ruler at the bottom edge. 1969 Norwegian police and press photography on 35mm film: Tri-X style black-and-white grain for police documentation, faded early colour film with a cool blue-green cast for everything else; overcast west-coast light, wet rock, heather and harbour mist. Documentary and quiet. No readable text, no faces, no bodies. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c07/scene_map — 지도 · 송월각 장부
+## c07/scene_map — 지도 · 송월각 장부 ✅
 - 저장 경로: `img/c07/scene_map.png` · 비율: 4:3
 - **꼭 보여야 할 것**: 왼쪽 위 삼거리 · 아래로 이어진 강변도로 · 맨 아래 둑과 강 · 오른쪽 우물집 · 오른쪽 나무 두 그루 사이 검은 차와 붉은 X · 글자 없음
-- 게임이 얹을 글자: 나루 삼거리 · 우물집 · × · 둑 · 강 · 강변도로 → 약 400m
+- 게임이 얹을 글자: 나루 삼거리 · 우물집 · 둑 · 강 · 강변도로 → 약 400m
 ```
 A 1971 Korean police scene sketch map drawn in pencil and red ink on thin yellowish paper, top-down. At the top left a three-way junction; a road runs down from it and joins a riverside road that runs left to right across the lower middle. Below the road an embankment and a grey-blue river band along the whole bottom. Above the road on the right a small house with a well beside it (a tobacco shop). On the road at the right, between two roadside trees, a black car shape with a small red X beside it. A short arrow along the road shows the distance from the junction. No words, no letters, no numbers. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c08/map — 지도 · 목소리의 지도
+## c08/map — 지도 · 목소리의 지도 ✅
 - 저장 경로: `img/c08/map.png` · 비율: 4:3
 - **꼭 보여야 할 것**: 가운데를 가로지르는 지상 철로와 역 셋 (왼쪽·가운데·오른쪽) · 왼쪽 위 붉은 십자가 · 역 옆 공중전화 네모 · 오른쪽 아래 시장 · 아래 가운데 크레인 (공사 현장) · 글자 없음
 - 게임이 얹을 글자: 새터역 · 가람역 · 솔마루역 · 2호선 철교 (지상) · 솔마루 시장 · 가람동 현장 · 동림대
@@ -163,7 +163,7 @@ A 1971 Korean police scene sketch map drawn in pencil and red ink on thin yellow
 A detective's hand-drawn district map from Seoul in 1991, black felt pen and a red pen on photocopied grid paper, top-down. An elevated subway line runs left to right across the middle as a thick line with three station circles: left, centre and right (the right one lighter). A small red cross for a church at the upper left; small squares for phone booths near the left and centre stations; a small square for a market at the lower right; a crane symbol for a construction site at the lower middle; a university block at the top right; plain blocks as pale rectangles. No words, no letters, no numbers. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c09/map — 지도 · 열세 칸
+## c09/map — 지도 · 열세 칸 ✅
 - 저장 경로: `img/c09/map.png` · 비율: 4:3
 - **꼭 보여야 할 것**: 좁은 골목과 작은 집 블록 · 왼쪽 정류장 · 왼쪽 아래 편의점 · 맨 아래 개천 · 위쪽 절반에 펜으로 동그라미 친 집 다섯 · 글자 없음
 - 게임이 얹을 글자: 은골천 · 은골시장
@@ -171,77 +171,77 @@ A detective's hand-drawn district map from Seoul in 1991, black felt pen and a r
 A detective's map of a dense hillside neighbourhood in Seoul in 2006, printed street-map style with pen marks, top-down: narrow white alleys wind between many small block rectangles; a bus stop at the left, a convenience store at the lower left, a small framing shop in the middle left, a traditional market block at the left of centre, a stream along the bottom edge, a dashed line at the top right. Five houses spread across the upper half are circled lightly in pen. No words, no letters, no numbers. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c09/ph217 — 관찰 사진 · 열세 칸
+## c09/ph217 — 관찰 사진 · 열세 칸 ✅
 - 저장 경로: `img/c09/ph217.png` · 비율: 4:3
 - **꼭 보여야 할 것**: 철계단 여덟 칸 → 계단참 → 다섯 칸 (모두 열셋) · 계단참의 네모난 흙 자국 여섯 · 오른쪽 위 2층 나무문 (도어락 없음, 스티커 뗀 자국) · 왼쪽 위 전화선 · 왼쪽 아래 담 밑 흙
 ```
 Photograph taken from a narrow alley in Seoul in 2006, looking up at a two-storey red-brick multi-family house on a damp evening. An exterior steel staircase climbs the right half of the façade: eight rusty steel treads up to a narrow landing, then it turns and five more treads up to a wooden front door on the second floor at the upper right. The door has a single keyhole and no digital lock, and at eye height a round faded patch where a sticker was peeled off. On the landing six square soil marks in a row with white styrofoam crumbs. A black telephone wire comes down from a pole and enters the wall beside a second-floor window at the upper left. At the foot of the wall at the lower left, dumped soil with dried scallion roots and pepper stems, half washed away. A bicycle under the stairs. Photo taken in 2006 with a cheap compact digital camera: 3-megapixel, visible sensor noise, flat on-camera flash at night with dark falloff behind the subject, slightly blown highlights, cool white balance, mild JPEG blockiness, casual amateur framing like a Korean mini-homepage photo album or a police canvass snapshot. Seoul low-rise residential alleys of the late 1980s–90s: red-brick multi-family houses with external iron staircases. People only from behind, blurred or out of frame; no faces, no readable text, no logos, nothing graphic. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c09/ph219 — 관찰 사진 · 열세 칸
+## c09/ph219 — 관찰 사진 · 열세 칸 ✅
 - 저장 경로: `img/c09/ph219.png` · 비율: 4:3
 - **꼭 보여야 할 것**: 콘크리트 계단 일곱 칸 → 계단참 → 여섯 칸 · 계단참 제라늄 화분 셋 · 왼쪽 위 2층 철문 (번호 도어락, 노란 네모 스티커)
 ```
 Photograph taken from a small front yard in Seoul in 2006 of a two-storey rendered concrete house: an exterior CONCRETE staircase with only a steel handrail, seven steps up to a landing, then it turns and six more steps. On the landing three geranium pots. At the top of the stairs, to the LEFT, a steel door on the second floor at the upper left with a digital keypad lock and a small yellow square sticker. A window at the upper right, a first-floor door at the right. Dull evening light. Photo taken in 2006 with a cheap compact digital camera: 3-megapixel, visible sensor noise, flat on-camera flash at night with dark falloff behind the subject, slightly blown highlights, cool white balance, mild JPEG blockiness, casual amateur framing like a Korean mini-homepage photo album or a police canvass snapshot. Seoul low-rise residential alleys of the late 1980s–90s: red-brick multi-family houses with external iron staircases. People only from behind, blurred or out of frame; no faces, no readable text, no logos, nothing graphic. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c11/cut_ev — 대조 시료 · 물길을 거슬러
+## c11/cut_ev — 대조 시료 · 물길을 거슬러 ✅
 - 저장 경로: `img/c11/cut_ev.png` · 비율: 3:2
 - **꼭 보여야 할 것**: 줄무늬 간격 넓음 · 활처럼 휜 결 · 한쪽 가장자리에 시작 자국 여러 개 · 회색 실리콘 본 (피·뼈 살 없음)
 ```
 Macro forensic photograph under low raking light of a grey silicone cast taken from a saw-cut surface, an oval about the size of a coin, on a black background with a tiny scale bar. The saw striations are spaced fairly wide (about 2.5 to 3 mm apart), bowed into a curve and dragged to one side; the kerf is wide; at one edge several false-start notches where the saw was re-set again and again. Clinical, grey, no blood. Provincial South Korea in 1986, a slow river city in late autumn: 35mm press and police photography on Kodak Tri-X black-and-white or faded Fujicolor negative film, coarse grain, harsh on-camera flash or flat overcast light, slightly lifted blacks, a coarse newspaper halftone dot screen and yellowed newsprint where it appears in print. Period details: cement-block and tin-roof houses, stacks of coal briquettes, reed beds, concrete bridges on piers, an old iron sluice gate, hand carts, white woven polypropylene rice sacks, green-and-cream city buses with round headlights. No readable text, no logos or emblems, no recognizable faces (backs, silhouettes or out-of-focus figures only). Graphic content is limited to dried bloodstains on surfaces and covered or sacked remains seen at a distance: no wounds, no cut surfaces, no gore close-ups. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c11/cut_a — 대조 시료 · 물길을 거슬러
+## c11/cut_a — 대조 시료 · 물길을 거슬러 ✅
 - 저장 경로: `img/c11/cut_a.png` · 비율: 3:2
 - **꼭 보여야 할 것**: 촘촘하고 곧은 가는 줄무늬
 ```
 Macro forensic photograph under raking light of a grey silicone cast of a test cut, an oval on a black background with a tiny scale bar: very fine, closely spaced straight striations (about 1.4 mm apart), thin and even, cut by pushing. Clinical, grey. Provincial South Korea in 1986, a slow river city in late autumn: 35mm press and police photography on Kodak Tri-X black-and-white or faded Fujicolor negative film, coarse grain, harsh on-camera flash or flat overcast light, slightly lifted blacks, a coarse newspaper halftone dot screen and yellowed newsprint where it appears in print. Period details: cement-block and tin-roof houses, stacks of coal briquettes, reed beds, concrete bridges on piers, an old iron sluice gate, hand carts, white woven polypropylene rice sacks, green-and-cream city buses with round headlights. No readable text, no logos or emblems, no recognizable faces (backs, silhouettes or out-of-focus figures only). Graphic content is limited to dried bloodstains on surfaces and covered or sacked remains seen at a distance: no wounds, no cut surfaces, no gore close-ups. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c11/cut_b — 대조 시료 · 물길을 거슬러
+## c11/cut_b — 대조 시료 · 물길을 거슬러 ✅
 - 저장 경로: `img/c11/cut_b.png` · 비율: 3:2
 - **꼭 보여야 할 것**: 자로 잰 듯 곧고 고른 넓은 줄무늬 · 시작 자국 없음
 ```
 Macro forensic photograph under raking light of a grey silicone cast of a test cut made by a band saw machine, an oval on a black background with a tiny scale bar: perfectly straight, evenly spaced parallel striations (about 6 mm apart) as if ruled, no false starts. Clinical, grey. Provincial South Korea in 1986, a slow river city in late autumn: 35mm press and police photography on Kodak Tri-X black-and-white or faded Fujicolor negative film, coarse grain, harsh on-camera flash or flat overcast light, slightly lifted blacks, a coarse newspaper halftone dot screen and yellowed newsprint where it appears in print. Period details: cement-block and tin-roof houses, stacks of coal briquettes, reed beds, concrete bridges on piers, an old iron sluice gate, hand carts, white woven polypropylene rice sacks, green-and-cream city buses with round headlights. No readable text, no logos or emblems, no recognizable faces (backs, silhouettes or out-of-focus figures only). Graphic content is limited to dried bloodstains on surfaces and covered or sacked remains seen at a distance: no wounds, no cut surfaces, no gore close-ups. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c11/cut_c — 대조 시료 · 물길을 거슬러
+## c11/cut_c — 대조 시료 · 물길을 거슬러 ✅
 - 저장 경로: `img/c11/cut_c.png` · 비율: 3:2
 - **꼭 보여야 할 것**: 아주 고운 줄무늬 · 좁은 켠 자리
 ```
 Macro forensic photograph under raking light of a grey silicone cast of a test cut made by a hacksaw, an oval on a black background with a tiny scale bar: extremely fine striations under 1 mm apart, a narrow kerf, almost smooth. Clinical, grey. Provincial South Korea in 1986, a slow river city in late autumn: 35mm press and police photography on Kodak Tri-X black-and-white or faded Fujicolor negative film, coarse grain, harsh on-camera flash or flat overcast light, slightly lifted blacks, a coarse newspaper halftone dot screen and yellowed newsprint where it appears in print. Period details: cement-block and tin-roof houses, stacks of coal briquettes, reed beds, concrete bridges on piers, an old iron sluice gate, hand carts, white woven polypropylene rice sacks, green-and-cream city buses with round headlights. No readable text, no logos or emblems, no recognizable faces (backs, silhouettes or out-of-focus figures only). Graphic content is limited to dried bloodstains on surfaces and covered or sacked remains seen at a distance: no wounds, no cut surfaces, no gore close-ups. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c11/cut_d — 대조 시료 · 물길을 거슬러
+## c11/cut_d — 대조 시료 · 물길을 거슬러 ✅
 - 저장 경로: `img/c11/cut_d.png` · 비율: 3:2
 - **꼭 보여야 할 것**: 넓은 줄무늬 간격 · 활처럼 휜 결 · 넓은 켠 자리 (증거 cut_ev 와 같은 결)
 ```
 Macro forensic photograph under low raking light of a grey silicone cast of a test cut made by a Korean pull saw with a wide tooth set, an oval on a black background with a tiny scale bar: striations spaced fairly wide (about 2.5 to 3 mm), bowed into a curve following the arm's swing, a wide kerf. Clinical, grey. Provincial South Korea in 1986, a slow river city in late autumn: 35mm press and police photography on Kodak Tri-X black-and-white or faded Fujicolor negative film, coarse grain, harsh on-camera flash or flat overcast light, slightly lifted blacks, a coarse newspaper halftone dot screen and yellowed newsprint where it appears in print. Period details: cement-block and tin-roof houses, stacks of coal briquettes, reed beds, concrete bridges on piers, an old iron sluice gate, hand carts, white woven polypropylene rice sacks, green-and-cream city buses with round headlights. No readable text, no logos or emblems, no recognizable faces (backs, silhouettes or out-of-focus figures only). Graphic content is limited to dried bloodstains on surfaces and covered or sacked remains seen at a distance: no wounds, no cut surfaces, no gore close-ups. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c11/ph_match — 관찰 사진 · 물길을 거슬러
+## c11/ph_match — 관찰 사진 · 물길을 거슬러 ✅
 - 저장 경로: `img/c11/ph_match.png` · 비율: 3:2
 - **꼭 보여야 할 것**: 왼쪽 겉면 청자 항아리 그림 · 오른쪽 안쪽 볼펜 두 줄 (첫 줄은 두 줄로 그어 지움, 읽히지 않게) · 위쪽 모서리 검은 얼룩 · 오른쪽 아래 성냥개비 일곱 · 왼쪽 아래 번호표와 자
 ```
 Infrared black-and-white forensic photograph from 1986 of a small paper matchbox that had been soaked in river water, now opened out flat and dried on a dark board. The left half is the printed outside: a simple picture of a celadon jar with lines of print beneath it (blurred, unreadable). The right half is the inside, showing two lines of faint ballpoint writing, the first line struck through with two lines (the writing blurred, unreadable). A dark blotch soaked into the top corner. At the lower right seven matchsticks, two with half-burnt heads. At the lower left a small evidence number card and a ruler. Provincial South Korea in 1986, a slow river city in late autumn: 35mm press and police photography on Kodak Tri-X black-and-white or faded Fujicolor negative film, coarse grain, harsh on-camera flash or flat overcast light, slightly lifted blacks, a coarse newspaper halftone dot screen and yellowed newsprint where it appears in print. Period details: cement-block and tin-roof houses, stacks of coal briquettes, reed beds, concrete bridges on piers, an old iron sluice gate, hand carts, white woven polypropylene rice sacks, green-and-cream city buses with round headlights. No readable text, no logos or emblems, no recognizable faces (backs, silhouettes or out-of-focus figures only). Graphic content is limited to dried bloodstains on surfaces and covered or sacked remains seen at a distance: no wounds, no cut surfaces, no gore close-ups. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c11/ph_print — 관찰 사진 · 물길을 거슬러
+## c11/ph_print — 관찰 사진 · 물길을 거슬러 ✅
 - 저장 경로: `img/c11/ph_print.png` · 비율: 3:2
 - **꼭 보여야 할 것**: 왼쪽 위 공구걸이의 새 톱과 그 아래 먼지 덜 앉은 톱 모양 자리 · 위 가운데 달력 · 왼쪽 리어카 · 가운데 오른쪽 전복 껍데기 바구니 · 오른쪽 학 두 마리 자개장 · 왼쪽 아래 흰 톱밥 포대 셋 · 아래 가운데 배수구 둘레 하얗게 바랜 동그라미 · 오른쪽 아래 귀퉁이가 빈 벽돌 더미
 ```
 Large black-and-white enlargement of a 1986 newspaper photograph of a small Korean mother-of-pearl lacquerware workshop, coarse grain. Top left a tool rack board with chisels and planes, a brand-new pull saw with a white rattan-wrapped handle and a price tag, and just below it a clean saw-shaped outline in the dust where another saw used to hang. Top middle a wall calendar with a pencil circle on one day. At the left middle a handcart by the back door, its bed newly boarded. In the centre right a basket of abalone shells, with glittering shell dust piled on the workbench edge. At the right a half-finished black lacquer cabinet inlaid with two cranes, one crane missing half a wing. At the lower left of centre three white rice sacks stuffed with sawdust. At the lower middle a floor drain with a pale, scrubbed circle around it on the dark cement. At the lower right a neat stack of bricks with a few missing from one top corner. Provincial South Korea in 1986, a slow river city in late autumn: 35mm press and police photography on Kodak Tri-X black-and-white or faded Fujicolor negative film, coarse grain, harsh on-camera flash or flat overcast light, slightly lifted blacks, a coarse newspaper halftone dot screen and yellowed newsprint where it appears in print. Period details: cement-block and tin-roof houses, stacks of coal briquettes, reed beds, concrete bridges on piers, an old iron sluice gate, hand carts, white woven polypropylene rice sacks, green-and-cream city buses with round headlights. No readable text, no logos or emblems, no recognizable faces (backs, silhouettes or out-of-focus figures only). Graphic content is limited to dried bloodstains on surfaces and covered or sacked remains seen at a distance: no wounds, no cut surfaces, no gore close-ups. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c11/ph_lumi — 관찰 사진 · 물길을 거슬러
+## c11/ph_lumi — 관찰 사진 · 물길을 거슬러 ✅
 - 저장 경로: `img/c11/ph_lumi.png` · 비율: 3:2
 - **꼭 보여야 할 것**: 아래 가운데 배수구 둘레 호 모양 결 · 줄눈의 밝은 선 · 가운데 작업대 앞 둥근 점 · 오른쪽 아래 벽 밑 비산흔 · 왼쪽 위 공구걸이의 톱 모양 · 왼쪽 아래 바퀴 자국 두 줄 · 옻장·창틀은 어둡게
 ```
 Darkroom luminol photograph from 1986, a 30-second exposure inside the same small lacquer workshop with every light off; the room is only faint dark outlines traced by torchlight. Pale blue glow: overlapping curved wipe marks in rings around the floor drain at the lower middle; bright thin lines along the cement joints at the lower left of centre; a cluster of coin-sized round drops in front of the workbench in the middle; small elongated spatter dots low on the wall at the lower right; a whole saw shape glowing on the tool-rack board at the top left; two parallel wheel tracks glowing toward the back door at the lower left. The lacquer cabinet at the right and the window frame at the top stay dark. Grainy, slightly blurred. Provincial South Korea in 1986, a slow river city in late autumn: 35mm press and police photography on Kodak Tri-X black-and-white or faded Fujicolor negative film, coarse grain, harsh on-camera flash or flat overcast light, slightly lifted blacks, a coarse newspaper halftone dot screen and yellowed newsprint where it appears in print. Period details: cement-block and tin-roof houses, stacks of coal briquettes, reed beds, concrete bridges on piers, an old iron sluice gate, hand carts, white woven polypropylene rice sacks, green-and-cream city buses with round headlights. No readable text, no logos or emblems, no recognizable faces (backs, silhouettes or out-of-focus figures only). Graphic content is limited to dried bloodstains on surfaces and covered or sacked remains seen at a distance: no wounds, no cut surfaces, no gore close-ups. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c12/sk_east — 관찰 사진 · 스물한 개의 봉투
+## c12/sk_east — 관찰 사진 · 스물한 개의 봉투 ✅
 - 저장 경로: `img/c12/sk_east.png` · 비율: 16:10
 - **꼭 보여야 할 것**: 왼쪽 동문 기둥 · 모래길의 짐자전거 바퀴 자국 두 줄 (왼쪽 아래) · 철망 쓰레기통 셋 · 왼쪽 통의 삐뚠 뚜껑 · 장화 발자국 · 가운데 전단지 · 오른쪽 아래 벤치 밑 꽁초 · 오른쪽 위 연못
 - 게임이 얹을 글자: 1 · 2 · 3 · 동문 · 연못
@@ -249,7 +249,7 @@ Darkroom luminol photograph from 1986, a 30-second exposure inside the same smal
 Forensic photograph at grey dawn in October 1994 of the inside of the east gate of a small Tokyo neighbourhood park. The gate pillar stands at the far left; beyond it low shop roofs and one brick chimney. A sand path runs from the gate diagonally up toward a small pond at the upper right. Along the path three green wire-mesh trash bins: one at the left, one in the middle, one right of centre. The lid of the left bin sits crooked with a small brown stain on its rim. Two lines of wide cargo-bicycle tyre tracks run in the sand from the gate at the lower left. In front of the left bin rubber-boot prints with a wavy sole pattern pressed into mud. A windblown shop flyer lies on the path in the middle. A bench at the lower right with a cigarette butt under it. No people. No readable text. Tokyo, autumn 1994 (Heisei 6), Japanese police and press documentation: 35mm color negative film with slightly faded Fuji-like greens and magentas, fine grain, harsh on-camera flash for night and interior shots, flat grey dawn light outdoors; press photos reproduced as coarse black-and-white newspaper halftone. Period details only: milky semi-transparent garbage bags, green wire-mesh park trash bins, pink coin payphones, VHS tapes, dedicated word processors, pagers, wooden sento lockers and tiled washing floors. No readable text, no logos, no recognizable faces. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c12/sk_sento — 관찰 사진 · 스물한 개의 봉투
+## c12/sk_sento — 관찰 사진 · 스물한 개의 봉투 ✅
 - 저장 경로: `img/c12/sk_sento.png` · 비율: 16:10
 - **꼭 보여야 할 것**: 왼쪽 아래 짐자전거와 나무 짐상자 · 가운데 빨래 자루 셋 · 오른쪽 위 선반의 봉투 상자 · 오른쪽 아래 새 시멘트로 메운 배수구 · 맨 오른쪽 고무장화 · 왼쪽 위 장작 더미와 도끼
 - 게임이 얹을 글자: 가마 · 세척장
@@ -257,7 +257,7 @@ Forensic photograph at grey dawn in October 1994 of the inside of the east gate 
 Forensic photograph from 1994 of the back yard of an old Tokyo public bathhouse. At the top left scrap firewood stacked waist-high with an axe stuck in it. At the lower left a heavy cargo bicycle with a wooden crate on its rear rack. In the middle the arched firebox mouth of the boiler, and three white laundry sacks tied with the same knot. On the right the back door stands open onto the white-tiled washing floor: on a shelf at the upper right a box of translucent 45-litre garbage bags; at the lower right a floor drain whose rim has been freshly sealed with bright new cement, the nearby grout bleached white; at the far right a pair of black rubber boots. Flash light, no people, no readable text. Tokyo, autumn 1994 (Heisei 6), Japanese police and press documentation: 35mm color negative film with slightly faded Fuji-like greens and magentas, fine grain, harsh on-camera flash for night and interior shots, flat grey dawn light outdoors; press photos reproduced as coarse black-and-white newspaper halftone. Period details only: milky semi-transparent garbage bags, green wire-mesh park trash bins, pink coin payphones, VHS tapes, dedicated word processors, pagers, wooden sento lockers and tiled washing floors. No readable text, no logos, no recognizable faces. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```
 
-## c12/sk_lum — 관찰 사진 · 스물한 개의 봉투
+## c12/sk_lum — 관찰 사진 · 스물한 개의 봉투 ✅
 - 저장 경로: `img/c12/sk_lum.png` · 비율: 16:10
 - **꼭 보여야 할 것**: 오른쪽 아래 배수구가 가장 밝게 · 가운데 줄눈 격자 · 왼쪽 호 모양 닦은 자국 · 왼쪽 위 문에서 이어지는 둥근 점 · 맨 왼쪽 위 벽 밑 비산흔 · 오른쪽 목욕 의자는 반응 없음
 ```

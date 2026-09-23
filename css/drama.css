@@ -152,3 +152,15 @@
 .zoom figure .art-wrap>img{max-height:86vh;width:auto}
 .zoom p{margin:0;font:11px var(--f-mono);letter-spacing:.08em;color:#bdb4a0}
 @keyframes zoomIn{from{opacity:0}to{opacity:1}}
+
+/* 지도: 넓은 화면에서는 읽기 칸에 크게, 목록 칸의 작은 지도는 점만 */
+.map-read{max-width:860px;margin:0 auto}
+.map-desc{margin:0 0 10px;font:21px/1.35 var(--f-hand);color:var(--pencil)}
+.map.big{box-shadow:0 3px 14px rgba(0,0,0,.35)}
+.map.big .spot{width:26px;height:26px}
+.map.big .spot span{top:28px;font-size:12.5px}
+.map .spot:hover,.map .spot:focus-visible{transform:translate(-50%,-50%) scale(1.15)}
+@container stage (min-width:701px){
+  .pane-list .map .spot{width:16px;height:16px;border-width:1.5px}
+  .pane-list .map .spot span{display:none}
+}

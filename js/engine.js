@@ -633,9 +633,14 @@
     if (!ps.length) return `<p class="res-none">${esc(s.empty || '아직 찾아갈 사람이 없다. 이름을 알아내야 한다.')}</p>`;
     return ps.map(p => `<button type="button" class="item person${o && o.t === 'person' && o.id === p.id ? ' on' : ''}${ST.asked[p.id] ? '' : ' new'}" data-person="${p.id}">${portrait(p)}<span class="item-t">${esc(p.name)}</span>${p.role ? `<span class="item-m">${esc(plain(p.role))}</span>` : ''}</button>`).join('');
   }
+  // 지도: 목록 칸에는 작은 지도(점만), 아무것도 펼치지 않았을 때는 읽기 칸에 크게(이름까지)
+  function mapHtml(s, big) {
+    const spots = (s.spots || []).filter(sp => ok(sp.need));
+    return `<div class="map${big ? ' big' : ''}">${art(s.art)}${spots.map(sp => `<button type="button" class="spot" style="left:${+sp.x}%;top:${+sp.y}%" data-spot="${esc(sp.id)}" aria-label="${esc(sp.label)}" title="${esc(sp.label)}"><span>${esc(sp.label)}</span></button>`).join('')}</div>`;
+  }
   function mapList(s) {
     const spots = (s.spots || []).filter(sp => ok(sp.need));
-    return `<div class="map">${art(s.art)}${spots.map(sp => `<button type="button" class="spot" style="left:${+sp.x}%;top:${+sp.y}%" data-spot="${esc(sp.id)}" aria-label="${esc(sp.label)}"><span>${esc(sp.label)}</span></button>`).join('')}</div>
+    return `${mapHtml(s)}
       ${spots.map(sp => { const d = C.docs[sp.doc]; return d ? itemBtn(d) : ''; }).join('')}`;
   }
 
@@ -672,6 +677,7 @@
     else if (o && o.t === 'compare' && C._sets[o.id]) h = compareHtml(C._sets[o.id]);
     else if (o && o.t === 'photo' && C._scenes[o.id]) h = photoHtml(C._scenes[o.id]);
     else if (o && o.t === 'report') h = reportHtml();
+    else if (curSrc() && curSrc().type === 'map' && srcOpen(curSrc()) && !narrow()) { const s = curSrc(); h = `<div class="map-read">${s.desc ? `<p class="map-desc">${inline(s.desc)}</p>` : ''}${mapHtml(s, true)}</div>`; }
     else h = `<div class="read-empty"><p>${inline(C.emptyRead || '왼쪽에서 자료를 고르면 여기에 펼쳐진다.')}</p></div>`;
     el.innerHTML = `<button type="button" class="back-list" data-back>← 목록으로</button>${h}`;
     $('#stageBody').classList.toggle('reading', !!(o && h));
