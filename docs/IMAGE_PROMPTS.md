@@ -388,18 +388,19 @@ Police evidence photograph of a 1960s 250cc two-cylinder motorcycle crudely hand
 ```
 - **꼭 보여야 할 것**: 흰 붓칠 사이로 보이는 원래 색(암녹색). 흑백으로 뽑으면 이 단서가 사라진다.
 
-### c04/montage — 신문에 실린 몽타주 사진 (특정 인물 아님)
+### c04/montage — 신문에 실린 몽타주 사진 (특정 인물 아님) 🔁 다시 뽑기
 - 저장 경로: `img/c04/montage.webp` · 비율: 3:4
 ```
-A 1960s police photo-composite portrait printed in a newspaper: a generic young man in a white open-face helmet and black leather jacket, face assembled from mismatched photo fragments with faint seams, coarse halftone dots, flat grey tones, deliberately generic features that resemble no real person.
+A 1960s police photo-composite portrait printed in a newspaper: a generic young man in a white open-face helmet and black leather jacket, face assembled from mismatched photo fragments with faint seams, coarse halftone dots, flat grey tones, deliberately generic features that resemble no real person. Make the composite obvious: eyes, nose and mouth come from three different photos that do not match in scale or tone, with visible cut lines, and the whole print is coarse, blurry newspaper halftone on yellowed newsprint rather than a clean photo.
 ```
 - 주의: 실존 인물(특히 실제 사건 몽타주의 얼굴)을 닮지 않게. 여러 얼굴을 조합한 듯 어색하게.
 
 ### c04/scene — 실황조사서 — 비 오는 정수장 담장길 현장
 - 저장 경로: `img/c04/scene.webp` · 비율: 16:9
 ```
-A long narrow single-lane road running beside a tall featureless concrete wall of a water purification plant, open vegetable fields on the other side, steady rain, grey sky, a few police officers in raincoats far in the distance measuring the road, 1968 Tokyo suburb, wide documentary shot.
+A long narrow single-lane road running beside a tall featureless concrete wall of a water purification plant, open vegetable fields on the other side, steady rain, grey sky, a few police officers in raincoats far in the distance measuring the road, 1968 Tokyo suburb, wide documentary shot. The plant wall runs along the LEFT side of the road, the fields on the right.
 ```
+- **꼭 보여야 할 것**: 정수장 담은 길 왼쪽 (본문 캡션: 왼쪽이 정수장 담)
 
 ### c04/wind — 유류품 카드 No.2 — 가격표 스티커를 긁어낸 바람막이
 - 저장 경로: `img/c04/wind.webp` · 비율: 4:3

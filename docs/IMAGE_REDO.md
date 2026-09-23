@@ -2,7 +2,7 @@
 
 > `node tools/prompts.js` 가 자동으로 만든다. 사건 파일 `art` 항목의 `redo` 표시를 모은 것이다.
 
-총 **6장** (필수 1 · 선택 5). 같은 경로·같은 이름으로 넣으면 게임 그림이 자동으로 바뀐다. 바꾼 뒤에는 그 항목의 `redo` 표시를 지운다.
+총 **7장** (필수 2 · 선택 5). 같은 경로·같은 이름으로 넣으면 게임 그림이 자동으로 바뀐다. 바꾼 뒤에는 그 항목의 `redo` 표시를 지운다.
 
 | 그림 | 급함 | 이유 |
 |---|---|---|
@@ -12,6 +12,7 @@
 | `c02/sledge` | 선택 | 판화+사진 두 칸으로 나와서 판화 칸만 잘라 두었다. 지금도 쓸 만하다. |
 | `c02/lock` | 선택 | 「새 자물쇠」인데 녹슨 헌 자물쇠처럼 보인다. |
 | `c03/p_radio` | 선택 | 캡션은 「스위치 켜진 채」인데 다이얼 불이 안 보이고, 표지 라디오와 모양이 다르다. |
+| `c04/montage` | 필수 | 너무 사실적인 한 사람의 깨끗한 증명사진처럼 나왔다. 신문 망점 느낌이 없고, 실제 사건 몽타주와 닮아 보일 위험이 있다. |
 
 ## c01/q_thread — 경찰의 소견 — 증거물 붉은 무명실 (필수)
 - 저장 경로: `img/c01/q_thread.png` · 비율: 4:3
@@ -58,4 +59,12 @@ A new hand-forged iron box lock for a farmhouse door with two large iron keys, l
 - **꼭 보여야 할 것**: 표지와 같은 모양의 라디오, 다이얼 불이 켜진 채 (스위치가 켜져 있었다)
 ```
 Police photograph of the same 1930s wooden cathedral-style vacuum-tube radio as on the folder cover, left switched on with its small tuning dial glowing warm, on a low table in a Korean ondol room, lattice paper doors behind, a floor cushion pushed aside, a cold brass ashtray, flat flash lighting, nobody in the frame. Colonial-era Gyeongseong (Seoul), autumn 1935. Newspaper pictures look like 1930s Korean newspaper halftone photographs on cheap yellowed newsprint: coarse dot screen, heavy black ink, slight misregistration, faded contrast. Police photographs look like grainy silver gelatin prints with soft vignetting. Tiled-roof hanok shopfronts, narrow dirt alleys, electric poles, trams, paper-covered lattice doors. People only as silhouettes, from behind or blurred. No faces, no blood, no bodies, no readable text or signage, no real brands. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them.
+```
+
+## c04/montage — 신문에 실린 몽타주 사진 (특정 인물 아님) (필수)
+- 저장 경로: `img/c04/montage.png` · 비율: 3:4
+- 이유: 너무 사실적인 한 사람의 깨끗한 증명사진처럼 나왔다. 신문 망점 느낌이 없고, 실제 사건 몽타주와 닮아 보일 위험이 있다.
+- 주의: 실존 인물(특히 실제 사건 몽타주의 얼굴)을 닮지 않게. 여러 얼굴을 조합한 듯 어색하게.
+```
+A 1960s police photo-composite portrait printed in a newspaper: a generic young man in a white open-face helmet and black leather jacket, face assembled from mismatched photo fragments with faint seams, coarse halftone dots, flat grey tones, deliberately generic features that resemble no real person. Make the composite obvious: eyes, nose and mouth come from three different photos that do not match in scale or tone, with visible cut lines, and the whole print is coarse, blurry newspaper halftone on yellowed newsprint rather than a clean photo. Late-1960s Japanese press and police evidence photography, Tokyo suburbs in the rainy season of 1968: black-and-white 35mm Tri-X film, pushed grain, slightly soft focus, flat overcast light, wet asphalt sheen, muted grey tonality; evidence-card shots on a plain board with a small ruler, occasionally as faded early color prints with a cyan shift. Showa-era details only. No readable text, no logos, no recognizable faces. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them.
 ```
