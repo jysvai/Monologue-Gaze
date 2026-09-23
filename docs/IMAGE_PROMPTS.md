@@ -19,14 +19,15 @@ CASE 00~02 를 실제로 뽑아 보고 보강한 규칙이다. 00~02 는 나중�
 1. 제목 줄의 설명과 **꼭 보여야 할 것** 이 그 그림의 단서다. 프롬프트의 다른 부분보다 우선한다. 개수(벽돌 네 장, 촛불 세 개)·색·위치를 정확히 지킨다.
 2. 흑백 스타일 사건이라도, 프롬프트가 색을 말하는 증거물(붉은 실, 파란 가방 같은)은 그 색이 보여야 한다. 그 물건만 손으로 색칠한 듯 부분 채색하거나 바랜 컬러 사진으로 만든다. (01 의 붉은 무명실이 회색으로 나와 단서가 사라졌다.)
 3. 정물·증거물 사진에는 창밖 거리, 걸어가는 사람 실루엣, 먼 도시 스카이라인을 넣지 않는다. 배경은 책상·증거물 판·벽처럼 단순하게. (01 에서 거의 모든 정물 뒤에 같은 창밖 풍경이 반복됐다.)
-4. 한 장에 장면 하나. 작은 삽입 칸, 여러 칸 조합, 카탈로그식 칸 나누기는 프롬프트가 요구할 때만.
-5. 모두 가상 지명이다. 실존 랜드마크(유명 성당 돔, 타워, 다리)는 프롬프트가 이름을 댈 때만 넣는다.
-6. 한 사건 안에서 같은 장소·물건·인물이 여러 장에 나오면 같은 모습으로 맞춘다 (같은 방, 같은 가방 색, 같은 옷 실루엣).
-7. 한 장 만들 때마다 위 규칙을 스스로 확인하고, 단서가 빠졌으면 한 번 다시 만든다.
+4. 숫자·날짜가 보이는 그림(달력, 시계, 번호판)은 프롬프트가 준 숫자만 쓴다. 프롬프트가 숫자를 말하지 않으면 숫자를 넣지 않는다. (02 의 달력이 본문의 26일 대신 7로 나왔다.)
+5. 한 장에 장면 하나. 작은 삽입 칸, 여러 칸 조합, 카탈로그식 칸 나누기는 프롬프트가 요구할 때만. (02 의 광고 삽화가 판화 + 사진 두 칸으로 나왔다.)
+6. 모두 가상 지명이다. 실존 랜드마크(유명 성당 돔, 타워, 다리)는 프롬프트가 이름을 댈 때만 넣는다.
+7. 한 사건 안에서 같은 장소·물건·인물이 여러 장에 나오면 같은 모습으로 맞춘다 (같은 방, 같은 가방 색, 같은 옷 실루엣).
+8. 한 장 만들 때마다 위 규칙을 스스로 확인하고, 단서가 빠졌으면 한 번 다시 만든다.
 
 - **추가 스타일** (CASE 03 부터, 공통 스타일 뒤에 이어 붙이기):
 ```
-Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. One single image, no inset panels or collage. No recognizable real landmarks unless the prompt names them.
+Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them.
 ```
 
 ## 공통 이미지
@@ -247,8 +248,9 @@ A servant's small bare room in a 1920s Bavarian farmhouse: a narrow wooden bed w
 ### c02/calendar — 안방 검증 조서 — 벽의 뜯는 달력과 십자가
 - 저장 경로: `img/c02/calendar.webp` · 비율: 4:3
 ```
-Corner of a Bavarian farmhouse living room in 1923: a simple wooden crucifix on a whitewashed wall and beside it a tear-off daily wall calendar with a thick block of unturned pages, its top sheet showing one large blurred date numeral. Below, the edge of a treadle sewing machine and an unopened envelope on a table. No readable text.
+Corner of a Bavarian farmhouse living room in 1923: a simple wooden crucifix on a whitewashed wall and beside it a tear-off daily wall calendar with a thick block of unturned pages, its top sheet showing the large date numeral 26 (the only legible mark). Below, the edge of a treadle sewing machine and an unopened envelope on a table. No other readable text.
 ```
+- **꼭 보여야 할 것**: 달력 맨 위 장은 26 (1월 26일에서 멈췄다). 다른 숫자가 나오면 이야기와 어긋난다.
 
 ### c02/kasten — 증거물 카드 — 지폐 다발이 그대로 든 쇠 금고
 - 저장 경로: `img/c02/kasten.webp` · 비율: 4:3
@@ -283,8 +285,9 @@ Close-up of a small open farmer's household account book with faded pencil entri
 ### c02/sledge — 주보 광고면 삽화 — 장작 실은 말썰매 (목판화풍)
 - 저장 경로: `img/c02/sledge.webp` · 비율: 4:3
 ```
-Small-town newspaper advertisement illustration from the 1920s in woodcut style: a white horse pulling a wooden work sledge loaded with split firewood through snow, bold black lines on off-white paper, letterpress printing texture. No text.
+Small-town newspaper advertisement illustration from the 1920s in woodcut style: a white horse pulling a wooden work sledge loaded with split firewood through snow, bold black lines on off-white paper, letterpress printing texture. One single woodcut panel only: no photograph, no second panel. No text.
 ```
+- **꼭 보여야 할 것**: 흰 말이 끄는 장작 썰매, 목판화 한 칸만
 
 ### c02/lock — 대장간 주문 장부 — 찾아가지 않은 새 자물쇠
 - 저장 경로: `img/c02/lock.webp` · 비율: 4:3
