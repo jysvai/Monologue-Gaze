@@ -16,10 +16,12 @@
 
 ## 플레이
 
-빌드 과정 없는 정적 사이트다.
+**바로 하기: https://jysvai.github.io/Monologue-Gaze/**
+
+빌드 과정 없는 정적 사이트다. 위 주소는 GitHub Pages 가 `main` 브랜치 루트를 그대로 내보낸 것이라, `main` 에 올리면 1~2분 뒤 반영된다.
 
 - 로컬: `index.html` 을 브라우저로 연다. 파일로 바로 열어도 되고, `npx serve .` 같은 정적 서버로 띄워도 된다.
-- GitHub Pages: 저장소 Settings → Pages → Branch `main` / root 로 켜면 그 주소에서 바로 플레이할 수 있다.
+- 사건마다 시대에 맞는 조명 빛깔·날씨(안개, 비, 눈, 김)·배경음이 깔린다. 배경음은 기록실 위쪽 「소리」 단추를 켰을 때만 난다.
 
 진행 상황은 브라우저의 localStorage 에 저장된다.
 
@@ -41,8 +43,10 @@
 index.html            게임 페이지 (스크립트 로드 순서가 곧 사건 목록)
 js/engine.js          엔진 — 기록실, 조사 도구, 수첩, 보고서 판정, 저장
 js/finale.js          본 사건을 모두 종결한 뒤 나오는 M의 편지
+js/mood.js            사건마다 다른 공기 — 조명 빛깔, 날씨, 합성 배경음, 사건을 여는 장면
 css/base.css          책상·기록실·화면 틀(papers / crt / laptop)·수첩
 css/skins.css         문서 스킨 (신문, 진술조서, 편지, 전보, 장부, 녹취록, 미니홈피, 폴더폰 …)
+css/mood.css          사건의 공기 (조명 8가지 · 날씨 8가지 · 여는 장면)
 cases/cNN-*.js        사건 데이터 (사건 하나 = 파일 하나)
 img/manifest.js       실제 이미지 목록 (자동 생성)
 img/<사건>/<키>.webp  AI 로 만든 이미지를 넣는 곳
@@ -69,7 +73,7 @@ node tools/optimize-images.js     # img/ 에 넣은 png·jpg 를 webp 로 바꿔
 
 ## 이미지 넣기
 
-지금 162장이 모두 들어가 있다. 검수에서 걸린 그림은 `docs/IMAGE_REDO.md` 에 모여 있다 (이유와, 그대로 붙여 넣을 합친 프롬프트 포함).
+지금 165장이 모두 들어가 있다. 검수에서 걸린 그림은 `docs/IMAGE_REDO.md` 에 모여 있다 (이유와, 그대로 붙여 넣을 합친 프롬프트 포함).
 
 1. `docs/IMAGE_PROMPTS.md` 의 프롬프트로 이미지를 만든다. [그림 프롬프트 + 사건 공통 스타일 + 맨 위 「추가 스타일」] 순서로 붙인다.
 2. 표에 적힌 경로·이름으로 저장한다, 예: `img/c01/cover.png` (`.jpg` 도 됨).

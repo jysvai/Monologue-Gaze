@@ -34,6 +34,14 @@ function check(c) {
   if (!/^c\d\d$/.test(c.id)) warn(`id "${c.id}" 는 c01 같은 형식을 권장`);
   if (c.kind !== 'tutorial' && ![3, 4, 5].includes(c.stars)) warn('stars(난이도 3·4·5)가 없음');
   if (c.graphic != null && typeof c.graphic !== 'boolean') err('graphic 은 true/false');
+  if (c.mood) { // 사건의 공기 (js/mood.js)
+    const L = ['gas', 'lamp', 'cold', 'sea', 'rain', 'sodium', 'screen', 'fluoro'], F = ['fog', 'mist', 'steam', 'smoke', 'rain', 'drizzle', 'snow', 'dust'];
+    const AMB = ['rain', 'drizzle', 'wind', 'surf', 'harbor', 'river', 'city', 'clock', 'clapper', 'bell', 'horn', 'hum', 'fan', 'room', 'drip', 'drone'];
+    if (c.mood.light && !L.includes(c.mood.light)) err(`mood.light "${c.mood.light}" 은 ${L.join(' | ')} 중 하나`);
+    if (c.mood.fx && !F.includes(c.mood.fx)) err(`mood.fx "${c.mood.fx}" 은 ${F.join(' | ')} 중 하나`);
+    (c.mood.amb || []).forEach(k => { if (!AMB.includes(k)) err(`mood.amb "${k}" 은 ${AMB.join(' | ')} 중 하나`); });
+    if ((c.mood.amb || []).includes('drone') && !c.graphic) warn('mood.amb 의 drone 은 빨간 별 사건용');
+  } else warn('mood(조명·날씨·배경음·여는 글)가 없음');
 
   const K = c.keywords, D = c.docs, P = c.people || {}, A = c.art || {};
   const sources = c.sources || [];

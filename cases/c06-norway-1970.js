@@ -48,6 +48,8 @@
     motif: '모티프: 이스달 여인 사건 (1970, 노르웨이)', length: '약 50분',
     stars: 5,
     frame: 'papers',
+
+    mood: { light: 'sea', fx: 'mist', amb: ['harbor', 'wind', 'horn'], line: '1969년 10월, 노르웨이 서해안. 항구의 안개가 산자락 등산로까지 올라온다.' },
     tag: '**증거철 06** · Sak nr. 2213/69 · Hellesund Politikammer · Kriminalavdelingen',
     disclaimer: '1970년 노르웨이 미제 사건의 모티프만 빌린 창작입니다. 도시·계곡·인물·회사·기관은 모두 지어낸 것이며 실제 인물과 관계가 없습니다.',
     emptyRead: '헬레순 경찰서 강력반의 서류 상자다. 위쪽 탭에서 서류철을 고르고, 왼쪽 목록에서 한 장씩 꺼내 읽는다.',

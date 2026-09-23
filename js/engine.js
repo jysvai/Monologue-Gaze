@@ -577,18 +577,21 @@
     PIN = {};
     renderTabs(); renderList(); renderRead(); renderNotebook();
   }
-  function openCase(id) {
+  // intro: 기록실에서 폴더를 눌러 열 때만 여는 장면을 보여 준다 (새로 고침·처음부터 다시는 바로)
+  function openCase(id, intro) {
     const c = MG.byId[id];
     if (!c) return cabinet();
     if (c.graphic && !cs(c).cw) return warnScreen(c);
     C = c; ST = cs(c); VERDICT = '';
     S.current = id; save();
     renderCase();
+    if (MG.mood) MG.mood.enter(C, intro);
     window.scrollTo(0, 0);
   }
 
   function warnScreen(c) {
     C = null; ST = null; S.current = null; save();
+    if (MG.mood) MG.mood.leave();
     document.body.dataset.screen = 'cabinet';
     app.innerHTML = `<div class="cw"><div class="cw-card">${S.mild ? '' : stains(c.id + 'cw', 2, 'acd', true)}<p class="cw-t">혐오감 주의</p><h2>CASE ${pad(c.no)} 「${esc(c.title)}」 ${starsHtml(c)}</h2>
       <p>${esc(c.warn || '이 사건 기록에는 시신 훼손 같은 잔혹한 내용과 강한 묘사가 들어 있습니다.')}</p><p class="cw-s">모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국 같은 화면 연출과 사진은 「잔혹 표현」 단추로 끌 수 있습니다.</p><p>${mildBtn()}</p>
@@ -598,6 +601,7 @@
 
   function cabinet() {
     C = null; ST = null; S.current = null; save();
+    if (MG.mood) MG.mood.leave();
     document.body.dataset.screen = 'cabinet';
     const main = MG.cases.filter(c => c.kind !== 'tutorial');
     const solvedMain = main.filter(c => S.cases[c.id] && S.cases[c.id].solved).length;
@@ -917,11 +921,11 @@
     document.addEventListener('click', e => {
       const t = e.target;
       let el;
-      if ((el = t.closest('[data-open]'))) return openCase(el.dataset.open);
-      if ((el = t.closest('[data-cw-ok]'))) { const c = MG.byId[el.dataset.cwOk]; if (c) { cs(c).cw = true; save(); openCase(c.id); } return; }
+      if ((el = t.closest('[data-open]'))) return openCase(el.dataset.open, true);
+      if ((el = t.closest('[data-cw-ok]'))) { const c = MG.byId[el.dataset.cwOk]; if (c) { cs(c).cw = true; save(); openCase(c.id, true); } return; }
       if (t.closest('[data-cabinet]')) { cabinet(); window.scrollTo(0, 0); return; }
-      if ((el = t.closest('[data-mild]'))) { S.mild = !S.mild; save(); if (C) renderCase(); else if (t.closest('.cw')) { const id = app.querySelector('[data-cw-ok]'); if (id) warnScreen(MG.byId[id.dataset.cwOk]); } else cabinet(); return; }
-      if ((el = t.closest('[data-sound]'))) { S.sound = !S.sound; save(); el.outerHTML = soundBtn(); if (S.sound) sfx('pen'); return; }
+      if ((el = t.closest('[data-mild]'))) { S.mild = !S.mild; save(); if (C) { renderCase(); if (MG.mood) MG.mood.enter(C); } else if (t.closest('.cw')) { const id = app.querySelector('[data-cw-ok]'); if (id) warnScreen(MG.byId[id.dataset.cwOk]); } else cabinet(); return; }
+      if ((el = t.closest('[data-sound]'))) { S.sound = !S.sound; save(); el.outerHTML = soundBtn(); if (S.sound) sfx('pen'); if (MG.mood) MG.mood.sound(); return; }
       if (t.closest('[data-intro-ok]')) { S.intro = true; save(); cabinet(); return; }
       if ((el = t.closest('[data-wipe]'))) return armed(el, '한 번 더 누르면 전부 지워진다', () => { S = { cases: {}, current: null, intro: false }; save(); cabinet(); });
       if (!C) return;
