@@ -7,8 +7,9 @@
 ## 쓰는 법
 
 1. 아래 프롬프트를 이미지 생성 AI(GPT 등)에 그대로 붙여 넣는다. 각 사건의 **공통 스타일** 문단을 프롬프트 뒤에 이어 붙이면 사건 안에서 그림체가 통일된다.
-2. 받은 이미지를 표에 적힌 경로(`img/<사건>/<키>.webp`)로 저장한다. `.png`, `.jpg` 도 된다. 가능하면 webp 로 바꿔 한 장에 300KB 이하로 줄이면 GitHub 에 올리기 좋다.
-3. `node tools/manifest.js` 를 실행하면 게임이 SVG 임시 그림 대신 그 이미지를 쓴다.
+2. 받은 이미지를 표에 적힌 경로·이름으로 저장한다 (`img/<사건>/<키>.png`, `.jpg` 도 된다).
+3. `node tools/optimize-images.js` 를 실행하면 webp 로 줄여 게임에 연결하고, 원본은 `img/_src/` 로 옮긴다. 없는 그림은 SVG 임시 그림으로 남는다.
+4. 검수에서 걸린 그림은 `docs/IMAGE_REDO.md` 에 모인다 (사건 파일 `art` 의 `redo` 표시). 다시 뽑아 넣은 뒤 `redo` 를 지운다.
 
 **모든 이미지 공통 원칙**: 실제 인물·실제 피해자의 얼굴을 닮게 만들지 않는다 / 보통 사건의 시신은 가리거나 암시만 / 혐오감 주의 사건은 마른 핏자국과 가려진 시신의 일부까지 (절단면·장기·훼손 부위 클로즈업은 없음) / 실제 상표·로고 없음 / 글자는 넣지 않는다 (신문 제목, 간판 글씨 등은 게임이 HTML 로 따로 쓴다). 글자가 꼭 필요해 보이는 자리는 "no readable text" 를 유지하고 흐릿한 형태만 둔다.
 
@@ -1014,11 +1015,12 @@ Black-and-white 1986 photograph of a small provincial hospital autopsy room: a s
 ```
 - 주의: 상처·절단면 없이. 흰 천과 손 하나만.
 
-### c11/items_table — 증거물 사진 — 잠바와 주머니 속 물건 🔞 열람 주의
+### c11/items_table — 증거물 사진 — 잠바와 주머니 속 물건 🔞 열람 주의 🔁 다시 뽑기
 - 저장 경로: `img/c11/items_table.webp` · 비율: 4:3
 ```
-Top-down black-and-white evidence photograph under flat flash: a wet navy quilted vinyl jacket spread flat on grey paper, dark dried stains running down its left collar and shoulder and a wide smeared stain across the lower back with pale sawdust stuck in it, beside it in a neat row a small soggy paper matchbox, two brass bus tokens, a few coins and a folded handkerchief, a numbered evidence card and a ruler, grain.
+Top-down black-and-white evidence photograph under flat flash: a wet navy quilted vinyl jacket laid face-down on grey paper so its back panel faces the camera (no zipper visible), dark dried stains running down its left collar and shoulder and a wide smeared stain across the lower back with pale sawdust and tiny glittering flecks of mother-of-pearl dust stuck in it, beside it in a neat row a small soggy paper matchbox, two brass bus tokens, a few coins and a folded handkerchief, a numbered evidence card and a ruler, grain.
 ```
+- **꼭 보여야 할 것**: 잠바 등판이 위로 (지퍼 안 보이게). 왼쪽 깃·어깨의 흐름흔, 등판 아래의 넓은 문질린 혈흔에 흰 톱밥과 반짝이는 가루
 
 ### c11/butcher_floor — 우성정육점 검증 뒤 가게 안 — 톱밥 바닥과 도마 🔞 열람 주의
 - 저장 경로: `img/c11/butcher_floor.webp` · 비율: 4:3

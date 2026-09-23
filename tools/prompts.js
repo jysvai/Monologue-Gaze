@@ -61,8 +61,9 @@ function main() {
   out.push('## 쓰는 법');
   out.push('');
   out.push('1. 아래 프롬프트를 이미지 생성 AI(GPT 등)에 그대로 붙여 넣는다. 각 사건의 **공통 스타일** 문단을 프롬프트 뒤에 이어 붙이면 사건 안에서 그림체가 통일된다.');
-  out.push('2. 받은 이미지를 표에 적힌 경로(`img/<사건>/<키>.webp`)로 저장한다. `.png`, `.jpg` 도 된다. 가능하면 webp 로 바꿔 한 장에 300KB 이하로 줄이면 GitHub 에 올리기 좋다.');
-  out.push('3. `node tools/manifest.js` 를 실행하면 게임이 SVG 임시 그림 대신 그 이미지를 쓴다.');
+  out.push('2. 받은 이미지를 표에 적힌 경로·이름으로 저장한다 (`img/<사건>/<키>.png`, `.jpg` 도 된다).');
+  out.push('3. `node tools/optimize-images.js` 를 실행하면 webp 로 줄여 게임에 연결하고, 원본은 `img/_src/` 로 옮긴다. 없는 그림은 SVG 임시 그림으로 남는다.');
+  out.push('4. 검수에서 걸린 그림은 `docs/IMAGE_REDO.md` 에 모인다 (사건 파일 `art` 의 `redo` 표시). 다시 뽑아 넣은 뒤 `redo` 를 지운다.');
   out.push('');
   out.push('**모든 이미지 공통 원칙**: 실제 인물·실제 피해자의 얼굴을 닮게 만들지 않는다 / 보통 사건의 시신은 가리거나 암시만 / 혐오감 주의 사건은 마른 핏자국과 가려진 시신의 일부까지 (절단면·장기·훼손 부위 클로즈업은 없음) / 실제 상표·로고 없음 / 글자는 넣지 않는다 (신문 제목, 간판 글씨 등은 게임이 HTML 로 따로 쓴다). 글자가 꼭 필요해 보이는 자리는 "no readable text" 를 유지하고 흐릿한 형태만 둔다.');
   out.push('');
@@ -118,6 +119,7 @@ function main() {
 
 // 검수에서 걸린 그림(art 의 redo 표시)만 모은 목록. 프롬프트는 [그림 + 사건 공통 스타일 + v2 추가 스타일] 을 합쳐 두어 그대로 붙여 넣으면 된다.
 function writeRedo(list) {
+  list.sort((x, y) => (x.a.redo.level === '필수' ? 0 : 1) - (y.a.redo.level === '필수' ? 0 : 1)); // 필수 먼저, 같은 급은 사건 순서 그대로
   const need = list.filter(r => r.a.redo.level === '필수').length;
   const o = ['# 다시 뽑을 이미지', ''];
   o.push('> `node tools/prompts.js` 가 자동으로 만든다. 사건 파일 `art` 항목의 `redo` 표시를 모은 것이다.');

@@ -48,10 +48,12 @@ img/manifest.js       실제 이미지 목록 (자동 생성)
 img/<사건>/<키>.webp  AI 로 만든 이미지를 넣는 곳
 docs/CASE_AUTHORING.md  사건 작성 가이드 (데이터 형식 전부)
 docs/IMAGE_PROMPTS.md   이미지 프롬프트 모음 (자동 생성)
+docs/IMAGE_REDO.md      검수에서 걸려 다시 뽑을 이미지 목록 (자동 생성)
 docs/examples/        새 조사 방식 최소 예시
 tools/validate.js     사건 검사기 — 형식 + "처음 단서에서 정답 증거까지 실제로 따라갈 수 있는가"
 tools/smoke.js        화면 점검 — 가짜 DOM 에서 모든 문서·인물·도구 화면을 그려 본다
 tools/prompts.js      사건 파일의 프롬프트를 모아 docs/IMAGE_PROMPTS.md 생성
+tools/optimize-images.js  img/ 에 넣은 png·jpg 를 webp 로 줄이고(원본은 img/_src/) 게임에 연결
 tools/manifest.js     img/ 폴더를 훑어 img/manifest.js 생성
 tools/gen-images.js   (선택) OpenAI API 키가 있으면 프롬프트 전부를 한 번에 그려 img/ 에 넣는다
 ```
@@ -61,15 +63,18 @@ tools/gen-images.js   (선택) OpenAI API 키가 있으면 프롬프트 전부�
 ```bash
 node tools/validate.js            # 모든 사건 검사 (특정 파일만: node tools/validate.js cases/c01-london-1888.js)
 node tools/smoke.js cases/*.js    # 모든 화면이 깨지지 않고 그려지는지
-node tools/prompts.js             # docs/IMAGE_PROMPTS.md 다시 만들기
-node tools/manifest.js            # img/ 에 넣은 이미지를 게임에 연결
+node tools/prompts.js             # docs/IMAGE_PROMPTS.md · IMAGE_REDO.md 다시 만들기
+node tools/optimize-images.js     # img/ 에 넣은 png·jpg 를 webp 로 바꿔 게임에 연결 (ffmpeg 필요)
 ```
 
 ## 이미지 넣기
 
-1. `docs/IMAGE_PROMPTS.md` 의 프롬프트로 이미지를 만든다 (사건별 공통 스타일 문단을 뒤에 붙이면 그림체가 맞는다).
-2. 표에 적힌 경로, 예: `img/c01/cover.webp` 로 저장한다 (`.png`/`.jpg` 도 됨).
-3. `node tools/manifest.js` 실행. 없는 이미지는 SVG 임시 그림으로 남는다.
+지금 162장이 모두 들어가 있다. 검수에서 걸린 그림은 `docs/IMAGE_REDO.md` 에 모여 있다 (이유와, 그대로 붙여 넣을 합친 프롬프트 포함).
+
+1. `docs/IMAGE_PROMPTS.md` 의 프롬프트로 이미지를 만든다. [그림 프롬프트 + 사건 공통 스타일 + 맨 위 「추가 스타일」] 순서로 붙인다.
+2. 표에 적힌 경로·이름으로 저장한다, 예: `img/c01/cover.png` (`.jpg` 도 됨).
+3. `node tools/optimize-images.js` 실행 — webp 로 줄여 연결하고 원본은 `img/_src/` 로 옮긴다. 없는 이미지는 SVG 임시 그림으로 남는다.
+4. 다시 뽑은 그림은 사건 파일 `art` 항목의 `redo` 표시를 지우고 `node tools/prompts.js` 를 돌린다.
 
 ## 사건 추가
 
