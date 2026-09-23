@@ -539,7 +539,7 @@ A newspaper front-page detail printed in halftone: a block of simple geometric h
 Police evidence photograph, 1969: two worn 1960s suitcases, one brown leather and one grey-blue, standing on a concrete floor under a cold overhead lamp, a paper left-luggage ticket tied to one handle and a manila evidence tag lying in front of them. Slightly soft focus, heavy 35mm black-and-white grain.
 ```
 
-### c06/valley — 신문 10월 20일자 — 크비트달 등산로
+### c06/valley — 신문 10월 20일자 — 크비트달 등산로 🔁 다시 뽑기
 - 저장 경로: `img/c06/valley.webp` · 비율: 4:3
 ```
 Newspaper photograph of a remote rocky valley above a small Norwegian west-coast town in late October 1969: a narrow hiking path winding up between boulders, heather and a few bare birches, low cloud on the ridges, wet stone, no people. Coarse halftone newsprint look.
@@ -569,13 +569,14 @@ A folded 1968 tourist map of a small Norwegian harbour town lying on a desk, two
 Grainy 35mm photograph taken at dawn from a high hotel window: a small Norwegian harbour with a long quay, wooden warehouses and a single rusty coastal freighter moored, a few lights still on, mist on the water. Slightly underexposed, cool colour shift.
 ```
 
-### c06/stern — 현상한 필름 7번 — 새 페인트 밑 옛 글자 자국이 보이는 고물
+### c06/stern — 현상한 필름 7번 — 새 페인트 밑 옛 글자 자국이 보이는 고물 🔁 다시 뽑기
 - 저장 경로: `img/c06/stern.webp` · 비율: 4:3
 ```
-Close-up 35mm photograph of the stern of a rusty small cargo ship at a quay: freshly painted name letters on the dark hull, and beneath the new paint the faint raised outlines of older, different letters showing in low raking morning light. No letters legible. Water reflections, cool muted colours.
+Close-up 35mm photograph of the stern of a rusty small cargo ship at a quay: freshly painted name letters on the dark hull, and beneath the new paint the faint raised outlines of older, different letters showing in low raking morning light. The two rows must be clearly visible as shapes: a short row of fresh white painted letters, and around and beneath it a longer row of older letter outlines standing out as raised ridges and paint edges in the raking light. Letter shapes only, blurred so no word can be read. Water reflections, cool muted colours.
 ```
+- **꼭 보여야 할 것**: 새로 칠한 글자 한 줄 + 그 밑으로 도드라진 옛 글자 윤곽 (읽히지는 않게)
 
-### c06/station — 신문 10월 23일자 — 역 수하물 보관소 창구
+### c06/station — 신문 10월 23일자 — 역 수하물 보관소 창구 🔁 다시 뽑기
 - 저장 경로: `img/c06/station.webp` · 비율: 4:3
 ```
 Interior of a small Norwegian railway station left-luggage office in 1969: a wooden counter with a hinged hatch, shelves behind it holding suitcases and parcels with paper tags, a round wall clock, empty benches. Newspaper halftone photograph, no people.

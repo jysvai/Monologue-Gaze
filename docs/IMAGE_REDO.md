@@ -2,7 +2,7 @@
 
 > `node tools/prompts.js` 가 자동으로 만든다. 사건 파일 `art` 항목의 `redo` 표시를 모은 것이다.
 
-총 **8장** (필수 2 · 선택 6). 같은 경로·같은 이름으로 넣으면 게임 그림이 자동으로 바뀐다. 바꾼 뒤에는 그 항목의 `redo` 표시를 지운다.
+총 **11장** (필수 3 · 선택 8). 같은 경로·같은 이름으로 넣으면 게임 그림이 자동으로 바뀐다. 바꾼 뒤에는 그 항목의 `redo` 표시를 지운다.
 
 | 그림 | 급함 | 이유 |
 |---|---|---|
@@ -14,6 +14,9 @@
 | `c03/p_radio` | 선택 | 캡션은 「스위치 켜진 채」인데 다이얼 불이 안 보이고, 표지 라디오와 모양이 다르다. |
 | `c04/montage` | 필수 | 너무 사실적인 한 사람의 깨끗한 증명사진처럼 나왔다. 신문 망점 느낌이 없고, 실제 사건 몽타주와 닮아 보일 위험이 있다. |
 | `c05/cipherimg` | 선택 | 기호가 네 가지뿐이고 규칙적으로 되풀이돼 무늬처럼 보인다. 게임 속 암호문(글자마다 다른 기호)과 안 맞는다. |
+| `c06/valley` | 선택 | 신문 사진인데 요즘 디지털 컬러 사진처럼 선명하게 나왔다 (망점·흑백 인쇄 느낌 없음). |
+| `c06/stern` | 필수 | 캡션은 「새 페인트 밑으로 다른 글자 자국이 도드라짐」인데 그림에 글자 흔적이 아예 없다. 이 사건의 핵심 단서다. |
+| `c06/station` | 선택 | 신문 사진인데 깨끗한 컬러 사진으로 나왔다 (망점·흑백 인쇄 느낌 없음). |
 
 ## c01/q_thread — 경찰의 소견 — 증거물 붉은 무명실 (필수)
 - 저장 경로: `img/c01/q_thread.png` · 비율: 4:3
@@ -76,4 +79,26 @@ A 1960s police photo-composite portrait printed in a newspaper: a generic young 
 - **꼭 보여야 할 것**: 기호 종류가 많고 불규칙하게 (4 가지가 되풀이되면 암호로 안 보인다)
 ```
 A newspaper front-page detail printed in halftone: a block of simple geometric hand-drawn symbols (circles, triangles, crossed circles, diamonds) arranged in three uneven rows like a cipher, no letters or readable words, slightly smudged ink, folded newsprint texture. Use about fifteen different symbol shapes (squares with crosses, circles with bars, arrows, half-moons, hourglass marks and so on) in an irregular, non-repeating sequence, like a real substitution cipher. 1969 American newspaper wire photo and police file photography, Northern California coast: black-and-white 35mm Tri-X, heavy grain, harsh on-camera flash at night, coastal fog and sodium streetlight glow, halftone dot texture when reproduced in the newspaper, late-1960s cars, phone booths and street furniture without brand logos. No readable text, no recognizable faces, no bodies, no blood, no weapons shown. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them.
+```
+
+## c06/valley — 신문 10월 20일자 — 크비트달 등산로 (선택)
+- 저장 경로: `img/c06/valley.png` · 비율: 4:3
+- 이유: 신문 사진인데 요즘 디지털 컬러 사진처럼 선명하게 나왔다 (망점·흑백 인쇄 느낌 없음).
+```
+Newspaper photograph of a remote rocky valley above a small Norwegian west-coast town in late October 1969: a narrow hiking path winding up between boulders, heather and a few bare birches, low cloud on the ridges, wet stone, no people. Coarse halftone newsprint look. 1969 Norwegian police and press photography on 35mm film: Tri-X style black-and-white grain for police documentation, faded early colour film with a cool blue-green cast for everything else; overcast west-coast light, wet rock, heather and harbour mist. Documentary and quiet. No readable text, no faces, no bodies. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them.
+```
+
+## c06/stern — 현상한 필름 7번 — 새 페인트 밑 옛 글자 자국이 보이는 고물 (필수)
+- 저장 경로: `img/c06/stern.png` · 비율: 4:3
+- 이유: 캡션은 「새 페인트 밑으로 다른 글자 자국이 도드라짐」인데 그림에 글자 흔적이 아예 없다. 이 사건의 핵심 단서다.
+- **꼭 보여야 할 것**: 새로 칠한 글자 한 줄 + 그 밑으로 도드라진 옛 글자 윤곽 (읽히지는 않게)
+```
+Close-up 35mm photograph of the stern of a rusty small cargo ship at a quay: freshly painted name letters on the dark hull, and beneath the new paint the faint raised outlines of older, different letters showing in low raking morning light. The two rows must be clearly visible as shapes: a short row of fresh white painted letters, and around and beneath it a longer row of older letter outlines standing out as raised ridges and paint edges in the raking light. Letter shapes only, blurred so no word can be read. Water reflections, cool muted colours. 1969 Norwegian police and press photography on 35mm film: Tri-X style black-and-white grain for police documentation, faded early colour film with a cool blue-green cast for everything else; overcast west-coast light, wet rock, heather and harbour mist. Documentary and quiet. No readable text, no faces, no bodies. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them.
+```
+
+## c06/station — 신문 10월 23일자 — 역 수하물 보관소 창구 (선택)
+- 저장 경로: `img/c06/station.png` · 비율: 4:3
+- 이유: 신문 사진인데 깨끗한 컬러 사진으로 나왔다 (망점·흑백 인쇄 느낌 없음).
+```
+Interior of a small Norwegian railway station left-luggage office in 1969: a wooden counter with a hinged hatch, shelves behind it holding suitcases and parcels with paper tags, a round wall clock, empty benches. Newspaper halftone photograph, no people. 1969 Norwegian police and press photography on 35mm film: Tri-X style black-and-white grain for police documentation, faded early colour film with a cool blue-green cast for everything else; overcast west-coast light, wet rock, heather and harbour mist. Documentary and quiet. No readable text, no faces, no bodies. Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them.
 ```
