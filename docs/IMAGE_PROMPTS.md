@@ -1,7 +1,7 @@
 # Monologue Gaze — 이미지 프롬프트 모음
 
 > 이 파일은 `node tools/prompts.js` 로 자동 생성됩니다. 프롬프트를 고치려면 각 사건 파일(`cases/*.js`)의 `art` 항목을 고친 뒤 다시 생성하세요.
-총 **162장**.
+총 **165장**.
 
 
 ## 쓰는 법
@@ -11,7 +11,7 @@
 3. `node tools/optimize-images.js` 를 실행하면 webp 로 줄여 게임에 연결하고, 원본은 `img/_src/` 로 옮긴다. 없는 그림은 SVG 임시 그림으로 남는다.
 4. 검수에서 걸린 그림은 `docs/IMAGE_REDO.md` 에 모인다 (사건 파일 `art` 의 `redo` 표시). 다시 뽑아 넣은 뒤 `redo` 를 지운다.
 
-**모든 이미지 공통 원칙**: 실제 인물·실제 피해자의 얼굴을 닮게 만들지 않는다 / 보통 사건의 시신은 가리거나 암시만 / 혐오감 주의 사건은 마른 핏자국과 가려진 시신의 일부까지 (절단면·장기·훼손 부위 클로즈업은 없음) / 실제 상표·로고 없음 / 글자는 넣지 않는다 (신문 제목, 간판 글씨 등은 게임이 HTML 로 따로 쓴다). 글자가 꼭 필요해 보이는 자리는 "no readable text" 를 유지하고 흐릿한 형태만 둔다.
+**모든 이미지 공통 원칙**: 실제 인물·실제 피해자의 얼굴을 닮게 만들지 않는다 / 보통 사건의 시신은 가리거나 암시만 / 혐오감 주의 사건은 범행 흔적(비산흔·낙하흔·닦아 낸 자국·피가 밴 포대와 봉투)을 진하게 보여 주고, 시신은 가려진 채 손·발·머리카락처럼 일부가 비치거나 삐져나온 정도까지 (절단면·장기·상처·죽은 사람의 얼굴은 없음) / 실제 상표·로고 없음 / 글자는 넣지 않는다 (신문 제목, 간판 글씨 등은 게임이 HTML 로 따로 쓴다). 글자가 꼭 필요해 보이는 자리는 "no readable text" 를 유지하고 흐릿한 형태만 둔다.
 
 ## 생성 규칙 v2 — CASE 03 부터 적용
 
@@ -954,8 +954,8 @@ Overcast daytime smartphone photo of an unfinished container pier in a Korean po
 
 ## CASE 11 · 물길을 거슬러 (1986, 은천시 목골동 · 은천강 (가상 지명))
 
-- 사건 파일: `cases/c11-riverside-1986.js` · 이미지 14장 · 난이도 ★★★★★
-- **혐오감 주의 사건**: 폴더 표지(cover) 위에는 게임이 「혐오감 주의」 스티커(`_global/warn`)를 겹쳐 붙이고 흐리게 처리한다. 마른 핏자국, 가려진 시신의 일부(방수포 밖의 손, 자루 속 형체)까지는 괜찮다. 절단면·장기·훼손 부위 클로즈업은 넣지 않는다. 🔞 표시가 붙은 그림은 게임에서 흐리게 가려진 채 나오고 눌러야 보인다.
+- 사건 파일: `cases/c11-riverside-1986.js` · 이미지 16장 · 난이도 ★★★★★
+- **혐오감 주의 사건 (빨간 별)**: 폴더 표지에는 게임이 「혐오감 주의」 스티커를 붙이고 흐리게 처리한다. 🔞 그림은 흐리게 가려진 채 나오고 눌러야 보인다. **수위** — 범행 흔적은 진하게: 벽의 비산흔, 바닥의 낙하흔, 닦아 낸 호 모양 자국, 줄눈·배수구에 스민 피, 피가 밴 포대·봉투, 루미놀 반응. 시신은 천·방수포·포대·봉투에 가려진 채로, 손·아래팔·발, 비닐 너머 비치는 팔다리 윤곽, 매듭에 걸린 머리카락 정도까지. 절단면·장기·상처·죽은 사람의 얼굴은 넣지 않는다. 생성 AI 가 거절하면 한 단계 낮춰(예: 손 → 비닐 너머 윤곽) 다시 만들고 저장한다.
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 Provincial South Korea in 1986, a slow river city in late autumn: 35mm press and police photography on Kodak Tri-X black-and-white or faded Fujicolor negative film, coarse grain, harsh on-camera flash or flat overcast light, slightly lifted blacks, a coarse newspaper halftone dot screen and yellowed newsprint where it appears in print. Period details: cement-block and tin-roof houses, stacks of coal briquettes, reed beds, concrete bridges on piers, an old iron sluice gate, hand carts, white woven polypropylene rice sacks, green-and-cream city buses with round headlights. No readable text, no logos or emblems, no recognizable faces (backs, silhouettes or out-of-focus figures only). Graphic content is limited to dried bloodstains on surfaces and covered or sacked remains seen at a distance: no wounds, no cut surfaces, no gore close-ups.
@@ -1000,20 +1000,21 @@ Cold dawn on the muddy bank of a slow, misty river in a 1986 provincial Korean c
 1986 Korean newspaper feature photograph in black and white: the interior of a small traditional mother-of-pearl lacquerware workshop, a craftsman in a grey work coat seen from behind bent over a half-finished black lacquered wardrobe inlaid with iridescent shell cranes, a wall pegboard with chisels and a Japanese-style pull saw, pale sawdust on a cement floor, soft window light, halftone print.
 ```
 
-### c11/photo_sack — 감식 사진 — 벽돌이 달린 넷째 포대 🔞 열람 주의
+### c11/photo_sack — 감식 사진 — 벽돌이 달린 넷째 포대 🔞 열람 주의 🔁 다시 뽑기
 - 저장 경로: `img/c11/photo_sack.webp` · 비율: 4:3
 ```
-Black-and-white 1986 police evidence photograph under flat flash, seen from above: a wet white woven polypropylene rice sack lying on a grey tarp on a concrete floor, its mouth tied tightly with twine that runs on to four red bricks bound together beside it, the heavy lumpy outline of what is inside pressing against the weave, a faded rust-brown stain soaked through one lower corner, a small numbered evidence card and a wooden folding ruler, grain. The bricks are the only colour in the image, hand-tinted brick red.
+Black-and-white 1986 police evidence photograph under harsh flat flash, seen from above: a wet white woven polypropylene rice sack lying on a grey tarp on a concrete floor, the heavy round lump of what is inside pressing hard against the weave, the lower half of the sack soaked through with a dark rust-brown stain that has bled out into a wide watery ring on the tarp, the mouth tied tight with twine, a few strands of long dark wet hair caught in the knot, the twine running on to four red bricks bound together beside it, a small numbered evidence card and a wooden folding ruler, grain. The bricks are the only colour in the image, hand-tinted brick red.
 ```
-- **꼭 보여야 할 것**: 붉은 벽돌 네 장 (사진은 흑백이어도 벽돌만 붉게)
-- 주의: 포대는 닫힌 채로. 안의 내용물은 윤곽만.
+- **꼭 보여야 할 것**: 붉은 벽돌 네 장 (벽돌만 붉게) · 아가리 매듭에 걸린 젖은 머리카락 몇 가닥 · 포대 아래로 번진 얼룩
+- 주의: 포대는 닫힌 채로. 안은 불룩한 형체만. 절단면·장기·상처·죽은 사람의 얼굴은 보이지 않게.
 
-### c11/autopsy_room — 은천의료원 부검실 — 흰 천 아래 수습된 시신 🔞 열람 주의
+### c11/autopsy_room — 은천의료원 부검실 — 흰 천 아래 수습된 시신 🔞 열람 주의 🔁 다시 뽑기
 - 저장 경로: `img/c11/autopsy_room.webp` · 비율: 4:3
 ```
-Black-and-white 1986 photograph of a small provincial hospital autopsy room: a steel table under a single hanging lamp, remains laid out in order beneath white sheets whose folds follow the shapes underneath, one pale limp hand visible at the edge of a sheet, white tiled walls, an enamel basin and an instrument tray pushed aside, a doctor in a gown seen from behind writing on a clipboard, cold light, grain.
+Black-and-white 1986 photograph of a small provincial hospital autopsy room: on a steel table under a single hanging lamp, not one body-shaped form but several separate shapes laid out in order beneath white sheets with clear gaps between them, rust-brown fluid seeping through the cloth in blotches where each covered piece ends, one pale limp hand visible at the edge of a sheet, a bone saw and rib shears on the instrument tray, an enamel basin of cloudy pink-grey water, a floor drain in the white tiles with a dark trickle running to it, a doctor in a gown seen from behind writing on a clipboard, cold light, grain.
 ```
-- 주의: 상처·절단면 없이. 흰 천과 손 하나만.
+- **꼭 보여야 할 것**: 천 아래가 한 사람 모양이 아니라 여러 덩어리로 떨어져 놓여 있다 (사이사이 틈) · 덩어리 끝마다 배어 나온 얼룩 · 손 하나
+- 주의: 천 아래는 형체와 배어 나온 얼룩만. 절단면·장기·상처·죽은 사람의 얼굴은 보이지 않게.
 
 ### c11/items_table — 증거물 사진 — 잠바와 주머니 속 물건 🔞 열람 주의 🔁 다시 뽑기
 - 저장 경로: `img/c11/items_table.webp` · 비율: 4:3
@@ -1053,10 +1054,25 @@ Night photograph from 1986 at a provincial city bus terminus on a dirt lot: a gr
 Photograph of an empty abandoned small workshop in early spring 1987: a bare cement floor with a round iron drain, a pale bleached patch scrubbed around the drain, dark dried brown bloodstains lingering in the cement joints and around the drain grate, small yellow numbered evidence markers set on the floor, an empty wall pegboard showing dust outlines of tools, one old workbench, cold window light, faded color negative film, grain.
 ```
 
+### c11/occ_reeds — 제1보 첨부 — 갈밭에서 연 첫 포대 (현장 사진) 🔞 열람 주의 🔁 다시 뽑기
+- 저장 경로: `img/c11/occ_reeds.webp` · 비율: 4:3
+```
+Black-and-white 1986 police scene photograph taken close with harsh flash on a grey November morning: a trampled reed bed at the edge of a slow river, a wet white woven rice sack lying on a straw mat with its twine untied and its mouth folded back, a pale, water-wrinkled human forearm and hand lying out of the sack mouth on the mat, fingers slightly curled, the rest hidden inside the sack, a grey tarp half pulled back beside it, the muddy rubber boots of policemen and a sickle on the ground at the edge of the frame, cut reeds and river mist behind, grain.
+```
+- **꼭 보여야 할 것**: 포대 아가리 밖으로 나온 창백한 아래팔과 손 (잘린 쪽은 포대 안에 가려져 안 보이게)
+- 주의: 절단면·장기·상처·죽은 사람의 얼굴은 보이지 않게.
+
+### c11/butcher_lumi — 우성정육점 검증 — 루미놀 암실 사진 🔞 열람 주의 🔁 다시 뽑기
+- 저장 경로: `img/c11/butcher_lumi.webp` · 비율: 4:3
+```
+Darkroom luminol photograph from 1986, a 30-second exposure inside a tiny market butcher shop with every light off: almost the whole sawdust-covered floor glowing an eerie pale blue, a brighter blue ring around the base of the round chopping block, blue streaks running down into the floor drain and smeared hand-height on the front of the refrigerator, the meat hooks and counter only faint dark outlines, grainy, slightly blurred.
+```
+- **꼭 보여야 할 것**: 불 끈 가게 바닥 거의 전체가 푸르게 빛난다
+
 ## CASE 12 · 스물한 개의 봉투 (1994, 도쿄도 아사기구 가시와다이 (가상 지명))
 
-- 사건 파일: `cases/c12-tokyo-1994.js` · 이미지 15장 · 난이도 ★★★★★
-- **혐오감 주의 사건**: 폴더 표지(cover) 위에는 게임이 「혐오감 주의」 스티커(`_global/warn`)를 겹쳐 붙이고 흐리게 처리한다. 마른 핏자국, 가려진 시신의 일부(방수포 밖의 손, 자루 속 형체)까지는 괜찮다. 절단면·장기·훼손 부위 클로즈업은 넣지 않는다. 🔞 표시가 붙은 그림은 게임에서 흐리게 가려진 채 나오고 눌러야 보인다.
+- 사건 파일: `cases/c12-tokyo-1994.js` · 이미지 16장 · 난이도 ★★★★★
+- **혐오감 주의 사건 (빨간 별)**: 폴더 표지에는 게임이 「혐오감 주의」 스티커를 붙이고 흐리게 처리한다. 🔞 그림은 흐리게 가려진 채 나오고 눌러야 보인다. **수위** — 범행 흔적은 진하게: 벽의 비산흔, 바닥의 낙하흔, 닦아 낸 호 모양 자국, 줄눈·배수구에 스민 피, 피가 밴 포대·봉투, 루미놀 반응. 시신은 천·방수포·포대·봉투에 가려진 채로, 손·아래팔·발, 비닐 너머 비치는 팔다리 윤곽, 매듭에 걸린 머리카락 정도까지. 절단면·장기·상처·죽은 사람의 얼굴은 넣지 않는다. 생성 AI 가 거절하면 한 단계 낮춰(예: 손 → 비닐 너머 윤곽) 다시 만들고 저장한다.
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 Tokyo, autumn 1994 (Heisei 6), Japanese police and press documentation: 35mm color negative film with slightly faded Fuji-like greens and magentas, fine grain, harsh on-camera flash for night and interior shots, flat grey dawn light outdoors; press photos reproduced as coarse black-and-white newspaper halftone. Period details only: milky semi-transparent garbage bags, green wire-mesh park trash bins, pink coin payphones, VHS tapes, dedicated word processors, pagers, wooden sento lockers and tiled washing floors. No readable text, no logos, no recognizable faces.
@@ -1076,19 +1092,21 @@ A narrow sand path through a small Tokyo neighborhood park at grey dawn in autum
 Black-and-white 1994 Japanese newspaper halftone photograph of a small park entrance with two concrete gate pillars, police tape across the gate, three trash bins covered with blue plastic sheets, two uniformed officers standing with their backs to the camera, onlookers blurred at the edge, overcast morning, coarse dot screen.
 ```
 
-### c12/scene_bin — 발생 보고 첨부 — 새벽 쓰레기통 둘레와 시트 위의 봉투 (멀리서) 🔞 열람 주의
+### c12/scene_bin — 발생 보고 첨부 — 새벽 쓰레기통 둘레와 시트 위의 봉투 (멀리서) 🔞 열람 주의 🔁 다시 뽑기
 - 저장 경로: `img/c12/scene_bin.webp` · 비율: 4:3
 ```
-Early-morning 1994 Tokyo park crime scene seen from a distance: forensic officers in navy uniforms and caps crouching around a green wire-mesh trash bin, a blue tarp on the sand path with a row of milky semi-transparent garbage bags laid out on it, dark indistinct shapes faintly visible through the bag film, a few dried brown stains smeared on the outside of the bags and on the tarp, small yellow numbered evidence markers, harsh flash mixing with grey dawn light, backs to the camera.
+Early-morning 1994 Tokyo park crime scene seen from a few metres away: forensic officers in navy uniforms and caps crouching around a green wire-mesh trash bin, a blue tarp on the sand path with a row of milky semi-transparent garbage bags laid out on it, the contents pressing against the film so that some shapes clearly read as parts of human limbs, the bend of a knee, the pale curve of a heel, fingertips flattened against the plastic, blood-tinged moisture beaded inside the film and pooled in the bag corners, dried brown stains smeared on the outside of the bags and on the tarp, small yellow numbered evidence markers, harsh flash mixing with grey dawn light, officers with their backs to the camera.
 ```
-- 주의: 봉투 속 형태는 흐릿한 어두운 덩어리로만. 절단면·살·뼈가 보이면 안 된다. 얼굴 보이지 않게.
+- **꼭 보여야 할 것**: 비닐 너머로 무릎·발뒤꿈치·손가락 끝처럼 사람 팔다리임을 알 수 있는 형태가 비친다
+- 주의: 비닐 너머로 비치는 형태까지만. 절단면·장기·상처·죽은 사람의 얼굴은 보이지 않게.
 
-### c12/bagsample — 감정서 첨부 — 번호표를 단 반투명 봉투 21장 (증거 사진) 🔞 열람 주의
+### c12/bagsample — 감정서 첨부 — 번호표를 단 반투명 봉투 21장 (증거 사진) 🔞 열람 주의 🔁 다시 뽑기
 - 저장 경로: `img/c12/bagsample.webp` · 비율: 4:3
 ```
-Overhead police evidence photograph on a grey laboratory bench: rows of tied milky semi-transparent 45-liter garbage bags, each with a small yellow numbered tag, heavy dark indistinct masses faintly visible through the frosted plastic, dried reddish-brown transfer stains on the outer film of several bags, one bag with a strip of clear packing tape over a tear, a scale ruler at the edge, flat fluorescent light with a slight green cast.
+Overhead police evidence photograph on a grey laboratory bench: a single row of eight tied milky semi-transparent 45-liter garbage bags, each with a small yellow numbered tag, through the frosted plastic the contents read as pale, water-bleached sections of human limbs, in one bag fingers pressed flat against the film, in another the outline of a foot, reddish-brown fluid pooled in the bottom corner of every bag, dried reddish-brown transfer stains on the outer film, one bag with a strip of clear packing tape over a tear, a scale ruler at the edge, flat fluorescent light with a slight green cast.
 ```
-- 주의: 봉투 속은 형체만 어렴풋이. 피부·절단면·뼈가 드러나면 안 된다.
+- **꼭 보여야 할 것**: 봉투 여덟 장 한 줄 · 비닐 너머 손가락·발 윤곽 · 봉투 구석에 고인 붉은 물기
+- 주의: 비닐 너머로 비치는 형태까지만. 절단면·장기·상처·죽은 사람의 얼굴은 보이지 않게.
 
 ### c12/cleancart — 청소 작업 일지 첨부 — 청소 수레와 일지 판
 - 저장 경로: `img/c12/cleancart.webp` · 비율: 4:3
@@ -1121,12 +1139,13 @@ Close-up of a 1990s Japanese dedicated word processor on an evidence table, its 
 Black-and-white 1994 newspaper halftone photo of an old wooden Tokyo public bathhouse with a temple-like tiled gable roof and a tall brick chimney, standing alone between empty fenced vacant lots after a land-assembly buyout, a short cloth curtain at the entrance, a stack of scrap firewood by the side wall, late-afternoon light, curtain lettering illegible.
 ```
 
-### c12/boiler — 가마 일지 첨부 — 가시와유 보일러실 아궁이와 장작 🔞 열람 주의
+### c12/boiler — 가마 일지 첨부 — 가시와유 보일러실 아궁이와 장작 🔞 열람 주의 🔁 다시 뽑기
 - 저장 경로: `img/c12/boiler.webp` · 비율: 4:3
 ```
-Interior of a cramped 1994 Tokyo bathhouse boiler room lit by camera flash: a soot-blackened iron firebox door of a wood-fired water heater with a low orange glow, split scrap firewood stacked to waist height, an iron poker leaning against the wall, a concrete floor with a hose drain, a few small dried dark brown spatter spots low on the whitewashed wall near the door, forensic scale ruler taped beside them.
+Interior of a cramped 1994 Tokyo bathhouse boiler room lit by camera flash: a soot-blackened iron firebox door of a wood-fired water heater with a low orange glow, split scrap firewood stacked to waist height, an iron poker leaning against the wall, a concrete floor with a hose drain, dozens of fine dried dark brown spatter dots on the whitewashed wall 40 to 70 cm above the floor beside the door, their little tails pointing upward, a forensic scale ruler taped beside them, and a line of round dried drip stains leading across the floor from the firebox toward the doorway.
 ```
-- 주의: 핏자국은 작은 점 몇 개만. 사람·시신 없음.
+- **꼭 보여야 할 것**: 문 옆 벽 낮은 자리의 비산흔 수십 점 (꼬리가 위로) · 바닥을 가로지르는 둥근 낙하흔 한 줄
+- 주의: 사람·시신 없음.
 
 ### c12/dengon — 역 전언판 (분필 글씨는 읽을 수 없게)
 - 저장 경로: `img/c12/dengon.webp` · 비율: 4:3
@@ -1152,9 +1171,18 @@ A 1990s Japanese video rental membership card with a cartoon panda mascot silhou
 Black-and-white 1994 newspaper halftone photo of a small neighborhood butcher shop in a Tokyo shopping street with its metal shutter pulled half down in daytime, an empty refrigerated display case visible below the shutter, a hand-painted shop sign above (illegible), a bicycle parked in front, no people.
 ```
 
-### c12/luminol — 현장 검증 조서 첨부 — 세척장 배수구와 핏자국, 번호표 🔞 열람 주의
+### c12/luminol — 현장 검증 조서 첨부 — 세척장 배수구와 핏자국, 번호표 🔞 열람 주의 🔁 다시 뽑기
 - 저장 경로: `img/c12/luminol.webp` · 비율: 4:3
 ```
-Forensic documentation photo of an old Japanese bathhouse washing floor of small white square tiles, flash-lit: a round cast-iron drain cover at the center, dried reddish-brown bloodstains smeared in wide arcs where someone wiped the floor, brown lines settled in the grout between tiles, a few drip spots, three small yellow triangular numbered evidence markers and a scale ruler, a wooden bath stool and a plastic basin pushed to the side, no people.
+Forensic documentation photo of an old Japanese bathhouse washing floor of small white square tiles, flash-lit: a round cast-iron drain cover at the center, dried reddish-brown bloodstains smeared in wide sweeping arcs where someone wiped the floor again and again, dark brown lines settled in every grout joint around the drain, a trail of round drip stains 5 to 8 mm wide coming in from a doorway at the edge of the frame, three small yellow triangular numbered evidence markers and a scale ruler, a wooden bath stool and a plastic basin pushed to the side, no people.
 ```
-- 주의: 시신·신체 부위 없음. 핏자국은 말라붙은 갈색, 흥건한 피 금지.
+- **꼭 보여야 할 것**: 닦아 낸 넓은 호 · 줄눈마다 스민 갈색 선 · 문 쪽에서 들어오는 둥근 낙하흔 한 줄
+- 주의: 시신·신체 부위 없음. 흥건한 생피 말고 마르고 닦인 자국으로.
+
+### c12/trap — 현장 검증 조서 첨부 — 분해한 세척장 배수구 트랩 🔞 열람 주의 🔁 다시 뽑기
+- 저장 경로: `img/c12/trap.webp` · 비율: 4:3
+```
+Close forensic flash photograph, November 1994: the U-shaped cast-iron drain trap from under an old Japanese bathhouse washing floor taken apart and laid on a white enamel tray, its inside coated with dark red-brown sludge and settled sediment with a fine pale gritty powder mixed in, a few long strands of hair tangled in it, small chips of white tile, a steel ruler and a yellow numbered evidence marker, the gloved hands of a forensic officer at the edge of the frame, white tiles behind.
+```
+- **꼭 보여야 할 것**: U자 트랩 안의 검붉은 침전물과 섞인 희끄무레한 가루
+- 주의: 사람 신체 부위 없음.

@@ -65,7 +65,7 @@ function main() {
   out.push('3. `node tools/optimize-images.js` 를 실행하면 webp 로 줄여 게임에 연결하고, 원본은 `img/_src/` 로 옮긴다. 없는 그림은 SVG 임시 그림으로 남는다.');
   out.push('4. 검수에서 걸린 그림은 `docs/IMAGE_REDO.md` 에 모인다 (사건 파일 `art` 의 `redo` 표시). 다시 뽑아 넣은 뒤 `redo` 를 지운다.');
   out.push('');
-  out.push('**모든 이미지 공통 원칙**: 실제 인물·실제 피해자의 얼굴을 닮게 만들지 않는다 / 보통 사건의 시신은 가리거나 암시만 / 혐오감 주의 사건은 마른 핏자국과 가려진 시신의 일부까지 (절단면·장기·훼손 부위 클로즈업은 없음) / 실제 상표·로고 없음 / 글자는 넣지 않는다 (신문 제목, 간판 글씨 등은 게임이 HTML 로 따로 쓴다). 글자가 꼭 필요해 보이는 자리는 "no readable text" 를 유지하고 흐릿한 형태만 둔다.');
+  out.push('**모든 이미지 공통 원칙**: 실제 인물·실제 피해자의 얼굴을 닮게 만들지 않는다 / 보통 사건의 시신은 가리거나 암시만 / 혐오감 주의 사건은 범행 흔적(비산흔·낙하흔·닦아 낸 자국·피가 밴 포대와 봉투)을 진하게 보여 주고, 시신은 가려진 채 손·발·머리카락처럼 일부가 비치거나 삐져나온 정도까지 (절단면·장기·상처·죽은 사람의 얼굴은 없음) / 실제 상표·로고 없음 / 글자는 넣지 않는다 (신문 제목, 간판 글씨 등은 게임이 HTML 로 따로 쓴다). 글자가 꼭 필요해 보이는 자리는 "no readable text" 를 유지하고 흐릿한 형태만 둔다.');
   out.push('');
   out.push(`## 생성 규칙 v2 — CASE ${String(V2_FROM).padStart(2, '0')} 부터 적용`);
   out.push('');
@@ -90,7 +90,7 @@ function main() {
     out.push(`## CASE ${String(c.no).padStart(2, '0')} · ${c.title} (${c.year}, ${c.place})`);
     out.push('');
     out.push(`- 사건 파일: \`cases/${files.find(f => f.startsWith(c.id)) || c.id}\` · 이미지 ${arts.length}장${c.stars ? ` · 난이도 ${'★'.repeat(c.stars)}` : ''}`);
-    if (c.graphic) out.push('- **혐오감 주의 사건**: 폴더 표지(cover) 위에는 게임이 「혐오감 주의」 스티커(`_global/warn`)를 겹쳐 붙이고 흐리게 처리한다. 마른 핏자국, 가려진 시신의 일부(방수포 밖의 손, 자루 속 형체)까지는 괜찮다. 절단면·장기·훼손 부위 클로즈업은 넣지 않는다. 🔞 표시가 붙은 그림은 게임에서 흐리게 가려진 채 나오고 눌러야 보인다.');
+    if (c.graphic) out.push('- **혐오감 주의 사건 (빨간 별)**: 폴더 표지에는 게임이 「혐오감 주의」 스티커를 붙이고 흐리게 처리한다. 🔞 그림은 흐리게 가려진 채 나오고 눌러야 보인다. **수위** — 범행 흔적은 진하게: 벽의 비산흔, 바닥의 낙하흔, 닦아 낸 호 모양 자국, 줄눈·배수구에 스민 피, 피가 밴 포대·봉투, 루미놀 반응. 시신은 천·방수포·포대·봉투에 가려진 채로, 손·아래팔·발, 비닐 너머 비치는 팔다리 윤곽, 매듭에 걸린 머리카락 정도까지. 절단면·장기·상처·죽은 사람의 얼굴은 넣지 않는다. 생성 AI 가 거절하면 한 단계 낮춰(예: 손 → 비닐 너머 윤곽) 다시 만들고 저장한다.');
     if (c.artStyle) {
       out.push('- **공통 스타일** (각 프롬프트 뒤에 붙이기):');
       out.push(block(c.artStyle));
@@ -119,12 +119,15 @@ function main() {
 
 // 검수에서 걸린 그림(art 의 redo 표시)만 모은 목록. 프롬프트는 [그림 + 사건 공통 스타일 + v2 추가 스타일] 을 합쳐 두어 그대로 붙여 넣으면 된다.
 function writeRedo(list) {
-  list.sort((x, y) => (x.a.redo.level === '필수' ? 0 : 1) - (y.a.redo.level === '필수' ? 0 : 1)); // 필수 먼저, 같은 급은 사건 순서 그대로
-  const need = list.filter(r => r.a.redo.level === '필수').length;
+  const RANK = { 필수: 0, 강화: 1, 선택: 2 };
+  list.sort((x, y) => (RANK[x.a.redo.level] ?? 3) - (RANK[y.a.redo.level] ?? 3)); // 같은 급은 사건 순서 그대로
+  const count = lv => list.filter(r => r.a.redo.level === lv).length;
   const o = ['# 다시 뽑을 이미지', ''];
   o.push('> `node tools/prompts.js` 가 자동으로 만든다. 사건 파일 `art` 항목의 `redo` 표시를 모은 것이다.');
   o.push('');
-  o.push(`총 **${list.length}장** (필수 ${need} · 선택 ${list.length - need}). 같은 경로·같은 이름으로 넣으면 게임 그림이 자동으로 바뀐다. 바꾼 뒤에는 그 항목의 \`redo\` 표시를 지운다.`);
+  o.push(`총 **${list.length}장** (필수 ${count('필수')} · 강화 ${count('강화')} · 선택 ${count('선택')}). 같은 경로·같은 이름으로 넣으면 게임 그림이 자동으로 바뀐다. 바꾼 뒤에는 그 항목의 \`redo\` 표시를 지운다.`);
+  o.push('');
+  o.push('- **필수**: 이야기·단서와 어긋나 꼭 다시 뽑아야 한다. **강화**: 빨간 별 사건의 수위를 올린 그림 (기존 교체 + 새 그림). **선택**: 지금도 쓸 만하지만 더 나아질 수 있다.');
   o.push('');
   o.push('| 그림 | 급함 | 이유 |', '|---|---|---|');
   list.forEach(({ c, key, a }) => o.push(`| \`${c.id}/${key}\` | ${a.redo.level} | ${a.redo.why} |`));
