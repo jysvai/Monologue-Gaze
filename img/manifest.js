@@ -102,6 +102,7 @@ window.MG.images = {
   "c08/montage_print": "img/c08/montage_print.webp",
   "c08/news_site": "img/c08/news_site.webp",
   "c08/note_paper": "img/c08/note_paper.webp",
+  "c08/rail": "img/c08/rail.webp",
   "c08/ransom_bag": "img/c08/ransom_bag.webp",
   "c08/shop_ledger": "img/c08/shop_ledger.webp",
   "c08/warehouse": "img/c08/warehouse.webp",
