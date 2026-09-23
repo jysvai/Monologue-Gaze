@@ -20,14 +20,15 @@ CASE 00~02 를 실제로 뽑아 보고 보강한 규칙이다. 00~02 는 나중�
 2. 흑백 스타일 사건이라도, 프롬프트가 색을 말하는 증거물(붉은 실, 파란 가방 같은)은 그 색이 보여야 한다. 그 물건만 손으로 색칠한 듯 부분 채색하거나 바랜 컬러 사진으로 만든다. (01 의 붉은 무명실이 회색으로 나와 단서가 사라졌다.)
 3. 정물·증거물 사진에는 창밖 거리, 걸어가는 사람 실루엣, 먼 도시 스카이라인을 넣지 않는다. 배경은 책상·증거물 판·벽처럼 단순하게. (01 에서 거의 모든 정물 뒤에 같은 창밖 풍경이 반복됐다.)
 4. 숫자·날짜가 보이는 그림(달력, 시계, 번호판)은 프롬프트가 준 숫자만 쓴다. 프롬프트가 숫자를 말하지 않으면 숫자를 넣지 않는다. (02 의 달력이 본문의 26일 대신 7로 나왔다.)
-5. 한 장에 장면 하나. 작은 삽입 칸, 여러 칸 조합, 카탈로그식 칸 나누기는 프롬프트가 요구할 때만. (02 의 광고 삽화가 판화 + 사진 두 칸으로 나왔다.)
-6. 모두 가상 지명이다. 실존 랜드마크(유명 성당 돔, 타워, 다리)는 프롬프트가 이름을 댈 때만 넣는다.
-7. 한 사건 안에서 같은 장소·물건·인물이 여러 장에 나오면 같은 모습으로 맞춘다 (같은 방, 같은 가방 색, 같은 옷 실루엣).
-8. 한 장 만들 때마다 위 규칙을 스스로 확인하고, 단서가 빠졌으면 한 번 다시 만든다.
+5. 신문 제목·전단·쪽지·간판처럼 글자가 들어갈 자리는 뭉개진 회색 띠나 흐린 선으로만 둔다. 또렷한 가짜 한글·한자·가나는 한국·일본 플레이어 눈에 바로 엉터리로 보인다. (08 의 전단·신문·쪽지에서 엉터리 한글이 읽혔다.)
+6. 한 장에 장면 하나. 작은 삽입 칸, 여러 칸 조합, 카탈로그식 칸 나누기는 프롬프트가 요구할 때만. (02 의 광고 삽화가 판화 + 사진 두 칸으로 나왔다.)
+7. 모두 가상 지명이다. 실존 랜드마크(유명 성당 돔, 타워, 다리)는 프롬프트가 이름을 댈 때만 넣는다.
+8. 한 사건 안에서 같은 장소·물건·인물이 여러 장에 나오면 같은 모습으로 맞춘다 (같은 방, 같은 가방 색, 같은 옷 실루엣).
+9. 한 장 만들 때마다 위 규칙을 스스로 확인하고, 단서가 빠졌으면 한 번 다시 만든다.
 
 - **추가 스타일** (CASE 03 부터, 공통 스타일 뒤에 이어 붙이기):
 ```
-Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them.
+Show exactly what the prompt names: counts, colours and positions. If the style is black-and-white but an object has a named colour, keep that colour on that object only, as if hand-tinted. For still-life and evidence shots use a simple background: no window view, no street scene, no passers-by, no city skyline. Show no numerals or dates except those the prompt gives. Wherever text would appear (headlines, flyers, notes, signs), render it only as smeared grey bands or soft blurred strokes, never as crisp pseudo-Hangul, pseudo-kanji or pseudo-kana. One single image, no inset panels, no collage, no second version of the scene. No recognizable real landmarks unless the prompt names them.
 ```
 
 ## 공통 이미지
@@ -721,11 +722,12 @@ A 1991 Korean newspaper photograph in coarse black-and-white halftone: an elevat
 Black-and-white newspaper photograph of a modest red-brick church in a dense early-1990s Seoul residential neighbourhood, a square bell tower with an open belfry and a real cast bronze bell visible, a cross on top, surrounded by multi-family brick houses and rooftop water tanks, halftone dots.
 ```
 
-### c08/note_paper — 가람역 부스 전화번호부 사이에서 나온 쪽지 (복사본)
+### c08/note_paper — 가람역 부스 전화번호부 사이에서 나온 쪽지 (복사본) 🔁 다시 뽑기
 - 저장 경로: `img/c08/note_paper.webp` · 비율: 4:3
 ```
 Photocopy-style evidence photo of a small torn scrap of lined notebook paper lying on the open pages of a thick public telephone directory, a short message written in stiff angular ballpoint strokes drawn along a ruler, the strokes blurred so nothing is readable, flat flash, grey tones.
 ```
+- **꼭 보여야 할 것**: 자를 대고 그은 듯 곧은 획 (읽히지는 않게)
 - 주의: 글자가 읽히지 않게.
 
 ### c08/warehouse — 가람동 현장 뒤편 가설창고 — 풀린 자물쇠
@@ -748,12 +750,12 @@ Early-1990s Korean police composite sketch on off-white paper in soft graphite: 
 ```
 - 주의: 실존 인물을 닮지 않게, 얼굴은 미완성으로.
 
-### c08/montage_print — 신문에 실린 몽타주 (망점 인쇄)
+### c08/montage_print — 신문에 실린 몽타주 (망점 인쇄) 🔁 다시 뽑기
 - 저장 경로: `img/c08/montage_print.webp` · 비율: 3:4
 ```
 The same generic police composite sketch reproduced small in a 1991 Korean newspaper with a coarse halftone dot screen on yellowed newsprint, blurred and low-detail, only the black-rimmed glasses and work-jacket collar clearly visible.
 ```
-- 주의: montage 이미지를 참고 이미지로 넣어 같은 그림을 신문 인쇄 느낌으로.
+- 주의: 제목·본문 모두 뭉개진 회색 줄로만. montage 이미지를 참고 이미지로 넣어 같은 그림을 신문 인쇄 느낌으로.
 
 ### c08/news_site — 신문 사진 — 피해자가 발견된 가람동 공사 현장
 - 저장 경로: `img/c08/news_site.webp` · 비율: 4:3
@@ -774,12 +776,12 @@ Close photo of a cheap spiral-bound ledger notebook from a tiny Seoul corner sho
 Evidence photo on grey card: two old brass padlock keys hanging from hooks on a wooden key board, each with a small paper tag on string, and a third empty hook with a blank tag and no key, flat flash, 1991 construction company storeroom.
 ```
 
-### c08/flyer — 실종 전단 사진 자리 — 인쇄가 번져 얼굴은 알아볼 수 없음
+### c08/flyer — 실종 전단 사진 자리 — 인쇄가 번져 얼굴은 알아볼 수 없음 🔁 다시 뽑기
 - 저장 경로: `img/c08/flyer.webp` · 비율: 3:4
 ```
 A 1991 photocopied missing-person flyer lying on a police desk: the student ID photo area is a heavily smeared, over-copied grey blob so no face can be made out, dense lines of Korean text below reduced to illegible grey stripes, a thumbtack hole at the top, flat light.
 ```
-- 주의: 얼굴이 드러나지 않게.
+- 주의: 얼굴이 드러나지 않게. 제목도 뭉개진 회색 띠로만.
 
 ## CASE 09 · 열세 칸 (2006, 서울 서남부 은골동 (가상 지명))
 
