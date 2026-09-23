@@ -52,6 +52,7 @@ function main() {
 
   let total = GLOBAL.length;
   const out = [];
+  const redo = [];
   out.push('# Monologue Gaze — 이미지 프롬프트 모음');
   out.push('');
   out.push('> 이 파일은 `node tools/prompts.js` 로 자동 생성됩니다. 프롬프트를 고치려면 각 사건 파일(`cases/*.js`)의 `art` 항목을 고친 뒤 다시 생성하세요.');
@@ -97,7 +98,8 @@ function main() {
     if (!arts.length) { out.push('_이미지 프롬프트 없음 (전부 SVG 로 그린 도면·지도)_'); out.push(''); }
     arts.forEach(([key, a]) => {
       total++;
-      out.push(`### ${c.id}/${key} — ${a.use || ''}${a.sensitive ? ' 🔞 열람 주의' : ''}`);
+      out.push(`### ${c.id}/${key} — ${a.use || ''}${a.sensitive ? ' 🔞 열람 주의' : ''}${a.redo ? ' 🔁 다시 뽑기' : ''}`);
+      if (a.redo) redo.push({ c, key, a });
       out.push(`- 저장 경로: \`img/${c.id}/${key}.webp\` · 비율: ${a.ratio || '4:3'}${a.where ? ` · 쓰이는 곳: ${a.where}` : ''}`);
       out.push(block(a.prompt));
       if (a.must) out.push(`- **꼭 보여야 할 것**: ${a.must}`);
@@ -110,6 +112,32 @@ function main() {
   const dest = path.join(root, 'docs', 'IMAGE_PROMPTS.md');
   fs.writeFileSync(dest, out.join('\n'), 'utf8');
   console.log(`${path.relative(root, dest)} 작성 — 이미지 ${total}장`);
+  writeRedo(redo);
+}
+
+// 검수에서 걸린 그림(art 의 redo 표시)만 모은 목록. 프롬프트는 [그림 + 사건 공통 스타일 + v2 추가 스타일] 을 합쳐 두어 그대로 붙여 넣으면 된다.
+function writeRedo(list) {
+  const need = list.filter(r => r.a.redo.level === '필수').length;
+  const o = ['# 다시 뽑을 이미지', ''];
+  o.push('> `node tools/prompts.js` 가 자동으로 만든다. 사건 파일 `art` 항목의 `redo` 표시를 모은 것이다.');
+  o.push('');
+  o.push(`총 **${list.length}장** (필수 ${need} · 선택 ${list.length - need}). 같은 경로·같은 이름으로 넣으면 게임 그림이 자동으로 바뀐다. 바꾼 뒤에는 그 항목의 \`redo\` 표시를 지운다.`);
+  o.push('');
+  o.push('| 그림 | 급함 | 이유 |', '|---|---|---|');
+  list.forEach(({ c, key, a }) => o.push(`| \`${c.id}/${key}\` | ${a.redo.level} | ${a.redo.why} |`));
+  o.push('');
+  list.forEach(({ c, key, a }) => {
+    o.push(`## ${c.id}/${key} — ${a.use || ''} (${a.redo.level})`);
+    o.push(`- 저장 경로: \`img/${c.id}/${key}.png\` · 비율: ${a.ratio || '4:3'}`);
+    o.push(`- 이유: ${a.redo.why}`);
+    if (a.must) o.push(`- **꼭 보여야 할 것**: ${a.must}`);
+    if (a.avoid) o.push(`- 주의: ${a.avoid}`);
+    o.push(block([a.prompt, c.artStyle, V2_TAIL].filter(Boolean).join(' ')));
+    o.push('');
+  });
+  const dest = path.join(root, 'docs', 'IMAGE_REDO.md');
+  fs.writeFileSync(dest, o.join('\n'), 'utf8');
+  console.log(`${path.relative(root, dest)} 작성 — 다시 뽑을 이미지 ${list.length}장`);
 }
 
 if (require.main === module) main();

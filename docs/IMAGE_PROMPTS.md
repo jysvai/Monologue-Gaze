@@ -200,7 +200,7 @@ A newspaper office copy slip from 1888: ruled paper with a printed red vertical 
 An open common lodging-house register on a scrubbed kitchen table, columns ruled in faded red and blue, rows of cramped illegible entries, a stub of pencil and a few copper pennies beside it, a coal fire glowing out of focus in the background.
 ```
 
-### c01/q_thread — 경찰의 소견 — 증거물 붉은 무명실
+### c01/q_thread — 경찰의 소견 — 증거물 붉은 무명실 🔁 다시 뽑기
 - 저장 경로: `img/c01/q_thread.webp` · 비율: 4:3
 ```
 A short length of red cotton thread tied in a small knot, laid on a plain white evidence card with a blank paper label, on a police surgeon's wooden table beside a magnifying glass, clinical still life. The thread is bright red, the only colour in the image, as if hand-tinted.
@@ -245,17 +245,17 @@ Dim interior of an old Bavarian cattle stable in winter 1923: a row of thin brow
 A servant's small bare room in a 1920s Bavarian farmhouse: a narrow wooden bed with a plain sheet, and beside it an old brown leather-cornered suitcase with its straps undone but still fully packed, the edge of a folded white apron showing, an empty candlestick on the windowsill. Cold, quiet, no people.
 ```
 
-### c02/calendar — 안방 검증 조서 — 벽의 뜯는 달력과 십자가
+### c02/calendar — 안방 검증 조서 — 벽의 뜯는 달력과 십자가 🔁 다시 뽑기
 - 저장 경로: `img/c02/calendar.webp` · 비율: 4:3
 ```
 Corner of a Bavarian farmhouse living room in 1923: a simple wooden crucifix on a whitewashed wall and beside it a tear-off daily wall calendar with a thick block of unturned pages, its top sheet showing the large date numeral 26 (the only legible mark). Below, the edge of a treadle sewing machine and an unopened envelope on a table. No other readable text.
 ```
 - **꼭 보여야 할 것**: 달력 맨 위 장은 26 (1월 26일에서 멈췄다). 다른 숫자가 나오면 이야기와 어긋난다.
 
-### c02/kasten — 증거물 카드 — 지폐 다발이 그대로 든 쇠 금고
+### c02/kasten — 증거물 카드 — 지폐 다발이 그대로 든 쇠 금고 🔁 다시 뽑기
 - 저장 경로: `img/c02/kasten.webp` · 비율: 4:3
 ```
-Evidence photograph: a small iron strongbox standing open on a table, holding thick bundles of 1920s German inflation banknotes tied with string, a few old silver coins and folded papers; a blank police evidence card beside it, flat overhead light, heavy grain.
+Evidence photograph: a small iron strongbox standing open on a table, holding thick bundles of 1920s German inflation banknotes tied with string, a few old silver coins and folded papers; a blank police evidence card beside it, flat overhead light, heavy grain. Plain wall behind, no window.
 ```
 
 ### c02/attic — 다락 검증 조서 — 사람이 누웠던 건초 자국과 들창
@@ -282,18 +282,19 @@ A small woodcutter's log hut at the edge of a fir forest in deep fresh snow, Bav
 Close-up of a small open farmer's household account book with faded pencil entries in old German handwriting, blurred and illegible, columns of little numbers, a stub of pencil lying across the pages, on a scrubbed wooden table. Shallow depth of field, no readable text.
 ```
 
-### c02/sledge — 주보 광고면 삽화 — 장작 실은 말썰매 (목판화풍)
+### c02/sledge — 주보 광고면 삽화 — 장작 실은 말썰매 (목판화풍) 🔁 다시 뽑기
 - 저장 경로: `img/c02/sledge.webp` · 비율: 4:3
 ```
 Small-town newspaper advertisement illustration from the 1920s in woodcut style: a white horse pulling a wooden work sledge loaded with split firewood through snow, bold black lines on off-white paper, letterpress printing texture. One single woodcut panel only: no photograph, no second panel. No text.
 ```
 - **꼭 보여야 할 것**: 흰 말이 끄는 장작 썰매, 목판화 한 칸만
 
-### c02/lock — 대장간 주문 장부 — 찾아가지 않은 새 자물쇠
+### c02/lock — 대장간 주문 장부 — 찾아가지 않은 새 자물쇠 🔁 다시 뽑기
 - 저장 경로: `img/c02/lock.webp` · 비율: 4:3
 ```
-A new hand-forged iron box lock for a farmhouse door with two large iron keys, lying on a sooty wooden shelf in a village blacksmith's forge in 1923, faint glowing embers out of focus in the background.
+A new hand-forged iron box lock for a farmhouse door with two large iron keys, lying on a sooty wooden shelf in a village blacksmith's forge in 1923, faint glowing embers out of focus in the background. The lock and keys are brand-new and unrusted: bright freshly filed iron, crisp edges, clearly never used.
 ```
+- **꼭 보여야 할 것**: 새것인 자물쇠 (찾아가지 않은 새 주문품)
 
 ## CASE 03 · 백난초 사건 (1935, 경성 종로 3정목 뒤 수남골 (가상 골목))
 
@@ -334,11 +335,12 @@ Advertisement-style halftone of a paper packet of traditional Korean herbal pill
 Early morning police photograph of a small traditional Korean herbal medicine shop in a narrow alley off Jongno, 1935: tiled roof, wooden shutter boards stacked by the door, paper lattice doors, a blank wooden signboard, a neighbouring tailor shop sharing the wall, dirt lane, no people.
 ```
 
-### c03/p_radio — 현장 사진 — 안방의 라디오 수신기
+### c03/p_radio — 현장 사진 — 안방의 라디오 수신기 🔁 다시 뽑기
 - 저장 경로: `img/c03/p_radio.webp` · 비율: 4:3
 ```
-Police photograph of a wooden vacuum-tube radio set on a low table in a Korean ondol room, lattice paper doors behind, a floor cushion pushed aside, a cold brass ashtray, flat flash lighting, nobody in the frame.
+Police photograph of the same 1930s wooden cathedral-style vacuum-tube radio as on the folder cover, left switched on with its small tuning dial glowing warm, on a low table in a Korean ondol room, lattice paper doors behind, a floor cushion pushed aside, a cold brass ashtray, flat flash lighting, nobody in the frame.
 ```
+- **꼭 보여야 할 것**: 표지와 같은 모양의 라디오, 다이얼 불이 켜진 채 (스위치가 켜져 있었다)
 
 ### c03/p_safe — 현장 사진 — 열린 안방 금고
 - 저장 경로: `img/c03/p_safe.webp` · 비율: 4:3
