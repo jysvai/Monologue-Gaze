@@ -462,8 +462,7 @@
       cipherimg: { use: '1면에 실린 암호문 (기호만, 뜻 없는 도형 배열)', ratio: '4:3',
         svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#e9e3d2"/><g fill="none" stroke="#222" stroke-width="2"><circle cx="30" cy="40" r="8"/><path d="M50 48 l8 -16 l8 16z"/><path d="M76 32 h14 v16 h-14z"/><circle cx="110" cy="40" r="8"/><path d="M104 40 h12 M110 34 v12"/><path d="M130 32 l14 16 M144 32 l-14 16"/><path d="M30 80 l8 16 l8 -16z"/><path d="M60 80 v16 M54 96 h12"/><circle cx="90" cy="88" r="8"/><path d="M114 80 l6 8 l-6 8 l-6 -8z"/></g></svg>',
         prompt: 'A newspaper front-page detail printed in halftone: a block of simple geometric hand-drawn symbols (circles, triangles, crossed circles, diamonds) arranged in three uneven rows like a cipher, no letters or readable words, slightly smudged ink, folded newsprint texture. Use about fifteen different symbol shapes (squares with crosses, circles with bars, arrows, half-moons, hourglass marks and so on) in an irregular, non-repeating sequence, like a real substitution cipher.',
-        must: '기호 종류가 많고 불규칙하게 (4 가지가 되풀이되면 암호로 안 보인다)',
-        redo: { level: '선택', why: '기호가 네 가지뿐이고 규칙적으로 되풀이돼 무늬처럼 보인다. 게임 속 암호문(글자마다 다른 기호)과 안 맞는다.' } },
+        must: '기호 종류가 많고 불규칙하게 (4 가지가 되풀이되면 암호로 안 보인다)' },
       /* 감식과 감정서 도해 — 대조 감정용, SVG 전용 */
       env_ref: ENV({ ink: BLUE, flip: true, folds: 3, bend: true }),
       env_typed: ENV({ typed: true, flip: false, folds: 2, bend: false }),

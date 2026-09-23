@@ -202,7 +202,7 @@ A newspaper office copy slip from 1888: ruled paper with a printed red vertical 
 An open common lodging-house register on a scrubbed kitchen table, columns ruled in faded red and blue, rows of cramped illegible entries, a stub of pencil and a few copper pennies beside it, a coal fire glowing out of focus in the background.
 ```
 
-### c01/q_thread — 경찰의 소견 — 증거물 붉은 무명실 🔁 다시 뽑기
+### c01/q_thread — 경찰의 소견 — 증거물 붉은 무명실
 - 저장 경로: `img/c01/q_thread.webp` · 비율: 4:3
 ```
 A short length of red cotton thread tied in a small knot, laid on a plain white evidence card with a blank paper label, on a police surgeon's wooden table beside a magnifying glass, clinical still life. The thread is bright red, the only colour in the image, as if hand-tinted.
@@ -247,14 +247,14 @@ Dim interior of an old Bavarian cattle stable in winter 1923: a row of thin brow
 A servant's small bare room in a 1920s Bavarian farmhouse: a narrow wooden bed with a plain sheet, and beside it an old brown leather-cornered suitcase with its straps undone but still fully packed, the edge of a folded white apron showing, an empty candlestick on the windowsill. Cold, quiet, no people.
 ```
 
-### c02/calendar — 안방 검증 조서 — 벽의 뜯는 달력과 십자가 🔁 다시 뽑기
+### c02/calendar — 안방 검증 조서 — 벽의 뜯는 달력과 십자가
 - 저장 경로: `img/c02/calendar.webp` · 비율: 4:3
 ```
 Corner of a Bavarian farmhouse living room in 1923: a simple wooden crucifix on a whitewashed wall and beside it a tear-off daily wall calendar with a thick block of unturned pages, its top sheet showing the large date numeral 26 (the only legible mark). Below, the edge of a treadle sewing machine and an unopened envelope on a table. No other readable text.
 ```
 - **꼭 보여야 할 것**: 달력 맨 위 장은 26 (1월 26일에서 멈췄다). 다른 숫자가 나오면 이야기와 어긋난다.
 
-### c02/kasten — 증거물 카드 — 지폐 다발이 그대로 든 쇠 금고 🔁 다시 뽑기
+### c02/kasten — 증거물 카드 — 지폐 다발이 그대로 든 쇠 금고
 - 저장 경로: `img/c02/kasten.webp` · 비율: 4:3
 ```
 Evidence photograph: a small iron strongbox standing open on a table, holding thick bundles of 1920s German inflation banknotes tied with string, a few old silver coins and folded papers; a blank police evidence card beside it, flat overhead light, heavy grain. Plain wall behind, no window.
@@ -284,14 +284,14 @@ A small woodcutter's log hut at the edge of a fir forest in deep fresh snow, Bav
 Close-up of a small open farmer's household account book with faded pencil entries in old German handwriting, blurred and illegible, columns of little numbers, a stub of pencil lying across the pages, on a scrubbed wooden table. Shallow depth of field, no readable text.
 ```
 
-### c02/sledge — 주보 광고면 삽화 — 장작 실은 말썰매 (목판화풍) 🔁 다시 뽑기
+### c02/sledge — 주보 광고면 삽화 — 장작 실은 말썰매 (목판화풍)
 - 저장 경로: `img/c02/sledge.webp` · 비율: 4:3
 ```
 Small-town newspaper advertisement illustration from the 1920s in woodcut style: a white horse pulling a wooden work sledge loaded with split firewood through snow, bold black lines on off-white paper, letterpress printing texture. One single woodcut panel only: no photograph, no second panel. No text.
 ```
 - **꼭 보여야 할 것**: 흰 말이 끄는 장작 썰매, 목판화 한 칸만
 
-### c02/lock — 대장간 주문 장부 — 찾아가지 않은 새 자물쇠 🔁 다시 뽑기
+### c02/lock — 대장간 주문 장부 — 찾아가지 않은 새 자물쇠
 - 저장 경로: `img/c02/lock.webp` · 비율: 4:3
 ```
 A new hand-forged iron box lock for a farmhouse door with two large iron keys, lying on a sooty wooden shelf in a village blacksmith's forge in 1923, faint glowing embers out of focus in the background. The lock and keys are brand-new and unrusted: bright freshly filed iron, crisp edges, clearly never used.
@@ -337,7 +337,7 @@ Advertisement-style halftone of a paper packet of traditional Korean herbal pill
 Early morning police photograph of a small traditional Korean herbal medicine shop in a narrow alley off Jongno, 1935: tiled roof, wooden shutter boards stacked by the door, paper lattice doors, a blank wooden signboard, a neighbouring tailor shop sharing the wall, dirt lane, no people.
 ```
 
-### c03/p_radio — 현장 사진 — 안방의 라디오 수신기 🔁 다시 뽑기
+### c03/p_radio — 현장 사진 — 안방의 라디오 수신기
 - 저장 경로: `img/c03/p_radio.webp` · 비율: 4:3
 ```
 Police photograph of the same 1930s wooden cathedral-style vacuum-tube radio as on the folder cover, left switched on with its small tuning dial glowing warm, on a low table in a Korean ondol room, lattice paper doors behind, a floor cushion pushed aside, a cold brass ashtray, flat flash lighting, nobody in the frame.
@@ -390,7 +390,7 @@ Police evidence photograph of a 1960s 250cc two-cylinder motorcycle crudely hand
 ```
 - **꼭 보여야 할 것**: 흰 붓칠 사이로 보이는 원래 색(암녹색). 흑백으로 뽑으면 이 단서가 사라진다.
 
-### c04/montage — 신문에 실린 몽타주 사진 (특정 인물 아님) 🔁 다시 뽑기
+### c04/montage — 신문에 실린 몽타주 사진 (특정 인물 아님)
 - 저장 경로: `img/c04/montage.webp` · 비율: 3:4
 ```
 A 1960s police photo-composite portrait printed in a newspaper: a generic young man in a white open-face helmet and black leather jacket, face assembled from mismatched photo fragments with faint seams, coarse halftone dots, flat grey tones, deliberately generic features that resemble no real person. Make the composite obvious: eyes, nose and mouth come from three different photos that do not match in scale or tone, with visible cut lines, and the whole print is coarse, blurry newspaper halftone on yellowed newsprint rather than a clean photo.
@@ -519,7 +519,7 @@ A coastal road leading to a small white lighthouse before dawn, thick fog, the l
 A newspaper distribution warehouse on a waterfront street late on a Saturday night, three loading bays lit with bare bulbs, workers in silhouette stacking tied bundles of thick Sunday newspapers onto trucks, wet pavement, 1969, grainy press photo.
 ```
 
-### c05/cipherimg — 1면에 실린 암호문 (기호만, 뜻 없는 도형 배열) 🔁 다시 뽑기
+### c05/cipherimg — 1면에 실린 암호문 (기호만, 뜻 없는 도형 배열)
 - 저장 경로: `img/c05/cipherimg.webp` · 비율: 4:3
 ```
 A newspaper front-page detail printed in halftone: a block of simple geometric hand-drawn symbols (circles, triangles, crossed circles, diamonds) arranged in three uneven rows like a cipher, no letters or readable words, slightly smudged ink, folded newsprint texture. Use about fifteen different symbol shapes (squares with crosses, circles with bars, arrows, half-moons, hourglass marks and so on) in an irregular, non-repeating sequence, like a real substitution cipher.
@@ -541,7 +541,7 @@ A newspaper front-page detail printed in halftone: a block of simple geometric h
 Police evidence photograph, 1969: two worn 1960s suitcases, one brown leather and one grey-blue, standing on a concrete floor under a cold overhead lamp, a paper left-luggage ticket tied to one handle and a manila evidence tag lying in front of them. Slightly soft focus, heavy 35mm black-and-white grain.
 ```
 
-### c06/valley — 신문 10월 20일자 — 크비트달 등산로 🔁 다시 뽑기
+### c06/valley — 신문 10월 20일자 — 크비트달 등산로
 - 저장 경로: `img/c06/valley.webp` · 비율: 4:3
 ```
 Newspaper photograph of a remote rocky valley above a small Norwegian west-coast town in late October 1969: a narrow hiking path winding up between boulders, heather and a few bare birches, low cloud on the ridges, wet stone, no people. Coarse halftone newsprint look.
@@ -571,14 +571,14 @@ A folded 1968 tourist map of a small Norwegian harbour town lying on a desk, two
 Grainy 35mm photograph taken at dawn from a high hotel window: a small Norwegian harbour with a long quay, wooden warehouses and a single rusty coastal freighter moored, a few lights still on, mist on the water. Slightly underexposed, cool colour shift.
 ```
 
-### c06/stern — 현상한 필름 7번 — 새 페인트 밑 옛 글자 자국이 보이는 고물 🔁 다시 뽑기
+### c06/stern — 현상한 필름 7번 — 새 페인트 밑 옛 글자 자국이 보이는 고물
 - 저장 경로: `img/c06/stern.webp` · 비율: 4:3
 ```
 Close-up 35mm photograph of the stern of a rusty small cargo ship at a quay: freshly painted name letters on the dark hull, and beneath the new paint the faint raised outlines of older, different letters showing in low raking morning light. The two rows must be clearly visible as shapes: a short row of fresh white painted letters, and around and beneath it a longer row of older letter outlines standing out as raised ridges and paint edges in the raking light. Letter shapes only, blurred so no word can be read. Water reflections, cool muted colours.
 ```
 - **꼭 보여야 할 것**: 새로 칠한 글자 한 줄 + 그 밑으로 도드라진 옛 글자 윤곽 (읽히지는 않게)
 
-### c06/station — 신문 10월 23일자 — 역 수하물 보관소 창구 🔁 다시 뽑기
+### c06/station — 신문 10월 23일자 — 역 수하물 보관소 창구
 - 저장 경로: `img/c06/station.webp` · 비율: 4:3
 ```
 Interior of a small Norwegian railway station left-luggage office in 1969: a wooden counter with a hinged hatch, shelves behind it holding suitcases and parcels with paper tags, a round wall clock, empty benches. Newspaper halftone photograph, no people.
@@ -723,7 +723,7 @@ A 1991 Korean newspaper photograph in coarse black-and-white halftone: an elevat
 Black-and-white newspaper photograph of a modest red-brick church in a dense early-1990s Seoul residential neighbourhood, a square bell tower with an open belfry and a real cast bronze bell visible, a cross on top, surrounded by multi-family brick houses and rooftop water tanks, halftone dots.
 ```
 
-### c08/note_paper — 가람역 부스 전화번호부 사이에서 나온 쪽지 (복사본) 🔁 다시 뽑기
+### c08/note_paper — 가람역 부스 전화번호부 사이에서 나온 쪽지 (복사본)
 - 저장 경로: `img/c08/note_paper.webp` · 비율: 4:3
 ```
 Photocopy-style evidence photo of a small torn scrap of lined notebook paper lying on the open pages of a thick public telephone directory, a short message written in stiff angular ballpoint strokes drawn along a ruler, the strokes blurred so nothing is readable, flat flash, grey tones.
@@ -751,7 +751,7 @@ Early-1990s Korean police composite sketch on off-white paper in soft graphite: 
 ```
 - 주의: 실존 인물을 닮지 않게, 얼굴은 미완성으로.
 
-### c08/montage_print — 신문에 실린 몽타주 (망점 인쇄) 🔁 다시 뽑기
+### c08/montage_print — 신문에 실린 몽타주 (망점 인쇄)
 - 저장 경로: `img/c08/montage_print.webp` · 비율: 3:4
 ```
 The same generic police composite sketch reproduced small in a 1991 Korean newspaper with a coarse halftone dot screen on yellowed newsprint, blurred and low-detail, only the black-rimmed glasses and work-jacket collar clearly visible.
@@ -777,7 +777,7 @@ Close photo of a cheap spiral-bound ledger notebook from a tiny Seoul corner sho
 Evidence photo on grey card: two old brass padlock keys hanging from hooks on a wooden key board, each with a small paper tag on string, and a third empty hook with a blank tag and no key, flat flash, 1991 construction company storeroom.
 ```
 
-### c08/flyer — 실종 전단 사진 자리 — 인쇄가 번져 얼굴은 알아볼 수 없음 🔁 다시 뽑기
+### c08/flyer — 실종 전단 사진 자리 — 인쇄가 번져 얼굴은 알아볼 수 없음
 - 저장 경로: `img/c08/flyer.webp` · 비율: 3:4
 ```
 A 1991 photocopied missing-person flyer lying on a police desk: the student ID photo area is a heavily smeared, over-copied grey blob so no face can be made out, dense lines of Korean text below reduced to illegible grey stripes, a thumbtack hole at the top, flat light.
@@ -1000,7 +1000,7 @@ Cold dawn on the muddy bank of a slow, misty river in a 1986 provincial Korean c
 1986 Korean newspaper feature photograph in black and white: the interior of a small traditional mother-of-pearl lacquerware workshop, a craftsman in a grey work coat seen from behind bent over a half-finished black lacquered wardrobe inlaid with iridescent shell cranes, a wall pegboard with chisels and a Japanese-style pull saw, pale sawdust on a cement floor, soft window light, halftone print.
 ```
 
-### c11/photo_sack — 감식 사진 — 벽돌이 달린 넷째 포대 🔞 열람 주의 🔁 다시 뽑기
+### c11/photo_sack — 감식 사진 — 벽돌이 달린 넷째 포대 🔞 열람 주의
 - 저장 경로: `img/c11/photo_sack.webp` · 비율: 4:3
 ```
 Black-and-white 1986 police evidence photograph under harsh flat flash, seen from above: a wet white woven polypropylene rice sack lying on a grey tarp on a concrete floor, the heavy round lump of what is inside pressing hard against the weave, the lower half of the sack soaked through with a dark rust-brown stain that has bled out into a wide watery ring on the tarp, the mouth tied tight with twine, a few strands of long dark wet hair caught in the knot, the twine running on to four red bricks bound together beside it, a small numbered evidence card and a wooden folding ruler, grain. The bricks are the only colour in the image, hand-tinted brick red.
@@ -1008,7 +1008,7 @@ Black-and-white 1986 police evidence photograph under harsh flat flash, seen fro
 - **꼭 보여야 할 것**: 붉은 벽돌 네 장 (벽돌만 붉게) · 아가리 매듭에 걸린 젖은 머리카락 몇 가닥 · 포대 아래로 번진 얼룩
 - 주의: 포대는 닫힌 채로. 안은 불룩한 형체만. 절단면·장기·상처·죽은 사람의 얼굴은 보이지 않게.
 
-### c11/autopsy_room — 은천의료원 부검실 — 흰 천 아래 수습된 시신 🔞 열람 주의 🔁 다시 뽑기
+### c11/autopsy_room — 은천의료원 부검실 — 흰 천 아래 수습된 시신 🔞 열람 주의
 - 저장 경로: `img/c11/autopsy_room.webp` · 비율: 4:3
 ```
 Black-and-white 1986 photograph of a small provincial hospital autopsy room: on a steel table under a single hanging lamp, not one body-shaped form but several separate shapes laid out in order beneath white sheets with clear gaps between them, rust-brown fluid seeping through the cloth in blotches where each covered piece ends, one pale limp hand visible at the edge of a sheet, a bone saw and rib shears on the instrument tray, an enamel basin of cloudy pink-grey water, a floor drain in the white tiles with a dark trickle running to it, a doctor in a gown seen from behind writing on a clipboard, cold light, grain.
@@ -1016,7 +1016,7 @@ Black-and-white 1986 photograph of a small provincial hospital autopsy room: on 
 - **꼭 보여야 할 것**: 천 아래가 한 사람 모양이 아니라 여러 덩어리로 떨어져 놓여 있다 (사이사이 틈) · 덩어리 끝마다 배어 나온 얼룩 · 손 하나
 - 주의: 천 아래는 형체와 배어 나온 얼룩만. 절단면·장기·상처·죽은 사람의 얼굴은 보이지 않게.
 
-### c11/items_table — 증거물 사진 — 잠바와 주머니 속 물건 🔞 열람 주의 🔁 다시 뽑기
+### c11/items_table — 증거물 사진 — 잠바와 주머니 속 물건 🔞 열람 주의
 - 저장 경로: `img/c11/items_table.webp` · 비율: 4:3
 ```
 Top-down black-and-white evidence photograph under flat flash: a wet navy quilted vinyl jacket laid face-down on grey paper so its back panel faces the camera (no zipper visible), dark dried stains running down its left collar and shoulder and a wide smeared stain across the lower back with pale sawdust and tiny glittering flecks of mother-of-pearl dust stuck in it, beside it in a neat row a small soggy paper matchbox, two brass bus tokens, a few coins and a folded handkerchief, a numbered evidence card and a ruler, grain.
@@ -1054,7 +1054,7 @@ Night photograph from 1986 at a provincial city bus terminus on a dirt lot: a gr
 Photograph of an empty abandoned small workshop in early spring 1987: a bare cement floor with a round iron drain, a pale bleached patch scrubbed around the drain, dark dried brown bloodstains lingering in the cement joints and around the drain grate, small yellow numbered evidence markers set on the floor, an empty wall pegboard showing dust outlines of tools, one old workbench, cold window light, faded color negative film, grain.
 ```
 
-### c11/occ_reeds — 제1보 첨부 — 갈밭에서 연 첫 포대 (현장 사진) 🔞 열람 주의 🔁 다시 뽑기
+### c11/occ_reeds — 제1보 첨부 — 갈밭에서 연 첫 포대 (현장 사진) 🔞 열람 주의
 - 저장 경로: `img/c11/occ_reeds.webp` · 비율: 4:3
 ```
 Black-and-white 1986 police scene photograph taken close with harsh flash on a grey November morning: a trampled reed bed at the edge of a slow river, a wet white woven rice sack lying on a straw mat with its twine untied and its mouth folded back, a pale, water-wrinkled human forearm and hand lying out of the sack mouth on the mat, fingers slightly curled, the rest hidden inside the sack, a grey tarp half pulled back beside it, the muddy rubber boots of policemen and a sickle on the ground at the edge of the frame, cut reeds and river mist behind, grain.
@@ -1062,7 +1062,7 @@ Black-and-white 1986 police scene photograph taken close with harsh flash on a g
 - **꼭 보여야 할 것**: 포대 아가리 밖으로 나온 창백한 아래팔과 손 (잘린 쪽은 포대 안에 가려져 안 보이게)
 - 주의: 절단면·장기·상처·죽은 사람의 얼굴은 보이지 않게.
 
-### c11/butcher_lumi — 우성정육점 검증 — 루미놀 암실 사진 🔞 열람 주의 🔁 다시 뽑기
+### c11/butcher_lumi — 우성정육점 검증 — 루미놀 암실 사진 🔞 열람 주의
 - 저장 경로: `img/c11/butcher_lumi.webp` · 비율: 4:3
 ```
 Darkroom luminol photograph from 1986, a 30-second exposure inside a tiny market butcher shop with every light off: almost the whole sawdust-covered floor glowing an eerie pale blue, a brighter blue ring around the base of the round chopping block, blue streaks running down into the floor drain and smeared hand-height on the front of the refrigerator, the meat hooks and counter only faint dark outlines, grainy, slightly blurred.
@@ -1092,7 +1092,7 @@ A narrow sand path through a small Tokyo neighborhood park at grey dawn in autum
 Black-and-white 1994 Japanese newspaper halftone photograph of a small park entrance with two concrete gate pillars, police tape across the gate, three trash bins covered with blue plastic sheets, two uniformed officers standing with their backs to the camera, onlookers blurred at the edge, overcast morning, coarse dot screen.
 ```
 
-### c12/scene_bin — 발생 보고 첨부 — 새벽 쓰레기통 둘레와 시트 위의 봉투 (멀리서) 🔞 열람 주의 🔁 다시 뽑기
+### c12/scene_bin — 발생 보고 첨부 — 새벽 쓰레기통 둘레와 시트 위의 봉투 (멀리서) 🔞 열람 주의
 - 저장 경로: `img/c12/scene_bin.webp` · 비율: 4:3
 ```
 Early-morning 1994 Tokyo park crime scene seen from a few metres away: forensic officers in navy uniforms and caps crouching around a green wire-mesh trash bin, a blue tarp on the sand path with a row of milky semi-transparent garbage bags laid out on it, the contents pressing against the film so that some shapes clearly read as parts of human limbs, the bend of a knee, the pale curve of a heel, fingertips flattened against the plastic, blood-tinged moisture beaded inside the film and pooled in the bag corners, dried brown stains smeared on the outside of the bags and on the tarp, small yellow numbered evidence markers, harsh flash mixing with grey dawn light, officers with their backs to the camera.
@@ -1100,7 +1100,7 @@ Early-morning 1994 Tokyo park crime scene seen from a few metres away: forensic 
 - **꼭 보여야 할 것**: 비닐 너머로 무릎·발뒤꿈치·손가락 끝처럼 사람 팔다리임을 알 수 있는 형태가 비친다
 - 주의: 비닐 너머로 비치는 형태까지만. 절단면·장기·상처·죽은 사람의 얼굴은 보이지 않게.
 
-### c12/bagsample — 감정서 첨부 — 번호표를 단 반투명 봉투 21장 (증거 사진) 🔞 열람 주의 🔁 다시 뽑기
+### c12/bagsample — 감정서 첨부 — 번호표를 단 반투명 봉투 21장 (증거 사진) 🔞 열람 주의
 - 저장 경로: `img/c12/bagsample.webp` · 비율: 4:3
 ```
 Overhead police evidence photograph on a grey laboratory bench: a single row of eight tied milky semi-transparent 45-liter garbage bags, each with a small yellow numbered tag, through the frosted plastic the contents read as pale, water-bleached sections of human limbs, in one bag fingers pressed flat against the film, in another the outline of a foot, reddish-brown fluid pooled in the bottom corner of every bag, dried reddish-brown transfer stains on the outer film, one bag with a strip of clear packing tape over a tear, a scale ruler at the edge, flat fluorescent light with a slight green cast.
@@ -1139,7 +1139,7 @@ Close-up of a 1990s Japanese dedicated word processor on an evidence table, its 
 Black-and-white 1994 newspaper halftone photo of an old wooden Tokyo public bathhouse with a temple-like tiled gable roof and a tall brick chimney, standing alone between empty fenced vacant lots after a land-assembly buyout, a short cloth curtain at the entrance, a stack of scrap firewood by the side wall, late-afternoon light, curtain lettering illegible.
 ```
 
-### c12/boiler — 가마 일지 첨부 — 가시와유 보일러실 아궁이와 장작 🔞 열람 주의 🔁 다시 뽑기
+### c12/boiler — 가마 일지 첨부 — 가시와유 보일러실 아궁이와 장작 🔞 열람 주의
 - 저장 경로: `img/c12/boiler.webp` · 비율: 4:3
 ```
 Interior of a cramped 1994 Tokyo bathhouse boiler room lit by camera flash: a soot-blackened iron firebox door of a wood-fired water heater with a low orange glow, split scrap firewood stacked to waist height, an iron poker leaning against the wall, a concrete floor with a hose drain, dozens of fine dried dark brown spatter dots on the whitewashed wall 40 to 70 cm above the floor beside the door, their little tails pointing upward, a forensic scale ruler taped beside them, and a line of round dried drip stains leading across the floor from the firebox toward the doorway.
@@ -1171,7 +1171,7 @@ A 1990s Japanese video rental membership card with a cartoon panda mascot silhou
 Black-and-white 1994 newspaper halftone photo of a small neighborhood butcher shop in a Tokyo shopping street with its metal shutter pulled half down in daytime, an empty refrigerated display case visible below the shutter, a hand-painted shop sign above (illegible), a bicycle parked in front, no people.
 ```
 
-### c12/luminol — 현장 검증 조서 첨부 — 세척장 배수구와 핏자국, 번호표 🔞 열람 주의 🔁 다시 뽑기
+### c12/luminol — 현장 검증 조서 첨부 — 세척장 배수구와 핏자국, 번호표 🔞 열람 주의
 - 저장 경로: `img/c12/luminol.webp` · 비율: 4:3
 ```
 Forensic documentation photo of an old Japanese bathhouse washing floor of small white square tiles, flash-lit: a round cast-iron drain cover at the center, dried reddish-brown bloodstains smeared in wide sweeping arcs where someone wiped the floor again and again, dark brown lines settled in every grout joint around the drain, a trail of round drip stains 5 to 8 mm wide coming in from a doorway at the edge of the frame, three small yellow triangular numbered evidence markers and a scale ruler, a wooden bath stool and a plastic basin pushed to the side, no people.
@@ -1179,7 +1179,7 @@ Forensic documentation photo of an old Japanese bathhouse washing floor of small
 - **꼭 보여야 할 것**: 닦아 낸 넓은 호 · 줄눈마다 스민 갈색 선 · 문 쪽에서 들어오는 둥근 낙하흔 한 줄
 - 주의: 시신·신체 부위 없음. 흥건한 생피 말고 마르고 닦인 자국으로.
 
-### c12/trap — 현장 검증 조서 첨부 — 분해한 세척장 배수구 트랩 🔞 열람 주의 🔁 다시 뽑기
+### c12/trap — 현장 검증 조서 첨부 — 분해한 세척장 배수구 트랩 🔞 열람 주의
 - 저장 경로: `img/c12/trap.webp` · 비율: 4:3
 ```
 Close forensic flash photograph, November 1994: the U-shaped cast-iron drain trap from under an old Japanese bathhouse washing floor taken apart and laid on a white enamel tray, its inside coated with dark red-brown sludge and settled sediment with a fine pale gritty powder mixed in, a few long strands of hair tangled in it, small chips of white tile, a steel ruler and a yellow numbered evidence marker, the gloved hands of a forensic officer at the edge of the frame, white tiles behind.
