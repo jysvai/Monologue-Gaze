@@ -1,4 +1,31 @@
 /* 자동 생성 파일 — node tools/manifest.js 로 다시 만든다.
  * img/<사건id>/<키>.(webp|png|jpg) 파일이 있으면 SVG 대신 그 이미지를 쓴다. */
 window.MG = window.MG || {};
-window.MG.images = {};
+window.MG.images = {
+  "c00/award": "img/c00/award.webp",
+  "c00/booth": "img/c00/booth.webp",
+  "c00/bridge": "img/c00/bridge.webp",
+  "c00/cake": "img/c00/cake.webp",
+  "c00/cat": "img/c00/cat.webp",
+  "c00/cover": "img/c00/cover.webp",
+  "c00/cup": "img/c00/cup.webp",
+  "c00/doorbag": "img/c00/doorbag.webp",
+  "c00/sketch": "img/c00/sketch.webp",
+  "c01/b_register": "img/c01/b_register.webp",
+  "c01/cover": "img/c01/cover.webp",
+  "c01/l_letter": "img/c01/l_letter.webp",
+  "c01/l_postcard": "img/c01/l_postcard.webp",
+  "c01/l_slip": "img/c01/l_slip.webp",
+  "c01/q_lamp": "img/c01/q_lamp.webp",
+  "c01/q_thread": "img/c01/q_thread.webp",
+  "c01/s_candle": "img/c01/s_candle.webp",
+  "c01/s_court": "img/c01/s_court.webp",
+  "c01/s_fundbox": "img/c01/s_fundbox.webp",
+  "c01/s_patrol": "img/c01/s_patrol.webp",
+  "c01/s_sailor": "img/c01/s_sailor.webp",
+  "c01/s_tanners": "img/c01/s_tanners.webp",
+  "_global/desk": "img/_global/desk.webp",
+  "_global/hero": "img/_global/hero.webp",
+  "_global/paper": "img/_global/paper.webp",
+  "_global/warn": "img/_global/warn.webp"
+};

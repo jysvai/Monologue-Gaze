@@ -991,9 +991,8 @@
     MG.cases.sort((a, b) => a.no - b.no);
     MG.cases.forEach(prep);
     injectCss();
-    if (MG.images['_global/desk']) document.documentElement.style.setProperty('--desk-img', `url("${MG.images['_global/desk']}")`);
-    if (MG.images['_global/paper']) document.documentElement.style.setProperty('--paper-img', `url("${MG.images['_global/paper']}")`);
-    if (MG.images['_global/warn']) document.documentElement.style.setProperty('--warn-img', `url("${MG.images['_global/warn']}")`);
+    // CSS 변수 안의 상대 주소는 css/ 폴더 기준으로 풀리므로, 페이지 기준 절대 주소로 바꿔 넣는다.
+    [['desk', '--desk-img'], ['paper', '--paper-img'], ['warn', '--warn-img']].forEach(([k, v]) => { const u = MG.images['_global/' + k]; if (u) { document.documentElement.style.setProperty(v, 'url("' + new URL(u, document.baseURI).href + '")'); document.documentElement.classList.add('has-' + k); } });
     app = document.getElementById('app');
     bind();
     if (S.current && MG.byId[S.current]) openCase(S.current); else cabinet();

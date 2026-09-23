@@ -12,7 +12,7 @@ const imgDir = path.join(root, 'img');
 const pref = ['.webp', '.png', '.jpg', '.jpeg'];
 const map = {};
 
-fs.readdirSync(imgDir, { withFileTypes: true }).filter(d => d.isDirectory()).forEach(dir => {
+fs.readdirSync(imgDir, { withFileTypes: true }).filter(d => d.isDirectory() && d.name !== '_src').forEach(dir => {
   fs.readdirSync(path.join(imgDir, dir.name)).forEach(f => {
     const ext = path.extname(f).toLowerCase();
     if (!pref.includes(ext)) return;

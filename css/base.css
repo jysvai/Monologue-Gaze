@@ -296,6 +296,7 @@ img{max-width:100%}
 .nb-case .stars{margin:0 6px 0 0}
 .f-cover.graphic img,.f-cover.graphic svg{filter:sepia(.25) blur(1.5px) brightness(.8)}
 .f-warn{position:absolute;top:34px;right:4px;z-index:3;padding:4px 8px 3px;border:2px solid #fff;background:var(--warn-img,none) center/cover,var(--red);color:#fff;font:800 12px/1 var(--f-web);letter-spacing:.06em;box-shadow:0 2px 6px rgba(0,0,0,.5);transform:rotate(-6deg)}
+.has-warn .f-warn{border:0;background-size:100% 100%;padding:6px 10px 5px;background-color:transparent;text-shadow:0 1px 0 rgba(0,0,0,.35)}
 .cw{display:grid;place-items:center;min-height:80svh}
 .cw-card{max-width:520px;padding:28px 28px 22px;background-color:var(--paper);background-image:var(--paper-img,none),var(--noise);color:var(--sheet-ink);box-shadow:0 20px 40px -12px rgba(0,0,0,.8);border-top:6px solid var(--red)}
 .cw-t{display:inline-block;margin:0 0 10px;padding:4px 10px 3px;border:3px double var(--red);color:var(--red);font:800 18px/1 var(--f-doc);transform:rotate(-3deg)}
@@ -369,6 +370,7 @@ img{max-width:100%}
 .brief .stain{opacity:.5}
 .f-blood{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
 .f-blood .stain{opacity:.55}
+.folder:has(.f-blood) .f-label{position:relative;z-index:3}
 .cw-card{position:relative;overflow:hidden}
 .cw-card>*:not(.stain){position:relative;z-index:4}
 .snd.mild[aria-pressed="true"]{color:#e08a7f}
