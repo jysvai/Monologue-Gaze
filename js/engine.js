@@ -944,7 +944,7 @@
       if ((el = t.closest('[data-scene]'))) return openItem({ t: 'photo', id: el.dataset.scene });
       if ((el = t.closest('[data-ph-cell]'))) return photoCell(el.dataset.phCell);
       if (t.closest('[data-ph-grid]')) { const g = $('.ph-grid'); if (g) g.hidden = !g.hidden; return; }
-      if ((el = t.closest('[data-cens]')) && !el.classList.contains('open')) {
+      if ((el = t.closest('[data-cens]')) && !el.classList.contains('open') && !(S.mild && el.closest('[data-ph]'))) {
         if (S.mild) { toast('잔혹 표현이 꺼져 있다'); return; }
         if (!ST.cens.includes(el.dataset.cens)) ST.cens.push(el.dataset.cens);
         save(); $$(`[data-cens="${el.dataset.cens}"]`).forEach(x => x.classList.add('open'));
