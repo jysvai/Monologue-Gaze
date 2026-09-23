@@ -52,6 +52,7 @@ window.MG.images = {
   "c04/cover": "img/c04/cover.webp",
   "c04/flare": "img/c04/flare.webp",
   "c04/kurotaki": "img/c04/kurotaki.webp",
+  "c04/letter": "img/c04/letter.webp",
   "c04/matchbox": "img/c04/matchbox.webp",
   "c04/montage": "img/c04/montage.webp",
   "c04/scene": "img/c04/scene.webp",
