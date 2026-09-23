@@ -22,6 +22,10 @@ const GLOBAL = [
     key: 'paper', use: '형사 수첩 종이 질감 (반복 타일)', ratio: '1:1 (1024×1024), 이음매 없는 타일',
     prompt: 'Seamless tileable texture of aged yellowed notebook paper, subtle fibers, faint foxing spots, very light and even, warm cream-ochre tone, scanned flat. No lines, no text, no shadows.',
   },
+  {
+    key: 'warn', use: '잔혹한 사건 폴더 표지에 붙는 「혐오감 주의」 스티커의 바탕 (글자는 게임이 위에 올린다)', ratio: '3:1 (600×200), 배경 투명 PNG 권장',
+    prompt: 'A single blank rectangular warning sticker label, flat top-down scan, deep brick-red vinyl with a thin white inner border, slightly worn corners, a few fine scratches and a faint crease, subtle paper-tape residue at one edge, even lighting, isolated on a transparent background. Completely blank: no text, no letters, no symbols, no icons.',
+  },
 ];
 
 function block(lines) { return '```\n' + lines + '\n```'; }
@@ -59,7 +63,8 @@ function main() {
     const arts = Object.entries(c.art || {}).filter(([, a]) => a && typeof a === 'object' && a.prompt);
     out.push(`## CASE ${String(c.no).padStart(2, '0')} · ${c.title} (${c.year}, ${c.place})`);
     out.push('');
-    out.push(`- 사건 파일: \`cases/${files.find(f => f.startsWith(c.id)) || c.id}\` · 이미지 ${arts.length}장`);
+    out.push(`- 사건 파일: \`cases/${files.find(f => f.startsWith(c.id)) || c.id}\` · 이미지 ${arts.length}장${c.stars ? ` · 난이도 ${'★'.repeat(c.stars)}` : ''}`);
+    if (c.graphic) out.push('- **혐오감 주의 사건**: 표지(cover) 위에는 게임이 「혐오감 주의」 스티커(`_global/warn`)를 겹쳐 붙이고 흐리게 처리한다. 그래도 그림 자체에는 시신·피·상처를 절대 넣지 말 것 — 비닐봉투, 현장 테이프, 빈 공원 같은 것으로만 암시.');
     if (c.artStyle) {
       out.push('- **공통 스타일** (각 프롬프트 뒤에 붙이기):');
       out.push(block(c.artStyle));

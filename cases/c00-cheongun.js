@@ -32,6 +32,7 @@
       '점선 밑줄 단어를 누르면 수첩에 적힌다.',
       '수첩의 단어로 검색하고, 사람을 찾아가 물어본다.',
       '문장 옆 ✎ 를 누르면 메모가 된다. 보고서엔 메모를 증거로 붙인다.',
+      '「감식 사진」은 사진을 직접 눌러 살핀다. 「타임라인」은 카드를 옮겨 시각에 맞춘다.',
     ],
     sources: [
       { id: 'web', type: 'archive', name: '누리 검색', skin: 'web', desc: '노트북 브라우저에 로그인된 채 남은 검색 사이트.', placeholder: '사람, 장소, 무엇이든', start: ['d_hist'], startLabel: '브라우저에 남은 기록' },
@@ -40,6 +41,25 @@
         lock: { title: '도란톡 로그인', desc: 'seoyun.draws 님, 비밀번호를 다시 입력해 주세요.', label: '비밀번호', password: true, code: ['dubu0317', '두부0317', 'tofu0317', 'doobu0317'], hint: '비밀번호 힌트: 우리 집 막내 이름(영문) + 내 생일 4자리', hint2: '막내는 사진에 자주 나온다. 생일은… 케이크 사진이 올라온 날?', ok: '도란톡에 로그인했다', need: ['k_dubu', 'k_birthday'] } },
       { id: 'files', type: 'list', name: '내 문서', skin: 'files', desc: 'C:\\사용자\\서윤\\내 문서' },
       { id: 'ask', type: 'people', name: '탐문', desc: '수첩에 이름이 적힌 사람만 찾아갈 수 있다.' },
+      { id: 'scene', type: 'photo', name: '감식 사진', desc: '강력2팀이 바탕화면에 넣어 둔 현장 사진. 사진 속을 직접 눌러 살핀다.', scenes: [
+        { id: 'sc_desk', title: '504호 작업책상', meta: '10.14 16:10 감식반 촬영', art: 'desk', intro: ['발견 당일 그대로의 책상. 무엇이 있고, 무엇이 없는가.'], spots: [
+          { id: 'sp_postit', x: 16, y: 19, label: '노트북 옆 포스트잇', body: [{ p: '서윤의 글씨: 「[[재희|k_jaehee]] 9시 반 — 오늘은 꼭 말하기」', f: 'f_postit' }] },
+          { id: 'sp_box', x: 81, y: 23, label: '뜯지 않은 택배 상자', body: [{ p: '외장하드 1TB. 10.08 도착 송장이 붙은 채 테이프도 안 뜯었다. [[원본 파일]]은 아직 이 노트북 안에만 있었다.', f: 'f_hdd' }] },
+          { id: 'sp_cups', x: 80, y: 76, r: 9, label: '머그잔 두 개', body: [{ p: '식은 커피가 담긴 머그잔 두 개. 한 잔에만 립밤 자국. 누군가 마주 앉아 있었다.', f: 'f_twocups' }] },
+        ] }] },
+      { id: 'board', type: 'timeline', name: '타임라인', need: ['k_night'], skin: 'board', title: '10월 9일 밤 재구성', desc: '수사팀이 띄워 둔 정리 보드.',
+        intro: ['시각은 기록에서 뽑아 두었다. 무슨 일이 몇 시에 있었는지, 카드를 옮겨 맞춰 본다. 출입 기록·게시판·메신저를 함께 볼 것.'],
+        slots: ['18:48', '20:43', '21:02', '21:33', '23:10', '23:26'],
+        events: [
+          { id: 'e_home', t: '누군가 비밀번호로 문을 열고 들어온다 (서윤의 귀가)' },
+          { id: 'e_threat', t: '서윤이 "원본 파일 올릴게"라고 보낸다' },
+          { id: 'e_reply', t: '재희가 "오늘 밤에 갈게"라고 답한다' },
+          { id: 'e_bell', t: '초인종이 울리고, 1분 뒤 안에서 문이 열린다' },
+          { id: 'e_thud', t: '503호가 "쿵" 하는 큰 소리를 듣는다' },
+          { id: 'e_out', t: '안에서 문이 열린다. 그 뒤로 14일까지 아무도 드나들지 않는다' },
+        ],
+        solved: [{ p: '9시 33분에 들어온 사람은 11시 26분에야 나갔다. 그 사이에 "쿵" 소리가 있었고, 그 뒤로 504호에서는 아무 소리도 나지 않았다.', f: 'f_tl_night' }],
+        ok: '그날 밤이 이어졌다', solveNeed: ['#talk', 'k_door', 'k_night'] },
     ],
     keywords: {
       k_seoyun: { label: '한서윤', type: 'person', alias: ['서윤', 'seoyun', 'seoyun.draws'] },
@@ -254,10 +274,10 @@
     solution: {
       culprit: 'k_jaehee',
       claims: [
-        { id: 'c1', q: '서윤이 실제로 숨진 때를 보여 주는 기록', accept: ['f_noise', 'f_door_night', 'f_bag', 'f_silence', 'f_neighbor_door'] },
+        { id: 'c1', q: '서윤이 실제로 숨진 때를 보여 주는 기록', accept: ['f_noise', 'f_door_night', 'f_bag', 'f_silence', 'f_neighbor_door', 'f_tl_night'] },
         { id: 'c2', q: '11일과 12일의 흔적을 남긴 것은 서윤이 아니다', accept: ['f_device', 'f_order'] },
-        { id: 'c3', q: '범인이 그날 밤 늦게까지 504호에 있었다', accept: ['f_door_night', 'f_neighbor_door', 'f_lastmsg'] },
-        { id: 'c4', q: '동기', accept: ['f_threat', 'f_psd', 'f_sketch'] },
+        { id: 'c3', q: '범인이 그날 밤 늦게까지 504호에 있었다', accept: ['f_door_night', 'f_neighbor_door', 'f_lastmsg', 'f_tl_night', 'f_twocups'] },
+        { id: 'c4', q: '동기', accept: ['f_threat', 'f_psd', 'f_sketch', 'f_hdd'] },
       ],
       stamp: '2025.10.17 · 강력2팀',
       epilogue: [
@@ -269,6 +289,7 @@
     },
     artStyle: 'Casual smartphone photo taken in 2025 Seoul, natural window light, slightly soft focus, subtle JPEG compression, warm muted colors, social-media snapshot feel. No faces, no readable text, no logos.',
     art: {
+      desk: '<svg viewBox="0 0 400 260" role="img" aria-label="위에서 찍은 작업책상 사진"><rect width="400" height="260" fill="#b39572"/><g stroke="#9c7f5d" stroke-width="1" opacity=".5"><path d="M0 40 H400 M0 95 H400 M0 150 H400 M0 205 H400"/></g><ellipse cx="42" cy="168" rx="36" ry="26" fill="#8a7a9a"/><ellipse cx="42" cy="168" rx="24" ry="15" fill="#a898b6"/><rect x="118" y="78" width="150" height="112" rx="6" fill="#2d2d30"/><rect x="128" y="88" width="130" height="70" fill="#3a3a3e"/><rect x="128" y="164" width="130" height="18" fill="#444449"/><rect x="178" y="184" width="30" height="4" fill="#555"/><g transform="rotate(-7 65 50)"><rect x="42" y="28" width="46" height="44" fill="#f2da5c"/><text x="47" y="46" font-size="10" fill="#4a4030" font-family="cursive">재희 9:30</text><text x="47" y="60" font-size="8" fill="#4a4030" font-family="cursive">꼭 말하기</text></g><g transform="rotate(5 325 60)"><rect x="292" y="32" width="66" height="56" fill="#a57b4b"/><rect x="292" y="56" width="66" height="8" fill="#d9c9a0" opacity=".85"/><rect x="302" y="38" width="24" height="12" fill="#f4efe2"/></g><circle cx="304" cy="192" r="15" fill="#f4f1ea"/><circle cx="304" cy="192" r="10" fill="#5a3b24"/><path d="M318 186 q9 2 7 10" stroke="#f4f1ea" stroke-width="4" fill="none"/><circle cx="338" cy="208" r="15" fill="#e9eef2"/><circle cx="338" cy="208" r="10" fill="#5a3b24"/><path d="M327 199 q3 -2 6 0" stroke="#d8707a" stroke-width="2.5" fill="none"/><g stroke-linecap="round" stroke-width="5"><path d="M64 214 L112 230" stroke="#3d6fa0"/><path d="M70 226 L116 238" stroke="#c9463a"/></g><rect x="186" y="208" width="72" height="44" rx="4" fill="#1f1f22"/><path d="M270 214 L300 238" stroke="#ddd" stroke-width="3" stroke-linecap="round"/><circle cx="372" cy="140" r="18" fill="#5f7d4a"/><circle cx="364" cy="132" r="9" fill="#77955d"/></svg>',
       cover: { use: '기록실 폴더 표지 — 증거물 꼬리표가 달린 노트북', ratio: '4:3', svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#57524a"/><rect x="36" y="46" width="128" height="80" rx="6" fill="#2a2a2c"/><rect x="36" y="118" width="128" height="8" fill="#1a1a1b"/><rect x="120" y="98" width="48" height="26" fill="#dfb64c" transform="rotate(-8 144 111)"/><line x1="130" y1="98" x2="116" y2="80" stroke="#ccc" stroke-width="1.5"/></svg>',
         prompt: 'Top-down photo of a closed silver laptop lying on a grey police evidence table, a yellow paper evidence tag tied to it with white string, a single white cat hair on the lid, cold fluorescent light, clinical and quiet mood.' },
       cup: { use: '서윤 계정의 10.11 "집콕" 게시물 사진', ratio: '4:3', svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#cdbb9c"/><rect width="200" height="60" fill="#e9dcc2"/><ellipse cx="100" cy="122" rx="50" ry="8" fill="#b19f7e"/><path d="M70 70 h60 v36 a30 18 0 0 1 -60 0z" fill="#f5efe4"/><ellipse cx="100" cy="70" rx="30" ry="6" fill="#6b4a33"/><path d="M130 80 q16 0 14 14 q-2 10 -16 10" stroke="#f5efe4" stroke-width="6" fill="none"/></svg>',

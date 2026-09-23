@@ -10,8 +10,8 @@ const vm = require('vm');
 const norm = s => String(s ?? '').toLowerCase().replace(/[\s'"`.,!?·・()[\]{}\-_/@:;~「」『』〈〉《》“”‘’]/g, '');
 const BLOCK_KEYS = new Set(['p', 'h', 'sep', 'divider', 'note', 'stamp', 'sign', 'm', 'img', 'cap', 'rows', 'head', 'list', 'msg', 'who', 'at', 'me', 'say', 'cipher', 'f', 'cls', 'nopin']);
 const TEXT_KEYS = ['p', 'h', 'divider', 'note', 'stamp', 'sign', 'm', 'cap', 'msg', 'say'];
-const SKINS = new Set(['plain', 'report', 'news', 'letter', 'telegram', 'ledger', 'card', 'transcript', 'memo', 'photo', 'web', 'chat', 'sms', 'home', 'files', 'cipher']);
-const TYPES = new Set(['archive', 'list', 'people', 'map', 'cipher']);
+const SKINS = new Set(['plain', 'report', 'news', 'letter', 'telegram', 'ledger', 'card', 'transcript', 'memo', 'photo', 'web', 'chat', 'sms', 'home', 'files', 'cipher', 'board', 'lab']);
+const TYPES = new Set(['archive', 'list', 'people', 'map', 'cipher', 'timeline', 'compare', 'query', 'photo']);
 const KT = new Set(['person', 'place', 'thing', 'time', 'word']);
 const FRAMES = new Set(['papers', 'laptop', 'crt']);
 
@@ -32,10 +32,20 @@ function check(c) {
   if (c.kind !== 'tutorial' && !['domestic', 'overseas'].includes(c.region)) err('region 은 domestic 또는 overseas');
   if (c.frame && !FRAMES.has(c.frame)) err(`frame "${c.frame}" 은 papers | laptop | crt 중 하나`);
   if (!/^c\d\d$/.test(c.id)) warn(`id "${c.id}" 는 c01 같은 형식을 권장`);
+  if (c.kind !== 'tutorial' && ![3, 4, 5].includes(c.stars)) warn('stars(난이도 3·4·5)가 없음');
+  if (c.graphic != null && typeof c.graphic !== 'boolean') err('graphic 은 true/false');
 
   const K = c.keywords, D = c.docs, P = c.people || {}, A = c.art || {};
   const sources = c.sources || [];
   const srcById = Object.fromEntries(sources.map(s => [s.id, s]));
+  const unlIds = {};   // '#id' 로 가리킬 수 있는 것: 자료 출처, 대조 세트, 관찰 장면·지점 (잠금 문서는 D 로 확인)
+  const claimId = (id, what) => { if (!id) return err(`${what}: id 없음`); if (unlIds[id]) err(`id "${id}" 가 ${unlIds[id]} 와 ${what} 에서 겹침`); else unlIds[id] = what; };
+  sources.forEach(s => {
+    claimId(s.id, `source ${s.id}`);
+    if (s.type === 'compare') (s.sets || []).forEach(x => claimId(x.id, 'compare set'));
+    if (s.type === 'photo') (s.scenes || []).forEach(x => { claimId(x.id, 'photo scene'); (x.spots || []).forEach(sp => claimId(sp.id, 'photo spot')); });
+  });
+  Object.keys(D).forEach(id => { if (unlIds[id]) err(`문서 id "${id}" 가 ${unlIds[id]} 와 겹침`); });
 
   // ── 단어 라벨 색인
   const lab = {};
@@ -120,7 +130,7 @@ function check(c) {
   if (!(c.brief.lines || []).length) err('brief.lines 가 비어 있음');
 
   // sources
-  const tokenOk = n => (n[0] === '#' ? srcById[n.slice(1)] || D[n.slice(1)] : n[0] === '!' ? true : K[n]);
+  const tokenOk = n => (n[0] === '#' ? unlIds[n.slice(1)] || D[n.slice(1)] : n[0] === '!' ? true : K[n]);
   const needCheck = (need, where) => {
     if (need == null) return;
     if (!Array.isArray(need)) return err(`${where}: need 는 배열`);
@@ -132,7 +142,6 @@ function check(c) {
   sources.forEach(s => {
     const w = `source ${s.id}`;
     if (!s.id) return err('id 없는 source');
-    if (seenSrc.has(s.id)) err(`${w}: id 중복`);
     seenSrc.add(s.id);
     if (!TYPES.has(s.type)) err(`${w}: type "${s.type}" 은 ${[...TYPES].join('|')} 중 하나`);
     if (s.skin && !SKINS.has(s.skin)) warn(`${w}: skin "${s.skin}" 은 기본 스킨이 아님 (사건 css 에서 직접 정의해야 함)`);
@@ -151,6 +160,84 @@ function check(c) {
       if (!s.art || A[s.art] == null) err(`${w}: 지도 art "${s.art}" 가 없음`);
       (s.spots || []).forEach(sp => { if (!D[sp.doc]) err(`${w}.spot ${sp.id}: 문서 ${sp.doc} 없음`); needCheck(sp.need, `${w}.spot ${sp.id}`); if (!(sp.x >= 0 && sp.x <= 100 && sp.y >= 0 && sp.y <= 100)) err(`${w}.spot ${sp.id}: x,y 는 0~100 (%)`); });
       if (!(s.spots || []).length) err(`${w}: spots 가 비어 있음`);
+    }
+    const rewardCheck = (r, where) => ((r && r.keys) || []).forEach(k => { if (!K[k]) err(`${where}.reward.keys: 없는 단어 ${k}`); });
+    if (s.type === 'timeline') {
+      const ev = s.events || [];
+      if (ev.length < 3) err(`${w}: events 가 3개 이상 필요`);
+      const ids = new Set();
+      const ib = mk(`tl:${s.id}:i`);
+      ev.forEach((e, i) => { if (!e.id || ids.has(e.id)) err(`${w}.events[${i}]: id 없음/중복`); ids.add(e.id); if (!e.t) err(`${w}.events[${i}]: t 없음`); scanText(e.t, `${w}.events[${i}]`, ib); });
+      (s.slots || []).forEach((t, i) => scanText(t, `${w}.slots[${i}]`, ib));
+      if (s.slots && s.slots.length !== ev.length) warn(`${w}: slots 수(${s.slots.length})가 events 수(${ev.length})와 다름`);
+      scanBlocks(s.intro, `${w}.intro`, ib);
+      scanBlocks(s.solved, `${w}.solved`, mk(`tl:${s.id}:s`));
+      needCheck(s.solveNeed, `${w}.solveNeed`);
+      if (!s.solveNeed) warn(`${w}: solveNeed(순서를 알 수 있게 되는 조건)가 없어 처음부터 풀 수 있다고 가정함`);
+      rewardCheck(s.reward, w);
+    }
+    if (s.type === 'compare') {
+      if (!(s.sets || []).length) err(`${w}: sets 가 비어 있음`);
+      (s.sets || []).forEach(x => {
+        const xw = `${w}.set ${x.id}`;
+        if (!x.title) err(`${xw}: title 없음`);
+        const opts = x.options || [];
+        if (opts.length < 2) err(`${xw}: options 가 2개 이상 필요`);
+        else if (opts.length < 3) warn(`${xw}: 선택지가 ${opts.length}개뿐 — 3개 이상 권장`);
+        if (!opts.some(o => o.id === x.answer)) err(`${xw}: answer "${x.answer}" 가 options 에 없음`);
+        const ib = mk(`cmp:${x.id}:i`);
+        ['title', 'meta', 'q', 'hint'].forEach(k => x[k] && scanText(x[k], `${xw}.${k}`, ib));
+        const ev = x.evidence || {};
+        if (ev.t) scanText(ev.t, `${xw}.evidence`, ib);
+        [ev.art, ...opts.map(o => o.art)].forEach(a => { if (a != null && A[a] == null) err(`${xw}: art "${a}" 가 없음`); });
+        opts.forEach(o => { if (!o.id || !o.label) err(`${xw}: 선택지에 id/label 필요`); ['label', 't'].forEach(k => o[k] && scanText(o[k], `${xw}.option ${o.id}`, ib)); });
+        scanBlocks(x.intro, `${xw}.intro`, ib);
+        scanBlocks(x.solved, `${xw}.solved`, mk(`cmp:${x.id}:s`));
+        needCheck(x.need, xw);
+        needCheck(x.solveNeed, `${xw}.solveNeed`);
+        if (!x.solveNeed) warn(`${xw}: solveNeed(무엇과 일치하는지 알 수 있게 되는 조건)가 없음`);
+        rewardCheck(x.reward, xw);
+      });
+    }
+    if (s.type === 'query') {
+      const fids = new Set((s.fields || []).map(fl => fl.id));
+      if (!fids.size) err(`${w}: fields 가 비어 있음`);
+      if (!(s.records || []).length) err(`${w}: records 가 비어 있음`);
+      (s.records || []).forEach((r, i) => {
+        const rw = `${w}.records[${i}]`;
+        if (!D[r.doc]) err(`${rw}: 문서 ${r.doc} 없음`);
+        else if (D[r.doc].src !== s.id) err(`${rw}: 문서 ${r.doc} 의 src 가 ${s.id} 가 아님`);
+        const m = Object.entries(r.match || {});
+        if (!m.length) err(`${rw}: match 가 비어 있음`);
+        m.forEach(([fl, v]) => { if (!fids.has(fl)) err(`${rw}: match 의 칸 "${fl}" 이 fields 에 없음`); if (!(Array.isArray(v) ? v : [v]).some(x => norm(x))) err(`${rw}: match.${fl} 값이 비어 있음`); });
+        needCheck(r.need, rw);
+        if (!r.need) warn(`${rw}: need(조회할 값을 알게 되는 조건)가 없어 처음부터 조회할 수 있다고 가정함`);
+        (r.keys || []).forEach(k => { if (!K[k]) err(`${rw}.keys: 없는 단어 ${k}`); });
+      });
+    }
+    if (s.type === 'photo') {
+      if (!(s.scenes || []).length) err(`${w}: scenes 가 비어 있음`);
+      (s.scenes || []).forEach(x => {
+        const xw = `${w}.scene ${x.id}`;
+        if (!x.art || A[x.art] == null) err(`${xw}: art "${x.art}" 가 없음`);
+        else if (typeof A[x.art] === 'object' && A[x.art].prompt && !A[x.art].raster) warn(`${xw}: 관찰 장면은 좌표가 맞아야 해서 SVG 로만 그린다 — prompt 는 쓰이지 않음 (지우거나 raster:true)`);
+        if (!(x.spots || []).length) err(`${xw}: spots 가 비어 있음`);
+        const ib = mk(`ph:${x.id}:i`);
+        ['title', 'meta'].forEach(k => x[k] && scanText(x[k], `${xw}.${k}`, ib));
+        scanBlocks(x.intro, `${xw}.intro`, ib);
+        needCheck(x.need, xw);
+        (x.spots || []).forEach(sp => {
+          const pw = `${xw}.spot ${sp.id}`;
+          if (!(sp.x >= 0 && sp.x <= 100 && sp.y >= 0 && sp.y <= 100)) err(`${pw}: x,y 는 0~100 (%)`);
+          if (sp.r != null && !(sp.r >= 3 && sp.r <= 25)) warn(`${pw}: r 은 3~25 권장`);
+          if (!sp.label) err(`${pw}: label 없음`);
+          const pb = mk(`ph:${sp.id}`);
+          if (sp.label) scanText(sp.label, `${pw}.label`, pb);
+          scanBlocks(sp.body, pw, pb);
+          needCheck(sp.need, pw);
+          (sp.keys || []).forEach(k => { if (!K[k]) err(`${pw}.keys: 없는 단어 ${k}`); });
+        });
+      });
     }
     if (s.type === 'cipher') {
       if (!s.cipher || !s.key) err(`${w}: cipher 와 key 가 필요`);
@@ -178,6 +265,7 @@ function check(c) {
     (d.find || []).forEach(k => { if (!K[k]) err(`${w}.find: 없는 단어 ${k}`); });
     needCheck(d.need, w);
     const s = srcById[d.src];
+    if (s && s.type === 'query' && !(s.records || []).some(r => r.doc === id)) err(`${w}: 조회(query) 문서인데 어느 record 도 가리키지 않음`);
     if (s && s.type === 'archive' && !(d.find || []).length && !(s.start || []).includes(id)) err(`${w}: 자료실(archive) 문서인데 find 도 없고 start 도 아님 → 찾을 방법이 없음`);
     const b = mk(`doc:${id}`);
     ['title', 'meta', 'paper', 'kicker'].forEach(k => d[k] && scanText(d[k], `${w}.${k}`, b));
@@ -258,6 +346,7 @@ function check(c) {
   let round = 0;
   for (;;) {
     round++;
+    const uBefore = U.size;
     const reach = new Set(['brief']);
     const unlock = (id, lock) => { if (!U.has(id)) { U.add(id); (lock.keys || []).forEach(k => reach.add(`__key:${k}`)); } };
     const openDoc = d => {
@@ -276,6 +365,11 @@ function check(c) {
       if (s.type === 'archive') docs.filter(d => okN(d.need) && ((s.start || []).includes(d.id) || (d.find || []).some(k => KN.has(k)))).forEach(openDoc);
       if (s.type === 'list') docs.filter(d => okN(d.need)).forEach(openDoc);
       if (s.type === 'map') (s.spots || []).filter(sp => okN(sp.need)).forEach(sp => openDoc(D[sp.doc]));
+      const reward = r => ((r && r.keys) || []).forEach(k => reach.add(`__key:${k}`));
+      if (s.type === 'timeline') { reach.add(`tl:${s.id}:i`); if (okN(s.solveNeed)) { U.add(s.id); reach.add(`tl:${s.id}:s`); reward(s.reward); } }
+      if (s.type === 'compare') (s.sets || []).forEach(x => { if (!okN(x.need)) return; reach.add(`cmp:${x.id}:i`); if (okN(x.solveNeed)) { U.add(x.id); reach.add(`cmp:${x.id}:s`); reward(x.reward); } });
+      if (s.type === 'query') (s.records || []).forEach(r => { if (okN(r.need)) { openDoc(D[r.doc]); (r.keys || []).forEach(k => reach.add(`__key:${k}`)); } });
+      if (s.type === 'photo') (s.scenes || []).forEach(x => { if (!okN(x.need)) return; reach.add(`ph:${x.id}:i`); (x.spots || []).forEach(sp => { if (okN(sp.need)) { U.add(sp.id); reach.add(`ph:${sp.id}`); (sp.keys || []).forEach(k => reach.add(`__key:${k}`)); } }); });
       if (s.type === 'cipher') {
         reach.add(`cip:${s.id}:i`);
         if (okN(s.solveNeed)) { U.add(s.id); reach.add(`cip:${s.id}:s`); ((s.reward && s.reward.keys) || []).forEach(k => reach.add(`__key:${k}`)); }
@@ -304,6 +398,7 @@ function check(c) {
       b.k.forEach(k => { if (!KN.has(k)) { KN.add(k); roundK[k] = round; changed = true; } });
       b.f.forEach(f => { if (!F.has(f)) { F.add(f); roundF[f] = round; changed = true; } });
     });
+    if (U.size !== uBefore) changed = true;
     if (!changed || round > 60) break;
   }
 
@@ -316,6 +411,15 @@ function check(c) {
   unreachK.forEach(id => warn(`도달 불가 단어: ${id} (${K[id].label})`));
   unreachF.forEach(f => warn(`도달 불가 사실: ${f}`));
 
+  // 검색 지름길: 적어 둔 단어 A 의 라벨이 아직 모르는 단어 B 의 라벨/별칭을 품으면, A 로 검색할 때 B 문서가 먼저 뜬다.
+  const finds = new Set(Object.values(D).flatMap(d => d.find || []));
+  const labs = id => [K[id].label, ...(K[id].alias || [])].map(norm).filter(Boolean);
+  Object.keys(K).filter(a => a in roundK).forEach(a => labs(a).forEach(la => Object.keys(K).forEach(b => {
+    if (b === a || !finds.has(b) || !((roundK[b] ?? Infinity) > roundK[a])) return;
+    const hit = labs(b).find(lb => lb.length >= 2 && la.includes(lb));
+    if (hit) warn(`검색 지름길: "${K[a].label}"(${a}) 로 찾으면 "${hit}" 가 걸려 ${b} 문서가 먼저 뜬다 — 라벨을 겹치지 않게`);
+  })));
+
   let depth = 0;
   if (sol.culprit && !KN.has(sol.culprit)) err(`범인 단어 ${sol.culprit} 에 도달할 수 없음 → 보고서에서 고를 수 없다`);
   else if (sol.culprit) depth = Math.max(depth, roundK[sol.culprit] || 0);
@@ -324,14 +428,17 @@ function check(c) {
     if (!r.length) err(`claim ${cl.id}: 인정 증거 중 도달 가능한 것이 없음 → 풀 수 없다`);
     else depth = Math.max(depth, Math.min(...r));
   });
-  if (depth && depth < 3 && c.kind !== 'tutorial') warn(`추적 깊이가 ${depth} — 3 이상이 되도록 단서가 단서를 여는 사슬을 늘릴 것`);
+  const minDepth = { 3: 3, 4: 4, 5: 5 }[c.stars] || 3;
+  if (depth && depth < minDepth && c.kind !== 'tutorial') warn(`추적 깊이가 ${depth} — ★${c.stars || 3} 사건은 ${minDepth} 이상이 되도록 단서가 단서를 여는 사슬을 늘릴 것`);
   const persons = Object.values(K).filter(k => k.type === 'person').length;
-  if (persons < 4 && c.kind !== 'tutorial') warn(`인물 단어가 ${persons}개뿐 — 용의선상이 너무 좁다`);
+  const minPersons = c.stars === 5 ? 6 : 4;
+  if (persons < minPersons && c.kind !== 'tutorial') warn(`인물 단어가 ${persons}개뿐 — ★${c.stars || 3} 사건에는 ${minPersons}명 이상`);
+  const methods = [...new Set(sources.map(s => s.type))];
   const prompts = Object.values(A).filter(a => a && typeof a === 'object' && a.prompt).length;
 
   return {
     E, W,
-    stats: { docs: Object.keys(D).length, docsR: docsSeen.size, people: Object.keys(P).length, peopleR: perSeen.size, keys: Object.keys(K).length, keysR: KN.size, facts: Object.keys(factWhere).length, factsR: F.size, depth, rounds: round, prompts, chars: allText.reduce((n, [, t]) => n + t.length, 0) },
+    stats: { docs: Object.keys(D).length, docsR: docsSeen.size, people: Object.keys(P).length, peopleR: perSeen.size, keys: Object.keys(K).length, keysR: KN.size, facts: Object.keys(factWhere).length, factsR: F.size, depth, rounds: round, prompts, stars: c.stars, graphic: !!c.graphic, methods, chars: allText.reduce((n, [, t]) => n + t.length, 0) },
   };
 }
 
@@ -347,7 +454,7 @@ function main() {
     for (const c of cases) {
       const { E, W, stats } = check(c);
       console.log(`\n== ${file} — ${c.id} 「${c.title}」 ==`);
-      if (stats) console.log(`문서 ${stats.docs}(도달 ${stats.docsR}) · 인물 ${stats.people}(도달 ${stats.peopleR}) · 단어 ${stats.keys}(도달 ${stats.keysR}) · 사실 ${stats.facts}(도달 ${stats.factsR}) · 추적 깊이 ${stats.depth} · 이미지 프롬프트 ${stats.prompts} · 글자 수 ${stats.chars.toLocaleString()}`);
+      if (stats) console.log(`문서 ${stats.docs}(도달 ${stats.docsR}) · 인물 ${stats.people}(도달 ${stats.peopleR}) · 단어 ${stats.keys}(도달 ${stats.keysR}) · 사실 ${stats.facts}(도달 ${stats.factsR}) · 추적 깊이 ${stats.depth} · ${stats.stars ? '★' + stats.stars + (stats.graphic ? '(혐오감 주의)' : '') : '연습'} · 조사 방식 ${stats.methods.join('/')} · 이미지 프롬프트 ${stats.prompts} · 글자 수 ${stats.chars.toLocaleString()}`);
       E.forEach(m => console.log('✗ ' + m));
       W.forEach(m => console.log('△ ' + m));
       console.log(E.length ? '결과: FAIL' : W.length ? '결과: PASS (경고 있음)' : '결과: PASS');

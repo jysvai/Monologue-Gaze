@@ -153,3 +153,20 @@
 /* ───────── cipher (암호 해독지) ───────── */
 .skin-cipher{background-color:#e7e4d8;background-image:var(--noise),linear-gradient(90deg,rgba(84,116,158,.1) 1px,transparent 1px),linear-gradient(rgba(84,116,158,.1) 1px,transparent 1px);background-size:auto,20px 20px,20px 20px}
 .skin-cipher .doc-t{font:700 17px var(--f-type);letter-spacing:.06em}
+
+/* ── 재구성 판 (코르크 보드) */
+.skin-board{background-color:#b8925f;background-image:radial-gradient(rgba(60,35,10,.35) 1px,transparent 1.4px),radial-gradient(rgba(255,240,210,.18) 1px,transparent 1.4px);background-size:7px 7px,11px 11px;background-position:0 0,3px 5px;color:#231a10}
+.skin-board .doc-h{padding:8px 12px;background:#f7f1de;box-shadow:0 2px 4px rgba(0,0,0,.3);transform:rotate(-.6deg)}
+.skin-board .doc-t{font:400 28px/1.1 var(--f-hand)}
+.skin-board .doc-b>.b-p,.skin-board .doc-b>.b-note{padding:6px 10px;background:rgba(247,241,222,.92)}
+.skin-board .tl-e{position:relative;background:#fffbea;border-left-color:#c9463a}
+.skin-board .tl-e::before{content:"";position:absolute;top:-4px;left:50%;width:9px;height:9px;border-radius:50%;background:#c9463a;box-shadow:0 1px 2px rgba(0,0,0,.5)}
+.skin-board .c-done{padding:8px 10px;background:#f7f1de}
+
+/* ── 감정서 (감식과) */
+.skin-lab{background-color:#eef0ea;font-family:var(--f-mono)}
+.skin-lab .doc-h{padding-bottom:8px;border-bottom:3px double #3a4a40}
+.skin-lab .doc-k{color:#3a6a52;letter-spacing:.14em}
+.skin-lab .doc-t{font:800 18px/1.35 var(--f-doc)}
+.skin-lab .doc-b{font:13.5px/1.8 var(--f-mono)}
+.skin-lab .cmp-ev{background:#fff;border-color:#6d8a78}
