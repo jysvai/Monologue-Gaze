@@ -352,7 +352,8 @@
 
   /* ── 대조 감정 (compare): 증거와 일치하는 시료를 고른다 */
   const cmpState = x => (ST.cmp[x.id] ||= { x: [], at: -1 });
-  const progress = () => ST.keys.length + ST.notes.length;
+  // 대조 감정 재시도 조건: 새 단어나 새 사실(아무 메모가 아니라 증거가 되는 메모)을 얻었는가
+  const progress = () => ST.keys.length + new Set(ST.notes.map(n => n.f).filter(Boolean)).size;
   function compareList(s) {
     const sets = (s.sets || []).filter(x => ok(x.need));
     if (!sets.length) return `<p class="res-none">${esc(s.empty || '아직 맡길 감정이 없다.')}</p>`;
@@ -367,7 +368,7 @@
     const wait = !solved && lv() >= 4 && st.at >= 0 && progress() <= st.at;
     const opt = o => {
       const cls = solved && o.id === x.answer ? ' ok' : st.x.includes(o.id) ? ' no' : '';
-      return `<div class="cmp-o${cls}">${o.art ? `<div class="cmp-art">${art(o.art)}</div>` : ''}<p class="cmp-n">${inline(o.label)}</p>${o.t ? `<p class="cmp-d">${inline(o.t)}</p>` : ''}${solved || st.x.includes(o.id) ? '' : `<button type="button" data-cmp-pick="${esc(x.id)}|${esc(o.id)}"${wait ? ' disabled' : ''}>이것과 일치</button>`}</div>`;
+      return `<div class="cmp-o${cls}">${o.art ? `<div class="cmp-art">${art(o.art, 'art', true)}</div>` : ''}<p class="cmp-n">${inline(o.label)}</p>${o.t ? `<p class="cmp-d">${inline(o.t)}</p>` : ''}${solved || st.x.includes(o.id) ? '' : `<button type="button" data-cmp-pick="${esc(x.id)}|${esc(o.id)}"${wait ? ' disabled' : ''}>이것과 일치</button>`}</div>`;
     };
     const fails = st.x.length;
     const hintAt = { 3: 1, 4: 2 }[lv()] || Infinity;
@@ -375,7 +376,7 @@
     const ev = x.evidence || {};
     return `<article class="doc skin-${esc(x.skin || 'lab')}"><header class="doc-h"><p class="doc-k">대조 감정</p><h3 class="doc-t">${inline(x.title)}</h3>${x.meta ? `<p class="doc-m">${inline(x.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(x.intro, `${x.id}@i`, plain(x.title))}
-        <div class="cmp-ev"><p class="cmp-lab">${esc(ev.label || '대조할 증거')}</p>${ev.art ? `<div class="cmp-art">${art(ev.art)}</div>` : ''}${ev.t ? `<p class="cmp-d">${inline(ev.t)}</p>` : ''}</div>
+        <div class="cmp-ev"><p class="cmp-lab">${esc(ev.label || '대조할 증거')}</p>${ev.art ? `<div class="cmp-art">${art(ev.art, 'art', true)}</div>` : ''}${ev.t ? `<p class="cmp-d">${inline(ev.t)}</p>` : ''}</div>
         <p class="cmp-q">${inline(x.q || '어느 것과 일치하는가?')}</p>
         <div class="cmp-opts">${(x.options || []).map(opt).join('')}</div>
         <p class="c-msg" role="status">${esc(msg)}</p>${!solved && x.hint && fails >= hintAt ? `<p class="lock-h2">${inline(x.hint)}</p>` : ''}
@@ -385,7 +386,7 @@
   /* ── 기록 조회 (query): 정확한 번호·이름을 넣어 대장을 조회한다 */
   function queryHits(s, inp) {
     if (!Object.values(inp).some(v => norm(v))) return null;
-    return (s.records || []).filter(r => Object.entries(r.match || {}).every(([f, vals]) => (Array.isArray(vals) ? vals : [vals]).map(norm).includes(norm(inp[f])))).map(r => r.doc).filter(id => C.docs[id]);
+    return (s.records || []).filter(r => Object.entries(r.match || {}).every(([f, vals]) => (Array.isArray(vals) ? vals : [vals]).map(norm).includes(norm(inp[f])))).map(r => r.doc).filter((id, i, a) => C.docs[id] && a.indexOf(id) === i);
   }
   function queryList(s) {
     const inp = ST.view.qin[s.id] || {};
@@ -856,9 +857,10 @@
     return true;
   }
   function photoClick(el, e) {
-    const r = el.getBoundingClientRect();
-    const px = ((e.clientX - r.left) / r.width) * 100, py = ((e.clientY - r.top) / r.height) * 100;
-    const hit = photoFind(el.dataset.ph, p => Math.hypot(px - p.x, (py - p.y) * (r.height / r.width)) <= (p.r || 7));
+    // 테두리를 뺀 안쪽(그림) 기준으로 잰다
+    const r = el.getBoundingClientRect(), w = el.clientWidth || r.width, h = el.clientHeight || r.height;
+    const px = ((e.clientX - r.left - el.clientLeft) / w) * 100, py = ((e.clientY - r.top - el.clientTop) / h) * 100;
+    const hit = photoFind(el.dataset.ph, p => Math.hypot(px - p.x, (py - p.y) * (h / w)) <= (p.r || 7));
     if (!hit) {
       const d = document.createElement('span');
       d.className = 'ph-miss'; d.style.left = px + '%'; d.style.top = py + '%';

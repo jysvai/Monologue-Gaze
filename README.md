@@ -53,6 +53,7 @@ tools/validate.js     사건 검사기 — 형식 + "처음 단서에서 정답 
 tools/smoke.js        화면 점검 — 가짜 DOM 에서 모든 문서·인물·도구 화면을 그려 본다
 tools/prompts.js      사건 파일의 프롬프트를 모아 docs/IMAGE_PROMPTS.md 생성
 tools/manifest.js     img/ 폴더를 훑어 img/manifest.js 생성
+tools/gen-images.js   (선택) OpenAI API 키가 있으면 프롬프트 전부를 한 번에 그려 img/ 에 넣는다
 ```
 
 ## 도구

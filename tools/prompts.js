@@ -87,4 +87,5 @@ function main() {
   console.log(`${path.relative(root, dest)} 작성 — 이미지 ${total}장`);
 }
 
-main();
+if (require.main === module) main();
+module.exports = { GLOBAL };
