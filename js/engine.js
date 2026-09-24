@@ -37,7 +37,14 @@
     b: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 130'><defs><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='.09' numOctaves='2' seed='7'/><feDisplacementMap in='SourceGraphic' scale='9'/></filter></defs><g filter='url(#r)' fill='none' stroke='#5e0f08' stroke-linecap='round'><path d='M18 42 C90 28 170 34 282 56' stroke-width='15' opacity='.9'/><path d='M22 66 C100 58 180 62 262 80' stroke-width='12' opacity='.8'/><path d='M28 88 C110 84 172 88 232 100' stroke-width='9' opacity='.7'/><path d='M34 108 C100 106 150 110 196 116' stroke-width='6' opacity='.6'/></g></svg>",
     c: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 230'><defs><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='.06' numOctaves='2' seed='5'/><feDisplacementMap in='SourceGraphic' scale='6'/></filter></defs><g filter='url(#r)' fill='#5c0e08'><path d='M8 0 H152 C152 20 142 26 130 28 C126 64 128 124 122 156 C120 168 108 168 106 156 C102 112 104 62 96 36 C90 44 88 72 84 96 C82 104 74 104 72 96 C70 72 70 46 62 36 C54 42 52 56 48 66 C46 72 40 72 38 66 C36 52 34 36 22 30 C14 26 8 18 8 0 Z'/><circle cx='114' cy='174' r='6'/><circle cx='78' cy='112' r='4'/></g></svg>",
     d: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 150'><defs><clipPath id='c'><ellipse cx='60' cy='75' rx='42' ry='58'/></clipPath><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='.2' numOctaves='1' seed='2'/><feDisplacementMap in='SourceGraphic' scale='5'/></filter></defs><g clip-path='url(#c)' filter='url(#r)' fill='none' stroke='#6a120a' stroke-width='3.4'><ellipse cx='60' cy='84' rx='7' ry='9'/><ellipse cx='60' cy='82' rx='13' ry='17'/><ellipse cx='60' cy='80' rx='19' ry='25'/><ellipse cx='60' cy='78' rx='25' ry='33'/><ellipse cx='60' cy='76' rx='31' ry='41'/><ellipse cx='60' cy='74' rx='37' ry='49'/><ellipse cx='60' cy='72' rx='43' ry='57'/></g></svg>",
+    // 비산: 한쪽으로 날아가며 작아지는 방울과 꼬리
+    e: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 120'><defs><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='.12' numOctaves='2' seed='11'/><feDisplacementMap in='SourceGraphic' scale='4'/></filter></defs><g filter='url(#r)' fill='#5a0e07' stroke='#5a0e07' stroke-linecap='round'><g transform='rotate(-14 130 60)'><ellipse cx='26' cy='62' rx='13' ry='9'/><path d='M36 60 L58 57' stroke-width='3' fill='none'/><circle cx='63' cy='56.5' r='2.4'/><ellipse cx='84' cy='58' rx='8' ry='5.5'/><path d='M91 57 L106 55' stroke-width='2.2' fill='none'/><circle cx='110' cy='54.6' r='1.8'/><ellipse cx='128' cy='56' rx='6' ry='4'/><path d='M133 55.4 L145 54.2' stroke-width='1.6' fill='none'/><ellipse cx='162' cy='54' rx='4.4' ry='3'/><path d='M166 53.6 L175 53' stroke-width='1.2' fill='none'/><ellipse cx='192' cy='52.6' rx='3.2' ry='2.2'/><ellipse cx='216' cy='51.6' rx='2.3' ry='1.6'/><ellipse cx='236' cy='51' rx='1.6' ry='1.1'/><circle cx='70' cy='70' r='2'/><circle cx='118' cy='44' r='1.5'/><circle cx='150' cy='66' r='1.3'/><circle cx='202' cy='60' r='1'/><circle cx='44' cy='44' r='2.2'/></g></g></svg>",
+    // 묻어난 자국: 손끝으로 쓸고 지나간 옅은 줄 셋
+    f: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 150'><defs><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='.9 .05' numOctaves='2' seed='4' result='n'/><feDisplacementMap in='SourceGraphic' in2='n' scale='7'/></filter></defs><g filter='url(#r)' fill='none' stroke='#662012' stroke-linecap='round'><path d='M20 40 C70 30 120 36 196 30' stroke-width='16' opacity='.5'/><path d='M26 70 C80 62 128 68 188 64' stroke-width='14' opacity='.42'/><path d='M34 98 C84 94 126 98 170 96' stroke-width='12' opacity='.34'/><path d='M20 40 C40 37 52 36 64 36' stroke-width='18' opacity='.35'/></g></svg>",
   };
+  // 마른 피는 고르게 칠해지지 않는다: 종이 결을 따라 얼룩덜룩 빠진 자리를 낸다 (a · b · c)
+  const MOTTLE = "<feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='9' result='n2'/><feColorMatrix in='n2' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.2 1.42' result='m'/><feComposite in='d' in2='m' operator='in'/>";
+  ['a', 'b', 'c'].forEach(k => { STAIN_SVG[k] = STAIN_SVG[k].replace(/<feDisplacementMap in='SourceGraphic' scale='(\d+)'\/>/, `<feDisplacementMap in='SourceGraphic' scale='$1' result='d'/>${MOTTLE}`); });
   const gore = () => !!(C && C.graphic && !S.mild);
   // kinds: 문자열 'abcd' 중에서 고른다. seed 로 위치·각도를 정한다 (같은 문서는 늘 같은 자리).
   function stains(seed, n, kinds, edge) {
@@ -52,10 +59,25 @@
     }
     return out;
   }
+  /* ── 책상에서 오래 굴러다닌 서류의 흔적: 커피잔 자국, (담배를 피우던 시대면) 담뱃불 자국. 몇 장에만, 늘 같은 자리에 */
+  const MARK_SVG = {
+    ring: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><defs><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='.045' numOctaves='2' seed='6'/><feDisplacementMap in='SourceGraphic' scale='5'/></filter></defs><g filter='url(#r)' fill='none' stroke='#6e4524'><circle cx='60' cy='60' r='45' stroke-width='3.4' opacity='.85'/><circle cx='60' cy='60' r='42.6' stroke-width='1.1' opacity='.45'/><path d='M19 78 A45 45 0 0 1 27 29' stroke-width='6' opacity='.3'/><path d='M96 36 A45 45 0 0 1 100 70' stroke-width='2' opacity='.5'/></g></svg>",
+    burn: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><defs><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='.18' numOctaves='2' seed='2'/><feDisplacementMap in='SourceGraphic' scale='7'/></filter><radialGradient id='g'><stop offset='0' stop-color='#1e1008'/><stop offset='.45' stop-color='#4a2810'/><stop offset='.8' stop-color='#8a5a2c' stop-opacity='.55'/><stop offset='1' stop-color='#a47444' stop-opacity='0'/></radialGradient></defs><ellipse cx='30' cy='31' rx='17' ry='13' fill='url(#g)' filter='url(#r)'/></svg>",
+  };
+  const PAPER_SKIN = /^(report|ledger|memo|news|lab|transcript|plain)$/; // 증거물인 편지·전보·카드는 깨끗이 둔다
+  const SMOKE_ERA = /^c0[4-8]$|^c11$/;
+  function docMarks(d, skin) {
+    if (!C || C.graphic || d.clean || !PAPER_SKIN.test(skin) || C.frame !== 'papers') return ''; // 화면 속 파일(노트북·모니터)에는 없다
+    const h = hash(d.id + '~'), at = (k, x, y) => `<span class="mark mk-${k}" style="--x:${x}%;--y:${y}%;--r:${(h >> 4) % 360}deg" aria-hidden="true"></span>`;
+    let out = '';
+    if (h % 6 === 1) out += at('ring', (h >> 2) % 2 ? 74 + (h >> 6) % 16 : -10 + (h >> 6) % 12, (h >> 3) % 2 ? -8 + (h >> 8) % 10 : 72 + (h >> 8) % 18);
+    if (SMOKE_ERA.test(C.id) && h % 11 === 4) out += at('burn', 6 + (h >> 5) % 84, 8 + (h >> 7) % 80);
+    return out;
+  }
   function docStains(d) {
     if (!gore() || d.blood === false) return '';
-    if (d.blood === 'heavy') return stains(d.id, 4, 'aacbd', false);
-    if (d.blood === true || hash(d.id) % 3 === 0) return stains(d.id, 1 + (hash(d.id) % 2), 'abd', true);
+    if (d.blood === 'heavy') return stains(d.id, 4, 'aacbdef', false);
+    if (d.blood === true || hash(d.id) % 3 === 0) return stains(d.id, 1 + (hash(d.id) % 2), 'abdef', true);
     return '';
   }
 
@@ -124,7 +146,8 @@
   function injectCss() {
     const st = document.createElement('style');
     st.id = 'stain-css';
-    st.textContent = Object.entries(STAIN_SVG).map(([k, v]) => `.st-${k}{background-image:url("data:image/svg+xml,${encodeURIComponent(v)}")}`).join('\n');
+    st.textContent = Object.entries(STAIN_SVG).map(([k, v]) => `.st-${k}{background-image:url("data:image/svg+xml,${encodeURIComponent(v)}")}`)
+      .concat(Object.entries(MARK_SVG).map(([k, v]) => `.mk-${k}{background-image:url("data:image/svg+xml,${encodeURIComponent(v)}")}`)).join('\n');
     document.head.appendChild(st);
     const css = MG.cases.map(c => c.css || '').join('\n');
     if (!css.trim()) return;
@@ -258,7 +281,8 @@
     if (!ST.seen.includes(d.id)) { ST.seen.push(d.id); save(); }
     const skin = d.skin || s.skin || 'plain';
     const paper = d.paper || s.paper;
-    return `<article class="doc skin-${esc(skin)}${d.cls ? ' ' + esc(d.cls) : ''}"${d.bar ? ` style="--bar:${esc(d.bar)}"` : ''}>${docStains(d)}
+    const marks = docMarks(d, skin);
+    return `<article class="doc skin-${esc(skin)}${d.cls ? ' ' + esc(d.cls) : ''}${marks ? ' marked' : ''}"${d.bar ? ` style="--bar:${esc(d.bar)}"` : ''}>${docStains(d)}${marks}
       <header class="doc-h">${paper ? `<p class="doc-paper">${inline(paper)}</p>` : ''}${d.kicker ? `<p class="doc-k">${inline(d.kicker)}</p>` : ''}<h3 class="doc-t">${inline(d.title)}</h3>${d.meta ? `<p class="doc-m">${inline(d.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(d.body, d.id, plain(d.title))}</div></article>`;
   }
@@ -765,14 +789,49 @@
   }
 
   /* ───────── screens ───────── */
+  // 책상 위 소품: 그 시대 책상에 있을 법한 물건을 종이 밑에 깔린 듯 가장자리에 둔다 (책상이 드러나는 넓은 화면에서만).
+  // 자리: 왼쪽 위 · 왼쪽 아래 · 오른쪽 위 · 오른쪽 아래. 사건 파일의 desk: [...] 가 있으면 그것을 쓴다.
+  const DESK = {
+    c00: ['takeaway', 'pencil', 'smartphone', 'clips'], c01: ['teacup', 'magnifier', 'pocketwatch', 'clips'],
+    c02: ['teacup', 'pencil', 'pocketwatch', 'matchbox'], c03: ['inkpen', 'magnifier', 'pocketwatch', 'clips'],
+    c04: ['ashtray', 'pencil', 'matchbox', 'clips'], c05: ['mug', 'pencil', 'ashtray', 'glasses'],
+    c06: ['mug', 'inkpen', 'magnifier', 'glasses'], c07: ['ashtray', 'pencil', 'stamp', 'matchbox'],
+    c08: ['mug', 'cassette', 'ashtray', 'clips'], c09: ['mug', 'pencil', 'flipphone', 'clips'],
+    c10: ['takeaway', 'pencil', 'glasses', 'clips'], c11: ['mug', 'pencil', 'ashtray', 'stamp'],
+    c12: ['mug', 'glasses', 'pager', 'clips'],
+  };
+  const PROPW = { mug: 210, teacup: 230, takeaway: 170, pocketwatch: 170, magnifier: 240, inkpen: 230, ashtray: 200, matchbox: 120, cassette: 200, pager: 130, flipphone: 120, smartphone: 150, pencil: 300, clips: 120, stamp: 190, glasses: 210 };
+  function deskProps() {
+    const list = (C.desk || DESK[C.id] || []).filter(k => MG.images['_desk/' + k]);
+    if (!list.length) return '';
+    return `<div class="desk-props" aria-hidden="true">${list.slice(0, 4).map((k, i) => {
+      const h = hash(C.id + k), r = k === 'pencil' ? 58 + h % 30 : (h % 50) - 25;
+      return `<img class="prop p${i} k-${k}" src="${esc(MG.images['_desk/' + k])}" alt="" loading="lazy" decoding="async" style="--w:${PROPW[k] || 180}px;--r:${r}deg">`;
+    }).join('')}</div>`;
+  }
+  // 노트북·모니터 화면 아래 시계: 그 사건을 들여다보는 날의 오후에서 시작해, 실제로 흐른 시간만큼 간다
+  const CLOCK = { c00: [2025, 10, 16, 14, 20], c09: [2006, 10, 27, 16, 5], c10: [2014, 12, 4, 15, 40] };
+  let clockT = null;
+  function clockBar() {
+    const c = C.clock || CLOCK[C.id];
+    if (!c || C.frame === 'papers') return '';
+    const ico = C.frame === 'laptop' ? '<svg viewBox="0 0 34 12" aria-hidden="true"><path d="M2 5.5a7 7 0 0 1 10 0M4 7.5a4.2 4.2 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="9.6" r="1.1" fill="currentColor"/><rect x="17" y="3" width="13" height="7" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.1"/><rect x="18.6" y="4.6" width="7" height="3.8" fill="currentColor"/><rect x="30.4" y="5" width="1.6" height="3" fill="currentColor"/></svg>' : '';
+    return `<div class="scr-bar" aria-hidden="true">${ico}<time class="scr-clock" data-t0="${new Date(c[0], c[1] - 1, c[2], c[3], c[4]).getTime()}" data-at="${Date.now()}"></time></div>`;
+  }
+  function tickClock() {
+    const el = $('.scr-clock');
+    if (!el) { clearInterval(clockT); clockT = null; return; }
+    const d = new Date(+el.dataset.t0 + (Date.now() - +el.dataset.at)), h = d.getHours();
+    el.textContent = `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()}. (${'일월화수목금토'[d.getDay()]})  ${h < 12 ? '오전' : '오후'} ${h % 12 || 12}:${pad(d.getMinutes())}`;
+  }
   function renderCase() {
     document.body.dataset.screen = 'case';
-    app.innerHTML = `${gore() ? `<div class="gore-bg" aria-hidden="true">${stains(C.id + 'bg', 5, 'aacb', true)}</div>` : ''}<div class="case-view" data-case="${esc(C.id)}" data-frame="${esc(C.frame || 'papers')}"${gore() ? ' data-graphic' : ''}>
+    app.innerHTML = `${deskProps()}${gore() ?`<div class="gore-bg" aria-hidden="true">${stains(C.id + 'bg', 5, 'aacb', true)}</div>` : ''}<div class="case-view" data-case="${esc(C.id)}" data-frame="${esc(C.frame || 'papers')}"${gore() ? ' data-graphic' : ''}>
       <main class="stage" aria-label="조사 자료">
         <div class="stage-frame"><span class="cam" aria-hidden="true"></span>
           <div class="screen">
             <nav class="src-tabs" role="tablist" id="srcTabs" aria-label="조사 도구"></nav>
-            <div class="stage-body" id="stageBody"><section class="pane-list" id="paneList" aria-label="목록"></section><section class="pane-read" id="paneRead" aria-label="읽기"></section></div>
+            <div class="stage-body" id="stageBody"><section class="pane-list" id="paneList" aria-label="목록"></section><section class="pane-read" id="paneRead" aria-label="읽기"></section></div>${clockBar()}
           </div>
         </div>
         <div class="frame-foot" aria-hidden="true"></div>
@@ -782,11 +841,12 @@
     </div>`;
     PIN = {};
     renderTabs(); renderList(); renderRead(); renderNotebook();
+    if ($('.scr-clock')) { tickClock(); clockT ||= setInterval(tickClock, 15000); }
   }
   // 사건마다 쓰는 특수 글꼴은 그 사건을 열 때만 부른다 (공통 글꼴은 index.html). 신문 양식은 송명·옛 로마자를 쓴다.
   // 손글씨 편지는 쓴 사람마다 필체가 다르다 (문서 cls 의 f-yeon · f-dokdo …)
   const FONTS = { old: 'Song+Myung', latin: 'Old+Standard+TT:wght@400;700', frak: 'UnifrakturMaguntia', jp: 'Noto+Serif+JP:wght@700;900',
-    yeon: 'Yeon+Sung', dokdo: 'Dokdo', gaegu: 'Gaegu:wght@400;700', dohyeon: 'Do+Hyeon', melody: 'Hi+Melody' };
+    yeon: 'Yeon+Sung', dokdo: 'Dokdo', gaegu: 'Gaegu:wght@400;700', dohyeon: 'Do+Hyeon', melody: 'Hi+Melody', bhs: 'Black+Han+Sans' };
   const fontOn = {};
   function caseFonts(c) {
     if (!c._fonts) {

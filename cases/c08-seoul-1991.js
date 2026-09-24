@@ -626,7 +626,8 @@
       sg_jang: { svg: SG({ top: 14, fw: 42, gap: 5, end: -12, rasp: true }), use: '성문 (합성음 스펙트로그램을 직접 만든다)', made: true, swap: 'svg', raster: true },
       sg_tak: { svg: SG({ top: 12, fw: 42, gap: 5, end: 12, rasp: true, stop: 176 }), use: '성문 (합성음 스펙트로그램을 직접 만든다)', made: true, swap: 'svg', raster: true },
     },
-    css: `[data-case="c08"] .doc.pager{background-color:#dfe4d6;border-top:10px solid #3f4a3a}
+    css: `[data-case="c08"] .skin-news .doc-paper{font:36px/1.1 var(--f-bhs);letter-spacing:.14em}
+[data-case="c08"] .doc.pager{background-color:#dfe4d6;border-top:10px solid #3f4a3a}
 [data-case="c08"] .doc.pager .b-div{color:#2f3a2c;opacity:.9}
 [data-case="c08"] .skin-transcript .b-p{color:#51585e;font-style:italic}`,
   });

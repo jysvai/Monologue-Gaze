@@ -570,9 +570,9 @@
         svg: `<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#d3cbb4"/><path d="M26 70 L100 40 L174 70 Z" fill="#55524a"/><rect x="36" y="70" width="128" height="60" fill="#a39a82"/><rect x="88" y="90" width="24" height="40" fill="#3b3a36"/><line x1="140" y1="52" x2="140" y2="14" stroke="${G}" stroke-width="2"/><path d="M126 20 H154 M130 28 H150" stroke="${G}" stroke-width="2"/></svg>`,
         prompt: 'Black-and-white photo of a modest tile-roofed single-storey house in an early-1970s Seoul alley, cement wall and blue-painted iron gate, a brand-new television antenna mast standing out on the roof, laundry line, overcast spring day, a child\'s bicycle leaning on the wall, grainy.' },
     },
-    css: `[data-case="c07"] .skin-report{background-color:#e7e0c9}
+    css: `[data-case="c07"] .skin-news .doc-paper{font:900 38px/1.1 var(--f-old);letter-spacing:.32em}
+[data-case="c07"] .skin-report{background-color:#e7e0c9}
 [data-case="c07"] .skin-ledger{background-color:#e9dfc3}
-[data-case="c07"] .skin-news .doc-paper{font-family:var(--f-old);letter-spacing:.3em}
 [data-case="c07"] .evtag{letter-spacing:.02em}`,
   });
 })();

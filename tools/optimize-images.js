@@ -14,13 +14,15 @@ const SRC = '_src';
 // 가로 최대 픽셀과 품질. 화면에서 가장 넓게 쓰이는 곳(문서 폭 760px)의 두 배 정도면 충분하다.
 const RULE = { '_global/hero': [1920, 80], '_global/desk': [1024, 80], '_global/paper': [1024, 82], '_global/warn': [600, 90] };
 const DEF = [1280, 78];
+// 폴더마다 정한 크기: 책상 소품(_desk)은 화면에서 200px 남짓이라 작게
+const DIRRULE = { _desk: [600, 82] };
 
 let n = 0, before = 0, after = 0;
 fs.readdirSync(img, { withFileTypes: true }).filter(d => d.isDirectory() && d.name !== SRC).forEach(dir => {
   fs.readdirSync(path.join(img, dir.name)).filter(f => /\.(png|jpe?g)$/i.test(f)).forEach(f => {
     const key = path.basename(f, path.extname(f));
     const id = `${dir.name}/${key}`;
-    const [w, q] = RULE[id] || DEF;
+    const [w, q] = RULE[id] || DIRRULE[dir.name] || DEF;
     const inp = path.join(img, dir.name, f);
     const out = path.join(img, dir.name, key + '.webp');
     const alpha = id === '_global/warn' || /\.png$/i.test(f) && fs.readFileSync(inp).readUInt8(25) === 6; // PNG 색 형식 6 = RGBA
