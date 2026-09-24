@@ -86,6 +86,8 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
 .case-view[data-frame="laptop"] .item{--card:#fffdf8;margin-bottom:6px;border:1px solid #e0d9c8;border-radius:7px;box-shadow:0 1px 1px rgba(60,50,30,.06)}
 .case-view[data-frame="laptop"] .item:hover{background-color:#fff}
 .case-view[data-frame="laptop"] .item.on{border-color:transparent;box-shadow:0 0 0 2px #3d6bc4}
+/* 종이 기록철에서 아직 안 본 서류는 빨간 점 대신 모서리에 붙인 붉은 색인 쪽지 */
+.case-view[data-frame="papers"] .item.new::after{top:9px;right:-6px;width:12px;height:18px;border-radius:0 2px 2px 0;background:linear-gradient(90deg,#9c2e25,#b8453a 40%,#b0342a);box-shadow:1px 1px 1px rgba(0,0,0,.25);opacity:.92}
 /* ───────── 조회·청구 양식: 시대마다 다른 서식 ───────── */
 /* 종이 기록철: 붉은 괘선 청구 용지에 펜으로 적고, 도장처럼 찍어 넣는다 */
 .case-view[data-frame="papers"] .q-f{position:relative;gap:10px;padding:12px 16px 14px;background-color:#f4ecd6;background-image:var(--noise),repeating-linear-gradient(180deg,transparent 0 31px,rgba(176,52,42,.14) 31px 32px);border:1px solid rgba(90,60,30,.32);box-shadow:0 2px 7px rgba(0,0,0,.2);transform:rotate(-.35deg)}
