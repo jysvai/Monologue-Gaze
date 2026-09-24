@@ -220,6 +220,7 @@ window.MG.images = {
   "c13/alley_day": "img/c13/alley_day.webp?v=fb4eac48",
   "c13/bread": "img/c13/bread.webp?v=63a6d05a",
   "c13/cctv_drop": "img/c13/cctv_drop.webp?v=93029ff9",
+  "c13/cctv_pick": "img/c13/cctv_pick.webp?v=98883136",
   "c13/cover": "img/c13/cover.webp?v=15597da9",
   "c13/cover_s": "img/c13/cover_s.webp?v=1495581b",
   "c13/door": "img/c13/door.webp?v=4606f206",
