@@ -1,7 +1,7 @@
 # Monologue Gaze — 이미지 프롬프트 모음
 
 > 이 파일은 `node tools/prompts.js` 로 자동 생성됩니다. 프롬프트를 고치려면 각 사건 파일(`cases/*.js`)의 `art` 항목을 고친 뒤 다시 생성하세요.
-총 **195장**.
+총 **201장**.
 
 
 ## 쓰는 법
@@ -226,10 +226,11 @@ Hand-drawn 1888 London police beat map, pen and ink with pale watercolour washes
 
 ## CASE 02 · 하젤외드의 열흘 (1923, 바이에른 켈바흐 군 오버뢰딩 (가상 지명))
 
-- 사건 파일: `cases/c02-bavaria-1922.js` · 이미지 16장 · 난이도 ★★★★
+- 사건 파일: `cases/c02-bavaria-1922.js` · 이미지 18장 · 난이도 ★★★★
+- **혐오감 주의 사건 (빨간 별)**: 폴더 표지에는 게임이 「혐오감 주의」 스티커를 붙이고 흐리게 처리한다. 🔞 그림은 흐리게 가려진 채 나오고 눌러야 보인다. **수위** — 범행 흔적은 진하게: 벽의 비산흔, 바닥의 낙하흔, 닦아 낸 호 모양 자국, 줄눈·배수구에 스민 피, 피가 밴 포대·봉투, 루미놀 반응. 시신은 천·방수포·포대·봉투에 가려진 채로, 손·아래팔·발, 비닐 너머 비치는 팔다리 윤곽, 매듭에 걸린 머리카락 정도까지. 절단면·장기·상처·죽은 사람의 얼굴은 넣지 않는다. 생성 AI 가 거절하면 한 단계 낮춰(예: 손 → 비닐 너머 윤곽) 다시 만들고 저장한다.
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
-Early 1920s Bavarian police and press photography: silver gelatin print from a glass-plate camera, heavy grain, warm sepia toning, soft vignetting, faint dust and scratches, cold overcast winter daylight and deep snow. Documentary, still and quiet. No readable text, no faces, no bodies, no blood.
+Early 1920s Bavarian police and press photography: silver gelatin print from a glass-plate camera, heavy grain, warm sepia toning, soft vignetting, faint dust and scratches, cold overcast winter daylight and deep snow. Documentary, still and quiet. Where the scene calls for it, dried and frozen blood is shown plainly and specifically (pooled into straw and floorboards, spattered low on posts and walls, dragged in wide swept trails), and the dead stay covered: under hay, planks or linen sheets, at most a sleeved forearm showing. No wounds, no faces, no readable text.
 ```
 
 ### c02/plan — 지도 (글자는 게임이 얹는다)
@@ -264,11 +265,13 @@ Interior of a 1920s Bavarian farmhouse kitchen photographed for a police inspect
 Dim interior of an old Bavarian cattle stable in winter 1923: a row of thin brown cows standing in straw, wooden hay racks holding only scraps of hay, an overturned tin milk pail beside a pig trough, a wooden ladder leading up to a hay loft, weak light from a small frosted window. Documentary police photograph.
 ```
 
-### c02/suitcase — 하녀 방 검증 조서 — 짐을 풀지 않은 가방
+### c02/suitcase — 하녀 방 검증 조서 — 짐을 풀지 않은 가방과 문 쪽 바닥의 핏자국 🔞 열람 주의
 - 저장 경로: `img/c02/suitcase.webp` · 비율: 4:3
 ```
-A servant's small bare room in a 1920s Bavarian farmhouse: a narrow wooden bed with a plain sheet, and beside it an old brown leather-cornered suitcase with its straps undone but still fully packed, the edge of a folded white apron showing, an empty candlestick on the windowsill. Cold, quiet, no people.
+Police inspection photograph of a servant's small bare room in a 1920s Bavarian farmhouse, taken from the doorway after the body was removed: a narrow wooden bed with a plain sheet, smooth and never slept in, and beside it an old brown leather-cornered suitcase with its straps undone but still fully packed, the edge of a folded white apron showing, an empty candlestick on the windowsill, a single coat on a wall peg. In the foreground, just inside the door, the bare pine floorboards carry a large dark dried bloodstain about a metre across, soaked into the grain and running along the gaps between the boards toward the threshold; fine dark spatter on the whitewashed wall and on the door frame, most of it below waist height and thickest near the floor. Nothing wiped, nothing moved. Cold, quiet, no people.
 ```
+- **꼭 보여야 할 것**: 짐을 풀지 않은 가방 · 누운 흔적 없는 침대 · 앞쪽 문 안쪽 널바닥에 스며 검게 굳은 큰 핏자국 · 문설주와 벽의 허리 아래 비산흔
+- 주의: 시신은 없다 (수습한 뒤). 상처·얼굴 없음.
 
 ### c02/calendar — 안방 검증 조서 — 벽의 뜯는 달력과 십자가
 - 저장 경로: `img/c02/calendar.webp` · 비율: 4:3
@@ -320,6 +323,22 @@ Small-town newspaper advertisement illustration from the 1920s in woodcut style:
 A new hand-forged iron box lock for a farmhouse door with two large iron keys, lying on a sooty wooden shelf in a village blacksmith's forge in 1923, faint glowing embers out of focus in the background. The lock and keys are brand-new and unrusted: bright freshly filed iron, crisp edges, clearly never used.
 ```
 - **꼭 보여야 할 것**: 새것인 자물쇠 (찾아가지 않은 새 주문품)
+
+### c02/barn_floor — 헛간 검증 조서 — 앞문 안쪽 짚 바닥의 언 핏자국과 덮인 구석 🔞 열람 주의
+- 저장 경로: `img/c02/barn_floor.webp` · 비율: 4:3
+```
+Police inspection photograph, February 1923, inside the dim timber barn of a remote Bavarian farm, taken from just inside the big front door. On the straw-strewn earth floor in the foreground, three dark pools of frozen blood soaked deep into the straw, each marked with a small white numbered card; from each pool a wide swept trail runs through the straw back to the far corner, bare earth showing along it, its edges smeared dark. In that corner a heap of hay with an unhinged wooden plank door laid flat on top of it and a fourth numbered card; from under the edge of the hay only one stiff forearm in a dark woollen sleeve shows, the hand turned down. On the inner wooden post, below waist height, fine dark spatter; on the underside of the low crossbeam overhead a single line of elongated drops. Hobnailed boot prints pressed into the frozen surface of the nearest pool. On the plank wall a tool rack holding a pitchfork, a shovel and an axe, with one empty peg. Grey winter light through the open door, frost on the beams, no people standing.
+```
+- **꼭 보여야 할 것**: 앞쪽 짚 바닥의 언 핏자국 웅덩이 셋 (번호표) · 웅덩이마다 안쪽 구석까지 짚이 쓸린 넓은 자국 · 구석 건초 더미 위에 얹힌 문짝과 그 밑으로 나온 소매 입은 아래팔 하나 · 안쪽 기둥 허리 아래 비산흔과 들보 아랫면의 한 줄 핏방울 · 웅덩이 위 징 박은 장화 자국 · 연장 걸이의 빈 못
+- 주의: 시신은 건초와 문짝에 덮인 채 아래팔 하나까지만. 상처·얼굴은 보이지 않게.
+
+### c02/autopsy_table — 검안 소견 — 헛간 타작마당 널판 위, 흰 천을 덮은 네 사람 🔞 열람 주의
+- 저장 경로: `img/c02/autopsy_table.webp` · 비율: 4:3
+```
+Police file photograph, February 1923, on the threshing floor of a Bavarian farm barn: four long shapes lying side by side on rough planks laid across wooden trestles, each completely covered by a coarse white linen sheet, a dark brownish-red stain seeping through the linen at the head end of every sheet. In front, a country doctor's worn leather bag standing open, an enamel basin of pinkish water with a stained cloth draped over its rim, a folding wooden rule and a pair of long scissors on a stool. A paraffin lantern hangs from a beam; cold grey daylight from the half-open barn door, frost on the timber. No people.
+```
+- **꼭 보여야 할 것**: 흰 천을 덮은 형체 넷이 널판 위에 나란히 · 천마다 머리 쪽에 배어 나온 핏자국 · 앞쪽 왕진 가방과 불그스름한 물이 든 대야, 가위
+- 주의: 천 밖으로 몸이 나오지 않게. 상처·얼굴 없음.
 
 ### c02/sk_kitchen — 정밀 관찰 사진
 - 저장 경로: `img/c02/sk_kitchen.webp` · 비율: 3:2
@@ -511,10 +530,11 @@ A detective's hand-drawn map of a Tokyo suburb in 1968, pencil and coloured penc
 
 ## CASE 05 · 모래시계의 편지 (1968–1969, 캘리포니아 카브릴로 만 연안 (가상 지명))
 
-- 사건 파일: `cases/c05-westcoast-1969.js` · 이미지 16장 · 난이도 ★★★★
+- 사건 파일: `cases/c05-westcoast-1969.js` · 이미지 18장 · 난이도 ★★★★
+- **혐오감 주의 사건 (빨간 별)**: 폴더 표지에는 게임이 「혐오감 주의」 스티커를 붙이고 흐리게 처리한다. 🔞 그림은 흐리게 가려진 채 나오고 눌러야 보인다. **수위** — 범행 흔적은 진하게: 벽의 비산흔, 바닥의 낙하흔, 닦아 낸 호 모양 자국, 줄눈·배수구에 스민 피, 피가 밴 포대·봉투, 루미놀 반응. 시신은 천·방수포·포대·봉투에 가려진 채로, 손·아래팔·발, 비닐 너머 비치는 팔다리 윤곽, 매듭에 걸린 머리카락 정도까지. 절단면·장기·상처·죽은 사람의 얼굴은 넣지 않는다. 생성 AI 가 거절하면 한 단계 낮춰(예: 손 → 비닐 너머 윤곽) 다시 만들고 저장한다.
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
-1969 American newspaper wire photo and police file photography, Northern California coast: black-and-white 35mm Tri-X, heavy grain, harsh on-camera flash at night, coastal fog and sodium streetlight glow, halftone dot texture when reproduced in the newspaper, late-1960s cars, phone booths and street furniture without brand logos. No readable text, no recognizable faces, no bodies, no blood, no weapons shown.
+1969 American newspaper wire photo and police file photography, Northern California coast: black-and-white 35mm Tri-X, heavy grain, harsh on-camera flash at night, coastal fog and sodium streetlight glow, halftone dot texture when reproduced in the newspaper, late-1960s cars, phone booths and street furniture without brand logos. Police scene photographs may show dark dried blood traces (fine spatter on upholstery, pooled stains soaked into seats, smeared palm marks on doors, drops on gravel), shattered safety glass and forms completely covered by grey blankets. No wounds, no exposed bodies, no recognizable faces, no weapons, no readable text.
 ```
 - **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.
 
@@ -545,17 +565,33 @@ A 1969 police artist composite pencil sketch of a generic man around thirty with
 ```
 - 주의: 실존 인물(실제 사건의 몽타주 포함)을 닮지 않게.
 
-### c05/masonhill — 메이슨 힐 전망대 주차장 (사건 뒤 낮 풍경)
+### c05/masonhill — 메이슨 힐 전망대 주차장 (사건 이튿날 아침, 아직 서 있는 피해 차량) 🔞 열람 주의
 - 저장 경로: `img/c05/masonhill.webp` · 비율: 16:9
 ```
-An empty gravel lookout parking area on a coastal hill in the morning fog, a low wooden guard rail, the bay faintly visible below, a single sheriff patrol car parked far away, tire marks in the gravel, 1968 Northern California, desolate and quiet.
+A gravel lookout parking area on a coastal hill in the grey morning fog after a night shooting: the early-1960s sedan of the two victims still parked against a low wooden guard rail, its driver window half lowered, a grey blanket thrown over the windshield so nothing inside can be seen, small numbered evidence markers on the gravel within a metre of the driver door, dark dried stains on the gravel and running down the lower edge of the door, one deputy standing far off with his back turned, the bay faintly visible below, 1968 Northern California newspaper photo, desolate and quiet.
 ```
+- **꼭 보여야 할 것**: 반쯤 내린 운전석 창 · 운전석 문 옆 자갈 위 번호표와 마른 얼룩
 
-### c05/cedar — 시더 크릭 트레일 주차장 (다음 날 아침)
+### c05/cedar — 시더 크릭 트레일 주차장 (다음 날 아침, 줄을 둘러친 피해 차량) 🔞 열람 주의
 - 저장 경로: `img/c05/cedar.webp` · 비율: 16:9
 ```
-A small dirt trailhead parking lot among redwood trees at dawn, mist between the trunks, a wooden trail sign with illegible text, a police barricade sawhorse, no vehicles except a distant patrol car, 1969 Northern California.
+A small dirt-and-gravel trailhead parking lot among redwood trees at dawn, mist between the trunks. Inside a rope cordon stands a 1960s two-door sedan: its passenger-side window smashed out, only jagged glass edges left in the frame, glass crumbs glinting on the ground; a dark smeared palm print on the rear fender and a dark patch soaked into the gravel about two metres behind the passenger-side rear wheel; small numbered evidence markers in a half-circle beside the passenger door. A police sawhorse barricade, a wooden trail sign with illegible text, a distant patrol car, 1969 Northern California.
 ```
+- **꼭 보여야 할 것**: 조수석 창이 깨진 차 · 뒤 펜더의 손바닥 자국과 조수석 뒤쪽 자갈의 짙은 얼룩 · 조수석 옆 반원 모양 번호표
+
+### c05/mh_car — 검시 보고서 첨부 — 메이슨 힐 현장, 앞좌석의 두 사람 (담요로 덮음) 🔞 열람 주의
+- 저장 경로: `img/c05/mh_car.webp` · 비율: 4:3
+```
+Police flash photograph at night, December 1968: an early-1960s sedan parked at the edge of a gravel lookout lot, seen from the front-left corner, black night and fog beyond the reach of the flash. The driver window is half lowered. Through the windshield two human forms sit slumped in the front seats, each completely covered by a grey wool blanket, nothing of the bodies visible but the blanket shapes. The radio dial glows faintly on the dashboard. Fine dark spatter on the inside of the driver window glass and a dark run down the outer door sill; small numbered evidence markers stand on the gravel beside the driver door where a few brass casings lie. No faces, no wounds, no weapons, no readable text.
+```
+- **꼭 보여야 할 것**: 반쯤 내린 운전석 창 · 담요로 덮인 앞좌석의 두 형체 · 운전석 문 옆 자갈 위 번호표 · 계기판의 라디오 불빛
+
+### c05/cedar_car — 감식 사진 — 깨진 조수석 창 너머 차 안 (섬광 촬영) 🔞 열람 주의
+- 저장 경로: `img/c05/cedar_car.webp` · 비율: 4:3
+```
+Police flash photograph at night, May 1969, taken from outside the passenger side of an early-1960s two-door sedan, looking in through the smashed-out passenger window; only jagged edges of safety glass remain in the frame. Inside: the empty bench seat glittering with crumbs of glass, dozens of small dark spatter dots across the passenger seat back, the headrest and the pale headliner, a dark pool soaked into the passenger seat cushion, and on the far side dark smeared palm marks on the inside driver door handle and window frame. No people, no bodies, no weapons, no readable text.
+```
+- **꼭 보여야 할 것**: 창틀에 가장자리만 남은 조수석 창 · 좌석 위 유리 알갱이 · 등받이와 천장의 작은 비산흔 수십 점 · 시트에 스민 고인 얼룩 · 건너편 운전석 문 손잡이의 손자국
 
 ### c05/payphone — 도크 스트리트 주유소 옆 공중전화 — 줄에 매달린 수화기
 - 저장 경로: `img/c05/payphone.webp` · 비율: 3:4
@@ -625,10 +661,11 @@ Evidence photograph on a grey board, 1969: on the left a plain white envelope, f
 
 ## CASE 06 · 크비트달의 여인 (1969, 노르웨이 서해안 헬레순 (가상 지명))
 
-- 사건 파일: `cases/c06-norway-1970.js` · 이미지 13장 · 난이도 ★★★★★
+- 사건 파일: `cases/c06-norway-1970.js` · 이미지 15장 · 난이도 ★★★★★
+- **혐오감 주의 사건 (빨간 별)**: 폴더 표지에는 게임이 「혐오감 주의」 스티커를 붙이고 흐리게 처리한다. 🔞 그림은 흐리게 가려진 채 나오고 눌러야 보인다. **수위** — 범행 흔적은 진하게: 벽의 비산흔, 바닥의 낙하흔, 닦아 낸 호 모양 자국, 줄눈·배수구에 스민 피, 피가 밴 포대·봉투, 루미놀 반응. 시신은 천·방수포·포대·봉투에 가려진 채로, 손·아래팔·발, 비닐 너머 비치는 팔다리 윤곽, 매듭에 걸린 머리카락 정도까지. 절단면·장기·상처·죽은 사람의 얼굴은 넣지 않는다. 생성 AI 가 거절하면 한 단계 낮춰(예: 손 → 비닐 너머 윤곽) 다시 만들고 저장한다.
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
-1969 Norwegian police and press photography on 35mm film: Tri-X style black-and-white grain for police documentation, faded early colour film with a cool blue-green cast for everything else; overcast west-coast light, wet rock, heather and harbour mist. Documentary and quiet. No readable text, no faces, no bodies.
+1969 Norwegian police and press photography on 35mm film: Tri-X style black-and-white grain for police documentation, faded early colour film with a cool blue-green cast for everything else; overcast west-coast light, wet rock, heather and harbour mist. Documentary and quiet. No readable text, no faces. Graphic content is limited to fire traces and covered remains: heather burned down to black ash, soot-streaked rock, charred and melted personal belongings, and a body kept fully covered under a grey tarp or white sheet with only its outline and soot seeping through the cloth: no burned skin or flesh, no wounds, no faces.
 ```
 - **생성 규칙 v2 적용**: 공통 스타일 뒤에 맨 위 「추가 스타일」 문단도 붙인다.
 
@@ -648,14 +685,31 @@ Police evidence photograph, 1969: two worn 1960s suitcases, one brown leather an
 ### c06/valley — 신문 10월 20일자 — 크비트달 등산로
 - 저장 경로: `img/c06/valley.webp` · 비율: 4:3
 ```
-Newspaper photograph of a remote rocky valley above a small Norwegian west-coast town in late October 1969: a narrow hiking path winding up between boulders, heather and a few bare birches, low cloud on the ridges, wet stone, no people. Coarse halftone newsprint look.
+Newspaper photograph of a remote rocky valley above a small Norwegian west-coast town in late October 1969: a narrow hiking path winding up between boulders, heather and a few bare birches, low cloud on the ridges, wet stone. On the right, below a steep boulder slope some sixty metres off the path, a small dark scorched patch in the heather and a black soot streak on the rock above it, three tiny distant figures of policemen in long coats standing around it, one holding a folded grey tarp. Taken from far away, nothing at the patch itself can be made out. Coarse halftone newsprint look.
 ```
+- **꼭 보여야 할 것**: 오른쪽 바위 비탈 아래 까맣게 탄 작은 자리와 바위의 그을음 · 그 둘레에 멀리 선 경찰 셋 (자리 안은 알아볼 수 없게)
 
 ### c06/thermos — 현장 유류품 1호 — 히스 덤불 속 보온병 뚜껑 컵
 - 저장 경로: `img/c06/thermos.webp` · 비율: 4:3
 ```
 Police close-up photograph of the screw-on cup lid of a 1960s vacuum flask lying in wet purple heather on a rocky Norwegian hillside, a dark coffee stain inside the cup, a blank evidence number card beside it. Overcast light, 35mm black-and-white film.
 ```
+
+### c06/scene_hollow — 현장 사진 3호 — 바위 비탈 밑 불탄 자리 (방수포로 덮은 시신) 🔞 열람 주의 🔁 다시 뽑기
+- 저장 경로: `img/c06/scene_hollow.webp` · 비율: 4:3
+```
+Black-and-white 1969 Norwegian police scene photograph on 35mm Tri-X, overcast afternoon after rain, wet rock: the foot of a steep grey boulder slope where a shallow hollow in the heather has burned. A ring about two metres across of heather burned down to black ash and stubble, singed brown tips beyond it, and on the rock face above a tongue of black soot rising to head height. In the middle of the ring a human form lies on its back under a grey canvas tarp, only its outline showing: the arms bent at the elbows and raised in front of the chest so the tarp tents up over them, the knees slightly bent. Around it, each with a small blank white numbered card: the black wire skeleton of a burnt folding umbrella by the right shoulder, two small opaque 1960s polyethylene bottles (squat, white and brown, like household cleaner flasks, not clear water bottles) melted into shapeless blackened lumps, lying on the ash about half a metre beyond the foot end of the tarp and clearly separate from it, a charred matchbox wedged in a rock crack above the head. The muddy rubber boots of a policeman at the frame edge, raindrops beading on the tarp, heavy grain.
+```
+- **꼭 보여야 할 것**: 지름 2m쯤 까맣게 탄 히스 고리 · 바위 벽을 사람 키만큼 타고 오른 그을음 · 방수포 아래로 가슴 앞에 들린 두 팔의 윤곽 · 번호표가 붙은 우산 뼈대(어깨 곁)·녹은 병 둘(발치)·성냥갑(머리 위 바위틈)
+- 주의: 방수포는 끝까지 덮인 채로. 탄 피부·살·상처·얼굴은 보이지 않게.
+
+### c06/autopsy_sheet — 시립병원 병리과 부검실 — 흰 천 아래 오그라든 형체 🔞 열람 주의
+- 저장 경로: `img/c06/autopsy_sheet.webp` · 비율: 4:3
+```
+Black-and-white 1969 photograph of a small Norwegian hospital pathology room: white tiled walls, a single enamel lamp hanging low over a steel autopsy table. On the table a body lies completely covered by a white sheet, and the shape under the sheet is wrong: the cloth is lifted over forearms bent at the elbows and raised in front of the chest with the hands clenched, and over knees slightly drawn up. Grey-black soot smudges have come through the cloth over the chest and where the face would be. On a side tray a blank dental chart form showing only printed tooth outlines, a dental mirror and probe; a hanging scale and a folded stack of clean towels (no specimen jars, no organs anywhere in the room); a pathologist in a white coat seen from behind writing at a desk by a tall window. Cold daylight, grain.
+```
+- **꼭 보여야 할 것**: 천이 가슴 앞으로 들린 두 팔과 조금 굽은 무릎 위로 솟아 있다 · 가슴과 얼굴 자리에 배어 나온 그을음 · 옆 쟁반의 치과 차트(치아 그림만)와 치경
+- 주의: 천은 끝까지 덮인 채로. 탄 피부·살·상처·얼굴은 보이지 않게. 차트에 읽히는 글자 없이.
 
 ### c06/suitcases — 역 보관소 가방 두 개의 내용물
 - 저장 경로: `img/c06/suitcases.webp` · 비율: 4:3

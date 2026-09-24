@@ -46,7 +46,8 @@
     id: 'c06', no: 6, region: 'overseas',
     title: '크비트달의 여인', year: '1969', place: '노르웨이 서해안 헬레순 (가상 지명)',
     motif: '모티프: 이스달 여인 사건 (1970, 노르웨이)', length: '약 50분',
-    stars: 5,
+    stars: 5, graphic: true,
+    warn: '이 사건 기록에는 불에 탄 시신의 상태와 화상·그을음을 검안서·감식 기록의 말투로 적은 대목과 그림이 들어 있습니다.',
     frame: 'papers',
 
     mood: { light: 'sea', fx: 'mist', amb: ['harbor', 'wind', 'horn'], line: '1969년 10월, 노르웨이 서해안. 항구의 안개가 산자락 등산로까지 올라온다.' },
@@ -202,23 +203,48 @@
     },
     docs: {
       /* ── 헬레순 경찰 수사철 ── */
-      d_report: { src: 'politi', title: '변사체 발견 보고', kicker: 'HELLESUND POLITIKAMMER · RAPPORT', meta: '1969년 10월 19일(일) 밤 · 강력반 당직', body: [
+      d_report: { src: 'politi', blood: true, title: '변사체 발견 보고', kicker: 'HELLESUND POLITIKAMMER · RAPPORT', meta: '1969년 10월 19일(일) 밤 · 강력반 당직', body: [
+        { img: 'scene_hollow', cap: '현장 사진 3호 (10월 19일 16:40 · 감식반). 방수포를 덮은 채 찍었다. 번호표는 현장 유류품 목록의 번호.' },
         '10월 19일 일요일 오후 2시 20분, 대학생 [[카리 바트네]](22)와 [[잉리드 몰란]](22)이 [[크비트달 산장|k_hytte]]에서 내려오다 등산로에서 60미터쯤 떨어진 바위 비탈 아래에서 여성 한 명이 숨져 있는 것을 발견, 3시 5분 들머리 농가 전화로 신고함.',
         '여성은 30대로 보이며, 몸 앞쪽과 곁에 둔 소지품 일부가 불에 탄 상태였음. 둘레의 히스 덤불에 불이 옮은 자국이 있으나 크게 번지지는 않았음.',
-        '옷가지의 [[상표]]가 모두 떼어져 있었음. 손가방·지갑·여권 없음. 손가락에 반지 자국은 있으나 반지는 없음.',
+        '시신은 바위 비탈 밑 오목한 자리에 반듯이 누운 채였음. 두 팔은 팔꿈치에서 굽어 가슴 앞으로 들려 있고, 두 손은 주먹을 쥔 모양. 무릎도 조금 굽음.',
+        '가장 세게 탄 자리는 가슴과 얼굴 둘레. 바로 위 바위 벽에 검은 그을음이 혀 모양으로 사람 키 높이까지 올라가 있음. 시신 둘레 지름 2미터쯤의 히스는 밑동까지 타서 재가 되었고, 그 바깥으로는 잎끝만 그슬림.',
+        '타다 남은 소지품은 시신 둘레에 놓여 있었음 — 오른쪽 어깨 곁에 우산, 발치에 녹은 병 둘, 머리 위쪽 바위틈에 성냥갑. 비탈에서 굴러 흩어진 모양이 아님.',
+        '비를 맞았는데도 비탈에는 휘발유 냄새가 짙게 남아 있었음. 시신을 들어 올리자 그 밑에만 사람 모양으로 마른 땅이 드러남. 비가 오기 전부터 줄곧 그 자리에 누워 있었다는 뜻.',
+        '옷가지의 [[상표]]가 모두 떼어져 있었음. 손가방·지갑·여권 없음. 손가락에 반지 자국은 있으나 반지는 없음. 손끝이 모두 타서 현장에서 지문을 뜨지 못함.',
         '현장 유류품은 따로 목록을 만듦. 시신은 밤 9시 시립병원 병리과로 옮김.',
+        { note: '현장 사진사 메모: 얼굴 쪽은 따로 찍지 않음. 알아볼 수 있는 데가 남아 있지 않았음.' },
         '[[헬레순 역|k_station]]과 부두 둘레의 호텔·하숙에 인상착의를 돌리기로 함.',
         { stamp: 'Hellesund Politikammer' },
       ] },
-      d_autopsy: { src: 'politi', title: '부검 소견 (요약)', kicker: 'HELLESUND SYKEHUS · PATOLOGISK AVDELING', meta: '1969년 10월 21일 · 병리과장 Dr. 라우릿센', body: [
-        '사인: 수면제 중독이 가장 유력함. 불은 숨지기 직전이나 숨진 뒤에 붙은 것으로 보임.',
+      d_autopsy: { src: 'politi', blood: 'heavy', title: '부검 소견서', kicker: 'HELLESUND SYKEHUS · PATOLOGISK AVDELING', meta: '1969년 10월 21일 · 병리과장 Dr. 라우릿센 · 입회 할보르센 경감', body: [
+        { img: 'autopsy_sheet', cap: '시립병원 병리과 부검실. 팔은 열에 오그라든 그대로 굳어, 덮은 천이 가슴 위로 들려 있다.' },
+        '사인: 수면제 중독에 불길의 일산화탄소 중독이 겹침. 불이 붙었을 때 아직 숨을 쉬고 있었음.',
         { p: '혈액과 위 내용물에서 [[수면제]](바르비투르산계) 성분이 많이 나옴. 위에서 커피가 조금 나옴.', f: 'f_pills' },
         { p: '사망 추정: [[10월 18일]](토) 낮부터 저녁 사이.', f: 'f_tod' },
+        { h: '1. 불에 탄 자리' },
+        { rows: [
+          ['얼굴 · 목 앞', '3도 화상. 피부가 검게 굳고 군데군데 숯이 됨. 눈썹·속눈썹 없음. 앞머리가 타서 두피에 눌어붙음'],
+          ['가슴 · 배', '3도 화상. 녹은 블라우스 옷감(합성섬유)이 피부에 달라붙어 떨어지지 않음'],
+          ['두 팔 앞쪽 · 손', '3도 화상. 열 손가락 끝이 모두 타서 지문을 뜰 수 없음'],
+          ['넓적다리 앞 · 무릎', '2~3도 화상. 물집이 터진 자리 여럿'],
+          ['등 · 엉덩이 · 종아리 뒤', '화상 없음. 땅에 닿아 있던 쪽. 옷도 거의 온전하여 목 뒤 상표를 오려 낸 자리가 그대로 보임'],
+        ], head: ['부위', '소견'] },
+        '팔꿈치와 무릎이 굽고 두 손이 주먹을 쥔 자세는 열에 근육이 오그라들어 생긴 것. 살아서 몸을 막으려던 자세로 보지 않음.',
+        '가슴과 왼쪽 넓적다리의 피부가 열에 터져 길게 갈라진 자리 네 곳 (길이 4~11cm). 가장자리에 피가 나온 흔적이 없고 밑의 근육이 멀쩡함. 칼에 베인 상처가 아님.',
+        '앞자락과 머리 둘레의 옷감에서 휘발유 냄새. 탄 자국이 몸 앞쪽에서 옆구리로 흘러내린 줄을 따라감. 반듯이 누운 몸 위로 휘발유를 붓고 불을 붙인 것으로 보임.',
+        { h: '2. 숨길과 피' },
+        '기관과 두 기관지 안쪽에 검은 그을음이 끈적하게 붙어 있음. 연기를 목구멍 아래까지 들이마셨다는 뜻.',
+        '혈중 일산화탄소헤모글로빈 약 30%. 혈중 바르비투르산 농도는 그것만으로도 목숨이 위태로울 만큼 높음. 위 속에서 다 녹지 않은 흰 알약 열두 알.',
+        '손톱 밑에 흙이나 히스 부스러기가 없음. 몸을 뒤척이거나 기어 나가려 한 흔적이 없음. 불이 붙었을 때 깨어 있지 않았던 것으로 보임.',
+        { h: '3. 그 밖' },
+        '오른쪽 목덜미에 지름 2cm의 멍 한 곳. 살아 있을 때 생긴 것. 넘어지며 바위에 부딪힌 것인지 가리지 못함.',
         '치아: [[금니]] 여섯 개와 뿌리 치료 자국. 노르웨이에서는 드문 대륙식 시술로 보임. 치과 차트를 만들어 둠.',
         '나이 30~40세. 키 164cm. 귀를 뚫은 자국 있음. 머리카락은 본디 밤색이며 짧게 자름.',
+        { note: '※ 입회 경관 메모: 오후 1시에 시작해 저녁 7시에 끝남. 탄내가 배어 부검실 창을 이튿날까지 열어 둠.' },
         { sign: 'Dr. H. Lauritsen' },
       ] },
-      d_scene: { src: 'politi', skin: 'card', title: '현장 유류품 목록', kicker: 'ÅSTEDSFUNN', meta: '1969.10.19~20 · 증거물 1~6호', body: [
+      d_scene: { src: 'politi', skin: 'card', blood: true, title: '현장 유류품 목록', kicker: 'ÅSTEDSFUNN', meta: '1969.10.19~20 · 증거물 1~6호', body: [
         { img: 'thermos', cap: '1호 — 히스 덤불 속에서 나온 보온병 뚜껑 컵' },
         { rows: [
           ['1', '[[보온병]] 뚜껑 컵 (몸통 없음)', '히스 덤불 속, 시신에서 4미터', '안쪽에 커피 자국'],
@@ -230,20 +256,20 @@
         ], head: ['번호', '물건', '자리', '비고'] },
         { note: '감식반: 둘레에서 담배꽁초나 다른 발자국은 가려내지 못함. 전날 밤 비.' },
       ] },
-      d_luggage: { src: 'politi', need: ['k_garderobe'], skin: 'card', title: '역 보관소 가방 두 개 — 내용물', kicker: 'NSB HELLESUND · GARDEROBE', meta: '1969.10.23 개봉 · 증거물 11~12호', body: [
+      d_luggage: { src: 'politi', blood: false, need: ['k_garderobe'], skin: 'card', title: '역 보관소 가방 두 개 — 내용물', kicker: 'NSB HELLESUND · GARDEROBE', meta: '1969.10.23 개봉 · 증거물 11~12호', body: [
         { img: 'suitcases', cap: '헬레순 역 수하물 보관소에서 나온 가방 두 개' },
         { p: '맡긴 때: 10월 18일(토) 오전 11시 5분. 보관표 1147번. 맡긴 사람: 검은 머리 여자, 외국 말씨 (보관소 직원 기억).', f: 'f_deposit' },
         '가방 둘 다 잠겨 있지 않았음. 내용물은 감식반이 탁자에 펼쳐 놓고 위에서 사진으로 남김 (증거물 사진 11~12호).',
         '여권·신분증·편지·지갑은 없음. 옷가지의 [[상표]]는 모두 떼어져 있음.',
       ] },
-      d_touristmap: { src: 'politi', need: ['k_map'], skin: 'card', title: '관광 지도의 연필 자국', kicker: 'BEVIS 11-7', meta: '헬레순 관광 지도 · 1968년판', body: [
+      d_touristmap: { src: 'politi', blood: false, need: ['k_map'], skin: 'card', title: '관광 지도의 연필 자국', kicker: 'BEVIS 11-7', meta: '헬레순 관광 지도 · 1968년판', body: [
         { img: 'touristmap', cap: '헬레순 관광 지도. 연필 동그라미 두 곳' },
         '연필 동그라미 두 곳: 항구 북쪽 부두 한 곳, 그리고 동쪽 산자락의 크비트달 등산로 들머리.',
         '크비트달 동그라미 옆에 다음 기호가 연필로 적혀 있음. 그 자리에 인쇄된 지명은 로마자로 KVITDAL.',
         { cipher: '▲◆●■◎○□' },
         { note: '감식반: 수첩의 기호와 같은 연필, 같은 손으로 보임.' },
       ] },
-      d_photos: { src: 'politi', need: ['k_film'], skin: 'photo', title: '필름 현상 — 36장 중 11장', meta: '1969.10.24 · 헬레순 포토 현상소 · 경찰 의뢰', body: [
+      d_photos: { src: 'politi', blood: false, need: ['k_film'], skin: 'photo', title: '필름 현상 — 36장 중 11장', meta: '1969.10.24 · 헬레순 포토 현상소 · 경찰 의뢰', body: [
         { img: 'harbor', cap: '3번 — 항구 전경. [[노르카이]] 쪽 부두에 화물선 한 척. 이른 아침으로 보임' },
         { img: 'stern', cap: '7번 — 같은 배의 고물. 배 이름 "HAVØRN · PANAMA" ([[하브외른]]). 비스듬한 빛에 새 페인트 밑으로 다른 글자 자국이 도드라짐 — "VESLE TE…"', f: 'f_repaint' },
         '8~11번 — 같은 고물을 조금씩 다른 각도로. 나머지는 찍히지 않음.',
@@ -251,57 +277,57 @@
       ] },
 
       /* ── 텔렉스·전보철 ── */
-      d_tx_out: { src: 'telex', need: ['k_dental'], title: 'TELEX 발신 · HELLESUND → INTERPOL OSLO', meta: '1969.10.24 10:15 · 할보르센', body: [
+      d_tx_out: { src: 'telex', blood: false, need: ['k_dental'], title: 'TELEX 발신 · HELLESUND → INTERPOL OSLO', meta: '1969.10.24 10:15 · 할보르센', body: [
         '신원 미상 여성 · 30대 · 키 164 · 10월 18일경 사망 · 헬레순 크비트달',
         '금니 여섯 · 대륙식 치과 시술로 보임 · 치과 차트 사본 항공우편 발송',
         '독일어 프랑스어 영어 쓴 것으로 보임 · 가발 씀 · 옷 상표 모두 뗌',
         '서독 오스트리아 프랑스 벨기에 스위스 경찰에 조회 바람 · 끝',
       ] },
-      d_tx_wiesbaden: { src: 'telex', need: ['k_dental'], title: 'TELEX 수신 · WIESBADEN → HELLESUND', meta: '1969.10.27 14:02', body: [
+      d_tx_wiesbaden: { src: 'telex', blood: false, need: ['k_dental'], title: 'TELEX 수신 · WIESBADEN → HELLESUND', meta: '1969.10.27 14:02', body: [
         '귀 조회 건 · 인상착의 맞는 실종 신고 없음',
         '치과 차트 대조 · 불일치 · 끝',
       ] },
-      d_tx_wien: { src: 'telex', need: ['k_schlosser'], title: 'TELEX 수신 · WIEN → HELLESUND', meta: '1969.10.29 09:48', body: [
+      d_tx_wien: { src: 'telex', blood: false, need: ['k_schlosser'], title: 'TELEX 수신 · WIEN → HELLESUND', meta: '1969.10.29 09:48', body: [
         '귀 조회 오스트리아 여권 0418773 · 발급 기록 없음 · 위조 여권으로 판단',
         '베라 슐로서 명의 실종 신고 없음 · 빈 주소 확인 불가 · 끝',
       ] },
-      d_tx_bruxelles: { src: 'telex', need: ['#cmp_cards'], title: 'TELEX 수신 · BRUXELLES → HELLESUND', meta: '1969.10.30 16:40', body: [
+      d_tx_bruxelles: { src: 'telex', blood: false, need: ['#cmp_cards'], title: 'TELEX 수신 · BRUXELLES → HELLESUND', meta: '1969.10.30 16:40', body: [
         '귀 조회 벨기에 여권 1.211.408 · 번호 체계는 진짜이나 기재 이름 틀림',
         { p: '같은 번호 여권은 1966년 앤트워프에서 [[미레유 다송]] 에게 발급 · 1933년생 · 틸레만스 는 다송 의 어머니 결혼 전 성', f: 'f_brussels' },
         '다송 · 10월 21일 고용주 [[앤트워프 해상공제]] 가 실종 신고',
         { p: '앤트워프 치과의사 보관 차트와 귀 차트 예비 대조 · 일치 · 정식 대조 서류 우송 · 끝', f: 'f_brussels' },
       ] },
-      d_tx_anvers: { src: 'telex', need: ['k_mutuelle'], title: 'TELEGRAMME · MUTUELLE MARITIME D’ANVERS → HELLESUND POLITI', meta: '1969.10.31 09:05 · 프랑스어 원문 번역', body: [
+      d_tx_anvers: { src: 'telex', blood: false, need: ['k_mutuelle'], title: 'TELEGRAMME · MUTUELLE MARITIME D’ANVERS → HELLESUND POLITI', meta: '1969.10.31 09:05 · 프랑스어 원문 번역', body: [
         { p: '미레유 다송 은 본사 선박 사고 조사원 · 9월 30일부터 노르웨이 출장 · 일 때문에 여러 이름을 씀', f: 'f_anvers_id' },
         { p: '조사 건 · 1968년 2월 북해에서 침몰 신고된 화물선 [[베슬레 테르네]] 호 · 선주 헬레순 [[하브브리스 해운]] · 대표 [[E. 브라테|k_brate]] · 보험금 390만 크로네 지급 끝남', f: 'f_vt_claim' },
         { p: '마지막 연락 · 10월 16일 밤 10시 헬레순 에서 전화 · VT 봤음 · 토요일에 확인하겠음', f: 'f_vt_claim' },
         '본사 조사역 한 사람 11월 3일 헬레순 도착 예정 · 끝',
       ] },
-      d_tx_kystrute: { src: 'telex', need: ['k_kystrute'], title: 'TELEGRAM · MS 노르비엔 사무장 → HELLESUND POLITI', meta: '1969.10.29 11:30 · 연안선 선상 무선', body: [
+      d_tx_kystrute: { src: 'telex', blood: false, need: ['k_kystrute'], title: 'TELEGRAM · MS 노르비엔 사무장 → HELLESUND POLITI', meta: '1969.10.29 11:30 · 연안선 선상 무선', body: [
         { p: '승객 클라우스 렘메르트 · 10월 17일 22시 헬레순 승선 · 선실 214 · 20일 09시 [[노르보그]] 하선', f: 'f_remmert_alibi' },
         { p: '항해 중 내린 적 없음 · 18일 아침 점심 저녁 선상 식당 기록 있음 · 끝', f: 'f_remmert_alibi' },
       ] },
 
       /* ── 시내 장부 대조 : 신문 ── */
-      d_avis_1020: { src: 'arkiv', find: ['k_kvitdal', 'k_woman'], skin: 'news', paper: 'Hellesunds Avis', title: '크비트달 등산로 아래서 신원 모를 여인 숨진 채 발견', kicker: '1969년 10월 20일 월요일 · 제243호', meta: '본지 사회부', body: [
+      d_avis_1020: { src: 'arkiv', blood: false, find: ['k_kvitdal', 'k_woman'], skin: 'news', paper: 'Hellesunds Avis', title: '크비트달 등산로 아래서 신원 모를 여인 숨진 채 발견', kicker: '1969년 10월 20일 월요일 · 제243호', meta: '본지 사회부', body: [
         { img: 'valley', cap: '크비트달 등산로. 여인은 오른쪽 바위 비탈 아래에서 발견되었다.' },
         '19일 오후, 헬레순 시 동쪽 크비트달 등산로 아래 바위 비탈에서 30대로 보이는 여인이 숨진 채 발견되었다. 경찰에 따르면 여인의 몸과 소지품 일부가 불에 탔고, 신분을 알 만한 것은 하나도 나오지 않았다.',
         '[[할보르센 경감]]은 "옷에서 상표까지 떼어 낸 것이 이상하다"면서, 지난주 [[헬레순 역|k_station]]이나 부두 둘레에서 검은 머리에 외국 말씨를 쓰는 여인을 본 시민은 알려 달라고 당부했다.',
-        '여인을 처음 본 이는 산장에서 내려오던 대학생 두 사람이다. 경찰은 부검 결과를 기다리고 있다.',
+        '여인을 처음 본 이는 산장에서 내려오던 대학생 두 사람이다. 한 학생은 "처음에는 타다 남은 나무 등걸인 줄 알았다. 가까이 가서야 장화를 봤다"고 말했다. 경찰은 부검 결과를 기다리고 있다.',
         '크비트달 등산로는 가을이면 시민들이 즐겨 찾는 길이나, 들머리에서 한 시간쯤 오르면 인가가 끊긴다.',
       ] },
-      d_avis_1023: { src: 'arkiv', find: ['k_station', 'k_garderobe'], skin: 'news', paper: 'Hellesunds Avis', title: '역에 맡긴 가방 두 개 — "크비트달 여인의 것인 듯"', kicker: '1969년 10월 23일 목요일 · 제246호', meta: '본지 사회부', body: [
+      d_avis_1023: { src: 'arkiv', blood: false, find: ['k_station', 'k_garderobe'], skin: 'news', paper: 'Hellesunds Avis', title: '역에 맡긴 가방 두 개 — "크비트달 여인의 것인 듯"', kicker: '1969년 10월 23일 목요일 · 제246호', meta: '본지 사회부', body: [
         { img: 'station', cap: '헬레순 역 수하물 보관소 창구' },
         '헬레순 역 [[수하물 보관소]] 직원이 신문을 보고, 18일 오전에 맡겨진 채 찾아가지 않은 가방 두 개를 경찰에 알렸다.',
         '경찰은 가방 안에서 가발과 옷가지 따위를 찾았다고만 밝히고 자세한 것은 말하지 않았다.',
         '역 앞 광장 매점 주인은 "토요일 오전 광장에 차가 여러 대 서 있었지만 눈여겨보지 않았다"고 했다.',
       ] },
-      d_avis_1101: { src: 'arkiv', find: ['k_wigs', 'k_schlosser', 'k_lancier', 'k_tielemans'], need: ['#cmp_cards'], skin: 'news', paper: 'Hellesunds Avis', title: '"이름이 셋인 여인" — 경찰, 호텔 세 곳에서 발자취 찾아', kicker: '1969년 11월 1일 토요일 · 제254호', meta: '본지 사회부', body: [
+      d_avis_1101: { src: 'arkiv', blood: false, find: ['k_wigs', 'k_schlosser', 'k_lancier', 'k_tielemans'], need: ['#cmp_cards'], skin: 'news', paper: 'Hellesunds Avis', title: '"이름이 셋인 여인" — 경찰, 호텔 세 곳에서 발자취 찾아', kicker: '1969년 11월 1일 토요일 · 제254호', meta: '본지 사회부', body: [
         '경찰은 크비트달 여인이 지난달 초부터 헬레순의 호텔 세 곳을 옮겨 다니며 적어도 세 개의 이름을 썼다고 밝혔다. 오스트리아, 프랑스, 벨기에 여권이 쓰였으나 경찰은 "어느 것도 제 이름은 아닌 듯하다"고 했다.',
         '한 호텔 직원은 "독일어, 프랑스어, 영어를 다 했고, 날마다 머리 모양이 달랐다. 늘 항구 쪽 방을 달라고 했다"고 말했다.',
         '시내에서는 "외국 스파이"라는 말까지 돌지만, 할보르센 경감은 "소문은 수사에 도움이 안 된다"고 잘라 말했다. 경찰은 벨기에 경찰과 연락을 주고받고 있다고만 밝혔다.',
       ] },
-      d_avis_ship: { src: 'arkiv', find: ['k_vesleterne', 'k_havbris'], skin: 'news', paper: 'Hellesunds Avis', title: '북해 폭풍 속 "베슬레 테르네" 침몰 — 선원 아홉 명 모두 구조', kicker: '1968년 2월 14일 수요일 · 자료철', meta: '본지 해운 담당', body: [
+      d_avis_ship: { src: 'arkiv', blood: false, find: ['k_vesleterne', 'k_havbris'], skin: 'news', paper: 'Hellesunds Avis', title: '북해 폭풍 속 "베슬레 테르네" 침몰 — 선원 아홉 명 모두 구조', kicker: '1968년 2월 14일 수요일 · 자료철', meta: '본지 해운 담당', body: [
         { img: 'ship', cap: '구조에 나선 트롤선에서 찍은 사진. 흐릿하다.' },
         { p: '헬레순 선적 화물선 베슬레 테르네 호(1958년 건조)가 12일 밤 북해에서 폭풍을 만나 가라앉았다. 선원 아홉 명은 가까이 있던 트롤선에 모두 구조되었다.', f: 'f_vt_sink' },
         '선주 [[하브브리스 해운]]의 [[에이나르 브라테]] 대표는 "배를 잃은 것은 슬프지만 사람이 다 살았으니 다행"이라고 말했다. 배와 짐은 앤트워프의 보험사에 들어 있었다.',
@@ -309,7 +335,7 @@
       ] },
 
       /* ── 시내 장부 대조 : 장부 ── */
-      d_reg_bryggen: { src: 'arkiv', find: ['k_bryggen', 'k_schlosser'], title: '브뤼겐 호텔 외국인 숙박 신고', kicker: 'HOTEL BRYGGEN · MELDESEDLER FOR UTLENDINGER', meta: '1969년 10월 3일 ~ 18일 · 외국인 손님만 옮겨 적음', body: [
+      d_reg_bryggen: { src: 'arkiv', blood: false, find: ['k_bryggen', 'k_schlosser'], title: '브뤼겐 호텔 외국인 숙박 신고', kicker: 'HOTEL BRYGGEN · MELDESEDLER FOR UTLENDINGER', meta: '1969년 10월 3일 ~ 18일 · 외국인 손님만 옮겨 적음', body: [
         { img: 'regcard', cap: '외국인 숙박 신고서. 손님이 손수 적는다' },
         { rows: [
           ['10.3 (금) 21:40', '[[베라 슐로서]]', '오스트리아 · 빈 · 골동품상', '0418773', '214 → 412', '이튿날 아침 항구 쪽 방으로 바꿈'],
@@ -322,7 +348,7 @@
         { note: '프런트: [[솔베이 하우그]] · 여권 번호는 신고서에 적힌 대로' },
         { m: '이름은 바꿀 수 있어도, 창문이 향한 쪽은 바꾸지 못한다.' },
       ] },
-      d_reg_sjomann: { src: 'arkiv', find: ['k_sjomann', 'k_lancier'], title: '선원 호텔 숙박 장부', kicker: 'SJØMANNSHJEMMET HELLESUND · GJESTEPROTOKOLL', meta: '부둣길 8 · 1969년 10월', body: [
+      d_reg_sjomann: { src: 'arkiv', blood: false, find: ['k_sjomann', 'k_lancier'], title: '선원 호텔 숙박 장부', kicker: 'SJØMANNSHJEMMET HELLESUND · GJESTEPROTOKOLL', meta: '부둣길 8 · 1969년 10월', body: [
         { rows: [
           ['10.6 (월) 19:00', '안데르스 뤼게', '노르웨이 · 갑판원', '—', '5', '배 기다림'],
           ['10.7 (화) 10:40', '[[주느비에브 랑시에]]', '프랑스 · 파리 · 통역사', '67 AB 30121', '3 → 9', '9호는 부두 쪽 창. 여자 손님은 드묾'],
@@ -332,7 +358,7 @@
         { note: '관리인 메모: 식당에 내려오지 않고 방에서 빵만 먹음. 창가에 의자를 붙여 놓고 지냄.' },
         { note: '장부는 관리인이 손님 여권을 받아 보고 손수 옮겨 적는다.' },
       ] },
-      d_reg_fjordheim: { src: 'arkiv', find: ['k_fjordheim', 'k_tielemans'], title: '피오르헤임 호텔 숙박 신고', kicker: 'HOTEL FJORDHEIM · MELDESEDLER', meta: '1969년 10월 11일 ~ 14일', body: [
+      d_reg_fjordheim: { src: 'arkiv', blood: false, find: ['k_fjordheim', 'k_tielemans'], title: '피오르헤임 호텔 숙박 신고', kicker: 'HOTEL FJORDHEIM · MELDESEDLER', meta: '1969년 10월 11일 ~ 14일', body: [
         { rows: [
           ['10.11 (토) 08:00', '[[클라우디아 틸레만스]]', '벨기에 · [[앤트워프]] · 판매원', '1.211.408', '21', '북부두 쪽 창. 쌍안경을 빌려 달라 함 (없다고 함)'],
           ['10.12 (일) 14:00', '스벤 알스트룀', '스웨덴 · 목재상', 'S 40771', '12', '—'],
@@ -340,7 +366,7 @@
         ], head: ['들어온 때', '이름', '국적 · 직업', '여권', '방', '비고'], f: { 0: 'f_rooms' } },
         { note: '지배인: 손님이 두고 간 것은 없음. 방은 늘 창가 쪽 커튼만 반쯤 열려 있었음.' },
       ] },
-      d_switch: { src: 'arkiv', find: ['k_sentralbord'], title: '브뤼겐 호텔 전화 교환 기록', kicker: 'HOTEL BRYGGEN · SENTRALBORD', meta: '방에서 건 전화 · 1969년 10월 14일 ~ 18일', body: [
+      d_switch: { src: 'arkiv', blood: false, find: ['k_sentralbord'], title: '브뤼겐 호텔 전화 교환 기록', kicker: 'HOTEL BRYGGEN · SENTRALBORD', meta: '방에서 건 전화 · 1969년 10월 14일 ~ 18일', body: [
         { rows: [
           ['10.14', '19:02', '305', '22 140', '2', '0.50'],
           ['10.15', '09:15', '407', '31 007 (역 안내)', '1', '0.25'],
@@ -352,7 +378,7 @@
         ], head: ['날', '시각', '방', '건 번호', '분', '요금 (크로네)'], f: { 2: 'f_callslip', 4: 'f_callslip' } },
         { note: '밤 10시부터 아침 6시까지는 야간 교환수가 적음.' },
       ] },
-      d_katalog: { src: 'nummer', title: '헬레순 전화번호부 — 24 3xx 줄', kicker: 'TELEFONKATALOG FOR HELLESUND 1969', meta: '번호순 부록에서 옮겨 적음', body: [
+      d_katalog: { src: 'nummer', blood: false, title: '헬레순 전화번호부 — 24 3xx 줄', kicker: 'TELEFONKATALOG FOR HELLESUND 1969', meta: '번호순 부록에서 옮겨 적음', body: [
         { rows: [
           ['24 301', '베르게 & 손 해운', '노르카이 2'],
           ['24 312', '헬레순 세관', '세관 거리 1'],
@@ -362,18 +388,18 @@
           ['24 377', '헬레순 포토 현상소', '장터 거리 3'],
         ], head: ['번호', '이름', '주소'], f: { 2: 'f_phonebook' } },
       ] },
-      d_q_22140: { src: 'nummer', title: '전화번호부 — 22 1xx 줄', kicker: 'TELEFONKATALOG FOR HELLESUND 1969', meta: '번호순 부록에서 옮겨 적음', body: [
+      d_q_22140: { src: 'nummer', blood: false, title: '전화번호부 — 22 1xx 줄', kicker: 'TELEFONKATALOG FOR HELLESUND 1969', meta: '번호순 부록에서 옮겨 적음', body: [
         { rows: [
           ['22 131', '부두 식당 할보르', '부둣길 3'],
           ['22 140', '[[헬레순 자동차 임대]] (Hellesund Bilutleie)', '부둣길 2'],
           ['22 147', '헬레순 목공소', '부둣길 1'],
         ], head: ['번호', '이름', '주소'] },
       ] },
-      d_q_31007: { src: 'nummer', title: '전화번호부 — 31 0xx 줄', kicker: 'TELEFONKATALOG FOR HELLESUND 1969', meta: '번호순 부록에서 옮겨 적음', body: [
+      d_q_31007: { src: 'nummer', blood: false, title: '전화번호부 — 31 0xx 줄', kicker: 'TELEFONKATALOG FOR HELLESUND 1969', meta: '번호순 부록에서 옮겨 적음', body: [
         { rows: [['31 001', 'NSB 헬레순 역 · 역장실', '역 광장'], ['31 007', 'NSB 헬레순 역 · 안내', '역 광장']], head: ['번호', '이름', '주소'] },
         '역 안내원: "15일 아침에 외국 말씨 여자가 토요일 저녁 오슬로행 자리가 남았는지 물었어요. 7시 40분 차라고 알려 줬죠."',
       ] },
-      d_q_hl24617: { src: 'nummer', title: '차량 등록 카드 · HL-24617', kicker: 'BILTILSYNET HELLESUND · KJORETOYKORT', meta: '1969.11.3 · 차량 검사소 전화 회신', body: [
+      d_q_hl24617: { src: 'nummer', blood: false, title: '차량 등록 카드 · HL-24617', kicker: 'BILTILSYNET HELLESUND · KJORETOYKORT', meta: '1969.11.3 · 차량 검사소 전화 회신', body: [
         { rows: [
           ['차', '볼보 아마존 1967 · 회색 · 4도어'],
           ['소유자', '브라테 해운대리점 A/S · 노르카이 5'],
@@ -382,7 +408,7 @@
         ], head: ['항목', '내용'], f: { 3: 'f_bumper' } },
         { note: '수리 완료 신고는 아직 들어오지 않음.' },
       ] },
-      d_q_hl24455: { src: 'nummer', title: '헬레순 자동차 임대 — 대여 장부 · HL-24455', kicker: 'HELLESUND BILUTLEIE · UTLEIEPROTOKOLL', meta: '부둣길 2 · 1969년 10월 · 가게에서 옮겨 적음', body: [
+      d_q_hl24455: { src: 'nummer', blood: false, title: '헬레순 자동차 임대 — 대여 장부 · HL-24455', kicker: 'HELLESUND BILUTLEIE · UTLEIEPROTOKOLL', meta: '부둣길 2 · 1969년 10월 · 가게에서 옮겨 적음', body: [
         { rows: [
           ['10.6 ~ 10.8', '헬레순 제재소 (업무)', '312 → 498', '—'],
           ['10.15 09:00 ~ 10.17 20:30', '[[클라우스 렘메르트]] · 서독 면허', '1,106 → 1,398', '반납 때 기름 가득 · 현금'],
@@ -390,15 +416,15 @@
         ], head: ['대여 기간', '빌린 사람', '주행계 (km)', '비고'], f: { 1: 'f_rental', 2: 'f_rental_idle' } },
         { note: '차량 검사소 기록: 1969.8.30 정기 검사 — 차체 이상 없음.' },
       ] },
-      d_q_hl24133: { src: 'nummer', title: '차량 등록 카드 · HL-24133', kicker: 'BILTILSYNET HELLESUND · KJORETOYKORT', meta: '1969.11.3 · 차량 검사소 전화 회신', body: [
+      d_q_hl24133: { src: 'nummer', blood: false, title: '차량 등록 카드 · HL-24133', kicker: 'BILTILSYNET HELLESUND · KJORETOYKORT', meta: '1969.11.3 · 차량 검사소 전화 회신', body: [
         { rows: [['차', '볼보 아마존 1966 · 회색'], ['소유자', '치과의사 T. 모 · 장터 거리 11'], ['정기 검사', '1969.7.14 — 이상 없음']], head: ['항목', '내용'] },
         '치과 접수부: 10월 18일(토) 오전 9시부터 오후 1시까지 진료, 환자 열한 명.',
       ] },
-      d_q_hl24902: { src: 'nummer', title: '차량 등록 카드 · HL-24902', kicker: 'BILTILSYNET HELLESUND · KJORETOYKORT', meta: '1969.11.3 · 차량 검사소 전화 회신', body: [
+      d_q_hl24902: { src: 'nummer', blood: false, title: '차량 등록 카드 · HL-24902', kicker: 'BILTILSYNET HELLESUND · KJORETOYKORT', meta: '1969.11.3 · 차량 검사소 전화 회신', body: [
         { rows: [['차', '볼보 아마존 1964 · 회색'], ['소유자', '농부 K. 울브세트 · 울브세트라'], ['정기 검사', '1969.5.20 — 뒤 범퍼 교체 (새것)']], head: ['항목', '내용'] },
         '10월 18일은 헬레순 가축 시장. 울브세트는 아침부터 오후 네 시까지 장터에 있었다고 이웃 셋이 말함.',
       ] },
-      d_havnelogg: { src: 'arkiv', find: ['k_havorn', 'k_nordkai'], title: '항만 입항 기록 — 1969년 10월', kicker: 'HAVNEFOGDEN I HELLESUND · ANLØPSPROTOKOLL', meta: '항만장 사무소 · 노르카이·남부두', body: [
+      d_havnelogg: { src: 'arkiv', blood: false, find: ['k_havorn', 'k_nordkai'], title: '항만 입항 기록 — 1969년 10월', kicker: 'HAVNEFOGDEN I HELLESUND · ANLØPSPROTOKOLL', meta: '항만장 사무소 · 노르카이·남부두', body: [
         { rows: [
           ['10.2 (목) 14:00', 'MS 솔바크', '노르웨이', '남부두 1', '헬레순 해운', '—'],
           ['10.4 (토) 06:10', 'MS [[하브외른]] (HAVØRN)', '파나마', '[[노르카이]] 3 (NORDKAI)', '[[브라테 해운대리점|k_brate]]', '서류: E. 브라테 서명 (07:00)'],
@@ -409,7 +435,7 @@
         ], head: ['들어온 때', '배', '선적', '선석', '대리점', '비고'], f: { 1: 'f_harborlog', 3: 'f_harborlog', 5: 'f_absent' } },
         { note: 'MS 하브외른: 1958년 건조 · 1968년 5월 파나마 선적 등록 · 전 이름 난은 비어 있음 · 토요일마다 들어와 월요일에 나감.' },
       ] },
-      d_bilreg: { src: 'arkiv', find: ['k_plate'], title: '차량 등록 조회 — 회색 볼보 아마존, HL-24로 시작하는 번호', kicker: 'BILTILSYNET HELLESUND', meta: '1969.10.27 · 차량 검사소 전화 회신을 받아 적음', body: [
+      d_bilreg: { src: 'arkiv', blood: false, find: ['k_plate'], title: '차량 등록 조회 — 회색 볼보 아마존, HL-24로 시작하는 번호', kicker: 'BILTILSYNET HELLESUND', meta: '1969.10.27 · 차량 검사소 전화 회신을 받아 적음', body: [
         { rows: [
           ['HL-24133', '볼보 아마존 1966 · 회색', '치과의사 T. 모 · 헬레순'],
           ['HL-24455', '볼보 아마존 1968 · 회색', '[[헬레순 자동차 임대]] (빌려 주는 차)'],
@@ -418,7 +444,7 @@
         ], head: ['번호', '차', '소유자 · 주 운전자'], f: { 2: 'f_carreg' } },
         { note: '번호별 등록 카드와 검사 기록은 번호를 불러 따로 조회해야 함.' },
       ] },
-      d_fuel: { src: 'arkiv', find: ['k_plate'], title: '크비트달 길 주유소 외상 장부', kicker: 'BENSINSTASJON · KVITDALSVEIEN', meta: '1969년 10월 · 외상 손님 서명란', body: [
+      d_fuel: { src: 'arkiv', blood: false, find: ['k_plate'], title: '크비트달 길 주유소 외상 장부', kicker: 'BENSINSTASJON · KVITDALSVEIEN', meta: '1969년 10월 · 외상 손님 서명란', body: [
         { img: 'fuel', cap: '크비트달 길 주유소' },
         { rows: [
           ['10.17 16:10', 'HL-11820', '헬레순 제재소', '42', 'R.S.'],
@@ -429,7 +455,7 @@
         ], head: ['때', '차 번호', '외상 손님', '리터', '서명'], f: { 2: 'f_fuel' } },
         { note: '주인: 외상 손님은 손수 서명함. 여기서 크비트달 등산로 들머리까지 차로 10분.' },
       ] },
-      d_hyttebok: { src: 'arkiv', find: ['k_hytte', 'k_per'], title: '크비트달 산장 방명록', kicker: 'HYTTEBOK · KVITDALSHYTTA', meta: '헬레순 등산회 · 1969년 10월 · 옮겨 적음', body: [
+      d_hyttebok: { src: 'arkiv', blood: false, find: ['k_hytte', 'k_per'], title: '크비트달 산장 방명록', kicker: 'HYTTEBOK · KVITDALSHYTTA', meta: '헬레순 등산회 · 1969년 10월 · 옮겨 적음', body: [
         { img: 'hytte', cap: '능선 위의 크비트달 산장' },
         { rows: [
           ['10.11 (토)', '헬레순 등산회 넷', '크비트달 들머리 → 산장', '안개. 아무것도 안 보임'],
@@ -550,7 +576,7 @@
         '역 보관소의 가방 두 개는 그녀가 저녁 7시 40분 오슬로행 기차로 떠나려고 맡겨 둔 것이었다. 보관표 1147번은 끝내 창구로 돌아오지 않았다.',
       ],
     },
-    artStyle: '1969 Norwegian police and press photography on 35mm film: Tri-X style black-and-white grain for police documentation, faded early colour film with a cool blue-green cast for everything else; overcast west-coast light, wet rock, heather and harbour mist. Documentary and quiet. No readable text, no faces, no bodies.',
+    artStyle: '1969 Norwegian police and press photography on 35mm film: Tri-X style black-and-white grain for police documentation, faded early colour film with a cool blue-green cast for everything else; overcast west-coast light, wet rock, heather and harbour mist. Documentary and quiet. No readable text, no faces. Graphic content is limited to fire traces and covered remains: heather burned down to black ash, soot-streaked rock, charred and melted personal belongings, and a body kept fully covered under a grey tarp or white sheet with only its outline and soot seeping through the cloth: no burned skin or flesh, no wounds, no faces.',
     art: {
       bags_table: { svg: bagsTable, use: '정밀 관찰 사진', ratio: '4:3', prompt: 'Top-down police evidence photograph from 1969: the contents of two suitcases laid out in three neat rows on a grey table, each object with a small blank paper tag, the two empty open suitcases along the top edge. Top row from left to right: three wigs (a black bob, a long chestnut one, a grey one pinned up), two pairs of glasses (horn-rimmed and wire-rimmed), a pair of 8x30 binoculars with a worn leather strap, a small 35mm camera, folded clothes (blouse, skirt, sweater) with small squares cut out at the collar where the labels were. Middle row: a palm-sized notebook, a folded tourist map, a brass hotel key tag with a key, a crumpled soap wrapper, an empty shoe box. Bottom row: two envelopes with banknotes, one train ticket. A ruler at the bottom edge.', must: '세 줄 배열 — 위: 가발 셋·안경 둘·쌍안경·카메라·상표를 오려 낸 옷 / 가운데: 수첩·관광 지도·놋쇠 열쇠고리·구겨진 비누 포장지·빈 신발 상자 / 아래: 돈 봉투 둘·기차표', swap: 'svg', raster: true },
       cover: { use: '기록실 폴더 표지 — 증거물 꼬리표가 달린 가방 두 개', ratio: '4:3',
@@ -558,10 +584,22 @@
         prompt: 'Police evidence photograph, 1969: two worn 1960s suitcases, one brown leather and one grey-blue, standing on a concrete floor under a cold overhead lamp, a paper left-luggage ticket tied to one handle and a manila evidence tag lying in front of them. Slightly soft focus, heavy 35mm black-and-white grain.' },
       valley: { use: '신문 10월 20일자 — 크비트달 등산로', ratio: '4:3',
         svg: `<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#b7bdb6"/>${hills}<path d="M20 150Q70 110 90 96T150 70" fill="none" stroke="#c9c1a4" stroke-width="3" stroke-dasharray="5 4"/><path d="M150 120l20-30 14 36z" fill="#4a4a42"/></svg>`,
-        prompt: 'Newspaper photograph of a remote rocky valley above a small Norwegian west-coast town in late October 1969: a narrow hiking path winding up between boulders, heather and a few bare birches, low cloud on the ridges, wet stone, no people. Coarse halftone newsprint look.' },
+        prompt: 'Newspaper photograph of a remote rocky valley above a small Norwegian west-coast town in late October 1969: a narrow hiking path winding up between boulders, heather and a few bare birches, low cloud on the ridges, wet stone. On the right, below a steep boulder slope some sixty metres off the path, a small dark scorched patch in the heather and a black soot streak on the rock above it, three tiny distant figures of policemen in long coats standing around it, one holding a folded grey tarp. Taken from far away, nothing at the patch itself can be made out. Coarse halftone newsprint look.',
+        must: '오른쪽 바위 비탈 아래 까맣게 탄 작은 자리와 바위의 그을음 · 그 둘레에 멀리 선 경찰 셋 (자리 안은 알아볼 수 없게)' },
       thermos: { use: '현장 유류품 1호 — 히스 덤불 속 보온병 뚜껑 컵', ratio: '4:3',
         svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#6e5a4e"/><g fill="#8a5f6e"><circle cx="30" cy="40" r="18"/><circle cx="170" cy="30" r="22"/><circle cx="60" cy="130" r="24"/><circle cx="160" cy="125" r="20"/></g><path d="M78 70h44l-6 44H84z" fill="#b8b9b4"/><ellipse cx="100" cy="70" rx="22" ry="6" fill="#d9dad5"/><ellipse cx="100" cy="72" rx="16" ry="3" fill="#4a3526"/></svg>',
         prompt: 'Police close-up photograph of the screw-on cup lid of a 1960s vacuum flask lying in wet purple heather on a rocky Norwegian hillside, a dark coffee stain inside the cup, a blank evidence number card beside it. Overcast light, 35mm black-and-white film.' },
+      scene_hollow: { use: '현장 사진 3호 — 바위 비탈 밑 불탄 자리 (방수포로 덮은 시신)', ratio: '4:3', sensitive: true,
+        redo: { level: '선택', why: '두 번째로 뽑은 그림은 병 둘이 제대로 나왔지만, 방수포가 평평해 조서의 「가슴 앞으로 들린 두 팔」 윤곽이 안 보인다.' },
+        svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#6f716b"/><path d="M0 0h200v70q-40 10-80 4T0 80z" fill="#55575a"/><path d="M92 76q-6-32 6-62q8 22 4 62z" fill="#1f1e1c" opacity=".7"/><ellipse cx="100" cy="106" rx="84" ry="32" fill="none" stroke="#5c4a36" stroke-width="7" opacity=".55"/><ellipse cx="100" cy="106" rx="72" ry="26" fill="#2a2724"/><path d="M58 110q4-18 20-16q6-16 20-12q16-10 30 4q16 4 18 24z" fill="#8c8e88"/><path d="M84 98q6-14 14-6M108 94q8-12 14-2" stroke="#6b6d68" stroke-width="3" fill="none"/><path d="M34 94l14 10M38 106l12-6" stroke="#111" stroke-width="1.5"/><ellipse cx="160" cy="106" rx="6" ry="4" fill="#3a3530"/><ellipse cx="170" cy="110" rx="5" ry="3.5" fill="#3a3530"/><g fill="#efece4"><rect x="40" y="110" width="9" height="6"/><rect x="152" y="116" width="9" height="6"/><rect x="118" y="70" width="9" height="6"/></g></svg>',
+        prompt: 'Black-and-white 1969 Norwegian police scene photograph on 35mm Tri-X, overcast afternoon after rain, wet rock: the foot of a steep grey boulder slope where a shallow hollow in the heather has burned. A ring about two metres across of heather burned down to black ash and stubble, singed brown tips beyond it, and on the rock face above a tongue of black soot rising to head height. In the middle of the ring a human form lies on its back under a grey canvas tarp, only its outline showing: the arms bent at the elbows and raised in front of the chest so the tarp tents up over them, the knees slightly bent. Around it, each with a small blank white numbered card: the black wire skeleton of a burnt folding umbrella by the right shoulder, two small opaque 1960s polyethylene bottles (squat, white and brown, like household cleaner flasks, not clear water bottles) melted into shapeless blackened lumps, lying on the ash about half a metre beyond the foot end of the tarp and clearly separate from it, a charred matchbox wedged in a rock crack above the head. The muddy rubber boots of a policeman at the frame edge, raindrops beading on the tarp, heavy grain.',
+        must: '지름 2m쯤 까맣게 탄 히스 고리 · 바위 벽을 사람 키만큼 타고 오른 그을음 · 방수포 아래로 가슴 앞에 들린 두 팔의 윤곽 · 번호표가 붙은 우산 뼈대(어깨 곁)·녹은 병 둘(발치)·성냥갑(머리 위 바위틈)',
+        avoid: '방수포는 끝까지 덮인 채로. 탄 피부·살·상처·얼굴은 보이지 않게.' },
+      autopsy_sheet: { use: '시립병원 병리과 부검실 — 흰 천 아래 오그라든 형체', ratio: '4:3', sensitive: true,
+        svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#6a6d6b"/><path d="M0 20H200M0 40H200M0 60H200M0 80H200M40 0V84M80 0V84M120 0V84M160 0V84" stroke="#7c7f7d"/><path d="M100 0v16" stroke="#222"/><path d="M86 16h28l-5 9h-18z" fill="#2b2b2a"/><rect x="24" y="92" width="152" height="9" fill="#9ea3a2"/><rect x="34" y="101" width="6" height="38" fill="#777"/><rect x="160" y="101" width="6" height="38" fill="#777"/><path d="M34 92q8-10 22-8l8-28q10-6 18 2l6 26q10-4 18-2l6-22q10-6 16 2l2 28q16-2 30 2z" fill="#e9ebe3"/><ellipse cx="60" cy="86" rx="10" ry="4" fill="#5a5854" opacity=".45"/><ellipse cx="88" cy="80" rx="12" ry="5" fill="#5a5854" opacity=".4"/><rect x="176" y="62" width="16" height="30" fill="#3b3a36"/></svg>',
+        prompt: 'Black-and-white 1969 photograph of a small Norwegian hospital pathology room: white tiled walls, a single enamel lamp hanging low over a steel autopsy table. On the table a body lies completely covered by a white sheet, and the shape under the sheet is wrong: the cloth is lifted over forearms bent at the elbows and raised in front of the chest with the hands clenched, and over knees slightly drawn up. Grey-black soot smudges have come through the cloth over the chest and where the face would be. On a side tray a blank dental chart form showing only printed tooth outlines, a dental mirror and probe; a hanging scale and a folded stack of clean towels (no specimen jars, no organs anywhere in the room); a pathologist in a white coat seen from behind writing at a desk by a tall window. Cold daylight, grain.',
+        must: '천이 가슴 앞으로 들린 두 팔과 조금 굽은 무릎 위로 솟아 있다 · 가슴과 얼굴 자리에 배어 나온 그을음 · 옆 쟁반의 치과 차트(치아 그림만)와 치경',
+        avoid: '천은 끝까지 덮인 채로. 탄 피부·살·상처·얼굴은 보이지 않게. 차트에 읽히는 글자 없이.' },
       suitcases: { use: '역 보관소 가방 두 개의 내용물', ratio: '4:3',
         svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#b9b2a2"/><rect x="24" y="60" width="86" height="60" rx="4" fill="#6b4a2c"/><rect x="56" y="52" width="20" height="10" rx="3" fill="none" stroke="#3a2818" stroke-width="3"/><rect x="104" y="72" width="76" height="50" rx="4" fill="#3f4b52"/><rect x="132" y="64" width="18" height="10" rx="3" fill="none" stroke="#20282c" stroke-width="3"/><rect x="160" y="84" width="14" height="20" fill="#e8dfc6"/></svg>',
         prompt: 'Two 1960s suitcases opened on a police table with their contents laid out for documentation: three wigs of different hair colours, plain-glass spectacles, neatly folded clothes with the labels cut out, small binoculars, a compact camera and a slim notebook. Flat fluorescent light, faded 35mm colour film.' },

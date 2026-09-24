@@ -428,7 +428,7 @@ img{max-width:100%}
 .nb-id{white-space:nowrap}
 .nb-ctl{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px}
 .nb-case .snd{margin:0}
-.nb-case .snd.mild[aria-pressed="true"]{color:var(--red)} /* 기록실(어두운 책상)의 옅은 빨강은 종이 위에서 안 읽힌다 */
+.nb-case .snd.mild[aria-pressed="true"],.cw-card .snd.mild[aria-pressed="true"]{color:var(--red)} /* 기록실(어두운 책상)의 옅은 빨강은 종이 위에서 안 읽힌다 */
 
 /* 빨간 별 사건 — 화면을 더 어둡게, 🔞 사진은 붉게 떠오르게. 잔혹 표현을 끄면 data-graphic 이 빠져 모두 사라진다 */
 .gore-bg{background:radial-gradient(ellipse at 50% 42%,rgba(10,2,1,.16) 30%,rgba(58,3,1,.62) 100%)}
