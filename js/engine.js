@@ -129,6 +129,7 @@
     st.cens ??= [];
     st.m ??= false;
     st.nid ??= 0;
+    if (c.live) { st.live ??= { t: 0, req: {}, fd: {}, fx: [], rd: {} }; st.live.fx ??= []; st.live.rd ??= {}; }
     return st;
   }
 
@@ -150,6 +151,7 @@
     c.sources.forEach(s => {
       if (s.type === 'compare') (s.sets || []).forEach(x => { x.src = s.id; c._sets[x.id] = x; });
       if (s.type === 'photo') (s.scenes || []).forEach(x => { x.src = s.id; c._scenes[x.id] = x; });
+      if (s.type === 'request' || s.type === 'feed') (s.items || []).forEach(x => { x.src = s.id; });
     });
     c._m = null;
     const scan = arr => (Array.isArray(arr) ? arr : [arr]).forEach(b => { if (b && typeof b === 'object' && b.m != null && !c._m) c._m = b.m; });
@@ -185,7 +187,7 @@
 
   const ok = need => {
     if (!need || !need.length) return true;
-    return need.every(n => (n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '!' ? ST.notes.some(x => x.f === n.slice(1)) : ST.keys.includes(n)));
+    return need.every(n => (n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '!' ? ST.notes.some(x => x.f === n.slice(1)) : n[0] === '@' ? !!ST.live && ST.live.t >= +n.slice(1) : ST.keys.includes(n)));
   };
   const srcVisible = s => ok(s.need);
   const srcOpen = s => !s.lock || ST.unl.includes(s.id);
@@ -204,6 +206,10 @@
       if (s.type === 'photo') n += (s.scenes || []).filter(x => ok(x.need)).length;
     });
     n += Object.values(C.people).filter(personVisible).length;
+    if (C.live && ST.live) {
+      C.sources.filter(s => s.type === 'request' && srcVisible(s)).forEach(s => (s.items || []).forEach(r => { if (ok(r.need)) n++; if (ST.unl.includes(r.id)) n++; }));
+      n += feedItems().filter(it => it.id in ST.live.fd).length;
+    }
     return n;
   }
 
@@ -635,6 +641,203 @@
         <ol class="ph-found">${found.map(sp => `<li><p class="ph-l">${inline(sp.label)}</p>${blocks(sp.body, `${sp.id}@b`, plain(x.title))}</li>`).join('')}</ol></div></article>`;
   }
 
+  /* ───────── 실시간 수사 (live) ─────────
+   * 지금 벌어지는 사건: 시계가 간다. C.live = { start: [년, 월, 일, 시, 분], deadline: { at: 분, label, who, miss }, cost: { … } }
+   * 시간은 행동만큼 흐른다 (문서를 처음 읽기·탐문·검색·조회·감정). 영장·공문은 소명 자료(수첩 메모)를 붙여 신청하고,
+   * 받아들여지면 eta 분 뒤에 회신이 온다. 단톡방(feed)에는 시간이 지나거나 조건이 채워지면 새 말이 온다. */
+  const LIVE_COST = { doc: 8, ask: 15, search: 4, query: 12, compare: 40, timeline: 10, photo: 6, write: 20 };
+  const liveOn = () => !!(C && C.live && ST && ST.live);
+  const lcost = k => { const c = (C.live && C.live.cost) || {}; return c[k] != null ? c[k] : LIVE_COST[k]; };
+  const liveDate = t => { const s = (C.live && C.live.start) || [2024, 1, 1, 9, 0]; return new Date(s[0], s[1] - 1, s[2], s[3], s[4] + t); };
+  const hm = m => { m = Math.max(0, Math.round(m)); const h = Math.floor(m / 60), r = m % 60; return h ? `${h}시간${r ? ' ' + r + '분' : ''}` : `${r}분`; };
+  const lstamp = t => { const d = liveDate(t); return `${d.getMonth() + 1}월 ${d.getDate()}일(${'일월화수목금토'[d.getDay()]}) ${pad(d.getHours())}:${pad(d.getMinutes())}`; };
+  const ltime = t => { const d = liveDate(t); return `${pad(d.getHours())}:${pad(d.getMinutes())}`; };
+  const reqItems = () => C.sources.filter(s => s.type === 'request').flatMap(s => s.items || []);
+  const reqById = id => reqItems().find(r => r.id === id);
+  const feedItems = () => C.sources.filter(s => s.type === 'feed').flatMap(s => s.items || []);
+  const reqState = id => (ST.live && ST.live.req[id]) || null;
+  const lvAll = n => (n || []).filter(x => x[0] !== '@'); // 시간 조건을 뺀 나머지
+  const feedName = id => { const s = C.sources.find(x => x.id === id); return s ? s.name : '단톡방'; };
+  const firstFeed = () => { const s = C.sources.find(x => x.type === 'feed'); return s && s.id; };
+
+  function advance(kind, min) {
+    if (!liveOn() || ST.solved) return liveSync();
+    const m = min != null ? min : lcost(kind);
+    const prev = ST.live.t;
+    ST.live.t += m || 0;
+    liveSync(prev);
+  }
+  // 시간이 흐르거나 새 단서가 생겼을 때: 회신 도착, 단톡방 새 말, 기한 넘김
+  function liveSync(prev) {
+    if (!liveOn()) return;
+    const L = ST.live, news = [];
+    if (prev == null) prev = L.t;
+    reqItems().forEach(r => {
+      const q = L.req[r.id];
+      if (!q || q.st !== 'wait' || L.t < q.due) return;
+      q.st = 'done';
+      if (!ST.unl.includes(r.id)) ST.unl.push(r.id);
+      (r.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
+      const who = (r.feed && r.feed.who) || r.from || '회신', msg = (r.feed && r.feed.msg) || `회신 도착 — ${plain(r.title)}`;
+      L.fx.push({ t: q.due, who, msg, doc: r.doc, src: (r.feed && r.feed.src) || null });
+      news.push({ who, msg, app: r.app || '회신', t: 'doc', id: r.doc, src: r.src });
+    });
+    feedItems().forEach(it => {
+      if (it.id in L.fd || L.t < (it.at || 0) || !ok(it.need)) return;
+      L.fd[it.id] = (it.at || 0) > prev ? it.at : L.t;
+      (it.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
+      if (!it.me) news.push({ who: it.who || '', msg: plain(it.msg || ''), app: it.app || feedName(it.src), t: 'feed', id: it.src, src: it.src });
+    });
+    const dl = C.live.deadline;
+    if (dl && !L.late && !ST.solved && L.t > dl.at) {
+      L.late = true;
+      const who = dl.who || '팀장', msg = dl.miss || `${dl.label || '기한'}이 지났다.`;
+      L.fx.push({ t: dl.at, who, msg, late: true });
+      news.push({ who, msg, app: dl.label || '기한', late: true });
+    }
+    save();
+    renderBar();
+    if (!news.length) return;
+    notify(news);
+    const o = ST.view.open; // 보고 있는 단톡방을 먼저 그려야 탭의 안 읽은 수가 맞다
+    if (o && (o.t === 'feed' || o.t === 'req')) { const pr = $('#paneRead'), top = pr ? pr.scrollTop : 0; renderRead(); if (pr) pr.scrollTop = o.t === 'feed' ? pr.scrollHeight : top; }
+    renderTabs(); renderList(); renderNotebook();
+  }
+  // 새 소식: 화면 오른쪽 위에 휴대폰 알림처럼 (누르면 그곳으로)
+  function notify(news) {
+    let box = $('#lvNotes');
+    if (!box) { box = document.createElement('div'); box.id = 'lvNotes'; box.className = 'lv-notes'; box.setAttribute('role', 'status'); box.setAttribute('aria-live', 'polite'); document.body.appendChild(box); }
+    const at = ltime(ST.live.t);
+    news.slice(-3).forEach((n, i) => setTimeout(() => {
+      if (!C || !box.isConnected) return;
+      const el = document.createElement('button');
+      el.type = 'button'; el.className = 'lv-note' + (n.late ? ' late' : '');
+      if (n.t) { el.dataset.lvT = n.t; el.dataset.lvId = n.id || ''; el.dataset.lvSrc = n.src || ''; }
+      el.innerHTML = `<span class="lv-app">${esc(n.app || '')}<time>${esc(at)}</time></span><b>${esc(n.who)}</b><span class="lv-msg">${esc(trunc(n.msg, 70))}</span>`;
+      box.appendChild(el);
+      while (box.children.length > 3) box.firstChild.remove();
+      requestAnimationFrame(() => el.classList.add('on'));
+      setTimeout(() => { el.classList.remove('on'); setTimeout(() => el.remove(), 400); }, 6500);
+      if (i === 0) {
+        sfx(n.late ? 'miss' : 'buzz');
+        if (S.sound && navigator.vibrate && (!navigator.userActivation || navigator.userActivation.hasBeenActive)) try { navigator.vibrate([90, 60, 90]); } catch (e) { /* not allowed */ }
+      }
+    }, i * 450));
+  }
+  function clearNotes() { const b = $('#lvNotes'); if (b && b.remove) b.remove(); }
+  function nextDue() {
+    if (!liveOn()) return null;
+    const L = ST.live, c = [];
+    Object.values(L.req).forEach(q => { if (q.st === 'wait') c.push(q.due); });
+    feedItems().forEach(it => { if (!(it.id in L.fd) && (it.at || 0) > L.t && ok(lvAll(it.need))) c.push(it.at); });
+    [...Object.values(C.docs), ...Object.values(C.people), ...C.sources, ...reqItems()].forEach(x => (x.need || []).forEach(n => { if (n[0] === '@' && +n.slice(1) > L.t && ok(lvAll(x.need))) c.push(+n.slice(1)); }));
+    return c.length ? Math.min(...c) : null;
+  }
+  function waitNext() {
+    const d = nextDue();
+    if (d == null || ST.solved) { toast('지금은 기다릴 것이 없다'); return; }
+    const prev = ST.live.t;
+    ST.live.t = Math.max(ST.live.t, d);
+    sfx('page');
+    toast(`${hm(ST.live.t - prev)}이 지났다`);
+    liveSync(prev);
+    renderList(); renderRead();
+  }
+  // 화면 아래 줄: 수사 시계 · 기한 · 기다리기
+  function liveBar() {
+    const L = ST.live, dl = C.live.deadline, t = L.t, nd = nextDue();
+    const left = dl ? dl.at - t : 0;
+    const pend = Object.values(L.req).some(q => q.st === 'wait');
+    return `<div class="scr-bar live"><span class="lv-clock"><b>D+${Math.floor(t / 1440)}</b> ${esc(lstamp(t))}</span>${dl ? `<span class="lv-dl${ST.solved ? ' done' : left < 0 ? ' over' : left < 360 ? ' hot' : ''}">${esc(dl.label || '기한')} · ${ST.solved ? '종결' : left >= 0 ? hm(left) + ' 남음' : hm(-left) + ' 넘김'}</span>` : ''}${nd != null && !ST.solved ? `<button type="button" class="lv-wait" data-wait>${pend ? '회신 기다리기' : '시간 보내기'} · ${hm(nd - t)}</button>` : ''}</div>`;
+  }
+  function renderBar() {
+    if (!liveOn()) return;
+    const b = $('.scr-bar.live');
+    if (b) b.outerHTML = liveBar();
+  }
+  const feedCount = s => { const L = ST.live; return L ? (s.items || []).filter(it => it.id in L.fd).length + L.fx.filter(x => (x.src || firstFeed()) === s.id).length : 0; };
+  const feedUnread = s => (ST.live ? Math.max(0, feedCount(s) - ((ST.live.rd || {})[s.id] || 0)) : 0);
+  const reqUnread = s => (s.items || []).filter(r => { const q = reqState(r.id); return q && q.st === 'done' && C.docs[r.doc] && !ST.seen.includes(r.doc); }).length;
+
+  function feedHtml(s) {
+    if (!s || !ST.live) return '';
+    const L = ST.live;
+    const rows = [...(s.items || []).filter(it => it.id in L.fd).map((it, i) => ({ t: L.fd[it.id], i, it })),
+      ...L.fx.filter(x => (x.src || firstFeed()) === s.id).map((x, i) => ({ t: x.t, i: i - 1000, x }))].sort((a, b) => a.t - b.t || a.i - b.i); // 같은 시각이면 회신 알림이 먼저
+    if ((L.rd ||= {})[s.id] !== rows.length) { L.rd[s.id] = rows.length; save(); }
+    let day = null;
+    const body = rows.map(r => {
+      const d = liveDate(r.t), dk = d.toDateString();
+      const div = dk !== day ? (day = dk, `<p class="b-div"><span>${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 ${'일월화수목금토'[d.getDay()]}요일</span></p>`) : '';
+      if (r.x) return `${div}<p class="lv-sys${r.x.late ? ' late' : ''}"><time>${esc(ltime(r.t))}</time> <b>${esc(r.x.who)}</b> ${esc(r.x.msg)}${r.x.doc && C.docs[r.x.doc] ? ` <button type="button" class="lv-att" data-doc="${esc(r.x.doc)}">열어 보기</button>` : ''}</p>`;
+      const it = r.it;
+      const att = it.doc && C.docs[it.doc] ? `<p class="lv-attrow${it.me ? ' me' : ''}"><button type="button" class="lv-att" data-doc="${esc(it.doc)}">${esc(it.att || '첨부 · ' + plain(C.docs[it.doc].title))}</button></p>` : '';
+      return `${div}${block({ msg: it.msg, who: it.who, me: it.me, at: ltime(r.t), f: it.f }, `${it.id}@fd`, s.name)}${att}`;
+    }).join('');
+    return `<article class="doc skin-${esc(s.skin || 'chat')} lv-feed"><header class="doc-h"><p class="doc-k">${esc(s.kicker || '메신저')}</p><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>
+      <div class="doc-b">${body || `<p class="res-none">${esc(s.empty || '아직 아무 말이 없다.')}</p>`}</div></article>`;
+  }
+  function feedList(s) {
+    const n = feedUnread(s), L = ST.live;
+    const last = (s.items || []).filter(it => it.id in L.fd).sort((a, b) => L.fd[b.id] - L.fd[a.id])[0];
+    const o = ST.view.open;
+    const atts = (s.items || []).filter(it => it.id in L.fd && it.doc && C.docs[it.doc]).map(it => C.docs[it.doc]);
+    return `<button type="button" class="item lv-room${o && o.t === 'feed' && o.id === s.id ? ' on' : ''}${n ? ' new' : ''}" data-feed="${esc(s.id)}"><span class="item-t">${esc(s.title || s.name)}${n ? ` <span class="lv-n">${n}</span>` : ''}</span><span class="item-m">${last ? esc(`${last.who ? last.who + ': ' : ''}${trunc(plain(last.msg || ''), 40)}`) : esc(s.empty || '아직 아무 말이 없다.')}</span></button>
+      ${atts.length ? `<p class="res-n">받은 첨부</p>${atts.map(itemBtn).join('')}` : ''}`;
+  }
+
+  const RQPICK = {}; // 신청서마다 고른 소명 메모 (올리기 전)
+  function requestList(s) {
+    const items = (s.items || []).filter(r => ok(r.need));
+    if (!items.length) return `<p class="res-none">${esc(s.empty || '아직 신청할 근거가 없다.')}</p>`;
+    const o = ST.view.open;
+    const st = r => reqState(r.id);
+    const btn = (r, meta, cls) => `<button type="button" class="item rq-i${cls ? ' ' + cls : ''}${o && o.t === 'req' && o.id === r.id ? ' on' : ''}" data-req="${esc(r.id)}"><span class="item-t">${esc(plain(r.title))}</span><span class="item-m">${meta}</span></button>`;
+    const draft = items.filter(r => !st(r) || st(r).st === 'no'), wait = items.filter(r => st(r) && st(r).st === 'wait'), done = items.filter(r => st(r) && st(r).st === 'done');
+    return `${draft.length ? `<p class="res-n">쓸 수 있는 신청서</p>${draft.map(r => btn(r, `${esc(r.kind || '요청')} · 회신까지 약 ${hm(r.eta != null ? r.eta : 120)}${st(r) ? ' · 기각됨' : ''}`, st(r) ? 'no' : '')).join('')}` : ''}
+      ${wait.length ? `<p class="res-n">회신 기다리는 중</p>${wait.map(r => btn(r, `회신 예정 ${esc(lstamp(st(r).due))}`, 'wait')).join('')}<p class="lv-waitrow"><button type="button" data-wait>다음 회신까지 기다린다</button></p>` : ''}
+      ${done.length ? `<p class="res-n">도착한 회신</p>${done.map(r => (C.docs[r.doc] ? itemBtn(C.docs[r.doc]) : '')).join('')}` : ''}`;
+  }
+  function requestHtml(r) {
+    if (!r || !ST.live) return '';
+    const L = ST.live, q = reqState(r.id), notes = ST.notes, why = (r.why || []).length;
+    const row = (k, v) => (v ? `<tr><th>${esc(k)}</th><td>${inline(v)}</td></tr>` : '');
+    let foot;
+    if (q && q.st === 'wait') foot = `<p class="rq-stamp" aria-hidden="true"><span>접수</span></p><p class="rq-st">접수 ${esc(lstamp(q.at))} · 회신 예정 ${esc(lstamp(q.due))} <small>(${hm(q.due - L.t)} 뒤)</small></p><p class="lv-waitrow"><button type="button" data-wait>회신까지 기다린다</button></p>`;
+    else if (q && q.st === 'done') foot = `<p class="rq-stamp ok" aria-hidden="true"><span>회신</span></p><p class="rq-st">회신 ${esc(lstamp(q.due))}</p>${C.docs[r.doc] ? itemBtn(C.docs[r.doc]) : ''}`;
+    else {
+      const sel = RQPICK[r.id] != null ? RQPICK[r.id] : '';
+      const pick = !why ? '' : `<section class="rq-why"><h4>소명 자료 <small>이 요청이 왜 필요한지 보여 줄 메모 하나</small></h4>${notes.length ? noteGroups(notes).map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${String(sel) === String(n.id) ? ' on' : ''}"><input type="radio" name="rq-${esc(r.id)}" value="${n.id}" data-rq-pick="${esc(r.id)}"${String(sel) === String(n.id) ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span></label>`).join('')}</details>`).join('') : '<p class="rep-empty">수첩에 메모가 없다. 근거가 될 문장을 먼저 적어 둔다.</p>'}</section>`;
+      const no = q && q.st === 'no' ? `<p class="rq-no"><b>기각</b> ${inline(r.deny || '소명이 부족하다.')} <small>${esc(lstamp(q.at))}</small></p>` : '';
+      foot = `${no}${pick}<p class="submit-row"><button type="button" class="btn-hand" data-rq-go="${esc(r.id)}">${esc(r.button || (q ? '다시 신청하기' : '신청서 올리기'))}</button><span class="c-msg" role="status"></span></p>`;
+    }
+    return `<article class="doc skin-${esc(r.skin || 'form')} rq"><header class="doc-h"><p class="doc-k">${esc(r.kind || '수사 요청')}</p><h3 class="doc-t">${inline(r.title)}</h3>${r.meta ? `<p class="doc-m">${inline(r.meta)}</p>` : ''}</header>
+      <div class="doc-b">${blocks(r.intro, `${r.id}@i`, plain(r.title))}<table class="rq-t"><tbody>${row('신청', r.by || '강력2팀')}${row('수신', r.to)}${row('대상', r.target)}${row('요청 내용', r.what)}${row('회신까지', r.eta != null ? '약 ' + hm(r.eta) : '')}</tbody></table>${foot}</div></article>`;
+  }
+  function submitReq(id) {
+    const r = reqById(id);
+    if (!r || !liveOn() || ST.solved) return;
+    const L = ST.live, q = reqState(id);
+    if (q && q.st !== 'no') return;
+    const why = (r.why || []).length;
+    const n = why ? ST.notes.find(x => String(x.id) === String(RQPICK[id])) : null;
+    if (why && !n) { const m = $('.rq .c-msg'); if (m) m.textContent = '소명 자료로 붙일 메모를 먼저 고른다.'; sfx('miss'); return; }
+    const prev = L.t;
+    L.t += lcost('write') + (q && lv() >= 5 ? 60 : 0);
+    const eta = r.eta != null ? r.eta : 120;
+    if (!why || r.why.includes(n.f)) {
+      L.req[id] = { st: 'wait', at: L.t, due: L.t + eta, note: n ? n.id : null, tries: q ? q.tries || 0 : 0 };
+      cue('unlock', r.stamp || '접수');
+      toast(eta ? `접수됐다 · 회신 예정 ${lstamp(L.t + eta)}` : '접수됐다');
+    } else {
+      L.req[id] = { st: 'no', at: L.t, note: n.id, tries: (q ? q.tries || 0 : 0) + 1 };
+      cue('miss');
+      toast('기각 — ' + trunc(plain(r.deny || '소명이 부족하다'), 40));
+    }
+    delete RQPICK[id];
+    save(); liveSync(prev); renderTabs(); renderList(); renderRead();
+  }
+
   /* ───────── panes ───────── */
   const itemBtn = d => {
     const o = ST.view.open;
@@ -692,10 +895,11 @@
       ${spots.map(sp => { const d = C.docs[sp.doc]; return d ? itemBtn(d) : ''; }).join('')}`;
   }
 
+  const tabBadge = s => { const n = s.type === 'feed' ? feedUnread(s) : s.type === 'request' ? reqUnread(s) : 0; return n ? `<span class="tab-n" aria-label="새 소식 ${n}">${n}</span>` : ''; };
   function renderTabs() {
     const vis = C.sources.filter(srcVisible);
     if (!vis.find(s => s.id === ST.view.src)) ST.view.src = vis[0] && vis[0].id;
-    $('#srcTabs').innerHTML = vis.map(s => `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" data-src="${esc(s.id)}">${esc(s.name)}${s.lock && !ST.unl.includes(s.id) ? '<span class="tab-lock">잠김</span>' : ''}</button>`).join('');
+    $('#srcTabs').innerHTML = vis.map(s => `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" data-src="${esc(s.id)}">${esc(s.name)}${s.lock && !ST.unl.includes(s.id) ? '<span class="tab-lock">잠김</span>' : ''}${tabBadge(s)}</button>`).join('');
   }
   function renderList() {
     const s = curSrc();
@@ -711,6 +915,8 @@
     else if (s.type === 'compare') h += compareList(s);
     else if (s.type === 'query') h += queryList(s);
     else if (s.type === 'photo') h += photoList(s);
+    else if (s.type === 'request') h += requestList(s);
+    else if (s.type === 'feed') h += feedList(s);
     el.innerHTML = h;
     el.dataset.type = s.type;
   }
@@ -725,6 +931,8 @@
     else if (o && o.t === 'compare' && C._sets[o.id]) h = compareHtml(C._sets[o.id]);
     else if (o && o.t === 'photo' && C._scenes[o.id]) h = photoHtml(C._scenes[o.id]);
     else if (o && o.t === 'report') h = reportHtml();
+    else if (o && o.t === 'req' && reqById(o.id)) h = requestHtml(reqById(o.id));
+    else if (o && o.t === 'feed' && C.sources.find(s => s.id === o.id)) h = feedHtml(C.sources.find(s => s.id === o.id));
     else if (curSrc() && curSrc().type === 'map' && srcOpen(curSrc()) && !narrow()) { const s = curSrc(); h = `<div class="map-read">${s.desc ? `<p class="map-desc">${inline(s.desc)}</p>` : ''}${mapHtml(s, true)}</div>`; }
     else h = `<div class="read-empty"><p>${inline(C.emptyRead || '왼쪽에서 자료를 고르면 여기에 펼쳐진다.')}</p></div>`;
     el.innerHTML = `<button type="button" class="back-list" data-back>← 목록으로</button>${h}`;
@@ -733,8 +941,9 @@
 
   /* ───────── 수사 보고서 (읽기 칸에 넓게) ───────── */
   let REPOPEN = null; // 메모 고르기가 펼쳐진 주장
+  const FORM = () => Object.assign({ title: '수사 보고서', culprit: '범인은', short: '범인', submit: '보고서 올리기', open: '보고서 펼쳐 쓰기', lead: '범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다.', judging: '보고서를 올렸다. 반장이 한 장씩 넘긴다…' }, C.solution.form || {});
   function reportHtml() {
-    const sol = C.solution, notes = ST.notes;
+    const sol = C.solution, notes = ST.notes, FM = FORM();
     const persons = ST.keys.filter(k => C.keywords[k] && C.keywords[k].type === 'person');
     const roleOf = k => { const p = Object.values(C.people || {}).find(x => x.key === k); return p && p.role ? plain(p.role) : ''; };
     const groups = noteGroups(notes);
@@ -749,11 +958,11 @@
         ${open ? `<div class="rep-acc">${notes.length ? `<input type="search" class="rep-filter" placeholder="메모에서 낱말 찾기" data-rep-filter aria-label="메모 찾기">${list}` : '<p class="rep-empty">수첩에 메모가 없다. 문서와 탐문에서 문장을 눌러 적어 둔다.</p>'}</div>` : ''}
       </section>`;
     };
-    return `<article class="doc skin-report rep-view"><header class="doc-h"><p class="doc-k">수사 보고서</p><h3 class="doc-t">${esc(C.title)}</h3><p class="doc-m">범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다.</p></header>
+    return `<article class="doc skin-report rep-view"><header class="doc-h"><p class="doc-k">${esc(FM.title)}</p><h3 class="doc-t">${esc(C.title)}</h3><p class="doc-m">${esc(FM.lead)}</p></header>
       <div class="doc-b"><form id="rep" autocomplete="off">
-        <section class="rep-sec"><h4>범인은</h4><div class="rep-people">${persons.map(k => `<label class="rep-per${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}><b>${esc(C.keywords[k].label)}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}</label>`).join('') || '<p class="rep-empty">수첩에 적힌 인물이 없다.</p>'}</div></section>
+        <section class="rep-sec"><h4>${esc(FM.culprit)}</h4><div class="rep-people">${persons.map(k => `<label class="rep-per${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}><b>${esc(C.keywords[k].label)}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}</label>`).join('') || '<p class="rep-empty">수첩에 적힌 인물이 없다.</p>'}</div></section>
         ${sol.claims.map(claim).join('')}
-        <p class="submit-row"><button type="submit" class="btn-hand">보고서 올리기</button><span class="tries">${ST.tries ? `제출 ${ST.tries}회` : ''}</span></p>
+        <p class="submit-row"><button type="submit" class="btn-hand">${esc(FM.submit)}</button><span class="tries">${ST.tries ? `제출 ${ST.tries}회` : ''}</span></p>
       </form><p class="verdict" role="status">${esc(VERDICT)}</p>${ST.solved ? `<div class="rep-solved">${solvedHtml(false)}</div>` : ''}</div></article>`;
   }
   function renderRep() {
@@ -768,9 +977,11 @@
   function solvedHtml(fresh) {
     const sol = C.solution;
     NOPIN = true;
-    const epi = blocks(sol.epilogue, 'epi', '결말');
+    const late = !!(C.live && ST.live && ST.live.late);
+    const epi = blocks(late && sol.late ? sol.late : sol.epilogue, 'epi', '결말');
     NOPIN = false;
-    return `<div class="stamp${fresh ? ' fresh' : ''}"><div>사건<br>종결<small>${esc(sol.stamp || '')}</small></div></div><div class="epi">${epi}</div>${sol.next ? `<p class="epi-next">${inline(sol.next)}</p>` : ''}`;
+    const fin = C.live && ST.live ? `<p class="lv-fin">수사 개시부터 ${hm(ST.live.t)}${C.live.deadline ? ` · ${esc(C.live.deadline.label || '기한')} ${late ? '넘김' : '안'}` : ''}</p>` : '';
+    return `<div class="stamp${fresh ? ' fresh' : ''}"><div>사건<br>종결<small>${esc(sol.stamp || '')}</small></div></div>${fin}<div class="epi">${epi}</div>${sol.next ? `<p class="epi-next">${inline(sol.next)}</p>` : ''}`;
   }
   // 메모는 어디서 적었는지(문서·사람)끼리 묶는다. 접어 둔 묶음은 기억한다
   const NGSHUT = new Set();
@@ -802,9 +1013,9 @@
         ${(C.tips || []).length ? `<ol class="notes">${C.tips.map(t => `<li class="tip">※ ${inline(t)}</li>`).join('')}</ol>` : ''}
         ${noteGroups(notes).map(g => `<details class="ng" data-ng="${esc(g.src)}"${NGSHUT.has(C.id + '|' + g.src) ? '' : ' open'}><summary>${esc(g.src)} <small>${g.items.length}</small></summary><ol class="notes">${g.items.map(([n, i]) => `<li data-nid="${n.id}" style="--r:${(hash(n.ref) % 5 - 2) * 0.25}deg"><span class="n">${i + 1}.</span> ${esc(n.t)}<button type="button" class="del" data-del="${n.id}" aria-label="메모 ${i + 1} 지우기">×</button></li>`).join('')}</ol></details>`).join('')}
       </section>
-      <section class="ruled nb-sec nb-rep"><h3 class="hh">수사 보고서</h3>
-        <p class="rep-sum">범인 <b>${ST.report.culprit && C.keywords[ST.report.culprit] ? esc(C.keywords[ST.report.culprit].label) : '—'}</b> · 증거 <b>${sol.claims.filter(cl => ST.report.claims[cl.id] && ST.notes.some(n => String(n.id) === String(ST.report.claims[cl.id]))).length}</b> / ${sol.claims.length}</p>
-        <p class="submit-row"><button type="button" class="btn-hand" data-open-rep>보고서 펼쳐 쓰기</button><span class="tries">${ST.tries ? `제출 ${ST.tries}회` : ''}</span></p>
+      <section class="ruled nb-sec nb-rep"><h3 class="hh">${esc(FORM().title)}</h3>
+        <p class="rep-sum">${esc(FORM().short)} <b>${ST.report.culprit && C.keywords[ST.report.culprit] ? esc(C.keywords[ST.report.culprit].label) : '—'}</b> · 증거 <b>${sol.claims.filter(cl => ST.report.claims[cl.id] && ST.notes.some(n => String(n.id) === String(ST.report.claims[cl.id]))).length}</b> / ${sol.claims.length}</p>
+        <p class="submit-row"><button type="button" class="btn-hand" data-open-rep>${esc(FORM().open)}</button><span class="tries">${ST.tries ? `제출 ${ST.tries}회` : ''}</span></p>
         <p class="verdict" role="status">${esc(VERDICT)}</p>
         <div id="solvedBox">${ST.solved ? solvedHtml(false) : ''}</div>
       </section>
@@ -837,6 +1048,7 @@
   const CLOCK = { c00: [2025, 10, 16, 14, 20], c09: [2006, 10, 27, 16, 5], c10: [2014, 12, 4, 15, 40] };
   let clockT = null;
   function clockBar() {
+    if (C.live && ST && ST.live) return liveBar();
     const c = C.clock || CLOCK[C.id];
     if (!c || C.frame === 'papers') return '';
     const ico = C.frame === 'laptop' ? '<svg viewBox="0 0 34 12" aria-hidden="true"><path d="M2 5.5a7 7 0 0 1 10 0M4 7.5a4.2 4.2 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="9.6" r="1.1" fill="currentColor"/><rect x="17" y="3" width="13" height="7" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.1"/><rect x="18.6" y="4.6" width="7" height="3.8" fill="currentColor"/><rect x="30.4" y="5" width="1.6" height="3" fill="currentColor"/></svg>' : '';
@@ -869,21 +1081,20 @@
   }
   // 사건마다 쓰는 특수 글꼴은 그 사건을 열 때만 부른다 (공통 글꼴은 index.html). 신문 양식은 송명·옛 로마자를 쓴다.
   // 손글씨 편지는 쓴 사람마다 필체가 다르다 (문서 cls 의 f-yeon · f-dokdo …)
-  const FONTS = { old: 'Song+Myung', latin: 'Old+Standard+TT:wght@400;700', frak: 'UnifrakturMaguntia', jp: 'Noto+Serif+JP:wght@700;900',
-    yeon: 'Yeon+Sung', dokdo: 'Dokdo', gaegu: 'Gaegu:wght@400;700', dohyeon: 'Do+Hyeon', melody: 'Hi+Melody', bhs: 'Black+Han+Sans' };
   const fontOn = {};
   function caseFonts(c) {
+    const FONTS = MG.fonts || {};
     if (!c._fonts) {
       const j = JSON.stringify(c), news = j.includes('"skin":"news"');
-      c._fonts = Object.keys(FONTS).filter(k => j.includes('f-' + k) || news && (k === 'old' || k === 'latin') || k === 'latin' && j.includes('f-frak'));
+      c._fonts = Object.keys(FONTS).filter(k => (c.fonts || []).includes(k) || j.includes('f-' + k) || news && (k === 'old' || k === 'latin') || k === 'latin' && j.includes('f-frak'));
     }
     const need = c._fonts.filter(k => !fontOn[k]);
     if (!need.length) return;
     need.forEach(k => { fontOn[k] = 1; });
-    const l = document.createElement('link');
-    l.rel = 'stylesheet';
-    l.href = 'https://fonts.googleapis.com/css2?' + need.map(k => 'family=' + FONTS[k]).join('&') + '&display=swap';
-    document.head.appendChild(l);
+    const link = href => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); };
+    const g = need.filter(k => typeof FONTS[k] === 'string');
+    if (g.length) link('https://fonts.googleapis.com/css2?' + g.map(k => 'family=' + FONTS[k]).join('&') + '&display=swap');
+    need.filter(k => FONTS[k] && FONTS[k].css).forEach(k => link(FONTS[k].css));
   }
 
   // intro: 기록실에서 폴더를 눌러 열 때만 여는 장면을 보여 준다 (새로 고침·처음부터 다시는 바로)
@@ -896,6 +1107,7 @@
     S.current = id; save();
     document.title = `CASE ${pad(c.no)} 「${c.title}」 — Monologue Gaze`;
     renderCase();
+    liveSync();
     if (MG.mood) MG.mood.enter(C, intro);
     window.scrollTo(0, 0);
   }
@@ -995,17 +1207,20 @@
   }
 
   function cabinet(showRoster) {
+    clearNotes();
     C = null; ST = null; S.current = null; save();
     if (MG.mood) MG.mood.leave();
     document.body.dataset.screen = 'cabinet';
     document.title = 'Monologue Gaze';
-    const main = MG.cases.filter(c => c.kind !== 'tutorial');
+    const main = MG.cases.filter(c => c.kind !== 'tutorial' && !c.live); // M 의 서랍: 미제 기록
+    const live = MG.cases.filter(c => c.live); // 당직: 지금 강력2팀에 떨어진 사건
     const solvedMain = main.filter(c => S.cases[c.id] && S.cases[c.id].solved).length;
+    const solvedLive = live.filter(c => S.cases[c.id] && S.cases[c.id].solved).length;
     const mList = MG.cases.filter(c => c._m && S.cases[c.id] && S.cases[c.id].m);
     const folder = c => {
       const st = S.cases[c.id];
       const status = st && st.solved ? 'done' : st && (st.notes.length || st.seen.length) ? 'going' : 'new';
-      const kind = c.kind === 'tutorial' ? '튜토리얼' : c.region === 'overseas' ? '해외' : '국내';
+      const kind = c.kind === 'tutorial' ? '튜토리얼' : c.live ? '현행' : c.region === 'overseas' ? '해외' : '국내';
       const coverFile = MG.images[`${c.id}/cover_s`] || MG.images[`${c.id}/cover`]; // 폴더 표지는 작게 (cover_s)
       const cover = coverFile ? `<img src="${esc(coverFile)}" alt="" loading="lazy" decoding="async">` : c.art && c.art.cover ? (typeof c.art.cover === 'string' ? c.art.cover : c.art.cover.svg || '') : '';
       return `<button type="button" class="folder ${status}${c.kind === 'tutorial' ? ' tutorial' : ''}" data-open="${esc(c.id)}" style="--tilt:${(hash(c.id) % 7 - 3) * 0.4}deg">
@@ -1021,10 +1236,11 @@
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
       <header class="cab-top"><p class="cab-kicker">서울서부경찰서 강력2팀 · 미제사건 기록실</p><h1 class="cab-title">Monologue Gaze</h1><p class="cab-sub">기록은 혼잣말을 한다. 들어주는 건 당신이다.</p>
-        <p class="cab-ctl">${whoBtn(showRoster)}${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}</p><p class="cab-stat">종결 <b>${solvedMain}</b> / ${main.length} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}</p></header>
+        <p class="cab-ctl">${whoBtn(showRoster)}${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}</p><p class="cab-stat">종결 <b>${solvedMain}</b> / ${main.length}${live.length ? ` · 현행 <b>${solvedLive}</b> / ${live.length}` : ''} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}</p></header>
       ${showRoster ? rosterHtml() : ''}
       ${intro}
-      <section class="drawer" aria-label="사건 파일">${MG.cases.map(folder).join('')}</section>
+      <section class="drawer" aria-label="사건 파일">${MG.cases.filter(c => !c.live).map(folder).join('')}</section>
+      ${live.length ? `<section class="duty" aria-label="현행 사건"><h2 class="duty-h">당직 · 현행 사건</h2><p class="duty-sub">지금 강력2팀에 배당된 사건. 기록을 넘기는 동안에도 시계는 간다.</p><div class="drawer">${live.map(folder).join('')}</div></section>` : ''}
       ${mList.length ? `<section class="mbox"><h2>M의 메모</h2><p class="mbox-sub">기록 여백에 남아 있던, 선배의 글씨.</p><ul>${mList.map(c => `<li><span class="mbox-case">CASE ${pad(c.no)}</span> ${esc(plain(c._m))}</li>`).join('')}</ul></section>` : ''}
       ${letter}
       <footer class="cab-foot"><p>모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.</p><p class="credit">목소리·효과음 <a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a></p><button type="button" class="reset" data-wipe>${roster().list.length > 1 ? '내 기록 지우기' : '모든 기록 지우기'}</button></footer>
@@ -1067,6 +1283,13 @@
         g.gain.setValueAtTime(0.001, t); g.gain.exponentialRampToValueAtTime(0.34, t + 0.35); g.gain.exponentialRampToValueAtTime(0.001, t + 2.1);
         o.connect(g).connect(actx.destination); o.start(t); o.stop(t + 2.15);
         noise(1.4, 'lowpass', 260, 0.6, 0.14);
+      } else if (kind === 'buzz') { // 휴대폰 진동 두 번: 낮은 사각파가 책상 위에서 드르륵
+        [0, 0.26].forEach(at => {
+          const o = actx.createOscillator(); const g = actx.createGain(); const f = actx.createBiquadFilter();
+          o.type = 'square'; o.frequency.setValueAtTime(148, t + at); f.type = 'lowpass'; f.frequency.value = 420;
+          g.gain.setValueAtTime(0.0001, t + at); g.gain.exponentialRampToValueAtTime(0.09, t + at + 0.02); g.gain.setValueAtTime(0.09, t + at + 0.16); g.gain.exponentialRampToValueAtTime(0.0001, t + at + 0.2);
+          o.connect(f).connect(g).connect(actx.destination); o.start(t + at); o.stop(t + at + 0.22);
+        });
       } else { // 북소리: 음높이가 뚝 떨어지는 낮은 사인파 + 가죽 치는 잡음. clue 한 번, match·confess 두 번, miss 짧고 둔하게
         const drum = (at, f0, v, len) => {
           const o = actx.createOscillator(); const g = actx.createGain();
@@ -1162,6 +1385,7 @@
     const chips = $('#askChips');
     if (chips && ST.view.open && ST.view.open.t === 'person') chips.innerHTML = askChips(C.people[ST.view.open.id]);
     if (!quiet) toast(`수첩에 적었다: ${k.label}${gained > 0 ? ` · 새로 열린 것 ${gained}` : ''}`);
+    liveSync();
   }
   function pin(ref) {
     const p = PIN[ref];
@@ -1180,6 +1404,7 @@
     const chips = $('#askChips');
     if (chips && ST.view.open && ST.view.open.t === 'person') chips.innerHTML = askChips(C.people[ST.view.open.id]);
     toast(`메모 ${ST.notes.length}번을 적었다${gained > 0 ? ` · 새로 열린 것 ${gained}` : ''}`);
+    liveSync();
   }
   function delNote(id) {
     const n = ST.notes.find(x => x.id === id);
@@ -1190,8 +1415,11 @@
     renderRep();
   }
   function openItem(o) {
+    const first = (o.t === 'doc' || o.t === 'photo') && !ST.seen.includes(o.id);
     ST.view.open = o; save(); sfx('page');
     renderRead(); renderList();
+    if (o.t === 'feed') { renderTabs(); const pr = $('#paneRead'); if (pr) setTimeout(() => { pr.scrollTop = pr.scrollHeight; }, 0); }
+    if (first && ST.seen.includes(o.id)) advance(o.t === 'photo' ? 'photo' : 'doc');
     $('#paneRead').scrollTop = 0;
     const doc = $('#paneRead > :not(.back-list)'); if (doc) doc.classList.add('enter');
     if (narrow()) $('.stage').scrollIntoView({ block: 'start' });
@@ -1202,6 +1430,7 @@
   function setQ(srcId, q) {
     ST.view.src = srcId; ST.view.q[srcId] = q; save();
     renderTabs(); renderList();
+    if (norm(q)) advance('search');
   }
   function search(kid) {
     let s = curSrc();
@@ -1227,6 +1456,7 @@
     if (census() > before) renderTabs();
     if (fresh) playAsk(p, e);
     else if (qa) { qa.classList.remove('flash'); void qa.offsetWidth; qa.classList.add('flash'); }
+    if (fresh) advance('ask');
   }
   function chip(k) {
     const o = ST.view.open;
@@ -1244,6 +1474,7 @@
       save(); refreshAll(); cue('unlock', '열림');
       const gained = census() - before;
       toast((lock.ok || '열렸다.') + (gained > 0 ? ` · 새로 열린 것 ${gained}` : ''));
+      liveSync();
     } else {
       LOCKFAIL[id] = (LOCKFAIL[id] || 0) + 1;
       renderList(); renderRead();
@@ -1275,6 +1506,7 @@
     save(); refreshAll(); cue('match', stamp || '일치');
     const gained = census() - before;
     toast(msg + (gained > 0 ? ` · 새로 열린 것 ${gained}` : ''));
+    liveSync();
   }
   function moveTl(arg) {
     const [sid, eid, dir] = arg.split('|');
@@ -1293,6 +1525,7 @@
     if (!s) return;
     const o = tlOrder(s);
     const hit = o.filter((id, i) => id === s.events[i].id);
+    advance('timeline');
     if (hit.length === o.length) return solveThing(sid, s.reward, s.ok || '앞뒤가 맞아떨어졌다', '재구성');
     TLHIT[sid] = lv() <= 3 ? hit : [];
     renderRead();
@@ -1305,6 +1538,7 @@
     if (!x || ST.unl.includes(xid)) return;
     const st = cmpState(x);
     if (lv() >= 4 && st.at >= 0 && progress() <= st.at) return;
+    advance('compare');
     if (oid === x.answer) return solveThing(xid, x.reward, x.ok || '감정 결과 일치', '일치');
     if (!st.x.includes(oid)) st.x.push(oid);
     st.at = progress();
@@ -1326,6 +1560,7 @@
     renderTabs(); renderList(); renderNotebook();
     if (hits && hits.length === 1) openItem({ t: 'doc', id: hits[0] });
     if (census() > before) { cue('clue'); toast(`새로 열린 것 ${census() - before}`); }
+    advance('query');
   }
   function photoFind(xid, test) {
     const x = C._scenes[xid];
@@ -1384,7 +1619,7 @@
     save();
     // 연출: 지목 → 침묵 → 판정
     JUDGING = true;
-    $$('.verdict').forEach(v => { v.textContent = '보고서를 올렸다. 반장이 한 장씩 넘긴다…'; v.classList.add('wait'); });
+    $$('.verdict').forEach(v => { v.textContent = FORM().judging; v.classList.add('wait'); });
     const view = $('.rep-view'); if (view) view.classList.add('judging');
     sfx('page');
     const v = MG.sound ? MG.sound.hero('accuse') : null;
@@ -1432,6 +1667,17 @@
       if (t.closest('[data-intro-ok]')) { S.intro = true; save(); cabinet(); return; }
       if ((el = t.closest('[data-wipe]'))) return armed(el, roster().list.length > 1 ? '한 번 더 누르면 내 기록이 지워진다' : '한 번 더 누르면 전부 지워진다', () => { S = blank(); save(); cabinet(); });
       if (!C) return;
+      if ((el = t.closest('.lv-note'))) { // 휴대폰 알림: 누르면 그곳으로
+        const tt = el.dataset.lvT, id = el.dataset.lvId, src = el.dataset.lvSrc;
+        el.remove();
+        if (!tt || !id) return;
+        if (src && C.sources.some(s => s.id === src)) { ST.view.src = src; renderTabs(); renderList(); }
+        return openItem({ t: tt, id });
+      }
+      if (t.closest('[data-wait]')) return waitNext();
+      if ((el = t.closest('[data-req]'))) return openItem({ t: 'req', id: el.dataset.req });
+      if ((el = t.closest('[data-rq-go]'))) return submitReq(el.dataset.rqGo);
+      if ((el = t.closest('[data-feed]'))) return openItem({ t: 'feed', id: el.dataset.feed });
       if (TALK && t.closest('.per-tr') && !t.closest('[data-pin]')) { TALK.finish(); return; } // 대화 건너뛰기
       if ((el = t.closest('.cmp-art img, .b-img img, .map img'))) { if (!t.closest('[data-spot], .cens:not(.open)')) return zoom(el); }
       if ((el = t.closest('[data-pad]'))) { // 전화 번호판
@@ -1506,6 +1752,8 @@
     }, true);
     document.addEventListener('change', e => {
       if (e.target.closest('[data-pname]')) return renamePlayer(e.target.value);
+      const rq = e.target.closest('[data-rq-pick]');
+      if (rq && C) { RQPICK[rq.dataset.rqPick] = rq.value; $$(`[data-rq-pick="${rq.dataset.rqPick}"]`).forEach(x => x.closest('.rep-opt').classList.toggle('on', x.checked)); sfx('pen'); return; }
       const s = e.target.closest('[data-rep]');
       if (!s || !C) return;
       if (s.dataset.rep === 'culprit') ST.report.culprit = s.value; else { ST.report.claims[s.dataset.rep] = s.value; REPOPEN = null; }

@@ -1,0 +1,83 @@
+/* Monologue Gaze — 실시간 수사(live): 수사 시계, 휴대폰 알림, 단톡방, 영장·공문 신청서, 기록실의 당직 칸
+ * 시대는 2020년대. 화면 틀(laptop) 안의 것은 운영체제·메신저처럼, 종이 신청서는 관공서 서식처럼. */
+
+/* ───────── 화면 아래 줄: 수사 시계 · 기한 · 기다리기 ───────── */
+.scr-bar.live{justify-content:space-between;gap:12px;height:30px;padding:0 10px 0 12px;white-space:nowrap;user-select:none}
+.lv-clock{font:12.5px/1 var(--f-mono);letter-spacing:.03em}
+.lv-clock b{margin-right:6px;padding:2px 5px 1px;border-radius:3px;background:rgba(255,255,255,.14);font-weight:700}
+.lv-dl{margin-left:auto;font:12px/1 var(--f-web);opacity:.85}
+.lv-dl.hot{color:#ffb454;opacity:1}
+.lv-dl.over{color:#ff7a6b;opacity:1;font-weight:700}
+.lv-dl.done{opacity:.55}
+.lv-wait{flex:none;height:20px;padding:0 10px;border:1px solid rgba(255,255,255,.3);border-radius:10px;background:rgba(255,255,255,.08);color:inherit;font:11px/18px var(--f-web);cursor:pointer}
+.lv-wait:hover{background:rgba(255,255,255,.18)}
+.case-view[data-frame="crt"] .lv-clock b{background:rgba(0,0,0,.12)}
+.case-view[data-frame="crt"] .lv-wait{border-color:#8c8a84;background:#e8e5dd;border-radius:2px}
+@media (max-width:560px){ .scr-bar.live{height:auto;min-height:28px;flex-wrap:wrap;padding:4px 10px;row-gap:4px} .lv-dl{margin-left:0} }
+
+/* ───────── 휴대폰 알림 (오른쪽 위에 쌓인다) ───────── */
+.lv-notes{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:12px;z-index:94;display:flex;flex-direction:column;gap:8px;width:min(330px,calc(100vw - 24px));pointer-events:none}
+.lv-note{display:grid;grid-template-columns:1fr;gap:1px;width:100%;padding:9px 12px 10px;border:0;border-radius:14px;background:rgba(246,247,249,.94);color:#1b1f24;text-align:left;box-shadow:0 10px 26px rgba(0,0,0,.38),0 0 0 1px rgba(0,0,0,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:13px/1.45 var(--f-web);cursor:pointer;pointer-events:auto;opacity:0;transform:translateY(-10px) scale(.98);transition:opacity .28s,transform .28s}
+.lv-note.on{opacity:1;transform:none}
+.lv-note:hover{background:#fff}
+.lv-app{display:flex;justify-content:space-between;font:10.5px/1.4 var(--f-web);letter-spacing:.02em;color:#6b7280;text-transform:none}
+.lv-app time{font-family:var(--f-mono)}
+.lv-note b{font-weight:800}
+.lv-msg{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#30363d}
+.lv-note.late{background:rgba(255,236,232,.96)}
+.lv-note.late b{color:#b0342a}
+@media (prefers-reduced-motion:reduce){ .lv-note{transition:none;transform:none} }
+
+/* ───────── 탭의 새 소식 수 ───────── */
+.tab-n{min-width:17px;height:17px;padding:0 5px;border-radius:9px;background:#e5483b;color:#fff;font:700 10.5px/17px var(--f-web);text-align:center}
+
+/* ───────── 단톡방 ───────── */
+.lv-room .item-t{display:flex;align-items:center;gap:6px}
+.lv-n{min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#e5483b;color:#fff;font:700 10.5px/18px var(--f-web);text-align:center}
+.lv-feed .doc-b{display:flow-root}
+.lv-sys{clear:both;margin:10px auto;max-width:92%;padding:5px 10px;border-radius:10px;background:rgba(0,0,0,.08);font:12px/1.5 var(--f-web);text-align:center;color:#2b3137}
+.lv-sys time{font-family:var(--f-mono);opacity:.7}
+.lv-sys.late{background:rgba(176,52,42,.14);color:#7a2019}
+.lv-attrow{margin:-2px 0 8px 4px}
+.lv-attrow.me{text-align:right;margin-right:4px}
+.lv-att{padding:5px 10px;border:1px solid rgba(0,0,0,.14);border-radius:9px;background:#fff;color:#1d2328;font:12px/1.4 var(--f-web);cursor:pointer;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.lv-att::before{content:"";display:inline-block;width:10px;height:12px;margin-right:6px;vertical-align:-1px;border:1.4px solid currentColor;border-radius:1px 4px 1px 1px;opacity:.6}
+.lv-att:hover{background:#f3f6f8}
+
+/* ───────── 영장·공문 신청서 (관공서 서식) ───────── */
+.skin-form{background:#fbfbf8;color:#1d1f22;font-family:var(--f-web)}
+.skin-form .doc-h{padding-bottom:10px;border-bottom:2px solid #1d1f22}
+.skin-form .doc-k{font:11px/1.4 var(--f-mono);letter-spacing:.12em;color:#5a5f66}
+.skin-form .doc-t{font:800 18px/1.4 var(--f-doc)}
+.skin-form .doc-m{font-size:12px;color:#5a5f66}
+.rq-t{width:100%;margin:12px 0 14px;border-collapse:collapse;font:13px/1.55 var(--f-web)}
+.rq-t th{width:6.5em;padding:7px 10px;border:1px solid #9aa0a6;background:#eef0f2;font-weight:700;text-align:left;vertical-align:top;white-space:nowrap}
+.rq-t td{padding:7px 10px;border:1px solid #9aa0a6}
+.rq-why h4{margin:14px 0 6px;font:700 14px/1.4 var(--f-doc)}
+.rq-why h4 small{font:12px var(--f-web);color:#5a5f66;font-weight:400}
+.rq-no{margin:10px 0;padding:8px 12px;border-left:4px solid #b0342a;background:rgba(176,52,42,.07);font:13px/1.6 var(--f-web)}
+.rq-no b{margin-right:6px;color:#b0342a}
+.rq-no small{margin-left:6px;font:11px var(--f-mono);opacity:.7}
+.rq-st{margin:6px 0 10px;font:13px/1.6 var(--f-web)}
+.rq-st small{opacity:.7}
+.rq-stamp{margin:14px 0 4px;height:0;text-align:right;pointer-events:none}
+.rq-stamp span{display:inline-block;padding:6px 12px 5px;border:3px double #b0342a;color:#b0342a;font:800 18px/1 var(--f-doc);letter-spacing:.2em;transform:rotate(-9deg) translateY(-4px);opacity:.85;mix-blend-mode:multiply}
+.rq-stamp.ok span{border-color:#2f5d9a;color:#2f5d9a}
+.rq-i.no .item-m{color:#b0342a}
+.rq-i.wait .item-m::before{content:"";display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:#e0a33a;animation:lv-blink 1.4s ease-in-out infinite}
+@keyframes lv-blink{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){ .rq-i.wait .item-m::before{animation:none} }
+.lv-waitrow{margin:8px 0 4px}
+.lv-waitrow button{padding:6px 12px;border:1px solid currentColor;border-radius:6px;background:transparent;color:inherit;font:12px var(--f-web);cursor:pointer;opacity:.85}
+.lv-waitrow button:hover{opacity:1;background:rgba(0,0,0,.05)}
+
+/* 종결 뒤: 수사에 든 시간 */
+.lv-fin{margin:8px 0 0;font:12px var(--f-mono);letter-spacing:.03em;opacity:.8}
+
+/* ───────── 기록실: 당직 · 현행 사건 ───────── */
+.duty{margin-top:44px}
+.duty-h{margin:0;font:400 30px/1.1 var(--f-hand);color:#efe4c9}
+.duty-h::before{content:"";display:inline-block;width:10px;height:10px;margin:0 10px 4px 0;border-radius:50%;background:#e5483b;box-shadow:0 0 0 3px rgba(229,72,59,.25);animation:lv-blink 2s ease-in-out infinite}
+.duty-sub{margin:4px 0 16px;font-size:13px;color:#a99a7e}
+.duty .drawer{margin-top:10px}
+@media (prefers-reduced-motion:reduce){ .duty-h::before{animation:none} }

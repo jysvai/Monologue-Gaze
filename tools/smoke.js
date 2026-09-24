@@ -34,6 +34,10 @@ for (const c of MG.cases.filter(c => files.some(f => f.includes(c.id)))) {
   const keys = Object.keys(c.keywords);
   const unl = [...Object.keys(c.docs).filter(id => c.docs[id].lock), ...c.sources.filter(s => s.lock).map(s => s.id)];
   const extra = [];
+  // 실시간 수사: 신청서는 기각·접수·회신 상태를 돌아가며, 단톡방은 말이 다 온 상태로
+  const reqs = c.sources.filter(s => s.type === 'request').flatMap(s => s.items || []);
+  const fitems = c.sources.filter(s => s.type === 'feed').flatMap(s => s.items || []);
+  const LIVE = () => (c.live ? { t: 900, req: Object.fromEntries(reqs.map((r, i) => [r.id, [null, { st: 'no', at: 30 }, { st: 'wait', at: 40, due: 1200 }, { st: 'done', at: 50, due: 300 }][i % 4]].filter(([, v]) => v))), fd: Object.fromEntries(fitems.map(it => [it.id, it.at || 0])), fx: reqs.length ? [{ t: 300, who: '회신', msg: '회신 도착', doc: reqs[0].doc }] : [], rd: {}, late: true } : undefined);
   c.sources.forEach(s => {
     if (s.type === 'timeline' || s.type === 'cipher') extra.push(s.id);
     if (s.type === 'compare') (s.sets || []).forEach(x => extra.push(x.id));
@@ -41,7 +45,7 @@ for (const c of MG.cases.filter(c => files.some(f => f.includes(c.id)))) {
   });
   const boot = view => {
     Object.keys(els).forEach(k => delete els[k]);
-    MG.boot({ S: { intro: true, current: c.id, cases: { [c.id]: { cw: true, keys: [...keys], unl: [...unl], view, asked: view.asked || {} } } } });
+    MG.boot({ S: { intro: true, current: c.id, cases: { [c.id]: { cw: true, live: LIVE(), keys: [...keys], unl: [...unl], view, asked: view.asked || {} } } } });
   };
   let n = 0;
   for (const [id, d] of Object.entries(c.docs)) {
@@ -54,7 +58,7 @@ for (const c of MG.cases.filter(c => files.some(f => f.includes(c.id)))) {
     asked.push('k_zzz_unknown'); // idle
     const view = { src: p.src, open: { t: 'person', id }, q: {} };
     Object.keys(els).forEach(k => delete els[k]);
-    MG.boot({ S: { intro: true, current: c.id, cases: { [c.id]: { cw: true, keys: [...keys], unl: [...unl], view, asked: { [id]: asked } } } } });
+    MG.boot({ S: { intro: true, current: c.id, cases: { [c.id]: { cw: true, live: LIVE(), keys: [...keys], unl: [...unl], view, asked: { [id]: asked } } } } });
     check(`${c.id} person ${id}`, el('#paneRead').innerHTML.replace(/k_zzz_unknown/g, ''), p.name); n++;
   }
   const views = [];
@@ -63,10 +67,12 @@ for (const c of MG.cases.filter(c => files.some(f => f.includes(c.id)))) {
     if (s.type === 'cipher') views.push([s.id, { t: 'cipher', id: s.id }]);
     if (s.type === 'compare') (s.sets || []).forEach(x => views.push([s.id, { t: 'compare', id: x.id }]));
     if (s.type === 'photo') (s.scenes || []).forEach(x => views.push([s.id, { t: 'photo', id: x.id }]));
+    if (s.type === 'request') (s.items || []).forEach(r => views.push([s.id, { t: 'req', id: r.id }]));
+    if (s.type === 'feed') views.push([s.id, { t: 'feed', id: s.id }]);
   });
   for (const solved of [false, true]) for (const [src, open] of views) {
     Object.keys(els).forEach(k => delete els[k]);
-    MG.boot({ S: { intro: true, current: c.id, cases: { [c.id]: { cw: true, keys: [...keys], unl: solved ? [...unl, ...extra] : [...unl], view: { src, open, q: {} } } } } });
+    MG.boot({ S: { intro: true, current: c.id, cases: { [c.id]: { cw: true, live: LIVE(), keys: [...keys], unl: solved ? [...unl, ...extra] : [...unl], view: { src, open, q: {} } } } } });
     check(`${c.id} ${open.t} ${open.id}${solved ? ' (solved)' : ''}`, el('#paneRead').innerHTML, 'class="doc-t"'); n++;
   }
   for (const s of c.sources) {

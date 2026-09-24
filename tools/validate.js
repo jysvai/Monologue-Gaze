@@ -10,8 +10,8 @@ const vm = require('vm');
 const norm = s => String(s ?? '').toLowerCase().replace(/[\s'"`.,!?·・()[\]{}\-_/@:;~「」『』〈〉《》“”‘’]/g, '');
 const BLOCK_KEYS = new Set(['p', 'h', 'sep', 'divider', 'note', 'stamp', 'sign', 'm', 'img', 'cap', 'rows', 'head', 'list', 'msg', 'who', 'at', 'me', 'say', 'cipher', 'f', 'cls', 'nopin', 'osd']);
 const TEXT_KEYS = ['p', 'h', 'divider', 'note', 'stamp', 'sign', 'm', 'cap', 'msg', 'say'];
-const SKINS = new Set(['plain', 'report', 'news', 'letter', 'telegram', 'ledger', 'card', 'transcript', 'memo', 'photo', 'web', 'chat', 'sms', 'home', 'files', 'cipher', 'board', 'lab']);
-const TYPES = new Set(['archive', 'list', 'people', 'map', 'cipher', 'timeline', 'compare', 'query', 'photo']);
+const SKINS = new Set(['plain', 'report', 'news', 'letter', 'telegram', 'ledger', 'card', 'transcript', 'memo', 'photo', 'web', 'chat', 'sms', 'home', 'files', 'cipher', 'board', 'lab', 'form']);
+const TYPES = new Set(['archive', 'list', 'people', 'map', 'cipher', 'timeline', 'compare', 'query', 'photo', 'request', 'feed']);
 const KT = new Set(['person', 'place', 'thing', 'time', 'word']);
 const FRAMES = new Set(['papers', 'laptop', 'crt']);
 
@@ -42,6 +42,13 @@ function check(c) {
     (c.mood.amb || []).forEach(k => { if (!AMB.includes(k)) err(`mood.amb "${k}" 은 ${AMB.join(' | ')} 중 하나`); });
     if ((c.mood.amb || []).includes('drone') && !c.graphic) warn('mood.amb 의 drone 은 빨간 별 사건용');
   } else warn('mood(조명·날씨·배경음·여는 글)가 없음');
+  if (c.live) { // 실시간 수사: 시계가 가는 사건
+    const st = c.live.start;
+    if (!Array.isArray(st) || st.length !== 5 || st.some(x => typeof x !== 'number')) err('live.start 는 [년, 월, 일, 시, 분] 숫자 다섯 개');
+    if (c.live.deadline && typeof c.live.deadline.at !== 'number') err('live.deadline.at 은 수사 시작부터 몇 분 뒤인지 (숫자)');
+    if (c.solution && c.solution.late != null && !Array.isArray(c.solution.late)) err('solution.late 는 블록 배열 (기한을 넘겼을 때의 결말)');
+    if (!c.sources.some(s => s.type === 'request' || s.type === 'feed')) warn('live 사건인데 request(영장·공문)도 feed(단톡방)도 없음');
+  }
 
   const K = c.keywords, D = c.docs, P = c.people || {}, A = c.art || {};
   const sources = c.sources || [];
@@ -52,6 +59,8 @@ function check(c) {
     claimId(s.id, `source ${s.id}`);
     if (s.type === 'compare') (s.sets || []).forEach(x => claimId(x.id, 'compare set'));
     if (s.type === 'photo') (s.scenes || []).forEach(x => { claimId(x.id, 'photo scene'); (x.spots || []).forEach(sp => claimId(sp.id, 'photo spot')); });
+    if (s.type === 'request') (s.items || []).forEach(r => claimId(r.id, 'request item'));
+    if (s.type === 'feed') (s.items || []).forEach(it => claimId(it.id, 'feed item'));
   });
   Object.keys(D).forEach(id => { if (unlIds[id]) err(`문서 id "${id}" 가 ${unlIds[id]} 와 겹침`); });
 
@@ -138,7 +147,7 @@ function check(c) {
   if (!(c.brief.lines || []).length) err('brief.lines 가 비어 있음');
 
   // sources
-  const tokenOk = n => (n[0] === '#' ? unlIds[n.slice(1)] || D[n.slice(1)] : n[0] === '!' ? true : K[n]);
+  const tokenOk = n => (n[0] === '#' ? unlIds[n.slice(1)] || D[n.slice(1)] : n[0] === '!' ? true : n[0] === '@' ? /^@\d+$/.test(n) && !!c.live : K[n]);
   const needCheck = (need, where) => {
     if (need == null) return;
     if (!Array.isArray(need)) return err(`${where}: need 는 배열`);
@@ -247,6 +256,41 @@ function check(c) {
         });
       });
     }
+    if (s.type === 'request') {
+      if (!c.live) err(`${w}: request 는 live 사건에서만 쓴다`);
+      if (!(s.items || []).length) err(`${w}: items 가 비어 있음`);
+      (s.items || []).forEach(r => {
+        const rw = `${w}.item ${r.id}`;
+        if (!r.title) err(`${rw}: title 없음`);
+        if (!D[r.doc]) err(`${rw}: 회신 문서 ${r.doc} 없음`);
+        else if (D[r.doc].src !== s.id) err(`${rw}: 회신 문서 ${r.doc} 의 src 가 ${s.id} 가 아님`);
+        if (r.eta != null && !(typeof r.eta === 'number' && r.eta >= 0)) err(`${rw}: eta 는 분 (0 이상 숫자)`);
+        const rb = mk(`rq:${r.id}`);
+        ['title', 'meta', 'to', 'target', 'what', 'deny'].forEach(k => r[k] && scanText(r[k], `${rw}.${k}`, rb));
+        scanBlocks(r.intro, `${rw}.intro`, rb);
+        needCheck(r.need, rw);
+        if (!r.need) warn(`${rw}: need(신청서를 쓸 수 있게 되는 조건)가 없어 처음부터 보인다`);
+        (r.why || []).forEach(f => factRefs.push([f, `${rw}.why`]));
+        if (r.why != null && !Array.isArray(r.why)) err(`${rw}: why 는 "f_id" 배열 (소명으로 인정되는 사실)`);
+        (r.keys || []).forEach(k => { if (!K[k]) err(`${rw}.keys: 없는 단어 ${k}`); });
+        if (r.feed && r.feed.msg) scanText(r.feed.msg, `${rw}.feed`, rb);
+      });
+    }
+    if (s.type === 'feed') {
+      if (!c.live) err(`${w}: feed 는 live 사건에서만 쓴다`);
+      if (!(s.items || []).length) err(`${w}: items 가 비어 있음`);
+      (s.items || []).forEach(it => {
+        const iw = `${w}.item ${it.id}`;
+        if (it.msg == null) err(`${iw}: msg 없음`);
+        if (it.at != null && !(typeof it.at === 'number' && it.at >= 0)) err(`${iw}: at 은 분 (0 이상 숫자)`);
+        const ib = mk(`fd:${it.id}`);
+        if (it.msg != null) scanText(it.msg, iw, ib);
+        if (it.f != null) addFact(it.f, iw, ib);
+        if (it.doc && !D[it.doc]) err(`${iw}: 첨부 문서 ${it.doc} 없음`);
+        needCheck(it.need, iw);
+        (it.keys || []).forEach(k => { if (!K[k]) err(`${iw}.keys: 없는 단어 ${k}`); });
+      });
+    }
     if (s.type === 'cipher') {
       if (!s.cipher || !s.key) err(`${w}: cipher 와 key 가 필요`);
       else {
@@ -277,6 +321,8 @@ function check(c) {
     const s = srcById[d.src];
     if (s && s.type === 'query' && !(s.records || []).some(r => r.doc === id)) err(`${w}: 조회(query) 문서인데 어느 record 도 가리키지 않음`);
     if (s && s.type === 'archive' && !(d.find || []).length && !(s.start || []).includes(id)) err(`${w}: 자료실(archive) 문서인데 find 도 없고 start 도 아님 → 찾을 방법이 없음`);
+    if (s && s.type === 'request' && !(s.items || []).some(r => r.doc === id)) err(`${w}: 요청(request) 회신 문서인데 어느 신청서도 가리키지 않음`);
+    if (s && s.type === 'feed' && !(s.items || []).some(it => it.doc === id)) err(`${w}: 단톡방(feed) 첨부 문서인데 어느 말에도 붙어 있지 않음`);
     const b = mk(`doc:${id}`);
     ['title', 'meta', 'paper', 'kicker'].forEach(k => d[k] && scanText(d[k], `${w}.${k}`, b));
     scanBlocks(d.body, w, b);
@@ -342,7 +388,8 @@ function check(c) {
   });
   if (!Array.isArray(sol.epilogue) || !sol.epilogue.length) err('solution.epilogue 가 비어 있음');
   factRefs.forEach(([f, w]) => { if (!factWhere[f]) err(`${w}: !${f} 사실이 없음`); });
-  if (mWhere.length === 0 && c.kind !== 'tutorial') warn('M 의 메모({m:...}) 블록이 없음');
+  if (mWhere.length === 0 && c.kind !== 'tutorial' && !c.live) warn('M 의 메모({m:...}) 블록이 없음');
+  if (mWhere.length && c.live) warn('live 사건에는 M 의 메모를 두지 않는다 (M 은 이미 떠났다)');
   if (mWhere.length > 1) warn(`M 의 메모가 ${mWhere.length}개 — 사건당 1개`);
 
   // leak heuristics
@@ -353,7 +400,7 @@ function check(c) {
   const KN = new Set(c.start || []), F = new Set(), U = new Set(), docsSeen = new Set(), perSeen = new Set();
   const roundK = {}, roundF = {}, roundD = {};
   (c.start || []).forEach(k => (roundK[k] = 0));
-  const okN = need => !need || need.every(n => (n[0] === '#' ? U.has(n.slice(1)) : n[0] === '!' ? F.has(n.slice(1)) : KN.has(n)));
+  const okN = need => !need || need.every(n => (n[0] === '#' ? U.has(n.slice(1)) : n[0] === '!' ? F.has(n.slice(1)) : n[0] === '@' ? true : KN.has(n)));
   let round = 0;
   for (;;) {
     round++;
@@ -381,6 +428,17 @@ function check(c) {
       if (s.type === 'compare') (s.sets || []).forEach(x => { if (!okN(x.need)) return; reach.add(`cmp:${x.id}:i`); if (okN(x.solveNeed)) { U.add(x.id); reach.add(`cmp:${x.id}:s`); reward(x.reward); } });
       if (s.type === 'query') (s.records || []).forEach(r => { if (okN(r.need)) { openDoc(D[r.doc]); (r.keys || []).forEach(k => reach.add(`__key:${k}`)); } });
       if (s.type === 'photo') (s.scenes || []).forEach(x => { if (!okN(x.need)) return; reach.add(`ph:${x.id}:i`); (x.spots || []).forEach(sp => { if (okN(sp.need)) { U.add(sp.id); reach.add(`ph:${sp.id}`); (sp.keys || []).forEach(k => reach.add(`__key:${k}`)); } }); });
+      if (s.type === 'request') (s.items || []).forEach(r => {
+        if (!okN(r.need)) return;
+        reach.add(`rq:${r.id}`);
+        if (!(r.why || []).length || r.why.some(f => F.has(f))) { U.add(r.id); openDoc(D[r.doc]); (r.keys || []).forEach(k => reach.add(`__key:${k}`)); }
+      });
+      if (s.type === 'feed') (s.items || []).forEach(it => {
+        if (!okN(it.need)) return;
+        reach.add(`fd:${it.id}`);
+        if (it.doc) openDoc(D[it.doc]);
+        (it.keys || []).forEach(k => reach.add(`__key:${k}`));
+      });
       if (s.type === 'cipher') {
         reach.add(`cip:${s.id}:i`);
         if (okN(s.solveNeed)) { U.add(s.id); reach.add(`cip:${s.id}:s`); ((s.reward && s.reward.keys) || []).forEach(k => reach.add(`__key:${k}`)); }
