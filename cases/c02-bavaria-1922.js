@@ -6,9 +6,10 @@
     id: 'c02', no: 2, region: 'overseas',
     title: '하젤외드의 열흘', year: '1923', place: '바이에른 켈바흐 군 오버뢰딩 (가상 지명)',
     motif: '모티프: 힌터카이페크 사건 (1922, 바이에른)', length: '약 35분',
-    stars: 4,
+    stars: 4, graphic: true,
+    warn: '이 기록에는 농기구에 머리를 여러 차례 맞아 숨진 네 사람의 상처와, 헛간 바닥에 얼어붙은 피와 끌린 자국을 검안서·검증 조서의 말투로 적은 대목이 들어 있습니다.',
     frame: 'papers',
-    mood: { light: 'cold', fx: 'snow', amb: ['wind'], line: '1923년 겨울, 눈 덮인 들판 건너 외딴 농가. 마지막 목격에서 발견까지 열흘.' },
+    mood: { light: 'cold', fx: 'snow', amb: ['wind', 'drone'], line: '1923년 겨울, 눈 덮인 들판 건너 외딴 농가. 마지막 목격에서 발견까지 열흘.' },
     tag: '**증거철 02** · Tgb.-Nr. 41/1923 · Gendarmerie-Station Oberröding · 켈바흐 군청 이관',
     disclaimer: '1922년 바이에른 외딴 농가 사건의 모티프만 빌린 창작입니다. 마을·농가·인물·기관은 모두 지어낸 것이며 실제 인물과 관계가 없습니다.',
     emptyRead: '켈바흐 군청에서 넘겨받은 서류 상자다. 위쪽 탭에서 서류철을 고르고, 왼쪽 목록에서 한 장씩 꺼내 읽는다.',
@@ -17,7 +18,7 @@
       lines: [
         ['발견', '1923년 2월 5일(월) 오후 · [[오버뢰딩]]에서 들판 건너 반 시간 거리의 외딴 [[하젤외드 농가]]'],
         ['사망자', '농부 [[미하엘 모스바우어]](71) · 처 [[발부르가 모스바우어]](68) · 딸 [[로자 모스바우어]](37) · 하녀 [[테클라 하이더]](54)'],
-        ['사인', '네 사람 모두 둔기에 의한 두부 손상 (켈바흐 군의 소견)'],
+        ['사인', '네 사람 모두 머리를 여러 차례 맞은 두부 손상 — 한쪽은 망치 면, 한쪽은 날인 농기구로 보임 (켈바흐 군의 소견)'],
         ['마지막 목격', '[[1월 26일]](금) — 발견까지 열흘'],
         ['특이 사항', '안방 금고 속 지폐 손대지 않음 · 외양간 가축 살아 있음'],
         ['관할', 'Gendarmerie-Station Oberröding · 켈바흐 군청'],
@@ -128,9 +129,10 @@
     },
     docs: {
       /* ── 오버뢰딩 초소 수사철 ── */
-      d_bericht: { src: 'akten', title: '변사 발견 보고', kicker: 'GENDARMERIE-STATION OBERRÖDING · Tgb.-Nr. 41/1923', meta: '1923년 2월 5일 밤 · 초소장 → 켈바흐 군청', body: [
+      d_bericht: { src: 'akten', blood: true, title: '변사 발견 보고', kicker: 'GENDARMERIE-STATION OBERRÖDING · Tgb.-Nr. 41/1923', meta: '1923년 2월 5일 밤 · 초소장 → 켈바흐 군청', body: [
         '1923년 2월 5일 오후 4시 10분, 오버뢰딩 우체국 집배원 [[마르틴 게르스틀]]과 이웃 농부 [[프란츠 후프만]]이 본 초소에 와서, [[하젤외드 농가]] 식구들이 여러 날째 보이지 않으며 방금 두 사람이 농가 안을 들여다보았다고 알림.',
         '본관은 두 사람을 앞세워 오후 5시경 농가에 이름. 헛간 안쪽에서 농부 [[미하엘 모스바우어]], 처 [[발부르가 모스바우어]], 딸 [[로자 모스바우어]]를, 안채 하녀 방에서 새로 온 하녀 [[테클라 하이더]]를 숨진 채 발견함.',
+        '헛간의 세 사람은 안쪽 구석에 포개진 채 건초에 덮여 있었고, 그 위에 문짝 한 짝이 얹혀 있었음. 문짝을 들어낸 것은 후프만임. 게르스틀은 헛간 밖으로 나가 한동안 들어오지 못했음. 하녀는 제 방 문 안쪽 바닥에 엎드려 있었음.',
         '현관문은 닫혀 있었으나 잠겨 있지 않았음. 집 열쇠는 어디에서도 찾지 못함.',
         '외양간의 소 여섯 마리와 돼지 세 마리, 묶인 개 한 마리는 살아 있었음. 소들은 야위었고 몹시 울었음.',
         '안방 궤짝 속 쇠 [[금고]]는 잠긴 채였음. 미하엘의 조끼 주머니에서 나온 작은 열쇠로, 이튿날 군청 위원 입회 아래 열기로 함.',
@@ -138,14 +140,26 @@
         { stamp: 'Gendarmerie-Station Oberröding' },
         { sign: 'Schwertfeger, Wachtmeister' },
       ] },
-      d_arzt: { src: 'akten', title: '검안 소견', kicker: 'BEZIRKSARZT KELBACH', meta: '1923년 2월 6일 · 켈바흐 군의 Dr. 오이겐 발터', body: [
+      d_arzt: { src: 'akten', blood: 'heavy', title: '검안 소견', kicker: 'BEZIRKSARZT KELBACH', meta: '1923년 2월 6일 · 켈바흐 군의 Dr. 오이겐 발터', body: [
+        { img: 'autopsy_table', cap: '헛간 타작마당에 널판을 걸쳐 놓고 검안함. 2월 6일 오후 1시부터 7시까지, 등잔 불빛 아래.' },
         '사망자 네 명 모두 머리에 둔기에 의한 상처가 있으며, 이를 사인으로 판단함. 다툰 흔적은 뚜렷하지 않음.',
+        '시신 넷이 모두 얼어 굳어 있어, 옷은 가위로 잘라 벗김. 머리카락이 피와 함께 짚에 얼어붙은 이는 머리카락을 잘라 내고서야 떼어 냄.',
+        { rows: [
+          ['미하엘 모스바우어 (71)', '헛간 안쪽 구석, 맨 밑', '뒤통수 왼쪽에 네모난 함몰 골절 2곳 (한 변 3.5cm 안팎, 모서리가 또렷함). 오른쪽 목덜미에 날에 찍힌 상처 1곳, 깊이 약 5cm로 목뼈에 닿음. 손과 팔뚝에 막은 상처 없음.'],
+          ['발부르가 모스바우어 (68)', '미하엘 위', '정수리와 오른쪽 관자놀이에 네모난 함몰 골절 3곳. 왼쪽 귀 뒤에 날에 찍힌 상처 1곳. 오른손 가운뎃손가락·약손가락 부러짐 — 머리를 감싸려 손을 올린 듯함.'],
+          ['로자 모스바우어 (37)', '맨 위, 문짝 바로 밑', '머리에 함몰 골절 5곳 — 넷 가운데 가장 많음. 앞머리의 1곳을 빼면 모두 뒤통수에 겹쳐 있어, 쓰러진 뒤에 더 맞은 것으로 봄.'],
+          ['테클라 하이더 (54)', '안채 하녀 방, 문 안쪽 바닥', '뒤통수에 네모난 함몰 골절 1곳. 오른쪽 정수리와 목덜미에 날에 찍힌 상처 2곳. 나들이옷 차림 그대로. 막은 상처 없음.'],
+        ], head: ['사망자', '발견된 자리', '소견'] },
+        '흉기: 상처 모양으로 보아 한 가지. 한쪽은 네모나고 평평한 망치 면, 반대쪽은 폭 4cm 안팎의 좁고 두꺼운 날. 이 지방 농가에서 뿌리를 캐고 언 땅을 깨는 괭이(Reuthaue)와 들어맞음. 현장에서는 찾지 못함.',
+        '네 사람 모두 뒤나 옆에서 먼저 맞았음. 헛간의 세 사람은 상처의 모양과 자리가 서로 닮아, 한꺼번에가 아니라 한 사람씩 헛간 문을 들어서다 맞은 것으로 봄.',
+        '헛간 세 사람의 시반은 등과 한쪽 옆구리에 겹쳐 있음. 숨진 뒤 오래지 않아 한 번 옮겨진 것으로 봄 (쓰러진 자리에서 구석으로).',
+        '위 내용물: 네 사람 모두 같은 음식 — 보리죽, 삶은 감자, 절인 양배추. 거의 삭지 않음. 저녁을 먹고 한두 시간 안에 숨짐.',
         '사망 뒤 지난 날수: 날씨가 줄곧 영하였으므로 변화가 더뎌 정확히 가리기 어려움. 대략 한 주 이상으로 봄.',
         '네 사람 사이에 숨진 때의 차이는 크지 않은 것으로 보임. 저녁 식사 뒤 오래지 않은 때로 추정되나 날짜는 특정할 수 없음.',
         { note: '시신은 2월 7일 오버뢰딩 성당 영안실로 옮김. 매장 허가는 군청 결정을 기다림.' },
         { sign: 'Dr. E. Walter' },
       ] },
-      d_aussagen: { src: 'akten', need: ['k_oberroding'], title: '마을 사람들 진술 (발췌)', kicker: 'ZEUGENAUSSAGEN', meta: '1923년 2월 6~8일 · 오버뢰딩 · 슈베르트페거 경사 받아 적음', body: [
+      d_aussagen: { src: 'akten', blood: false, need: ['k_oberroding'], title: '마을 사람들 진술 (발췌)', kicker: 'ZEUGENAUSSAGEN', meta: '1923년 2월 6~8일 · 오버뢰딩 · 슈베르트페거 경사 받아 적음', body: [
         { say: '28일 일요일 미사에 모스바우어네가 한 사람도 안 왔어요. 로자는 눈이 무릎까지 와도 빠지는 법이 없는데.', who: '성당지기 아내', f: 'f_church' },
         { say: '영감은 돈 얘기를 남한테 안 했소. 그래도 가을에 숲 한 뙈기를 팔았다는 말은 돌았지.', who: '오버뢰딩 여관 주인' },
         { say: '1월 들어 밤에 하젤외드 쪽에서 개가 짖는 걸 몇 번 들었소. 그 집 개는 원래 잘 안 짖는데.', who: '나무꾼 노인' },
@@ -155,21 +169,21 @@
         { say: '요새 돈이 종잇조각이라 도둑도 지폐는 안 가져간다는 농담이 돌아요. 그 집 금고 얘기 듣고 다들 그 소리를 하죠.', who: '빵집 주인' },
         { note: '※ 소문과 들은 말은 따로 표시하지 않았음. 확인은 각자 대조할 것.' },
       ] },
-      d_fuhrmann: { src: 'akten', need: ['k_thekla'], title: '마부 [[제프 브란들]] 진술조서', kicker: 'VERNEHMUNG', meta: '1923년 2월 7일 · 켈바흐 역 삯마차꾼 · 43세', body: [
+      d_fuhrmann: { src: 'akten', blood: false, need: ['k_thekla'], title: '마부 [[제프 브란들]] 진술조서', kicker: 'VERNEHMUNG', meta: '1923년 2월 7일 · 켈바흐 역 삯마차꾼 · 43세', body: [
         { say: '1월 26일 금요일 오후 두 시 반 기차로 내린 여자를 태웠소. 짐 가방 하나, 보따리 하나. 하젤외드에 새로 들어가는 하녀라 합디다.', who: '브란들' },
         { say: '대문 앞에 내려 준 게 세 시 반쯤이오. 딸 로자가 나와서 짐을 받아 들어갔소.', who: '브란들', f: 'f_thekla_arrive' },
         { say: '돌아오는 길에 숲 쪽은 안 봤소. 눈이 무릎까지라 말 발밑만 보고 왔지.', who: '브란들' },
         { say: '여자가 수레에서 그럽디다. 전에 있던 하녀는 그 집에 [[귀신|k_ghost]]이 든다고 나갔다던데 괜찮겠느냐고. 내가 웃었지.', who: '브란들' },
         { sign: '위 진술을 읽어 주니 틀림없다 함. — Brandl (X 표시)' },
       ] },
-      d_kasten: { src: 'akten', need: ['k_kasten'], skin: 'card', title: '금고 내용물 목록', kicker: 'KASSENINVENTAR', meta: '1923.2.6 · 증거물 3호', body: [
+      d_kasten: { src: 'akten', blood: false, need: ['k_kasten'], skin: 'card', title: '금고 내용물 목록', kicker: 'KASSENINVENTAR', meta: '1923.2.6 · 증거물 3호', body: [
         { img: 'kasten', cap: '안방 궤짝에서 꺼낸 쇠 금고. 군청 위원 입회 아래 조끼 주머니의 열쇠로 엶' },
         { rows: [['[[지폐]]', '612,000마르크 (1천·1만 마르크권, 끈으로 묶음)'], ['은화', '1마르크 은화 11닢 (전쟁 전 것)'], ['증권', '화재보험 증권 1 · 1911년 혼인 계약서 사본 1'], ['[[차용증]] ①', '[[안톤 네프]] · 1919년 · 3,000마르크'], ['[[차용증]] ②', '[[크사버 후버]] · 1921년 · 8,000마르크'], ['기타', '묵주 1 · 세례 증명서 4 · 편지 묶음 1']], head: ['물목', '내용'], f: { 3: 'f_kasten', 4: 'f_kasten' } },
         '지폐 다발은 모두 끈에 묶인 그대로였고, 풀어 세어 본 흔적은 없음. 요즘 시세로는 호밀 열두어 첸트너 값에 지나지 않음.',
         '금고를 억지로 연 자국은 없음. 열쇠는 줄곧 미하엘의 조끼 주머니에 있었던 것으로 보임.',
         { note: '위원: 켈바흐 군청 서기 포이히트 · 입회: 슈베르트페거 경사' },
       ] },
-      d_hausbuch: { src: 'akten', need: ['k_schuldschein'], skin: 'ledger', title: '미하엘 모스바우어의 [[가계 수첩]] (발췌)', kicker: 'HAUSBUCH', meta: '부엌 탁자 서랍에서 압수 · 연필 글씨 · 1922~23년', body: [
+      d_hausbuch: { src: 'akten', blood: false, need: ['k_schuldschein'], skin: 'ledger', title: '미하엘 모스바우어의 [[가계 수첩]] (발췌)', kicker: 'HAUSBUCH', meta: '부엌 탁자 서랍에서 압수 · 연필 글씨 · 1922~23년', body: [
         { img: 'hausbuch', cap: '부엌 탁자 서랍 속 수첩. 우유·달걀 셈 사이사이에 적은 메모' },
         { rows: [
           ['1922.10.14', '[[태넨슐라크]] 412번지 숲 V.K.에게 넘김. 3분의 1 현금 받음 (11만 6천). 나머지는 호밀 80첸트너 값, [[성촉절]]에 그날 시세로. 증서 한 장 써 받음 — 궤에.'],
@@ -183,7 +197,7 @@
         ], head: ['날짜', '적은 것'], f: { 0: 'f_hausbuch', 3: 'f_hausbuch', 5: 'f_tracks' } },
         { note: '수첩의 나머지 쪽은 우유 리터 수, 달걀 개수, 품삯 셈이다. 1월 26일 뒤로는 아무것도 적혀 있지 않다.' },
       ] },
-      d_pfaenzl: { src: 'akten', need: ['k_pfaenzl'], title: '알로이스 펜츨 신문조서', kicker: 'VERNEHMUNG', meta: '1923년 2월 7일 · 전 하젤외드 머슴 · 29세', body: [
+      d_pfaenzl: { src: 'akten', blood: false, need: ['k_pfaenzl'], title: '알로이스 펜츨 신문조서', kicker: 'VERNEHMUNG', meta: '1923년 2월 7일 · 전 하젤외드 머슴 · 29세', body: [
         { say: '1월 25일부터 29일까지 어디 있었나?', who: '문' },
         { say: '[[켈바흐]] 누이 집에 있었소. 누이한테 물어보시오.', who: '답', f: 'f_pfaenzl_claim' },
         { say: '12월에 여관에서 한 말은?', who: '문' },
@@ -192,13 +206,13 @@
         { say: '머슴 살 때야 건초 내리러 날마다 올라갔지. 쫓겨난 뒤론 그 집 문턱도 안 밟았소.', who: '답' },
         { note: '본인은 켈바흐 누이 집의 번지를 대지 못함. 확인 요망.' },
       ] },
-      d_hausierer: { src: 'akten', need: ['k_hausierer'], skin: 'telegram', title: 'TELEGRAMM · WEISSACH → OBERRÖDING', meta: '1923년 2월 9일 오전 10시 12분 접수', body: [
+      d_hausierer: { src: 'akten', blood: false, need: ['k_hausierer'], skin: 'telegram', title: 'TELEGRAMM · WEISSACH → OBERRÖDING', meta: '1923년 2월 9일 오전 10시 12분 접수', body: [
         '행상 에머란 슈퇴클 이곳에서 붙잡음 · 행상 허가증 확인함',
         { p: '허가증 도장 · 1월 24일 오버뢰딩 · 26일 27일 [[바이사흐|k_weissach]] 장터 · 26일 밤 27일 밤 이곳 여관 투숙 장부로 확인함', f: 'f_peddler' },
         '24일 하젤외드 들러 바늘 실 팔았다 함 · 늙은 부부와 딸만 봄 · 개가 몹시 짖었다 함',
         '더 물을 것 있으면 회신 바람 · 바이사흐 초소 · 끝',
       ] },
-      d_huetten: { src: 'akten', need: ['k_huette'], title: '숲 오두막 수색 기록', kicker: 'DURCHSUCHUNG', meta: '1923년 2월 10일 · 슈베르트페거 경사 · 산림 감시원 동행', body: [
+      d_huetten: { src: 'akten', blood: false, need: ['k_huette'], title: '숲 오두막 수색 기록', kicker: 'DURCHSUCHUNG', meta: '1923년 2월 10일 · 슈베르트페거 경사 · 산림 감시원 동행', body: [
         '하젤외드 북쪽 숲 가장자리의 나무꾼 오두막 세 곳을 수색함.',
         { img: 'hut', cap: '태넨슐라크 오두막. 문 앞 눈에 발자국이 없다 (2월 10일 촬영)' },
         { rows: [['① 태넨슐라크 오두막', '[[발렌틴 크나우어]] (412번지 숲 주인)', '문 잠김. 문 앞 눈 위에 발자국 없음. 안의 장작은 모두 마르고 오래된 것, 새로 팬 나무 없음. 화덕 재는 오래 식었음.'], ['② 노이빌 오두막', '[[안톤 네프]]', '문 열림. 비어 있음.'], ['③ 산림청 오두막', '켈바흐 산림청', '잠김. 이상 없음.']], head: ['오두막', '주인', '본 것'], f: { 0: 'f_hut' } },
@@ -206,7 +220,7 @@
       ] },
 
       /* ── 농가 도면 (검증 조서) ── */
-      d_kitchen: { src: 'hof', title: '검증 조서 — 부엌', kicker: 'AUGENSCHEIN · KÜCHE', meta: '1923년 2월 6일 · 켈바흐 군청 검증위원회', body: [
+      d_kitchen: { src: 'hof', blood: true, title: '검증 조서 — 부엌', kicker: 'AUGENSCHEIN · KÜCHE', meta: '1923년 2월 6일 · 켈바흐 군청 검증위원회', body: [
         { img: 'kitchen', cap: '부엌 식탁. 주보 한 부가 접힌 채 놓여 있다' },
         '화덕: 재가 수북하고 불씨는 없음. 장작 궤짝은 거의 비었음.',
         { p: '식탁 위: 1월 27일자 [[켈바흐 주보|k_zeitung]] 제8호 한 부, 네 겹으로 접힌 채. 펼쳐 본 자국 없음.', f: 'f_paper_taken' },
@@ -214,8 +228,9 @@
         '개수대에 쓴 그릇 넷 — 저녁 식사 것으로 보임. 씻지 않음.',
         '문설주의 쇠못 두 개: [[열쇠|k_schloss]] 거는 자리로 보이나 둘 다 비어 있음.',
         '탁자 서랍: 우유·달걀 셈을 적은 [[가계 수첩]] 한 권 (압수).',
+        '개수대 옆 못에 걸린 삼베 수건: 녹슨 빛 얼룩이 넓게 배어 뻣뻣하게 굳었음. 손을 닦은 자국. 개수대 물통의 물은 얼었고, 얼음 밑바닥에 불그스름한 앙금이 가라앉아 있음.',
       ] },
-      d_stube: { src: 'hof', title: '검증 조서 — 안방', kicker: 'AUGENSCHEIN · STUBE', meta: '1923년 2월 6일 · 켈바흐 군청 검증위원회', body: [
+      d_stube: { src: 'hof', blood: false, title: '검증 조서 — 안방', kicker: 'AUGENSCHEIN · STUBE', meta: '1923년 2월 6일 · 켈바흐 군청 검증위원회', body: [
         '궤짝 안에 쇠 [[금고]] 한 개 (내용물은 따로 목록을 만듦).',
         { img: 'calendar', cap: '안방 벽의 뜯는 달력과 십자가' },
         { p: '벽의 [[뜯는 달력]]: 맨 위 장이 1월 26일 금요일. 27일부터의 장은 뜯기지 않은 채 붙어 있음.', f: 'f_calendar' },
@@ -223,34 +238,48 @@
         { p: '탁자 위: [[대부조합 통지서]] 한 통. 1월 29일 오버뢰딩 소인. 봉투를 뜯지 않음.', f: 'f_paper_taken' },
         '침대 둘: 이불이 개어진 그대로. 누운 흔적 없음.',
       ] },
-      d_kammer: { src: 'hof', title: '검증 조서 — 하녀 방', kicker: 'AUGENSCHEIN · MÄGDEKAMMER', meta: '1923년 2월 6일 · 켈바흐 군청 검증위원회', body: [
+      d_kammer: { src: 'hof', blood: 'heavy', title: '검증 조서 — 하녀 방', kicker: 'AUGENSCHEIN · MÄGDEKAMMER', meta: '1923년 2월 6일 · 켈바흐 군청 검증위원회', body: [
         '새 하녀 테클라 하이더가 발견된 방. 시신은 2월 6일 오후 수습함.',
         { img: 'suitcase', cap: '하녀 방 침대 옆의 짐 가방' },
         { p: '짐 가방: 가죽끈만 풀었고 짐은 그대로 들어 있음. 새 앞치마 두 장, 속옷, 기도서, 켈바흐 직업소개소 소개장.', f: 'f_unpacked' },
         '침대: 시트는 깔았으나 누운 흔적 없음. 창틀에 빈 촛대.',
         '옷걸이에 걸린 것은 외투 한 벌뿐.',
+        '바닥: 문 안쪽 널바닥에 피가 고였다 스며 검게 굳은 자리 (가로 약 1m). 널 틈을 따라 문턱 밑까지 번졌음. 시신은 그 위에 엎드려 있었고, 머리는 문 쪽, 오른손은 문턱에 닿아 있었음.',
+        '문설주와 벽에 흩뿌려진 핏방울은 허리 높이 아래에 몰려 있고, 아래로 갈수록 촘촘함. 선 채로 한 번 맞고, 쓰러진 뒤에도 여러 번 맞은 자국.',
+        '이 방에는 닦아 낸 자국도, 끌린 자국도 없음. 방문은 밖에서 닫혀 있었음. 헛간과 달리, 이 방은 누구도 치우지 않았음.',
       ] },
-      d_stall: { src: 'hof', title: '검증 조서 — 외양간', kicker: 'AUGENSCHEIN · STALL', meta: '1923년 2월 6일 · 켈바흐 군청 검증위원회 · 군 수의사 동행', body: [
+      d_stall: { src: 'hof', blood: false, title: '검증 조서 — 외양간', kicker: 'AUGENSCHEIN · STALL', meta: '1923년 2월 6일 · 켈바흐 군청 검증위원회 · 군 수의사 동행', body: [
         { img: 'stall', cap: '외양간. 구유에 건초 찌꺼기가 남아 있다' },
         '[[외양간]]: 소 여섯 마리, 돼지 세 마리 살아 있음. 개 한 마리는 마당 기둥에 묶여 있었음.',
         { p: '군 수의사 소견: 소들이 몹시 야위었으나 열흘을 굶은 몸은 아님. 적어도 발견 대엿새 전까지는 누군가 여물을 주고 젖을 짠 것으로 봄.', f: 'f_fed' },
         '돼지우리 옆에 우유 통 하나가 엎어져 있고, 돼지 구유 바닥에 우유가 말라붙어 있음. 짠 젖을 돼지에게 부은 듯함.',
         '건초 다락으로 오르는 사다리가 외양간 안쪽에 걸쳐 있음.',
       ] },
-      d_scheune: { src: 'hof', title: '검증 조서 — 헛간', kicker: 'AUGENSCHEIN · STADEL', meta: '1923년 2월 6일 · 켈바흐 군청 검증위원회', body: [
+      d_scheune: { src: 'hof', blood: 'heavy', title: '검증 조서 — 헛간', kicker: 'AUGENSCHEIN · STADEL', meta: '1923년 2월 6일 · 켈바흐 군청 검증위원회', body: [
         '미하엘·발부르가·로자 세 사람이 발견된 곳. 시신은 2월 6일 오후 수습함.',
         '헛간 앞문은 밖에서 빗장이 걸려 있었음. 안쪽 짚 위의 발자국은 발견 당일 여러 사람이 드나들어 가릴 수 없음.',
         { p: '헛간 서쪽 칸: 말똥 한 무더기와 흩어진 귀리. 모스바우어 집안은 말을 기르지 않음 (이웃 후프만 확인).', f: 'f_horse' },
         '뒷문에서 숲길 쪽으로 썰매 날 자국 같은 두 줄이 보이나, 2월 3일 내린 눈에 덮여 흐림.',
+        { h: '앞문 안쪽 — 세 사람이 쓰러진 자리와 발견된 구석' },
+        { img: 'barn_floor', cap: '헛간 앞문 안쪽. 번호표 1~3은 핏자국 웅덩이, 4는 구석의 건초 더미 (2월 6일 촬영)' },
+        '앞문 문턱에서 두세 걸음 들어간 짚 바닥에 피가 고였다 언 자리 셋. 가장 큰 것은 지름 80cm 안팎으로, 짚을 적시고 흙바닥까지 스며 얼어붙어 삽으로 떠내야 했음.',
+        '안쪽 기둥의 허리 높이 아래에 잘게 흩뿌린 핏방울. 머리 위 가로 들보 아랫면에는 가늘고 긴 방울이 한 줄로 늘어섬 — 흉기를 다시 휘둘러 올릴 때 날에서 떨어진 것.',
+        '웅덩이마다 안쪽 구석까지 짚이 넓게 쓸려 흙이 드러난 자국이 하나씩, 모두 셋. 가장자리에 피가 묻어 번졌음. 세 사람 모두 쓰러진 자리에서 구석으로 끌려갔음.',
+        '구석의 세 사람은 포개어 놓였고, 그 위를 건초로 덮은 다음 헛간 뒷칸에서 돌쩌귀째 들어낸 문짝 한 짝을 얹었음.',
+        '벽의 연장 걸이: 쇠스랑·삽·도끼는 제자리. 괭이를 걸던 못 하나만 비어 있음 (후프만 말로 그 집 괭이 자리).',
+        '앞에 적은 대로 짚 위의 발자국은 가릴 수 없으나, 웅덩이 위의 것은 다름. 징 박은 장화 바닥 자국 여럿이 이미 언 피 위에 찍혀 있음 — 가장자리가 부서졌을 뿐 번지지 않았음. 피가 굳은 뒤에 밟은 것. 발견 당일 들어온 사람들은 모두 웅덩이를 돌아서 걸었다고 함.',
+        '같은 장화 자국이 옅어지며 외양간 쪽 통로로 이어짐. 헛간과 외양간 사이를 여러 번 오간 자국.',
+        '건초 더미 바로 옆으로 여물 부스러기가 외양간까지 길게 흘려져 있음. 여물을 나른 사람은 날마다 이 구석 곁을 지나다녔음.',
       ] },
-      d_attic: { src: 'hof', title: '검증 조서 — 다락', kicker: 'AUGENSCHEIN · DACHBODEN', meta: '1923년 2월 8일 · 추가 검증 · 슈베르트페거 경사', body: [
+      d_attic: { src: 'hof', blood: true, title: '검증 조서 — 다락', kicker: 'AUGENSCHEIN · DACHBODEN', meta: '1923년 2월 8일 · 추가 검증 · 슈베르트페거 경사', body: [
         { img: 'attic', cap: '건초 다락. 들창 너머로 숲이 보인다' },
         '외양간 사다리와 안채 층계, 두 곳으로 오를 수 있음. 안채 쪽 문은 다락 안에서만 빗장을 걸 수 있게 되어 있음.',
         '건초 위에 사람이 누웠던 자국 두 곳. 한 곳은 먼지가 앉아 오래되었고, 한 곳은 새것.',
         '새 자국 옆에 빵 껍질 몇 조각과 담배 재.',
+        '새 자국 머리맡의 건초 몇 가닥에 녹슨 빛으로 굳은 얼룩. 소매 끝이나 장갑이 닿은 자리로 보임.',
         '들창을 열면 [[태넨슐라크]] 숲 가장자리가 곧바로 내다보임.',
       ] },
-      d_briefkasten: { src: 'hof', title: '검증 조서 — 대문 우편함', kicker: 'AUGENSCHEIN · BRIEFKASTEN', meta: '1923년 2월 5일 밤 · 슈베르트페거 경사', body: [
+      d_briefkasten: { src: 'hof', blood: false, title: '검증 조서 — 대문 우편함', kicker: 'AUGENSCHEIN · BRIEFKASTEN', meta: '1923년 2월 5일 밤 · 슈베르트페거 경사', body: [
         '대문 기둥의 나무 우편함. 2월 5일 오후, 넘친 채로 발견됨.',
         { img: 'mailbox', cap: '대문 기둥의 우편함 (2월 6일 촬영)' },
         { list: ['[[켈바흐 주보|k_zeitung]] 제9호 (1월 31일자)', '편지 1통 — 테클라 하이더 앞, 켈바흐 소인 2월 1일', '켈바흐 주보 제10호 (2월 3일자)'] },
@@ -258,7 +287,7 @@
       ] },
 
       /* ── 켈바흐 군청 문서고 ── */
-      d_postbuch: { src: 'amt', find: ['k_gerstl', 'k_zeitung'], title: '집배 수첩 — 오버뢰딩 북쪽 구역', kicker: 'ZUSTELLBUCH · POSTAGENTUR OBERRÖDING', meta: '집배원 마르틴 게르스틀 · 1923.1.22 ~ 2.5 · 하젤외드 줄만 옮겨 적음', body: [
+      d_postbuch: { src: 'amt', blood: false, find: ['k_gerstl', 'k_zeitung'], title: '집배 수첩 — 오버뢰딩 북쪽 구역', kicker: 'ZUSTELLBUCH · POSTAGENTUR OBERRÖDING', meta: '집배원 마르틴 게르스틀 · 1923.1.22 ~ 2.5 · 하젤외드 줄만 옮겨 적음', body: [
         { rows: [
           ['1.22 (월)', '—', '—', '들르지 않음'],
           ['1.24 (수)', '주보 제7호', '비어 있음', '—'],
@@ -273,7 +302,7 @@
         { m: '우편함은 누가 비웠는지는 몰라도, 언제 비웠는지는 안다.' },
         { note: '※ 주보는 수·토 발행. 하젤외드 우편함은 대문 기둥에 달려 있다.' },
       ] },
-      d_milch: { src: 'amt', find: ['k_milch', 'k_stall'], title: '오버뢰딩 우유 수거 장부', kicker: 'MILCHSAMMELSTELLE OBERRÖDING', meta: '수거소: 프란츠 후프만 집 · 1923년 1월 22~27일 · 단위 리터', body: [
+      d_milch: { src: 'amt', blood: false, find: ['k_milch', 'k_stall'], title: '오버뢰딩 우유 수거 장부', kicker: 'MILCHSAMMELSTELLE OBERRÖDING', meta: '수거소: 프란츠 후프만 집 · 1923년 1월 22~27일 · 단위 리터', body: [
         { rows: [
           ['1.22 (월)', '21', '18', '26', '15', '—'],
           ['1.23 (화)', '20', '18', '25', '14', '—'],
@@ -284,7 +313,7 @@
         ], head: ['날짜', '[[네프|k_neff]]', '[[후버|k_huber]]', '후프만', '모스바우어', '비고'], f: { 4: 'f_milk', 5: 'f_milk' } },
         { note: '1월 28일 일요일은 수거 없음. 29일부터 모스바우어 칸은 비어 있어 줄을 그어 둠.' },
       ] },
-      d_auftrag: { src: 'amt', find: ['k_rottmayr'], title: '로트마이어 대장간 주문 장부', kicker: 'SCHMIEDE ROTTMAYR · AUFTRAGSBUCH', meta: '오버뢰딩 · 1923년 1월', body: [
+      d_auftrag: { src: 'amt', blood: false, find: ['k_rottmayr'], title: '로트마이어 대장간 주문 장부', kicker: 'SCHMIEDE ROTTMAYR · AUFTRAGSBUCH', meta: '오버뢰딩 · 1923년 1월', body: [
         { rows: [
           ['1.15', '네프 · 오버뢰딩', '말굽 넷', '1.16 · 현금'],
           ['1.19', '오버뢰딩 성당', '종탑 사다리 쇠고리', '1.20'],
@@ -295,7 +324,7 @@
         ], head: ['날짜', '주문한 사람', '일', '찾아감'], f: { 3: 'f_lock' } },
         { img: 'lock', cap: '대장간 선반에 그대로 있는 새 자물쇠 (2월 8일 촬영)' },
       ] },
-      d_grundbuch: { src: 'amt', find: ['k_tannenschlag'], title: '토지 대장 발췌 — 오버뢰딩 지번 410~412', kicker: 'GRUNDBUCHAMT KELBACH', meta: '켈바흐 군 등기소 · 1923년 2월 9일 떼어 줌', body: [
+      d_grundbuch: { src: 'amt', blood: false, find: ['k_tannenschlag'], title: '토지 대장 발췌 — 오버뢰딩 지번 410~412', kicker: 'GRUNDBUCHAMT KELBACH', meta: '켈바흐 군 등기소 · 1923년 2월 9일 떼어 줌', body: [
         { rows: [
           ['410', '하젤외드 집터·마당·텃밭 0.6헥타르', '미하엘 모스바우어', '—'],
           ['411', '하젤외드 풀밭·밭 11.2헥타르', '미하엘 모스바우어', '1911년 혼인 계약으로 처와 공유'],
@@ -304,7 +333,7 @@
         '등기소는 사적 계약서를 받아 두지 않으며, 값이 치러졌는지도 확인하지 않음.',
         { stamp: 'Grundbuchamt Kelbach' },
       ] },
-      d_arrest: { src: 'amt', find: ['k_pfaenzl', 'k_kelbach'], title: '켈바흐 군청 유치장 장부', kicker: 'ARRESTBUCH · BEZIRKSAMT KELBACH', meta: '1923년 1월 20일 ~ 2월 1일', body: [
+      d_arrest: { src: 'amt', blood: false, find: ['k_pfaenzl', 'k_kelbach'], title: '켈바흐 군청 유치장 장부', kicker: 'ARRESTBUCH · BEZIRKSAMT KELBACH', meta: '1923년 1월 20일 ~ 2월 1일', body: [
         { rows: [
           ['1.20 23:30', '이름 모름 · 떠돌이', '부랑', '1.21 08:00'],
           ['1.25 22:10', '[[알로이스 펜츨]] · 머슴 (일 없음)', '가스트호프 포스트에서 싸움·기물 파손', '1.29 09:00 · 벌금 대신 나흘'],
@@ -313,7 +342,7 @@
         ], head: ['들어온 때', '이름 · 직업', '까닭', '나간 때'], f: { 1: 'f_arrest' } },
         { note: '유치장 문지기: 군청 사환 레히너. 밤에는 두 시간마다 들여다봄.' },
       ] },
-      d_fremdenbuch: { src: 'amt', find: ['k_stern', 'k_resl'], title: '가스트호프 골데너 슈테른 숙박부', kicker: 'GASTHOF ZUM GOLDENEN STERN · KELBACH · FREMDENBUCH', meta: '주인 [[레지 오버마이어]] · 1923년 1월 25일 ~ 2월 1일', body: [
+      d_fremdenbuch: { src: 'amt', blood: false, find: ['k_stern', 'k_resl'], title: '가스트호프 골데너 슈테른 숙박부', kicker: 'GASTHOF ZUM GOLDENEN STERN · KELBACH · FREMDENBUCH', meta: '주인 [[레지 오버마이어]] · 1923년 1월 25일 ~ 2월 1일', body: [
         { rows: [
           ['1.25 (목) 18:00', '요한 바이어', '곡물상 · 레겐탈', '2', '1.27'],
           ['1.26 (금) 20:30', '에른스트 할러', '재봉틀 판매원 · 뮌헨', '3', '1.28'],
@@ -323,7 +352,7 @@
         ], head: ['도착', '이름', '직업 · 사는 곳', '방', '떠남'], f: { 3: 'f_inn' } },
         { note: '손님은 도착한 날 제 손으로 적는다. 방값은 떠날 때 그날 시세로 받음.' },
       ] },
-      d_preise: { src: 'amt', find: ['k_roggen', 'k_markt'], title: '켈바흐 곡물 시세', kicker: 'SCHRANNENPREISE KELBACH', meta: '켈바흐 곡물 장터 · 1첸트너(50킬로그램) 값 · 마르크', body: [
+      d_preise: { src: 'amt', blood: false, find: ['k_roggen', 'k_markt'], title: '켈바흐 곡물 시세', kicker: 'SCHRANNENPREISE KELBACH', meta: '켈바흐 곡물 장터 · 1첸트너(50킬로그램) 값 · 마르크', body: [
         { rows: [
           ['1922.10.14', '2,900', '3,400', '—'],
           ['1922.11.18', '6,100', '7,000', '—'],
@@ -334,7 +363,7 @@
         ], head: ['날', '호밀', '밀', '비고'], f: { 5: 'f_rye' } },
         { note: '성촉절 장 날은 장터가 붐벼 시세가 하루에도 두어 번 바뀜.' },
       ] },
-      d_vermittlung: { src: 'amt', find: ['k_thekla', 'k_magdalena'], title: '켈바흐 직업소개소 장부 (하녀·머슴)', kicker: 'DIENSTBOTENVERMITTLUNG KELBACH', meta: '1922년 11월 ~ 1923년 1월', body: [
+      d_vermittlung: { src: 'amt', blood: false, find: ['k_thekla', 'k_magdalena'], title: '켈바흐 직업소개소 장부 (하녀·머슴)', kicker: 'DIENSTBOTENVERMITTLUNG KELBACH', meta: '1922년 11월 ~ 1923년 1월', body: [
         { rows: [
           ['1922.11.21', '[[마그달레나 뷔르츠]] (24)', '하젤외드(모스바우어) → 그만둠', '"그 집에 뭔가 있다" 함. 켈바흐 빵집에 소개'],
           ['1922.12.2', '알로이스 펜츨 (29)', '하젤외드 → 쫓겨남', '새 자리 없음'],
@@ -344,16 +373,17 @@
       ] },
 
       /* ── 켈바흐 주보 ── */
-      d_wb_0207: { src: 'blatt', find: ['k_haselod', 'k_michael', 'k_oberroding'], title: '오버뢰딩 외딴 농가의 참변 — 일가 네 사람 숨진 채 발견', kicker: '제11호 · 1923년 2월 7일 수요일 · 한 부 300마르크', meta: '본보 오버뢰딩 통신원', body: [
+      d_wb_0207: { src: 'blatt', blood: false, find: ['k_haselod', 'k_michael', 'k_oberroding'], title: '오버뢰딩 외딴 농가의 참변 — 일가 네 사람 숨진 채 발견', kicker: '제11호 · 1923년 2월 7일 수요일 · 한 부 300마르크', meta: '본보 오버뢰딩 통신원', body: [
         { img: 'farm', cap: '눈에 덮인 하젤외드 농가. 뒤로 숲이 바짝 붙어 있다.' },
         '지난 5일 오후, 오버뢰딩 마을에서 들판을 건너 반 시간 거리에 떨어진 [[하젤외드 농가]]에서 농부 미하엘 모스바우어(71) 씨 일가 세 사람과 하녀 한 사람이 숨진 채 발견되었다. 발견한 이는 이 구역 집배원과 이웃 농부로, 대문 우편함에 우편물이 여러 날 쌓인 것을 이상히 여겨 안으로 들어갔다 한다.',
+        '밤새 현장을 지킨 소방대원의 말로는, 네 사람 모두 머리를 여러 차례 맞았으며 세 사람은 헛간 구석 건초 더미 밑에서 문짝에 덮인 채 나왔다. 그는 헛간 안의 모습을 "차마 옮겨 말할 수 없다"고만 하였다.',
         '켈바흐 군청 검증위원회가 이튿날 현장을 살폈으며, 군청은 일이 벌어진 날짜를 가리는 데 힘을 쏟고 있다. 금고 안의 지폐는 손대지 않은 채였다고 하여, 마을에서는 도둑의 짓이 아니라는 말이 많다.',
         '숨진 하녀 [[테클라 하이더]](54) 씨는 켈바흐 직업소개소를 거쳐 이 집에 막 들어온 사람이라 한다.',
         '한편 이 농가에서 일하다 지난 12월 쫓겨난 [[머슴|k_pfaenzl]] 한 사람이 초소에 불려 가 조사를 받았으나 곧 돌아갔다.',
         '마을 사람들은 지난가을 "그 집에 밤마다 발소리가 난다"며 일을 그만둔 [[전 하녀|k_magdalena]]의 이야기를 다시 입에 올리고 있다. 군청은 근거 없는 [[유령 소문]]을 퍼뜨리지 말 것을 당부하였다.',
         { note: '장례 날짜는 군청의 허가가 나는 대로 알린다.' },
       ] },
-      d_wb_0210: { src: 'blatt', find: ['k_ghost', 'k_hausierer', 'k_pfaenzl'], title: '하젤외드를 둘러싼 소문 셋', kicker: '제12호 · 1923년 2월 10일 토요일', meta: '본보 기자', body: [
+      d_wb_0210: { src: 'blatt', blood: false, find: ['k_ghost', 'k_hausierer', 'k_pfaenzl'], title: '하젤외드를 둘러싼 소문 셋', kicker: '제12호 · 1923년 2월 10일 토요일', meta: '본보 기자', body: [
         '오버뢰딩 사건 뒤로 군내에 온갖 말이 떠돈다. 본보가 들은 것 가운데 셋을 적고, 군청에 물은 바를 덧붙인다.',
         { h: '하나, 귀신 든 집' },
         '지난가을 그 집을 나온 하녀가 "밤마다 발소리가 났다"고 한 것이 퍼져, 이제는 밤에 그 들판을 지나지 않는다는 이까지 있다. 군청은 웃어넘겼다.',
@@ -363,7 +393,7 @@
         '12월에 여관에서 주인에게 험한 말을 한 전 머슴이 있다는 것은 사실이다. 그러나 그 무렵 그가 어디 있었는지에 대해서는 "장부로 확인하는 중"이라는 답만 들었다.',
         { note: '독자께: 소문을 편지로 보내 주시는 것은 고마우나, 이름을 밝히지 않은 편지는 싣지 않습니다.' },
       ] },
-      d_wb_0127: { src: 'blatt', find: ['k_zeitung'], title: '군내 소식', kicker: '제8호 · 1923년 1월 27일 토요일 · 한 부 150마르크', meta: '하젤외드 부엌 식탁에서 나온 것과 같은 호', body: [
+      d_wb_0127: { src: 'blatt', blood: false, find: ['k_zeitung'], title: '군내 소식', kicker: '제8호 · 1923년 1월 27일 토요일 · 한 부 150마르크', meta: '하젤외드 부엌 식탁에서 나온 것과 같은 호', body: [
         { h: '큰눈' },
         '지난 화요일 밤부터 수요일 새벽까지 군 전역에 한 자 넘는 눈이 내렸다. 켈바흐와 바이사흐 사이 역마차가 하루 쉬었다.',
         { h: '달러 1만 8천 마르크 넘어' },
@@ -373,7 +403,7 @@
         { h: '소방대 무도회 미룸' },
         '켈바흐 소방대 겨울 무도회는 석탄 값 때문에 3월로 미룬다.',
       ] },
-      d_wb_ads: { src: 'blatt', find: ['k_tannenschlag', 'k_markt'], title: '광고', kicker: '제7호 · 1923년 1월 24일 수요일 · 광고면', meta: '광고 한 줄 500마르크', body: [
+      d_wb_ads: { src: 'blatt', blood: false, find: ['k_tannenschlag', 'k_markt'], title: '광고', kicker: '제7호 · 1923년 1월 24일 수요일 · 광고면', meta: '광고 한 줄 500마르크', body: [
         { img: 'sledge', cap: '광고 삽화 — 장작을 실은 말썰매' },
         { list: [
           '마른 장작 팝니다 — [[태넨슐라크]]산 전나무, 수레째 또는 썰매째. 운터뢰딩 [[V. 크나우어|k_knauer]] 목재·가축상',
@@ -383,7 +413,7 @@
           '잃어버린 개를 찾습니다 — 검은 얼룩 사냥개. 후버, 오버뢰딩',
         ] },
       ] },
-      d_wb_roggen: { src: 'blatt', find: ['k_schuldschein', 'k_roggen'], title: '"호밀로 빌리고 호밀로 갚는다" — 요즘 시골 빚 셈법', kicker: '제6호 · 1923년 1월 20일 토요일', meta: '본보 경제란', body: [
+      d_wb_roggen: { src: 'blatt', blood: false, find: ['k_schuldschein', 'k_roggen'], title: '"호밀로 빌리고 호밀로 갚는다" — 요즘 시골 빚 셈법', kicker: '제6호 · 1923년 1월 20일 토요일', meta: '본보 경제란', body: [
         '마르크가 날마다 떨어지자 요즘 시골에서는 땅값이나 빚을 돈 대신 "[[호밀 값]] 몇 첸트너"로 정해 두는 일이 흔하다. 갚는 날 그날의 호밀 시세로 치르니, 빌려준 쪽은 돈값이 떨어져도 손해를 보지 않는다.',
         '문제는 빌린 쪽이다. 가을에 호밀 50첸트너 값을 치르기로 한 이는, 그때 같으면 15만 마르크 남짓이면 되었을 것을 이제 그 몇 곱절을 마련해야 한다. 성촉절이 다가오며 이런 [[차용증]]을 쥔 이와 쓴 이 사이에 다툼이 잦다.',
         '공증인을 거치지 않은 증서는 세상에 한 장뿐인 경우가 많다. 군청은 이런 증서를 꼭 공증해 두라고 권한다.',
@@ -501,9 +531,9 @@
         '증서는 끝내 나오지 않았다. 그러나 미하엘은 우유 리터 수 사이에 다 적어 두었다. V.K., 80첸트너, 궤에.',
       ],
     },
-    artStyle: 'Early 1920s Bavarian police and press photography: silver gelatin print from a glass-plate camera, heavy grain, warm sepia toning, soft vignetting, faint dust and scratches, cold overcast winter daylight and deep snow. Documentary, still and quiet. No readable text, no faces, no bodies, no blood.',
+    artStyle: 'Early 1920s Bavarian police and press photography: silver gelatin print from a glass-plate camera, heavy grain, warm sepia toning, soft vignetting, faint dust and scratches, cold overcast winter daylight and deep snow. Documentary, still and quiet. Where the scene calls for it, dried and frozen blood is shown plainly and specifically (pooled into straw and floorboards, spattered low on posts and walls, dragged in wide swept trails), and the dead stay covered: under hay, planks or linen sheets, at most a sleeved forearm showing. No wounds, no faces, no readable text.',
     art: {
-      plan: { svg: `<svg viewBox="0 0 300 200" role="img" aria-label="하젤외드 농가 도면"><rect width="300" height="200" fill="#ece4cc"/><g fill="#8f9a78" opacity=".75">${trees}</g><text x="150" y="52" font-size="8" text-anchor="middle" fill="#4f5646">태넨슐라크 (숲)</text><path d="M150 44 Q140 62 124 78" fill="none" stroke="#7a6a50" stroke-dasharray="3 3"/><g fill="#f6f1e2" stroke="#3b3326" stroke-width="2"><rect x="40" y="80" width="50" height="35"/><rect x="90" y="80" width="60" height="35"/><rect x="40" y="115" width="50" height="35"/><rect x="90" y="115" width="60" height="35"/><rect x="150" y="80" width="60" height="70"/><rect x="218" y="70" width="66" height="90"/></g><rect x="44" y="57" width="102" height="18" fill="none" stroke="#3b3326" stroke-dasharray="4 3"/><text x="120" y="140" font-size="7" text-anchor="middle" fill="#3b3326">현관</text><path d="M120 150 V182" stroke="#7a6a50" stroke-dasharray="3 3"/><rect x="113" y="182" width="14" height="8" fill="#6b5a3e"/><text x="258" y="194" font-size="7" fill="#3b3326">오버뢰딩 →</text></svg>`, use: '지도 (글자는 게임이 얹는다)', ratio: '3:2', own: true, prompt: 'A 1923 Bavarian gendarme\'s ink floor plan of an isolated farmhouse, drawn on squared paper with a ruler, slightly smudged, top-down. Across the top edge a row of small fir-tree symbols for the forest. In the middle left a long farmhouse block: the living part on the left divided into four rooms in a two-by-two grid, the stable attached on its right, and a dashed rectangle above the living part for the attic. A separate barn stands to the right with a gap between. From the front door a dotted path runs down to a small gate with a mailbox at the bottom middle. A small arrow at the bottom right points toward the village. No words, no letters, no numbers.', must: '위쪽 숲 · 가운데 왼쪽 살림채 네 칸 + 붙은 외양간 · 오른쪽에 따로 선 헛간 · 살림채 위 점선 다락 · 아래 가운데 대문 우편함까지 점선 길 · 글자 없음', labels: [['태넨슐라크 (숲)',44,12,'l'],['현관',32,50,'c'],['오버뢰딩 →',84,97,'l']], swap: 'svg', raster: true },
+      plan: { svg: `<svg viewBox="0 0 300 200" role="img" aria-label="하젤외드 농가 도면"><rect width="300" height="200" fill="#ece4cc"/><g fill="#8f9a78" opacity=".75">${trees}</g><text x="150" y="52" font-size="8" text-anchor="middle" fill="#4f5646">태넨슐라크 (숲)</text><path d="M150 44 Q140 62 124 78" fill="none" stroke="#7a6a50" stroke-dasharray="3 3"/><g fill="#f6f1e2" stroke="#3b3326" stroke-width="2"><rect x="40" y="80" width="50" height="35"/><rect x="90" y="80" width="60" height="35"/><rect x="40" y="115" width="50" height="35"/><rect x="90" y="115" width="60" height="35"/><rect x="150" y="80" width="60" height="70"/><rect x="218" y="70" width="66" height="90"/></g><rect x="44" y="57" width="102" height="18" fill="none" stroke="#3b3326" stroke-dasharray="4 3"/><text x="120" y="140" font-size="7" text-anchor="middle" fill="#3b3326">현관</text><path d="M120 150 V182" stroke="#7a6a50" stroke-dasharray="3 3"/><rect x="113" y="182" width="14" height="8" fill="#6b5a3e"/><text x="258" y="194" font-size="7" fill="#3b3326">오버뢰딩 →</text></svg>`, use: '지도 (글자는 게임이 얹는다)', ratio: '3:2', own: true, prompt: 'A 1923 Bavarian gendarme\'s ink floor plan of an isolated farmhouse, drawn on squared paper with a ruler, slightly smudged, top-down. Across the top edge a row of small fir-tree symbols for the forest. In the middle left a long farmhouse block: the living part on the left divided into four rooms in a two-by-two grid, the stable attached on its right, and a dashed rectangle above the living part for the attic. A separate barn stands to the right with a gap between. From the front door a dotted path runs down to a small gate with a mailbox at the bottom middle. A small arrow at the bottom right points toward the village. No words, no letters, no numbers.', must: '위쪽 숲 · 가운데 왼쪽 살림채 네 칸 + 붙은 외양간 · 오른쪽에 따로 선 헛간 · 살림채 위 점선 다락 · 아래 가운데 대문 우편함까지 점선 길 · 글자 없음', labels: [['태넨슐라크 (숲)',44,12,'l'],['현관',32,50,'c'],['오버뢰딩 →',98,97,'r']], swap: 'svg', raster: true },
       cover: { use: '기록실 폴더 표지 — 눈 덮인 외딴 농가 사진', ratio: '4:3',
         svg: `<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#cdc5b3"/><g fill="#555b4b" transform="translate(-6,40) scale(.74)">${trees}</g><rect y="90" width="200" height="60" fill="#ece7db"/><path d="M50 92V66l34-20 34 20v26z" fill="#62574a"/><path d="M44 68l40-26 40 26" fill="none" stroke="#2f2820" stroke-width="3"/><path d="M118 92V72h50v20z" fill="#72654f"/><rect x="100" y="48" width="6" height="12" fill="#2f2820"/><rect x="66" y="72" width="9" height="9" fill="#2b241c"/><path d="M150 122l22-7 6 18-22 7z" fill="#dfb64c"/><path d="M150 122l-14-12" stroke="#bbb" stroke-width="1.5"/></svg>`,
         prompt: 'Evidence photograph from a 1920s police file: a remote Bavarian farmstead in deep snow at the edge of a dark fir forest, seen across an open white field under a flat grey sky. A long low farmhouse with a steep roof and attached stable, a separate wooden barn, no smoke from the chimney, no people. A small manila evidence tag on a string lies slightly out of focus in the lower corner of the print.' },
@@ -516,9 +546,11 @@
       stall: { use: '외양간 검증 조서 — 야윈 소들과 빈 여물통', ratio: '4:3',
         svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#3a3128"/><rect y="110" width="200" height="40" fill="#5a4a36"/><path d="M0 60h200" stroke="#6b5a42" stroke-width="4"/><g fill="#1f1a15"><ellipse cx="50" cy="92" rx="30" ry="16"/><circle cx="22" cy="84" r="9"/><ellipse cx="130" cy="94" rx="30" ry="16"/><circle cx="102" cy="86" r="9"/></g><path d="M150 70h40l-6 30h-28z" fill="#b89a5a"/><rect x="170" y="20" width="4" height="90" fill="#6b5a42"/></svg>',
         prompt: 'Dim interior of an old Bavarian cattle stable in winter 1923: a row of thin brown cows standing in straw, wooden hay racks holding only scraps of hay, an overturned tin milk pail beside a pig trough, a wooden ladder leading up to a hay loft, weak light from a small frosted window. Documentary police photograph.' },
-      suitcase: { use: '하녀 방 검증 조서 — 짐을 풀지 않은 가방', ratio: '4:3',
+      suitcase: { use: '하녀 방 검증 조서 — 짐을 풀지 않은 가방과 문 쪽 바닥의 핏자국', ratio: '4:3', sensitive: true,
+        must: '짐을 풀지 않은 가방 · 누운 흔적 없는 침대 · 앞쪽 문 안쪽 널바닥에 스며 검게 굳은 큰 핏자국 · 문설주와 벽의 허리 아래 비산흔',
+        avoid: '시신은 없다 (수습한 뒤). 상처·얼굴 없음.',
         svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#cfc4ad"/><rect x="10" y="80" width="120" height="50" fill="#e8e2d2"/><rect x="10" y="70" width="18" height="60" fill="#7a5f40"/><rect x="120" y="92" width="64" height="40" rx="3" fill="#6b4a2c"/><rect x="146" y="86" width="12" height="8" rx="2" fill="none" stroke="#3a2818" stroke-width="3"/><path d="M130 92v40M174 92v40" stroke="#3a2818" stroke-width="3"/><path d="M150 112q20-4 40 6" stroke="#8a6a44" stroke-width="2" fill="none"/></svg>',
-        prompt: 'A servant\'s small bare room in a 1920s Bavarian farmhouse: a narrow wooden bed with a plain sheet, and beside it an old brown leather-cornered suitcase with its straps undone but still fully packed, the edge of a folded white apron showing, an empty candlestick on the windowsill. Cold, quiet, no people.' },
+        prompt: 'Police inspection photograph of a servant\'s small bare room in a 1920s Bavarian farmhouse, taken from the doorway after the body was removed: a narrow wooden bed with a plain sheet, smooth and never slept in, and beside it an old brown leather-cornered suitcase with its straps undone but still fully packed, the edge of a folded white apron showing, an empty candlestick on the windowsill, a single coat on a wall peg. In the foreground, just inside the door, the bare pine floorboards carry a large dark dried bloodstain about a metre across, soaked into the grain and running along the gaps between the boards toward the threshold; fine dark spatter on the whitewashed wall and on the door frame, most of it below waist height and thickest near the floor. Nothing wiped, nothing moved. Cold, quiet, no people.' },
       calendar: { use: '안방 검증 조서 — 벽의 뜯는 달력과 십자가', ratio: '4:3',
         svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#d8ceb6"/><rect x="40" y="30" width="56" height="78" fill="#f3eee2" stroke="#6b5e4b"/><rect x="40" y="30" width="56" height="14" fill="#8a3a2e"/><rect x="56" y="54" width="24" height="30" fill="#2b2823" opacity=".75"/><path d="M48 92h40M48 98h32" stroke="#9a9180" stroke-width="2"/><rect x="138" y="30" width="5" height="60" fill="#4a3a28"/><rect x="126" y="44" width="29" height="5" fill="#4a3a28"/></svg>',
         prompt: 'Corner of a Bavarian farmhouse living room in 1923: a simple wooden crucifix on a whitewashed wall and beside it a tear-off daily wall calendar with a thick block of unturned pages, its top sheet showing the large date numeral 26 (the only legible mark). Below, the edge of a treadle sewing machine and an unopened envelope on a table. No other readable text.',
@@ -546,6 +578,16 @@
         svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#6f6252"/><rect y="96" width="200" height="8" fill="#4a3e30"/><rect x="50" y="46" width="70" height="50" fill="#3a3834"/><circle cx="85" cy="68" r="5" fill="#16140f"/><rect x="83" y="70" width="4" height="12" fill="#16140f"/><g fill="#8f8a7c"><circle cx="138" cy="70" r="7"/><rect x="144" y="68" width="30" height="4"/><circle cx="138" cy="86" r="7"/><rect x="144" y="84" width="26" height="4"/></g></svg>',
         prompt: 'A new hand-forged iron box lock for a farmhouse door with two large iron keys, lying on a sooty wooden shelf in a village blacksmith\'s forge in 1923, faint glowing embers out of focus in the background. The lock and keys are brand-new and unrusted: bright freshly filed iron, crisp edges, clearly never used.',
         must: '새것인 자물쇠 (찾아가지 않은 새 주문품)' },
+      barn_floor: { use: '헛간 검증 조서 — 앞문 안쪽 짚 바닥의 언 핏자국과 덮인 구석', ratio: '4:3', sensitive: true,
+        svg: '<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="150" fill="#3b3228"/><path d="M0 70h200" stroke="#5a4b38" stroke-width="5"/><rect x="20" y="0" width="7" height="150" fill="#54463a"/><rect y="84" width="200" height="66" fill="#8f7a52"/><g fill="#b39a62" opacity=".6"><path d="M0 96l20-4M30 120l18-6M70 140l22-5M120 132l18-4M160 110l20-6"/></g><g fill="none" stroke="#6e5c3e" stroke-width="10" opacity=".8"><path d="M52 124Q110 110 158 92"/><path d="M84 136Q130 118 164 98"/><path d="M40 108Q100 98 152 88"/></g><g fill="#3a0d07" opacity=".9"><ellipse cx="46" cy="126" rx="18" ry="7"/><ellipse cx="82" cy="138" rx="14" ry="6"/><ellipse cx="36" cy="108" rx="11" ry="5"/></g><path d="M140 96q20-30 56-18v24h-56z" fill="#c2a664"/><rect x="138" y="80" width="58" height="12" fill="#5e4a32" transform="rotate(-6 166 86)"/><path d="M146 100q6 6 16 4" stroke="#2c241c" stroke-width="4" fill="none"/><g fill="#4a0e08"><circle cx="24" cy="92" r="1.4"/><circle cx="26" cy="98" r="1.2"/><circle cx="22" cy="102" r="1"/><ellipse cx="60" cy="72" rx="2.4" ry=".8"/><ellipse cx="68" cy="72" rx="2" ry=".7"/><ellipse cx="76" cy="72" rx="1.6" ry=".6"/></g><g fill="#efe8d6"><rect x="54" y="118" width="6" height="5"/><rect x="92" y="132" width="6" height="5"/><rect x="44" y="100" width="6" height="5"/></g></svg>',
+        prompt: 'Police inspection photograph, February 1923, inside the dim timber barn of a remote Bavarian farm, taken from just inside the big front door. On the straw-strewn earth floor in the foreground, three dark pools of frozen blood soaked deep into the straw, each marked with a small white numbered card; from each pool a wide swept trail runs through the straw back to the far corner, bare earth showing along it, its edges smeared dark. In that corner a heap of hay with an unhinged wooden plank door laid flat on top of it and a fourth numbered card; from under the edge of the hay only one stiff forearm in a dark woollen sleeve shows, the hand turned down. On the inner wooden post, below waist height, fine dark spatter; on the underside of the low crossbeam overhead a single line of elongated drops. Hobnailed boot prints pressed into the frozen surface of the nearest pool. On the plank wall a tool rack holding a pitchfork, a shovel and an axe, with one empty peg. Grey winter light through the open door, frost on the beams, no people standing.',
+        must: '앞쪽 짚 바닥의 언 핏자국 웅덩이 셋 (번호표) · 웅덩이마다 안쪽 구석까지 짚이 쓸린 넓은 자국 · 구석 건초 더미 위에 얹힌 문짝과 그 밑으로 나온 소매 입은 아래팔 하나 · 안쪽 기둥 허리 아래 비산흔과 들보 아랫면의 한 줄 핏방울 · 웅덩이 위 징 박은 장화 자국 · 연장 걸이의 빈 못',
+        avoid: '시신은 건초와 문짝에 덮인 채 아래팔 하나까지만. 상처·얼굴은 보이지 않게.' },
+      autopsy_table: { use: '검안 소견 — 헛간 타작마당 널판 위, 흰 천을 덮은 네 사람', ratio: '4:3', sensitive: true,
+        svg: '<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="150" fill="#4a4034"/><rect y="104" width="200" height="46" fill="#6b5a42"/><g fill="#3a2f24"><rect x="18" y="96" width="4" height="30"/><rect x="178" y="96" width="4" height="30"/></g><rect x="12" y="92" width="176" height="6" fill="#7a6448"/><g fill="#e6e0d0"><path d="M16 92q2-14 14-14h24q10 0 12 14z"/><path d="M60 92q2-14 14-14h24q10 0 12 14z"/><path d="M104 92q2-14 14-14h24q10 0 12 14z"/><path d="M148 92q2-14 14-14h20q8 0 8 14z"/></g><g fill="#5a1a10" opacity=".7"><ellipse cx="26" cy="84" rx="6" ry="4"/><ellipse cx="70" cy="85" rx="5" ry="4"/><ellipse cx="114" cy="84" rx="6" ry="3.5"/><ellipse cx="158" cy="85" rx="5" ry="4"/></g><rect x="40" y="120" width="30" height="18" rx="3" fill="#3a2a1a"/><ellipse cx="120" cy="130" rx="18" ry="6" fill="#d8d4c8"/><ellipse cx="120" cy="129" rx="14" ry="4" fill="#c79a90"/><path d="M104 128q-4 8 2 12" stroke="#8a3a2e" stroke-width="3" fill="none"/><path d="M96 20v26" stroke="#2a221a" stroke-width="2"/><rect x="90" y="46" width="12" height="16" fill="#e0b050" opacity=".8"/></svg>',
+        prompt: 'Police file photograph, February 1923, on the threshing floor of a Bavarian farm barn: four long shapes lying side by side on rough planks laid across wooden trestles, each completely covered by a coarse white linen sheet, a dark brownish-red stain seeping through the linen at the head end of every sheet. In front, a country doctor\'s worn leather bag standing open, an enamel basin of pinkish water with a stained cloth draped over its rim, a folding wooden rule and a pair of long scissors on a stool. A paraffin lantern hangs from a beam; cold grey daylight from the half-open barn door, frost on the timber. No people.',
+        must: '흰 천을 덮은 형체 넷이 널판 위에 나란히 · 천마다 머리 쪽에 배어 나온 핏자국 · 앞쪽 왕진 가방과 불그스름한 물이 든 대야, 가위',
+        avoid: '천 밖으로 몸이 나오지 않게. 상처·얼굴 없음.' },
       /* 정밀 관찰용 연필 스케치 — 좌표가 맞아야 하므로 SVG 전용 (prompt 없음) */
       sk_kitchen: { svg: `<svg viewBox="0 0 400 260" role="img" aria-label="연필 현장 스케치 — 하젤외드 부엌"><rect width="400" height="260" fill="#efe8d6"/>`
         + `<g fill="none" stroke="#9a948a" stroke-width=".8"><path d="M0 22H400M0 212L400 207M0 232L400 226M0 250L400 246M20 130H106M20 150H28M64 150H106M20 170H68M100 170H106M150 196l10-8M170 196l10-8M190 196l10-8M232 196l10-8M252 196l10-8"/><path d="M164 44l12 12M196 44l18 18M164 72l16 16M196 72l14 14"/></g>`
