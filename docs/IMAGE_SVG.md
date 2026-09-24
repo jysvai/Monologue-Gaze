@@ -158,7 +158,7 @@ A 1971 Korean police scene sketch map drawn in pencil and red ink on thin yellow
 ## c08/map — 지도 · 목소리의 지도 ✅
 - 저장 경로: `img/c08/map.png` · 비율: 4:3
 - **꼭 보여야 할 것**: 가운데를 가로지르는 지상 철로와 역 셋 (왼쪽·가운데·오른쪽) · 왼쪽 위 붉은 십자가 · 역 옆 공중전화 네모 · 오른쪽 아래 시장 · 아래 가운데 크레인 (공사 현장) · 글자 없음
-- 게임이 얹을 글자: 새터역 · 가람역 · 솔마루역 · 2호선 철교 (지상) · 솔마루 시장 · 가람동 현장 · 동림대
+- 게임이 얹을 글자: 새터역 · 가람역 · 솔마루역 · 2호선 철교 (지상) · 솔마루 시장 · 동림대
 ```
 A detective's hand-drawn district map from Seoul in 1991, black felt pen and a red pen on photocopied grid paper, top-down. An elevated subway line runs left to right across the middle as a thick line with three station circles: left, centre and right (the right one lighter). A small red cross for a church at the upper left; small squares for phone booths near the left and centre stations; a small square for a market at the lower right; a crane symbol for a construction site at the lower middle; a university block at the top right; plain blocks as pale rectangles. No words, no letters, no numbers. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
 ```

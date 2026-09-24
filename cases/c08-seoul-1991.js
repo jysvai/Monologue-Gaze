@@ -33,7 +33,7 @@
     stars: 4,
     frame: 'papers',
     mood: { light: 'sodium', fx: 'drizzle', amb: ['city', 'drizzle'], line: '1991년 11월, 비 젖은 공중전화 부스. 테이프 속 목소리 뒤에서 무언가 울린다.' },
-    tag: '**증거철 08** · 한울경찰서 91-강력-1104 · 카세트테이프 6 · 호출기 음성사서함 복사본 1 · 역추적 회보철',
+    tag: '**증거철 08** · 한울경찰서 91-강력-1104 · 카세트테이프 6 (집 전화 5 · 음성사서함 복사 1) · 역추적 회보철',
     disclaimer: '실제 사건의 모티프만 빌린 창작입니다. 피해자·결말을 바꾸었으며 인물·장소·학교·회사·신문은 모두 지어낸 것으로 실존 인물과 관계가 없습니다.',
     emptyRead: '한울경찰서 강력반 캐비닛에서 나온 기록철과 카세트테이프 상자다. 위쪽 탭에서 자료를 고른다. 테이프 라벨마다 어머니의 볼펜 글씨가 있다.',
     brief: {
@@ -43,7 +43,7 @@
         ['실종', '1991. 11. 4 (월) 저녁 · 지하철 2호선 [[가람역]] 앞에서 친구와 헤어진 뒤'],
         ['협박', '11. 5 ~ 11. 29 · 집 전화 6회, 사장 [[삐삐 음성사서함]] 6회 · 몸값 1억 원 · 전달 2회 실패'],
         ['발견', '11. 29 (금) 밤 · 공사가 멈춘 [[가람동 현장]] 가설창고 · 탈수 증세, 생명 지장 없음'],
-        ['자료', '어머니 [[강미숙]] 씨가 녹음한 [[카세트테이프]] 6개 · 공중전화 역추적 회보'],
+        ['자료', '어머니 [[강미숙]] 씨가 녹음한 [[카세트테이프]] 5개 · 음성사서함 복사 테이프 1개 · 공중전화 역추적 회보'],
         ['미제', '범인 미검거. 목소리만 남았다.'],
       ],
       scrawl: '그놈 목소리 뒤에서 무엇이 울렸나.',
@@ -51,7 +51,7 @@
     start: ['k_junyoung', 'k_haesol', 'k_baek', 'k_garam', 'k_pager', 'k_site', 'k_mother', 'k_tape'],
     tips: ['소리는 지도 위에 올려놓을 수 있다. 신문 동네 소식란도 기록이다.'],
     sources: [
-      { id: 'tapes', type: 'list', name: '녹음테이프', skin: 'transcript', desc: '집 전화 녹음 여섯 개와 사장 호출기 음성사서함 복사본. 대괄호 속은 녹취 담당 형사가 적은 뒤쪽 소리.' },
+      { id: 'tapes', type: 'list', name: '녹음테이프', skin: 'transcript', desc: '집 전화 녹음 다섯 개(첫 통화는 어머니 기억으로 적은 메모)와 사장 호출기 음성사서함 복사 테이프 한 개. 대괄호 속은 녹취 담당 형사가 적은 뒤쪽 소리.' },
       { id: 'map', type: 'map', name: '공중전화 위치도', art: 'map', desc: '한울구 지도에 형사가 빨간 점을 찍어 두었다. 굵은 선은 2호선이 땅 위로 올라오는 철교 구간.',
         spots: [
           { id: 'sp_garam', label: '가람역 3번 출구', x: 50.5, y: 38.5, doc: 'd_spgaram' },
@@ -77,7 +77,7 @@
           { id: 'e_last', t: '(음성사서함) 「오늘 밤 안에 가 보쇼.」 — 종소리 여섯 번.' },
         ],
         solved: [
-          '종소리는 늘 저녁 여섯 시 무렵, 네 음 차임은 늘 오후 네 시 조금 전, 시보는 늘 밤 아홉 시 정각에 울린다. 철교의 쇳소리는 그 셋 어느 것과도 겹친다.',
+          '종소리는 늘 저녁 여섯 시 무렵, 네 음 차임은 늘 오후 네 시 조금 전, 시보는 늘 밤 아홉 시 정각에 울린다. 철교의 쇳소리는 종소리와도, 시보와도 겹친다.',
           { p: '시장 소리가 난 11월 9일 한 통(역추적 — 솔마루 시장)과 행상 소리뿐인 11월 5일 한 통을 빼면, 일곱 통의 뒤쪽 소리가 한 자리를 가리킨다. 교회 종탑에서 150미터, 국민학교 담장 건너, 철교 바로 밑 — [[새터역]] 2번 출구 앞 부스.', f: 'f_tl_sounds' },
         ],
         ok: '소리가 한 자리에 모였다', solveNeed: ['#d_pager', 'k_church', 'k_school', 'k_train'] },
@@ -264,7 +264,7 @@
       d_nvoice: { src: 'paper', find: ['k_tape', 'k_voice'], kicker: '1991년 11월 28일 (목) 조간 · 1면', title: '"이 목소리를 아십니까"', meta: '경찰, 유괴범 협박 전화 녹음 공개… 제보 하루 3백여 건', body: [
         '한울경찰서는 27일 대학생 유괴 사건 범인이 피해자 집에 건 협박 전화 녹음 일부를 텔레비전과 라디오를 통해 공개했다.',
         '공개된 목소리는 "돈은 됐소?", "쓸데없는 짓 마쇼" 등으로, 경찰은 범인이 30대 후반에서 40대의 서울·경기 말씨를 쓰는 남자로 보고 있다.',
-        '방송이 나간 뒤 이틀 동안 3백여 건의 제보가 들어왔으나 결정적인 단서는 없는 것으로 알려졌다.',
+        '방송이 나간 뒤 하루 동안 3백여 건의 제보가 들어왔으나 결정적인 단서는 없는 것으로 알려졌다.',
       ] },
       d_nfound: { src: 'paper', find: ['k_site', 'k_warehouse'], cls: 'vertical', kicker: '1991년 11월 30일 (토) 조간 · 1면', title: '유괴 대학생 25일 만에 살아서 돌아와', meta: '공사 멈춘 현장 창고에 갇혀… 범인은 행방 묘연', body: [
         { img: 'news_site', cap: '백군이 발견된 가람동 공사 현장' },
@@ -459,7 +459,7 @@
         ask: {
           k_junyoung: ['착한 애예요. 건축가가 되겠다고, 방학마다 아빠 현장에 실습을 나갔어요.'],
           k_pager: ['애 아빠 삐삐 음성사서함 비밀번호요? [[준영이 생일]]이에요. 제가 정했어요.'],
-          k_tape: ['테이프는 여섯 개예요. 전화가 올 때마다 녹음 버튼을 눌렀어요. 뒤에서 나는 소리까지 다 녹음됐대요.'],
+          k_tape: ['테이프는 여섯 개예요. 첫 전화만 빼고 올 때마다 녹음 버튼을 눌렀어요. 하나는 애 아빠 삐삐 음성사서함을 옮겨 담은 거고요. 뒤에서 나는 소리까지 다 녹음됐대요.'],
           k_tutor: [{ p: '염 선생님은 매주 금요일 저녁 8시부터 10시까지 소영이 방에서 수업을 하셨어요. 8일 밤 9시에 전화가 왔을 때도 소영이 방에 계셨어요. 문 열고 나와서 걱정하시던걸요.', f: 'f_tutor_present' }],
           k_bell: ['종소리요? 세 번째 전화 때 들렸어요. 저녁 여섯 시. 그래서 교회 옆인가 했지요.'],
           k_signal: ['9시 뉴스 "땡" 소리요. 처음엔 우리 집 텔레비전인 줄 알았는데 우리 집 텔레비전은 꺼져 있었어요.'],
@@ -504,7 +504,7 @@
           k_saeteo: { need: ['!f_church_news'], a: ['…네, 새터동 하숙집에 삽니다. 교회 바로 뒤예요. 저녁 여섯 시 종소리요? 매일 듣지요.', '그렇다고 제가… 8일 밤 9시에 전화가 왔을 때 저는 그 집 소영이 방에 있었어요. 어머님이 아세요.'], else: ['새터동이요? 제 하숙집이 그쪽이에요.'] },
           k_tape: ['방송에 나온 녹음 들어 봤어요. 제 목소리하고는 전혀 다르잖아요. 저는 담배도 안 피우고요.'],
           k_pager: ['사장님 삐삐 번호요? 몰라요. 연락은 늘 댁 전화로 했어요.'],
-          k_junyoung: ['건축 하는 사람답게 꼼꼼한 분이었어요. 소영이 수학 문제도 자로 대고 풀어 주더라고요.'],
+          k_junyoung: ['건축하는 사람답게 꼼꼼한 분이었어요. 소영이 수학 문제도 자로 대고 풀어 주더라고요.'],
           k_shop: ['새터슈퍼요? 라면 사러 자주 가요. 외상도 달아 주시고.'],
           k_bell: ['종소리요? 하숙집 창문이 종탑 쪽이라 여섯 시면 창문이 울려요.'],
           k_soyoung: ['소영이는 수학을 잘해요. 요즘은 통 집중을 못 하지만요.'],
@@ -580,7 +580,7 @@
       cover: { use: '기록실 폴더 표지 — 카세트 녹음기와 라벨 붙은 테이프, 전화기', ratio: '4:3',
         svg: `<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#3c3f41"/><rect x="20" y="40" width="96" height="62" rx="6" fill="#1f2224"/><rect x="30" y="50" width="76" height="26" rx="3" fill="#8e9497"/><circle cx="48" cy="63" r="7" fill="#1f2224"/><circle cx="88" cy="63" r="7" fill="#1f2224"/><g fill="#bfc4c6">${[0, 1, 2, 3, 4].map(i => `<rect x="${30 + i * 16}" y="86" width="12" height="8"/>`).join('')}</g><g transform="rotate(-8 150 100)"><rect x="124" y="84" width="54" height="34" rx="3" fill="${PAPER}"/><rect x="130" y="90" width="42" height="12" fill="#d9c27a"/><circle cx="140" cy="110" r="4" fill="#555"/><circle cx="162" cy="110" r="4" fill="#555"/></g><path d="M130 30 h50 v26 h-50z" fill="#b9b3a2"/><path d="M134 30 q21 -14 42 0" fill="none" stroke="#b9b3a2" stroke-width="6"/></svg>`,
         prompt: 'Top-down photo on a grey police desk in 1991 Seoul: a black portable cassette recorder with a small microphone clipped to a beige push-button home telephone handset by a suction-cup pickup, six audio cassette tapes in clear cases with handwritten labels that are blurred and unreadable, a ballpoint pen, harsh overhead fluorescent light, slight color cast.' },
-      map: { svg: `<svg viewBox="0 0 200 150" role="img" aria-label="한울구 공중전화 위치도"><rect width="200" height="150" fill="#ebe6d6"/><g fill="#d8d1bd">${[[8, 8, 30, 20], [150, 10, 42, 24], [8, 92, 40, 30], [140, 118, 52, 26], [70, 96, 30, 20]].map(([x, y, w, h]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}"/>`).join('')}</g><path d="M0 60 H50" stroke="#6e7b86" stroke-width="3" stroke-dasharray="5 4"/><path d="M130 60 H200" stroke="#6e7b86" stroke-width="3" stroke-dasharray="5 4"/><path d="M50 60 H130" stroke="#2f3437" stroke-width="6"/><circle cx="60" cy="60" r="5" fill="#fff" stroke="#2f3437" stroke-width="2"/><circle cx="120" cy="60" r="5" fill="#fff" stroke="#2f3437" stroke-width="2"/><circle cx="176" cy="60" r="4" fill="#fff" stroke="#6e7b86" stroke-width="2"/><text x="48" y="52" font-size="8" fill="#2f3437">새터역</text><text x="110" y="52" font-size="8" fill="#2f3437">가람역</text><text x="164" y="52" font-size="7" fill="#6e7b86">솔마루역</text><text x="70" y="75" font-size="6.5" fill="#2f3437">2호선 철교 (지상)</text><path d="M44 28 v10 M40 32 h8" stroke="${NEON}" stroke-width="2"/><rect x="72" y="26" width="14" height="9" fill="none" stroke="#2f3437" stroke-width="1.2"/><path d="M160 96 h16 v12 h-16z" fill="none" stroke="#2f3437" stroke-width="1.2"/><text x="150" y="92" font-size="6.5" fill="#2f3437">솔마루 시장</text><path d="M108 120 l6 -14 l6 14z M114 106 v-8 h10" fill="none" stroke="#2f3437" stroke-width="1.4"/><text x="96" y="134" font-size="6.5" fill="#2f3437">가람동 현장</text><text x="176" y="30" font-size="6.5" fill="#6e7b86">동림대</text></svg>`, use: '지도 (글자는 게임이 얹는다)', ratio: '4:3', own: true, prompt: 'A detective\'s hand-drawn district map from Seoul in 1991, black felt pen and a red pen on photocopied grid paper, top-down. An elevated subway line runs left to right across the middle as a thick line with three station circles: left, centre and right (the right one lighter). A small red cross for a church at the upper left; small squares for phone booths near the left and centre stations; a small square for a market at the lower right; a crane symbol for a construction site at the lower middle; a university block at the top right; plain blocks as pale rectangles. No words, no letters, no numbers.', must: '가운데를 가로지르는 지상 철로와 역 셋 (왼쪽·가운데·오른쪽) · 왼쪽 위 붉은 십자가 · 역 옆 공중전화 네모 · 오른쪽 아래 시장 · 아래 가운데 크레인 (공사 현장) · 글자 없음', labels: [['새터역',13,49.5,'c'],['가람역',49,50,'c'],['솔마루역',86,50,'c'],['2호선 철교 (지상)',30,40,'c'],['솔마루 시장',86,61.5,'c'],['가람동 현장',52,83,'c'],['동림대',81,28,'c']], swap: 'svg', raster: true },
+      map: { svg: `<svg viewBox="0 0 200 150" role="img" aria-label="한울구 공중전화 위치도"><rect width="200" height="150" fill="#ebe6d6"/><g fill="#d8d1bd">${[[8, 8, 30, 20], [150, 10, 42, 24], [8, 92, 40, 30], [140, 118, 52, 26], [70, 96, 30, 20]].map(([x, y, w, h]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}"/>`).join('')}</g><path d="M0 60 H50" stroke="#6e7b86" stroke-width="3" stroke-dasharray="5 4"/><path d="M130 60 H200" stroke="#6e7b86" stroke-width="3" stroke-dasharray="5 4"/><path d="M50 60 H130" stroke="#2f3437" stroke-width="6"/><circle cx="60" cy="60" r="5" fill="#fff" stroke="#2f3437" stroke-width="2"/><circle cx="120" cy="60" r="5" fill="#fff" stroke="#2f3437" stroke-width="2"/><circle cx="176" cy="60" r="4" fill="#fff" stroke="#6e7b86" stroke-width="2"/><text x="48" y="52" font-size="8" fill="#2f3437">새터역</text><text x="110" y="52" font-size="8" fill="#2f3437">가람역</text><text x="164" y="52" font-size="7" fill="#6e7b86">솔마루역</text><text x="70" y="75" font-size="6.5" fill="#2f3437">2호선 철교 (지상)</text><path d="M44 28 v10 M40 32 h8" stroke="${NEON}" stroke-width="2"/><rect x="72" y="26" width="14" height="9" fill="none" stroke="#2f3437" stroke-width="1.2"/><path d="M160 96 h16 v12 h-16z" fill="none" stroke="#2f3437" stroke-width="1.2"/><text x="150" y="92" font-size="6.5" fill="#2f3437">솔마루 시장</text><path d="M108 120 l6 -14 l6 14z M114 106 v-8 h10" fill="none" stroke="#2f3437" stroke-width="1.4"/><text x="96" y="134" font-size="6.5" fill="#2f3437">가람동 현장</text><text x="176" y="30" font-size="6.5" fill="#6e7b86">동림대</text></svg>`, use: '지도 (글자는 게임이 얹는다)', ratio: '4:3', own: true, prompt: 'A detective\'s hand-drawn district map from Seoul in 1991, black felt pen and a red pen on photocopied grid paper, top-down. An elevated subway line runs left to right across the middle as a thick line with three station circles: left, centre and right (the right one lighter). A small red cross for a church at the upper left; small squares for phone booths near the left and centre stations; a small square for a market at the lower right; a crane symbol for a construction site at the lower middle; a university block at the top right; plain blocks as pale rectangles. No words, no letters, no numbers.', must: '가운데를 가로지르는 지상 철로와 역 셋 (왼쪽·가운데·오른쪽) · 왼쪽 위 붉은 십자가 · 역 옆 공중전화 네모 · 오른쪽 아래 시장 · 아래 가운데 크레인 (공사 현장) · 글자 없음', labels: [['새터역',13,49.5,'c'],['가람역',49,50,'c'],['솔마루역',86,50,'c'],['2호선 철교 (지상)',30,40,'c'],['솔마루 시장',86,61.5,'c'],['동림대',81,28,'c']], swap: 'svg', raster: true },
       booth: { use: '새터역 2번 출구 앞 공중전화 부스 두 대 — 머리 위 2호선 철교', ratio: '4:3',
         svg: `<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#2a2d3a"/><rect y="18" width="200" height="16" fill="#4a4d55"/><g fill="#4a4d55">${[20, 80, 140].map(x => `<rect x="${x}" y="34" width="8" height="60"/>`).join('')}</g><rect x="60" y="70" width="30" height="62" fill="#8fb3a8" opacity=".85"/><rect x="96" y="70" width="30" height="62" fill="#8fb3a8" opacity=".85"/><rect x="68" y="84" width="14" height="18" fill="#2f3437"/><rect x="104" y="84" width="14" height="18" fill="#2f3437"/><rect x="140" y="80" width="46" height="52" fill="#d9b35a"/><rect y="132" width="200" height="18" fill="#3a3d45"/></svg>`,
         prompt: 'Dusk photo in 1991 Seoul: two glass-and-aluminium public telephone booths standing side by side under a massive elevated steel subway bridge, the lit window of a small corner shop next to them, a church bell tower with a red neon cross in the distant background, wet pavement, a lone figure in a work jacket seen from behind inside one booth with a handkerchief raised to his mouth, on-camera flash falloff, grain.' },
