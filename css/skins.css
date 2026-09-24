@@ -103,6 +103,13 @@
 .skin-ledger .b-tbl table{font:14px/1.5 var(--f-hand2);font-size:18px}
 .skin-ledger .b-tbl th{font:700 11px var(--f-mono);background:rgba(90,60,20,.12)}
 .skin-ledger .b-tbl td{border-bottom:1px solid rgba(84,116,158,.45);border-right:1px solid rgba(176,52,42,.2)}
+/* 기계로 뽑은 장부(전산 출력·회신 공문)와 타자 친 장부: 손글씨 대신 인쇄 글자, 괘선 대신 얇은 줄 */
+.doc.printed{background-color:#f4f3ee}
+.doc.printed .b-tbl table{font:12.5px/1.5 var(--f-mono)}
+.doc.printed .b-tbl td,.doc.typed .b-tbl td{border-right:0;border-bottom:1px solid rgba(0,0,0,.12)}
+.doc.printed .b-tbl th{background:rgba(0,0,0,.06)}
+.doc.typed .b-tbl table{font:13px/1.55 var(--f-type)}
+.doc.typed .b-tbl td{border-bottom-style:dotted;border-bottom-color:rgba(0,0,0,.28)}
 
 /* ───────── card (증거물 카드) ───────── */
 .skin-card{max-width:560px;background-color:#f7f3e8;border:1px solid #bdb39b;box-shadow:0 3px 12px rgba(0,0,0,.3)}
