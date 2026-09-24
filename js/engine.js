@@ -81,14 +81,31 @@
     return '';
   }
 
-  /* ───────── save ───────── */
-  const KEY = 'mg-save-v1';
-  let S = { cases: {}, current: null, intro: false };
-  try {
-    const d = JSON.parse(localStorage.getItem(KEY) || 'null');
-    if (d && typeof d === 'object' && d.cases) S = Object.assign(S, d);
-  } catch (e) { /* storage unavailable */ }
-  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } };
+  /* ───────── save ─────────
+   * 수사관마다 서랍(저장 칸)을 따로 둔다. 한 브라우저를 여럿이 나눠 써도 남의 기록을 이어 하지 않게.
+   * 첫 수사관(p0)은 예전 저장 칸을 그대로 써서, 명부가 생기기 전의 기록도 이어진다. */
+  const KEY = 'mg-save-v1', ROSTER = 'mg-roster-v1';
+  const blank = () => ({ cases: {}, current: null, intro: false });
+  const slot = id => (id === 'p0' ? KEY : KEY + '@' + id);
+  function roster() { // 다른 탭이 명부를 고쳤을 수 있으니 쓸 때마다 새로 읽는다
+    let r = null;
+    try { r = JSON.parse(localStorage.getItem(ROSTER) || 'null'); } catch (e) { /* storage unavailable */ }
+    if (!r || !Array.isArray(r.list) || !r.list.length) r = { list: [{ id: 'p0', name: '', no: 1 }], cur: 'p0', n: 2 };
+    if (!r.list.some(p => p.id === r.cur)) r.cur = r.list[0].id;
+    return r;
+  }
+  const saveRoster = r => { try { localStorage.setItem(ROSTER, JSON.stringify(r)); } catch (e) { /* ignore */ } };
+  const who = p => (p && p.name) || `수사관 ${p ? p.no : 1}`;
+  function load(id) {
+    try {
+      const d = JSON.parse(localStorage.getItem(slot(id)) || 'null');
+      if (d && typeof d === 'object' && d.cases) return Object.assign(blank(), d);
+    } catch (e) { /* storage unavailable */ }
+    return blank();
+  }
+  let PID = roster().cur; // 이 탭의 수사관. 다른 탭에서 바꿔도 이 탭은 제 서랍에만 쓴다
+  let S = load(PID);
+  const save = () => { try { localStorage.setItem(slot(PID), JSON.stringify(S)); } catch (e) { /* ignore */ } };
 
   function cs(c) {
     const st = (S.cases[c.id] = S.cases[c.id] || {});
@@ -894,7 +911,67 @@
     window.scrollTo(0, 0);
   }
 
-  function cabinet() {
+  /* ── 근무 명부: 이 브라우저를 쓰는 수사관들. 고르기 · 새 서랍 받기 · 이름 고치기 · 지우기 */
+  function rosterHtml() {
+    const r = roster(), main = MG.cases.filter(c => c.kind !== 'tutorial');
+    const row = p => {
+      const s = p.id === PID ? S : load(p.id), sts = Object.values(s.cases);
+      const done = main.filter(c => s.cases[c.id] && s.cases[c.id].solved).length;
+      const going = sts.some(st => st && !st.solved && ((st.notes || []).length || (st.seen || []).length));
+      const stat = `<span class="ro-stat">종결 ${done} / ${main.length}${going ? ' · 수사 중' : ''}</span>`;
+      if (p.id === PID) return `<li class="ro-me"><form data-pname><input maxlength="12" value="${esc(p.name)}" placeholder="${esc(who(p))}" aria-label="내 이름 (고칠 수 있다)"></form>${stat}<span class="ro-now">지금 서랍</span></li>`;
+      return `<li><button type="button" class="ro-pick" data-player="${esc(p.id)}">${esc(who(p))}</button>${stat}<button type="button" class="reset" data-drop="${esc(p.id)}">명부에서 지우기</button></li>`;
+    };
+    return `<section class="roster" aria-label="근무 명부"><h2>강력2팀 근무 명부</h2><p class="ro-sub">서랍은 수사관마다 따로다. 한 컴퓨터를 나눠 써도 남의 수첩을 이어 쓰지 않는다.</p>
+      <ul>${r.list.map(row).join('')}</ul>
+      <form class="ro-new" data-pnew><input maxlength="12" placeholder="새 수사관 이름" aria-label="새 수사관 이름"><button type="submit" class="btn-hand">새 서랍 받기</button></form></section>`;
+  }
+  function toggleRoster(open) {
+    const top = $('.cab-top'), cur = $('.roster');
+    if (!top) return;
+    if (cur) cur.remove();
+    if (open ?? !cur) { top.insertAdjacentHTML('afterend', rosterHtml()); sfx('page'); }
+    const b = $('[data-roster]');
+    if (b) b.setAttribute('aria-expanded', String(!!$('.roster')));
+  }
+  function usePlayer(id) {
+    const r = roster(), p = r.list.find(x => x.id === id);
+    if (!p) return;
+    save();
+    r.cur = id; saveRoster(r);
+    PID = id; S = load(id);
+    if (MG.sound) MG.sound.stopVoice();
+    cabinet();
+    if (MG.mood) MG.mood.sound();
+    window.scrollTo(0, 0);
+    toast(`${who(p)}의 서랍`);
+  }
+  function newPlayer(name) {
+    const r = roster(), id = 'p' + Date.now().toString(36), no = r.n || r.list.length + 1;
+    r.list.push({ id, name: name.trim().slice(0, 12), no }); r.n = no + 1;
+    saveRoster(r);
+    usePlayer(id);
+  }
+  function renamePlayer(name) {
+    const r = roster(), p = r.list.find(x => x.id === PID);
+    if (!p) return;
+    p.name = name.trim().slice(0, 12);
+    saveRoster(r);
+    const b = $('[data-roster]');
+    if (b) b.outerHTML = whoBtn(true);
+    toast(`명부 고침 — ${who(p)}`);
+  }
+  function dropPlayer(id) {
+    const r = roster();
+    if (id === PID || !r.list.some(p => p.id === id)) return;
+    r.list = r.list.filter(p => p.id !== id);
+    saveRoster(r);
+    try { localStorage.removeItem(slot(id)); } catch (e) { /* ignore */ }
+    toggleRoster(true);
+    if (r.list.length < 2) { const w = $('[data-wipe]'); if (w) w.textContent = '모든 기록 지우기'; }
+  }
+
+  function cabinet(showRoster) {
     C = null; ST = null; S.current = null; save();
     if (MG.mood) MG.mood.leave();
     document.body.dataset.screen = 'cabinet';
@@ -921,12 +998,13 @@
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
       <header class="cab-top"><p class="cab-kicker">서울서부경찰서 강력2팀 · 미제사건 기록실</p><h1 class="cab-title">Monologue Gaze</h1><p class="cab-sub">기록은 혼잣말을 한다. 들어주는 건 당신이다.</p>
-        <p class="cab-ctl">${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}</p><p class="cab-stat">종결 <b>${solvedMain}</b> / ${main.length} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}</p></header>
+        <p class="cab-ctl">${whoBtn(showRoster)}${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}</p><p class="cab-stat">종결 <b>${solvedMain}</b> / ${main.length} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}</p></header>
+      ${showRoster ? rosterHtml() : ''}
       ${intro}
       <section class="drawer" aria-label="사건 파일">${MG.cases.map(folder).join('')}</section>
       ${mList.length ? `<section class="mbox"><h2>M의 메모</h2><p class="mbox-sub">기록 여백에 남아 있던, 선배의 글씨.</p><ul>${mList.map(c => `<li><span class="mbox-case">CASE ${pad(c.no)}</span> ${esc(plain(c._m))}</li>`).join('')}</ul></section>` : ''}
       ${letter}
-      <footer class="cab-foot"><p>모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.</p><p class="credit">목소리·효과음 <a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a></p><button type="button" class="reset" data-wipe>모든 기록 지우기</button></footer>
+      <footer class="cab-foot"><p>모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.</p><p class="credit">목소리·효과음 <a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a></p><button type="button" class="reset" data-wipe>${roster().list.length > 1 ? '내 기록 지우기' : '모든 기록 지우기'}</button></footer>
     </div>`;
   }
 
@@ -1014,6 +1092,7 @@
     const lines = HEROSAY[kind];
     if (lines && MG.sound) { HEROI = (HEROI + 1 + (Date.now() & 1)) % lines.length; const k = lines[HEROI]; setTimeout(() => MG.sound.hero(k), 900); }
   }
+  const whoBtn = open => `<button type="button" class="snd who" data-roster aria-expanded="${!!open}">담당 · ${esc(who(roster().list.find(p => p.id === PID)))}</button>`;
   const mildBtn = () => `<button type="button" class="snd mild" data-mild aria-pressed="${!S.mild}">${S.mild ? '잔혹 표현 꺼짐' : '잔혹 표현 켜짐'}</button>`;
   const soundBtn = () => `<button type="button" class="snd" data-sound aria-pressed="${!!S.sound}">${S.sound ? '소리 켜짐' : '소리 꺼짐'}</button>${S.sound ? voiceBtn() : ''}`;
   const voiceBtn = () => `<button type="button" class="snd voice" data-voice aria-pressed="${S.voice !== false}">${S.voice !== false ? '목소리 켜짐' : '목소리 꺼짐'}</button>`;
@@ -1324,8 +1403,11 @@
       if ((el = t.closest('[data-mild]'))) { S.mild = !S.mild; save(); if (C) { renderCase(); if (MG.mood) MG.mood.enter(C); } else if (t.closest('.cw')) { const id = app.querySelector('[data-cw-ok]'); if (id) warnScreen(MG.byId[id.dataset.cwOk]); } else cabinet(); return; }
       if ((el = t.closest('[data-voice]'))) { S.voice = S.voice === false; save(); if (!S.voice && MG.sound) MG.sound.stopVoice(); el.outerHTML = voiceBtn(); return; }
       if ((el = t.closest('[data-sound]'))) { S.sound = !S.sound; save(); const vb = el.parentNode && el.parentNode.querySelector('[data-voice]'); if (vb) vb.remove(); if (!S.sound && MG.sound) MG.sound.stopVoice(); el.outerHTML = soundBtn(); if (S.sound) sfx('pen'); if (MG.mood) MG.mood.sound(); return; }
+      if (t.closest('[data-roster]')) return toggleRoster();
+      if ((el = t.closest('[data-player]'))) return usePlayer(el.dataset.player);
+      if ((el = t.closest('[data-drop]'))) return armed(el, '한 번 더 누르면 그 서랍이 비워진다', () => dropPlayer(el.dataset.drop));
       if (t.closest('[data-intro-ok]')) { S.intro = true; save(); cabinet(); return; }
-      if ((el = t.closest('[data-wipe]'))) return armed(el, '한 번 더 누르면 전부 지워진다', () => { S = { cases: {}, current: null, intro: false }; save(); cabinet(); });
+      if ((el = t.closest('[data-wipe]'))) return armed(el, roster().list.length > 1 ? '한 번 더 누르면 내 기록이 지워진다' : '한 번 더 누르면 전부 지워진다', () => { S = blank(); save(); cabinet(); });
       if (!C) return;
       if (TALK && t.closest('.per-tr') && !t.closest('[data-pin]')) { TALK.finish(); return; } // 대화 건너뛰기
       if ((el = t.closest('.cmp-art img, .b-img img, .map img'))) { if (!t.closest('[data-spot], .cens:not(.open)')) return zoom(el); }
@@ -1383,6 +1465,8 @@
     });
     document.addEventListener('submit', e => {
       const f = e.target;
+      if (f.matches('[data-pnew]')) { e.preventDefault(); return newPlayer(f.querySelector('input').value); }
+      if (f.matches('[data-pname]')) { e.preventDefault(); f.querySelector('input').blur(); return; } // 흐려지면서 change 로 이름이 적힌다
       if (!C) return;
       if (f.matches('[data-arch]')) { e.preventDefault(); setQ(f.dataset.arch, f.querySelector('input').value.trim()); const i = $(`#aq-${f.dataset.arch}`); if (i) i.focus(); }
       else if (f.matches('[data-lock]')) { e.preventDefault(); tryLock(f.dataset.lock, f.querySelector('input').value); }
@@ -1397,6 +1481,7 @@
       if (d.open) NGSHUT.delete(k); else NGSHUT.add(k);
     }, true);
     document.addEventListener('change', e => {
+      if (e.target.closest('[data-pname]')) return renamePlayer(e.target.value);
       const s = e.target.closest('[data-rep]');
       if (!s || !C) return;
       if (s.dataset.rep === 'culprit') ST.report.culprit = s.value; else { ST.report.claims[s.dataset.rep] = s.value; REPOPEN = null; }
@@ -1430,7 +1515,9 @@
     [['desk', '--desk-img'], ['paper', '--paper-img'], ['warn', '--warn-img']].forEach(([k, v]) => { const u = MG.images['_global/' + k]; if (u) { document.documentElement.style.setProperty(v, 'url("' + new URL(u, document.baseURI).href + '")'); document.documentElement.classList.add('has-' + k); } });
     app = document.getElementById('app');
     bind();
-    if (S.current && MG.byId[S.current]) openCase(S.current); else cabinet();
+    // 명부에 둘 이상이면 누가 앉았는지부터 묻는다: 마지막 사람의 사건을 바로 열지 않는다
+    if (roster().list.length > 1) cabinet(true);
+    else if (S.current && MG.byId[S.current]) openCase(S.current); else cabinet();
   };
   MG.state = () => S;
 })();
