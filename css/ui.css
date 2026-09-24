@@ -88,6 +88,8 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
 .case-view[data-frame="laptop"] .item.on{border-color:transparent;box-shadow:0 0 0 2px #3d6bc4}
 /* 종이 기록철에서 아직 안 본 서류는 빨간 점 대신 모서리에 붙인 붉은 색인 쪽지 */
 .case-view[data-frame="papers"] .item.new::after{top:9px;right:-6px;width:12px;height:18px;border-radius:0 2px 2px 0;background:linear-gradient(90deg,#9c2e25,#b8453a 40%,#b0342a);box-shadow:1px 1px 1px rgba(0,0,0,.25);opacity:.92}
+/* 철해 둔 공문서: 왼쪽 가장자리에 편철 구멍 두 개 */
+@media (min-width:700px){.case-view[data-frame="papers"] .doc.skin-report{background-image:radial-gradient(circle,#2a1f16 0 3.3px,rgba(60,40,20,.35) 3.6px 4.6px,transparent 5px),radial-gradient(circle,#2a1f16 0 3.3px,rgba(60,40,20,.35) 3.6px 4.6px,transparent 5px),var(--noise);background-repeat:no-repeat,no-repeat,repeat;background-position:6px 58px,6px 138px,0 0;background-size:12px 12px,12px 12px,auto}}
 /* ───────── 조회·청구 양식: 시대마다 다른 서식 ───────── */
 /* 종이 기록철: 붉은 괘선 청구 용지에 펜으로 적고, 도장처럼 찍어 넣는다 */
 .case-view[data-frame="papers"] .q-f{position:relative;gap:10px;padding:12px 16px 14px;background-color:#f4ecd6;background-image:var(--noise),repeating-linear-gradient(180deg,transparent 0 31px,rgba(176,52,42,.14) 31px 32px);border:1px solid rgba(90,60,30,.32);box-shadow:0 2px 7px rgba(0,0,0,.2);transform:rotate(-.35deg)}
