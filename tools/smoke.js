@@ -19,7 +19,10 @@ global.document = { body: stub(), head: stub(), documentElement: stub(), getElem
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'js/engine.js'), 'utf8'));
 let files = process.argv.slice(2);
 if (!files.length) files = fs.readdirSync(path.join(ROOT, 'cases')).filter(f => /^c\d+.*\.js$/.test(f)).sort().map(f => path.join('cases', f)); // 인자가 없으면 사건 전부
+const before = MG.cases.length;
 files.forEach(f => vm.runInThisContext(fs.readFileSync(path.resolve(ROOT, f), 'utf8')));
+const mine = MG.cases.slice(before); // 이 파일들이 등록한 사건 (파일 이름과 id 가 달라도: docs/examples/…)
+if (!mine.length) { console.log('✗ 등록된 사건이 없음'); process.exit(1); }
 
 let problems = 0;
 const check = (label, html, mustHave) => {
@@ -30,22 +33,22 @@ const check = (label, html, mustHave) => {
   if (bad.length) { problems++; console.log('✗', label, bad.join(' | ')); }
 };
 
-for (const c of MG.cases.filter(c => files.some(f => f.includes(c.id)))) {
+for (const c of mine) {
   const keys = Object.keys(c.keywords);
   const unl = [...Object.keys(c.docs).filter(id => c.docs[id].lock), ...c.sources.filter(s => s.lock).map(s => s.id)];
   const extra = [];
   // 실시간 수사: 신청서는 기각·접수·회신 상태를 돌아가며, 단톡방은 말이 다 온 상태로
   const reqs = c.sources.filter(s => s.type === 'request').flatMap(s => s.items || []);
   const fitems = c.sources.filter(s => s.type === 'feed').flatMap(s => s.items || []);
-  const LIVE = () => (c.live ? { t: 900, req: Object.fromEntries(reqs.map((r, i) => [r.id, [null, { st: 'no', at: 30 }, { st: 'wait', at: 40, due: 1200 }, { st: 'done', at: 50, due: 300 }][i % 4]].filter(([, v]) => v))), fd: Object.fromEntries(fitems.map(it => [it.id, it.at || 0])), fx: reqs.length ? [{ t: 300, who: '회신', msg: '회신 도착', doc: reqs[0].doc }] : [], rd: {}, late: true } : undefined);
+  const LIVE = (k = 0) => (c.live ? { t: 900, req: Object.fromEntries(reqs.map((r, i) => [r.id, [null, { st: 'no', at: 30 }, { st: 'wait', at: 40, due: 1200 }, { st: 'done', at: 50, due: 300 }][(i + k) % 4]]).filter(([, v]) => v)), fd: Object.fromEntries(fitems.map(it => [it.id, it.at || 0])), fx: reqs.length ? [{ t: 300, who: '회신', msg: '회신 도착', doc: reqs[0].doc }] : [], rd: {}, late: true } : undefined);
   c.sources.forEach(s => {
     if (s.type === 'timeline' || s.type === 'cipher') extra.push(s.id);
     if (s.type === 'compare') (s.sets || []).forEach(x => extra.push(x.id));
     if (s.type === 'photo') (s.scenes || []).forEach(x => (x.spots || []).forEach(sp => extra.push(sp.id)));
   });
-  const boot = view => {
+  const boot = (view, k) => {
     Object.keys(els).forEach(k => delete els[k]);
-    MG.boot({ S: { intro: true, current: c.id, cases: { [c.id]: { cw: true, live: LIVE(), keys: [...keys], unl: [...unl], view, asked: view.asked || {} } } } });
+    MG.boot({ S: { intro: true, current: c.id, cases: { [c.id]: { cw: true, live: LIVE(k), keys: [...keys], unl: [...unl], view, asked: view.asked || {} } } } });
   };
   let n = 0;
   for (const [id, d] of Object.entries(c.docs)) {
@@ -67,17 +70,17 @@ for (const c of MG.cases.filter(c => files.some(f => f.includes(c.id)))) {
     if (s.type === 'cipher') views.push([s.id, { t: 'cipher', id: s.id }]);
     if (s.type === 'compare') (s.sets || []).forEach(x => views.push([s.id, { t: 'compare', id: x.id }]));
     if (s.type === 'photo') (s.scenes || []).forEach(x => views.push([s.id, { t: 'photo', id: x.id }]));
-    if (s.type === 'request') (s.items || []).forEach(r => views.push([s.id, { t: 'req', id: r.id }]));
+    if (s.type === 'request') (s.items || []).forEach(r => [0, 1, 2, 3].forEach(k => views.push([s.id, { t: 'req', id: r.id }, k]))); // 신청서는 네 가지 상태 모두
     if (s.type === 'feed') views.push([s.id, { t: 'feed', id: s.id }]);
   });
-  for (const solved of [false, true]) for (const [src, open] of views) {
+  for (const solved of [false, true]) for (const [src, open, k] of views) {
     Object.keys(els).forEach(k => delete els[k]);
-    MG.boot({ S: { intro: true, current: c.id, cases: { [c.id]: { cw: true, live: LIVE(), keys: [...keys], unl: solved ? [...unl, ...extra] : [...unl], view: { src, open, q: {} } } } } });
+    MG.boot({ S: { intro: true, current: c.id, cases: { [c.id]: { cw: true, live: LIVE(k), keys: [...keys], unl: solved ? [...unl, ...extra] : [...unl], view: { src, open, q: {} } } } } });
     check(`${c.id} ${open.t} ${open.id}${solved ? ' (solved)' : ''}`, el('#paneRead').innerHTML, 'class="doc-t"'); n++;
   }
-  for (const s of c.sources) {
-    boot({ src: s.id, q: s.type === 'archive' ? { [s.id]: c.keywords[keys[0]].label } : {} });
-    check(`${c.id} source ${s.id}`, el('#paneList').innerHTML); n++;
+  for (const s of c.sources) for (const k of s.type === 'request' ? [0, 1, 2, 3] : [0]) {
+    boot({ src: s.id, q: s.type === 'archive' ? { [s.id]: c.keywords[keys[0]].label } : {} }, k);
+    check(`${c.id} source ${s.id}${k ? ' #' + k : ''}`, el('#paneList').innerHTML); n++;
   }
   check(`${c.id} notebook`, el('#nb').innerHTML, 'CASE ' + String(c.no).padStart(2, '0'));
   // cabinet folder
