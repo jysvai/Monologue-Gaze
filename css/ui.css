@@ -106,6 +106,11 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
 .case-view[data-frame="papers"] .arch-f button{flex:none;padding:4px 12px 3px;border:2.5px solid var(--red);border-radius:3px;background:transparent;color:var(--red);font:800 14px var(--f-doc);letter-spacing:.2em;transform:rotate(-3deg);mix-blend-mode:multiply;transition:transform .08s,background-color .12s}
 .case-view[data-frame="papers"] .arch-f button:hover{background-color:rgba(176,52,42,.08)}
 .case-view[data-frame="papers"] .arch-f button:active{transform:rotate(-3deg) scale(.94)}
+/* ───────── 인쇄 결: 도장은 잉크가 고르게 묻지 않고, 신문 사진은 망점으로 찍힌다 ───────── */
+:root{--inkmask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.4 2.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.b-stamp span,.f-stamp,.stamp>div,.cue-stamp span,.rep-per.on::before,.case-view[data-frame="papers"] .q-f button,.case-view[data-frame="papers"] .arch-f button{-webkit-mask-image:var(--inkmask);mask-image:var(--inkmask);-webkit-mask-size:140px;mask-size:140px}
+.skin-news .b-img>img,.skin-news .b-img .art-wrap>img{-webkit-mask-image:radial-gradient(circle,#000 58%,rgba(0,0,0,.84) 64%);mask-image:radial-gradient(circle,#000 58%,rgba(0,0,0,.84) 64%);-webkit-mask-size:3px 3px;mask-size:3px 3px}
+.lite .skin-news .b-img>img,.lite .skin-news .b-img .art-wrap>img{-webkit-mask-image:none;mask-image:none}
 /* ───────── 잠금 화면: 1991년 전화기 번호판 · 1994년 워드프로세서 액정 ───────── */
 .lock-phone{max-width:300px;padding:18px 18px 16px;border-radius:18px 18px 26px 26px;background:linear-gradient(#e2dccb,#cfc6b0);color:#2c2a26;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -3px 6px rgba(0,0,0,.18),0 10px 22px rgba(0,0,0,.35)}
 .lock-phone .lock-d{font:12.5px/1.5 var(--f-web);font-style:italic;opacity:.85}
