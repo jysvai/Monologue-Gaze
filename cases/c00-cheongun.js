@@ -286,7 +286,7 @@
         '재희는 9월에 받아 둔 비밀번호로 서윤의 계정에 들어가, 페어 부스에서 "집콕" 글을 올리고 죽을 주문했다. 그 죽은 끝내 문 앞에서 식었다.',
         '〈푸른 정류장〉의 원본, 레이어 14개짜리 파일은 서윤의 노트북에 그대로 남아 있었다. 열네 번째 레이어의 이름은 "서명(SY)"이었다.',
       ],
-      next: '보고서를 올리자 팀장이 열쇠 하나를 건넸다. "M이 남기고 간 서랍이야. 이제 네가 열어 봐." → 기록실로 돌아가 CASE 01부터.',
+      next: '보고서를 올리자 팀장이 열쇠 하나를 건넸다. "M이 남기고 간 서랍이야. 은천서로 보내 달라고 제 발로 손을 들었지. 이제 네가 열어 봐." → 기록실로 돌아가 CASE 01부터.',
     },
     artStyle: 'Casual smartphone photo taken in 2025 Seoul, natural window light, slightly soft focus, subtle JPEG compression, warm muted colors, social-media snapshot feel. No faces, no readable text, no logos.',
     art: {
