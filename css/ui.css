@@ -98,6 +98,14 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
 .case-view[data-frame="crt"] .qf input{padding:3px 5px;border:1px solid #7f9db9;background:#fff;font:13px var(--f-web);outline:none}
 .case-view[data-frame="crt"] .q-f button{padding:4px 16px;border:1px solid #1c3f78;border-radius:3px;background:linear-gradient(#fff,#ecebe6 85%,#d6d0c5);color:#111;font:12px var(--f-web)}
 .case-view[data-frame="crt"] .q-f button:active{background:linear-gradient(#d6d0c5,#ecebe6)}
+/* 종이 기록철의 자료실 찾기: 색인 카드에 적고 도장으로 찾는다 (노트북·모니터 속 검색창은 그대로) */
+.case-view[data-frame="papers"] .arch-f{align-items:flex-end;gap:10px;padding:8px 12px 9px;border:1px solid rgba(90,60,30,.3);border-top:4px solid rgba(176,52,42,.55);background-color:#f6efdc;background-image:var(--noise);box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.case-view[data-frame="papers"] .arch-f input{padding:2px 2px 1px;border-bottom:1.5px solid rgba(60,45,30,.5);color:#1f2a44;font:22px/1.15 var(--f-hand)}
+.case-view[data-frame="papers"] .arch-f input::placeholder{font:12px var(--f-mono);color:rgba(80,64,48,.45)}
+.case-view[data-frame="papers"] .arch-f input:focus{border-bottom-color:var(--red)}
+.case-view[data-frame="papers"] .arch-f button{flex:none;padding:4px 12px 3px;border:2.5px solid var(--red);border-radius:3px;background:transparent;color:var(--red);font:800 14px var(--f-doc);letter-spacing:.2em;transform:rotate(-3deg);mix-blend-mode:multiply;transition:transform .08s,background-color .12s}
+.case-view[data-frame="papers"] .arch-f button:hover{background-color:rgba(176,52,42,.08)}
+.case-view[data-frame="papers"] .arch-f button:active{transform:rotate(-3deg) scale(.94)}
 /* ───────── 잠금 화면: 1991년 전화기 번호판 · 1994년 워드프로세서 액정 ───────── */
 .lock-phone{max-width:300px;padding:18px 18px 16px;border-radius:18px 18px 26px 26px;background:linear-gradient(#e2dccb,#cfc6b0);color:#2c2a26;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -3px 6px rgba(0,0,0,.18),0 10px 22px rgba(0,0,0,.35)}
 .lock-phone .lock-d{font:12.5px/1.5 var(--f-web);font-style:italic;opacity:.85}
