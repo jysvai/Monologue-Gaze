@@ -12,6 +12,8 @@ window.MG.audio = {
   "sfx/dread": "audio/sfx/dread.mp3",
   "sfx/pen": "audio/sfx/pen.mp3",
   "sfx/page": "audio/sfx/page.mp3",
+  "sfx/click": "audio/sfx/click.mp3",
+  "sfx/key": "audio/sfx/key.mp3",
   "hero/press1": "audio/voice/hero/press1.mp3",
   "hero/press2": "audio/voice/hero/press2.mp3",
   "hero/press3": "audio/voice/hero/press3.mp3",

@@ -930,7 +930,8 @@
   const SFXFILE = { stamp: 'solved', lock: 'unlock' };
   function sfx(kind) {
     if (!S.sound) return;
-    if (MG.sound && MG.sound.play('sfx/' + (SFXFILE[kind] || kind), kind === 'pen' || kind === 'page' ? 0.5 : 0.9)) return;
+    if (kind === 'page' && C) kind = C.frame === 'laptop' ? 'click' : C.frame === 'crt' ? 'key' : 'page'; // 화면 속 문서는 종이 넘기는 소리 대신 딸깍
+    if (MG.sound && MG.sound.play('sfx/' + (SFXFILE[kind] || kind), kind === 'pen' || kind === 'page' || kind === 'click' || kind === 'key' ? 0.5 : 0.9)) return;
     try {
       actx = actx || new (window.AudioContext || window.webkitAudioContext)();
       const t = actx.currentTime;
@@ -946,6 +947,7 @@
       };
       if (kind === 'pen') { noise(0.09, 'bandpass', 3200, 1.2, 0.18); setTimeout(() => noise(0.07, 'bandpass', 2600, 1.2, 0.12), 90); }
       else if (kind === 'page') noise(0.22, 'lowpass', 1400, 0.7, 0.22);
+      else if (kind === 'click' || kind === 'key') noise(kind === 'key' ? 0.06 : 0.03, 'highpass', kind === 'key' ? 1800 : 3500, 0.8, 0.2);
       else if (kind === 'stamp') {
         const o = actx.createOscillator(); const g = actx.createGain();
         o.frequency.setValueAtTime(120, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.18);
@@ -972,6 +974,19 @@
         else if (kind === 'miss') { drum(0, 140, 0.35, 0.18); noise(0.12, 'lowpass', 400, 0.8, 0.2); }
         else if (kind === 'unlock') { noise(0.05, 'highpass', 4000, 0.8, 0.15); drum(0.12, 100, 0.4, 0.5); }
       }
+    } catch (e) { /* audio unavailable */ }
+  }
+  // 전화 번호판: 누른 단추의 진짜 신호음(DTMF — 가로줄 낮은 음 + 세로줄 높은 음)
+  function dtmf(k) {
+    if (!S.sound) return;
+    const i = '123456789*0#'.indexOf(k);
+    if (i < 0) return;
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      const t = actx.currentTime, g = actx.createGain();
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.07, t + 0.01); g.gain.setValueAtTime(0.07, t + 0.12); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
+      g.connect(actx.destination);
+      [[697, 770, 852, 941][i / 3 | 0], [1209, 1336, 1477][i % 3]].forEach(f => { const o = actx.createOscillator(); o.frequency.value = f; o.connect(g); o.start(t); o.stop(t + 0.17); });
     } catch (e) { /* audio unavailable */ }
   }
   // 단서가 맞아떨어지는 순간: 소리 + 화면 연출 (+ 주인공 한마디). kind: clue · match · confess · miss · solved · unlock
@@ -1309,7 +1324,7 @@
       if ((el = t.closest('[data-pad]'))) { // 전화 번호판
         const f = el.closest('form'), i = f && f.querySelector('input'), k = el.dataset.pad;
         if (!i) return;
-        sfx('lock');
+        dtmf(k);
         if (k === '#') { if (f.requestSubmit) f.requestSubmit(); else tryLock(f.dataset.lock, i.value); }
         else if (k === '*') i.value = '';
         else if (i.value.length < 8) i.value += k;

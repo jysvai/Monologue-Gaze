@@ -69,6 +69,8 @@ const SFX = {
   dread: ['a dark low drone swell with a distant metallic scrape and a faint breath, horror reveal, no music', 3],
   pen: ['a short pencil scribble on notebook paper', 0.7],
   page: ['a single old paper page turned quickly', 0.6],
+  click: ['a single soft computer mouse button click, dry and close, no echo', 0.5],
+  key: ['one single keystroke on an old heavy mechanical computer keyboard, dry and close, no echo', 0.5],
 };
 
 const strip = s => String(s || '').replace(/\[\[([^\]|]+)(\|[^\]]+)?\]\]/g, '$1').replace(/\*\*|~~/g, '');
