@@ -170,3 +170,10 @@
 .zoom[data-frame="papers"] figure img,.zoom[data-frame="papers"] figure .art-wrap{box-sizing:border-box;max-height:80vh;border:10px solid #f1ecdf;box-shadow:0 24px 50px rgba(0,0,0,.65),0 1px 0 rgba(0,0,0,.3)}
 .zoom[data-frame="papers"] figure .art-wrap>img{max-height:calc(80vh - 20px);border:0;box-shadow:none}
 .zoom[data-frame="papers"] .z-cap{font:21px/1.35 var(--f-hand);color:#efe5cc}
+/* 문서가 나타나는 방식도 틀마다: 종이는 살짝 비뚤게 내려놓이고, 화면 속 파일은 창이 열리듯 */
+.case-view[data-frame="papers"] .pane-read>.enter{animation-name:paperDown}
+.case-view[data-frame="laptop"] .pane-read>.enter{animation:winIn .18s ease-out both}
+.case-view[data-frame="crt"] .pane-read>.enter{animation:winIn .12s steps(3,end) both}
+@keyframes paperDown{from{opacity:0;transform:translate(3px,10px) rotate(-.5deg)}to{opacity:1;transform:none}}
+@keyframes winIn{from{opacity:0;transform:scale(.975)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.case-view .pane-read>.enter{animation:none}}
