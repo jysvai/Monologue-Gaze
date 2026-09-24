@@ -338,7 +338,7 @@
         '아사기구 안에서 이런 우물물을 퍼 올려 쓰는 곳은 대개 목욕탕 — 보건소 온천 이용 허가 대장 확인 요망.',
         { sign: '감정인 기사 우에노' },
       ] },
-      d_tip: { src: 'hq', need: ['k_sawmarks'], skin: 'letter', meta: '10월 17일 수사본부 앞 도착 · 소인 아사기 · 보낸 이 없음',
+      d_tip: { cls: 'f-dokdo ink-blue', src: 'hq', need: ['k_sawmarks'], skin: 'letter', meta: '10월 17일 수사본부 앞 도착 · 소인 아사기 · 보낸 이 없음',
         title: '익명 투서', body: [
         { note: '원문 볼펜 글씨. 통역반 옮김.' },
         '특별수사본부 앞.',
