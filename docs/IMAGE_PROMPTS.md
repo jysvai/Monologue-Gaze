@@ -218,7 +218,7 @@ A short length of red cotton thread tied in a small knot, laid on a plain white 
 
 ### c01/map — 지도 (글자는 게임이 얹는다)
 - 저장 경로: `img/c01/map.webp` · 비율: 4:3
-- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치라 프롬프트 안에 그림체가 들어 있다).
+- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치·증거물 접사처럼 프롬프트 안에 그림체가 들어 있다).
 ```
 Hand-drawn 1888 London police beat map, pen and ink with pale watercolour washes on yellowed paper, seen straight from above like a plan. A main street runs across the top; a narrow lane runs down the left side; another lane runs along the bottom; a narrow alley runs down the right side from the main street. Buildings are small washed rectangles: a newspaper office above the main street at the top right, a public house in the upper middle with a small red square marking its back door on its right wall, a small enclosed courtyard with a dot at the right, a church with a tiny cross at the left middle, a larger building at the bottom middle, a tiny coal shed at the lower right of the block, a pillar box at the top left corner. A red dashed line traces one rectangular patrol loop around the whole block along the four streets. Leave all building and street names blank: no words, no letters anywhere.
 ```
@@ -234,7 +234,7 @@ Early 1920s Bavarian police and press photography: silver gelatin print from a g
 
 ### c02/plan — 지도 (글자는 게임이 얹는다)
 - 저장 경로: `img/c02/plan.webp` · 비율: 3:2
-- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치라 프롬프트 안에 그림체가 들어 있다).
+- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치·증거물 접사처럼 프롬프트 안에 그림체가 들어 있다).
 ```
 A 1923 Bavarian gendarme's ink floor plan of an isolated farmhouse, drawn on squared paper with a ruler, slightly smudged, top-down. Across the top edge a row of small fir-tree symbols for the forest. In the middle left a long farmhouse block: the living part on the left divided into four rooms in a two-by-two grid, the stable attached on its right, and a dashed rectangle above the living part for the attic. A separate barn stands to the right with a gap between. From the front door a dotted path runs down to a small gate with a mailbox at the bottom middle. A small arrow at the bottom right points toward the village. No words, no letters, no numbers.
 ```
@@ -323,7 +323,7 @@ A new hand-forged iron box lock for a farmhouse door with two large iron keys, l
 
 ### c02/sk_kitchen — 정밀 관찰 사진
 - 저장 경로: `img/c02/sk_kitchen.webp` · 비율: 3:2
-- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치라 프롬프트 안에 그림체가 들어 있다).
+- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치·증거물 접사처럼 프롬프트 안에 그림체가 들어 있다).
 ```
 A court clerk's pencil sketch from February 1923 of a Bavarian farmhouse kitchen, drawn from the doorway "as seen, nothing moved": loose graphite lines on off-white paper with light hatching. On the left a big tiled wood-fired stove whose ash drawer overflows, grey ash spilling onto the floor, an empty firewood crate beside it. In the middle a kitchen table with a folded newspaper lying on it, never opened, and a loaf of bread. On the right a steep wooden ladder-stair rising to a plank trapdoor-door at the top right, its bolt drawn on the far side. At the far right the doorway, and on the floor right in the doorway at the lower right a wooden dog bowl with dried crusts. A small window at the top middle, pots hanging on the wall. Tiny margin notes appear only as unreadable pencil squiggles.
 ```
@@ -331,7 +331,7 @@ A court clerk's pencil sketch from February 1923 of a Bavarian farmhouse kitchen
 
 ### c02/sk_stall — 정밀 관찰 사진
 - 저장 경로: `img/c02/sk_stall.webp` · 비율: 3:2
-- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치라 프롬프트 안에 그림체가 들어 있다).
+- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치·증거물 접사처럼 프롬프트 안에 그림체가 들어 있다).
 ```
 A court clerk's pencil sketch from February 1923 of a Bavarian farmhouse cow stable opening into the barn, loose graphite on off-white paper. On the left a long wooden feeding trough with three cows' heads behind it; hay heaped thickly on the trough rim and spilled over the aisle floor in front, far more than one day's feed. In the middle a ladder to the hayloft and a hanging lantern. On the right a small pig pen; in front of it at the lower right an overturned milk can and a three-legged milking stool that faces the pig pen, not the cows. At the far right edge, in the barn's west bay, a wooden post with a few long white horse hairs caught on a nail, a heap of horse droppings and spilled oats at its foot. A cart wheel leaning at the lower left. Unreadable pencil squiggles only, no words.
 ```
@@ -409,7 +409,7 @@ Interior of a small 1930s Seoul cafe at night: bentwood chairs, round marble tab
 
 ### c03/map — 지도 (글자는 게임이 얹는다)
 - 저장 경로: `img/c03/map.webp` · 비율: 4:3
-- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치라 프롬프트 안에 그림체가 들어 있다).
+- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치·증거물 접사처럼 프롬프트 안에 그림체가 들어 있다).
 ```
 A 1935 Keijo (colonial Seoul) police site sketch drawn in brush-pen ink and red ink on thin ruled Japanese government paper, top-down. Across the top a main street with a small red dot for the tram stop at the upper left. A narrow alley runs across the middle from the left. Above the alley at the right a large inn building. Below the alley two joined shop-houses side by side: a herbal medicine shop on the left and a tailor shop on the right; inside them two small back rooms next to each other, each with a small red mark at its back door, and a black bar for a shutter on the tailor shop roof line. Behind them a back yard with a round well at the lower left of centre. A dotted night-watchman path runs across the very bottom. No words, no letters, no numbers.
 ```
@@ -503,7 +503,7 @@ Police evidence photograph of a motorcycle standing side-on in front of a plain 
 
 ### c04/map — 지도 (글자는 게임이 얹는다)
 - 저장 경로: `img/c04/map.webp` · 비율: 3:2
-- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치라 프롬프트 안에 그림체가 들어 있다).
+- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치·증거물 접사처럼 프롬프트 안에 그림체가 들어 있다).
 ```
 A detective's hand-drawn map of a Tokyo suburb in 1968, pencil and coloured pencil on pale graph paper, top-down. A small bank building at the far left, upper middle. A road runs from the bank across to the right. In the lower middle a large pale-blue rectangle for a water purification plant, with a long walled road running along its north side; that walled road is traced in red. A small construction site at the top left of centre with a short side road. A round clump of green trees for a shrine at the right of centre. A block of public housing at the top right, a factory building at the bottom right. No words, no letters.
 ```
@@ -729,7 +729,7 @@ Top-down photo of a stack of yellowed Korean police case files on a dark wooden 
 
 ### c07/scene_map — 지도 (글자는 게임이 얹는다)
 - 저장 경로: `img/c07/scene_map.webp` · 비율: 4:3
-- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치라 프롬프트 안에 그림체가 들어 있다).
+- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치·증거물 접사처럼 프롬프트 안에 그림체가 들어 있다).
 ```
 A 1971 Korean police scene sketch map drawn in pencil and red ink on thin yellowish paper, top-down. At the top left a three-way junction; a road runs down from it and joins a riverside road that runs left to right across the lower middle. Below the road an embankment and a grey-blue river band along the whole bottom. Above the road on the right a small house with a well beside it (a tobacco shop). On the road at the right, between two roadside trees, a black car shape with a small red X beside it. A short arrow along the road shows the distance from the junction. No words, no letters, no numbers.
 ```
@@ -819,7 +819,7 @@ Top-down photo on a grey police desk in 1991 Seoul: a black portable cassette re
 
 ### c08/map — 지도 (글자는 게임이 얹는다)
 - 저장 경로: `img/c08/map.webp` · 비율: 4:3
-- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치라 프롬프트 안에 그림체가 들어 있다).
+- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치·증거물 접사처럼 프롬프트 안에 그림체가 들어 있다).
 ```
 A detective's hand-drawn district map from Seoul in 1991, black felt pen and a red pen on photocopied grid paper, top-down. An elevated subway line runs left to right across the middle as a thick line with three station circles: left, centre and right (the right one lighter). A small red cross for a church at the upper left; small squares for phone booths near the left and centre stations; a small square for a market at the lower right; a crane symbol for a construction site at the lower middle; a university block at the top right; plain blocks as pale rectangles. No words, no letters, no numbers.
 ```
@@ -921,7 +921,7 @@ Rainy night in a narrow Seoul residential alley in 2006: the side of an old red-
 
 ### c09/map — 지도 (글자는 게임이 얹는다)
 - 저장 경로: `img/c09/map.webp` · 비율: 4:3
-- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치라 프롬프트 안에 그림체가 들어 있다).
+- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치·증거물 접사처럼 프롬프트 안에 그림체가 들어 있다).
 ```
 A detective's map of a dense hillside neighbourhood in Seoul in 2006, printed street-map style with pen marks, top-down: narrow white alleys wind between many small block rectangles; a bus stop at the left, a convenience store at the lower left, a small framing shop in the middle left, a traditional market block at the left of centre, a stream along the bottom edge, a dashed line at the top right. Five houses spread across the upper half are circled lightly in pen. No words, no letters, no numbers.
 ```
@@ -1008,16 +1008,18 @@ Police canvass snapshot at night, 2006: a multi-family house on an uphill alley 
 ### c09/ph217 — 정밀 관찰 사진 🔁 다시 뽑기
 - 저장 경로: `img/c09/ph217.webp` · 비율: 4:3
 ```
-Photograph taken from a narrow alley in Seoul in 2006, looking up at a two-storey red-brick multi-family house on a damp evening. An exterior steel staircase climbs the right half of the façade: eight rusty steel treads up to a narrow landing, then it turns and five more treads up to a wooden front door on the second floor at the upper right. The door has a single keyhole and no digital lock, and at eye height a round faded patch where a sticker was peeled off. On the landing six square soil marks in a row with white styrofoam crumbs. A black telephone wire comes down from a pole and enters the wall beside a second-floor window at the upper left. At the foot of the wall at the lower left, dumped soil with dried scallion roots and pepper stems, half washed away. A bicycle under the stairs.
+Photograph taken from a narrow alley in Seoul in 2006, looking straight at the side wall of a two-storey red-brick multi-family house on a damp night. Fixed flat against the brick wall is a Z-shaped switchback exterior staircase of rusty steel with open treads: every tread is a separate steel plate with a dark gap above and below it, so the treads can be counted one by one. LOWER FLIGHT: exactly EIGHT treads, starting at the ground at the lower RIGHT and climbing diagonally up to the LEFT, to a narrow steel landing at mid-height in the centre of the wall. At the landing the staircase doubles back. UPPER FLIGHT: exactly FIVE treads climbing diagonally up to the RIGHT, the opposite direction to the lower flight, ending at a small top platform at the upper right. Thirteen treads in all. A wooden front door on the second floor stands immediately to the right of the last tread of the upper flight, with a bare bulb above it; the door has a single keyhole and no digital lock, and at eye height a round faded patch where a sticker was peeled off. On the steel floor of the landing six square soil marks in a neat row, left by pots that were taken away, with white styrofoam crumbs along the edge. A black telephone wire comes down from a utility pole at the far left and enters the wall beside a second-floor window at the upper left. At the foot of the wall at the lower left, dumped soil with dried scallion roots and pepper stems, half washed away by rain. A bicycle leans against the wall under the landing.
 ```
-- **꼭 보여야 할 것**: 철계단 여덟 칸 → 계단참 → 다섯 칸 (모두 열셋) · 계단참의 네모난 흙 자국 여섯 · 오른쪽 위 2층 나무문 (도어락 없음, 스티커 뗀 자국) · 왼쪽 위 전화선 · 왼쪽 아래 담 밑 흙
+- **꼭 보여야 할 것**: 철계단이 Z자로 꺾인다: 아래 단 여덟 칸 (오른쪽 아래 → 왼쪽 위) → 가운데 계단참 → 위 단 다섯 칸 (반대로 오른쪽 위) · 모두 열세 칸, 칸이 하나씩 셀 수 있게 · 계단참 바닥에 네모난 흙 자국 여섯 · 오른쪽 위 2층 나무문, 위 단 끝 바로 오른쪽 (도어락 없음, 스티커 뗀 둥근 자국) · 왼쪽 위 전화선 · 왼쪽 아래 담 밑 흙
+- 주의: 계단이 한 방향으로만 오르면 다시 뽑는다. 칸 수가 8 + 5 가 아니면 다시 뽑는다.
 
 ### c09/ph219 — 정밀 관찰 사진 🔁 다시 뽑기
 - 저장 경로: `img/c09/ph219.webp` · 비율: 4:3
 ```
-Photograph taken from a small front yard in Seoul in 2006 of a two-storey rendered concrete house: an exterior CONCRETE staircase with only a steel handrail, seven steps up to a landing, then it turns and six more steps. On the landing three geranium pots. At the top of the stairs, to the LEFT, a steel door on the second floor at the upper left with a digital keypad lock and a small yellow square sticker. A window at the upper right, a first-floor door at the right. Dull evening light.
+Photograph taken from a small front yard in Seoul in 2006 of a two-storey rendered concrete house at night. An L-shaped exterior staircase of solid poured CONCRETE steps, not steel treads, with only a thin steel handrail. LOWER FLIGHT: exactly SEVEN concrete steps facing the camera, climbing straight up toward the house in the centre of the picture, to a square concrete landing against the wall. On the landing three geranium pots with red flowers. At the landing the stairs turn LEFT. UPPER FLIGHT: exactly SIX concrete steps seen from the side, climbing along the wall toward the upper left, to a small top platform in front of a steel door on the second floor at the upper left. Thirteen steps in all. The steel door has a digital keypad lock and a small plain yellow square sticker with nothing on it. A window at the upper right, a first-floor door at the lower right. No second small staircase anywhere.
 ```
-- **꼭 보여야 할 것**: 콘크리트 계단 일곱 칸 → 계단참 → 여섯 칸 · 계단참 제라늄 화분 셋 · 왼쪽 위 2층 철문 (번호 도어락, 노란 네모 스티커)
+- **꼭 보여야 할 것**: 콘크리트 계단이 L자로 꺾인다: 아래 일곱 칸 (정면, 가운데) → 계단참 → 왼쪽으로 꺾여 여섯 칸 (옆모습) · 계단참에 제라늄 화분 셋 · 왼쪽 위 2층 철문 (번호 도어락, 노란 네모 스티커) · 오른쪽 위 창, 오른쪽 아래 1층 문
+- 주의: 계단이 곧게 올라 문에 닿거나, 따로 떨어진 작은 계단이 또 생기면 다시 뽑는다.
 
 ### c09/house230 — 일제 탐문 카드 사진 — 230-5
 - 저장 경로: `img/c09/house230.webp` · 비율: 4:3
@@ -1213,10 +1215,12 @@ Darkroom luminol photograph from 1986, a 30-second exposure inside a tiny market
 
 ### c11/cut_ev — 대조 감정 시료 🔁 다시 뽑기
 - 저장 경로: `img/c11/cut_ev.webp` · 비율: 3:2
+- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치·증거물 접사처럼 프롬프트 안에 그림체가 들어 있다).
 ```
-Macro forensic photograph under low raking light of a grey silicone cast taken from a saw-cut surface, an oval about the size of a coin, on a black background with a tiny scale bar. The saw striations are spaced fairly wide (about 2.5 to 3 mm apart), bowed into a curve and dragged to one side; the kerf is wide; at one edge several false-start notches where the saw was re-set again and again. Clinical, grey, no blood.
+Macro forensic laboratory photograph of ONE single object: a flat oval grey silicone cast lying horizontally and filling most of the frame, on a plain matte pure-black background, lit by low raking light from the upper left, sharp focus, neutral grey monochrome, fine photographic grain, 3:2 frame. A small black-and-white segmented scale bar lies flat in the lower right corner. Down the middle of the oval runs a wide horizontal saw groove. Inside the groove about nine raised ridges cross it, spaced fairly wide apart (about 2.5 to 3 mm), each ridge bowed into a curved arc and leaning toward the right, as if the stroke was pulled to one side. At the left end of the groove three or four short, overlapping false-start nicks sit slightly above and below the main groove, where the cut was restarted in slightly different places. Only the silicone cast and the scale bar: no saw, no tools, no hands, no bone, no flesh, no blood, no sacks, no people, no room, no second panel, no collage, no inset, no text or numbers.
 ```
-- **꼭 보여야 할 것**: 줄무늬 간격 넓음 · 활처럼 휜 결 · 한쪽 가장자리에 시작 자국 여러 개 · 회색 실리콘 본 (피·뼈 살 없음)
+- **꼭 보여야 할 것**: 검은 바탕에 회색 실리콘 본 하나 + 오른쪽 아래 눈금자 · 줄무늬 간격 넓음 (아홉 줄 남짓) · 활처럼 휜 결, 한쪽으로 당겨짐 · 왼쪽 끝에 시작 자국 서너 개 · 피·뼈·살·톱 없음
+- 주의: 여러 장면을 이어 붙이거나 톱·포대·핏자국이 나오면 다시 뽑는다. 대조 시료 cut_a~d 와 같은 구도 (가로 타원, 검은 바탕, 오른쪽 아래 눈금자).
 
 ### c11/cut_a — 대조 감정 시료
 - 저장 경로: `img/c11/cut_a.webp` · 비율: 3:2

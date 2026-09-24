@@ -105,7 +105,7 @@ function main() {
       if (a.redo) redo.push({ c, key, a });
       if (a.swap) swap.push({ c, key, a });
       out.push(`- 저장 경로: \`img/${c.id}/${key}.webp\` · 비율: ${a.ratio || '4:3'}${a.where ? ` · 쓰이는 곳: ${a.where}` : ''}`);
-      if (a.own) out.push('- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치라 프롬프트 안에 그림체가 들어 있다).');
+      if (a.own) out.push('- 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치·증거물 접사처럼 프롬프트 안에 그림체가 들어 있다).');
       out.push(block(a.prompt));
       if (a.must) out.push(`- **꼭 보여야 할 것**: ${a.must}`);
       if (a.avoid) out.push(`- 주의: ${a.avoid}`);
@@ -142,7 +142,7 @@ function writeRedo(list) {
     o.push(`- 이유: ${a.redo.why}`);
     if (a.must) o.push(`- **꼭 보여야 할 것**: ${a.must}`);
     if (a.avoid) o.push(`- 주의: ${a.avoid}`);
-    o.push(block([a.prompt, c.artStyle, V2_TAIL].filter(Boolean).join(' ')));
+    o.push(block((a.own ? [a.prompt] : [a.prompt, c.artStyle, V2_TAIL]).concat(a.swap ? [SWAP_TAIL] : []).filter(Boolean).join(' ')));
     o.push('');
   });
   const dest = path.join(root, 'docs', 'IMAGE_REDO.md');
