@@ -72,6 +72,52 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
 /* 종이 서류에 붙은 사진은 클립으로 물려 있다 (신문 인쇄 사진은 빼고) */
 .case-view[data-frame="papers"] .doc:not(.skin-news) .b-img{position:relative}
 .case-view[data-frame="papers"] .doc:not(.skin-news) .b-img::before{content:"";position:absolute;left:14px;top:-14px;z-index:2;width:16px;height:44px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 44'%3E%3Cpath d='M5 30V8a3.5 3.5 0 0 1 7 0v26a5 5 0 0 1-10 0V12' fill='none' stroke='%23000' stroke-opacity='.3' stroke-width='2.4' stroke-linecap='round' transform='translate(1.2 1.6)'/%3E%3Cpath d='M5 30V8a3.5 3.5 0 0 1 7 0v26a5 5 0 0 1-10 0V12' fill='none' stroke='%23a3a7a8' stroke-width='1.9' stroke-linecap='round'/%3E%3Cpath d='M6 9a2.4 2.4 0 0 1 3.4-2' fill='none' stroke='%23fff' stroke-opacity='.7' stroke-width='.8' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;transform:rotate(-4deg);pointer-events:none}
+/* ───────── 조회·청구 양식: 시대마다 다른 서식 ───────── */
+/* 종이 기록철: 붉은 괘선 청구 용지에 펜으로 적고, 도장처럼 찍어 넣는다 */
+.case-view[data-frame="papers"] .q-f{position:relative;gap:10px;padding:12px 16px 14px;background-color:#f4ecd6;background-image:var(--noise),repeating-linear-gradient(180deg,transparent 0 31px,rgba(176,52,42,.14) 31px 32px);border:1px solid rgba(90,60,30,.32);box-shadow:0 2px 7px rgba(0,0,0,.2);transform:rotate(-.35deg)}
+.case-view[data-frame="papers"] .q-f::before{content:attr(data-slip);display:block;padding-bottom:5px;border-bottom:3px double rgba(138,58,42,.45);color:#8a3a2a;font:700 12px var(--f-doc);letter-spacing:.4em;text-align:center}
+.case-view[data-frame="papers"] .qf{color:#6b4a36}
+.case-view[data-frame="papers"] .qf input{padding:3px 2px 1px;border:0;border-bottom:1.5px solid rgba(60,45,30,.55);background:transparent;color:#1f2a44;font:22px/1.15 var(--f-hand);outline:none}
+.case-view[data-frame="papers"] .qf input::placeholder{font:12px var(--f-mono);color:rgba(80,64,48,.45)}
+.case-view[data-frame="papers"] .qf input:focus{border-bottom-color:var(--red)}
+.case-view[data-frame="papers"] .q-f button{align-self:flex-end;padding:5px 14px 4px;border:2.5px solid var(--red);border-radius:3px;background:transparent;color:var(--red);font:800 14px var(--f-doc);letter-spacing:.14em;transform:rotate(-3deg);mix-blend-mode:multiply;transition:transform .08s,background-color .12s}
+.case-view[data-frame="papers"] .q-f button:hover{background-color:rgba(176,52,42,.08)}
+.case-view[data-frame="papers"] .q-f button:active{transform:rotate(-3deg) scale(.94)}
+/* 노트북(2010년대 이후): 요즘 웹 양식 */
+.case-view[data-frame="laptop"] .q-f,.case-view[data-frame="laptop"] .lock{border:1px solid #d8dde5;border-radius:10px;background:#fff;box-shadow:0 1px 3px rgba(20,30,50,.08)}
+.case-view[data-frame="laptop"] .q-f{padding:14px}
+.case-view[data-frame="laptop"] .qf,.case-view[data-frame="laptop"] .lock-f label{font:600 12px var(--f-web);letter-spacing:0;color:#4a5568}
+.case-view[data-frame="laptop"] .qf input,.case-view[data-frame="laptop"] .lock-f input{padding:8px 10px;border:1px solid #cdd4de;border-radius:6px;background:#fbfcfe;font:14px var(--f-web);transition:border-color .12s,box-shadow .12s}
+.case-view[data-frame="laptop"] .qf input:focus,.case-view[data-frame="laptop"] .lock-f input:focus{border-color:#3b6fd8;box-shadow:0 0 0 3px rgba(59,111,216,.18);outline:none}
+.case-view[data-frame="laptop"] .q-f button,.case-view[data-frame="laptop"] .lock-f button{padding:8px 18px;border-radius:6px;background:#2f5fc8;font:700 13px var(--f-web)}
+.case-view[data-frame="laptop"] .q-f button:hover,.case-view[data-frame="laptop"] .lock-f button:hover{background:#2551b0}
+/* 브라운관 모니터(2000년대 중반 경찰 전산망): 회색 창에 오목한 입력칸, 볼록한 단추 */
+.case-view[data-frame="crt"] .q-f{padding:10px 12px;border:1px solid;border-color:#fff #8c8a84 #8c8a84 #fff;background:#ece9d8}
+.case-view[data-frame="crt"] .q-f::before{content:attr(data-slip);margin:-10px -12px 4px;padding:3px 8px;background:linear-gradient(90deg,#2a4f9c,#6f8fcf);color:#fff;font:700 12px var(--f-web)}
+.case-view[data-frame="crt"] .qf{font:12px var(--f-web);letter-spacing:0;color:#222}
+.case-view[data-frame="crt"] .qf input{padding:3px 5px;border:1px solid #7f9db9;background:#fff;font:13px var(--f-web);outline:none}
+.case-view[data-frame="crt"] .q-f button{padding:4px 16px;border:1px solid #1c3f78;border-radius:3px;background:linear-gradient(#fff,#ecebe6 85%,#d6d0c5);color:#111;font:12px var(--f-web)}
+.case-view[data-frame="crt"] .q-f button:active{background:linear-gradient(#d6d0c5,#ecebe6)}
+/* ───────── 잠금 화면: 1991년 전화기 번호판 · 1994년 워드프로세서 액정 ───────── */
+.lock-phone{max-width:300px;padding:18px 18px 16px;border-radius:18px 18px 26px 26px;background:linear-gradient(#e2dccb,#cfc6b0);color:#2c2a26;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -3px 6px rgba(0,0,0,.18),0 10px 22px rgba(0,0,0,.35)}
+.lock-phone .lock-d{font:12.5px/1.5 var(--f-web);font-style:italic;opacity:.85}
+.lock-phone .lock-f{display:grid;grid-template-columns:1fr auto;gap:8px 8px}
+.lock-phone .lock-f label{grid-column:1/-1;font:11px var(--f-mono);opacity:.7}
+.lock-phone .lock-f input{height:36px;padding:0 10px;border:2px solid #6f6a5c;border-radius:4px;background:linear-gradient(#a9b59a,#98a589);box-shadow:inset 0 2px 4px rgba(0,0,0,.35);color:#1b2216;font:700 20px/1 var(--f-mono);letter-spacing:.35em;text-align:center;outline:none}
+.lock-phone .lock-f>button[type="submit"]{padding:0 12px;border-radius:6px;background:#5b564a;font:700 12px var(--f-web)}
+.lock-pad{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
+.lock-pad button{height:38px;border:0;border-radius:9px;background:linear-gradient(#f7f3e8,#ddd6c4);box-shadow:0 3px 0 #a79f8a,0 4px 6px rgba(0,0,0,.25);color:#2c2a26;font:700 17px var(--f-mono);cursor:pointer;transition:transform .05s,box-shadow .05s}
+.lock-pad button:active{transform:translateY(3px);box-shadow:0 0 0 #a79f8a,0 1px 2px rgba(0,0,0,.25)}
+.lock-pad [data-pad="#"],.lock-pad [data-pad="*"]{color:#8a3a2a}
+.lock-lcd{max-width:440px;padding:16px;border:10px solid #3a3833;border-radius:6px;background:#a3ad8f;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.035) 0 1px,transparent 1px 3px);color:#1c2418;box-shadow:inset 0 0 18px rgba(0,0,0,.28),0 8px 18px rgba(0,0,0,.35);font-family:var(--f-mono)}
+.lock-lcd .lock-t{font:700 15px var(--f-mono);letter-spacing:.04em}
+.lock-lcd .lock-d,.lock-lcd .lock-h,.lock-lcd .lock-f label{font:12px/1.5 var(--f-mono);color:#1c2418;opacity:.85}
+.lock-lcd .lock-f input{flex:0 0 auto;width:9.5ch;padding:4px 6px;border:2px solid #1c2418;background:transparent;color:#1c2418;font:700 22px var(--f-mono);letter-spacing:.5em;text-align:center;caret-color:#1c2418;outline:none;animation:lcdBlink 1.1s steps(1) infinite}
+.lock-lcd .lock-f input:focus,.lock-lcd .lock-f input:not(:placeholder-shown){animation:none}
+.lock-lcd .lock-f button{padding:0 12px;border:2px solid #1c2418;background:#1c2418;color:#a3ad8f;font:700 13px var(--f-mono)}
+.lock-lcd .lock-e{color:#5a1a10}
+@keyframes lcdBlink{50%{border-color:transparent}}
+@media (prefers-reduced-motion:reduce){.lock-lcd .lock-f input{animation:none}}
 /* 줄 그어 지운 글자: 인쇄된 취소선 대신 펜으로 두 번 그은 줄 */
 s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M1 6.4C30 5.2 62 6.9 99 5.3M3 7.6C38 6.6 70 7.8 97 6.8' fill='none' stroke='%232a2320' stroke-width='1.3' stroke-linecap='round' vector-effect='non-scaling-stroke' opacity='.85'/%3E%3C/svg%3E") 0 55%/100% .7em no-repeat;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 

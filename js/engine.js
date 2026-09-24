@@ -270,8 +270,10 @@
   /* ───────── documents / locks / people / cipher ───────── */
   function lockHtml(id, lock, title) {
     const fails = LOCKFAIL[id] || 0;
-    return `<div class="lock"><p class="lock-t">${inline(lock.title || title || '잠겨 있다')}</p>${lock.desc ? `<p class="lock-d">${inline(lock.desc)}</p>` : ''}
-      <form class="lock-f" data-lock="${esc(id)}"><label for="lk-${esc(id)}">${esc(lock.label || '비밀번호')}</label><input id="lk-${esc(id)}" autocomplete="off"${lock.password ? ' type="password"' : ''}><button type="submit">${esc(lock.button || '열기')}</button></form>
+    // style: 'phone' 이면 전화 번호판(누르면 칸에 들어가고 # 은 확인, * 은 지우기), 'lcd' 면 워드프로세서 액정
+    const pad = lock.style === 'phone' ? `<div class="lock-pad" role="group" aria-label="번호판">${'123456789*0#'.split('').map(k => `<button type="button" data-pad="${k}"${k === '#' ? ' aria-label="확인"' : k === '*' ? ' aria-label="지우기"' : ''}>${k}</button>`).join('')}</div>` : '';
+    return `<div class="lock${lock.style ? ' lock-' + esc(lock.style) : ''}"><p class="lock-t">${inline(lock.title || title || '잠겨 있다')}</p>${lock.desc ? `<p class="lock-d">${inline(lock.desc)}</p>` : ''}
+      <form class="lock-f" data-lock="${esc(id)}"><label for="lk-${esc(id)}">${esc(lock.label || '비밀번호')}</label><input id="lk-${esc(id)}" autocomplete="off"${lock.password ? ' type="password"' : ''}${lock.style === 'phone' || lock.style === 'lcd' ? ' inputmode="numeric" maxlength="8"' : ''}><button type="submit">${esc(lock.button || '열기')}</button>${pad}</form>
       ${lock.hint ? `<p class="lock-h">${inline(lock.hint)}</p>` : ''}<p class="lock-e" role="status">${fails ? `맞지 않는다. (${fails}회)` : ''}</p>${lock.hint2 && fails >= ({ 3: 2, 4: 3 }[lv()] || Infinity) ? `<p class="lock-h2">${inline(lock.hint2)}</p>` : ''}</div>`;
   }
 
@@ -580,7 +582,7 @@
     const fields = (s.fields || []).map(f => `<label class="qf"><span>${esc(f.label)}</span><input name="${esc(f.id)}" value="${esc(inp[f.id] || '')}" placeholder="${esc(f.placeholder || '')}" autocomplete="off"></label>`).join('');
     let out = '';
     if (res) out = res.length ? `<p class="res-n">조회 결과 ${res.length}건</p>${res.map(id => itemBtn(C.docs[id])).join('')}` : `<p class="res-none">${esc(s.none || '해당하는 기록이 없다.')}</p>`;
-    return `<form class="q-f" data-query="${esc(s.id)}">${fields}<button type="submit">${esc(s.button || '조회')}</button></form>
+    return `<form class="q-f" data-query="${esc(s.id)}" data-slip="${esc(s.slip || s.name || '')}">${fields}<button type="submit">${esc(s.button || '조회')}</button></form>
       <div class="res">${out}</div>${found.length ? `<p class="res-n">${esc(s.foundLabel || '조회해 둔 기록')}</p>${found.map(itemBtn).join('')}` : ''}`;
   }
 
@@ -1304,6 +1306,15 @@
       if (!C) return;
       if (TALK && t.closest('.per-tr') && !t.closest('[data-pin]')) { TALK.finish(); return; } // 대화 건너뛰기
       if ((el = t.closest('.cmp-art img, .b-img img, .map img'))) { if (!t.closest('[data-spot], .cens:not(.open)')) return zoom(el); }
+      if ((el = t.closest('[data-pad]'))) { // 전화 번호판
+        const f = el.closest('form'), i = f && f.querySelector('input'), k = el.dataset.pad;
+        if (!i) return;
+        sfx('lock');
+        if (k === '#') { if (f.requestSubmit) f.requestSubmit(); else tryLock(f.dataset.lock, i.value); }
+        else if (k === '*') i.value = '';
+        else if (i.value.length < 8) i.value += k;
+        return;
+      }
       if ((el = t.closest('[data-pin]'))) return pin(el.dataset.pin);
       if ((el = t.closest('[data-kw]'))) return addKey(el.dataset.kw);
       if ((el = t.closest('[data-bub]')) && !getSelection().toString()) return pin(el.dataset.bub); // 말풍선을 누르면 수첩에
