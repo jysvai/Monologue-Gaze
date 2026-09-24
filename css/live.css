@@ -17,10 +17,10 @@
 
 /* ───────── 휴대폰 알림 (오른쪽 위에 쌓인다) ───────── */
 .lv-notes{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:12px;z-index:94;display:flex;flex-direction:column;gap:8px;width:min(330px,calc(100vw - 24px));pointer-events:none}
-.lv-note{display:grid;grid-template-columns:1fr;gap:1px;width:100%;padding:9px 12px 10px;border:0;border-radius:14px;background:rgba(246,247,249,.94);color:#1b1f24;text-align:left;box-shadow:0 10px 26px rgba(0,0,0,.38),0 0 0 1px rgba(0,0,0,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:13px/1.45 var(--f-web);cursor:pointer;pointer-events:auto;opacity:0;transform:translateY(-10px) scale(.98);transition:opacity .28s,transform .28s}
+.lv-note{display:grid;grid-template-columns:1fr;gap:1px;width:100%;padding:9px 12px 10px;border:0;border-radius:14px;background:rgba(246,247,249,.94);color:#1b1f24;text-align:left;box-shadow:0 10px 26px rgba(0,0,0,.38),0 0 0 1px rgba(0,0,0,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:13px/1.45 var(--f-phone);cursor:pointer;pointer-events:auto;opacity:0;transform:translateY(-10px) scale(.98);transition:opacity .28s,transform .28s}
 .lv-note.on{opacity:1;transform:none}
 .lv-note:hover{background:#fff}
-.lv-app{display:flex;justify-content:space-between;font:10.5px/1.4 var(--f-web);letter-spacing:.02em;color:#6b7280;text-transform:none}
+.lv-app{display:flex;justify-content:space-between;font:10.5px/1.4 var(--f-phone);letter-spacing:.02em;color:#6b7280;text-transform:none}
 .lv-app time{font-family:var(--f-mono)}
 .lv-note b{font-weight:800}
 .lv-msg{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#30363d}
@@ -45,15 +45,15 @@
 .lv-att:hover{background:#f3f6f8}
 
 /* ───────── 영장·공문 신청서 (관공서 서식) ───────── */
-.skin-form{background:#fbfbf8;color:#1d1f22;font-family:var(--f-web)}
+.skin-form{--f-web:var(--f-sys);background:#fbfbf8;color:#1d1f22;font-family:var(--f-sys)} /* 2020년대 경찰 전산 양식 */
 .skin-form .doc-h{padding-bottom:10px;border-bottom:2px solid #1d1f22}
 .skin-form .doc-k{font:11px/1.4 var(--f-mono);letter-spacing:.12em;color:#5a5f66}
-.skin-form .doc-t{font:800 18px/1.4 var(--f-doc)}
+.skin-form .doc-t{font:700 18px/1.4 var(--f-sys);letter-spacing:-.01em}
 .skin-form .doc-m{font-size:12px;color:#5a5f66}
 .rq-t{width:100%;margin:12px 0 14px;border-collapse:collapse;font:13px/1.55 var(--f-web)}
 .rq-t th{width:6.5em;padding:7px 10px;border:1px solid #9aa0a6;background:#eef0f2;font-weight:700;text-align:left;vertical-align:top;white-space:nowrap}
 .rq-t td{padding:7px 10px;border:1px solid #9aa0a6}
-.rq-why h4{margin:14px 0 6px;font:700 14px/1.4 var(--f-doc)}
+.rq-why h4{margin:14px 0 6px;font:700 14px/1.4 var(--f-sys)}
 .rq-why h4 small{font:12px var(--f-web);color:#5a5f66;font-weight:400}
 .rq-no{margin:10px 0;padding:8px 12px;border-left:4px solid #b0342a;background:rgba(176,52,42,.07);font:13px/1.6 var(--f-web)}
 .rq-no b{margin-right:6px;color:#b0342a}
@@ -81,3 +81,13 @@
 .duty-sub{margin:4px 0 16px;font-size:13px;color:#a99a7e}
 .duty .drawer{margin-top:10px}
 @media (prefers-reduced-motion:reduce){ .duty-h::before{animation:none} }
+
+/* ───────── 현행 사건을 여는 장면: 옛 사진 대신 당직실 모니터 빛, 지령 시각 ───────── */
+.case-intro.live{background:radial-gradient(ellipse at 50% 34%,#1b2632 0%,#07090c 72%)}
+.case-intro.live .ci-bg{filter:blur(8px) saturate(.6) brightness(.3) hue-rotate(-8deg)}
+.case-intro.live .ci-no{color:#ff8a7a}
+.case-intro.live .ci-no::before{content:"";display:inline-block;width:8px;height:8px;margin:0 10px 1px 0;border-radius:50%;background:#e5483b;box-shadow:0 0 10px #e5483b;animation:lv-blink 1.2s ease-in-out infinite}
+.case-intro.live .ci-title{font-family:var(--f-ui);font-weight:800;letter-spacing:-.01em}
+.case-intro.live .ci-when{font:500 14px/1.4 var(--f-mono);letter-spacing:.04em;color:#cdd5e1}
+.case-intro.live .ci-line{font:400 clamp(16px,2.6vw,20px)/1.6 var(--f-ui);color:#e6ebf2;animation:ci-rise .9s .6s ease-out both}
+@media (prefers-reduced-motion:reduce){ .case-intro.live .ci-no::before,.case-intro.live .ci-line{animation:none} }

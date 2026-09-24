@@ -273,23 +273,30 @@
     el.classList.add('out');
     setTimeout(() => el.remove(), 450);
   }
+  // 현행 사건은 해 대신 지령이 떨어진 때: 2023년 3월 8일 (수) 22:40
+  const liveWhen = s => { const d = new Date(s[0], s[1] - 1, s[2], s[3], s[4]); return `${s[0]}년 ${s[1]}월 ${s[2]}일 (${'일월화수목금토'[d.getDay()]}) ${String(s[3]).padStart(2, '0')}:${String(s[4]).padStart(2, '0')}`; };
   function showIntro(c, m) {
     hideIntro();
     const el = document.createElement('div');
-    el.className = 'case-intro' + (c.graphic ? ' graphic' : '');
+    el.className = 'case-intro' + (c.graphic ? ' graphic' : '') + (c.live ? ' live' : '');
+    el.dataset.case = c.id; // 여는 장면 제목도 그 사건·시대 글꼴로 (css 의 [data-case] 규칙)
+    el.dataset.era = (y => y < 1945 ? 'old' : y < 1980 ? 'mid' : '')(parseInt(c.year, 10) || 2000);
     el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-modal', 'true');
+    el.tabIndex = -1;
     el.setAttribute('aria-label', `CASE ${c.no} ${c.title}`);
     const place = String(c.place || '').replace(/\s*\([^)]*\)\s*$/, '');
     // 뒤에 그 사건 기록철 표지 사진을 어둡고 흐리게 깐다 (천천히 다가온다)
     const cov = MG.images && MG.images[c.id + '/cover'];
     el.innerHTML = `${cov ? `<div class="ci-bg" aria-hidden="true" style="background-image:url('${esc(cov)}')"></div>` : ''}<div class="ci-in">
-      <p class="ci-no">CASE ${String(c.no).padStart(2, '0')}${c.kind === 'tutorial' ? ' · 연습' : ''}</p>
+      <p class="ci-no">CASE ${String(c.no).padStart(2, '0')}${c.kind === 'tutorial' ? ' · 연습' : c.live ? ' · 현행 사건' : ''}</p>
       <h2 class="ci-title">${esc(c.title)}</h2>
-      <p class="ci-when">${esc(c.year)} · ${esc(place)}</p>
+      <p class="ci-when">${c.live && c.live.start ? esc(liveWhen(c.live.start)) : esc(c.year)} · ${esc(place)}</p>
       ${m.line ? `<p class="ci-line">${esc(m.line)}</p>` : ''}
       <p class="ci-skip">눌러서 넘기기</p></div>`;
     el.addEventListener('click', hideIntro);
     document.body.appendChild(el);
+    el.focus({ preventScroll: true }); // Tab 이 뒤 화면으로 새지 않게
     const once = e => { if (e.key !== 'Tab') { hideIntro(); document.removeEventListener('keydown', once); } };
     document.addEventListener('keydown', once);
     introTimer = setTimeout(() => { document.removeEventListener('keydown', once); hideIntro(); }, reduce.matches ? 1600 : 3600);

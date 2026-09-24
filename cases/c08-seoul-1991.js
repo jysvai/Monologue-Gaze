@@ -628,7 +628,10 @@
     },
     css: `[data-case="c08"] .skin-news .doc-paper{font:36px/1.1 var(--f-bhs);letter-spacing:.14em}
 [data-case="c08"] .doc.pager{background-color:#dfe4d6;border-top:10px solid #3f4a3a}
-[data-case="c08"] .doc.pager .b-div{color:#2f3a2c;opacity:.9}
-[data-case="c08"] .skin-transcript .b-p{color:#51585e;font-style:italic}`,
+[data-case="c08"] .doc.pager .b-div{color:#2f3a2c;opacity:.9;font:16px/1.4 var(--f-dos)}
+[data-case="c08"] .skin-transcript .b-p{color:#51585e;font-style:italic}
+[data-case="c08"] .skin-report:not(.rep-view) .doc-b{font-family:var(--f-type)}
+[data-case="c08"] .skin-card .doc-t{font:30px/1.2 var(--f-bhs);letter-spacing:.06em}
+[data-case="c08"] .lock-phone .lock-f input{font:16px/1 var(--f-dos)}`,
   });
 })();

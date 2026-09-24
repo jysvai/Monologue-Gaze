@@ -546,6 +546,7 @@
     css: `[data-case="c05"] .skin-news .doc-paper{font-family:var(--f-frak);font-size:32px}
 [data-case="c05"] .skin-transcript .doc-paper,[data-case="c05"] .skin-report .doc-paper,[data-case="c05"] .skin-ledger .doc-paper{font:700 11px var(--f-type);letter-spacing:.18em}
 [data-case="c05"] .b-cipher{letter-spacing:.3em;font-size:22px}
-[data-case="c05"] .skin-letter .b-sign{font-size:30px}`,
+[data-case="c05"] .skin-letter .b-sign{font-size:30px}
+[data-case="c05"] :is(.skin-report:not(.rep-view),.skin-transcript) .doc-b{font-family:var(--f-type)}`,
   });
 })();

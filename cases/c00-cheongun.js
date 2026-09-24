@@ -312,6 +312,7 @@
       doorbag: { use: '배달앱 — 504호 문 앞에 놓인 배달봉지 (라이더 촬영)', ratio: '4:3', svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#cfc7b6"/><rect y="124" width="200" height="26" fill="#a99f8b"/><rect x="60" y="14" width="80" height="112" fill="#5f5a52"/><rect x="88" y="28" width="24" height="10" fill="#e8e1cf"/><rect x="122" y="64" width="9" height="20" rx="2" fill="#2a2a2a"/><path d="M84 104 h32 l4 24 h-40z" fill="#f6f3ea"/></svg>',
         prompt: 'Delivery rider\'s proof-of-delivery photo: a white plastic takeout bag with two soup containers left on the floor in front of a dark grey apartment door with a digital door lock, narrow officetel corridor, harsh flash, slightly crooked framing.' },
     },
+    fonts: ['ui'],
     css: `[data-case="c00"] .arch-f{--arch-line:#c35c28}`,
   });
 })();

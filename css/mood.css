@@ -52,7 +52,7 @@ body[data-light="screen"] .mood-light{animation:glow 6s ease-in-out infinite alt
 .ci-when{margin:14px 0 0;font:400 14px/1.4 var(--f-type);letter-spacing:.08em;color:rgba(233,223,199,.75);animation:ci-rise .9s .35s ease-out both}
 .ci-line{margin:26px auto 0;max-width:30em;font:400 clamp(20px,3.4vw,27px)/1.45 var(--f-hand);color:#f1e4c2;animation:write 1.6s .8s steps(28) both}
 .case-intro.graphic .ci-line{color:#e8b2a4}
-.ci-skip{margin:34px 0 0;font:400 11px/1 var(--f-mono);letter-spacing:.2em;color:rgba(233,223,199,.35)}
+.ci-skip{margin:34px 0 0;font:400 11px/1 var(--f-mono);letter-spacing:.2em;color:rgba(233,223,199,.6)}
 @keyframes ci-in{from{opacity:0}to{opacity:1}}
 @keyframes ci-out{to{opacity:0;visibility:hidden}}
 @keyframes ci-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}

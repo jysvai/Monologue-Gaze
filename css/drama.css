@@ -36,7 +36,7 @@
 .c-dots i:nth-child(2){animation-delay:.15s}.c-dots i:nth-child(3){animation-delay:.3s}
 @keyframes dot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
 .qa.live{cursor:pointer}
-.qa.live::after{content:"누르면 건너뛴다";align-self:center;margin-top:2px;font:10px var(--f-mono);letter-spacing:.06em;color:#9a917f}
+.qa.live::after{content:"누르면 건너뛴다";align-self:center;margin-top:2px;font:11px var(--f-mono);letter-spacing:.06em;color:#6d6552}
 .qa.pressing .c-dots{background:rgba(91,31,26,.12)}
 .qa.pressing .c-dots i{background:var(--red);animation-duration:1.6s}
 .chip.again{border:1.5px solid var(--red);box-shadow:0 0 0 2px rgba(176,52,42,.15)}

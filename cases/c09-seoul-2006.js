@@ -102,7 +102,7 @@
           { id: 'sp_230', label: '230-5', x: 85, y: 37.5, doc: 'd_house_230', need: ['k_canvass'] },
         ] },
       { id: 'photo', type: 'photo', name: '사진 판독', skin: 'photo', need: ['k_canvass'],
-        desc: '일제 탐문 때 2층이 비어 계단 위로 오르지 못한 집은 아래에서 플래시로 찍어 왔다. 사진을 눌러 확대해 본다.',
+        desc: '일제 탐문 때 2층이 비어 계단 위로 오르지 못한 집은 아래에서 플래시로 찍어 왔다. 사진을 눌러 걸리는 곳을 짚는다.',
         scenes: [
           { id: 'ph217', title: '217-3 · 외부 계단과 2층 현관', meta: '탐문 반 촬영 2006.10.22 21:50 · 디지털카메라 · 플래시', art: 'ph217',
             intro: ['2층 부재. 1층 할머니는 주무신다. 골목에서 올려다보고 찍은 한 장.'],
@@ -245,7 +245,7 @@
         { note: '※ 화질이 낮아 사람 식별은 어렵다. 방향만 확인.' },
       ] },
       /* ── 하루홈 ── */
-      d_home_sora: { src: 'home', find: ['k_sora', 'k_umbrella'], title: '소라소라 ♪ 민소라의 미니홈피', meta: 'TODAY 0 | TOTAL 2,118 · 보존 조치 2006.10.20', body: [
+      d_home_sora: { src: 'home', cls: 'f-cute', find: ['k_sora', 'k_umbrella'], title: '소라소라 ♪ 민소라의 미니홈피', meta: 'TODAY 0 | TOTAL 2,118 · 보존 조치 2006.10.20', body: [
         '♡ 오늘의 기분: 피곤 ㅠ · BGM ♬ 「비 오는 날의 정류장」 — 한결밴드',
         '스물넷. 휴학 중. 학원 사무실 알바. 인터넷 쇼핑 중독 ㅋㅋ',
         { h: '일촌평' },
@@ -259,7 +259,7 @@
         '수연 : 소라야 괜찮아? 뉴스 봤어… 연락 줘 제발 (10.16)',
         '은비 : 비밀글입니다.',
       ] },
-      d_home_haeun: { src: 'home', find: ['k_haeun', 'k_academy', 'k_mar17'], title: '하은쌤의 방 · 주하은의 미니홈피', meta: 'TODAY 3 | TOTAL 5,902 · 보존 조치 2006.10.20', body: [
+      d_home_haeun: { src: 'home', cls: 'f-gamja', find: ['k_haeun', 'k_academy', 'k_mar17'], title: '하은쌤의 방 · 주하은의 미니홈피', meta: 'TODAY 3 | TOTAL 5,902 · 보존 조치 2006.10.20', body: [
         'BGM ♬ 「봄날의 편지」 — 윤해솔',
         { h: '다이어리' },
         { p: '2006.03.17 (금) 18:31 — 택배 또 옆골목에 맡겼대 ㅡㅡ 기사님 문자 좀 일찍 주시지. 퇴근하고 찾으러 가야지. 비 온다는데…', f: 'f_diary_haeun' },
@@ -279,7 +279,7 @@
         '하진우 : 비밀글입니다. (08.10)',
         '마트 언니 : 선영아… 보고 싶다 (08.15)',
       ] },
-      d_home_eunbi: { src: 'home', find: ['k_eunbi'], title: '비오는날 · 한은비의 미니홈피', meta: 'TODAY 12 | TOTAL 3,440', body: [
+      d_home_eunbi: { src: 'home', cls: 'f-single', find: ['k_eunbi'], title: '비오는날 · 한은비의 미니홈피', meta: 'TODAY 12 | TOTAL 3,440', body: [
         '오늘의 기분: 멍함 · BGM ♬ 「괜찮아, 괜찮아」 — 모래시계',
         { h: '다이어리' },
         '2006.10.15 (일) — 어젯밤에 내가 "내일 찾아"라고 한 번만 더 말했으면.',
@@ -586,6 +586,14 @@
       house230: { use: '일제 탐문 카드 사진 — 230-5', ratio: '4:3', svg: house({ steps: 16, turn: 6, iron: true, bg: '#1b2029' }),
         prompt: 'Police canvass snapshot at night, 2006: an older brick house with a tall external iron staircase that switches back twice up to a rooftop, styrofoam vegetable boxes visible at the roof edge, a plain door with a key lock. Harsh flash.' },
     },
-    css: `[data-case="c09"] .arch-f{--arch-line:#ff6f9c}`,
+    fonts: ['pixel', 'gamja'],
+    css: `[data-case="c09"] .arch-f[data-arch="home"]{--arch-line:#ff6f9c}
+[data-case="c09"][data-frame="crt"] :is(.tab,.item,.src-desc,.res-n,.back-list,.scr-bar,.arch-f input,.arch-f button,.qf,.qf input,.q-f button){font-family:var(--f-pixel);font-size:12px}
+[data-case="c09"][data-frame="crt"] .q-f::before{font-family:var(--f-pixel);font-size:12px}
+[data-case="c09"][data-frame="crt"] .item-m{font:12px/1.4 var(--f-pixel)}
+[data-case="c09"] .doc.printed :is(.doc-k,.doc-m,.b-p,.b-note,.b-tbl table,.b-tbl caption){font-family:var(--f-pixel);font-size:12px;line-height:1.7}
+[data-case="c09"] .doc.printed .b-tbl th,[data-case="c09"] .skin-card .b-tbl th{font:700 12px var(--f-pixel)}
+[data-case="c09"] .skin-card :is(.doc-b,.doc-m,.b-tbl table,.b-img figcaption){font-family:var(--f-pixel);font-size:12px;line-height:1.8}
+[data-case="c09"] .skin-report:not(.rep-view) .doc-b{font:14px/1.85 var(--f-doc)}`,
   });
 })();

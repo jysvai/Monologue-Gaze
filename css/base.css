@@ -7,17 +7,36 @@
   --ink:#26303f; --ink-soft:#586071; --pencil:#7a7466; --red:#b0342a; --olive:#6f7f4d;
   --tag:#dfb64c;
   --card:#f6f0df; --card-ink:#2b2823; --card-soft:#6f6858;
+  /* 글꼴 — 공통 여섯은 index.html 이 부르고, 나머지는 js/fonts.js 목록의 같은 키(--f-키 ↔ 키)로 사건을 열 때 부른다. docs/FONTS.md
+   * 명조 줄 끝의 "Noto Serif KR" 은 한자 받침: 나눔명조·송명에 없는 한자만 채운다 (사건에 fonts:['hanja']). 일본 사건은 이미 부른 "Noto Serif JP"(jp)가 받는다 */
   --f-hand:"Nanum Pen Script","Gaegu",cursive;
   --f-hand2:"Nanum Brush Script","Nanum Pen Script",cursive;
   --f-web:"Nanum Gothic","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
   --f-mono:"Nanum Gothic Coding",ui-monospace,Consolas,monospace;
-  --f-doc:"Nanum Myeongjo","AppleMyungjo","Batang",serif;
-  --f-old:"Song Myung","Nanum Myeongjo",serif;
+  --f-doc:"Nanum Myeongjo","Noto Serif KR","Noto Serif JP","AppleMyungjo","Batang",serif;
+  --f-old:"Song Myung","Nanum Myeongjo","Noto Serif KR",serif;
   --f-type:"Special Elite","Nanum Gothic Coding",monospace;
   --f-bhs:"Black Han Sans","Nanum Gothic",sans-serif;
-  --f-latin:"Old Standard TT","Nanum Myeongjo",serif;
+  --f-latin:"Old Standard TT","Nanum Myeongjo","Noto Serif KR",serif;
   --f-frak:"UnifrakturMaguntia","Old Standard TT",serif;
   --f-jp:"Noto Serif JP","Nanum Myeongjo",serif;
+  /* 시대 글꼴 (사건마다) */
+  --f-batang:"Gowun Batang","Nanum Myeongjo","Noto Serif KR",serif;              /* 1945년 전 공문서·조서 본문 — 옛 책 같은 바탕 */
+  --f-hanja:"Noto Serif KR","Nanum Myeongjo",serif;                                /* 한자 받침 (위 명조 글꼴들의 끝자리) */
+  --f-showa:"New Tegomin","Noto Serif JP","Nanum Myeongjo","Noto Serif KR",serif;  /* 쇼와 시대(1930~60년대) 일본 인쇄 명조 */
+  --f-fude:"Yuji Boku","Noto Serif JP","Song Myung","Noto Serif KR",serif;         /* 신문 제호 붓글씨 (한자·가나) */
+  --f-kana:"M PLUS 1 Code","Nanum Gothic Coding",ui-monospace,monospace;           /* 전보 가타카나 — 타전기 고딕 활자 */
+  --f-dos:"NeoDunggeunmo","GalmuriMono11","Galmuri11","Nanum Gothic Coding",monospace; /* 1980~90년대 도스·워드프로세서 화면 (16px 배수로). 한자·가나·※ 는 갈무리가 받는다 */
+  --f-dotprint:"GalmuriMono11","Galmuri11","GulimChe","Nanum Gothic Coding",monospace; /* 1990년대 도트 프린터 출력 (12px 배수로) */
+  --f-pixel:"Galmuri11","Gulim","Dotum","Nanum Gothic",sans-serif;                /* 2000년대 굴림 비트맵 화면·폴더폰·삐삐 액정 (12px 배수로) */
+  --f-sys:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo","Nanum Gothic",sans-serif; /* 2010~20년대 윈도·안드로이드·경찰 전산 (맑은 고딕 결) */
+  --f-ui:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Nanum Gothic","Malgun Gothic",sans-serif; /* 2020년대 웹·앱 */
+  --f-phone:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Noto Sans KR","Nanum Gothic",sans-serif; /* 2020년대 스마트폰 메신저 */
+  --f-gamja:"Gamja Flower","Nanum Pen Script",cursive;                             /* 2000년대 미니홈피 글꼴 아이템 */
+  /* 쓴 사람마다 다른 필체 (문서 cls 의 f-키, css/skins.css) */
+  --f-yeon:"Yeon Sung",var(--f-hand2); --f-dokdo:"Dokdo",var(--f-hand2); --f-gaegu:"Gaegu",var(--f-hand);
+  --f-dohyeon:"Do Hyeon",var(--f-web); --f-melody:"Hi Melody",var(--f-hand);
+  --f-poor:"Poor Story",var(--f-hand); --f-eastsea:"East Sea Dokdo",var(--f-hand2); --f-single:"Single Day",var(--f-hand); --f-cute:"Cute Font",var(--f-hand);
   --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .24 0 0 0 0 .12 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .05 0 0 0 0 .035 0 0 0 0 .015 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --fiber:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .35' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
@@ -48,7 +67,7 @@ img{max-width:100%}
 .cab-kicker{margin:0;font:12px/1.4 var(--f-mono);letter-spacing:.14em;color:#a99a7e}
 .cab-title{margin:0;font:400 clamp(40px,7vw,78px)/1 var(--f-type);letter-spacing:.02em;color:#efe4c9;text-shadow:0 2px 0 rgba(0,0,0,.4)}
 .cab-sub{margin:4px 0 0;font:700 16px/1.5 var(--f-doc);color:#cdbf9f}
-.cab-stat{margin:10px 0 0;font:12.5px var(--f-mono);color:#a99a7e}
+.cab-stat{margin:10px 0 0;font:12.5px var(--f-type);color:#a99a7e}
 .cab-stat b{color:#efe4c9;font-weight:700}
 .intro{position:relative;max-width:620px;margin:0 0 30px;padding:22px 24px 20px;transform:rotate(-.6deg);background-color:var(--memo);background-image:var(--noise);color:var(--sheet-ink);font:14.5px/1.75 var(--f-doc);box-shadow:0 12px 30px rgba(0,0,0,.45)}
 .intro p{margin:0 0 10px;text-wrap:pretty}
@@ -67,7 +86,7 @@ img{max-width:100%}
 .ro-pick:hover{color:var(--red)}
 .ro-me input{border-bottom:1px dashed rgba(84,64,40,.5)}
 .ro-me input:focus{outline:0;border-bottom:1.5px solid var(--red)}
-.ro-stat{font:11.5px var(--f-mono);color:var(--card-soft)}
+.ro-stat{font:11.5px var(--f-type);color:var(--card-soft)}
 .ro-now{margin-left:auto;padding:1px 7px;border:2px solid var(--red);color:var(--red);font:800 12px/1.4 var(--f-doc);transform:rotate(-3deg)}
 .roster li .reset{margin-left:auto}
 .ro-new{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
@@ -80,16 +99,16 @@ img{max-width:100%}
 .cab-hero{margin:-20px 0 18px;height:clamp(160px,28vw,340px);overflow:hidden;border-radius:4px;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
 .cab-hero img{display:block;width:100%;height:100%;object-fit:cover}
 .folder:hover,.folder:focus-visible{transform:rotate(0deg) translateY(-4px)}
-.f-tab{margin-left:16px;padding:5px 12px 3px;border-radius:6px 6px 0 0;background-color:var(--kraft);background-image:var(--fiber);font:12px/1.2 var(--f-mono);letter-spacing:.06em;color:var(--kraft-ink)}
+.f-tab{margin-left:16px;padding:5px 12px 3px;border-radius:6px 6px 0 0;background-color:var(--kraft);background-image:var(--fiber);font:12px/1.2 var(--f-type);letter-spacing:.06em;color:var(--kraft-ink)}
 .f-body{position:relative;display:flex;flex-direction:column;gap:8px;width:100%;min-height:200px;padding:14px 16px 16px;border-radius:0 4px 4px 4px;background-color:var(--kraft);background-image:var(--fiber),linear-gradient(180deg,rgba(255,255,255,.12),rgba(0,0,0,.08));color:var(--kraft-ink);box-shadow:0 14px 26px -10px rgba(0,0,0,.7),inset 0 0 30px rgba(90,60,20,.25)}
 .folder.tutorial .f-tab,.folder.tutorial .f-body{background-color:#b8b09a}
-.f-kind{font:11px/1.2 var(--f-mono);letter-spacing:.08em;color:#4b3c24}
+.f-kind{font:11px/1.2 var(--f-type);letter-spacing:.08em;color:#4b3c24}
 .f-cover~.f-body .f-kind{padding-right:94px} /* 표지 사진 밑으로 별이 숨지 않게: 길면 별이 다음 줄로 */
 .f-label{display:flex;flex-direction:column;gap:2px;padding:9px 11px 8px;background-color:#f4efe2;background-image:var(--noise);box-shadow:0 1px 2px rgba(0,0,0,.25)}
 .f-title{font:800 18px/1.3 var(--f-doc);color:#1f1a14;text-wrap:balance}
 .f-place{font:12px/1.4 var(--f-web);color:#5d5444}
 .f-motif{font:18px/1.2 var(--f-hand);color:#3c3020}
-.f-len{margin-top:auto;font:11px var(--f-mono);color:#5b4a2e}
+.f-len{margin-top:auto;font:11px var(--f-type);color:#5b4a2e}
 .f-stamp{position:absolute;right:12px;bottom:14px;padding:4px 10px;border:3px double var(--red);color:var(--red);font:800 17px/1 var(--f-doc);transform:rotate(-12deg);opacity:.88;mix-blend-mode:multiply}
 .f-going{position:absolute;right:12px;bottom:12px;font:20px/1 var(--f-hand);color:var(--red);transform:rotate(-4deg)}
 .mbox{margin-top:40px;max-width:760px}
@@ -98,7 +117,7 @@ img{max-width:100%}
 .mbox ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .mbox li{padding:10px 14px 8px;background-color:#e9dfc2;background-image:var(--noise);color:#5a2b1e;font:22px/1.25 var(--f-hand2);box-shadow:0 4px 10px rgba(0,0,0,.35);transform:rotate(-.4deg)}
 .mbox li:nth-child(even){transform:rotate(.5deg)}
-.mbox-case{display:inline-block;margin-right:8px;font:11px var(--f-mono);color:#7a6a50;vertical-align:3px}
+.mbox-case{display:inline-block;margin-right:8px;font:11px var(--f-type);color:#7a6a50;vertical-align:3px}
 .m-letter{max-width:640px;margin-top:40px;padding:26px 28px;background-color:#efe6cf;background-image:var(--noise);color:#3a2418;font:24px/1.5 var(--f-hand2);box-shadow:0 14px 34px rgba(0,0,0,.5);transform:rotate(.4deg)}
 .m-letter h3{margin:0 0 10px;font:700 16px var(--f-doc);color:#6d5a44}
 .m-letter p{margin:0 0 10px}
@@ -138,7 +157,7 @@ img{max-width:100%}
 }
 .frame-foot{flex:none}
 .cam{display:none}
-.evtag{position:relative;align-self:flex-start;margin:-4px 0 0 28px;padding:8px 12px 8px 28px;max-width:calc(100% - 40px);transform:rotate(-2deg);border-radius:3px;background-color:var(--tag);background-image:var(--noise);color:#2d2512;font:11px/1.5 var(--f-mono);box-shadow:0 6px 14px rgba(0,0,0,.5)}
+.evtag{position:relative;align-self:flex-start;margin:-4px 0 0 28px;padding:8px 12px 8px 28px;max-width:calc(100% - 40px);transform:rotate(-2deg);border-radius:3px;background-color:var(--tag);background-image:var(--noise);color:#2d2512;font:11px/1.5 var(--f-type);box-shadow:0 6px 14px rgba(0,0,0,.5)}
 .evtag::before{content:"";position:absolute;left:10px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--desk);box-shadow:inset 0 0 0 2px #b2913b}
 .evtag .kw{pointer-events:none;text-decoration:none}
 @media (max-width:1099px){
@@ -154,6 +173,9 @@ img{max-width:100%}
 .case-view[data-frame="papers"] .tab.on{background-color:var(--tab-on,#efe3c3);box-shadow:none}
 .case-view[data-frame="papers"] .stage-body{background-color:var(--tab-on,#efe3c3);background-image:var(--fiber);border-radius:0 0 6px 6px}
 .case-view[data-frame="papers"] .pane-list{border-right:1px dashed rgba(60,45,20,.3)}
+/* 종이 기록철의 목록은 색인 카드: 제목은 명조로, 날짜·번호는 타자로 */
+.case-view[data-frame="papers"] .item-t{font-family:var(--f-doc)}
+.case-view[data-frame="papers"] .item-m{font-family:var(--f-type)}
 
 /* frame: laptop — 2020년대 노트북 */
 .case-view[data-frame="laptop"] .stage-frame{padding:20px 18px 8px;border-radius:18px 18px 8px 8px;background:linear-gradient(180deg,#303033,#1d1d1f);box-shadow:0 34px 60px -22px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.08),inset 0 0 0 1px rgba(0,0,0,.6)}
@@ -165,6 +187,9 @@ img{max-width:100%}
 .case-view[data-frame="laptop"] .tab.on{background:#f8f5ee;color:#222}
 .case-view[data-frame="laptop"] .stage-body{background:#f8f5ee;color:#262521}
 .case-view[data-frame="laptop"] .pane-list{background:#efeadd;border-right:1px solid #d6cdb8}
+/* 노트북 화면 속 글자는 2020년대 웹 글꼴: --f-web 을 화면 안에서만 --f-ui 로 바꾼다 (사건이 fonts:['ui'] 로 부른다. 수첩·꼬리표는 화면 밖이라 그대로).
+ * 다른 시대 노트북이면 사건 css 에서 [data-case="cNN"][data-frame="laptop"] .screen{--f-web:…} 로 다시 바꾼다 (c10) */
+.case-view[data-frame="laptop"] .screen{--f-web:var(--f-ui)}
 .case-view[data-frame="laptop"] .frame-foot{height:16px;margin-inline:-2.5%;border-radius:2px 2px 14px 14px;background:linear-gradient(180deg,#3d3d40,#232325 60%,#151516)}
 
 /* frame: crt — 2000년대 CRT 모니터 */
@@ -232,14 +257,14 @@ img{max-width:100%}
 .per-h{display:flex;gap:14px;align-items:center;margin-bottom:14px}
 .per-h h3{margin:0;font:800 18px/1.3 var(--f-doc)}
 .per-h p{margin:2px 0 0;font-size:13px;opacity:.8}
-.per-w{font:12px var(--f-mono)!important}
+.per-w{font:12px/1.45 var(--f-mono)!important}
 .per-tr{padding:14px 16px;background-color:var(--sheet);background-image:var(--noise);color:var(--sheet-ink);font:14px/1.75 var(--f-web);box-shadow:0 2px 8px rgba(0,0,0,.2)}
 .per-tr .b-p{margin:0 0 10px}
 .qa{margin-top:14px;padding-top:12px;border-top:1px dashed rgba(60,50,30,.3)}
 .q{margin:0 0 6px;font:20px/1.3 var(--f-hand);color:var(--ink)}
 .per-ask{margin-top:14px}
 .per-ask-t{margin:0;font:22px/1.2 var(--f-hand);color:inherit}
-.per-ask-t small{font:11px var(--f-mono);opacity:.7}
+.per-ask-t small{font:11px/1.4 var(--f-mono);opacity:.7}
 .lock{max-width:420px;margin:24px auto;padding:22px 20px;text-align:center;background-color:var(--sheet);background-image:var(--noise);color:var(--sheet-ink);box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .lock-t{margin:0 0 6px;font:800 17px var(--f-doc)}
 .lock-d{margin:0 0 12px;font-size:13px}
@@ -268,11 +293,11 @@ img{max-width:100%}
 /* ───────── notebook ───────── */
 .nb{position:relative;min-height:0;overflow:auto;border-radius:4px 10px 10px 4px;background-color:var(--paper);background-image:var(--noise),var(--paper-img,none),radial-gradient(circle at 90% 4%,transparent 0 30px,rgba(140,95,40,.2) 31px 34px,transparent 36px),linear-gradient(180deg,rgba(255,255,255,.18),transparent 30%,rgba(120,85,30,.12));box-shadow:0 34px 60px -22px rgba(0,0,0,.8),inset 0 0 70px rgba(140,100,40,.28);color:var(--ink)}
 .nb-rings{height:24px;background:radial-gradient(circle at 11px 12px,var(--desk) 0 4.5px,rgba(0,0,0,.25) 5.5px,transparent 6.5px) 6px 0/24px 24px repeat-x;border-bottom:1px solid rgba(120,90,40,.25)}
-.nb-top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 14px 4px}
+.nb-top{position:relative;z-index:4;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 14px 4px}
 .nb-back{padding:4px 10px 2px;border:1px solid rgba(60,50,30,.35);background:transparent;font:18px/1.1 var(--f-hand);cursor:pointer}
 .nb-back:hover{background:rgba(255,255,255,.4)}
-.nb-case{font:11px var(--f-mono);letter-spacing:.08em;color:var(--pencil)}
-.brief{position:relative;margin:10px 14px 20px;padding:18px 16px 14px;transform:rotate(-.5deg);background-color:var(--memo);background-image:var(--noise);color:#2d2a25;font:12.5px/1.65 var(--f-mono);box-shadow:0 2px 7px rgba(60,40,10,.28)}
+.nb-case{font:11px var(--f-type);letter-spacing:.08em;color:var(--pencil)}
+.brief{position:relative;margin:10px 14px 20px;padding:18px 16px 14px;transform:rotate(-.5deg);background-color:var(--memo);background-image:var(--noise);color:#2d2a25;font:12.5px/1.65 var(--f-type);box-shadow:0 2px 7px rgba(60,40,10,.28)}
 .clip{position:absolute;top:-14px;left:18px;width:18px;height:48px}
 .brief h2{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 10px;margin:0 0 8px;padding-bottom:6px;border-bottom:1px solid #b9ae97;font:800 17px/1.3 var(--f-doc);text-wrap:balance}
 .brief h2 small{font:11px var(--f-mono);color:#6a6254}
@@ -370,7 +395,7 @@ img{max-width:100%}
 .cmp-o.no{opacity:.45;background:repeating-linear-gradient(135deg,transparent 0 8px,rgba(176,52,42,.08) 8px 10px),#f1ead4}
 .cmp-o.ok{border:2px solid var(--olive);background:#f1f3e2}
 .cmp-art svg,.cmp-art img{display:block;width:100%;height:auto;max-height:160px;object-fit:contain}
-.cmp-n{margin:0;font:700 13px var(--f-web)}
+.cmp-n{margin:0;font:700 13px/1.4 var(--f-web)}
 .cmp-d{margin:0;font:13px/1.5 var(--f-doc)}
 .cmp-o button{margin-top:auto;padding:5px 10px;border:0;background:#3b3a36;color:#fff;font:700 12px var(--f-web);cursor:pointer}
 .cmp-o button:disabled{opacity:.35;cursor:not-allowed}
@@ -445,6 +470,7 @@ img{max-width:100%}
 .folder:has(.f-blood) .f-label{position:relative;z-index:3}
 .cw-card{position:relative;overflow:hidden}
 .cw-card>*:not(.stain){position:relative;z-index:4}
+.cw-card .stain{opacity:.35} /* 면책 문구·단추 밑이 읽히게 */
 .snd.mild[aria-pressed="true"]{color:#e08a7f}
 .cens{position:relative;display:block;overflow:hidden;cursor:pointer;background:#1c1412}
 .cens>svg,.cens>img{display:block;width:100%;height:auto;filter:blur(14px) grayscale(.6) brightness(.5);transform:scale(1.08);transition:filter .6s ease,transform .6s ease}
@@ -470,3 +496,13 @@ body:has(.case-view[data-graphic])::before{background:radial-gradient(ellipse at
 @keyframes cens-reveal{0%{filter:blur(14px) brightness(.3) sepia(1) saturate(5) hue-rotate(-38deg);transform:scale(1.08)}45%{filter:blur(2px) brightness(.55) sepia(.8) saturate(3) hue-rotate(-38deg);transform:scale(1.02)}100%{filter:none;transform:none}}
 @keyframes cens-flash{from{opacity:1}to{opacity:0}}
 @media (prefers-reduced-motion:reduce){.cens.reveal>svg,.cens.reveal>img{animation:none}.cens.reveal::after{display:none}}
+
+/* 화면 틀(모니터·노트북) 속 시스템 문구: 연필 손글씨가 아니라 그 화면의 글자 */
+.case-view:is([data-frame="crt"],[data-frame="laptop"]) :is(.read-empty p,.res-none,.map-desc){font:13px/1.6 var(--f-web);color:#5b6576}
+.case-view:is([data-frame="crt"],[data-frame="laptop"]) :is(.c-msg,.cmp-q,.lock-h2){font:600 13px/1.5 var(--f-web)}
+/* 좁은 화면: 틀 테두리를 줄여 읽는 칸을 넓힌다 (폰에서 표가 한두 글자씩 끊기지 않게) */
+@media (max-width:1099px){ .case-view[data-frame="laptop"] .frame-foot{margin-inline:0} }
+@media (max-width:560px){
+  .case-view[data-frame="crt"] .stage-frame{padding:10px 10px 16px;border-radius:14px}
+  .case-view[data-frame="laptop"] .stage-frame{padding:10px 6px 6px}
+}

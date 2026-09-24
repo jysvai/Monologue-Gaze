@@ -606,7 +606,7 @@
   function queryList(s) {
     const inp = ST.view.qin[s.id] || {};
     const res = ST.view.qres[s.id];
-    const found = (ST.found[s.id] || []).map(id => C.docs[id]).filter(Boolean);
+    const found = (ST.found[s.id] || []).filter(id => !(res || []).includes(id)).map(id => C.docs[id]).filter(Boolean); // 방금 조회한 결과는 위에만
     const fields = (s.fields || []).map(f => `<label class="qf"><span>${esc(f.label)}</span><input name="${esc(f.id)}" value="${esc(inp[f.id] || '')}" placeholder="${esc(f.placeholder || '')}" autocomplete="off"></label>`).join('');
     let out = '';
     if (res) out = res.length ? `<p class="res-n">조회 결과 ${res.length}건</p>${res.map(id => itemBtn(C.docs[id])).join('')}` : `<p class="res-none">${esc(s.none || '해당하는 기록이 없다.')}</p>`;
@@ -637,7 +637,7 @@
     return `<article class="doc skin-${esc(x.skin || 'photo')} scene"><header class="doc-h"><p class="doc-k">정밀 관찰</p><h3 class="doc-t">${inline(x.title)}</h3>${x.meta ? `<p class="doc-m">${inline(x.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(x.intro, `${x.id}@i`, plain(x.title))}
         <div class="ph" data-ph="${esc(x.id)}">${art(x.art, 'art', true)}${marks}<div class="ph-grid" hidden>${cells.join('')}</div></div>
-        <p class="ph-bar"><span>찾은 것 ${found.length}${lv() >= 5 ? '' : ` / ${tot}`}</span><button type="button" data-ph-grid>칸을 나눠 살피기</button></p>
+        <p class="ph-bar"><span>찾은 것 ${found.length}${lv() >= 5 ? '' : ` / ${tot}`}</span><button type="button" data-ph-grid aria-pressed="false">칸을 나눠 살피기</button></p>
         <ol class="ph-found">${found.map(sp => `<li><p class="ph-l">${inline(sp.label)}</p>${blocks(sp.body, `${sp.id}@b`, plain(x.title))}</li>`).join('')}</ol></div></article>`;
   }
 
@@ -1085,16 +1085,18 @@
   function caseFonts(c) {
     const FONTS = MG.fonts || {};
     if (!c._fonts) {
-      const j = JSON.stringify(c), news = j.includes('"skin":"news"');
-      c._fonts = Object.keys(FONTS).filter(k => (c.fonts || []).includes(k) || j.includes('f-' + k) || news && (k === 'old' || k === 'latin') || k === 'latin' && j.includes('f-frak'));
+      const j = JSON.stringify(c), y = parseInt(c.year, 10) || 2000, news = y < 1980 && j.includes('"skin":"news"');
+      // 화면 틀·시대가 부르는 글꼴 (css/skins.css 의 시대 기본값, css/live.css 가 쓴다)
+      const auto = [...(c.frame === 'laptop' ? ['ui'] : c.frame === 'crt' ? ['pixel'] : []), ...(y < 1945 ? ['batang', 'latin'] : []), ...(c.live ? ['phone', 'sys'] : [])];
+      c._fonts = Object.keys(FONTS).filter(k => (c.fonts || []).includes(k) || auto.includes(k) || new RegExp('\\bf-' + k + '\\b').test(j) || news && (k === 'old' || k === 'latin') || k === 'latin' && j.includes('f-frak'));
     }
     const need = c._fonts.filter(k => !fontOn[k]);
     if (!need.length) return;
     need.forEach(k => { fontOn[k] = 1; });
-    const link = href => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); };
+    const link = href => { if (fontOn[href]) return; fontOn[href] = 1; const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); };
     const g = need.filter(k => typeof FONTS[k] === 'string');
     if (g.length) link('https://fonts.googleapis.com/css2?' + g.map(k => 'family=' + FONTS[k]).join('&') + '&display=swap');
-    need.filter(k => FONTS[k] && FONTS[k].css).forEach(k => link(FONTS[k].css));
+    need.filter(k => FONTS[k] && FONTS[k].css).forEach(k => link(FONTS[k].css)); // 같은 주소(Pretendard·갈무리)는 한 번만
   }
 
   // intro: 기록실에서 폴더를 눌러 열 때만 여는 장면을 보여 준다 (새로 고침·처음부터 다시는 바로)
@@ -1715,7 +1717,7 @@
       if ((el = t.closest('[data-cmp-pick]'))) return pickCompare(el.dataset.cmpPick);
       if ((el = t.closest('[data-scene]'))) return openItem({ t: 'photo', id: el.dataset.scene });
       if ((el = t.closest('[data-ph-cell]'))) return photoCell(el.dataset.phCell);
-      if (t.closest('[data-ph-grid]')) { const g = $('.ph-grid'); if (g) g.hidden = !g.hidden; return; }
+      if (t.closest('[data-ph-grid]')) { const g = $('.ph-grid'); if (g) { g.hidden = !g.hidden; t.closest('[data-ph-grid]').setAttribute('aria-pressed', String(!g.hidden)); } return; }
       if ((el = t.closest('[data-cens]')) && !el.classList.contains('open') && !(S.mild && el.closest('[data-ph]'))) {
         if (S.mild) { toast('잔혹 표현이 꺼져 있다'); return; }
         if (!ST.cens.includes(el.dataset.cens)) ST.cens.push(el.dataset.cens);

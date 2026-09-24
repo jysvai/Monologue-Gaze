@@ -447,6 +447,11 @@
       pier_day: { use: '카페 민원 글 사진 — 신항 3부두 공사 현장 낮 풍경', ratio: '16:9', svg: cam(`<rect width="200" height="90" fill="#9fb0bd"/><rect y="90" width="200" height="60" fill="#6f7b82"/><g fill="#5a646b"><rect x="20" y="50" width="4" height="40"/><rect x="60" y="50" width="4" height="40"/><rect x="100" y="50" width="4" height="40"/></g><g fill="#c9c3b3"><path d="M130 90 l10 -10 l10 10z"/><path d="M146 90 l10 -10 l10 10z"/><path d="M162 90 l10 -10 l10 10z"/></g>`, '#9fb0bd'),
         prompt: 'Overcast daytime smartphone photo of an unfinished container pier in a Korean port: temporary fencing, unlit lamp posts, piles of concrete tetrapods along the breakwater, grey sea, gulls, distant cranes. Bleak and empty.' },
     },
-    css: `[data-case="c10"] .skin-chat .doc-h{background:#d6e2e8}`,
+    css: `[data-case="c10"] .skin-chat .doc-h{background:#d6e2e8}
+[data-case="c10"][data-frame="laptop"] .screen{--f-web:var(--f-sys)}
+[data-case="c10"] .skin-web{--f-web:"Nanum Gothic","Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+[data-case="c10"] .doc.printed :is(.b-tbl table,.b-tbl caption){font-family:var(--f-sys);font-size:13px}
+[data-case="c10"] .doc.printed .b-tbl th{font:700 12px var(--f-sys)}
+[data-case="c10"] .skin-card .doc-b{font-family:var(--f-sys)}`,
   });
 })();

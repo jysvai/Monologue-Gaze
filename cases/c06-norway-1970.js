@@ -632,6 +632,7 @@
     },
     css: `[data-case="c06"] .skin-news .doc-paper{font-family:var(--f-latin);font-weight:700;letter-spacing:.04em}
 [data-case="c06"] .skin-telegram .doc-b .b-p{text-transform:uppercase}
-[data-case="c06"] .arch-f{--arch-line:#34465a}`,
+[data-case="c06"] .arch-f{--arch-line:#34465a}
+[data-case="c06"] :is(.skin-report:not(.rep-view),.skin-card) .doc-b{font-family:var(--f-type)}`,
   });
 })();
