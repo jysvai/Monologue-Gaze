@@ -1005,7 +1005,7 @@ Police canvass snapshot at night, 2006: a multi-family house with a poured concr
 Police canvass snapshot at night, 2006: a multi-family house on an uphill alley with a long external iron staircase turning once, many potted plants crowded in the small front yard below, a metal door with keypad lock. Harsh flash.
 ```
 
-### c09/ph217 — 정밀 관찰 사진 🔁 다시 뽑기
+### c09/ph217 — 정밀 관찰 사진
 - 저장 경로: `img/c09/ph217.webp` · 비율: 4:3
 ```
 Photograph taken from a narrow alley in Seoul in 2006, looking straight at the side wall of a two-storey red-brick multi-family house on a damp night. Fixed flat against the brick wall is a Z-shaped switchback exterior staircase of rusty steel with open treads: every tread is a separate steel plate with a dark gap above and below it, so the treads can be counted one by one. LOWER FLIGHT: exactly EIGHT treads, starting at the ground at the lower RIGHT and climbing diagonally up to the LEFT, to a narrow steel landing at mid-height in the centre of the wall. At the landing the staircase doubles back. UPPER FLIGHT: exactly FIVE treads climbing diagonally up to the RIGHT, the opposite direction to the lower flight, ending at a small top platform at the upper right. Thirteen treads in all. A wooden front door on the second floor stands immediately to the right of the last tread of the upper flight, with a bare bulb above it; the door has a single keyhole and no digital lock, and at eye height a round faded patch where a sticker was peeled off. On the steel floor of the landing six square soil marks in a neat row, left by pots that were taken away, with white styrofoam crumbs along the edge. A black telephone wire comes down from a utility pole at the far left and enters the wall beside a second-floor window at the upper left. At the foot of the wall at the lower left, dumped soil with dried scallion roots and pepper stems, half washed away by rain. A bicycle leans against the wall under the landing.
@@ -1016,10 +1016,10 @@ Photograph taken from a narrow alley in Seoul in 2006, looking straight at the s
 ### c09/ph219 — 정밀 관찰 사진 🔁 다시 뽑기
 - 저장 경로: `img/c09/ph219.webp` · 비율: 4:3
 ```
-Photograph taken from a small front yard in Seoul in 2006 of a two-storey rendered concrete house at night. An L-shaped exterior staircase of solid poured CONCRETE steps, not steel treads, with only a thin steel handrail. LOWER FLIGHT: exactly SEVEN concrete steps facing the camera, climbing straight up toward the house in the centre of the picture, to a square concrete landing against the wall. On the landing three geranium pots with red flowers. At the landing the stairs turn LEFT. UPPER FLIGHT: exactly SIX concrete steps seen from the side, climbing along the wall toward the upper left, to a small top platform in front of a steel door on the second floor at the upper left. Thirteen steps in all. The steel door has a digital keypad lock and a small plain yellow square sticker with nothing on it. A window at the upper right, a first-floor door at the lower right. No second small staircase anywhere.
+Photograph taken from a small front yard in Seoul in 2006 of a two-storey rendered concrete house at night. An L-shaped exterior staircase of solid poured CONCRETE steps, not steel treads, with only a thin steel handrail. LOWER FLIGHT: exactly SEVEN concrete steps facing the camera, climbing straight up toward the house in the centre of the picture, to a square concrete landing against the wall. On the landing three geranium pots with red flowers. At the landing the stairs turn LEFT. UPPER FLIGHT: exactly SIX concrete steps seen from the side (only six, fewer than the lower flight, each step clearly separate), climbing along the wall toward the upper left, to a small top platform in front of a steel door on the second floor at the upper left. Thirteen steps in all. The steel door has a digital keypad lock and a small plain yellow square sticker with nothing on it. A window at the upper right, a first-floor door at the lower right. No second small staircase anywhere.
 ```
 - **꼭 보여야 할 것**: 콘크리트 계단이 L자로 꺾인다: 아래 일곱 칸 (정면, 가운데) → 계단참 → 왼쪽으로 꺾여 여섯 칸 (옆모습) · 계단참에 제라늄 화분 셋 · 왼쪽 위 2층 철문 (번호 도어락, 노란 네모 스티커) · 오른쪽 위 창, 오른쪽 아래 1층 문
-- 주의: 계단이 곧게 올라 문에 닿거나, 따로 떨어진 작은 계단이 또 생기면 다시 뽑는다.
+- 주의: 계단이 곧게 올라 문에 닿거나, 따로 떨어진 작은 계단이 또 생기면 다시 뽑는다. 위 단이 여섯 칸이 아니면 다시 뽑는다 (2차는 여덟 칸이었다). 위 단 디딤판이 옆에서 하나씩 셀 수 있게.
 
 ### c09/house230 — 일제 탐문 카드 사진 — 230-5
 - 저장 경로: `img/c09/house230.webp` · 비율: 4:3
@@ -1213,7 +1213,7 @@ Darkroom luminol photograph from 1986, a 30-second exposure inside a tiny market
 ```
 - **꼭 보여야 할 것**: 불 끈 가게 바닥 거의 전체가 푸르게 빛난다
 
-### c11/cut_ev — 대조 감정 시료 🔁 다시 뽑기
+### c11/cut_ev — 대조 감정 시료
 - 저장 경로: `img/c11/cut_ev.webp` · 비율: 3:2
 - 이 그림은 **공통 스타일을 붙이지 않는다** (지도·손 스케치·증거물 접사처럼 프롬프트 안에 그림체가 들어 있다).
 ```
