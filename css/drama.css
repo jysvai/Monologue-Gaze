@@ -79,7 +79,7 @@
 .verdict.wait{color:var(--ink-soft);animation:pulse 1.2s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.45}}
 .rep-view.judging form{opacity:.55;pointer-events:none;transition:opacity .4s}
-.rep-view.bounced{animation:bounce .5s ease-out}
+.rep-view.bounced,.m-who.bounced{animation:bounce .5s ease-out}
 @keyframes bounce{20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(2px)}}
 .rep-solved{margin-top:14px;overflow:hidden}
 .rep-solved .epi .b-p,.rep-solved .epi p{font:15px/1.8 var(--f-doc)}
@@ -117,7 +117,7 @@
 
 
 @media (prefers-reduced-motion:reduce){
-  #app[class*="cue-"] .stage-frame,#app[class*="cue-"] .case-view,#app.cue-solved,.rep-view.bounced,.qa.pressing .c-ev,.c-dots i{animation:none!important}
+  #app[class*="cue-"] .stage-frame,#app[class*="cue-"] .case-view,#app.cue-solved,.rep-view.bounced,.m-who.bounced,.qa.pressing .c-ev,.c-dots i{animation:none!important}
   #app.cue-confess::after{animation-duration:.01s}
   .cue-stamp span{animation-duration:1.2s}
 }

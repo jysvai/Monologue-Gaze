@@ -971,6 +971,29 @@
     if (r.list.length < 2) { const w = $('[data-wipe]'); if (w) w.textContent = '모든 기록 지우기'; }
   }
 
+  /* ── 편지 밑의 물음: M 은 기록 속 누구였나. 맞히면 추신 */
+  function mWho(fresh) {
+    const W = MG.finaleWho;
+    if (!W) return '';
+    if (S.mwho) return `<div class="m-ps${fresh ? ' reveal' : ''}">${W.ps.map(p => `<p>${esc(p)}</p>`).join('')}<p class="m-sig">${esc(W.sig)}</p></div>`;
+    return `<form class="m-who" data-mwho><label><span>${esc(W.q)}</span><input maxlength="16" placeholder="${esc(W.placeholder)}" aria-label="${esc(W.q)}"></label><button type="submit" class="btn-hand">적는다</button>${(S.mwhoTries || 0) >= 3 ? `<p class="m-hint">${esc(W.hint)}</p>` : ''}</form>`;
+  }
+  function guessM(f) {
+    const W = MG.finaleWho, v = norm(f.querySelector('input').value);
+    if (!W || !v) return;
+    if (W.answer.some(a => norm(a) === v)) {
+      S.mwho = true; save();
+      f.outerHTML = mWho(true);
+      sfx('stamp');
+      return;
+    }
+    S.mwhoTries = (S.mwhoTries || 0) + 1; save();
+    f.outerHTML = mWho();
+    const nf = $('[data-mwho]');
+    if (nf) { nf.classList.add('bounced'); const i = nf.querySelector('input'); if (i) i.focus(); }
+    sfx('miss'); toast(W.miss);
+  }
+
   function cabinet(showRoster) {
     C = null; ST = null; S.current = null; save();
     if (MG.mood) MG.mood.leave();
@@ -992,8 +1015,8 @@
         <span class="f-motif">${esc(c.motif || '')}</span>${c.length ? `<span class="f-len">${esc(c.length)}</span>` : ''}
         ${status === 'done' ? '<span class="f-stamp">종결</span>' : status === 'going' ? '<span class="f-going">수사 중</span>' : ''}</span></button>`;
     };
-    const intro = S.intro ? '' : `<div class="intro"><p>서울서부경찰서 강력2팀. 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.</p><p>서랍 속에는 한 세기에 걸친 미제 기록 ${numk(main.length)} 건. 사진 한 장, 편지 한 통, 누군가의 혼잣말 같은 기록들. 기록은 대답하지 않는다. 쫓아가는 사람에게만 조금씩 입을 연다.</p><p class="intro-hand">처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장</p><button type="button" class="btn-hand" data-intro-ok>서랍을 연다</button></div>`;
-    const letter = main.length >= 10 && solvedMain === main.length ? `<article class="m-letter"><h3>서랍 맨 밑의 편지</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p></article>` : '';
+    const intro = S.intro ? '' : `<div class="intro"><p>서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.</p><p>서랍 속에는 한 세기에 걸친 미제 기록 ${numk(main.length)} 건. 사진 한 장, 편지 한 통, 누군가의 혼잣말 같은 기록들. 기록은 대답하지 않는다. 쫓아가는 사람에게만 조금씩 입을 연다.</p><p class="intro-hand">처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장</p><button type="button" class="btn-hand" data-intro-ok>서랍을 연다</button></div>`;
+    const letter = main.length >= 10 && solvedMain === main.length ? `<article class="m-letter"><h3>서랍 맨 밑의 편지</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p>${mWho()}</article>` : '';
     const hero = MG.images['_global/hero'];
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
@@ -1465,6 +1488,7 @@
     });
     document.addEventListener('submit', e => {
       const f = e.target;
+      if (f.matches('[data-mwho]')) { e.preventDefault(); return guessM(f); }
       if (f.matches('[data-pnew]')) { e.preventDefault(); return newPlayer(f.querySelector('input').value); }
       if (f.matches('[data-pname]')) { e.preventDefault(); f.querySelector('input').blur(); return; } // 흐려지면서 change 로 이름이 적힌다
       if (!C) return;

@@ -103,6 +103,17 @@ img{max-width:100%}
 .m-letter h3{margin:0 0 10px;font:700 16px var(--f-doc);color:#6d5a44}
 .m-letter p{margin:0 0 10px}
 .m-sig{text-align:right}
+.m-who{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 14px;margin-top:18px;padding-top:14px;border-top:1px dashed rgba(58,36,24,.35)}
+.m-who label{display:flex;flex-direction:column;gap:2px;flex:1 1 12em;min-width:0}
+.m-who label span{font:700 13px/1.4 var(--f-doc);color:#6d5a44}
+.m-who input{height:36px;padding:0 4px;border:0;border-bottom:1.5px solid rgba(58,36,24,.45);border-radius:0;background:transparent;font:26px/36px var(--f-hand2);color:#3a2418}
+.m-who input:focus{outline:0;border-bottom-color:var(--red)}
+.m-hint{flex-basis:100%;margin:2px 0 0!important;font:20px/1.3 var(--f-hand);color:var(--pencil)}
+.m-ps{margin-top:18px;padding-top:14px;border-top:1px dashed rgba(58,36,24,.35)}
+.m-ps p:first-child{font-weight:700}
+.m-ps.reveal{animation:m-ps-in 1.6s ease-out both}
+@keyframes m-ps-in{from{opacity:0;filter:blur(3px)}to{opacity:1;filter:none}}
+@media (prefers-reduced-motion:reduce){.m-ps.reveal{animation:none}}
 .cab-foot{margin-top:48px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;font:11.5px/1.6 var(--f-mono);color:#8f8269}
 .cab-foot p{margin:0;max-width:70ch}
 
