@@ -31,9 +31,10 @@
     id: 'c05', no: 5, region: 'overseas',
     title: '모래시계의 편지', year: '1968–1969', place: '캘리포니아 카브릴로 만 연안 (가상 지명)',
     motif: '모티프: 조디악 연쇄살인', length: '약 35분',
-    stars: 4,
+    stars: 4, graphic: true,
+    warn: '이 기록에는 총상의 자리와 발사 거리, 차 안팎의 혈흔을 검시·감식 기록의 말투로 적은 대목과 그 현장 사진이 들어 있습니다.',
     frame: 'papers',
-    mood: { light: 'sodium', fx: 'fog', amb: ['surf', 'horn'], line: '1969년, 캘리포니아 해안의 밤안개. 편집국 앞으로 모래시계가 그려진 편지가 온다.' },
+    mood: { light: 'sodium', fx: 'fog', amb: ['surf', 'horn', 'drone'], line: '1969년, 캘리포니아 해안의 밤안개. 편집국 앞으로 모래시계가 그려진 편지가 온다.' },
     tag: '**증거철 05** · KNOWLTON POLICE DEPT. · Case 68-1214 / 69-0503 · 편지 원본은 사본으로 대체 · 번역본',
     disclaimer: '실제 미제 사건의 모티프만 빌린 창작입니다. 도시·신문사·인물은 모두 지어낸 것이며, 실제 사건의 피해자나 용의자와 아무 관련이 없습니다.',
     emptyRead: '놀턴 경찰서 지하 창고에서 올라온 상자. 신문사 편집국이 넘긴 편지 사본과 경찰 기록이 섞여 있다.',
@@ -153,7 +154,7 @@
     },
     docs: {
       /* ── 편집국 우편함 ── */
-      m_1: { cls: 'f-gaegu ink-blue', src: 'mail', title: '⧗ 편지 (1)', meta: '1968년 12월 17일 (화) 수령 · 시티 데스크 앞', body: [
+      m_1: { cls: 'f-gaegu ink-blue', src: 'mail', blood: false, title: '⧗ 편지 (1)', meta: '1968년 12월 17일 (화) 수령 · 시티 데스크 앞', body: [
         { img: 'letter1', cap: '첫 편지와 봉투 (사본).' },
         { note: '원문 영어. 파란 볼펜으로 쓴 대문자. 편집국 번역부 옮김.' },
         '편집자에게.',
@@ -164,7 +165,7 @@
         { sign: '⧗' },
         { p: '봉투 — [[소인]] SANTA REINA CALIF · DEC 16 1968 · AM ([[산타 레이나]] 우체국, 월요일 아침 수거분) · 6센트 우표 · 받는 이 주소도 대문자', f: 'f_postmark' },
       ] },
-      m_2: { cls: 'f-gaegu ink-blue', src: 'mail', title: '⧗ 편지 (2) — 암호문 동봉', meta: '1969년 5월 6일 (화) 수령 · 시티 데스크 앞', body: [
+      m_2: { cls: 'f-gaegu ink-blue', src: 'mail', blood: false, title: '⧗ 편지 (2) — 암호문 동봉', meta: '1969년 5월 6일 (화) 수령 · 시티 데스크 앞', body: [
         { img: 'cipherimg', cap: '둘째 장에 그려진 기호들 (사본).' },
         { note: '원문 영어. 같은 파란 볼펜 대문자.' },
         'THE SAND RUNS. [[시더 크릭]]도 나다.',
@@ -174,7 +175,7 @@
         { sign: '⧗' },
         { p: '봉투 — 소인 MILLBROOK CALIF · MAY 5 1969 · AM ([[밀브룩]] 우체국, 월요일 아침 수거분) · 6센트 우표 2장', f: 'f_postmark' },
       ] },
-      m_3: { cls: 'typed', src: 'mail', title: '⧗ 편지 (3) — 타자', meta: '1969년 5월 9일 (금) 수령 · 편집자 앞', body: [
+      m_3: { cls: 'typed', src: 'mail', blood: false, title: '⧗ 편지 (3) — 타자', meta: '1969년 5월 9일 (금) 수령 · 편집자 앞', body: [
         { img: 'typed', cap: '타자로 친 편지 (사본).' },
         { note: '원문 영어. [[타자기]]로 침. 소문자 e 윗부분이 군데군데 끊겨 있다. 서명 자리에 모래시계를 펜으로 그렸는데 위아래 삼각형 크기가 다르다.' },
         '쿠리어 편집자 귀하.',
@@ -183,7 +184,7 @@
         { sign: '(펜으로 그린 모래시계)' },
         '봉투 — 소인 KNOWLTON CALIF · MAY 8 1969 · PM (놀턴 중앙우체국) · 주소는 타자',
       ] },
-      m_4: { cls: 'f-gaegu ink-blue', src: 'mail', title: '⧗ 편지 (4)', meta: '1969년 8월 19일 (화) 수령 · 시티 데스크 앞', body: [
+      m_4: { cls: 'f-gaegu ink-blue', src: 'mail', blood: false, title: '⧗ 편지 (4)', meta: '1969년 8월 19일 (화) 수령 · 시티 데스크 앞', body: [
         { note: '원문 영어. 파란 볼펜 대문자.' },
         'THE SAND RUNS.',
         '토요일 밤 [[그레이록 등대]]에 경찰차가 네 대 있더군. 나는 그 앞을 지나갔다. 너희는 나를 보고도 보지 못한다.',
@@ -192,19 +193,19 @@
         { p: '봉투 — 소인 PORT HALEY CALIF · AUG 18 1969 · AM ([[포트 헤일리]] 우체국, 월요일 아침 수거분)', f: 'f_postmark' },
         { m: '편지는 무엇이든 쓸 수 있다. 봉투는 제가 지나온 길만 말한다.' },
       ] },
-      m_r1: { cls: 'f-melody ink-navy', src: 'mail', title: '독자 편지 — "살인자에게 1면을 내주다니"', meta: '1968년 12월 23일 수령 · 밀브룩 거주 독자', body: [
+      m_r1: { cls: 'f-melody ink-navy', src: 'mail', blood: false, title: '독자 편지 — "살인자에게 1면을 내주다니"', meta: '1968년 12월 23일 수령 · 밀브룩 거주 독자', body: [
         '편집자에게. 저는 쿠리어를 20년 읽었습니다. 그런데 그런 사람의 편지를 1면에 싣다니요. 그 사람은 바로 그걸 바라는 겁니다.',
         '우리 동네에선 요즘 해가 지면 아무도 차를 세워 두지 않습니다. 일요일 아침 신문을 주우러 나가는 것도 겁이 난다는 이웃이 있어요.',
         { sign: 'H. 캠벨 부인' },
       ] },
-      m_r2: { cls: 'f-pen ink-black', src: 'mail', need: ['k_cipher'], title: '독자 편지 — "암호를 풀었습니다"', meta: '1969년 5월 12일 수령 · 놀턴 거주 독자 (고교 교사)', body: [
+      m_r2: { cls: 'f-pen ink-black', src: 'mail', need: ['k_cipher'], blood: false, title: '독자 편지 — "암호를 풀었습니다"', meta: '1969년 5월 12일 수령 · 놀턴 거주 독자 (고교 교사)', body: [
         '편집자에게. 금요일자 암호를 풀었습니다. 답은 THE POLICE ARE BLIND AND DEAF입니다. 기호가 반복되는 자리를 세어 보면 압니다.',
         '(번역부 메모: 첫 줄 둘째 낱말은 기호가 넷인데 POLICE는 여섯 글자다. 틀린 풀이.)',
         { sign: 'G. 월시' },
       ] },
 
       /* ── 쿠리어 자료실 ── */
-      n_1216: { src: 'morgue', find: ['k_masonhill', 'k_dec14'], title: '메이슨 힐 전망대서 젊은 남녀 숨진 채 발견', kicker: 'MONDAY · FINAL EDITION', meta: '1968년 12월 16일 (월) · 1면', body: [
+      n_1216: { src: 'morgue', find: ['k_masonhill', 'k_dec14'], blood: false, title: '메이슨 힐 전망대서 젊은 남녀 숨진 채 발견', kicker: 'MONDAY · FINAL EDITION', meta: '1968년 12월 16일 (월) · 1면', body: [
         { img: 'masonhill', cap: '메이슨 힐 전망대 주차장. 15일 아침.' },
         '14일 밤 [[메이슨 힐]] 전망대 주차장에 서 있던 승용차 안에서 [[대니얼 오어]](22)와 [[루스 캘러핸]](20)이 숨진 채 발견됐다. 두 사람은 약혼을 앞두고 있었다.',
         '카운티 보안관실은 "지갑과 시계가 그대로 있어 강도로 보기 어렵다"고 밝혔다. 두 사람은 총상을 입었으며, 발견 시각은 15일 0시 50분쯤이다.',
@@ -212,23 +213,23 @@
         '전망대는 시내에서 차로 15분 거리로, 밤이면 젊은 연인들이 차를 세우는 곳으로 알려져 있다.',
         { note: 'The Knowlton Courier · 번역: 편집국 번역부' },
       ] },
-      n_1220: { src: 'morgue', find: ['k_hourglass', 'k_courier', 'k_withheld'], title: '"모래시계"라는 사내, 본사에 편지 — "1면에 실어라"', kicker: 'FRIDAY · FINAL EDITION', meta: '1968년 12월 20일 (금) · 1면', body: [
+      n_1220: { src: 'morgue', find: ['k_hourglass', 'k_courier', 'k_withheld'], blood: false, title: '"모래시계"라는 사내, 본사에 편지 — "1면에 실어라"', kicker: 'FRIDAY · FINAL EDITION', meta: '1968년 12월 20일 (금) · 1면', body: [
         '메이슨 힐 사건의 범인이라고 스스로 밝힌 사람이 17일 본사 편집국에 편지를 보내왔다. 편지 끝에는 모래시계 그림으로 서명이 되어 있었다.',
         '본사는 경찰과 협의한 끝에 편지를 싣기로 했다. 다만 경찰의 요청에 따라 편지의 일부는 [[보도 유보]]했다.',
         '[[마거릿 로웰]] 시티 에디터는 "싣지 않으면 또 사람을 해치겠다는 편지를 무시할 수 없었다"고 말했다.',
         { note: 'The Knowlton Courier · 번역: 편집국 번역부' },
       ] },
-      n_0505: { src: 'morgue', find: ['k_cedar', 'k_may3'], title: '시더 크릭 주차장서 또… 여성 숨지고 남성 중상', kicker: 'MONDAY · FINAL EDITION', meta: '1969년 5월 5일 (월) · 1면', body: [
+      n_0505: { src: 'morgue', find: ['k_cedar', 'k_may3'], blood: false, title: '시더 크릭 주차장서 또… 여성 숨지고 남성 중상', kicker: 'MONDAY · FINAL EDITION', meta: '1969년 5월 5일 (월) · 1면', body: [
         { img: 'cedar', cap: '시더 크릭 트레일 주차장. 4일 아침.' },
         '3일 밤 [[시더 크릭]] 트레일 주차장에서 [[앤 노리스|k_morris]](24)가 숨지고 함께 있던 [[레이 두건]](27)이 크게 다쳤다. 두건은 병원에서 고비를 넘겼다.',
         '경찰은 사건 직후 경찰서에 걸려 온 [[신고 전화|k_payphone]] 한 통에 대해 "수사 중"이라며 말을 아꼈다.',
         '지난해 12월 메이슨 힐 사건과의 관련성에 대해 경찰은 "아직 말할 단계가 아니다"라고 했다.',
         { note: 'The Knowlton Courier · 번역: 편집국 번역부' },
       ] },
-      n_0507: { src: 'morgue', find: ['k_misprint', 'k_morris'], title: '바로잡습니다', kicker: 'WEDNESDAY', meta: '1969년 5월 7일 (수) · 2면', body: [
+      n_0507: { src: 'morgue', find: ['k_misprint', 'k_morris'], blood: false, title: '바로잡습니다', kicker: 'WEDNESDAY', meta: '1969년 5월 7일 (수) · 2면', body: [
         { p: '5일자 1면 시더 크릭 사건 기사에서 피해자 이름 「앤 노리스」는 「[[앤 모리스]]」의 [[오자]]이기에 바로잡습니다. 유족께 사과드립니다.', f: 'f_misprint' },
       ] },
-      n_0509: { src: 'morgue', find: ['k_cipher', 'k_sketch', 'k_star'], title: '"풀어 보라" — 모래시계의 암호문 전문', kicker: 'FRIDAY · FINAL EDITION', meta: '1969년 5월 9일 (금) · 1면', body: [
+      n_0509: { src: 'morgue', find: ['k_cipher', 'k_sketch', 'k_star'], blood: false, title: '"풀어 보라" — 모래시계의 암호문 전문', kicker: 'FRIDAY · FINAL EDITION', meta: '1969년 5월 9일 (금) · 1면', body: [
         '본사는 6일 도착한 편지에 들어 있던 [[암호문]]을 그대로 싣는다. 경찰과 대학 언어학과가 풀이에 나섰으나 아직 뜻을 밝히지 못했다.',
         { cipher: CIPHER_LINE },
         { img: 'sketch', cap: '생존자의 기억을 바탕으로 경찰이 만든 [[몽타주]].' },
@@ -236,13 +237,13 @@
         '경쟁지 [[베이 이브닝 스타]]는 암호를 가장 먼저 푼 독자에게 500달러를 주겠다고 발표했다.',
         { note: 'The Knowlton Courier · 번역: 편집국 번역부' },
       ] },
-      n_sunday: { src: 'morgue', find: ['k_sunday'], title: '쿠리어 일요일판, 만 북쪽 세 마을까지 새벽 배달', kicker: 'SUNDAY · ANNOUNCEMENT', meta: '1968년 9월 29일 (일) · 사고(社告)', body: [
+      n_sunday: { src: 'morgue', find: ['k_sunday'], blood: false, title: '쿠리어 일요일판, 만 북쪽 세 마을까지 새벽 배달', kicker: 'SUNDAY · ANNOUNCEMENT', meta: '1968년 9월 29일 (일) · 사고(社告)', body: [
         { img: 'truck', cap: '새로 들여온 배송 트럭.' },
         { p: '다음 달부터 일요일판이 [[7번 노선]] 신설로 [[산타 레이나]], [[밀브룩]], [[포트 헤일리]]의 가정에도 해 뜨기 전에 배달된다.', f: 'f_route7' },
         '배송 트럭은 토요일 자정이 지나면 [[도크 스트리트]]의 [[배송 창고]]에서 판을 싣고 떠난다.',
         '배송부장 [[버넌 오스굿]]은 "일요일 아침 식탁마다 쿠리어를"이라고 말했다.',
       ] },
-      n_0818: { src: 'morgue', find: ['k_graylock'], title: '등대 잠복 허탕 — 모래시계 나타나지 않아', kicker: 'MONDAY', meta: '1969년 8월 18일 (월) · 3면', body: [
+      n_0818: { src: 'morgue', find: ['k_graylock'], blood: false, title: '등대 잠복 허탕 — 모래시계 나타나지 않아', kicker: 'MONDAY', meta: '1969년 8월 18일 (월) · 3면', body: [
         { img: 'lighthouse', cap: '그레이록 등대길. 잠복 이튿날 아침.' },
         '경찰은 16일 밤부터 17일 아침까지 [[그레이록 등대]] 일대에 잠복했으나 수상한 사람을 찾지 못했다. 등대 근처에서 연인들의 차가 자주 서는 데 따른 조치였다.',
         '경찰 관계자는 "밤새 지나간 차는 몇 대 되지 않았다"고 말했다.',
@@ -250,14 +251,37 @@
       ] },
 
       /* ── 놀턴 경찰 기록철 ── */
-      r_radio: { src: 'kpd', title: '무전 기록 — 12월 15일 새벽', meta: '카운티 보안관실 통신실 · 채널 2 · 받아 적은 이: 통신원 매킨리', body: [
+      r_radio: { src: 'kpd', blood: true, title: '무전 기록 — 12월 15일 새벽', meta: '카운티 보안관실 통신실 · 채널 2 · 받아 적은 이: 통신원 매킨리', body: [
         { say: '메이슨 힐 전망대 주차장, 승용차 1대. 안에 남녀 2명, 반응 없음. 구급차 요청.', who: '순찰 12', at: '00:52' },
         { say: '구급차 출발. 보안관 대리 두 명 더 보냄.', who: '통신실', at: '00:54' },
         { say: '두 사람 다 숨졌음. 현장 보존. 차 [[카 라디오]] 켜져 있음, 음악 나오고 있음. 탄피 여럿, 수거 대기.', who: '순찰 12', at: '01:12', f: 'f_radio_broadcast' },
         { say: '알았다. 검시관 연락하겠다.', who: '통신실', at: '01:13' },
         { note: '※ 이 채널은 시판되는 [[경찰 무전 수신기]](police band 라디오)로 누구나 들을 수 있음. 카운티 안에 수백 대로 추정.' },
       ] },
-      r_call: { src: 'kpd', title: '통신실 녹취 — 5월 4일 0시 18분 신고 전화', meta: '놀턴 경찰서 통신실 · 받은 이: 당직 [[하비 스톤 경사]] · 녹음 테이프에서 옮겨 적음', body: [
+      r_coroner: { src: 'kpd', need: ['k_orr'], skin: 'report', blood: 'heavy', title: '검시 보고서 — 메이슨 힐 (68-1214)', kicker: 'KABRILLO COUNTY CORONER · 번역본', meta: '1968년 12월 15일 09:40 ~ 16:10 · 카운티 병원 영안실 · 검시의 H. 린드퀴스트 · 입회 보안관 대리 2', body: [
+        { img: 'mh_car', cap: '15일 01:30 현장 사진. 검시관이 오기 전까지 두 사람은 앞좌석에 그대로 있었다.' },
+        { h: '1. 대니얼 오어 (남 · 22세) — 운전석' },
+        { rows: [
+          ['총상', '2곳. 사출구 없음. 탄두 2개 회수'],
+          ['①', '왼쪽 관자놀이. 사입구 지름 약 6mm, 둘레 지름 4cm 안에 화약 알갱이가 박힌 점상 문신 — 발사 거리 15~45cm. 탄두는 머리뼈 안을 오른쪽 위로 지나 두정부 안쪽에 멈춤'],
+          ['②', '왼쪽 가슴 셋째 갈비 사이. 화약 문신 없음 — 60cm 넘는 거리. 우심실을 뚫고 척추 오른쪽에 멈춤'],
+          ['손', '왼손 등과 새끼손가락 쪽에 화약 알갱이 몇 점 — 얼굴 앞으로 손을 들어 올린 채 맞은 것으로 봄'],
+          ['사인', '① 두부 총상'],
+        ], head: ['항목', '소견'] },
+        { h: '2. 루스 캘러핸 (여 · 20세) — 조수석' },
+        { rows: [
+          ['총상', '4곳. 등 오른쪽 위 3, 오른쪽 위팔 1 (팔을 뚫고 가슴으로 다시 들어감). 탄두 4개 회수'],
+          ['방향', '모두 등에서 가슴 쪽으로, 차의 왼쪽에서 오른쪽으로, 조금 아래로. 화약 문신 없음 — 1m 넘는 거리'],
+          ['자세', '몸통이 조수석 문 쪽으로 돌아 있었음. 운전석 창에 등을 보인 채 맞음'],
+          ['손', '오른손 손바닥과 손가락 안쪽에 제 피. 손톱 두 개 밑에 문 안쪽 손잡이의 크롬 도금 부스러기'],
+          ['사인', '폐와 대동맥 손상에 따른 실혈'],
+        ], head: ['항목', '소견'] },
+        '두 사람 모두 위에 팝콘과 탄산음료가 조금 — 먹은 지 1~2시간. 체온·시반·시강으로 본 사망 시각은 14일 23시에서 15일 0시 30분 사이.',
+        '몸에서 나온 탄두 6개와 계기판·조수석 문틀에서 파낸 2개, 모두 .22 구경 롱 라이플. 강선 자국이 같아 한 총에서 나온 것으로 봄. 탄피 8개는 운전석 문 밖 자갈 위 1m 안에 모여 있었음 (보안관실 감식).',
+        { note: '※ 검시의 소견: 첫 발은 반쯤 내린 운전석 창 틈으로, 창 바로 밖에서 쏨. 조수석 여성은 문을 열려고 돌아앉다가 등에 맞음. 쏜 사람은 서 있던 자리에서 한 걸음도 옮기지 않았음.' },
+        { sign: '카브릴로 카운티 검시의 H. 린드퀴스트 (서명)' },
+      ] },
+      r_call: { src: 'kpd', blood: true, title: '통신실 녹취 — 5월 4일 0시 18분 신고 전화', meta: '놀턴 경찰서 통신실 · 받은 이: 당직 [[하비 스톤 경사]] · 녹음 테이프에서 옮겨 적음', body: [
         { say: '놀턴 경찰서입니다.', who: '스톤', at: '00:18' },
         { say: '[[시더 크릭]] 트레일 주차장에 가 봐. 차 안에 두 사람이 있다.', who: '남자' },
         { say: '성함이 어떻게 되십니까? 지금 어디서—', who: '스톤' },
@@ -268,61 +292,98 @@
         '00:20 스톤 경사, 전화회사 교환국에 [[회선 추적]] 요청. 00:21 순찰차 2대 시더 크릭으로 출발.',
         { note: '목소리: 낮고 차분함. 사투리 없음. 30대 안팎으로 들림 (스톤 경사 소견).' },
       ] },
-      r_trace: { src: 'kpd', need: ['k_trace'], skin: 'report', title: '회선 추적 회신 — 5월 4일 새벽', meta: '카브릴로 전화회사 놀턴 교환국 → 놀턴 경찰서', body: [
+      r_trace: { src: 'kpd', need: ['k_trace'], skin: 'report', blood: false, title: '회선 추적 회신 — 5월 4일 새벽', meta: '카브릴로 전화회사 놀턴 교환국 → 놀턴 경찰서', body: [
         { img: 'payphone', cap: '00:39 순찰차가 찍은 공중전화. 수화기가 늘어져 있다.' },
         { rows: [['00:20', '경찰서 요청 접수. 통화 회선이 열린 채 유지됨'], ['00:29', '발신 회선 확인 — 도크 스트리트 212, 주유소 옆 [[공중전화]] (KN 4-0917)'], ['00:39', '순찰차 도착. 수화기가 줄에 매달려 흔들리고 있었음. 주변에 사람 없음'], ['비고', '공중전화 길 건너편은 놀턴 쿠리어 [[배송 창고]]. 토요일 밤 일요일판 싣는 작업 중이라 창고 불이 켜져 있었음']], head: ['시각', '내용'], f: { 1: 'f_trace', 3: 'f_trace' } },
         { p: '공중전화 수화기와 부스 유리에서 지문 여럿 채취 — 주유소 손님과 섞여 가려내기 어려움.' },
         { sign: '교환국 야간 주임 R. 파울러' },
       ] },
-      r_withheld: { src: 'kpd', need: ['k_withheld'], skin: 'report', title: '협조 요청 — 보도 유보 사항', meta: '놀턴 경찰서 수사과 → 쿠리어·이브닝 스타 편집국 · 1969년 5월 5일', body: [
+      r_scene: { src: 'kpd', need: ['k_morris'], skin: 'report', blood: 'heavy', title: '현장 감식 기록 — 시더 크릭 트레일 주차장', kicker: 'KNOWLTON P.D. · 감식반 · 69-0503 · 번역본', meta: '1969년 5월 4일 00:43 순찰차 도착 · 02:10 ~ 06:30 감식 · 감식반 E. 토레스', body: [
+        { img: 'cedar_car', cap: '조수석 쪽에서 들여다본 피해 차량. 02:30 섬광 촬영.' },
+        { rows: [
+          ['차량', '1964년형 2도어 세단 (레이 두건 소유). 시동·전조등·라디오 모두 꺼짐. 문 잠금 풀림'],
+          ['조수석 창', '밖에서 안으로 깨짐. 창틀에 가장자리만 남음. 유리 알갱이는 조수석, 운전석 바닥, 두 사람 무릎 자리까지 흩어짐. 창밖 자갈 위에는 몇 알뿐'],
+          ['탄피', '9mm 파라벨룸 7개 — 조수석 문에서 1~2m 사이에 반원을 그리며 흩어짐'],
+          ['지붕', '[[캠핑 랜턴]] 1개 — 켜진 채 발견. 기름 거의 다 탐. (보도 유보 사항 2 — 무전에 올리지 않음)'],
+        ], head: ['항목', '소견'], f: { 3: 'f_withheld' } },
+        { h: '혈흔' },
+        { list: [
+          '1. 조수석 등받이·머리받이와 천장 안감 — 지름 1~3mm 비산흔 수십 점. 조수석에서 운전석 쪽으로 뻗음.',
+          '2. 조수석 시트 — 고인 피. 가장자리부터 말라 들어감. 시트 스프링을 지나 바닥 매트까지 스밈.',
+          '3. 운전석 창 안쪽과 운전석 문 안쪽 — 가는 비산흔과 흘러내린 자국.',
+          '4. 운전석 문 안쪽 손잡이와 창틀 — 손바닥 전이흔 여러 겹. 손잡이를 몇 번 놓쳤다가 다시 잡은 자국.',
+          '5. 자갈 위 낙하흔 — 운전석 문에서 나와 트렁크를 돌아 조수석 쪽으로 이어짐. 뒤 펜더에 손바닥 자국 (차를 짚고 돌아간 자국). 조수석 뒷바퀴에서 1.8m 되는 자리에 고인 피 — 생존자가 엎드려 있던 자리. 쏜 사람이 서 있던 쪽으로 기어간 셈.',
+        ] },
+        { h: '발자국 · 바퀴 자국' },
+        '조수석 쪽 흙과 자갈에 남자 신발 자국 — 크기 10½ 안팎, 밑창에 가로 홈이 촘촘한 작업화. 차 뒤쪽에서 와서 조수석 창 앞에 멈추었다가 같은 길로 돌아감. 보폭이 처음부터 끝까지 고르다. 뛴 자국이 없다.',
+        '피해 차 뒤 약 6m에 다른 차의 바퀴 자국. 한 번에 빠져나감. 후진한 자국 없음.',
+        { note: '※ 조수석 발밑에 앤 모리스의 핸드백 — 잠긴 채. 지갑 속 21달러 그대로.' },
+        { note: '※ 00:18 신고 전화는 「차 안에 두 사람이 있다」고 했다. 순찰차가 왔을 때 한 사람은 차 밖 자갈 위에 있었다. 전화를 건 사람은 그가 문을 열고 나오는 것을 보지 못했다.' },
+        { sign: '감식반 E. 토레스' },
+      ] },
+      r_hospital: { src: 'kpd', need: ['k_dugan'], skin: 'report', blood: 'heavy', title: '진료 기록 발췌 — 레이 두건', kicker: 'KNOWLTON MUNICIPAL HOSPITAL · 응급실 · 외과 · 번역본', meta: '1969년 5월 4일 01:22 입원 · 수사과 요청으로 발췌', body: [
+        { rows: [
+          ['01:22', '구급차 도착. 의식 있으나 말을 하지 못함. 혈압 70/40. 옷과 머리카락에 유리 알갱이'],
+          ['총상 ①', '오른쪽 어깨 — 쇄골 골절. 탄두가 오른쪽 폐 윗부분을 찢고 등 근육 속에서 멈춤. 가슴 안에 피와 공기가 차 숨을 제대로 쉬지 못함'],
+          ['총상 ②', '오른쪽 위팔 안쪽 관통. 사입구 둘레에 화약 문신 없이 유리 가루가 박힘 — 창유리를 사이에 두고 맞음'],
+          ['총상 ③', '오른쪽 옆구리 — 아홉째 갈비 골절, 간 가장자리 찢김'],
+          ['열상', '두 아래팔 바깥쪽에 유리 조각에 베인 상처 11곳 — 얼굴 앞으로 팔을 들어 막은 자세'],
+          ['처치', '기관 삽관. 오른쪽 가슴관 삽입 (피 1,100cc 빠짐). 개복 수술 (간 봉합). 수혈 7단위'],
+        ], head: ['시각 · 부위', '기록'] },
+        '5월 6일 중환자실 간호 기록: 환자가 종이에 「불빛」 「목소리」 두 낱말만 되풀이해 씀. 목에 관을 꽂고 있어 닷새 동안 말을 할 수 없음.',
+        '5월 7일 수사과 면담 (필담): 뒤에 선 차에서 한 사람이 손전등을 들고 조수석 쪽으로 걸어옴. 경찰인 줄 알았음. 불빛 뒤에서 낮은 목소리로 무어라 말했고, 그다음에 유리가 깨졌다.',
+        { note: '※ 함께 실려 온 앤 모리스 (24)는 01:24 도착 때 이미 숨짐. 오른쪽 가슴 2, 오른쪽 옆구리 1, 오른쪽 위팔 1 — 네 곳 모두 사입구 둘레에 유리 가루. 검시관 소견: 조수석 창을 사이에 두고 1m 안에서 쏨. 몸에서 나온 탄두와 두건의 탄두 모두 9mm.' },
+        { sign: '외과 당직의 R. 페이지 (서명)' },
+      ] },
+      r_withheld: { src: 'kpd', need: ['k_withheld'], skin: 'report', blood: false, title: '협조 요청 — 보도 유보 사항', meta: '놀턴 경찰서 수사과 → 쿠리어·이브닝 스타 편집국 · 1969년 5월 5일', body: [
         { stamp: 'CONFIDENTIAL' },
         '아래 사항은 수사상 필요하므로 기사로 쓰지 말아 주기 바람.',
         { list: ['1. ⧗ 편지의 첫 문장 (12월 편지에서 앞으로 늘 이 문구로 시작하겠다고 밝힘)', '2. 시더 크릭 현장 피해 차량 지붕 위의 [[캠핑 랜턴]]', '3. 5월 4일 새벽 신고 전화의 내용'], f: { 1: 'f_withheld' } },
         { p: '2번은 현장 무전에도 올리지 않았음. 생존자와 현장 경관 네 명만 아는 사항.', f: 'f_withheld' },
         { sign: '수사과장 D. 하글런드' },
       ] },
-      r_typewriter: { src: 'kpd', need: ['k_typewriter'], skin: 'report', title: '문서 감정 회신 — 5월 9일 도착 타자 편지', meta: '주 법무부 감식과 → 놀턴 경찰서 · 1969년 5월 16일', body: [
+      r_typewriter: { src: 'kpd', need: ['k_typewriter'], skin: 'report', blood: false, title: '문서 감정 회신 — 5월 9일 도착 타자 편지', meta: '주 법무부 감식과 → 놀턴 경찰서 · 1969년 5월 16일', body: [
         { rows: [['활자', '엘리트체. 소문자 e 윗고리 파손, 대문자 T 왼쪽으로 기울어 찍힘'], ['대조', '쿠리어 독자 투고란 단골 투고자 [[월도 펠]]의 투고 편지 11통과 같은 파손 흔적'], ['첫 문장', '없음 — 다른 ⧗ 편지(손글씨)와 달리 첫 문장이 빠져 있음'], ['서명', '펜으로 그린 모래시계. 다른 편지의 모래시계와 비율이 다름']], head: ['항목', '결과'], f: { 1: 'f_typewriter' } },
         '손글씨 편지 세 통과는 쓴 사람이 다른 것으로 봄.',
       ] },
-      r_jail: { cls: 'typed', src: 'kpd', need: ['k_pell'], skin: 'ledger', title: '카운티 구치소 입출소 기록 — 월도 펠', meta: '리나 카운티 보안관실 · 발췌', body: [
+      r_jail: { cls: 'typed', src: 'kpd', need: ['k_pell'], skin: 'ledger', blood: false, title: '카운티 구치소 입출소 기록 — 월도 펠', meta: '리나 카운티 보안관실 · 발췌', body: [
         { rows: [['1969.05.03 21:10', '입소', '주취 · 메인 스트리트 술집에서 소란'], ['1969.05.04 07:00', '퇴소', '벌금 25달러 납부 약속']], head: ['일시', '구분', '사유'], f: { 0: 'f_pell_jail' } },
         { note: '입소 뒤 밤새 공동 보호실. 당직 간수 확인.' },
       ] },
-      r_coyle: { cls: 'typed', src: 'kpd', need: ['k_coyle'], skin: 'ledger', title: '출근 카드 조회 — 미치 코일', meta: '[[베이쇼어 정유공장]] 인사과 회신 · 1968년 12월 20일', body: [
+      r_coyle: { cls: 'typed', src: 'kpd', need: ['k_coyle'], skin: 'ledger', blood: false, title: '출근 카드 조회 — 미치 코일', meta: '[[베이쇼어 정유공장]] 인사과 회신 · 1968년 12월 20일', body: [
         { rows: [['1968.12.14 (토)', '21:58 출근 타각', '야간조'], ['1968.12.15 (일)', '06:03 퇴근 타각', '—']], head: ['날짜', '기록', '비고'], f: { 0: 'f_coyle_shift' } },
         '야간 반장 진술: 코일은 밤새 3번 증류탑에서 함께 일했음. 자리를 비운 것은 식사 시간 20분뿐. 정유공장에서 메이슨 힐까지 차로 40분.',
       ] },
-      r_stakeout: { src: 'kpd', need: ['k_graylock'], skin: 'ledger', title: '잠복 일지 — 그레이록 등대 (8월 16~17일)', meta: '놀턴 경찰서 수사과 · 차량 4대', body: [
+      r_stakeout: { src: 'kpd', need: ['k_graylock'], skin: 'ledger', blood: false, title: '잠복 일지 — 그레이록 등대 (8월 16~17일)', meta: '놀턴 경찰서 수사과 · 차량 4대', body: [
         { rows: [['22:00', '배치 끝남. 등대길 양쪽 2대씩'], ['23:40', '승용차 1대 — 연인. 검문 뒤 돌려보냄'], ['02:15', '이상 없음'], ['05:12', '놀턴 쿠리어 배송 트럭 1대 북쪽으로 지나감 — 일요일판 배달. 검문하지 않음'], ['05:58', '같은 트럭 남쪽으로 돌아감'], ['06:30', '철수']], head: ['시각', '내용'], f: { 3: 'f_stakeout_truck' } },
       ] },
-      r_route: { cls: 'typed', src: 'kpd', need: ['k_route7'], skin: 'ledger', title: '배송 노선표 — 7번 노선 (일요일판)', meta: '놀턴 쿠리어 배송부 · 1968년 10월 개정 · 임의 제출', body: [
+      r_route: { cls: 'typed', src: 'kpd', need: ['k_route7'], skin: 'ledger', blood: false, title: '배송 노선표 — 7번 노선 (일요일판)', meta: '놀턴 쿠리어 배송부 · 1968년 10월 개정 · 임의 제출', body: [
         { rows: [['00:30', '[[도크 스트리트]] 창고에서 판 싣기'], ['01:10', '창고 출발'], ['02:40', '[[산타 레이나]] — 판매소 3곳, 우체국 앞 신문함'], ['03:50', '[[밀브룩]] — 판매소 2곳, 가정 배달원 인계'], ['05:12', '[[그레이록 등대]]길 지나감'], ['05:40', '[[포트 헤일리]] — 판매소 2곳'], ['07:00 전후', '창고 돌아옴']], head: ['시각', '들르는 곳'], f: { 2: 'f_route7', 3: 'f_route7', 5: 'f_route7' } },
         '일요일판만 달리는 노선. 평일에는 운행하지 않음.',
       ] },
 
       /* ── 배송부 배차 대장 (조회해야 나온다) ── */
-      q_1215: { src: 'haul', title: '배차 대장 — 1968년 12월 15일 (일)', kicker: 'KNOWLTON COURIER · CIRCULATION · SUNDAY ROUTES', meta: '배송부 배차 대장 사본 · 오스굿 부장 떼어 줌', body: [
+      q_1215: { src: 'haul', blood: false, title: '배차 대장 — 1968년 12월 15일 (일)', kicker: 'KNOWLTON COURIER · CIRCULATION · SUNDAY ROUTES', meta: '배송부 배차 대장 사본 · 오스굿 부장 떼어 줌', body: [
         { rows: [['1번 (시내)', '[[프랭크 델가도]]', '바꿈'], ['4번 (남부)', '해리스', '—'], ['7번 (북부)', '[[칼 브레넌]]', '바꿈 — 본래 델가도']], head: ['노선', '운전사', '비고'], f: { 2: 'f_roster7' } },
         { p: '바꿈 청: 브레넌 — 12월 13일 (금) 말로. 까닭 「북쪽 길이 한가하다」. 배송부장 서명.', f: 'f_swap' },
         { note: '7번 트럭 창고 출발 01:10 · 돌아옴 07:05.' },
       ] },
-      q_0504: { src: 'haul', title: '배차 대장 — 1969년 5월 4일 (일)', kicker: 'KNOWLTON COURIER · CIRCULATION · SUNDAY ROUTES', meta: '배송부 배차 대장 사본 · 오스굿 부장 떼어 줌', body: [
+      q_0504: { src: 'haul', blood: false, title: '배차 대장 — 1969년 5월 4일 (일)', kicker: 'KNOWLTON COURIER · CIRCULATION · SUNDAY ROUTES', meta: '배송부 배차 대장 사본 · 오스굿 부장 떼어 줌', body: [
         { rows: [['1번 (시내)', '[[프랭크 델가도]]', '바꿈'], ['4번 (남부)', '퀸', '해리스 병가 대신'], ['7번 (북부)', '[[칼 브레넌]]', '바꿈 — 본래 델가도']], head: ['노선', '운전사', '비고'], f: { 2: 'f_roster7' } },
         { p: '바꿈 청: 브레넌 — 5월 2일 (금) 말로. 까닭 적지 않음. 배송부장 서명.', f: 'f_swap' },
         { note: '판 싣기 00:30 시작 · 7번 트럭 창고 출발 01:12 · 돌아옴 07:12.' },
       ] },
-      q_0817: { src: 'haul', title: '배차 대장 — 1969년 8월 17일 (일)', kicker: 'KNOWLTON COURIER · CIRCULATION · SUNDAY ROUTES', meta: '배송부 배차 대장 사본 · 오스굿 부장 떼어 줌', body: [
+      q_0817: { src: 'haul', blood: false, title: '배차 대장 — 1969년 8월 17일 (일)', kicker: 'KNOWLTON COURIER · CIRCULATION · SUNDAY ROUTES', meta: '배송부 배차 대장 사본 · 오스굿 부장 떼어 줌', body: [
         { rows: [['1번 (시내)', '[[프랭크 델가도]]', '바꿈'], ['4번 (남부)', '퀸', '—'], ['7번 (북부)', '[[칼 브레넌]]', '바꿈 — 본래 델가도']], head: ['노선', '운전사', '비고'], f: { 2: 'f_roster7' } },
         { p: '배송부장 메모: 7번은 본래 델가도 노선. 지난 12월부터 이 대장에서 7번을 바꿔 탄 날은 셋 — 12.15, 5.4, 8.17. 셋 다 브레넌이 먼저 청함 (까닭은 대개 「북쪽 길이 한가하다」).', f: 'f_swap' },
         { note: '7번 트럭 창고 출발 01:08 · 돌아옴 06:58.' },
       ] },
-      q_usual: { src: 'haul', title: '배차 대장 — 그 밖의 일요일', kicker: 'KNOWLTON COURIER · CIRCULATION · SUNDAY ROUTES', meta: '조회한 날짜의 장을 한데 옮겨 적음', body: [
+      q_usual: { src: 'haul', blood: false, title: '배차 대장 — 그 밖의 일요일', kicker: 'KNOWLTON COURIER · CIRCULATION · SUNDAY ROUTES', meta: '조회한 날짜의 장을 한데 옮겨 적음', body: [
         { rows: [['1968.12.08', '브레넌', '해리스', '델가도'], ['1968.12.22', '브레넌', '해리스', '델가도'], ['1969.04.27', '브레넌', '해리스', '델가도'], ['1969.05.11', '브레넌', '퀸', '델가도'], ['1969.08.10', '브레넌', '퀸', '델가도']], head: ['일요일', '1번 (시내)', '4번 (남부)', '7번 (북부)'] },
         '1번 시내 노선은 [[칼 브레넌]], 7번 북부 노선은 [[프랭크 델가도]]가 맡는다. 이 날들에는 바꾼 기록이 없다.',
         { note: '해리스 — 5월부터 병가. 퀸이 대신 맡음.' },
       ] },
-      r_timecard: { cls: 'typed', src: 'kpd', need: ['k_timecard'], skin: 'ledger', title: '출근 카드 — 배송부 (5월 3일 토요일 밤)', meta: '놀턴 쿠리어 배송 창고 · 타각 기록 · 임의 제출', body: [
+      r_timecard: { cls: 'typed', src: 'kpd', need: ['k_timecard'], skin: 'ledger', blood: false, title: '출근 카드 — 배송부 (5월 3일 토요일 밤)', meta: '놀턴 쿠리어 배송 창고 · 타각 기록 · 임의 제출', body: [
         { img: 'depot', cap: '도크 스트리트 배송 창고. 토요일 밤 판 싣는 모습 (쿠리어 사진부).' },
         { rows: [['델가도', '23:52'], ['퀸', '00:05'], ['브레넌', '00:31'], ['창고 주임 월리스', '23:30']], head: ['이름', '출근 타각'], f: { 2: 'f_timecard' } },
         '판 싣기는 00:30 시작. 브레넌은 1분 늦음. 평소에는 자정 전에 옴 (같은 달 다른 토요일 23:50, 23:48, 23:55).',
@@ -425,7 +486,7 @@
       ],
       next: '보고서를 덮자, 서랍 속 다음 폴더의 끈이 풀려 있었다. → 기록실로 돌아가 CASE 06으로.',
     },
-    artStyle: '1969 American newspaper wire photo and police file photography, Northern California coast: black-and-white 35mm Tri-X, heavy grain, harsh on-camera flash at night, coastal fog and sodium streetlight glow, halftone dot texture when reproduced in the newspaper, late-1960s cars, phone booths and street furniture without brand logos. No readable text, no recognizable faces, no bodies, no blood, no weapons shown.',
+    artStyle: '1969 American newspaper wire photo and police file photography, Northern California coast: black-and-white 35mm Tri-X, heavy grain, harsh on-camera flash at night, coastal fog and sodium streetlight glow, halftone dot texture when reproduced in the newspaper, late-1960s cars, phone booths and street furniture without brand logos. Police scene photographs may show dark dried blood traces (fine spatter on upholstery, pooled stains soaked into seats, smeared palm marks on doors, drops on gravel), shattered safety glass and forms completely covered by grey blankets. No wounds, no exposed bodies, no recognizable faces, no weapons, no readable text.',
     art: {
       cover: { use: '기록실 폴더 표지 — 편집국 책상 위의 봉투 더미와 모래시계', ratio: '4:3',
         svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#3e3a34"/><rect x="30" y="50" width="96" height="60" fill="#e8e0cc" transform="rotate(-8 78 80)"/><rect x="60" y="40" width="96" height="60" fill="#f1ead8" transform="rotate(5 108 70)"/><rect x="132" y="46" width="14" height="16" fill="#8a3a2a" transform="rotate(5 108 70)"/><path d="M160 96 h24 l-12 16 l12 16 h-24 l12 -16 z" fill="#c9a86a" stroke="#6a5030" stroke-width="2"/></svg>',
@@ -442,12 +503,22 @@
         svg: '<svg viewBox="0 0 150 200"><rect width="150" height="200" fill="#e6e2d8"/><ellipse cx="75" cy="88" rx="32" ry="42" fill="none" stroke="#555" stroke-width="2"/><path d="M44 64 Q75 38 106 64" stroke="#555" stroke-width="4" fill="none"/><rect x="50" y="82" width="20" height="12" rx="3" fill="none" stroke="#333" stroke-width="3"/><rect x="80" y="82" width="20" height="12" rx="3" fill="none" stroke="#333" stroke-width="3"/><path d="M30 200 Q75 140 120 200" stroke="#555" stroke-width="2" fill="#bdb8ac"/></svg>',
         prompt: 'A 1969 police artist composite pencil sketch of a generic man around thirty with short hair and heavy-rimmed glasses, dark work jacket, frontal view, simple shading on off-white paper, printed in a newspaper with coarse halftone, deliberately generic features that resemble no real person.',
         avoid: '실존 인물(실제 사건의 몽타주 포함)을 닮지 않게.' },
-      masonhill: { use: '메이슨 힐 전망대 주차장 (사건 뒤 낮 풍경)', ratio: '16:9',
+      masonhill: { use: '메이슨 힐 전망대 주차장 (사건 이튿날 아침, 아직 서 있는 피해 차량)', ratio: '16:9', sensitive: true,
+        must: '반쯤 내린 운전석 창 · 운전석 문 옆 자갈 위 번호표와 마른 얼룩',
         svg: '<svg viewBox="0 0 200 112"><rect width="200" height="112" fill="#9aa0a2"/><path d="M0 60 Q60 30 120 50 T200 40 V112 H0 Z" fill="#5f6660"/><rect x="0" y="84" width="200" height="28" fill="#7c7f7a"/><rect x="120" y="72" width="3" height="16" fill="#333"/><rect x="100" y="70" width="44" height="3" fill="#333"/></svg>',
-        prompt: 'An empty gravel lookout parking area on a coastal hill in the morning fog, a low wooden guard rail, the bay faintly visible below, a single sheriff patrol car parked far away, tire marks in the gravel, 1968 Northern California, desolate and quiet.' },
-      cedar: { use: '시더 크릭 트레일 주차장 (다음 날 아침)', ratio: '16:9',
+        prompt: 'A gravel lookout parking area on a coastal hill in the grey morning fog after a night shooting: the early-1960s sedan of the two victims still parked against a low wooden guard rail, its driver window half lowered, a grey blanket thrown over the windshield so nothing inside can be seen, small numbered evidence markers on the gravel within a metre of the driver door, dark dried stains on the gravel and running down the lower edge of the door, one deputy standing far off with his back turned, the bay faintly visible below, 1968 Northern California newspaper photo, desolate and quiet.' },
+      cedar: { use: '시더 크릭 트레일 주차장 (다음 날 아침, 줄을 둘러친 피해 차량)', ratio: '16:9', sensitive: true,
+        must: '조수석 창이 깨진 차 · 뒤 펜더의 손바닥 자국과 조수석 뒤쪽 자갈의 짙은 얼룩 · 조수석 옆 반원 모양 번호표',
         svg: '<svg viewBox="0 0 200 112"><rect width="200" height="112" fill="#7d857a"/><g fill="#3d4a3a"><path d="M20 90 L34 20 L48 90Z"/><path d="M150 90 L166 14 L182 90Z"/><path d="M60 90 L70 40 L80 90Z"/></g><rect y="90" width="200" height="22" fill="#6a6558"/></svg>',
-        prompt: 'A small dirt trailhead parking lot among redwood trees at dawn, mist between the trunks, a wooden trail sign with illegible text, a police barricade sawhorse, no vehicles except a distant patrol car, 1969 Northern California.' },
+        prompt: 'A small dirt-and-gravel trailhead parking lot among redwood trees at dawn, mist between the trunks. Inside a rope cordon stands a 1960s two-door sedan: its passenger-side window smashed out, only jagged glass edges left in the frame, glass crumbs glinting on the ground; a dark smeared palm print on the rear fender and a dark patch soaked into the gravel about two metres behind the passenger-side rear wheel; small numbered evidence markers in a half-circle beside the passenger door. A police sawhorse barricade, a wooden trail sign with illegible text, a distant patrol car, 1969 Northern California.' },
+      mh_car: { use: '검시 보고서 첨부 — 메이슨 힐 현장, 앞좌석의 두 사람 (담요로 덮음)', ratio: '4:3', sensitive: true,
+        svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#101113"/><ellipse cx="96" cy="84" rx="92" ry="60" fill="#2a2c2e" opacity=".7"/><path d="M28 104 L44 70 Q60 52 100 52 Q140 52 156 70 L172 104 Z" fill="#4a4d50"/><path d="M52 72 Q66 58 100 58 Q134 58 148 72 Z" fill="#1c1e20"/><path d="M68 72 q8 -12 18 0 z M112 72 q8 -12 18 0 z" fill="#8a8a84"/><rect x="22" y="104" width="156" height="18" rx="4" fill="#3a3c3e"/><circle cx="94" cy="80" r="2" fill="#e8c070"/><g fill="#5a130c"><circle cx="40" cy="128" r="3"/><circle cx="48" cy="133" r="2"/><circle cx="34" cy="136" r="1.5"/></g><g fill="#e8e4d8"><rect x="54" y="130" width="6" height="7"/><rect x="66" y="134" width="6" height="7"/></g></svg>',
+        prompt: 'Police flash photograph at night, December 1968: an early-1960s sedan parked at the edge of a gravel lookout lot, seen from the front-left corner, black night and fog beyond the reach of the flash. The driver window is half lowered. Through the windshield two human forms sit slumped in the front seats, each completely covered by a grey wool blanket, nothing of the bodies visible but the blanket shapes. The radio dial glows faintly on the dashboard. Fine dark spatter on the inside of the driver window glass and a dark run down the outer door sill; small numbered evidence markers stand on the gravel beside the driver door where a few brass casings lie. No faces, no wounds, no weapons, no readable text.',
+        must: '반쯤 내린 운전석 창 · 담요로 덮인 앞좌석의 두 형체 · 운전석 문 옆 자갈 위 번호표 · 계기판의 라디오 불빛' },
+      cedar_car: { use: '감식 사진 — 깨진 조수석 창 너머 차 안 (섬광 촬영)', ratio: '4:3', sensitive: true,
+        svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#0e0f11"/><path d="M14 20 H186 V130 H14 Z" fill="#26282a"/><path d="M14 20 L40 34 L30 60 L14 52 Z M186 20 L162 30 L172 58 L186 64 Z M14 130 L36 118 L50 130 Z" fill="#9aa0a4" opacity=".55"/><rect x="40" y="70" width="120" height="44" rx="6" fill="#6a6660"/><rect x="40" y="40" width="120" height="34" rx="6" fill="#7a766e"/><g fill="#4a0f08"><circle cx="70" cy="50" r="1.6"/><circle cx="84" cy="46" r="1.2"/><circle cx="96" cy="54" r="2"/><circle cx="110" cy="44" r="1.3"/><circle cx="122" cy="52" r="1.7"/><circle cx="76" cy="60" r="1"/><circle cx="130" cy="42" r="1.1"/><circle cx="104" cy="62" r="1.4"/><ellipse cx="84" cy="90" rx="26" ry="12" opacity=".85"/></g><g fill="#cfd4d8"><circle cx="60" cy="84" r=".9"/><circle cx="120" cy="96" r=".9"/><circle cx="140" cy="80" r=".8"/><circle cx="100" cy="104" r=".8"/></g><path d="M150 76 q6 -2 8 6 q-2 8 -8 6" fill="none" stroke="#4a0f08" stroke-width="3"/></svg>',
+        prompt: 'Police flash photograph at night, May 1969, taken from outside the passenger side of an early-1960s two-door sedan, looking in through the smashed-out passenger window; only jagged edges of safety glass remain in the frame. Inside: the empty bench seat glittering with crumbs of glass, dozens of small dark spatter dots across the passenger seat back, the headrest and the pale headliner, a dark pool soaked into the passenger seat cushion, and on the far side dark smeared palm marks on the inside driver door handle and window frame. No people, no bodies, no weapons, no readable text.',
+        must: '창틀에 가장자리만 남은 조수석 창 · 좌석 위 유리 알갱이 · 등받이와 천장의 작은 비산흔 수십 점 · 시트에 스민 고인 얼룩 · 건너편 운전석 문 손잡이의 손자국' },
       payphone: { use: '도크 스트리트 주유소 옆 공중전화 — 줄에 매달린 수화기', ratio: '3:4',
         svg: '<svg viewBox="0 0 150 200"><rect width="150" height="200" fill="#1c1e22"/><rect x="40" y="30" width="70" height="150" fill="#2f3a44" stroke="#8a9aa8" stroke-width="2"/><rect x="58" y="70" width="34" height="50" fill="#6a7078"/><path d="M75 120 q-4 30 6 46" stroke="#111" stroke-width="3" fill="none"/><rect x="74" y="162" width="16" height="8" rx="3" fill="#111"/><circle cx="130" cy="30" r="10" fill="#e8c070" opacity=".6"/></svg>',
         prompt: 'A glass-panelled roadside telephone booth next to a closed gas station at night, the receiver hanging down on its metal cord, a sodium streetlight glowing in fog, across the street the lit loading bay of a newspaper distribution warehouse with bundled papers, 1969, harsh police flash, no readable signs.' },
