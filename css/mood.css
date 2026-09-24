@@ -71,3 +71,11 @@ body[data-light="screen"] .mood-light{animation:glow 6s ease-in-out infinite alt
 
 /* 빨간 별 사건은 붉은 가장자리를 그대로 둔다 */
 body[data-light]:has(.case-view[data-graphic])::before{background:radial-gradient(ellipse at 50% 45%,transparent 52%,rgba(46,3,1,.55) 100%)}
+
+/* 사건을 여는 장면 뒤의 표지 사진 */
+.ci-bg{position:absolute;inset:-4%;background:center/cover no-repeat;filter:blur(6px) sepia(.35) brightness(.34) saturate(.8);opacity:0;animation:ci-bg 3.8s ease-out forwards;pointer-events:none}
+.case-intro.graphic .ci-bg{filter:blur(10px) sepia(.5) brightness(.26)}
+.case-intro{overflow:hidden}.case-intro .ci-in{position:relative}
+@keyframes ci-bg{from{opacity:0;transform:scale(1.08)}35%{opacity:1}to{opacity:1;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.ci-bg{animation:none;opacity:1}}
+.lite .ci-bg{filter:brightness(.3);animation:none;opacity:1}
