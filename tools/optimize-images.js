@@ -35,4 +35,14 @@ fs.readdirSync(img, { withFileTypes: true }).filter(d => d.isDirectory() && d.na
 });
 if (n) console.log(`${n}장 변환 · ${(before / 1048576).toFixed(1)}MB → ${(after / 1048576).toFixed(1)}MB · 원본은 img/${SRC}/ 에 보관`);
 else console.log('변환할 .png/.jpg 가 없다.');
+
+// 기록실 폴더에 붙는 표지는 92×68px 이라, 작은 표지(cover_s)를 따로 만들어 쓴다. 표지가 바뀌면 다시 만든다.
+const THUMB = [260, 74];
+fs.readdirSync(img, { withFileTypes: true }).filter(d => d.isDirectory() && d.name !== SRC && d.name !== '_global').forEach(dir => {
+  const big = path.join(img, dir.name, 'cover.webp'), small = path.join(img, dir.name, 'cover_s.webp');
+  if (!fs.existsSync(big) || fs.existsSync(small) && fs.statSync(small).mtimeMs >= fs.statSync(big).mtimeMs) return;
+  const orig = ['.png', '.jpg', '.jpeg'].map(e => path.join(img, SRC, dir.name, 'cover' + e)).find(p => fs.existsSync(p) && fs.statSync(p).mtimeMs >= fs.statSync(big).mtimeMs - 60000);
+  execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-i', orig || big, '-vf', `scale='min(${THUMB[0]},iw)':-2`, '-c:v', 'libwebp', '-quality', String(THUMB[1]), '-compression_level', '6', small]);
+  console.log(`✓ ${dir.name}/cover_s.webp  ${(fs.statSync(small).size / 1024).toFixed(0)}KB (기록실 표지)`);
+});
 execFileSync(process.execPath, [path.join(__dirname, 'manifest.js')], { stdio: 'inherit' });

@@ -15,8 +15,7 @@ body[data-light]:not([data-light=""])::before{background:radial-gradient(ellipse
 .mood>*{position:fixed;inset:0;pointer-events:none}
 .mood-light{z-index:86;mix-blend-mode:soft-light;background:radial-gradient(ellipse 70% 62% at var(--lx,30%) var(--ly,20%),var(--lc,transparent) 0%,transparent 58%,rgba(0,0,0,.34) 100%)}
 .mood-tint{z-index:89;background:var(--tint,transparent);opacity:var(--tint-op,0);mix-blend-mode:soft-light}
-.mood-fx{z-index:87;width:100%;height:100%;-webkit-mask-image:radial-gradient(ellipse 60% 58% at 50% 50%,transparent 45%,#000 100%);mask-image:radial-gradient(ellipse 60% 58% at 50% 50%,transparent 45%,#000 100%)}
-.mood-fx[data-fx="dust"]{-webkit-mask-image:none;mask-image:none}
+.mood-fx{z-index:87;width:100%;height:100%} /* 가운데를 비우는 일은 js/mood.js 가 입자마다 한다 */
 
 /* 불빛이 숨 쉬듯: 가스등·등잔은 가늘게 떨리고, 형광등은 가끔 깜박인다 */
 body[data-light="gas"] .mood-light,body[data-light="lamp"] .mood-light{animation:flame 7s steps(1) infinite}
@@ -57,6 +56,13 @@ body[data-light="screen"] .mood-light{animation:glow 6s ease-in-out infinite alt
 @keyframes ci-in{from{opacity:0}to{opacity:1}}
 @keyframes ci-out{to{opacity:0;visibility:hidden}}
 @keyframes ci-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* 가벼운 화면 (js/mood.js 가 느린 기기에서 html.lite 를 붙인다): 화면 전체 합성·날씨 입자·안개 흐름을 끄고 빛깔만 남긴다 */
+.lite .mood-light{mix-blend-mode:normal;opacity:.5;animation:none!important}
+.lite .mood-tint{mix-blend-mode:normal;opacity:calc(var(--tint-op,0) * .4)}
+.lite .mood-fx{display:none}
+.lite .mood-fog i{animation:none!important}
+.lite .case-view[data-frame="laptop"] .screen::after{display:none}
 
 @media (prefers-reduced-motion:reduce){
   .mood-light,.mood-fog i{animation:none!important}

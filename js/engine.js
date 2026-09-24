@@ -183,7 +183,7 @@
     if (a == null) return '';
     const file = svgOnly && !(a && a.raster) ? null : MG.images[`${C.id}/${key}`];
     const alt = (a && a.alt) || (a && a.use) || '';
-    const img = file ? `<img class="${cls || 'art'}" src="${esc(file)}" alt="${esc(alt)}" loading="lazy">` : '';
+    const img = file ? `<img class="${cls || 'art'}" src="${esc(file)}" alt="${esc(alt)}" loading="lazy" decoding="async">` : '';
     // 글자 없는 그림(지도·약도)에는 이름표를 게임이 얹는다: [글자, x%, y%(글자 밑줄), 'l'|'c'|'r']
     const labs = file && a && a.labels ? `<span class="art-labs" aria-hidden="true">${a.labels.map(([t, x, y, al]) => `<span class="art-lab${al === 'c' ? ' c' : al === 'r' ? ' r' : ''}" style="left:${+x}%;top:${+y}%">${esc(t)}</span>`).join('')}</span>` : '';
     const body = file ? (labs ? `<span class="art-wrap">${img}${labs}</span>` : img) : typeof a === 'string' ? a : a.svg || '';
@@ -740,7 +740,7 @@
     const persons = keys.filter(k => C.keywords[k].type === 'person');
     const notes = ST.notes;
     const sol = C.solution;
-    const top = nb.scrollTop;
+    const top = nb.firstChild ? nb.scrollTop : 0;
     nb.innerHTML = `
       <div class="nb-rings" aria-hidden="true"></div>
       <div class="nb-top"><button type="button" class="nb-back" data-cabinet>← 기록실</button><span class="nb-case">${soundBtn()}${C.graphic ? mildBtn() : ''} ${starsHtml(C)} CASE ${pad(C.no)}</span></div>
@@ -761,7 +761,7 @@
         <div id="solvedBox">${ST.solved ? solvedHtml(false) : ''}</div>
       </section>
       <footer class="nb-foot"><button type="button" class="reset" data-reset>이 사건 처음부터</button><p>${esc(C.disclaimer || '실제 미제 사건의 모티프만 빌린 창작입니다. 인물·장소·기관은 모두 지어낸 것입니다.')}</p></footer>`;
-    nb.scrollTop = top;
+    if (top) nb.scrollTop = top;
   }
 
   /* ───────── screens ───────── */
@@ -783,10 +783,28 @@
     PIN = {};
     renderTabs(); renderList(); renderRead(); renderNotebook();
   }
+  // 사건마다 쓰는 특수 글꼴은 그 사건을 열 때만 부른다 (공통 글꼴은 index.html). 신문 양식은 송명·옛 로마자를 쓴다.
+  const FONTS = { old: 'Song+Myung', latin: 'Old+Standard+TT:wght@400;700', frak: 'UnifrakturMaguntia', jp: 'Noto+Serif+JP:wght@700;900' };
+  const fontOn = {};
+  function caseFonts(c) {
+    if (!c._fonts) {
+      const j = JSON.stringify(c), news = j.includes('"skin":"news"');
+      c._fonts = Object.keys(FONTS).filter(k => j.includes('f-' + k) || news && (k === 'old' || k === 'latin') || k === 'latin' && j.includes('f-frak'));
+    }
+    const need = c._fonts.filter(k => !fontOn[k]);
+    if (!need.length) return;
+    need.forEach(k => { fontOn[k] = 1; });
+    const l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?' + need.map(k => 'family=' + FONTS[k]).join('&') + '&display=swap';
+    document.head.appendChild(l);
+  }
+
   // intro: 기록실에서 폴더를 눌러 열 때만 여는 장면을 보여 준다 (새로 고침·처음부터 다시는 바로)
   function openCase(id, intro) {
     const c = MG.byId[id];
     if (!c) return cabinet();
+    caseFonts(c);
     if (c.graphic && !cs(c).cw) return warnScreen(c);
     C = c; ST = cs(c); VERDICT = '';
     S.current = id; save();
@@ -816,8 +834,8 @@
       const st = S.cases[c.id];
       const status = st && st.solved ? 'done' : st && (st.notes.length || st.seen.length) ? 'going' : 'new';
       const kind = c.kind === 'tutorial' ? '튜토리얼' : c.region === 'overseas' ? '해외' : '국내';
-      const coverFile = MG.images[`${c.id}/cover`];
-      const cover = coverFile ? `<img src="${esc(coverFile)}" alt="" loading="lazy">` : c.art && c.art.cover ? (typeof c.art.cover === 'string' ? c.art.cover : c.art.cover.svg || '') : '';
+      const coverFile = MG.images[`${c.id}/cover_s`] || MG.images[`${c.id}/cover`]; // 폴더 표지는 작게 (cover_s)
+      const cover = coverFile ? `<img src="${esc(coverFile)}" alt="" loading="lazy" decoding="async">` : c.art && c.art.cover ? (typeof c.art.cover === 'string' ? c.art.cover : c.art.cover.svg || '') : '';
       return `<button type="button" class="folder ${status}${c.kind === 'tutorial' ? ' tutorial' : ''}" data-open="${esc(c.id)}" style="--tilt:${(hash(c.id) % 7 - 3) * 0.4}deg">
         ${cover ? `<span class="f-cover${c.graphic ? ' graphic' : ''}" aria-hidden="true">${cover}</span>` : ''}${c.graphic && !S.mild ? `<span class="f-blood" aria-hidden="true">${stains(c.id + 'f', 2, 'dac', false)}</span>` : ''}${c.graphic ? '<span class="f-warn">혐오감 주의</span>' : ''}
         <span class="f-tab">CASE ${pad(c.no)}</span>
@@ -829,7 +847,7 @@
     const letter = main.length >= 10 && solvedMain === main.length ? `<article class="m-letter"><h3>서랍 맨 밑의 편지</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p></article>` : '';
     const hero = MG.images['_global/hero'];
     app.innerHTML = `<div class="cabinet">
-      ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt=""></div>` : ''}
+      ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
       <header class="cab-top"><p class="cab-kicker">서울서부경찰서 강력2팀 · 미제사건 기록실</p><h1 class="cab-title">Monologue Gaze</h1><p class="cab-sub">기록은 혼잣말을 한다. 들어주는 건 당신이다.</p>
         ${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}<p class="cab-stat">종결 <b>${solvedMain}</b> / ${main.length} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}</p></header>
       ${intro}

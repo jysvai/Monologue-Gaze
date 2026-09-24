@@ -24,60 +24,115 @@
   }
 
   /* ───────── 날씨 (캔버스) ───────── */
-  let cv = null, g = null, parts = [], kind = '', raf = 0, last = 0, W = 0, H = 0;
+  // 입자를 밝기 몇 단계로 묶어 한 번에 그린다 (입자마다 따로 그리면 느리다).
+  // 가운데 읽는 자리는 비워 두는데, CSS 가림막 대신 입자마다 가장자리로 갈수록 짙어지게 한다.
+  let cv = null, g = null, parts = [], kind = '', raf = 0, last = 0, W = 0, H = 0, edge = true;
+  const LV = 8;
+  const bins = Array.from({ length: LV }, () => []);
   const SPEC = {
     rain:    { per: 7000,  make: () => ({ x: rnd(-60, W), y: rnd(-H, H), l: rnd(14, 26), v: rnd(900, 1300), a: rnd(.08, .2) }) },
     drizzle: { per: 15000, make: () => ({ x: rnd(-40, W), y: rnd(-H, H), l: rnd(5, 10), v: rnd(420, 620), a: rnd(.08, .16) }) },
     snow:    { per: 9000,  make: () => ({ x: rnd(0, W), y: rnd(-H, H), r: rnd(.8, 2.6), v: rnd(26, 64), p: rnd(0, 6.3), a: rnd(.25, .6) }) },
     dust:    { per: 38000, make: () => ({ x: rnd(0, W), y: rnd(0, H), r: rnd(.5, 1.5), vx: rnd(-7, 7), vy: rnd(-6, 4), p: rnd(0, 6.3), a: rnd(.12, .36) }) },
   };
+  const MAXA = { rain: .2, drizzle: .16, snow: .6, dust: .36 };
   function size() {
     if (!cv) return;
-    const d = Math.min(window.devicePixelRatio || 1, 1.5);
     W = window.innerWidth; H = window.innerHeight;
-    cv.width = Math.round(W * d); cv.height = Math.round(H * d);
-    g.setTransform(d, 0, 0, d, 0, 0);
+    cv.width = W; cv.height = H; // 흐릿한 날씨라 기기 배율은 1 로 충분하다
     const sp = SPEC[kind];
-    parts = sp ? Array.from({ length: Math.min(320, Math.round(W * H / sp.per)) }, sp.make) : [];
+    parts = sp ? Array.from({ length: Math.min(260, Math.round(W * H / sp.per)) }, sp.make) : [];
   }
+  // 화면 가운데(가로 60%·세로 58% 타원의 45% 안)는 비우고 바깥으로 갈수록 짙게
+  function fade(x, y) {
+    if (!edge) return 1;
+    const dx = (x - W / 2) / (W * 0.6), dy = (y - H / 2) / (H * 0.58);
+    const d = Math.sqrt(dx * dx + dy * dy);
+    return d <= 0.45 ? 0 : d >= 1 ? 1 : (d - 0.45) / 0.55;
+  }
+  function bin(p, a) { const i = Math.min(LV - 1, Math.round(a / MAXA[kind] * (LV - 1))); if (i > 0) bins[i].push(p); }
   function frame(t) {
     raf = requestAnimationFrame(frame);
     const dt = Math.min(0.05, (t - (last || t)) / 1000); last = t;
     g.clearRect(0, 0, W, H);
+    for (const b of bins) b.length = 0;
     if (kind === 'rain' || kind === 'drizzle') {
-      g.lineWidth = kind === 'rain' ? 1 : .8; g.lineCap = 'round';
       for (const p of parts) {
         p.y += p.v * dt; p.x += p.v * 0.16 * dt;
         if (p.y > H + 30) { p.y = rnd(-80, -10); p.x = rnd(-60, W); }
-        g.strokeStyle = `rgba(196,210,226,${p.a})`;
-        g.beginPath(); g.moveTo(p.x, p.y); g.lineTo(p.x - p.l * 0.16, p.y - p.l); g.stroke();
+        bin(p, p.a * fade(p.x, p.y));
       }
-    } else if (kind === 'snow') {
-      for (const p of parts) {
+      g.lineWidth = kind === 'rain' ? 1 : .8; g.lineCap = 'round';
+      bins.forEach((b, i) => {
+        if (!b.length) return;
+        g.strokeStyle = `rgba(196,210,226,${(i / (LV - 1) * MAXA[kind]).toFixed(3)})`;
+        g.beginPath();
+        for (const p of b) { g.moveTo(p.x, p.y); g.lineTo(p.x - p.l * 0.16, p.y - p.l); }
+        g.stroke();
+      });
+      return;
+    }
+    const col = kind === 'snow' ? '236,240,246' : '255,236,196';
+    for (const p of parts) {
+      if (kind === 'snow') {
         p.p += dt * 0.9; p.y += p.v * dt; p.x += Math.sin(p.p) * 14 * dt + 6 * dt;
         if (p.y > H + 6) { p.y = -6; p.x = rnd(0, W); }
         if (p.x > W + 6) p.x = -6;
-        g.fillStyle = `rgba(236,240,246,${p.a})`;
-        g.beginPath(); g.arc(p.x, p.y, p.r, 0, 6.283); g.fill();
-      }
-    } else if (kind === 'dust') {
-      for (const p of parts) {
+        bin(p, p.a * fade(p.x, p.y));
+      } else {
         p.p += dt * 0.7; p.x += p.vx * dt; p.y += p.vy * dt;
         if (p.x < -4) p.x = W + 4; if (p.x > W + 4) p.x = -4; if (p.y < -4) p.y = H + 4; if (p.y > H + 4) p.y = -4;
-        g.fillStyle = `rgba(255,236,196,${p.a * (0.55 + 0.45 * Math.sin(p.p))})`;
-        g.beginPath(); g.arc(p.x, p.y, p.r, 0, 6.283); g.fill();
+        bin(p, p.a * (0.55 + 0.45 * Math.sin(p.p)));
       }
     }
+    bins.forEach((b, i) => {
+      if (!b.length) return;
+      g.fillStyle = `rgba(${col},${(i / (LV - 1) * MAXA[kind]).toFixed(3)})`;
+      g.beginPath();
+      for (const p of b) { g.moveTo(p.x + p.r, p.y); g.arc(p.x, p.y, p.r, 0, 6.283); }
+      g.fill();
+    });
   }
   function startFx(fx) {
     kind = SPEC[fx] ? fx : '';
     cv = layer && layer.querySelector('.mood-fx');
-    if (!kind || !cv || reduce.matches) return;
+    if (!kind || !cv || reduce.matches || lite()) return;
+    edge = kind !== 'dust';
     g = cv.getContext('2d');
     size(); last = 0;
     raf = requestAnimationFrame(frame);
   }
-  function stopFx() { cancelAnimationFrame(raf); raf = 0; parts = []; cv = null; g = null; kind = ''; }
+  function stopFx() { cancelAnimationFrame(raf); raf = 0; parts = []; if (g) g.clearRect(0, 0, W, H); cv = null; g = null; kind = ''; }
+
+  /* ───────── 가벼운 화면 ─────────
+   * 그래픽 가속이 약한 기기(또는 절전 모드)에서는 화면 전체 합성·날씨 입자가 버벅임을 만든다.
+   * 사건을 연 뒤 잠시 화면이 몇 프레임으로 도는지 재 보고, 느리면 이번 방문 동안 가벼운 화면으로 바꾼다. */
+  const LITE = 'mg-lite';
+  const lite = () => document.documentElement.classList.contains('lite');
+  try { if (sessionStorage.getItem(LITE) === '1') document.documentElement.classList.add('lite'); } catch (e) { /* 저장소 막힘 */ }
+  let probeT = 0;
+  function probe() {
+    clearTimeout(probeT);
+    if (lite()) return;
+    probeT = setTimeout(() => {
+      if (document.hidden || !cur) return;
+      const fr = []; let prev = 0, id = 0;
+      const step = n => {
+        if (document.hidden || !cur) return; // 가려지면 재지 않는다
+        if (prev) fr.push(n - prev);
+        prev = n;
+        if (fr.length < 60) { id = requestAnimationFrame(step); return; }
+        fr.sort((x, y) => x - y);
+        if (fr[30] > 26) goLite(); // 가운데값이 초당 40프레임 아래
+      };
+      id = requestAnimationFrame(step);
+    }, 1500);
+  }
+  function goLite() {
+    document.documentElement.classList.add('lite');
+    try { sessionStorage.setItem(LITE, '1'); } catch (e) { /* ignore */ }
+    stopFx();
+  }
   window.addEventListener('resize', () => { if (raf) size(); });
 
   /* ───────── 배경음 (모두 합성음) ───────── */
@@ -246,6 +301,7 @@
       if (cur !== c.id) {
         stopFx(); if (layer) layer.remove();
         cur = c.id; build(m); startFx(m.fx);
+        probe();
       }
       syncAmb(c);
       if (intro) showIntro(c, m);
