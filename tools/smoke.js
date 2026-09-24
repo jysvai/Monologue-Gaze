@@ -17,7 +17,8 @@ global.scrollTo = () => {};
 global.document = { body: stub(), head: stub(), documentElement: stub(), getElementById: el, querySelector: el, querySelectorAll: () => [], createElement: stub, addEventListener() {} };
 
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'js/engine.js'), 'utf8'));
-const files = process.argv.slice(2);
+let files = process.argv.slice(2);
+if (!files.length) files = fs.readdirSync(path.join(ROOT, 'cases')).filter(f => /^c\d+.*\.js$/.test(f)).sort().map(f => path.join('cases', f)); // 인자가 없으면 사건 전부
 files.forEach(f => vm.runInThisContext(fs.readFileSync(path.resolve(ROOT, f), 'utf8')));
 
 let problems = 0;
@@ -81,3 +82,4 @@ for (const c of MG.cases.filter(c => files.some(f => f.includes(c.id)))) {
   console.log(`${c.id}: rendered ${n} views`);
 }
 console.log(problems ? `FAIL: ${problems} problem(s)` : 'SMOKE OK');
+process.exit(problems ? 1 : 0); // 화면 시계(setInterval)가 프로세스를 붙잡지 않게
