@@ -1247,7 +1247,7 @@
       ${showRoster ? rosterHtml() : ''}
       ${intro}
       <section class="drawer" aria-label="사건 파일">${MG.cases.filter(c => !c.live).map(folder).join('')}</section>
-      ${live.length ? `<section class="duty" aria-label="현행 사건"><h2 class="duty-h">당직 · 현행 사건</h2><p class="duty-sub">지금 강력2팀에 배당된 사건. 기록을 넘기는 동안에도 시계는 간다.</p><div class="drawer">${live.map(folder).join('')}</div></section>` : ''}
+      ${live.length ? `<section class="duty" aria-label="현행 사건"><h2 class="duty-h">당직 · 현행 사건</h2><p class="duty-sub">당직 때마다 다른 팀에 지원으로 붙는다. 지금 벌어지는 사건이라, 기록을 넘기는 동안에도 시계는 간다.</p><div class="drawer">${live.map(folder).join('')}</div></section>` : ''}
       ${mList.length ? `<section class="mbox"><h2>M의 메모</h2><p class="mbox-sub">기록 여백에 남아 있던, 선배의 글씨.</p><ul>${mList.map(c => `<li><span class="mbox-case">CASE ${pad(c.no)}</span> ${esc(plain(c._m))}</li>`).join('')}</ul></section>` : ''}
       ${letter}
       <footer class="cab-foot"><p>모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.</p><p class="credit">목소리·효과음 <a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a></p><button type="button" class="reset" data-wipe>${roster().list.length > 1 ? '내 기록 지우기' : '모든 기록 지우기'}</button></footer>
