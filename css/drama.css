@@ -164,3 +164,9 @@
   .pane-list .map .spot{width:16px;height:16px;border-width:1.5px}
   .pane-list .map .spot span{display:none}
 }
+/* 크게 본 사진 밑에 사진 설명. 종이 기록철의 사진은 인화지 여백째 약간 비뚤게 들어 올린다 */
+.zoom .z-cap{max-width:min(760px,90vw);font:13px/1.5 var(--f-web);letter-spacing:0;color:#e4dccb;text-align:center;text-wrap:balance}
+.zoom[data-frame="papers"] figure{transform:rotate(-.6deg)}
+.zoom[data-frame="papers"] figure img,.zoom[data-frame="papers"] figure .art-wrap{box-sizing:border-box;max-height:80vh;border:10px solid #f1ecdf;box-shadow:0 24px 50px rgba(0,0,0,.65),0 1px 0 rgba(0,0,0,.3)}
+.zoom[data-frame="papers"] figure .art-wrap>img{max-height:calc(80vh - 20px);border:0;box-shadow:none}
+.zoom[data-frame="papers"] .z-cap{font:21px/1.35 var(--f-hand);color:#efe5cc}

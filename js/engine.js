@@ -1018,7 +1018,10 @@
     const z = document.createElement('div');
     z.className = 'zoom'; z.setAttribute('role', 'dialog'); z.setAttribute('aria-label', '그림 크게 보기'); z.tabIndex = -1;
     const w = img.closest('.art-wrap');
-    z.innerHTML = `<figure>${w ? w.outerHTML : `<img src="${esc(img.getAttribute('src'))}" alt="${esc(img.alt || '')}">`}</figure><p>누르면 닫힌다</p>`;
+    const fc = img.closest('figure') && img.closest('figure').querySelector('figcaption');
+    const cap = fc ? [...fc.childNodes].filter(n => !(n.classList && n.classList.contains('pin'))).map(n => n.textContent).join('').trim() : '';
+    if (C) z.dataset.frame = C.frame;
+    z.innerHTML = `<figure>${w ? w.outerHTML : `<img src="${esc(img.getAttribute('src'))}" alt="${esc(img.alt || '')}">`}</figure>${cap ? `<p class="z-cap">${esc(cap)}</p>` : ''}<p>누르면 닫힌다</p>`;
     const close = () => { z.remove(); document.removeEventListener('keydown', key); };
     const key = e => { if (e.key === 'Escape') close(); };
     z.addEventListener('click', close);
