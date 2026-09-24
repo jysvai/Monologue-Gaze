@@ -22,6 +22,11 @@
     if (!a0) return false;
     const a = a0.paused ? a0 : a0.cloneNode();
     a.volume = vol == null ? 0.9 : vol;
+    // 자주 나는 잔소리(종이·연필·딸깍)는 매번 조금씩 다르게: 같은 녹음이 되풀이되는 티가 덜 난다
+    const small = /^sfx\/(pen|page|click|key)$/.test(k);
+    a.preservesPitch = !small;
+    a.playbackRate = small ? 0.92 + Math.random() * 0.16 : 1;
+    if (small) a.volume *= 0.85 + Math.random() * 0.15;
     try { a.currentTime = 0; } catch (e) { /* not loaded yet */ }
     a.play().catch(() => {});
     return true;
