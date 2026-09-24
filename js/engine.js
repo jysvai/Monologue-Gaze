@@ -1034,8 +1034,11 @@
     c08: ['mug', 'cassette', 'ashtray', 'clips'], c09: ['mug', 'pencil', 'flipphone', 'clips'],
     c10: ['takeaway', 'pencil', 'glasses', 'clips'], c11: ['mug', 'pencil', 'ashtray', 'stamp'],
     c12: ['mug', 'glasses', 'pager', 'clips'],
+    // 현행 사건: 당직 책상 — 무전기, 증거 봉투, 출입증 목줄, 캔 음료
+    c13: ['radio', 'evidencebag', 'smartphone', 'energy'], c14: ['takeaway', 'lanyard', 'radio', 'evidencebag'],
+    c15: ['radio', 'smartphone', 'lanyard', 'energy'],
   };
-  const PROPW = { mug: 210, teacup: 230, takeaway: 170, pocketwatch: 170, magnifier: 240, inkpen: 230, ashtray: 200, matchbox: 120, cassette: 200, pager: 130, flipphone: 120, smartphone: 150, pencil: 300, clips: 120, stamp: 190, glasses: 210 };
+  const PROPW = { mug: 210, teacup: 230, takeaway: 170, pocketwatch: 170, magnifier: 240, inkpen: 230, ashtray: 200, matchbox: 120, cassette: 200, pager: 130, flipphone: 120, smartphone: 150, pencil: 300, clips: 120, stamp: 190, glasses: 210, radio: 140, evidencebag: 190, lanyard: 230, energy: 115 };
   function deskProps() {
     const list = (C.desk || DESK[C.id] || []).filter(k => MG.images['_desk/' + k]);
     if (!list.length) return '';
