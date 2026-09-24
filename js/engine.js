@@ -678,7 +678,7 @@
       q.st = 'done';
       if (!ST.unl.includes(r.id)) ST.unl.push(r.id);
       (r.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
-      const who = (r.feed && r.feed.who) || r.from || '회신', msg = (r.feed && r.feed.msg) || `회신 도착 — ${plain(r.title)}`;
+      const who = (r.feed && r.feed.who) || r.from || plain(r.to || '') || '회신', msg = (r.feed && r.feed.msg) || `회신 — ${plain(r.title)}`;
       L.fx.push({ t: q.due, who, msg, doc: r.doc, src: (r.feed && r.feed.src) || null });
       news.push({ who, msg, app: r.app || '회신', t: 'doc', id: r.doc, src: r.src });
     });
@@ -756,7 +756,7 @@
     if (b) b.outerHTML = liveBar();
   }
   const feedCount = s => { const L = ST.live; return L ? (s.items || []).filter(it => it.id in L.fd).length + L.fx.filter(x => (x.src || firstFeed()) === s.id).length : 0; };
-  const feedUnread = s => (ST.live ? Math.max(0, feedCount(s) - ((ST.live.rd || {})[s.id] || 0)) : 0);
+  const feedUnread = s => { const o = ST.view.open; if (!ST.live || (o && o.t === 'feed' && o.id === s.id)) return 0; return Math.max(0, feedCount(s) - ((ST.live.rd || {})[s.id] || 0)); }; // 보고 있는 방은 다 읽은 것
   const reqUnread = s => (s.items || []).filter(r => { const q = reqState(r.id); return q && q.st === 'done' && C.docs[r.doc] && !ST.seen.includes(r.doc); }).length;
 
   function feedHtml(s) {
