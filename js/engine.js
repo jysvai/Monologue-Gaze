@@ -197,7 +197,7 @@
     PIN[ref] = { t: plain(t).trim(), f: f || null, src };
     const on = ST.notes.some(n => n.ref === ref);
     const lab = on ? '수첩에 적음' : '수첩에 적기';
-    return `<button type="button" class="pin${on ? ' on' : ''}" data-pin="${esc(ref)}" aria-label="${lab}" title="${lab}">${on ? '✓' : '✎'}</button>`;
+    return `<button type="button" class="pin${on ? ' on' : ''}" data-pin="${esc(ref)}" aria-label="${lab}" data-tip="${lab}">${on ? '✓' : '✎'}</button>`;
   }
 
   function blocks(arr, base, src) {
@@ -636,7 +636,7 @@
   // 지도: 목록 칸에는 작은 지도(점만), 아무것도 펼치지 않았을 때는 읽기 칸에 크게(이름까지)
   function mapHtml(s, big) {
     const spots = (s.spots || []).filter(sp => ok(sp.need));
-    return `<div class="map${big ? ' big' : ''}">${art(s.art)}${spots.map(sp => `<button type="button" class="spot" style="left:${+sp.x}%;top:${+sp.y}%" data-spot="${esc(sp.id)}" aria-label="${esc(sp.label)}" title="${esc(sp.label)}"><span>${esc(sp.label)}</span></button>`).join('')}</div>`;
+    return `<div class="map${big ? ' big' : ''}">${art(s.art)}${spots.map(sp => `<button type="button" class="spot" style="left:${+sp.x}%;top:${+sp.y}%" data-spot="${esc(sp.id)}" aria-label="${esc(sp.label)}" data-tip="${esc(sp.label)}"><span>${esc(sp.label)}</span></button>`).join('')}</div>`;
   }
   function mapList(s) {
     const spots = (s.spots || []).filter(sp => ok(sp.need));

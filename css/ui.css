@@ -1,0 +1,54 @@
+/* Monologue Gaze — 브라우저 기본 부품 대신 쓰는 것들: 스크롤바, 고른 글자 빛깔, 입력칸, 말풍선, 보고서의 고르기 표시.
+ * 윈도우·맥 기본 모양(회색 스크롤바, 파란 선택 빛, 노란 말풍선, 검색칸 ×, 맞춤법 밑줄)이 기록 속 분위기를 깨지 않게 한다. */
+
+/* ───────── 스크롤바: 종이 위에서는 연필 빛, 어두운 책상 위에서는 바랜 종이 빛 ───────── */
+html{scrollbar-color:rgba(233,223,199,.32) #15110d;-webkit-tap-highlight-color:transparent}
+*{scrollbar-width:thin;scrollbar-color:rgba(84,64,40,.45) transparent}
+.case-view[data-frame="laptop"] .screen,.case-view[data-frame="laptop"] .screen *{scrollbar-color:rgba(64,88,132,.5) transparent}
+.zoom,.case-intro,.cw{scrollbar-color:rgba(233,223,199,.3) transparent}
+/* 사파리 등 scrollbar-color 를 모르는 브라우저 */
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(84,64,40,.42);border:2px solid transparent;border-radius:8px;background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background-color:rgba(84,64,40,.6)}
+::-webkit-scrollbar-corner{background:transparent}
+
+/* ───────── 고른 글자: 형광펜 ───────── */
+::selection{background:rgba(255,212,84,.55);color:inherit}
+.cabinet ::selection,.case-intro ::selection,.cw ::selection,.zoom ::selection{background:rgba(233,196,106,.38);color:#fff6df}
+
+/* ───────── 입력칸 ───────── */
+input,textarea{caret-color:var(--red)}
+input::placeholder,textarea::placeholder{color:rgba(60,52,40,.45);opacity:1}
+input[type="search"]{-webkit-appearance:none;appearance:none}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration,input[type="search"]::-webkit-search-results-button{-webkit-appearance:none;appearance:none;display:none}
+input:-webkit-autofill,input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 60px #fbf6e6 inset;-webkit-text-fill-color:var(--ink);transition:background-color 9999s}
+.rep-filter{display:block;width:100%;margin:0 0 8px;padding:7px 10px 6px 30px;border:0;border-bottom:1.5px solid rgba(43,40,35,.45);background:rgba(255,253,245,.75) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='8' cy='8' r='5.2' fill='none' stroke='%237a6a50' stroke-width='1.8'/%3E%3Cpath d='M12 12l5 5' stroke='%237a6a50' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 8px 50%/15px no-repeat;font:14px var(--f-web);color:var(--ink);outline:none}
+.rep-filter:focus{border-bottom-color:var(--red);background-color:#fffdf5}
+
+/* ───────── 접었다 펴는 제목: 기본 삼각형 대신 연필 화살 ───────── */
+summary{list-style:none}
+summary::-webkit-details-marker{display:none}
+.rep-grp>summary::before{content:"▸";display:inline-block;width:1em;color:var(--pencil);transition:transform .15s}
+.rep-grp[open]>summary::before{transform:rotate(90deg)}
+
+/* ───────── 말풍선 (title 대신 data-tip) — js/ui.js ───────── */
+.tip{position:fixed;left:0;top:0;z-index:99;max-width:260px;padding:5px 11px 4px;border:1px solid rgba(60,48,30,.35);border-radius:2px;background:#f6eed6;box-shadow:0 5px 14px rgba(0,0,0,.35);font:19px/1.25 var(--f-hand);color:#3a2f22;pointer-events:none;opacity:0;transform:translateY(3px) rotate(-1deg);transition:opacity .12s,transform .12s;white-space:normal}
+.tip.on{opacity:1;transform:translateY(0) rotate(-1deg)}
+.tip::after{content:"";position:absolute;left:var(--ax,50%);bottom:-6px;width:10px;height:10px;margin-left:-5px;background:inherit;border-right:1px solid rgba(60,48,30,.35);border-bottom:1px solid rgba(60,48,30,.35);transform:rotate(45deg)}
+.tip.below::after{top:-6px;bottom:auto;transform:rotate(225deg)}
+
+/* ───────── 보고서: 고른 인물에 빨간 연필 동그라미와 「지목」, 고른 메모에 연필 체크 ───────── */
+.rep-per{position:relative;transition:transform .12s ease,background-color .12s}
+.rep-per:hover{transform:translateY(-1px);background:#fbf5e3}
+.rep-per.on{border:1px solid rgba(176,52,42,.55);background:#fbeee8;box-shadow:none}
+.rep-per.on::after{content:"";position:absolute;inset:-9px -12px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80' preserveAspectRatio='none'%3E%3Cpath d='M22 46C18 18 150 4 186 30c20 16-10 42-86 44C40 76 6 60 14 36 20 20 60 9 104 9' fill='none' stroke='%23b0342a' stroke-width='2.6' stroke-linecap='round' vector-effect='non-scaling-stroke' opacity='.9'/%3E%3C/svg%3E") center/100% 100% no-repeat;animation:circleIn .35s ease-out both}
+.rep-per.on::before{content:"지목";position:absolute;right:-10px;top:-12px;z-index:1;padding:1px 6px 0;border:1.5px solid var(--red);background:#fbeee8;color:var(--red);font:800 11px/16px var(--f-doc);letter-spacing:.1em;transform:rotate(9deg);animation:stampIn .3s .1s ease-out both}
+@keyframes circleIn{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes stampIn{from{opacity:0;transform:rotate(9deg) scale(1.6)}to{opacity:1;transform:rotate(9deg) scale(1)}}
+.rep-opt{padding-left:36px}
+.rep-opt::before{content:"";position:absolute;left:10px;top:10px;width:15px;height:15px;border:1.5px solid rgba(43,40,35,.5);border-radius:2px 3px 2px 4px;background:rgba(255,255,255,.7);transform:rotate(-2deg)}
+.rep-opt.on::after{content:"✓";position:absolute;left:10px;top:-2px;font:30px/1 var(--f-hand);color:var(--red);transform:rotate(-8deg);animation:stampIn .25s ease-out both}
+.rep-opt:hover::before{border-color:rgba(176,52,42,.7)}
+
+@media (prefers-reduced-motion:reduce){.rep-per.on::after,.rep-per.on::before,.rep-opt.on::after{animation:none}.tip{transition:none}}
