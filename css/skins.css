@@ -202,3 +202,13 @@
 .doc.txt .doc-m{margin:0 0 0 auto;font:11px var(--f-mono);color:#6b7280}
 .doc.txt .doc-b{padding:0 18px;font:14px/1.8 var(--f-mono);color:#1f2328}
 .doc.txt .b-p{margin:0}
+/* 감시 카메라·블랙박스 화면 글자 (engine block 의 osd) */
+.osd-wrap{position:relative;display:block}
+.osd-wrap>img{display:block;width:100%;height:auto;background:#ddd6c4}
+.skin-card .osd-wrap>img{border:6px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.osd{position:absolute;inset:0 0 auto;display:flex;justify-content:space-between;gap:12px;padding:9px 11px;pointer-events:none;font:700 12px/1 var(--f-mono);letter-spacing:.06em;color:#f3f3ec;text-shadow:0 0 2px #000,0 0 1px #000,1px 1px 0 rgba(0,0,0,.6);opacity:.92}
+.skin-card .osd{inset:6px 6px auto}
+.osd i{display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:#e8392f;vertical-align:1px;animation:recBlink 1.2s steps(2,start) infinite}
+@keyframes recBlink{to{visibility:hidden}}
+@media (prefers-reduced-motion:reduce){.osd i{animation:none}}
+@media (max-width:520px){.osd{font-size:10px;padding:6px 8px}}

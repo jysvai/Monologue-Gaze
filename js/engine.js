@@ -245,6 +245,11 @@
     }
     if (b.img != null) {
       const cap = b.cap ? `<figcaption>${inline(b.cap)}${pinBtn(ref, b.cap, b.f, src)}</figcaption>` : '';
+      // 감시 카메라·블랙박스 화면: 채널과 날짜·시각을 그림 위에 글자로 얹는다 (그림 안에는 글자를 그리지 않으므로). osd: [채널, 날짜]
+      if (Array.isArray(b.osd)) {
+        const tm = (String(b.cap || '').slice(0, 24).match(/\d{1,2}:\d{2}:\d{2}/) || [''])[0];
+        return `<figure class="b-img has-osd${cls}"><span class="osd-wrap">${art(b.img)}<span class="osd" aria-hidden="true"><span><i></i>REC ${esc(b.osd[0])}</span><span>${esc(b.osd[1])} ${tm}</span></span></span>${cap}</figure>`;
+      }
       return `<figure class="b-img${cls}">${art(b.img)}${cap}</figure>`;
     }
     if (b.rows) {
