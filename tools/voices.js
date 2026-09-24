@@ -41,6 +41,7 @@ const CAST = {
   'c10/p_miran': [210, 'matilda', 0.95, 0.3], 'c10/p_sangmin': [115], 'c10/p_myeongsu': [100, 'chris', 0.95, 0.4], 'c10/p_okja': [185], 'c10/p_guard': [98], 'c10/p_bang': [90, 'brian', 0.95, 0.4],
   'c11/p_woo': [92, 'adam', 0.92, 0.35], 'c11/p_jin': [95], 'c11/p_han': [225], 'c11/p_yeom': [85], 'c11/p_park': [195], 'c11/p_gil': [125, 'liam', 1.0, 0.3], 'c11/p_ham': [95, 'george', 0.9, 0.4],
   'c12/p_takano': [85], 'c12/p_paperboy': [135], 'c12/p_ishiguro': [215], 'c12/p_ogawa': [125], 'c12/p_murakoshi': [95, 'adam', 0.95, 0.4], 'c12/p_kimura': [92], 'c12/p_toshie': [180], 'c12/p_shinji': [98, 'roger', 0.9, 0.35],
+  'c13/p_oh': [112, 'brian', 0.95, 0.4], 'c13/p_woojin': [138, 'liam', 1.05, 0.3], 'c13/p_jihan': [128, 'will', 1.0, 0.3], 'c13/p_choi': [205], 'c13/p_kim': [188],
 };
 
 // 주인공 대사: 추궁할 때, 결정적인 단서가 맞아떨어질 때, 보고서를 올릴 때

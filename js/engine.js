@@ -185,10 +185,8 @@
   let VERDICT = '';
   const LOCKFAIL = {};
 
-  const ok = need => {
-    if (!need || !need.length) return true;
-    return need.every(n => (n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '!' ? ST.notes.some(x => x.f === n.slice(1)) : n[0] === '@' ? !!ST.live && ST.live.t >= +n.slice(1) : ST.keys.includes(n)));
-  };
+  const okOne = n => (n[0] === '~' ? !okOne(n.slice(1)) : n[0] === '?' ? !!(ST.live && ST.live.req[n.slice(1)] && ST.live.req[n.slice(1)].st !== 'no') : n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '!' ? ST.notes.some(x => x.f === n.slice(1)) : n[0] === '@' ? !!ST.live && ST.live.t >= +n.slice(1) : ST.keys.includes(n)); // '~' = 아직 아님
+  const ok = need => !need || !need.length || need.every(okOne);
   const srcVisible = s => ok(s.need);
   const srcOpen = s => !s.lock || ST.unl.includes(s.id);
   const personVisible = p => (!p.key || ST.keys.includes(p.key)) && ok(p.need);
@@ -684,7 +682,8 @@
     });
     feedItems().forEach(it => {
       if (it.id in L.fd || L.t < (it.at || 0) || !ok(it.need)) return;
-      L.fd[it.id] = (it.at || 0) > prev ? it.at : L.t;
+      L.fd[it.id] = it.backdate || (it.at || 0) > prev ? it.at || 0 : L.t; // backdate: 조건이 늦게 채워져도 적힌 시각 그대로
+      if (!ST.unl.includes(it.id)) ST.unl.push(it.id); // '#말id' 조건: 그 말이 왔음
       (it.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
       if (!it.me) news.push({ who: it.who || '', msg: plain(it.msg || ''), app: it.app || feedName(it.src), t: 'feed', id: it.src, src: it.src });
     });
@@ -745,7 +744,7 @@
   }
   // 화면 아래 줄: 수사 시계 · 기한 · 기다리기
   function liveBar() {
-    const L = ST.live, dl = C.live.deadline, t = L.t, nd = nextDue();
+    const L = ST.live, dl = C.live.deadline && ok(C.live.deadline.need) ? C.live.deadline : null, t = L.t, nd = nextDue(); // 기한은 need 가 채워져야 보인다
     const left = dl ? dl.at - t : 0;
     const pend = Object.values(L.req).some(q => q.st === 'wait');
     return `<div class="scr-bar live"><span class="lv-clock"><b>D+${Math.floor(t / 1440)}</b> ${esc(lstamp(t))}</span>${dl ? `<span class="lv-dl${ST.solved ? ' done' : left < 0 ? ' over' : left < 360 ? ' hot' : ''}">${esc(dl.label || '기한')} · ${ST.solved ? '종결' : left >= 0 ? hm(left) + ' 남음' : hm(-left) + ' 넘김'}</span>` : ''}${nd != null && !ST.solved ? `<button type="button" class="lv-wait" data-wait>${pend ? '회신 기다리기' : '시간 보내기'} · ${hm(nd - t)}</button>` : ''}</div>`;
@@ -978,7 +977,10 @@
     const sol = C.solution;
     NOPIN = true;
     const late = !!(C.live && ST.live && ST.live.late);
-    const epi = blocks(late && sol.late ? sol.late : sol.epilogue, 'epi', '결말');
+    // 현행 사건 결말의 {{t}} · {{d}} = 보고서를 올린 시각 (15:40 · 11월 22일(금) 15:40)
+    const when = x => (C.live && ST.live && typeof x === 'string' ? x.replace(/\{\{t\}\}/g, ltime(ST.live.t)).replace(/\{\{d\}\}/g, lstamp(ST.live.t)) : x);
+    const stamped = arr => (arr || []).map(b => (typeof b === 'string' ? when(b) : b && typeof b.p === 'string' ? { ...b, p: when(b.p) } : b));
+    const epi = blocks(stamped(late && sol.late ? sol.late : sol.epilogue), 'epi', '결말');
     NOPIN = false;
     const fin = C.live && ST.live ? `<p class="lv-fin">수사 개시부터 ${hm(ST.live.t)}${C.live.deadline ? ` · ${esc(C.live.deadline.label || '기한')} ${late ? '넘김' : '안'}` : ''}</p>` : '';
     return `<div class="stamp${fresh ? ' fresh' : ''}"><div>사건<br>종결<small>${esc(sol.stamp || '')}</small></div></div>${fin}<div class="epi">${epi}</div>${sol.next ? `<p class="epi-next">${inline(sol.next)}</p>` : ''}`;

@@ -147,7 +147,7 @@ function check(c) {
   if (!(c.brief.lines || []).length) err('brief.lines 가 비어 있음');
 
   // sources
-  const tokenOk = n => (n[0] === '#' ? unlIds[n.slice(1)] || D[n.slice(1)] : n[0] === '!' ? true : n[0] === '@' ? /^@\d+$/.test(n) && !!c.live : K[n]);
+  const tokenOk = n => (n[0] === '~' ? n.length > 1 && tokenOk(n.slice(1)) : n[0] === '?' ? !!c.live && c.sources.some(s => s.type === 'request' && (s.items || []).some(r => r.id === n.slice(1))) : n[0] === '#' ? unlIds[n.slice(1)] || D[n.slice(1)] : n[0] === '!' ? true : n[0] === '@' ? /^@\d+$/.test(n) && !!c.live : K[n]);
   const needCheck = (need, where) => {
     if (need == null) return;
     if (!Array.isArray(need)) return err(`${where}: need 는 배열`);
@@ -397,10 +397,10 @@ function check(c) {
   allText.forEach(([w, t]) => { if (leak.test(t)) warn(`${w}: 정답을 대놓고 말하는 문장처럼 보임 → "${t.slice(0, 40)}"`); });
 
   // ── 추적 경로 시뮬레이션
-  const KN = new Set(c.start || []), F = new Set(), U = new Set(), docsSeen = new Set(), perSeen = new Set();
+  const KN = new Set(c.start || []), F = new Set(), U = new Set(), RQ = new Set(), docsSeen = new Set(), perSeen = new Set();
   const roundK = {}, roundF = {}, roundD = {};
   (c.start || []).forEach(k => (roundK[k] = 0));
-  const okN = need => !need || need.every(n => (n[0] === '#' ? U.has(n.slice(1)) : n[0] === '!' ? F.has(n.slice(1)) : n[0] === '@' ? true : KN.has(n)));
+  const okN = need => !need || need.every(n => (n[0] === '~' ? true : n[0] === '?' ? RQ.has(n.slice(1)) : n[0] === '#' ? U.has(n.slice(1)) : n[0] === '!' ? F.has(n.slice(1)) : n[0] === '@' ? true : KN.has(n)));
   let round = 0;
   for (;;) {
     round++;
@@ -431,11 +431,13 @@ function check(c) {
       if (s.type === 'request') (s.items || []).forEach(r => {
         if (!okN(r.need)) return;
         reach.add(`rq:${r.id}`);
+        RQ.add(r.id); // 신청서를 올릴 수 있다 = '?rq' 조건
         if (!(r.why || []).length || r.why.some(f => F.has(f))) { U.add(r.id); openDoc(D[r.doc]); (r.keys || []).forEach(k => reach.add(`__key:${k}`)); }
       });
       if (s.type === 'feed') (s.items || []).forEach(it => {
         if (!okN(it.need)) return;
         reach.add(`fd:${it.id}`);
+        U.add(it.id);
         if (it.doc) openDoc(D[it.doc]);
         (it.keys || []).forEach(k => reach.add(`__key:${k}`));
       });

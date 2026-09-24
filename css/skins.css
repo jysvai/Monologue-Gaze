@@ -97,6 +97,12 @@
 .doc[class*="ink-"] .doc-b .b-p,.doc[class*="ink-"] .b-sign{color:var(--ink)}
 .doc.ink-red{--ink:#8a2015}.doc.ink-purple{--ink:#4e2d6e}.doc.ink-blue{--ink:#1f3d86}.doc.ink-navy{--ink:#1f2a44}
 .doc.ink-sepia{--ink:#3e2a19}.doc.ink-black{--ink:#1d1b1a}
+/* 문단 하나만 다른 필체·잉크 (블록 cls) — 책상 위 포스트잇, 사진 속 쪽지 한 장 */
+.doc-b .f-yeon{font:20px/1.55 var(--f-yeon)}.doc-b .f-dokdo{font:22px/1.45 var(--f-dokdo)}.doc-b .f-gaegu{font:700 19px/1.55 var(--f-gaegu)}
+.doc-b .f-melody{font:21px/1.5 var(--f-melody)}.doc-b .f-poor{font:20px/1.55 var(--f-poor)}.doc-b .f-eastsea{font:24px/1.35 var(--f-eastsea)}
+.doc-b .f-single{font:19px/1.6 var(--f-single)}.doc-b .f-cute{font:22px/1.4 var(--f-cute)}.doc-b .f-gamja{font:20px/1.55 var(--f-gamja)}.doc-b .f-pen{font:22px/1.45 var(--f-hand)}
+.doc-b :is(.ink-red,.ink-purple,.ink-blue,.ink-navy,.ink-sepia,.ink-black){color:var(--ink)}
+.doc-b .ink-red{--ink:#8a2015}.doc-b .ink-purple{--ink:#4e2d6e}.doc-b .ink-blue{--ink:#1f3d86}.doc-b .ink-navy{--ink:#1f2a44}.doc-b .ink-sepia{--ink:#3e2a19}.doc-b .ink-black{--ink:#1d1b1a}
 .doc.ink-pencil{--ink:#4d4d4f}.doc.ink-pencil .doc-b .b-p{opacity:.92;text-shadow:0 0 .6px rgba(60,60,64,.5)}
 /* 만년필·펜 잉크는 종이에 조금 번진다 */
 .doc.ink-red .doc-b .b-p,.doc.ink-purple .doc-b .b-p,.doc.ink-sepia .doc-b .b-p{text-shadow:0 0 .7px color-mix(in srgb,var(--ink) 55%,transparent)}

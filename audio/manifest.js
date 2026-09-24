@@ -144,7 +144,27 @@ window.MG.audio = {
   "v/c12/p_shinji/k_saeki.2": "audio/voice/c12/p_shinji-k_saeki.2.mp3",
   "v/c12/p_shinji/k_1013": "audio/voice/c12/p_shinji-k_1013.mp3",
   "v/c12/p_shinji/k_1013.1": "audio/voice/c12/p_shinji-k_1013.1.mp3",
-  "v/c12/p_shinji/k_1013.2": "audio/voice/c12/p_shinji-k_1013.2.mp3"
+  "v/c12/p_shinji/k_1013.2": "audio/voice/c12/p_shinji-k_1013.2.mp3",
+  "v/c13/p_jihan/k_pill": "audio/voice/c13/p_jihan-k_pill.mp3",
+  "v/c13/p_jihan/k_pill.1": "audio/voice/c13/p_jihan-k_pill.1.mp3",
+  "v/c13/p_jihan/k_pill.2": "audio/voice/c13/p_jihan-k_pill.2.mp3",
+  "v/c13/p_jihan/k_paper": "audio/voice/c13/p_jihan-k_paper.mp3",
+  "v/c13/p_jihan/k_paper.1": "audio/voice/c13/p_jihan-k_paper.1.mp3",
+  "v/c13/p_jihan/k_paper.2": "audio/voice/c13/p_jihan-k_paper.2.mp3",
+  "v/c13/p_oh/k_paper": "audio/voice/c13/p_oh-k_paper.mp3",
+  "v/c13/p_oh/k_paper.1": "audio/voice/c13/p_oh-k_paper.1.mp3",
+  "v/c13/p_oh/k_parcel": "audio/voice/c13/p_oh-k_parcel.mp3",
+  "v/c13/p_oh/k_parcel.1": "audio/voice/c13/p_oh-k_parcel.1.mp3",
+  "v/c13/p_oh/k_parcel.2": "audio/voice/c13/p_oh-k_parcel.2.mp3",
+  "v/c13/p_oh/k_stakeout": "audio/voice/c13/p_oh-k_stakeout.mp3",
+  "v/c13/p_oh/k_stakeout.1": "audio/voice/c13/p_oh-k_stakeout.1.mp3",
+  "v/c13/p_oh/k_stakeout.2": "audio/voice/c13/p_oh-k_stakeout.2.mp3",
+  "v/c13/p_woojin/k_alley": "audio/voice/c13/p_woojin-k_alley.mp3",
+  "v/c13/p_woojin/k_alley.1": "audio/voice/c13/p_woojin-k_alley.1.mp3",
+  "v/c13/p_woojin/k_alley.2": "audio/voice/c13/p_woojin-k_alley.2.mp3",
+  "v/c13/p_woojin/k_coinnaru": "audio/voice/c13/p_woojin-k_coinnaru.mp3",
+  "v/c13/p_woojin/k_coinnaru.1": "audio/voice/c13/p_woojin-k_coinnaru.1.mp3",
+  "v/c13/p_woojin/k_coinnaru.2": "audio/voice/c13/p_woojin-k_coinnaru.2.mp3"
  },
  "span": {
   "v/c01/p_vane/k_knotsman": 3,
@@ -236,7 +256,12 @@ window.MG.audio = {
   "c12/p_murakoshi": 95,
   "c12/p_kimura": 92,
   "c12/p_toshie": 180,
-  "c12/p_shinji": 98
+  "c12/p_shinji": 98,
+  "c13/p_jihan": 128,
+  "c13/p_oh": 112,
+  "c13/p_woojin": 138,
+  "c13/p_choi": 205,
+  "c13/p_kim": 188
  },
  "say": {
   "hero/press1": "이걸 보시죠. 그래도 같은 말씀입니까?",
