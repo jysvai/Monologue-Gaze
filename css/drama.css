@@ -115,7 +115,6 @@
 .mono-cap::before{content:"— ";opacity:.6}
 .mono-cap.on{opacity:1;transform:translate(-50%,0)}
 
-.snd.voice{margin-left:4px}
 
 @media (prefers-reduced-motion:reduce){
   #app[class*="cue-"] .stage-frame,#app[class*="cue-"] .case-view,#app.cue-solved,.rep-view.bounced,.qa.pressing .c-ev,.c-dots i{animation:none!important}

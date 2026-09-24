@@ -29,7 +29,9 @@ body{
   background-color:var(--desk);
   background-image:var(--desk-img,none),radial-gradient(ellipse at 28% 18%,#3a3029 0%,transparent 62%),radial-gradient(ellipse at 85% 95%,#2b231d 0%,transparent 55%),repeating-linear-gradient(91deg,rgba(255,255,255,.014) 0 2px,transparent 2px 9px);
   color:var(--ink);font-family:var(--f-web);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  word-break:keep-all;overflow-wrap:anywhere; /* 한국어는 낱말 가운데서 줄을 바꾸지 않는다 ("부/두"). 한 줄에 안 들어가는 긴 낱말만 끊는다 */
 }
+td,th{overflow-wrap:break-word} /* 표 칸은 낱말 너비를 지킨다: anywhere 면 칸이 좁아져 "23:0/2" 처럼 끊긴다 */
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;background:radial-gradient(ellipse at 50% 45%,transparent 58%,rgba(0,0,0,.4) 100%)}
 /* 종이 결: 곱하기 합성과 같은 어둡기를 보통 합성으로 (짙은 갈색 결 × .22) */
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:91;background-image:var(--grain);opacity:.22}
@@ -62,6 +64,7 @@ img{max-width:100%}
 .f-body{position:relative;display:flex;flex-direction:column;gap:8px;width:100%;min-height:200px;padding:14px 16px 16px;border-radius:0 4px 4px 4px;background-color:var(--kraft);background-image:var(--fiber),linear-gradient(180deg,rgba(255,255,255,.12),rgba(0,0,0,.08));color:var(--kraft-ink);box-shadow:0 14px 26px -10px rgba(0,0,0,.7),inset 0 0 30px rgba(90,60,20,.25)}
 .folder.tutorial .f-tab,.folder.tutorial .f-body{background-color:#b8b09a}
 .f-kind{font:11px/1.2 var(--f-mono);letter-spacing:.08em;color:#4b3c24}
+.f-cover~.f-body .f-kind{padding-right:94px} /* 표지 사진 밑으로 별이 숨지 않게: 길면 별이 다음 줄로 */
 .f-label{display:flex;flex-direction:column;gap:2px;padding:9px 11px 8px;background-color:#f4efe2;background-image:var(--noise);box-shadow:0 1px 2px rgba(0,0,0,.25)}
 .f-title{font:800 18px/1.3 var(--f-doc);color:#1f1a14;text-wrap:balance}
 .f-place{font:12px/1.4 var(--f-web);color:#5d5444}
@@ -180,6 +183,7 @@ img{max-width:100%}
 .map>svg,.map>img{display:block;width:100%;height:auto}
 .spot{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;width:22px;height:22px;padding:0;border:2px solid #fff;border-radius:50%;background:var(--red);box-shadow:0 2px 6px rgba(0,0,0,.4);cursor:pointer}
 .spot span{position:absolute;top:24px;left:50%;transform:translateX(-50%);padding:1px 6px;background:rgba(255,253,245,.92);color:#222;font:11px/1.3 var(--f-web);white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.spot.at-l span{left:-2px;transform:none}.spot.at-r span{left:auto;right:-2px;transform:none} /* 지도 가장자리의 점은 이름표를 안쪽으로 편다 (좁은 화면에서 잘리지 않게) */
 
 /* ───────── read pane ───────── */
 .read-empty{display:grid;place-items:center;min-height:60%;padding:30px;text-align:center}
@@ -293,7 +297,8 @@ img{max-width:100%}
 
 .snd{padding:3px 9px;border:1px solid currentColor;border-radius:2px;background:transparent;font:11px var(--f-mono);letter-spacing:.04em;opacity:.7;cursor:pointer}
 .snd:hover,.snd[aria-pressed="true"]{opacity:1}
-.cab-top .snd{justify-self:start;margin-top:10px;color:#cdbf9f}
+.cab-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 0}
+.cab-top .snd{margin:0;color:#cdbf9f}
 .nb-case .snd{margin-right:6px;color:var(--pencil)}
 
 /* ── 난이도 별 · 혐오감 주의 */
@@ -419,8 +424,11 @@ img{max-width:100%}
 .cens.open .cens-l{display:none}
 @media (prefers-reduced-motion:reduce){.cens>svg,.cens>img{transition:none}}
 .nb-back{white-space:nowrap}
-.nb-case{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:2px 6px;text-align:right}
-.nb-case .snd{margin-right:0}
+.nb-case{display:grid;justify-items:end;gap:5px;text-align:right}
+.nb-id{white-space:nowrap}
+.nb-ctl{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px}
+.nb-case .snd{margin:0}
+.nb-case .snd.mild[aria-pressed="true"]{color:var(--red)} /* 기록실(어두운 책상)의 옅은 빨강은 종이 위에서 안 읽힌다 */
 
 /* 빨간 별 사건 — 화면을 더 어둡게, 🔞 사진은 붉게 떠오르게. 잔혹 표현을 끄면 data-graphic 이 빠져 모두 사라진다 */
 .gore-bg{background:radial-gradient(ellipse at 50% 42%,rgba(10,2,1,.16) 30%,rgba(58,3,1,.62) 100%)}

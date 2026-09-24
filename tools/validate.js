@@ -8,7 +8,7 @@ const path = require('path');
 const vm = require('vm');
 
 const norm = s => String(s ?? '').toLowerCase().replace(/[\s'"`.,!?·・()[\]{}\-_/@:;~「」『』〈〉《》“”‘’]/g, '');
-const BLOCK_KEYS = new Set(['p', 'h', 'sep', 'divider', 'note', 'stamp', 'sign', 'm', 'img', 'cap', 'rows', 'head', 'list', 'msg', 'who', 'at', 'me', 'say', 'cipher', 'f', 'cls', 'nopin']);
+const BLOCK_KEYS = new Set(['p', 'h', 'sep', 'divider', 'note', 'stamp', 'sign', 'm', 'img', 'cap', 'rows', 'head', 'list', 'msg', 'who', 'at', 'me', 'say', 'cipher', 'f', 'cls', 'nopin', 'osd']);
 const TEXT_KEYS = ['p', 'h', 'divider', 'note', 'stamp', 'sign', 'm', 'cap', 'msg', 'say'];
 const SKINS = new Set(['plain', 'report', 'news', 'letter', 'telegram', 'ledger', 'card', 'transcript', 'memo', 'photo', 'web', 'chat', 'sms', 'home', 'files', 'cipher', 'board', 'lab']);
 const TYPES = new Set(['archive', 'list', 'people', 'map', 'cipher', 'timeline', 'compare', 'query', 'photo']);

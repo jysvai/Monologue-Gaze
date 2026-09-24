@@ -667,7 +667,7 @@
   // 지도: 목록 칸에는 작은 지도(점만), 아무것도 펼치지 않았을 때는 읽기 칸에 크게(이름까지)
   function mapHtml(s, big) {
     const spots = (s.spots || []).filter(sp => ok(sp.need));
-    return `<div class="map${big ? ' big' : ''}">${art(s.art)}${spots.map(sp => `<button type="button" class="spot" style="left:${+sp.x}%;top:${+sp.y}%" data-spot="${esc(sp.id)}" aria-label="${esc(sp.label)}" data-tip="${esc(sp.label)}"><span>${esc(sp.label)}</span></button>`).join('')}</div>`;
+    return `<div class="map${big ? ' big' : ''}">${art(s.art)}${spots.map(sp => `<button type="button" class="spot${+sp.x < 22 ? ' at-l' : +sp.x > 78 ? ' at-r' : ''}" style="left:${+sp.x}%;top:${+sp.y}%" data-spot="${esc(sp.id)}" aria-label="${esc(sp.label)}" data-tip="${esc(sp.label)}"><span>${esc(sp.label)}</span></button>`).join('')}</div>`;
   }
   function mapList(s) {
     const spots = (s.spots || []).filter(sp => ok(sp.need));
@@ -774,7 +774,7 @@
     const top = nb.firstChild ? nb.scrollTop : 0;
     nb.innerHTML = `
       <div class="nb-rings" aria-hidden="true"></div>
-      <div class="nb-top"><button type="button" class="nb-back" data-cabinet>← 기록실</button><span class="nb-case">${soundBtn()}${C.graphic ? mildBtn() : ''} ${starsHtml(C)} CASE ${pad(C.no)}</span></div>
+      <div class="nb-top"><button type="button" class="nb-back" data-cabinet>← 기록실</button><span class="nb-case"><span class="nb-id">${starsHtml(C)} CASE ${pad(C.no)}</span><span class="nb-ctl">${soundBtn()}${C.graphic ? mildBtn() : ''}</span></span></div>
       <article class="brief"><svg class="clip" viewBox="0 0 24 64" aria-hidden="true"><path d="M8 20 V50 a6 6 0 0 0 12 0 V12 a8 8 0 0 0 -16 0 V46" fill="none" stroke="#8d918f" stroke-width="2.6" stroke-linecap="round"/></svg>
         ${gore() ? stains(C.id + 'brief', 1, 'bd', true) : ''}<h2>${esc(b.title || C.title)} <small>${esc(b.no || '')}</small></h2>
         <dl>${(b.lines || []).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${inline(v)}</dd>`).join('')}</dl>${b.scrawl ? `<p class="scrawl">${inline(b.scrawl)}</p>` : ''}</article>
@@ -921,7 +921,7 @@
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
       <header class="cab-top"><p class="cab-kicker">서울서부경찰서 강력2팀 · 미제사건 기록실</p><h1 class="cab-title">Monologue Gaze</h1><p class="cab-sub">기록은 혼잣말을 한다. 들어주는 건 당신이다.</p>
-        ${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}<p class="cab-stat">종결 <b>${solvedMain}</b> / ${main.length} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}</p></header>
+        <p class="cab-ctl">${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}</p><p class="cab-stat">종결 <b>${solvedMain}</b> / ${main.length} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}</p></header>
       ${intro}
       <section class="drawer" aria-label="사건 파일">${MG.cases.map(folder).join('')}</section>
       ${mList.length ? `<section class="mbox"><h2>M의 메모</h2><p class="mbox-sub">기록 여백에 남아 있던, 선배의 글씨.</p><ul>${mList.map(c => `<li><span class="mbox-case">CASE ${pad(c.no)}</span> ${esc(plain(c._m))}</li>`).join('')}</ul></section>` : ''}

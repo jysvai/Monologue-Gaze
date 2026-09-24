@@ -27,6 +27,7 @@
 .b-tbl td{font-variant-numeric:tabular-nums}
 .b-tbl .pc{width:34px;text-align:right}
 .b-tbl .pin{margin:0}
+@container stage (max-width:520px){.b-tbl th,.b-tbl td{padding:5px 5px;overflow-wrap:anywhere}.b-tbl .pc{width:28px}} /* 폰: 표가 옆으로 밀려 ✎ 칸이 숨느니 칸 안에서 끊는다 */
 .b-list{margin:4px 0 14px;padding-left:20px}
 .b-list li{margin:3px 0}
 .b-div{display:flex;align-items:center;gap:10px;margin:16px 0 10px;font:11.5px var(--f-mono);opacity:.75}
@@ -59,11 +60,11 @@
 .skin-news .doc-k{text-align:center;font-size:11px;border-bottom:1px solid #2b2823;padding-bottom:4px}
 .skin-news .doc-t{margin-top:10px;font:900 24px/1.3 var(--f-old);text-align:center}
 .skin-news .doc-m{text-align:center}
-.skin-news .doc-b{font:15px/1.85 var(--f-old);text-align:justify}
+.skin-news .doc-b{font:15px/1.85 var(--f-old);text-align:justify;word-break:normal} /* 옛 신문 단은 글자 단위로 끊어 양쪽을 맞춘다 */
 @container stage (min-width:900px){.skin-news .doc-b{column-count:2;column-gap:28px;column-rule:1px solid rgba(0,0,0,.2)}}
 .skin-news .b-img{break-inside:avoid;filter:grayscale(1) contrast(1.1)}
 .skin-news .b-h{font-family:var(--f-old);text-align:center}
-.skin-news.vertical .doc-b{writing-mode:vertical-rl;column-count:auto;height:min(62vh,540px);overflow-x:auto;text-align:start;line-height:2}
+.skin-news.vertical .doc-b{writing-mode:vertical-rl;column-count:auto;width:100%;height:min(62vh,540px);overflow-x:auto;text-align:start;line-height:2} /* 너비를 묶어야 좁은 화면에서 첫 줄(오른쪽)이 잘리지 않고 옆으로 넘겨 읽힌다 */
 .skin-news.vertical .b-p{margin:0 0 0 14px}
 .skin-news.vertical .pin{writing-mode:horizontal-tb;margin:6px 0 0}
 
@@ -94,8 +95,8 @@
 /* ───────── telegram (전보) ───────── */
 .skin-telegram{background-color:#efe4b8;border-top:10px solid #c9b46a}
 .skin-telegram .doc-t{font:700 15px/1.4 var(--f-type);letter-spacing:.12em;text-transform:uppercase}
-.skin-telegram .doc-b .b-p{display:inline;padding:3px 8px;margin:0 0 6px;line-height:2.4;background:#fbf8ec;font:14px/2.4 var(--f-mono);letter-spacing:.08em;box-decoration-break:clone;-webkit-box-decoration-break:clone;box-shadow:0 1px 1px rgba(0,0,0,.2)}
-.skin-telegram .doc-b .b-p::after{content:"";display:block;height:6px}
+/* 전보 띠: 줄마다 붙인 종이 띠. 인라인+::after 줄바꿈은 빈 띠 조각을 다음 줄 앞에 남겨서, 블록 하나에 줄 높이마다 띠를 그린다 */
+.skin-telegram .doc-b .b-p{width:fit-content;max-width:100%;padding:0 8px;margin:0 0 6px;font:14px/2.4 var(--f-mono);letter-spacing:.08em;background:linear-gradient(180deg,transparent 15%,#fbf8ec 15% 85%,transparent 85%) 0 0/100% 2.4em repeat-y;filter:drop-shadow(0 1px .6px rgba(0,0,0,.22))}
 
 /* ───────── ledger (장부, 숙박부, 출입 기록) ───────── */
 .skin-ledger{background-color:#ebe3cb}
