@@ -261,8 +261,10 @@
     if (b.stamp != null) return `<p class="b-stamp${cls}"><span>${inline(b.stamp)}</span></p>`;
     if (b.sign != null) return `<p class="b-sign${cls}">${inline(b.sign)}</p>`;
     if (b.m != null) {
-      if (!ST.m) { ST.m = true; save(); }
-      return `<p class="b-m">${inline(b.m)}<span class="b-m-sig">— M</span></p>`;
+      // 선배의 글씨를 처음 만나는 때: 잉크가 배어 나오듯 나타나고, 한마디 (기록실의 「M의 메모」에 모인다)
+      const first = !ST.m;
+      if (first) { ST.m = true; save(); const c0 = C; setTimeout(() => { if (C === c0) { sfx('pen'); toast('여백에 낯익은 글씨가 있다 — M'); } }, 1100); }
+      return `<p class="b-m${first ? ' fresh' : ''}">${inline(b.m)}<span class="b-m-sig">— M</span></p>`;
     }
     if (b.img != null) {
       const cap = b.cap ? `<figcaption>${inline(b.cap)}${pinBtn(ref, b.cap, b.f, src)}</figcaption>` : '';
@@ -1241,6 +1243,11 @@
     const solvedMain = main.filter(c => S.cases[c.id] && S.cases[c.id].solved).length;
     const solvedLive = live.filter(c => S.cases[c.id] && S.cases[c.id].solved).length;
     const mList = MG.cases.filter(c => c._m && S.cases[c.id] && S.cases[c.id].m);
+    // 처음 보는 종결 도장·M의 메모는 한 번만 찍히고 스며 나온다 (전부터 있던 것은 조용히)
+    const doneIds = MG.cases.filter(c => S.cases[c.id] && S.cases[c.id].solved).map(c => c.id), mIds = mList.map(c => c.id);
+    if (!S.seen) S.seen = { done: doneIds, m: mIds };
+    const newDone = doneIds.filter(id => !S.seen.done.includes(id)), newM = mIds.filter(id => !S.seen.m.includes(id));
+    S.seen.done.push(...newDone); S.seen.m.push(...newM); save();
     const folder = c => {
       const st = S.cases[c.id];
       const status = st && st.solved ? 'done' : st && (st.notes.length || st.seen.length) ? 'going' : 'new';
@@ -1252,7 +1259,7 @@
         <span class="f-tab">CASE ${pad(c.no)}</span>
         <span class="f-body"><span class="f-kind">${kind} · ${esc(c.year)} ${c.kind === 'tutorial' ? '<span class="stars t">연습</span>' : starsHtml(c)}</span><span class="f-label"><span class="f-title">${esc(c.title)}</span><span class="f-place">${esc(c.place)}</span></span>
         <span class="f-motif">${esc(c.motif || '')}</span>${c.length ? `<span class="f-len">${esc(c.length)}</span>` : ''}
-        ${status === 'done' ? '<span class="f-stamp">종결</span>' : status === 'going' ? '<span class="f-going">수사 중</span>' : ''}</span></button>`;
+        ${status === 'done' ? `<span class="f-stamp${newDone.includes(c.id) ? ' fresh' : ''}">종결</span>` : status === 'going' ? '<span class="f-going">수사 중</span>' : ''}</span></button>`;
     };
     const intro = S.intro ? '' : `<div class="intro"><p>서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.</p><p>서랍 속에는 한 세기에 걸친 미제 기록 ${numk(main.length)} 건. 사진 한 장, 편지 한 통, 누군가의 혼잣말 같은 기록들. 기록은 대답하지 않는다. 쫓아가는 사람에게만 조금씩 입을 연다.</p><p class="intro-hand">처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장</p><button type="button" class="btn-hand" data-intro-ok>서랍을 연다</button></div>`;
     const letter = main.length >= 10 && solvedMain === main.length ? `<article class="m-letter"><h3>서랍 맨 밑의 편지</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p>${mWho()}</article>` : '';
@@ -1265,10 +1272,13 @@
       ${intro}
       <section class="drawer" aria-label="사건 파일">${MG.cases.filter(c => !c.live).map(folder).join('')}</section>
       ${live.length ? `<section class="duty" aria-label="현행 사건"><h2 class="duty-h">당직 · 현행 사건</h2><p class="duty-sub">당직 때마다 다른 팀에 지원으로 붙는다. 지금 벌어지는 사건이라, 기록을 넘기는 동안에도 시계는 간다.</p><div class="drawer">${live.map(folder).join('')}</div></section>` : ''}
-      ${mList.length ? `<section class="mbox"><h2>M의 메모</h2><p class="mbox-sub">기록 여백에 남아 있던, 선배의 글씨.</p><ul>${mList.map(c => `<li><span class="mbox-case">CASE ${pad(c.no)}</span> ${esc(plain(c._m))}</li>`).join('')}</ul></section>` : ''}
+      ${mList.length ? `<section class="mbox"><h2>M의 메모</h2><p class="mbox-sub">기록 여백에 남아 있던, 선배의 글씨.</p><ul>${mList.map(c => `<li${newM.includes(c.id) ? ' class="fresh"' : ''}><span class="mbox-case">CASE ${pad(c.no)}</span> ${esc(plain(c._m))}</li>`).join('')}</ul></section>` : ''}
       ${letter}
       <footer class="cab-foot"><p>모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.</p><p class="credit">목소리·효과음 <a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a></p><button type="button" class="reset" data-wipe>${roster().list.length > 1 ? '내 기록 지우기' : '모든 기록 지우기'}</button></footer>
     </div>`;
+    // 막 종결한 사건이면 그 폴더까지 내려가 도장을 찍는다
+    const fresh = $('.f-stamp.fresh');
+    if (fresh) { setTimeout(() => { fresh.closest('.folder').scrollIntoView({ block: 'center', behavior: reduced() ? 'auto' : 'smooth' }); }, 150); setTimeout(() => sfx('stamp'), 700); }
   }
 
   /* ───────── sound (기본 꺼짐) — audio/ 의 효과음 파일이 있으면 그것을, 없으면 합성음 ───────── */
@@ -1770,7 +1780,7 @@
       if (t.closest('[data-open-rep]')) { REPOPEN = null; return openItem({ t: 'report' }); }
       if ((el = t.closest('[data-rep-open]'))) { REPOPEN = REPOPEN === el.dataset.repOpen ? null : el.dataset.repOpen; renderRep(); const a = $('.rep-claim.open'); if (a) { a.scrollIntoView({ block: 'nearest' }); const q = a.querySelector('[data-rep-filter]'); if (q && !narrow()) q.focus({ preventScroll: true }); } return; }
       if (t.closest('[data-back]')) { ST.view.open = null; save(); renderRead(); renderList(); return; }
-      if ((el = t.closest('[data-reset]'))) return armed(el, '한 번 더 누르면 이 사건 기록이 지워진다', () => { delete S.cases[C.id]; save(); openCase(C.id); toast('처음부터 다시'); });
+      if ((el = t.closest('[data-reset]'))) return armed(el, '한 번 더 누르면 이 사건 기록이 지워진다', () => { delete S.cases[C.id]; if (S.seen) { S.seen.done = S.seen.done.filter(x => x !== C.id); S.seen.m = S.seen.m.filter(x => x !== C.id); } save(); openCase(C.id); toast('처음부터 다시'); });
     });
     document.addEventListener('submit', e => {
       const f = e.target;
