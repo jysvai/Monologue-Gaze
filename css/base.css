@@ -111,6 +111,7 @@ img{max-width:100%}
 .f-len{margin-top:auto;font:11px var(--f-type);color:#5b4a2e}
 .f-stamp{position:absolute;right:12px;bottom:14px;padding:4px 10px;border:3px double var(--red);color:var(--red);font:800 17px/1 var(--f-doc);transform:rotate(-12deg);opacity:.88;mix-blend-mode:multiply}
 .f-going{position:absolute;right:12px;bottom:12px;font:20px/1 var(--f-hand);color:var(--red);transform:rotate(-4deg)}
+.f-going small{display:block;margin-top:3px;font-size:16px;text-align:right;color:#4a3f33}
 .mbox{margin-top:40px;max-width:760px}
 .mbox h2{margin:0;font:400 30px/1.1 var(--f-hand);color:#efe4c9}
 .mbox-sub{margin:4px 0 12px;font-size:13px;color:#a99a7e}

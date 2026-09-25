@@ -755,7 +755,11 @@
   function renderBar() {
     if (!liveOn()) return;
     const b = $('.scr-bar.live');
-    if (b) b.outerHTML = liveBar();
+    if (!b) return;
+    const was = ($('.scr-bar.live .lv-clock') || {}).textContent;
+    b.outerHTML = liveBar();
+    const c = $('.scr-bar.live .lv-clock'); // 수사 시각이 넘어가는 순간 시계가 잠깐 밝아진다
+    if (c && was && c.textContent !== was) c.classList.add('tick');
   }
   const feedCount = s => { const L = ST.live; return L ? (s.items || []).filter(it => it.id in L.fd).length + L.fx.filter(x => (x.src || firstFeed()) === s.id).length : 0; };
   const feedUnread = s => { const o = ST.view.open; if (!ST.live || (o && o.t === 'feed' && o.id === s.id)) return 0; return Math.max(0, feedCount(s) - ((ST.live.rd || {})[s.id] || 0)); }; // 보고 있는 방은 다 읽은 것
@@ -1256,6 +1260,8 @@
       const st = S.cases[c.id];
       const status = st && st.solved ? 'done' : st && (st.notes.length || st.seen.length) ? 'going' : 'new';
       const kind = c.kind === 'tutorial' ? '튜토리얼' : c.live ? '현행' : c.region === 'overseas' ? '해외' : '국내';
+      // 현행 사건 폴더에는 사건 속 시계가 멈춘 시각을 연필로 적어 둔다 (다시 열면 거기서부터 흐른다)
+      const stop = c.live && st && st.live ? (([y, mo, d, h, mi]) => { const t = new Date(y, mo - 1, d, h, mi + (st.live.t || 0)); return `${t.getMonth() + 1}.${t.getDate()} ${pad(t.getHours())}:${pad(t.getMinutes())}`; })(c.live.start || [2024, 1, 1, 9, 0]) : '';
       const coverFile = MG.images[`${c.id}/cover_s`] || MG.images[`${c.id}/cover`]; // 폴더 표지는 작게 (cover_s)
       const cover = coverFile ? `<img src="${esc(coverFile)}" alt="" loading="lazy" decoding="async">` : c.art && c.art.cover ? (typeof c.art.cover === 'string' ? c.art.cover : c.art.cover.svg || '') : '';
       return `<button type="button" class="folder ${status}${c.kind === 'tutorial' ? ' tutorial' : ''}" data-open="${esc(c.id)}" style="--tilt:${(hash(c.id) % 7 - 3) * 0.4}deg">
@@ -1263,7 +1269,7 @@
         <span class="f-tab">CASE ${pad(c.no)}</span>
         <span class="f-body"><span class="f-kind">${kind} · ${esc(c.year)} ${c.kind === 'tutorial' ? '<span class="stars t">연습</span>' : starsHtml(c)}</span><span class="f-label"><span class="f-title">${esc(c.title)}</span><span class="f-place">${esc(c.place)}</span></span>
         <span class="f-motif">${esc(c.motif || '')}</span>${c.length ? `<span class="f-len">${esc(c.length)}</span>` : ''}
-        ${status === 'done' ? `<span class="f-stamp${newDone.includes(c.id) ? ' fresh' : ''}">종결</span>` : status === 'going' ? '<span class="f-going">수사 중</span>' : ''}</span></button>`;
+        ${status === 'done' ? `<span class="f-stamp${newDone.includes(c.id) ? ' fresh' : ''}">종결</span>` : status === 'going' ? `<span class="f-going">수사 중${stop ? `<small>${stop}</small>` : ''}</span>` : ''}</span></button>`;
     };
     const intro = S.intro ? '' : `<div class="intro"><p>서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.</p><p>서랍 속에는 한 세기에 걸친 미제 기록 ${numk(main.length)} 건. 사진 한 장, 편지 한 통, 누군가의 혼잣말 같은 기록들. 기록은 대답하지 않는다. 쫓아가는 사람에게만 조금씩 입을 연다.</p><p class="intro-hand">처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장</p><button type="button" class="btn-hand" data-intro-ok>서랍을 연다</button></div>`;
     const letter = main.length >= 10 && solvedMain === main.length ? `<article class="m-letter"><h3>서랍 맨 밑의 편지</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p>${mWho()}</article>` : '';

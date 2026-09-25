@@ -5,6 +5,9 @@
 .scr-bar.live{justify-content:space-between;gap:12px;height:30px;padding:0 10px 0 12px;white-space:nowrap;user-select:none}
 .lv-clock{font:12.5px/1 var(--f-mono);letter-spacing:.03em}
 .lv-clock b{margin-right:6px;padding:2px 5px 1px;border-radius:3px;background:rgba(255,255,255,.14);font-weight:700}
+.lv-clock.tick{animation:lvTick 1s ease-out}
+@keyframes lvTick{from{color:#ffd46a;text-shadow:0 0 6px rgba(255,196,80,.55)}}
+@media (prefers-reduced-motion:reduce){.lv-clock.tick{animation:none}}
 .lv-dl{margin-left:auto;font:12px/1 var(--f-web);opacity:.85}
 .lv-dl.hot{color:#ffb454;opacity:1}
 .lv-dl.over{color:#ff7a6b;opacity:1;font-weight:700}
