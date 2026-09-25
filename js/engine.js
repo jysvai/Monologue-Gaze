@@ -957,7 +957,10 @@
         ${open ? `<div class="rep-acc">${notes.length ? `<input type="search" class="rep-filter" placeholder="메모에서 낱말 찾기" data-rep-filter aria-label="메모 찾기">${list}` : '<p class="rep-empty">수첩에 메모가 없다. 문서와 탐문에서 문장을 눌러 적어 둔다.</p>'}</div>` : ''}
       </section>`;
     };
-    return `<article class="doc skin-report rep-view"><header class="doc-h"><p class="doc-k">${esc(FM.title)}</p><h3 class="doc-t">${esc(C.title)}</h3><p class="doc-m">${esc(FM.lead)}</p></header>
+    // 화면 속(모니터·노트북) 보고서는 전산 양식이라 머리에 결재란: 담당은 지금 서랍 주인, 종결되면 팀장·과장 칸에 결재 도장
+    const me = roster().list.find(p => p.id === PID), back = !ST.solved && ST.tries && VERDICT;
+    const sign = C.frame === 'crt' || C.frame === 'laptop' ? `<table class="rep-sign" aria-label="결재"><tr><th>담당</th><th>팀장</th><th>과장</th></tr><tr><td>${esc(who(me))}</td><td>${ST.solved ? '<span class="ok">결재</span>' : back ? '<span class="no">반려</span>' : ''}</td><td>${ST.solved ? '<span class="ok">결재</span>' : ''}</td></tr></table>` : '';
+    return `<article class="doc skin-report rep-view"><header class="doc-h">${sign}<p class="doc-k">${esc(FM.title)}</p><h3 class="doc-t">${esc(C.title)}</h3><p class="doc-m">${esc(FM.lead)}</p></header>
       <div class="doc-b"><form id="rep" autocomplete="off">
         <section class="rep-sec"><h4>${esc(FM.culprit)}</h4><div class="rep-people">${persons.map(k => `<label class="rep-per${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}><b>${esc(C.keywords[k].label)}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}</label>`).join('') || '<p class="rep-empty">수첩에 적힌 인물이 없다.</p>'}</div></section>
         ${sol.claims.map(claim).join('')}

@@ -83,6 +83,12 @@ for (const c of mine) {
     check(`${c.id} source ${s.id}${k ? ' #' + k : ''}`, el('#paneList').innerHTML); n++;
   }
   check(`${c.id} notebook`, el('#nb').innerHTML, 'CASE ' + String(c.no).padStart(2, '0'));
+  // 수사 보고서: 빈 것 · 반려된 것 · 종결된 것 (화면 속 사건은 결재란까지)
+  for (const [tries, solved] of [[0, false], [2, false], [1, true]]) {
+    Object.keys(els).forEach(k => delete els[k]);
+    MG.boot({ S: { intro: true, current: c.id, cases: { [c.id]: { cw: true, live: LIVE(), keys: [...keys], unl: [...unl], tries, solved, view: { open: { t: 'report' }, q: {} } } } } });
+    check(`${c.id} report${solved ? ' (solved)' : tries ? ' (tried)' : ''}`, el('#paneRead').innerHTML, c.frame === 'crt' || c.frame === 'laptop' ? 'rep-sign' : 'rep-view'); n++;
+  }
   // cabinet folder
   MG.boot({ S: { intro: true, current: null, cases: {} } });
   check(`${c.id} cabinet`, document.getElementById('app').innerHTML, c.title);
