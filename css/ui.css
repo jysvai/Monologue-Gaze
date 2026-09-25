@@ -360,3 +360,10 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
 @keyframes mSeep{from{opacity:0;filter:blur(3px);translate:0 -6px}to{opacity:1;filter:none;translate:0 0}}
 .b-m.fresh{animation:mSeep 1.8s .5s ease-out both}
 @media (prefers-reduced-motion:reduce){.f-stamp.fresh,.mbox li.fresh,.b-m.fresh{animation:none}}
+/* 사진 살피기 돋보기 (js/ui.js): 종이 기록은 놋쇠 테 둥근 렌즈, 화면 속 사진은 네모 확대 창. 가운데 작은 고리가 누르는 자리 */
+.ph-lens{position:absolute;z-index:3;width:156px;height:156px;margin:-78px 0 0 -78px;border-radius:50%;pointer-events:none;background-color:#222;background-repeat:no-repeat;box-shadow:0 0 0 3px #b8893a,0 0 0 5px rgba(60,40,10,.55),0 12px 26px rgba(0,0,0,.45),inset 0 0 20px rgba(0,0,0,.4);transition:opacity .15s}
+.ph-lens::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.22),transparent 42%)}
+.ph-lens::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border:1px solid rgba(255,255,255,.75);border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+.case-view:not([data-frame="papers"]) .ph-lens{border-radius:4px;box-shadow:0 0 0 1px rgba(255,255,255,.9),0 0 0 2px rgba(0,0,0,.4),0 10px 22px rgba(0,0,0,.4)}
+.case-view:not([data-frame="papers"]) .ph-lens::before{content:none}
+.ph.lensing,.ph.lensing .ph-cell{cursor:none}

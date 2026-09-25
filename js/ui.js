@@ -4,6 +4,7 @@
  * 3. 그림: 크게 볼 수 있는 그림·열람 주의 사진도 키보드(Tab → Enter)로 닿게 한다.
  * 4. 크게 보기 창: 열려 있는 동안 Tab 이 뒤로 새지 않고, 닫히면 보던 그림으로 돌아간다.
  * 5. 잠금·조회 칸: 틀린 번호를 넣어 칸이 다시 그려져도 커서가 그 칸에 남는다.
+ * 6. 사진 살피기 돋보기: 마우스를 올린 자리를 크게 (종이는 놋쇠 돋보기, 화면 속 사진은 네모 확대 창).
  */
 (function () {
   let tip = null, cur = null, wait = 0;
@@ -91,6 +92,28 @@
       if (t.isConnected) label(t);
     }
   });
+
+  // 사진 살피기(.ph): 마우스를 올린 자리를 두 배 남짓 크게 보여 준다. 종이 기록은 놋쇠 테 돋보기, 화면 속 사진은 네모 확대 창.
+  // 누르는 자리는 렌즈 가운데 그대로다 (렌즈는 누름을 가로채지 않는다). 가려진 열람 주의 사진·손가락 조작에는 띄우지 않는다.
+  const LZ = 2.2, LR = 78;
+  let lens = null, lph = null;
+  function lensOff() { if (lens) lens.remove(); if (lph) lph.classList.remove('lensing'); lens = null; lph = null; }
+  document.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
+    const ph = e.target.closest ? e.target.closest('.ph') : null;
+    const img = ph && [...ph.querySelectorAll('img.art')].find(i => !i.closest('.cens:not(.open)'));
+    if (!img || !img.complete || !img.naturalWidth) { if (lph && lph !== ph) lensOff(); return; }
+    if (lph !== ph || !lens || !lens.isConnected) { lensOff(); lph = ph; lens = document.createElement('div'); lens.className = 'ph-lens'; lens.setAttribute('aria-hidden', 'true'); ph.appendChild(lens); ph.classList.add('lensing'); }
+    const r = img.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, pr = ph.getBoundingClientRect();
+    lens.style.opacity = x < 0 || y < 0 || x > r.width || y > r.height ? '0' : '1';
+    lens.style.left = (e.clientX - pr.left - ph.clientLeft) + 'px';
+    lens.style.top = (e.clientY - pr.top - ph.clientTop) + 'px';
+    lens.style.backgroundImage = `url("${img.currentSrc || img.src}")`;
+    lens.style.backgroundSize = `${r.width * LZ}px ${r.height * LZ}px`;
+    lens.style.backgroundPosition = `${LR - x * LZ}px ${LR - y * LZ}px`;
+  }, { passive: true });
+  document.addEventListener('pointerout', e => { if (lph && !lph.contains(e.relatedTarget)) lensOff(); });
+  window.addEventListener('scroll', lensOff, { capture: true, passive: true });
 
   // 잠금·조회 칸에 번호를 넣고 Enter: 엔진이 칸을 새로 그려 초점이 사라지면, 같은 자리의 새 칸으로 돌려준다.
   // (전화 번호판을 눌러 확인한 때는 돌려주지 않는다 — 폰에서 자판이 다시 튀어나오므로. 조회 칸은 마우스로 쓸 때만)
