@@ -1118,7 +1118,21 @@
     document.title = `CASE ${pad(c.no)} 「${c.title}」 — Monologue Gaze`;
     renderCase();
     liveSync();
+    // 기록실에서 화면 속 사건(모니터·노트북)을 열면: 여는 장면 동안 꺼져 있다가, 장면이 걷힐 때 켜진다
+    const scr = intro && MG.mood && (c.frame === 'crt' || c.frame === 'laptop') && $('.screen');
+    if (scr) {
+      scr.classList.add('off');
+      const on = () => {
+        document.removeEventListener('mg:intro-out', on);
+        if (!scr.isConnected) return;
+        scr.classList.replace('off', 'boot');
+        if (c.frame === 'crt') sfx('crton');
+        setTimeout(() => scr.classList.remove('boot'), 1000);
+      };
+      document.addEventListener('mg:intro-out', on);
+    }
     if (MG.mood) MG.mood.enter(C, intro);
+    if (scr && !document.querySelector('.case-intro')) document.dispatchEvent(new Event('mg:intro-out'));
     window.scrollTo(0, 0);
   }
 
@@ -1300,6 +1314,21 @@
           g.gain.setValueAtTime(0.0001, t + at); g.gain.exponentialRampToValueAtTime(0.09, t + at + 0.02); g.gain.setValueAtTime(0.09, t + at + 0.16); g.gain.exponentialRampToValueAtTime(0.0001, t + at + 0.2);
           o.connect(f).connect(g).connect(actx.destination); o.start(t + at); o.stop(t + at + 0.22);
         });
+      } else if (kind === 'crton') { // 브라운관이 켜질 때: 툭(소자 제거) + 가늘게 우는 고음 + 지직
+        const o = actx.createOscillator(); const g = actx.createGain();
+        o.frequency.setValueAtTime(58, t); o.frequency.exponentialRampToValueAtTime(34, t + 0.35);
+        g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.32, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
+        o.connect(g).connect(actx.destination); o.start(t); o.stop(t + 0.42);
+        const w = actx.createOscillator(); const wg = actx.createGain();
+        w.frequency.value = 9600; wg.gain.setValueAtTime(0.0001, t + 0.1); wg.gain.exponentialRampToValueAtTime(0.012, t + 0.3); wg.gain.exponentialRampToValueAtTime(0.0001, t + 1.5);
+        w.connect(wg).connect(actx.destination); w.start(t + 0.1); w.stop(t + 1.55);
+        noise(0.5, 'highpass', 2400, 0.7, 0.07);
+      } else if (kind === 'radio') { // 무전: 치익 — 삑
+        noise(0.28, 'bandpass', 1900, 1.4, 0.16);
+        const o = actx.createOscillator(); const g = actx.createGain();
+        o.type = 'square'; o.frequency.value = 1320;
+        g.gain.setValueAtTime(0.0001, t + 0.3); g.gain.exponentialRampToValueAtTime(0.035, t + 0.31); g.gain.setValueAtTime(0.035, t + 0.38); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
+        o.connect(g).connect(actx.destination); o.start(t + 0.3); o.stop(t + 0.42);
       } else { // 북소리: 음높이가 뚝 떨어지는 낮은 사인파 + 가죽 치는 잡음. clue 한 번, match·confess 두 번, miss 짧고 둔하게
         const drum = (at, f0, v, len) => {
           const o = actx.createOscillator(); const g = actx.createGain();
@@ -1661,6 +1690,7 @@
   }
 
   /* ───────── events ───────── */
+  let TYPED = 0; // 마지막으로 칸에 적는 소리를 낸 때
   function bind() {
     document.addEventListener('click', e => {
       const t = e.target;
@@ -1770,6 +1800,11 @@
       save(); sfx('pen'); renderRep();
     });
     document.addEventListener('input', e => {
+      // 칸에 적는 소리: 2006년 모니터는 자판, 노트북은 얕은 자판, 종이 서식은 연필 (소리 파일이 있을 때만, 너무 잦지 않게)
+      if (C && S.sound && MG.sound && e.target.matches('input:not([type="radio"])') && e.target.closest('.case-view')) {
+        const now = Date.now(), f = C.frame === 'crt' ? ['key', 0.24, 45] : C.frame === 'laptop' ? ['click', 0.16, 45] : ['pen', 0.14, 120];
+        if (now - TYPED > f[2]) { TYPED = now; MG.sound.play('sfx/' + f[0], f[1]); }
+      }
       const q = e.target.closest('[data-rep-filter]');
       if (q) { // 메모 찾기: 낱말이 든 메모만 남긴다
         const w = q.value.trim().toLowerCase(), box = q.parentNode;
@@ -1802,4 +1837,5 @@
     else if (S.current && MG.byId[S.current]) openCase(S.current); else cabinet();
   };
   MG.state = () => S;
+  MG.sfx = kind => sfx(kind); // 여는 장면(js/mood.js)의 무전 소리
 })();

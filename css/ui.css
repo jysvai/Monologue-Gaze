@@ -341,3 +341,14 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
 .rep-sign .ok{color:#b0342a}
 .rep-sign .no{color:#b0342a;border-style:double;border-width:3px}
 @media (max-width:560px){.case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-sign td{width:44px;height:34px}.rep-sign span{width:28px;height:28px;font-size:10px}}
+/* 기록실에서 화면 속 사건을 열면 여는 장면이 걷힐 때 모니터가 켜진다: 브라운관은 가운데 한 줄이 위아래로 벌어지며 번쩍, 노트북은 검은 화면에서 밝아진다 */
+.case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen:is(.off,.boot)::before{content:"";position:absolute;inset:0;z-index:6;pointer-events:none;background:linear-gradient(#060708,#060708) top/100% 50% no-repeat,linear-gradient(#060708,#060708) bottom/100% 50% no-repeat}
+.case-view[data-frame="crt"] .screen.boot{animation:crtGlow .85s ease-out both}
+.case-view[data-frame="crt"] .screen.boot::before{animation:crtOn .85s cubic-bezier(.3,.7,.3,1) both}
+@keyframes crtOn{0%{background-size:100% 50%,100% 50%}16%,36%{background-size:100% 49.3%,100% 49.3%}100%{background-size:100% 0,100% 0}}
+@keyframes crtGlow{0%,36%{filter:brightness(3.4) saturate(.2)}100%{filter:none}}
+.case-view[data-frame="laptop"] .screen.boot{animation:lapGlow .9s ease-out both}
+.case-view[data-frame="laptop"] .screen.boot::before{animation:lapOn .6s ease-out both}
+@keyframes lapOn{to{opacity:0}}
+@keyframes lapGlow{from{filter:brightness(.45)}to{filter:none}}
+@media (prefers-reduced-motion:reduce){.case-view .screen.boot,.case-view .screen.boot::before{animation-duration:.01s}}
