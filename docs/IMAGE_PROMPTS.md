@@ -1,7 +1,7 @@
 # Monologue Gaze — 이미지 프롬프트 모음
 
 > 이 파일은 `node tools/prompts.js` 로 자동 생성됩니다. 프롬프트를 고치려면 각 사건 파일(`cases/*.js`)의 `art` 항목을 고친 뒤 다시 생성하세요.
-총 **233장**.
+총 **239장**.
 
 
 ## 쓰는 법
@@ -1466,7 +1466,7 @@ Forensic luminol photograph from 1994, a 30-second exposure on the dark tiled wa
 
 ## CASE 13 · 초승달 각인 (2023, 하람시 새솔동 (가상의 수도권 신도시))
 
-- 사건 파일: `cases/c13-drop-2023.js` · 이미지 10장 · 난이도 ★★★★
+- 사건 파일: `cases/c13-drop-2023.js` · 이미지 13장 · 난이도 ★★★★
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 Stills from a 2023 new-town district of a Korean satellite city in November. CCTV frames: fixed high-angle fisheye, low-light sensor noise, greyish night-mode colour with a little sodium orange, H.264 compression blocking. Smartphone photos: 2020s phone camera, computational HDR, noise at night, harsh flash on close-ups. Police evidence photos: flat flash on a grey backdrop with a scale ruler. Officetels, narrow residential alleys with air-conditioner outdoor units, bright convenience stores. No on-screen overlays, no readable text or signs, no logos or brand marks, no identifiable faces (people only from behind, hooded or blurred), nothing graphic.
@@ -1539,9 +1539,30 @@ Smartphone photo at 4 a.m. of a small bright convenience store on a quiet reside
 ```
 - **꼭 보여야 할 것**: 새벽 어둠 속 환한 작은 편의점 · 유리창 너머 계산대 옆에 켜진 CCTV 모니터 · 손님 없음
 
+### c13/room — 정밀 관찰 사진
+- 저장 경로: `img/c13/room.webp` · 비율: 3:2
+```
+Forensic photograph taken straight down with an on-camera flash at 3 a.m. of the wooden desk of a young baker, under a clear glass sheet in a small studio apartment, just after paramedics left: under the glass at the upper centre a cream certificate with a small red round seal and a hand-written recipe sheet (illegible); a yellow sticky note with blue scribbles at the upper right; a round white analog alarm clock with hands only and a folded white baker cap at the right; a smartphone lying face-up at the left, its lock screen lit with one blurred notification; a tiny clear zip bag holding one white round tablet in the middle; a crumpled long thermal receipt at the lower right; a white paper pharmacy envelope at the lower left; a small milk carton and a charging cable.
+```
+- **꼭 보여야 할 것**: 왼쪽 가운데 켜진 휴대폰 · 가운데 알약 한 알 든 작은 지퍼백 · 오른쪽 위 노란 포스트잇 · 오른쪽 알람 시계와 흰 위생모 · 오른쪽 아래 구겨진 영수증 · 왼쪽 아래 약봉투 · 위 가운데 유리 밑 자격증
+
+### c13/drop — 정밀 관찰 사진
+- 저장 경로: `img/c13/drop.webp` · 비율: 4:3
+```
+A hurried smartphone photo at night with harsh phone flash in a narrow residential alley, the kind a street dealer sends as a "drop location": a blue steel double gate between red-brick pillars at the left, a grey gas meter on the concrete wall beside the gate, a white air-conditioner outdoor unit on two small concrete feet against the wall in the middle with a strip of black electrical tape stuck in the gap under it, a small blank white sign board with a red band on the wall at the right, beyond the wall at the top right the corner of a building with a white dome security camera looking down toward the unit, two cigarette butts on the wet ground at the lower right, the alley running off into the dark.
+```
+- **꼭 보여야 할 것**: 왼쪽 파란 철 대문 · 대문 옆 가스 계량기 · 가운데 실외기와 받침 아래 검정 테이프 · 오른쪽 위 담 너머 건물의 돔 카메라 · 빨간 띠 안내판 · 바닥의 꽁초 두 개
+
+### c13/counter — 정밀 관찰 사진
+- 저장 경로: `img/c13/counter.webp` · 비율: 3:2
+```
+Smartphone photo taken by a young police officer from behind the checkout counter of a small, bright Korean neighbourhood convenience store at night under white LED light: a black security monitor with a four-way split view at the upper left, its lower-left quadrant showing a dark alley with a blue gate; a staff work-schedule grid sheet taped to the wall at the top centre (illegible marks); an empty wicker bread basket on a small wall shelf at the upper right; two paper cups of instant coffee on the counter; a tall white self-service parcel kiosk with a blank blue screen at the right edge; under the counter at the lower left a black router with two green lights and an old closed laptop on a charging cable.
+```
+- **꼭 보여야 할 것**: 왼쪽 위 네 칸 CCTV 모니터 (왼쪽 아래 칸에 파란 대문 골목) · 벽의 근무표 · 빈 빵 바구니 · 종이컵 두 개 · 오른쪽 택배 키오스크 · 계산대 밑 공유기와 노트북
+
 ## CASE 14 · 귤 하나 (2021, 가온시 솔매동 일대 (가상 도시))
 
-- 사건 파일: `cases/c14-runner-2021.js` · 이미지 11장 · 난이도 ★★★★
+- 사건 파일: `cases/c14-runner-2021.js` · 이미지 13장 · 난이도 ★★★★
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 Photos and stills from a mid-sized Korean city in late November 2021. Smartphone photos: 2021 phone camera, slightly over-processed HDR, cool grey daylight or harsh fluorescent light, mild JPEG compression, casual framing. CCTV and ATM camera stills: high-angle wide lens, low resolution, H.264 blocking, greenish fluorescent cast, washed-out blacks. Old low-rise villas, a traditional market, a bus terminal, delivery scooters with square rear boxes. No on-screen timestamps or overlays, no readable text, numbers or license plates, no logos or brand marks, no identifiable faces (people only from behind, helmeted, masked or blurred), nothing graphic.
@@ -1625,9 +1646,23 @@ Police evidence photo in an outdoor back lot on an overcast day: the rear of a w
 ```
 - **꼭 보여야 할 것**: 배달통 뒤쪽 왼쪽 모서리의 은색 X자 테이프 (park 캡처와 같은 자리) · 번호판 흐림
 
+### c14/sk_door — 정밀 관찰 사진
+- 저장 경로: `img/c14/sk_door.webp` · 비율: 3:2
+```
+Police photo at noon in the shared corridor of a 1990s Korean low-rise villa: beige walls, terrazzo floor, stairs going down at the lower right. A dark green metal front door stands open, hinged on the left, showing a small entryway. A row of grey metal mailboxes on the corridor wall at the left with a yellow flyer half stuck in the top; inside, a paper wall calendar with a red header, its page slightly lifted; on a low wooden shoe cabinet one printed sheet with a faint red round stamp and a translucent bag of tangerines; a pair of brown fur-lined winter slippers on the entry floor; a small white dome camera on the corridor ceiling at the top right; a round basket of green onions at the far lower left in front of the neighbouring door.
+```
+- **꼭 보여야 할 것**: 왼쪽 우편함과 노란 전단 · 열린 초록 현관문 · 안쪽 벽 달력 · 신발장 위 종이 한 장과 귤 봉지 · 바닥의 털신 · 오른쪽 위 천장 돔 카메라 · 왼쪽 아래 쪽파 바구니
+
+### c14/sk_locker — 정밀 관찰 사진
+- 저장 경로: `img/c14/sk_locker.webp` · 비율: 3:2
+```
+High-angle security-camera still inside a small Korean intercity bus terminal waiting hall at 11:21 in the morning, wide lens, washed-out colours, fluorescent light: a bank of grey metal coin lockers at the left with one door open and its compartment empty; a rider in a black full-face helmet with the visor down and one thin white stripe, black jacket, reaching into the locker with the left hand in an orange rubber-palm work glove while the bare right hand holds a paper shopping bag; a round wall clock with hands only at the top centre; a person in a black long padded coat seen from behind on a metal bench in the lower middle, head bowed over a phone; glass entrance doors at the right with a delivery scooter just outside, its square white rear box patched with silver duct tape in an X, the plate washed out to a white smear.
+```
+- **꼭 보여야 할 것**: 왼쪽 보관함과 열린 빈 칸 · 흰 줄 하나 있는 검은 헬멧 · 왼손에만 주황 장갑 · 벽시계 · 의자에 앉은 뒷모습 · 유리문 밖 배달통의 은색 X 테이프 · 하얗게 날아간 번호판
+
 ## CASE 15 · 워치가 멈춘 뒤 (2024, 가람시 미리내동 일대 (가상 도시))
 
-- 사건 파일: `cases/c15-tracker-2024.js` · 이미지 11장 · 난이도 ★★★★★
+- 사건 파일: `cases/c15-tracker-2024.js` · 이미지 12장 · 난이도 ★★★★★
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 Korea, November 2024, a fictional mid-sized city at night. Smartphone photos: modern phone night mode, slight noise and over-sharpening, cold white LED and sodium streetlight, wet asphalt and gravel after a short shower. CCTV, elevator and helmet-camera frames: wide-angle fisheye, low-light sensor noise, H.264 compression blocking, washed-out blacks. Forensic photos: harsh on-camera flash, yellow scale rulers, blue nitrile gloves. Everyday details of 2020s Korean villa (dasedae) alleys, officetel entryways and industrial outskirts. No on-screen timestamps or overlays, no readable text, license plates or logos, no identifiable faces (people only from behind, from above, or as silhouettes), nothing graphic, no injuries.
@@ -1707,3 +1742,10 @@ Smartphone group photo at an outdoor futsal court at night under floodlights: a 
 Street-view style daytime photo of a closed-down coin-operated car wash on a bleak industrial road on the outskirts of a Korean city: a faded canopy over four wash bays with roll-down shutters pulled down, weeds in the cracked concrete, a small grey steel door to a machine room at the side with a padlock hasp, an old sign board with its lettering peeled away, overcast sky. No readable text or logos.
 ```
 - **꼭 보여야 할 것**: 셔터 내린 세차 부스 4칸 · 옆에 기계실 철문(자물쇠 고리)
+
+### c15/carlot — 현장 사진 (정밀 관찰) — 피해자 차량 뒤, 미리내빌라 주차장
+- 저장 경로: `img/c15/carlot.webp` · 비율: 3:2
+```
+Forensic photograph at 11 p.m. taken from behind a small silver hatchback parked in the narrow lot behind a four-storey Korean villa just after a rain shower, lit by a white work light on the far wall, a faint blue and red patrol-car glow at the right, wet gravel and asphalt glistening. Over the villa entrance at the upper left a small white security camera whose black power cable hangs loose, unplugged; a sheet of white paper with illegible marker scrawl tucked under the rear wiper; a small matte black box stuck under the rear bumper; a palm-sized dry rectangle on the wet ground beside the left rear wheel; at the lower right against the wall a tipped-over sports bag and a torn plastic bag with tangerines rolled out.
+```
+- **꼭 보여야 할 것**: 가운데 은색 해치백 뒷모습 · 뒷유리 와이퍼 밑 종이 · 뒤 범퍼 밑 작은 검은 상자 · 왼쪽 뒷바퀴 옆 마른 직사각형 · 오른쪽 아래 엎어진 가방과 귤 · 왼쪽 위 전원선이 빠진 벽 카메라
