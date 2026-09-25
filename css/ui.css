@@ -370,3 +370,8 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
 /* 화면 속 사진 살피기: 인화지 흰 테두리 대신 사진 보기 창의 얇은 테 */
 .case-view[data-frame="laptop"] .ph{border:1px solid #cdd4de;border-radius:4px;box-shadow:0 1px 4px rgba(20,30,50,.18)}
 .case-view[data-frame="crt"] .ph{border:2px solid;border-color:#8c8a84 #fff #fff #8c8a84;box-shadow:none}
+/* 화면 속 웹 페이지를 열면 맨 위에 잠깐 불러오는 줄: 노트북은 가는 파란 줄, 2006년 브라운관은 초록 칸이 한 칸씩 */
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .pane-read>.enter:is(.skin-web,.skin-home)::before{content:"";position:absolute;z-index:4;top:0;left:0;right:0;height:2px;transform-origin:0 50%;background:#3d7be0;pointer-events:none;animation:pageLoad .75s ease-out both}
+.case-view[data-frame="crt"] .pane-read>.enter:is(.skin-web,.skin-home)::before{height:4px;background:repeating-linear-gradient(90deg,#3cb043 0 7px,transparent 7px 9px);animation-timing-function:steps(9,end)}
+@keyframes pageLoad{0%{transform:scaleX(0);opacity:1}75%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+@media (prefers-reduced-motion:reduce){.case-view .pane-read>.enter:is(.skin-web,.skin-home)::before{animation:none;opacity:0}}

@@ -45,6 +45,10 @@
 .b-bub{max-width:74%;padding:7px 11px;border-radius:12px;background:#fff;color:#1d2328;font:13.5px/1.55 var(--f-web);overflow-wrap:anywhere;box-shadow:0 1px 1px rgba(0,0,0,.12)}
 .b-msg.me .b-bub{background:#d3e5c8}
 .b-msg time{flex:none;font:10.5px var(--f-mono);opacity:.7}
+/* 단톡방: 시각 위에 안 읽은 사람 수 (노란 숫자) */
+.b-at{flex:none;display:flex;flex-direction:column;align-items:flex-start;gap:1px}
+.b-msg.me .b-at{align-items:flex-end}
+.b-unr{font:700 10.5px/1 var(--f-ui);color:#d69e00}
 
 /* ───────── plain / report (수사 서류, 진술조서) ───────── */
 .skin-report{background-color:#ecebe2;font-family:var(--f-mono)}
@@ -212,6 +216,15 @@
 .case-view[data-frame="laptop"] .skin-board .tl-e{background:#fff;border-left-color:#3f5a80}
 .skin-board .tl-e::before{content:"";position:absolute;top:-4px;left:50%;width:9px;height:9px;border-radius:50%;background:#c9463a;box-shadow:0 1px 2px rgba(0,0,0,.5)}
 .skin-board .c-done{padding:8px 10px;background:#f7f1de}
+/* 화면 속 판은 공유 문서 앱: 압정 없이 카드, 글씨는 화면 글꼴, 순서 버튼은 창 단추 */
+.case-view[data-frame="laptop"] .skin-board .tl-e{border:1px solid #dfe3ea;border-left:4px solid #3f5a80;border-radius:6px;box-shadow:0 1px 2px rgba(20,30,50,.08)}
+.case-view[data-frame="laptop"] .skin-board .tl-e::before{content:none}
+.case-view[data-frame="laptop"] .skin-board .tl-e:is(.hit,.ok){border-left-color:#2f8a57}
+.case-view[data-frame="laptop"] .skin-board .tl-e.ok{background:#f1f8f3}
+.case-view[data-frame="laptop"] .skin-board .tl-t{font:14px/1.5 var(--f-web)}
+.case-view[data-frame="laptop"] .skin-board :is(.doc-b>.b-p,.doc-b>.b-note,.c-done){border-radius:4px;background:#f2f5f9}
+.case-view[data-frame="laptop"] .skin-board .tl-mv button{border:1px solid #c3cad6;border-radius:4px;background:linear-gradient(#fff,#edf0f4);color:#2c3440;font-family:var(--f-ui)}
+.case-view[data-frame="laptop"] .skin-board .tl-mv button:hover:not(:disabled){background:#e4ebf5;border-color:#8fa3c2}
 
 /* ── 감정서 (감식과) */
 .skin-lab{background-color:#eef0ea;font-family:var(--f-mono)}

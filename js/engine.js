@@ -285,7 +285,8 @@
     }
     if (b.msg != null) {
       const who = b.who && !b.me ? `<span class="b-who">${esc(b.who)}</span>` : '';
-      return `<div class="b-msg${b.me ? ' me' : ''}${cls}">${who}<div class="b-row"><div class="b-bub">${inline(b.msg)}</div>${b.at ? `<time>${esc(b.at)}</time>` : ''}${pinBtn(ref, (b.who ? b.who + ': ' : b.me ? (C.me || '나') + ': ' : '') + b.msg, b.f, src)}</div></div>`;
+      const at = b.at ? `<time>${esc(b.at)}</time>` : '';
+      return `<div class="b-msg${b.me ? ' me' : ''}${cls}">${who}<div class="b-row"><div class="b-bub">${inline(b.msg)}</div>${b.unr ? `<span class="b-at"><b class="b-unr" aria-label="안 읽은 사람 ${b.unr}명">${b.unr}</b>${at}</span>` : at}${pinBtn(ref, (b.who ? b.who + ': ' : b.me ? (C.me || '나') + ': ' : '') + b.msg, b.f, src)}</div></div>`;
     }
     if (b.say != null) {
       return `<p class="b-say${cls}">${b.at ? `<time>${esc(b.at)}</time>` : ''}${b.who ? `<span class="b-who">${esc(b.who)}</span>` : ''}<span class="b-line">${inline(b.say)}</span>${pinBtn(ref, (b.who ? b.who + ': ' : '') + b.say, b.f, src)}</p>`;
@@ -766,6 +767,9 @@
     const rows = [...(s.items || []).filter(it => it.id in L.fd).map((it, i) => ({ t: L.fd[it.id], i, it })),
       ...L.fx.filter(x => (x.src || firstFeed()) === s.id).map((x, i) => ({ t: x.t, i: i - 1000, x }))].sort((a, b) => a.t - b.t || a.i - b.i); // 같은 시각이면 회신 알림이 먼저
     if ((L.rd ||= {})[s.id] !== rows.length) { L.rd[s.id] = rows.length; save(); }
+    // 방 이름의 (인원) 으로 안 읽은 사람 수: 보낸 사람과 나를 뺀 동료들이 저마다 몇 분 안에 읽는다 (수사 시각이 흐르면 줄어든다)
+    const N = +(((s.title || '').match(/\((\d+)\)\s*$/) || [])[1] || 0);
+    const unread = (it, t) => { let u = 0; for (let k = 0; k < N - (it.me ? 1 : 2); k++) if (L.t - t < 2 + hash(`${it.id}#${k}`) % 18) u++; return u; };
     let day = null;
     const body = rows.map(r => {
       const d = liveDate(r.t), dk = d.toDateString();
@@ -773,7 +777,7 @@
       if (r.x) return `${div}<p class="lv-sys${r.x.late ? ' late' : ''}"><time>${esc(ltime(r.t))}</time> <b>${esc(r.x.who)}</b> ${esc(r.x.msg)}${r.x.doc && C.docs[r.x.doc] ? ` <button type="button" class="lv-att" data-doc="${esc(r.x.doc)}">열어 보기</button>` : ''}</p>`;
       const it = r.it;
       const att = it.doc && C.docs[it.doc] ? `<p class="lv-attrow${it.me ? ' me' : ''}"><button type="button" class="lv-att" data-doc="${esc(it.doc)}">${esc(it.att || '첨부 · ' + plain(C.docs[it.doc].title))}</button></p>` : '';
-      return `${div}${block({ msg: it.msg, who: it.who, me: it.me, at: ltime(r.t), f: it.f }, `${it.id}@fd`, s.name)}${att}`;
+      return `${div}${block({ msg: it.msg, who: it.who, me: it.me, at: ltime(r.t), unr: unread(it, r.t), f: it.f }, `${it.id}@fd`, s.name)}${att}`;
     }).join('');
     return `<article class="doc skin-${esc(s.skin || 'chat')} lv-feed"><header class="doc-h"><p class="doc-k">${esc(s.kicker || '메신저')}</p><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>
       <div class="doc-b">${body || `<p class="res-none">${esc(s.empty || '아직 아무 말이 없다.')}</p>`}</div></article>`;
