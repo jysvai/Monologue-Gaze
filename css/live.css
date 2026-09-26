@@ -30,6 +30,7 @@
 .lv-note.late{background:rgba(255,236,232,.96)}
 .lv-note.late b{color:#b0342a}
 @media (prefers-reduced-motion:reduce){ .lv-note{transition:none;transform:none} }
+@media (max-width:560px){.lv-notes{left:8px;right:8px;width:auto}} /* 휴대폰에서는 알림이 화면 폭을 거의 다 쓴다 (실제 휴대폰 배너처럼) */
 
 /* ───────── 탭의 새 소식 수 ───────── */
 .tab-n{min-width:17px;height:17px;padding:0 5px;border-radius:9px;background:#e5483b;color:#fff;font:700 10.5px/17px var(--f-web);text-align:center}
