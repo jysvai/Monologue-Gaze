@@ -289,6 +289,10 @@ img{max-width:100%}
 .c-act{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .c-act button{padding:6px 14px;border:0;background:#3b3a36;color:#fff;font:700 13px var(--f-web);cursor:pointer}
 .c-msg{font:19px var(--f-hand);color:var(--red)}
+.c-msg.again{animation:write .5s ease-out both} /* 다시 맞춰 볼 때마다 연필로 새로 적는다 */
+.case-view:is([data-frame="crt"],[data-frame="laptop"]) .c-msg.again{animation:msgIn .25s ease-out both}
+@keyframes msgIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.c-msg.again{animation:none!important}}
 .c-done{margin-top:10px}
 
 /* ───────── notebook ───────── */
@@ -321,6 +325,8 @@ img{max-width:100%}
 .notes .del{position:absolute;right:0;top:4px;width:20px;height:20px;padding:0;border:0;background:none;color:var(--pencil);font:16px/1 var(--f-web);opacity:.5;cursor:pointer}
 .notes li:hover .del,.notes .del:focus-visible{opacity:1}
 .notes li.fresh{animation:write .9s ease-out both}
+.notes li.gone{pointer-events:none;text-decoration:line-through 2px var(--pencil);animation:strikeOut .42s ease-in both}
+@keyframes strikeOut{0%{text-decoration-color:transparent}40%{text-decoration-color:var(--pencil);opacity:1}100%{text-decoration-color:var(--pencil);opacity:0}}
 @keyframes write{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
 .nb-rep form p{margin:0}
 .nb-rep .no{color:var(--pencil)}
@@ -471,7 +477,7 @@ img{max-width:100%}
 .folder:has(.f-blood) .f-label{position:relative;z-index:3}
 .cw-card{position:relative;overflow:hidden}
 .cw-card>*:not(.stain){position:relative;z-index:4}
-.cw-card .stain{opacity:.35} /* 면책 문구·단추 밑이 읽히게 */
+.cw-card .stain{opacity:.5} /* 자리는 오른쪽 모서리뿐 (엔진 stains 의 corner) — 글 위에 얹히지 않는다 */
 .snd.mild[aria-pressed="true"]{color:#e08a7f}
 .cens{position:relative;display:block;overflow:hidden;cursor:pointer;background:#1c1412}
 .cens>svg,.cens>img{display:block;width:100%;height:auto;filter:blur(14px) grayscale(.6) brightness(.5);transform:scale(1.08);transition:filter .6s ease,transform .6s ease}

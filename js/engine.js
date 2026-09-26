@@ -47,14 +47,16 @@
   ['a', 'b', 'c'].forEach(k => { STAIN_SVG[k] = STAIN_SVG[k].replace(/<feDisplacementMap in='SourceGraphic' scale='(\d+)'\/>/, `<feDisplacementMap in='SourceGraphic' scale='$1' result='d'/>${MOTTLE}`); });
   const gore = () => !!(C && C.graphic && !S.mild);
   // kinds: 문자열 'abcd' 중에서 고른다. seed 로 위치·각도를 정한다 (같은 문서는 늘 같은 자리).
+  // edge: true 면 좌우 가장자리, 'corner' 면 오른쪽 위·아래 모서리만 (글이 꽉 찬 작은 카드용)
   function stains(seed, n, kinds, edge) {
     let out = '';
     for (let i = 0; i < n; i++) {
       const h = hash(seed + ':' + i);
       const k = kinds[h % kinds.length];
       const side = (h >> 3) % 2;
-      const x = edge ? (side ? 78 + (h % 17) : -6 + (h % 14)) : 8 + (h % 80);
-      const y = -4 + ((h >> 5) % 90);
+      const corner = edge === 'corner';
+      const x = corner ? 80 + (h % 12) : edge ? (side ? 78 + (h % 17) : -6 + (h % 14)) : 8 + (h % 80);
+      const y = corner ? (i % 2 ? 70 + ((h >> 5) % 12) : -12 + ((h >> 5) % 8)) : -4 + ((h >> 5) % 90);
       out += `<span class="stain st-${k}" style="--x:${x}%;--y:${y}%;--r:${(h >> 7) % 360}deg;--s:${(0.6 + ((h >> 9) % 60) / 100).toFixed(2)}" aria-hidden="true"></span>`;
     }
     return out;
@@ -297,13 +299,15 @@
   }
 
   /* ───────── documents / locks / people / cipher ───────── */
+  // 틀렸을 때의 말: 기계가 띄우는 잠금이면 기계의 말투로 (lock.err 가 있으면 그것)
+  const lockErr = lock => lock.err || (lock.style === 'phone' ? '"비밀번호가 틀렸습니다. 다시 누르십시오."' : lock.style === 'lcd' ? '「암호가 다릅니다」' : C.frame === 'papers' ? '맞지 않는다.' : '비밀번호가 올바르지 않습니다.');
   function lockHtml(id, lock, title) {
     const fails = LOCKFAIL[id] || 0;
     // style: 'phone' 이면 전화 번호판(누르면 칸에 들어가고 # 은 확인, * 은 지우기), 'lcd' 면 워드프로세서 액정
     const pad = lock.style === 'phone' ? `<div class="lock-pad" role="group" aria-label="번호판">${'123456789*0#'.split('').map(k => `<button type="button" data-pad="${k}"${k === '#' ? ' aria-label="확인"' : k === '*' ? ' aria-label="지우기"' : ''}>${k}</button>`).join('')}</div>` : '';
     return `<div class="lock${lock.style ? ' lock-' + esc(lock.style) : ''}"><p class="lock-t">${inline(lock.title || title || '잠겨 있다')}</p>${lock.desc ? `<p class="lock-d">${inline(lock.desc)}</p>` : ''}
       <form class="lock-f" data-lock="${esc(id)}"><label for="lk-${esc(id)}">${esc(lock.label || '비밀번호')}</label><input id="lk-${esc(id)}" autocomplete="off"${lock.password ? ' type="password"' : ''}${lock.style === 'phone' || lock.style === 'lcd' ? ' inputmode="numeric" maxlength="8"' : ''}><button type="submit">${esc(lock.button || '열기')}</button>${pad}</form>
-      ${lock.hint ? `<p class="lock-h">${inline(lock.hint)}</p>` : ''}<p class="lock-e" role="status">${fails ? `맞지 않는다. (${fails}회)` : ''}</p>${lock.hint2 && fails >= ({ 3: 2, 4: 3 }[lv()] || Infinity) ? `<p class="lock-h2">${inline(lock.hint2)}</p>` : ''}</div>`;
+      ${lock.hint ? `<p class="lock-h">${inline(lock.hint)}</p>` : ''}<p class="lock-e" role="status">${fails ? `${esc(lockErr(lock))} (${fails}회)` : ''}</p>${lock.hint2 && fails >= ({ 3: 2, 4: 3 }[lv()] || Infinity) ? `<p class="lock-h2">${inline(lock.hint2)}</p>` : ''}</div>`;
   }
 
   function docHtml(d) {
@@ -830,7 +834,7 @@
     if (q && q.st !== 'no') return;
     const why = (r.why || []).length;
     const n = why ? ST.notes.find(x => String(x.id) === String(RQPICK[id])) : null;
-    if (why && !n) { const m = $('.rq .c-msg'); if (m) m.textContent = '소명 자료로 붙일 메모를 먼저 고른다.'; sfx('miss'); return; }
+    if (why && !n) { sayMsg('소명 자료로 붙일 메모를 먼저 고른다.'); sfx('miss'); return; }
     const prev = L.t;
     L.t += lcost('write') + (q && lv() >= 5 ? 60 : 0);
     const eta = r.eta != null ? r.eta : 120;
@@ -908,7 +912,15 @@
   function renderTabs() {
     const vis = C.sources.filter(srcVisible);
     if (!vis.find(s => s.id === ST.view.src)) ST.view.src = vis[0] && vis[0].id;
-    $('#srcTabs').innerHTML = vis.map(s => `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" data-src="${esc(s.id)}">${esc(s.name)}${s.lock && !ST.unl.includes(s.id) ? '<span class="tab-lock">잠김</span>' : ''}${tabBadge(s)}</button>`).join('');
+    const bar = $('#srcTabs');
+    bar.innerHTML = vis.map(s => `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" data-src="${esc(s.id)}">${esc(s.name)}${s.lock && !ST.unl.includes(s.id) ? '<span class="tab-lock">잠김</span>' : ''}${tabBadge(s)}</button>`).join('');
+    // 탭이 넘쳐 옆으로 밀리는 좁은 화면: 고른 탭이 가려져 있으면 보이는 데까지 민다
+    const on = bar.querySelector('.tab.on');
+    if (on && bar.scrollWidth > bar.clientWidth) {
+      const b = bar.getBoundingClientRect(), r = on.getBoundingClientRect();
+      if (r.left < b.left + 8) bar.scrollLeft -= b.left + 8 - r.left;
+      else if (r.right > b.right - 8) bar.scrollLeft += r.right - (b.right - 8);
+    }
   }
   function renderList() {
     const s = curSrc();
@@ -956,14 +968,15 @@
     const persons = ST.keys.filter(k => C.keywords[k] && C.keywords[k].type === 'person');
     const roleOf = k => { const p = Object.values(C.people || {}).find(x => x.key === k); return p && p.role ? plain(p.role) : ''; };
     const groups = noteGroups(notes);
+    const shut = ST.solved; // 종결된 보고서는 결재가 끝난 서류: 고칠 수 없다
     const claim = (cl, i) => {
       const cur = notes.find(n => String(n.id) === String(ST.report.claims[cl.id]));
-      const open = REPOPEN === cl.id;
+      const open = !shut && REPOPEN === cl.id;
       const list = groups.map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${cur && cur.id === n.id ? ' on' : ''}"><input type="radio" name="rep-${esc(cl.id)}" value="${n.id}" data-rep="${esc(cl.id)}"${cur && cur.id === n.id ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span></label>`).join('')}</details>`).join('');
       return `<section class="rep-claim${cur ? ' filled' : ''}${open ? ' open' : ''}">
         <h4><span class="no">${i + 1}</span> ${inline(cl.q)}</h4>
         <div class="rep-pick">${cur ? `<p class="rep-memo"><span class="n">${notes.indexOf(cur) + 1}.</span> ${esc(cur.t)} <span class="src">— ${esc(cur.src || '')}</span></p>` : '<p class="rep-empty">아직 붙인 메모가 없다.</p>'}
-          <button type="button" class="rep-tog" data-rep-open="${esc(cl.id)}" aria-expanded="${open}">${open ? '접기' : cur ? '다른 메모로 바꾸기' : '메모에서 고르기'} <small>${notes.length}</small></button></div>
+          ${shut ? '' : `<button type="button" class="rep-tog" data-rep-open="${esc(cl.id)}" aria-expanded="${open}">${open ? '접기' : cur ? '다른 메모로 바꾸기' : '메모에서 고르기'} <small>${notes.length}</small></button>`}</div>
         ${open ? `<div class="rep-acc">${notes.length ? `<input type="search" class="rep-filter" placeholder="메모에서 낱말 찾기" data-rep-filter aria-label="메모 찾기">${list}` : '<p class="rep-empty">수첩에 메모가 없다. 문서와 탐문에서 문장을 눌러 적어 둔다.</p>'}</div>` : ''}
       </section>`;
     };
@@ -971,10 +984,10 @@
     const me = roster().list.find(p => p.id === PID), back = !ST.solved && ST.tries && VERDICT;
     const sign = C.frame === 'crt' || C.frame === 'laptop' ? `<table class="rep-sign" aria-label="결재"><tr><th>담당</th><th>팀장</th><th>과장</th></tr><tr><td>${esc(who(me))}</td><td>${ST.solved ? '<span class="ok">결재</span>' : back ? '<span class="no">반려</span>' : ''}</td><td>${ST.solved ? '<span class="ok">결재</span>' : ''}</td></tr></table>` : '';
     return `<article class="doc skin-report rep-view"><header class="doc-h">${sign}<p class="doc-k">${esc(FM.title)}</p><h3 class="doc-t">${esc(C.title)}</h3><p class="doc-m">${esc(FM.lead)}</p></header>
-      <div class="doc-b"><form id="rep" autocomplete="off">
-        <section class="rep-sec"><h4>${esc(FM.culprit)}</h4><div class="rep-people">${persons.map(k => `<label class="rep-per${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}><b>${esc(C.keywords[k].label)}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}</label>`).join('') || '<p class="rep-empty">수첩에 적힌 인물이 없다.</p>'}</div></section>
+      <div class="doc-b"><form id="rep" autocomplete="off"${shut ? ' class="shut"' : ''}>
+        <section class="rep-sec"><h4>${esc(FM.culprit)}</h4><div class="rep-people">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => `<label class="rep-per${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}><b>${esc(C.keywords[k].label)}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}</label>`).join('') || '<p class="rep-empty">수첩에 적힌 인물이 없다.</p>'}</div></section>
         ${sol.claims.map(claim).join('')}
-        <p class="submit-row"><button type="submit" class="btn-hand">${esc(FM.submit)}</button><span class="tries">${ST.tries ? `제출 ${ST.tries}회` : ''}</span></p>
+        <p class="submit-row">${shut ? `<span class="rep-filed">${esc(FM.filed || (C.frame === 'papers' ? '종결 · 철해 둠' : '결재 완료'))}</span>` : `<button type="submit" class="btn-hand">${esc(FM.submit)}</button>`}<span class="tries">${ST.tries ? `제출 ${ST.tries}회` : ''}</span></p>
       </form><p class="verdict" role="status">${esc(VERDICT)}</p>${ST.solved ? `<div class="rep-solved">${solvedHtml(false)}</div>` : ''}</div></article>`;
   }
   function renderRep() {
@@ -1030,7 +1043,7 @@
       </section>
       <section class="ruled nb-sec nb-rep"><h3 class="hh">${esc(FORM().title)}</h3>
         <p class="rep-sum">${esc(FORM().short)} <b>${ST.report.culprit && C.keywords[ST.report.culprit] ? esc(C.keywords[ST.report.culprit].label) : '—'}</b> · 증거 <b>${sol.claims.filter(cl => ST.report.claims[cl.id] && ST.notes.some(n => String(n.id) === String(ST.report.claims[cl.id]))).length}</b> / ${sol.claims.length}</p>
-        <p class="submit-row"><button type="button" class="btn-hand" data-open-rep>${esc(FORM().open)}</button><span class="tries">${ST.tries ? `제출 ${ST.tries}회` : ''}</span></p>
+        <p class="submit-row"><button type="button" class="btn-hand" data-open-rep>${esc(ST.solved ? `올린 ${FORM().title} 보기` : FORM().open)}</button><span class="tries">${ST.tries ? `제출 ${ST.tries}회` : ''}</span></p>
         <p class="verdict" role="status">${esc(VERDICT)}</p>
         <div id="solvedBox">${ST.solved ? solvedHtml(false) : ''}</div>
       </section>
@@ -1151,7 +1164,7 @@
     if (MG.mood) MG.mood.leave();
     document.body.dataset.screen = 'cabinet';
     document.title = 'Monologue Gaze';
-    app.innerHTML = `<div class="cw"><div class="cw-card">${S.mild ? '' : stains(c.id + 'cw', 2, 'acd', true)}<p class="cw-t">혐오감 주의</p><h2>CASE ${pad(c.no)} 「${esc(c.title)}」 ${starsHtml(c)}</h2>
+    app.innerHTML = `<div class="cw"><div class="cw-card">${S.mild ? '' : stains(c.id + 'cw', 2, 'acd', 'corner')}<p class="cw-t">혐오감 주의</p><h2>CASE ${pad(c.no)} 「${esc(c.title)}」 ${starsHtml(c)}</h2>
       <p>${esc(c.warn || '이 사건 기록에는 시신 훼손 같은 잔혹한 내용과 강한 묘사가 들어 있습니다.')}</p><p class="cw-s">모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국 같은 화면 연출과 사진은 「잔혹 표현」 단추로 끌 수 있습니다.</p><p>${mildBtn()}</p>
       <p class="cw-b"><button type="button" class="btn-hand" data-cw-ok="${esc(c.id)}">기록을 연다</button> <button type="button" class="reset" data-cabinet>돌아간다</button></p></div></div>`;
     window.scrollTo(0, 0);
@@ -1343,6 +1356,17 @@
         w.frequency.value = 9600; wg.gain.setValueAtTime(0.0001, t + 0.1); wg.gain.exponentialRampToValueAtTime(0.012, t + 0.3); wg.gain.exponentialRampToValueAtTime(0.0001, t + 1.5);
         w.connect(wg).connect(actx.destination); w.start(t + 0.1); w.stop(t + 1.55);
         noise(0.5, 'highpass', 2400, 0.7, 0.07);
+      } else if (kind === 'deny' || kind === 'lcdbeep' || kind === 'reorder') { // 비밀번호가 틀렸을 때
+        const tone = (at, fs, len, type, v, lp) => {
+          const g = actx.createGain(), f = actx.createBiquadFilter();
+          f.type = 'lowpass'; f.frequency.value = lp;
+          g.gain.setValueAtTime(0.0001, t + at); g.gain.exponentialRampToValueAtTime(v, t + at + 0.008); g.gain.setValueAtTime(v, t + at + len - 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + at + len);
+          f.connect(g).connect(actx.destination);
+          fs.forEach(([f0, f1]) => { const o = actx.createOscillator(); o.type = type; o.frequency.setValueAtTime(f0, t + at); if (f1) o.frequency.exponentialRampToValueAtTime(f1, t + at + len); o.connect(f); o.start(t + at); o.stop(t + at + len + 0.02); });
+        };
+        if (kind === 'reorder') [0, 0.22, 0.44].forEach(at => tone(at, [[480], [620]], 0.12, 'sine', 0.06, 2400)); // 전화: 뚜뚜뚜 (끊긴 신호)
+        else if (kind === 'lcdbeep') [0, 0.13].forEach(at => tone(at, [[1250]], 0.07, 'square', 0.035, 3000)); // 워드프로세서: 삑삑
+        else tone(0, [[330, 210]], 0.17, 'triangle', 0.14, 1200); // 화면 속 잠금: 낮게 툭
       } else if (kind === 'radio') { // 무전: 치익 — 삑
         noise(0.28, 'bandpass', 1900, 1.4, 0.16);
         const o = actx.createOscillator(); const g = actx.createGain();
@@ -1411,7 +1435,8 @@
     const cap = fc ? [...fc.childNodes].filter(n => !(n.classList && n.classList.contains('pin'))).map(n => n.textContent).join('').trim() : '';
     if (C) z.dataset.frame = C.frame;
     z.innerHTML = `<figure>${w ? w.outerHTML : `<img src="${esc(img.getAttribute('src'))}" alt="${esc(img.alt || '')}">`}</figure>${cap ? `<p class="z-cap">${esc(cap)}</p>` : ''}<p>누르면 닫힌다</p>`;
-    const close = () => { z.remove(); document.removeEventListener('keydown', key); };
+    const back = document.activeElement; // 닫으면 누르던 자리로 초점을 돌려준다
+    const close = () => { z.remove(); document.removeEventListener('keydown', key); if (back && back !== document.body && back.isConnected && back.focus) back.focus({ preventScroll: true }); };
     const key = e => { if (e.key === 'Escape') close(); };
     z.addEventListener('click', close);
     document.addEventListener('keydown', key);
@@ -1465,7 +1490,16 @@
     toast(`메모 ${ST.notes.length}번을 적었다${gained > 0 ? ` · 새로 열린 것 ${gained}` : ''}`);
     liveSync();
   }
+  // 메모 지우기: 연필로 줄을 긋고 나서 지운다
   function delNote(id) {
+    const li = $(`.notes li[data-nid="${id}"]`);
+    if (!li || reduced()) return dropNote(id);
+    if (li.classList.contains('gone')) return;
+    li.classList.add('gone'); sfx('pen');
+    const c0 = C;
+    setTimeout(() => { if (C === c0 && ST.notes.some(x => x.id === id)) dropNote(id); }, 420);
+  }
+  function dropNote(id) {
     const n = ST.notes.find(x => x.id === id);
     ST.notes = ST.notes.filter(x => x.id !== id);
     Object.keys(ST.report.claims).forEach(k => { if (String(ST.report.claims[k]) === String(id)) ST.report.claims[k] = ''; });
@@ -1537,6 +1571,11 @@
     } else {
       LOCKFAIL[id] = (LOCKFAIL[id] || 0) + 1;
       renderList(); renderRead();
+      // 틀리면 그 기계답게 거절한다: 전화는 짧게 끊기는 신호음, 워드프로세서는 삑삑, 노트북은 입력창이 도리질
+      sfx(lock.style === 'phone' ? 'reorder' : lock.style === 'lcd' ? 'lcdbeep' : C.frame === 'papers' ? 'miss' : 'deny');
+      const f = $$('[data-lock]').find(x => x.dataset.lock === id), box = f && f.closest('.lock'), i = f && f.querySelector('input');
+      if (box) box.classList.add('denied');
+      if (i && lock.style !== 'phone' && !narrow()) i.focus({ preventScroll: true }); // 곧바로 다시 칠 수 있게. 번호판·좁은 화면은 자판이 다시 튀어나오지 않게 그냥 둔다
     }
   }
   function checkCipher(id) {
@@ -1554,9 +1593,16 @@
       const gained = census() - before;
       toast(`해독했다${gained > 0 ? ` · 새로 열린 것 ${gained}` : ''}`);
     } else {
-      const m = $('.c-msg');
-      if (m) m.textContent = (s.feedback || (lv() >= 5 ? 'none' : 'count')) === 'none' ? '아직 문장이 되지 않는다.' : `기호 ${syms.length}개 중 ${right}개가 맞는 것 같다.`;
+      sfx('miss');
+      sayMsg((s.feedback || (lv() >= 5 ? 'none' : 'count')) === 'none' ? '아직 문장이 되지 않는다.' : `기호 ${syms.length}개 중 ${right}개가 맞는 것 같다.`);
     }
+  }
+  // 대조·재구성 결과 한 줄: 같은 말이 되풀이돼도 다시 맞춰 봤다는 게 보이게 새로 적는다
+  function sayMsg(t) {
+    const m = $('.c-msg');
+    if (!m) return;
+    m.textContent = t;
+    m.classList.remove('again'); void m.offsetWidth; m.classList.add('again');
   }
   function solveThing(id, reward, msg, stamp) {
     const before = census();
@@ -1588,8 +1634,8 @@
     if (hit.length === o.length) return solveThing(sid, s.reward, s.ok || '앞뒤가 맞아떨어졌다', '재구성');
     TLHIT[sid] = lv() <= 3 ? hit : [];
     renderRead();
-    const m = $('.c-msg');
-    if (m) m.textContent = lv() >= 5 ? '아직 앞뒤가 맞지 않는다.' : `${o.length}개 중 ${hit.length}개가 제자리인 것 같다.`;
+    sfx('miss');
+    sayMsg(lv() >= 5 ? '아직 앞뒤가 맞지 않는다.' : `${o.length}개 중 ${hit.length}개가 제자리인 것 같다.`);
   }
   function pickCompare(arg) {
     const [xid, oid] = arg.split('|');

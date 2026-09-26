@@ -9,7 +9,7 @@ const ROOT = path.join(__dirname, '..');
 
 const els = {};
 const stub = () => ({ innerHTML: '', textContent: '', dataset: {}, scrollTop: 0, clientWidth: 1200, offsetTop: 0, style: { setProperty() {} },
-  classList: { toggle() {}, add() {}, remove() {}, contains() { return false; } }, scrollIntoView() {}, focus() {}, setAttribute() {}, appendChild() {} });
+  classList: { toggle() {}, add() {}, remove() {}, contains() { return false; } }, scrollIntoView() {}, focus() {}, setAttribute() {}, appendChild() {}, querySelector() { return null; }, querySelectorAll() { return []; } });
 const el = s => (els[s] ||= stub());
 global.window = global;
 global.localStorage = { getItem() { return null; }, setItem() {} };
