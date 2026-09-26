@@ -1172,12 +1172,12 @@
 
   /* ── 근무 명부: 이 브라우저를 쓰는 수사관들. 고르기 · 새 서랍 받기 · 이름 고치기 · 지우기 */
   function rosterHtml() {
-    const r = roster(), main = MG.cases.filter(c => c.kind !== 'tutorial');
+    const r = roster(), main = MG.cases.filter(c => c.kind !== 'tutorial' && !c.live), live = MG.cases.filter(c => c.live); // 기록실 위쪽 셈과 같게: 미제 기록 · 현행 따로
     const row = p => {
       const s = p.id === PID ? S : load(p.id), sts = Object.values(s.cases);
-      const done = main.filter(c => s.cases[c.id] && s.cases[c.id].solved).length;
+      const done = list => list.filter(c => s.cases[c.id] && s.cases[c.id].solved).length;
       const going = sts.some(st => st && !st.solved && ((st.notes || []).length || (st.seen || []).length));
-      const stat = `<span class="ro-stat">종결 ${done} / ${main.length}${going ? ' · 수사 중' : ''}</span>`;
+      const stat = `<span class="ro-stat">종결 ${done(main)} / ${main.length}${live.length ? ` · 현행 ${done(live)} / ${live.length}` : ''}${going ? ' · 수사 중' : ''}</span>`;
       if (p.id === PID) return `<li class="ro-me"><form data-pname><input maxlength="12" value="${esc(p.name)}" placeholder="${esc(who(p))}" aria-label="내 이름 (고칠 수 있다)"></form>${stat}<span class="ro-now">지금 서랍</span></li>`;
       return `<li><button type="button" class="ro-pick" data-player="${esc(p.id)}">${esc(who(p))}</button>${stat}<button type="button" class="reset" data-drop="${esc(p.id)}">명부에서 지우기</button></li>`;
     };
@@ -1435,8 +1435,7 @@
     const cap = fc ? [...fc.childNodes].filter(n => !(n.classList && n.classList.contains('pin'))).map(n => n.textContent).join('').trim() : '';
     if (C) z.dataset.frame = C.frame;
     z.innerHTML = `<figure>${w ? w.outerHTML : `<img src="${esc(img.getAttribute('src'))}" alt="${esc(img.alt || '')}">`}</figure>${cap ? `<p class="z-cap">${esc(cap)}</p>` : ''}<p>누르면 닫힌다</p>`;
-    const back = document.activeElement; // 닫으면 누르던 자리로 초점을 돌려준다
-    const close = () => { z.remove(); document.removeEventListener('keydown', key); if (back && back !== document.body && back.isConnected && back.focus) back.focus({ preventScroll: true }); };
+    const close = () => { z.remove(); document.removeEventListener('keydown', key); };
     const key = e => { if (e.key === 'Escape') close(); };
     z.addEventListener('click', close);
     document.addEventListener('keydown', key);
@@ -1571,11 +1570,10 @@
     } else {
       LOCKFAIL[id] = (LOCKFAIL[id] || 0) + 1;
       renderList(); renderRead();
-      // 틀리면 그 기계답게 거절한다: 전화는 짧게 끊기는 신호음, 워드프로세서는 삑삑, 노트북은 입력창이 도리질
+      // 틀리면 그 기계답게 거절한다: 전화는 짧게 끊기는 신호음, 워드프로세서는 삑삑, 노트북은 입력창이 도리질 (커서는 js/ui.js 가 칸에 돌려준다)
       sfx(lock.style === 'phone' ? 'reorder' : lock.style === 'lcd' ? 'lcdbeep' : C.frame === 'papers' ? 'miss' : 'deny');
-      const f = $$('[data-lock]').find(x => x.dataset.lock === id), box = f && f.closest('.lock'), i = f && f.querySelector('input');
+      const f = $$('[data-lock]').find(x => x.dataset.lock === id), box = f && f.closest('.lock');
       if (box) box.classList.add('denied');
-      if (i && lock.style !== 'phone' && !narrow()) i.focus({ preventScroll: true }); // 곧바로 다시 칠 수 있게. 번호판·좁은 화면은 자판이 다시 튀어나오지 않게 그냥 둔다
     }
   }
   function checkCipher(id) {
@@ -1763,7 +1761,13 @@
       let el;
       if ((el = t.closest('[data-open]'))) return openCase(el.dataset.open, true);
       if ((el = t.closest('[data-cw-ok]'))) { const c = MG.byId[el.dataset.cwOk]; if (c) { cs(c).cw = true; save(); openCase(c.id, true); } return; }
-      if (t.closest('[data-cabinet]')) { cabinet(); window.scrollTo(0, 0); return; }
+      if (t.closest('[data-cabinet]')) { // 기록실로: 방금 보던 사건 폴더가 있는 자리로 돌아간다 (서랍에 도로 꽂듯)
+        const from = C && C.id;
+        cabinet(); window.scrollTo(0, 0);
+        const f = from && !$('.f-stamp.fresh') && $$('[data-open]').find(x => x.dataset.open === from);
+        if (f && f.getBoundingClientRect().bottom > window.innerHeight) { f.scrollIntoView({ block: 'center' }); f.focus({ preventScroll: true }); }
+        return;
+      }
       if ((el = t.closest('[data-mild]'))) { S.mild = !S.mild; save(); if (C) { renderCase(); if (MG.mood) MG.mood.enter(C); } else if (t.closest('.cw')) { const id = app.querySelector('[data-cw-ok]'); if (id) warnScreen(MG.byId[id.dataset.cwOk]); } else cabinet(); return; }
       if ((el = t.closest('[data-voice]'))) { S.voice = S.voice === false; save(); if (!S.voice && MG.sound) MG.sound.stopVoice(); el.outerHTML = voiceBtn(); return; }
       if ((el = t.closest('[data-sound]'))) { S.sound = !S.sound; save(); const vb = el.parentNode && el.parentNode.querySelector('[data-voice]'); if (vb) vb.remove(); if (!S.sound && MG.sound) MG.sound.stopVoice(); el.outerHTML = soundBtn(); if (S.sound) sfx('pen'); if (MG.mood) MG.mood.sound(); return; }
@@ -1799,6 +1803,7 @@
       if ((el = t.closest('[data-kw]'))) return addKey(el.dataset.kw);
       if ((el = t.closest('[data-bub]')) && !getSelection().toString()) return pin(el.dataset.bub); // 말풍선을 누르면 수첩에
       if ((el = t.closest('[data-src]'))) {
+        if (ST.view.src !== el.dataset.src) sfx('page'); // 다른 철·다른 창으로 넘어갈 때만
         ST.view.src = el.dataset.src;
         const s = curSrc();
         if (s.type === 'cipher' || s.type === 'timeline') ST.view.open = { t: s.type, id: s.id };

@@ -57,6 +57,7 @@
 .skin-report .doc-b{font:13.5px/1.9 var(--f-mono)}
 .skin-report .b-say .b-who{font-family:var(--f-mono)}
 .skin-report::after{content:"";position:absolute;top:18px;right:18px;width:64px;height:64px;border:2px solid rgba(176,52,42,.35);border-radius:50%;transform:rotate(-12deg);pointer-events:none}
+.case-view[data-frame="papers"] .skin-report .doc-h>*{padding-right:60px} /* 도장 테 자리를 비워 둔다 (좁은 화면에서 제목·안내가 테 밑으로 들어가지 않게) */
 
 /* ───────── news (신문) ───────── */
 .skin-news{padding:22px 26px 28px;background-color:#ede5d0;background-image:var(--noise),linear-gradient(180deg,rgba(120,90,40,.06),rgba(120,90,40,.14))}
