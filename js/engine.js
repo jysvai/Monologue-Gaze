@@ -915,7 +915,7 @@
     const vis = C.sources.filter(srcVisible);
     if (!vis.find(s => s.id === ST.view.src)) ST.view.src = vis[0] && vis[0].id;
     const bar = $('#srcTabs');
-    bar.innerHTML = vis.map(s => `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" data-src="${esc(s.id)}">${esc(s.name)}${s.lock && !ST.unl.includes(s.id) ? '<span class="tab-lock">잠김</span>' : ''}${tabBadge(s)}</button>`).join('');
+    bar.innerHTML = vis.map(s => `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" tabindex="${s.id === ST.view.src ? 0 : -1}" data-src="${esc(s.id)}">${esc(s.name)}${s.lock && !ST.unl.includes(s.id) ? '<span class="tab-lock">잠김</span>' : ''}${tabBadge(s)}</button>`).join('');
     // 탭이 넘쳐 옆으로 밀리는 좁은 화면: 고른 탭이 가려져 있으면 보이는 데까지 민다
     const on = bar.querySelector('.tab.on');
     if (on && bar.scrollWidth > bar.clientWidth) {
@@ -1814,11 +1814,13 @@
       if ((el = t.closest('[data-bub]')) && !getSelection().toString()) return pin(el.dataset.bub); // 말풍선을 누르면 수첩에
       if ((el = t.closest('[data-src]'))) {
         if (ST.view.src !== el.dataset.src) sfx('page'); // 다른 철·다른 창으로 넘어갈 때만
+        const kept = el.closest('#srcTabs') && document.activeElement && document.activeElement.closest && document.activeElement.closest('#srcTabs'); // 탭 줄을 다시 그려도 초점은 고른 탭에
         ST.view.src = el.dataset.src;
         const s = curSrc();
         if (s.type === 'cipher' || s.type === 'timeline') ST.view.open = { t: s.type, id: s.id };
         else if (narrow()) ST.view.open = null;
         save(); renderTabs(); renderList(); renderRead();
+        if (kept) { const on = $('#srcTabs .tab.on'); if (on) on.focus({ preventScroll: true }); }
         return;
       }
       if ((el = t.closest('[data-doc]'))) return openItem({ t: 'doc', id: el.dataset.doc });
@@ -1864,6 +1866,17 @@
       else if (f.matches('[data-cipher]')) { e.preventDefault(); checkCipher(f.dataset.cipher); }
       else if (f.matches('[data-query]')) { e.preventDefault(); runQuery(f); }
       else if (f.id === 'rep') { e.preventDefault(); submitReport(); }
+    });
+    // 탭 줄: ← → 로 옆 탭, Home·End 로 처음·끝 탭 (Tab 키는 고른 탭 하나에만 들렀다 본문으로 넘어간다)
+    document.addEventListener('keydown', e => {
+      const t = e.target;
+      if (!C || e.altKey || e.ctrlKey || e.metaKey || !t.matches || !t.matches('#srcTabs .tab')) return;
+      const tabs = $$('#srcTabs .tab'), i = tabs.indexOf(t);
+      const j = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : null;
+      if (j === null || i < 0) return;
+      e.preventDefault();
+      const n = tabs[(j + tabs.length) % tabs.length];
+      if (n !== t) n.click();
     });
     document.addEventListener('scroll', e => { if (e.target.id === 'srcTabs') tabEdge(e.target); }, { capture: true, passive: true });
     window.addEventListener('resize', () => tabEdge($('#srcTabs')), { passive: true });
