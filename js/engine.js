@@ -724,7 +724,9 @@
       box.appendChild(el);
       while (box.children.length > 3) box.firstChild.remove();
       requestAnimationFrame(() => el.classList.add('on'));
-      setTimeout(() => { el.classList.remove('on'); setTimeout(() => el.remove(), 400); }, 6500);
+      // 마우스를 올려 읽고 있거나 초점이 있는 알림은 붙들어 둔다 (손을 떼면 조금 뒤에 걷힌다)
+      const gone = () => { if (!el.isConnected) return; if (el.matches(':hover') || el === document.activeElement) return void setTimeout(gone, 1500); el.classList.remove('on'); setTimeout(() => el.remove(), 400); };
+      setTimeout(gone, 6500);
       if (i === 0) {
         sfx(n.late ? 'miss' : 'buzz');
         if (S.sound && navigator.vibrate && (!navigator.userActivation || navigator.userActivation.hasBeenActive)) try { navigator.vibrate([90, 60, 90]); } catch (e) { /* not allowed */ }
