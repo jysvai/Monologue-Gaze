@@ -143,6 +143,20 @@ img{max-width:100%}
 .stage-frame{position:relative;flex:1;min-height:0;display:flex;flex-direction:column}
 .screen{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;container:stage / inline-size}
 .src-tabs{flex:none;display:flex;gap:4px;overflow-x:auto;padding:0 10px}
+/* 탭이 넘치는 좁은 화면: 가려진 탭이 남은 쪽 끝이 흐려진다 (js tabEdge). 종이 탭은 그대로 흐리고, 화면 속 탭 줄은 제 바탕색을 덮어 흐린다 */
+.src-tabs.more-r{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent)}
+.src-tabs.more-l{-webkit-mask-image:linear-gradient(90deg,transparent,#000 40px);mask-image:linear-gradient(90deg,transparent,#000 40px)}
+.src-tabs.more-l.more-r{-webkit-mask-image:linear-gradient(90deg,transparent,#000 40px calc(100% - 40px),transparent);mask-image:linear-gradient(90deg,transparent,#000 40px calc(100% - 40px),transparent)}
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .src-tabs{-webkit-mask-image:none;mask-image:none}
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .src-tabs::before,.case-view:is([data-frame="laptop"],[data-frame="crt"]) .src-tabs::after{content:"";position:sticky;z-index:1;flex:none;width:34px;pointer-events:none;opacity:0;transition:opacity .15s}
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .src-tabs::before{order:-1;left:0;margin-right:-34px}
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .src-tabs::after{right:0;margin-left:-34px}
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .src-tabs.more-l::before,.case-view:is([data-frame="laptop"],[data-frame="crt"]) .src-tabs.more-r::after{opacity:1}
+.case-view[data-frame="laptop"] .src-tabs::before{margin:-6px -38px 0 0;background:linear-gradient(90deg,#3a4960 20%,rgba(58,73,96,0))}
+.case-view[data-frame="laptop"] .src-tabs::after{margin:-6px 0 0 -38px;background:linear-gradient(90deg,rgba(98,112,138,0),#62708a 80%)}
+.case-view[data-frame="crt"] .src-tabs::before,.case-view[data-frame="crt"] .src-tabs::after{background:linear-gradient(180deg,#2d63c8,#1d4aa6)}
+.case-view[data-frame="crt"] .src-tabs::before{margin:-4px -37px -4px 0;-webkit-mask-image:linear-gradient(90deg,#000 20%,transparent);mask-image:linear-gradient(90deg,#000 20%,transparent)}
+.case-view[data-frame="crt"] .src-tabs::after{margin:-4px 0 -4px -37px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 80%);mask-image:linear-gradient(90deg,transparent,#000 80%)}
 .tab{flex:none;display:inline-flex;align-items:center;gap:6px;padding:7px 14px 6px;border:0;background:none;cursor:pointer;white-space:nowrap}
 .tab-lock{font:10px var(--f-mono);padding:1px 5px;border:1px solid currentColor;opacity:.7}
 .stage-body{flex:1;min-height:0;display:grid;grid-template-columns:minmax(210px,300px) minmax(0,1fr)}

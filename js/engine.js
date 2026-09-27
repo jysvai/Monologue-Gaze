@@ -923,6 +923,14 @@
       if (r.left < b.left + 8) bar.scrollLeft -= b.left + 8 - r.left;
       else if (r.right > b.right - 8) bar.scrollLeft += r.right - (b.right - 8);
     }
+    tabEdge(bar);
+  }
+  // 가려진 탭이 남은 쪽 끝을 흐리게 한다 (옆으로 밀면 더 있다는 표시)
+  function tabEdge(bar) {
+    if (!bar) return;
+    const x = Math.abs(bar.scrollLeft), m = bar.scrollWidth - bar.clientWidth;
+    bar.classList.toggle('more-l', x > 2);
+    bar.classList.toggle('more-r', x < m - 2);
   }
   function renderList() {
     const s = curSrc();
@@ -1857,6 +1865,9 @@
       else if (f.matches('[data-query]')) { e.preventDefault(); runQuery(f); }
       else if (f.id === 'rep') { e.preventDefault(); submitReport(); }
     });
+    document.addEventListener('scroll', e => { if (e.target.id === 'srcTabs') tabEdge(e.target); }, { capture: true, passive: true });
+    window.addEventListener('resize', () => tabEdge($('#srcTabs')), { passive: true });
+    if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => tabEdge($('#srcTabs'))); // 글꼴이 늦게 와 탭 너비가 바뀐 때
     document.addEventListener('toggle', e => {
       const d = e.target;
       if (!C || !d.matches || !d.matches('details[data-ng]')) return;
