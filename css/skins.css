@@ -72,6 +72,12 @@
 .skin-news.vertical .doc-b{writing-mode:vertical-rl;column-count:auto;width:100%;height:min(62vh,540px);overflow-x:auto;text-align:start;line-height:2} /* 너비를 묶어야 좁은 화면에서 첫 줄(오른쪽)이 잘리지 않고 옆으로 넘겨 읽힌다 */
 .skin-news.vertical .b-p{margin:0 0 0 14px}
 .skin-news.vertical .pin{writing-mode:horizontal-tb;margin:6px 0 0}
+/* 세로쓰기 신문 속 사진: 가로쓰기의 width:100% 가 먹지 않아 원래 크기(1280px)로 튀어나와 잘리던 것을, 한눈에 보이는 단 크기 안으로 줄인다 */
+.skin-news.vertical{container-type:inline-size}
+.skin-news.vertical .b-img img{width:auto;height:auto;max-width:calc(100cqw - 56px);max-height:calc(min(62vh,540px) - 44px)}
+.skin-news.vertical .b-img svg{width:calc(100cqw - 56px);max-height:calc(min(62vh,540px) - 44px)}
+.skin-news.vertical .b-img :is(.cens,.art-wrap){height:fit-content}
+.skin-news.vertical .cens-l{writing-mode:horizontal-tb}
 /* 날짜 줄·쪽수는 활판 로마자 (1980년 뒤 신문은 맨 아래 시대 기본값에서 명조로). 신문 속 표·사진 설명·말한 사람도 신문 활자로 */
 .skin-news .doc-k,.skin-news .doc-m{font-family:var(--f-latin)}
 .skin-news :is(.b-tbl table,.b-tbl caption,.b-img figcaption,.b-say .b-who){font-family:inherit}
