@@ -1164,6 +1164,7 @@
     document.title = `CASE ${pad(c.no)} 「${c.title}」 — Monologue Gaze`;
     renderCase();
     liveSync();
+    guard();
     // 기록실에서 화면 속 사건(모니터·노트북)을 열면: 여는 장면 동안 꺼져 있다가, 장면이 걷힐 때 켜진다
     const scr = intro && MG.mood && (c.frame === 'crt' || c.frame === 'laptop') && $('.screen');
     if (scr) {
@@ -1191,6 +1192,7 @@
       <p>${esc(c.warn || '이 사건 기록에는 시신 훼손 같은 잔혹한 내용과 강한 묘사가 들어 있습니다.')}</p><p class="cw-s">모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국 같은 화면 연출과 사진은 「잔혹 표현」 단추로 끌 수 있습니다.</p><p>${mildBtn()}</p>
       <p class="cw-b"><button type="button" class="btn-hand" data-cw-ok="${esc(c.id)}">기록을 연다</button> <button type="button" class="reset" data-cabinet>돌아간다</button></p></div></div>`;
     window.scrollTo(0, 0);
+    guard();
     const card = !again && app.querySelector('.cw-card'); if (card) card.focus({ preventScroll: true }); // 처음 열 때 경고문부터 읽히고, Tab 으로 두 단추에
   }
 
@@ -1278,7 +1280,7 @@
   }
 
   function cabinet(showRoster) {
-    clearNotes();
+    clearNotes(); unguard();
     C = null; ST = null; S.current = null; save();
     if (MG.mood) MG.mood.leave();
     document.body.dataset.screen = 'cabinet';
@@ -1465,6 +1467,20 @@
     document.addEventListener('keydown', key);
     document.body.appendChild(z); z.focus();
     sfx('page');
+  }
+
+  /* ───────── 브라우저·휴대폰의 뒤로 가기: 게임 밖으로 나가지 않고 한 칸씩 물러난다 (크게 보기 → 읽던 문서 → 기록실) ───────── */
+  let backSelf = false; // 게임이 스스로 물린 뒤로 가기 (기록실에 돌아올 때 남은 한 칸을 걷는다)
+  function guard() { try { if (!(history.state && history.state.mg)) history.pushState({ mg: 1 }, ''); } catch (e) { /* ignore */ } }
+  function unguard() { try { if (history.state && history.state.mg) { backSelf = true; history.back(); } } catch (e) { /* ignore */ } }
+  function onBack() {
+    if (backSelf) { backSelf = false; return; }
+    const z = $('.zoom');
+    if (z) { z.click(); guard(); return; }
+    const b = C && $('#paneRead [data-back]');
+    if (b && b.offsetParent !== null && narrow()) { b.click(); guard(); return; } // 좁은 화면: 문서 → 목록
+    const home = (C || $('.cw')) && $('[data-cabinet]');
+    if (home) home.click();
   }
 
   /* ───────── actions ───────── */
@@ -1901,6 +1917,7 @@
       else if (f.matches('[data-query]')) { e.preventDefault(); runQuery(f); }
       else if (f.id === 'rep') { e.preventDefault(); submitReport(); }
     });
+    window.addEventListener('popstate', onBack);
     // 탭 줄: ← → 로 옆 탭, Home·End 로 처음·끝 탭 (Tab 키는 고른 탭 하나에만 들렀다 본문으로 넘어간다)
     document.addEventListener('keydown', e => {
       const t = e.target;
