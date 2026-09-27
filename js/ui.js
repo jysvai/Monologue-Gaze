@@ -141,7 +141,7 @@
   }, true);
 
   // 키보드로 누른 단추(목록에서 문서 열기 등)가 다시 그려져 사라지면, 새로 그려진 같은 단추로 초점을 돌려준다.
-  // 좁은 화면에서 목록이 접혀 같은 단추가 없으면, 읽기 칸의 「목록으로」에 둔다. (마우스로 누른 때는 건드리지 않는다)
+  // 같은 단추가 없어졌으면(맞춰 본 감정 후보·올린 신청서 등) 같은 칸의 같은 종류 단추 → 목록에서 지금 보고 있는 항목 → 「목록으로」 차례로. (마우스로 누른 때는 건드리지 않는다)
   document.addEventListener('click', e => {
     if (e.detail !== 0) return;
     const b = e.target && e.target.closest ? e.target.closest('button') : null;
@@ -150,12 +150,13 @@
     const attrs = [...b.attributes].filter(a => a.name.startsWith('data-') && !/^data-(tip|ui|ui-key)$/.test(a.name));
     if (!attrs.length) return;
     const sel = 'button' + attrs.map(a => `[${a.name}="${q(a.value)}"]`).join('');
-    const fromList = !!b.closest('#paneList');
+    const pane = b.closest('#paneList, #paneRead'), kin = pane ? `#${pane.id} button[${attrs[0].name}]:not(:disabled)` : '';
     setTimeout(() => {
       const now = document.activeElement;
       if (b.isConnected || (now && now !== document.body)) return;
-      const el = [...document.querySelectorAll(sel)].find(x => x.offsetParent !== null) || (fromList && document.querySelector('#paneRead [data-back]'));
-      if (el && el.offsetParent !== null) el.focus({ preventScroll: true });
+      const seen = s => s && [...document.querySelectorAll(s)].find(x => x.offsetParent !== null);
+      const el = seen(sel) || seen(kin) || (pane && (seen('#paneList .item.on') || seen('#paneRead [data-back]')));
+      if (el) el.focus({ preventScroll: true });
     }, 0);
   }, true);
 })();
