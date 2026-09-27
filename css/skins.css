@@ -129,6 +129,11 @@
 .doc.printed .b-tbl table{font:12.5px/1.5 var(--f-mono)}
 .doc.printed .b-tbl td,.doc.typed .b-tbl td{border-right:0;border-bottom:1px solid rgba(0,0,0,.12)}
 .doc.printed .b-tbl th{background:rgba(0,0,0,.06)}
+/* 노트북 화면(현행 사건)에 뜨는 장부는 모두 전산 조회·회신 공문·통장 인자 — printed 를 안 달아도 인쇄 글자로 */
+.case-view[data-frame="laptop"] .skin-ledger{background-color:#f4f3ee}
+.case-view[data-frame="laptop"] .skin-ledger .b-tbl table{font:12.5px/1.5 var(--f-mono)}
+.case-view[data-frame="laptop"] .skin-ledger .b-tbl td{border-right:0;border-bottom:1px solid rgba(0,0,0,.12)}
+.case-view[data-frame="laptop"] .skin-ledger .b-tbl th{background:rgba(0,0,0,.06)}
 .doc.typed .b-tbl table{font:13px/1.55 var(--f-type)}
 .doc.typed .b-tbl td{border-bottom-style:dotted;border-bottom-color:rgba(0,0,0,.28)}
 

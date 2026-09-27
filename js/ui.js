@@ -18,6 +18,9 @@
     if (!tip) { tip = document.createElement('div'); tip.className = 'ui-tip'; tip.setAttribute('role', 'tooltip'); document.body.appendChild(tip); }
     tip.textContent = s;
     tip.classList.remove('below');
+    // 모니터·노트북 화면 안에서는 종이쪽지 대신 그 화면의 풍선 도움말 (2006년 창의 노란 풍선 · 노트북의 어두운 풍선)
+    const scr = el.closest('.case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen');
+    tip.dataset.frame = scr ? scr.closest('.case-view').dataset.frame : '';
     const r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
     const x = Math.max(8, Math.min(window.innerWidth - w - 8, r.left + r.width / 2 - w / 2));
     let y = r.top - h - 10;

@@ -879,7 +879,8 @@
     let res = '';
     if (q) {
       const hits = archiveHits(s, q);
-      res = hits.length ? `<p class="res-n">「${esc(q)}」 ${hits.length}건</p>${hits.map(itemBtn).join('')}` : `<p class="res-none">「${esc(q)}」에 해당하는 자료가 없다.</p>`;
+      const scr = C.frame !== 'papers'; // 화면 속 검색창은 소프트웨어의 말투, 종이 자료실은 서고 담당의 말투
+      res = hits.length ? `<p class="res-n">${scr ? `'${esc(q)}' 검색 결과 ${hits.length}건` : `「${esc(q)}」 ${hits.length}건`}</p>${hits.map(itemBtn).join('')}` : `<p class="res-none">${scr ? `'${esc(q)}'에 대한 검색 결과가 없습니다.` : `「${esc(q)}」에 해당하는 자료가 없다.`}</p>`;
     }
     const start = (s.start || []).map(id => C.docs[id]).filter(d => d && ok(d.need));
     const chips = keyChips('data-search');

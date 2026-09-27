@@ -46,6 +46,14 @@ summary::-webkit-details-marker{display:none}
 /* 이름이 .ui-tip 인 까닭: 수첩의 요령 줄(li.tip)과 겹치지 않게 */
 .ui-tip{position:fixed;left:0;top:0;z-index:99;max-width:260px;padding:5px 11px 4px;border:1px solid rgba(60,48,30,.35);border-radius:2px;background:#f6eed6;box-shadow:0 5px 14px rgba(0,0,0,.35);font:19px/1.25 var(--f-hand);color:#3a2f22;pointer-events:none;opacity:0;transform:translateY(3px) rotate(-1deg);transition:opacity .12s,transform .12s;white-space:normal}
 .ui-tip.on{opacity:1;transform:translateY(0) rotate(-1deg)}
+/* 화면 속 풍선 도움말: 노트북은 어두운 둥근 풍선, 2006년 모니터는 검은 테의 노란 풍선 (손글씨·기울임 없이) */
+.ui-tip[data-frame="laptop"]{padding:5px 9px;border:0;border-radius:6px;background:rgba(30,34,42,.94);color:#f3f5f8;font:600 12px/1.35 var(--f-ui);box-shadow:0 4px 12px rgba(0,0,0,.3);transform:translateY(3px)}
+.ui-tip[data-frame="laptop"].on{transform:none}
+.ui-tip[data-frame="laptop"]::after{border:0;width:8px;height:8px;margin-left:-4px;bottom:-4px}
+.ui-tip[data-frame="laptop"].below::after{top:-4px;bottom:auto}
+.ui-tip[data-frame="crt"]{padding:2px 6px 3px;border:1px solid #000;border-radius:0;background:#ffffe1;color:#000;font:12px/1.35 var(--f-web);box-shadow:2px 2px 2px rgba(0,0,0,.3);transform:none;transition:opacity .08s}
+.ui-tip[data-frame="crt"].on{transform:none}
+.ui-tip[data-frame="crt"]::after{content:none}
 .ui-tip::after{content:"";position:absolute;left:var(--ax,50%);bottom:-6px;width:10px;height:10px;margin-left:-5px;background:inherit;border-right:1px solid rgba(60,48,30,.35);border-bottom:1px solid rgba(60,48,30,.35);transform:rotate(45deg)}
 .ui-tip.below::after{top:-6px;bottom:auto;transform:rotate(225deg)}
 
