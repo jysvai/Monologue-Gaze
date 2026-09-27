@@ -14,6 +14,7 @@ const el = s => (els[s] ||= stub());
 global.window = global;
 global.localStorage = { getItem() { return null; }, setItem() {} };
 global.scrollTo = () => {};
+global.addEventListener = () => {};
 global.document = { body: stub(), head: stub(), documentElement: stub(), getElementById: el, querySelector: el, querySelectorAll: () => [], createElement: stub, addEventListener() {} };
 
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'js/engine.js'), 'utf8'));
