@@ -1001,11 +1001,22 @@
       </form><p class="verdict" role="status">${esc(VERDICT)}</p>${ST.solved ? `<div class="rep-solved">${solvedHtml(false)}</div>` : ''}</div></article>`;
   }
   function renderRep() {
+    const a = document.activeElement, k = focusKey(a);
     renderNotebook();
     const o = ST.view.open;
-    if (!o || o.t !== 'report') return;
-    const pr = $('#paneRead'), top = pr.scrollTop;
-    renderRead(); pr.scrollTop = top;
+    if (o && o.t === 'report') { const pr = $('#paneRead'), top = pr.scrollTop; renderRead(); pr.scrollTop = top; }
+    // 다시 그려도 초점은 같은 칸에 (보고서의 범인 칸을 방향키로 고르는 중에 초점이 사라지지 않게)
+    if (k && !a.isConnected) { const el = $$(k).find(x => x.offsetParent !== null); if (el) el.focus({ preventScroll: true }); }
+  }
+  // 초점이 있던 칸을 다시 그린 뒤에도 찾을 수 있게 적어 둔다: id, 아니면 이름·값·data-* (같은 form 안에서)
+  function focusKey(a) {
+    if (!a || a === document.body || !a.closest || !a.closest('#app')) return '';
+    const q = v => (window.CSS && CSS.escape ? CSS.escape(v) : v);
+    if (a.id) return '#' + q(a.id);
+    const at = [...a.attributes].filter(x => (x.name.startsWith('data-') && !/^data-(tip|ui|ui-key)$/.test(x.name)) || x.name === 'name' || x.name === 'type' || (x.name === 'value' && a.type === 'radio'));
+    if (!at.length) return '';
+    const f = a.closest('form[id]');
+    return (f ? '#' + q(f.id) + ' ' : '') + a.tagName.toLowerCase() + at.map(x => `[${x.name}="${q(x.value)}"]`).join('');
   }
 
   /* ───────── notebook ───────── */
@@ -1749,7 +1760,10 @@
       renderRep();
       if (fresh) {
         const box = $('.rep-view .rep-solved') || $('#solvedBox');
-        if (box) { box.innerHTML = solvedHtml(true); box.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+        if (box) {
+          box.innerHTML = solvedHtml(true); box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          if (document.activeElement === document.body) { box.tabIndex = -1; box.focus({ preventScroll: true }); } // 키보드로 올렸으면 결말부터 읽히게
+        }
         cue('solved', '사건 종결');
         if (MG.sound) setTimeout(() => { if (C === c0) MG.sound.hero('solved'); }, 1300);
       } else if (wrong === 0) toast('이미 닫힌 사건이다');
