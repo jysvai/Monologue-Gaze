@@ -77,6 +77,7 @@ summary::-webkit-details-marker{display:none}
 /* 키보드로 옮겨 다닐 때: 파란 테 대신 빨간 연필 점선 */
 :focus-visible{outline:1.5px dashed var(--red);outline-offset:3px;border-radius:3px}
 .cabinet :focus-visible,.case-intro :focus-visible,.cw :focus-visible,.zoom:focus-visible{outline-color:rgba(233,196,106,.8)}
+.case-intro:focus{outline:0} /* 초점을 붙들어 두는 여는 장면 자체에는 테를 두르지 않는다 */
 /* 화면 속에서는 연필 점선 대신 그 시절 운영체제의 초점 표시: 2006년 모니터는 검은 점선 네모, 노트북은 파란 테 */
 .case-view[data-frame="crt"] .screen :focus-visible{outline:1px dotted #111;outline-offset:2px;border-radius:0}
 .case-view[data-frame="laptop"] .screen :focus-visible{outline:2px solid #3b6fd8;outline-offset:2px;border-radius:4px}

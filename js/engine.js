@@ -1169,15 +1169,16 @@
     window.scrollTo(0, 0);
   }
 
-  function warnScreen(c) {
+  function warnScreen(c, again) {
     C = null; ST = null; S.current = null; save();
     if (MG.mood) MG.mood.leave();
     document.body.dataset.screen = 'cabinet';
     document.title = 'Monologue Gaze';
-    app.innerHTML = `<div class="cw"><div class="cw-card">${S.mild ? '' : stains(c.id + 'cw', 2, 'acd', 'corner')}<p class="cw-t">혐오감 주의</p><h2>CASE ${pad(c.no)} 「${esc(c.title)}」 ${starsHtml(c)}</h2>
+    app.innerHTML = `<div class="cw"><div class="cw-card" role="region" aria-labelledby="cwH" tabindex="-1">${S.mild ? '' : stains(c.id + 'cw', 2, 'acd', 'corner')}<p class="cw-t">혐오감 주의</p><h2 id="cwH">CASE ${pad(c.no)} 「${esc(c.title)}」 ${starsHtml(c)}</h2>
       <p>${esc(c.warn || '이 사건 기록에는 시신 훼손 같은 잔혹한 내용과 강한 묘사가 들어 있습니다.')}</p><p class="cw-s">모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국 같은 화면 연출과 사진은 「잔혹 표현」 단추로 끌 수 있습니다.</p><p>${mildBtn()}</p>
       <p class="cw-b"><button type="button" class="btn-hand" data-cw-ok="${esc(c.id)}">기록을 연다</button> <button type="button" class="reset" data-cabinet>돌아간다</button></p></div></div>`;
     window.scrollTo(0, 0);
+    const card = !again && app.querySelector('.cw-card'); if (card) card.focus({ preventScroll: true }); // 처음 열 때 경고문부터 읽히고, Tab 으로 두 단추에
   }
 
   /* ── 근무 명부: 이 브라우저를 쓰는 수사관들. 고르기 · 새 서랍 받기 · 이름 고치기 · 지우기 */
@@ -1778,13 +1779,16 @@
       if ((el = t.closest('[data-open]'))) return openCase(el.dataset.open, true);
       if ((el = t.closest('[data-cw-ok]'))) { const c = MG.byId[el.dataset.cwOk]; if (c) { cs(c).cw = true; save(); openCase(c.id, true); } return; }
       if (t.closest('[data-cabinet]')) { // 기록실로: 방금 보던 사건 폴더가 있는 자리로 돌아간다 (서랍에 도로 꽂듯)
-        const from = C && C.id;
+        const cw = t.closest('.cw') && app.querySelector('[data-cw-ok]');
+        const from = C ? C.id : cw ? cw.dataset.cwOk : null; // 혐오감 주의 앞에서 돌아가도 그 폴더로
         cabinet(); window.scrollTo(0, 0);
         const f = from && !$('.f-stamp.fresh') && $$('[data-open]').find(x => x.dataset.open === from);
-        if (f && f.getBoundingClientRect().bottom > window.innerHeight) { f.scrollIntoView({ block: 'center' }); f.focus({ preventScroll: true }); }
+        const off = f && f.getBoundingClientRect().bottom > window.innerHeight;
+        if (off) f.scrollIntoView({ block: 'center' });
+        if (f && (off || e.detail === 0)) f.focus({ preventScroll: true }); // 키보드로 돌아온 때는 화면 안에 있어도 그 폴더에
         return;
       }
-      if ((el = t.closest('[data-mild]'))) { S.mild = !S.mild; save(); if (C) { renderCase(); if (MG.mood) MG.mood.enter(C); } else if (t.closest('.cw')) { const id = app.querySelector('[data-cw-ok]'); if (id) warnScreen(MG.byId[id.dataset.cwOk]); } else cabinet(); return; }
+      if ((el = t.closest('[data-mild]'))) { S.mild = !S.mild; save(); if (C) { renderCase(); if (MG.mood) MG.mood.enter(C); } else if (t.closest('.cw')) { const id = app.querySelector('[data-cw-ok]'); if (id) warnScreen(MG.byId[id.dataset.cwOk], true); } else cabinet(); return; }
       if ((el = t.closest('[data-voice]'))) { S.voice = S.voice === false; save(); if (!S.voice && MG.sound) MG.sound.stopVoice(); el.outerHTML = voiceBtn(); return; }
       if ((el = t.closest('[data-sound]'))) { S.sound = !S.sound; save(); const vb = el.parentNode && el.parentNode.querySelector('[data-voice]'); if (vb) vb.remove(); if (!S.sound && MG.sound) MG.sound.stopVoice(); el.outerHTML = soundBtn(); if (S.sound) sfx('pen'); if (MG.mood) MG.mood.sound(); return; }
       if (t.closest('[data-roster]')) return toggleRoster();

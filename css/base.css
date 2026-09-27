@@ -490,6 +490,7 @@ img{max-width:100%}
 .f-blood .stain{opacity:.55}
 .folder:has(.f-blood) .f-label{position:relative;z-index:3}
 .cw-card{position:relative;overflow:hidden}
+.cw-card:focus{outline:0} /* 여는 때 초점을 받는 경고문 자체에는 테를 두르지 않는다 (단추들은 Tab 으로) */
 .cw-card>*:not(.stain){position:relative;z-index:4}
 .cw-card .stain{opacity:.5} /* 자리는 오른쪽 모서리뿐 (엔진 stains 의 corner) — 글 위에 얹히지 않는다 */
 .snd.mild[aria-pressed="true"]{color:#e08a7f}

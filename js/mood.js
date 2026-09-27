@@ -271,7 +271,12 @@
     const el = document.querySelector('.case-intro');
     if (!el || el.classList.contains('out')) return;
     el.classList.add('out');
-    setTimeout(() => el.remove(), 450);
+    const had = document.activeElement === el; // 여는 장면에 있던 초점은 걷힌 뒤 사건의 첫 탭으로
+    setTimeout(() => {
+      el.remove();
+      const a = document.activeElement, t = document.querySelector('#srcTabs .tab.on');
+      if (had && t && (!a || a === document.body)) t.focus({ preventScroll: true });
+    }, 450);
     document.dispatchEvent(new Event('mg:intro-out')); // 화면 속 사건은 이때 모니터가 켜진다 (engine.js openCase)
   }
   // 현행 사건은 해 대신 지령이 떨어진 때: 2023년 3월 8일 (수) 22:40
@@ -299,7 +304,10 @@
     document.body.appendChild(el);
     if (c.live && MG.sfx) MG.sfx('radio'); // 현행 사건: 출동 지령이 무전으로 떨어진다
     el.focus({ preventScroll: true }); // Tab 이 뒤 화면으로 새지 않게
-    const once = e => { if (e.key !== 'Tab') { hideIntro(); document.removeEventListener('keydown', once); } };
+    const once = e => {
+      if (e.key === 'Tab') { e.preventDefault(); el.focus({ preventScroll: true }); return; } // 떠 있는 동안 Tab 은 뒤 화면으로 가지 않는다
+      hideIntro(); document.removeEventListener('keydown', once);
+    };
     document.addEventListener('keydown', once);
     introTimer = setTimeout(() => { document.removeEventListener('keydown', once); hideIntro(); }, reduce.matches ? 1600 : 3600);
   }
