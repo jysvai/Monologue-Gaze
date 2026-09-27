@@ -59,6 +59,12 @@
     return { audio: a, done, span: A().span[k] || 1 };
   }
   const hasVoice = k => !!url(k) && S().sound && S().voice !== false;
+  // 다른 탭에 가 있는 동안 목소리는 멈춰 둔다 (배경음처럼). 돌아오면 그 자리부터 이어서 — 자막도 목소리가 끝날 때까지 기다린다
+  let held = null;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { if (cur && !cur.paused) { held = cur; cur.pause(); } }
+    else if (held) { const a = held; held = null; if (cur === a) a.play().catch(() => { if (a.onended) a.onended(); }); }
+  });
 
   // 주인공의 결정적인 한마디: 목소리(켜져 있으면) + 화면 아래 속말 자막(늘)
   let capN = 0, capT = null;
