@@ -158,7 +158,8 @@
 .map.big{box-shadow:0 3px 14px rgba(0,0,0,.35)}
 .map.big .spot{width:26px;height:26px}
 .map.big .spot span{top:28px;font-size:12.5px}
-.map .spot:hover,.map .spot:focus-visible{transform:translate(-50%,-50%) scale(1.15)}
+.map .spot:focus-visible{transform:translate(-50%,-50%) scale(1.15)}
+@media (hover:hover){.map .spot:hover{transform:translate(-50%,-50%) scale(1.15)}}
 @container stage (min-width:701px){
   .pane-list .map .spot{width:16px;height:16px;border-width:1.5px}
   .pane-list .map .spot span{display:none}

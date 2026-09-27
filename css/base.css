@@ -98,7 +98,8 @@ img{max-width:100%}
 .f-cover svg,.f-cover img{display:block;width:100%;height:100%;object-fit:cover;filter:sepia(.25)}
 .cab-hero{margin:-20px 0 18px;height:clamp(160px,28vw,340px);overflow:hidden;border-radius:4px;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
 .cab-hero img{display:block;width:100%;height:100%;object-fit:cover}
-.folder:hover,.folder:focus-visible{transform:rotate(0deg) translateY(-4px)}
+.folder:focus-visible{transform:rotate(0deg) translateY(-4px)}
+@media (hover:hover){.folder:hover{transform:rotate(0deg) translateY(-4px)}} /* 손가락으로 누른 뒤 폴더가 들린 채 남지 않게 */
 .f-tab{margin-left:16px;padding:5px 12px 3px;border-radius:6px 6px 0 0;background-color:var(--kraft);background-image:var(--fiber);font:12px/1.2 var(--f-type);letter-spacing:.06em;color:var(--kraft-ink)}
 .f-body{position:relative;display:flex;flex-direction:column;gap:8px;width:100%;min-height:200px;padding:14px 16px 16px;border-radius:0 4px 4px 4px;background-color:var(--kraft);background-image:var(--fiber),linear-gradient(180deg,rgba(255,255,255,.12),rgba(0,0,0,.08));color:var(--kraft-ink);box-shadow:0 14px 26px -10px rgba(0,0,0,.7),inset 0 0 30px rgba(90,60,20,.25)}
 .folder.tutorial .f-tab,.folder.tutorial .f-body{background-color:#b8b09a}

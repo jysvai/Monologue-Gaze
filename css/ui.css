@@ -62,7 +62,7 @@ summary::-webkit-details-marker{display:none}
 
 /* ───────── 보고서: 고른 인물에 빨간 연필 동그라미와 「지목」, 고른 메모에 연필 체크 ───────── */
 .rep-per{position:relative;transition:transform .12s ease,background-color .12s}
-.rep-per:hover{transform:translateY(-1px);background:#fbf5e3}
+@media (hover:hover){.rep-per:hover{transform:translateY(-1px);background:#fbf5e3}}
 .rep-per.on{border:1px solid rgba(176,52,42,.55);background:#fbeee8;box-shadow:none}
 .rep-per.on::after{content:"";position:absolute;inset:-9px -12px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80' preserveAspectRatio='none'%3E%3Cpath d='M22 46C18 18 150 4 186 30c20 16-10 42-86 44C40 76 6 60 14 36 20 20 60 9 104 9' fill='none' stroke='%23b0342a' stroke-width='2.6' stroke-linecap='round' vector-effect='non-scaling-stroke' opacity='.9'/%3E%3C/svg%3E") center/100% 100% no-repeat;animation:circleIn .35s ease-out both}
 .rep-per.on::before{content:"지목";position:absolute;right:-10px;top:-12px;z-index:1;padding:1px 6px 0;border:1.5px solid var(--red);background:#fbeee8;color:var(--red);font:800 11px/16px var(--f-doc);letter-spacing:.1em;transform:rotate(9deg);animation:stampIn .3s .1s ease-out both}
