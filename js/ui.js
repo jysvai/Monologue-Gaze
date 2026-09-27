@@ -5,6 +5,7 @@
  * 4. 크게 보기 창: 열려 있는 동안 Tab 이 뒤로 새지 않고, 닫히면 보던 그림으로 돌아간다.
  * 5. 잠금·조회 칸: 틀린 번호를 넣어 칸이 다시 그려져도 커서가 그 칸에 남는다.
  * 6. 사진 살피기 돋보기: 마우스를 올린 자리를 크게 (종이는 놋쇠 돋보기, 화면 속 사진은 네모 확대 창).
+ * 7. 키보드로 누른 단추가 다시 그려져도 초점이 그 단추(새로 그려진 것)에 남는다.
  */
 (function () {
   let tip = null, cur = null, wait = 0;
@@ -135,6 +136,25 @@
       const now = document.activeElement;
       if (now && now !== document.body && now.isConnected) return;
       const el = document.querySelector(sel);
+      if (el && el.offsetParent !== null) el.focus({ preventScroll: true });
+    }, 0);
+  }, true);
+
+  // 키보드로 누른 단추(목록에서 문서 열기 등)가 다시 그려져 사라지면, 새로 그려진 같은 단추로 초점을 돌려준다.
+  // 좁은 화면에서 목록이 접혀 같은 단추가 없으면, 읽기 칸의 「목록으로」에 둔다. (마우스로 누른 때는 건드리지 않는다)
+  document.addEventListener('click', e => {
+    if (e.detail !== 0) return;
+    const b = e.target && e.target.closest ? e.target.closest('button') : null;
+    if (!b || document.activeElement !== b) return;
+    const q = v => (window.CSS && CSS.escape ? CSS.escape(v) : v);
+    const attrs = [...b.attributes].filter(a => a.name.startsWith('data-') && !/^data-(tip|ui|ui-key)$/.test(a.name));
+    if (!attrs.length) return;
+    const sel = 'button' + attrs.map(a => `[${a.name}="${q(a.value)}"]`).join('');
+    const fromList = !!b.closest('#paneList');
+    setTimeout(() => {
+      const now = document.activeElement;
+      if (b.isConnected || (now && now !== document.body)) return;
+      const el = [...document.querySelectorAll(sel)].find(x => x.offsetParent !== null) || (fromList && document.querySelector('#paneRead [data-back]'));
       if (el && el.offsetParent !== null) el.focus({ preventScroll: true });
     }, 0);
   }, true);

@@ -1510,11 +1510,17 @@
   }
   function dropNote(id) {
     const n = ST.notes.find(x => x.id === id);
+    // 지운 메모의 × 에 초점이 있었으면 (키보드) 옆 메모의 × 로, 없으면 그 묶음 제목으로 옮긴다
+    const li = $(`.notes li[data-nid="${id}"]`), had = li && li.contains(document.activeElement);
+    const sib = li && (li.nextElementSibling || li.previousElementSibling), grp = li && li.closest('.ng');
+    const to = had && (sib ? `.notes li[data-nid="${sib.dataset.nid}"] .del` : grp ? `.ng[data-ng="${CSS.escape(grp.dataset.ng)}"] > summary` : '');
     ST.notes = ST.notes.filter(x => x.id !== id);
     Object.keys(ST.report.claims).forEach(k => { if (String(ST.report.claims[k]) === String(id)) ST.report.claims[k] = ''; });
     save();
     if (n) $$('.pin').forEach(b => { if (b.dataset.pin === n.ref) { b.classList.remove('on'); b.textContent = '✎'; b.setAttribute('aria-label', '수첩에 적기'); b.dataset.tip = '수첩에 적기'; } });
     renderRep();
+    const f = to && ($(to) || $('[data-open-rep]'));
+    if (f && (document.activeElement === document.body || !document.activeElement)) f.focus({ preventScroll: true });
   }
   function openItem(o) {
     const first = (o.t === 'doc' || o.t === 'photo') && !ST.seen.includes(o.id);
@@ -1852,7 +1858,15 @@
       if ((el = t.closest('[data-del]'))) return delNote(+el.dataset.del);
       if (t.closest('[data-open-rep]')) { REPOPEN = null; return openItem({ t: 'report' }); }
       if ((el = t.closest('[data-rep-open]'))) { REPOPEN = REPOPEN === el.dataset.repOpen ? null : el.dataset.repOpen; renderRep(); const a = $('.rep-claim.open'); if (a) { a.scrollIntoView({ block: 'nearest' }); const q = a.querySelector('[data-rep-filter]'); if (q && !narrow()) q.focus({ preventScroll: true }); } return; }
-      if (t.closest('[data-back]')) { ST.view.open = null; save(); renderRead(); renderList(); return; }
+      if (t.closest('[data-back]')) {
+        const was = ST.view.open;
+        ST.view.open = null; save(); renderRead(); renderList();
+        // 키보드로 목록에 돌아오면 방금 읽던 항목에 초점을 둔다
+        const at = was && e.detail === 0 && { doc: 'doc', person: 'person', req: 'req', feed: 'feed', compare: 'cmp', photo: 'scene', cipher: 'open-cipher', timeline: 'open-tl' }[was.t];
+        const it = at && $(`#paneList [data-${at}="${CSS.escape(String(was.id))}"]`);
+        if (it) it.focus({ preventScroll: false });
+        return;
+      }
       if ((el = t.closest('[data-reset]'))) return armed(el, '한 번 더 누르면 이 사건 기록이 지워진다', () => { delete S.cases[C.id]; if (S.seen) { S.seen.done = S.seen.done.filter(x => x !== C.id); S.seen.m = S.seen.m.filter(x => x !== C.id); } save(); openCase(C.id); toast('처음부터 다시'); });
     });
     document.addEventListener('submit', e => {
