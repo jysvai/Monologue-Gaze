@@ -1,6 +1,6 @@
 /* Monologue Gaze — 브라우저 기본 부품 대신 쓰는 것들 (css/ui.css 와 짝)
  * 1. 말풍선: title 대신 data-tip. 마우스를 올리거나 키보드로 옮겨 가면 종이쪽지가 뜬다.
- * 2. 입력칸: 브라우저 자동 완성 목록·맞춤법 밑줄이 뜨지 않게 한다.
+ * 2. 입력칸: 브라우저 자동 완성 목록·맞춤법 밑줄이 뜨지 않게 하고, 휴대폰 자판의 Enter 글쇠 이름을 칸에 맞춘다.
  * 3. 그림: 크게 볼 수 있는 그림·열람 주의 사진도 키보드(Tab → Enter)로 닿게 한다.
  * 4. 크게 보기 창: 열려 있는 동안 Tab 이 뒤로 새지 않고, 닫히면 보던 그림으로 돌아간다.
  * 5. 잠금·조회 칸: 틀린 번호를 넣어 칸이 다시 그려져도 커서가 그 칸에 남는다.
@@ -54,6 +54,8 @@
       if (i.dataset.ui) return;
       i.dataset.ui = '1';
       i.setAttribute('autocomplete', 'off'); i.setAttribute('spellcheck', 'false'); i.setAttribute('autocorrect', 'off'); i.setAttribute('autocapitalize', 'off');
+      // 휴대폰 자판의 Enter 글쇠 이름: 검색창은 「검색」, 잠금은 「이동」, 나머지는 「완료」
+      if (!i.hasAttribute('enterkeyhint')) i.setAttribute('enterkeyhint', i.closest('.arch-f, .q-f, [role="search"]') ? 'search' : i.closest('.lock-f') ? 'go' : 'done');
     });
     const imgs = root.matches && root.matches(ZOOMABLE) ? [root] : root.querySelectorAll(ZOOMABLE);
     imgs.forEach(img => {
