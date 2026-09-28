@@ -45,6 +45,12 @@
   document.addEventListener('focusin', e => { const el = at(e); if (el && el.matches(':focus-visible')) show(el); else hide(); });
   document.addEventListener('focusout', hide);
   ['pointerdown', 'scroll', 'keydown', 'wheel'].forEach(ev => document.addEventListener(ev, hide, { capture: true, passive: true }));
+  // 손가락 기기에는 올려 둘 마우스가 없다: 누를 수 없는 표식(수첩의 「보고서에 붙인 메모」 표 등)은 누르면 말풍선이 잠깐 뜬다
+  document.addEventListener('click', e => {
+    const el = at(e);
+    if (!el || el.closest('button,a,input,label,summary,[role="button"],[tabindex]')) return;
+    show(el); clearTimeout(wait); wait = setTimeout(hide, 2400);
+  });
 
   // 엔진이 누르면 크게 보여 주는 그림 (js/engine.js zoom 과 같은 고르기)
   const ZOOMABLE = '.cmp-art img, .b-img img, .map img';
