@@ -125,6 +125,8 @@ window.MG.audio = {
   "v/c10/p_bang/k_sinhang.1": "audio/voice/c10/p_bang-k_sinhang.1.mp3",
   "v/c10/p_bang/k_origin": "audio/voice/c10/p_bang-k_origin.mp3",
   "v/c10/p_bang/k_foglamp": "audio/voice/c10/p_bang-k_foglamp.mp3",
+  "v/c10/p_bang/k_audit": "audio/voice/c10/p_bang-k_audit.mp3",
+  "v/c10/p_bang/k_audit.1": "audio/voice/c10/p_bang-k_audit.1.mp3",
   "v/c11/p_woo/k_night": "audio/voice/c11/p_woo-k_night.mp3",
   "v/c11/p_woo/k_pocha": "audio/voice/c11/p_woo-k_pocha.mp3",
   "v/c11/p_gil/k_night": "audio/voice/c11/p_gil-k_night.mp3",

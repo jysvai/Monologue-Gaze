@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* 목소리·효과음 만들기 (ElevenLabs) → audio/ 와 audio/manifest.js
  *   node tools/voices.js --dry      무엇을 몇 글자 만들지 보기만
- *   node tools/voices.js            없는 파일만 만든다 (이미 있으면 건너뜀)
+ *   node tools/voices.js            없는 파일과, 녹음한 뒤로 대사 글자가 바뀐 파일만 만든다
  *   node tools/voices.js --manifest 파일은 그대로 두고 manifest 만 다시 쓴다
  * 목소리는 결정적인 순간에만 쓴다: 증거를 들이밀어 진술이 바뀌는 대사, 주인공의 추궁·결론. 나머지 대사는 게임이 말소리(짧은 합성음)로 채운다.
  */
@@ -13,6 +13,8 @@ const el = require('./eleven');
 
 const root = path.join(__dirname, '..');
 const OUT = path.join(root, 'audio');
+// 파일마다 어떤 글자를 읽혀 만들었는지 적어 둔다: 사건 파일의 대사를 고치면 그 목소리만 다시 녹음한다 (자막과 목소리가 어긋나지 않게)
+const SAID = path.join(__dirname, 'voices-said.json');
 const MODEL = 'eleven_multilingual_v2'; // 화면 글자를 그대로 읽는다 (v3 는 어미를 바꿔 읽는 일이 있다)
 
 // 프리셋 목소리 (ElevenLabs premade)
@@ -142,11 +144,16 @@ async function main() {
   const dry = process.argv.includes('--dry'), only = process.argv.includes('--manifest');
   const { list, tone } = jobs();
   fs.mkdirSync(OUT, { recursive: true });
-  const todo = list.filter(j => !fs.existsSync(path.join(root, j.file)));
+  const said = fs.existsSync(SAID) ? JSON.parse(fs.readFileSync(SAID, 'utf8')) : {};
+  const has = j => fs.existsSync(path.join(root, j.file));
+  list.forEach(j => { if (j.kind === 'tts' && has(j) && said[j.key] == null) said[j.key] = j.text; }); // 적어 둔 것이 없는 옛 파일은 지금 글자대로 읽었다고 본다
+  const stale = j => j.kind === 'tts' && has(j) && said[j.key] !== j.text;
+  const todo = list.filter(j => !has(j) || stale(j));
+  const keep = () => { const k = new Set(list.map(j => j.key)); fs.writeFileSync(SAID, JSON.stringify(Object.fromEntries(Object.entries(said).filter(([x]) => k.has(x)).sort()), null, 1) + '\n'); };
   const chars = todo.filter(j => j.kind === 'tts').reduce((n, j) => n + j.text.length, 0);
   const secs = todo.filter(j => j.kind === 'sfx').reduce((n, j) => n + j.secs, 0);
   console.log(`만들 것: 대사 ${todo.filter(j => j.kind === 'tts').length}개 (${chars}자) · 효과음 ${todo.filter(j => j.kind === 'sfx').length}개 (${secs}초) — 예상 약 ${chars + secs * 10} 크레딧`);
-  if (dry) { todo.forEach(j => console.log(`${j.key}\t${j.kind === 'sfx' ? j.secs + 's' : j.text.length + '자'}\t${j.text.slice(0, 90)}`)); return; }
+  if (dry) { todo.forEach(j => console.log(`${stale(j) ? '(다시) ' : ''}${j.key}\t${j.kind === 'sfx' ? j.secs + 's' : j.text.length + '자'}\t${j.text.slice(0, 90)}`)); return; }
   if (!only) {
     let left = (await el.quota()).left;
     console.log(`남은 크레딧 ${left}`);
@@ -156,10 +163,13 @@ async function main() {
       try {
         if (j.kind === 'sfx') await el.sfx(path.join(root, j.file), j.text, j.secs);
         else await el.tts(j.voice, path.join(root, j.file), j.text, MODEL, j.speed, j.stab);
+        if (j.kind === 'tts') said[j.key] = j.text;
         left -= cost; console.log('✓', j.key, cost);
       } catch (e) { console.log('✗', j.key, e.message.slice(0, 160)); if (/quota|credits|401|403/.test(e.message)) break; }
     }
+    keep();
   }
   writeManifest(list, tone);
 }
-main().catch(e => { console.error(e); process.exit(1); });
+if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });
+module.exports = { jobs };
