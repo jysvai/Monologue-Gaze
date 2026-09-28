@@ -1085,7 +1085,7 @@
       <div class="nb-rings" aria-hidden="true"></div>
       <div class="nb-top"><button type="button" class="nb-back" data-cabinet>← 기록실</button><span class="nb-case"><span class="nb-id">${starsHtml(C)} CASE ${pad(C.no)}</span><span class="nb-ctl">${soundBtn()}${C.graphic ? mildBtn() : ''}</span></span></div>
       <article class="brief"><svg class="clip" viewBox="0 0 24 64" aria-hidden="true"><path d="M8 20 V50 a6 6 0 0 0 12 0 V12 a8 8 0 0 0 -16 0 V46" fill="none" stroke="#8d918f" stroke-width="2.6" stroke-linecap="round"/></svg>
-        ${gore() ? stains(C.id + 'brief', 1, 'bd', true) : ''}<h2>${esc(b.title || C.title)} <small>${esc(b.no || '')}</small></h2>
+        ${gore() ? `<span class="brief-blood" aria-hidden="true">${stains(C.id + 'brief', 1, 'bd', true)}</span>` : ''}<h2>${esc(b.title || C.title)} <small>${esc(b.no || '')}</small></h2>
         <dl>${(b.lines || []).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${inline(v)}</dd>`).join('')}</dl>${b.scrawl ? `<p class="scrawl">${inline(b.scrawl)}</p>` : ''}</article>
       <section class="ruled nb-sec"><h3 class="hh">단어 <small>${keys.length}</small></h3>
         ${groups.map(([t, a]) => `<p class="kg"><span class="kg-t">${KTYPE[t]}</span> ${a.map(k => `<button type="button" class="kchip" data-chip="${k}">${esc(C.keywords[k].label)}</button>`).join(' ')}</p>`).join('')}

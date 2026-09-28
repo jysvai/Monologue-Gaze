@@ -495,6 +495,7 @@ img{max-width:100%}
 .gore-bg .st-c{top:-10px;width:calc(160px * var(--s));height:calc(230px * var(--s))}
 .case-view[data-graphic] .stage-frame{box-shadow:0 30px 60px -20px rgba(0,0,0,.85),0 0 0 1px rgba(80,8,4,.35)}
 .brief .stain{opacity:.5}
+.brief-blood{position:absolute;inset:0;overflow:hidden;pointer-events:none} /* 개요 종이에 묻은 것: 종이 밖(수첩 머리의 사건 번호·단추)으로 번지지 않는다 */
 .brief:has(.stain) :is(h2,dl,.scrawl){position:relative;z-index:4} /* 사건 개요도 폴더처럼: 핏자국은 종이에 스며 있고 글자는 그 위에 (「마지막 목격」 같은 칸 이름이 가려지지 않게) */
 .f-blood{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
 .f-blood .stain{opacity:.55}
