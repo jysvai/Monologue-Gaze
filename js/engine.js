@@ -1918,6 +1918,7 @@
       else if (f.id === 'rep') { e.preventDefault(); submitReport(); }
     });
     window.addEventListener('popstate', onBack);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && TALK && !$('.zoom')) TALK.finish(); }); // 대화 건너뛰기 (키보드)
     // 탭 줄: ← → 로 옆 탭, Home·End 로 처음·끝 탭 (Tab 키는 고른 탭 하나에만 들렀다 본문으로 넘어간다)
     document.addEventListener('keydown', e => {
       const t = e.target;
