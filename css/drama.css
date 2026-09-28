@@ -85,6 +85,8 @@
 @keyframes bounce{20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(2px)}}
 .rep-solved{margin-top:14px;overflow:hidden}
 .rep-solved .epi .b-p,.rep-solved .epi p{font:15px/1.8 var(--f-doc)}
+/* 좁은 칸(폰·수첩)에서는 종결 도장이 글을 한 줌 너비로 밀어내지 않게: 글 위에 비스듬히 찍힌다 (인주는 곱하기로 비친다) */
+@container stage (max-width:520px){.rep-solved .stamp{float:none;position:absolute;right:4px;margin:0;width:96px;height:96px;font-size:17px;z-index:1;pointer-events:none}.rep-solved{position:relative;padding-top:4px}}
 
 /* 수첩의 메모 묶음 */
 .ng{margin:0}
