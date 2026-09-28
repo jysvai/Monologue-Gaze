@@ -358,7 +358,7 @@
   }
   function askChips(p) {
     const asked = ST.asked[p.id] || [];
-    return ST.keys.filter(k => C.keywords[k]).map(k => {
+    return ST.keys.filter(k => C.keywords[k] && (k !== p.key || rawAns(p, k) != null)).map(k => { // 제 이름은 따로 할 말(self)이 있을 때만 묻는다 — 없으면 「모르겠다」가 되돌아와 어색하다
       const e = askEntry(p, k);
       const state = asked.includes(e) ? ' done' : e.endsWith('!') && asked.includes(k) && lv() < 5 ? ' again' : '';
       return `<button type="button" class="chip${state}" data-ask="${k}">${esc(C.keywords[k].label)}${state === ' done' ? '<span class="sr"> (물어봄)</span>' : state ? '<span class="sr"> (메모를 들이밀어 다시 물을 수 있음)</span>' : ''}</button>`; // 테두리·흐림은 눈에만 보이니 말로도
