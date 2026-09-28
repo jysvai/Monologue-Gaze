@@ -32,10 +32,10 @@ const HERO = { voice: 'river', speed: 1, stab: 0.6, tone: 150 };
 const CAST = {
   'c00/p_manager': [105], 'c00/p_neighbor': [205], 'c00/p_minji': [225], 'c00/p_jaehee': [215, 'sarah', 1.0, 0.3], 'c00/p_dohyun': [120],
   'c01/p_quarrell': [110], 'c01/p_bill': [95], 'c01/p_vane': [115, 'daniel', 1.05, 0.45], 'c01/p_croft': [92, 'callum', 0.92, 0.35], 'c01/p_hannah': [195], 'c01/p_peggy': [185], 'c01/p_dill': [105],
-  'c02/p_gerstl': [100], 'c02/p_hubmann': [95], 'c02/p_magdalena': [215], 'c02/p_rottmayr': [88], 'c02/p_pfaenzl': [105, 'harry', 0.95, 0.35], 'c02/p_knauer': [90, 'adam', 0.9, 0.45],
+  'c02/p_gerstl': [100], 'c02/p_hubmann': [95], 'c02/p_magdalena': [215], 'c02/p_rottmayr': [88], 'c02/p_pfaenzl': [105, 'harry', 0.95, 0.35], 'c02/p_knauer': [90, 'adam', 0.9, 0.45], 'c02/p_resl': [205],
   'c03/p_park': [125], 'c03/p_baek': [220, 'lily', 0.95, 0.35], 'c03/p_seo': [100, 'eric', 0.93, 0.4], 'c03/p_choi': [190], 'c03/p_kwak': [85], 'c03/p_gil': [115],
   'c04/p_okabe': [95, 'roger', 0.95, 0.4], 'c04/p_kitamura': [100], 'c04/p_ono': [98], 'c04/p_genzo': [95], 'c04/p_shimada': [112], 'c04/p_irie': [120, 'liam', 1.0, 0.3],
-  'c05/p_lowell': [200], 'c05/p_dugan': [118], 'c05/p_pell': [92, 'george', 0.95, 0.45], 'c05/p_coyle': [122], 'c05/p_osgood': [95], 'c05/p_brennan': [110, 'chris', 0.95, 0.35],
+  'c05/p_lowell': [200], 'c05/p_dugan': [118], 'c05/p_pell': [92, 'george', 0.95, 0.45], 'c05/p_coyle': [122], 'c05/p_osgood': [95], 'c05/p_delgado': [100], 'c05/p_brennan': [110, 'chris', 0.95, 0.35],
   'c06/p_kari': [225], 'c06/p_per': [110], 'c06/p_randi': [220], 'c06/p_solveig': [200], 'c06/p_taxi': [100], 'c06/p_remmert': [112, 'chris', 1.0, 0.4], 'c06/p_brate': [90, 'brian', 0.92, 0.45],
   'c07/p_mansik': [105, 'roger', 0.9, 0.3], 'c07/p_madam': [195], 'c07/p_operator': [230, 'jessica', 1.05, 0.35], 'c07/p_granny': [175], 'c07/p_seok': [90, 'adam', 0.95, 0.45], 'c07/p_wife': [205, 'bella', 0.95, 0.3], 'c07/p_no': [110, 'will', 0.95, 0.35],
   'c08/p_mother': [200], 'c08/p_father': [92, 'brian', 1.0, 0.35], 'c08/p_driver': [105], 'c08/p_tutor': [120, 'liam', 1.0, 0.4], 'c08/p_shop': [195], 'c08/p_foreman': [95], 'c08/p_tak': [88, 'callum', 0.92, 0.4],
