@@ -913,11 +913,31 @@
   }
 
   const tabBadge = s => { const n = s.type === 'feed' ? feedUnread(s) : s.type === 'request' ? reqUnread(s) : 0; return n ? `<span class="tab-n" aria-label="새 소식 ${n}">${n}</span>` : ''; };
+  // 탭마다 지금 보이는 항목 ('@' = 탭 자체). 새로 열린 자료가 어느 탭에 생겼는지 점으로 알리는 데 쓴다
+  function srcKeys(s) {
+    if (!srcVisible(s)) return [];
+    const k = ['@'], add = (list, pass) => (list || []).forEach(x => { if (pass(x)) k.push(x.id); });
+    if (s.type === 'list' && srcOpen(s)) add(C._srcDocs[s.id], d => ok(d.need));
+    else if (s.type === 'map') add(s.spots, x => ok(x.need));
+    else if (s.type === 'compare') add(s.sets, x => ok(x.need));
+    else if (s.type === 'photo') add(s.scenes, x => ok(x.need));
+    else if (s.type === 'people') add(Object.values(C.people), p => p.src === s.id && personVisible(p));
+    return k;
+  }
   function renderTabs() {
     const vis = C.sources.filter(srcVisible);
     if (!vis.find(s => s.id === ST.view.src)) ST.view.src = vis[0] && vis[0].id;
     const bar = $('#srcTabs');
-    bar.innerHTML = vis.map(s => `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" tabindex="${s.id === ST.view.src ? 0 : -1}" data-src="${esc(s.id)}">${esc(s.name)}${s.lock && !ST.unl.includes(s.id) ? '<span class="tab-lock">잠김</span>' : ''}${tabBadge(s)}</button>`).join('');
+    // 다른 탭에 새 자료가 생기면 탭에 작은 점 (그 탭을 열면 지워진다). 처음 열 때 이미 있던 것은 조용히
+    const kn = (ST.view.known ||= {}), first = !Object.keys(kn).length;
+    const fresh = s => {
+      const k = srcKeys(s);
+      if (first || s.id === ST.view.src) { kn[s.id] = k; return false; }
+      const was = kn[s.id] || [];
+      return k.some(x => !was.includes(x));
+    };
+    if (first) C.sources.forEach(s => { kn[s.id] = srcKeys(s); });
+    bar.innerHTML = vis.map(s => { const b = tabBadge(s); return `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" tabindex="${s.id === ST.view.src ? 0 : -1}" data-src="${esc(s.id)}">${esc(s.name)}${s.lock && !ST.unl.includes(s.id) ? '<span class="tab-lock">잠김</span>' : ''}${b || (fresh(s) ? '<span class="tab-new" role="img" aria-label="새로 열린 자료"></span>' : '')}</button>`; }).join('');
     // 탭이 넘쳐 옆으로 밀리는 좁은 화면: 고른 탭이 가려져 있으면 보이는 데까지 민다
     const on = bar.querySelector('.tab.on');
     if (on && bar.scrollWidth > bar.clientWidth) {

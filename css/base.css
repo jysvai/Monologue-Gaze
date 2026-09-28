@@ -162,6 +162,8 @@ img{max-width:100%}
 .case-view[data-frame="crt"] .src-tabs::after{margin:-4px 0 -4px -37px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 80%);mask-image:linear-gradient(90deg,transparent,#000 80%)}
 .tab{flex:none;display:inline-flex;align-items:center;gap:6px;padding:7px 14px 6px;border:0;background:none;cursor:pointer;white-space:nowrap}
 .tab-lock{font:10px var(--f-mono);padding:1px 5px;border:1px solid currentColor;opacity:.7}
+.tab-new{flex:none;width:7px;height:7px;margin-left:-1px;border-radius:50%;background:var(--red);box-shadow:0 0 0 1.5px rgba(255,250,235,.55)} /* 새로 열린 자료가 있는 탭 (js renderTabs) */
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .tab-new{background:#e5483b;box-shadow:0 0 0 1.5px rgba(255,255,255,.7)}
 .stage-body{flex:1;min-height:0;display:grid;grid-template-columns:minmax(210px,300px) minmax(0,1fr)}
 .pane-list{min-height:0;overflow:auto;padding:14px 12px 20px}
 .pane-read{position:relative;min-height:0;overflow:auto;padding:18px 18px 40px}
