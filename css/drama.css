@@ -154,6 +154,7 @@ body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,
 
 .cab-foot .credit{margin-top:4px;font-size:11px;opacity:.9}
 .cab-foot .credit a{color:inherit}
+.cab-foot .unsaved{flex-basis:100%;max-width:none;color:#a4382c;font-weight:700} /* 저장이 막힌 브라우저: 알림 한 번이 다른 알림에 덮여도 기록실에는 늘 적혀 있게 */
 
 /* 그림 크게 보기 */
 .cmp-art img,.b-img img,.map img{cursor:zoom-in}

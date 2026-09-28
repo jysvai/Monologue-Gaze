@@ -281,8 +281,8 @@
     }, 450);
     document.dispatchEvent(new Event('mg:intro-out')); // 화면 속 사건은 이때 모니터가 켜진다 (engine.js openCase)
   }
-  // 현행 사건은 해 대신 지령이 떨어진 때: 2023년 3월 8일 (수) 22:40
-  const liveWhen = s => { const d = new Date(s[0], s[1] - 1, s[2], s[3], s[4]); return `${s[0]}년 ${s[1]}월 ${s[2]}일 (${'일월화수목금토'[d.getDay()]}) ${String(s[3]).padStart(2, '0')}:${String(s[4]).padStart(2, '0')}`; };
+  // 현행 사건은 해 대신 지령이 떨어진 때: 2023년 3월 8일(수) 22:40
+  const liveWhen = s => { const d = new Date(s[0], s[1] - 1, s[2], s[3], s[4]); return `${s[0]}년 ${s[1]}월 ${s[2]}일(${'일월화수목금토'[d.getDay()]}) ${String(s[3]).padStart(2, '0')}:${String(s[4]).padStart(2, '0')}`; };
   function showIntro(c, m) {
     hideIntro();
     const el = document.createElement('div');
@@ -292,7 +292,7 @@
     el.setAttribute('role', 'dialog');
     el.setAttribute('aria-modal', 'true');
     el.tabIndex = -1;
-    el.setAttribute('aria-label', `CASE ${c.no} ${c.title}`);
+    el.setAttribute('aria-label', `CASE ${String(c.no).padStart(2, '0')} ${c.title}`);
     const place = String(c.place || '').replace(/\s*\([^)]*\)\s*$/, '');
     // 뒤에 그 사건 기록철 표지 사진을 어둡고 흐리게 깐다 (천천히 다가온다)
     const cov = MG.images && (MG.images[c.id + '/cover_bg'] || MG.images[c.id + '/cover']); // 흐리게 깔 것이라 작은 판(cover_bg)으로

@@ -70,7 +70,7 @@
   function start(data) {
     try { window.MG.boot(data); } catch (e) { // 사건 파일 하나가 잘못 받아졌어도 빈 책상만 남기지 않는다
       var a = document.getElementById('app');
-      if (a) a.innerHTML = '<p class="nojs">서랍이 걸려 열리지 않는다.<br>새로 고침해서 다시 열어 보십시오. 계속 걸리면 조금 뒤에 다시.</p>';
+      if (a) a.innerHTML = '<p class="nojs">서랍이 걸려 열리지 않는다.<br>새로 고침을 눌러 다시 열어 본다. 그래도 걸리면 조금 있다가 다시 연다.</p>';
       if (window.console) console.error(e);
     }
   }

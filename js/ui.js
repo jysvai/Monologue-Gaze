@@ -215,6 +215,8 @@
     if (!i || i.tagName !== 'IMG' || i.dataset.miss) return;
     i.dataset.miss = '1';
     i.alt = '';
+    // 책상 소품·폴더 표지·사람 얼굴·기록실 머리 사진은 기록이 아니라 꾸밈: 유실 도장 없이 그 자리만 비운다 (틀의 크기·자리는 그대로)
+    if (i.closest('.desk-props, .cab-hero, .f-cover, .per-art')) { i.style.visibility = 'hidden'; return; }
     const box = i.closest('.art-wrap, .b-img, .cmp-art, .osd-wrap') || i.parentNode;
     if (box && box.classList) box.classList.add('img-miss');
   }, true);
