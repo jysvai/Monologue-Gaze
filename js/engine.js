@@ -1370,13 +1370,21 @@
 
   /* ───────── sound (기본 꺼짐) — audio/ 의 효과음 파일이 있으면 그것을, 없으면 합성음 ───────── */
   let actx = null;
+  // 합성음 판. 새로 고침 뒤 아직 아무것도 누르지 않았으면(현행 사건의 알림 진동 등) 브라우저가 막으므로 내지 않고 — 멈춘 판에 쌓였다가 첫 누름에 한꺼번에 울리지 않게 —
+  // 판이 멈춰 있으면 낼 때마다 깨운다 (한 번 멈춘 판이 끝까지 멈춰 전화 신호음·브라운관 소리가 내내 안 나지 않게)
+  const ac = () => {
+    if (navigator.userActivation && !navigator.userActivation.hasBeenActive) return null;
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === 'suspended') actx.resume().catch(() => {});
+    return actx;
+  };
   const SFXFILE = { stamp: 'solved', lock: 'unlock' };
   function sfx(kind) {
     if (!S.sound) return;
     if (kind === 'page' && C) kind = C.frame === 'laptop' ? 'click' : C.frame === 'crt' ? 'key' : 'page'; // 화면 속 문서는 종이 넘기는 소리 대신 딸깍
     if (MG.sound && MG.sound.play('sfx/' + (SFXFILE[kind] || kind), kind === 'pen' || kind === 'page' || kind === 'click' || kind === 'key' ? 0.5 : 0.9)) return;
     try {
-      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (!ac()) return;
       const t = actx.currentTime;
       const noise = (dur, type, freq, q, gain) => {
         const len = Math.floor(actx.sampleRate * dur);
@@ -1458,7 +1466,7 @@
     const i = '123456789*0#'.indexOf(k);
     if (i < 0) return;
     try {
-      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (!ac()) return;
       const t = actx.currentTime, g = actx.createGain();
       g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.07, t + 0.01); g.gain.setValueAtTime(0.07, t + 0.12); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
       g.connect(actx.destination);
