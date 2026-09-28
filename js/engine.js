@@ -2200,6 +2200,7 @@
         const s = curSrc();
         if (s.type === 'cipher' || s.type === 'timeline') ST.view.open = { t: s.type, id: s.id };
         else if (narrow()) ST.view.open = null;
+        else if (s.type === 'feed') ST.view.open = { t: 'feed', id: s.id }; // 단톡방 탭은 방이 하나뿐: 넓은 화면이면 누르자마자 방이 열린다 (읽기 칸에 사건 안내만 남지 않게)
         save(); renderTabs(); renderList(); renderRead();
         if (kept) { const on = $('#srcTabs .tab.on'); if (on) on.focus({ preventScroll: true }); }
         return;

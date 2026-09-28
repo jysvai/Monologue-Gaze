@@ -4,7 +4,7 @@
   --paper:#ece2c6; --memo:#f3eee0; --sheet:#f4efe2; --sheet-ink:#2b2823;
   --kraft:#c6a26b; --kraft-deep:#a5834f; --kraft-ink:#2d2418;
   --rule:rgba(84,116,158,.32); --margin:rgba(196,106,96,.6);
-  --ink:#26303f; --ink-soft:#586071; --pencil:#7a7466; --red:#b0342a; --olive:#6f7f4d;
+  --ink:#26303f; --ink-soft:#586071; --pencil:#655f52; --red:#b0342a; --olive:#6f7f4d;
   --tag:#dfb64c;
   --card:#f6f0df; --card-ink:#2b2823; --card-soft:#6f6858;
   /* 글꼴 — 공통 여섯은 index.html 이 부르고, 나머지는 js/fonts.js 목록의 같은 키(--f-키 ↔ 키)로 사건을 열 때 부른다. docs/FONTS.md
@@ -116,7 +116,7 @@ img{max-width:100%}
 .f-title{font:800 18px/1.3 var(--f-doc);color:#1f1a14;text-wrap:balance}
 .f-place{font:12px/1.4 var(--f-web);color:#5d5444}
 .f-motif{font:18px/1.2 var(--f-hand);color:#3c3020}
-.f-len{margin-top:auto;font:11px var(--f-type);color:#5b4a2e}
+.f-len{margin-top:auto;font:11px var(--f-type);color:#3f311c}
 .f-stamp{position:absolute;right:12px;bottom:14px;padding:4px 10px;border:3px double var(--red);color:var(--red);font:800 17px/1 var(--f-doc);transform:rotate(-12deg);opacity:.88;mix-blend-mode:multiply}
 .f-going{position:absolute;right:12px;bottom:12px;font:20px/1 var(--f-hand);color:var(--red);transform:rotate(-4deg)}
 .f-going small{display:block;margin-top:3px;font-size:16px;text-align:right;color:#4a3f33}
@@ -162,7 +162,7 @@ img{max-width:100%}
 .case-view:is([data-frame="laptop"],[data-frame="crt"]) .src-tabs::after{right:0;margin-left:-34px}
 .case-view:is([data-frame="laptop"],[data-frame="crt"]) .src-tabs.more-l::before,.case-view:is([data-frame="laptop"],[data-frame="crt"]) .src-tabs.more-r::after{opacity:1}
 .case-view[data-frame="laptop"] .src-tabs::before{margin:-6px -38px 0 0;background:linear-gradient(90deg,#3a4960 20%,rgba(58,73,96,0))}
-.case-view[data-frame="laptop"] .src-tabs::after{margin:-6px 0 0 -38px;background:linear-gradient(90deg,rgba(98,112,138,0),#62708a 80%)}
+.case-view[data-frame="laptop"] .src-tabs::after{margin:-6px 0 0 -38px;background:linear-gradient(90deg,rgba(79,93,120,0),#4f5d78 80%)}
 .case-view[data-frame="crt"] .src-tabs::before,.case-view[data-frame="crt"] .src-tabs::after{background:linear-gradient(180deg,#2d63c8,#1d4aa6)}
 .case-view[data-frame="crt"] .src-tabs::before{margin:-4px -37px -4px 0;-webkit-mask-image:linear-gradient(90deg,#000 20%,transparent);mask-image:linear-gradient(90deg,#000 20%,transparent)}
 .case-view[data-frame="crt"] .src-tabs::after{margin:-4px 0 -4px -37px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 80%);mask-image:linear-gradient(90deg,transparent,#000 80%)}
@@ -214,7 +214,7 @@ img{max-width:100%}
 .case-view[data-frame="laptop"] .cam{display:block;position:absolute;top:7px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#0b0b0c;box-shadow:0 0 0 2px #29292b}
 .case-view[data-frame="laptop"] .screen{overflow:hidden;border-radius:3px;background:#d4cab1;box-shadow:inset 0 0 0 2px #0b0b0c}
 .case-view[data-frame="laptop"] .screen::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:5;mix-blend-mode:multiply;background:repeating-linear-gradient(0deg,rgba(0,0,0,.03) 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,transparent 60%,rgba(46,28,6,.26) 100%),linear-gradient(rgba(176,128,52,.07),rgba(176,128,52,.07))}
-.case-view[data-frame="laptop"] .src-tabs{padding:6px 6px 0;background:linear-gradient(90deg,#3a4960,#62708a)}
+.case-view[data-frame="laptop"] .src-tabs{padding:6px 6px 0;background:linear-gradient(90deg,#3a4960,#4f5d78)}
 .case-view[data-frame="laptop"] .tab{border-radius:6px 6px 0 0;background:rgba(255,255,255,.14);color:#eef0f3;font:12px/1.2 var(--f-web)}
 .case-view[data-frame="laptop"] .tab.on{background:#f8f5ee;color:#222}
 .case-view[data-frame="laptop"] .stage-body{background:#f8f5ee;color:#262521}
@@ -260,7 +260,7 @@ img{max-width:100%}
 .chips{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 10px}
 .chip{padding:3px 9px 1px;border:1px dashed #8e7f5c;border-radius:2px;background:#f4ebc6;color:var(--ink);font:17px/1.15 var(--f-hand);cursor:pointer}
 @media (hover:hover){.chip:hover{background:#efe1a8}}
-.chip.done{opacity:.5;border-style:solid;border-color:transparent;background:#e7dcb8}
+.chip.done{opacity:.72;border-style:solid;border-color:transparent;background:#e7dcb8}
 .chip.again{border-style:solid;border-color:var(--red);color:var(--red);opacity:1}
 .ava{display:inline-grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:var(--c,#6b6155);color:#fff;font:700 14px/1 var(--f-web)}
 .ava.lg{width:64px;height:64px;font-size:24px}
@@ -288,7 +288,7 @@ img{max-width:100%}
 .pin .ic{display:block;width:12px;height:12px}
 .item-t .ic,.ic-in .ic{display:inline-block;width:.95em;height:.95em;vertical-align:-.12em}
 @media (hover:none){.pin{opacity:.8}}
-.person{max-width:720px;margin:0 auto}
+article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사람 카드(.item.person)는 다른 카드처럼 사이를 띄운다 */
 .per-h{display:flex;gap:14px;align-items:center;margin-bottom:14px}
 .per-h h3{margin:0;font:800 18px/1.3 var(--f-doc)}
 .per-h p{margin:2px 0 0;font-size:13px;opacity:.8}
@@ -499,7 +499,8 @@ img{max-width:100%}
 .stain:nth-of-type(3n+2){filter:sepia(.35) saturate(.8) brightness(1.08)}
 .stain:nth-of-type(4n+3){filter:saturate(1.15) brightness(.9)}
 .case-view[data-graphic] .doc{overflow:hidden}
-.case-view[data-graphic] .doc-b{position:relative;z-index:1}
+.case-view[data-graphic] .doc-b,.case-view[data-graphic] .doc-h{position:relative;z-index:1}
+.doc>.stain{z-index:0} /* 기록지의 핏자국은 글자 밑으로 (요약 카드·폴더처럼) — 표 끝·✎ 단추·사진 설명이 얼룩에 묻히지 않게 */
 .case-view{position:relative;z-index:1}
 /* ── 책상 위 소품 (js deskProps): 종이 밑에 깔린 듯 가장자리만 보인다. 책상이 드러나는 넓은 화면에서만 */
 .desk-props{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;display:none}
@@ -564,3 +565,17 @@ body:has(.case-view[data-graphic])::before{background:radial-gradient(ellipse at
   .case-view[data-frame="laptop"] .stage-frame{padding:10px 6px 6px}
 }
 .sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0} /* 화면 읽기 프로그램에만 들리는 말 (js say) */
+
+/* ───────── 좁은 화면(휴대폰)에서 찌그러지던 것들 ───────── */
+@container stage (max-width:520px){
+  /* 진술·녹취: 말한 사람 이름이 길면 대사 칸이 한 글자 너비로 줄던 것 → 이름을 윗줄로 */
+  .b-say{grid-template-columns:minmax(0,1fr) auto}
+  .b-say .b-who{grid-column:1/-1;white-space:normal}
+  /* 사건 재구성 카드: 긴 시각 칸이 카드 글을 밀어내던 것 → 시각은 윗줄, 글은 아랫줄, 화살은 오른쪽 */
+  .tl-e{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px}
+  .tl-slot{min-width:0;grid-column:1}
+  .tl-t{grid-column:1}
+  .tl-mv{grid-column:2;grid-row:1/3;align-self:center}
+}
+@media (hover:none){.notes .del{opacity:.85}} /* 손가락 기기에는 올려 볼 마우스가 없다: 메모 지우기 × 가 보이게 */
+.nb-case .snd{opacity:.9}

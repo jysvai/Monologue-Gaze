@@ -52,7 +52,7 @@
 /* 단톡방: 시각 위에 안 읽은 사람 수 (노란 숫자) */
 .b-at{flex:none;display:flex;flex-direction:column;align-items:flex-start;gap:1px}
 .b-msg.me .b-at{align-items:flex-end}
-.b-unr{font:700 10.5px/1 var(--f-ui);color:#d69e00}
+.b-unr{font:700 10.5px/1 var(--f-ui);color:#7a5200}
 
 /* ───────── plain / report (수사 서류, 진술조서) ───────── */
 .skin-report{background-color:#ecebe2;font-family:var(--f-mono)}
@@ -181,7 +181,7 @@
 .skin-web .doc-h{margin:0;padding:12px 18px 10px;background:var(--bar,#3f5a6b);color:#fff}
 .skin-web .doc-paper{margin:0 0 4px;font:800 13px/1 var(--f-web);letter-spacing:.02em;opacity:.9}
 .skin-web .doc-t{font:800 17px/1.35 var(--f-web)}
-.skin-web .doc-m{opacity:.85}
+.skin-web .doc-m{opacity:1}
 .skin-web .doc-b{padding:14px 18px 18px;font:14px/1.7 var(--f-web)}
 .skin-web .b-img>svg,.skin-web .b-img>img{max-width:420px}
 
@@ -206,16 +206,18 @@
 .skin-home{padding:14px;border-radius:10px;background:linear-gradient(135deg,#9bc3e6,#c9b3e0);box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .skin-home .doc-h{margin:0;padding:10px 14px;border-radius:8px 8px 0 0;background:#fff;border-bottom:1px dashed #f1a7c1}
 /* 굴림 9pt 비트맵 본문(--f-pixel)과 도토리로 산 글꼴 아이템(--f-gamja) — 사건이 f-pixel · f-gamja 를 부른다 */
-.skin-home .doc-paper{margin:0;font:700 12px var(--f-pixel);color:#ff6f9c}
+.skin-home .doc-paper{margin:0;font:700 12px var(--f-pixel);color:#d6336c}
 .skin-home .doc-t{font:23px/1.25 var(--f-gamja);color:#3a5f9e}
-.skin-home .doc-m{font:12px/1.4 var(--f-pixel);color:#888}
+.skin-home .doc-m{font:12px/1.4 var(--f-pixel);color:#666}
 .skin-home .doc-b{padding:12px 14px;border-radius:0 0 8px 8px;background:#fff;font:12px/1.8 var(--f-pixel);color:#333}
-.skin-home .b-h{font:19px/1.3 var(--f-gamja);color:#ff6f9c}
+.skin-home .b-h{font:19px/1.3 var(--f-gamja);color:#d6336c}
 .skin-home .b-tbl table,.skin-home .b-img figcaption,.skin-home .b-tbl caption{font:12px/1.6 var(--f-pixel)}
 .skin-home .b-tbl th{font:700 12px/1.35 var(--f-pixel)}
 
 /* ───────── files (탐색기) ───────── */
-.skin-files{background:#fffdf8}
+.skin-files{background:#fffdf8;border:1px solid #b9bec7;border-radius:6px;overflow:hidden}
+.skin-files .doc-h{margin:0;padding:8px 14px;background:linear-gradient(#f4f5f7,#e3e6ea);border-bottom:1px solid #c5cad2}
+.skin-files .b-tbl td:first-child{white-space:nowrap}
 .skin-files .doc-t{font:700 15px/1.3 var(--f-web)}
 .skin-files .doc-b{font:13px/1.7 var(--f-web)}
 
@@ -270,7 +272,7 @@
 .osd i{display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:#e8392f;vertical-align:1px;animation:recBlink 1.2s steps(2,start) infinite}
 @keyframes recBlink{to{visibility:hidden}}
 @media (prefers-reduced-motion:reduce){.osd i{animation:none}}
-@media (max-width:520px){.osd{font-size:10px;padding:6px 8px}}
+@media (max-width:520px){.osd{font-size:10px;padding:6px 8px;line-height:1.3}.osd>span:last-child{text-align:right}}
 
 /* ───────── 글꼴: 표·사진 설명도 그 서류의 활자로 (기본은 웹 고딕이라 옛 서류 속 표만 요즘 글씨가 된다) ───────── */
 .doc:is(.skin-report,.skin-card,.skin-lab,.skin-transcript,.skin-telegram) :is(.b-tbl table,.b-tbl caption,.b-img figcaption){font-family:inherit}

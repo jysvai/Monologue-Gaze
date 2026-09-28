@@ -313,11 +313,11 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
 /* 화면 속 수첩 단어(자료실 찾기 · 탐문 물음): 노란 손글씨 쪽지 대신 그 화면의 태그 단추 */
 .case-view[data-frame="crt"] .screen .chip{padding:3px 10px;border:1px solid #7f9db9;border-radius:3px;background:linear-gradient(#fff,#ecebe6 85%,#d6d0c5);color:#111;font:12px/1.4 var(--f-web)}
 @media (hover:hover){.case-view[data-frame="crt"] .screen .chip:hover{box-shadow:inset 0 0 0 2px rgba(248,179,59,.8)}}
-.case-view[data-frame="crt"] .screen .chip.done{border-color:#b5b3ab;background:#ece9d8;color:#8a8a8a;opacity:1}
+.case-view[data-frame="crt"] .screen .chip.done{border-color:#b5b3ab;background:#ece9d8;color:#666;opacity:1}
 .case-view[data-frame="crt"] .screen .chip.again{border-color:#c0504d;background:linear-gradient(#fff,#fbe3df);color:#a1261f;box-shadow:none}
 .case-view[data-frame="laptop"] .screen .chip{padding:5px 12px 4px;border:1px solid #d0d7e2;border-radius:999px;background:#f5f7fb;color:#2b3445;font:600 12.5px/1.3 var(--f-web)}
 @media (hover:hover){.case-view[data-frame="laptop"] .screen .chip:hover{border-color:#9db5e8;background:#e8effc}}
-.case-view[data-frame="laptop"] .screen .chip.done{border-color:transparent;background:#eef0f4;color:#9aa3af;opacity:1}
+.case-view[data-frame="laptop"] .screen .chip.done{border-color:transparent;background:#eef0f4;color:#5f6673;opacity:1}
 .case-view[data-frame="laptop"] .screen .chip.again{border-color:#d93025;background:#fdecea;color:#c62f24;box-shadow:none}
 /* 화면 속 안내 줄: 손글씨 대신 그 화면의 글씨 */
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen :is(.per-ask-t,.res-none,.read-empty p,.q,.lock-h2,.cmp-q,.map-desc,.c-msg){font-family:var(--f-web);font-size:14px;line-height:1.5}
@@ -460,3 +460,30 @@ input.pw{-webkit-text-security:disc;text-security:disc}
 .case-view[data-frame="crt"] .screen ::-webkit-scrollbar-button:double-button{display:none}
 .case-view[data-frame="crt"] .screen ::-webkit-scrollbar-corner{background:#eeede5}
 .case-view[data-frame="crt"] .screen :is(button,.item,.tab,[role="button"],summary,label,.chip):not(.kw):not(.pin){cursor:default}
+
+/* ───────── 화면 속(모니터·노트북) 서류가 종이처럼 보이던 곳 ───────── */
+/* 화면 속 파일은 누런 종이 결(노이즈) 없이 */
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .doc:is(.skin-report,.skin-ledger,.skin-card,.skin-lab,.skin-plain,.printed){background-image:none}
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .skin-plain{background-color:#fbfbf8;border:1px solid #e3e6ea}
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .skin-plain .doc-h{padding-bottom:10px;border-bottom:2px solid #1d1f22}
+/* 결재란이 좁은 화면에서 제목을 한 글자씩 꺾던 것 → 결재란은 제목 위 오른쪽에 따로 */
+@container stage (max-width:520px){.case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-sign{float:none;margin:0 0 10px auto}}
+/* 경찰 전자 서식 안의 빈칸 안내는 손글씨가 아니라 화면 글자 */
+.case-view:is([data-frame="crt"],[data-frame="laptop"]) .skin-form .rep-empty{font:13.5px/1.6 var(--f-web);color:#5f6570}
+.case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-view .rep-empty{color:#5f6570}
+/* 화면 속 증거 사진(블랙박스·CCTV 캡처)은 인화지 흰 테 대신 뷰어 테두리 */
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .skin-card :is(.b-img>img,.osd-wrap>img){border:1px solid #cdd4de;box-shadow:0 1px 3px rgba(20,30,50,.18)}
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .skin-card .osd{inset:1px 1px auto}
+/* 화면 속 연락처 이름·잠금 화면 제목은 종이 명조가 아니라 화면 글꼴 */
+.case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen :is(.per-h h3,.lock:not(.lock-lcd):not(.lock-phone) .lock-t){font:700 17px/1.3 var(--f-web)}
+/* 첫 대답 위에 그어지던 선 */
+.case-view:is([data-frame="crt"],[data-frame="laptop"]) .per-tr .qa-first{border-top:0}
+/* 노트북 대조 감정 시료: 누런 종이 쪽지 대신 앱 카드 */
+.case-view[data-frame="laptop"] :is(.cmp-o,.cmp-ev){border:1px solid #d8dde5;border-radius:8px;background:#fff}
+.case-view[data-frame="laptop"] .cmp-d{font-family:var(--f-web)}
+.case-view[data-frame="laptop"] .cmp-o.ok{border-color:#2f8a57;background:#f1f8f3}
+/* 노트북 탭 줄의 「잠김」 표 */
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .tab-lock{opacity:1}
+/* 화면 속 문서의 M 메모: 종이 여백의 붓글씨 대신 모니터에 붙인 노란 메모지 */
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .screen .b-m{border-left:0;background:#fff4b8;box-shadow:0 3px 8px rgba(0,0,0,.18);transform:rotate(-1.5deg)}
+@media (max-width:560px){.case-view[data-frame="laptop"] .cam{top:2px}}

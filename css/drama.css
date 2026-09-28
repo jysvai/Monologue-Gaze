@@ -62,7 +62,7 @@
 .rep-memo,.rep-empty{flex:1 1 260px;word-break:keep-all;margin:0;font:19px/1.35 var(--f-hand);color:var(--ink)}
 .rep-memo .n,.rep-opt .n{color:var(--pencil)}
 .rep-memo .src{font-size:15px;color:var(--pencil)}
-.rep-empty{color:#8a8170}
+.rep-empty{color:#6f6858}
 .rep-tog{flex:0 0 auto;padding:4px 10px;border:1px solid #8e7f5c;background:#f4ebc6;color:var(--ink);font:12px var(--f-web);cursor:pointer}
 .rep-tog small{margin-left:2px;font:10px var(--f-mono);opacity:.7}
 @media (hover:hover){.rep-tog:hover{background:#efe1ad}}
@@ -126,7 +126,9 @@ body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,
 @media (prefers-reduced-motion:reduce){
   #app[class*="cue-"] .stage-frame,#app[class*="cue-"] .case-view,#app.cue-solved,.rep-view.bounced,.m-who.bounced,.qa.pressing .c-ev,.c-dots i{animation:none!important}
   #app.cue-confess::after{animation-duration:.01s}
-  .cue-stamp span{animation-duration:1.2s}
+  .cue-stamp span{animation:cueFade 1.2s ease-out both;transform:rotate(-12deg)} /* 움직임 줄이기: 쾅 내려찍는 크기 변화 없이 스며 나왔다 사라진다 */
+  .mono-cap{transition:opacity .2s}
+  .verdict.wait{animation:none}
 }
 @media (max-width:560px){
   .c-q,.c-bub{max-width:92%}
@@ -150,7 +152,7 @@ body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,
 @keyframes paperIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.pane-read>*{animation:none!important}}
 
-.cab-foot .credit{margin-top:4px;font-size:11px;opacity:.65}
+.cab-foot .credit{margin-top:4px;font-size:11px;opacity:.9}
 .cab-foot .credit a{color:inherit}
 
 /* 그림 크게 보기 */
@@ -192,3 +194,5 @@ body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,
 @keyframes paperDown{from{opacity:0;transform:translate(3px,10px) rotate(-.5deg)}to{opacity:1;transform:none}}
 @keyframes winIn{from{opacity:0;transform:scale(.975)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.case-view .pane-read>.enter{animation:none}}
+
+@keyframes cueFade{0%,100%{opacity:0}15%,75%{opacity:.9}}
