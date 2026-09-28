@@ -1747,6 +1747,13 @@
     if (first && ST.seen.includes(o.id)) advance(o.t === 'photo' ? 'photo' : 'doc');
     $('#paneRead').scrollTop = READPOS.get(posKey(o)) || 0;
     const doc = $('#paneRead > :not(.back-list)'); if (doc) doc.classList.add('enter');
+    // 검색 결과에서 연 문서: 찾은 말에 형광펜이 한 번 지나가고, 처음 펼친 문서면 그 말이 있는 데까지 내려 준다
+    const sr = curSrc(), sq = sr && sr.type === 'archive' && o.t === 'doc' ? ST.view.q[sr.id] : '';
+    if (sq) {
+      const ks = matchKeys(sq), pr = $('#paneRead'), ws = $$('#paneRead .kw').filter(b => ks.includes(b.dataset.kw));
+      ws.forEach(b => b.classList.add('hitw'));
+      if (ws[0] && !READPOS.get(posKey(o))) { const r = ws[0].getBoundingClientRect(), pb = pr.getBoundingClientRect(); if (r.bottom > pb.bottom - 24) pr.scrollTop += r.top - pb.top - pb.height / 3; }
+    }
     if (narrow()) $('.stage').scrollIntoView({ block: 'start' });
     // 처음 만나는 사람은 첫마디를 재생한다
     const p = o.t === 'person' && C.people[o.id];
