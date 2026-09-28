@@ -104,6 +104,8 @@ input[type="password"]{letter-spacing:.28em}
 /* 단추를 두 번 누를 때 글자가 형광펜으로 칠해지지 않게, 사진을 끌거나 길게 눌러도 브라우저 메뉴가 뜨지 않게 */
 .tab,.kchip,.folder,.snd,.btn-hand,.item,.pin,.del,.rep-tog,.nb-back,.back-list,.reset,.spot,.ph-cell,.art-lab,[data-ask],summary{-webkit-user-select:none;user-select:none}
 img{-webkit-user-drag:none;-webkit-touch-callout:none}
+/* 휴대폰: 단추를 빨리 두 번 눌러도(카드 ▲▼, 시간 보내기, 사진 칸) 화면이 확대되지 않게 — 두 손가락 확대는 그대로 */
+:is(button,a,summary,label,input,select,textarea,.kw,.spot,.ph-cell,[role="button"]){touch-action:manipulation}
 /* 칸 끝까지 굴려도 뒤의 책상까지 따라 굴러가지 않게 */
 .pane-list,.pane-read,.nb{overscroll-behavior:contain}
 /* 사진 살피기: 기본 확대 화살표 대신 놋쇠 돋보기 (가운데가 누르는 자리) */
