@@ -312,8 +312,8 @@
     // style: 'phone' 이면 전화 번호판(누르면 칸에 들어가고 # 은 확인, * 은 지우기), 'lcd' 면 워드프로세서 액정
     const pad = lock.style === 'phone' ? `<div class="lock-pad" role="group" aria-label="번호판">${'123456789*0#'.split('').map(k => `<button type="button" data-pad="${k}"${k === '#' ? ' aria-label="확인"' : k === '*' ? ' aria-label="지우기"' : ''}>${k}</button>`).join('')}</div>` : '';
     return `<div class="lock${lock.style ? ' lock-' + esc(lock.style) : ''}"><p class="lock-t">${inline(lock.title || title || '잠겨 있다')}</p>${lock.desc ? `<p class="lock-d">${inline(lock.desc)}</p>` : ''}
-      <form class="lock-f" data-lock="${esc(id)}"><label for="lk-${esc(id)}">${esc(lock.label || '비밀번호')}</label><input id="lk-${esc(id)}" autocomplete="off"${lock.password ? ' type="password"' : ''}${lock.style === 'phone' || lock.style === 'lcd' ? ' inputmode="numeric" maxlength="8"' : (lock.code || []).length && lock.code.every(c => /^\d+$/.test(c)) ? ' inputmode="numeric"' : ''}><button type="submit">${esc(lock.button || '열기')}</button>${pad}</form>
-      ${lock.hint ? `<p class="lock-h">${inline(lock.hint)}</p>` : ''}<p class="lock-e" role="status">${fails ? `${esc(lockErr(lock))} (${fails}회)` : ''}</p>${lock.hint2 && fails >= ({ 3: 2, 4: 3 }[lv()] || Infinity) ? `<p class="lock-h2">${inline(lock.hint2)}</p>` : ''}</div>`;
+      <form class="lock-f" data-lock="${esc(id)}"><label for="lk-${esc(id)}">${esc(lock.label || '비밀번호')}</label><input id="lk-${esc(id)}" aria-describedby="le-${esc(id)}" autocomplete="off"${lock.password ? ' type="password"' : ''}${lock.style === 'phone' || lock.style === 'lcd' ? ' inputmode="numeric" maxlength="8"' : (lock.code || []).length && lock.code.every(c => /^\d+$/.test(c)) ? ' inputmode="numeric"' : ''}><button type="submit">${esc(lock.button || '열기')}</button>${pad}</form>
+      ${lock.hint ? `<p class="lock-h">${inline(lock.hint)}</p>` : ''}<p class="lock-e" id="le-${esc(id)}">${fails ? `${esc(lockErr(lock))} (${fails}회)` : ''}</p>${lock.hint2 && fails >= ({ 3: 2, 4: 3 }[lv()] || Infinity) ? `<p class="lock-h2">${inline(lock.hint2)}</p>` : ''}</div>`;
   }
 
   function docHtml(d) {
@@ -556,7 +556,7 @@
     const g = ST.ciph[s.id] || {};
     const given = s.given || {};
     const solved = ST.unl.includes(s.id);
-    const form = solved ? `<div class="c-done">${blocks(s.solved, `${s.id}@s`, s.name)}</div>` : `<form class="c-form" data-cipher="${esc(s.id)}"><div class="c-keys">${syms.map(y => `<label class="ck"><span>${esc(y)}</span><input data-sym="${esc(y)}" value="${esc(given[y] || g[y] || '')}" maxlength="${s.max || 2}"${given[y] ? ' readonly' : ''} aria-label="기호 ${esc(y)}에 맞는 글자"></label>`).join('')}</div><p class="c-act"><button type="submit">대조해 보기</button><span class="c-msg" role="status"></span></p></form>`;
+    const form = solved ? `<div class="c-done">${blocks(s.solved, `${s.id}@s`, s.name)}</div>` : `<form class="c-form" data-cipher="${esc(s.id)}"><div class="c-keys">${syms.map(y => `<label class="ck"><span>${esc(y)}</span><input data-sym="${esc(y)}" value="${esc(given[y] || g[y] || '')}" maxlength="${s.max || 2}"${given[y] ? ' readonly' : ''} aria-label="기호 ${esc(y)}에 맞는 글자"></label>`).join('')}</div><p class="c-act"><button type="submit">대조해 보기</button><span class="c-msg"></span></p></form>`;
     return `<article class="doc skin-${esc(s.skin || 'cipher')}"><header class="doc-h"><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(s.intro, `${s.id}@i`, s.name)}<div class="c-grid" id="cGrid">${cipherGrid(s)}</div>${form}</div></article>`;
   }
@@ -579,7 +579,7 @@
     const order = solved ? s.events.map(e => e.id) : tlOrder(s);
     const hit = tmp().tl[s.id] || [];
     const rows = order.map((id, i) => `<li class="tl-e${solved ? ' ok' : hit.includes(id) ? ' hit' : ''}" data-ev="${esc(id)}"><span class="tl-slot">${inline((s.slots || [])[i] || String(i + 1))}</span><span class="tl-t">${inline(ev[id].t)}</span>${solved ? '' : `<span class="tl-mv"><button type="button" data-tl="${esc(s.id)}|${esc(id)}|-1" aria-label="앞으로"${i === 0 ? ' disabled' : ''}>▲</button><button type="button" data-tl="${esc(s.id)}|${esc(id)}|1" aria-label="뒤로"${i === order.length - 1 ? ' disabled' : ''}>▼</button></span>`}</li>`).join('');
-    const act = solved ? `<div class="c-done">${blocks(s.solved, `${s.id}@s`, s.name)}</div>` : `<p class="c-act"><button type="button" data-tl-check="${esc(s.id)}">이 순서로 맞춰 보기</button><span class="c-msg" role="status"></span></p>`;
+    const act = solved ? `<div class="c-done">${blocks(s.solved, `${s.id}@s`, s.name)}</div>` : `<p class="c-act"><button type="button" data-tl-check="${esc(s.id)}">이 순서로 맞춰 보기</button><span class="c-msg"></span></p>`;
     return `<article class="doc skin-${esc(s.skin || 'board')}"><header class="doc-h"><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(s.intro, `${s.id}@i`, s.name)}<ol class="tl">${rows}</ol>${act}</div></article>`;
   }
@@ -613,7 +613,7 @@
         <div class="cmp-ev"><p class="cmp-lab">${esc(ev.label || '대조할 증거')}</p>${ev.art ? `<div class="cmp-art">${art(ev.art, 'art', true)}</div>` : ''}${ev.t ? `<p class="cmp-d">${inline(ev.t)}</p>` : ''}</div>
         <p class="cmp-q">${inline(x.q || '어느 것과 일치하는가?')}</p>
         <div class="cmp-opts">${(x.options || []).map(opt).join('')}</div>
-        <p class="c-msg" role="status">${esc(msg)}</p>${!solved && x.hint && fails >= hintAt ? `<p class="lock-h2">${inline(x.hint)}</p>` : ''}
+        <p class="c-msg">${esc(msg)}</p>${!solved && x.hint && fails >= hintAt ? `<p class="lock-h2">${inline(x.hint)}</p>` : ''}
         ${solved ? `<div class="c-done">${blocks(x.solved, `${x.id}@s`, plain(x.title))}</div>` : ''}</div></article>`;
   }
 
@@ -875,7 +875,7 @@
       const sel = tmp().rq[r.id] != null ? tmp().rq[r.id] : ''; // 신청서마다 고른 소명 메모 (올리기 전)
       const pick = !why ? '' : `<section class="rq-why"><h4>소명 자료 <small>이 요청이 왜 필요한지 보여 줄 메모 하나</small></h4>${notes.length ? noteGroups(notes).map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${String(sel) === String(n.id) ? ' on' : ''}"><input type="radio" name="rq-${esc(r.id)}" value="${n.id}" data-rq-pick="${esc(r.id)}"${String(sel) === String(n.id) ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span></label>`).join('')}</details>`).join('') : '<p class="rep-empty">수첩에 메모가 없다. 근거가 될 문장을 먼저 적어 둔다.</p>'}</section>`;
       const no = q && q.st === 'no' ? `<p class="rq-no"><b>기각</b> ${inline(r.deny || '소명이 부족하다.')} <small>${esc(lstamp(q.at))}</small></p>` : '';
-      foot = `${no}${pick}<p class="submit-row"><button type="button" class="btn-hand" data-rq-go="${esc(r.id)}">${esc(r.button || (q ? '다시 신청하기' : '신청서 올리기'))}</button><span class="c-msg" role="status"></span></p>`;
+      foot = `${no}${pick}<p class="submit-row"><button type="button" class="btn-hand" data-rq-go="${esc(r.id)}">${esc(r.button || (q ? '다시 신청하기' : '신청서 올리기'))}</button><span class="c-msg"></span></p>`;
     }
     return `<article class="doc skin-${esc(r.skin || 'form')} rq"><header class="doc-h"><p class="doc-k">${esc(r.kind || '수사 요청')}</p><h3 class="doc-t">${inline(r.title)}</h3>${r.meta ? `<p class="doc-m">${inline(r.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(r.intro, `${r.id}@i`, plain(r.title))}<table class="rq-t"><tbody>${row('신청', r.by || '강력2팀')}${row('수신', r.to)}${row('대상', r.target)}${row('요청 내용', r.what)}${row('회신까지', r.eta != null ? '약 ' + hm(r.eta) : '')}</tbody></table>${foot}</div></article>`;
@@ -1137,7 +1137,7 @@
         <section class="rep-sec"><h4>${esc(FM.culprit)}</h4><div class="rep-people">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => `<label class="rep-per${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}><b>${esc(C.keywords[k].label)}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}</label>`).join('') || '<p class="rep-empty">수첩에 적힌 인물이 없다.</p>'}</div></section>
         ${sol.claims.map(claim).join('')}
         <p class="submit-row">${shut ? `<span class="rep-filed">${esc(FM.filed || (C.frame === 'papers' ? '종결 · 철해 둠' : '결재 완료'))}</span>` : `<button type="submit" class="btn-hand">${esc(FM.submit)}</button>`}<span class="tries">${ST.tries ? `제출 ${ST.tries}회` : ''}</span></p>
-      </form><p class="verdict" role="status">${esc(VERDICT)}</p>${ST.solved ? `<div class="rep-solved">${solvedHtml(false)}</div>` : ''}</div></article>`;
+      </form><p class="verdict">${esc(VERDICT)}</p>${ST.solved ? `<div class="rep-solved">${solvedHtml(false)}</div>` : ''}</div></article>`;
   }
   function renderRep() {
     const a = document.activeElement, k = focusKey(a);
@@ -1210,7 +1210,7 @@
       <section class="ruled nb-sec nb-rep"><h3 class="hh">${esc(FORM().title)}</h3>
         <p class="rep-sum">${esc(FORM().short)} <b>${ST.report.culprit && C.keywords[ST.report.culprit] ? esc(C.keywords[ST.report.culprit].label) : '—'}</b> · 증거 <b>${sol.claims.filter(cl => ST.report.claims[cl.id] && ST.notes.some(n => String(n.id) === String(ST.report.claims[cl.id]))).length}</b> / ${sol.claims.length}</p>
         <p class="submit-row"><button type="button" class="btn-hand" data-open-rep>${esc(ST.solved ? `올린 ${FORM().title} 보기` : FORM().open)}</button><span class="tries">${ST.tries ? `제출 ${ST.tries}회` : ''}</span></p>
-        <p class="verdict" role="status">${esc(VERDICT)}</p>
+        <p class="verdict">${esc(VERDICT)}</p>
         <div id="solvedBox">${ST.solved ? solvedHtml(false) : ''}</div>
       </section>
       <footer class="nb-foot"><button type="button" class="reset" data-reset>이 사건 처음부터</button><p>${esc(C.disclaimer || '실제 미제 사건의 모티프만 빌린 창작입니다. 인물·장소·기관은 모두 지어낸 것입니다.')}</p></footer>`;
@@ -1653,6 +1653,8 @@
     if (!b) { b = document.createElement('div'); b.id = id; b.className = cls; b.setAttribute('role', 'status'); document.body.appendChild(b); }
     return b;
   }
+  // 화면 읽기 프로그램에만 들리는 한 줄 (판정처럼 칸을 새로 그리며 바뀌는 말은 새로 그린 칸에서 읽히지 않으므로 여기로)
+  function say(t) { const b = statusBox('srSay', 'sr'); b.textContent = ''; if (t) setTimeout(() => { b.textContent = t; }, 60); }
   function toast(msg, ms) {
     const t = statusBox('toast', 'toast');
     t.textContent = msg;
@@ -1823,6 +1825,7 @@
     } else {
       tmp().fail[id] = (tmp().fail[id] || 0) + 1;
       renderList(); renderRead();
+      say(`${plain(lockErr(lock))} (${tmp().fail[id]}회)`);
       // 틀리면 그 기계답게 거절한다: 전화는 짧게 끊기는 신호음, 워드프로세서는 삑삑, 노트북은 입력창이 도리질 (커서는 js/ui.js 가 칸에 돌려준다)
       sfx(lock.style === 'phone' ? 'reorder' : lock.style === 'lcd' ? 'lcdbeep' : C.frame === 'papers' ? 'miss' : 'deny');
       const f = $$('[data-lock]').find(x => x.dataset.lock === id), box = f && f.closest('.lock');
@@ -1854,6 +1857,7 @@
     if (!m) return;
     m.textContent = t;
     m.classList.remove('again'); void m.offsetWidth; m.classList.add('again');
+    say(t); // 칸을 새로 그린 바로 뒤라 그 칸에서는 읽히지 않을 수 있다
   }
   function solveThing(id, reward, msg, stamp) {
     const before = census();
@@ -1916,6 +1920,7 @@
     if (!st.x.includes(oid)) st.x.push(oid);
     st.at = progress();
     save(); cue('miss'); renderRead();
+    const m = $('.c-msg'); if (m && m.textContent) say(m.textContent);
   }
   function runQuery(form) {
     const s = C.sources.find(x => x.id === form.dataset.query);
@@ -1989,10 +1994,10 @@
     if (JUDGING) return;
     const sol = C.solution, c0 = C;
     const has = id => ST.notes.some(n => String(n.id) === String(id));
-    if (!ST.report.culprit || sol.claims.some(cl => !ST.report.claims[cl.id] || !has(ST.report.claims[cl.id]))) { VERDICT = '빈칸이 남아 있다. 범인과 모든 주장에 메모를 붙여야 올릴 수 있다.'; renderRep(); sfx('miss'); return; }
+    if (!ST.report.culprit || sol.claims.some(cl => !ST.report.claims[cl.id] || !has(ST.report.claims[cl.id]))) { VERDICT = '빈칸이 남아 있다. 범인과 모든 주장에 메모를 붙여야 올릴 수 있다.'; renderRep(); say(VERDICT); sfx('miss'); return; }
     // 방금 반려된 보고서를 한 칸도 고치지 않고 다시 올리면: 제출 횟수를 쓰지 않고 그렇다고만 알려 준다
     const sig = JSON.stringify([ST.report.culprit, sol.claims.map(cl => String(ST.report.claims[cl.id]))]);
-    if (!ST.solved && ST.lastRep === sig) { VERDICT = '방금 반려된 보고서 그대로다. 어딘가 고쳐서 올린다.'; renderRep(); sfx('miss'); return; }
+    if (!ST.solved && ST.lastRep === sig) { VERDICT = '방금 반려된 보고서 그대로다. 어딘가 고쳐서 올린다.'; renderRep(); say(VERDICT); sfx('miss'); return; }
     ST.tries++;
     const bad = ST.report.culprit === sol.culprit ? [] : ['범인'];
     sol.claims.forEach((cl, i) => {
@@ -2012,6 +2017,7 @@
     // 연출: 지목 → 침묵 → 판정
     JUDGING = true;
     $$('.verdict').forEach(v => { v.textContent = FORM().judging; v.classList.add('wait'); });
+    say(FORM().judging);
     const view = $('.rep-view'); if (view) view.classList.add('judging');
     sfx('page');
     const v = MG.sound ? MG.sound.hero('accuse') : null;
@@ -2025,11 +2031,11 @@
           box.innerHTML = solvedHtml(true); box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
           if (document.activeElement === document.body) { box.tabIndex = -1; box.focus({ preventScroll: true }); } // 키보드로 올렸으면 결말부터 읽히게
         }
-        cue('solved', '사건 종결');
+        cue('solved', '사건 종결'); say('사건 종결');
         if (MG.sound) setTimeout(() => { if (C === c0) MG.sound.hero('solved'); }, 1300);
       } else if (wrong === 0) toast('이미 닫힌 사건이다');
       else {
-        cue('miss');
+        cue('miss'); say(VERDICT);
         const r = $('.rep-view'); if (r) { r.classList.remove('bounced'); void r.offsetWidth; r.classList.add('bounced'); }
         if (MG.sound) setTimeout(() => { if (C === c0) MG.sound.hero('wrong'); }, 500);
       }
@@ -2267,7 +2273,7 @@
     // CSS 변수 안의 상대 주소는 css/ 폴더 기준으로 풀리므로, 페이지 기준 절대 주소로 바꿔 넣는다.
     [['desk', '--desk-img'], ['paper', '--paper-img'], ['warn', '--warn-img']].forEach(([k, v]) => { const u = MG.images['_global/' + k]; if (u) { document.documentElement.style.setProperty(v, 'url("' + new URL(u, document.baseURI).href + '")'); document.documentElement.classList.add('has-' + k); } });
     app = document.getElementById('app');
-    statusBox('toast', 'toast'); statusBox('lvNotes', 'lv-notes');
+    statusBox('toast', 'toast'); statusBox('lvNotes', 'lv-notes'); statusBox('srSay', 'sr');
     bind();
     // 명부에 둘 이상이면 누가 앉았는지부터 묻는다: 마지막 사람의 사건을 바로 열지 않는다
     // 새로 고침하면 브라우저가 전에 보던 자리로 스크롤을 되돌린다. 누가 앉았는지 묻는 명부가 위에 가려지면 안 되므로 그때만 맨 위에서
