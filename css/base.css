@@ -192,6 +192,8 @@ img{max-width:100%}
   .case-view{height:auto;grid-template-columns:minmax(0,1fr)}
   .stage{height:600px;height:max(600px,84svh)}
 }
+/* 가로로 눕힌 휴대폰·태블릿: 수사 화면이 화면 높이를 넘지 않게 (한눈에 들어오고, 그 밑의 수첩으로 내려가기 쉽게) */
+@media (max-width:1099px) and (orientation:landscape){ .stage{height:max(320px,calc(100svh - 24px))} }
 
 /* frame: papers (default) — 크라프트 서류철 */
 .case-view[data-frame="papers"] .stage-frame{padding-top:10px;border-radius:6px;background-color:var(--kraft-deep);background-image:var(--fiber),linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.12));box-shadow:0 30px 60px -24px rgba(0,0,0,.85),inset 0 0 50px rgba(60,35,10,.35)}

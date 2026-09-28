@@ -107,7 +107,9 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
 /* 휴대폰: 단추를 빨리 두 번 눌러도(카드 ▲▼, 시간 보내기, 사진 칸) 화면이 확대되지 않게 — 두 손가락 확대는 그대로 */
 :is(button,a,summary,label,input,select,textarea,.kw,.spot,.ph-cell,[role="button"]){touch-action:manipulation}
 /* 칸 끝까지 굴려도 뒤의 책상까지 따라 굴러가지 않게 */
-.pane-list,.pane-read,.nb{overscroll-behavior:contain}
+/* 단, 굴릴 게 남은 칸에서만 (.oy — 손을 대는 순간 ui.js 가 잰다): 내용이 짧은 칸에 붙들리면 휴대폰에서 그 칸이나 수첩을 끌어도 페이지가 내려가지 않는다 */
+:is(.pane-list,.pane-read,.nb).oy{overscroll-behavior:contain}
+@media (max-width:1099px) and (orientation:landscape) and (max-height:560px){:is(.pane-list,.pane-read).oy{overscroll-behavior-y:auto}} /* 가로 휴대폰: 칸이 화면을 거의 다 덮으니, 칸 끝에서 더 밀면 페이지가 이어서 내려간다 */
 /* 사진 살피기: 기본 확대 화살표 대신 놋쇠 돋보기 (가운데가 누르는 자리) */
 .ph,.ph-cell{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'%3E%3Cpath d='M19.5 19.5l9 9' stroke='%23000' stroke-opacity='.35' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M19 19l9 9' stroke='%234a2c17' stroke-width='4.2' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='12' r='9.2' fill='%23fff' fill-opacity='.14' stroke='%23000' stroke-opacity='.4' stroke-width='4.4'/%3E%3Ccircle cx='12' cy='12' r='9.2' fill='none' stroke='%23b8893a' stroke-width='2.6'/%3E%3Cpath d='M7.5 9a5.5 5.5 0 0 1 4-3.6' fill='none' stroke='%23fff' stroke-opacity='.8' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") 12 12,zoom-in}
 .ph .ph-mk{cursor:inherit}

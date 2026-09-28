@@ -125,6 +125,13 @@
   document.addEventListener('pointerout', e => { if (lph && !lph.contains(e.relatedTarget)) lensOff(); });
   window.addEventListener('scroll', lensOff, { capture: true, passive: true });
 
+  // 목록·본문·수첩 칸은 끝까지 굴려도 뒤의 책상이 따라 굴러가지 않는다 — 굴릴 내용이 넘칠 때만. 손가락·휠이 닿는 순간 칸마다 잰다
+  function overflowY(e) {
+    for (let el = e.target && e.target.closest ? e.target.closest('.pane-list,.pane-read,.nb') : null; el; el = el.parentElement && el.parentElement.closest('.pane-list,.pane-read,.nb')) el.classList.toggle('oy', el.scrollHeight > el.clientHeight + 1);
+  }
+  document.addEventListener('touchstart', overflowY, { capture: true, passive: true });
+  document.addEventListener('wheel', overflowY, { capture: true, passive: true });
+
   // 잠금·조회 칸에 번호를 넣고 Enter: 엔진이 칸을 새로 그려 초점이 사라지면, 같은 자리의 새 칸으로 돌려준다.
   // (전화 번호판을 눌러 확인한 때는 돌려주지 않는다 — 폰에서 자판이 다시 튀어나오므로. 조회 칸은 마우스로 쓸 때만)
   const fine = () => !!(window.matchMedia && matchMedia('(pointer:fine)').matches);
