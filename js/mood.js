@@ -295,7 +295,7 @@
     el.setAttribute('aria-label', `CASE ${c.no} ${c.title}`);
     const place = String(c.place || '').replace(/\s*\([^)]*\)\s*$/, '');
     // 뒤에 그 사건 기록철 표지 사진을 어둡고 흐리게 깐다 (천천히 다가온다)
-    const cov = MG.images && MG.images[c.id + '/cover'];
+    const cov = MG.images && (MG.images[c.id + '/cover_bg'] || MG.images[c.id + '/cover']); // 흐리게 깔 것이라 작은 판(cover_bg)으로
     el.innerHTML = `${cov ? `<div class="ci-bg" aria-hidden="true" style="background-image:url('${esc(cov)}')"></div>` : ''}<div class="ci-in">
       <p class="ci-no">CASE ${String(c.no).padStart(2, '0')}${c.kind === 'tutorial' ? ' · 연습' : c.live ? ' · 현행 사건' : ''}</p>
       <h2 class="ci-title">${esc(c.title)}</h2>
