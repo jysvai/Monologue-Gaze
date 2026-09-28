@@ -2082,7 +2082,10 @@
     statusBox('toast', 'toast'); statusBox('lvNotes', 'lv-notes');
     bind();
     // 명부에 둘 이상이면 누가 앉았는지부터 묻는다: 마지막 사람의 사건을 바로 열지 않는다
-    if (roster().list.length > 1) cabinet(true);
+    // 새로 고침하면 브라우저가 전에 보던 자리로 스크롤을 되돌린다. 누가 앉았는지 묻는 명부가 위에 가려지면 안 되므로 그때만 맨 위에서
+    const ask = roster().list.length > 1;
+    try { history.scrollRestoration = ask ? 'manual' : 'auto'; } catch (e) { /* ignore */ }
+    if (ask) { cabinet(true); window.scrollTo(0, 0); }
     else if (S.current && MG.byId[S.current]) openCase(S.current); else cabinet();
   };
   MG.state = () => S;
