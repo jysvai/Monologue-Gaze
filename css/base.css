@@ -306,6 +306,7 @@ img{max-width:100%}
 .cc b{font-weight:400}
 .cc i{font:15px/1.2 var(--f-hand);font-style:normal;color:var(--pencil)}
 .cc.has i{color:var(--red)}
+.cc i,.ck input{text-transform:uppercase} /* 해독지에는 대문자로 적는다: 휴대폰에서 소문자로 쳐도 주어진 글자(M·V·F)와 나란히 */
 .cc.sp{min-width:10px}
 .cc.hl{background:rgba(255,212,84,.45);border-radius:2px;box-shadow:0 0 0 1px rgba(255,212,84,.45)} /* 글자를 넣는 기호가 암호문 어디에 있는지 */
 .ck:focus-within{border-color:rgba(0,0,0,.5);background:rgba(255,236,170,.6)}
