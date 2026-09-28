@@ -777,6 +777,12 @@
       } else { el.style.transform = ''; el.style.opacity = ''; }
     };
     el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+    el.addEventListener('keydown', e => { // 키보드로 알림에 와 있으면 Esc 로 치운다 (옆 알림이 있으면 그리로)
+      if (e.key !== 'Escape') return;
+      e.preventDefault(); e.stopPropagation();
+      const sib = el.nextElementSibling || el.previousElementSibling;
+      el.remove(); if (sib) sib.focus();
+    });
   }
   function clearNotes() { const b = $('#lvNotes'); if (b) b.innerHTML = ''; }
   function nextDue() {
