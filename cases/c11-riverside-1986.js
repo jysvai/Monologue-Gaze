@@ -135,7 +135,7 @@
     keywords: {
       k_pyeon: { label: '편상구', type: 'person', alias: ['상구', '편씨'] },
       k_jin: { label: '진영달', type: 'person', alias: ['진 사장', '대원상사 사장'] },
-      k_woo: { label: '우만복', type: 'person', alias: ['우 사장', 'W씨'] },
+      k_woo: { label: '우만복', type: 'person', alias: ['우 사장', '우모씨', '우모', '우씨'] },
       k_han: { label: '한정미', type: 'person', alias: ['미스 한', '레지'] },
       k_yeom: { label: '염창수', type: 'person', alias: ['염 영감', '염모씨', '야경꾼'] },
       k_gil: { label: '길용수', type: 'person', alias: ['용수', '견습공'] },
@@ -216,7 +216,7 @@
         '고소인은 [[11월 14일 밤]] 피고소인이 어디로 갔는지는 "모른다"고 진술함.',
         { note: '※ 11. 17. 변사자 신원이 피고소인으로 확인되어 고소인이 고소를 취하함. (형사과)' },
       ] },
-      d_diary1: { cls: 'f-gaegu ink-pencil', src: 'rec', find: ['k_woo'], skin: 'memo', title: '수사 일지 (소병국) — 1', meta: '1986. 11. 16 ~ 11. 29 · 연필 · 기록철 뒤표지 안쪽', body: [
+      d_diary1: { cls: 'f-gaegu ink-pencil', src: 'rec', find: ['k_woo', 'k_so'], skin: 'memo', title: '수사 일지 (소병국) — 1', meta: '1986. 11. 16 ~ 11. 29 · 연필 · 기록철 뒤표지 안쪽', body: [
         '11/16 갈밭에서 첫 포대. 오후 시장교에서 둘째. 둘 다 톱밥, 둘 다 같은 매듭.',
         '11/17 지문 — 편상구. 시장을 돌자 다들 "정육점 우 사장"을 댄다. 12일에 "토막 내서 강에 처넣는다"고 했단다. 오후 연행.',
         '11/17 우의 처. 처음엔 "그 밤 안 들어왔다", 한 시간 뒤엔 "집에서 잤다". 과장 눈이 번쩍.',
@@ -423,10 +423,10 @@
         '수사본부는 편씨가 늘 들고 다니던 파란 비닐 수금 가방과 수금 수첩이 발견되지 않은 점으로 미루어 돈을 노린 범행일 가능성도 살피고 있다.',
       ] },
       d_n3: { src: 'news', find: ['k_woo', 'k_threat'], kicker: '1986년 11월 18일 (화) 조간 · 7면', title: '"토막 내겠다" 큰소리친 시장 상인 연행', meta: '"홧김에 한 말" … 혐의 부인', body: [
-        '수사본부는 17일 오후 중앙시장 [[우성정육점]] 주인 [[W씨]](46)를 연행해 조사하고 있다.',
-        'W씨는 지난 12일 오후 시장 안에서 이자를 독촉하던 편씨의 멱살을 잡고 "한 번만 더 오면 토막을 내서 강에 처넣겠다"고 소리친 것으로 알려졌다. 이 광경은 시장 상인 여럿이 지켜봤다.',
+        '수사본부는 17일 오후 중앙시장 [[우성정육점]] 주인 [[우모|k_woo]](46)씨를 연행해 조사하고 있다.',
+        '우씨는 지난 12일 오후 시장 안에서 이자를 독촉하던 편씨의 멱살을 잡고 "한 번만 더 오면 토막을 내서 강에 처넣겠다"고 소리친 것으로 알려졌다. 이 광경은 시장 상인 여럿이 지켜봤다.',
         { img: 'news_shop', cap: '셔터를 반쯤 내린 시장 정육점 (17일 저녁)' },
-        '경찰은 W씨의 가게에서 [[뼈톱]]과 칼 등을 거두어 감정을 맡겼다. W씨는 "홧김에 한 말일 뿐, 14일 밤에는 집에서 잤다"며 혐의를 부인하고 있다.',
+        '경찰은 우씨의 가게에서 [[뼈톱]]과 칼 등을 거두어 감정을 맡겼다. 우씨는 "홧김에 한 말일 뿐, 14일 밤에는 집에서 잤다"며 혐의를 부인하고 있다.',
         '시장 상인들 사이에서는 "빚 독촉에 시달린 사람이 한둘이 아니다"라는 말도 나온다.',
       ] },
       d_n4: { src: 'news', find: ['k_sijanggyo', 'k_sumun'], cls: 'vertical', kicker: '1986년 11월 19일 (수) 조간 · 7면', title: '하구 수문서 세 번째 포대', meta: '다리 두 쪽과 잠바 … "강물 무서워 못 살겠다"', body: [
@@ -440,7 +440,7 @@
         '20일 오전 11시 40분쯤 은천시 목골동 [[목골 나루]] 강바닥(수심 2m)에서 수색하던 잠수부가 [[붉은 벽돌]] 네 장과 함께 노끈으로 묶여 가라앉아 있던 네 번째 포대를 건져 올렸다.',
         '목골 나루는 앞서 포대가 발견된 시장교·갈밭·하구 수문보다 상류다. 수사본부의 한 관계자는 "물살에 밀려 올라갔을 가능성도 있다"고 말했다.',
         '나루 바로 옆 [[목골 제재소]]의 야경원 [[염모씨]](64)는 "밤에 순찰을 돌았지만 아무것도 못 봤다"고 말했다.',
-        '이로써 시신은 네 포대에서 모두 수습됐다. 수사본부는 이미 연행한 시장 상인 W씨를 상대로 보강 조사를 벌이고 있다.',
+        '이로써 시신은 네 포대에서 모두 수습됐다. 수사본부는 이미 연행한 시장 상인 우씨를 상대로 보강 조사를 벌이고 있다.',
       ] },
       d_n6: { src: 'news', find: ['k_najeon'], blood: false, kicker: '1986년 11월 25일 (화) · 9면 · 연재 「은천의 손」 ⑦', title: '자개장 끝물 — 목골 공방의 겨울', meta: '전복 껍데기로 학을 붙이는 삼십 년', body: [
         { img: 'news_workshop', cap: '목골 청학 나전칠기 작업장. 벽에는 톱과 끌이 가지런하다.' },
@@ -450,9 +450,9 @@
         '함씨는 "빚을 내 버티고 있다"면서도 "이 학 한 쌍은 끝까지 붙이고 싶다"고 했다. 인터뷰 내내 그는 손에서 헝겊을 놓지 않았다.',
         { note: '(스크랩 옆 연필 메모: "원판 인화 받아 둠 — 사진철")' },
       ] },
-      d_n7: { src: 'news', find: ['k_woo'], cls: 'vertical', kicker: '1986년 12월 1일 (월) 조간 · 7면', title: '시장 상인 W씨 석방 … 수사 원점', meta: '"감정 결과 기대와 달라"', body: [
-        '은천강 포대 사건 수사본부는 지난달 29일 연행 12일 만에 시장 상인 W씨를 증거 불충분으로 풀어 줬다.',
-        '수사본부 관계자는 "감정 결과가 기대와 달랐다"고만 말했다. W씨는 풀려나면서 기자들에게 "장사는 망했고 누명은 그대로"라고 했다.',
+      d_n7: { src: 'news', find: ['k_woo'], cls: 'vertical', kicker: '1986년 12월 1일 (월) 조간 · 7면', title: '시장 상인 우모씨 석방 … 수사 원점', meta: '"감정 결과 기대와 달라"', body: [
+        '은천강 포대 사건 수사본부는 지난달 29일 연행 12일 만에 시장 상인 우모(46)씨를 증거 불충분으로 풀어 줬다.',
+        '수사본부 관계자는 "감정 결과가 기대와 달랐다"고만 말했다. 우씨는 풀려나면서 기자들에게 "장사는 망했고 누명은 그대로"라고 했다.',
         '수사본부는 편씨의 채무자와 주변 인물을 다시 살피고 있으나 뚜렷한 단서는 없는 상태다.',
         '시장에서는 "그래도 그 사람 말고 누가 있겠느냐"는 수군거림이 여전하다.',
       ] },
@@ -504,7 +504,8 @@
         { rows: [
           ['세대주', '함덕규 (42)'],
           ['세대원', '처 1'],
-          ['전입', '1979. 4 · 은천시 목골동'],
+          ['전입', '1968. 11 · 주민등록 첫 등재 · 은천시 목골동 (부 함○○ 세대)'],
+          ['세대 분리', '1979. 4 · 같은 번지'],
           ['전출', '1986. 12. 20 · 서울 성동구 성수동'],
         ], head: ['항목', '내용'] },
       ] },
@@ -520,7 +521,7 @@
           k_bonesaw: ['정육점에 뼈톱 없는 데가 어디 있소. 갈비 켤 때 쓰는 거요. 경찰이 가져가 놓고 석 달 만에 돌려줬소. 녹이 슬었더군.'],
           k_cutmark: ['뼈를 가운데서 톱으로 켰다고? (코웃음) 그건 칼 쥘 줄 모르는 사람 짓이오.', '우리는 관절에 칼을 넣소. 뼈 사이 힘줄만 끊으면 절로 떨어져. 톱은 갈비나 등뼈 켤 때만 쓰지. 스무 해 고기를 만진 사람은 톱부터 들지 않소.'],
           k_luminol: ['내 가게 바닥이 온통 빛났다고 신문에 났지. 정육점 바닥에서 피가 안 나오면 그게 이상한 거요. 소 피, 돼지 피.'],
-          k_sawdust: ['톱밥은 목골 제재소에서 한 포대에 오백 원 주고 사다 깔아요. 기름 먹으라고.'],
+          k_sawdust: ['톱밥은 목골 제재소에서 한 포대에 오백 원 주고 사다 깔아 두오. 기름 먹으라고.'],
           k_knot: ['고기 묶는 매듭은 따로 있소. 올가미를 먼저 만들어 걸고 조이는 거. 포대 아가리를 그렇게 묶진 않지.'],
           k_jin: ['진 사장이야 돈만 받으면 되는 사람이지. 수금쟁이 죽고 나서 딴 놈이 와서 똑같이 손바닥을 내밀더군.'],
           k_pocha: { need: ['!f_protect'], a: ['갈밭 삼거리 포장마차요. 소주 세 병. 옆에 앉은 놈이 "정육점 칼잡이" 어쩌고 하길래.'], else: ['포장마차? 무슨 포장마차 말이오.'] },
@@ -637,7 +638,7 @@
         '1986년 11월 14일 저녁 8시 5분, 편상구는 청자다방 카운터 전화로 은천 2국 7341을 불렀다. 원장의 "목-3", 청학 나전칠기. 이백오십만 원의 만기가 그날이었다. 수화기를 든 함덕규는 반쯤 싼 짐을 내려다보고 있었다. 새벽 네 시에 용달이 오기로 돼 있었고, 견습공 길용수에게는 여관비를 쥐여 소양여관으로 보낸 뒤였다.',
         '편상구는 8시 45분 목골 종점에서 내려 골목 맨 안쪽 공방으로 걸어 들어갔다. 이불에 싸여 노끈에 묶인 자개장 열두 짝이 그를 맞았다. "물건으로 받아 가겠다"는 말이 오갔을 것이다. 아홉 시 반 무렵, 자개를 두드려 붙이던 쇠망치가 그의 왼쪽 머리를 쳤다. 쌍화차는 아직 위 속에 있었다.',
         '함덕규는 달아날 생각을 버렸다. 배수구 옆 시멘트 바닥에서, 아버지가 쓰던 양날톱으로 관절이 아닌 뼈 한가운데를 켰다. 톱밥을 뿌려 피를 먹이고, 물로 씻고, 쌀집에서 사 둔 빈 포대에 나눠 담아 자개장을 묶던 짐 매듭으로 조였다. 넷째 포대에는 아궁이 벽돌 네 장을 달았다. 새벽 두 시, 불 없는 리어카가 둑길을 내려갔다. 세 시 십 분, 그는 용달을 취소했다.',
-        '토요일 아침 여덟 시 반, 그는 대성철물에서 새 양날톱과 노끈과 양잿물을 외상으로 샀다. 수금 가방과 일수 수첩은 아궁이에서 탔고, 칠십이만 원은 쌀집과 철물점 외상을 갚는 데 들어갔다. 그사이 은천강은 시간당 150m씩, 포대를 하나씩 사람들 눈앞으로 밀어 보냈다.',
+        '토요일 아침 여덟 시 반, 그는 대성철물에서 새 양날톱과 노끈과 양잿물을 외상으로 샀다. 수금 가방과 일수 수첩은 아궁이에서 탔고, 칠십이만 원 가운데 만 원짜리 몇 장이 쌀집과 철물점 외상을 갚는 데 먼저 나갔다. 그사이 은천강은 시간당 150m씩, 포대를 하나씩 사람들 눈앞으로 밀어 보냈다.',
         '수사본부가 "토막 내겠다"던 정육점 주인을 붙들고 있는 동안, 성냥갑 안쪽의 두 번째 번호는 조회되지 않은 채 철 맨 뒤에 끼워져 있었다. 우만복은 그 밤 내내 갈밭 지서 보호실에 있었다. 창피해서 말하지 않았을 뿐이다. 물을 거슬러 올라간 것은 포대가 아니라, 넉 달 늦은 서류였다.',
       ],
     },
@@ -645,7 +646,7 @@
     art: {
       cover: { use: '기록실 폴더 표지 — 새벽 강가의 포대와 통제선 (사진 한 장이 서류철에 클립으로 끼워져 있다)', alt: '기록실 폴더 표지 — 새벽 강가의 포대와 통제선', ratio: '4:3',
         svg: `<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#3d3832"/><rect x="14" y="16" width="118" height="120" fill="${P}" transform="rotate(-4 73 76)"/><g fill="#b9b19a" transform="rotate(-4 73 76)"><rect x="26" y="30" width="80" height="7"/><rect x="26" y="44" width="92" height="4"/><rect x="26" y="54" width="70" height="4"/><rect x="26" y="64" width="84" height="4"/></g><g transform="rotate(5 142 84)"><rect x="80" y="34" width="112" height="90" fill="#f2eee3"/><rect x="86" y="40" width="100" height="70" fill="#8b979a"/><rect x="86" y="84" width="100" height="26" fill="#5f6b6c"/><path d="M86 84 q50 -7 100 0" stroke="#aebcbd" fill="none"/><path d="M100 100 q6 -9 16 -6 q8 3 4 10 q-10 4 -20 -4z" fill="#ebe7dc"/><path d="M126 102 q6 -7 14 -4 q6 3 2 8 q-8 3 -16 -4z" fill="#dcd7ca"/><path d="M146 98 q5 -6 12 -3 q5 3 1 7 q-7 2 -13 -4z" fill="#e3dfd3"/><path d="M88 94 L184 88" stroke="#b0342a" stroke-width="1.2" stroke-dasharray="3 2"/><rect x="118" y="46" width="4" height="40" fill="#4c5252"/><rect x="150" y="44" width="4" height="42" fill="#4c5252"/></g><circle cx="40" cy="118" r="9" fill="none" stroke="#a8322a" stroke-width="2.2"/></svg>`,
-        prompt: 'Cold dawn on the muddy bank of a slow, misty river in a 1986 provincial Korean city: three white woven polypropylene rice sacks tied tight at the mouth with twine lying in a row on the mud among cut reeds, a sagging police rope line strung between wooden stakes, a concrete bridge on piers fading into fog behind, an empty wooden rowboat pulled up on the bank, no people, blue-grey light, faded color negative film, grain.' },
+        prompt: 'Cold dawn on the muddy bank of a slow, misty river in a 1986 provincial Korean city: a single white woven polypropylene rice sack tied tight at the mouth with twine lying alone on the mud among cut reeds, a sagging police rope line strung between wooden stakes, a concrete bridge on piers fading into fog behind, an empty wooden rowboat pulled up on the bank, no people, blue-grey light, faded color negative film, grain.' },
       news_reeds: { use: '신문 1보 사진 — 하류 갈대밭 발견 현장 (멀리서)', ratio: '4:3', sensitive: true,
         svg: `<svg viewBox="0 0 200 150">${HT('ht1')}<rect width="200" height="150" fill="#e2dac4"/><rect width="200" height="60" fill="#b9b3a2"/><g stroke="#4a473f" stroke-width="1.4">${A(22, i => `<line x1="${6 + i * 9}" y1="104" x2="${10 + i * 9 + (i % 3 - 1) * 4}" y2="${58 + (i * 7) % 18}"/>`)}</g><rect y="100" width="200" height="50" fill="#8f8a7c"/><path d="M66 112 h68 l6 14 h-80z" fill="#c9c2ac"/><path d="M80 104 q20 -10 40 0 l4 14 h-48z" fill="#6b6a64"/><path d="M120 116 q6 -2 8 2" stroke="#e8e2d2" stroke-width="3"/><g fill="#2a2925"><rect x="40" y="76" width="12" height="36" rx="5"/><circle cx="46" cy="72" r="6"/><rect x="146" y="74" width="13" height="38" rx="5"/><circle cx="152" cy="70" r="6"/><rect x="164" y="80" width="11" height="32" rx="5"/><circle cx="169" cy="76" r="5"/></g><rect width="200" height="150" fill="url(#ht1)" opacity=".45"/></svg>`,
         prompt: '1986 Korean newspaper photograph printed with a coarse halftone dot screen on yellowed newsprint: a trampled reed bed on a riverbank on a grey morning, seen from a distance, several policemen in dark winter uniforms and a laborer holding a sickle standing in a loose circle with their backs to the camera around a white rice sack lying opened on a straw mat, a grey tarp thrown over what came out of it with only a pale limp shape showing at the tarp edge, heavy contrast, ink spread.',
