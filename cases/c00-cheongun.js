@@ -80,7 +80,7 @@
       k_delivery: { label: '배달봉지', type: 'thing', alias: ['배달', '한그릇', '죽'] },
       k_psd: { label: '원본 파일', type: 'thing', alias: ['psd', '레이어', '원본'] },
       k_night: { label: '10월 9일 밤', type: 'time', alias: ['9일', '한글날', '그날 밤'] },
-      k_birthday: { label: '서윤의 생일', type: 'time', alias: ['생일', '0317', '3월 17일'] },
+      k_birthday: { label: '서윤의 생일', type: 'time', alias: ['생일', '0317', '3월 17일'], q: ['서윤 씨 생일 얘기를 좀 여쭙겠습니다.'] },
     },
     docs: {
       /* ── 누리 검색 ── */

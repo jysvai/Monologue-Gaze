@@ -148,7 +148,7 @@
       k_train: { label: '전동차 소리', type: 'thing', alias: ['전동차', '철교', '쇳소리', '2호선'] },
       k_chime: { label: '학교 차임', type: 'thing', alias: ['차임', '딩동댕동', '수업 종'] },
       k_signal: { label: '9시 시보', type: 'thing', alias: ['시보', '9시 뉴스', '땡'] },
-      k_birthday: { label: '준영이 생일', type: 'time', alias: ['생일', '4월 23일', '0423', '1969년 4월 23일생'] },
+      k_birthday: { label: '준영이 생일', type: 'time', alias: ['생일', '4월 23일', '0423', '1969년 4월 23일생'], q: ['준영 씨 생일 얘기를 좀 여쭙겠습니다.'] },
       k_nov4: { label: '11월 4일 저녁', type: 'time', alias: ['실종 당일', '4일 저녁'] },
       k_shimai: { label: '시마이', type: 'word', alias: ['시마이다', '시마이합시다'] },
       k_custody: { label: '임의동행', type: 'word', alias: ['임의동행 기록', '조사실'] },
