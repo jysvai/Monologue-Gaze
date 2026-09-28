@@ -984,8 +984,31 @@
     b.classList.toggle('more-l', m > 2 && x < m - 2);
     b.classList.toggle('more-r', m > 2 && x > 2);
   }
+  // 지도 위 그림 이름표가 조사 지점(빨간 점·점 이름)에 깔리면 그 이름표는 접어 둔다 — 폰의 작은 지도에서 글자가 겹쳐 뭉개지지 않게 (크게 보기에는 다 나온다)
+  function mapTidy() {
+    $$('.case-view .map').forEach(m => {
+      const labs = $$('.art-lab', m);
+      // 점 이름이 다른 점·이름표에 깔리거나 지도 밖으로 나가면, 아래 · 위 · 오른쪽 · 왼쪽 가운데 가장 덜 겹치는 자리로 옮긴다
+      const sps = $$('.spot', m), box = m.getBoundingClientRect(), POS = ['lab-up', 'lab-r', 'lab-l'];
+      const hit = (r, b, pad) => r.left < b.right + pad && r.right > b.left - pad && r.top < b.bottom + pad && r.bottom > b.top - pad;
+      const area = (r, b) => Math.max(0, Math.min(r.right, b.right) - Math.max(r.left, b.left)) * Math.max(0, Math.min(r.bottom, b.bottom) - Math.max(r.top, b.top));
+      sps.forEach(sp => sp.classList.remove(...POS));
+      sps.forEach(sp => {
+        const lab = sp.querySelector('span'); if (!lab || lab.offsetParent === null) return;
+        const cost = () => { const r = lab.getBoundingClientRect(); return sps.filter(o => o !== sp).flatMap(o => [o, o.querySelector('span')]).filter(e => e && e.offsetParent !== null).reduce((n, e) => n + area(r, e.getBoundingClientRect()), 0) + (r.width * r.height - area(r, box)) * 2; };
+        let best = '', low = cost();
+        if (!low) return;
+        POS.forEach(c => { sp.classList.add(c); const v = cost(); sp.classList.remove(c); if (v < low) { low = v; best = c; } });
+        if (best) sp.classList.add(best);
+      });
+      if (!labs.length) return;
+      labs.forEach(l => l.classList.remove('hid'));
+      const pad = 2, spots = $$('.spot', m).flatMap(sp => [sp, sp.querySelector('span')]).filter(e => e && e.offsetParent !== null).map(e => e.getBoundingClientRect());
+      labs.forEach(l => { const r = l.getBoundingClientRect(); if (r.width && spots.some(b => hit(r, b, pad))) l.classList.add('hid'); });
+    });
+  }
   // 읽기 칸의 넘치는 것들을 다시 잰다 (그림·글꼴이 늦게 와 너비가 바뀐 때도)
-  function edges() { const el = $('#paneRead'); if (!el) return; $$('.b-tbl', el).forEach(tblEdge); $$('.skin-news.vertical .doc-b', el).forEach(colEdge); }
+  function edges() { mapTidy(); const el = $('#paneRead'); if (!el) return; $$('.b-tbl', el).forEach(tblEdge); $$('.skin-news.vertical .doc-b', el).forEach(colEdge); }
   function renderList() {
     const s = curSrc();
     const el = $('#paneList');
@@ -1004,6 +1027,7 @@
     else if (s.type === 'feed') h += feedList(s);
     el.innerHTML = h;
     el.dataset.type = s.type;
+    if (s.type === 'map') mapTidy();
   }
   function renderRead() {
     const el = $('#paneRead');
@@ -2099,7 +2123,7 @@
       e.preventDefault();
       b.scrollLeft -= dy;
     }, { passive: false });
-    document.addEventListener('load', e => { if (e.target.tagName === 'IMG' && e.target.closest && e.target.closest('#paneRead')) edges(); }, true); // 늦게 뜬 그림이 세로 신문을 밀어낸 때
+    document.addEventListener('load', e => { if (e.target.tagName === 'IMG' && e.target.closest && e.target.closest('#paneRead, .map')) edges(); }, true); // 늦게 뜬 그림이 세로 신문을 밀어낸 때
     document.addEventListener('toggle', e => {
       const d = e.target;
       if (!C || !d.matches || !d.matches('details[data-ng]')) return;

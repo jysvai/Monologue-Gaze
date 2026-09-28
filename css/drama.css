@@ -141,6 +141,7 @@ body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,
 .art-lab{position:absolute;transform:translateY(-85%);padding:0 4px;border-radius:2px;background:rgba(246,241,226,.8);box-shadow:0 0 0 1px rgba(43,40,35,.12);color:#2b2823;font:700 clamp(9px,1.4vw,12.5px)/1.35 var(--f-web);white-space:nowrap}
 .art-lab.c{transform:translate(-50%,-85%)}
 .art-lab.r{transform:translate(-100%,-85%)}
+.art-lab.hid{visibility:hidden} /* 조사 지점에 깔린 이름표 (js mapTidy) */
 
 /* 자료를 펼칠 때 종이가 스르르 */
 .pane-read>.enter{animation:paperIn .32s ease-out both}
@@ -165,6 +166,11 @@ body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,
 .map.big{box-shadow:0 3px 14px rgba(0,0,0,.35)}
 .map.big .spot{width:26px;height:26px}
 .map.big .spot span{top:28px;font-size:12.5px}
+/* 점 이름이 옆 점·이름표에 깔리면 덜 겹치는 자리로: 위 · 오른쪽 · 왼쪽 (js mapTidy) */
+.map .spot.lab-up span{top:auto;bottom:calc(100% + 2px)}
+.map .spot:is(.lab-r,.lab-l) span{top:50%;transform:translateY(-50%)}
+.map .spot.lab-r span{left:calc(100% + 3px);right:auto}
+.map .spot.lab-l span{left:auto;right:calc(100% + 3px)}
 .map .spot:focus-visible{transform:translate(-50%,-50%) scale(1.15)}
 @media (hover:hover){.map .spot:hover{transform:translate(-50%,-50%) scale(1.15)}}
 @container stage (min-width:701px){
