@@ -84,6 +84,8 @@ summary::-webkit-details-marker{display:none}
 .case-view[data-frame="laptop"] .screen :focus-visible{outline:2px solid #3b6fd8;outline-offset:2px;border-radius:4px}
 /* 크게 볼 수 있는 그림 (js/ui.js 가 키보드로 닿게 해 둔다): 테는 그림 안쪽에 — 바깥은 종이·틀에 가려 잘린다 */
 img[data-ui-key]:focus-visible{outline-offset:-5px}
+/* 칸 끝에 걸린 것으로 초점이 옮겨 가면 테까지 보이게 조금 더 들여 보인다 */
+:where(.pane-list,.pane-read,.nb,.src-tabs) :is(button,input,summary,[tabindex="0"]){scroll-margin:8px}
 /* 탭 줄은 옆으로 넘기는 칸이라 바깥 테가 잘린다: 탭의 테도 안쪽에 */
 .src-tabs .tab:focus-visible,.case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen .src-tabs .tab:focus-visible{outline-offset:-4px}
 .case-view[data-frame="crt"] .screen .src-tabs .tab:focus-visible{outline-color:#fff} /* 파란 탭 줄 위의 점선 네모는 밝게 (옛 창의 초점 표시가 어두운 바탕에서 뒤집혀 보이듯) */
