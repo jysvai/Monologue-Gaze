@@ -1371,10 +1371,11 @@
     const W = MG.finaleWho;
     if (!W) return '';
     if (S.mwho) return `<div class="m-ps${fresh ? ' reveal' : ''}">${W.ps.map(p => `<p>${esc(p)}</p>`).join('')}<p class="m-sig">${esc(W.sig)}</p></div>`;
-    return `<form class="m-who" data-mwho><label><span>${esc(W.q)}</span><input maxlength="16" placeholder="${esc(W.placeholder)}" aria-label="${esc(W.q)}"></label><button type="submit" class="btn-hand">적는다</button>${(S.mwhoTries || 0) >= 3 ? `<p class="m-hint">${esc(W.hint)}</p>` : ''}</form>`;
+    const tried = S.mwhoTried || []; // 틀리게 적은 이름은 연필로 그어 편지에 남는다
+    return `<form class="m-who" data-mwho><label><span>${esc(W.q)}</span><input maxlength="16" placeholder="${esc(W.placeholder)}" aria-label="${esc(W.q)}"></label><button type="submit" class="btn-hand">적는다</button>${tried.length ? `<p class="m-tried">${tried.map(x => `<s>${esc(x)}</s>`).join('')}</p>` : ''}${(S.mwhoTries || 0) >= 3 ? `<p class="m-hint">${esc(W.hint)}</p>` : ''}</form>`;
   }
   function guessM(f) {
-    const W = MG.finaleWho, v = norm(f.querySelector('input').value);
+    const W = MG.finaleWho, raw = f.querySelector('input').value.trim(), v = norm(raw);
     if (!W || !v) return;
     if (W.answer.some(a => norm(a) === v)) {
       S.mwho = true; save();
@@ -1382,7 +1383,8 @@
       sfx('stamp');
       return;
     }
-    S.mwhoTries = (S.mwhoTries || 0) + 1; save();
+    S.mwhoTries = (S.mwhoTries || 0) + 1;
+    S.mwhoTried = [...(S.mwhoTried || []).filter(x => norm(x) !== v), raw].slice(-6); save();
     f.outerHTML = mWho();
     const nf = $('[data-mwho]');
     if (nf) { nf.classList.add('bounced'); const i = nf.querySelector('input'); if (i) i.focus(); }

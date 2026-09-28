@@ -132,6 +132,7 @@ img{max-width:100%}
 .m-who label span{font:700 13px/1.4 var(--f-doc);color:#6d5a44}
 .m-who input{height:36px;padding:0 4px;border:0;border-bottom:1.5px solid rgba(58,36,24,.45);border-radius:0;background:transparent;font:26px/36px var(--f-hand2);color:#3a2418}
 .m-who input:focus{outline:0;border-bottom-color:var(--red)}
+.m-tried{flex-basis:100%;display:flex;flex-wrap:wrap;gap:0 18px;margin:-4px 0 0!important;font:24px/1.3 var(--f-hand2);color:rgba(58,36,24,.6)}
 .m-hint{flex-basis:100%;margin:2px 0 0!important;font:20px/1.3 var(--f-hand);color:var(--pencil)}
 .m-ps{margin-top:18px;padding-top:14px;border-top:1px dashed rgba(58,36,24,.35)}
 .m-ps p:first-child{font-weight:700}
