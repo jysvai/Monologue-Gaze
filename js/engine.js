@@ -704,7 +704,7 @@
       (r.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
       const who = (r.feed && r.feed.who) || r.from || plain(r.to || '') || '회신', msg = (r.feed && r.feed.msg) || `회신 — ${plain(r.title)}`;
       L.fx.push({ t: q.due, who, msg, doc: r.doc, src: (r.feed && r.feed.src) || null });
-      news.push({ who, msg, app: r.app || '회신', t: 'doc', id: r.doc, src: r.src });
+      news.push({ who, msg, app: r.app || '회신', t: 'doc', id: r.doc, src: r.src, at: q.due });
     });
     feedItems().forEach(it => {
       if (it.id in L.fd || L.t < (it.at || 0) || !ok(it.need)) return;
@@ -712,14 +712,14 @@
       if (!ST.unl.includes(it.id)) ST.unl.push(it.id); // '#말id' 조건: 그 말이 왔음
       (it.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
       const o = ST.view.open, here = o && o.t === 'feed' && o.id === it.src; // 지금 펼쳐 둔 단톡방의 말은 알림으로 또 띄우지 않는다 (방에 바로 뜬다)
-      if (!it.me && !here) news.push({ who: it.who || '', msg: plain(it.msg || ''), app: it.app || feedName(it.src), t: 'feed', id: it.src, src: it.src });
+      if (!it.me && !here) news.push({ who: it.who || '', msg: plain(it.msg || ''), app: it.app || feedName(it.src), t: 'feed', id: it.src, src: it.src, at: L.fd[it.id] });
     });
     const dl = C.live.deadline;
     if (dl && !L.late && !ST.solved && L.t > dl.at) {
       L.late = true;
       const who = dl.who || '팀장', msg = dl.miss || `${dl.label || '기한'}이 지났다.`;
       L.fx.push({ t: dl.at, who, msg, late: true });
-      news.push({ who, msg, app: dl.label || '기한', late: true });
+      news.push({ who, msg, app: dl.label || '기한', late: true, at: dl.at });
     }
     save();
     renderBar();
@@ -740,13 +740,15 @@
   // 새 소식: 화면 오른쪽 위에 휴대폰 알림처럼 (누르면 그곳으로)
   function notify(news) {
     const box = statusBox('lvNotes', 'lv-notes');
-    const at = ltime(ST.live.t), gen = NOTEGEN;
+    const gen = NOTEGEN, now = ST.live.t;
+    news = news.map((n, i) => [n, i]).sort((a, b) => (a[0].at ?? now) - (b[0].at ?? now) || a[1] - b[1]).map(x => x[0]); // 온 차례대로, 각자 온 시각을 달고
+    const more = news.length - 3; // 한꺼번에 너무 많이 오면 앞의 것은 접고 「+N」
     news.slice(-3).forEach((n, i) => setTimeout(() => {
       if (!C || !box.isConnected || gen !== NOTEGEN) return;
       const el = document.createElement('button');
       el.type = 'button'; el.className = 'lv-note' + (n.late ? ' late' : '');
       if (n.t) { el.dataset.lvT = n.t; el.dataset.lvId = n.id || ''; el.dataset.lvSrc = n.src || ''; }
-      el.innerHTML = `<span class="lv-app">${esc(n.app || '')}<time>${esc(at)}</time></span><b>${esc(n.who)}</b><span class="lv-msg">${esc(trunc(n.msg, 70))}</span>`;
+      el.innerHTML = `<span class="lv-app"><span>${esc(n.app || '')}${i === 0 && more > 0 ? ` <small>외 ${more}건</small>` : ''}</span><time>${esc(ltime(n.at ?? now))}</time></span><b>${esc(n.who)}</b><span class="lv-msg">${esc(trunc(n.msg, 70))}</span>`;
       box.appendChild(el); swipeAway(el);
       while (box.children.length > 3) box.firstChild.remove();
       requestAnimationFrame(() => el.classList.add('on'));
@@ -885,8 +887,9 @@
     const L = ST.live, q = reqState(r.id), notes = ST.notes, why = (r.why || []).length;
     const row = (k, v) => (v ? `<tr><th>${esc(k)}</th><td>${inline(v)}</td></tr>` : '');
     let foot;
-    if (q && q.st === 'wait') foot = `<p class="rq-stamp" aria-hidden="true"><span>접수</span></p><p class="rq-st">접수 ${esc(lstamp(q.at))} · 회신 예정 ${esc(lstamp(q.due))} <small>(${hm(q.due - L.t)} 뒤)</small></p><p class="lv-waitrow"><button type="button" data-wait>회신까지 기다린다</button></p>`;
+    if (q && q.st === 'wait') foot = `<p class="rq-stamp" aria-hidden="true"><span>접수</span></p><p class="rq-st">접수 ${esc(lstamp(q.at))} · ${ST.solved ? '회신 전에 사건 종결' : `회신 예정 ${esc(lstamp(q.due))} <small>(${hm(q.due - L.t)} 뒤)</small>`}</p>${ST.solved ? '' : '<p class="lv-waitrow"><button type="button" data-wait>회신까지 기다린다</button></p>'}`;
     else if (q && q.st === 'done') foot = `<p class="rq-stamp ok" aria-hidden="true"><span>회신</span></p><p class="rq-st">회신 ${esc(lstamp(q.due))}</p>${C.docs[r.doc] ? itemBtn(C.docs[r.doc]) : ''}`;
+    else if (ST.solved) foot = `${q && q.st === 'no' ? `<p class="rq-no"><b>기각</b> ${inline(r.deny || '소명이 부족하다.')} <small>${esc(lstamp(q.at))}</small></p>` : ''}<p class="rq-st">${q ? '다시 올리기 전에' : '올리기 전에'} 사건 종결</p>`; // 종결된 사건에는 신청할 것이 없다
     else {
       const sel = tmp().rq[r.id] != null ? tmp().rq[r.id] : ''; // 신청서마다 고른 소명 메모 (올리기 전)
       const pick = !why ? '' : `<section class="rq-why"><h4>소명 자료 <small>이 요청이 왜 필요한지 보여 줄 메모 하나</small></h4>${notes.length ? noteGroups(notes).map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${String(sel) === String(n.id) ? ' on' : ''}"><input type="radio" name="rq-${esc(r.id)}" value="${n.id}" data-rq-pick="${esc(r.id)}"${String(sel) === String(n.id) ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span></label>`).join('')}</details>`).join('') : '<p class="rep-empty">수첩에 메모가 없다. 근거가 될 문장을 먼저 적어 둔다.</p>'}</section>`;
@@ -1187,7 +1190,8 @@
     const stamped = arr => (arr || []).map(b => (typeof b === 'string' ? when(b) : b && typeof b.p === 'string' ? { ...b, p: when(b.p) } : b));
     const epi = blocks(stamped(late && sol.late ? sol.late : sol.epilogue), 'epi', '결말');
     NOPIN = false;
-    const fin = C.live && ST.live ? `<p class="lv-fin">수사 개시부터 ${hm(ST.live.t)}${C.live.deadline ? ` · ${esc(C.live.deadline.label || '기한')} ${late ? '넘김' : '안'}` : ''}</p>` : '';
+    const dl = C.live && C.live.deadline, dlSeen = dl && (late || ok(dl.need)); // 끝내 몰랐던 기한은 말하지 않는다
+    const fin = C.live && ST.live ? `<p class="lv-fin">수사 개시부터 ${hm(ST.live.t)}${dlSeen ? ` · ${late ? '기한 넘김' : '기한 안에 종결'} <small>(${esc(dl.label || '기한')})</small>` : ''}</p>` : '';
     return `<div class="stamp${fresh ? ' fresh' : ''}"><div>사건<br>종결<small>${esc(sol.stamp || '')}</small></div></div>${fin}<div class="epi">${epi}</div>${sol.next ? `<p class="epi-next">${inline(sol.next)}</p>` : ''}`;
   }
   // 메모는 어디서 적었는지(문서·사람)끼리 묶는다. 접어 둔 묶음은 기억한다
