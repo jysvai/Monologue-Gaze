@@ -1702,6 +1702,14 @@
   // 메모 지우기: 연필로 줄을 긋고 나서 지운다
   function delNote(id) {
     const li = $(`.notes li[data-nid="${id}"]`);
+    // 보고서에 붙여 둔 메모는 한 번에 지우지 않는다 (작은 × 를 잘못 누르면 붙여 둔 증거까지 빠지므로): 한 번 더 누르면 지운다
+    const on = ST.solved ? [] : C.solution.claims.map((c, j) => (String(ST.report.claims[c.id]) === String(id) ? j + 1 : 0)).filter(Boolean);
+    if (li && on.length && !li.classList.contains('arm')) {
+      li.classList.add('arm');
+      toast(`보고서 ${on.join('·')}번에 붙인 메모다 — × 를 한 번 더 누르면 지운다`);
+      setTimeout(() => li.classList.remove('arm'), 3000);
+      return;
+    }
     if (!li || reduced()) return dropNote(id);
     if (li.classList.contains('gone')) return;
     li.classList.add('gone'); sfx('pen');

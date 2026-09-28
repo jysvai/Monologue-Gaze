@@ -355,6 +355,8 @@ img{max-width:100%}
 .notes .del{position:absolute;right:0;top:4px;width:20px;height:20px;padding:0;border:0;background:none;color:var(--pencil);font:16px/1 var(--f-web);opacity:.5;cursor:pointer}
 .notes li:hover .del,.notes .del:focus-visible{opacity:1}
 .n-rep{display:inline-block;min-width:1.35em;margin-left:6px;padding:1px 5px 0;border:1.5px solid rgba(176,52,42,.75);border-radius:50%;color:var(--red);font:19px/1.1 var(--f-hand);white-space:nowrap;text-align:center;vertical-align:1px;transform:rotate(-8deg)} /* 보고서에 붙인 메모: 빨간 연필로 친 주장 번호 동그라미 */
+.notes li.arm{background:rgba(176,52,42,.08)} /* 보고서에 붙인 메모의 × 를 한 번 누른 때: 한 번 더 누르면 지워진다 */
+.notes li.arm .del{opacity:1;color:var(--red)}
 .notes li.fresh,.kchip.fresh{animation:write .9s ease-out both}
 .notes li.again,.kchip.again{animation:noteAgain 1.4s ease-out} /* 이미 적은 줄을 다시 눌렀을 때: 형광펜이 한 번 지나간다 */
 @keyframes noteAgain{0%,35%{background:rgba(255,212,84,.5)}100%{background:transparent}}
