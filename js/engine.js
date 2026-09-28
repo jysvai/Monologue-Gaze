@@ -568,7 +568,7 @@
     const ev = Object.fromEntries((s.events || []).map(e => [e.id, e]));
     const order = solved ? s.events.map(e => e.id) : tlOrder(s);
     const hit = tmp().tl[s.id] || [];
-    const rows = order.map((id, i) => `<li class="tl-e${solved ? ' ok' : hit.includes(id) ? ' hit' : ''}"><span class="tl-slot">${inline((s.slots || [])[i] || String(i + 1))}</span><span class="tl-t">${inline(ev[id].t)}</span>${solved ? '' : `<span class="tl-mv"><button type="button" data-tl="${esc(s.id)}|${esc(id)}|-1" aria-label="앞으로"${i === 0 ? ' disabled' : ''}>▲</button><button type="button" data-tl="${esc(s.id)}|${esc(id)}|1" aria-label="뒤로"${i === order.length - 1 ? ' disabled' : ''}>▼</button></span>`}</li>`).join('');
+    const rows = order.map((id, i) => `<li class="tl-e${solved ? ' ok' : hit.includes(id) ? ' hit' : ''}" data-ev="${esc(id)}"><span class="tl-slot">${inline((s.slots || [])[i] || String(i + 1))}</span><span class="tl-t">${inline(ev[id].t)}</span>${solved ? '' : `<span class="tl-mv"><button type="button" data-tl="${esc(s.id)}|${esc(id)}|-1" aria-label="앞으로"${i === 0 ? ' disabled' : ''}>▲</button><button type="button" data-tl="${esc(s.id)}|${esc(id)}|1" aria-label="뒤로"${i === order.length - 1 ? ' disabled' : ''}>▼</button></span>`}</li>`).join('');
     const act = solved ? `<div class="c-done">${blocks(s.solved, `${s.id}@s`, s.name)}</div>` : `<p class="c-act"><button type="button" data-tl-check="${esc(s.id)}">이 순서로 맞춰 보기</button><span class="c-msg" role="status"></span></p>`;
     return `<article class="doc skin-${esc(s.skin || 'board')}"><header class="doc-h"><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(s.intro, `${s.id}@i`, s.name)}<ol class="tl">${rows}</ol>${act}</div></article>`;
@@ -1725,7 +1725,23 @@
     if (i < 0 || j < 0 || j >= o.length) return;
     [o[i], o[j]] = [o[j], o[i]];
     delete tmp().tl[sid];
+    // 바뀐 두 장이 제자리로 미끄러져 들어간다 (다시 그리기 전후의 자리 차이만큼 거슬러 올라갔다가)
+    const at = () => Object.fromEntries($$('.tl-e[data-ev]').map(li => [li.dataset.ev, li.getBoundingClientRect().top]));
+    const was = at();
     save(); sfx('page'); renderRead();
+    if (!reduced()) {
+      const now = at();
+      $$('.tl-e[data-ev]').forEach(li => {
+        const d = was[li.dataset.ev] - now[li.dataset.ev];
+        if (!d || !li.animate) return;
+        const mine = li.dataset.ev === eid; // 손에 든 카드는 다른 카드 위로 지나간다
+        if (mine) { li.style.position = 'relative'; li.style.zIndex = '2'; }
+        const how = { duration: 240, easing: 'cubic-bezier(.2,.75,.3,1)' };
+        li.animate([{ transform: `translateY(${d}px)` }, { transform: 'none' }], how).onfinish = () => { if (mine) { li.style.position = ''; li.style.zIndex = ''; } };
+        const sl = li.querySelector('.tl-slot'); // 칸의 시각은 판에 적힌 것: 제자리에 둔 채 스며 나온다
+        if (sl) sl.animate([{ transform: `translateY(${-d}px)`, opacity: 0 }, { transform: 'none', opacity: 1 }], how);
+      });
+    }
     const b = $(`[data-tl="${sid}|${eid}|${dir}"]`) || $(`[data-tl="${sid}|${eid}|${-dir}"]`);
     if (b) b.focus();
   }
