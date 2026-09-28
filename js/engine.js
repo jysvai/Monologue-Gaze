@@ -1753,10 +1753,10 @@
   }
   function setQ(srcId, q) {
     ST.view.src = srcId; ST.view.q[srcId] = q;
-    const n = norm(q), sq = ((ST.view.sq ||= {})[srcId] ||= []); if (n && !sq.includes(n)) sq.push(n); // 찾아본 말 (칩을 흐리게)
+    const n = norm(q), sq = ((ST.view.sq ||= {})[srcId] ||= []), again = sq.includes(n); if (n && !again) sq.push(n); // 찾아본 말 (칩을 흐리게)
     save();
     renderTabs(); renderList();
-    if (norm(q)) advance('search');
+    if (n && !again) advance('search'); // 한 번 찾아본 말을 다시 찾는 데는 수사 시간이 들지 않는다 (결과를 다시 펼칠 뿐)
   }
   function search(kid) {
     let s = curSrc();
@@ -1902,8 +1902,12 @@
     if (!s) return;
     const inp = {};
     (s.fields || []).forEach(fl => { const i = form.querySelector(`[name="${fl.id}"]`); inp[fl.id] = i ? i.value.trim() : ''; });
-    ST.view.qin[s.id] = inp;
     const hits = queryHits(s, inp);
+    if (!hits) { toast('조회할 것을 먼저 적는다'); const i = form.querySelector('input'); if (i) i.focus(); return; } // 빈칸 조회는 시간도 쓰지 않는다
+    // 같은 조회를 다시 하면 결과만 다시 펼친다 (수사 시간이 들지 않는다)
+    const sig = JSON.stringify((s.fields || []).map(fl => norm(inp[fl.id]))), done = ((ST.view.qdone ||= {})[s.id] ||= []), again = done.includes(sig);
+    if (!again) done.push(sig);
+    ST.view.qin[s.id] = inp;
     ST.view.qres[s.id] = hits || [];
     const before = census();
     const fr = (ST.found[s.id] ||= []);
@@ -1913,7 +1917,7 @@
     renderTabs(); renderList(); renderNotebook();
     if (hits && hits.length === 1) openItem({ t: 'doc', id: hits[0] });
     if (census() > before) { cue('clue'); toast(`새로 열린 것 ${census() - before}`); }
-    advance('query');
+    if (!again) advance('query');
   }
   function photoFind(xid, test) {
     const x = C._scenes[xid];
