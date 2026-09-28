@@ -862,7 +862,8 @@
     const on = o && o.t === 'doc' && o.id === d.id;
     return `<button type="button" class="item${on ? ' on' : ''}${ST.seen.includes(d.id) ? '' : ' new'}" data-doc="${d.id}"><span class="item-t">${esc(plain(d.title))}</span>${d.meta ? `<span class="item-m">${esc(plain(d.meta))}</span>` : ''}</button>`;
   };
-  const keyChips = attr => ST.keys.filter(k => C.keywords[k]).map(k => `<button type="button" class="chip" ${attr}="${k}">${esc(C.keywords[k].label)}</button>`).join('');
+  // 자료실의 「수첩의 단어로 찾기」: 찾아본 단어는 탐문에서 물어본 단어처럼 흐리게. 단, 그 단어로 걸리는 자료 가운데 안 읽은 것이 생기면 다시 진하게
+  const keyChips = s => { const sq = (ST.view.sq || {})[s.id] || []; return ST.keys.filter(k => C.keywords[k]).map(k => { const L = C.keywords[k].label, done = sq.includes(norm(L)) && archiveHits(s, L).every(d => ST.seen.includes(d.id)); return `<button type="button" class="chip${done ? ' done' : ''}" data-search="${k}">${esc(L)}</button>`; }).join(''); };
 
   function matchKeys(q) {
     const n = norm(q);
@@ -887,7 +888,7 @@
       res = hits.length ? `<p class="res-n">${scr ? `'${esc(q)}' 검색 결과 ${hits.length}건` : `「${esc(q)}」 ${hits.length}건`}</p>${hits.map(itemBtn).join('')}` : `<p class="res-none">${scr ? `'${esc(q)}'에 대한 검색 결과가 없습니다.` : `「${esc(q)}」에 해당하는 자료가 없다.`}</p>`;
     }
     const start = (s.start || []).map(id => C.docs[id]).filter(d => d && ok(d.need));
-    const chips = keyChips('data-search');
+    const chips = keyChips(s);
     return `<form class="arch-f" data-arch="${esc(s.id)}" role="search"><input id="aq-${esc(s.id)}" value="${esc(q)}" placeholder="${esc(s.placeholder || '찾을 단어')}" aria-label="${esc(s.name)} 검색어" autocomplete="off"><button type="submit">찾기</button></form>
       ${chips ? `<p class="chips-t">수첩의 단어로 찾기</p><div class="chips">${chips}</div>` : ''}
       <div class="res">${res}</div>
@@ -1619,7 +1620,9 @@
     if (p && !tmp().met.has(p.id)) { tmp().met.add(p.id); if (!(ST.asked[p.id] || []).length) playTalk($('.per-tr .qa-first'), { p, lead: 650 }); }
   }
   function setQ(srcId, q) {
-    ST.view.src = srcId; ST.view.q[srcId] = q; save();
+    ST.view.src = srcId; ST.view.q[srcId] = q;
+    const n = norm(q), sq = ((ST.view.sq ||= {})[srcId] ||= []); if (n && !sq.includes(n)) sq.push(n); // 찾아본 말 (칩을 흐리게)
+    save();
     renderTabs(); renderList();
     if (norm(q)) advance('search');
   }
