@@ -74,6 +74,10 @@
 .rq-stamp{margin:14px 0 4px;height:0;text-align:right;pointer-events:none}
 .rq-stamp span{display:inline-block;padding:6px 12px 5px;border:3px double #b0342a;color:#b0342a;font:800 18px/1 var(--f-doc);letter-spacing:.2em;transform:rotate(-9deg) translateY(-4px);opacity:.85;mix-blend-mode:multiply}
 .rq-stamp.ok span{border-color:#2f5d9a;color:#2f5d9a}
+.rq-stamp.fresh span{animation:rqStamp .24s cubic-bezier(.2,1.4,.5,1) 1.35s both} /* 막 올린 신청서: 큰 도장이 들리는 순간 서류에 찍힌다 */
+@keyframes rqStamp{from{opacity:0;transform:rotate(-9deg) translateY(-4px) scale(1.6)}}
+@keyframes rqStampOn{from{opacity:0}}
+@media (prefers-reduced-motion:reduce){ .rq-stamp.fresh span{animation:rqStampOn .01s .9s both} }
 .rq-i.no .item-m{color:#b0342a}
 .rq-i.wait .item-m::before{content:"";display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:#e0a33a;animation:lv-blink 1.4s ease-in-out infinite}
 @keyframes lv-blink{50%{opacity:.25}}

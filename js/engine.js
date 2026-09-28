@@ -879,6 +879,8 @@
     }
     delete tmp().rq[id];
     save(); liveSync(prev); renderTabs(); renderList(); renderRead();
+    const st = L.req[id].st === 'wait' && $('#paneRead .rq-stamp');
+    if (st) st.classList.add('fresh'); // 서류의 접수 도장은 화면 가운데 큰 도장이 걷힐 때 찍힌다
   }
 
   /* ───────── panes ───────── */
