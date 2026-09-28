@@ -47,6 +47,7 @@
 
   // 엔진이 누르면 크게 보여 주는 그림 (js/engine.js zoom 과 같은 고르기)
   const ZOOMABLE = '.cmp-art img, .b-img img, .map img';
+  const coarse = window.matchMedia ? matchMedia('(pointer:coarse)') : null;
   function tidy(root) {
     if (!root || !root.querySelectorAll) return;
     const list = root.matches && root.matches('input,textarea') ? [root] : root.querySelectorAll('input,textarea');
@@ -56,6 +57,8 @@
       i.setAttribute('autocomplete', 'off'); i.setAttribute('spellcheck', 'false'); i.setAttribute('autocorrect', 'off'); i.setAttribute('autocapitalize', 'off');
       // 휴대폰 자판의 Enter 글쇠 이름: 검색창은 「검색」, 잠금은 「이동」, 나머지는 「완료」
       if (!i.hasAttribute('enterkeyhint')) i.setAttribute('enterkeyhint', i.closest('.arch-f, .q-f, [role="search"]') ? 'search' : i.closest('.lock-f') ? 'go' : 'done');
+      // 손가락 기기: 글자가 16px 보다 작은 칸을 누르면 아이폰 사파리가 화면을 확대해 버린다 → 그런 칸만 16px 로 (화면 속 검색창·조회칸 등)
+      if (coarse && coarse.matches && !/^(radio|checkbox)$/.test(i.type) && parseFloat(getComputedStyle(i).fontSize) < 16) i.style.fontSize = '16px';
     });
     const imgs = root.matches && root.matches(ZOOMABLE) ? [root] : root.querySelectorAll(ZOOMABLE);
     imgs.forEach(img => {
