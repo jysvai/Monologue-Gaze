@@ -59,6 +59,11 @@
 .rq-t td{padding:7px 10px;border:1px solid #9aa0a6}
 .rq-why h4{margin:14px 0 6px;font:700 14px/1.4 var(--f-sys)}
 .rq-why h4 small{font:12px var(--f-web);color:#5a5f66;font-weight:400}
+/* 전산 신청서의 올리기 단추·고른 소명 메모 표시도 화면 양식대로 (보고서의 화면 양식과 같게 — 손글씨 ✓·연필 단추가 아니라) */
+.skin-form .btn-hand{height:auto;padding:8px 20px;border-radius:6px;background:#2f5fc8;color:#fff;font:700 13px/1.2 var(--f-web);transform:none}
+.skin-form .btn-hand:hover{background:#2551b0}
+.skin-form .rep-opt.on{border-left-color:#2f5fc8;background:#eef3fd}
+.skin-form .rep-opt.on::after{left:auto;right:10px;top:7px;font:700 14px/1 var(--f-web);color:#2f5fc8;transform:none;animation:none}
 .rq-no{margin:10px 0;padding:8px 12px;border-left:4px solid #b0342a;background:rgba(176,52,42,.07);font:13px/1.6 var(--f-web)}
 .rq-no b{margin-right:6px;color:#b0342a}
 .rq-no small{margin-left:6px;font:11px var(--f-mono);opacity:.7}
