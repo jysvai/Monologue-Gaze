@@ -311,6 +311,7 @@
         { note: '[Q 분서 메모] 10.31 J. 켈 불러 물음. 27일 밤엔 선원 숙소 식당에서 새벽까지 카드놀이를 했다 함. 동석자 다섯 — 모두 같은 배 선원.' },
       ] },
       d_l_rose: { cls: 'ink-sepia', src: 'post', need: ['k_scrivener'], title: '스타 신문 기자 양반께', meta: '10월 26일(금) 대필 · 10월 27일(토) 첫 우편 도착 · 뜯지 않은 채 발견', body: [
+        { img: 'roseletter', cap: '「매듭장이」 투서 더미 속에서 뜯기지 않은 채 나온 봉투 (본지 도판).' },
         '스타 신문 기자 양반께.',
         '저는 [[솔트 레인]] [[블루 랜턴]]에 묵는 로즈 캘러웨이라는 사람입니다. 글을 몰라 교회 앞 대서인에게 불러 적게 합니다.',
         { p: '저는 수요일과 토요일 아침마다 [[스리 키스]] 뒷방 바닥을 닦습니다. 지난 [[수요일 아침]], 모금함을 맡은 양반이 함을 열어 은행 가방에 돈을 옮기다가, 금화 몇 닢과 은화 한 줌을 따로 자기 조끼 주머니에 넣는 것을 보았습니다. 제가 문간에 서 있는 것을 그 양반도 보았습니다.', f: 'f_rose_letter' },
@@ -338,6 +339,7 @@
         { m: '편지는 크게 떠들고, 장부는 작게 말한다. 작은 쪽을 한 줄씩 셀 것.' },
       ] },
       d_b_patrol: { src: 'books', need: ['k_patrollog'], title: '자경위원회 순찰 일지 — 10월 27일(토) ~ 28일(일)', meta: '스리 키스 뒷방 · 기록 S. C. · 10월 30일 압수', body: [
+        { img: 'patrollog', cap: '압수한 일지를 펼친 면 (본지 도판).' },
         { rows: [
           ['00:55', '뒷방 엶. 등불 넷에 기름 채움.', 'S.C.'],
           ['01:00', '1조 [[딜|k_dill]] · [[핍스|k_phipps]] 나감 (캔들 마켓 – 부두 길)', 'S.C.'],
@@ -497,6 +499,14 @@
     },
     artStyle: '19th-century British newspaper wood engraving, dense cross-hatched black ink on off-white newsprint, Victorian London East End c.1888: gas-lit fog, wet cobblestones, soot-dark brick. Evidence items are drawn like engraved catalogue plates with the same hatching. Figures only as silhouettes, from behind or with faces hidden in shadow. No faces, no blood, no wounds, no bodies, no readable text, no real brands.',
     art: {
+      patrollog: { use: '압수한 자경위원회 순찰 일지 펼친 면', alt: '압수한 순찰 일지 펼친 면 — 왼쪽은 줄마다 잉크가 짙고 옅고, 오른쪽은 고르다', ratio: '4:3',
+        svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#e9e1cb"/><rect x="30" y="35" width="140" height="90" fill="#f4efe0" stroke="#6b6250"/><path d="M100 35v90" stroke="#6b6250"/><g stroke-width="2"><path d="M40 50h50" stroke="#222"/><path d="M40 60h46" stroke="#777"/><path d="M40 70h50" stroke="#333"/><path d="M40 80h42" stroke="#999"/><path d="M40 90h48" stroke="#444"/></g><g stroke="#555" stroke-width="2"><path d="M110 50h50M110 60h48M110 70h50M110 80h46M110 90h50M110 100h44"/></g><circle cx="165" cy="25" r="7" fill="#c9a24a"/><rect x="20" y="118" width="40" height="6" fill="#f7f7f2" stroke="#6b6250"/></svg>',
+        prompt: 'Engraved catalogue plate: an open patrol logbook lying on a plain pub back-room table, beside an oil lamp and a folded white armband. The left page is filled with rows of handwriting rendered as hatched lines whose ink weight changes from line to line, some heavy black, some faint grey; the right page is filled top to bottom in one single even ink weight. All writing is illegible hatching, no letters.',
+        must: '왼쪽 쪽은 줄마다 잉크 짙기가 다름 · 오른쪽 쪽은 처음부터 끝까지 고른 한 가지 짙기 · 흰 완장 · 등잔 · 글자는 읽히지 않게' },
+      roseletter: { use: '투서 더미 속 뜯지 않은 봉투', alt: '뜯은 편지 더미 위에 놓인 뜯지 않은 봉투 — 서명 자리에 가위표', ratio: '4:3',
+        svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#e9e1cb"/><g fill="#f4efe0" stroke="#6b6250"><rect x="30" y="60" width="90" height="55" transform="rotate(-8 75 87)"/><rect x="80" y="70" width="90" height="55" transform="rotate(6 125 97)"/><rect x="55" y="40" width="95" height="58"/></g><path d="M55 40l47 30 48-30" fill="none" stroke="#6b6250"/><path d="M125 80l10 10M135 80l-10 10" stroke="#222" stroke-width="2"/><circle cx="70" cy="85" r="8" fill="none" stroke="#555"/><path d="M150 120l35-10" stroke="#555" stroke-width="3"/></svg>',
+        prompt: 'Engraved catalogue plate: a heap of opened, torn-open Victorian letters and envelopes on a desk, and lying on top of them one sealed, unopened envelope whose wax seal is intact, marked in the corner with a single simple cross (X) where a name should be; a round receiving handstamp on it rendered only as illegible hatching; a paper knife lying beside the heap. No legible writing.',
+        must: '뜯긴 편지 더미 위 뜯지 않은 봉투 하나 (봉인 그대로) · 봉투 귀퉁이 가위표 하나 · 접수 소인은 읽히지 않게 · 종이칼' },
       cover: { use: '기록실 폴더 표지 — 끈으로 묶인 붉은 잉크 편지 다발', ratio: '4:3',
         svg: eng('#2c241c', `<circle cx="168" cy="28" r="26" fill="#f0c36b" opacity=".22"/><rect x="40" y="40" width="96" height="66" fill="#e3d8bd" transform="rotate(-6 88 73)"/><rect x="56" y="48" width="96" height="66" fill="#f1e8d2" transform="rotate(4 104 81)"/>${scrawl(70, [66, 76, 86, 96], '#9b2a1f')}<path d="M48 90 L158 72 M100 42 L108 122" stroke="#7a6a4a" stroke-width="2"/><circle cx="104" cy="81" r="5" fill="#8a1f16"/>`, '끈으로 묶인 편지 다발'),
         prompt: 'A bundle of old handwritten letters in red ink, tied crosswise with coarse string, lying on a scarred wooden police desk beside a brass oil lamp and a police constable\'s whistle on a chain, a folded Victorian newspaper underneath, 1888 London, low warm lamplight, deep shadows, still life seen from slightly above. The handwriting is an illegible scrawl.' },

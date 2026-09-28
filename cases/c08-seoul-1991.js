@@ -227,6 +227,7 @@
         '광장 건너 가람역은 땅 위 철교 끝에 붙은 고가 역사. 전동차가 들어올 때마다 부스 유리가 울린다.',
       ] },
       d_spsolmaru: { src: 'map', skin: 'report', title: '솔마루 시장 입구 공중전화', meta: '녹취 ⑥ 역추적 지점 · 1991. 11. 9 19:33 도착', body: [
+        { img: 'solmaru', cap: '11월 9일 19:40 — 시장 입구 부스 (감식계 촬영).' },
         '시장 입구 쌀가게 앞 동전식 부스 한 대. 형사 도착 때 부스는 비어 있었음.',
         '토요일 저녁이라 장 보러 나온 사람이 많았음. 쌀가게 주인: "전화 쓰는 사람이 한둘이어야지. 기억 안 나요."',
         '고물 트럭 한 대가 확성기를 틀고 시장 앞을 지나고 있었음 (녹취 ⑥의 뒤쪽 소리와 같음).',
@@ -577,6 +578,10 @@
     },
     artStyle: 'Early-1990s Seoul, shot on a consumer compact 35mm film camera: color negative film look, on-camera flash at night, slight green-orange color cast from sodium street lamps, visible grain, soft focus; police evidence photos are flat flash on grey paper; newspaper images are coarse black-and-white halftone. 1991 Korean street details: card-and-coin public phone booths, an elevated steel subway bridge, red-brick multi-family houses, small corner shops with sliding aluminium-glass doors, tangled utility wires, a church bell tower with a red neon cross. No faces (backs, silhouettes or blurred figures only), no readable text, no logos or brand marks.',
     art: {
+      solmaru: { use: '솔마루 시장 입구 공중전화 부스', alt: '토요일 저녁 솔마루 시장 입구 — 쌀가게 앞 공중전화 부스와 확성기 단 고물 트럭', ratio: '4:3',
+        svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#3c3a44"/><rect x="20" y="60" width="160" height="70" fill="#5b5448"/><rect x="40" y="70" width="30" height="55" fill="#c9c4a8" opacity=".8"/><g fill="#e8e0c8"><ellipse cx="110" cy="112" rx="10" ry="6"/><ellipse cx="128" cy="112" rx="10" ry="6"/></g><rect x="140" y="95" width="45" height="22" fill="#7a7a70"/><path d="M150 95v-8h10" stroke="#aaa" stroke-width="2"/><circle cx="70" cy="40" r="8" fill="#f1c36a" opacity=".7"/></svg>',
+        prompt: 'Early-1990s Seoul, colour-negative compact-camera photo at Saturday dusk: a single coin-operated public phone booth standing at the entrance of a busy traditional market, right beside a small rice shop with open sacks of rice and grain on its stall; blurred shoppers seen only from behind; a small junk-collecting pickup truck with a loudspeaker on its roof passing in front; warm shop lights and a sodium street lamp. The station here is underground: no elevated railway, no trains in view. No faces, no readable text or signs.',
+        must: '동전식 공중전화 부스 하나 · 바로 옆 쌀가게 (쌀 포대) · 확성기 단 고물 트럭 · 뒷모습 행인 · 고가 철로 없음' },
       cover: { use: '기록실 폴더 표지 — 카세트 녹음기와 라벨 붙은 테이프, 전화기', ratio: '4:3',
         svg: `<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#3c3f41"/><rect x="20" y="40" width="96" height="62" rx="6" fill="#1f2224"/><rect x="30" y="50" width="76" height="26" rx="3" fill="#8e9497"/><circle cx="48" cy="63" r="7" fill="#1f2224"/><circle cx="88" cy="63" r="7" fill="#1f2224"/><g fill="#bfc4c6">${[0, 1, 2, 3, 4].map(i => `<rect x="${30 + i * 16}" y="86" width="12" height="8"/>`).join('')}</g><g transform="rotate(-8 150 100)"><rect x="124" y="84" width="54" height="34" rx="3" fill="${PAPER}"/><rect x="130" y="90" width="42" height="12" fill="#d9c27a"/><circle cx="140" cy="110" r="4" fill="#555"/><circle cx="162" cy="110" r="4" fill="#555"/></g><path d="M130 30 h50 v26 h-50z" fill="#b9b3a2"/><path d="M134 30 q21 -14 42 0" fill="none" stroke="#b9b3a2" stroke-width="6"/></svg>`,
         prompt: 'Top-down photo on a grey police desk in 1991 Seoul: a black portable cassette recorder with a small microphone clipped to a beige push-button home telephone handset by a suction-cup pickup, six audio cassette tapes in clear cases with handwritten labels that are blurred and unreadable, a ballpoint pen, harsh overhead fluorescent light, slight color cast.' },

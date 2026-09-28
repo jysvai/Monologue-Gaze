@@ -1,6 +1,6 @@
 /* CASE 12 — 스물한 개의 봉투 (모티프: 1994년 도쿄 공원 토막 사건 · 대폭 각색) */
 (function () {
-  const J = '東都日報 · 번역: 특별수사본부 통역반';
+  const J = '東都日報 · 한국어 번역지';
 
   MG.registerCase({
     id: 'c12', no: 12, region: 'overseas',
@@ -27,7 +27,7 @@
     start: ['k_1014', 'k_park', 'k_takano', 'k_bags'],
     sources: [
       { id: 'paper', type: 'archive', name: '東都日報 축쇄판', skin: 'news', paper: '東都日報', start: ['d_n_1014'],
-        desc: '도쿄 지역지 「도토 일보」 축쇄판. 기사마다 수사본부 통역반의 한국어 번역지가 끼워져 있다.', placeholder: '찾을 말 (사람, 장소, 물건)' },
+        desc: '도쿄 지역지 「도토 일보」 축쇄판. 기사마다 한국어 번역지가 끼워져 있다.', placeholder: '찾을 말 (사람, 장소, 물건)' },
       { id: 'hq', type: 'list', name: '특별수사본부 서류함', skin: 'report', paper: '浅葱警察署 特別捜査本部',
         desc: '보고서, 감정서, 조서, 임의 제출 받은 장부와 일지. 실마리가 늘면 서류도 는다.', empty: '아직 철해진 서류가 없다.' },
       { id: 'ph', type: 'photo', name: '현장 사진첩', need: ['k_eastgate'],
@@ -112,7 +112,7 @@
         sets: [
           { id: 'cm_saw', title: '뼈 절단면과 톱', meta: '법의학 교실 · 과수연 물리과', need: ['k_sawmarks', 'k_kimura'],
             intro: ['왼쪽 정강이뼈 절단면을 실리콘으로 본떴다. 같은 굵기의 돼지 뼈를 톱 네 가지로 시험 삼아 잘라 나란히 놓았다.'],
-            evidence: { label: '절단면 본 (왼쪽 정강이뼈)', t: '톱니 자국 간격 약 2.0mm. 가늘고 곧은 줄이 한쪽 방향으로만 나 있다. 가장자리 열 변색 없음. 한 면을 세 번에 나눠 끊었다.' },
+            evidence: { label: '절단면 본 (왼쪽 정강이뼈)', art: 'saw_cast', t: '톱니 자국 간격 약 2.0mm. 가늘고 곧은 줄이 한쪽 방향으로만 나 있다. 가장자리 열 변색 없음. 한 면을 세 번에 나눠 끊었다.' },
             q: '절단면과 같은 자국을 남긴 시험 절단은?',
             options: [
               { id: 'a', label: '전동 띠톱 (기무라 정육점에서 빌림)', t: '간격 1.5mm 줄이 끊김 없이 한 번에 이어짐 · 가장자리가 마찰열로 누렇게 변색' },
@@ -144,7 +144,7 @@
             solveNeed: ['!f_kuroyu', 'k_kashiwayu'] },
           { id: 'cm_knot', title: '봉투 매듭', meta: '과수연 물리과 · 매듭 시료 4건', need: ['k_sack'],
             intro: ['스물한 개 봉투의 매듭은 모두 같았다. 사건에 닿은 곳마다 봉투나 자루를 묶은 것을 한 점씩 받아 왔다.'],
-            evidence: { label: '봉투 21개의 매듭', t: '봉투 목을 한 번 비튼 뒤 두 번 감고, 끝을 고리로 빼냈다. 고리를 당기면 한 번에 풀린다. 모두 왼쪽 감기.' },
+            evidence: { label: '봉투 21개의 매듭', art: 'knot_bag', t: '봉투 목을 한 번 비튼 뒤 두 번 감고, 끝을 고리로 빼냈다. 고리를 당기면 한 번에 풀린다. 모두 왼쪽 감기.' },
             q: '같은 손버릇으로 묶인 것은?',
             options: [
               { id: 'a', label: '기무라 정육점 고기 봉투', t: '입구를 접어 고무줄로 두 번 감음' },
@@ -248,6 +248,7 @@
       ] },
       d_n_jiage: { src: 'paper', blood: false, find: ['k_taisei', 'k_murakoshi'], kicker: '朝刊 · 経済', meta: '1994년 6월 3일 (금) 조간 · 9면',
         title: '거품 뒤의 "땅 모으기" — 멈춰 선 가시와다이 2초메 재개발', body: [
+        { img: 'jiage', cap: '빈 터 사이에 홀로 남은 목욕탕 (6월 2일 촬영).' },
         '땅값이 치솟던 1989년, 아사기구 가시와다이 2초메의 한 블록을 사 모아 고층 맨션을 짓겠다는 계획이 발표됐다. 매수를 맡은 곳은 지역 부동산 회사 [[가게노 흥업]].',
         '그러나 거품이 꺼지며 은행 돈줄이 말랐다. 블록 스무 필지 가운데 열아홉은 사들였지만, 마지막 한 필지가 남았다. 60년 된 동네 목욕탕이다.',
         '가게노 흥업 [[무라코시 데쓰야]] 사장(46)은 "마지막 한 곳만 풀리면 은행도 다시 돈을 풀 것"이라며 "연내에 매듭짓겠다"고 말했다.',
@@ -340,7 +341,7 @@
       ] },
       d_tip: { cls: 'f-dokdo ink-blue', src: 'hq', need: ['k_sawmarks'], skin: 'letter', meta: '10월 17일 수사본부 앞 도착 · 소인 아사기 · 보낸 이 없음',
         title: '익명 투서', body: [
-        { note: '원문 볼펜 글씨. 통역반 옮김.' },
+        { note: '원문 볼펜 글씨. (한국어로 옮김)' },
         '특별수사본부 앞.',
         '공원 서쪽 [[기무라 정육점]]을 조사하십시오. 밤마다 가게 안에서 톱 돌아가는 소리가 납니다. 쓰레기 봉투도 늘 산처럼 내놓습니다.',
         '고기를 뼈째 자르는 사람이니 그런 일도 할 수 있을 겁니다.',
@@ -623,6 +624,18 @@
     },
     artStyle: 'Tokyo, autumn 1994 (Heisei 6), Japanese police and press documentation: 35mm color negative film with slightly faded Fuji-like greens and magentas, fine grain, harsh on-camera flash for night and interior shots, flat grey dawn light outdoors; press photos reproduced as coarse black-and-white newspaper halftone. Period details only: milky semi-transparent garbage bags, green wire-mesh park trash bins, pink coin payphones, VHS tapes, dedicated word processors, pagers, wooden sento lockers and tiled washing floors. No readable text, no logos, no recognizable faces.',
     art: {
+      knot_bag: { use: '봉투 21개의 매듭 (감식 사진)', alt: '반투명 봉투 목의 매듭 — 한 번 비틀어 왼쪽으로 두 번 감고 끝을 고리로 뺐다', ratio: '4:3', raster: true,
+        svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#8d8d88"/><path d="M60 150q10-60 40-80q30 20 40 80z" fill="#e6e6df" opacity=".85" stroke="#9a9a92"/><path d="M92 70q8-6 16 0" stroke="#9a9a92" stroke-width="5" fill="none"/><path d="M90 62q10-6 20 0" stroke="#9a9a92" stroke-width="5" fill="none"/><path d="M104 58q16-20 4-30q-12 8-4 30" fill="none" stroke="#9a9a92" stroke-width="4"/><rect x="140" y="120" width="45" height="6" fill="#dcdad0"/></svg>',
+        prompt: '1994 colour-negative police evidence photograph, flat flash on grey paper: the neck of a milky semi-transparent garbage bag, twisted once, then wound twice round to the left, and its end pulled back through the windings as a slip loop that would come undone with one pull; a blank numbered tag and a small scale ruler beside it; the contents of the bag are not visible. Fine grain.',
+        must: '반투명 봉투 목 · 한 번 비틂 · 왼쪽으로 두 번 감음 · 끝을 고리로 뺌 (당기면 풀리는 매듭) · 빈 번호표와 자 · 속은 안 보이게' },
+      saw_cast: { use: '정강이뼈 절단면 실리콘 본', alt: '회색 실리콘 본 — 가늘고 곧은 톱 자국이 한 방향으로, 세 번에 나눠 끊은 면', ratio: '4:3', raster: true,
+        svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#1b1b1b"/><ellipse cx="100" cy="75" rx="55" ry="38" fill="#8a8a86"/><g stroke="#6a6a66" stroke-width="1.5"><path d="M55 60h35M52 68h38M52 76h38M54 84h36"/><path d="M92 58h30M92 66h32M92 74h32M92 82h30"/><path d="M124 62h26M124 70h28M124 78h26"/></g><path d="M90 45v60M122 45v60" stroke="#5a5a56" stroke-width="2"/><rect x="60" y="125" width="80" height="6" fill="#dcdad0"/></svg>',
+        prompt: '1994 forensic laboratory macro photograph under flat flash: a grey silicone-rubber cast of a cut bone end lying on black card; the cast face shows fine, straight, parallel saw striations about 2 mm apart, all running in one direction, across three slightly offset cutting planes where the cut was made in three passes; no heat discoloration; a small scale ruler beside it. Only the grey rubber cast: no bone, no flesh, no blood.',
+        must: '회색 실리콘 본 (뼈·살·피 없음) · 가늘고 곧은 톱 자국이 한 방향으로 · 조금씩 어긋난 세 면 · 자' },
+      jiage: { use: '신문 사진 — 빈 터 사이에 홀로 남은 목욕탕', alt: '신문 사진 — 가림막 친 빈 터 한가운데 홀로 남은 굴뚝 높은 목조 목욕탕', ratio: '4:3',
+        svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#d9d6cc"/><rect x="0" y="95" width="200" height="55" fill="#b9b5aa"/><g fill="#8e8a80"><rect x="10" y="80" width="50" height="18"/><rect x="140" y="80" width="55" height="18"/></g><rect x="75" y="60" width="50" height="40" fill="#5d5750"/><path d="M70 60l30-18 30 18z" fill="#4b463f"/><rect x="118" y="20" width="8" height="45" fill="#6b4a3a"/></svg>',
+        prompt: 'June 1994 Japanese newspaper photograph reproduced in coarse black-and-white halftone dots: a Tokyo shitamachi block cleared into empty fenced gravel lots behind corrugated metal hoardings, and standing alone in the middle an old two-storey wooden public bathhouse with a tall brick chimney; overcast sky, no people, no readable signs.',
+        must: '가림막 친 빈 자갈 터 · 한가운데 홀로 남은 2층 목조 목욕탕 · 높은 벽돌 굴뚝 · 망점 인쇄 · 사람 없음' },
       cover: { use: '기록실 폴더 표지 — 새벽 공원길의 쓰레기통과 폴리스 라인', ratio: '4:3',
         svg: '<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="150" fill="#8d9490"/><rect width="200" height="62" fill="#b9bdb4"/><rect x="150" y="16" width="8" height="38" fill="#5a4a42"/><rect y="62" width="200" height="88" fill="#5f6b5a"/><path d="M60 150 L95 62 H112 L170 150Z" fill="#c2b49a"/><ellipse cx="40" cy="78" rx="38" ry="7" fill="#9fb0ae" opacity=".7"/><g fill="#3d5a44" stroke="#223326"><rect x="118" y="86" width="14" height="18"/><rect x="138" y="96" width="16" height="22"/><rect x="160" y="110" width="18" height="26"/></g><g fill="#e8e6dc" opacity=".75"><ellipse cx="146" cy="96" rx="7" ry="4"/><ellipse cx="169" cy="110" rx="8" ry="4"/></g><path d="M18 92 L200 70" stroke="#e0b82a" stroke-width="2.5"/><path d="M20 92 v40 M190 71 v50" stroke="#3a3530" stroke-width="3"/></svg>',
         prompt: 'A narrow sand path through a small Tokyo neighborhood park at grey dawn in autumn 1994, a row of green wire-mesh trash bins along the path with milky semi-transparent garbage bags inside whose contents are indistinct, yellow police tape strung between two cherry trees, a long pond glinting behind, a distant brick bathhouse chimney over low shop roofs, no people, cold flat light, documentary press-photo framing from a low angle.',
