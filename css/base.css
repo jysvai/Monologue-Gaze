@@ -80,6 +80,7 @@ img{max-width:100%}
 .roster ::selection{background:rgba(255,212,84,.55);color:inherit}
 .roster h2{margin:0;font:700 17px/1.4 var(--f-doc)}
 .ro-sub{margin:0 0 8px;font:19px/1.25 var(--f-hand);color:var(--pencil)}
+.ro-ask{margin:-2px 0 10px;font:20px/1.25 var(--f-hand);color:var(--red);transform:rotate(-.6deg)} /* 들어오자마자 묻는 한 줄 */
 .roster ul{margin:0 0 12px;padding:0;list-style:none}
 .roster li{display:flex;flex-wrap:wrap;align-items:center;gap:2px 12px;min-height:44px;padding:4px 0;border-bottom:1px solid var(--rule)}
 .ro-me form{display:contents}

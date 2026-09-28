@@ -1232,7 +1232,7 @@
   }
 
   /* ── 근무 명부: 이 브라우저를 쓰는 수사관들. 고르기 · 새 서랍 받기 · 이름 고치기 · 지우기 */
-  function rosterHtml() {
+  function rosterHtml(ask) { // ask: 들어오자마자 누가 앉았는지 묻는 때
     const r = roster(), main = MG.cases.filter(c => c.kind !== 'tutorial' && !c.live), live = MG.cases.filter(c => c.live); // 기록실 위쪽 셈과 같게: 미제 기록 · 현행 따로
     const row = p => {
       const s = p.id === PID ? S : load(p.id), sts = Object.values(s.cases);
@@ -1242,7 +1242,7 @@
       if (p.id === PID) return `<li class="ro-me"><form data-pname><input maxlength="12" value="${esc(p.name)}" placeholder="${esc(who(p))}" aria-label="내 이름 (고칠 수 있다)"></form>${stat}<span class="ro-now">지금 서랍</span></li>`;
       return `<li><button type="button" class="ro-pick" data-player="${esc(p.id)}">${esc(who(p))}</button>${stat}<button type="button" class="reset" data-drop="${esc(p.id)}">명부에서 지우기</button></li>`;
     };
-    return `<section class="roster" aria-label="근무 명부"><h2>강력2팀 근무 명부</h2><p class="ro-sub">서랍은 수사관마다 따로다. 한 컴퓨터를 나눠 써도 남의 수첩을 이어 쓰지 않는다.</p>
+    return `<section class="roster" aria-label="근무 명부"><h2>강력2팀 근무 명부</h2><p class="ro-sub">서랍은 수사관마다 따로다. 한 컴퓨터를 나눠 써도 남의 수첩을 이어 쓰지 않는다.</p>${ask ? `<p class="ro-ask">지금 열린 서랍은 ${esc(who(r.list.find(p => p.id === PID)))}의 것이다. 다른 사람이 앉았으면 제 이름을 누르거나 새 서랍을 받는다.</p>` : ''}
       <ul>${r.list.map(row).join('')}</ul>
       <form class="ro-new" data-pnew><input maxlength="12" placeholder="새 수사관 이름" aria-label="새 수사관 이름"><button type="submit" class="btn-hand">새 서랍 받기</button></form></section>`;
   }
@@ -1353,7 +1353,7 @@
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
       <header class="cab-top"><p class="cab-kicker">서울서부경찰서 강력2팀 · 미제사건 기록실</p><h1 class="cab-title">Monologue Gaze</h1><p class="cab-sub">기록은 혼잣말을 한다. 들어주는 건 당신이다.</p>
         <p class="cab-ctl">${whoBtn(showRoster)}${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}</p><p class="cab-stat">종결 <b>${solvedMain}</b> / ${main.length}${live.length ? ` · 현행 <b>${solvedLive}</b> / ${live.length}` : ''} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}</p></header>
-      ${showRoster ? rosterHtml() : ''}
+      ${showRoster ? rosterHtml(showRoster === 'ask') : ''}
       ${intro}
       <section class="drawer" aria-label="사건 파일">${MG.cases.filter(c => !c.live).map(folder).join('')}</section>
       ${live.length ? `<section class="duty" aria-label="현행 사건"><h2 class="duty-h">당직 · 현행 사건</h2><p class="duty-sub">당직 때마다 다른 팀에 지원으로 붙는다. 지금 벌어지는 사건이라, 기록을 넘기는 동안에도 시계는 간다.</p><div class="drawer">${live.map(folder).join('')}</div></section>` : ''}
@@ -2085,7 +2085,7 @@
     // 새로 고침하면 브라우저가 전에 보던 자리로 스크롤을 되돌린다. 누가 앉았는지 묻는 명부가 위에 가려지면 안 되므로 그때만 맨 위에서
     const ask = roster().list.length > 1;
     try { history.scrollRestoration = ask ? 'manual' : 'auto'; } catch (e) { /* ignore */ }
-    if (ask) { cabinet(true); window.scrollTo(0, 0); }
+    if (ask) { cabinet('ask'); window.scrollTo(0, 0); }
     else if (S.current && MG.byId[S.current]) openCase(S.current); else cabinet();
   };
   MG.state = () => S;
