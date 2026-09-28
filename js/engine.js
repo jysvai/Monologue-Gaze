@@ -423,7 +423,15 @@
     const tone = snd ? snd.tone(`${C.id}/${p.id}`) : 130, htone = snd ? snd.tone('hero') : 150;
     const fast = reduced();
     const pr = $('#paneRead');
-    const keep = el => { if (!pr || !el.isConnected) return; const r = el.getBoundingClientRect(), b = pr.getBoundingClientRect(); if (r.bottom > b.bottom - 36) pr.scrollTop += r.bottom - b.bottom + 36; };
+    // 말이 나오는 대로 따라 내려간다 — 단, 앞의 대답을 다시 보려고 위로 올려 둔 동안은 끌어내리지 않는다 (끝까지 다시 내려오면 또 따라간다)
+    let auto = null;
+    const keep = el => {
+      if (!pr || !el.isConnected) return;
+      if (auto != null && pr.scrollTop < auto - 24 && pr.scrollHeight - pr.clientHeight - pr.scrollTop > 60) return;
+      const r = el.getBoundingClientRect(), b = pr.getBoundingClientRect();
+      if (r.bottom > b.bottom - 36) pr.scrollTop += r.bottom - b.bottom + 36;
+      auto = pr.scrollTop;
+    };
     const dots = document.createElement('p'); dots.className = 'c-dots'; dots.setAttribute('aria-hidden', 'true'); dots.innerHTML = '<i></i><i></i><i></i>';
     const me = { timer: 0, saved: new Map() };
     me.finish = () => {
