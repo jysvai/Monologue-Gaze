@@ -287,7 +287,7 @@
         '서윤의 휴대폰은 그날 밤 재희의 천가방에 담겨 나갔고, 끝내 나오지 않았다. "집콕" 글의 라테 사진은 여름에 서윤이 재희에게 보내 준 사진이었다.',
         '〈푸른 정류장〉의 원본, 레이어 14개짜리 파일은 서윤의 노트북에 그대로 남아 있었다. 열네 번째 레이어의 이름은 "서명(SY)"이었다.',
       ],
-      next: '보고서를 올리자 팀장이 열쇠 하나를 건넸다. "M이 남기고 간 서랍이야. 은천서로 보내 달라고 제 발로 손을 들었지. 이제 네가 열어 봐." → 기록실로 돌아가 CASE 01부터.',
+      next: '보고서를 올리자 팀장이 턱으로 M의 서랍을 가리켰다. "은천서로 보내 달라고 제 발로 손을 든 사람이야. 남은 칸은 이제 네 몫이다." → 기록실로 돌아가 CASE 01부터.',
     },
     artStyle: 'Casual smartphone photo taken in 2025 Seoul, natural window light, slightly soft focus, subtle JPEG compression, warm muted colors, social-media snapshot feel. No faces, no readable text, no logos.',
     art: {

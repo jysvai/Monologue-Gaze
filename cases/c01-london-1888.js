@@ -335,7 +335,7 @@
           ['12', 'T. 버드', '4d', '01:05', '—'],
         ], head: ['침대', '이름', '값', '들어온 시각', '비고'], f: { 5: 'f_rose_out' } },
         { note: '[역주] 비고란은 모두 관리인의 글씨. 11번 줄 끝에 「월요일엔 갚는다 함」이라고 작게 덧붙어 있다.' },
-        { sign: 'M. T. (야간 관리인)' },
+        { sign: 'P. 톨 (야간 관리인)' },
         { m: '편지는 크게 떠들고, 장부는 작게 말한다. 작은 쪽을 한 줄씩 셀 것.' },
       ] },
       d_b_patrol: { src: 'books', need: ['k_patrollog'], title: '자경위원회 순찰 일지 — 10월 27일(토) ~ 28일(일)', meta: '스리 키스 뒷방 · 기록 S. C. · 10월 30일 압수', body: [
@@ -495,7 +495,7 @@
         '그는 두 번째 편지에서 읽은 「붉은 실」을 남겼다. 다만 목이 아니라 소맷부리 속 손목에. 그리고 새벽 2시 40분, 기자에게 그것을 먼저 말해 버렸다. 호외는 4시에 인쇄에 들어갔고, 경찰의는 5시 반에야 소매를 걷었다.',
         '매듭장이는 처음부터 없었다. 시릴 베인은 신문을 팔려고 그 이름을 지었고, 크로프트는 제 주머니를 지키려고 그 이름을 빌렸다. 태너스 야드와 캔들 마켓의 두 사람을 해친 손은 끝내 어느 기록에도 남지 않았다.',
       ],
-      next: '서류철을 닫자 서랍 안쪽에서 독일어 도장이 찍힌 봉투가 보인다. → 기록실로 돌아가 다음 사건으로.',
+      next: '서류철을 닫자 서랍 다음 칸에서 독일어 도장이 찍힌 서류 묶음이 보인다. → 기록실로 돌아가 다음 사건으로.',
     },
     artStyle: '19th-century British newspaper wood engraving, dense cross-hatched black ink on off-white newsprint, Victorian London East End c.1888: gas-lit fog, wet cobblestones, soot-dark brick. Evidence items are drawn like engraved catalogue plates with the same hatching. Figures only as silhouettes, from behind or with faces hidden in shadow. No faces, no blood, no wounds, no bodies, no readable text, no real brands.',
     art: {

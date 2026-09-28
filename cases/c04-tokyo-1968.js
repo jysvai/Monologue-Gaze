@@ -11,7 +11,7 @@
     mood: { light: 'rain', fx: 'rain', amb: ['rain'], line: '쇼와 43년 6월, 장맛비. 정수장 담장길로 흰 오토바이 한 대가 들어섰다.' },
     tag: '**증거철 04** · 水尾警察署 特別捜査本部 · 쇼와 43년 6월 28일 현금 수송차 강탈 사건 · 번역본',
     disclaimer: '실제 미제 사건의 모티프만 빌린 창작입니다. 회사·은행·지명·인물은 모두 지어낸 것이며, 실제 사건의 관계자와 아무 관련이 없습니다.',
-    emptyRead: '수사본부 서류함에서 빌려 온 상자 하나. 위쪽 탭에서 서류철을 고르고, 왼쪽 목록에서 자료를 연다.',
+    emptyRead: '수사본부 서류함에서 빌려 온 두툼한 봉투 하나. 위쪽 탭에서 서류철을 고르고, 왼쪽 목록에서 자료를 연다.',
     brief: {
       title: '현금 수송차 강탈사건 개요', no: '水尾署 特捜 43-017',
       lines: [
@@ -377,7 +377,7 @@
         '25일, 수송차 운전사가 창문을 내리고 푸념했다. "28일 아침에도 이리 가야 하나. 그날은 상여금이라 짐이 무겁다." 이리에는 그 말을 일지에 적었다. 문의가 있으면 적으라고 했으니까. 협박장 세 통은 이미 은행 사람들의 귀에 "폭탄"이라는 말을 심어 두었다.',
         '28일 아침, 그는 현장에 나오지 않았다. 비가 왔고 담장길에는 아무도 없었다. 1억 7,420만 엔은 끝내 한 장도 나오지 않았다. 8월, 이리에는 미나미 라인공업을 그만두었다. 그 뒤의 행방은 이 서류철에 없다.',
       ],
-      next: '다음 서랍 — CASE 05. 1969년 캘리포니아, 신문사로 온 편지 끝에는 모래시계가 그려져 있었다.',
+      next: '서랍 다음 칸 — CASE 05. 1969년 캘리포니아, 신문사로 온 편지 끝에는 모래시계가 그려져 있었다.',
     },
     artStyle: 'Late-1960s Japanese press and police evidence photography, Tokyo suburbs in the rainy season of 1968: black-and-white 35mm Tri-X film, pushed grain, slightly soft focus, flat overcast light, wet asphalt sheen, muted grey tonality; evidence-card shots on a plain board with a small ruler, occasionally as faded early color prints with a cyan shift. Showa-era details only. No readable text, no logos, no recognizable faces.',
     art: {

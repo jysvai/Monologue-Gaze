@@ -1,4 +1,4 @@
-/* CASE 09 — 열세 칸 (2006 · 서울 서남부 가상 동네 · 모티프: 신정동 연쇄살인 사건, 대폭 각색) */
+/* CASE 09 — 열세 칸 (2006 · 은천시 가상 동네 · 모티프: 신정동 연쇄살인 사건, 대폭 각색) */
 (function () {
   /* 외부 계단이 달린 다가구 — 탐문 카드 사진 자리 */
   function house(o) {
@@ -53,7 +53,7 @@
 
   MG.registerCase({
     id: 'c09', no: 9, region: 'domestic',
-    title: '열세 칸', year: '2006', place: '서울 서남부 은골동 (가상 지명)',
+    title: '열세 칸', year: '2006', place: '은천시 은골동 (가상 지명)',
     motif: '모티프: 신정동 연쇄살인 사건 (2005–2006) · 대폭 각색', length: '약 35분',
     stars: 4,
     frame: 'crt',
@@ -78,7 +78,7 @@
     sources: [
       { id: 'file', type: 'list', name: '수사 기록철', skin: 'report', desc: '강력3팀 공유 폴더 · 한글 문서와 녹취 파일. 수사가 진행되면 파일이 늘어난다.' },
       { id: 'home', type: 'archive', name: '하루홈', skin: 'home', paper: '하루홈 미니홈피', desc: '보존 조치된 미니홈피와 동네 클럽. 이름이나 별명으로 찾는다.', placeholder: '이름 · 별명 · 동네 이름' },
-      { id: 'rec', type: 'archive', name: '공문 회신', skin: 'ledger', desc: '공문으로 받은 구청·영업소·통신사·상인회 회신 자료. 업체명, 가게 이름, 물건 이름으로 찾는다.', placeholder: '업체명 · 가게 · 물건' },
+      { id: 'rec', type: 'archive', name: '공문 회신', skin: 'ledger', desc: '공문으로 받은 시청·영업소·통신사·상인회 회신 자료. 업체명, 가게 이름, 물건 이름으로 찾는다.', placeholder: '업체명 · 가게 · 물건' },
       { id: 'jeonip', type: 'query', name: '전입세대 열람', skin: 'ledger', need: ['k_canvass'], button: '열람 신청',
         desc: '은골동사무소 · 수사 협조 공문으로 한 집씩 전입세대를 열람한다. 은골동 지번을 번지까지 정확히 넣는다.',
         fields: [{ id: 'addr', label: '지번 (은골동)', placeholder: '예: 000-0' }],
@@ -128,9 +128,9 @@
       k_haeun: { label: '주하은', type: 'person', alias: ['하은', '하은쌤'] },
       k_seonyoung: { label: '노선영', type: 'person', alias: ['선영', '선영이네'] },
       k_eunbi: { label: '한은비', type: 'person', alias: ['은비', '비오는날'] },
-      k_courier: { label: '구민재', type: 'person', alias: ['민재', 'bike_minjae', '택배 기사'] },
+      k_courier: { label: '구태현', type: 'person', alias: ['태현', 'bike_taehyun', '택배 기사'] },
       k_jinwoo: { label: '하진우', type: 'person', alias: ['진우'] },
-      k_tak: { label: '탁성규', type: 'person', alias: ['탁 사장', '성규'] },
+      k_tak: { label: '육성규', type: 'person', alias: ['육 사장', '성규'] },
       k_realtor: { label: '오정란', type: 'person', alias: ['은골부동산', '부동산 사장'] },
       k_moon: { label: '문순례', type: 'person', alias: ['문 할머니'] },
       k_choi: { label: '최 권사', type: 'person', alias: ['최 권사님', '권사님'] },
@@ -206,7 +206,7 @@
         { note: '진술인 [[휴대폰|k_phone]]과 가방은 그 집에 두고 나온 것으로 보임. 둘 다 미발견.' },
       ] },
       d_profile: { src: 'file', title: '용의선상 검토 메모', meta: '2006.10.18 (수) · 강력3팀 내부', body: [
-        { list: ['택배 기사 [[구민재]] (29) — 세 사람 모두 그의 배송 구역. 생존자의 "뭘 가지러 갔다"는 말과 겹칠 수 있음. 10.14 밤 "영업소 야간 상차" 주장.', '[[하진우]] (30) — 노선영 전 남자친구. 6월 결별 뒤 미니홈피 방명록에 험한 글. 8.11~13 행적 확인 필요.', '시장 상인·배달원·검침원 등 동네 사정에 밝은 남성 — 탐문 중.', '생존자 기억: 외부 철계단 다가구. [[은골부동산]] 말로는 은골동에만 스무 채가 넘음.', '택배 영업소에 이웃 인계 기록 공문 10.17 발송 — 영업소는 "고객 정보라 구역을 좁혀 달라"며 회신을 미룸.'] },
+        { list: ['택배 기사 [[구태현]] (29) — 세 사람 모두 그의 배송 구역. 생존자의 "뭘 가지러 갔다"는 말과 겹칠 수 있음. 10.14 밤 "영업소 야간 상차" 주장.', '[[하진우]] (30) — 노선영 전 남자친구. 6월 결별 뒤 미니홈피 방명록에 험한 글. 8.11~13 행적 확인 필요.', '시장 상인·배달원·검침원 등 동네 사정에 밝은 남성 — 탐문 중.', '생존자 기억: 외부 철계단 다가구. [[은골부동산]] 말로는 은골동에만 스무 채가 넘음.', '택배 영업소에 이웃 인계 기록 공문 10.17 발송 — 영업소는 "고객 정보라 구역을 좁혀 달라"며 회신을 미룸.'] },
         '※ 동네 클럽 게시판에 택배 기사 이야기가 돌고 있음. 본인은 10.17 조사에서 전부 부인. 확인 중.',
       ] },
       d_sms: { src: 'file', skin: 'sms', need: ['k_eunbi'], title: '한은비 휴대폰 · 문자 출력', meta: '임의 제출 2006.10.16 · 상대 016-***-4471 (민소라)', body: [
@@ -222,7 +222,7 @@
         { msg: '소라야?', me: true, at: '22:31' },
         { msg: '자? 답장좀', me: true, at: '23:05' },
         { divider: '2006.10.15 (일)' },
-        { msg: '한은비씨 휴대폰 맞으시죠 은천경찰서입니다 민소라씨 관련 연락바랍니다', who: '02-***-0112', at: '00:48' },
+        { msg: '한은비씨 휴대폰 맞으시죠 은천경찰서입니다 민소라씨 관련 연락바랍니다', who: '031-***-0112', at: '00:48' },
         { note: '※ 민소라가 보낸 문자는 21:56 이후 없음.' },
       ] },
       d_stmt2: { src: 'file', skin: 'transcript', need: ['k_walk'], title: '피해자 진술 녹취 (2차 · 현장 동행)', meta: '2006.10.21 (토) 21:30 ~ 22:40 · 은골시장 정류장 → 골목 일대 · 진술인 민소라', body: [
@@ -294,14 +294,14 @@
         { p: '일촌평 · 동아리 선배 : 진우야 11일 밤에 텐트 네가 다 쳤잖아 ㅋ 그 사진 올려라 (08.14)', f: 'f_jinwoo_alibi' },
         '다이어리 2006.08.16 — 뉴스 보고 손이 떨린다. 방명록에 그런 말 쓴 게 평생 부끄러울 거다.',
       ] },
-      d_home_courier: { src: 'home', find: ['k_courier', 'k_hanbit'], title: '오토바이 인생 · 구민재의 미니홈피', meta: 'TODAY 41 | TOTAL 6,027', body: [
+      d_home_courier: { src: 'home', find: ['k_courier', 'k_hanbit'], title: '오토바이 인생 · 구태현의 미니홈피', meta: 'TODAY 41 | TOTAL 6,027', body: [
         '오늘의 기분: 졸림 · BGM ♬ 「질주」 — 블랙타이어',
         { h: '다이어리' },
         { p: '2006.10.14 (토) 20:55 — 야간 상차 땡땡이 ㅋ 비 오는 토요일 밤은 자유다. 팀장님 모르시겠지…', f: 'f_courier_skip' },
         { img: 'courier_room', cap: '사진첩 · 2006.05 — 반지하 자취방. 창문 반은 땅 ㅋㅋ 계단 세 칸 내려가면 우리 집' },
         '2006.10.19 (목) — 형사들이 또 옴. 동네 클럽에 내가 범인이래. 미치겠다.',
         { h: '방명록' },
-        '영업소 형 : 민재야 팀장님이 토요일 상차 명단 보자신다. 전화 좀 받아라 (10.19)',
+        '영업소 형 : 태현아 팀장님이 토요일 상차 명단 보자신다. 전화 좀 받아라 (10.19)',
       ] },
       d_home_pyogu: { src: 'home', find: ['k_nick'], title: '은골표구 · 표구쟁이의 작업실', meta: 'TODAY 4 | TOTAL 812 · 주인장 별명: 표구쟁이', body: [
         'BGM ♬ 「옛 골목」 — 가야금 연주곡',
@@ -340,21 +340,21 @@
       /* ── 기록 조회 ── */
       d_rec_parcel: { cls: 'printed', src: 'rec', find: ['k_hanbit'], need: ['k_canvass'], title: '한빛택배 은골영업소 · 이웃 인계 기록 (발췌)', meta: '공문 회신 2006.10.23 · 일제 탐문 구역 (정류장 도보 10분 안) · 기간 2006.02 ~ 10 · 부재 처리 건만', body: [
         { rows: [
-          ['02.24 14:10', '김○○', '202-7', '1층 슈퍼', '슈퍼', '구민재'],
-          ['03.17 18:20', '주○○', '221-4 302호', '[[217-3번지]] 2층', '탁', '구민재'],
-          ['05.02 11:30', '이○○', '230-5 2층', '1층 집주인', '박', '구민재'],
-          ['08.11 17:05', '노○○', '219-6 201호', '219-8 1층', '최', '구민재'],
-          ['09.08 19:40', '정○○', '204-11 2층', '[[은골표구]] (가게)', '—', '구민재'],
-          ['10.02 16:15', '윤○○', '226-2 반지하', '217-3번지 2층', '탁', '구민재'],
-          ['10.14 19:10', '민○○', '223-9 반지하', '217-3번지 2층', '탁', '구민재'],
-          ['10.14 19:25', '한○○', '225-1', '문 앞', '—', '구민재'],
+          ['02.24 14:10', '김○○', '202-7', '1층 슈퍼', '슈퍼', '구태현'],
+          ['03.17 18:20', '주○○', '221-4 302호', '[[217-3번지]] 2층', '육', '구태현'],
+          ['05.02 11:30', '이○○', '230-5 2층', '1층 집주인', '박', '구태현'],
+          ['08.11 17:05', '노○○', '219-6 201호', '219-8 1층', '최', '구태현'],
+          ['09.08 19:40', '정○○', '204-11 2층', '[[은골표구]] (가게)', '—', '구태현'],
+          ['10.02 16:15', '윤○○', '226-2 반지하', '217-3번지 2층', '육', '구태현'],
+          ['10.14 19:10', '민○○', '223-9 반지하', '217-3번지 2층', '육', '구태현'],
+          ['10.14 19:25', '한○○', '225-1', '문 앞', '—', '구태현'],
         ], head: ['일시', '수취인', '수취 주소 (은골동)', '인계처', '인수 서명', '담당'], f: { 1: 'f_parcel_haeun', 6: 'f_parcel_sora' } },
         '부재 시 고객에게 문자 발송: "고객님 부재로 ○○에 맡겼습니다 — 한빛택배"',
         { note: '※ 수취인 성명은 개인정보 보호를 위해 가림. 영업소장 메모: 은골동은 경비실이 없어 부재 시 맡기는 집이 대개 정해져 있음.' },
       ] },
       /* ── 전입세대 열람 (지번을 정확히 넣어야 나온다) ── */
       d_rec_res217: { cls: 'printed', src: 'jeonip', title: '전입세대 열람 · 은골동 217-3', meta: '은골동사무소 · 2006.10.24 열람 · 강력3팀', body: [
-        { rows: [['1층', '[[문순례]] (71)', '1989.04.02', '1명'], ['2층', '[[탁성규]] (42)', '2003.05.19', '1명 (단독 세대)'], ['반지하', '—', '—', '공실 (2006.06 ~)']], head: ['층', '세대주', '전입일', '세대원'], f: { 1: 'f_resident' } },
+        { rows: [['1층', '[[문순례]] (71)', '1989.04.02', '1명'], ['2층', '[[육성규]] (42)', '2003.05.19', '1명 (단독 세대)'], ['반지하', '—', '—', '공실 (2006.06 ~)']], head: ['층', '세대주', '전입일', '세대원'], f: { 1: 'f_resident' } },
         '건물 소유자: 문순례. 1989년 준공 다가구, 외부 계단으로 2층 출입.',
         { note: '※ 2층 전세 계약 2003.05 — [[은골부동산]] 중개.' },
       ] },
@@ -372,17 +372,17 @@
       d_res230: { cls: 'printed', src: 'jeonip', title: '전입세대 열람 · 은골동 230-5', meta: '은골동사무소 · 2006.10.24 열람', body: [
         { rows: [['1층', '정○○ (44)', '1999.06.14', '4명'], ['2층', '한○○ (71)', '1988.12.01', '2명 (배우자)'], ['반지하', '—', '—', '공실 (2006.10 ~)']], head: ['층', '세대주', '전입일', '세대원'] },
       ] },
-      d_rec_call: { cls: 'printed', src: 'rec', find: ['k_bell'], need: ['k_addr217'], title: '유선전화 착발신 내역 · 은골동 217-3 2층', meta: '통신사 회신 2006.10.27 · 02-2**-3371 · 가입자 2층 세대주', body: [
+      d_rec_call: { cls: 'printed', src: 'rec', find: ['k_bell'], need: ['k_addr217'], title: '유선전화 착발신 내역 · 은골동 217-3 2층', meta: '통신사 회신 2006.10.27 · 031-2**-3371 · 가입자 2층 세대주', body: [
         { rows: [
           ['10.14 (토) 17:48', '착신', '061-***-2240', '3분 10초'],
           ['10.14 (토) 22:17', '착신', '061-***-2240', '1분 12초'],
           ['10.15 (일) 09:12', '발신', '061-***-2240', '12분 40초'],
-          ['10.16 (월) 10:05', '발신', '은천구청 대형폐기물 신고센터', '2분 15초'],
+          ['10.16 (월) 10:05', '발신', '은천시청 대형폐기물 신고센터', '2분 15초'],
         ], head: ['일시', '구분', '상대 번호', '통화 시간'], f: { 1: 'f_call' } },
-        '061 번호 가입자: 전남의 한 군 지역, 탁 씨 성 여성 (68).',
+        '061 번호 가입자: 전남의 한 군 지역, 육 씨 성 여성 (68).',
         { note: '※ 응답 없는 착신은 이 내역에 남지 않음. 착신 전환·자동 응답 부가서비스 가입 없음.' },
       ] },
-      d_rec_waste: { cls: 'printed', src: 'rec', find: ['k_disposal'], title: '대형폐기물 배출 신고 대장 · 은골동 (2006.10)', meta: '은천구청 청소행정과 · 공문 회신 2006.10.26', body: [
+      d_rec_waste: { cls: 'printed', src: 'rec', find: ['k_disposal'], title: '대형폐기물 배출 신고 대장 · 은골동 (2006.10)', meta: '은천시청 청소행정과 · 공문 회신 2006.10.26', body: [
         { rows: [
           ['10.03', '226-2 1층', '냉장고 1', '10.05'],
           ['10.09', '204-11 2층', '장판 1 · 벽지 폐기물 3자루', '10.11'],
@@ -392,7 +392,7 @@
         { note: '※ 수거 기사 메모: 스티로폼 상자는 원래 대형폐기물 대상이 아님. 217-3 신고자가 "흙까지 전부 같이 가져가 달라"고 요청.' },
       ] },
       d_rec_pcbang: { cls: 'printed', src: 'rec', find: ['k_pcbang'], title: '은골PC방 · 회원 이용 기록 (10.14)', meta: 'PC방 관리 프로그램 출력 · 업주 임의 제출', body: [
-        { rows: [['07', 'dudwkd88', '19:02', '23:15', ''], ['23', 'bike_minjae', '20:48', '01:40', '22:10 컵라면 2 · 음료 1'], ['31', '(비회원)', '21:30', '22:05', ''], ['40', 'sky_love', '22:40', '02:10', '']], head: ['좌석', '회원 ID', '시작', '종료', '비고'], f: { 1: 'f_pcbang' } },
+        { rows: [['07', 'dudwkd88', '19:02', '23:15', ''], ['23', 'bike_taehyun', '20:48', '01:40', '22:10 컵라면 2 · 음료 1'], ['31', '(비회원)', '21:30', '22:05', ''], ['40', 'sky_love', '22:40', '02:10', '']], head: ['좌석', '회원 ID', '시작', '종료', '비고'], f: { 1: 'f_pcbang' } },
         { p: '23번 좌석은 카운터 바로 앞. 야간 알바생 진술: "그 택배 형은 밤새 게임만 했다. 열 시쯤 라면 갖다줬다. 한 번도 밖에 안 나갔다."', f: 'f_pcbang' },
       ] },
       d_rec_patrol: { src: 'rec', find: ['k_pyogu', 'k_market'], need: ['k_tak'], title: '은골시장 상인회 · 야간 방범 순찰일지', meta: '상인회 자율방범대 · 조회 사유: 2번 골목 상인 진술 확인', body: [
@@ -480,17 +480,17 @@
           k_phone: ['소라 폰은 아직 못 찾았대요. 제 폰에 문자가 남아 있어서 다행이에요.'],
         },
         idle: ['그건 잘 모르겠어요.'] },
-      p_courier: { name: '구민재', role: '한빛택배 은골 구역 기사', where: '[[한빛택배|k_hanbit]] 은골영업소', key: 'k_courier', color: '#4f7a9a', initial: '구',
-        intro: ['[[한빛택배|k_hanbit]] 은골 구역 맡고 있는 구민재입니다. 형사님들 벌써 세 번째예요. 저 아니에요, 진짜.'],
+      p_courier: { name: '구태현', role: '한빛택배 은골 구역 기사', where: '[[한빛택배|k_hanbit]] 은골영업소', key: 'k_courier', color: '#4f7a9a', initial: '구',
+        intro: ['[[한빛택배|k_hanbit]] 은골 구역 맡고 있는 구태현입니다. 형사님들 벌써 세 번째예요. 저 아니에요, 진짜.'],
         ask: {
           k_oct14: { need: ['!f_courier_skip'], a: ['…영업소 아니었어요. PC방에 있었어요. 야간 상차 빼먹은 거 회사가 알면 잘려요. 그래서 거짓말했어요.', '시장 앞 [[은골PC방]] 카운터 앞자리에서 밤새 게임만 했어요. 알바생한테 물어보세요.'], else: [{ p: '그날 밤은 영업소에서 야간 상차했어요. 자정 넘어서까지요.' }] },
           k_parcel: ['부재면 옆집이나 가게에 맡기죠. 은골동은 경비실 있는 집이 없으니까요. 받아 주는 집이 정해져 있어요. 몇 집 안 돼요.'],
           k_sora: ['그 아가씨 택배는 저녁에… 옆 골목 2층에 맡겼어요. 문자도 보냈고요. 그 집 아저씨가 늘 받아 줘요.'],
           k_haeun: ['3월이요? 일일이 기억은 못 해요. 영업소 기록 보시면 다 나와요.'],
           k_seonyoung: ['그분 택배는 그날 219번지 1층 권사님께 맡겼어요. 다음 날 전해 주신다고 했는데… 못 받으셨겠네요.'],
-          k_tak: ['탁 사장님? 표구집 하시는 분. 택배 잘 받아 주세요. 여름엔 음료수도 주시고. 좋은 분이에요.'],
+          k_tak: ['육 사장님? 표구집 하시는 분. 택배 잘 받아 주세요. 여름엔 음료수도 주시고. 좋은 분이에요.'],
           k_umbrella: ['저는 우산 안 써요. 오토바이 타니까 우비 입죠. 파란 조끼 위에.'],
-          k_pcbang: ['회원 아이디 bike_minjae요. 기록 뽑아 보시면 제가 한 번이라도 나갔는지 나와요.'],
+          k_pcbang: ['회원 아이디 bike_taehyun요. 기록 뽑아 보시면 제가 한 번이라도 나갔는지 나와요.'],
           k_ironstairs: ['은골동 계단은 다 쇠예요. 겨울에 택배 들고 오르다 몇 번 굴렀어요. 저희 집은 반지하라 계단 세 칸이지만.'],
         },
         idle: ['그건 잘 모르겠는데요. 저는 물건만 날라요.'] },
@@ -513,11 +513,11 @@
           k_redev: ['3구역 재개발은 몇 년째 말만 무성해. 빈집만 늘고.'],
           k_moon: ['문 할머니? 귀가 좀 어두워. 밤엔 초저녁부터 주무시고.'],
           k_styro: ['스티로폼 텃밭? 이 동네 사람들 계단참마다 해. 흔해.'],
-          k_tak: ['탁 사장? 3년 전에 내가 중개했지. 전세금도 깔끔하게 내고, 말수 적고.'],
+          k_tak: ['육 사장? 3년 전에 내가 중개했지. 전세금도 깔끔하게 내고, 말수 적고.'],
         },
         idle: ['그건 부동산 일이 아니라서 모르겠네.'] },
-      p_tak: { name: '탁성규', role: '은골표구 주인 · 217-3 2층 거주', where: '은골시장 2번 골목 · 은골표구', key: 'k_tak', color: '#5a5f52', initial: '탁',
-        intro: ['표구 하는 탁성규입니다. 형사님들이 동네를 다 훑고 다니시더니 저한테까지 오셨네. 물어보세요.'],
+      p_tak: { name: '육성규', role: '은골표구 주인 · 217-3 2층 거주', where: '은골시장 2번 골목 · 은골표구', key: 'k_tak', color: '#5a5f52', initial: '육',
+        intro: ['표구 하는 육성규입니다. 형사님들이 동네를 다 훑고 다니시더니 저한테까지 오셨네. 물어보세요.'],
         ask: {
           k_oct14: { need: ['!f_shop_closed'], a: ['셔터는… 내렸죠. 손님 안 받으려고요. 안에서 작업하는 사람도 있어요.', '— 불을 다 끄고 액자를 짭니까?', '…(담배를 찾는다) 그날은 좀 일찍 들어갔나 봐요. 기억이 잘 안 나네.'], else: [{ p: '그날이요? 가게에서 새벽까지 액자 짰어요. 추석 대목 끝나고 밀린 게 산더미라. 집엔 새벽에 들어갔고요.' }] },
           k_parcel: { need: ['!f_parcel_sora'], a: ['아, 그거. 기사가 저녁에 맡기고 간 거요. 잠깐 집에 들렀을 때 받았어요. 받아만 놓고 다시 가게로 나갔고.', '그 아가씨는 안 왔어요. 다음 날 아침에 문 앞에 내놨죠.'], else: ['택배요? 요즘 기사들이 아무 집에나 맡기고 가니까… 저는 잘 안 받아요. 귀찮아서.'] },
@@ -549,7 +549,7 @@
         '밤 9시 54분, 검은 우산이 골목 입구에서 소라를 기다렸다. 열세 칸짜리 철계단, 여덟 번째 칸의 꺾임, 계단참의 스티로폼 상자, 문에 붙은 노란 웃음 스티커. 10시 17분, 시골의 어머니가 건 전화가 울렸고, 소라는 그 1분 12초 동안 계단을 내려왔다.',
         '이틀 뒤 2층은 옷장과 카펫, 전화기와 스티로폼 상자 여섯 개를 내다 버렸다. 스티커는 떼어졌지만 노란 종이 조각이 문에 남았다. 소라가 센 숫자는 틀리지 않았다.',
       ],
-      next: '다음 칸 파일의 표지에는 항구 도시의 이름이 적혀 있다. → CASE 10',
+      next: '다음 칸에는 증거물 꼬리표를 단 노트북 한 대가 누워 있다. 꼬리표에 항구 도시의 이름. → CASE 10',
     },
     artStyle: 'Photo taken in 2006 with a cheap compact digital camera: 3-megapixel, visible sensor noise, flat on-camera flash at night with dark falloff behind the subject, slightly blown highlights, cool white balance, mild JPEG blockiness, casual amateur framing like a Korean mini-homepage photo album or a police canvass snapshot. Seoul low-rise residential alleys of the late 1980s–90s: red-brick multi-family houses with external iron staircases. People only from behind, blurred or out of frame; no faces, no readable text, no logos, nothing graphic.',
     art: {
@@ -570,7 +570,7 @@
         prompt: 'Snapshot of a cram-school teacher\'s desk in 2006: stacked English workbooks, a CRT monitor, a red marker, a few small chocolate boxes left by students, a sticky note with a heart doodle, fluorescent office light, compact camera flash. No people, no readable text.' },
       mt_photo: { use: '하진우 미니홈피 — 8월 가평 동아리 MT 사진 (알리바이)', alt: '하진우 미니홈피 — 8월 가평 동아리 MT 사진', ratio: '4:3', svg: night('#9fc0cf', `<rect y="90" width="200" height="60" fill="#5e8a6a"/><path d="M0 90 Q50 70 100 88 T200 84" fill="#4a7058"/><g fill="#e0673c"><path d="M40 110 l14 -18 l14 18z"/><path d="M80 112 l14 -18 l14 18z"/></g><g fill="#3a3a3a"><circle cx="130" cy="104" r="4"/><circle cx="142" cy="104" r="4"/><circle cx="154" cy="104" r="4"/></g>`),
         prompt: 'Summer 2006 group outing by a mountain river in Gapyeong-like countryside: orange dome tents on a pebble riverbank, a yellow rafting boat pulled onto the shore, a dozen people seen from behind in life vests waving, bright midday sun, compact camera snapshot with slight lens flare.' },
-      courier_room: { use: '구민재 미니홈피 — 반지하 자취방 (계단 세 칸)', ratio: '4:3', svg: night('#3b3a36', `<rect x="20" y="20" width="160" height="40" fill="#8e9aa0"/><rect x="20" y="42" width="160" height="18" fill="#5a4b3a"/><rect x="30" y="100" width="70" height="30" fill="#2f4f7f"/><g fill="#7c7c78"><rect x="140" y="120" width="40" height="6"/><rect x="146" y="112" width="34" height="6"/><rect x="152" y="104" width="28" height="6"/></g>`),
+      courier_room: { use: '구태현 미니홈피 — 반지하 자취방 (계단 세 칸)', ratio: '4:3', svg: night('#3b3a36', `<rect x="20" y="20" width="160" height="40" fill="#8e9aa0"/><rect x="20" y="42" width="160" height="18" fill="#5a4b3a"/><rect x="30" y="100" width="70" height="30" fill="#2f4f7f"/><g fill="#7c7c78"><rect x="140" y="120" width="40" height="6"/><rect x="146" y="112" width="34" height="6"/><rect x="152" y="104" width="28" height="6"/></g>`),
         prompt: 'Cramped Seoul semi-basement studio room in 2006, a high window half below street level showing wet pavement and passing feet, a folded blue delivery vest hanging on a hook, a motorcycle helmet on the floor, three concrete steps leading up to the door, dim fluorescent light.' },
       roof: { use: '표구쟁이 미니홈피 — 철계단 꺾이는 곳의 스티로폼 텃밭', ratio: '4:3', svg: night('#bcd3e0', `<rect x="0" y="0" width="80" height="150" fill="#9a6f55"/><g fill="#39424c"><rect x="90" y="120" width="30" height="3"/><rect x="100" y="108" width="30" height="3"/><rect x="110" y="96" width="30" height="3"/><rect x="100" y="84" width="60" height="4"/><rect x="92" y="72" width="30" height="3"/></g><g fill="#f4f4ef"><rect x="126" y="70" width="16" height="13"/><rect x="146" y="70" width="16" height="13"/></g><g fill="#3f8a3a"><path d="M130 70 l3 -12 l3 12z"/><path d="M150 70 l3 -14 l3 14z"/></g>`),
         prompt: 'Sunny daytime photo of the turning landing of an external iron staircase on an old red-brick house: six white styrofoam boxes planted with chili peppers and green onions crowded on the landing, rusty handrail, laundry line above, blue summer sky. Proud amateur gardener\'s snapshot, compact digital camera.' },

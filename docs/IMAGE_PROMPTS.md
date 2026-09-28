@@ -993,7 +993,7 @@ A 1991 photocopied missing-person flyer lying on a police desk: the student ID p
 ```
 - 주의: 얼굴이 드러나지 않게. 제목도 뭉개진 회색 띠로만.
 
-## CASE 09 · 열세 칸 (2006, 서울 서남부 은골동 (가상 지명))
+## CASE 09 · 열세 칸 (2006, 은천시 은골동 (가상 지명))
 
 - 사건 파일: `cases/c09-seoul-2006.js` · 이미지 19장 · 난이도 ★★★★
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
@@ -1053,7 +1053,7 @@ Snapshot of a cram-school teacher's desk in 2006: stacked English workbooks, a C
 Summer 2006 group outing by a mountain river in Gapyeong-like countryside: orange dome tents on a pebble riverbank, a yellow rafting boat pulled onto the shore, a dozen people seen from behind in life vests waving, bright midday sun, compact camera snapshot with slight lens flare.
 ```
 
-### c09/courier_room — 구민재 미니홈피 — 반지하 자취방 (계단 세 칸)
+### c09/courier_room — 구태현 미니홈피 — 반지하 자취방 (계단 세 칸)
 - 저장 경로: `img/c09/courier_room.webp` · 비율: 4:3
 ```
 Cramped Seoul semi-basement studio room in 2006, a high window half below street level showing wet pavement and passing feet, a folded blue delivery vest hanging on a hook, a motorcycle helmet on the floor, three concrete steps leading up to the door, dim fluorescent light.
@@ -1807,7 +1807,7 @@ Elevator CCTV frame from the top corner, looking down at a tall man in a black p
 ```
 - **꼭 보여야 할 것**: 검은 점퍼·모자 · 편의점 봉지(맥주 캔) · 어깨와 운동화가 젖음 · 얼굴 안 보임
 
-### c15/watch_found — 스마트워치 발견 보고 — 솔매사거리 화단
+### c15/watch_found — 스마트워치 발견 보고 — 갈매사거리 화단
 - 저장 경로: `img/c15/watch_found.webp` · 비율: 4:3
 ```
 Night flash photo of a roadside flower bed at a suburban intersection: wet dark soil, wilted chrysanthemums, and a black smartwatch lying face-up with a cracked screen, one side of its rubber strap torn off at the lug while the buckle end is still fastened in a closed loop; a yellow evidence marker tent beside it (number unreadable), the curb and asphalt at the edge of the frame. No readable text.

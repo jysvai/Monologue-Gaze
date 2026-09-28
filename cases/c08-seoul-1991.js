@@ -574,7 +574,7 @@
         '두 번의 전달은 두 번 다 경찰의 그림자 때문에 틀어졌다. 몽타주가 신문에 실리고 목소리가 방송을 타자, 그는 11월 29일 저녁 여섯 시에 마지막으로 음성사서함에 창고 이름을 남기고 자물쇠를 풀어 두었다. 오늘은 이걸로 시마이.',
         '백준영은 살아서 돌아왔다. 목소리의 주인은 끝내 불려 나오지 않았고, 기록철은 미제 칸으로 옮겨졌다. 기록 속에서만, 그 목소리 뒤의 종소리가 새터역 2번 출구 앞을 가리키고 있었다.',
       ],
-      next: '다음 서랍 칸은 2000년대 날짜로 시작한다. → CASE 09',
+      next: '다음 칸에는 「은천서 강력3팀 수사 PC」라고 적힌 하드디스크 사본이 들어 있다. 첫 날짜는 2006년. → CASE 09',
     },
     artStyle: 'Early-1990s Seoul, shot on a consumer compact 35mm film camera: color negative film look, on-camera flash at night, slight green-orange color cast from sodium street lamps, visible grain, soft focus; police evidence photos are flat flash on grey paper; newspaper images are coarse black-and-white halftone. 1991 Korean street details: card-and-coin public phone booths, an elevated steel subway bridge, red-brick multi-family houses, small corner shops with sliding aluminium-glass doors, tangled utility wires, a church bell tower with a red neon cross. No faces (backs, silhouettes or blurred figures only), no readable text, no logos or brand marks.',
     art: {
