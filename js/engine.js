@@ -1925,10 +1925,10 @@
       if (t.closest('[data-back]')) {
         const was = ST.view.open;
         keepPos(); ST.view.open = null; save(); renderRead(); renderList();
-        // 키보드로 목록에 돌아오면 방금 읽던 항목에 초점을 둔다
-        const at = was && e.detail === 0 && { doc: 'doc', person: 'person', req: 'req', feed: 'feed', compare: 'cmp', photo: 'scene', cipher: 'open-cipher', timeline: 'open-tl' }[was.t];
+        // 목록에 돌아오면 방금 읽던 항목이 보이는 자리로 (긴 목록 아래쪽에서 열었어도), 키보드로 왔으면 초점도 그 항목에
+        const at = was && { doc: 'doc', person: 'person', req: 'req', feed: 'feed', compare: 'cmp', photo: 'scene', cipher: 'open-cipher', timeline: 'open-tl' }[was.t];
         const it = at && $(`#paneList [data-${at}="${CSS.escape(String(was.id))}"]`);
-        if (it) it.focus({ preventScroll: false });
+        if (it) { it.scrollIntoView({ block: 'nearest' }); if (e.detail === 0) it.focus({ preventScroll: true }); }
         return;
       }
       if ((el = t.closest('[data-reset]'))) return armed(el, '한 번 더 누르면 이 사건 기록이 지워진다', () => { delete S.cases[C.id]; if (S.seen) { S.seen.done = S.seen.done.filter(x => x !== C.id); S.seen.m = S.seen.m.filter(x => x !== C.id); } save(); openCase(C.id); toast('처음부터 다시'); });
