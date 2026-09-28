@@ -244,7 +244,7 @@
 .case-view[data-frame="laptop"] .skin-board .tl-t{font:14px/1.5 var(--f-web)}
 .case-view[data-frame="laptop"] .skin-board :is(.doc-b>.b-p,.doc-b>.b-note,.c-done){border-radius:4px;background:#f2f5f9}
 .case-view[data-frame="laptop"] .skin-board .tl-mv button{border:1px solid #c3cad6;border-radius:4px;background:linear-gradient(#fff,#edf0f4);color:#2c3440;font-family:var(--f-ui)}
-.case-view[data-frame="laptop"] .skin-board .tl-mv button:hover:not(:disabled){background:#e4ebf5;border-color:#8fa3c2}
+@media (hover:hover){.case-view[data-frame="laptop"] .skin-board .tl-mv button:hover:not(:disabled){background:#e4ebf5;border-color:#8fa3c2}}
 
 /* ── 감정서 (감식과) */
 .skin-lab{background-color:#eef0ea;font-family:var(--f-mono)}

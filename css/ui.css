@@ -71,7 +71,7 @@ summary::-webkit-details-marker{display:none}
 .rep-opt{padding-left:36px}
 .rep-opt::before{content:"";position:absolute;left:10px;top:10px;width:15px;height:15px;border:1.5px solid rgba(43,40,35,.5);border-radius:2px 3px 2px 4px;background:rgba(255,255,255,.7);transform:rotate(-2deg)}
 .rep-opt.on::after{content:"✓";position:absolute;left:10px;top:-2px;font:30px/1 var(--f-hand);color:var(--red);transform:rotate(-8deg);animation:stampIn .25s ease-out both}
-.rep-opt:hover::before{border-color:rgba(176,52,42,.7)}
+@media (hover:hover){.rep-opt:hover::before{border-color:rgba(176,52,42,.7)}}
 
 /* ───────── 그 밖의 기본 모양 ───────── */
 /* 키보드로 옮겨 다닐 때: 파란 테 대신 빨간 연필 점선 */
@@ -91,7 +91,7 @@ img[data-ui-key]:focus-visible{outline-offset:-5px}
 .case-view[data-frame="crt"] .screen .src-tabs .tab:focus-visible{outline-color:#fff} /* 파란 탭 줄 위의 점선 네모는 밝게 (옛 창의 초점 표시가 어두운 바탕에서 뒤집혀 보이듯) */
 /* 링크: 파란 밑줄 대신 바랜 글씨에 점선 */
 .cab-foot a,.cab-foot .credit a{color:#cdbf9f;text-decoration:underline dotted 1px;text-underline-offset:3px}
-.cab-foot a:hover,.cab-foot .credit a:hover{color:#efe4c9;text-decoration-style:solid}
+@media (hover:hover){.cab-foot a:hover,.cab-foot .credit a:hover{color:#efe4c9;text-decoration-style:solid}}
 /* 정밀 관찰에서 찾은 것의 번호: 사진 위 빨간 동그라미 번호와 같은 빛깔 */
 .ph-found>li::marker{color:var(--red);font-weight:800}
 /* .c-act 는 탐문의 몸짓 줄(drama.css)과 해독·재구성의 단추 줄이 같이 쓰는 이름이다.
@@ -123,11 +123,11 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
 .case-view[data-frame="crt"] .item{--card:#fff;--card-soft:#5b6576;margin-bottom:3px;border:1px solid #c3cddd;border-radius:0;box-shadow:none}
 .case-view[data-frame="crt"] .item:not(.person){padding-left:34px}
 .case-view[data-frame="crt"] .item:not(.person)::before{content:"";position:absolute;left:10px;top:10px;width:16px;height:18px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 18'%3E%3Cpath d='M1.5.5h9l4 4v13h-13z' fill='%23fff' stroke='%235a6f94'/%3E%3Cpath d='M10.5.5v4h4' fill='%23dbe5f5' stroke='%235a6f94'/%3E%3Cpath d='M4 7h7M4 9.5h7M4 12h7M4 14.5h4.5' stroke='%232c62c4' stroke-width='1.1'/%3E%3C/svg%3E") center/contain no-repeat}
-.case-view[data-frame="crt"] .item:hover{background-color:#eef3fb;border-color:#9fb4d6}
+@media (hover:hover){.case-view[data-frame="crt"] .item:hover{background-color:#eef3fb;border-color:#9fb4d6}}
 .case-view[data-frame="crt"] .item.on{background-color:#316ac5;border-color:#1d4aa6;color:#fff;box-shadow:none}
 .case-view[data-frame="crt"] .item.on .item-m{color:#dce6f7}
 .case-view[data-frame="laptop"] .item{--card:#fffdf8;margin-bottom:6px;border:1px solid #e0d9c8;border-radius:7px;box-shadow:0 1px 1px rgba(60,50,30,.06)}
-.case-view[data-frame="laptop"] .item:hover{background-color:#fff}
+@media (hover:hover){.case-view[data-frame="laptop"] .item:hover{background-color:#fff}}
 .case-view[data-frame="laptop"] .item.on{border-color:transparent;box-shadow:0 0 0 2px #3d6bc4}
 /* 종이 기록철에서 아직 안 본 서류는 빨간 점 대신 모서리에 붙인 붉은 색인 쪽지 */
 .case-view[data-frame="papers"] .item.new::after{top:9px;right:-6px;width:12px;height:18px;border-radius:0 2px 2px 0;background:linear-gradient(90deg,#9c2e25,#b8453a 40%,#b0342a);box-shadow:1px 1px 1px rgba(0,0,0,.25);opacity:.92}
@@ -144,7 +144,7 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
 .case-view[data-frame="papers"] .qf input::placeholder{font:12px var(--f-mono);color:rgba(80,64,48,.45)}
 .case-view[data-frame="papers"] .qf input:focus{border-bottom-color:var(--red)}
 .case-view[data-frame="papers"] .q-f button{align-self:flex-end;padding:5px 14px 4px;border:2.5px solid var(--red);border-radius:3px;background:transparent;color:var(--red);font:800 14px var(--f-doc);letter-spacing:.14em;transform:rotate(-3deg);mix-blend-mode:multiply;transition:transform .08s,background-color .12s}
-.case-view[data-frame="papers"] .q-f button:hover{background-color:rgba(176,52,42,.08)}
+@media (hover:hover){.case-view[data-frame="papers"] .q-f button:hover{background-color:rgba(176,52,42,.08)}}
 .case-view[data-frame="papers"] .q-f button:active{transform:rotate(-3deg) scale(.94)}
 /* 노트북(2010년대 이후): 요즘 웹 양식 */
 .case-view[data-frame="laptop"] .q-f,.case-view[data-frame="laptop"] .lock{border:1px solid #d8dde5;border-radius:10px;background:#fff;box-shadow:0 1px 3px rgba(20,30,50,.08)}
@@ -153,7 +153,7 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
 .case-view[data-frame="laptop"] .qf input,.case-view[data-frame="laptop"] .lock-f input{padding:8px 10px;border:1px solid #cdd4de;border-radius:6px;background:#fbfcfe;font:14px var(--f-web);transition:border-color .12s,box-shadow .12s}
 .case-view[data-frame="laptop"] .qf input:focus,.case-view[data-frame="laptop"] .lock-f input:focus{border-color:#3b6fd8;box-shadow:0 0 0 3px rgba(59,111,216,.18);outline:none}
 .case-view[data-frame="laptop"] .q-f button,.case-view[data-frame="laptop"] .lock-f button{padding:8px 18px;border-radius:6px;background:#2f5fc8;font:700 13px var(--f-web)}
-.case-view[data-frame="laptop"] .q-f button:hover,.case-view[data-frame="laptop"] .lock-f button:hover{background:#2551b0;filter:none}
+@media (hover:hover){.case-view[data-frame="laptop"] .q-f button:hover,.case-view[data-frame="laptop"] .lock-f button:hover{background:#2551b0;filter:none}}
 /* 브라운관 모니터(2000년대 중반 경찰 전산망): 회색 창에 오목한 입력칸, 볼록한 단추 */
 .case-view[data-frame="crt"] .q-f{padding:10px 12px;border:1px solid;border-color:#fff #8c8a84 #8c8a84 #fff;background:#ece9d8}
 .case-view[data-frame="crt"] .q-f::before{content:attr(data-slip);margin:-10px -12px 4px;padding:3px 8px;background:linear-gradient(90deg,#2a4f9c,#6f8fcf);color:#fff;font:700 12px var(--f-web)}
@@ -171,33 +171,33 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
 .case-view[data-frame="papers"] .arch-f input::placeholder{font:12px var(--f-mono);color:rgba(80,64,48,.45)}
 .case-view[data-frame="papers"] .arch-f input:focus{border-bottom-color:var(--red)}
 .case-view[data-frame="papers"] .arch-f button{flex:none;padding:4px 12px 3px;border:2.5px solid var(--red);border-radius:3px;background:transparent;color:var(--red);font:800 14px var(--f-doc);letter-spacing:.2em;transform:rotate(-3deg);mix-blend-mode:multiply;transition:transform .08s,background-color .12s}
-.case-view[data-frame="papers"] .arch-f button:hover{background-color:rgba(176,52,42,.08)}
+@media (hover:hover){.case-view[data-frame="papers"] .arch-f button:hover{background-color:rgba(176,52,42,.08)}}
 .case-view[data-frame="papers"] .arch-f button:active{transform:rotate(-3deg) scale(.94)}
 /* ───────── 그 밖의 단추: 대조 감정 「이것과 일치」, 해독·재구성 「맞춰 보기」, 잠금 「열기」, 「← 목록으로」, 「칸을 나눠 살피기」 ─────────
  * 기본 모양(검은 네모 웹 단추)은 어느 시대에도 맞지 않는다. 자료실·조회 단추처럼 틀마다 그 시대 모양으로 */
-.cmp-o button:not(:disabled):hover,.c-act button:hover,.lock-f button:hover{filter:brightness(1.18)}
+@media (hover:hover){.cmp-o button:not(:disabled):hover,.c-act button:hover,.lock-f button:hover{filter:brightness(1.18)}}
 .cmp-o button:not(:disabled):active,.c-act button:active,.lock-f>button:active{filter:brightness(.9)}
-.case-view:not([data-frame="papers"]) .arch-f button:hover{filter:brightness(1.1)}
+@media (hover:hover){.case-view:not([data-frame="papers"]) .arch-f button:hover{filter:brightness(1.1)}}
 .case-view:not([data-frame="papers"]) .arch-f button:active{filter:brightness(.9)}
 /* 종이 기록철: 빨간 도장 */
 .case-view[data-frame="papers"] :is(.cmp-o button,.c-act button,.lock:not(.lock-phone):not(.lock-lcd) .lock-f button){padding:4px 12px 3px;border:2.5px solid var(--red);border-radius:3px;background:transparent;color:var(--red);font:800 13px var(--f-doc);letter-spacing:.14em;transform:rotate(-2deg);mix-blend-mode:multiply;filter:none;transition:transform .08s,background-color .12s;-webkit-mask-image:var(--inkmask);mask-image:var(--inkmask);-webkit-mask-size:140px;mask-size:140px}
 .case-view[data-frame="papers"] .cmp-o button{align-self:center}
 .case-view[data-frame="papers"] .skin-board .c-act button{background-color:rgba(247,241,222,.94)} /* 코르크 판 위에서는 종이쪽지에 찍어야 읽힌다 */
-.case-view[data-frame="papers"] .skin-board .c-act button:hover{background-color:#fbf6e6}
-.case-view[data-frame="papers"] :is(.cmp-o button:not(:disabled),.c-act button,.lock:not(.lock-phone):not(.lock-lcd) .lock-f button):hover{background-color:rgba(176,52,42,.08);filter:none}
+@media (hover:hover){.case-view[data-frame="papers"] .skin-board .c-act button:hover{background-color:#fbf6e6}}
+@media (hover:hover){.case-view[data-frame="papers"] :is(.cmp-o button:not(:disabled),.c-act button,.lock:not(.lock-phone):not(.lock-lcd) .lock-f button):hover{background-color:rgba(176,52,42,.08);filter:none}}
 .case-view[data-frame="papers"] :is(.cmp-o button:not(:disabled),.c-act button,.lock:not(.lock-phone):not(.lock-lcd) .lock-f button):active{transform:rotate(-2deg) scale(.94);filter:none}
 .case-view[data-frame="papers"] .back-list{padding:4px 10px 2px;border:1px solid rgba(60,50,30,.35);background:rgba(255,255,255,.25);color:var(--ink);font:18px/1.1 var(--f-hand)}
 .case-view[data-frame="papers"] .back-list:active{background:rgba(255,255,255,.5)}
 /* 2006년 모니터: 볼록한 회색 단추, 올리면 주황 테 */
 .case-view[data-frame="crt"] :is(.cmp-o button,.c-act button,.lock:not(.lock-phone):not(.lock-lcd) .lock-f button,.ph-bar button,.back-list){padding:4px 14px;border:1px solid #1c3f78;border-radius:3px;background:linear-gradient(#fff,#ecebe6 85%,#d6d0c5);color:#111;font:12px var(--f-web);letter-spacing:0;filter:none}
-.case-view[data-frame="crt"] :is(.cmp-o button:not(:disabled),.c-act button,.lock:not(.lock-phone):not(.lock-lcd) .lock-f button,.ph-bar button,.back-list,.q-f button):hover{box-shadow:inset 0 0 0 2px rgba(248,179,59,.8);filter:none}
+@media (hover:hover){.case-view[data-frame="crt"] :is(.cmp-o button:not(:disabled),.c-act button,.lock:not(.lock-phone):not(.lock-lcd) .lock-f button,.ph-bar button,.back-list,.q-f button):hover{box-shadow:inset 0 0 0 2px rgba(248,179,59,.8);filter:none}}
 .case-view[data-frame="crt"] :is(.cmp-o button,.c-act button,.lock:not(.lock-phone):not(.lock-lcd) .lock-f button,.ph-bar button,.back-list):active{background:linear-gradient(#d6d0c5,#ecebe6)}
 /* 노트북: 둥근 파란 단추 (보조 단추는 흰 바탕) */
 .case-view[data-frame="laptop"] :is(.cmp-o button,.c-act button){padding:7px 16px;border:0;border-radius:6px;background:#2f5fc8;color:#fff;font:700 12.5px var(--f-web);filter:none}
-.case-view[data-frame="laptop"] :is(.cmp-o button:not(:disabled),.c-act button):hover{background:#2551b0;filter:none}
+@media (hover:hover){.case-view[data-frame="laptop"] :is(.cmp-o button:not(:disabled),.c-act button):hover{background:#2551b0;filter:none}}
 .case-view[data-frame="laptop"] .cmp-o button:disabled{background:#9aa7bf}
 .case-view[data-frame="laptop"] :is(.ph-bar button,.back-list){padding:5px 12px;border:1px solid #cdd4de;border-radius:6px;background:#fff;color:#2b3445;font:600 12.5px var(--f-web)}
-.case-view[data-frame="laptop"] :is(.ph-bar button,.back-list):hover{background:#f3f6fb}
+@media (hover:hover){.case-view[data-frame="laptop"] :is(.ph-bar button,.back-list):hover{background:#f3f6fb}}
 /* 「칸을 나눠 살피기」: 칸이 펼쳐져 있는 동안은 눌린 채로 보인다 */
 .scene:has(.ph-grid:not([hidden])) .ph-bar button{border-style:solid;background:#e6d8a4;box-shadow:inset 0 1px 3px rgba(0,0,0,.22)}
 .case-view[data-frame="crt"] .scene:has(.ph-grid:not([hidden])) .ph-bar button{background:linear-gradient(#d6d0c5,#ecebe6);box-shadow:inset 0 1px 2px rgba(0,0,0,.3)}
@@ -272,7 +272,7 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
 .case-view[data-frame="crt"] .per-tr .qa{border-top:1px solid #dfe6f1}
 .case-view[data-frame="crt"] .per-tr :is(.c-q,.c-bub,.c-dots){border-radius:3px;box-shadow:none;font:13px/1.65 var(--f-web)}
 .case-view[data-frame="crt"] .c-bub:not(.me){border:1px solid #b9c7dc;background:#f7f9fc;color:#111}
-.case-view[data-frame="crt"] .c-bub:not(.me):hover{border-color:#7f9db9}
+@media (hover:hover){.case-view[data-frame="crt"] .c-bub:not(.me):hover{border-color:#7f9db9}}
 .case-view[data-frame="crt"] :is(.c-q,.c-bub.me){border:1px solid #7f9db9;background:#dbe7fa;color:#0b2a5c}
 .case-view[data-frame="crt"] .c-bub.me .pin{border-color:#7f9db9;color:#0b2a5c}
 .case-view[data-frame="crt"] .qa.press .c-q{border-color:#c0504d;background:#fbe3df;color:#6b1410;box-shadow:none}
@@ -285,7 +285,7 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
 .case-view[data-frame="laptop"] .per-tr .qa{border-top:1px solid #eef0f3}
 .case-view[data-frame="laptop"] .per-tr :is(.c-q,.c-bub){border-radius:16px;box-shadow:none;font:14.5px/1.6 var(--f-web)}
 .case-view[data-frame="laptop"] .c-bub:not(.me){border:1px solid transparent;border-bottom-left-radius:4px;background:#e9ecf0;color:#1d1f22}
-.case-view[data-frame="laptop"] .c-bub:not(.me):hover{border-color:#d5dae1}
+@media (hover:hover){.case-view[data-frame="laptop"] .c-bub:not(.me):hover{border-color:#d5dae1}}
 .case-view[data-frame="laptop"] :is(.c-q,.c-bub.me){border:0;border-bottom-right-radius:4px;background:#2f5fc8;color:#fff}
 .case-view[data-frame="laptop"] .c-bub.me .pin{border-color:rgba(255,255,255,.5);color:#fff}
 .case-view[data-frame="laptop"] .qa.press .c-q{background:#c62f24;box-shadow:0 0 0 3px rgba(198,47,36,.18)}
@@ -298,11 +298,11 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .qa.live::after{font:11px var(--f-web);letter-spacing:0;opacity:.75}
 /* 화면 속 수첩 단어(자료실 찾기 · 탐문 물음): 노란 손글씨 쪽지 대신 그 화면의 태그 단추 */
 .case-view[data-frame="crt"] .screen .chip{padding:3px 10px;border:1px solid #7f9db9;border-radius:3px;background:linear-gradient(#fff,#ecebe6 85%,#d6d0c5);color:#111;font:12px/1.4 var(--f-web)}
-.case-view[data-frame="crt"] .screen .chip:hover{box-shadow:inset 0 0 0 2px rgba(248,179,59,.8)}
+@media (hover:hover){.case-view[data-frame="crt"] .screen .chip:hover{box-shadow:inset 0 0 0 2px rgba(248,179,59,.8)}}
 .case-view[data-frame="crt"] .screen .chip.done{border-color:#b5b3ab;background:#ece9d8;color:#8a8a8a;opacity:1}
 .case-view[data-frame="crt"] .screen .chip.again{border-color:#c0504d;background:linear-gradient(#fff,#fbe3df);color:#a1261f;box-shadow:none}
 .case-view[data-frame="laptop"] .screen .chip{padding:5px 12px 4px;border:1px solid #d0d7e2;border-radius:999px;background:#f5f7fb;color:#2b3445;font:600 12.5px/1.3 var(--f-web)}
-.case-view[data-frame="laptop"] .screen .chip:hover{border-color:#9db5e8;background:#e8effc}
+@media (hover:hover){.case-view[data-frame="laptop"] .screen .chip:hover{border-color:#9db5e8;background:#e8effc}}
 .case-view[data-frame="laptop"] .screen .chip.done{border-color:transparent;background:#eef0f4;color:#9aa3af;opacity:1}
 .case-view[data-frame="laptop"] .screen .chip.again{border-color:#d93025;background:#fdecea;color:#c62f24;box-shadow:none}
 /* 화면 속 안내 줄: 손글씨 대신 그 화면의 글씨 */
@@ -335,11 +335,11 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-view .rep-empty{color:#8a8f98}
 .case-view[data-frame="laptop"] .rep-view :is(.rep-tog,.rep-per,.rep-filter){border:1px solid #cdd4de;border-radius:6px;background:#fff}
 .case-view[data-frame="laptop"] .rep-view .rep-tog{padding:5px 11px;color:#2b3445;font:600 12px var(--f-web)}
-.case-view[data-frame="laptop"] .rep-view :is(.rep-tog,.rep-per):hover{background:#f3f6fb;transform:none}
+@media (hover:hover){.case-view[data-frame="laptop"] .rep-view :is(.rep-tog,.rep-per):hover{background:#f3f6fb;transform:none}}
 .case-view[data-frame="laptop"] .rep-view .rep-per.on{border-color:#2f5fc8;background:#eef3fd;box-shadow:0 0 0 2px rgba(47,95,200,.18)}
 .case-view[data-frame="crt"] .rep-view :is(.rep-tog,.rep-per){border:1px solid #1c3f78;border-radius:3px;background:linear-gradient(#fff,#ecebe6 85%,#d6d0c5);color:#111}
 .case-view[data-frame="crt"] .rep-view .rep-tog{padding:3px 10px;font:12px var(--f-web)}
-.case-view[data-frame="crt"] .rep-view :is(.rep-tog,.rep-per):hover{box-shadow:inset 0 0 0 2px rgba(248,179,59,.8);transform:none}
+@media (hover:hover){.case-view[data-frame="crt"] .rep-view :is(.rep-tog,.rep-per):hover{box-shadow:inset 0 0 0 2px rgba(248,179,59,.8);transform:none}}
 .case-view[data-frame="crt"] .rep-view .rep-per.on{border-color:#1d4aa6;background:#316ac5;color:#fff}
 .case-view[data-frame="crt"] .rep-view .rep-per.on small{color:#dce6f7}
 .case-view[data-frame="crt"] .rep-view .rep-filter{border:1px solid #7f9db9;background:#fff}
@@ -350,9 +350,9 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-view .rep-opt.on{border-left-color:#2f5fc8;background:#eef3fd}
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-view .rep-opt.on::after{left:auto;right:10px;top:7px;font:700 14px/1 var(--f-web);color:#2f5fc8;transform:none;animation:none}
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-view .btn-hand{height:auto;padding:8px 20px;border-radius:6px;background:#2f5fc8;color:#fff;font:700 13px/1.2 var(--f-web);transform:none}
-.case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-view .btn-hand:hover{background:#2551b0}
+@media (hover:hover){.case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-view .btn-hand:hover{background:#2551b0}}
 .case-view[data-frame="crt"] .rep-view .btn-hand{padding:5px 22px;border:1px solid #1c3f78;border-radius:3px;background:linear-gradient(#fff,#ecebe6 85%,#d6d0c5);color:#111;font:700 12px var(--f-web)}
-.case-view[data-frame="crt"] .rep-view .btn-hand:hover{background:linear-gradient(#fff,#ecebe6 85%,#d6d0c5);box-shadow:inset 0 0 0 2px rgba(248,179,59,.8)}
+@media (hover:hover){.case-view[data-frame="crt"] .rep-view .btn-hand:hover{background:linear-gradient(#fff,#ecebe6 85%,#d6d0c5);box-shadow:inset 0 0 0 2px rgba(248,179,59,.8)}}
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-view .tries{font:11px var(--f-mono);color:#5a5f66}
 /* 종결된 보고서: 고를 수 없는 서류. 올리기 단추 자리에 철해 둔 표시 (종이) · 결재 완료 상태 (화면) */
 #rep.shut .rep-per{cursor:default;transform:none}

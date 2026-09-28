@@ -9,12 +9,12 @@
 .c-q .c-k{display:block;margin-top:2px;font:11px var(--f-mono);letter-spacing:.04em;opacity:.55}
 .qa.press .c-q{background:#5b1f1a;box-shadow:0 0 0 2px rgba(176,52,42,.35),0 2px 0 rgba(0,0,0,.2)}
 .c-bub{align-self:flex-start;border:1px solid rgba(60,50,30,.22);border-bottom-left-radius:3px;background:#fffdf6;color:var(--sheet-ink);box-shadow:0 1px 0 rgba(60,50,30,.12);cursor:pointer;transition:border-color .15s,box-shadow .15s}
-.c-bub:hover{border-color:rgba(60,50,30,.45)}
+@media (hover:hover){.c-bub:hover{border-color:rgba(60,50,30,.45)}}
 .c-bub:has(.pin.on){border-left:3px solid var(--olive)}
 .c-bub.me{align-self:flex-end;border-color:transparent;border-radius:14px 14px 3px 14px;background:var(--ink);color:#f3ecd8}
 .c-bub.me .pin{border-color:rgba(243,236,216,.5);background:transparent;color:#f3ecd8}
 .c-bub .pin{margin-left:8px}
-.c-bub:hover .pin{opacity:1}
+@media (hover:hover){.c-bub:hover .pin{opacity:1}}
 .c-bub .kw{font-size:inherit}
 .c-act{align-self:flex-start;margin:2px 0 0 6px;max-width:80%;font:italic 13px/1.5 var(--f-doc);color:#6d6552}
 .c-act::before{content:"— ";opacity:.6}
@@ -65,14 +65,14 @@
 .rep-empty{color:#8a8170}
 .rep-tog{flex:0 0 auto;padding:4px 10px;border:1px solid #8e7f5c;background:#f4ebc6;color:var(--ink);font:12px var(--f-web);cursor:pointer}
 .rep-tog small{margin-left:2px;font:10px var(--f-mono);opacity:.7}
-.rep-tog:hover{background:#efe1ad}
+@media (hover:hover){.rep-tog:hover{background:#efe1ad}}
 .rep-acc{margin-top:10px;padding-top:10px;border-top:1px dashed rgba(43,40,35,.3)}
 .rep-filter{width:100%;margin:0 0 8px;padding:6px 9px;border:1px solid #8e7f5c;background:#fffdf5;color:var(--ink);font:14px var(--f-web)}
 .rep-grp{margin:0 0 6px}
 .rep-grp>summary{padding:3px 0;font:12px var(--f-mono);letter-spacing:.04em;color:var(--ink-soft);cursor:pointer}
 .rep-grp>summary small{opacity:.7}
 .rep-opt{position:relative;display:block;margin:0 0 3px;padding:6px 10px;border:1px solid transparent;border-left:3px solid rgba(43,40,35,.18);background:rgba(255,255,255,.5);font:14px/1.6 var(--f-web);cursor:pointer}
-.rep-opt:hover{border-color:rgba(43,40,35,.3)}
+@media (hover:hover){.rep-opt:hover{border-color:rgba(43,40,35,.3)}}
 .rep-opt.on{border-left-color:var(--olive);background:#eef0dc}
 .rep-opt[hidden],.rep-grp[hidden]{display:none}
 .rep-used{color:var(--pencil);font-size:12px;white-space:nowrap} /* 다른 주장에 이미 붙인 메모 */
