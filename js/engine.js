@@ -1641,7 +1641,9 @@
   function openItem(o) {
     const first = (o.t === 'doc' || o.t === 'photo') && !ST.seen.includes(o.id);
     keepPos();
-    ST.view.open = o; save(); sfx('page');
+    ST.view.open = o;
+    if (o.t === 'person' && C.people[o.id]) ST.asked[o.id] ||= []; // 찾아가 첫마디를 들었으면 목록의 빨간 표시는 걷힌다 (문서를 펼치면 걷히듯)
+    save(); sfx('page');
     renderRead(); renderList();
     if (o.t === 'feed') { renderTabs(); const pr = $('#paneRead'); if (pr) setTimeout(() => { pr.scrollTop = pr.scrollHeight; }, 0); }
     if (first && ST.seen.includes(o.id)) advance(o.t === 'photo' ? 'photo' : 'doc');
