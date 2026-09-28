@@ -538,7 +538,7 @@
         svg: alley('<ellipse cx="128" cy="96" rx="9" ry="10" fill="#0c0d0e"/><circle cx="126" cy="83" r="5.5" fill="#0c0d0e"/><path d="M84 66v18l12 2" stroke="#3f9a55" stroke-width="2.5" fill="none"/><circle cx="84" cy="88" r="3" fill="#161616"/><circle cx="96" cy="89" r="3" fill="#161616"/>'),
         must: '높은 고정 카메라 시점 · 파란 철 대문 옆 에어컨 실외기 · 그 앞에 쪼그려 앉은 검은 후드·백팩 남성(뒷모습) · 골목 입구에 선 초록색 공유킥보드',
         prompt: 'Fixed CCTV frame from a high rear-wall camera looking down a narrow residential alley at night: an air-conditioner outdoor unit beside a blue metal gate, a man in a black hoodie and black backpack crouching in front of the unit with his back to the camera, a green shared electric kick-scooter parked at the alley entrance. Fisheye distortion, night-mode grey noise, compression blocking.' },
-      cctv_pick: { use: '후면 카메라 00:18 — 남색 패딩 남성이 실외기 아래를 더듬음 (피해자)', ratio: '16:9',
+      cctv_pick: { use: '후면 카메라 00:18 — 남색 패딩 남성이 실외기 아래를 더듬음 (피해자)', alt: '후면 카메라 00:18 — 남색 패딩 남성이 실외기 아래를 더듬음', ratio: '16:9',
         svg: alley('<ellipse cx="130" cy="98" rx="10" ry="9" fill="#1d2c48"/><circle cx="124" cy="86" r="5" fill="#121a2a"/><path d="M134 96l6 -4" stroke="#1d2c48" stroke-width="3"/>'),
         must: '같은 골목 · 같은 실외기 · 남색 패딩 남성이 무릎을 굽혀 실외기 아래로 손을 넣는 자세 (얼굴 안 보임)',
         prompt: 'The same fixed CCTV view of the night alley: a young man in a navy padded jacket kneeling by the air-conditioner outdoor unit next to the blue gate, reaching one hand underneath it, face turned away from the camera. Fisheye, grainy night-mode noise, compression artifacts.' },
