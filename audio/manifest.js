@@ -103,6 +103,7 @@ window.MG.audio = {
   "v/c08/p_tak/k_voice.1": "audio/voice/c08/p_tak-k_voice.1.mp3",
   "v/c09/p_sora/k_parcel": "audio/voice/c09/p_sora-k_parcel.mp3",
   "v/c09/p_courier/k_oct14": "audio/voice/c09/p_courier-k_oct14.mp3",
+  "v/c09/p_courier/k_pcbang": "audio/voice/c09/p_courier-k_pcbang.mp3",
   "v/c09/p_tak/k_oct14": "audio/voice/c09/p_tak-k_oct14.mp3",
   "v/c09/p_tak/k_oct14.1": "audio/voice/c09/p_tak-k_oct14.1.mp3",
   "v/c09/p_tak/k_oct14.2": "audio/voice/c09/p_tak-k_oct14.2.mp3",
