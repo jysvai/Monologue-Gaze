@@ -1796,7 +1796,7 @@
   }
   function setQ(srcId, q) {
     ST.view.src = srcId; ST.view.q[srcId] = q;
-    const n = norm(q), sq = ((ST.view.sq ||= {})[srcId] ||= []), again = sq.includes(n); if (n && !again) sq.push(n); // 찾아본 말 (칩을 흐리게)
+    const n = norm(q), sq = ((ST.view.sq ||= {})[srcId] ||= []), again = sq.includes(n); if (n && !again) { sq.push(n); if (sq.length > 120) sq.splice(0, sq.length - 120); } // 찾아본 말 (칩을 흐리게) — 기록이 한없이 불지 않게 최근 것만
     save();
     renderTabs(); renderList();
     if (n && !again) advance('search'); // 한 번 찾아본 말을 다시 찾는 데는 수사 시간이 들지 않는다 (결과를 다시 펼칠 뿐)
@@ -1964,7 +1964,7 @@
     if (!hits) { toast('조회할 것을 먼저 적는다'); const i = form.querySelector('input'); if (i) i.focus(); return; } // 빈칸 조회는 시간도 쓰지 않는다
     // 같은 조회를 다시 하면 결과만 다시 펼친다 (수사 시간이 들지 않는다)
     const sig = JSON.stringify((s.fields || []).map(fl => norm(inp[fl.id]))), done = ((ST.view.qdone ||= {})[s.id] ||= []), again = done.includes(sig);
-    if (!again) done.push(sig);
+    if (!again) { done.push(sig); if (done.length > 120) done.splice(0, done.length - 120); }
     ST.view.qin[s.id] = inp;
     ST.view.qres[s.id] = hits || [];
     const before = census();
@@ -2211,12 +2211,23 @@
     // 같은 서랍을 다른 탭(창)에서도 열어 두었을 때: 그쪽에서 기록하면 이 탭도 그 기록으로 바꿔 든다.
     // 그러지 않으면 묵은 이 탭이 다음에 저장하면서 저쪽에서 푼 것·적은 것을 지워 버린다.
     window.addEventListener('storage', e => {
+      if (e.key === ROSTER) { // 다른 창에서 이 창의 서랍을 명부에서 지웠으면: 그 창이 쓰는 서랍으로 옮겨 앉는다 (지워진 자리에 계속 적지 않게)
+        const r = roster();
+        if (r.list.some(p => p.id === PID)) return;
+        PID = r.cur; S = load(PID); forget(); clearNotes(); stopTalk();
+        if (MG.sound) MG.sound.stopVoice();
+        SYNC = true;
+        try { cabinet(); } finally { SYNC = false; }
+        toast(`다른 창에서 이 서랍을 명부에서 지웠다 — ${who(r.list.find(p => p.id === PID))}의 서랍으로`);
+        return;
+      }
       if (e.key !== slot(PID) || e.newValue == null) return;
       const cur = C && C.id, ro = !!$('.roster');
+      const v = cur && ST && ST.view ? { src: ST.view.src, open: ST.view.open } : null, pr = $('#paneRead'), pl = $('#paneList'), top = [pr ? pr.scrollTop : 0, pl ? pl.scrollTop : 0]; // 무엇을 펼쳐 보고 있는지는 창마다 제 것
       S = load(PID);
       SYNC = true;
       try {
-        if (cur) { S.current = cur; ST = cs(C); if (TEMP[cur]) TEMP[cur].tl = {}; clearNotes(); stopTalk(); renderCase(); } // 다른 창에서 판을 옮겼을 수 있으니 「방금 맞춰 본 판」 표는 비운다
+        if (cur) { S.current = cur; ST = cs(C); if (v) Object.assign(ST.view, v); if (TEMP[cur]) TEMP[cur].tl = {}; clearNotes(); stopTalk(); renderCase(); const a = $('#paneRead'), b = $('#paneList'); if (a) a.scrollTop = top[0]; if (b) b.scrollTop = top[1]; } // 다른 창에서 판을 옮겼을 수 있으니 「방금 맞춰 본 판」 표는 비운다
         else if ($('.cabinet')) cabinet(ro);
       } finally { SYNC = false; }
     });
