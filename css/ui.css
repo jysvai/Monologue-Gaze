@@ -84,6 +84,9 @@ summary::-webkit-details-marker{display:none}
 .case-view[data-frame="laptop"] .screen :focus-visible{outline:2px solid #3b6fd8;outline-offset:2px;border-radius:4px}
 /* 크게 볼 수 있는 그림 (js/ui.js 가 키보드로 닿게 해 둔다): 테는 그림 안쪽에 — 바깥은 종이·틀에 가려 잘린다 */
 img[data-ui-key]:focus-visible{outline-offset:-5px}
+/* 탭 줄은 옆으로 넘기는 칸이라 바깥 테가 잘린다: 탭의 테도 안쪽에 */
+.src-tabs .tab:focus-visible,.case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen .src-tabs .tab:focus-visible{outline-offset:-4px}
+.case-view[data-frame="crt"] .screen .src-tabs .tab:focus-visible{outline-color:#fff} /* 파란 탭 줄 위의 점선 네모는 밝게 (옛 창의 초점 표시가 어두운 바탕에서 뒤집혀 보이듯) */
 /* 링크: 파란 밑줄 대신 바랜 글씨에 점선 */
 .cab-foot a,.cab-foot .credit a{color:#cdbf9f;text-decoration:underline dotted 1px;text-underline-offset:3px}
 .cab-foot a:hover,.cab-foot .credit a:hover{color:#efe4c9;text-decoration-style:solid}
