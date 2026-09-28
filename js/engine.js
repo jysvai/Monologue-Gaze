@@ -352,7 +352,7 @@
     return ST.keys.filter(k => C.keywords[k]).map(k => {
       const e = askEntry(p, k);
       const state = asked.includes(e) ? ' done' : e.endsWith('!') && asked.includes(k) && lv() < 5 ? ' again' : '';
-      return `<button type="button" class="chip${state}" data-ask="${k}">${esc(C.keywords[k].label)}</button>`;
+      return `<button type="button" class="chip${state}" data-ask="${k}">${esc(C.keywords[k].label)}${state === ' done' ? '<span class="sr"> (물어봄)</span>' : state ? '<span class="sr"> (메모를 들이밀어 다시 물을 수 있음)</span>' : ''}</button>`; // 테두리·흐림은 눈에만 보이니 말로도
     }).join('');
   }
   /* 탐문은 대화처럼: 내가 묻는 말풍선 → 상대가 한 글자씩 답한다. 앞의 (…) 는 몸짓, 「— 」 로 시작하면 내가 끼어든 말 */
@@ -418,7 +418,7 @@
   /* 대화 재생: 몸짓은 스르르, 말은 한 글자씩(사람마다 다른 말소리). 목소리가 있는 말풍선은 재생 시각에 맞춰 찍는다. 누르면 건너뛴다 */
   let TALK = null;
   const reduced = () => !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
-  function stopTalk() { if (TALK) TALK.finish(); }
+  function stopTalk() { if (TALK) TALK.finish(true); }
   function playTalk(qa, opt) {
     stopTalk();
     const box = qa && (qa.querySelector('.c-ans') || qa);
@@ -439,7 +439,8 @@
     };
     const dots = document.createElement('p'); dots.className = 'c-dots'; dots.setAttribute('aria-hidden', 'true'); dots.innerHTML = '<i></i><i></i><i></i>';
     const me = { timer: 0, saved: new Map() };
-    me.finish = () => {
+    me.finish = quiet => {
+      if (!quiet && TALK === me && qa.isConnected) say(items.map(el => { const c = el.cloneNode(true); c.querySelectorAll('[data-pin],[aria-hidden="true"]').forEach(x => x.remove()); return c.textContent.trim(); }).filter(Boolean).join(' ')); // 화면 읽기 프로그램에 대답을 읽어 준다 (다른 곳으로 옮겨 가며 끊은 것은 말고)
       if (TALK === me) TALK = null;
       clearTimeout(me.timer);
       dots.remove();
@@ -531,7 +532,7 @@
     document.body.appendChild(st); setTimeout(() => st.remove(), 1900);
     const t = playTalk(qa, { p, lead: 600000 }); // 대답은 내 말이 끝난 뒤
     const hv = MG.sound ? MG.sound.voice('hero/' + pressKey(p, k)) : null;
-    const go = () => { if (t && TALK === t && qa.isConnected) { t.finish(); playTalk(qa, { p, voice: `v/${C.id}/${p.id}/${k}`, lead: 1000 }); } };
+    const go = () => { if (t && TALK === t && qa.isConnected) { t.finish(true); playTalk(qa, { p, voice: `v/${C.id}/${p.id}/${k}`, lead: 1000 }); } };
     if (hv) hv.done.then(go); else setTimeout(go, 1500);
   }
 
@@ -583,7 +584,7 @@
     const ev = Object.fromEntries((s.events || []).map(e => [e.id, e]));
     const order = solved ? s.events.map(e => e.id) : tlOrder(s);
     const hit = tmp().tl[s.id] || [];
-    const rows = order.map((id, i) => `<li class="tl-e${solved ? ' ok' : hit.includes(id) ? ' hit' : ''}" data-ev="${esc(id)}"><span class="tl-slot">${inline((s.slots || [])[i] || String(i + 1))}</span><span class="tl-t">${inline(ev[id].t)}</span>${solved ? '' : `<span class="tl-mv"><button type="button" data-tl="${esc(s.id)}|${esc(id)}|-1" aria-label="앞으로"${i === 0 ? ' disabled' : ''}>▲</button><button type="button" data-tl="${esc(s.id)}|${esc(id)}|1" aria-label="뒤로"${i === order.length - 1 ? ' disabled' : ''}>▼</button></span>`}</li>`).join('');
+    const rows = order.map((id, i) => `<li class="tl-e${solved ? ' ok' : hit.includes(id) ? ' hit' : ''}" data-ev="${esc(id)}"><span class="tl-slot">${inline((s.slots || [])[i] || String(i + 1))}</span><span class="tl-t">${inline(ev[id].t)}</span>${solved ? '' : `<span class="tl-mv"><button type="button" data-tl="${esc(s.id)}|${esc(id)}|-1" aria-label="${esc(trunc(plain(ev[id].t), 40))} — 앞 칸으로"${i === 0 ? ' disabled' : ''}>▲</button><button type="button" data-tl="${esc(s.id)}|${esc(id)}|1" aria-label="${esc(trunc(plain(ev[id].t), 40))} — 뒤 칸으로"${i === order.length - 1 ? ' disabled' : ''}>▼</button></span>`}</li>`).join('');
     const act = solved ? `<div class="c-done">${blocks(s.solved, `${s.id}@s`, s.name)}</div>` : `<p class="c-act"><button type="button" data-tl-check="${esc(s.id)}">이 순서로 맞춰 보기</button><span class="c-msg"></span></p>`;
     return `<article class="doc skin-${esc(s.skin || 'board')}"><header class="doc-h"><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(s.intro, `${s.id}@i`, s.name)}<ol class="tl">${rows}</ol>${act}</div></article>`;
@@ -597,7 +598,7 @@
     const sets = (s.sets || []).filter(x => ok(x.need));
     if (!sets.length) return `<p class="res-none">${esc(s.empty || '아직 맡길 감정이 없다.')}</p>`;
     const o = ST.view.open;
-    return sets.map(x => `<button type="button" class="item${o && o.t === 'compare' && o.id === x.id ? ' on' : ''}${ST.seen.includes(x.id) ? '' : ' new'}" data-cmp="${esc(x.id)}"><span class="item-t">${ST.unl.includes(x.id) ? '✓ ' : ''}${esc(plain(x.title))}</span>${x.meta ? `<span class="item-m">${esc(plain(x.meta))}</span>` : ''}</button>`).join('');
+    return sets.map(x => `<button type="button" class="item${o && o.t === 'compare' && o.id === x.id ? ' on' : ''}${ST.seen.includes(x.id) ? '' : ' new'}" data-cmp="${esc(x.id)}"><span class="item-t">${ST.unl.includes(x.id) ? '✓ ' : ''}${esc(plain(x.title))}${NEWSR(x.id)}</span>${x.meta ? `<span class="item-m">${esc(plain(x.meta))}</span>` : ''}</button>`).join('');
   }
   function compareHtml(x) {
     if (!x) return '';
@@ -647,7 +648,7 @@
     return scenes.map(x => {
       const n = (x.spots || []).filter(sp => ST.unl.includes(sp.id)).length;
       const tot = lv() >= 5 ? '' : ` / ${sceneSpots(x).length}`;
-      return `<button type="button" class="item${o && o.t === 'photo' && o.id === x.id ? ' on' : ''}${ST.seen.includes(x.id) ? '' : ' new'}" data-scene="${esc(x.id)}"><span class="item-t">${esc(plain(x.title))}</span><span class="item-m">찾은 것 ${n}${tot}${x.meta ? ' · ' + esc(plain(x.meta)) : ''}</span></button>`;
+      return `<button type="button" class="item${o && o.t === 'photo' && o.id === x.id ? ' on' : ''}${ST.seen.includes(x.id) ? '' : ' new'}" data-scene="${esc(x.id)}"><span class="item-t">${esc(plain(x.title))}${NEWSR(x.id)}</span><span class="item-m">찾은 것 ${n}${tot}${x.meta ? ' · ' + esc(plain(x.meta)) : ''}</span></button>`;
     }).join('');
   }
   function photoHtml(x) {
@@ -790,7 +791,7 @@
       if (e.key !== 'Escape') return;
       e.preventDefault(); e.stopPropagation();
       const sib = el.nextElementSibling || el.previousElementSibling;
-      el.remove(); if (sib) sib.focus();
+      el.remove(); if (sib) sib.focus(); else land(['#paneList .item.on', '#srcTabs .tab.on']); // 마지막 알림이었으면 보던 자리로
     });
   }
   function clearNotes() { NOTEGEN++; const b = $('#lvNotes'); if (b) b.innerHTML = ''; } // 아직 뜰 차례를 기다리던 알림도 거둔다
@@ -837,6 +838,7 @@
     const c = $('.scr-bar.live .lv-clock'); // 수사 시각이 넘어가는 순간 시계가 잠깐 밝아진다
     if (c && was && c.textContent !== was) c.classList.add('tick');
   }
+  const NEWSR = id => (ST.seen.includes(id) ? '' : '<span class="sr"> (새 자료)</span>'); // 붉은 점은 눈에만 보이니
   const feedCount = s => { const L = ST.live; return L ? (s.items || []).filter(it => it.id in L.fd && !it.me).length + L.fx.filter(x => (x.src || firstFeed()) === s.id).length : 0; }; // 내가 보낸 말은 안 읽은 말이 아니다
   const feedUnread = s => { const o = ST.view.open; if (!ST.live || (o && o.t === 'feed' && o.id === s.id)) return 0; return Math.max(0, feedCount(s) - ((ST.live.rd || {})[s.id] || 0)); }; // 보고 있는 방은 다 읽은 것
   const reqUnread = s => (s.items || []).filter(r => { const q = reqState(r.id); return q && q.st === 'done' && C.docs[r.doc] && !ST.seen.includes(r.doc); }).length;
@@ -892,7 +894,7 @@
     else if (ST.solved) foot = `${q && q.st === 'no' ? `<p class="rq-no"><b>기각</b> ${inline(r.deny || '소명이 부족하다.')} <small>${esc(lstamp(q.at))}</small></p>` : ''}<p class="rq-st">${q ? '다시 올리기 전에' : '올리기 전에'} 사건 종결</p>`; // 종결된 사건에는 신청할 것이 없다
     else {
       const sel = tmp().rq[r.id] != null ? tmp().rq[r.id] : ''; // 신청서마다 고른 소명 메모 (올리기 전)
-      const pick = !why ? '' : `<section class="rq-why"><h4>소명 자료 <small>이 요청이 왜 필요한지 보여 줄 메모 하나</small></h4>${notes.length ? noteGroups(notes).map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${String(sel) === String(n.id) ? ' on' : ''}"><input type="radio" name="rq-${esc(r.id)}" value="${n.id}" data-rq-pick="${esc(r.id)}"${String(sel) === String(n.id) ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span></label>`).join('')}</details>`).join('') : '<p class="rep-empty">수첩에 메모가 없다. 근거가 될 문장을 먼저 적어 둔다.</p>'}</section>`;
+      const pick = !why ? '' : `<section class="rq-why"><h4 id="rqh-${esc(r.id)}">소명 자료 <small>이 요청이 왜 필요한지 보여 줄 메모 하나</small></h4>${notes.length ? `<div role="radiogroup" aria-labelledby="rqh-${esc(r.id)}">` + noteGroups(notes).map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${String(sel) === String(n.id) ? ' on' : ''}"><input type="radio" name="rq-${esc(r.id)}" value="${n.id}" data-rq-pick="${esc(r.id)}"${String(sel) === String(n.id) ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span></label>`).join('')}</details>`).join('') + '</div>' : '<p class="rep-empty">수첩에 메모가 없다. 근거가 될 문장을 먼저 적어 둔다.</p>'}</section>`;
       const no = q && q.st === 'no' ? `<p class="rq-no"><b>기각</b> ${inline(r.deny || '소명이 부족하다.')} <small>${esc(lstamp(q.at))}</small></p>` : '';
       foot = `${no}${pick}<p class="submit-row"><button type="button" class="btn-hand" data-rq-go="${esc(r.id)}">${esc(r.button || (q ? '다시 신청하기' : '신청서 올리기'))}</button><span class="c-msg"></span></p>`;
     }
@@ -930,10 +932,10 @@
   const itemBtn = d => {
     const o = ST.view.open;
     const on = o && o.t === 'doc' && o.id === d.id;
-    return `<button type="button" class="item${on ? ' on' : ''}${ST.seen.includes(d.id) ? '' : ' new'}" data-doc="${d.id}"><span class="item-t">${esc(plain(d.title))}</span>${d.meta ? `<span class="item-m">${esc(plain(d.meta))}</span>` : ''}</button>`;
+    return `<button type="button" class="item${on ? ' on' : ''}${ST.seen.includes(d.id) ? '' : ' new'}" data-doc="${d.id}"><span class="item-t">${esc(plain(d.title))}${NEWSR(d.id)}</span>${d.meta ? `<span class="item-m">${esc(plain(d.meta))}</span>` : ''}</button>`;
   };
   // 자료실의 「수첩의 단어로 찾기」: 찾아본 단어는 탐문에서 물어본 단어처럼 흐리게. 단, 그 단어로 걸리는 자료 가운데 안 읽은 것이 생기면 다시 진하게
-  const keyChips = s => { const sq = (ST.view.sq || {})[s.id] || []; return ST.keys.filter(k => C.keywords[k]).map(k => { const L = C.keywords[k].label, done = sq.includes(norm(L)) && archiveHits(s, L).every(d => ST.seen.includes(d.id)); return `<button type="button" class="chip${done ? ' done' : ''}" data-search="${k}">${esc(L)}</button>`; }).join(''); };
+  const keyChips = s => { const sq = (ST.view.sq || {})[s.id] || []; return ST.keys.filter(k => C.keywords[k]).map(k => { const L = C.keywords[k].label, done = sq.includes(norm(L)) && archiveHits(s, L).every(d => ST.seen.includes(d.id)); return `<button type="button" class="chip${done ? ' done' : ''}" data-search="${k}">${esc(L)}${done ? '<span class="sr"> (찾아봄)</span>' : ''}</button>`; }).join(''); };
 
   function matchKeys(q) {
     const n = norm(q);
@@ -972,7 +974,7 @@
     const ps = Object.values(C.people).filter(p => p.src === s.id && personVisible(p));
     const o = ST.view.open;
     if (!ps.length) return `<p class="res-none">${esc(s.empty || '아직 찾아갈 사람이 없다. 이름을 알아내야 한다.')}</p>`;
-    return ps.map(p => `<button type="button" class="item person${o && o.t === 'person' && o.id === p.id ? ' on' : ''}${ST.asked[p.id] ? '' : ' new'}" data-person="${p.id}">${portrait(p)}<span class="item-t">${esc(p.name)}</span>${p.role ? `<span class="item-m">${esc(plain(p.role))}</span>` : ''}</button>`).join('');
+    return ps.map(p => `<button type="button" class="item person${o && o.t === 'person' && o.id === p.id ? ' on' : ''}${ST.asked[p.id] ? '' : ' new'}" data-person="${p.id}">${portrait(p)}<span class="item-t">${esc(p.name)}${ST.asked[p.id] ? '' : '<span class="sr"> (아직 안 만남)</span>'}</span>${p.role ? `<span class="item-m">${esc(plain(p.role))}</span>` : ''}</button>`).join('');
   }
   // 지도: 목록 칸에는 작은 지도(점만), 아무것도 펼치지 않았을 때는 읽기 칸에 크게(이름까지)
   function mapHtml(s, big) {
@@ -1142,10 +1144,10 @@
       const open = !shut && REPOPEN === cl.id;
       const list = groups.map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${cur && cur.id === n.id ? ' on' : ''}"><input type="radio" name="rep-${esc(cl.id)}" value="${n.id}" data-rep="${esc(cl.id)}"${cur && cur.id === n.id ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span>${usedBy(n, i)}</label>`).join('')}</details>`).join('');
       return `<section class="rep-claim${cur ? ' filled' : ''}${open ? ' open' : ''}" data-claim="${esc(cl.id)}">
-        <h4><span class="no">${i + 1}</span> ${inline(cl.q)}</h4>
+        <h4 id="rh-${esc(cl.id)}"><span class="no">${i + 1}</span> ${inline(cl.q)}</h4>
         <div class="rep-pick">${cur ? `<p class="rep-memo"><span class="n">${notes.indexOf(cur) + 1}.</span> ${esc(cur.t)} <span class="src">— ${esc(cur.src || '')}</span></p>` : '<p class="rep-empty">아직 붙인 메모가 없다.</p>'}
           ${shut ? '' : `<button type="button" class="rep-tog" data-rep-open="${esc(cl.id)}" aria-expanded="${open}">${open ? '접기' : cur ? '다른 메모로 바꾸기' : '메모에서 고르기'} <small>${notes.length}</small></button>`}</div>
-        ${open ? `<div class="rep-acc">${notes.length ? `<input type="search" class="rep-filter" placeholder="메모에서 낱말 찾기" data-rep-filter aria-label="메모 찾기">${list}` : '<p class="rep-empty">수첩에 메모가 없다. 문서와 탐문에서 문장을 눌러 적어 둔다.</p>'}</div>` : ''}
+        ${open ? `<div class="rep-acc">${notes.length ? `<input type="search" class="rep-filter" placeholder="메모에서 낱말 찾기" data-rep-filter aria-label="메모 찾기"><div role="radiogroup" aria-labelledby="rh-${esc(cl.id)}">${list}</div>` : '<p class="rep-empty">수첩에 메모가 없다. 문서와 탐문에서 문장을 눌러 적어 둔다.</p>'}</div>` : ''}
       </section>`;
     };
     // 화면 속(모니터·노트북) 보고서는 전산 양식이라 머리에 결재란: 담당은 지금 서랍 주인, 종결되면 팀장·과장 칸에 결재 도장
@@ -1153,7 +1155,7 @@
     const sign = C.frame === 'crt' || C.frame === 'laptop' ? `<table class="rep-sign" aria-label="결재"><tr><th>담당</th><th>팀장</th><th>과장</th></tr><tr><td>${esc(who(me))}</td><td>${ST.solved ? '<span class="ok">결재</span>' : back ? '<span class="no">반려</span>' : ''}</td><td>${ST.solved ? '<span class="ok">결재</span>' : ''}</td></tr></table>` : '';
     return `<article class="doc skin-report rep-view"><header class="doc-h">${sign}<p class="doc-k">${esc(FM.title)}</p><h3 class="doc-t">${esc(C.title)}</h3><p class="doc-m">${esc(FM.lead)}</p></header>
       <div class="doc-b"><form id="rep" autocomplete="off"${shut ? ' class="shut"' : ''}>
-        <section class="rep-sec"><h4>${esc(FM.culprit)}</h4><div class="rep-people">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => `<label class="rep-per${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}><b>${esc(C.keywords[k].label)}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}</label>`).join('') || '<p class="rep-empty">수첩에 적힌 인물이 없다.</p>'}</div></section>
+        <section class="rep-sec"><h4 id="rh-culprit">${esc(FM.culprit)}</h4><div class="rep-people" role="radiogroup" aria-labelledby="rh-culprit">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => `<label class="rep-per${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}><b>${esc(C.keywords[k].label)}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}</label>`).join('') || '<p class="rep-empty">수첩에 적힌 인물이 없다.</p>'}</div></section>
         ${sol.claims.map(claim).join('')}
         <p class="submit-row">${shut ? `<span class="rep-filed">${esc(FM.filed || (C.frame === 'papers' ? '종결 · 철해 둠' : '결재 완료'))}</span>` : `<button type="submit" class="btn-hand">${esc(FM.submit)}</button>`}<span class="tries">${ST.tries ? `제출 ${ST.tries}회` : ''}</span></p>
       </form><p class="verdict">${esc(VERDICT)}</p>${ST.solved ? `<div class="rep-solved">${solvedHtml(false)}</div>` : ''}</div></article>`;
@@ -1838,7 +1840,7 @@
       const before = census();
       if (!ST.unl.includes(id)) ST.unl.push(id);
       (lock.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
-      save(); refreshAll(); cue('unlock', '열림');
+      save(); refreshAll(); cue('unlock', '열림'); land(C.docs[id] ? ['#paneRead .doc-t', '#paneList .item.on'] : ['#paneList .item', '#srcTabs .tab.on']);
       const gained = census() - before;
       toast((lock.ok || '열렸다.') + (gained > 0 ? ` · 새로 열린 것 ${gained}` : ''));
       liveSync();
@@ -1863,7 +1865,7 @@
       const before = census();
       ST.unl.push(s.id);
       ((s.reward && s.reward.keys) || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
-      save(); refreshAll(); cue('match', '해독');
+      save(); refreshAll(); cue('match', '해독'); land(['#paneRead .c-done', '#paneRead .doc-t']);
       const gained = census() - before;
       toast(`해독했다${gained > 0 ? ` · 새로 열린 것 ${gained}` : ''}`);
     } else {
@@ -1879,11 +1881,20 @@
     m.classList.remove('again'); void m.offsetWidth; m.classList.add('again');
     say(t); // 칸을 새로 그린 바로 뒤라 그 칸에서는 읽히지 않을 수 있다
   }
+  // 풀어서 칸·단추가 사라져 초점이 몸통으로 떨어졌으면 새로 드러난 것으로 (force: 떨어지지 않았어도)
+  function land(sels, force) {
+    const a = document.activeElement;
+    if (!force && a && a !== document.body && a.isConnected) return;
+    const el = [].concat(sels).map(x => $(x)).find(x => x && x.offsetParent !== null);
+    if (!el) return;
+    if (!el.matches('a[href],button,input,select,textarea,[tabindex]')) el.tabIndex = -1;
+    el.focus({ preventScroll: true });
+  }
   function solveThing(id, reward, msg, stamp) {
     const before = census();
     if (!ST.unl.includes(id)) ST.unl.push(id);
     ((reward && reward.keys) || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
-    save(); refreshAll(); cue('match', stamp || '일치');
+    save(); refreshAll(); cue('match', stamp || '일치'); land(['#paneRead .c-done', '#paneRead .doc-t']);
     const gained = census() - before;
     toast(msg + (gained > 0 ? ` · 새로 열린 것 ${gained}` : ''));
     liveSync();
@@ -2098,14 +2109,14 @@
       if (t.closest('[data-intro-ok]')) { S.intro = true; save(); cabinet(); return; }
       if ((el = t.closest('[data-wipe]'))) return armed(el, roster().list.length > 1 ? '한 번 더 누르면 내 기록이 지워진다' : '한 번 더 누르면 전부 지워진다', () => { S = blank(); forget(); save(); cabinet(); });
       if (!C) return;
-      if ((el = t.closest('.lv-more'))) { const pr = $('#paneRead'); if (pr) pr.scrollTo({ top: pr.scrollHeight, behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth' }); el.remove(); return; }
+      if ((el = t.closest('.lv-more'))) { const pr = $('#paneRead'); if (pr) pr.scrollTo({ top: pr.scrollHeight, behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth' }); el.remove(); land('#paneRead'); return; }
       if ((el = t.closest('.lv-note'))) { // 휴대폰 알림: 누르면 그곳으로
         if (el.dataset.moved) { delete el.dataset.moved; return; } // 밀어 치우던 것
         const tt = el.dataset.lvT, id = el.dataset.lvId, src = el.dataset.lvSrc;
         el.remove();
-        if (!tt || !id) return;
+        if (!tt || !id) return land(['#lvNotes .lv-note', '#paneList .item.on', '#srcTabs .tab.on']);
         if (src && C.sources.some(s => s.id === src)) { ST.view.src = src; renderTabs(); renderList(); }
-        return openItem({ t: tt, id });
+        openItem({ t: tt, id }); land(['#paneList .item.on', '#srcTabs .tab.on']); return;
       }
       if ((el = t.closest('[data-wait]'))) return waitsPast() ? armed(el, '한 번 더 누르면 기한을 넘긴다', waitNext) : waitNext();
       if ((el = t.closest('[data-req]'))) return openItem({ t: 'req', id: el.dataset.req });
@@ -2164,7 +2175,7 @@
       if ((el = t.closest('[data-search]'))) return search(el.dataset.search);
       if ((el = t.closest('[data-chip]'))) return chip(el.dataset.chip);
       if ((el = t.closest('[data-del]'))) return delNote(+el.dataset.del);
-      if (t.closest('[data-open-rep]')) { REPOPEN = null; return openItem({ t: 'report' }); }
+      if (t.closest('[data-open-rep]')) { REPOPEN = null; openItem({ t: 'report' }); if (!e.detail) land(['#paneRead .rep-view input:checked', '#paneRead .rep-view input', '#paneRead .rep-view'], true); return; } // 키보드로 펼쳤으면 초점도 보고서로
       if ((el = t.closest('[data-rep-open]'))) { REPOPEN = REPOPEN === el.dataset.repOpen ? null : el.dataset.repOpen; renderRep(); const a = $('.rep-claim.open'); if (a) { a.scrollIntoView({ block: 'nearest' }); const q = a.querySelector('[data-rep-filter]'); if (q && !narrow()) q.focus({ preventScroll: true }); } return; }
       if (t.closest('[data-back]')) {
         const was = ST.view.open;
@@ -2186,7 +2197,7 @@
       const f = e.target;
       if (f.matches('[data-mwho]')) { e.preventDefault(); return guessM(f); }
       if (f.matches('[data-pnew]')) { e.preventDefault(); return newPlayer(f.querySelector('input').value); }
-      if (f.matches('[data-pname]')) { e.preventDefault(); f.querySelector('input').blur(); return; } // 흐려지면서 change 로 이름이 적힌다
+      if (f.matches('[data-pname]')) { e.preventDefault(); const i = f.querySelector('input'); i.blur(); if (matchMedia('(pointer:fine)').matches) i.focus(); return; } // 흐려지면서 change 로 이름이 적힌다 (키보드면 칸에 그대로 남는다)
       if (!C) return;
       if (f.matches('[data-arch]')) { e.preventDefault(); setQ(f.dataset.arch, f.querySelector('input').value.trim()); const i = $(`#aq-${f.dataset.arch}`); if (i) { if (matchMedia('(pointer:fine)').matches) i.focus(); else i.blur(); } } // 손가락으로 쓰면 자판을 내려 결과가 보이게
       else if (f.matches('[data-lock]')) { e.preventDefault(); tryLock(f.dataset.lock, f.querySelector('input').value); }

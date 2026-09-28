@@ -216,7 +216,8 @@
       const now = document.activeElement;
       if (b.isConnected || (now && now !== document.body)) return;
       const seen = s => s && [...document.querySelectorAll(s)].find(x => x.offsetParent !== null && !x.disabled);
-      const el = seen(sel) || seen(kin) || (pane && (seen('#paneList .item.on') || seen('#paneRead [data-back]')));
+      const el = seen(sel) || seen(kin) || (pane && (seen('#paneList .item.on') || seen('#paneRead [data-back]')))
+        || seen('#paneList .item.on') || seen('#srcTabs .tab.on') || seen('[data-roster]') || seen('[data-open]'); // 칸 밖의 단추(아래 줄의 기다리기, 명부, 첫 방문)가 사라졌으면 보던 곳 → 기록실 차례로
       if (el) el.focus({ preventScroll: true });
     }, 0);
   }, true);
