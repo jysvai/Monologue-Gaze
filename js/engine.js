@@ -714,14 +714,14 @@
       if (!ST.unl.includes(it.id)) ST.unl.push(it.id); // '#말id' 조건: 그 말이 왔음
       (it.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
       const o = ST.view.open, here = o && o.t === 'feed' && o.id === it.src; // 지금 펼쳐 둔 단톡방의 말은 알림으로 또 띄우지 않는다 (방에 바로 뜬다)
-      if (!it.me && !here) news.push({ who: it.who || '', msg: plain(it.msg || ''), app: it.app || feedName(it.src), t: 'feed', id: it.src, src: it.src, at: L.fd[it.id] });
+      if (!it.me && !here && !ST.solved) news.push({ who: it.who || '', msg: plain(it.msg || ''), app: it.app || feedName(it.src), t: 'feed', id: it.src, src: it.src, at: L.fd[it.id] });
     });
     const dl = C.live.deadline;
     if (dl && !L.late && !ST.solved && L.t > dl.at) {
       L.late = true;
       const who = dl.who || '팀장', msg = dl.miss || `${dl.label || '기한'}이 지났다.`;
       L.fx.push({ t: dl.at, who, msg, late: true });
-      news.push({ who, msg, app: dl.label || '기한', late: true, at: dl.at });
+      news.push({ who, msg, app: dl.label || '기한', late: true, at: dl.at, t: 'feed', id: firstFeed(), src: firstFeed() }); // 누르면 그 말이 적힌 단톡방으로
     }
     save();
     renderBar();
@@ -744,8 +744,9 @@
     const box = statusBox('lvNotes', 'lv-notes');
     const gen = NOTEGEN, now = ST.live.t;
     news = news.map((n, i) => [n, i]).sort((a, b) => (a[0].at ?? now) - (b[0].at ?? now) || a[1] - b[1]).map(x => x[0]); // 온 차례대로, 각자 온 시각을 달고
-    const more = news.length - 3; // 한꺼번에 너무 많이 오면 앞의 것은 접고 「+N」
-    news.slice(-3).forEach((n, i) => setTimeout(() => {
+    const more = news.length - 3; // 한꺼번에 너무 많이 오면 앞의 것은 접고 「+N」 — 회신(서류가 열리는 것)과 기한 알림은 접지 않는다
+    if (more > 0) { const keep = new Set(news.filter(n => n.late || n.t === 'doc').slice(-3)); news.slice().reverse().forEach(n => { if (keep.size < 3) keep.add(n); }); news = news.filter(n => keep.has(n)); }
+    news.forEach((n, i) => setTimeout(() => {
       if (!C || !box.isConnected || gen !== NOTEGEN) return;
       const el = document.createElement('button');
       el.type = 'button'; el.className = 'lv-note' + (n.late ? ' late' : '');
