@@ -108,7 +108,8 @@
   let PID = roster().cur; // 이 탭의 수사관. 다른 탭에서 바꿔도 이 탭은 제 서랍에만 쓴다
   let S = load(PID);
   let SYNC = false; // 다른 탭의 기록을 받아 다시 그리는 동안은 쓰지 않는다 (두 탭이 서로 덮어쓰며 핑퐁하지 않게)
-  const save = () => { if (SYNC) return; try { localStorage.setItem(slot(PID), JSON.stringify(S)); } catch (e) { /* ignore */ } };
+  let unsaved = false; // 브라우저가 저장을 막으면(사이트 데이터 차단 등) 한 번만 알린다 — 조용히 잃지 않게
+  const save = () => { if (SYNC) return; try { localStorage.setItem(slot(PID), JSON.stringify(S)); } catch (e) { if (!unsaved) { unsaved = true; setTimeout(() => toast('이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다', 6000), 900); } } };
 
   function cs(c) {
     const st = (S.cases[c.id] = S.cases[c.id] || {});
@@ -1522,13 +1523,13 @@
 
   /* ───────── actions ───────── */
   let toastTimer;
-  function toast(msg) {
+  function toast(msg, ms) {
     let t = $('#toast');
     if (!t) { t = document.createElement('div'); t.id = 'toast'; t.className = 'toast'; t.setAttribute('role', 'status'); document.body.appendChild(t); }
     t.textContent = msg;
     t.classList.add('on');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.classList.remove('on'), 2200);
+    toastTimer = setTimeout(() => t.classList.remove('on'), ms || 2200);
   }
   function refreshAll() { renderTabs(); renderList(); renderRead(); renderNotebook(); }
 
