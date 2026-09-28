@@ -955,6 +955,13 @@
     const x = Math.abs(bar.scrollLeft), m = bar.scrollWidth - bar.clientWidth;
     bar.classList.toggle('more-l', x > 2);
     bar.classList.toggle('more-r', x < m - 2);
+    // 새 자료 점이 찍힌 탭이 가려져 있으면, 그쪽 끝에 작은 점을 따로 띄운다 (좁은 화면에서 옆으로 밀어 볼 곳을 알려 준다)
+    const scr = bar.parentElement, b = bar.getBoundingClientRect();
+    if (!scr || !scr.querySelector || !b.width) return;
+    const dots = [...bar.querySelectorAll('.tab-new')].map(d => d.getBoundingClientRect());
+    scr.classList.toggle('new-r', x < m - 2 && dots.some(r => r.left > b.right - 24));
+    scr.classList.toggle('new-l', x > 2 && dots.some(r => r.right < b.left + 24));
+    scr.style.setProperty('--tabs-mid', Math.round(bar.offsetTop + bar.offsetHeight / 2) + 'px');
   }
   function renderList() {
     const s = curSrc();
@@ -1142,7 +1149,7 @@
       <main class="stage" aria-label="조사 자료">
         <div class="stage-frame"><span class="cam" aria-hidden="true"></span>
           <div class="screen">
-            <nav class="src-tabs" role="tablist" id="srcTabs" aria-label="조사 도구"></nav>
+            <nav class="src-tabs" role="tablist" id="srcTabs" aria-label="조사 도구"></nav><span class="tabs-new l" aria-hidden="true"></span><span class="tabs-new r" aria-hidden="true"></span>
             <div class="stage-body" id="stageBody"><section class="pane-list" id="paneList" role="tabpanel"></section><section class="pane-read" id="paneRead" aria-label="읽기"></section></div>${clockBar()}
           </div>
         </div>

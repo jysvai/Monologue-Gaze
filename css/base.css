@@ -164,6 +164,10 @@ img{max-width:100%}
 .tab-lock{font:10px var(--f-mono);padding:1px 5px;border:1px solid currentColor;opacity:.7}
 .tab-new{flex:none;width:7px;height:7px;margin-left:-1px;border-radius:50%;background:var(--red);box-shadow:0 0 0 1.5px rgba(255,250,235,.55)} /* 새로 열린 자료가 있는 탭 (js renderTabs) */
 .case-view:is([data-frame="laptop"],[data-frame="crt"]) .tab-new{background:#e5483b;box-shadow:0 0 0 1.5px rgba(255,255,255,.7)}
+.tabs-new{position:absolute;top:var(--tabs-mid,18px);z-index:6;display:none;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--red);box-shadow:0 0 0 1.5px rgba(255,250,235,.6);pointer-events:none} /* 가려진 탭에 새 자료가 있을 때 그쪽 끝에 (js tabEdge) */
+.tabs-new.l{left:3px}.tabs-new.r{right:3px}
+.screen.new-l>.tabs-new.l,.screen.new-r>.tabs-new.r{display:block}
+.case-view:is([data-frame="laptop"],[data-frame="crt"]) .tabs-new{background:#e5483b}
 .stage-body{flex:1;min-height:0;display:grid;grid-template-columns:minmax(210px,300px) minmax(0,1fr)}
 .pane-list{min-height:0;overflow:auto;padding:14px 12px 20px}
 .pane-read{position:relative;min-height:0;overflow:auto;padding:18px 18px 40px}
