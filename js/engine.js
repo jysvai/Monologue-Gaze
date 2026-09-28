@@ -2065,6 +2065,15 @@
     document.addEventListener('scroll', e => { const t = e.target; if (t.id === 'srcTabs') tabEdge(t); else if (t.classList && t.classList.contains('b-tbl')) tblEdge(t); else if (t.matches && t.matches('.skin-news.vertical .doc-b')) colEdge(t); }, { capture: true, passive: true });
     window.addEventListener('resize', () => { tabEdge($('#srcTabs')); edges(); }, { passive: true });
     if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { tabEdge($('#srcTabs')); edges(); }); // 글꼴이 늦게 와 탭·표 너비가 바뀐 때
+    // 세로쓰기 신문 위에서 휠을 굴리면 읽는 방향(왼쪽)으로 넘긴다. 끝까지 읽었으면 휠은 원래대로 칸을 내린다
+    document.addEventListener('wheel', e => {
+      const b = e.target.closest && e.target.closest('.skin-news.vertical .doc-b');
+      if (!b || e.ctrlKey || Math.abs(e.deltaX) >= Math.abs(e.deltaY)) return;
+      const m = b.scrollWidth - b.clientWidth, x = Math.abs(b.scrollLeft), dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? b.clientWidth : 1);
+      if (m <= 2 || (dy > 0 && x >= m - 1) || (dy < 0 && x <= 1)) return;
+      e.preventDefault();
+      b.scrollLeft -= dy;
+    }, { passive: false });
     document.addEventListener('load', e => { if (e.target.tagName === 'IMG' && e.target.closest && e.target.closest('#paneRead')) edges(); }, true); // 늦게 뜬 그림이 세로 신문을 밀어낸 때
     document.addEventListener('toggle', e => {
       const d = e.target;
