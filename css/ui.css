@@ -106,6 +106,8 @@ input[type="password"]{letter-spacing:.28em}
 img{-webkit-user-drag:none;-webkit-touch-callout:none}
 /* 휴대폰: 단추를 빨리 두 번 눌러도(카드 ▲▼, 시간 보내기, 사진 칸) 화면이 확대되지 않게 — 두 손가락 확대는 그대로 */
 :is(button,a,summary,label,input,select,textarea,.kw,.spot,.ph-cell,[role="button"]){touch-action:manipulation}
+/* 아이폰은 16px 보다 작은 글자의 입력칸을 누르면 화면을 확대한 채 둔다 — 손가락으로 쓰는 기기에서는 화면 속 검색·조회·잠금 칸과 보고서 메모 찾기 칸의 글자를 16px 로 (손글씨로 크게 쓰는 종이 칸은 그대로) */
+@media (pointer:coarse){:is(.arch-f,.qf,.lock-f) input:not(.case-view[data-frame="papers"] :is(.arch-f,.qf) input):not(:is(.lock-lcd,.lock-phone) input),.rep-filter{font-size:16px!important}}
 /* 칸 끝까지 굴려도 뒤의 책상까지 따라 굴러가지 않게 */
 .pane-list,.pane-read,.nb{overscroll-behavior:contain}
 /* 사진 살피기: 기본 확대 화살표 대신 놋쇠 돋보기 (가운데가 누르는 자리) */
