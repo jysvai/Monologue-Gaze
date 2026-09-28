@@ -528,6 +528,8 @@
     const syms = [...new Set(toks.filter(t => !keep.has(t)))];
     return { toks, keep, syms };
   }
+  let CIPHL = null; // 글자를 넣고 있는 기호: 암호문 속 같은 기호에 형광펜
+  const cipherHl = sym => { CIPHL = sym; const g = $('#cGrid'); if (g) $$('.cc:not(.sp)', g).forEach(c => c.classList.toggle('hl', c.firstChild.textContent === sym)); };
   function cipherGrid(s) {
     const { toks, keep } = cipherParts(s);
     const g = ST.ciph[s.id] || {};
@@ -537,7 +539,7 @@
       if (t === '\n') return '<br>';
       if (keep.has(t)) return `<span class="cc sp">${t === ' ' ? '&nbsp;' : esc(t)}</span>`;
       const v = solved ? s.key[t] : given[t] || g[t] || '';
-      return `<span class="cc${v ? ' has' : ''}"><b>${esc(t)}</b><i>${esc(v || '·')}</i></span>`;
+      return `<span class="cc${v ? ' has' : ''}${t === CIPHL ? ' hl' : ''}"><b>${esc(t)}</b><i>${esc(v || '·')}</i></span>`;
     }).join('');
   }
   function cipherHtml(s) {
@@ -2170,6 +2172,8 @@
       if (s.dataset.rep === 'culprit') ST.report.culprit = s.value; else { ST.report.claims[s.dataset.rep] = s.value; REPOPEN = null; }
       save(); sfx('pen'); renderRep();
     });
+    document.addEventListener('focusin', e => { const i = e.target.closest && e.target.closest('[data-sym]'); if (i) cipherHl(i.dataset.sym); });
+    document.addEventListener('focusout', e => { if (CIPHL != null && e.target.closest && e.target.closest('[data-sym]') && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-sym]'))) cipherHl(null); });
     document.addEventListener('input', e => {
       // 칸에 적는 소리: 2006년 모니터는 자판, 노트북은 얕은 자판, 종이 서식은 연필 (소리 파일이 있을 때만, 너무 잦지 않게)
       if (C && S.sound && MG.sound && e.target.matches('input:not([type="radio"])') && e.target.closest('.case-view')) {

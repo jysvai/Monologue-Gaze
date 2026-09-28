@@ -307,6 +307,8 @@ img{max-width:100%}
 .cc i{font:15px/1.2 var(--f-hand);font-style:normal;color:var(--pencil)}
 .cc.has i{color:var(--red)}
 .cc.sp{min-width:10px}
+.cc.hl{background:rgba(255,212,84,.45);border-radius:2px;box-shadow:0 0 0 1px rgba(255,212,84,.45)} /* 글자를 넣는 기호가 암호문 어디에 있는지 */
+.ck:focus-within{border-color:rgba(0,0,0,.5);background:rgba(255,236,170,.6)}
 .c-keys{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
 .ck{display:inline-flex;align-items:center;gap:4px;padding:3px 6px;border:1px solid rgba(0,0,0,.25);background:rgba(255,255,255,.6)}
 .ck span{font:18px var(--f-mono);min-width:18px;text-align:center}
