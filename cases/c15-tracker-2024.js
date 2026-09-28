@@ -640,7 +640,7 @@
         { id: 'c3', q: '그녀가 있는 곳', accept: ['f_carwash_owner', 'f_gps_stop', 'f_tl_night'] },
         { id: 'c4', q: '그녀가 언제 집에 닿을지 그가 알았던 까닭', accept: ['f_share', 'f_exmsg_route', 'f_note_hand'] },
       ],
-      near: '한 군데가 어긋난다.',
+      near: '한 군데가 어긋난다. 고쳐 쓰는 동안에도 시계는 간다.',
       far: '반려. 그녀가 있는 곳까지 이어지는 줄이 아직 한 군데 끊겨 있다.',
       stamp: '2024.11.22 · 가람서 여청수사팀',
       epilogue: [
