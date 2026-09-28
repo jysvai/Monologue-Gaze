@@ -385,6 +385,7 @@
     const k = e.replace(/!$/, ''), kw = C.keywords[k] || {}, L = kw.label || k;
     if (e.endsWith('!')) return (MG.sound && MG.sound.line(pressKey(p, k))) || '이걸 보시죠. 그래도 같은 말씀입니까?';
     if (k === p.key) return '본인 이야기를 좀 듣고 싶습니다.';
+    if (kw.q) { const qs = [].concat(kw.q); return qs[hash(p.id + k) % qs.length]; } // 틀에 안 맞는 단어(기한·판결·통금 등)는 단어가 제 물음을 가진다
     const t = QT[kw.type] || QT.word;
     return t[hash(p.id + k) % t.length](L);
   }
