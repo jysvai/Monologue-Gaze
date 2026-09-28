@@ -937,7 +937,7 @@
       return k.some(x => !was.includes(x));
     };
     if (first) C.sources.forEach(s => { kn[s.id] = srcKeys(s); });
-    bar.innerHTML = vis.map(s => { const b = tabBadge(s); return `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" tabindex="${s.id === ST.view.src ? 0 : -1}" data-src="${esc(s.id)}">${esc(s.name)}${s.lock && !ST.unl.includes(s.id) ? '<span class="tab-lock">잠김</span>' : ''}${b || (fresh(s) ? '<span class="tab-new" role="img" aria-label="새로 열린 자료"></span>' : '')}</button>`; }).join('');
+    bar.innerHTML = vis.map(s => { const b = tabBadge(s); return `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" tabindex="${s.id === ST.view.src ? 0 : -1}" aria-controls="paneList" id="tab-${esc(s.id)}" data-src="${esc(s.id)}">${esc(s.name)}${s.lock && !ST.unl.includes(s.id) ? '<span class="tab-lock">잠김</span>' : ''}${b || (fresh(s) ? '<span class="tab-new" role="img" aria-label="새로 열린 자료"></span>' : '')}</button>`; }).join('');
     // 탭이 넘쳐 옆으로 밀리는 좁은 화면: 고른 탭이 가려져 있으면 보이는 데까지 민다
     const on = bar.querySelector('.tab.on');
     if (on && bar.scrollWidth > bar.clientWidth) {
@@ -946,6 +946,7 @@
       else if (r.right > b.right - 8) bar.scrollLeft += r.right - (b.right - 8);
     }
     tabEdge(bar);
+    const pl = $('#paneList'); if (pl && ST.view.src) { pl.setAttribute('aria-labelledby', 'tab-' + ST.view.src); } // 목록 칸 = 고른 탭의 내용
   }
   // 가려진 탭이 남은 쪽 끝을 흐리게 한다 (옆으로 밀면 더 있다는 표시)
   function tabEdge(bar) {
@@ -1141,7 +1142,7 @@
         <div class="stage-frame"><span class="cam" aria-hidden="true"></span>
           <div class="screen">
             <nav class="src-tabs" role="tablist" id="srcTabs" aria-label="조사 도구"></nav>
-            <div class="stage-body" id="stageBody"><section class="pane-list" id="paneList" aria-label="목록"></section><section class="pane-read" id="paneRead" aria-label="읽기"></section></div>${clockBar()}
+            <div class="stage-body" id="stageBody"><section class="pane-list" id="paneList" role="tabpanel"></section><section class="pane-read" id="paneRead" aria-label="읽기"></section></div>${clockBar()}
           </div>
         </div>
         <div class="frame-foot" aria-hidden="true"></div>
