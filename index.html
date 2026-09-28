@@ -6,9 +6,12 @@
 <title>Monologue Gaze</title>
 <meta name="description" content="한 세기에 걸친 미제 사건 열두 건을 기록만으로 쫓고, 지금 벌어지는 사건 세 건을 직접 수사하는 웹 추리 게임. 신문, 진술서, 편지, 녹취록을 뒤지고, 영장을 신청하고, 시계와 싸운다.">
 <meta name="theme-color" content="#1c1815">
+<meta name="color-scheme" content="only light"><!-- 브라우저·휴대폰의 「어두운 화면」이 누런 종이를 뒤집어 칠하지 않게 -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%231c1815%22%2F%3E%3Cpath%20d%3D%22M8%2032c7-11%2015-16%2024-16s17%205%2024%2016c-7%2011-15%2016-24%2016S15%2043%208%2032z%22%20fill%3D%22%23e9dfc7%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2210%22%20fill%3D%22%231c1815%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%224%22%20fill%3D%22%23b0342a%22%2F%3E%3C%2Fsvg%3E">
 <link rel="apple-touch-icon" href="apple-touch-icon.png"><!-- 휴대폰 홈 화면에 둘 때의 아이콘: 파비콘과 같은 눈 -->
 <meta name="apple-mobile-web-app-title" content="Monologue Gaze">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest"><!-- 홈 화면에서 열면 주소창 없이 책상만 -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Monologue Gaze">
 <meta property="og:title" content="Monologue Gaze — 기록은 혼잣말을 한다">
@@ -21,11 +24,12 @@
 <style>[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- 공통 글꼴 여섯(나눔고딕·나눔고딕코딩·나눔명조·나눔펜·나눔붓·Special Elite — 기록실·수첩·기본 서류)은 화면을 막지 않고 받는다.
+<!-- 공통 글꼴 여섯(나눔고딕·나눔고딕코딩·나눔명조·나눔펜·나눔붓·Special Elite — 기록실·수첩·기본 서류)은 받은 뒤에 글자를 그린다 (display=block:
+     컴퓨터에 깔린 굴림·궁서로 먼저 찍혔다가 바뀌지 않게). 손글씨 글꼴에는 문장부호·기호가 없어, 그 자리는 붓펜 글씨(East Sea Dokdo)의 기호만 떼어 받는다.
      시대·매체 글꼴(송명·고운바탕·일본 명조·붓 제호·갈무리·둥근모·Pretendard …)은 js/fonts.js 목록에서 그 사건을 열 때만 부른다. 표: docs/FONTS.md -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Gothic+Coding:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Pen+Script&family=Nanum+Brush+Script&family=Special+Elite&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Gothic+Coding:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Pen+Script&family=Nanum+Brush+Script&family=Special+Elite&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Gothic+Coding:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Pen+Script&family=Nanum+Brush+Script&family=Special+Elite&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&text=%C2%B7%E2%80%93%E2%80%94%E2%80%98%E2%80%99%E2%80%9C%E2%80%9D%E2%80%A6%E2%80%BA%E2%80%BB%E2%82%A9%E2%84%83%E2%86%90%E2%86%92%E2%86%91%E2%86%93%E2%88%92%E2%89%A4%E2%91%A0%E2%91%A1%E2%91%A2%E2%91%A3%E2%91%A4%E2%91%A5%E2%91%A6%E2%96%A0%E2%96%A1%E2%96%B2%E2%96%B3%E2%96%BC%E2%96%BD%E2%97%86%E2%97%87%E2%97%8B%E2%97%8E%E2%97%8F%E2%98%85%E2%98%86%E2%98%8E%E2%99%A1%E2%99%A5%E2%99%AA%E2%99%AC%E3%80%81%E3%80%83%E3%80%88%E3%80%89%E3%80%8A%E3%80%8B%E3%80%8C%E3%80%8D%E3%80%8E%E3%80%8F&display=block">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/skins.css">
 <link rel="stylesheet" href="css/mood.css">
@@ -34,7 +38,7 @@
 <link rel="stylesheet" href="css/live.css">
 </head>
 <body>
-<div id="app"></div>
+<div id="app"><p class="nojs boot" role="status">서랍을 여는 중…</p></div>
 <noscript><p class="nojs">이 기록실은 자바스크립트가 켜져 있어야 열립니다.<br>브라우저 설정에서 자바스크립트를 켜고 다시 불러 주십시오.</p></noscript>
 
 <script src="js/ui.js"></script>
@@ -63,7 +67,13 @@
 <script src="cases/c15-tracker-2024.js"></script>
 <script>
 (function () {
-  function start(data) { window.MG.boot(data); }
+  function start(data) {
+    try { window.MG.boot(data); } catch (e) { // 사건 파일 하나가 잘못 받아졌어도 빈 책상만 남기지 않는다
+      var a = document.getElementById('app');
+      if (a) a.innerHTML = '<p class="nojs">서랍이 걸려 열리지 않는다.<br>새로 고침해서 다시 열어 보십시오. 계속 걸리면 조금 뒤에 다시.</p>';
+      if (window.console) console.error(e);
+    }
+  }
   try { window.claude && window.claude.hot && window.claude.hot.snapshot && window.claude.hot.snapshot(function () { return { S: window.MG.state() }; }); } catch (e) {}
   if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(start);
   else start((window.claude && window.claude.hot && window.claude.hot.data) || {});

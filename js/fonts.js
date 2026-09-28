@@ -21,7 +21,9 @@ window.MG = window.MG || {};
     dos: { css: NEODGM },                 // 1980~90년대 도스·워드프로세서 화면
     dotprint: { css: GALMURI },           // 1990년대 도트 프린터 출력 (갈무리 모노11)
     pixel: { css: GALMURI },              // 2000년대 굴림 비트맵 · 폴더폰 · 삐삐 액정 (갈무리11)
-    sys: 'Noto+Sans+KR:wght@400;500;700', // 2010~20년대 윈도·안드로이드·경찰 전산 (맑은 고딕 결)
+    sys: 'Noto+Sans+KR:wght@400;500;700', // 2010~20년대 윈도·안드로이드·경찰 전산 (맑은 고딕 결). 한자·ö·Å 가 든 사건의 고딕 받침도 겸한다
+    jpsans: 'Noto+Sans+JP:wght@400;700',  // 가나·일본 한자가 든 사건의 고딕 받침 (꼬리표·탭 이름·조회 칸) — 엔진이 글자를 보고 부른다
+    cipher: { css: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Math&family=Noto+Sans+Symbols+2&display=swap&text=' + encodeURIComponent('◐⊕△▽✕◇⌖⋈⋔⊥⊓♁⊗○⊞⧗') }, // CASE 05 암호 기호 — 수학 기호 글꼴에서 그 글자만
     ui: { css: PRETENDARD },              // 2020년대 웹·앱
     phone: { css: PRETENDARD },           // 2020년대 스마트폰 메신저
     // 쓴 사람마다 다른 필체 (문서 cls 'f-키') · 표지 글자

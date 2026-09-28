@@ -8,6 +8,12 @@
 - **공통 여섯** (index.html, 늘 부른다): 나눔고딕 `--f-web` · 나눔고딕코딩 `--f-mono` · 나눔명조 `--f-doc` · 나눔손글씨 펜 `--f-hand` · 나눔손글씨 붓 `--f-hand2` · Special Elite `--f-type`. 기록실·수첩·보고서가 쓴다.
 - **사건 글꼴**: `js/fonts.js` 의 키 `k` 는 CSS 변수 `--f-k`(css/base.css `:root`)와 짝이다. 사건 파일 어디든 `f-k` 가 나오면(css 의 `var(--f-k)`, 문서 cls 의 `f-k`) 또는 `fonts: ['k']` 가 있으면 그 사건을 열 때 부른다. Google 글꼴은 한 요청으로 묶이고, jsDelivr 글꼴은 따로 부른다.
 - 변수마다 뒤에 대신 쓸 글꼴이 적혀 있어서, 부르지 않았거나 못 받아도 비슷한 글꼴로 나온다.
+- **공통 글꼴은 받은 뒤에 그린다** (`display=block`): 컴퓨터에 깔린 굴림·궁서·맑은 고딕으로 먼저 찍혔다가 바뀌지 않게.
+- **받침 글꼴** — 나눔 글꼴에 없는 글자가 운영체제 글꼴(궁서·굴림·Segoe UI Symbol·Cambria Math)로 떨어지지 않게:
+  - 손글씨의 문장부호·기호(— · … 「」 ※ ← ♡ ☎ …): 붓펜 East Sea Dokdo 에서 그 기호만 떼어 index.html 이 늘 부른다 (`text=` 조각, 11KB).
+  - 한자·외국 글자(ö Å é)·마이너스(−): Noto Sans KR (`sys`), 가나: Noto Sans JP (`jpsans`) — 그런 글자가 든 사건을 열 때 엔진이 글자를 보고 부른다 (`--f-cjk`).
+  - CASE 05 암호 기호(◐ ⊕ ⋈ ⋔ ⧗ …): Noto Sans Math · Noto Sans Symbols 2 에서 그 글자만 (`cipher`, `--f-sym`).
+  - 연필(✎)·체크(✓)·접기 화살(▸)은 글꼴 기호가 아니라 그림(SVG·CSS)으로 그린다.
 - 한국어 글꼴은 무겁다. Google 글꼴은 글자 조각(unicode-range)으로 쓰는 글자만 받는다. 갈무리는 쓰는 가족만(한 벌 약 500KB), 둥근모는 44KB 한 벌.
 
 ## 시대·매체 → 글꼴

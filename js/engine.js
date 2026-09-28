@@ -226,7 +226,7 @@
 
   /* ───────── text rendering ───────── */
   function inline(t) {
-    let h = esc(t);
+    let h = esc(t).replace(/✎/g, () => `<span class="ic-in" role="img" aria-label="연필 표시">${IC_PEN}</span>`); // 글 속의 ✎ 도 단추와 같은 연필 그림으로
     h = h.replace(/\[\[([^\]|]+?)(?:\|([\w-]+))?\]\]/g, (m, label, kid) => {
       const id = kid || C._lab[norm(label)];
       if (!id || !C.keywords[id]) return `<span class="kw-x">${label}</span>`;
@@ -250,12 +250,15 @@
     return `<span class="cens${open ? ' open' : ''}" data-cens="${esc(key)}">${body}<span class="cens-l"><b>열람 주의</b>${S.mild ? '잔혹 표현을 끈 상태' : '눌러서 보기'}</span></span>`;
   }
 
+  // 연필·체크 표시는 글꼴의 기호(✎ ✓)가 아니라 그림으로: 기호는 어느 웹 글꼴에도 없어 운영체제마다 다른 기호 글꼴로 찍힌다
+  const IC_PEN = '<svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 12.8l.9-3.1 7.2-7.2a1.2 1.2 0 0 1 1.7 0l.5.5a1.2 1.2 0 0 1 0 1.7L6.3 11.9z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9.9 3.9l2.2 2.2M4.1 9.7l2.2 2.2" stroke="currentColor" stroke-width="1.1"/></svg>';
+  const IC_TICK = '<svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.6 8.4c1.4.9 2.4 2.1 3.2 3.6 1.8-4.2 4.3-7.3 7.6-9.3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   function pinBtn(ref, t, f, src) {
     if (NOPIN) return '';
     PIN[ref] = { t: plain(t).trim(), f: f || null, src };
     const on = ST.notes.some(n => n.ref === ref);
     const lab = on ? '수첩에 적음' : '수첩에 적기';
-    return `<button type="button" class="pin${on ? ' on' : ''}" data-pin="${esc(ref)}" aria-label="${lab}" data-tip="${lab}">${on ? '✓' : '✎'}</button>`;
+    return `<button type="button" class="pin${on ? ' on' : ''}" data-pin="${esc(ref)}" aria-label="${lab}" data-tip="${lab}">${on ? IC_TICK : IC_PEN}</button>`;
   }
 
   function blocks(arr, base, src) {
@@ -312,13 +315,15 @@
 
   /* ───────── documents / locks / people / cipher ───────── */
   // 틀렸을 때의 말: 기계가 띄우는 잠금이면 기계의 말투로 (lock.err 가 있으면 그것)
+  // 가려 적는 비밀번호: 진짜 password 칸이면 브라우저가 로그인 창으로 알고 「비밀번호 저장」·자동 채우기를 띄운다 → 보통 칸에 글자만 점으로 (못 하는 브라우저만 password)
+  const PWMASK = window.CSS && CSS.supports && CSS.supports('-webkit-text-security', 'disc') ? ' class="pw"' : ' type="password"';
   const lockErr = lock => lock.err || (lock.style === 'phone' ? '"비밀번호가 틀렸습니다. 다시 누르십시오."' : lock.style === 'lcd' ? '「암호가 다릅니다」' : C.frame === 'papers' ? '맞지 않는다.' : '비밀번호가 올바르지 않습니다.');
   function lockHtml(id, lock, title) {
     const fails = tmp().fail[id] || 0;
     // style: 'phone' 이면 전화 번호판(누르면 칸에 들어가고 # 은 확인, * 은 지우기), 'lcd' 면 워드프로세서 액정
     const pad = lock.style === 'phone' ? `<div class="lock-pad" role="group" aria-label="번호판">${'123456789*0#'.split('').map(k => `<button type="button" data-pad="${k}"${k === '#' ? ' aria-label="확인"' : k === '*' ? ' aria-label="지우기"' : ''}>${k}</button>`).join('')}</div>` : '';
     return `<div class="lock${lock.style ? ' lock-' + esc(lock.style) : ''}"><p class="lock-t">${inline(lock.title || title || '잠겨 있다')}</p>${lock.desc ? `<p class="lock-d">${inline(lock.desc)}</p>` : ''}
-      <form class="lock-f" data-lock="${esc(id)}"><label for="lk-${esc(id)}">${esc(lock.label || '비밀번호')}</label><input id="lk-${esc(id)}" aria-describedby="le-${esc(id)}" autocomplete="off"${lock.password ? ' type="password"' : ''}${lock.style === 'phone' || lock.style === 'lcd' ? ' inputmode="numeric" maxlength="8"' : (lock.code || []).length && lock.code.every(c => /^\d+$/.test(c)) ? ' inputmode="numeric"' : ''}><button type="submit">${esc(lock.button || '열기')}</button>${pad}</form>
+      <form class="lock-f" data-lock="${esc(id)}"><label for="lk-${esc(id)}">${esc(lock.label || '비밀번호')}</label><input id="lk-${esc(id)}" aria-describedby="le-${esc(id)}" autocomplete="off"${lock.password ? PWMASK : ''}${lock.style === 'phone' || lock.style === 'lcd' ? ' inputmode="numeric" maxlength="8"' : (lock.code || []).length && lock.code.every(c => /^\d+$/.test(c)) ? ' inputmode="numeric"' : ''}><button type="submit">${esc(lock.button || '열기')}</button>${pad}</form>
       ${lock.hint ? `<p class="lock-h">${inline(lock.hint)}</p>` : ''}<p class="lock-e" id="le-${esc(id)}">${fails ? `${esc(lockErr(lock))} (${fails}회)` : ''}</p>${lock.hint2 && fails >= ({ 3: 2, 4: 3 }[lv()] || Infinity) ? `<p class="lock-h2">${inline(lock.hint2)}</p>` : ''}</div>`;
   }
 
@@ -633,7 +638,7 @@
     const inp = ST.view.qin[s.id] || {};
     const res = ST.view.qres[s.id];
     const found = (ST.found[s.id] || []).filter(id => !(res || []).includes(id)).map(id => C.docs[id]).filter(Boolean); // 방금 조회한 결과는 위에만
-    const fields = (s.fields || []).map(f => `<label class="qf"><span>${esc(f.label)}</span><input name="${esc(f.id)}" value="${esc(inp[f.id] || '')}" placeholder="${esc(f.placeholder || '')}" autocomplete="off"></label>`).join('');
+    const fields = (s.fields || []).map(f => `<label class="qf"><span>${esc(f.label)}</span><input data-qf="${esc(f.id)}" value="${esc(inp[f.id] || '')}" placeholder="${esc(f.placeholder || '')}" autocomplete="off"></label>`).join('');
     let out = '';
     if (res) out = res.length ? `<p class="res-n">조회 결과 ${res.length}건</p>${res.map(id => itemBtn(C.docs[id])).join('')}` : `<p class="res-none">${esc(s.none || '해당하는 기록이 없다.')}</p>`;
     return `<form class="q-f" data-query="${esc(s.id)}" data-slip="${esc(s.slip || s.name || '')}">${fields}<button type="submit">${esc(s.button || '조회')}</button></form>
@@ -1094,7 +1099,7 @@
     else if (s.type === 'people') h += peopleList(s);
     else if (s.type === 'map') h += mapList(s);
     else if (s.type === 'cipher') h += `<button type="button" class="item" data-open-cipher="${esc(s.id)}"><span class="item-t">${esc(s.openLabel || '해독지 펼치기')}</span></button>`;
-    else if (s.type === 'timeline') h += `<button type="button" class="item" data-open-tl="${esc(s.id)}"><span class="item-t">${ST.unl.includes(s.id) ? '✓ ' : ''}${esc(s.openLabel || '재구성 판 펼치기')}</span></button>`;
+    else if (s.type === 'timeline') h += `<button type="button" class="item" data-open-tl="${esc(s.id)}"><span class="item-t">${ST.unl.includes(s.id) ? IC_TICK + ' ' : ''}${esc(s.openLabel || '재구성 판 펼치기')}</span></button>`;
     else if (s.type === 'compare') h += compareList(s);
     else if (s.type === 'query') h += queryList(s);
     else if (s.type === 'photo') h += photoList(s);
@@ -1309,6 +1314,10 @@
       const j = JSON.stringify(c), y = parseInt(c.year, 10) || 2000, news = y < 1980 && j.includes('"skin":"news"');
       // 화면 틀·시대가 부르는 글꼴 (css/skins.css 의 시대 기본값, css/live.css 가 쓴다)
       const auto = [...(c.frame === 'laptop' ? ['ui'] : c.frame === 'crt' ? ['pixel'] : []), ...(y < 1945 ? ['batang', 'latin'] : []), ...(c.live ? ['phone', 'sys'] : [])];
+      // 나눔 글꼴에 없는 글자가 든 사건은 받침 글꼴을 부른다: 한자·외국 글자 → Noto Sans KR, 가나 → Noto Sans JP, 암호 기호 → 수학 기호 조각
+      if (/[一-鿿À-ɏ−]/.test(j)) auto.push('sys');
+      if (/[぀-ヿ]/.test(j)) auto.push('jpsans');
+      if (/[◐⊕⌖⋈⋔⊓♁⊞⧗]/.test(j)) auto.push('cipher');
       c._fonts = Object.keys(FONTS).filter(k => (c.fonts || []).includes(k) || auto.includes(k) || new RegExp('\\bf-' + k + '\\b').test(j) || news && (k === 'old' || k === 'latin') || k === 'latin' && j.includes('f-frak'));
     }
     const need = c._fonts.filter(k => !fontOn[k]);
@@ -1726,7 +1735,7 @@
     ST.notes.push({ id: ++ST.nid, ref, t: p.t, f: p.f, src: p.src });
     save();
     if (census() > before) cue('clue'); else sfx('pen');
-    $$('.pin').forEach(b => { if (b.dataset.pin === ref) { b.classList.add('on'); b.textContent = '✓'; b.setAttribute('aria-label', '수첩에 적음'); b.dataset.tip = '수첩에 적음'; } });
+    $$('.pin').forEach(b => { if (b.dataset.pin === ref) { b.classList.add('on'); b.innerHTML = IC_TICK; b.setAttribute('aria-label', '수첩에 적음'); b.dataset.tip = '수첩에 적음'; } });
     renderNotebook();
     const li = $(`.notes li[data-nid="${ST.nid}"]`);
     if (li) { const d = li.closest('details'); if (d && !d.open) { NGSHUT.delete(C.id + '|' + d.dataset.ng); d.open = true; } if (!(MG.writeIn && MG.writeIn(li, { duration: 900 }))) li.classList.add('fresh'); if (beside()) li.scrollIntoView({ block: 'nearest' }); }
@@ -1763,7 +1772,7 @@
     ST.notes = ST.notes.filter(x => x.id !== id);
     Object.keys(ST.report.claims).forEach(k => { if (String(ST.report.claims[k]) === String(id)) ST.report.claims[k] = ''; });
     save();
-    if (n) $$('.pin').forEach(b => { if (b.dataset.pin === n.ref) { b.classList.remove('on'); b.textContent = '✎'; b.setAttribute('aria-label', '수첩에 적기'); b.dataset.tip = '수첩에 적기'; } });
+    if (n) $$('.pin').forEach(b => { if (b.dataset.pin === n.ref) { b.classList.remove('on'); b.innerHTML = IC_PEN; b.setAttribute('aria-label', '수첩에 적기'); b.dataset.tip = '수첩에 적기'; } });
     renderRep();
     const f = to && ($(to) || $('[data-open-rep]'));
     if (f && (document.activeElement === document.body || !document.activeElement)) f.focus({ preventScroll: true });
@@ -1960,7 +1969,7 @@
     const s = C.sources.find(x => x.id === form.dataset.query);
     if (!s) return;
     const inp = {};
-    (s.fields || []).forEach(fl => { const i = form.querySelector(`[name="${fl.id}"]`); inp[fl.id] = i ? i.value.trim() : ''; });
+    (s.fields || []).forEach(fl => { const i = form.querySelector(`[data-qf="${fl.id}"]`); inp[fl.id] = i ? i.value.trim() : ''; });
     const hits = queryHits(s, inp);
     if (!hits) { toast('조회할 것을 먼저 적는다'); const i = form.querySelector('input'); if (i) i.focus(); return; } // 빈칸 조회는 시간도 쓰지 않는다
     // 같은 조회를 다시 하면 결과만 다시 펼친다 (수사 시간이 들지 않는다)
@@ -2233,6 +2242,8 @@
       } finally { SYNC = false; }
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && TALK && !$('.zoom')) TALK.finish(); }); // 대화 건너뛰기 (키보드)
+    // Ctrl+S: 브라우저의 「다른 이름으로 저장」 창 대신 — 수첩과 진행은 서랍에 저절로 남는다
+    document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && !e.altKey && !e.shiftKey && (e.key === 's' || e.key === 'S')) { e.preventDefault(); toast('적은 것은 서랍에 저절로 남는다. 따로 저장할 것은 없다.'); } });
     // 보고서는 「올리기」 단추로만 올린다: 범인·메모를 고르다가, 메모를 찾다가 Enter 를 눌러 모르고 올라가지 않게 (양식의 Enter 제출을 막는다).
     // 메모 찾기 칸의 Enter 는 걸린 메모가 하나뿐이면 그것을 고른다
     document.addEventListener('keydown', e => {

@@ -9,15 +9,17 @@
   --card:#f6f0df; --card-ink:#2b2823; --card-soft:#6f6858;
   /* 글꼴 — 공통 여섯은 index.html 이 부르고, 나머지는 js/fonts.js 목록의 같은 키(--f-키 ↔ 키)로 사건을 열 때 부른다. docs/FONTS.md
    * 명조 줄 끝의 "Noto Serif KR" 은 한자 받침: 나눔명조·송명에 없는 한자만 채운다 (사건에 fonts:['hanja']). 일본 사건은 이미 부른 "Noto Serif JP"(jp)가 받는다 */
-  --f-hand:"Nanum Pen Script","Gaegu",cursive;
-  --f-hand2:"Nanum Brush Script","Nanum Pen Script",cursive;
-  --f-web:"Nanum Gothic","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-  --f-mono:"Nanum Gothic Coding",ui-monospace,Consolas,monospace;
-  --f-doc:"Nanum Myeongjo","Noto Serif KR","Noto Serif JP","AppleMyungjo","Batang",serif;
+  /* 받침 글꼴: 나눔 글꼴에 없는 한자·가나·외국 글자(ö Å)·암호 기호는 그 사건을 열 때 부르는 Noto 가 받는다 (js/engine.js caseFonts) — 운영체제 글꼴로 떨어지지 않게 */
+  --f-cjk:"Noto Sans KR","Noto Sans JP"; --f-sym:"Noto Sans Math","Noto Sans Symbols 2";
+  --f-hand:"Nanum Pen Script","Gaegu","East Sea Dokdo",var(--f-sym),cursive; /* 손글씨 글꼴에 없는 문장부호·기호(— · 「」 ※ ← ♡ …)는 붓펜 기호 조각(index.html)이 받는다 — 컴퓨터의 궁서로 떨어지지 않게 */
+  --f-hand2:"Nanum Brush Script","Nanum Pen Script","East Sea Dokdo",var(--f-sym),cursive;
+  --f-web:"Nanum Gothic",var(--f-cjk),var(--f-sym),"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-mono:"Nanum Gothic Coding","M PLUS 1 Code",var(--f-cjk),var(--f-sym),ui-monospace,Consolas,monospace;
+  --f-doc:"Nanum Myeongjo","Noto Serif KR","Noto Serif JP",var(--f-sym),"AppleMyungjo","Batang",serif;
   --f-old:"Song Myung","Nanum Myeongjo","Noto Serif KR",serif;
-  --f-type:"Special Elite","Nanum Gothic Coding",monospace;
+  --f-type:"Special Elite","Nanum Gothic Coding",var(--f-cjk),var(--f-sym),monospace;
   --f-bhs:"Black Han Sans","Nanum Gothic",sans-serif;
-  --f-latin:"Old Standard TT","Nanum Myeongjo","Noto Serif KR",serif;
+  --f-latin:"Old Standard TT","Nanum Myeongjo","Noto Serif KR",var(--f-sym),serif;
   --f-frak:"UnifrakturMaguntia","Old Standard TT",serif;
   --f-jp:"Noto Serif JP","Nanum Myeongjo",serif;
   /* 시대 글꼴 (사건마다) */
@@ -32,11 +34,13 @@
   --f-sys:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo","Nanum Gothic",sans-serif; /* 2010~20년대 윈도·안드로이드·경찰 전산 (맑은 고딕 결) */
   --f-ui:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Nanum Gothic","Malgun Gothic",sans-serif; /* 2020년대 웹·앱 */
   --f-phone:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Noto Sans KR","Nanum Gothic",sans-serif; /* 2020년대 스마트폰 메신저 */
-  --f-gamja:"Gamja Flower","Nanum Pen Script",cursive;                             /* 2000년대 미니홈피 글꼴 아이템 */
+  --f-gamja:"Gamja Flower","Nanum Pen Script","East Sea Dokdo",cursive;                             /* 2000년대 미니홈피 글꼴 아이템 */
   /* 쓴 사람마다 다른 필체 (문서 cls 의 f-키, css/skins.css) */
   --f-yeon:"Yeon Sung",var(--f-hand2); --f-dokdo:"Dokdo",var(--f-hand2); --f-gaegu:"Gaegu",var(--f-hand);
   --f-dohyeon:"Do Hyeon",var(--f-web); --f-melody:"Hi Melody",var(--f-hand);
   --f-poor:"Poor Story",var(--f-hand); --f-eastsea:"East Sea Dokdo",var(--f-hand2); --f-single:"Single Day",var(--f-hand); --f-cute:"Cute Font",var(--f-hand);
+  /* 손으로 그은 체크 (보고서에서 고른 것 · 올린 표시) — 기호 글꼴 대신 */
+  --tick:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2.6 8.4c1.4.9 2.4 2.1 3.2 3.6 1.8-4.2 4.3-7.3 7.6-9.3' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .24 0 0 0 0 .12 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .05 0 0 0 0 .035 0 0 0 0 .015 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --fiber:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .35' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
@@ -281,6 +285,8 @@ img{max-width:100%}
 .pin:focus-visible,.pin.on{opacity:1}
 @media (hover:hover){.pin:hover{background:#f4ebc6}}
 .pin.on{border-style:solid;border-color:var(--olive);color:var(--olive);background:transparent}
+.pin .ic{display:block;width:12px;height:12px}
+.item-t .ic,.ic-in .ic{display:inline-block;width:.95em;height:.95em;vertical-align:-.12em}
 @media (hover:none){.pin{opacity:.8}}
 .person{max-width:720px;margin:0 auto}
 .per-h{display:flex;gap:14px;align-items:center;margin-bottom:14px}

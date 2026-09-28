@@ -7,6 +7,7 @@
  * 6. 사진 살피기 돋보기: 마우스를 올린 자리를 크게 (종이는 놋쇠 돋보기, 화면 속 사진은 네모 확대 창).
  * 7. 키보드로 누른 단추가 다시 그려져도 초점이 그 단추(새로 그려진 것)에 남는다.
  * 8. 손으로 써 내려가기(MG.writeIn): 여러 줄이면 한 줄을 다 쓴 뒤 다음 줄로 (새 메모 · 사진에서 찾은 것 · 사건을 여는 장면의 한 줄).
+ * 9. 그림: 길게 누르거나 오른쪽 단추를 눌러도 브라우저의 「이미지 저장」 차림표가 뜨지 않고, 받지 못한 그림은 깨진 그림 표시 대신 「사진 유실」 빈자리.
  */
 (function () {
   let tip = null, cur = null, wait = 0;
@@ -62,6 +63,8 @@
       if (i.dataset.ui) return;
       i.dataset.ui = '1';
       i.setAttribute('autocomplete', 'off'); i.setAttribute('spellcheck', 'false'); i.setAttribute('autocorrect', 'off'); i.setAttribute('autocapitalize', 'off');
+      // 비밀번호 관리 확장(1Password·LastPass·Bitwarden 등)이 칸 안에 제 아이콘을 넣거나 저장을 권하지 않게
+      i.setAttribute('data-1p-ignore', ''); i.setAttribute('data-lpignore', 'true'); i.setAttribute('data-bwignore', ''); i.setAttribute('data-form-type', 'other');
       // 휴대폰 자판의 Enter 글쇠 이름: 검색창은 「검색」, 잠금은 「이동」, 나머지는 「완료」
       if (!i.hasAttribute('enterkeyhint')) i.setAttribute('enterkeyhint', i.closest('.arch-f, .q-f, [role="search"]') ? 'search' : i.closest('.lock-f') ? 'go' : 'done');
       // 손가락 기기: 글자가 16px 보다 작은 칸을 누르면 아이폰 사파리가 화면을 확대해 버린다 → 그런 칸만 16px 로 (화면 속 검색창·조회칸 등)
@@ -149,7 +152,7 @@
     let sel = '';
     const q = v => (window.CSS && CSS.escape ? CSS.escape(v) : v);
     if (f.matches('[data-lock]')) sel = `form[data-lock="${q(f.dataset.lock)}"] input`;
-    else if (f.matches('[data-query]') && typed && fine() && a.name) sel = `form[data-query="${q(f.dataset.query)}"] input[name="${q(a.name)}"]`;
+    else if (f.matches('[data-query]') && typed && fine() && a.dataset.qf) sel = `form[data-query="${q(f.dataset.query)}"] input[data-qf="${q(a.dataset.qf)}"]`;
     if (!sel) return;
     setTimeout(() => { // 엔진이 이 submit 을 받아 칸을 다시 그린 뒤 (rAF 는 가려진 탭에서 멈추므로 쓰지 않는다)
       const now = document.activeElement;
@@ -200,6 +203,21 @@
   }
   window.MG = window.MG || {};
   window.MG.writeIn = writeIn;
+
+  // 그림 위의 오른쪽 단추·길게 누르기: 「이미지 저장 / 새 탭에서 열기 / 렌즈로 검색」 차림표 대신 아무 일도 (글자 위에서는 그대로 — 복사는 된다)
+  document.addEventListener('contextmenu', e => {
+    const t = e.target;
+    if (t && t.closest && t.closest('img, .ph, .zoom, .map, .desk-props, .ph-cell, .cens, .b-img, .cmp-art')) e.preventDefault();
+  });
+  // 받지 못한 그림: 브라우저의 깨진 그림 표시와 설명 글(alt) 대신 그 기록다운 빈자리 (css/ui.css .img-miss)
+  document.addEventListener('error', e => {
+    const i = e.target;
+    if (!i || i.tagName !== 'IMG' || i.dataset.miss) return;
+    i.dataset.miss = '1';
+    i.alt = '';
+    const box = i.closest('.art-wrap, .b-img, .cmp-art, .osd-wrap') || i.parentNode;
+    if (box && box.classList) box.classList.add('img-miss');
+  }, true);
 
   // 키보드로 누른 단추(목록에서 문서 열기 등)가 다시 그려져 사라지면, 새로 그려진 같은 단추로 초점을 돌려준다.
   // 같은 단추가 없어졌으면(맞춰 본 감정 후보·올린 신청서 등) 같은 칸의 같은 종류 단추 → 목록에서 지금 보고 있는 항목 → 「목록으로」 차례로. (마우스로 누른 때는 건드리지 않는다)
