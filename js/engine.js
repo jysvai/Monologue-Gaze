@@ -1580,7 +1580,7 @@
     $$('.pin').forEach(b => { if (b.dataset.pin === ref) { b.classList.add('on'); b.textContent = '✓'; b.setAttribute('aria-label', '수첩에 적음'); b.dataset.tip = '수첩에 적음'; } });
     renderNotebook();
     const li = $(`.notes li[data-nid="${ST.nid}"]`);
-    if (li) { const d = li.closest('details'); if (d && !d.open) { NGSHUT.delete(C.id + '|' + d.dataset.ng); d.open = true; } li.classList.add('fresh'); if (!narrow()) li.scrollIntoView({ block: 'nearest' }); }
+    if (li) { const d = li.closest('details'); if (d && !d.open) { NGSHUT.delete(C.id + '|' + d.dataset.ng); d.open = true; } if (!(MG.writeIn && MG.writeIn(li, { duration: 900 }))) li.classList.add('fresh'); if (!narrow()) li.scrollIntoView({ block: 'nearest' }); }
     const gained = census() - before;
     if (gained > 0) { renderTabs(); renderList(); }
     const chips = $('#askChips');
@@ -1807,7 +1807,7 @@
     if (all) cue('match', '관찰 끝'); else if (gained > 0) cue('clue'); else sfx('find');
     toast(`눈에 걸리는 것: ${plain(sp.label)}${gained > 0 ? ` · 새로 열린 것 ${gained}` : ''}`);
     const li = $$('.ph-found li').pop();
-    if (li) li.classList.add('fresh');
+    if (li && !(MG.writeIn && MG.writeIn(li, { duration: 500 }))) li.classList.add('fresh');
     return true;
   }
   function photoClick(el, e) {

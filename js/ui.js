@@ -6,6 +6,7 @@
  * 5. 잠금·조회 칸: 틀린 번호를 넣어 칸이 다시 그려져도 커서가 그 칸에 남는다.
  * 6. 사진 살피기 돋보기: 마우스를 올린 자리를 크게 (종이는 놋쇠 돋보기, 화면 속 사진은 네모 확대 창).
  * 7. 키보드로 누른 단추가 다시 그려져도 초점이 그 단추(새로 그려진 것)에 남는다.
+ * 8. 손으로 써 내려가기(MG.writeIn): 여러 줄이면 한 줄을 다 쓴 뒤 다음 줄로 (새 메모 · 사진에서 찾은 것 · 사건을 여는 장면의 한 줄).
  */
 (function () {
   let tip = null, cur = null, wait = 0;
@@ -144,6 +145,48 @@
       if (el && el.offsetParent !== null) el.focus({ preventScroll: true });
     }, 0);
   }, true);
+
+  // 손으로 써 내려가기: 글줄마다 왼쪽에서 오른쪽으로, 한 줄을 다 쓰면 다음 줄 (clip-path 를 계단 모양으로 움직인다).
+  // CSS 의 write(왼쪽→오른쪽 한 번에 걷기)로는 두 줄이 동시에 드러나 글씨가 세로로 자라는 것처럼 보인다.
+  // delay 동안은 가려 두었다가 쓰기 시작할 때 줄을 잰다 (그사이 늦게 온 글꼴로 줄이 바뀌어도 맞게). 움직임 줄이기면 하지 않고 false.
+  const still = () => !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  function writeIn(el, o) {
+    o = o || {};
+    if (!el || !el.animate || still() || !document.createRange) return false;
+    const hide = 'inset(0 100% 0 0)';
+    const go = () => {
+      if (!el.isConnected) return;
+      el.style.clipPath = '';
+      const box = el.getBoundingClientRect(), W = el.offsetWidth, H = el.offsetHeight;
+      if (!W || !H) return;
+      const rg = document.createRange(); rg.selectNodeContents(el);
+      const lines = [];
+      [...rg.getClientRects()].forEach(q => {
+        if (!q.width || !q.height) return;
+        const t = q.top - box.top, b = q.bottom - box.top, l = q.left - box.left, r = q.right - box.left;
+        const L = lines.find(x => Math.min(x.b, b) - Math.max(x.t, t) > Math.min(x.b - x.t, b - t) / 2); // 세로로 절반 넘게 겹치면 같은 줄
+        if (L) { L.t = Math.min(L.t, t); L.b = Math.max(L.b, b); L.l = Math.min(L.l, l); L.r = Math.max(L.r, r); } else lines.push({ t, b, l, r });
+      });
+      if (!lines.length) return;
+      lines.sort((x, y) => x.t - y.t);
+      const tot = lines.reduce((n, x) => n + Math.max(1, x.r - x.l), 0);
+      const poly = (x, T, B) => `polygon(0 0, ${W + 2}px 0, ${W + 2}px ${T}px, ${x}px ${T}px, ${x}px ${B}px, 0 ${B}px)`;
+      const kf = [];
+      let acc = 0;
+      lines.forEach((x, i) => {
+        const last = i === lines.length - 1, T = i ? Math.max(0, x.t) : 0, B = last ? H + 4 : x.b; // 앞줄은 다 드러난 채, 이 줄만 오른쪽으로
+        kf.push({ offset: acc / tot, clipPath: poly(Math.max(0, x.l), T, B) });
+        acc += Math.max(1, x.r - x.l);
+        kf.push({ offset: acc / tot, clipPath: poly(last ? W + 2 : x.r, T, B) });
+      });
+      const k = Math.min(o.most || 1.8, Math.max(1, tot / W)); // 줄이 길면 그만큼 오래 쓴다
+      el.animate(kf, { duration: (o.duration || 900) * k, easing: o.easing || (lines.length > 1 ? 'linear' : 'ease-out') });
+    };
+    if (o.delay) { el.style.clipPath = hide; setTimeout(go, o.delay); } else go();
+    return true;
+  }
+  window.MG = window.MG || {};
+  window.MG.writeIn = writeIn;
 
   // 키보드로 누른 단추(목록에서 문서 열기 등)가 다시 그려져 사라지면, 새로 그려진 같은 단추로 초점을 돌려준다.
   // 같은 단추가 없어졌으면(맞춰 본 감정 후보·올린 신청서 등) 같은 칸의 같은 종류 단추 → 목록에서 지금 보고 있는 항목 → 「목록으로」 차례로. (마우스로 누른 때는 건드리지 않는다)

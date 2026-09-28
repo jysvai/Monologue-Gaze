@@ -302,6 +302,8 @@
       <p class="ci-skip">눌러서 넘기기</p></div>`;
     el.addEventListener('click', hideIntro);
     document.body.appendChild(el);
+    const ln = !c.live && el.querySelector('.ci-line'); // 손글씨 한 줄: 휴대폰에서 두 줄로 접혀도 한 줄씩 써 내려간다 (현행 사건은 떠오르는 활자라 그대로)
+    if (ln && MG.writeIn && MG.writeIn(ln, { duration: 1600, delay: 800, easing: 'steps(28)', most: 1.5 })) ln.style.animation = 'none';
     if (c.live && MG.sfx) MG.sfx('radio'); // 현행 사건: 출동 지령이 무전으로 떨어진다
     el.focus({ preventScroll: true }); // Tab 이 뒤 화면으로 새지 않게
     const once = e => {
