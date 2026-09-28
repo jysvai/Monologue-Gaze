@@ -1546,6 +1546,7 @@
     const t = statusBox('toast', 'toast');
     t.textContent = msg;
     t.classList.add('on');
+    document.documentElement.style.setProperty('--toast-h', t.offsetHeight + 'px'); // 속말 자막이 이만큼 비켜 선다 (css/drama.css)
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => t.classList.remove('on'), ms || 2200);
   }
