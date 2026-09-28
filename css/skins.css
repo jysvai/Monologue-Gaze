@@ -27,6 +27,10 @@
 .b-tbl td{font-variant-numeric:tabular-nums}
 .b-tbl .pc{width:34px;text-align:right}
 .b-tbl .pin{margin:0}
+/* 옆으로 넘는 표 (js tblEdge): ✎ 칸은 종이 빛깔로 덮고, 뒤로 더 있으면 그 칸 가장자리에 그늘 */
+.b-tbl.scrolls td.pc{background-color:var(--pc-bg,transparent);background-image:var(--pc-bgi,none)}
+.b-tbl.scrolls th.pc{background-color:var(--pc-bg,transparent);background-image:linear-gradient(rgba(0,0,0,.05),rgba(0,0,0,.05)),var(--pc-bgi,none)}
+.b-tbl.more-r .pc{box-shadow:-8px 0 8px -6px rgba(0,0,0,.3)}
 @container stage (max-width:520px){.b-tbl th,.b-tbl td{padding:5px;word-break:keep-all;overflow-wrap:break-word;min-width:3em}.b-tbl .pc{position:sticky;right:0;width:28px;min-width:0}} /* 폰: 이름·금액은 한 덩어리로 두고 표는 옆으로 넘긴다. ✎ 칸은 오른쪽에 붙어 있다 */
 .b-list{margin:4px 0 14px;padding-left:20px}
 .b-list li{margin:3px 0}

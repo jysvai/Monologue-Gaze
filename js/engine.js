@@ -964,6 +964,20 @@
     scr.classList.toggle('new-l', x > 2 && dots.some(r => r.right < b.left + 24));
     scr.style.setProperty('--tabs-mid', Math.round(bar.offsetTop + bar.offsetHeight / 2) + 'px');
   }
+  // 옆으로 넘는 표(폰): 오른쪽에 붙은 ✎ 칸에 문서 종이 빛깔을 깔고(밑으로 지나가는 글자가 ✎ 와 겹치지 않게),
+  // 뒤로 더 있으면 그 칸 가장자리에 그늘을 드리운다 (폰에서는 가로 스크롤 막대가 숨어 있어 표가 더 있는 줄 모른다)
+  function tblEdge(t) {
+    const m = t.scrollWidth - t.clientWidth, x = Math.abs(t.scrollLeft);
+    t.classList.toggle('scrolls', m > 2);
+    t.classList.toggle('more-r', m > 2 && x < m - 2);
+    if (m > 2 && !t.style.getPropertyValue('--pc-bg')) {
+      for (let e = t.parentElement; e && e !== document.body; e = e.parentElement) {
+        const c = getComputedStyle(e).backgroundColor, a = c.match(/rgba?\(([^)]+)\)/);
+        const v = a ? a[1].split(',').map(Number) : null;
+        if (v && (v.length < 4 || v[3] > 0.6)) { const i = getComputedStyle(e).backgroundImage; t.style.setProperty('--pc-bg', `rgb(${v[0]},${v[1]},${v[2]})`); if (i && i !== 'none') t.style.setProperty('--pc-bgi', i); break; } // 종이 결(무늬)도 같이
+      }
+    }
+  }
   function renderList() {
     const s = curSrc();
     const el = $('#paneList');
@@ -1000,6 +1014,7 @@
     else h = `<div class="read-empty"><p>${inline(C.emptyRead || '왼쪽에서 자료를 고르면 여기에 펼쳐진다.')}</p></div>`;
     el.innerHTML = `<button type="button" class="back-list" data-back>← 목록으로</button>${h}`;
     $('#stageBody').classList.toggle('reading', !!(o && h));
+    $$('.b-tbl', el).forEach(tblEdge);
   }
 
   /* ───────── 수사 보고서 (읽기 칸에 넓게) ───────── */
@@ -2039,8 +2054,8 @@
       const n = tabs[(j + tabs.length) % tabs.length];
       if (n !== t) n.click();
     });
-    document.addEventListener('scroll', e => { if (e.target.id === 'srcTabs') tabEdge(e.target); }, { capture: true, passive: true });
-    window.addEventListener('resize', () => tabEdge($('#srcTabs')), { passive: true });
+    document.addEventListener('scroll', e => { const t = e.target; if (t.id === 'srcTabs') tabEdge(t); else if (t.classList && t.classList.contains('b-tbl')) tblEdge(t); }, { capture: true, passive: true });
+    window.addEventListener('resize', () => { tabEdge($('#srcTabs')); $$('#paneRead .b-tbl').forEach(tblEdge); }, { passive: true });
     if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => tabEdge($('#srcTabs'))); // 글꼴이 늦게 와 탭 너비가 바뀐 때
     document.addEventListener('toggle', e => {
       const d = e.target;
