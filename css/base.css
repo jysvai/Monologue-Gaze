@@ -493,7 +493,7 @@ img{max-width:100%}
 .brief .stain{opacity:.5}
 .f-blood{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
 .f-blood .stain{opacity:.55}
-.folder:has(.f-blood) .f-label{position:relative;z-index:3}
+.folder:has(.f-blood) :is(.f-label,.f-kind,.f-motif,.f-len){position:relative;z-index:3} /* 핏자국은 종이에 스며 있고 글자는 그 위에 (연도·난이도·모티프가 가려지지 않게) */
 .cw-card{position:relative;overflow:hidden}
 .cw-card:focus{outline:0} /* 여는 때 초점을 받는 경고문 자체에는 테를 두르지 않는다 (단추들은 Tab 으로) */
 .cw-card>*:not(.stain){position:relative;z-index:4}
