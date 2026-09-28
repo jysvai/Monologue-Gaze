@@ -191,6 +191,11 @@
   // 다른 사건에 같은 이름의 칸(talk · tl · rq_cctv · p_park …)이 있어도 섞이지 않게. 「이 사건 처음부터」면 함께 비운다
   const TEMP = {};
   const tmp = () => (TEMP[C.id] ||= { fail: {}, tl: {}, rq: {}, met: new Set() });
+  // 비운다: 사건 하나(id) 또는 전부 — 다른 수사관의 서랍을 열거나 기록을 지우면 앞사람의 틀린 횟수·고른 메모·읽던 자리가 따라오지 않게
+  function forget(id) {
+    Object.keys(TEMP).forEach(k => { if (!id || k === id) delete TEMP[k]; });
+    [READPOS, NGSHUT].forEach(m => [...m.keys()].forEach(k => { if (!id || k.startsWith(id + '|')) m.delete(k); }));
+  }
 
   const okOne = n => (n[0] === '~' ? !okOne(n.slice(1)) : n[0] === '?' ? !!(ST.live && ST.live.req[n.slice(1)] && ST.live.req[n.slice(1)].st !== 'no') : n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '!' ? ST.notes.some(x => x.f === n.slice(1)) : n[0] === '@' ? !!ST.live && ST.live.t >= +n.slice(1) : ST.keys.includes(n)); // '~' = 아직 아님
   const ok = need => !need || !need.length || need.every(okOne);
@@ -723,6 +728,7 @@
     if (o && (o.t === 'feed' || o.t === 'req')) { const pr = $('#paneRead'), top = pr ? pr.scrollTop : 0; renderRead(); if (pr && o.t === 'req') pr.scrollTop = top; } // 단톡방의 굴림은 renderRead 가 맡는다
     renderTabs(); renderList(); renderNotebook();
   }
+  let NOTEGEN = 0;
   function newBelow(pr) {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'lv-more'; b.textContent = '새 메시지 ↓';
@@ -733,9 +739,9 @@
   // 새 소식: 화면 오른쪽 위에 휴대폰 알림처럼 (누르면 그곳으로)
   function notify(news) {
     const box = statusBox('lvNotes', 'lv-notes');
-    const at = ltime(ST.live.t);
+    const at = ltime(ST.live.t), gen = NOTEGEN;
     news.slice(-3).forEach((n, i) => setTimeout(() => {
-      if (!C || !box.isConnected) return;
+      if (!C || !box.isConnected || gen !== NOTEGEN) return;
       const el = document.createElement('button');
       el.type = 'button'; el.className = 'lv-note' + (n.late ? ' late' : '');
       if (n.t) { el.dataset.lvT = n.t; el.dataset.lvId = n.id || ''; el.dataset.lvSrc = n.src || ''; }
@@ -784,7 +790,7 @@
       el.remove(); if (sib) sib.focus();
     });
   }
-  function clearNotes() { const b = $('#lvNotes'); if (b) b.innerHTML = ''; }
+  function clearNotes() { NOTEGEN++; const b = $('#lvNotes'); if (b) b.innerHTML = ''; } // 아직 뜰 차례를 기다리던 알림도 거둔다
   function nextDue() {
     if (!liveOn()) return null;
     const L = ST.live, c = [];
@@ -1367,7 +1373,7 @@
     if (!p) return;
     save();
     r.cur = id; saveRoster(r);
-    PID = id; S = load(id);
+    PID = id; S = load(id); forget();
     if (MG.sound) MG.sound.stopVoice();
     cabinet();
     if (MG.mood) MG.mood.sound();
@@ -2076,7 +2082,7 @@
       if ((el = t.closest('[data-player]'))) return usePlayer(el.dataset.player);
       if ((el = t.closest('[data-drop]'))) return armed(el, '한 번 더 누르면 그 서랍이 비워진다', () => dropPlayer(el.dataset.drop));
       if (t.closest('[data-intro-ok]')) { S.intro = true; save(); cabinet(); return; }
-      if ((el = t.closest('[data-wipe]'))) return armed(el, roster().list.length > 1 ? '한 번 더 누르면 내 기록이 지워진다' : '한 번 더 누르면 전부 지워진다', () => { S = blank(); save(); cabinet(); });
+      if ((el = t.closest('[data-wipe]'))) return armed(el, roster().list.length > 1 ? '한 번 더 누르면 내 기록이 지워진다' : '한 번 더 누르면 전부 지워진다', () => { S = blank(); forget(); save(); cabinet(); });
       if (!C) return;
       if ((el = t.closest('.lv-more'))) { const pr = $('#paneRead'); if (pr) pr.scrollTo({ top: pr.scrollHeight, behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth' }); el.remove(); return; }
       if ((el = t.closest('.lv-note'))) { // 휴대폰 알림: 누르면 그곳으로
@@ -2156,9 +2162,10 @@
         return;
       }
       if ((el = t.closest('[data-reset]'))) return armed(el, '한 번 더 누르면 이 사건 기록이 지워진다', () => {
+        if (JUDGING) return; // 보고서를 넘기는 중에는 (판정이 새 기록 위에 떨어지지 않게)
         const cw = S.cases[C.id] && S.cases[C.id].cw; // 혐오감 주의는 이미 읽고 들어왔으니 다시 묻지 않는다
         delete S.cases[C.id]; if (cw) S.cases[C.id] = { cw: true };
-        delete TEMP[C.id]; [READPOS, NGSHUT].forEach(m => [...m.keys()].forEach(k => { if (k.startsWith(C.id + '|')) m.delete(k); })); // 틀린 횟수·읽던 자리·접어 둔 묶음도 처음으로
+        forget(C.id); clearNotes(); // 틀린 횟수·읽던 자리·접어 둔 묶음, 아직 떠 있는 휴대폰 알림도 처음으로
         if (S.seen) { S.seen.done = S.seen.done.filter(x => x !== C.id); S.seen.m = S.seen.m.filter(x => x !== C.id); } save(); openCase(C.id); toast('처음부터 다시'); });
     });
     document.addEventListener('submit', e => {
@@ -2182,7 +2189,7 @@
       S = load(PID);
       SYNC = true;
       try {
-        if (cur) { S.current = cur; ST = cs(C); stopTalk(); renderCase(); }
+        if (cur) { S.current = cur; ST = cs(C); if (TEMP[cur]) TEMP[cur].tl = {}; clearNotes(); stopTalk(); renderCase(); } // 다른 창에서 판을 옮겼을 수 있으니 「방금 맞춰 본 판」 표는 비운다
         else if ($('.cabinet')) cabinet(ro);
       } finally { SYNC = false; }
     });
