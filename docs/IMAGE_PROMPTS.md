@@ -723,7 +723,7 @@ Newspaper photograph of a remote rocky valley above a small Norwegian west-coast
 Police close-up photograph of the screw-on cup lid of a 1960s vacuum flask lying in wet purple heather on a rocky Norwegian hillside, a dark coffee stain inside the cup, a blank evidence number card beside it. Overcast light, 35mm black-and-white film.
 ```
 
-### c06/scene_hollow — 현장 사진 3호 — 바위 비탈 밑 불탄 자리 (방수포로 덮은 시신) 🔞 열람 주의 🔁 다시 뽑기
+### c06/scene_hollow — 현장 사진 3호 — 바위 비탈 밑 불탄 자리 (방수포로 덮은 시신) 🔞 열람 주의
 - 저장 경로: `img/c06/scene_hollow.webp` · 비율: 4:3
 ```
 Black-and-white 1969 Norwegian police scene photograph on 35mm Tri-X, overcast afternoon after rain, wet rock: the foot of a steep grey boulder slope where a shallow hollow in the heather has burned. A ring about two metres across of heather burned down to black ash and stubble, singed brown tips beyond it, and on the rock face above a tongue of black soot rising to head height. In the middle of the ring a human form lies on its back under a grey canvas tarp, only its outline showing: the arms bent at the elbows and raised in front of the chest so the tarp tents up over them, the knees slightly bent. Around it, each with a small blank white numbered card: the black wire skeleton of a burnt folding umbrella by the right shoulder, two small opaque 1960s polyethylene bottles (squat, white and brown, like household cleaner flasks, not clear water bottles) melted into shapeless blackened lumps, lying on the ash about half a metre beyond the foot end of the tarp and clearly separate from it, a charred matchbox wedged in a rock crack above the head. The muddy rubber boots of a policeman at the frame edge, raindrops beading on the tarp, heavy grain.
