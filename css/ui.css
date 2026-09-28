@@ -250,6 +250,8 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
   .spot::after{inset:-9px}
   .chip::after,.tab::after{inset:-5px -2px}
   .tl-mv button::after{inset:-2px -8px}
+  .lv-wait,[data-ph-grid]{position:relative;z-index:1}
+  .lv-wait::after,[data-ph-grid]::after{content:"";position:absolute;inset:-7px -4px} /* 실시간 사건의 「시간 보내기」, 사진의 「칸을 나눠 살피기」 */
 }
 
 @media (prefers-reduced-motion:reduce){.rep-per.on::after,.rep-per.on::before,.rep-opt.on::after{animation:none}.ui-tip{transition:none}}
