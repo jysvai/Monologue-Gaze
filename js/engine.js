@@ -1878,6 +1878,7 @@
   function checkTimeline(sid) {
     const s = C.sources.find(x => x.id === sid);
     if (!s) return;
+    if (tmp().tl[sid]) { sayMsg('방금 맞춰 본 그대로다. 카드를 옮긴 뒤에 다시 맞춰 본다.'); return; } // 카드를 옮기면 지워지는 표: 그대로면 시간을 또 쓰지 않는다
     const o = tlOrder(s);
     const hit = o.filter((id, i) => id === s.events[i].id);
     advance('timeline');
