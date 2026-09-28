@@ -882,6 +882,7 @@
     const why = (r.why || []).length;
     const n = why ? ST.notes.find(x => String(x.id) === String(tmp().rq[id])) : null;
     if (why && !n) { sayMsg('소명 자료로 붙일 메모를 먼저 고른다.'); sfx('miss'); return; }
+    if (n && q && q.st === 'no' && String(q.note) === String(n.id)) { sayMsg('방금 기각된 그 소명 그대로다. 다른 메모를 붙여야 한다.'); sfx('miss'); return; } // 같은 신청서를 또 올려 시간만 쓰지 않게
     const prev = L.t;
     L.t += lcost('write') + (q && lv() >= 5 ? 60 : 0);
     const eta = r.eta != null ? r.eta : 120;
@@ -1965,6 +1966,9 @@
     const sol = C.solution, c0 = C;
     const has = id => ST.notes.some(n => String(n.id) === String(id));
     if (!ST.report.culprit || sol.claims.some(cl => !ST.report.claims[cl.id] || !has(ST.report.claims[cl.id]))) { VERDICT = '빈칸이 남아 있다. 범인과 모든 주장에 메모를 붙여야 올릴 수 있다.'; renderRep(); sfx('miss'); return; }
+    // 방금 반려된 보고서를 한 칸도 고치지 않고 다시 올리면: 제출 횟수를 쓰지 않고 그렇다고만 알려 준다
+    const sig = JSON.stringify([ST.report.culprit, sol.claims.map(cl => String(ST.report.claims[cl.id]))]);
+    if (!ST.solved && ST.lastRep === sig) { VERDICT = '방금 반려된 보고서 그대로다. 어딘가 고쳐서 올린다.'; renderRep(); sfx('miss'); return; }
     ST.tries++;
     const bad = ST.report.culprit === sol.culprit ? [] : ['범인'];
     sol.claims.forEach((cl, i) => {
@@ -1973,6 +1977,7 @@
     });
     const wrong = bad.length;
     const fresh = wrong === 0 && !ST.solved;
+    ST.lastRep = wrong ? sig : null;
     if (wrong === 0) { ST.solved = true; VERDICT = ''; }
     else if (lv() >= 5) VERDICT = sol.far || '반려. 어디가 틀렸는지는 아무도 말해 주지 않는다.';
     else {
