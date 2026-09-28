@@ -113,3 +113,6 @@
 .case-intro.live .ci-when{font:500 14px/1.4 var(--f-mono);letter-spacing:.04em;color:#cdd5e1}
 .case-intro.live .ci-line{font:400 clamp(16px,2.6vw,20px)/1.6 var(--f-ui);color:#e6ebf2;animation:ci-rise .9s .6s ease-out both}
 @media (prefers-reduced-motion:reduce){ .case-intro.live .ci-no::before,.case-intro.live .ci-line{animation:none} }
+
+/* 신청서 칸의 기다리기 단추도 아래 줄 단추처럼: 이번 기다림이 기한을 넘기면 붉게, 한 번 눌러 「한 번 더」 상태면 더 붉게 */
+.lv-waitrow button:is(.arm,.over){border-color:#b0342a;color:#b0342a;background:rgba(176,52,42,.07);opacity:1}

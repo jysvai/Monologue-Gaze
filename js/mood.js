@@ -163,7 +163,8 @@
   function tone(type, f, ...fx) { const o = ax.createOscillator(); o.type = type; o.frequency.value = f; chain(o, ...fx).connect(bus); o.start(); srcs.push(o); return o; }
   function every(a, b, fn) { // a~b 초마다 한 번씩
     const h = { id: 0 }; timers.push(h);
-    const tick = () => { if (!bus) return; try { fn(ax.currentTime); } catch (e) { /* skip */ } h.id = setTimeout(tick, rnd(a, b) * 1000); };
+    // 탭을 떠나 소리가 멈춘 동안(시계가 서 있는 동안)은 소리를 쌓아 두지 않는다 — 돌아왔을 때 한꺼번에 터지지 않게
+    const tick = () => { if (!bus) return; if (!document.hidden && ax.state === 'running') { try { fn(ax.currentTime); } catch (e) { /* skip */ } } h.id = setTimeout(tick, rnd(a, b) * 1000); };
     h.id = setTimeout(tick, rnd(a * 0.3, b * 0.6) * 1000);
   }
   function burst(t, dur, type, f, q, v) { // 짧은 잡음 한 번
@@ -203,7 +204,7 @@
     },
     clock() {
       let n = 0;
-      const tick = () => { if (!bus) return; const t = ax.currentTime; burst(t, 0.02, 'highpass', n % 2 ? 2600 : 3400, 1, n % 2 ? 0.035 : 0.05); n++; };
+      const tick = () => { if (!bus || document.hidden || ax.state !== 'running') return; const t = ax.currentTime; burst(t, 0.02, 'highpass', n % 2 ? 2600 : 3400, 1, n % 2 ? 0.035 : 0.05); n++; };
       timers.push({ id: setInterval(tick, 1000), iv: true });
     },
     clapper() { // 야경꾼 딱딱이, 멀리서
@@ -265,9 +266,10 @@
   });
 
   /* ───────── 사건을 여는 장면 ───────── */
-  let introTimer = 0;
+  let introTimer = 0, introKey = null;
   function hideIntro() {
     clearTimeout(introTimer);
+    if (introKey) { document.removeEventListener('keydown', introKey); introKey = null; } // 눌러서 넘겼어도 Tab 을 붙잡던 손은 뗀다
     const el = document.querySelector('.case-intro');
     if (!el || el.classList.contains('out')) return;
     el.classList.add('out');
@@ -307,11 +309,13 @@
     if (c.live && MG.sfx) MG.sfx('radio'); // 현행 사건: 출동 지령이 무전으로 떨어진다
     el.focus({ preventScroll: true }); // Tab 이 뒤 화면으로 새지 않게
     const once = e => {
+      if (!el.isConnected || el.classList.contains('out')) { document.removeEventListener('keydown', once); if (introKey === once) introKey = null; return; }
       if (e.key === 'Tab') { e.preventDefault(); el.focus({ preventScroll: true }); return; } // 떠 있는 동안 Tab 은 뒤 화면으로 가지 않는다
       hideIntro(); document.removeEventListener('keydown', once);
     };
+    introKey = once;
     document.addEventListener('keydown', once);
-    introTimer = setTimeout(() => { document.removeEventListener('keydown', once); hideIntro(); }, reduce.matches ? 1600 : 3600);
+    introTimer = setTimeout(hideIntro, reduce.matches ? 1600 : 3600);
   }
 
   /* ───────── 엔진이 부르는 곳 ───────── */
