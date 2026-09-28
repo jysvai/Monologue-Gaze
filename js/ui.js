@@ -215,7 +215,7 @@
     setTimeout(() => {
       const now = document.activeElement;
       if (b.isConnected || (now && now !== document.body)) return;
-      const seen = s => s && [...document.querySelectorAll(s)].find(x => x.offsetParent !== null);
+      const seen = s => s && [...document.querySelectorAll(s)].find(x => x.offsetParent !== null && !x.disabled);
       const el = seen(sel) || seen(kin) || (pane && (seen('#paneList .item.on') || seen('#paneRead [data-back]')));
       if (el) el.focus({ preventScroll: true });
     }, 0);

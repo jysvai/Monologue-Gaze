@@ -1108,6 +1108,7 @@
 
   /* ───────── 수사 보고서 (읽기 칸에 넓게) ───────── */
   let REPOPEN = null; // 메모 고르기가 펼쳐진 주장
+  let PTR = false; // 마지막 손길이 마우스·손가락이었나 (키보드면 false)
   const FORM = () => Object.assign({ title: '수사 보고서', culprit: '범인은', short: '범인', submit: '보고서 올리기', open: '보고서 펼쳐 쓰기', lead: '범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다.', judging: '보고서를 올렸다. 반장이 한 장씩 넘긴다…' }, C.solution.form || {});
   function reportHtml() {
     const sol = C.solution, notes = ST.notes, FM = FORM();
@@ -1121,7 +1122,7 @@
       const cur = notes.find(n => String(n.id) === String(ST.report.claims[cl.id]));
       const open = !shut && REPOPEN === cl.id;
       const list = groups.map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${cur && cur.id === n.id ? ' on' : ''}"><input type="radio" name="rep-${esc(cl.id)}" value="${n.id}" data-rep="${esc(cl.id)}"${cur && cur.id === n.id ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span>${usedBy(n, i)}</label>`).join('')}</details>`).join('');
-      return `<section class="rep-claim${cur ? ' filled' : ''}${open ? ' open' : ''}">
+      return `<section class="rep-claim${cur ? ' filled' : ''}${open ? ' open' : ''}" data-claim="${esc(cl.id)}">
         <h4><span class="no">${i + 1}</span> ${inline(cl.q)}</h4>
         <div class="rep-pick">${cur ? `<p class="rep-memo"><span class="n">${notes.indexOf(cur) + 1}.</span> ${esc(cur.t)} <span class="src">— ${esc(cur.src || '')}</span></p>` : '<p class="rep-empty">아직 붙인 메모가 없다.</p>'}
           ${shut ? '' : `<button type="button" class="rep-tog" data-rep-open="${esc(cl.id)}" aria-expanded="${open}">${open ? '접기' : cur ? '다른 메모로 바꾸기' : '메모에서 고르기'} <small>${notes.length}</small></button>`}</div>
@@ -1144,7 +1145,10 @@
     const o = ST.view.open;
     if (o && o.t === 'report') { const pr = $('#paneRead'), top = pr.scrollTop; renderRead(); pr.scrollTop = top; }
     // 다시 그려도 초점은 같은 칸에 (보고서의 범인 칸을 방향키로 고르는 중에 초점이 사라지지 않게)
-    if (k && !a.isConnected) { const el = $$(k).find(x => x.offsetParent !== null); if (el) el.focus({ preventScroll: true }); }
+    if (k && !a.isConnected) {
+      const el = $$(k).find(x => x.offsetParent !== null) || (() => { const id = a.closest && a.closest('[data-claim]') && a.closest('[data-claim]').dataset.claim; return id && $(`[data-rep-open="${CSS.escape(id)}"]`); })(); // 접힌 메모 목록 안에 있었으면 그 주장의 단추로
+      if (el) el.focus({ preventScroll: true });
+    }
   }
   // 초점이 있던 칸을 다시 그린 뒤에도 찾을 수 있게 적어 둔다: id, 아니면 이름·값·data-* (같은 form 안에서)
   function focusKey(a) {
@@ -1885,7 +1889,7 @@
         if (sl) sl.animate([{ transform: `translateY(${-d}px)`, opacity: 0 }, { transform: 'none', opacity: 1 }], how);
       });
     }
-    const b = $(`[data-tl="${sid}|${eid}|${dir}"]`) || $(`[data-tl="${sid}|${eid}|${-dir}"]`);
+    const b = $(`[data-tl="${sid}|${eid}|${dir}"]:not(:disabled)`) || $(`[data-tl="${sid}|${eid}|${-dir}"]`); // 맨 끝에 닿아 그 쪽 단추가 잠기면 반대쪽 단추로
     if (b) b.focus();
   }
   function checkTimeline(sid) {
@@ -2217,13 +2221,16 @@
       const k = C.id + '|' + d.dataset.ng;
       if (d.open) NGSHUT.delete(k); else NGSHUT.add(k);
     }, true);
+    document.addEventListener('pointerdown', () => { PTR = true; }, true);
+    document.addEventListener('keydown', () => { PTR = false; }, true);
     document.addEventListener('change', e => {
       if (e.target.closest('[data-pname]')) return renamePlayer(e.target.value);
       const rq = e.target.closest('[data-rq-pick]');
       if (rq && C) { tmp().rq[rq.dataset.rqPick] = rq.value; $$(`[data-rq-pick="${rq.dataset.rqPick}"]`).forEach(x => x.closest('.rep-opt').classList.toggle('on', x.checked)); sfx('pen'); return; }
       const s = e.target.closest('[data-rep]');
       if (!s || !C) return;
-      if (s.dataset.rep === 'culprit') ST.report.culprit = s.value; else { ST.report.claims[s.dataset.rep] = s.value; REPOPEN = null; }
+      // 마우스·손가락으로 고르면 목록을 접는다. 방향키로 고르는 중이면 펼쳐 둔다 (방향키는 옮기는 대로 골라지므로, 접으면 첫 메모에서 멈춘다 — 접기는 「접기」 단추로)
+      if (s.dataset.rep === 'culprit') ST.report.culprit = s.value; else { ST.report.claims[s.dataset.rep] = s.value; if (PTR) REPOPEN = null; }
       save(); sfx('pen'); renderRep();
     });
     document.addEventListener('focusin', e => { const i = e.target.closest && e.target.closest('[data-sym]'); if (i) cipherHl(i.dataset.sym); });
