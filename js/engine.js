@@ -1011,10 +1011,12 @@
     const roleOf = k => { const p = Object.values(C.people || {}).find(x => x.key === k); return p && p.role ? plain(p.role) : ''; };
     const groups = noteGroups(notes);
     const shut = ST.solved; // 종결된 보고서는 결재가 끝난 서류: 고칠 수 없다
+    // 다른 주장에 이미 붙인 메모는 고를 때 알 수 있게 (같은 메모를 두 주장에 붙여도 되지만, 모르고 겹치지 않게)
+    const usedBy = (n, i) => { const u = sol.claims.map((c, j) => (j !== i && String(ST.report.claims[c.id]) === String(n.id) ? j + 1 : 0)).filter(Boolean); return u.length ? ` <small class="rep-used">· ${u.join('·')}번에 붙임</small>` : ''; };
     const claim = (cl, i) => {
       const cur = notes.find(n => String(n.id) === String(ST.report.claims[cl.id]));
       const open = !shut && REPOPEN === cl.id;
-      const list = groups.map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${cur && cur.id === n.id ? ' on' : ''}"><input type="radio" name="rep-${esc(cl.id)}" value="${n.id}" data-rep="${esc(cl.id)}"${cur && cur.id === n.id ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span></label>`).join('')}</details>`).join('');
+      const list = groups.map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${cur && cur.id === n.id ? ' on' : ''}"><input type="radio" name="rep-${esc(cl.id)}" value="${n.id}" data-rep="${esc(cl.id)}"${cur && cur.id === n.id ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span>${usedBy(n, i)}</label>`).join('')}</details>`).join('');
       return `<section class="rep-claim${cur ? ' filled' : ''}${open ? ' open' : ''}">
         <h4><span class="no">${i + 1}</span> ${inline(cl.q)}</h4>
         <div class="rep-pick">${cur ? `<p class="rep-memo"><span class="n">${notes.indexOf(cur) + 1}.</span> ${esc(cur.t)} <span class="src">— ${esc(cur.src || '')}</span></p>` : '<p class="rep-empty">아직 붙인 메모가 없다.</p>'}

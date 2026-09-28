@@ -75,6 +75,7 @@
 .rep-opt:hover{border-color:rgba(43,40,35,.3)}
 .rep-opt.on{border-left-color:var(--olive);background:#eef0dc}
 .rep-opt[hidden],.rep-grp[hidden]{display:none}
+.rep-used{color:var(--pencil);font-size:12px;white-space:nowrap} /* 다른 주장에 이미 붙인 메모 */
 .rep-view .submit-row{margin-top:14px!important}
 .rep-view .verdict{margin-top:8px;font:20px/1.3 var(--f-hand)}
 .verdict.wait{color:var(--ink-soft);animation:pulse 1.2s ease-in-out infinite}
