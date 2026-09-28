@@ -14,6 +14,8 @@
 .lv-dl.done{opacity:.55}
 .lv-wait{flex:none;height:20px;padding:0 10px;border:1px solid rgba(255,255,255,.3);border-radius:10px;background:rgba(255,255,255,.08);color:inherit;font:11px/18px var(--f-web);cursor:pointer}
 @media (hover:hover){.lv-wait:hover{background:rgba(255,255,255,.18)}}
+.lv-wait.over,.lv-wait.arm{border-color:#e0685c;color:#ffb3aa} /* 기다리면 기한을 넘긴다 */
+.case-view[data-frame="crt"] .lv-wait:is(.over,.arm){border-color:#b0342a;color:#b0342a}
 .case-view[data-frame="crt"] .lv-clock b{background:rgba(0,0,0,.12)}
 .case-view[data-frame="crt"] .lv-wait{border-color:#8c8a84;background:#e8e5dd;border-radius:2px}
 @media (max-width:560px){ .scr-bar.live{height:auto;min-height:30px;flex-wrap:wrap;padding:5px 10px;row-gap:3px} .lv-clock{font-size:11.5px;letter-spacing:0} .lv-wait{margin-left:auto;padding:0 8px;font-size:10.5px} .lv-dl{order:3;flex-basis:100%;margin-left:0;font-size:11px} }

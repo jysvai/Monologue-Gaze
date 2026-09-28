@@ -711,7 +711,8 @@
       L.fd[it.id] = it.backdate || (it.at || 0) > prev ? it.at || 0 : L.t; // backdate: 조건이 늦게 채워져도 적힌 시각 그대로
       if (!ST.unl.includes(it.id)) ST.unl.push(it.id); // '#말id' 조건: 그 말이 왔음
       (it.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
-      if (!it.me) news.push({ who: it.who || '', msg: plain(it.msg || ''), app: it.app || feedName(it.src), t: 'feed', id: it.src, src: it.src });
+      const o = ST.view.open, here = o && o.t === 'feed' && o.id === it.src; // 지금 펼쳐 둔 단톡방의 말은 알림으로 또 띄우지 않는다 (방에 바로 뜬다)
+      if (!it.me && !here) news.push({ who: it.who || '', msg: plain(it.msg || ''), app: it.app || feedName(it.src), t: 'feed', id: it.src, src: it.src });
     });
     const dl = C.live.deadline;
     if (dl && !L.late && !ST.solved && L.t > dl.at) {
@@ -799,9 +800,15 @@
     [...Object.values(C.docs), ...Object.values(C.people), ...C.sources, ...reqItems()].forEach(x => (x.need || []).forEach(n => { if (n[0] === '@' && +n.slice(1) > L.t && ok(lvAll(x.need))) c.push(+n.slice(1)); }));
     return c.length ? Math.min(...c) : null;
   }
+  // 다음 것을 기다리면 (보이는) 기한을 넘기게 되는가
+  function waitsPast() {
+    if (!liveOn() || ST.solved || ST.live.late) return false;
+    const dl = C.live.deadline, nd = nextDue();
+    return !!(dl && ok(dl.need) && nd != null && ST.live.t <= dl.at && nd > dl.at);
+  }
   function waitNext() {
     const d = nextDue();
-    if (d == null || ST.solved) { toast('지금은 기다릴 것이 없다'); return; }
+    if (d == null || ST.solved) { toast('지금은 기다릴 것이 없다'); renderBar(); return; }
     const prev = ST.live.t;
     ST.live.t = Math.max(ST.live.t, d);
     sfx('page');
@@ -813,8 +820,11 @@
   function liveBar() {
     const L = ST.live, dl = C.live.deadline && ok(C.live.deadline.need) ? C.live.deadline : null, t = L.t, nd = nextDue(); // 기한은 need 가 채워져야 보인다
     const left = dl ? dl.at - t : 0;
-    const pend = Object.values(L.req).some(q => q.st === 'wait');
-    return `<div class="scr-bar live"><span class="lv-clock"><b>D+${Math.floor(t / 1440)}</b> ${esc(lstamp(t))}</span>${dl ? `<span class="lv-dl${ST.solved ? ' done' : left < 0 ? ' over' : left < 360 ? ' hot' : ''}">${esc(dl.label || '기한')} · ${ST.solved ? '종결' : left >= 0 ? hm(left) + ' 남음' : hm(-left) + ' 넘김'}</span>` : ''}${nd != null && !ST.solved ? `<button type="button" class="lv-wait" data-wait>${pend ? '회신 기다리기' : '시간 보내기'} · ${hm(nd - t)}</button>` : ''}</div>`;
+    const waits = Object.values(L.req).filter(q => q.st === 'wait').map(q => q.due);
+    const pend = waits.length && nd === Math.min(...waits); // 「회신 기다리기」는 다음에 오는 것이 회신일 때만 (먼저 단톡방 말이 끼면 「시간 보내기」)
+    const over = waitsPast(); // 이번 기다림이 기한을 넘긴다: 단추를 붉게, 한 번 더 눌러야 간다
+    const d0 = liveDate(0), d1 = liveDate(t), dday = Math.round((new Date(d1.getFullYear(), d1.getMonth(), d1.getDate()) - new Date(d0.getFullYear(), d0.getMonth(), d0.getDate())) / 864e5); // 달력 날짜로 센다 (자정을 넘기면 D+1)
+    return `<div class="scr-bar live"><span class="lv-clock"><b>D+${dday}</b> ${esc(lstamp(t))}</span>${dl ? `<span class="lv-dl${ST.solved ? ' done' : left < 0 ? ' over' : left < 360 ? ' hot' : ''}">${esc(dl.label || '기한')} · ${ST.solved ? '종결' : left >= 0 ? hm(left) + ' 남음' : hm(-left) + ' 넘김'}</span>` : ''}${nd != null && !ST.solved ? `<button type="button" class="lv-wait${over ? ' over' : ''}" data-wait>${pend ? '회신 기다리기' : '시간 보내기'} · ${hm(nd - t)}${over ? ' · 기한 넘김' : ''}</button>` : ''}</div>`;
   }
   function renderBar() {
     if (!liveOn()) return;
@@ -825,7 +835,7 @@
     const c = $('.scr-bar.live .lv-clock'); // 수사 시각이 넘어가는 순간 시계가 잠깐 밝아진다
     if (c && was && c.textContent !== was) c.classList.add('tick');
   }
-  const feedCount = s => { const L = ST.live; return L ? (s.items || []).filter(it => it.id in L.fd).length + L.fx.filter(x => (x.src || firstFeed()) === s.id).length : 0; };
+  const feedCount = s => { const L = ST.live; return L ? (s.items || []).filter(it => it.id in L.fd && !it.me).length + L.fx.filter(x => (x.src || firstFeed()) === s.id).length : 0; }; // 내가 보낸 말은 안 읽은 말이 아니다
   const feedUnread = s => { const o = ST.view.open; if (!ST.live || (o && o.t === 'feed' && o.id === s.id)) return 0; return Math.max(0, feedCount(s) - ((ST.live.rd || {})[s.id] || 0)); }; // 보고 있는 방은 다 읽은 것
   const reqUnread = s => (s.items || []).filter(r => { const q = reqState(r.id); return q && q.st === 'done' && C.docs[r.doc] && !ST.seen.includes(r.doc); }).length;
 
@@ -834,7 +844,7 @@
     const L = ST.live;
     const rows = [...(s.items || []).filter(it => it.id in L.fd).map((it, i) => ({ t: L.fd[it.id], i, it })),
       ...L.fx.filter(x => (x.src || firstFeed()) === s.id).map((x, i) => ({ t: x.t, i: i - 1000, x }))].sort((a, b) => a.t - b.t || a.i - b.i); // 같은 시각이면 회신 알림이 먼저
-    if ((L.rd ||= {})[s.id] !== rows.length) { L.rd[s.id] = rows.length; save(); }
+    if ((L.rd ||= {})[s.id] !== feedCount(s)) { L.rd[s.id] = feedCount(s); save(); }
     // 방 이름의 (인원) 으로 안 읽은 사람 수: 보낸 사람과 나를 뺀 동료들이 저마다 몇 분 안에 읽는다 (수사 시각이 흐르면 줄어든다)
     const N = +(((s.title || '').match(/\((\d+)\)\s*$/) || [])[1] || 0);
     const unread = (it, t) => { let u = 0; for (let k = 0; k < N - (it.me ? 1 : 2); k++) if (L.t - t < 2 + hash(`${it.id}#${k}`) % 18) u++; return u; };
@@ -2037,7 +2047,7 @@
           box.innerHTML = solvedHtml(true); box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
           if (document.activeElement === document.body) { box.tabIndex = -1; box.focus({ preventScroll: true }); } // 키보드로 올렸으면 결말부터 읽히게
         }
-        cue('solved', '사건 종결'); say('사건 종결');
+        cue('solved', '사건 종결'); say('사건 종결'); renderBar(); // 아래 줄의 시계도 「종결」로
         if (MG.sound) setTimeout(() => { if (C === c0) MG.sound.hero('solved'); }, 1300);
       } else if (wrong === 0) toast('이미 닫힌 사건이다');
       else {
@@ -2093,7 +2103,7 @@
         if (src && C.sources.some(s => s.id === src)) { ST.view.src = src; renderTabs(); renderList(); }
         return openItem({ t: tt, id });
       }
-      if (t.closest('[data-wait]')) return waitNext();
+      if ((el = t.closest('[data-wait]'))) return waitsPast() ? armed(el, '한 번 더 누르면 기한을 넘긴다', waitNext) : waitNext();
       if ((el = t.closest('[data-req]'))) return openItem({ t: 'req', id: el.dataset.req });
       if ((el = t.closest('[data-rq-go]'))) return submitReq(el.dataset.rqGo);
       if ((el = t.closest('[data-feed]'))) return openItem({ t: 'feed', id: el.dataset.feed });
