@@ -1480,7 +1480,7 @@
     const fc = img.closest('figure') && img.closest('figure').querySelector('figcaption');
     const cap = fc ? [...fc.childNodes].filter(n => !(n.classList && n.classList.contains('pin'))).map(n => n.textContent).join('').trim() : '';
     if (C) z.dataset.frame = C.frame;
-    z.innerHTML = `<figure>${w ? w.outerHTML : `<img src="${esc(img.getAttribute('src'))}" alt="${esc(img.alt || '')}">`}</figure>${cap ? `<p class="z-cap">${esc(cap)}</p>` : ''}<p>누르면 닫힌다</p>`;
+    z.innerHTML = `<figure>${w ? w.outerHTML : `<img src="${esc(img.getAttribute('src'))}" alt="${esc(img.alt || '')}">`}</figure>${cap ? `<p class="z-cap">${esc(cap)}</p>` : ''}<p>${matchMedia('(hover:hover) and (pointer:fine)').matches ? '누르거나 Esc — 닫힌다' : '누르면 닫힌다'}</p>`;
     const close = () => { z.remove(); document.removeEventListener('keydown', key); };
     const key = e => { if (e.key === 'Escape') close(); };
     z.addEventListener('click', close);
