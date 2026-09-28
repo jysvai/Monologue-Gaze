@@ -1574,13 +1574,18 @@
     const f = to && ($(to) || $('[data-open-rep]'));
     if (f && (document.activeElement === document.body || !document.activeElement)) f.focus({ preventScroll: true });
   }
+  // 읽던 자리: 다른 자료를 펼쳤다가 돌아오면 읽던 데서 다시 (이번 창에서만 — 새로 고치면 처음부터)
+  const READPOS = new Map();
+  const posKey = o => (o && ['doc', 'person', 'photo', 'compare'].includes(o.t) ? `${C.id}|${o.t}|${o.id}` : '');
+  function keepPos() { const k = posKey(ST.view.open), pr = $('#paneRead'); if (k && pr) READPOS.set(k, pr.scrollTop); }
   function openItem(o) {
     const first = (o.t === 'doc' || o.t === 'photo') && !ST.seen.includes(o.id);
+    keepPos();
     ST.view.open = o; save(); sfx('page');
     renderRead(); renderList();
     if (o.t === 'feed') { renderTabs(); const pr = $('#paneRead'); if (pr) setTimeout(() => { pr.scrollTop = pr.scrollHeight; }, 0); }
     if (first && ST.seen.includes(o.id)) advance(o.t === 'photo' ? 'photo' : 'doc');
-    $('#paneRead').scrollTop = 0;
+    $('#paneRead').scrollTop = READPOS.get(posKey(o)) || 0;
     const doc = $('#paneRead > :not(.back-list)'); if (doc) doc.classList.add('enter');
     if (narrow()) $('.stage').scrollIntoView({ block: 'start' });
     // 처음 만나는 사람은 첫마디를 재생한다
@@ -1879,6 +1884,7 @@
       if ((el = t.closest('[data-src]'))) {
         if (ST.view.src !== el.dataset.src) sfx('page'); // 다른 철·다른 창으로 넘어갈 때만
         const kept = el.closest('#srcTabs') && document.activeElement && document.activeElement.closest && document.activeElement.closest('#srcTabs'); // 탭 줄을 다시 그려도 초점은 고른 탭에
+        keepPos();
         ST.view.src = el.dataset.src;
         const s = curSrc();
         if (s.type === 'cipher' || s.type === 'timeline') ST.view.open = { t: s.type, id: s.id };
@@ -1918,7 +1924,7 @@
       if ((el = t.closest('[data-rep-open]'))) { REPOPEN = REPOPEN === el.dataset.repOpen ? null : el.dataset.repOpen; renderRep(); const a = $('.rep-claim.open'); if (a) { a.scrollIntoView({ block: 'nearest' }); const q = a.querySelector('[data-rep-filter]'); if (q && !narrow()) q.focus({ preventScroll: true }); } return; }
       if (t.closest('[data-back]')) {
         const was = ST.view.open;
-        ST.view.open = null; save(); renderRead(); renderList();
+        keepPos(); ST.view.open = null; save(); renderRead(); renderList();
         // 키보드로 목록에 돌아오면 방금 읽던 항목에 초점을 둔다
         const at = was && e.detail === 0 && { doc: 'doc', person: 'person', req: 'req', feed: 'feed', compare: 'cmp', photo: 'scene', cipher: 'open-cipher', timeline: 'open-tl' }[was.t];
         const it = at && $(`#paneList [data-${at}="${CSS.escape(String(was.id))}"]`);
