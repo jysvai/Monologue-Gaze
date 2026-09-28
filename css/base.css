@@ -456,7 +456,9 @@ img{max-width:100%}
 .ph-found li{margin:0 0 8px}
 .ph-found li.fresh{animation:write .5s ease-out}
 .ph-l{margin:0 0 2px;font:700 13px var(--f-web);color:var(--red)}
-@media (prefers-reduced-motion:reduce){.ph-miss,.ph-found li.fresh{animation:none}}
+.ph-mk.again{animation:phAgain .6s ease-out} /* 이미 찾은 자리를 다시 눌렀을 때 */
+@keyframes phAgain{0%{transform:translate(-50%,-50%) scale(1)}35%{transform:translate(-50%,-50%) scale(1.35)}100%{transform:translate(-50%,-50%) scale(1)}}
+@media (prefers-reduced-motion:reduce){.ph-miss,.ph-found li.fresh,.ph-mk.again{animation:none}}
 
 /* ── 혐오감 주의 사건: 마른 핏자국 · 열람 주의 사진 */
 .stain{position:absolute;left:var(--x);top:var(--y);width:calc(150px * var(--s));height:calc(150px * var(--s));background-repeat:no-repeat;background-position:center;background-size:contain;transform:translate(-30%,-20%) rotate(var(--r));mix-blend-mode:multiply;opacity:.66;pointer-events:none;z-index:3}

@@ -1851,7 +1851,15 @@
     // 테두리를 뺀 안쪽(그림) 기준으로 잰다
     const r = el.getBoundingClientRect(), w = el.clientWidth || r.width, h = el.clientHeight || r.height;
     const px = ((e.clientX - r.left - el.clientLeft) / w) * 100, py = ((e.clientY - r.top - el.clientTop) / h) * 100;
-    const hit = photoFind(el.dataset.ph, p => Math.hypot(px - p.x, (py - p.y) * (h / w)) <= (p.r || 7));
+    const near = p => Math.hypot(px - p.x, (py - p.y) * (h / w)) <= (p.r || 7);
+    const hit = photoFind(el.dataset.ph, near);
+    const x = !hit && C._scenes[el.dataset.ph], old = x && (x.spots || []).find(sp => ST.unl.includes(sp.id) && near(sp));
+    if (old) { // 이미 찾은 자리: 헛짚었다고 하지 않고 그 번호 동그라미를 한 번 짚는다
+      const i = (x.spots || []).filter(sp => ST.unl.includes(sp.id)).indexOf(old), mk = el.querySelectorAll('.ph-mk')[i];
+      toast(`이미 찾은 것: ${plain(old.label)}`);
+      if (mk) { mk.classList.remove('again'); void mk.offsetWidth; mk.classList.add('again'); }
+      return;
+    }
     if (!hit) {
       const d = document.createElement('span');
       d.className = 'ph-miss'; d.style.left = px + '%'; d.style.top = py + '%';
@@ -1860,7 +1868,10 @@
   }
   function photoCell(arg) {
     const [xid, q, r] = arg.split('|').map((v, i) => (i ? +v : v));
-    if (!photoFind(xid, p => Math.min(3, Math.floor(p.x / 25)) === q && Math.min(2, Math.floor(p.y / (100 / 3))) === r)) toast('이 칸에는 눈에 걸리는 것이 없다');
+    const inCell = p => Math.min(3, Math.floor(p.x / 25)) === q && Math.min(2, Math.floor(p.y / (100 / 3))) === r;
+    if (photoFind(xid, inCell)) return;
+    const x = C._scenes[xid], old = x && sceneSpots(x).find(sp => ST.unl.includes(sp.id) && inCell(sp)); // 이미 찾은 것만 있는 칸
+    toast(old ? `이 칸에서는 이미 찾았다: ${plain(old.label)}` : '이 칸에는 눈에 걸리는 것이 없다');
   }
   // 보고서 올리기: 주인공이 범인을 지목하고(목소리), 한 박자 쉰 뒤 판정
   let JUDGING = false;
