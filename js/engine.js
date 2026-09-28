@@ -720,8 +720,15 @@
     if (!news.length) return;
     notify(news);
     const o = ST.view.open; // 보고 있는 단톡방을 먼저 그려야 탭의 안 읽은 수가 맞다
-    if (o && (o.t === 'feed' || o.t === 'req')) { const pr = $('#paneRead'), top = pr ? pr.scrollTop : 0; renderRead(); if (pr) pr.scrollTop = o.t === 'feed' ? pr.scrollHeight : top; }
+    if (o && (o.t === 'feed' || o.t === 'req')) { const pr = $('#paneRead'), top = pr ? pr.scrollTop : 0; renderRead(); if (pr && o.t === 'req') pr.scrollTop = top; } // 단톡방의 굴림은 renderRead 가 맡는다
     renderTabs(); renderList(); renderNotebook();
+  }
+  function newBelow(pr) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'lv-more'; b.textContent = '새 메시지 ↓';
+    pr.appendChild(b);
+    const off = () => { if (pr.scrollHeight - pr.clientHeight - pr.scrollTop < 40) { b.remove(); pr.removeEventListener('scroll', off); } };
+    pr.addEventListener('scroll', off, { passive: true });
   }
   // 새 소식: 화면 오른쪽 위에 휴대폰 알림처럼 (누르면 그곳으로)
   function notify(news) {
@@ -1082,7 +1089,12 @@
     else if (o && o.t === 'feed' && C.sources.find(s => s.id === o.id)) h = feedHtml(C.sources.find(s => s.id === o.id));
     else if (curSrc() && curSrc().type === 'map' && srcOpen(curSrc()) && !narrow()) { const s = curSrc(); h = `<div class="map-read">${s.desc ? `<p class="map-desc">${inline(s.desc)}</p>` : ''}${mapHtml(s, true)}</div>`; }
     else h = `<div class="read-empty"><p>${inline(C.emptyRead || '왼쪽에서 자료를 고르면 여기에 펼쳐진다.')}</p></div>`;
+    // 보던 단톡방에 새 말이 오면: 맨 아래를 보고 있었으면 따라 내려가고, 위의 말을 읽던 중이면 그 자리에 두고 「새 메시지 ↓」만 (메신저처럼)
+    const rows = () => { const b = el.querySelector('.lv-feed .doc-b'); return b ? b.children.length : 0; };
+    const fd = o && o.t === 'feed' && el.dataset.fd === o.id ? { low: el.scrollHeight - el.clientHeight - el.scrollTop < 80, n: rows(), pill: !!el.querySelector('.lv-more') } : null;
     el.innerHTML = `<button type="button" class="back-list" data-back>← 목록으로</button>${h}`;
+    el.dataset.fd = o && o.t === 'feed' ? o.id : '';
+    if (fd && (rows() > fd.n || fd.pill)) { if (fd.low) el.scrollTop = el.scrollHeight; else newBelow(el); }
     $('#stageBody').classList.toggle('reading', !!(o && h));
     edges();
   }
@@ -2023,6 +2035,7 @@
       if (t.closest('[data-intro-ok]')) { S.intro = true; save(); cabinet(); return; }
       if ((el = t.closest('[data-wipe]'))) return armed(el, roster().list.length > 1 ? '한 번 더 누르면 내 기록이 지워진다' : '한 번 더 누르면 전부 지워진다', () => { S = blank(); save(); cabinet(); });
       if (!C) return;
+      if ((el = t.closest('.lv-more'))) { const pr = $('#paneRead'); if (pr) pr.scrollTo({ top: pr.scrollHeight, behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth' }); el.remove(); return; }
       if ((el = t.closest('.lv-note'))) { // 휴대폰 알림: 누르면 그곳으로
         if (el.dataset.moved) { delete el.dataset.moved; return; } // 밀어 치우던 것
         const tt = el.dataset.lvT, id = el.dataset.lvId, src = el.dataset.lvSrc;
