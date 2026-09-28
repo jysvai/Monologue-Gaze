@@ -1578,7 +1578,13 @@
   function addKey(id, quiet) {
     const k = C.keywords[id];
     if (!k) return;
-    if (ST.keys.includes(id)) { if (!quiet) toast(`이미 수첩에 있다: ${k.label}`); return; }
+    if (ST.keys.includes(id)) {
+      if (quiet) return;
+      toast(`이미 수첩에 있다: ${k.label}`);
+      const kc = $(`.kchip[data-chip="${id}"]`); // 수첩의 그 단어에 형광펜 한 번
+      if (kc) { kc.classList.remove('again'); void kc.offsetWidth; kc.classList.add('again'); if (!narrow()) kc.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); }
+      return;
+    }
     const before = census();
     ST.keys.push(id); save();
     const gained = census() - before;
