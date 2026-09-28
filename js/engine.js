@@ -978,6 +978,14 @@
       }
     }
   }
+  // 세로쓰기 신문: 오른쪽에서 왼쪽으로 읽어 나가므로, 왼쪽에 기사가 더 있으면 그쪽 끝을 흐린다 (다 읽어 가면 오른쪽 끝을)
+  function colEdge(b) {
+    const m = b.scrollWidth - b.clientWidth, x = Math.abs(b.scrollLeft);
+    b.classList.toggle('more-l', m > 2 && x < m - 2);
+    b.classList.toggle('more-r', m > 2 && x > 2);
+  }
+  // 읽기 칸의 넘치는 것들을 다시 잰다 (그림·글꼴이 늦게 와 너비가 바뀐 때도)
+  function edges() { const el = $('#paneRead'); if (!el) return; $$('.b-tbl', el).forEach(tblEdge); $$('.skin-news.vertical .doc-b', el).forEach(colEdge); }
   function renderList() {
     const s = curSrc();
     const el = $('#paneList');
@@ -1014,7 +1022,7 @@
     else h = `<div class="read-empty"><p>${inline(C.emptyRead || '왼쪽에서 자료를 고르면 여기에 펼쳐진다.')}</p></div>`;
     el.innerHTML = `<button type="button" class="back-list" data-back>← 목록으로</button>${h}`;
     $('#stageBody').classList.toggle('reading', !!(o && h));
-    $$('.b-tbl', el).forEach(tblEdge);
+    edges();
   }
 
   /* ───────── 수사 보고서 (읽기 칸에 넓게) ───────── */
@@ -2054,9 +2062,10 @@
       const n = tabs[(j + tabs.length) % tabs.length];
       if (n !== t) n.click();
     });
-    document.addEventListener('scroll', e => { const t = e.target; if (t.id === 'srcTabs') tabEdge(t); else if (t.classList && t.classList.contains('b-tbl')) tblEdge(t); }, { capture: true, passive: true });
-    window.addEventListener('resize', () => { tabEdge($('#srcTabs')); $$('#paneRead .b-tbl').forEach(tblEdge); }, { passive: true });
-    if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => tabEdge($('#srcTabs'))); // 글꼴이 늦게 와 탭 너비가 바뀐 때
+    document.addEventListener('scroll', e => { const t = e.target; if (t.id === 'srcTabs') tabEdge(t); else if (t.classList && t.classList.contains('b-tbl')) tblEdge(t); else if (t.matches && t.matches('.skin-news.vertical .doc-b')) colEdge(t); }, { capture: true, passive: true });
+    window.addEventListener('resize', () => { tabEdge($('#srcTabs')); edges(); }, { passive: true });
+    if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { tabEdge($('#srcTabs')); edges(); }); // 글꼴이 늦게 와 탭·표 너비가 바뀐 때
+    document.addEventListener('load', e => { if (e.target.tagName === 'IMG' && e.target.closest && e.target.closest('#paneRead')) edges(); }, true); // 늦게 뜬 그림이 세로 신문을 밀어낸 때
     document.addEventListener('toggle', e => {
       const d = e.target;
       if (!C || !d.matches || !d.matches('details[data-ng]')) return;

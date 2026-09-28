@@ -73,6 +73,10 @@
 @container stage (min-width:900px){.skin-news .doc-b{column-count:2;column-gap:28px;column-rule:1px solid rgba(0,0,0,.2)}}
 .skin-news .b-img{break-inside:avoid;filter:grayscale(1) contrast(1.1)}
 .skin-news .b-h{font-family:var(--f-old);text-align:center}
+/* 왼쪽(또는 오른쪽)에 기사가 더 있으면 그쪽 끝이 흐려진다 (js colEdge). 끝 줄도 읽히게 다 지우지는 않는다 */
+.skin-news.vertical .doc-b.more-l{-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.3),#000 26px);mask-image:linear-gradient(90deg,rgba(0,0,0,.3),#000 26px)}
+.skin-news.vertical .doc-b.more-r{-webkit-mask-image:linear-gradient(270deg,rgba(0,0,0,.3),#000 26px);mask-image:linear-gradient(270deg,rgba(0,0,0,.3),#000 26px)}
+.skin-news.vertical .doc-b.more-l.more-r{-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.3),#000 26px calc(100% - 26px),rgba(0,0,0,.3));mask-image:linear-gradient(90deg,rgba(0,0,0,.3),#000 26px calc(100% - 26px),rgba(0,0,0,.3))}
 .skin-news.vertical .doc-b{writing-mode:vertical-rl;column-count:auto;width:100%;height:min(62vh,540px);overflow-x:auto;text-align:start;line-height:2} /* 너비를 묶어야 좁은 화면에서 첫 줄(오른쪽)이 잘리지 않고 옆으로 넘겨 읽힌다 */
 .skin-news.vertical .b-p{margin:0 0 0 14px}
 .skin-news.vertical .pin{writing-mode:horizontal-tb;margin:6px 0 0}
