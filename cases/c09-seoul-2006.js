@@ -80,7 +80,7 @@
       { id: 'home', type: 'archive', name: '하루홈', skin: 'home', paper: '하루홈 미니홈피', desc: '보존 조치된 미니홈피와 동네 클럽. 이름이나 별명으로 찾는다.', placeholder: '이름 · 별명 · 동네 이름' },
       { id: 'rec', type: 'archive', name: '공문 회신', skin: 'ledger', desc: '공문으로 받은 구청·영업소·통신사·상인회 회신 자료. 업체명, 가게 이름, 물건 이름으로 찾는다.', placeholder: '업체명 · 가게 · 물건' },
       { id: 'jeonip', type: 'query', name: '전입세대 열람', skin: 'ledger', need: ['k_canvass'], button: '열람 신청',
-        desc: '은골동 주민센터 · 수사 협조 공문으로 한 집씩 전입세대를 열람한다. 은골동 지번을 번지까지 정확히 넣는다.',
+        desc: '은골동사무소 · 수사 협조 공문으로 한 집씩 전입세대를 열람한다. 은골동 지번을 번지까지 정확히 넣는다.',
         fields: [{ id: 'addr', label: '지번 (은골동)', placeholder: '예: 000-0' }],
         records: [
           { match: { addr: ['217-3', '217-3번지', '은골동 217-3', '은골동 217-3번지'] }, doc: 'd_rec_res217', need: ['k_addr217'] },
@@ -118,7 +118,7 @@
             spots: [
               { id: 'sp219_steps', x: 56.3, y: 71, r: 11, label: '계단 — 칸 수', body: ['일곱 칸 오르고 꺾여 여섯 칸 — 모두 열셋. 디딤판은 부어 만든 콘크리트, 쇠는 난간뿐.'] },
               { id: 'sp219_pots', x: 57.9, y: 45.6, r: 7, label: '계단참', body: ['제라늄 화분 셋. 1층 권사님 것. 스티로폼 상자는 없다.'] },
-              { id: 'sp219_door', x: 24.3, y: 11, r: 6, label: '2층 현관문', body: ['철문에 번호 도어락. 계단 끝에서 왼쪽. 노란 네모 스티커 — 숫자 37, 신문 구독 표시.'] },
+              { id: 'sp219_door', x: 24.3, y: 11, r: 6, label: '2층 현관문', body: ['철문에 번호 도어락. 계단 끝에서 왼쪽. 노란 네모 스티커 — 신문 구독 표시. 적힌 글자는 바래서 안 보인다.'] },
             ] },
         ] },
       { id: 'ask', type: 'people', name: '탐문', desc: '수첩에 이름이 적힌 사람만 찾아갈 수 있다.' },
@@ -211,13 +211,13 @@
       ] },
       d_sms: { src: 'file', skin: 'sms', need: ['k_eunbi'], title: '한은비 휴대폰 · 문자 출력', meta: '임의 제출 2006.10.16 · 상대 016-***-4471 (민소라)', body: [
         { divider: '2006.10.14 (토)' },
-        { msg: '은비야 나 알바 끝 ㅠㅠ 오늘 진짜 사람 개많았음', who: '소라', at: '21:18' },
+        { msg: '은비야 나 알바 끝 ㅠㅠ 오늘 진짜 사람 완전많았음', who: '소라', at: '21:18' },
         { msg: 'ㅋㅋ고생했당 집가서 푹자', me: true, at: '21:20' },
         { msg: '은골시장 내림 비 미친듯이옴 우산없음 -_-', who: '소라', at: '21:41' },
         { msg: '편의점에서 하나 사 ㅋ', me: true, at: '21:42' },
         { msg: '아 맞다 [[한빛택배|k_hanbit]]서 문자왔었는데 부재라 옆골목 2층 아저씨네 맡겼대 ㅡㅡ 가지러감', who: '소라', at: '21:52', f: 'f_sms_parcel' },
         { msg: '밤에 모르는집 가지말고 내일 찾아', me: true, at: '21:53' },
-        { msg: 'ㄱㅊ 그 아저씨가 골목앞까지 우산들고 나와줌 ㅋ 착하시다', who: '소라', at: '21:56' },
+        { msg: '괜찮아~ 그 아저씨가 골목앞까지 우산들고 나와줌 ㅋ 착하시다', who: '소라', at: '21:56' },
         { msg: '오 다행 ㅋㅋ 도착하면 문자해', me: true, at: '21:57' },
         { msg: '소라야?', me: true, at: '22:31' },
         { msg: '자? 답장좀', me: true, at: '23:05' },
@@ -353,23 +353,23 @@
         { note: '※ 수취인 성명은 개인정보 보호를 위해 가림. 영업소장 메모: 은골동은 경비실이 없어 부재 시 맡기는 집이 대개 정해져 있음.' },
       ] },
       /* ── 전입세대 열람 (지번을 정확히 넣어야 나온다) ── */
-      d_rec_res217: { cls: 'printed', src: 'jeonip', title: '전입세대 열람 · 은골동 217-3', meta: '은골동 주민센터 · 2006.10.24 열람 · 강력3팀', body: [
+      d_rec_res217: { cls: 'printed', src: 'jeonip', title: '전입세대 열람 · 은골동 217-3', meta: '은골동사무소 · 2006.10.24 열람 · 강력3팀', body: [
         { rows: [['1층', '[[문순례]] (71)', '1989.04.02', '1명'], ['2층', '[[탁성규]] (42)', '2003.05.19', '1명 (단독 세대)'], ['반지하', '—', '—', '공실 (2006.06 ~)']], head: ['층', '세대주', '전입일', '세대원'], f: { 1: 'f_resident' } },
         '건물 소유자: 문순례. 1989년 준공 다가구, 외부 계단으로 2층 출입.',
         { note: '※ 2층 전세 계약 2003.05 — [[은골부동산]] 중개.' },
       ] },
-      d_rec_res204: { cls: 'printed', src: 'jeonip', title: '전입세대 열람 · 은골동 204-11', meta: '은골동 주민센터 · 2006.10.24 열람', body: [
+      d_rec_res204: { cls: 'printed', src: 'jeonip', title: '전입세대 열람 · 은골동 204-11', meta: '은골동사무소 · 2006.10.24 열람', body: [
         { rows: [['1층', '장○○ (58)', '1996.11.30', '3명'], ['2층', '[[변재호]] (35)', '2006.09.25', '2명 (배우자)'], ['반지하', '송○○ (26)', '2005.03.02', '1명']], head: ['층', '세대주', '전입일', '세대원'] },
         { p: '2층 전 세입자는 2006.09.20 전출. 9월 말 세입자 교체 때 도배·장판 새로 함.' },
       ] },
-      d_res219: { cls: 'printed', src: 'jeonip', title: '전입세대 열람 · 은골동 219-8', meta: '은골동 주민센터 · 2006.10.24 열람', body: [
+      d_res219: { cls: 'printed', src: 'jeonip', title: '전입세대 열람 · 은골동 219-8', meta: '은골동사무소 · 2006.10.24 열람', body: [
         { rows: [['1층', '최○○ (74)', '1990.05.11', '1명'], ['2층', '김○○ (52) · 교회 사택', '2004.02.20', '4명'], ['반지하', '—', '—', '창고']], head: ['층', '세대주', '전입일', '세대원'] },
         '건물 소유자: 최○○. 1990년 준공. 2층은 교회가 임차해 목회자 사택으로 씀.',
       ] },
-      d_res226: { cls: 'printed', src: 'jeonip', title: '전입세대 열람 · 은골동 226-2', meta: '은골동 주민센터 · 2006.10.24 열람', body: [
+      d_res226: { cls: 'printed', src: 'jeonip', title: '전입세대 열람 · 은골동 226-2', meta: '은골동사무소 · 2006.10.24 열람', body: [
         { rows: [['1층', '박○○ (63)', '1992.08.01', '2명'], ['2층', '이○○ (21)', '2006.03.02', '2명 (동거인)'], ['반지하', '윤○○ (29)', '2005.11.10', '1명']], head: ['층', '세대주', '전입일', '세대원'] },
       ] },
-      d_res230: { cls: 'printed', src: 'jeonip', title: '전입세대 열람 · 은골동 230-5', meta: '은골동 주민센터 · 2006.10.24 열람', body: [
+      d_res230: { cls: 'printed', src: 'jeonip', title: '전입세대 열람 · 은골동 230-5', meta: '은골동사무소 · 2006.10.24 열람', body: [
         { rows: [['1층', '정○○ (44)', '1999.06.14', '4명'], ['2층', '한○○ (71)', '1988.12.01', '2명 (배우자)'], ['반지하', '—', '—', '공실 (2006.10 ~)']], head: ['층', '세대주', '전입일', '세대원'] },
       ] },
       d_rec_call: { cls: 'printed', src: 'rec', find: ['k_bell'], need: ['k_addr217'], title: '유선전화 착발신 내역 · 은골동 217-3 2층', meta: '통신사 회신 2006.10.27 · 02-2**-3371 · 가입자 2층 세대주', body: [
@@ -453,7 +453,7 @@
         intro: ['…조각조각이에요. 물어보시면 생각나는 대로 말할게요. 틀릴 수도 있어요.'],
         ask: {
           k_oct14: ['알바 끝나고 버스 타고 [[은골시장]]에서 내렸어요. 비가 많이 왔어요. 누가 우산을 씌워 줬어요.', '왜 따라갔는지가… 제일 이상해요. 그 부분만 하얘요.'],
-          k_ironstairs: [{ p: '셌어요. 무서우면 숫자 세는 버릇이 있어서. 열셋. 여덟쯤에서 몸이 한 번 돌았어요. 쇠라서 발 디딜 때마다 텅, 텅.', f: 'f_mem_steps' }, '형사님이 토요일 밤에, 그날이랑 같은 시각에 같이 걸어 보자고 하셨어요. [[현장 동행]]이래요. 걸으면 몸이 기억할지도 모른다고.'],
+          k_ironstairs: [{ p: '셌어요. 왜 셌는지는 몰라요. 세고 있으면 뒤에서 오는 발소리가 안 들렸어요. 열셋. 여덟쯤에서 몸이 한 번 돌았어요. 쇠라서 발 디딜 때마다 텅, 텅.', f: 'f_mem_steps' }, '형사님이 토요일 밤에, 그날이랑 같은 시각에 같이 걸어 보자고 하셨어요. [[현장 동행]]이래요. 걸으면 몸이 기억할지도 모른다고.'],
           k_styro: [{ p: '계단 꺾이는 데 하얀 상자들이 있었어요. 흙이랑 파 냄새. 발에 걸릴 뻔했어요.', f: 'f_mem_plants' }],
           k_sticker: [{ p: '문에, 제 눈높이쯤. 노랗고 동그란 거. 웃는 얼굴이었던 것 같아요. 그 사람이 열쇠를 찾는 동안 그것만 보고 있었어요.', f: 'f_mem_sticker' }],
           k_glue: ['풀 냄새요. 도배할 때 나는. 벽에 나무 막대 같은 게 잔뜩 기대어 있었어요. 길고 짧은 게 섞여서.'],
@@ -548,7 +548,7 @@
         '밤 9시 54분, 검은 우산이 골목 입구에서 소라를 기다렸다. 열세 칸짜리 철계단, 여덟 번째 칸의 꺾임, 계단참의 스티로폼 상자, 문에 붙은 노란 웃음 스티커. 10시 17분, 시골의 어머니가 건 전화가 울렸고, 소라는 그 1분 12초 동안 계단을 내려왔다.',
         '이틀 뒤 2층은 옷장과 카펫, 전화기와 스티로폼 상자 여섯 개를 내다 버렸다. 스티커는 떼어졌지만 노란 종이 조각이 문에 남았다. 소라가 센 숫자는 틀리지 않았다.',
       ],
-      next: '서랍에 남은 파일은 이제 하나. 표지에는 항구 도시의 이름이 적혀 있다. → CASE 10',
+      next: '다음 칸 파일의 표지에는 항구 도시의 이름이 적혀 있다. → CASE 10',
     },
     artStyle: 'Photo taken in 2006 with a cheap compact digital camera: 3-megapixel, visible sensor noise, flat on-camera flash at night with dark falloff behind the subject, slightly blown highlights, cool white balance, mild JPEG blockiness, casual amateur framing like a Korean mini-homepage photo album or a police canvass snapshot. Seoul low-rise residential alleys of the late 1980s–90s: red-brick multi-family houses with external iron staircases. People only from behind, blurred or out of frame; no faces, no readable text, no logos, nothing graphic.',
     art: {
@@ -581,7 +581,7 @@
         prompt: 'Police canvass snapshot at night, 2006: a multi-family house with a poured concrete external staircase that turns once, three potted red geraniums on the landing, a door at the top with a small yellow square newspaper-subscription sticker. Harsh flash.' },
       house226: { use: '일제 탐문 카드 사진 — 226-2', ratio: '4:3', svg: house({ steps: 14, turn: 9, iron: true, bg: '#1b2029' }),
         prompt: 'Police canvass snapshot at night, 2006: a multi-family house on an uphill alley with a long external iron staircase turning once, many potted plants crowded in the small front yard below, a metal door with keypad lock. Harsh flash.' },
-      ph217: { svg: ph217, use: '정밀 관찰 사진', ratio: '4:3', prompt: 'Photograph taken from a narrow alley in Seoul in 2006, looking straight at the side wall of a two-storey red-brick multi-family house on a damp night. Fixed flat against the brick wall is a Z-shaped switchback exterior staircase of rusty steel with open treads: every tread is a separate steel plate with a dark gap above and below it, so the treads can be counted one by one. LOWER FLIGHT: exactly EIGHT treads, starting at the ground at the lower RIGHT and climbing diagonally up to the LEFT, to a narrow steel landing at mid-height in the centre of the wall. At the landing the staircase doubles back. UPPER FLIGHT: exactly FIVE treads climbing diagonally up to the RIGHT, the opposite direction to the lower flight, ending at a small top platform at the upper right. Thirteen treads in all. A wooden front door on the second floor stands immediately to the right of the last tread of the upper flight, with a bare bulb above it; the door has a single keyhole and no digital lock, and at eye height a round faded patch where a sticker was peeled off. On the steel floor of the landing six square soil marks in a neat row, left by pots that were taken away, with white styrofoam crumbs along the edge. A black telephone wire comes down from a utility pole at the far left and enters the wall beside a second-floor window at the upper left. At the foot of the wall at the lower left, dumped soil with dried scallion roots and pepper stems, half washed away by rain. A bicycle leans against the wall under the landing.', must: '철계단이 Z자로 꺾인다: 아래 단 여덟 칸 (오른쪽 아래 → 왼쪽 위) → 가운데 계단참 → 위 단 다섯 칸 (반대로 오른쪽 위) · 모두 열세 칸, 칸이 하나씩 셀 수 있게 · 계단참 바닥에 네모난 흙 자국 여섯 · 오른쪽 위 2층 나무문, 위 단 끝 바로 오른쪽 (도어락 없음, 스티커 뗀 둥근 자국) · 왼쪽 위 전화선 · 왼쪽 아래 담 밑 흙', avoid: '계단이 한 방향으로만 오르면 다시 뽑는다. 칸 수가 8 + 5 가 아니면 다시 뽑는다.', swap: 'svg', raster: true },
+      ph217: { svg: ph217, use: '정밀 관찰 사진', ratio: '4:3', prompt: 'Photograph taken from a narrow alley in Seoul in 2006, looking straight at the side wall of a two-storey red-brick multi-family house on a damp night. Fixed flat against the brick wall is a Z-shaped switchback exterior staircase of rusty steel with open treads: every tread is a separate steel plate with a dark gap above and below it, so the treads can be counted one by one. LOWER FLIGHT: one plain concrete bottom step, then exactly SEVEN steel treads (eight steps in all), starting at the ground at the lower RIGHT and climbing diagonally up to the LEFT, to a narrow steel landing at mid-height in the centre of the wall. At the landing the staircase doubles back. UPPER FLIGHT: exactly FIVE treads climbing diagonally up to the RIGHT, the opposite direction to the lower flight, ending at a small top platform at the upper right. Thirteen treads in all. A wooden front door on the second floor stands immediately to the right of the last tread of the upper flight, with a bare bulb above it; the door has a single keyhole and no digital lock, and at eye height a round faded patch where a sticker was peeled off. On the steel floor of the landing six square soil marks in a neat row, left by pots that were taken away, with white styrofoam crumbs along the edge. A black telephone wire comes down from a utility pole at the far left and enters the wall beside a second-floor window at the upper left. At the foot of the wall at the lower left, dumped soil with dried scallion roots and pepper stems, half washed away by rain. A bicycle leans against the wall under the landing.', must: '철계단이 Z자로 꺾인다: 아래 단 여덟 칸 (오른쪽 아래 → 왼쪽 위) → 가운데 계단참 → 위 단 다섯 칸 (반대로 오른쪽 위) · 모두 열세 칸, 칸이 하나씩 셀 수 있게 · 계단참 바닥에 네모난 흙 자국 여섯 · 오른쪽 위 2층 나무문, 위 단 끝 바로 오른쪽 (도어락 없음, 스티커 뗀 둥근 자국) · 왼쪽 위 전화선 · 왼쪽 아래 담 밑 흙', avoid: '계단이 한 방향으로만 오르면 다시 뽑는다. 칸 수가 8 + 5 가 아니면 다시 뽑는다.', swap: 'svg', raster: true },
       ph219: { svg: ph219, use: '정밀 관찰 사진', ratio: '4:3', prompt: 'Photograph taken from a small front yard in Seoul in 2006 of a two-storey red-brick multi-family house (1990) at night. An L-shaped exterior staircase of solid poured CONCRETE steps, not steel treads, with only a thin steel handrail. LOWER FLIGHT: exactly SEVEN concrete steps facing the camera, climbing straight up toward the house in the centre of the picture, to a square concrete landing against the wall. On the landing three geranium pots with red flowers. At the landing the stairs turn LEFT. UPPER FLIGHT: exactly SIX concrete steps seen from the side (only six, fewer than the lower flight, each step clearly separate), climbing along the wall toward the upper left, to a small top platform in front of a steel door on the second floor at the upper left. Thirteen steps in all. The steel door has a digital keypad lock and a small plain yellow square sticker with nothing on it. A window at the upper right, a first-floor door at the lower right. No second small staircase anywhere.', must: '콘크리트 계단이 L자로 꺾인다: 아래 일곱 칸 (정면, 가운데) → 계단참 → 왼쪽으로 꺾여 여섯 칸 (옆모습) · 계단참에 제라늄 화분 셋 · 왼쪽 위 2층 철문 (번호 도어락, 노란 네모 스티커) · 오른쪽 위 창, 오른쪽 아래 1층 문', avoid: '계단이 곧게 올라 문에 닿거나, 따로 떨어진 작은 계단이 또 생기면 다시 뽑는다. 위 단이 여섯 칸이 아니면 다시 뽑는다 (2차는 여덟 칸이었다). 위 단 디딤판이 옆에서 하나씩 셀 수 있게.', swap: 'svg', raster: true },
       house230: { use: '일제 탐문 카드 사진 — 230-5', ratio: '4:3', svg: house({ steps: 16, turn: 6, iron: true, bg: '#1b2029' }),
         prompt: 'Police canvass snapshot at night, 2006: an older brick house with a tall external iron staircase that switches back twice up to a rooftop, styrofoam vegetable boxes visible at the roof edge, a plain door with a key lock. Harsh flash.' },

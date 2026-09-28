@@ -81,7 +81,7 @@ const say = s => strip(s).replace(/\([^()]*\)/g, ' ').replace(/[「」『』"]/g
 const bl = b => (b == null ? [] : Array.isArray(b) ? b : [b]).map(x => (typeof x === 'string' ? x : x && x.p != null ? x.p : x && x.say != null ? x.say : null));
 const DASH = /^\s*(\([^()]*\)\s*)?—/;
 // 목소리로 읽을 때만 바꿔 읽는 것 (화면 글자는 그대로): 삐삐 번호·번호판·단위
-const SPEAK = [[/300m/g, '삼백 미터'], [/2330/g, '이삼삼공'], [/HL-24/g, '에이치엘 이십사'], [/0시 31분/g, '영 시 삼십일 분']];
+const SPEAK = [[/300m/g, '삼백 미터'], [/2330/g, '이삼삼공'], [/H-24/g, '에이치 이십사'], [/0시 31분/g, '영 시 삼십일 분']];
 const speak = t => SPEAK.reduce((s, [re, w]) => s.replace(re, w), t);
 // 번복 대사에서 목소리를 입힐 부분: 첫 말풍선, 너무 짧으면 둘째까지. 170자를 넘으면 문장 끝에서 자른다.
 function pickText(blocks) {

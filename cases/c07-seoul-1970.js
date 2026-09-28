@@ -75,7 +75,7 @@
       k_gu: { label: '구태섭', type: 'person', alias: ['구 형사', '구 경사', '담당 형사'] },
       k_geumseong: { label: '금성 사장', type: 'person', alias: ['금성상사'] },
       k_doraji: { label: '도라지 선생', type: 'person', alias: ['도라지'] },
-      k_yang: { label: '양씨 댁', type: 'person', alias: ['주인집', '버들개 38번', '38번', '우물가 양씨'] },
+      k_yang: { label: '양씨 댁', type: 'person', alias: ['주인집', '버들개 38번', '38번', '느티나무집 양씨', '느티나무집'] },
       k_gwak: { label: '곽춘길', type: 'person', alias: ['곽 방범', '방범대원', '곽씨'] },
       k_buddle: { label: '버들개 강변도로', type: 'place', alias: ['강변도로', '버들개', '강변'] },
       k_songwol: { label: '송월각', type: 'place', alias: ['요정', '송월각 요정'] },
@@ -279,8 +279,8 @@
         '경찰은 [[통금]]을 앞둔 시각이라 목격자가 없어 애를 먹고 있다. 서하경찰서는 수사본부를 차리고 강변 일대에서 불심검문을 벌이고 있다.',
       ] },
       d_n2: { src: 'news', find: ['k_rumor', 'k_songwol'], kicker: '1971년 10월 26일 (화) 조간 · 3면', title: '"장부 속 손님" 누구냐', meta: '피살 요정 경리 둘러싸고 소문 무성', body: [
-        { img: 'songwol_gate', cap: '서울 도심의 요정 송월각. 대문은 사흘째 닫혀 있다.' },
-        '버들개 강변도로 요정 여경리 피살 사건은 사흘째 뚜렷한 단서 없이 갖가지 소문만 번지고 있다.',
+        { img: 'songwol_gate', cap: '서울 도심의 요정 송월각. 대문은 나흘째 닫혀 있다.' },
+        '버들개 강변도로 요정 여경리 피살 사건은 나흘째 뚜렷한 단서 없이 갖가지 소문만 번지고 있다.',
         '숨진 배양은 도심의 이름난 요정 송월각에서 손님 장부를 맡아 왔으며, 이 요정에는 정계·관계·재계의 이른바 [[고위층|k_rumor]] 인사들이 드나들었다는 말이 파다하다. 배양이 타던 승용차가 한 기업체 명의로 되어 있다는 사실도 소문을 부채질하고 있다.',
         '경찰은 배양과 한때 가까웠던 통기타 가수 [[최모씨|k_dongjin]](29)가 지난 15일 송월각 앞에서 배양과 크게 다퉜다는 진술을 확보하고 행적을 캐고 있다.',
         '한 경찰 간부는 "고위층 운운은 근거 없는 뜬소문"이라며 "치정이나 금전 관계에 무게를 두고 있다"고 말했다.',
@@ -311,7 +311,7 @@
         { list: [
           '[[은하수 음악살롱]] — 10월 저녁 무대 · 통기타 [[최동진]] (밤 10시 ~ 11시 반, 매일) · 입장 150원',
           '셋방 있음 — 버들개동 정미소 뒤, 문간방 월 1,500원 · 전화 버들개 7번',
-          '구함 — 자가용 운전사 (경력 3년 이상) · 대양흥업 차량부',
+          '구함 — 자가용 운전사 (경력 3년 이상) · 금성상사 서울 출장소',
           '흑백 텔레비전 19인치 월부 · 12개월',
           '분실 — 검정 가죽 수첩, 찾아 주시면 후사함',
         ], f: { 0: 'f_dongjin_show' } },
@@ -320,7 +320,7 @@
       d_nverdict: { src: 'news', find: ['k_verdict'], cls: 'vertical', kicker: '1972년 3월 18일 (토) 조간 · 7면', title: '요정 경리 피살 운전사 징역 12년', meta: '방청석서 "진짜는 따로 있다" 외침', body: [
         '서하지법 형사부는 17일 지난해 10월 버들개 강변도로에서 요정 경리를 권총으로 쏘아 숨지게 한 혐의로 구속 기소된 운전사 강만식(35) 피고인에게 징역 12년을 선고했다.',
         '재판부는 "흉기는 찾지 못했으나 피고인의 진술이 일관된다"고 밝혔다.',
-        '이날 방청석 뒤편에서 한 중년 여인이 "진짜는 따로 있다"고 외치다 법정 밖으로 끌려 나갔다.',
+        '이날 방청석 뒤편에서 한 젊은 부인이 "진짜는 따로 있다"고 외치다 법정 밖으로 끌려 나갔다.',
         '강 피고인은 선고 내내 고개를 들지 않았다.',
       ] },
       d_nreporter: { cls: 'f-pen ink-navy', src: 'news', find: ['k_reporter', 'k_second'], skin: 'letter', paper: '새한일보 사회부 · 원고지', title: '[게재 보류] 송월각 장부 사본의 행방', meta: '1971년 10월 25일 작성 · 필자 사회부 문경식', body: [
@@ -394,7 +394,7 @@
           ['26일 09:40', '버들개 38번 (양씨 댁)', '시내 대양흥업 총무부', '2분', '여자'],
           ['27일 19:20', '시내 대양흥업 총무부', '버들개 38번 (양씨 댁)', '4분', '문간방 부인 불러 줌'],
         ], head: ['일시', '발신', '수신', '통화', '비고'], f: { 2: 'f_booth_log', 4: 'f_landlord_call', 6: 'f_landlord_call' } },
-        { note: '※ 38번 가입자: 버들개동 우물가 양씨 댁. 세든 사람들에게도 전화를 불러 주는 집 (분국 교환원 기재).' },
+        { note: '※ 38번 가입자: 버들개동 느티나무집 양씨 댁. 세든 사람들에게도 전화를 불러 주는 집 (분국 교환원 기재).' },
       ] },
       d_ticket: { src: 'phone', need: ['k_songhak', '#recon'], title: '시외통화 교환 전표 (서울 착신)', meta: '서하전화국 시외 교환대 · 1971년 10월 22일 밤 · 지명 통화분', body: [
         '지명 통화는 교환원이 받는 쪽에 지명한 사람을 불러 본인이 나온 것을 확인한 뒤에 잇는다.',
@@ -491,7 +491,7 @@
         intro: ['(아이들을 방으로 들여보낸다) 그이는 파리 한 마리 못 잡는 사람이에요. 그런데 본인이 했다니… 제가 무슨 말을 하겠어요.'],
         ask: {
           k_mansik: ['그날 밤 나가면서 "오늘은 좀 늦는다" 했어요. 평소엔 그런 말 안 하는 사람인데.'],
-          k_yang: ['예전에 살던 집 주인이에요. 우물가 양씨 할머니. 저희는 그 집 문간방에 살았어요. 전화도 그 집 걸 빌려 썼고요.'],
+          k_yang: ['예전에 살던 집 주인이에요. 느티나무집 양씨 할머니. 저희는 그 집 문간방에 살았어요. 전화도 그 집 걸 빌려 썼고요.'],
           k_seok: { need: ['!f_landlord_call'], a: [{ p: '…사건 이틀 뒤에 주인집 할머니가 전화 왔다고 부르더라고요. 대양 석 부장이라는 분이었어요. "애 아버지 일은 걱정 말라, 식구는 회사가 책임진다"고요.', f: 'f_wife_envelope' }, { p: '그다음 주에 노 기사라는 사람이 누런 봉투를 가져왔어요. 이 [[전셋집]]도 그쪽에서 구해 줬어요. 그이는 면회 때 "받아 두라"고만 했어요.', f: 'f_wife_envelope' }], else: ['회사 높은 분이요. 저는 뵌 적 없어요.'] },
           k_okhee: ['아가씨가 좋은 분이라고 했어요. 명절에 애들 양말도 사 주셨어요.'],
           k_verdict: ['재판 날 소리 지른 거 저예요. "진짜는 따로 있다"고요. 끌려 나갔지요.'],
@@ -544,7 +544,7 @@
         prompt: 'Black-and-white close evidence photo inside the back seat footwell of a 1960s sedan: worn rubber floor mat, a single filtered cigarette butt lying on it, a hand-drawn white arrow on the print pointing at the butt, harsh direct flash, deep shadows under the seat, grainy.' },
       handbag: { use: '유류품 사진 — 검정 비닐 핸드백과 내용물', ratio: '4:3',
         svg: `<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#d9d4c5"/><path d="M30 60 h70 l8 50 h-86z" fill="${D}"/><path d="M46 60 q19 -30 38 0" fill="none" stroke="${D}" stroke-width="4"/><circle cx="136" cy="70" r="16" fill="#a9a597" stroke="#555" stroke-width="2"/><rect x="118" y="98" width="30" height="12" fill="#8a7f68"/><rect x="156" y="96" width="8" height="24" rx="3" fill="#6e2a2a"/><rect x="170" y="60" width="18" height="10" fill="#e9e3d0"/><rect x="170" y="74" width="18" height="10" fill="#e9e3d0"/></svg>`,
-        prompt: 'Black-and-white evidence table photo, top-down: a small black vinyl handbag with a short strap, next to it a round compact mirror, a lipstick, a folded handkerchief, a thin cloth wallet, a few paper bus tokens and two old keys on a string, laid out in a row on grey paper with a small blank evidence card, flat flash, grain.' },
+        prompt: 'Black-and-white evidence table photo, top-down: a small black vinyl handbag with a short strap, next to it a round compact mirror, a lipstick, a folded handkerchief, a thin cloth wallet, a folded paper packet of headache powder, a small pocket notebook with its last page torn out, and two old keys on a string, laid out in a row on grey paper with a small blank evidence card, flat flash, grain.' },
       news_car: { use: '신문 1보 사진 — 현장에 남은 승용차 (망점 인쇄)', ratio: '4:3',
         svg: `<svg viewBox="0 0 200 150"><defs><pattern id="h7" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#3a3834"/></pattern></defs><rect width="200" height="150" fill="#e4dcc6"/><rect width="200" height="150" fill="url(#h7)" opacity=".55"/><path d="M36 104 h120 l-10 -24 h-80 z" fill="#1d1c19"/><rect x="28" y="100" width="136" height="16" rx="5" fill="#1d1c19"/><circle cx="56" cy="120" r="8" fill="#111"/><circle cx="136" cy="120" r="8" fill="#111"/></svg>`,
         prompt: 'A 1971 Korean newspaper photograph printed with a coarse halftone dot screen on yellowed newsprint: a dark sedan standing alone on a dark unpaved road at night lit by a single flash, a few blurred onlookers in hats at the edge, heavy contrast, ink spread.' },
