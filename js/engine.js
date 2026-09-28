@@ -1406,12 +1406,13 @@
       sfx('stamp');
       return;
     }
-    S.mwhoTries = (S.mwhoTries || 0) + 1;
+    const again = (S.mwhoTried || []).some(x => norm(x) === v);
+    if (!again) S.mwhoTries = (S.mwhoTries || 0) + 1; // 이미 그어 둔 이름을 또 적은 것은 세지 않는다
     S.mwhoTried = [...(S.mwhoTried || []).filter(x => norm(x) !== v), raw].slice(-6); save();
     f.outerHTML = mWho();
     const nf = $('[data-mwho]');
     if (nf) { nf.classList.add('bounced'); const i = nf.querySelector('input'); if (i) i.focus(); }
-    sfx('miss'); toast(W.miss);
+    sfx('miss'); toast(again ? '이미 적었다가 그어 둔 이름이다' : W.miss);
   }
 
   function cabinet(showRoster) {
