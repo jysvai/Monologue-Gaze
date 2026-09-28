@@ -350,6 +350,8 @@ img{max-width:100%}
 .notes li:hover .del,.notes .del:focus-visible{opacity:1}
 .n-rep{display:inline-block;min-width:1.35em;margin-left:6px;padding:1px 5px 0;border:1.5px solid rgba(176,52,42,.75);border-radius:50%;color:var(--red);font:19px/1.1 var(--f-hand);white-space:nowrap;text-align:center;vertical-align:1px;transform:rotate(-8deg)} /* 보고서에 붙인 메모: 빨간 연필로 친 주장 번호 동그라미 */
 .notes li.fresh,.kchip.fresh{animation:write .9s ease-out both}
+.notes li.again{animation:noteAgain 1.4s ease-out} /* 이미 적은 줄을 다시 눌렀을 때: 형광펜이 한 번 지나간다 */
+@keyframes noteAgain{0%,35%{background:rgba(255,212,84,.5)}100%{background:transparent}}
 .notes li.gone{pointer-events:none;text-decoration:line-through 2px var(--pencil);animation:strikeOut .42s ease-in both}
 @keyframes strikeOut{0%{text-decoration-color:transparent}40%{text-decoration-color:var(--pencil);opacity:1}100%{text-decoration-color:var(--pencil);opacity:0}}
 @keyframes write{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
@@ -379,7 +381,7 @@ img{max-width:100%}
 .toast.on{opacity:1;transform:translate(-50%,0) rotate(-1deg)}
 
 @media (prefers-reduced-motion:reduce){
-  .notes li.fresh,.kchip.fresh,.stamp.fresh{animation:none}
+  .notes li.fresh,.kchip.fresh,.stamp.fresh,.notes li.again{animation:none}
   .toast,.folder{transition:none}
 }
 

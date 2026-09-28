@@ -1595,7 +1595,13 @@
   function pin(ref) {
     const p = PIN[ref];
     if (!p) return;
-    if (ST.notes.some(n => n.ref === ref)) { toast('이미 적어 둔 메모다'); return; }
+    const had = ST.notes.findIndex(n => n.ref === ref);
+    if (had >= 0) { // 이미 적은 줄: 수첩의 그 메모를 짚어 준다 (접힌 묶음이면 펼쳐서)
+      toast(`이미 적어 둔 메모다 — ${had + 1}번`);
+      const li = $(`.notes li[data-nid="${ST.notes[had].id}"]`);
+      if (li) { const d = li.closest('details'); if (d && !d.open) d.open = true; li.classList.remove('again'); void li.offsetWidth; li.classList.add('again'); if (!narrow()) li.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); }
+      return;
+    }
     const before = census();
     ST.notes.push({ id: ++ST.nid, ref, t: p.t, f: p.f, src: p.src });
     save();
