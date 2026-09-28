@@ -2018,6 +2018,16 @@
       } finally { SYNC = false; }
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && TALK && !$('.zoom')) TALK.finish(); }); // 대화 건너뛰기 (키보드)
+    // 보고서는 「올리기」 단추로만 올린다: 범인·메모를 고르다가, 메모를 찾다가 Enter 를 눌러 모르고 올라가지 않게 (양식의 Enter 제출을 막는다).
+    // 메모 찾기 칸의 Enter 는 걸린 메모가 하나뿐이면 그것을 고른다
+    document.addEventListener('keydown', e => {
+      const t = e.target;
+      if (e.key !== 'Enter' || e.isComposing || !C || !t.matches || !t.matches('#rep input')) return;
+      e.preventDefault();
+      if (!t.matches('[data-rep-filter]')) return;
+      const hits = [...t.parentNode.querySelectorAll('.rep-opt:not([hidden]) input')].filter(i => !i.closest('.rep-grp[hidden]'));
+      if (hits.length === 1 && !hits[0].checked) { hits[0].checked = true; hits[0].dispatchEvent(new Event('change', { bubbles: true })); }
+    });
     // 탭 줄: ← → 로 옆 탭, Home·End 로 처음·끝 탭 (Tab 키는 고른 탭 하나에만 들렀다 본문으로 넘어간다)
     document.addEventListener('keydown', e => {
       const t = e.target;
