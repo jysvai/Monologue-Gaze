@@ -68,9 +68,15 @@
 
   // 주인공의 결정적인 한마디: 목소리(켜져 있으면) + 화면 아래 속말 자막(늘)
   let capN = 0, capT = null;
-  function caption(t, v) {
+  // 자막 칸은 처음부터 깔아 둔다 (화면 읽기 프로그램이 첫 한마디도 읽어 주게)
+  const capBox = () => {
     let el = document.getElementById('monoCap');
     if (!el) { el = document.createElement('div'); el.id = 'monoCap'; el.className = 'mono-cap'; el.setAttribute('aria-live', 'polite'); document.body.appendChild(el); }
+    return el;
+  };
+  if (document.body) capBox();
+  function caption(t, v) {
+    const el = capBox();
     const my = ++capN;
     clearTimeout(capT);
     el.textContent = t; el.classList.remove('on'); void el.offsetWidth; el.classList.add('on');

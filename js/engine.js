@@ -715,8 +715,7 @@
   }
   // 새 소식: 화면 오른쪽 위에 휴대폰 알림처럼 (누르면 그곳으로)
   function notify(news) {
-    let box = $('#lvNotes');
-    if (!box) { box = document.createElement('div'); box.id = 'lvNotes'; box.className = 'lv-notes'; box.setAttribute('role', 'status'); box.setAttribute('aria-live', 'polite'); document.body.appendChild(box); }
+    const box = statusBox('lvNotes', 'lv-notes');
     const at = ltime(ST.live.t);
     news.slice(-3).forEach((n, i) => setTimeout(() => {
       if (!C || !box.isConnected) return;
@@ -736,7 +735,7 @@
       }
     }, i * 450));
   }
-  function clearNotes() { const b = $('#lvNotes'); if (b && b.remove) b.remove(); }
+  function clearNotes() { const b = $('#lvNotes'); if (b) b.innerHTML = ''; }
   function nextDue() {
     if (!liveOn()) return null;
     const L = ST.live, c = [];
@@ -1532,9 +1531,14 @@
 
   /* ───────── actions ───────── */
   let toastTimer;
+  // 알림 쪽지·휴대폰 알림 칸은 처음부터 깔아 둔다 (화면 읽기 프로그램은 미리 있던 칸에 새로 든 글만 읽어 주므로, 첫 알림도 들리게)
+  function statusBox(id, cls) {
+    let b = $('#' + id);
+    if (!b) { b = document.createElement('div'); b.id = id; b.className = cls; b.setAttribute('role', 'status'); document.body.appendChild(b); }
+    return b;
+  }
   function toast(msg, ms) {
-    let t = $('#toast');
-    if (!t) { t = document.createElement('div'); t.id = 'toast'; t.className = 'toast'; t.setAttribute('role', 'status'); document.body.appendChild(t); }
+    const t = statusBox('toast', 'toast');
     t.textContent = msg;
     t.classList.add('on');
     clearTimeout(toastTimer);
@@ -2053,6 +2057,7 @@
     // CSS 변수 안의 상대 주소는 css/ 폴더 기준으로 풀리므로, 페이지 기준 절대 주소로 바꿔 넣는다.
     [['desk', '--desk-img'], ['paper', '--paper-img'], ['warn', '--warn-img']].forEach(([k, v]) => { const u = MG.images['_global/' + k]; if (u) { document.documentElement.style.setProperty(v, 'url("' + new URL(u, document.baseURI).href + '")'); document.documentElement.classList.add('has-' + k); } });
     app = document.getElementById('app');
+    statusBox('toast', 'toast'); statusBox('lvNotes', 'lv-notes');
     bind();
     // 명부에 둘 이상이면 누가 앉았는지부터 묻는다: 마지막 사람의 사건을 바로 열지 않는다
     if (roster().list.length > 1) cabinet(true);
