@@ -105,7 +105,7 @@ input[type="password"]{letter-spacing:.28em}
 .tab,.kchip,.folder,.snd,.btn-hand,.item,.pin,.del,.rep-tog,.nb-back,.back-list,.reset,.spot,.ph-cell,.art-lab,[data-ask],summary{-webkit-user-select:none;user-select:none}
 img{-webkit-user-drag:none;-webkit-touch-callout:none}
 /* 휴대폰: 단추를 빨리 두 번 눌러도(카드 ▲▼, 시간 보내기, 사진 칸) 화면이 확대되지 않게 — 두 손가락 확대는 그대로 */
-:is(button,a,summary,label,input,select,textarea,.kw,.spot,.ph-cell,[role="button"]){touch-action:manipulation}
+:is(button,a,summary,label,input,select,textarea,.kw,.spot,.ph,.ph-cell,.per-tr,[role="button"]){touch-action:manipulation} /* 사진(누르는 곳마다 살핀다)·대화(누르면 건너뛴다)도 */
 /* 칸 끝까지 굴려도 뒤의 책상까지 따라 굴러가지 않게 */
 /* 단, 굴릴 게 남은 칸에서만 (.oy — 손을 대는 순간 ui.js 가 잰다): 내용이 짧은 칸에 붙들리면 휴대폰에서 그 칸이나 수첩을 끌어도 페이지가 내려가지 않는다 */
 :is(.pane-list,.pane-read,.nb).oy{overscroll-behavior:contain}
@@ -252,6 +252,9 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
   .spot::after{inset:-9px}
   .chip::after,.tab::after{inset:-5px -2px}
   .tl-mv button::after{inset:-2px -8px}
+  .back-list,.rep-tog,.btn-hand{position:relative}
+  .back-list::after,.rep-tog::after,.btn-hand::after{content:"";position:absolute;inset:-8px -4px} /* 「목록으로」·보고서의 메모 고르기·손글씨 단추 */
+  .case-view[data-frame="papers"] .src-tabs{padding-top:6px;margin-top:-6px} /* 가로로 굴리는 탭 줄이 넓힌 자리를 잘라 먹지 않게 (틀의 위 여백을 빌린다) */
   .lv-wait,[data-ph-grid]{position:relative;z-index:1}
   .lv-wait::after,[data-ph-grid]::after{content:"";position:absolute;inset:-7px -4px} /* 실시간 사건의 「시간 보내기」, 사진의 「칸을 나눠 살피기」 */
 }

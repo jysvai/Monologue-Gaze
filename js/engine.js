@@ -203,7 +203,8 @@
   const srcOpen = s => !s.lock || ST.unl.includes(s.id);
   const personVisible = p => (!p.key || ST.keys.includes(p.key)) && ok(p.need);
   const curSrc = () => C.sources.find(s => s.id === ST.view.src);
-  const narrow = () => { const b = $('#stageBody'); return b ? b.clientWidth < 700 : false; };
+  const narrow = () => { const b = $('#stageBody'); if (!b || !window.getComputedStyle) return false; const g = getComputedStyle(b).gridTemplateColumns; return /\(/.test(g) ? b.clientWidth <= 700 : g.trim().split(/\s+/).length < 2; }; // 칸이 하나뿐인가: CSS 의 @container (≤700px) 가 그린 칸 수 그대로 (그려지기 전이면 너비로)
+  const beside = () => !window.matchMedia || matchMedia('(min-width:1100px)').matches; // 수첩이 수사 화면 옆에 있는가 (좁으면 밑으로 내려간다: base.css)
 
   function census() {
     let n = 0;
@@ -1227,7 +1228,7 @@
       </section>
       <section class="ruled nb-sec"><h3 class="hh">메모 <small>${notes.length}</small></h3>
         ${(C.tips || []).length ? `<ol class="notes">${C.tips.map(t => `<li class="tip">※ ${inline(t)}</li>`).join('')}</ol>` : ''}
-        ${noteGroups(notes).map(g => `<details class="ng" data-ng="${esc(g.src)}"${NGSHUT.has(C.id + '|' + g.src) ? '' : ' open'}><summary>${esc(g.src)} <small>${g.items.length}</small></summary><ol class="notes">${g.items.map(([n, i]) => `<li data-nid="${n.id}" style="--r:${(hash(n.ref) % 5 - 2) * 0.25}deg"><span class="n">${i + 1}.</span> ${esc(n.t)}${repMark(n)}<button type="button" class="del" data-del="${n.id}" aria-label="메모 ${i + 1} 지우기">×</button></li>`).join('')}</ol></details>`).join('')}
+        ${noteGroups(notes).map(g => `<details class="ng" data-ng="${esc(g.src)}"${NGSHUT.has(C.id + '|' + g.src) ? '' : ' open'}><summary><span class="ng-t">${esc(g.src)}</span> <small>${g.items.length}</small></summary><ol class="notes">${g.items.map(([n, i]) => `<li data-nid="${n.id}" style="--r:${(hash(n.ref) % 5 - 2) * 0.25}deg"><span class="n">${i + 1}.</span> ${esc(n.t)}${repMark(n)}<button type="button" class="del" data-del="${n.id}" aria-label="메모 ${i + 1} 지우기">×</button></li>`).join('')}</ol></details>`).join('')}
       </section>
       <section class="ruled nb-sec nb-rep"><h3 class="hh">${esc(FORM().title)}</h3>
         <p class="rep-sum">${esc(FORM().short)} <b>${ST.report.culprit && C.keywords[ST.report.culprit] ? esc(C.keywords[ST.report.culprit].label) : '—'}</b> · 증거 <b>${sol.claims.filter(cl => ST.report.claims[cl.id] && ST.notes.some(n => String(n.id) === String(ST.report.claims[cl.id]))).length}</b> / ${sol.claims.length}</p>
@@ -1694,7 +1695,7 @@
       if (quiet) return;
       toast(`이미 수첩에 있다: ${k.label}`);
       const kc = $(`.kchip[data-chip="${id}"]`); // 수첩의 그 단어에 형광펜 한 번
-      if (kc) { kc.classList.remove('again'); void kc.offsetWidth; kc.classList.add('again'); if (!narrow()) kc.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); }
+      if (kc) { kc.classList.remove('again'); void kc.offsetWidth; kc.classList.add('again'); if (beside()) kc.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); }
       return;
     }
     const before = census();
@@ -1704,7 +1705,7 @@
     $$('.kw').forEach(b => { if (b.dataset.kw === id) b.classList.add('on'); });
     renderTabs(); renderList(); renderNotebook();
     const kc = $(`.kchip[data-chip="${id}"]`); // 방금 적은 단어는 연필로 써 넣듯 (메모와 같게)
-    if (kc) { kc.classList.add('fresh'); if (!narrow()) kc.scrollIntoView({ block: 'nearest' }); }
+    if (kc) { kc.classList.add('fresh'); if (beside()) kc.scrollIntoView({ block: 'nearest' }); }
     const chips = $('#askChips');
     if (chips && ST.view.open && ST.view.open.t === 'person') chips.innerHTML = askChips(C.people[ST.view.open.id]);
     if (!quiet) toast(`수첩에 적었다: ${k.label}${gained > 0 ? ` · 새로 열린 것 ${gained}` : ''}`);
@@ -1717,7 +1718,7 @@
     if (had >= 0) { // 이미 적은 줄: 수첩의 그 메모를 짚어 준다 (접힌 묶음이면 펼쳐서)
       toast(`이미 적어 둔 메모다 — ${had + 1}번`);
       const li = $(`.notes li[data-nid="${ST.notes[had].id}"]`);
-      if (li) { const d = li.closest('details'); if (d && !d.open) d.open = true; li.classList.remove('again'); void li.offsetWidth; li.classList.add('again'); if (!narrow()) li.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); }
+      if (li) { const d = li.closest('details'); if (d && !d.open) d.open = true; li.classList.remove('again'); void li.offsetWidth; li.classList.add('again'); if (beside()) li.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); }
       return;
     }
     const before = census();
@@ -1727,7 +1728,7 @@
     $$('.pin').forEach(b => { if (b.dataset.pin === ref) { b.classList.add('on'); b.textContent = '✓'; b.setAttribute('aria-label', '수첩에 적음'); b.dataset.tip = '수첩에 적음'; } });
     renderNotebook();
     const li = $(`.notes li[data-nid="${ST.nid}"]`);
-    if (li) { const d = li.closest('details'); if (d && !d.open) { NGSHUT.delete(C.id + '|' + d.dataset.ng); d.open = true; } if (!(MG.writeIn && MG.writeIn(li, { duration: 900 }))) li.classList.add('fresh'); if (!narrow()) li.scrollIntoView({ block: 'nearest' }); }
+    if (li) { const d = li.closest('details'); if (d && !d.open) { NGSHUT.delete(C.id + '|' + d.dataset.ng); d.open = true; } if (!(MG.writeIn && MG.writeIn(li, { duration: 900 }))) li.classList.add('fresh'); if (beside()) li.scrollIntoView({ block: 'nearest' }); }
     const gained = census() - before;
     if (gained > 0) { renderTabs(); renderList(); }
     const chips = $('#askChips');
@@ -1788,7 +1789,7 @@
       ws.forEach(b => b.classList.add('hitw'));
       if (ws[0] && !READPOS.get(posKey(o))) { const r = ws[0].getBoundingClientRect(), pb = pr.getBoundingClientRect(); if (r.bottom > pb.bottom - 24) pr.scrollTop += r.top - pb.top - pb.height / 3; }
     }
-    if (narrow()) $('.stage').scrollIntoView({ block: 'start' });
+    if (!beside()) $('.stage').scrollIntoView({ block: 'start' }); // 수첩이 밑에 있으면 (수첩에서 열었을 수 있으니) 화면으로 올라간다
     // 처음 만나는 사람은 첫마디를 재생한다
     const p = o.t === 'person' && C.people[o.id];
     if (p && !tmp().met.has(p.id)) { tmp().met.add(p.id); if (!(ST.asked[p.id] || []).length) playTalk($('.per-tr .qa-first'), { p, lead: 650 }); }
@@ -1805,7 +1806,8 @@
     if (!s || s.type !== 'archive') s = C.sources.find(x => x.type === 'archive' && srcVisible(x));
     if (!s) { toast('이 사건에는 검색할 자료실이 없다'); return; }
     setQ(s.id, C.keywords[kid].label);
-    if (narrow()) { ST.view.open = null; renderRead(); $('.stage').scrollIntoView({ block: 'start' }); }
+    if (narrow()) { ST.view.open = null; renderRead(); }
+    if (!beside()) $('.stage').scrollIntoView({ block: 'start' });
   }
   function ask(k) {
     const o = ST.view.open;
@@ -1828,7 +1830,7 @@
   }
   function chip(k) {
     const o = ST.view.open;
-    if (o && o.t === 'person') { ask(k); if (narrow()) $('.stage').scrollIntoView({ block: 'start' }); return; }
+    if (o && o.t === 'person') { ask(k); if (!beside()) $('.stage').scrollIntoView({ block: 'start' }); return; }
     search(k);
   }
   function tryLock(id, v) {
