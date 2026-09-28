@@ -107,7 +107,8 @@
   }
   let PID = roster().cur; // 이 탭의 수사관. 다른 탭에서 바꿔도 이 탭은 제 서랍에만 쓴다
   let S = load(PID);
-  const save = () => { try { localStorage.setItem(slot(PID), JSON.stringify(S)); } catch (e) { /* ignore */ } };
+  let SYNC = false; // 다른 탭의 기록을 받아 다시 그리는 동안은 쓰지 않는다 (두 탭이 서로 덮어쓰며 핑퐁하지 않게)
+  const save = () => { if (SYNC) return; try { localStorage.setItem(slot(PID), JSON.stringify(S)); } catch (e) { /* ignore */ } };
 
   function cs(c) {
     const st = (S.cases[c.id] = S.cases[c.id] || {});
@@ -1947,6 +1948,18 @@
       else if (f.id === 'rep') { e.preventDefault(); submitReport(); }
     });
     window.addEventListener('popstate', onBack);
+    // 같은 서랍을 다른 탭(창)에서도 열어 두었을 때: 그쪽에서 기록하면 이 탭도 그 기록으로 바꿔 든다.
+    // 그러지 않으면 묵은 이 탭이 다음에 저장하면서 저쪽에서 푼 것·적은 것을 지워 버린다.
+    window.addEventListener('storage', e => {
+      if (e.key !== slot(PID) || e.newValue == null) return;
+      const cur = C && C.id, ro = !!$('.roster');
+      S = load(PID);
+      SYNC = true;
+      try {
+        if (cur) { S.current = cur; ST = cs(C); stopTalk(); renderCase(); }
+        else if ($('.cabinet')) cabinet(ro);
+      } finally { SYNC = false; }
+    });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && TALK && !$('.zoom')) TALK.finish(); }); // 대화 건너뛰기 (키보드)
     // 탭 줄: ← → 로 옆 탭, Home·End 로 처음·끝 탭 (Tab 키는 고른 탭 하나에만 들렀다 본문으로 넘어간다)
     document.addEventListener('keydown', e => {
