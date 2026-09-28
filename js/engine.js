@@ -1297,7 +1297,7 @@
     S.seen.done.push(...newDone); S.seen.m.push(...newM); save();
     const folder = c => {
       const st = S.cases[c.id];
-      const status = st && st.solved ? 'done' : st && (st.notes.length || st.seen.length) ? 'going' : 'new';
+      const status = st && st.solved ? 'done' : st && ((st.notes || []).length || (st.seen || []).length) ? 'going' : 'new'; // 예전 판의 저장에 칸이 빠져 있어도 기록실은 열린다
       const kind = c.kind === 'tutorial' ? '튜토리얼' : c.live ? '현행' : c.region === 'overseas' ? '해외' : '국내';
       // 현행 사건 폴더에는 사건 속 시계가 멈춘 시각을 연필로 적어 둔다 (다시 열면 거기서부터 흐른다)
       const stop = c.live && st && st.live ? (([y, mo, d, h, mi]) => { const t = new Date(y, mo - 1, d, h, mi + (st.live.t || 0)); return `${t.getMonth() + 1}.${t.getDate()} ${pad(t.getHours())}:${pad(t.getMinutes())}`; })(c.live.start || [2024, 1, 1, 9, 0]) : '';
