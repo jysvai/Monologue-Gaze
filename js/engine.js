@@ -1505,6 +1505,8 @@
     if (gained > 0) cue('clue'); else sfx('pen');
     $$('.kw').forEach(b => { if (b.dataset.kw === id) b.classList.add('on'); });
     renderTabs(); renderList(); renderNotebook();
+    const kc = $(`.kchip[data-chip="${id}"]`); // 방금 적은 단어는 연필로 써 넣듯 (메모와 같게)
+    if (kc) { kc.classList.add('fresh'); if (!narrow()) kc.scrollIntoView({ block: 'nearest' }); }
     const chips = $('#askChips');
     if (chips && ST.view.open && ST.view.open.t === 'person') chips.innerHTML = askChips(C.people[ST.view.open.id]);
     if (!quiet) toast(`수첩에 적었다: ${k.label}${gained > 0 ? ` · 새로 열린 것 ${gained}` : ''}`);
