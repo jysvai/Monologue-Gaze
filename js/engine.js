@@ -187,7 +187,10 @@
   let PIN = {};      // ref -> { t, f, src }
   let NOPIN = false;
   let VERDICT = '';
-  const LOCKFAIL = {};
+  // 이번 창에서만 기억하는 것(잠금에 틀린 횟수 · 재구성의 제자리 표시 · 고른 소명 메모 · 이미 만난 사람)은 사건마다 따로 둔다.
+  // 다른 사건에 같은 이름의 칸(talk · tl · rq_cctv · p_park …)이 있어도 섞이지 않게. 「이 사건 처음부터」면 함께 비운다
+  const TEMP = {};
+  const tmp = () => (TEMP[C.id] ||= { fail: {}, tl: {}, rq: {}, met: new Set() });
 
   const okOne = n => (n[0] === '~' ? !okOne(n.slice(1)) : n[0] === '?' ? !!(ST.live && ST.live.req[n.slice(1)] && ST.live.req[n.slice(1)].st !== 'no') : n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '!' ? ST.notes.some(x => x.f === n.slice(1)) : n[0] === '@' ? !!ST.live && ST.live.t >= +n.slice(1) : ST.keys.includes(n)); // '~' = 아직 아님
   const ok = need => !need || !need.length || need.every(okOne);
@@ -305,7 +308,7 @@
   // 틀렸을 때의 말: 기계가 띄우는 잠금이면 기계의 말투로 (lock.err 가 있으면 그것)
   const lockErr = lock => lock.err || (lock.style === 'phone' ? '"비밀번호가 틀렸습니다. 다시 누르십시오."' : lock.style === 'lcd' ? '「암호가 다릅니다」' : C.frame === 'papers' ? '맞지 않는다.' : '비밀번호가 올바르지 않습니다.');
   function lockHtml(id, lock, title) {
-    const fails = LOCKFAIL[id] || 0;
+    const fails = tmp().fail[id] || 0;
     // style: 'phone' 이면 전화 번호판(누르면 칸에 들어가고 # 은 확인, * 은 지우기), 'lcd' 면 워드프로세서 액정
     const pad = lock.style === 'phone' ? `<div class="lock-pad" role="group" aria-label="번호판">${'123456789*0#'.split('').map(k => `<button type="button" data-pad="${k}"${k === '#' ? ' aria-label="확인"' : k === '*' ? ' aria-label="지우기"' : ''}>${k}</button>`).join('')}</div>` : '';
     return `<div class="lock${lock.style ? ' lock-' + esc(lock.style) : ''}"><p class="lock-t">${inline(lock.title || title || '잠겨 있다')}</p>${lock.desc ? `<p class="lock-d">${inline(lock.desc)}</p>` : ''}
@@ -409,7 +412,6 @@
 
   /* 대화 재생: 몸짓은 스르르, 말은 한 글자씩(사람마다 다른 말소리). 목소리가 있는 말풍선은 재생 시각에 맞춰 찍는다. 누르면 건너뛴다 */
   let TALK = null;
-  const MET = new Set(); // 이번에 처음 만난 사람 (첫 인사를 재생)
   const reduced = () => !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   function stopTalk() { if (TALK) TALK.finish(); }
   function playTalk(qa, opt) {
@@ -550,7 +552,6 @@
   }
 
   /* ── 사건 재구성 (timeline): 사건 카드를 순서대로 맞춘다 */
-  const TLHIT = {};
   function tlOrder(s) {
     const ids = (s.events || []).map(e => e.id);
     let o = ST.tl[s.id];
@@ -566,7 +567,7 @@
     const solved = ST.unl.includes(s.id);
     const ev = Object.fromEntries((s.events || []).map(e => [e.id, e]));
     const order = solved ? s.events.map(e => e.id) : tlOrder(s);
-    const hit = TLHIT[s.id] || [];
+    const hit = tmp().tl[s.id] || [];
     const rows = order.map((id, i) => `<li class="tl-e${solved ? ' ok' : hit.includes(id) ? ' hit' : ''}"><span class="tl-slot">${inline((s.slots || [])[i] || String(i + 1))}</span><span class="tl-t">${inline(ev[id].t)}</span>${solved ? '' : `<span class="tl-mv"><button type="button" data-tl="${esc(s.id)}|${esc(id)}|-1" aria-label="앞으로"${i === 0 ? ' disabled' : ''}>▲</button><button type="button" data-tl="${esc(s.id)}|${esc(id)}|1" aria-label="뒤로"${i === order.length - 1 ? ' disabled' : ''}>▼</button></span>`}</li>`).join('');
     const act = solved ? `<div class="c-done">${blocks(s.solved, `${s.id}@s`, s.name)}</div>` : `<p class="c-act"><button type="button" data-tl-check="${esc(s.id)}">이 순서로 맞춰 보기</button><span class="c-msg" role="status"></span></p>`;
     return `<article class="doc skin-${esc(s.skin || 'board')}"><header class="doc-h"><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>
@@ -804,7 +805,6 @@
       ${atts.length ? `<p class="res-n">받은 첨부</p>${atts.map(itemBtn).join('')}` : ''}`;
   }
 
-  const RQPICK = {}; // 신청서마다 고른 소명 메모 (올리기 전)
   function requestList(s) {
     const items = (s.items || []).filter(r => ok(r.need));
     if (!items.length) return `<p class="res-none">${esc(s.empty || '아직 신청할 근거가 없다.')}</p>`;
@@ -824,7 +824,7 @@
     if (q && q.st === 'wait') foot = `<p class="rq-stamp" aria-hidden="true"><span>접수</span></p><p class="rq-st">접수 ${esc(lstamp(q.at))} · 회신 예정 ${esc(lstamp(q.due))} <small>(${hm(q.due - L.t)} 뒤)</small></p><p class="lv-waitrow"><button type="button" data-wait>회신까지 기다린다</button></p>`;
     else if (q && q.st === 'done') foot = `<p class="rq-stamp ok" aria-hidden="true"><span>회신</span></p><p class="rq-st">회신 ${esc(lstamp(q.due))}</p>${C.docs[r.doc] ? itemBtn(C.docs[r.doc]) : ''}`;
     else {
-      const sel = RQPICK[r.id] != null ? RQPICK[r.id] : '';
+      const sel = tmp().rq[r.id] != null ? tmp().rq[r.id] : ''; // 신청서마다 고른 소명 메모 (올리기 전)
       const pick = !why ? '' : `<section class="rq-why"><h4>소명 자료 <small>이 요청이 왜 필요한지 보여 줄 메모 하나</small></h4>${notes.length ? noteGroups(notes).map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${String(sel) === String(n.id) ? ' on' : ''}"><input type="radio" name="rq-${esc(r.id)}" value="${n.id}" data-rq-pick="${esc(r.id)}"${String(sel) === String(n.id) ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span></label>`).join('')}</details>`).join('') : '<p class="rep-empty">수첩에 메모가 없다. 근거가 될 문장을 먼저 적어 둔다.</p>'}</section>`;
       const no = q && q.st === 'no' ? `<p class="rq-no"><b>기각</b> ${inline(r.deny || '소명이 부족하다.')} <small>${esc(lstamp(q.at))}</small></p>` : '';
       foot = `${no}${pick}<p class="submit-row"><button type="button" class="btn-hand" data-rq-go="${esc(r.id)}">${esc(r.button || (q ? '다시 신청하기' : '신청서 올리기'))}</button><span class="c-msg" role="status"></span></p>`;
@@ -838,7 +838,7 @@
     const L = ST.live, q = reqState(id);
     if (q && q.st !== 'no') return;
     const why = (r.why || []).length;
-    const n = why ? ST.notes.find(x => String(x.id) === String(RQPICK[id])) : null;
+    const n = why ? ST.notes.find(x => String(x.id) === String(tmp().rq[id])) : null;
     if (why && !n) { sayMsg('소명 자료로 붙일 메모를 먼저 고른다.'); sfx('miss'); return; }
     const prev = L.t;
     L.t += lcost('write') + (q && lv() >= 5 ? 60 : 0);
@@ -852,7 +852,7 @@
       cue('miss');
       toast('기각 — ' + trunc(plain(r.deny || '소명이 부족하다'), 40));
     }
-    delete RQPICK[id];
+    delete tmp().rq[id];
     save(); liveSync(prev); renderTabs(); renderList(); renderRead();
   }
 
@@ -1608,7 +1608,7 @@
     if (narrow()) $('.stage').scrollIntoView({ block: 'start' });
     // 처음 만나는 사람은 첫마디를 재생한다
     const p = o.t === 'person' && C.people[o.id];
-    if (p && !MET.has(p.id)) { MET.add(p.id); if (!(ST.asked[p.id] || []).length) playTalk($('.per-tr .qa-first'), { p, lead: 650 }); }
+    if (p && !tmp().met.has(p.id)) { tmp().met.add(p.id); if (!(ST.asked[p.id] || []).length) playTalk($('.per-tr .qa-first'), { p, lead: 650 }); }
   }
   function setQ(srcId, q) {
     ST.view.src = srcId; ST.view.q[srcId] = q; save();
@@ -1632,7 +1632,7 @@
     if (fresh) a.push(e);
     save();
     const before = census();
-    MET.add(p.id);
+    tmp().met.add(p.id);
     renderRead(); renderList();
     const qa = $$('.per-tr .qa').find(x => x.dataset.qa === e);
     if (qa) $('#paneRead').scrollTop = qa.offsetTop - 12;
@@ -1659,7 +1659,7 @@
       toast((lock.ok || '열렸다.') + (gained > 0 ? ` · 새로 열린 것 ${gained}` : ''));
       liveSync();
     } else {
-      LOCKFAIL[id] = (LOCKFAIL[id] || 0) + 1;
+      tmp().fail[id] = (tmp().fail[id] || 0) + 1;
       renderList(); renderRead();
       // 틀리면 그 기계답게 거절한다: 전화는 짧게 끊기는 신호음, 워드프로세서는 삑삑, 노트북은 입력창이 도리질 (커서는 js/ui.js 가 칸에 돌려준다)
       sfx(lock.style === 'phone' ? 'reorder' : lock.style === 'lcd' ? 'lcdbeep' : C.frame === 'papers' ? 'miss' : 'deny');
@@ -1709,7 +1709,7 @@
     const o = tlOrder(s), i = o.indexOf(eid), j = i + +dir;
     if (i < 0 || j < 0 || j >= o.length) return;
     [o[i], o[j]] = [o[j], o[i]];
-    delete TLHIT[sid];
+    delete tmp().tl[sid];
     save(); sfx('page'); renderRead();
     const b = $(`[data-tl="${sid}|${eid}|${dir}"]`) || $(`[data-tl="${sid}|${eid}|${-dir}"]`);
     if (b) b.focus();
@@ -1721,7 +1721,7 @@
     const hit = o.filter((id, i) => id === s.events[i].id);
     advance('timeline');
     if (hit.length === o.length) return solveThing(sid, s.reward, s.ok || '앞뒤가 맞아떨어졌다', '재구성');
-    TLHIT[sid] = lv() <= 3 ? hit : [];
+    tmp().tl[sid] = lv() <= 3 ? hit : [];
     renderRead();
     sfx('miss');
     sayMsg(lv() >= 5 ? '아직 앞뒤가 맞지 않는다.' : `${o.length}개 중 ${hit.length}개가 제자리인 것 같다.`);
@@ -1949,7 +1949,11 @@
         if (it) { it.scrollIntoView({ block: 'nearest' }); if (e.detail === 0) it.focus({ preventScroll: true }); }
         return;
       }
-      if ((el = t.closest('[data-reset]'))) return armed(el, '한 번 더 누르면 이 사건 기록이 지워진다', () => { delete S.cases[C.id]; if (S.seen) { S.seen.done = S.seen.done.filter(x => x !== C.id); S.seen.m = S.seen.m.filter(x => x !== C.id); } save(); openCase(C.id); toast('처음부터 다시'); });
+      if ((el = t.closest('[data-reset]'))) return armed(el, '한 번 더 누르면 이 사건 기록이 지워진다', () => {
+        const cw = S.cases[C.id] && S.cases[C.id].cw; // 혐오감 주의는 이미 읽고 들어왔으니 다시 묻지 않는다
+        delete S.cases[C.id]; if (cw) S.cases[C.id] = { cw: true };
+        delete TEMP[C.id]; [READPOS, NGSHUT].forEach(m => [...m.keys()].forEach(k => { if (k.startsWith(C.id + '|')) m.delete(k); })); // 틀린 횟수·읽던 자리·접어 둔 묶음도 처음으로
+        if (S.seen) { S.seen.done = S.seen.done.filter(x => x !== C.id); S.seen.m = S.seen.m.filter(x => x !== C.id); } save(); openCase(C.id); toast('처음부터 다시'); });
     });
     document.addEventListener('submit', e => {
       const f = e.target;
@@ -2000,7 +2004,7 @@
     document.addEventListener('change', e => {
       if (e.target.closest('[data-pname]')) return renamePlayer(e.target.value);
       const rq = e.target.closest('[data-rq-pick]');
-      if (rq && C) { RQPICK[rq.dataset.rqPick] = rq.value; $$(`[data-rq-pick="${rq.dataset.rqPick}"]`).forEach(x => x.closest('.rep-opt').classList.toggle('on', x.checked)); sfx('pen'); return; }
+      if (rq && C) { tmp().rq[rq.dataset.rqPick] = rq.value; $$(`[data-rq-pick="${rq.dataset.rqPick}"]`).forEach(x => x.closest('.rep-opt').classList.toggle('on', x.checked)); sfx('pen'); return; }
       const s = e.target.closest('[data-rep]');
       if (!s || !C) return;
       if (s.dataset.rep === 'culprit') ST.report.culprit = s.value; else { ST.report.claims[s.dataset.rep] = s.value; REPOPEN = null; }
