@@ -139,7 +139,7 @@
             answer: 'b',
             solved: [
               { p: '봉투 속 물은 가시와유 탕수와 성분이 겹친다. 색, 부식질, 메타규산, 염화물, 요오드까지.', f: 'f_water_match' },
-              { note: '탕수 시료 — 10월 25일 오후, 영업 전 탕에서 채취.' },
+              { note: '탕수 시료 — 10월 26일 오후, 영업 전 탕에서 채취.' },
             ],
             solveNeed: ['!f_kuroyu', 'k_kashiwayu'] },
           { id: 'cm_knot', title: '봉투 매듭', meta: '과수연 물리과 · 매듭 시료 4건', need: ['k_sack'],

@@ -531,6 +531,7 @@
         '그는 사흘을 더 머물렀다. 흰 말을 헛간에 들이고, 소에게 여물을 주고, 짠 젖을 돼지에게 붓고, 주보를 들여다 놓고, 굴뚝에 연기를 올렸다. 집이 아직 살아 있는 것처럼. 1월 29일 월요일 저녁 그는 골데너 슈테른에 들었고, 그날부터 "금요일부터 장 보러 와 있었다"고 말하기 시작했다.',
         '증서는 끝내 나오지 않았다. 그러나 미하엘은 우유 리터 수 사이에 다 적어 두었다. V.K., 80첸트너, 궤에.',
       ],
+      next: '서류철 밑에 한자와 일본어가 섞인 번역 사본 한 묶음이 깔려 있다. → 기록실로 돌아가 CASE 03으로.',
     },
     artStyle: 'Early 1920s Bavarian police and press photography: silver gelatin print from a glass-plate camera, heavy grain, warm sepia toning, soft vignetting, faint dust and scratches, cold overcast winter daylight and deep snow. Documentary, still and quiet. Where the scene calls for it, dried and frozen blood is shown plainly and specifically (pooled into straw and floorboards, spattered low on posts and walls, dragged in wide swept trails), and the dead stay covered: under hay, planks or linen sheets, at most a sleeved forearm showing. No wounds, no faces, no readable text.',
     art: {

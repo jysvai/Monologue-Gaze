@@ -293,14 +293,14 @@
       ] },
       d_tx_bruxelles: { src: 'telex', blood: false, need: ['#cmp_cards'], title: 'TELEX 수신 · BRUXELLES → HELLESUND', meta: '1969.10.30 16:40', body: [
         '귀 조회 벨기에 여권 1.211.408 · 번호 체계는 진짜이나 기재 이름 틀림',
-        { p: '같은 번호 여권은 1966년 앤트워프에서 [[미레유 다송]] 에게 발급 · 1933년생 · 틸레만스 는 다송 의 어머니 결혼 전 성', f: 'f_brussels' },
-        '다송 · 10월 21일 고용주 [[앤트워프 해상공제]] 가 실종 신고',
+        { p: '같은 번호 여권은 1966년 앤트워프에서 [[미레유 다송]]에게 발급 · 1933년생 · 틸레만스는 다송의 어머니 결혼 전 성', f: 'f_brussels' },
+        '다송 · 10월 21일 고용주 [[앤트워프 해상공제]]가 실종 신고',
         { p: '앤트워프 치과의사 보관 차트와 귀 차트 예비 대조 · 일치 · 정식 대조 서류 우송 · 끝', f: 'f_brussels' },
       ] },
       d_tx_anvers: { src: 'telex', blood: false, need: ['k_mutuelle'], title: 'TELEGRAMME · MUTUELLE MARITIME D’ANVERS → HELLESUND POLITI', meta: '1969.10.31 09:05 · 프랑스어 원문 번역', body: [
-        { p: '미레유 다송 은 본사 선박 사고 조사원 · 9월 30일부터 노르웨이 출장 · 일 때문에 여러 이름을 씀', f: 'f_anvers_id' },
+        { p: '미레유 다송은 본사 선박 사고 조사원 · 9월 30일부터 노르웨이 출장 · 일 때문에 여러 이름을 씀', f: 'f_anvers_id' },
         { p: '조사 건 · 1968년 2월 북해에서 침몰 신고된 헬레순 선적 화물선 [[베슬레 테르네]] 호 · 1958년 건조 · 보험금 390만 크로네 지급 끝남', f: 'f_vt_claim' },
-        { p: '마지막 연락 · 10월 16일 밤 10시 헬레순 에서 전화 · VT 봤음 · 토요일에 확인하겠음', f: 'f_vt_claim' },
+        { p: '마지막 연락 · 10월 16일 밤 10시 헬레순에서 전화 · VT 봤음 · 토요일에 확인하겠음', f: 'f_vt_claim' },
         '본사 조사역 한 사람 11월 3일 헬레순 도착 예정 · 끝',
       ] },
       d_tx_kystrute: { src: 'telex', blood: false, need: ['k_kystrute'], title: 'TELEGRAM · MS 노르비엔 사무장 → HELLESUND POLITI', meta: '1969.10.29 11:30 · 연안선 선상 무선', body: [
@@ -410,9 +410,9 @@
       ] },
       d_q_hl24455: { src: 'nummer', blood: false, title: '헬레순 자동차 임대 — 대여 장부 · HL-24455', kicker: 'HELLESUND BILUTLEIE · UTLEIEPROTOKOLL', meta: '부둣길 2 · 1969년 10월 · 가게에서 옮겨 적음', body: [
         { rows: [
-          ['10.6 ~ 10.8', '헬레순 제재소 (업무)', '312 → 498', '—'],
-          ['10.15 09:00 ~ 10.17 20:30', '[[클라우스 렘메르트]] · 서독 면허', '1,106 → 1,398', '반납 때 기름 가득 · 현금'],
-          ['10.20 08:30 ~ 10.22 17:00', '헬레순 제재소 (업무)', '1,398 → 1,571', '—'],
+          ['10.6 ~ 10.8', '헬레순 제재소 (업무)', '38,530 → 38,716', '—'],
+          ['10.15 09:00 ~ 10.17 20:30', '[[클라우스 렘메르트]] · 서독 면허', '38,716 → 39,008', '반납 때 기름 가득 · 현금'],
+          ['10.20 08:30 ~ 10.22 17:00', '헬레순 제재소 (업무)', '39,008 → 39,181', '—'],
         ], head: ['대여 기간', '빌린 사람', '주행계 (km)', '비고'], f: { 1: 'f_rental', 2: 'f_rental_idle' } },
         { note: '차량 검사소 기록: 1969.8.30 정기 검사 — 차체 이상 없음.' },
       ] },
@@ -576,6 +576,7 @@
         '18일 토요일, 하브외른 호의 서류에는 사무원 올라 리가 대신 서명했다. 11시 15분 역 광장의 회색 아마존 HL-24617, 11시 40분 크비트달 길 주유소 장부의 E.B. 보온병의 커피에는 수면제가 들어 있었다. 브라테는 손가방과 여권을 가져갔고, 남은 것에 불을 붙였다.',
         '역 보관소의 가방 두 개는 그녀가 저녁 7시 40분 오슬로행 기차로 떠나려고 맡겨 둔 것이었다. 보관표 1147번은 끝내 창구로 돌아오지 않았다.',
       ],
+      next: '가방 사진을 덮자 다음 칸에서 갱지로 묶은 서류철이 나온다. 겉장에 한글로 「송월각」. → 기록실로 돌아가 CASE 07로.',
     },
     artStyle: '1969 Norwegian police and press photography on 35mm film: Tri-X style black-and-white grain for police documentation, faded early colour film with a cool blue-green cast for everything else; overcast west-coast light, wet rock, heather and harbour mist. Documentary and quiet. No readable text, no faces. Graphic content is limited to fire traces and covered remains: heather burned down to black ash, soot-streaked rock, charred and melted personal belongings, and a body kept fully covered under a grey tarp or white sheet with only its outline and soot seeping through the cloth: no burned skin or flesh, no wounds, no faces.',
     art: {
