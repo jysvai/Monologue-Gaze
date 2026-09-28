@@ -1794,6 +1794,7 @@
     const target = C.docs[id] || C.sources.find(s => s.id === id);
     const lock = target && target.lock;
     if (!lock) return;
+    if (!norm(v)) { const i = $(`#lk-${CSS.escape(id)}`); if (i) i.focus(); return; } // 아무것도 넣지 않고 누른 것은 틀린 번호로 세지 않는다
     if ((lock.code || []).map(norm).includes(norm(v))) {
       const before = census();
       if (!ST.unl.includes(id)) ST.unl.push(id);
