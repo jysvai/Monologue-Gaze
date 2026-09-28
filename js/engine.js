@@ -1940,7 +1940,7 @@
       if (f.matches('[data-pnew]')) { e.preventDefault(); return newPlayer(f.querySelector('input').value); }
       if (f.matches('[data-pname]')) { e.preventDefault(); f.querySelector('input').blur(); return; } // 흐려지면서 change 로 이름이 적힌다
       if (!C) return;
-      if (f.matches('[data-arch]')) { e.preventDefault(); setQ(f.dataset.arch, f.querySelector('input').value.trim()); const i = $(`#aq-${f.dataset.arch}`); if (i) i.focus(); }
+      if (f.matches('[data-arch]')) { e.preventDefault(); setQ(f.dataset.arch, f.querySelector('input').value.trim()); const i = $(`#aq-${f.dataset.arch}`); if (i) { if (matchMedia('(pointer:fine)').matches) i.focus(); else i.blur(); } } // 손가락으로 쓰면 자판을 내려 결과가 보이게
       else if (f.matches('[data-lock]')) { e.preventDefault(); tryLock(f.dataset.lock, f.querySelector('input').value); }
       else if (f.matches('[data-cipher]')) { e.preventDefault(); checkCipher(f.dataset.cipher); }
       else if (f.matches('[data-query]')) { e.preventDefault(); runQuery(f); }
