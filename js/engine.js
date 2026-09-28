@@ -723,17 +723,43 @@
       el.type = 'button'; el.className = 'lv-note' + (n.late ? ' late' : '');
       if (n.t) { el.dataset.lvT = n.t; el.dataset.lvId = n.id || ''; el.dataset.lvSrc = n.src || ''; }
       el.innerHTML = `<span class="lv-app">${esc(n.app || '')}<time>${esc(at)}</time></span><b>${esc(n.who)}</b><span class="lv-msg">${esc(trunc(n.msg, 70))}</span>`;
-      box.appendChild(el);
+      box.appendChild(el); swipeAway(el);
       while (box.children.length > 3) box.firstChild.remove();
       requestAnimationFrame(() => el.classList.add('on'));
       // 마우스를 올려 읽고 있거나 초점이 있는 알림은 붙들어 둔다 (손을 떼면 조금 뒤에 걷힌다)
-      const gone = () => { if (!el.isConnected) return; if (el.matches(':hover') || el === document.activeElement) return void setTimeout(gone, 1500); el.classList.remove('on'); setTimeout(() => el.remove(), 400); };
+      const gone = () => { if (!el.isConnected) return; if (el.matches(':hover') || el === document.activeElement || el.classList.contains('drag')) return void setTimeout(gone, 1500); el.classList.remove('on'); setTimeout(() => el.remove(), 400); };
       setTimeout(gone, 6500);
       if (i === 0) {
         sfx(n.late ? 'miss' : 'buzz');
         if (S.sound && navigator.vibrate && (!navigator.userActivation || navigator.userActivation.hasBeenActive)) try { navigator.vibrate([90, 60, 90]); } catch (e) { /* not allowed */ }
       }
     }, i * 450));
+  }
+  // 알림은 위로(또는 옆으로) 밀어 치운다 — 실제 휴대폰 배너처럼. 끌었다 놓은 것은 누른 것으로 치지 않는다
+  function swipeAway(el) {
+    let id = null, x0 = 0, y0 = 0, dx = 0, dy = 0;
+    el.addEventListener('pointerdown', e => { if (e.button) return; id = e.pointerId; x0 = e.clientX; y0 = e.clientY; dx = dy = 0; delete el.dataset.moved; });
+    el.addEventListener('pointermove', e => {
+      if (e.pointerId !== id) return;
+      dx = e.clientX - x0; dy = e.clientY - y0;
+      if (!el.classList.contains('drag')) { if (Math.hypot(dx, dy) < 8) return; el.classList.add('drag'); el.dataset.moved = '1'; try { el.setPointerCapture(id); } catch (err) { /* gone */ } }
+      const side = Math.abs(dx) > -dy;
+      el.style.transform = side ? `translateX(${dx}px)` : `translateY(${Math.min(dy, 0)}px)`;
+      el.style.opacity = Math.max(0.2, 1 - (side ? Math.abs(dx) / 260 : -dy / 110));
+    });
+    const up = e => {
+      if (e.pointerId !== id) return;
+      id = null;
+      if (!el.classList.contains('drag')) return;
+      el.classList.remove('drag');
+      const side = Math.abs(dx) > -dy;
+      if (side ? Math.abs(dx) > 80 : dy < -30) {
+        el.style.transform = side ? `translateX(${dx > 0 ? 110 : -110}%)` : 'translateY(-130%)';
+        el.style.opacity = '0';
+        setTimeout(() => el.remove(), 280);
+      } else { el.style.transform = ''; el.style.opacity = ''; }
+    };
+    el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
   }
   function clearNotes() { const b = $('#lvNotes'); if (b) b.innerHTML = ''; }
   function nextDue() {
@@ -1984,6 +2010,7 @@
       if ((el = t.closest('[data-wipe]'))) return armed(el, roster().list.length > 1 ? '한 번 더 누르면 내 기록이 지워진다' : '한 번 더 누르면 전부 지워진다', () => { S = blank(); save(); cabinet(); });
       if (!C) return;
       if ((el = t.closest('.lv-note'))) { // 휴대폰 알림: 누르면 그곳으로
+        if (el.dataset.moved) { delete el.dataset.moved; return; } // 밀어 치우던 것
         const tt = el.dataset.lvT, id = el.dataset.lvId, src = el.dataset.lvSrc;
         el.remove();
         if (!tt || !id) return;
