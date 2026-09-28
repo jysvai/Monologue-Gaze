@@ -75,7 +75,7 @@ body[data-light]:has(.case-view[data-graphic])::before{background:radial-gradien
 /* 사건을 여는 장면 뒤의 표지 사진 */
 .ci-bg{position:absolute;inset:-4%;background:center/cover no-repeat;filter:blur(6px) sepia(.35) brightness(.34) saturate(.8);opacity:0;animation:ci-bg 3.8s ease-out forwards;pointer-events:none}
 .case-intro.graphic .ci-bg{filter:blur(10px) sepia(.5) brightness(.26)}
-.case-intro{overflow:hidden}.case-intro .ci-in{position:relative}
+.case-intro{overflow:hidden;overscroll-behavior:contain} /* 떠 있는 동안 손가락으로 끌어도 뒤의 페이지가 밀려 가지 않게 (크게 보기도 같다) */.case-intro .ci-in{position:relative}
 @keyframes ci-bg{from{opacity:0;transform:scale(1.08)}35%{opacity:1}to{opacity:1;transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.ci-bg{animation:none;opacity:1}}
 .lite .ci-bg{filter:brightness(.3);animation:none;opacity:1}
