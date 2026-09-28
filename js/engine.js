@@ -1321,9 +1321,10 @@
     const mList = MG.cases.filter(c => c._m && S.cases[c.id] && S.cases[c.id].m);
     // 처음 보는 종결 도장·M의 메모는 한 번만 찍히고 스며 나온다 (전부터 있던 것은 조용히)
     const doneIds = MG.cases.filter(c => S.cases[c.id] && S.cases[c.id].solved).map(c => c.id), mIds = mList.map(c => c.id);
-    if (!S.seen) S.seen = { done: doneIds, m: mIds };
-    const newDone = doneIds.filter(id => !S.seen.done.includes(id)), newM = mIds.filter(id => !S.seen.m.includes(id));
-    S.seen.done.push(...newDone); S.seen.m.push(...newM); save();
+    const allShut = main.length >= 10 && solvedMain === main.length; // 서랍이 전부 닫히면 맨 밑에서 M의 편지가 나온다
+    if (!S.seen) S.seen = { done: doneIds, m: mIds, letter: allShut };
+    const newDone = doneIds.filter(id => !S.seen.done.includes(id)), newM = mIds.filter(id => !S.seen.m.includes(id)), newLetter = allShut && !S.seen.letter;
+    S.seen.done.push(...newDone); S.seen.m.push(...newM); S.seen.letter = allShut; save();
     const folder = c => {
       const st = S.cases[c.id];
       const status = st && st.solved ? 'done' : st && ((st.notes || []).length || (st.seen || []).length) ? 'going' : 'new'; // 예전 판의 저장에 칸이 빠져 있어도 기록실은 열린다
@@ -1340,7 +1341,7 @@
         ${status === 'done' ? `<span class="f-stamp${newDone.includes(c.id) ? ' fresh' : ''}">종결</span>` : status === 'going' ? `<span class="f-going">수사 중${stop ? `<small>${stop}</small>` : ''}</span>` : ''}</span></button>`;
     };
     const intro = S.intro ? '' : `<div class="intro"><p>서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.</p><p>서랍 속에는 한 세기에 걸친 미제 기록 ${numk(main.length)} 건. 사진 한 장, 편지 한 통, 누군가의 혼잣말 같은 기록들. 기록은 대답하지 않는다. 쫓아가는 사람에게만 조금씩 입을 연다.</p><p class="intro-hand">처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장</p><button type="button" class="btn-hand" data-intro-ok>서랍을 연다</button></div>`;
-    const letter = main.length >= 10 && solvedMain === main.length ? `<article class="m-letter"><h3>서랍 맨 밑의 편지</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p>${mWho()}</article>` : '';
+    const letter = allShut ? `<article class="m-letter${newLetter ? ' fresh' : ''}"><h3>서랍 맨 밑의 편지</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p>${mWho()}</article>` : '';
     const hero = MG.images['_global/hero'];
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
@@ -1357,6 +1358,13 @@
     // 막 종결한 사건이면 그 폴더까지 내려가 도장을 찍는다
     const fresh = $('.f-stamp.fresh');
     if (fresh) { setTimeout(() => { fresh.closest('.folder').scrollIntoView({ block: 'center', behavior: reduced() ? 'auto' : 'smooth' }); }, 150); setTimeout(() => sfx('stamp'), 700); }
+    // 마지막 서랍을 막 닫았으면: 도장 다음에 편지가 나왔다고 알리고, 편지는 눈에 들어오는 순간 서랍 밑에서 밀려 나온다
+    const ml = $('.m-letter.fresh');
+    if (ml) {
+      const out = () => { ml.classList.add('out'); sfx('page'); };
+      if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { io.disconnect(); out(); } }, { threshold: 0.15 }); io.observe(ml); } else out();
+      setTimeout(() => { if (ml.isConnected) toast('서랍 맨 밑에서 편지 한 통이 밀려 나왔다'); }, fresh ? 2000 : 600);
+    }
   }
 
   /* ───────── sound (기본 꺼짐) — audio/ 의 효과음 파일이 있으면 그것을, 없으면 합성음 ───────── */
