@@ -48,7 +48,7 @@
   const gore = () => !!(C && C.graphic && !S.mild);
   // 글 한 토막의 잔혹판: { p: '…', gore: '…' } — 잔혹 표현을 켜 두면 gore 가 원래 글 자리(p·note·say·cap·msg)에 들어간다. 사실(f)·단어는 두 판이 같다
   const GTXT = ['p', 'note', 'say', 'cap', 'msg'];
-  const gv = b => b && typeof b === 'object' && b.gore != null && gore() ? { ...b, [GTXT.find(k => b[k] != null) || 'p']: b.gore } : b;
+  const gv = b => !(b && typeof b === 'object' && gore()) ? b : b.goreRows ? { ...b, rows: b.goreRows } : b.gore != null ? { ...b, [GTXT.find(k => b[k] != null) || 'p']: b.gore } : b; // 표는 goreRows (행 수·순서는 원래 표와 같게)
   // kinds: 문자열 'abcd' 중에서 고른다. seed 로 위치·각도를 정한다 (같은 문서는 늘 같은 자리).
   // edge: true 면 좌우 가장자리, 'corner' 면 오른쪽 위·아래 모서리만 (글이 꽉 찬 작은 카드용)
   function stains(seed, n, kinds, edge) {
@@ -339,7 +339,7 @@
     if (!ST.seen.includes(d.id)) {
       ST.seen.push(d.id); save();
       // 빨간 별 사건에서 끔찍한 기록을 처음 펼칠 때: 파리 떼·긁는 현 (문서가 sting 을 정하면 그 소리 — 뼈 켜는 톱 등)
-      if (gore() && (d.sting || (d.body || []).some(b => b && typeof b === 'object' && (b.gore != null || (b.img && C.art[b.img] && C.art[b.img].sensitive))))) { const c0 = C; setTimeout(() => { if (C === c0) sfx(d.sting || 'gore'); }, 350); }
+      if (gore() && (d.sting || (d.body || []).some(b => b && typeof b === 'object' && (b.gore != null || b.goreRows || (b.img && C.art[b.img] && C.art[b.img].sensitive))))) { const c0 = C; setTimeout(() => { if (C === c0) sfx(d.sting || 'gore'); }, 350); }
     }
     const skin = d.skin || s.skin || 'plain';
     const paper = d.paper || s.paper;
