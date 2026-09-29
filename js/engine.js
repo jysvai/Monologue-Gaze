@@ -244,9 +244,11 @@
   function art(key, cls, svgOnly) {
     const a = C.art[key];
     if (a == null) return '';
-    const file = svgOnly && !(a && a.raster) ? null : MG.images[`${C.id}/${key}`];
+    // 잔혹 표현을 끈 사람에게는 <키>_mild 그림(천을 덮은 판)이 있으면 그걸 보인다
+    const ik = ST && S.mild && a && a.sensitive && MG.images[`${C.id}/${key}_mild`] ? `${C.id}/${key}_mild` : `${C.id}/${key}`;
+    const file = svgOnly && !(a && a.raster) ? null : MG.images[ik];
     const alt = (a && a.alt) || (a && a.use) || '';
-    const sz = file && (MG.imageSize || {})[`${C.id}/${key}`]; // 그림이 오기 전에 제 비율만큼 자리를 잡아 둔다 (늦게 뜬 그림이 글·표시점을 밀어내지 않게)
+    const sz = file && (MG.imageSize || {})[ik]; // 그림이 오기 전에 제 비율만큼 자리를 잡아 둔다 (늦게 뜬 그림이 글·표시점을 밀어내지 않게)
     const img = file ? `<img class="${cls || 'art'}" src="${esc(file)}" alt="${esc(alt)}" loading="lazy" decoding="async"${sz ? ` style="aspect-ratio:auto ${+sz[0]}/${+sz[1]}"` : ''}>` : '';
     // 글자 없는 그림(지도·약도)에는 이름표를 게임이 얹는다: [글자, x%, y%(글자 밑줄), 'l'|'c'|'r']
     const labs = file && a && a.labels ? `<span class="art-labs" aria-hidden="true">${a.labels.map(([t, x, y, al]) => `<span class="art-lab${al === 'c' ? ' c' : al === 'r' ? ' r' : ''}" style="left:${+x}%;top:${+y}%">${esc(t)}</span>`).join('')}</span>` : '';
