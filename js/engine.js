@@ -20,7 +20,9 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const esc = s => String(s ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
-  const norm = s => String(s ?? '').normalize('NFKC').toLowerCase().replace(/[\s'"`.,!?·・()[\]{}\-_/@:;~「」『』〈〉《》“”‘’„«»]/g, '');
+  // 로마자·키릴 문자의 발음 부호는 떼고 비교한다 (Oberröding = Oberroding, ё = е)
+  const FOLD = { ä: 'a', ö: 'o', ü: 'u', ß: 'ss', é: 'e', è: 'e', ê: 'e', ë: 'e', à: 'a', á: 'a', â: 'a', å: 'a', æ: 'ae', ø: 'o', œ: 'oe', ç: 'c', ñ: 'n', ï: 'i', í: 'i', ì: 'i', î: 'i', ó: 'o', ò: 'o', ô: 'o', ú: 'u', ù: 'u', û: 'u', ý: 'y', ё: 'е' };
+  const norm = s => String(s ?? '').normalize('NFKC').toLowerCase().replace(/[\s'"`.,!?·・()[\]{}\-_/@:;~「」『』〈〉《》“”‘’„«»]/g, '').replace(/[äöüßéèêëàáâåæøœçñïíìîóòôúùûýё]/g, c => FOLD[c]);
   const plain = s => String(s ?? '').replace(/\[\[([^\]|]+?)(?:\|[\w-]+)?\]\]/g, '$1').replace(/\*\*(.+?)\*\*/g, '$1').replace(/~~(.+?)~~/g, '$1');
   const trunc = (s, n) => (s.length > n ? s.slice(0, n - 1) + '…' : s);
   const pad = n => String(n).padStart(2, '0');

@@ -44,7 +44,8 @@ function loadCases() {
 const caseById = id => loadCases().find(c => c.id === id);
 
 /* ── 엔진과 같은 [[이름]] 풀기 (js/engine.js 의 norm · prep) ── */
-const norm = s => String(s ?? '').normalize('NFKC').toLowerCase().replace(/[\s'"`.,!?·・()[\]{}\-_/@:;~「」『』〈〉《》“”‘’„«»]/g, '');
+const FOLD = { ä: 'a', ö: 'o', ü: 'u', ß: 'ss', é: 'e', è: 'e', ê: 'e', ë: 'e', à: 'a', á: 'a', â: 'a', å: 'a', æ: 'ae', ø: 'o', œ: 'oe', ç: 'c', ñ: 'n', ï: 'i', í: 'i', ì: 'i', î: 'i', ó: 'o', ò: 'o', ô: 'o', ú: 'u', ù: 'u', û: 'u', ý: 'y', ё: 'е' };
+const norm = s => String(s ?? '').normalize('NFKC').toLowerCase().replace(/[\s'"`.,!?·・()[\]{}\-_/@:;~「」『』〈〉《》“”‘’„«»]/g, '').replace(/[äöüßéèêëàáâåæøœçñïíìîóòôúùûýё]/g, c => FOLD[c]);
 function labMap(c) {
   const lab = {};
   for (const [id, k] of Object.entries(c.keywords || {})) [k.label, ...(k.alias || [])].forEach(l => { const n = norm(l); if (n && !(n in lab)) lab[n] = id; });
