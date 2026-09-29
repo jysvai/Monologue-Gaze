@@ -32,7 +32,7 @@
       scrawl: '포대 넷. 매듭은 하나.',
     },
     start: ['k_pyeon', 'k_daewon', 'k_eunriver', 'k_sacks', 'k_woo', 'k_threat'],
-    tips: ['사람은 잊어도 대장은 잊지 않는다. 번호는 적힌 그대로 옮겨 적을 것.'],
+    tips: ['대장에 적힌 번호는 적힌 그대로 옮겨 적을 것.'],
     sources: [
       { id: 'news', type: 'archive', name: '은천일보 스크랩', skin: 'news', paper: '은천일보', desc: '사회부 책상에서 나온 스크랩북. 광고면까지 오려 붙여 두었다.', placeholder: '기사 속 낱말' },
       { id: 'rec', type: 'archive', name: '수사본부 기록철', skin: 'report', desc: '은천서 86-강-411. 표지에 "수사본부 해체 · 1987. 1. 10". 뒤쪽에 재조사 첨부가 끼워져 있다.', placeholder: '사람, 장소, 물건…', start: ['d_occ'], startLabel: '철 맨 앞장' },
@@ -320,7 +320,7 @@
         ], head: ['날짜', '수위', '표면 유속', '비고'], f: { 2: 'f_flow' } },
         { rows: [['목골 나루', '0'], ['시장교', '1.4km'], ['갈밭 갈대밭', '4.4km'], ['하구 수문', '6.8km']], head: ['지점', '물길 거리 (목골 나루 기준, 하류 쪽)'] },
         '관측원 소견: 11월 갈수기에는 상포 보 수문을 닫아 물이 거의 서 있다. 뜬 물건은 시간당 150m 안팎으로 흘러간다. 보 아래로는 밀물이 닿지 않아 물이 거슬러 오르는 일은 없다.',
-        { m: '물길은 거꾸로 흐르지 않는다. 거꾸로 짚어 올라가는 건 형사의 몫이다. 백오십 미터씩, 한 시간씩 셀 것.' },
+        { m: '포대가 떠내려온 길을 거꾸로 짚을 것. 백오십 미터씩, 한 시간씩 셀 것.' },
       ] },
       d_protect: { src: 'rec', find: ['k_pocha', 'k_jiseo'], skin: 'ledger', title: '사건 처리부 · 보호실 대장 (발췌)', kicker: '하평경찰서 [[갈밭 지서]]', meta: '1986년 11월 14일 (금) 야간 · 근무 순경 ○○○', body: [
         { rows: [
@@ -665,7 +665,7 @@
         '편상구는 8시 45분 목골 종점에서 내려 골목 맨 안쪽 공방으로 걸어 들어갔다. 이불에 싸여 노끈에 묶인 자개장 열두 짝이 그를 맞았다. "물건으로 받아 가겠다"는 말이 오갔을 것이다. 아홉 시 반 무렵, 자개를 두드려 붙이던 쇠망치가 그의 왼쪽 머리를 쳤다. 쌍화차는 아직 위 속에 있었다.',
         '함덕규는 달아날 생각을 버렸다. 배수구 옆 시멘트 바닥에서, 아버지가 쓰던 양날톱으로 관절이 아닌 뼈 한가운데를 켰다. 톱밥을 뿌려 피를 먹이고, 물로 씻고, 쌀집에서 사 둔 빈 포대에 나눠 담아 자개장을 묶던 짐 매듭으로 조였다. 넷째 포대에는 아궁이 벽돌 네 장을 달았다. 새벽 두 시, 불 없는 리어카가 둑길을 내려갔다. 세 시 십 분, 그는 용달을 취소했다.',
         '토요일 아침 여덟 시 반, 그는 대성철물에서 새 양날톱과 노끈과 양잿물을 외상으로 샀다. 수금 가방과 일수 수첩은 아궁이에서 탔고, 칠십이만 원 가운데 만 원짜리 몇 장이 쌀집과 철물점 외상을 갚는 데 먼저 나갔다. 그사이 은천강은 시간당 150m씩, 포대를 하나씩 사람들 눈앞으로 밀어 보냈다.',
-        '수사본부가 "토막 내겠다"던 정육점 주인을 붙들고 있는 동안, 성냥갑 안쪽의 두 번째 번호는 조회되지 않은 채 철 맨 뒤에 끼워져 있었다. 우만복은 그 밤 내내 갈밭 지서 보호실에 있었다. 창피해서 말하지 않았을 뿐이다. 물을 거슬러 올라간 것은 포대가 아니라, 넉 달 늦은 서류였다.',
+        '수사본부가 "토막 내겠다"던 정육점 주인을 붙들고 있는 동안, 성냥갑 안쪽의 두 번째 번호는 조회되지 않은 채 철 맨 뒤에 끼워져 있었다. 우만복은 그 밤 내내 갈밭 지서 보호실에 있었다. 창피해서 말하지 않았을 뿐이다. 그 번호가 조회된 것은 넉 달 뒤였다.',
       ],
     },
     artStyle: 'Provincial South Korea in 1986, a slow river city in late autumn: 35mm press and police photography on Kodak Tri-X black-and-white or faded Fujicolor negative film, coarse grain, harsh on-camera flash or flat overcast light, slightly lifted blacks, a coarse newspaper halftone dot screen and yellowed newsprint where it appears in print. Period details: cement-block and tin-roof houses, stacks of coal briquettes, reed beds, concrete bridges on piers, an old iron sluice gate, hand carts, white woven polypropylene rice sacks, green-and-cream city buses with round headlights. No readable text, no logos or emblems, no recognizable faces (backs, silhouettes or out-of-focus figures only). Graphic content is limited to dried bloodstains on surfaces and covered or sacked remains seen at a distance: no wounds, no cut surfaces, no gore close-ups.',

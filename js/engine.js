@@ -1541,12 +1541,12 @@
         <span class="f-motif">${esc(c.motif || '')}</span>${c.length ? `<span class="f-len">${esc(c.length)}</span>` : ''}
         ${status === 'done' ? `<span class="f-stamp${newDone.includes(c.id) ? ' fresh' : ''}">종결</span>` : status === 'going' ? `<span class="f-going">수사 중${stop ? `<small>${stop}</small>` : ''}</span>` : ''}</span></button>`;
     };
-    const intro = S.intro ? '' : `<div class="intro"><p>서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.</p><p>서랍 속에는 한 세기에 걸친 미제 기록 ${numk(main.length)} 건. 사진 한 장, 편지 한 통, 누군가의 혼잣말 같은 기록들. 기록은 대답하지 않는다. 쫓아가는 사람에게만 조금씩 입을 연다.</p><p class="intro-hand">처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장</p><button type="button" class="btn-hand" data-intro-ok>서랍을 연다</button></div>`;
+    const intro = S.intro ? '' : `<div class="intro"><p>서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.</p><p>서랍 속에는 한 세기에 걸친 미제 기록 ${numk(main.length)} 건. 신문 스크랩, 진술서, 편지, 사진. 선배가 끝내 풀지 못하고 두고 간 것들이다.</p><p class="intro-hand">처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장</p><button type="button" class="btn-hand" data-intro-ok>서랍을 연다</button></div>`;
     const letter = allShut ? `<article class="m-letter${newLetter ? ' fresh' : ''}"><h3>서랍 맨 밑의 편지</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p>${mWho()}</article>` : '';
     const hero = MG.images['_global/hero'];
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
-      <header class="cab-top"><p class="cab-kicker">서울서부경찰서 강력2팀 · 미제사건 기록실</p><h1 class="cab-title">Monologue Gaze</h1><p class="cab-sub">기록은 혼잣말을 한다. 들어주는 건 당신이다.</p>
+      <header class="cab-top"><p class="cab-kicker">서울서부경찰서 강력2팀 · 미제사건 기록실</p><h1 class="cab-title">Monologue Gaze</h1><p class="cab-sub">시간은 흐르지만, 새겨진 기록은 거짓말을 하지 않는다.</p>
         <p class="cab-ctl">${whoBtn(showRoster)}${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}</p><p class="cab-stat">종결 <b>${solvedMain}</b> / ${main.length}${live.length ? ` · 현행 <b>${solvedLive}</b> / ${live.length}` : ''} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}</p></header>
       ${showRoster ? rosterHtml(showRoster === 'ask') : ''}
       ${intro}

@@ -63,7 +63,7 @@
         ['사인', '부검 중 (헬레순 시립병원 병리과)'],
         ['관할', 'Hellesund Politikammer · 강력반'],
       ],
-      scrawl: '이름 없는 사람은 없다. 이름이 여럿인 사람이 있을 뿐.',
+      scrawl: '이 여자, 이름이 몇 개인가.',
     },
     start: ['k_hellesund', 'k_kvitdal', 'k_woman', 'k_labels'],
     sources: [
@@ -346,7 +346,7 @@
           ['10.18 (토) 10:40', '슐로서 계산', '현금 (크로네)', '—', '407', '택시 불러 줌 — [[헬레순 택시]] 7호'],
         ], head: ['들어온 때', '이름', '국적 · 사는 곳', '여권', '방', '비고'], f: { 0: 'f_rooms', 4: 'f_rooms' } },
         { note: '프런트: [[솔베이 하우그]] · 여권 번호는 신고서에 적힌 대로' },
-        { m: '이름은 몇 번이고 바꿀 수 있어도, 창문이 향한 쪽은 바꾸지 못한다. 묵은 방을 하나씩 셀 것.' },
+        { m: '숙박부 이름은 믿지 말 것. 묵은 방과 창이 난 쪽을 하나씩 셀 것.' },
       ] },
       d_reg_sjomann: { src: 'arkiv', blood: false, find: ['k_sjomann', 'k_lancier'], title: '선원 호텔 숙박 장부', kicker: 'SJØMANNSHJEMMET HELLESUND · GJESTEPROTOKOLL', meta: '부둣길 8 · 1969년 10월', body: [
         { rows: [
