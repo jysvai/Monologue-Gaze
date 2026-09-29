@@ -345,8 +345,13 @@
   const rawAns = (p, k) => { let a = p.ask && p.ask[k]; if (a == null && k === p.key) a = p.self; return a; };
   const isCond = a => a && !Array.isArray(a) && typeof a === 'object' && 'need' in a;
   const askEntry = (p, k) => { const a = rawAns(p, k); return isCond(a) && ok(a.need) ? k + '!' : k; };
-  // idle 이 여러 줄이면 단어마다 그중 한 줄 — 모르는 걸 스무 번 물어도 똑같은 말만 되풀이하지 않게
-  const idleFor = (p, k) => Array.isArray(p.idle) && p.idle.length > 1 ? [p.idle[hash(p.id + '~' + k) % p.idle.length]] : p.idle;
+  // idle 이 여러 줄이면 돌아가며 한 줄씩 — 모르는 걸 스무 번 물어도 똑같은 말만 되풀이하지 않게 (앞서 모른다고 한 횟수로 고르니 다시 그려도 같은 줄)
+  const fallsIdle = (p, e) => { const a = rawAns(p, e.replace(/!$/, '')); return a == null || (isCond(a) && !e.endsWith('!') && a.else == null); };
+  const idleFor = (p, k) => {
+    if (!Array.isArray(p.idle) || p.idle.length < 2) return p.idle;
+    let n = 0; for (const e of ST.asked[p.id] || []) { if (e === k) break; if (fallsIdle(p, e)) n++; }
+    return [p.idle[(n + hash(p.id)) % p.idle.length]];
+  };
   function ansBlocks(p, entry) {
     const conf = entry.endsWith('!');
     const k = conf ? entry.slice(0, -1) : entry;
