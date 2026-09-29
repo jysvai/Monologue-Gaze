@@ -77,6 +77,7 @@ tools/manifest.js     img/ 폴더를 훑어 img/manifest.js 생성
 tools/gen-images.js   (선택) OpenAI API 키가 있으면 프롬프트 전부를 한 번에 그려 img/ 에 넣는다
 tools/voices.js       (선택) ElevenLabs 로 목소리·효과음을 만든다. 사람마다 목소리·말소리 높이 배정표가 들어 있다
 tools/eleven.js       ElevenLabs API 호출 (키는 .env 의 ELEVENLABS_API_KEY — 저장소에 올리지 않는다)
+tools/itch-zip.js     itch.io 에 올릴 zip — 게임에 쓰는 파일만 골라 dist/ 에 묶는다
 ```
 
 ## 도구
@@ -86,6 +87,7 @@ node tools/validate.js            # 모든 사건 검사 (특정 파일만: node
 node tools/smoke.js cases/*.js    # 모든 화면이 깨지지 않고 그려지는지
 node tools/prompts.js             # docs/IMAGE_PROMPTS.md · IMAGE_REDO.md 다시 만들기
 node tools/optimize-images.js     # img/ 에 넣은 png·jpg 를 webp 로 바꿔 게임에 연결 (ffmpeg 필요)
+node tools/itch-zip.js            # itch.io 에 올릴 dist/monologue-gaze-itch.zip — 빠진 그림·소리, 경로 대소문자, itch.io 한도를 먼저 본다
 ```
 
 ## 소리

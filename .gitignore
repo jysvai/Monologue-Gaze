@@ -5,3 +5,4 @@ Thumbs.db
 .claude/
 .env
 img/_src/
+dist/
