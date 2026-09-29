@@ -209,6 +209,18 @@
     const t = e.target;
     if (t && t.closest && t.closest('img, .ph, .zoom, .map, .desk-props, .ph-cell, .cens, .b-img, .cmp-art')) e.preventDefault();
   });
+  // 긁어 잡은 글을 끌어 옮기기: 브라우저가 고른 부분을 그림째(가려진 열람 주의 사진의 원본까지) 다른 곳에 떨군다 → 게임 안에서는 끌 것이 없다 (입력 칸 글자는 그대로)
+  document.addEventListener('dragstart', e => {
+    const t = e.target;
+    if (!(t && t.closest && t.closest('input, textarea'))) e.preventDefault();
+  });
+  // 복사: 글자만 (고른 곳에 그림이 걸리면 붙여 넣는 곳에 원본 그림이 딸려 가므로). 입력 칸 안의 복사는 브라우저에 맡긴다
+  document.addEventListener('copy', e => {
+    const a = document.activeElement, s = window.getSelection && getSelection();
+    if ((a && a.matches && a.matches('input, textarea')) || !s || s.isCollapsed || !e.clipboardData) return;
+    e.clipboardData.setData('text/plain', s.toString());
+    e.preventDefault();
+  });
   // 받지 못한 그림: 브라우저의 깨진 그림 표시와 설명 글(alt) 대신 그 기록다운 빈자리 (css/ui.css .img-miss)
   document.addEventListener('error', e => {
     const i = e.target;

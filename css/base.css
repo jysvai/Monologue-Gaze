@@ -487,7 +487,7 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 .st-e{width:calc(210px * var(--s));height:calc(96px * var(--s))}
 .st-f{width:calc(170px * var(--s));height:calc(116px * var(--s));opacity:.5}
 /* 커피잔 자국 · 담뱃불 자국 (핏자국이 없는 사건의 종이 서류 몇 장) */
-.doc.marked{overflow:hidden}
+.doc.marked{overflow:hidden;overflow:clip} /* clip: 글을 긁어 끌어도 문서가 옆으로 밀려 가장자리 얼룩이 딸려 나오지 않게 */
 .mark{position:absolute;left:var(--x);top:var(--y);background:center/contain no-repeat;transform:rotate(var(--r));mix-blend-mode:multiply;pointer-events:none;z-index:0}
 .mk-ring{width:132px;height:132px;opacity:.2}
 .mk-burn{width:30px;height:30px;opacity:.55}
@@ -499,7 +499,7 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 /* 같은 핏자국이라도 마른 정도가 다르다: 오래된 것은 갈색으로 */
 .stain:nth-of-type(3n+2){filter:sepia(.35) saturate(.8) brightness(1.08)}
 .stain:nth-of-type(4n+3){filter:saturate(1.15) brightness(.9)}
-.case-view[data-graphic] .doc{overflow:hidden}
+.case-view[data-graphic] .doc{overflow:hidden;overflow:clip}
 .case-view[data-graphic] .doc-b,.case-view[data-graphic] .doc-h{position:relative;z-index:1}
 .doc>.stain{z-index:0} /* 기록지의 핏자국은 글자 밑으로 (요약 카드·폴더처럼) — 표 끝·✎ 단추·사진 설명이 얼룩에 묻히지 않게 */
 .case-view{position:relative;z-index:1}
@@ -531,7 +531,7 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 .cw-card>*:not(.stain){position:relative;z-index:4}
 .cw-card .stain{opacity:.5} /* 자리는 오른쪽 모서리뿐 (엔진 stains 의 corner) — 글 위에 얹히지 않는다 */
 .snd.mild[aria-pressed="true"]{color:#e08a7f}
-.cens{position:relative;display:block;overflow:hidden;cursor:pointer;background:#1c1412}
+.cens{position:relative;display:block;overflow:hidden;overflow:clip;user-select:none;cursor:pointer;background:#1c1412}
 .cens>svg,.cens>img{display:block;width:100%;height:auto;filter:blur(14px) grayscale(.6) brightness(.5);transform:scale(1.08);transition:filter .6s ease,transform .6s ease}
 .cens.open{cursor:inherit}
 .cens.open>svg,.cens.open>img{filter:none;transform:none}
