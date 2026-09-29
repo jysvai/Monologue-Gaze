@@ -345,12 +345,14 @@
   const rawAns = (p, k) => { let a = p.ask && p.ask[k]; if (a == null && k === p.key) a = p.self; return a; };
   const isCond = a => a && !Array.isArray(a) && typeof a === 'object' && 'need' in a;
   const askEntry = (p, k) => { const a = rawAns(p, k); return isCond(a) && ok(a.need) ? k + '!' : k; };
+  // idle 이 여러 줄이면 단어마다 그중 한 줄 — 모르는 걸 스무 번 물어도 똑같은 말만 되풀이하지 않게
+  const idleFor = (p, k) => Array.isArray(p.idle) && p.idle.length > 1 ? [p.idle[hash(p.id + '~' + k) % p.idle.length]] : p.idle;
   function ansBlocks(p, entry) {
     const conf = entry.endsWith('!');
     const k = conf ? entry.slice(0, -1) : entry;
     const a = rawAns(p, k);
-    if (isCond(a)) return conf ? a.a : a.else ?? p.idle ?? '…글쎄요.';
-    return a ?? p.idle ?? '…글쎄요, 잘 모르겠네요.';
+    if (isCond(a)) return conf ? a.a : a.else ?? idleFor(p, k) ?? '…글쎄요.';
+    return a ?? idleFor(p, k) ?? '…글쎄요, 잘 모르겠네요.';
   }
   function portrait(p, big) {
     if (p.art && C.art[p.art]) return `<span class="per-art${big ? ' lg' : ''}">${art(p.art)}</span>`;
@@ -420,7 +422,7 @@
       const k = e.replace(/!$/, ''), press = e.endsWith('!');
       const ev = press ? evidence(p, k) : [];
       return `<div class="qa${press ? ' press' : ''}" data-qa="${esc(e)}"><div class="c-q"><span class="c-t">${esc(qText(p, e))}</span>${press ? '' : `<small class="c-k">${esc((C.keywords[k] || {}).label || k)}</small>`}</div>
-        ${ev.map(n => `<p class="c-ev"><span class="c-ev-k">수첩을 내민다</span>${esc(n.t)}</p>`).join('')}
+        ${ev.map(n => `<p class="c-ev"><span class="c-ev-k">${isSoft(p, k) ? '수첩을 펴 보인다' : '수첩을 내민다'}</span>${esc(n.t)}</p>`).join('')}
         <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div></div>`;
     }).join('');
     return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}</div></header>
