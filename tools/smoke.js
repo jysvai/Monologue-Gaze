@@ -17,10 +17,11 @@ const LANG = process.env.LANG_CODE || 'ko';
 global.localStorage = { getItem(k) { return k === 'mg-lang' ? LANG : null; }, setItem() {} }; // 기본은 한국어 원문 (js/i18n.js)
 global.scrollTo = () => {};
 global.addEventListener = () => {};
-global.document = { body: stub(), head: stub(), documentElement: stub(), getElementById: el, querySelector: el, querySelectorAll: () => [], createElement: stub, addEventListener() {} };
+global.document = { baseURI: 'http://localhost/', body: stub(), head: stub(), documentElement: stub(), getElementById: el, querySelector: el, querySelectorAll: () => [], createElement: stub, addEventListener() {} };
 
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'js/i18n.js'), 'utf8'));
 if (LANG !== 'ko') { const dir = path.join(ROOT, 'i18n', LANG); fs.readdirSync(dir).filter(f => f.endsWith('.js')).forEach(f => vm.runInThisContext(fs.readFileSync(path.join(dir, f), 'utf8'))); }
+vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'img/manifest.js'), 'utf8')); // 그림 파일이 있는 자리는 SVG 대신 그림이 뜬다 (남은 한글 목록이 실제 화면과 같게)
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'js/engine.js'), 'utf8'));
 let files = process.argv.slice(2);
 if (!files.length) files = fs.readdirSync(path.join(ROOT, 'cases')).filter(f => /^c\d+.*\.js$/.test(f)).sort().map(f => path.join('cases', f)); // 인자가 없으면 사건 전부
@@ -47,7 +48,7 @@ for (const c of mine) {
   // 실시간 수사: 신청서는 기각·접수·회신 상태를 돌아가며, 단톡방은 말이 다 온 상태로
   const reqs = c.sources.filter(s => s.type === 'request').flatMap(s => s.items || []);
   const fitems = c.sources.filter(s => s.type === 'feed').flatMap(s => s.items || []);
-  const LIVE = (k = 0) => (c.live ? { t: 900, req: Object.fromEntries(reqs.map((r, i) => [r.id, [null, { st: 'no', at: 30 }, { st: 'wait', at: 40, due: 1200 }, { st: 'done', at: 50, due: 300 }][(i + k) % 4]]).filter(([, v]) => v)), fd: Object.fromEntries(fitems.map(it => [it.id, it.at || 0])), fx: reqs.length ? [{ t: 300, who: '회신', msg: '회신 도착', doc: reqs[0].doc }] : [], rd: {}, late: true } : undefined);
+  const LIVE = (k = 0) => (c.live ? { t: 900, req: Object.fromEntries(reqs.map((r, i) => [r.id, [null, { st: 'no', at: 30 }, { st: 'wait', at: 40, due: 1200 }, { st: 'done', at: 50, due: 300 }][(i + k) % 4]]).filter(([, v]) => v)), fd: Object.fromEntries(fitems.map(it => [it.id, it.at || 0])), fx: reqs.length ? [{ t: 300, who: MG.T('회신'), msg: MG.T('회신'), doc: reqs[0].doc }] : [], rd: {}, late: true } : undefined);
   c.sources.forEach(s => {
     if (s.type === 'timeline' || s.type === 'cipher') extra.push(s.id);
     if (s.type === 'compare') (s.sets || []).forEach(x => extra.push(x.id));
@@ -103,6 +104,6 @@ for (const c of mine) {
   if (/&lt;b&gt;/.test(tagHtml)) { problems++; console.log('✗', c.id, 'tag shows escaped <b>'); }
   console.log(`${c.id}: rendered ${n} views`);
 }
-if (hangul.size) { console.log(`한글이 남은 낱말 ${hangul.size}개:`); [...hangul].slice(0, 40).forEach(([w, at]) => console.log(`  ${w}   (${at})`)); }
+if (hangul.size) { console.log(`한글이 남은 낱말 ${hangul.size}개:`); [...hangul].slice(0, +process.env.SHOW || 40).forEach(([w, at]) => console.log(`  ${w}   (${at})`)); }
 console.log(problems ? `FAIL: ${problems} problem(s)` : 'SMOKE OK');
 process.exit(problems ? 1 : 0); // 화면 시계(setInterval)가 프로세스를 붙잡지 않게
