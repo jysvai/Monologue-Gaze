@@ -1427,7 +1427,7 @@
     document.body.dataset.screen = 'cabinet';
     document.title = 'Monologue Gaze';
     app.innerHTML = `<div class="cw"><div class="cw-card" role="region" aria-labelledby="cwH" tabindex="-1">${S.mild ? '' : stains(c.id + 'cw', 2, 'acd', 'corner')}<p class="cw-t">혐오감 주의</p><h2 id="cwH">CASE ${pad(c.no)} 「${esc(c.title)}」 ${starsHtml(c)}</h2>
-      <p>${esc(c.warn || '이 사건 기록에는 시신 훼손 같은 잔혹한 내용과 강한 묘사가 들어 있습니다.')}</p><p class="cw-s">모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국 같은 화면 연출과 사진은 「잔혹 표현」 단추로 끌 수 있습니다.</p><p>${mildBtn()}</p>
+      <p>${esc(c.warn || '이 사건 기록에는 시신 훼손 같은 잔혹한 내용과 강한 묘사가 들어 있습니다.')}</p><p class="cw-s">모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국, 가림 없는 사진, 참혹한 묘사와 소리는 「잔혹 표현」 단추로 끌 수 있습니다 — 끄면 사진은 가려지고 기록은 건조한 판으로 바뀝니다.</p><p>${mildBtn()}</p>
       <p class="cw-b"><button type="button" class="btn-hand" data-cw-ok="${esc(c.id)}">기록을 연다</button> <button type="button" class="reset" data-cabinet>돌아간다</button></p></div></div>`;
     window.scrollTo(0, 0);
     guard();
