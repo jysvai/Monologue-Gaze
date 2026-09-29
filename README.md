@@ -17,9 +17,17 @@
 
 ## 플레이
 
-**바로 하기: https://jysvai.github.io/Monologue-Gaze/**
+**바로 하기: https://jysvai.itch.io/monologue-gaze** (itch.io) · https://jysvai.github.io/Monologue-Gaze/ (GitHub Pages)
 
-빌드 과정 없는 정적 사이트다. 위 주소는 GitHub Pages 가 `main` 브랜치 루트를 그대로 내보낸 것이라, `main` 에 올리면 1~2분 뒤 반영된다.
+빌드 과정 없는 정적 사이트다. GitHub Pages 주소는 `main` 브랜치 루트를 그대로 내보낸 것이라, `main` 에 올리면 1~2분 뒤 반영된다.
+
+itch.io 판은 따로 올려야 바뀐다. `node tools/itch-zip.js` 로 묶은 뒤 itch.io 의 업로드 도구 [butler](https://itch.io/docs/butler/) 로 올린다 (처음 한 번 `butler login`):
+
+```bash
+butler push dist/monologue-gaze-itch.zip jysvai/monologue-gaze:html5 --userversion $(git rev-parse --short HEAD)
+```
+
+itch.io 는 게임을 다른 주소(html-classic.itch.zone)에서 돌리므로, GitHub Pages 판과 저장 기록을 나눠 갖지 않는다.
 
 - 로컬: `index.html` 을 브라우저로 연다. 파일로 바로 열어도 되고, `npx serve .` 같은 정적 서버로 띄워도 된다.
 - 사건마다 시대에 맞는 조명 빛깔·날씨(안개, 비, 눈, 김)·배경음이 깔린다. 배경음은 기록실 위쪽 「소리」 단추를 켰을 때만 난다.
