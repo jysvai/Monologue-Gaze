@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /* 화면 점검 — 가짜 DOM 위에서 엔진을 돌려 사건의 모든 문서·인물·조사 도구 화면을 그려 본다.
  * 사용: node tools/smoke.js cases/c01-....js [...]   (undefined, 못 찾은 [[단어]], 깨진 화면을 찾는다)
+ *       LANG_CODE=en node tools/smoke.js …          (그 언어의 번역을 덮어 그리고, 화면에 남은 한글도 센다)
  */
 const fs = require('fs');
 const path = require('path');
@@ -12,12 +13,14 @@ const stub = () => ({ innerHTML: '', textContent: '', dataset: {}, scrollTop: 0,
   classList: { toggle() {}, add() {}, remove() {}, contains() { return false; } }, scrollIntoView() {}, focus() {}, getBoundingClientRect() { return { left: 0, right: 0, top: 0, bottom: 0, width: 0, height: 0 }; }, setAttribute() {}, appendChild() {}, querySelector() { return null; }, querySelectorAll() { return []; } });
 const el = s => (els[s] ||= stub());
 global.window = global;
-global.localStorage = { getItem(k) { return k === 'mg-lang' ? 'ko' : null; }, setItem() {} }; // 한국어 원문으로 그린다 (js/i18n.js)
+const LANG = process.env.LANG_CODE || 'ko';
+global.localStorage = { getItem(k) { return k === 'mg-lang' ? LANG : null; }, setItem() {} }; // 기본은 한국어 원문 (js/i18n.js)
 global.scrollTo = () => {};
 global.addEventListener = () => {};
 global.document = { body: stub(), head: stub(), documentElement: stub(), getElementById: el, querySelector: el, querySelectorAll: () => [], createElement: stub, addEventListener() {} };
 
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'js/i18n.js'), 'utf8'));
+if (LANG !== 'ko') { const dir = path.join(ROOT, 'i18n', LANG); fs.readdirSync(dir).filter(f => f.endsWith('.js')).forEach(f => vm.runInThisContext(fs.readFileSync(path.join(dir, f), 'utf8'))); }
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'js/engine.js'), 'utf8'));
 let files = process.argv.slice(2);
 if (!files.length) files = fs.readdirSync(path.join(ROOT, 'cases')).filter(f => /^c\d+.*\.js$/.test(f)).sort().map(f => path.join('cases', f)); // 인자가 없으면 사건 전부
@@ -27,8 +30,10 @@ const mine = MG.cases.slice(before); // 이 파일들이 등록한 사건 (파�
 if (!mine.length) { console.log('✗ 등록된 사건이 없음'); process.exit(1); }
 
 let problems = 0;
+const hangul = new Map(); // 번역한 언어로 그렸는데 화면 글자에 남은 한글 (눈으로 볼 목록)
 const check = (label, html, mustHave) => {
   const bad = [];
+  if (LANG !== 'ko') String(html).replace(/<[^>]*>/g, ' ').replace(/[^\s<>]*[가-힣][^\s<>]*/g, w => { if (!hangul.has(w)) hangul.set(w, label); return w; });
   if (/undefined|NaN|\[object Object\]/.test(html)) bad.push('undefined/NaN/object');
   const x = html.match(/class="kw-x">[^<]*/g); if (x) bad.push('unresolved kw: ' + x.join(', '));
   if (mustHave && !html.includes(mustHave)) bad.push('missing: ' + mustHave);
@@ -98,5 +103,6 @@ for (const c of mine) {
   if (/&lt;b&gt;/.test(tagHtml)) { problems++; console.log('✗', c.id, 'tag shows escaped <b>'); }
   console.log(`${c.id}: rendered ${n} views`);
 }
+if (hangul.size) { console.log(`한글이 남은 낱말 ${hangul.size}개:`); [...hangul].slice(0, 40).forEach(([w, at]) => console.log(`  ${w}   (${at})`)); }
 console.log(problems ? `FAIL: ${problems} problem(s)` : 'SMOKE OK');
 process.exit(problems ? 1 : 0); // 화면 시계(setInterval)가 프로세스를 붙잡지 않게
