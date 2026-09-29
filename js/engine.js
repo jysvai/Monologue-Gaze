@@ -414,6 +414,7 @@
     return ((a && a.need) || []).filter(n => n[0] === '!').map(n => ST.notes.find(x => x.f === n.slice(1))).filter(Boolean);
   }
   const DASH = /^\s*—\s*/;
+  const MIDACT = /\(([^()<>\d]*[가-힣][^()<>\d]*)\)/g; // 말 도중의 몸짓 (숫자가 든 괄호 — 나이·번호 — 는 말 그대로 둔다)
   function chatLines(arr, base, src) {
     if (arr == null) return '';
     if (!Array.isArray(arr)) arr = [arr];
@@ -426,7 +427,9 @@
       const rest = m ? t.slice(m[0].length) : t;
       if (!rest.trim()) return m ? `<p class="c-act" data-i="${i}">${inline(m[1])}${fid ? pinBtn(ref, t, fid, src) : ''}</p>` : '';
       const me = DASH.test(rest);
-      return `${m ? `<p class="c-act" data-i="${i}">${inline(m[1])}</p>` : ''}<div class="c-bub${me ? ' me' : ''}" data-i="${i}" data-bub="${esc(ref)}"><span class="c-t">${inline(me ? rest.replace(DASH, '') : rest)}</span>${pinBtn(ref, rest, fid, src)}</div>`;
+      // 말 도중의 몸짓 「(고개를 숙인다)」은 말이 아니다: 말풍선 안에서 흐린 기울임꼴로, 수첩에 적을 때는 뺀다
+      const said = inline(me ? rest.replace(DASH, '') : rest).replace(MIDACT, '<i class="c-mid">($1)</i>');
+      return `${m ? `<p class="c-act" data-i="${i}">${inline(m[1])}</p>` : ''}<div class="c-bub${me ? ' me' : ''}" data-i="${i}" data-bub="${esc(ref)}"><span class="c-t">${said}</span>${pinBtn(ref, rest.replace(MIDACT, ' ').replace(/\s{2,}/g, ' '), fid, src)}</div>`;
     }).join('');
   }
   function personHtml(p) {
@@ -515,7 +518,7 @@
       // 글자마다 감싸 두고 하나씩 보이게 (자리는 미리 잡혀 있어 줄이 흔들리지 않는다)
       const chars = [];
       const walk = node => [...node.childNodes].forEach(c => {
-        if (c.nodeType !== 3) return walk(c);
+        if (c.nodeType !== 3) { if (c.classList && c.classList.contains('c-mid')) { c.classList.add('ch'); chars.push(c); return; } return walk(c); } // 몸짓은 한 번에 스르르
         const frag = document.createDocumentFragment();
         [...c.data].forEach(ch => { const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; frag.appendChild(s); chars.push(s); });
         c.replaceWith(frag);
@@ -543,7 +546,7 @@
         if (k % 10 === 1) keep(el);
         if (k >= chars.length) return end();
         const ch = chars[k - 1] ? chars[k - 1].textContent : '';
-        me.timer = setTimeout(step, v ? 30 : /[.?!…]/.test(ch) ? 230 : /[,、]/.test(ch) ? 120 : 34);
+        me.timer = setTimeout(step, v ? 30 : chars[k - 1].classList.contains('c-mid') ? 420 : /[.?!…]/.test(ch) ? 230 : /[,、]/.test(ch) ? 120 : 34);
       };
       step();
     };

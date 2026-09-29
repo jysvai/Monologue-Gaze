@@ -16,6 +16,8 @@
 .c-bub .pin{margin-left:8px}
 @media (hover:hover){.c-bub:hover .pin{opacity:1}}
 .c-bub .kw{font-size:inherit}
+.c-mid{font:italic .92em/1 var(--f-doc);color:#7a715c} /* 말 도중의 몸짓 */
+.c-bub.me .c-mid{color:rgba(243,236,216,.66)}
 .c-act{align-self:flex-start;margin:2px 0 0 6px;max-width:80%;font:italic 13px/1.5 var(--f-doc);color:#6d6552}
 .c-act::before{content:"— ";opacity:.6}
 .c-ev{align-self:flex-end;max-width:min(78%,480px);margin:0 6px 2px 0;padding:7px 12px 6px;background:#f3e7b3;background-image:var(--noise);color:var(--ink);font:19px/1.25 var(--f-hand);box-shadow:0 3px 8px rgba(0,0,0,.2);transform:rotate(1.2deg)}
