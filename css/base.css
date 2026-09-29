@@ -502,6 +502,8 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 .case-view[data-graphic] .doc{overflow:hidden;overflow:clip}
 .case-view[data-graphic] .doc-b,.case-view[data-graphic] .doc-h{position:relative;z-index:1}
 .doc>.stain{z-index:0} /* 기록지의 핏자국은 글자 밑으로 (요약 카드·폴더처럼) — 표 끝·✎ 단추·사진 설명이 얼룩에 묻히지 않게 */
+.case-view[data-graphic] .doc-b{text-shadow:0 0 1px var(--sheet),0 0 3px var(--sheet)} /* 짙은 핏자국 위의 글자도 읽히게: 먹 둘레에 종이 빛 테 (핏자국 없는 자리에서는 보이지 않는다) */
+@container stage (max-width:520px){.doc>.stain{opacity:.42}} /* 폰: 좁은 종이에서는 가장자리 핏자국도 글 위에 걸리니 옅게 */
 .case-view{position:relative;z-index:1}
 /* ── 책상 위 소품 (js deskProps): 종이 밑에 깔린 듯 가장자리만 보인다. 책상이 드러나는 넓은 화면에서만 */
 .desk-props{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;display:none}
