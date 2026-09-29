@@ -1008,10 +1008,12 @@
     const n = norm(q);
     if (!n) return [];
     // 수첩에 적은 단어는 일부만 쳐도 찾히고, 아직 모르는 단어는 온전히 쳐야만 찾힌다 (추적을 건너뛰지 못하게).
+    // 로마자·키릴 문자로만 된 세 글자 이하 별칭(S.C., Ann)은 다른 언어에서 낱말 속에 섞여 걸리므로 통째로 쳐야 한다.
+    const inside = l => l.length >= 2 && (MG.I18N.lang === 'ko' || l.length >= 4 || !/^[a-zа-яёäöüßéè]+$/.test(l)) && n.includes(l);
     return Object.entries(C.keywords).filter(([id, k]) => {
       const labels = [k.label, ...(k.alias || [])].map(norm).filter(Boolean);
-      if (!ST.keys.includes(id)) return labels.some(l => l === n || (l.length >= 2 && n.includes(l)));
-      return labels.some(l => l === n || (n.length >= 2 && l.includes(n)) || (l.length >= 2 && n.includes(l)));
+      if (!ST.keys.includes(id)) return labels.some(l => l === n || inside(l));
+      return labels.some(l => l === n || (n.length >= 2 && l.includes(n)) || inside(l));
     }).map(([id]) => id);
   }
   function archiveHits(s, q) {
