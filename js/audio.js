@@ -175,5 +175,6 @@
   function warm() { if (S().sound) ['sfx/clue', 'sfx/match', 'sfx/confess', 'sfx/miss', 'sfx/find', 'sfx/pen', 'sfx/page', 'sfx/click', 'sfx/key'].forEach(load); }
   document.addEventListener('pointerdown', function once() { ctx(); warm(); document.removeEventListener('pointerdown', once); }, { passive: true });
 
-  MG.sound = { play, voice, stopVoice, hasVoice, blip, tone, hero, caption, warm, line: k => (A().say || {})['hero/' + k] || '' };
+  const preload = ks => { if (S().sound) ks.forEach(k => url(k) && load(k)); }; // 곧 날 소리를 미리 받아 둔다 (처음 한 번이 늦어 건너뛰지 않게)
+  MG.sound = { play, voice, stopVoice, hasVoice, blip, tone, hero, caption, warm, preload, line: k => (A().say || {})['hero/' + k] || '' };
 })();

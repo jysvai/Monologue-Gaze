@@ -8,7 +8,7 @@ const path = require('path');
 const vm = require('vm');
 
 const norm = s => String(s ?? '').toLowerCase().replace(/[\s'"`.,!?·・()[\]{}\-_/@:;~「」『』〈〉《》“”‘’]/g, '');
-const BLOCK_KEYS = new Set(['p', 'h', 'sep', 'divider', 'note', 'stamp', 'sign', 'm', 'img', 'cap', 'rows', 'head', 'list', 'msg', 'who', 'at', 'me', 'say', 'cipher', 'f', 'cls', 'nopin', 'osd']);
+const BLOCK_KEYS = new Set(['p', 'h', 'sep', 'divider', 'note', 'stamp', 'sign', 'm', 'img', 'cap', 'rows', 'head', 'list', 'msg', 'who', 'at', 'me', 'say', 'cipher', 'f', 'cls', 'nopin', 'osd', 'gore']);
 const TEXT_KEYS = ['p', 'h', 'divider', 'note', 'stamp', 'sign', 'm', 'cap', 'msg', 'say'];
 const SKINS = new Set(['plain', 'report', 'news', 'letter', 'telegram', 'ledger', 'card', 'transcript', 'memo', 'photo', 'web', 'chat', 'sms', 'home', 'files', 'cipher', 'board', 'lab', 'form']);
 const TYPES = new Set(['archive', 'list', 'people', 'map', 'cipher', 'timeline', 'compare', 'query', 'photo', 'request', 'feed']);
@@ -36,7 +36,7 @@ function check(c) {
   if (c.graphic != null && typeof c.graphic !== 'boolean') err('graphic 은 true/false');
   if (c.mood) { // 사건의 공기 (js/mood.js)
     const L = ['gas', 'lamp', 'cold', 'sea', 'rain', 'sodium', 'screen', 'fluoro'], F = ['fog', 'mist', 'steam', 'smoke', 'rain', 'drizzle', 'snow', 'dust'];
-    const AMB = ['rain', 'drizzle', 'wind', 'surf', 'harbor', 'river', 'city', 'clock', 'clapper', 'bell', 'horn', 'hum', 'fan', 'room', 'drip', 'drone'];
+    const AMB = ['rain', 'drizzle', 'wind', 'surf', 'harbor', 'river', 'city', 'clock', 'clapper', 'bell', 'horn', 'hum', 'fan', 'room', 'drip', 'drone', 'flies', 'creak', 'crackle', 'static'];
     if (c.mood.light && !L.includes(c.mood.light)) err(`mood.light "${c.mood.light}" 은 ${L.join(' | ')} 중 하나`);
     if (c.mood.fx && !F.includes(c.mood.fx)) err(`mood.fx "${c.mood.fx}" 은 ${F.join(' | ')} 중 하나`);
     (c.mood.amb || []).forEach(k => { if (!AMB.includes(k)) err(`mood.amb "${k}" 은 ${AMB.join(' | ')} 중 하나`); });

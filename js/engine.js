@@ -46,6 +46,9 @@
   const MOTTLE = "<feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='9' result='n2'/><feColorMatrix in='n2' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.2 1.42' result='m'/><feComposite in='d' in2='m' operator='in'/>";
   ['a', 'b', 'c'].forEach(k => { STAIN_SVG[k] = STAIN_SVG[k].replace(/<feDisplacementMap in='SourceGraphic' scale='(\d+)'\/>/, `<feDisplacementMap in='SourceGraphic' scale='$1' result='d'/>${MOTTLE}`); });
   const gore = () => !!(C && C.graphic && !S.mild);
+  // 글 한 토막의 잔혹판: { p: '…', gore: '…' } — 잔혹 표현을 켜 두면 gore 가 원래 글 자리(p·note·say·cap·msg)에 들어간다. 사실(f)·단어는 두 판이 같다
+  const GTXT = ['p', 'note', 'say', 'cap', 'msg'];
+  const gv = b => b && typeof b === 'object' && b.gore != null && gore() ? { ...b, [GTXT.find(k => b[k] != null) || 'p']: b.gore } : b;
   // kinds: 문자열 'abcd' 중에서 고른다. seed 로 위치·각도를 정한다 (같은 문서는 늘 같은 자리).
   // edge: true 면 좌우 가장자리, 'corner' 면 오른쪽 위·아래 모서리만 (글이 꽉 찬 작은 카드용)
   function stains(seed, n, kinds, edge) {
@@ -248,9 +251,8 @@
     // 글자 없는 그림(지도·약도)에는 이름표를 게임이 얹는다: [글자, x%, y%(글자 밑줄), 'l'|'c'|'r']
     const labs = file && a && a.labels ? `<span class="art-labs" aria-hidden="true">${a.labels.map(([t, x, y, al]) => `<span class="art-lab${al === 'c' ? ' c' : al === 'r' ? ' r' : ''}" style="left:${+x}%;top:${+y}%">${esc(t)}</span>`).join('')}</span>` : '';
     const body = file ? (labs ? `<span class="art-wrap">${img}${labs}</span>` : img) : typeof a === 'string' ? a : a.svg || '';
-    if (!(a && a.sensitive) || !ST) return body;
-    const open = ST.cens.includes(key) && !S.mild;
-    return `<span class="cens${open ? ' open' : ''}" data-cens="${esc(key)}">${body}<span class="cens-l"><b>열람 주의</b>${S.mild ? '잔혹 표현을 끈 상태' : '눌러서 보기'}</span></span>`;
+    if (!(a && a.sensitive) || !ST || !S.mild) return body; // 잔혹 표현을 켜 두었으면 가리지 않고 바로 보인다 (사건 들머리의 혐오감 주의에서 이미 동의했다)
+    return `<span class="cens" data-cens="${esc(key)}">${body}<span class="cens-l"><b>열람 주의</b>잔혹 표현을 끈 상태</span></span>`;
   }
 
   // 연필·체크 표시는 글꼴의 기호(✎ ✓)가 아니라 그림으로: 기호는 어느 웹 글꼴에도 없어 운영체제마다 다른 기호 글꼴로 찍힌다
@@ -273,6 +275,7 @@
   function block(b, ref, src) {
     if (b == null) return '';
     if (typeof b === 'string') b = { p: b };
+    b = gv(b);
     const cls = b.cls ? ' ' + esc(b.cls) : '';
     if (b.h != null) return `<h4 class="b-h${cls}">${inline(b.h)}</h4>`;
     if (b.sep) return `<hr class="b-sep">`;
@@ -333,7 +336,11 @@
   function docHtml(d) {
     const s = C.sources.find(x => x.id === d.src) || {};
     if (d.lock && !ST.unl.includes(d.id)) return lockHtml(d.id, d.lock, d.title);
-    if (!ST.seen.includes(d.id)) { ST.seen.push(d.id); save(); }
+    if (!ST.seen.includes(d.id)) {
+      ST.seen.push(d.id); save();
+      // 빨간 별 사건에서 끔찍한 기록을 처음 펼칠 때: 파리 떼·긁는 현 (문서가 sting 을 정하면 그 소리 — 뼈 켜는 톱 등)
+      if (gore() && (d.sting || (d.body || []).some(b => b && typeof b === 'object' && (b.gore != null || (b.img && C.art[b.img] && C.art[b.img].sensitive))))) { const c0 = C; setTimeout(() => { if (C === c0) sfx(d.sting || 'gore'); }, 350); }
+    }
     const skin = d.skin || s.skin || 'plain';
     const paper = d.paper || s.paper;
     const marks = docMarks(d, skin);
@@ -408,7 +415,8 @@
   function chatLines(arr, base, src) {
     if (arr == null) return '';
     if (!Array.isArray(arr)) arr = [arr];
-    return arr.map((b, i) => {
+    return arr.map((b0, i) => {
+      const b = gv(b0);
       const ref = `${base}#${i}`;
       if (!(typeof b === 'string' || (b && b.p != null && !b.cls && !b.nopin))) return block(b, ref, src);
       const t = typeof b === 'string' ? b : b.p, fid = typeof b === 'string' ? null : b.f;
@@ -1242,7 +1250,7 @@
     const ptime = t => { const d = liveDate(t), h = d.getHours(), m = d.getMinutes(); return `${h < 6 ? '새벽 ' : ''}${h}시${m ? ` ${m}분` : ''}`; };
     const pstamp = t => { const d = liveDate(t); return `${d.getMonth() + 1}월 ${d.getDate()}일 ${'일월화수목금토'[d.getDay()]}요일 ${ptime(t)}`; };
     const when = x => (C.live && ST.live && typeof x === 'string' ? x.replace(/\{\{t\}\}/g, ptime(ST.live.t)).replace(/\{\{d\}\}/g, pstamp(ST.live.t)) : x);
-    const stamped = arr => (arr || []).map(b => (typeof b === 'string' ? when(b) : b && typeof b.p === 'string' ? { ...b, p: when(b.p) } : b));
+    const stamped = arr => (arr || []).map(b => (typeof b === 'string' ? when(b) : b && typeof b.p === 'string' ? { ...b, p: when(b.p), ...(typeof b.gore === 'string' ? { gore: when(b.gore) } : {}) } : b));
     const epi = blocks(stamped(late && sol.late ? sol.late : sol.epilogue), 'epi', '결말');
     NOPIN = false;
     const dl = C.live && C.live.deadline, dlSeen = dl && (late || ok(dl.need)); // 끝내 몰랐던 기한은 말하지 않는다
@@ -1334,6 +1342,7 @@
   }
   function renderCase() {
     document.body.dataset.screen = 'case';
+    if (gore() && MG.sound && MG.sound.preload) MG.sound.preload(['sfx/gore', 'sfx/bonesaw']); // 끔찍한 기록을 처음 펼칠 때 날 소리
     app.innerHTML = `${deskProps()}${gore() ?`<div class="gore-bg" aria-hidden="true">${stains(C.id + 'bg', 5, 'aacb', true)}</div>` : ''}<div class="case-view" data-case="${esc(C.id)}" data-frame="${esc(C.frame || 'papers')}" data-era="${(y => y < 1945 ? 'old' : y < 1980 ? 'mid' : '')(parseInt(C.year, 10) || 2000)}"${gore() ? ' data-graphic' : ''}>
       <main class="stage" aria-label="조사 자료">
         <div class="stage-frame"><span class="cam" aria-hidden="true"></span>

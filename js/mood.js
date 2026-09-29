@@ -232,7 +232,17 @@
       tone('sine', 46, gain(0.035)); tone('sine', 46.7, gain(0.03));
       loop('brown', filt('lowpass', 110), gain(0.035));
     },
+    // 빨간 별 사건의 녹음된 소리 (잔혹 표현을 끄면 나지 않는다): 이따금, 어디선가
+    flies() { rec('sfx/flies', 1, 38, 80); },
+    creak() { rec('sfx/creak', 0.4, 45, 95); },
+    crackle() { rec('sfx/crackle', 0.7, 40, 85); },
+    static() { rec('sfx/static', 0.65, 45, 90); },
   };
+  const HORROR = ['drone', 'flies', 'creak', 'crackle', 'static'];
+  function rec(k, vol, a, b) {
+    if (MG.sound && MG.sound.preload) MG.sound.preload([k]);
+    every(a, b, () => { if (MG.sound) MG.sound.play(k, vol); });
+  }
   function startAmb(list) {
     try {
       ax = ax || new (window.AudioContext || window.webkitAudioContext)();
@@ -251,7 +261,7 @@
   }
   function syncAmb(c) {
     const st = S(), m = (c && c.mood) || {};
-    const list = (m.amb || []).filter(k => k !== 'drone' || !st.mild);
+    const list = (m.amb || []).filter(k => !HORROR.includes(k) || !st.mild);
     const sig = c && st.sound ? c.id + ':' + list.join(',') : '';
     if (sig === ampSig) return;
     stopAmb(); ampSig = sig;

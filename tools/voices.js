@@ -78,6 +78,13 @@ const SFX = {
   page: ['a single old paper page turned quickly', 0.6],
   click: ['a single soft computer mouse button click, dry and close, no echo', 0.5],
   key: ['one single keystroke on an old heavy mechanical computer keyboard, dry and close, no echo', 0.5],
+  // 빨간 별 사건 (잔혹 표현 켜짐): 끔찍한 기록을 처음 펼칠 때, 그리고 사건 배경에 이따금
+  gore: ['a sudden swarm of flies lifting off close to the ear, a low dissonant cello scrape and one heavy wet drip, horror discovery stinger, no melody', 3.5],
+  bonesaw: ['a hand saw rasping slowly back and forth through bone, muffled as if heard through a thin wall, a wet crack at the end, then silence, no music', 4],
+  flies: ['a few flies buzzing slowly around something rotting in a cold quiet room, drifting close past the ear and away, no music', 6],
+  creak: ['an old wooden barn door creaking slowly on rusted hinges in a winter wind, a loose chain knocking faintly, no music', 5],
+  crackle: ['charred wood still hissing and crackling faintly in cold mountain mist after a fire has burned out, a gust of wind, no music', 5],
+  static: ['a car radio left on in a parked car at night, soft hissing static between stations, the engine ticking as it cools, lonely, no music', 5],
 };
 
 const strip = s => String(s || '').replace(/\[\[([^\]|]+)(\|[^\]]+)?\]\]/g, '$1').replace(/\*\*|~~/g, '');
