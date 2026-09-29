@@ -156,7 +156,7 @@
       k_parcel: { label: '택배', type: 'thing', alias: ['송장', '부재', '이웃 인계'] },
       k_hanbit: { label: '한빛', type: 'thing', alias: ['한빛 영업소', '은골영업소', '영업소'] },
       k_frame: { label: '액자', type: 'thing', alias: ['환갑 사진', '족자'] },
-      k_nick: { label: '표구쟁이', type: 'word', alias: ['표구쟁이의 작업실'] },
+      k_nick: { label: '표구쟁이', type: 'word', alias: ['표구쟁이의 작업실'], q: ['표구쟁이라는 말, 짚이는 데가 있습니까?', '표구쟁이에 대해 아시는 대로 말씀해 주시죠.'] },
       k_phone: { label: '소라의 휴대폰', type: 'thing', alias: ['휴대폰', '폰', '기지국'] },
       k_disposal: { label: '대형폐기물', type: 'thing', alias: ['폐기물', '폐기물 스티커', '옷장'] },
       k_canvass: { label: '일제 탐문', type: 'word', alias: ['탐문 카드'] },

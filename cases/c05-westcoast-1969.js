@@ -134,7 +134,7 @@
       k_graylock: { label: '그레이록 등대', type: 'place', alias: ['등대', 'Graylock', '등대 잠복'] },
       k_refinery: { label: '베이쇼어 정유공장', type: 'place', alias: ['정유공장', 'Bayshore'] },
       k_jail: { label: '카운티 구치소', type: 'place', alias: ['구치소', '주취 보호'] },
-      k_sandruns: { label: 'THE SAND RUNS', type: 'word', alias: ['모래가 흐른다', '모래는 흐른다', '첫 문장'] },
+      k_sandruns: { label: 'THE SAND RUNS', type: 'word', alias: ['모래가 흐른다', '모래는 흐른다', '첫 문장'], q: ['THE SAND RUNS라는 말, 짚이는 데가 있습니까?', 'THE SAND RUNS에 대해 아시는 대로 말씀해 주시죠.'] },
       k_cipher: { label: '암호문', type: 'thing', alias: ['암호', 'cipher', '기호'] },
       k_lantern: { label: '캠핑 랜턴', type: 'thing', alias: ['랜턴', '등불', 'lantern'] },
       k_radio: { label: '카 라디오', type: 'thing', alias: ['라디오', '음악'] },

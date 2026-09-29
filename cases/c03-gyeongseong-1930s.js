@@ -98,7 +98,7 @@
       k_nine: { label: '밤 9시', type: 'time', alias: ['아홉 시'] },
       k_deadline: { label: '11월 5일 기한', type: 'time', alias: ['5일 기한'], q: ['11월 5일이 갚기로 한 기한이었다지요. 알고 계셨습니까?', '11월 5일 기한 말입니다. 그 날짜를 누구한테 들으셨습니까?'] },
       k_voice: { label: '여자 목소리', type: 'word', alias: ['목소리'] },
-      k_modern: { label: '모던걸', type: 'word', alias: ['모던 걸'] },
+      k_modern: { label: '모던걸', type: 'word', alias: ['모던 걸'], q: ['모던걸이라는 말, 짚이는 데가 있습니까?', '모던걸에 대해 아시는 대로 말씀해 주시죠.'] },
     },
     docs: {
       /* ───────── 청구일보 스크랩 ───────── */

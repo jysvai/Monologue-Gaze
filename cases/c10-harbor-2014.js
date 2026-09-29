@@ -98,7 +98,7 @@
       k_busn1: { label: '심야버스', type: 'thing', alias: ['N1', '교통카드'] },
       k_fishing: { label: '밤낚시', type: 'thing', alias: ['낚시'] },
       k_hangover: { label: '숙취해소제', type: 'thing', alias: ['편의점'] },
-      k_hyungnim: { label: '형님', type: 'word', alias: ['형님이 잠깐 보자네'] },
+      k_hyungnim: { label: '형님', type: 'word', alias: ['형님이 잠깐 보자네'], q: ['형님이라는 말, 짚이는 데가 있습니까?', '형님에 대해 아시는 대로 말씀해 주시죠.'] },
       k_nov21: { label: '11월 21일 밤', type: 'time', alias: ['21일', '그날 밤', '금요일 밤'] },
       k_nov28: { label: '11월 28일', type: 'time', alias: ['28일'] },
     },

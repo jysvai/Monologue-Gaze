@@ -209,7 +209,7 @@
       k_night: { label: '11월 17일 밤', type: 'time', alias: ['금요일 밤', '그날 밤'] },
       k_sat21: { label: '토요일 21시', type: 'time', alias: ['새솔 2차 배송', '21시 배송'] },
       k_reopen: { label: '일요일 12시', type: 'time', alias: ['재오픈'] },
-      k_drop: { label: '던지기', type: 'word', alias: ['좌표', '좌표 사진'] },
+      k_drop: { label: '던지기', type: 'word', alias: ['좌표', '좌표 사진'], q: ['던지기라는 말, 짚이는 데가 있습니까?', '던지기에 대해 아시는 대로 말씀해 주시죠.'] },
       k_stakeout: { label: '잠복', type: 'word', alias: ['잠복 협조'] },
     },
     docs: {

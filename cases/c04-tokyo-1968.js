@@ -59,7 +59,7 @@
       k_0628: { label: '6월 28일', type: 'time', alias: ['28일', '사건 당일', '수송 당일'] },
       k_0625: { label: '6월 25일', type: 'time', alias: ['25일', '월급날'] },
       k_johsui: { label: '정수장 담장길', type: 'place', alias: ['정수장', '담장길', '현장'] },
-      k_bank: { label: '다마쇼와 은행', type: 'word', alias: ['미즈오 지점', '은행', '多摩昭和銀行'] },
+      k_bank: { label: '다마쇼와 은행', type: 'place', alias: ['미즈오 지점', '은행', '多摩昭和銀行'] },
       k_hinosawa: { label: '히노사와 전기', type: 'word', alias: ['히노사와', '공장', '日野沢電機'] },
       k_whitebike: { label: '가짜 백바이', type: 'thing', alias: ['백바이', '흰 오토바이', '白バイ', '오토바이'] },
       k_car: { label: '수송차', type: 'thing', alias: ['현금 수송차', '은행 차'] },

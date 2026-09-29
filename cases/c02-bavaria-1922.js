@@ -121,7 +121,7 @@
       k_hausbuch: { label: '가계 수첩', type: 'thing', alias: ['Hausbuch', '살림 수첩'] },
       k_calendar: { label: '뜯는 달력', type: 'thing', alias: ['달력', '일력'] },
       k_notice: { label: '대부조합 통지서', type: 'thing', alias: ['통지서', '대부조합'] },
-      k_mark: { label: '지폐', type: 'word', alias: ['마르크', '돈다발'] },
+      k_mark: { label: '지폐', type: 'thing', alias: ['마르크', '돈다발'] },
 
       k_freitag: { label: '1월 26일', type: 'time', alias: ['26일', '그 금요일'] },
       k_lichtmess: { label: '성촉절', type: 'time', alias: ['Lichtmess', '2월 2일'] },

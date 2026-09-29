@@ -150,7 +150,7 @@
       k_signal: { label: '9시 시보', type: 'thing', alias: ['시보', '9시 뉴스', '땡'] },
       k_birthday: { label: '준영이 생일', type: 'time', alias: ['생일', '4월 23일', '0423', '1969년 4월 23일생'], q: ['준영 씨 생일 얘기를 좀 여쭙겠습니다.'] },
       k_nov4: { label: '11월 4일 저녁', type: 'time', alias: ['실종 당일', '4일 저녁'] },
-      k_shimai: { label: '시마이', type: 'word', alias: ['시마이다', '시마이합시다'] },
+      k_shimai: { label: '시마이', type: 'word', alias: ['시마이다', '시마이합시다'], q: ['시마이라는 말, 짚이는 데가 있습니까?', '시마이에 대해 아시는 대로 말씀해 주시죠.'] },
       k_custody: { label: '임의동행', type: 'word', alias: ['임의동행 기록', '조사실'] },
     },
     docs: {

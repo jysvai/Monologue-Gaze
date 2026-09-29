@@ -181,7 +181,7 @@
       k_luminol: { label: '루미놀', type: 'thing', alias: ['루미놀 반응'] },
       k_bloodtype: { label: '혈액형', type: 'word', alias: ['B형', 'ABO'] },
       k_night: { label: '11월 14일 밤', type: 'time', alias: ['14일 밤', '그날 밤', '금요일 밤'] },
-      k_threat: { label: '토막 발언', type: 'word', alias: ['시장 소란', '멱살잡이'] },
+      k_threat: { label: '토막 발언', type: 'word', alias: ['시장 소란', '멱살잡이'], q: ['토막 발언이라는 말, 짚이는 데가 있습니까?', '토막 발언에 대해 아시는 대로 말씀해 주시죠.'] },
       k_flow: { label: '유속', type: 'word', alias: ['물살', '물 흐름'] },
     },
     docs: {
