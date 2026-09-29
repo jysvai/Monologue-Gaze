@@ -1562,7 +1562,7 @@
       ${showRoster ? rosterHtml(showRoster === 'ask') : ''}
       ${intro}
       <section class="drawer" aria-label="사건 파일">${MG.cases.filter(c => !c.live).map(folder).join('')}</section>
-      ${live.length ? `<section class="duty" aria-label="현행 사건"><h2 class="duty-h">당직 · 현행 사건</h2><p class="duty-sub">몇 해 전 실제로 돌았던 현행 사건을 그날 그 시각부터 다시 돌리는 당직 훈련이다. 지원으로 붙은 형사 자리에 앉는다. 기록을 넘기는 동안에도 시계는 간다.</p><div class="drawer">${live.map(folder).join('')}</div></section>` : ''}
+      ${live.length ? `<section class="duty" aria-label="현행 사건"><h2 class="duty-h">당직 · 현행 사건</h2><p class="duty-sub">몇 해 전 실제로 돌았던 현행 사건을 그날 그 시각부터 다시 돌리는 당직 훈련이다. 지원으로 붙은 형사 자리에 앉는다. 문서를 읽고 묻고 조회할 때마다 수사 시계가 돈다.</p><div class="drawer">${live.map(folder).join('')}</div></section>` : ''}
       ${mList.length ? `<section class="mbox"><h2>M의 메모</h2><p class="mbox-sub">기록 여백과 화면에 붙은 포스트잇에 남아 있던, 선배의 글씨.</p><ul>${mList.map(c => `<li${newM.includes(c.id) ? ' class="fresh"' : ''}><span class="mbox-case">CASE ${pad(c.no)}</span> ${esc(plain(c._m))}</li>`).join('')}</ul></section>` : ''}
       ${letter}
       <footer class="cab-foot">${unsaved ? '<p class="unsaved" role="note">이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다.</p>' : ''}<p>모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.</p><p class="credit">목소리·효과음 <a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a></p><button type="button" class="reset" data-wipe>${roster().list.length > 1 ? '내 기록 지우기' : '모든 기록 지우기'}</button></footer>
@@ -2121,7 +2121,7 @@
     const fresh = wrong === 0 && !ST.solved;
     ST.lastRep = wrong ? sig : null;
     if (wrong === 0) { ST.solved = true; VERDICT = ''; }
-    else if (lv() >= 5) VERDICT = sol.far || '반려. 어디가 틀렸는지는 아무도 말해 주지 않는다.';
+    else if (lv() >= 5) VERDICT = sol.far || '반려. 어디가 틀렸는지는 적혀 있지 않다.';
     else {
       VERDICT = wrong === 1 ? sol.near || '딱 한 군데가 어긋난다.' : sol.far || '아직 이야기가 이어지지 않는다. 더 쫓아가 보자.';
       if (lv() <= 3) VERDICT += ` (어긋난 칸: ${bad.join(', ')})`;
