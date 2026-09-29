@@ -381,10 +381,12 @@
     word: [L => `${L} 얘기를 좀 여쭙겠습니다.`, L => `${L}에 대해 아시는 대로 말씀해 주시죠.`], // 회사·신문·절차 이름에 「~이라는 말」은 어색하다 — 은어나 인용구는 단어가 q 로 그 물음을 가진다
   };
   const PRESS = ['press1', 'press2', 'press3', 'press4'];
-  const pressKey = (p, k) => PRESS[hash(p.id + k) % PRESS.length];
+  const RECALL = ['recall1', 'recall2']; // soft: 거짓말한 적 없는 사람(피해자·유족·목격자)에게 메모를 보여 기억을 되살릴 때
+  const isSoft = (p, k) => !!(rawAns(p, k) || {}).soft;
+  const pressKey = (p, k) => { const L = isSoft(p, k) ? RECALL : PRESS; return L[hash(p.id + k) % L.length]; };
   function qText(p, e) {
     const k = e.replace(/!$/, ''), kw = C.keywords[k] || {}, L = kw.label || k;
-    if (e.endsWith('!')) return (MG.sound && MG.sound.line(pressKey(p, k))) || '이걸 보시죠. 그래도 같은 말씀입니까?';
+    if (e.endsWith('!')) return (MG.sound && MG.sound.line(pressKey(p, k))) || (isSoft(p, k) ? '이걸 한번 봐 주시겠습니까. 떠오르는 게 있으신지요.' : '이걸 보시죠. 그래도 같은 말씀입니까?');
     if (k === p.key) return '본인 이야기를 좀 듣고 싶습니다.';
     if (kw.q) { const qs = [].concat(kw.q); return qs[hash(p.id + k) % qs.length]; } // 틀에 안 맞는 단어(기한·판결·통금 등)는 단어가 제 물음을 가진다
     const t = QT[kw.type] || QT.word;
@@ -539,8 +541,9 @@
     const k = e.replace(/!$/, '');
     if (!e.endsWith('!')) return playTalk(qa, { p });
     qa.classList.add('pressing');
-    cue('confess');
-    const st = document.createElement('div'); st.className = 'cue-stamp press'; st.setAttribute('aria-hidden', 'true'); st.innerHTML = '<span>추궁</span>';
+    const soft = isSoft(p, k);
+    cue(soft ? 'clue' : 'confess');
+    const st = document.createElement('div'); st.className = 'cue-stamp press'; st.setAttribute('aria-hidden', 'true'); st.innerHTML = `<span>${soft ? '확인' : '추궁'}</span>`;
     document.body.appendChild(st); setTimeout(() => st.remove(), 1900);
     const t = playTalk(qa, { p, lead: 600000 }); // 대답은 내 말이 끝난 뒤
     const hv = MG.sound ? MG.sound.voice('hero/' + pressKey(p, k)) : null;
