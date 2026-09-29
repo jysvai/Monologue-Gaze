@@ -13,6 +13,8 @@
 
 난이도는 ★3 부터 ★5 까지. 별이 **빨간** 사건은 잔혹한 내용이 있어 폴더에 「혐오감 주의」가 붙고, 처음 열 때 한 번 더 묻는다. 이런 사건은 화면 가장자리와 기록지에 마른 핏자국이 번지고, 현장 사진이 가림 없이 나오며, 검안서·감식 기록·진술이 더 참혹한 판으로 바뀐다 (단서와 숫자는 같다). 끔찍한 기록을 처음 펼치면 파리 떼나 뼈톱 소리와 함께 화면이 잠깐 검붉게 가라앉는다. 기록실 위쪽 「잔혹 표현」 단추로 이런 연출을 모두 끌 수 있다 — 끄면 핏자국이 사라지고, 사진은 흐리게 가려지며 (시신이 드러난 사진은 천을 덮은 판으로), 글은 건조한 원래 판으로 돌아간다.
 
+한국어 원문에 더해 **영어 · 일본어 · 중국어(간체) · 러시아어 · 독일어**로 할 수 있다. 기록실 위쪽 언어 칸에서 고르고, 처음 여는 사람은 브라우저 언어로 열린다 (주소에 `?lang=en` 을 붙여도 된다). 화면 글자, 사건 기록, 탐문 대사, 서랍 밑의 편지가 모두 옮겨지고, 언어마다 손글씨·활자 글꼴을 따로 쓴다. 목소리는 한국어 그대로이고 주인공 속말에는 번역 자막이 붙는다.
+
 모든 사건은 실제 미제 사건의 **모티프만** 빌려 새로 지은 이야기다. 인물·장소·기관·사이트는 전부 허구다.
 
 ## 플레이
@@ -62,6 +64,8 @@ js/mood.js            사건마다 다른 공기 — 조명 빛깔, 날씨, 합�
 js/audio.js           효과음·목소리·말소리(글자 찍히는 소리)·주인공 속말 자막
 js/ui.js              말풍선 도움말 (title 대신)
 js/fonts.js           사건마다 따로 부르는 시대별 글꼴 목록
+js/i18n.js            언어 — 고르기, 화면 글자 T, 사건 기록에 번역 덮기, 날짜 꼴, 언어별 글꼴
+i18n/<언어>/          번역 꾸러미 — ui.js (화면 글자), finale.js (편지), cNN.js (사건). tools/i18n.js 가 만든다
 audio/                ElevenLabs 로 만든 효과음·목소리 mp3 와 audio/manifest.js (자동 생성)
 css/base.css          책상·기록실·화면 틀(papers / crt / laptop)·수첩
 css/skins.css         문서 스킨 (신문, 진술조서, 편지, 전보, 장부, 녹취록, 미니홈피, 폴더폰 …)
@@ -69,10 +73,12 @@ css/mood.css          사건의 공기 (조명 8가지 · 날씨 8가지 · 여�
 css/drama.css         연출 — 탐문 대화, 수사 보고서, 단서 발견 효과, 속말 자막, 그림 위 이름표
 css/ui.css            공통 조작부 — 스크롤바, 선택 표시, 말풍선 도움말, 보고서의 표시
 css/live.css          현행 사건 — 수사 시계, 휴대폰 알림, 단톡방, 영장·공문 신청서, 당직 칸
+css/i18n.css          언어별 글꼴 (base.css 글꼴 변수의 앞자리)
 cases/cNN-*.js        사건 데이터 (사건 하나 = 파일 하나)
 img/manifest.js       실제 이미지 목록 (자동 생성)
 img/<사건>/<키>.webp  AI 로 만든 이미지를 넣는 곳
 docs/CASE_AUTHORING.md  사건 작성 가이드 (데이터 형식 전부)
+docs/TRANSLATION.md     번역 — 어떻게 덮이는지, 번역 넣기·검사, 사건을 고칠 때 할 일
 docs/IMAGE_PROMPTS.md   이미지 프롬프트 모음 (자동 생성)
 docs/IMAGE_REDO.md      검수에서 걸려 다시 뽑을 이미지 목록 (자동 생성)
 docs/IMAGE_SVG.md       아직 SVG 로 남은 도해를 그림으로 바꿀 목록과 프롬프트 (자동 생성)
@@ -86,6 +92,7 @@ tools/gen-images.js   (선택) OpenAI API 키가 있으면 프롬프트 전부�
 tools/voices.js       (선택) ElevenLabs 로 목소리·효과음을 만든다. 사람마다 목소리·말소리 높이 배정표가 들어 있다
 tools/eleven.js       ElevenLabs API 호출 (키는 .env 의 ELEVENLABS_API_KEY — 저장소에 올리지 않는다)
 tools/itch-zip.js     itch.io 에 올릴 zip — 게임에 쓰는 파일만 골라 dist/ 에 묶는다
+tools/i18n.js         번역 — 원문 토막 뽑기, 번역 넣기(검사 포함), 언어·사건마다 빠진 곳 세기
 ```
 
 ## 도구
@@ -95,6 +102,7 @@ node tools/validate.js            # 모든 사건 검사 (특정 파일만: node
 node tools/smoke.js cases/*.js    # 모든 화면이 깨지지 않고 그려지는지
 node tools/prompts.js             # docs/IMAGE_PROMPTS.md · IMAGE_REDO.md 다시 만들기
 node tools/optimize-images.js     # img/ 에 넣은 png·jpg 를 webp 로 바꿔 게임에 연결 (ffmpeg 필요)
+node tools/i18n.js check          # 언어 × 사건마다 번역이 몇 곳 빠졌는지 (원문을 고치면 그 토막의 번역이 떨어진다 — docs/TRANSLATION.md)
 node tools/itch-zip.js            # itch.io 에 올릴 dist/monologue-gaze-itch.zip — 빠진 그림·소리, 경로 대소문자, itch.io 한도를 먼저 본다
 ```
 

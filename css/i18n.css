@@ -1,0 +1,29 @@
+/* Monologue Gaze — 언어별 글꼴 (js/i18n.js 가 <html lang> 을 정하고 그 언어의 글꼴을 부른다)
+ * css/base.css 의 글꼴 변수는 앞자리에 var(--l-종류,) 를 비워 두었다. 한국어면 비어 있어 원래 글꼴 그대로,
+ * 다른 언어면 그 언어의 글자를 가진 글꼴이 앞에 선다. 번역되지 않고 남은 한글은 뒤의 한국어 글꼴이 받는다.
+ * 값 끝의 쉼표는 지우지 말 것 (뒤에 원래 글꼴 목록이 이어 붙는다).
+ * 종류: hand 펜 손글씨 · hand2 붓·거친 손글씨 · hand3 동글동글한 손글씨 · serif 명조 · old 옛 활자 · sans 고딕 · heavy 굵은 제목
+ *       mono 고정폭 · type 타자기 · pixel 도트 화면 · brush 신문 제호 붓글씨 · cjk 한자·가나 받침 */
+
+html:is([lang="en"],[lang="de"]){
+  --l-hand:"Caveat",; --l-hand2:"Shadows Into Light",; --l-hand3:"Patrick Hand",;
+  --l-serif:"Crimson Pro",; --l-old:"Old Standard TT",; --l-brush:"Old Standard TT",;
+}
+html[lang="ru"]{
+  --l-hand:"Caveat",; --l-hand2:"Marck Script",; --l-hand3:"Pangolin",;
+  --l-serif:"PT Serif",; --l-old:"Old Standard TT",; --l-brush:"Old Standard TT",;
+  --l-sans:"PT Sans",; --l-mono:"PT Mono",; --l-type:"IBM Plex Mono",;
+}
+html[lang="ja"]{
+  --l-hand:"Klee One",; --l-hand2:"Zen Kurenaido",; --l-hand3:"Yomogi",;
+  --l-serif:"Noto Serif JP",; --l-old:"New Tegomin",; --l-sans:"Noto Sans JP",; --l-heavy:"Dela Gothic One",;
+  --l-mono:"M PLUS 1 Code",; --l-type:"Special Elite","M PLUS 1 Code",; --l-pixel:"DotGothic16",; --l-cjk:"Noto Sans JP",;
+}
+html[lang="zh"]{
+  --l-hand:"LXGW WenKai",; --l-hand2:"Long Cang",; --l-hand3:"ZCOOL KuaiLe",;
+  --l-serif:"Noto Serif SC",; --l-old:"ZCOOL XiaoWei",; --l-sans:"Noto Sans SC",; --l-heavy:"ZCOOL QingKe HuangYou",; --l-brush:"Ma Shan Zheng",;
+  --l-mono:"Noto Sans SC",; --l-type:"Special Elite","Noto Sans SC",; --l-pixel:"Noto Sans SC",; --l-cjk:"Noto Sans SC",;
+}
+
+/* 제목은 어느 언어에서나 로마자라 타자기 글꼴 그대로 */
+.cab-title{font-family:"Special Elite",var(--f-type)}

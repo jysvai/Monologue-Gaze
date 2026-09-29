@@ -38,8 +38,8 @@
 .c-dots i:nth-child(2){animation-delay:.15s}.c-dots i:nth-child(3){animation-delay:.3s}
 @keyframes dot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
 .qa.live{cursor:pointer}
-.qa.live::after{content:"누르면 건너뛴다";align-self:center;margin-top:2px;font:11px var(--f-mono);letter-spacing:.06em;color:#6d6552}
-@media (hover:hover) and (pointer:fine){.qa.live::after{content:"누르거나 Esc — 건너뛴다"}} /* 자판이 있는 기기: Esc 로도 넘긴다 */
+.qa.live::after{content:var(--t-skip,"누르면 건너뛴다");align-self:center;margin-top:2px;font:11px var(--f-mono);letter-spacing:.06em;color:#6d6552}
+@media (hover:hover) and (pointer:fine){.qa.live::after{content:var(--t-skip-esc,"누르거나 Esc — 건너뛴다")}} /* 자판이 있는 기기: Esc 로도 넘긴다 */
 .qa.pressing .c-dots{background:rgba(91,31,26,.12)}
 .qa.pressing .c-dots i{background:var(--red);animation-duration:1.6s}
 .chip.again{border:1.5px solid var(--red);box-shadow:0 0 0 2px rgba(176,52,42,.15)}
@@ -148,6 +148,8 @@ body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,
 .art-lab{position:absolute;transform:translateY(-85%);padding:0 4px;border-radius:2px;background:rgba(246,241,226,.8);box-shadow:0 0 0 1px rgba(43,40,35,.12);color:#2b2823;font:700 clamp(9px,1.4vw,12.5px)/1.35 var(--f-web);white-space:nowrap}
 .art-lab.c{transform:translate(-50%,-85%)}
 .art-lab.r{transform:translate(-100%,-85%)}
+.art-labs.axis{container-type:size}
+.art-labs.axis .art-lab{padding:0;background:none;box-shadow:none;color:#4f4f4f;font:400 11px/1.2 var(--f-web);font-size:1.6cqw} /* 도표(소나그램)의 눈금 글자: 그림에서 지운 글자 자리에 */
 .art-lab.hid{visibility:hidden} /* 조사 지점에 깔린 이름표 (js mapTidy) */
 .zoom .art-lab.hid{visibility:visible} /* 크게 보기에는 핀이 없으니 전부 */
 

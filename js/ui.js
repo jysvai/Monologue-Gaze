@@ -10,6 +10,7 @@
  * 9. 그림: 길게 누르거나 오른쪽 단추를 눌러도 브라우저의 「이미지 저장」 차림표가 뜨지 않고, 받지 못한 그림은 깨진 그림 표시 대신 「사진 유실」 빈자리.
  */
 (function () {
+  const T = window.MG.T; // 화면 글자 (js/i18n.js)
   let tip = null, cur = null, wait = 0;
   function show(el) {
     const s = el.getAttribute('data-tip');
@@ -80,7 +81,7 @@
   // 열람 주의 사진은 가려져 있는 동안 「눌러서 보기」, 걷힌 뒤에는 「크게 보기」
   function label(img) {
     const shut = img.closest('.cens:not(.open)');
-    img.setAttribute('aria-label', shut ? '열람 주의 사진 — 눌러서 보기' : (img.alt ? img.alt + ' — ' : '') + '크게 보기');
+    img.setAttribute('aria-label', shut ? T('열람 주의 사진 — 눌러서 보기') : (img.alt ? img.alt + ' — ' : '') + T('크게 보기'));
   }
   new MutationObserver(ms => ms.forEach(m => {
     m.addedNodes.forEach(n => { if (n.nodeType !== 1) return; tidy(n); if (n.classList.contains('zoom')) n.setAttribute('aria-modal', 'true'); });

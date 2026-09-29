@@ -68,7 +68,7 @@ summary::-webkit-details-marker{display:none}
 @media (hover:hover){.rep-per:hover{transform:translateY(-1px);background:#fbf5e3}}
 .rep-per.on{border:1px solid rgba(176,52,42,.55);background:#fbeee8;box-shadow:none}
 .rep-per.on::after{content:"";position:absolute;inset:-9px -12px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80' preserveAspectRatio='none'%3E%3Cpath d='M22 46C18 18 150 4 186 30c20 16-10 42-86 44C40 76 6 60 14 36 20 20 60 9 104 9' fill='none' stroke='%23b0342a' stroke-width='2.6' stroke-linecap='round' vector-effect='non-scaling-stroke' opacity='.9'/%3E%3C/svg%3E") center/100% 100% no-repeat;animation:circleIn .35s ease-out both}
-.rep-per.on::before{content:"지목";position:absolute;right:-10px;top:-12px;z-index:1;padding:1px 6px 0;border:1.5px solid var(--red);background:#fbeee8;color:var(--red);font:800 11px/16px var(--f-doc);letter-spacing:.1em;transform:rotate(9deg);animation:stampIn .3s .1s ease-out both}
+.rep-per.on::before{content:var(--t-accused,"지목");position:absolute;right:-10px;top:-12px;z-index:1;padding:1px 6px 0;border:1.5px solid var(--red);background:#fbeee8;color:var(--red);font:800 11px/16px var(--f-doc);letter-spacing:.1em;transform:rotate(9deg);animation:stampIn .3s .1s ease-out both}
 @keyframes circleIn{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
 @keyframes stampIn{from{opacity:0;transform:rotate(9deg) scale(1.6)}to{opacity:1;transform:rotate(9deg) scale(1)}}
 .rep-opt{padding-left:36px}
@@ -429,9 +429,9 @@ input.pw{-webkit-text-security:disc;text-security:disc}
 /* ───────── 그림이 오지 않았을 때: 깨진 그림 표시·설명 글 대신 그 기록다운 빈자리 ───────── */
 .img-miss{position:relative;display:block;min-height:90px;background:repeating-linear-gradient(-45deg,rgba(84,64,40,.07) 0 8px,transparent 8px 16px);border:1.5px dashed rgba(84,64,40,.4)}
 .img-miss>img{visibility:hidden}
-.img-miss::after{content:"사진 유실 — 원본 확인 요망";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-4deg);padding:3px 10px 2px;border:2px solid rgba(176,52,42,.75);border-radius:3px;color:rgba(176,52,42,.85);font:700 13px/1.4 var(--f-web);letter-spacing:.08em;white-space:nowrap}
+.img-miss::after{content:var(--t-img-lost,"사진 유실 — 원본 확인 요망");position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-4deg);padding:3px 10px 2px;border:2px solid rgba(176,52,42,.75);border-radius:3px;color:rgba(176,52,42,.85);font:700 13px/1.4 var(--f-web);letter-spacing:.08em;white-space:nowrap}
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen .img-miss{background:#fff;border:1px solid #9aa3b0}
-.case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen .img-miss::after{content:"그림을 표시할 수 없습니다";transform:translate(-50%,-50%);border:0;color:#3a3f48;font:12px/1.4 var(--f-sys);letter-spacing:0;padding-left:22px;background:radial-gradient(circle at 8px 50%,#d23a2c 0 7px,transparent 7.5px)}
+.case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen .img-miss::after{content:var(--t-img-fail,"그림을 표시할 수 없습니다");transform:translate(-50%,-50%);border:0;color:#3a3f48;font:12px/1.4 var(--f-sys);letter-spacing:0;padding-left:22px;background:radial-gradient(circle at 8px 50%,#d23a2c 0 7px,transparent 7.5px)}
 
 /* ───────── 인쇄(Ctrl+P): 기록실 화면째가 아니라 지금 읽는 기록 한 장만, 복사본처럼 ───────── */
 @media print{

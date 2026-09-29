@@ -4,6 +4,7 @@
  */
 (function () {
   const MG = window.MG;
+  const T = MG.T; // 화면 글자 (js/i18n.js)
   const S = () => MG.state();
   const reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
   const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
@@ -292,7 +293,7 @@
     document.dispatchEvent(new Event('mg:intro-out')); // 화면 속 사건은 이때 모니터가 켜진다 (engine.js openCase)
   }
   // 현행 사건은 해 대신 지령이 떨어진 때: 2023년 3월 8일(수) 22:40
-  const liveWhen = s => { const d = new Date(s[0], s[1] - 1, s[2], s[3], s[4]); return `${s[0]}년 ${s[1]}월 ${s[2]}일(${'일월화수목금토'[d.getDay()]}) ${String(s[3]).padStart(2, '0')}:${String(s[4]).padStart(2, '0')}`; };
+  const liveWhen = s => MG.I18N.date(new Date(s[0], s[1] - 1, s[2], s[3], s[4]), 'ymdwhm');
   function showIntro(c, m) {
     hideIntro();
     const el = document.createElement('div');
@@ -307,11 +308,11 @@
     // 뒤에 그 사건 기록철 표지 사진을 어둡고 흐리게 깐다 (천천히 다가온다)
     const cov = MG.images && (MG.images[c.id + '/cover_bg'] || MG.images[c.id + '/cover']); // 흐리게 깔 것이라 작은 판(cover_bg)으로
     el.innerHTML = `${cov ? `<div class="ci-bg" aria-hidden="true" style="background-image:url('${esc(cov)}')"></div>` : ''}<div class="ci-in">
-      <p class="ci-no">CASE ${String(c.no).padStart(2, '0')}${c.kind === 'tutorial' ? ' · 연습' : c.live ? ' · 현행 사건' : ''}</p>
+      <p class="ci-no">CASE ${String(c.no).padStart(2, '0')}${c.kind === 'tutorial' ? T(' · 연습') : c.live ? T(' · 현행 사건') : ''}</p>
       <h2 class="ci-title">${esc(c.title)}</h2>
       <p class="ci-when">${c.live && c.live.start ? esc(liveWhen(c.live.start)) : esc(c.year)} · ${esc(place)}</p>
       ${m.line ? `<p class="ci-line">${esc(m.line)}</p>` : ''}
-      <p class="ci-skip">눌러서 넘기기</p></div>`;
+      <p class="ci-skip">${T`눌러서 넘기기`}</p></div>`;
     el.addEventListener('click', hideIntro);
     document.body.appendChild(el);
     const ln = !c.live && el.querySelector('.ci-line'); // 손글씨 한 줄: 휴대폰에서 두 줄로 접혀도 한 줄씩 써 내려간다 (현행 사건은 떠오르는 활자라 그대로)

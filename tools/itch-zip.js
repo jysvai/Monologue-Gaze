@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* itch.io 에 올릴 묶음 — 게임에 쓰는 파일만 골라 dist/monologue-gaze-itch.zip 하나로 묶는다.
- * 넣는 것: index.html · manifest.webmanifest · 아이콘 · css/ js/ cases/ img/ audio/
+ * 넣는 것: index.html · manifest.webmanifest · 아이콘 · css/ js/ cases/ i18n/ img/ audio/
  * 빼는 것: README · docs/ · tools/ · prototype/ · 404.html · 점 파일, 그리고 .gitignore 에 걸린 것 (.env, img/_src/)
  * 묶기 전에 index.html·css·js·사건 파일이 가리키는 그림·소리가 모두 들어갔는지 대소문자까지 맞춰 본다.
  * 윈도는 대소문자를 가리지 않아 로컬에서는 열려도, itch.io 는 가려서 그 파일만 빠진다.
@@ -16,7 +16,7 @@ const { execFileSync } = require('child_process');
 const root = path.join(__dirname, '..');
 const OUT = path.join(root, 'dist', 'monologue-gaze-itch.zip');
 const TOP = ['index.html', 'manifest.webmanifest', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png'];
-const DIRS = ['css/', 'js/', 'cases/', 'img/', 'audio/'];
+const DIRS = ['css/', 'js/', 'cases/', 'i18n/', 'img/', 'audio/']; // i18n/: 다른 언어 꾸러미 (js/i18n.js 가 고른 언어의 것만 부른다)
 const LIMIT = { files: 1000, file: 200 * 2 ** 20, total: 500 * 2 ** 20, name: 240 };
 const MB = n => (n / 2 ** 20).toFixed(1) + 'MB';
 

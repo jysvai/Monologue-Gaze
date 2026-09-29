@@ -12,11 +12,12 @@ const stub = () => ({ innerHTML: '', textContent: '', dataset: {}, scrollTop: 0,
   classList: { toggle() {}, add() {}, remove() {}, contains() { return false; } }, scrollIntoView() {}, focus() {}, getBoundingClientRect() { return { left: 0, right: 0, top: 0, bottom: 0, width: 0, height: 0 }; }, setAttribute() {}, appendChild() {}, querySelector() { return null; }, querySelectorAll() { return []; } });
 const el = s => (els[s] ||= stub());
 global.window = global;
-global.localStorage = { getItem() { return null; }, setItem() {} };
+global.localStorage = { getItem(k) { return k === 'mg-lang' ? 'ko' : null; }, setItem() {} }; // 한국어 원문으로 그린다 (js/i18n.js)
 global.scrollTo = () => {};
 global.addEventListener = () => {};
 global.document = { body: stub(), head: stub(), documentElement: stub(), getElementById: el, querySelector: el, querySelectorAll: () => [], createElement: stub, addEventListener() {} };
 
+vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'js/i18n.js'), 'utf8'));
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'js/engine.js'), 'utf8'));
 let files = process.argv.slice(2);
 if (!files.length) files = fs.readdirSync(path.join(ROOT, 'cases')).filter(f => /^c\d+.*\.js$/.test(f)).sort().map(f => path.join('cases', f)); // 인자가 없으면 사건 전부

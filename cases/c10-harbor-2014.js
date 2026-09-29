@@ -482,7 +482,7 @@
     },
     css: `[data-case="c10"] .skin-chat .doc-h{background:#d6e2e8}
 [data-case="c10"][data-frame="laptop"] .screen{--f-web:var(--f-sys)}
-[data-case="c10"] .skin-web{--f-web:"Nanum Gothic","Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+[data-case="c10"] .skin-web{--f-web:var(--l-sans,)"Nanum Gothic","Apple SD Gothic Neo","Malgun Gothic",sans-serif}
 [data-case="c10"] .doc.printed :is(.b-tbl table,.b-tbl caption){font-family:var(--f-sys);font-size:13px}
 [data-case="c10"] .doc.printed .b-tbl th{font:700 12px var(--f-sys)}
 [data-case="c10"] .skin-card .doc-b{font-family:var(--f-sys)}`,

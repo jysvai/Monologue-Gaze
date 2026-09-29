@@ -1,0 +1,176 @@
+/* Monologue Gaze — 언어 (한국어가 원문, 영어·일본어·중국어·러시아어·독일어는 번역을 덮는다)
+ * 1. 화면 글자: 코드에 T`한국어 ${x}` 또는 T('한국어') 로 적는다. 번역 꾸러미 i18n/<언어>/ui.js 의 열쇠는 그 한국어
+ *    (자리 표시는 {0} {1} …). 번역이 없으면 한국어 그대로 나온다.
+ * 2. 사건 기록: i18n/<언어>/<사건 id>.js 가 한국어 글 한 토막마다 지문(hash) → 번역을 둔다. 원문을 고치면 그 토막만
+ *    한국어로 돌아가고, node tools/i18n.js check 가 빠진 곳을 알려 준다. 편지(js/finale.js)는 i18n/<언어>/finale.js.
+ * 3. 답으로 치는 값(잠금 비밀번호 code · 조회 match · 편지의 answer · 단어 alias)은 번역을 더한다 — 한국어로 쳐도 맞는다.
+ * 4. 글꼴은 css/i18n.css (html[lang] 마다), 날짜·시각은 MG.I18N.date 가 그 언어의 꼴로.
+ * 고르는 순서: 주소의 ?lang=xx → 전에 고른 언어(mg-lang) → 브라우저 언어 → 영어. 바꾸면 새로 불러온다. */
+(function () {
+  'use strict';
+  const MG = (window.MG = window.MG || {});
+  const LANGS = [['ko', '한국어'], ['en', 'English'], ['ja', '日本語'], ['zh', '简体中文'], ['ru', 'Русский'], ['de', 'Deutsch']];
+  const has = l => LANGS.some(x => x[0] === l);
+  const KEY = 'mg-lang';
+  const HAN = /[가-힣ㄱ-ㅎㅏ-ㅣ]/;
+
+  function pick() {
+    let q = null, saved = null;
+    try { q = new URLSearchParams(location.search).get('lang'); } catch (e) { /* 옛 브라우저 */ }
+    try { saved = localStorage.getItem(KEY); } catch (e) { /* 저장소 막힘 */ }
+    let nav = [];
+    try { nav = [].concat(navigator.languages || [], navigator.language || []).map(x => String(x).toLowerCase().slice(0, 2)); } catch (e) { /* navigator 없음 */ }
+    for (const l of [q, saved, ...nav]) if (l && has(l)) return l;
+    return 'en';
+  }
+  const lang = typeof window.document === 'undefined' ? 'ko' : pick();
+  const packs = {}; // { ui: { 한국어: 번역 }, c00: { 지문: 번역 }, finale: { … } }
+
+  // 지문: 53비트 (cyrb53) — tools/i18n.js 도 이 함수를 쓴다
+  function hash(str) {
+    let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+    for (let i = 0; i < str.length; i++) { const ch = str.charCodeAt(i); h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677); }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
+  }
+
+  /* ── 화면 글자 ── */
+  const keys = new WeakMap();
+  const T = function (s, ...v) {
+    if (s == null) return s;
+    if (typeof s === 'string') { if (lang === 'ko') return s; const t = (packs.ui || {})[s]; return t == null ? s : t; }
+    let k = keys.get(s);
+    if (k === undefined) { k = s.reduce((a, x, i) => (i ? a + '{' + (i - 1) + '}' + x : x), ''); keys.set(s, k); }
+    const t = lang === 'ko' ? null : (packs.ui || {})[k];
+    if (t == null) return s.reduce((a, x, i) => (i ? a + String(v[i - 1]) + x : x), '');
+    return t.replace(/\{(\d+)\}/g, (m, n) => (+n < v.length ? String(v[+n]) : m));
+  };
+
+  /* ── 사건 기록 ──
+   * 번역할 것: 한글이 든 문자열. 그림을 만드는 데만 쓰는 칸(svg·prompt …)은 건너뛴다.
+   * 답으로 치는 칸(ATOM, match 의 값)은 통째로 한 토막 — 번역은 배열이고, 한국어 값과 합친다. */
+  const SKIP = new Set(['svg', 'prompt', 'css', 'artStyle', 'must', 'avoid', 'redo', 'initial']);
+  const ATOM = new Set(['alias', 'code', 'answer']);
+  function walk(o, fn, path, inMatch) {
+    const arr = Array.isArray(o);
+    for (const k of arr ? o.keys() : Object.keys(o)) {
+      const v = o[k], p = path ? path + '.' + k : String(k);
+      if (!arr && (SKIP.has(k) || k[0] === '_')) continue;
+      if (typeof v === 'string') { if (HAN.test(v)) fn(o, k, v, inMatch && !arr ? 'atom' : 'text', p); continue; }
+      if (!v || typeof v !== 'object') continue;
+      if (Array.isArray(v) && (inMatch || (!arr && ATOM.has(k)))) { if (v.some(x => typeof x === 'string' && HAN.test(x))) fn(o, k, v, 'atom', p); continue; }
+      walk(v, fn, p, !arr && k === 'match');
+    }
+  }
+  const uniq = a => a.filter((x, i) => a.indexOf(x) === i);
+  function apply(obj, tr) {
+    walk(obj, (h, k, v, kind) => {
+      if (kind === 'text') { const t = tr[hash(v)]; if (typeof t === 'string') h[k] = t; return; }
+      const t = tr[hash(JSON.stringify(v))];
+      if (Array.isArray(t)) h[k] = uniq([...t, ...[].concat(v)]);
+    });
+  }
+  function applyCase(c) {
+    const tr = packs[c.id];
+    if (lang === 'ko' || !tr) return;
+    const ko = {};
+    Object.entries(c.keywords || {}).forEach(([id, k]) => { ko[id] = k.label; });
+    apply(c, tr);
+    // 한국어 이름도 별칭으로 남긴다: 검색창에 한국어로 쳐도, 번역이 빠진 글의 [[한국어]] 도 그 단어를 찾는다
+    Object.entries(c.keywords || {}).forEach(([id, k]) => { if (ko[id] && k.label !== ko[id]) k.alias = uniq([...(k.alias || []), ko[id]]); });
+    // 얼굴 동그라미의 한 글자: 이름이 번역됐으면 번역된 이름의 첫 글자로 (엔진이 name[0] 을 쓴다)
+    Object.values(c.people || {}).forEach(p => { if (p.initial && HAN.test(p.initial) && p.name && !HAN.test(p.name)) delete p.initial; });
+    // 세로쓰기 신문은 한자를 쓰는 언어에서만. 라틴·키릴 글자는 가로로
+    if (!/^(ja|zh)$/.test(lang)) Object.values(c.docs || {}).forEach(d => { if (d.cls) d.cls = d.cls.replace(/\bvertical\b/g, '').trim(); });
+  }
+  function applyFinale() {
+    if (lang === 'ko' || !packs.finale) return;
+    apply({ finale: MG.finale || [], finaleWho: MG.finaleWho || {} }, packs.finale);
+  }
+
+  /* ── 날짜·시각 ── */
+  const WD = '일월화수목금토', p2 = n => String(n).padStart(2, '0');
+  const KO = {
+    mdwhm: d => `${d.getMonth() + 1}월 ${d.getDate()}일(${WD[d.getDay()]}) ${p2(d.getHours())}:${p2(d.getMinutes())}`,
+    ymdw: d => `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 ${WD[d.getDay()]}요일`,
+    ymdwhm: d => `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일(${WD[d.getDay()]}) ${p2(d.getHours())}:${p2(d.getMinutes())}`,
+    clock: d => `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()}. (${WD[d.getDay()]})  ${d.getHours() < 12 ? '오전' : '오후'} ${d.getHours() % 12 || 12}:${p2(d.getMinutes())}`,
+    ptime: d => `${d.getHours() < 6 ? '새벽 ' : ''}${d.getHours()}시${d.getMinutes() ? ` ${d.getMinutes()}분` : ''}`, // 결말의 {{t}}: 글 속의 시각
+    pstamp: d => `${d.getMonth() + 1}월 ${d.getDate()}일 ${WD[d.getDay()]}요일 ${KO.ptime(d)}`,
+  };
+  const LOC = { en: 'en-US', de: 'de-DE', ru: 'ru-RU', ja: 'ja-JP', zh: 'zh-CN' };
+  const OPT = {
+    mdwhm: { month: 'short', day: 'numeric', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' },
+    ymdw: { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' },
+    ymdwhm: { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' },
+    clock: { year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'short', hour: 'numeric', minute: '2-digit' },
+    ptime: { hour: 'numeric', minute: '2-digit' },
+    pstamp: { month: 'long', day: 'numeric', weekday: 'long', hour: 'numeric', minute: '2-digit' },
+  };
+  const fmts = {};
+  function date(d, kind) {
+    if (lang === 'ko' || !window.Intl) return KO[kind](d);
+    try { return (fmts[kind] ||= new Intl.DateTimeFormat(LOC[lang], OPT[kind])).format(d); } catch (e) { return KO[kind](d); }
+  }
+
+  /* ── 꾸러미 부르기 ── */
+  const BOOT = { en: 'Opening the drawer…', ja: '引き出しを開けています…', zh: '正在打开抽屉…', ru: 'Открываю ящик…', de: 'Die Schublade geht auf…' };
+  // 글꼴: css/i18n.css 가 쓰는 그 언어의 글꼴 (Google Fonts · 중국어 손글씨는 jsDelivr 의 LXGW WenKai)
+  const GF = 'https://fonts.googleapis.com/css2?display=swap&family=';
+  const FONTS = {
+    en: [GF + 'Caveat:wght@400;600&family=Shadows+Into+Light&family=Patrick+Hand&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Old+Standard+TT:wght@400;700'],
+    ru: [GF + 'Caveat:wght@400;600&family=Marck+Script&family=Pangolin&family=PT+Serif:wght@400;700&family=Old+Standard+TT:wght@400;700&family=PT+Sans:wght@400;700&family=PT+Mono&family=IBM+Plex+Mono:wght@400;600'],
+    ja: [GF + 'Klee+One:wght@400;600&family=Zen+Kurenaido&family=Yomogi&family=Noto+Serif+JP:wght@400;700&family=New+Tegomin&family=Noto+Sans+JP:wght@400;700&family=Dela+Gothic+One&family=M+PLUS+1+Code&family=DotGothic16'],
+    zh: [GF + 'Long+Cang&family=ZCOOL+KuaiLe&family=Noto+Serif+SC:wght@400;700&family=ZCOOL+XiaoWei&family=Noto+Sans+SC:wght@400;700&family=ZCOOL+QingKe+HuangYou&family=Ma+Shan+Zheng',
+      'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css', 'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css'],
+  };
+  FONTS.de = FONTS.en;
+  function early() {
+    const html = document.documentElement;
+    html.lang = lang;
+    (FONTS[lang] || []).forEach(href => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); });
+    const b = document.querySelector('#app .boot');
+    if (b && BOOT[lang]) b.textContent = BOOT[lang];
+  }
+  // CSS 의 content 글자 (css/*.css 의 var(--t-…))
+  function cssText() {
+    const R = document.documentElement.style, put = (k, s) => R.setProperty(k, JSON.stringify(s));
+    put('--t-skip', T('누르면 건너뛴다'));
+    put('--t-skip-esc', T('누르거나 Esc — 건너뛴다'));
+    put('--t-notepad', T(' — 메모장'));
+    put('--t-accused', T('지목'));
+    put('--t-img-lost', T('사진 유실 — 원본 확인 요망'));
+    put('--t-img-fail', T('그림을 표시할 수 없습니다'));
+  }
+  // 고른 언어의 꾸러미(화면 글자 · 편지 · 사건마다)를 모두 받은 뒤 cb (없는 파일은 건너뛴다 — 그 부분은 한국어로)
+  function ready(cb) {
+    if (lang === 'ko') return cb();
+    const ids = ['ui', 'finale', ...(MG.cases || []).map(c => c.id)];
+    let left = ids.length, fired = false;
+    const go = () => { if (fired) return; fired = true; cssText(); cb(); };
+    const done = () => { if (--left <= 0) go(); };
+    ids.forEach(id => {
+      const s = document.createElement('script');
+      s.src = `i18n/${lang}/${id}.js`;
+      s.onload = s.onerror = done;
+      document.head.appendChild(s);
+    });
+    setTimeout(go, 15000); // 꾸러미 하나가 끝내 오지 않아도 책상은 연다
+  }
+  function set(l) {
+    if (!has(l) || l === lang) return;
+    try { localStorage.setItem(KEY, l); } catch (e) { /* 저장소 막힘: 주소로 넘긴다 */ }
+    let u = null;
+    try { u = new URL(location.href); } catch (e) { /* 옛 브라우저 */ }
+    if (u && (u.searchParams.has('lang') || (() => { try { return localStorage.getItem(KEY) !== l; } catch (e) { return true; } })())) { u.searchParams.set('lang', l); location.replace(u.href); }
+    else location.reload();
+  }
+
+  MG.T = T;
+  MG.I18N = {
+    lang, langs: LANGS, packs, hash, walk, applyCase, applyFinale, date, ready, set,
+    put(l, part, data) { if (l === lang) packs[part] = Object.assign(packs[part] || {}, data); },
+  };
+  if (typeof window.document !== 'undefined' && document.documentElement) early();
+})();

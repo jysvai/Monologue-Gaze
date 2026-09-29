@@ -150,7 +150,7 @@
     if (v) v.done.then(() => hide(900)); else hide(1500 + t.length * 80);
   }
   function hero(k) {
-    const t = (A().say || {})['hero/' + k];
+    const t = MG.T((A().say || {})['hero/' + k]); // 목소리는 한국어 그대로, 자막만 고른 언어로
     const v = voice('hero/' + k);
     if (t) caption(t, v);
     return v;
@@ -176,5 +176,5 @@
   document.addEventListener('pointerdown', function once() { ctx(); warm(); document.removeEventListener('pointerdown', once); }, { passive: true });
 
   const preload = ks => { if (S().sound) ks.forEach(k => url(k) && load(k)); }; // 곧 날 소리를 미리 받아 둔다 (처음 한 번이 늦어 건너뛰지 않게)
-  MG.sound = { play, voice, stopVoice, hasVoice, blip, tone, hero, caption, warm, preload, line: k => (A().say || {})['hero/' + k] || '' };
+  MG.sound = { play, voice, stopVoice, hasVoice, blip, tone, hero, caption, warm, preload, line: k => MG.T((A().say || {})['hero/' + k] || '') };
 })();
