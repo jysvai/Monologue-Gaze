@@ -341,7 +341,7 @@
     if (!ST.seen.includes(d.id)) {
       ST.seen.push(d.id); save();
       // 빨간 별 사건에서 끔찍한 기록을 처음 펼칠 때: 파리 떼·긁는 현 (문서가 sting 을 정하면 그 소리 — 뼈 켜는 톱 등)
-      if (gore() && (d.sting || (d.body || []).some(b => b && typeof b === 'object' && (b.gore != null || b.goreRows || (b.img && C.art[b.img] && C.art[b.img].sensitive))))) { const c0 = C; setTimeout(() => { if (C === c0) sfx(d.sting || 'gore'); }, 350); }
+      if (gore() && (d.sting || (d.body || []).some(b => b && typeof b === 'object' && (b.gore != null || b.goreRows || (b.img && C.art[b.img] && C.art[b.img].sensitive))))) { const c0 = C; setTimeout(() => { if (C === c0) cue(d.sting || 'gore'); }, 350); } // 소리와 함께 화면 가장자리가 잠깐 검붉게 가라앉는다
     }
     const skin = d.skin || s.skin || 'plain';
     const paper = d.paper || s.paper;

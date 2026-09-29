@@ -105,6 +105,8 @@
 #app.cue-solved{animation:cueMatch 1.6s ease-out}
 #app.cue-confess .case-view{animation:quake .7s cubic-bezier(.36,.07,.19,.97) .05s,quake .5s cubic-bezier(.36,.07,.19,.97) .9s}
 #app.cue-confess::after{content:"";position:fixed;inset:0;z-index:88;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(120,10,6,.45));animation:redPulse 1.6s ease-out both}
+#app:is(.cue-gore,.cue-bonesaw)::after{content:"";position:fixed;inset:0;z-index:88;pointer-events:none;background:radial-gradient(ellipse at center,transparent 34%,rgba(38,2,0,.62));animation:goreDim 1.6s ease-out both} /* 끔찍한 기록을 처음 펼칠 때 */
+@keyframes goreDim{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
 @keyframes redPulse{0%{opacity:0}20%{opacity:1}55%{opacity:.35}70%{opacity:.8}100%{opacity:0}}
 @keyframes quake{10%,90%{transform:translate(-1px,0)}20%,80%{transform:translate(2px,1px)}30%,50%,70%{transform:translate(-3px,-1px)}40%,60%{transform:translate(3px,1px)}}
 #app.cue-miss .stage-frame{animation:quake .35s cubic-bezier(.36,.07,.19,.97)}
@@ -125,7 +127,7 @@ body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,
 
 @media (prefers-reduced-motion:reduce){
   #app[class*="cue-"] .stage-frame,#app[class*="cue-"] .case-view,#app.cue-solved,.rep-view.bounced,.m-who.bounced,.qa.pressing .c-ev,.c-dots i{animation:none!important}
-  #app.cue-confess::after{animation-duration:.01s}
+  #app.cue-confess::after,#app:is(.cue-gore,.cue-bonesaw)::after{animation-duration:.01s}
   .cue-stamp span{animation:cueFade 1.2s ease-out both;transform:rotate(-12deg)} /* 움직임 줄이기: 쾅 내려찍는 크기 변화 없이 스며 나왔다 사라진다 */
   .mono-cap{transition:opacity .2s}
   .verdict.wait{animation:none}
