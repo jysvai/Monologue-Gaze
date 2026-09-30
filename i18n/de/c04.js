@@ -12,7 +12,7 @@ MG.I18N.put("de", "c04", {
 "1p8weevagc9": "Zeit",
 "1e3rtvb6a8x": "Fr., [[28. Juni|k_0628]] 1968 (Shōwa 43), gegen 9:21 Uhr · Dauerregen der Regenzeit",
 "1x9grc2dd1j": "Ort",
-"1gheokajz5u": "Mizuo, [[Mauerweg am Wasserwerk|k_johsui]] — einspurige Straße entlang der Ostmauer des städtischen Wasserwerks",
+"1gheokajz5u": "Mizuo, [[Mauerweg am Wasserwerk|k_johsui]] — schmale Straße ohne Abzweigungen entlang der Ostmauer des städtischen Wasserwerks",
 "6m1j3xtfad": "Schaden",
 "2emethqkcf8": "Ein Geldtransporter der [[Tama-Shōwa-Bank|k_bank]], Filiale Mizuo, samt 174,2 Millionen Yen Bargeld (Sommergratifikation für das Werk Mizuo von [[Hinosawa Elektrik|k_hinosawa]])",
 "1m2okwvsqv3": "Vorgehen",

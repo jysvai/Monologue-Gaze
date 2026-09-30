@@ -12,7 +12,7 @@ MG.I18N.put("en", "c04", {
 "1p8weevagc9": "When",
 "1e3rtvb6a8x": "Fri., [[June 28|k_0628]], 1968 (Showa 43), about 9:21 a.m. · rainy-season rain",
 "1x9grc2dd1j": "Where",
-"1gheokajz5u": "[[Waterworks wall road|k_johsui]], Mizuo City — a single-lane road along the east wall of the city waterworks",
+"1gheokajz5u": "[[Waterworks wall road|k_johsui]], Mizuo City — a narrow road with no turnoffs along the east wall of the city waterworks",
 "6m1j3xtfad": "Loss",
 "2emethqkcf8": "One cash transport car of the [[Tama Showa Bank|k_bank]] Mizuo branch, and ¥174.2 million in cash (summer bonuses for the Mizuo plant of [[Hinosawa Electric|k_hinosawa]])",
 "1m2okwvsqv3": "Method",

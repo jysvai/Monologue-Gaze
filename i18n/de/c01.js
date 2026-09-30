@@ -477,7 +477,7 @@ MG.I18N.put("de", "c01", {
 "ii8rg49klw": "Die Laterne hinten in Ropewalk Court ist allein diesen Monat drei-, viermal ausgegangen. Mr. Gall, der Laternenanzünder, schimpft, da drehe einer den Hahn zu.",
 "1nd0uqogix": "Cordell? Den habe ich in der Nacht auf meiner Runde nicht gesehen.",
 "2bl854tzqzr": "Hannah, die Kartoffelverkäuferin. Die hat an der Kirchenecke die ganze Nacht ihr Blechöfchen am Brennen. Die hat gute Augen.",
-"21tvjvtjm1r": "Um 1:57 Uhr standen zwei vor der Hintertür vom Three Keys und suchten Schutz vor dem Regen — einer davon wird Mr. Dill gewesen sein. Er hat nur kurz genickt, und ich bin weiter.",
+"21tvjvtjm1r": "Um 1:57 Uhr standen zwei vor der Hintertür vom Three Keys und suchten Schutz vor dem Regen — einer davon wird Mr. Dill gewesen sein. Ich habe nur kurz genickt und bin weitergegangen.",
 "1uaiamnv1nw": "Briefe? Ein Constable versteht nichts von Briefen. Ich bin einer, der zu Fuß geht.",
 "1m0vlno1jbm": "Dienstvorschrift, Paragraph 4. Überall, wo ich vorbeikomme, schreibe ich auf, was ich sehe, mit Uhrzeit. Mit Bleistift, damit nichts verläuft, wenn es nass wird.",
 "19k91nakmwt": "Das ist meine Division. Seit der Sache am Candle Market sind die Nachtstreifen verdoppelt, alle kommen zu wenig zum Schlafen.",

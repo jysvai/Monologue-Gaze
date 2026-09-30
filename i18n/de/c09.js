@@ -25,7 +25,7 @@ MG.I18N.put("de", "c09", {
 "14zpajymkip": "Wie viele Stufen hat die Frau gezählt?",
 "9t7wtti35n": "In HaruHome nach Namen oder Spitznamen suchen. So-ras Aussagen und die Akten nebeneinanderlegen.",
 "25dpbjchysw": "Ermittlungsakte",
-"1qckbq5d0ml": "Gemeinsamer Ordner von Team 3 · HWP-Dokumente und Tonprotokolle. Mit den Ermittlungen kommen weitere Dateien hinzu.",
+"1qckbq5d0ml": "Gemeinsamer Ordner von Team 3 · Textdokumente und Tonprotokolle. Mit den Ermittlungen kommen weitere Dateien hinzu.",
 "29uos70lxhi": "HaruHome",
 "14l4j6d7bfg": "HaruHome-Minihomepage",
 "1x7jyawz9nl": "Gesicherte Minihomepages und der Club des Viertels. Suche nach Namen oder Spitznamen.",

@@ -48,7 +48,7 @@ MG.I18N.put("de", "c13", {
 "1z0z96cyaem": "Am Rand des Koordinatenfotos ist die Kamera an der Rückwand des 24-Stunden-Ladens zu sehen.",
 "1kku0be2v1w": "Hab auch ein paar Fotos vom Kassenbereich gemacht (Reiter Tatortfotos). Der Inhaber hat uns sogar Kaffee gemacht ☕ Eben kam auch noch eine SMS von ihm — „Wenn Sie noch was brauchen, jederzeit ^^7“",
 "i7bzalmcw2": "Den Scooter hat Jeong U-jin gemietet, zwanzig. Wohnheim in Yeokjeon-dong. Seit einem Monat jeden Freitag- und Samstagabend dieselbe Strecke.",
-"1knn4fnsjc": "Wenn wir jetzt zugreifen, werfen die Hintermänner ihre Handys weg und tauchen ab. Laut Ankündigung gibt es heute um 21 Uhr wieder eine Lieferung nach Saesol. Wir schnappen den, der am Ablageort die Ware rausholt. Observation vorbereiten.",
+"1knn4fnsjc": "Wenn wir jetzt zugreifen, werfen die Hintermänner ihre Handys weg und tauchen ab. Laut Ankündigung gibt es heute um 21 Uhr wieder eine Lieferung nach Saesol. Wir schnappen den, der mit der Ware am Ablageort auftaucht. Observation vorbereiten.",
 "1nbhhwblvn4": "Unterstützung für die Observation steht. Von der alten Dame, der das Haus gehört, ein Parkplatz (18:30), vom Inhaber des Harumart der Fensterplatz und der Schlüssel zur Hintertür (19:58). Alle sehr hilfsbereit 🙏",
 "1ff5pmit8fy": "Observationsplan",
 "17a46lc7dih": "21:00. Alles ruhig in der Gasse. Keine Menschenseele.",

@@ -271,7 +271,7 @@ MG.I18N.put("en", "c00", {
 "1twzcb6x0ee": "Layers",
 "1ue7enan2pp": "14 — Guides · Sky · Moon · Rain · Horizon · Shelter roof · Posts · Bench · Sign · Umbrella · Person with umbrella · Shadow · Texture · Signature (SY)",
 "22hth4v60ft": "todo.txt",
-"11ov808pajz": "10/9 (Hangeul Day)",
+"11ov808pajz": "Oct 9 (Hangeul Day)",
 "1vj0cuwfh79": "- [[Tofu|k_dubu]] vet appointment (Sat 11:00)",
 "1g978ej2k4h": "- Send 2 drafts for deadline B",
 "ot9uu4dcvk": "- Back up [[original file|k_psd]] to external drive",
