@@ -664,9 +664,12 @@
   }
 
   /* ── 기록 조회 (query): 정확한 번호·이름을 넣어 대장을 조회한다 */
+  // 이름을 성·이름 순서를 뒤집어 쳐도 (Deok-su Kang = Kang Deok-su) 같은 사람으로 찾는다: 낱말 두세 개면 거꾸로 한 번 더 맞춰 본다
+  const flipWords = v => { const w = String(v ?? '').trim().split(/[\s,]+/).filter(Boolean); return w.length > 1 && w.length < 4 ? w.reverse().join(' ') : null; };
   function queryHits(s, inp) {
     if (!Object.values(inp).some(v => norm(v))) return null;
-    return (s.records || []).filter(r => Object.entries(r.match || {}).every(([f, vals]) => (Array.isArray(vals) ? vals : [vals]).map(norm).includes(norm(inp[f])))).map(r => r.doc).filter((id, i, a) => C.docs[id] && a.indexOf(id) === i);
+    const fits = (vals, v) => { const L = (Array.isArray(vals) ? vals : [vals]).map(norm); return L.includes(norm(v)) || (flipWords(v) != null && L.includes(norm(flipWords(v)))); };
+    return (s.records || []).filter(r => Object.entries(r.match || {}).every(([f, vals]) => fits(vals, inp[f]))).map(r => r.doc).filter((id, i, a) => C.docs[id] && a.indexOf(id) === i);
   }
   function queryList(s) {
     const inp = ST.view.qin[s.id] || {};
