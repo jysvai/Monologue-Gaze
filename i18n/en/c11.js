@@ -917,7 +917,7 @@ MG.I18N.put("en", "c11", {
 "25h0wsca974": "When and where the sacks went into the water",
 "1l4g51md3f6": "Who met Pyeon Sang-gu that night",
 "450xqen87t": "Just one thing is off. Let's go against the current one more time.",
-"1knxrrwgnt3": "Rejected. Too many points don't match the records.",
+"11mj4dtvk8r": "Rejected. Something doesn’t match the records.",
 "1y5ioc0rbzy": "Euncheon Station 86-VC-411 · Reviewed",
 "1xvtsfw3v86": "As you tie up the newsprint file with string, a bundle of confidential Japanese copies stamped “部外秘” slides out of the next slot in the drawer. → Back to the records room for CASE 12.",
 "269ncezsgb6": "At 8:05 p.m. on November 14, 1986, Pyeon Sang-gu used the counter phone at the Celadon Tearoom to call Euncheon 2-7341. “Mok-3” in the ledger: Cheonghak Lacquerware. The two and a half million won came due that day. Ham Deok-gyu, receiver in hand, was looking down at his half-packed belongings. A truck was coming at four in the morning, and he had already pressed money for a room into the hand of his apprentice, Gil Yong-su, and sent him off to the Soyang Inn.",
@@ -955,5 +955,5 @@ MG.I18N.put("en", "c11", {
 "5qeaehzuof": "Cut surface of a sample sawn with the crosscut edge of a double-edged saw",
 "86in5mh8gj": "Close-up photo",
 "l6vi07gosc": "Black-and-white print from the negative of the Cheonghak Lacquerware workshop",
-"1ka1sf0qpms": "Darkroom photo of the luminol reaction at the former Cheonghak workshop"
+"1ka1sf0qpms": "Darkroom photo of the luminol reaction at the former Cheonghak workshop",
 });

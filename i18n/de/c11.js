@@ -917,7 +917,7 @@ MG.I18N.put("de", "c11", {
 "25h0wsca974": "Wann und wo die Säcke ins Wasser kamen",
 "1l4g51md3f6": "Wer Pyeon Sang-gu in jener Nacht empfing",
 "450xqen87t": "Genau eine Stelle stimmt nicht. Noch einmal gegen den Strom zurückgehen.",
-"1knxrrwgnt3": "Zurückgegeben. An mehreren Stellen passt es nicht zu den Akten.",
+"11mj4dtvk8r": "Zurückgegeben. Etwas passt nicht zu den Akten.",
 "1y5ioc0rbzy": "Revier Euncheon 86-Gewalt-411 · erneut geprüft",
 "1xvtsfw3v86": "Als der Hefter aus Graupapier mit der Schnur zugebunden ist, rutscht aus dem nächsten Fach der Schublade ein Bündel japanischer Abschriften mit dem Stempel „部外秘“. → Zurück ins Archiv, weiter mit CASE 12.",
 "269ncezsgb6": "Am 14. November 1986 um 20:05 Uhr wählte Pyeon Sang-gu vom Telefon an der Theke des Café Cheongja die Nummer Euncheon 2-7341. „M-3“ im Hauptbuch, die Perlmuttwerkstatt Cheonghak. Zweieinhalb Millionen Won waren an diesem Tag fällig. Ham Deok-gyu hielt den Hörer und blickte auf das halb gepackte Gepäck. Um vier Uhr früh sollte der Transporter kommen, und den Lehrling Gil Yong-su hatte er schon mit Geld fürs Gasthaus ins Gasthaus Soyang geschickt.",
@@ -955,5 +955,5 @@ MG.I18N.put("de", "c11", {
 "5qeaehzuof": "Schnittfläche einer mit der Querschnittseite der Zugsäge gesägten Probe",
 "86in5mh8gj": "Foto zur genauen Untersuchung",
 "l6vi07gosc": "Schwarzweißabzug vom Originalnegativ der Perlmuttwerkstatt Cheonghak",
-"1ka1sf0qpms": "Luminol-Dunkelkammerfoto der ehemaligen Werkstatt Cheonghak"
+"1ka1sf0qpms": "Luminol-Dunkelkammerfoto der ehemaligen Werkstatt Cheonghak",
 });
