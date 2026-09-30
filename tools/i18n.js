@@ -178,6 +178,26 @@ const kids = s => [...String(s).matchAll(LINK)].map(m => m[2] || '?').sort().joi
 const count = (s, re) => (String(s).match(re) || []).length;
 const tags = s => (String(s).match(/<\/?[a-z][a-z0-9]*/gi) || []).map(x => x.toLowerCase()).sort().join(',');
 const phs = s => [...new Set(String(s).match(/\{\d+\}/g) || [])].sort();
+// 번역되지 않는 답: 한글이 하나도 없는 조회 match · 잠금 code · answer 값. 게임은 원문 모양만 받으므로,
+// 원문 글에 그 값이 적혀 있으면 번역에도 같은 모양으로 있어야 한다 (예: CASE 11 도장 11.07-③ 를 07.11-③ 로 바꾸면 조회가 막힌다)
+const FIXED = new Map();
+function fixedAnswers(c) {
+  if (FIXED.has(c.id)) return FIXED.get(c.id);
+  const out = new Set();
+  (function walk(o, inMatch) {
+    for (const k of Object.keys(o)) {
+      const v = o[k];
+      if ((inMatch || k === 'code' || k === 'answer') && (typeof v === 'string' || Array.isArray(v))) {
+        const arr = [].concat(v);
+        if (!arr.some(x => typeof x === 'string' && HAN.test(x))) arr.forEach(x => { if (typeof x === 'string' && /\d/.test(x) && x.length >= 3) out.add(x); });
+        continue;
+      }
+      if (v && typeof v === 'object') walk(v, k === 'match' || (inMatch && !Array.isArray(o)));
+    }
+  })(c, false);
+  FIXED.set(c.id, [...out]);
+  return FIXED.get(c.id);
+}
 function checkCaseUnit(u, t, c) {
   const errs = [], warns = [];
   if (u.atom) {
@@ -187,6 +207,7 @@ function checkCaseUnit(u, t, c) {
   if (typeof t !== 'string' || !t.trim()) return { errs: ['빈 번역'], warns };
   if (kids(u.ko) !== kids(t)) errs.push(`걸린 단어가 다르다: 원문 [${kids(u.ko)}] · 번역 [${kids(t)}]`);
   if (c) for (const m of t.matchAll(LINK)) if (m[2] && !(c.keywords || {})[m[2]]) errs.push('없는 단어 id: ' + m[2]);
+  if (c) for (const a of fixedAnswers(c)) if (u.ko.includes(a) && !t.includes(a)) errs.push(`답으로 치는 값 「${a}」 이 번역에 원문 모양 그대로 없다 (조회·잠금은 그 모양만 받는다)`);
   for (const [re, what] of [[/\*\*/g, '**굵게**'], [/~~/g, '~~줄~~'], [/\{\{t\}\}/g, '{{t}}'], [/\{\{d\}\}/g, '{{d}}'], [/\{n\}/g, '{n}'], [/\{next\}/g, '{next}']]) if (count(u.ko, re) !== count(t, re)) errs.push(what + ' 개수가 다르다');
   if (/^\s*[(（]/.test(u.ko) !== /^\s*[(（]/.test(t)) warns.push('앞의 몸짓 (…) 이 원문과 다르다');
   if (/^\s*—/.test(u.ko) !== /^\s*—/.test(t)) warns.push('앞의 「— 」(끼어든 말) 이 원문과 다르다');
