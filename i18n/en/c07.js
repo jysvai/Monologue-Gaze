@@ -582,7 +582,7 @@ MG.I18N.put("en", "c07", {
 "uptxukteew": "That's the manager's car. Noh drove it.",
 "1wciheorxp2": "Talk about important people? What would someone like me know?",
 "126bd991sar": "I didn't appeal. Everyone said that was best.",
-"11uyxftl5w8": "He's a driver in the same Daeyang vehicle section. He's been driving the manager's car longer than I've been driving at all. We used to wash cars together in the garage.",
+"11uyxftl5w8": "He's a driver in the same Daeyang vehicle section. He's driven the manager's car longer than I have. We used to wash cars together in the garage.",
 "1bbabuk1som": "The company that paid my wages. I joined the vehicle section as a driver and drove the young lady's car from June last year.",
 "u32vawnjot": "The black handbag, yes. She always rode with it on her lap. That night too.",
 "opovq3jfmc": "It's the embankment road to her rented place. There isn't a single streetlight, so at night you drive by the headlights alone.",

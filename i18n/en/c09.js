@@ -218,7 +218,7 @@ MG.I18N.put("en", "c09", {
 "1bxc5osk8v9": "buy one at the convenience store lol",
 "1yn54s9ls0k": "oh right [[hanbit express|k_hanbit]] texted me, nobody home so they left it w/ the guy on the 2nd floor in the next alley -_- gonna go get it",
 "12sfxoul4ov": "dont go to some strangers place at night. get it tomorrow",
-"29jbhk1miov": "its fine~ the guy came out to the end of the alley w/ an umbrella for me lol so nice of him",
+"29jbhk1miov": "its fine~ the guy came out to the mouth of the alley w/ an umbrella for me lol so nice of him",
 "trdpi7hrbd": "oh good lol text me when u get there",
 "1x7v5dx6o89": "sora?",
 "1kodsley2a": "u asleep? text back",

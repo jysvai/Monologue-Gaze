@@ -217,7 +217,7 @@ MG.I18N.put("en", "c08", {
 "2apar8xhtug": "[The moment the call connects, a “bong—” time signal. Then the opening music of the TV news, faintly. The TV in this house was off]",
 "ec8omytsm": "I'll call again tomorrow evening at seven-thirty. When I do, the one who brings the money is you, ma'am. Alone.",
 "25exg69gci5": "All right, all right.",
-"1z39o527pu8": "※ Only non-family visitor to the house — [[Yeom Jin-u|k_tutor]] (graduate student, Dongrim University), tutor to the daughter [[Baek So-yeong|k_soyoung]] (mother's memo).",
+"1z39o527pu8": "※ Visitor to the house from outside the family — [[Yeom Jin-u|k_tutor]] (graduate student, Dongrim University), tutor to the daughter [[Baek So-yeong|k_soyoung]] (mother's memo).",
 "smdtz6ols2": "Transcript ⑥ · Nov. 9 (Sat) 19:30",
 "14mptucvf03": "Call 29 sec · trace: payphone at the entrance of [[Solmaru Market|k_solmaru]] (arrived 3 min later — already gone)",
 "2cv6hms8lre": "Go to the phone booth at Garam Station Exit 3, right now. There's a note in the phone book. Just you, ma'am.",
