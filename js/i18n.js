@@ -139,7 +139,11 @@
   const fmts = {};
   function date(d, kind) {
     if (lang === 'ko' || !window.Intl) return KO[kind](d);
-    try { return (fmts[kind] ||= new Intl.DateTimeFormat(LOC[lang], OPT[kind])).format(d); } catch (e) { return KO[kind](d); }
+    try {
+      const s = (fmts[kind] ||= new Intl.DateTimeFormat(LOC[lang], OPT[kind])).format(d);
+      // 결말 글 속의 시각은 영어 번역문과 같은 꼴로 (5:40 p.m.) — 화면 시계는 그대로 PM
+      return lang === 'en' && (kind === 'ptime' || kind === 'pstamp') ? s.replace(/[\s ]?([AP])M\b/g, (m, x) => ` ${x.toLowerCase()}.m.`) : s;
+    } catch (e) { return KO[kind](d); }
   }
 
   /* ── 꾸러미 부르기 ── */
