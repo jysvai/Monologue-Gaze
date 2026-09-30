@@ -380,7 +380,7 @@ MG.I18N.put("en", "c01", {
 "18je7hq3b30": "The envelope found unopened in the heap of “Knotsman” letters (Star engraving).",
 "14jeahx3u6h": "To the gentleman reporter at the Star newspaper.",
 "1j14jyfvn4e": "My name is Rose Callaway and I lodge at the [[Blue Lantern|k_bluelantern]] in [[Salt Lane|k_saltlane]]. I cannot write, so I am telling this to the letter-writer by the church to set down.",
-"epwmd31ejo": "Every Wednesday and Saturday morning I scrub the floor of the back room at the [[Three Keys|k_threekeys]]. Last [[Wednesday morning|k_wednesday]] I saw the gentleman in charge of the collection box open it to move the money into the bank bag, and put some gold pieces and a handful of silver aside into his own waistcoat pocket. He saw me standing in the doorway.",
+"epwmd31ejo": "Every Wednesday and Saturday morning I scrub the floor of the back room at the [[Three Keys|k_threekeys]]. On [[Wednesday morning|k_wednesday]] this week I saw the gentleman in charge of the collection box open it to move the money into the bank bag, and put some gold pieces and a handful of silver aside into his own waistcoat pocket. He saw me standing in the doorway.",
 "1h9i6igwbod": "The reward is money the neighbourhood put together to keep women like us safe. Can that be right? If anyone will believe me, please come to the Blue Lantern on Monday.",
 "4k5hh45kdm": "Rose C. (her mark ×)",
 "1m6vb1z0ss4": "Written by Mortimer, public letter-writer, at the west door of St Edwin's Church · Fee 1d.",

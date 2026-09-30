@@ -380,7 +380,7 @@ MG.I18N.put("de", "c01", {
 "18je7hq3b30": "Der Umschlag, der ungeöffnet im Stapel der „Knotsman“-Zuschriften lag (Abbildung im Star).",
 "14jeahx3u6h": "An die Herren Reporter vom Star.",
 "1j14jyfvn4e": "Ich heiße Rose Callaway und schlafe im [[Blue Lantern|k_bluelantern]] in der [[Salt Lane|k_saltlane]]. Ich kann nicht schreiben, darum lasse ich den Schreiber vor der Kirche aufsetzen, was ich sage.",
-"epwmd31ejo": "Jeden Mittwoch- und Samstagmorgen schrubbe ich den Boden im Hinterzimmer des [[Three Keys|k_threekeys]]. Letzten [[Mittwochmorgen|k_wednesday]] hat der Herr, der die Sammelbüchse verwahrt, die Büchse aufgemacht und das Geld in die Banktasche getan, und dabei hat er ein paar Goldstücke und eine Handvoll Silbergeld für sich in die Westentasche gesteckt. Ich stand in der Tür, und er hat mich auch gesehen.",
+"epwmd31ejo": "Jeden Mittwoch- und Samstagmorgen schrubbe ich den Boden im Hinterzimmer des [[Three Keys|k_threekeys]]. Am [[Mittwochmorgen|k_wednesday]] dieser Woche hat der Herr, der die Sammelbüchse verwahrt, die Büchse aufgemacht und das Geld in die Banktasche getan, und dabei hat er ein paar Goldstücke und eine Handvoll Silbergeld für sich in die Westentasche gesteckt. Ich stand in der Tür, und er hat mich auch gesehen.",
 "1h9i6igwbod": "Die Belohnung ist doch Geld, das das Viertel gesammelt hat, damit Frauen wie wir geschützt werden. Darf das denn sein? Wenn mir einer glauben will, so kommen Sie bitte am Montag ins Blue Lantern.",
 "4k5hh45kdm": "Rose C. (ihr Zeichen: ×)",
 "1m6vb1z0ss4": "Aufgesetzt von Mortimer, Schreiber vor dem Westportal der Kirche St. Edwin · Gebühr 1 Penny",
