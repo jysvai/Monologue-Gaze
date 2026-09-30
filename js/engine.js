@@ -1557,7 +1557,7 @@
       const status = st && st.solved ? 'done' : st && ((st.notes || []).length || (st.seen || []).length) ? 'going' : 'new'; // 예전 판의 저장에 칸이 빠져 있어도 기록실은 열린다
       const kind = c.kind === 'tutorial' ? T('신입 교육') : c.live ? T('현행') : c.region === 'overseas' ? T('해외') : T('국내');
       // 현행 사건 폴더에는 사건 속 시계가 멈춘 시각을 연필로 적어 둔다 (다시 열면 거기서부터 흐른다)
-      const stop = c.live && st && st.live ? (([y, mo, d, h, mi]) => { const t = new Date(y, mo - 1, d, h, mi + (st.live.t || 0)); return `${t.getMonth() + 1}.${t.getDate()} ${pad(t.getHours())}:${pad(t.getMinutes())}`; })(c.live.start || [2024, 1, 1, 9, 0]) : '';
+      const stop = c.live && st && st.live ? (([y, mo, d, h, mi]) => { const t = new Date(y, mo - 1, d, h, mi + (st.live.t || 0)); return MG.I18N.date(t, 'mdhm'); })(c.live.start || [2024, 1, 1, 9, 0]) : '';
       const coverFile = MG.images[`${c.id}/cover_s`] || MG.images[`${c.id}/cover`]; // 폴더 표지는 작게 (cover_s)
       const cover = coverFile ? `<img src="${esc(coverFile)}" alt="" loading="lazy" decoding="async">` : c.art && c.art.cover ? (typeof c.art.cover === 'string' ? c.art.cover : c.art.cover.svg || '') : '';
       return `<button type="button" class="folder ${status}${c.kind === 'tutorial' ? ' tutorial' : ''}" data-open="${esc(c.id)}" style="--tilt:${(hash(c.id) % 7 - 3) * 0.4}deg">

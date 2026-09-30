@@ -126,6 +126,7 @@
     clock: d => `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()}. (${WD[d.getDay()]})  ${d.getHours() < 12 ? '오전' : '오후'} ${d.getHours() % 12 || 12}:${p2(d.getMinutes())}`,
     ptime: d => `${d.getHours() < 6 ? '새벽 ' : ''}${d.getHours()}시${d.getMinutes() ? ` ${d.getMinutes()}분` : ''}`, // 결말의 {{t}}: 글 속의 시각
     pstamp: d => `${d.getMonth() + 1}월 ${d.getDate()}일 ${WD[d.getDay()]}요일 ${KO.ptime(d)}`,
+    mdhm: d => `${d.getMonth() + 1}.${d.getDate()} ${p2(d.getHours())}:${p2(d.getMinutes())}`, // 현행 사건 폴더에 연필로 적는 멈춘 시각
   };
   const LOC = { en: 'en-US', de: 'de-DE', ru: 'ru-RU', ja: 'ja-JP', zh: 'zh-CN' };
   const OPT = {
@@ -135,13 +136,16 @@
     clock: { year: 'numeric', month: 'numeric', day: 'numeric', weekday: 'short', hour: 'numeric', minute: '2-digit' },
     ptime: { hour: 'numeric', minute: '2-digit' },
     pstamp: { month: 'long', day: 'numeric', weekday: 'long', hour: 'numeric', minute: '2-digit' },
+    mdhm: { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' },
   };
+  if (lang === 'en') OPT.mdhm.month = 'short'; // 3/14 보다 Mar 14
   const fmts = {};
   function date(d, kind) {
     if (lang === 'ko' || !window.Intl) return KO[kind](d);
     try {
       const s = (fmts[kind] ||= new Intl.DateTimeFormat(LOC[lang], OPT[kind])).format(d);
       // 결말 글 속의 시각은 영어 번역문과 같은 꼴로 (5:40 p.m.) — 화면 시계는 그대로 PM
+      if (kind === 'mdhm' && lang !== 'en') return s.replace(/,\s/, ' '); // 연필 메모는 18.11. 03:40 처럼 쉼표 없이
       return lang === 'en' && (kind === 'ptime' || kind === 'pstamp') ? s.replace(/[\s ]?([AP])M\b/g, (m, x) => ` ${x.toLowerCase()}.m.`) : s;
     } catch (e) { return KO[kind](d); }
   }
