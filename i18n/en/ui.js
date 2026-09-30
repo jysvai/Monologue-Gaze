@@ -248,7 +248,7 @@ MG.I18N.put("en", "ui", {
 "사건 파일": "Case files",
 "현행 사건": "Live cases",
 "당직 · 현행 사건": "Night duty · Live cases",
-"몇 해 전 실제로 돌았던 현행 사건을 그날 그 시각부터 다시 돌리는 당직 훈련이다. 지원으로 붙은 형사 자리에 앉는다. 문서를 읽고 묻고 조회할 때마다 수사 시계가 돈다.": "A duty drill that replays live cases from a few years back, from that day and hour. You take the seat of a detective sent in as backup. Every time you read, ask or look something up, the investigation clock runs.",
+"몇 해 전 실제로 돌았던 현행 사건을 그날 그 시각부터 다시 돌리는 당직 훈련이다. 지원으로 붙은 형사 자리에 앉는다. 문서를 읽고 묻고 조회할 때마다 수사 시계가 돈다.": "A duty drill that replays live cases from a few years back, starting at the same day and hour they broke. You take the seat of a detective sent in as backup. Every time you read, ask or look something up, the investigation clock runs.",
 "M의 메모": "M's notes",
 "기록 여백과 화면에 붙은 포스트잇에 남아 있던, 선배의 글씨.": "M's handwriting, left in the margins of the records and on sticky notes stuck to screens.",
 "<p class=\"unsaved\" role=\"note\">이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다.</p>": "<p class=\"unsaved\" role=\"note\">This browser is blocking saves — close the window and the investigation is lost.</p>",
