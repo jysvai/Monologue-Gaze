@@ -150,12 +150,15 @@
     let left = ids.length, fired = false;
     const go = () => { if (fired) return; fired = true; cssText(); cb(); };
     const done = () => { if (--left <= 0) go(); };
-    ids.forEach(id => {
+    // 못 받은 꾸러미는 주소 끝을 바꿔 한 번 더 청한다 (중간 서버가 실패한 응답을 붙들고 있어도 새로 받게)
+    const add = (id, again) => {
       const s = document.createElement('script');
-      s.src = `i18n/${lang}/${id}.js`;
-      s.onload = s.onerror = done;
+      s.src = `i18n/${lang}/${id}.js` + (again ? `?r=${Date.now()}` : '');
+      s.onload = done;
+      s.onerror = again ? done : () => add(id, true);
       document.head.appendChild(s);
-    });
+    };
+    ids.forEach(id => add(id, false));
     setTimeout(go, 15000); // 꾸러미 하나가 끝내 오지 않아도 책상은 연다
   }
   function set(l) {
