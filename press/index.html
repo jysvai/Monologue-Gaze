@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Monologue Gaze — Press Kit</title>
+<meta name="description" content="Press kit for Monologue Gaze, a free browser detective game played by reading period records. Facts, trailer, screenshots and case list.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Monologue Gaze — Press Kit">
+<meta property="og:description" content="A free browser detective game: 16 cases from 1888 to 2025, solved by reading the records.">
+<meta property="og:image" content="https://jysvai.github.io/Monologue-Gaze/press/media/01-london-1888.jpg">
+<link rel="icon" href="../icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --wood: #20150e; --wood-2: #2c1d13; --paper: #efe4cc; --paper-2: #e3d4b4; --ink: #2a2118;
+    --ink-2: #5d4c39; --rule: #c9b58f; --red: #9b2c22; --gold: #e2b877; --on-wood: #eadcc2; --on-wood-2: #bba88a;
+    --f-type: "Special Elite", "Courier New", monospace; --f-body: "Crimson Pro", Georgia, serif; --f-mono: "IBM Plex Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--wood); }
+  body { margin: 0; color: var(--on-wood); font: 400 19px/1.55 var(--f-body); background: var(--wood) url("../img/_global/desk.webp") center top / 1600px auto repeat; padding-inline: 16px; padding-block: 0 64px; }
+  a { color: var(--gold); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  header { padding-block: 56px 28px; }
+  .kicker { font: 500 13px/1.4 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--on-wood-2); margin: 0 0 10px; }
+  h1 { font: 400 clamp(44px, 8vw, 88px)/1 var(--f-type); margin: 0 0 14px; color: #f4ead6; text-wrap: balance; }
+  .tag { font-style: italic; font-size: clamp(19px, 2.4vw, 24px); margin: 0 0 26px; color: var(--paper-2); max-width: 40ch; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn { display: inline-block; font: 400 18px/1 var(--f-type); color: var(--wood); background: var(--gold); padding: 13px 20px 12px; text-decoration: none; border-radius: 2px; }
+  .btn.ghost { background: transparent; color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
+  .langs { font: 400 15px/1.5 var(--f-mono); color: var(--on-wood-2); }
+  .reel { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; margin-block: 8px 40px; }
+  .reel figure { margin: 0; }
+  video { width: 100%; height: auto; display: block; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+  figcaption { font: 400 14px/1.45 var(--f-mono); color: var(--on-wood-2); margin-top: 8px; }
+  .sheet { background: var(--paper) url("../img/_global/paper.webp") center / 900px auto; color: var(--ink); padding: clamp(20px, 4vw, 44px); box-shadow: 0 14px 40px rgba(0,0,0,.5); border-radius: 2px; margin-bottom: 40px; }
+  .sheet h2 { font: 400 28px/1.15 var(--f-type); margin: 0 0 16px; color: var(--ink); }
+  .sheet h2 small { font: 500 12px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 6px; }
+  .cols { display: grid; grid-template-columns: 1fr 300px; gap: 36px; align-items: start; }
+  .prose p { margin: 0 0 14px; max-width: 64ch; }
+  dl.facts { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; font-size: 17px; }
+  dl.facts dt { font: 500 12px/1.9 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+  dl.facts dd { margin: 0; }
+  ul.feat { margin: 0; padding-left: 1.1em; }
+  ul.feat li { margin-bottom: 8px; max-width: 70ch; }
+  .tablewrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 17px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font: 500 12px var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+  td.no, td.yr { font: 400 15px var(--f-mono); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .stars { color: var(--ink-2); letter-spacing: .05em; white-space: nowrap; }
+  .stars.red { color: var(--red); }
+  tr.group td { font: 400 15px var(--f-type); color: var(--red); padding-top: 18px; border-bottom-color: transparent; }
+  .shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .shots a { display: block; }
+  .shots img { width: 100%; height: auto; display: block; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+  .shots span { display: block; font: 400 13px/1.4 var(--f-mono); color: var(--ink-2); margin-top: 6px; }
+  .note { font-size: 16px; color: var(--ink-2); }
+  .sheet a { color: var(--red); }
+  footer { font: 400 14px/1.6 var(--f-mono); color: var(--on-wood-2); }
+  @media (max-width: 760px) { .reel, .cols, .shots { grid-template-columns: 1fr; } body { font-size: 18px; } }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="kicker">Press kit · Free browser game · Released September 29, 2026</p>
+    <h1>Monologue Gaze</h1>
+    <p class="tag">A detective game where you solve cases by reading the records.</p>
+    <div class="cta">
+      <a class="btn" href="https://jysvai.itch.io/monologue-gaze">Play on itch.io</a>
+      <a class="btn ghost" href="#media">Screenshots &amp; video</a>
+      <span class="langs">English · 日本語 · 简体中文 · Русский · Deutsch · 한국어</span>
+    </div>
+  </header>
+
+  <section class="reel" aria-label="Video">
+    <figure>
+      <video controls preload="metadata" poster="media/trailer-en-poster.jpg" src="media/trailer-en.mp4"></video>
+      <figcaption>Trailer, 34 s · <a href="media/trailer-en.mp4">MP4</a> · <a href="media/trailer-ja.mp4">Japanese UI version</a></figcaption>
+    </figure>
+    <figure>
+      <video controls preload="metadata" poster="media/how-it-plays-en-poster.jpg" src="media/how-it-plays-en.mp4"></video>
+      <figcaption>How it plays, 26 s · <a href="media/how-it-plays-en.mp4">MP4</a> · <a href="media/how-it-plays-ja.mp4">Japanese</a></figcaption>
+    </figure>
+  </section>
+
+  <section class="sheet">
+    <div class="cols">
+      <div class="prose">
+        <h2><small>About</small>A drawer of cold cases</h2>
+        <p>You are a new detective in Violent Crimes Unit 2 at Seoul Seobu Police Station. M, a senior member of the unit, has transferred out and left you the key to a desk drawer of unsolved cases, spanning more than a century.</p>
+        <p>You never walk around a map. Each case is told through the paperwork of its time: a halfpenny paper in 1888 London, police files and telegram requests from 1930s Gyeongseong, a guest ledger in 1971 Seoul, a police PC in 2006, a live group chat in 2023. You click the underlined words to write them in your notebook, search the archives with them, and take them to the people involved. Show someone the right note and their story changes.</p>
+        <p>To close a case you file a report: name the culprit and attach an evidence note to every claim. The case closes only when all of it is right. Close the twelve main cases and you can read the letter M left behind.</p>
+      </div>
+      <dl class="facts">
+        <dt>Title</dt><dd>Monologue Gaze</dd>
+        <dt>Developer</dt><dd>jysvai</dd>
+        <dt>Release</dt><dd>Sept 29, 2026</dd>
+        <dt>Platform</dt><dd>Web browser (desktop recommended), no download</dd>
+        <dt>Price</dt><dd>Free</dd>
+        <dt>Cases</dt><dd>16 · 35–50 min each · about 10 hours in total</dd>
+        <dt>Languages</dt><dd>Korean (original), English, Japanese, Simplified Chinese, Russian, German</dd>
+        <dt>Audio</dt><dd>Voices in Korean with subtitles in every language</dd>
+        <dt>Link</dt><dd><a href="https://jysvai.itch.io/monologue-gaze">jysvai.itch.io/monologue-gaze</a></dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <h2><small>Features</small>What you do</h2>
+    <ul class="feat">
+      <li>Read period documents: newspapers, statements, letters, telegrams, ledgers, transcripts, old personal homepages and messenger logs.</li>
+      <li>Keep a notebook of words and search with them. A word you have not found yet has to be typed in full, so you cannot skip ahead.</li>
+      <li>Question people about what you found, then press them with your notes. Their answers change.</li>
+      <li>Use each era's tools: handwriting, footprint and voiceprint comparison, vehicle and phone lookups, close study of scene photos, cipher work, case timelines.</li>
+      <li>Three live cases (2021–2024) run on an investigation clock. You apply for warrants and records, some get rejected, and you have to finish before the deadline.</li>
+      <li>Difficulty ★3 to ★5. The more stars, the less a rejected report tells you about what was wrong.</li>
+    </ul>
+  </section>
+
+  <section class="sheet">
+    <h2><small>Cases</small>The drawer</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>No.</th><th>Title</th><th>Setting</th><th>Year</th><th>Difficulty</th></tr></thead>
+        <tbody>
+          <tr><td class="no">00</td><td>Cheongun Heights, Unit 504</td><td>Seoul</td><td class="yr">2025</td><td class="stars">practice</td></tr>
+          <tr class="group"><td colspan="5">Cold cases</td></tr>
+          <tr><td class="no">01</td><td>The Whitegate Letters</td><td>East End, London</td><td class="yr">1888</td><td class="stars">★★★</td></tr>
+          <tr><td class="no">02</td><td>Ten Days at Haselöd</td><td>Bavaria</td><td class="yr">1923</td><td class="stars red">★★★★</td></tr>
+          <tr><td class="no">03</td><td>The Baek Nancho Affair</td><td>Gyeongseong</td><td class="yr">1935</td><td class="stars">★★★</td></tr>
+          <tr><td class="no">04</td><td>White Motorcycle in the Rain</td><td>Tokyo</td><td class="yr">1968</td><td class="stars">★★★</td></tr>
+          <tr><td class="no">05</td><td>The Hourglass Letters</td><td>California</td><td class="yr">1968–69</td><td class="stars red">★★★★</td></tr>
+          <tr><td class="no">06</td><td>The Kvitdal Woman</td><td>West coast of Norway</td><td class="yr">1969</td><td class="stars red">★★★★★</td></tr>
+          <tr><td class="no">07</td><td>The Songwolgak Ledgers</td><td>Seoul</td><td class="yr">1971</td><td class="stars">★★★</td></tr>
+          <tr><td class="no">08</td><td>The Map of Voices</td><td>Seoul</td><td class="yr">1991</td><td class="stars">★★★★</td></tr>
+          <tr><td class="no">09</td><td>Thirteen Steps</td><td>Euncheon</td><td class="yr">2006</td><td class="stars">★★★★</td></tr>
+          <tr><td class="no">10</td><td>The Last Call</td><td>A port city</td><td class="yr">2014</td><td class="stars">★★★★</td></tr>
+          <tr><td class="no">11</td><td>Against the Current</td><td>Euncheon River</td><td class="yr">1986</td><td class="stars red">★★★★★</td></tr>
+          <tr><td class="no">12</td><td>Twenty-One Bags</td><td>Tokyo</td><td class="yr">1994</td><td class="stars red">★★★★★</td></tr>
+          <tr class="group"><td colspan="5">Live cases</td></tr>
+          <tr><td class="no">13</td><td>Crescent Stamp</td><td>A new town outside Seoul</td><td class="yr">2023</td><td class="stars">★★★★</td></tr>
+          <tr><td class="no">14</td><td>One Tangerine</td><td>Gaon</td><td class="yr">2021</td><td class="stars">★★★★</td></tr>
+          <tr><td class="no">15</td><td>After the Watch Stopped</td><td>Garam</td><td class="yr">2024</td><td class="stars">★★★★★</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Red stars mark cases with graphic descriptions and crime scene photos showing bodies. A switch in the records room covers the photos and swaps in a drier version of the text; the clues stay the same. Every case is a new story that borrows only motifs from real unsolved cases, and all people, places and organizations are fictional.</p>
+  </section>
+
+  <section class="sheet" id="media">
+    <h2><small>Media</small>Screenshots</h2>
+    <p class="note">1280 × 760. Click for the full-size file.</p>
+    <div class="shots">
+      <a href="media/01-london-1888.jpg"><img src="media/01-london-1888.jpg" alt="A halfpenny newspaper from 1888 London beside the case summary card" loading="lazy" width="1280" height="760"><span>CASE 01 · London, 1888</span></a>
+      <a href="media/02-gyeongseong-1935.jpg"><img src="media/02-gyeongseong-1935.jpg" alt="A 1935 Gyeongseong newspaper clipping in translation" loading="lazy" width="1280" height="760"><span>CASE 03 · Gyeongseong, 1935</span></a>
+      <a href="media/06-tokyo-1968.jpg"><img src="media/06-tokyo-1968.jpg" alt="Searching a 1968 Tokyo newspaper archive with a notebook word" loading="lazy" width="1280" height="760"><span>CASE 04 · Tokyo, 1968</span></a>
+      <a href="media/03-seoul-1971.jpg"><img src="media/03-seoul-1971.jpg" alt="A 1971 Seoul police report on coarse paper" loading="lazy" width="1280" height="760"><span>CASE 07 · Seoul, 1971</span></a>
+      <a href="media/04-euncheon-2006.jpg"><img src="media/04-euncheon-2006.jpg" alt="A 2006 police investigation PC with case files" loading="lazy" width="1280" height="760"><span>CASE 09 · Euncheon, 2006</span></a>
+      <a href="media/05-live-2023.jpg"><img src="media/05-live-2023.jpg" alt="A live case on a duty laptop with a group chat notification" loading="lazy" width="1280" height="760"><span>CASE 13 · live case, 2023</span></a>
+      <a href="media/07-interview.jpg"><img src="media/07-interview.jpg" alt="Questioning a witness about a word from the notebook" loading="lazy" width="1280" height="760"><span>Questioning a witness</span></a>
+      <a href="media/00-records-room.jpg"><img src="media/00-records-room.jpg" alt="The records room with the case folders" loading="lazy" width="1280" height="760"><span>The records room</span></a>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <h2><small>Credits &amp; tools</small>How it was made</h2>
+    <p>Images were generated with AI and checked one by one against the case records. Voices and sound effects: ElevenLabs. The text and code were written with AI assistance. Fonts are under the SIL Open Font License (Nanum, Pretendard, Galmuri, DungGeunMo, LXGW WenKai, Noto and period faces from Google Fonts).</p>
+    <p class="note">Questions and coverage: leave a comment on the <a href="https://jysvai.itch.io/monologue-gaze">itch.io page</a>. Screenshots and video on this page may be used freely for coverage of the game.</p>
+  </section>
+
+  <footer>Monologue Gaze · jysvai · 2026</footer>
+</div>
+</body>
+</html>
