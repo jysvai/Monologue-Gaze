@@ -643,7 +643,7 @@ MG.I18N.put("de", "c08", {
 "1badbzeuhx1": "Vor dem Bauzaun der Baustelle Garam-dong · ein rostiger Kran",
 "2evxvorhqmz": "Jang Du-man, Polier der Baustelle Garam-dong. An dem Tag, als wir Jun-yeong gefunden haben, war ich als Erster vor dem Schuppen.",
 "1nak2xik1mc": "Seit dem Baustopp im September habe ich einmal die Woche nachgesehen. Von außen nur aufs Schloss geschaut und bin wieder gegangen. Dass da drin einer ist … Aber in der Nacht des 29. hing das Schloss offen am Überwurf.",
-"vlptl0k30z": "Ein netter Student, war letzten Sommer in den Ferien zum Praktikum auf der Baustelle. Er kam erst, nachdem der Bauleiter weg war, die alten Leute kennt er kaum.",
+"vlptl0k30z": "Ein netter Student, war letzten Sommer in den Ferien zum Praktikum auf der Baustelle. Er kam erst, nachdem der Bauleiter weg war, die alten Leute kennen ihn kaum.",
 "558sz3deh4": "Bauleiter Tak? Beim Gerüstunfall vorletztes Jahr hat ihm der Chef die ganze Schuld aufgeladen und ihn rausgeworfen. Sein Spruch war immer „shimai“. Wenn Feierabend war, wenn er einen Streit schlichtete — „So, shimai!“",
 "1e27113x4qu": "Auf der Baustelle sagt jeder „shimai“. Nach der Arbeit heißt es: „So, shimai.“ Sag ich auch.",
 "2c53hf5l7w4": "(Zieht die Arbeitshandschuhe aus) … Wenn es nicht aufgebrochen wurde, dann wurde es mit einem Schlüssel geöffnet, meinen Sie. Meiner ist nie von meinem Gürtel weggekommen.",

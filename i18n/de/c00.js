@@ -63,7 +63,7 @@ MG.I18N.put("de", "c00", {
 "1oozpekearl": "Eine Übersichtstafel, die das Ermittlungsteam angelegt hat.",
 "1r8v4zo5ezx": "Die Uhrzeiten sind schon aus den Akten herausgesucht. Die Karten verschieben und zuordnen, was um wie viel Uhr geschah. Zutrittsprotokoll, Forum und Messenger zusammen ansehen.",
 "1c5itpbj9k9": "Jemand öffnet die Tür mit dem Code und kommt herein (Seo-yun kommt nach Hause)",
-"weofwffdrm": "Seo-yun schreibt „stell ich die Originaldatei online“",
+"weofwffdrm": "Seo-yun schreibt „ich stell die Originaldatei online“",
 "1bmwtatlz0z": "Jae-hee antwortet „Ich komm heute Abend vorbei“",
 "214on6ts945": "Es klingelt, eine Minute später wird die Tür von innen geöffnet",
 "hx1e0e76xs": "In 503 ist ein lauter „Rums“ zu hören",

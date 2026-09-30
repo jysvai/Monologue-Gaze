@@ -660,7 +660,7 @@ MG.I18N.put("de", "c02", {
 "dabypunkzf": "Schmied in Oberröding",
 "25xtrby8wdc": "Schmiede vor der Kirche, Oberröding",
 "jiple6enss": "Rottmayr. Schmied in Oberröding. Hufeisen oder Schlösser, alles, was aus Eisen ist, mach ich.",
-"18xdzr5gbqz": "Am Donnerstag, den 25. Januar, ist der Alte gekommen. Am Morgen vorher seien im Schnee Fußspuren vom Wald her zum Haus gewesen, hat er gesagt. Und keine, die zurückgehen.",
+"18xdzr5gbqz": "Am Donnerstag, den 25. Januar, ist der Alte gekommen. Am Vortag in der Früh seien im Schnee Fußspuren vom Wald her zum Haus gewesen, hat er gesagt. Und keine, die zurückgehen.",
 "svmmn5tanh": "Der Hausschlüssel sei auch eine Woche vorher verschwunden. Drum hat er ein neues Schloss für die Haustür bestellt. Am Samstag wollt er's holen, und dann ist er nicht gekommen.",
 "1vgaubiftaw": "Das Schloss liegt noch bei mir im Regal. Mit beiden Schlüsseln dran. Am Samstag wollt der Alte es holen, und er ist nie gekommen.",
 "25u6m4z5ej0": "Die Spuren sind vom [[Tannenschlag|k_tannenschlag]] her gekommen, hat er gesagt. Der Wald gehört ja nimmer ihm.",

@@ -183,7 +183,7 @@ MG.I18N.put("de", "ui", {
 "담당": "Bearbeiter",
 "과장": "Dezernatsleiter",
 "<span class=\"ok\">결재</span>": "<span class=\"ok\">Genehmigt</span>",
-"<span class=\"no\">반려</span>": "<span class=\"no\">Zurück</span>",
+"<span class=\"no\">반려</span>": "<span class=\"no\">Zurückgegeben</span>",
 "<p class=\"rep-empty\">수첩에 적힌 인물이 없다.</p>": "<p class=\"rep-empty\">Keine Personen im Notizbuch.</p>",
 "종결 · 철해 둠": "Abgeschlossen · abgeheftet",
 "결재 완료": "Genehmigt",
