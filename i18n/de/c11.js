@@ -93,7 +93,7 @@ MG.I18N.put("de", "c11", {
 "1cjwpnl0wqa": "Ein Handkarren ohne Licht rollt den Dammweg hinunter, dann drei-, viermal Wassergeräusche",
 "1ojb1ghad4x": "Ein Schilfschneider zieht den ersten Sack an Land",
 "2arok5oqox1": "Alles passt zusammen",
-"2gj2u8hdcnw": "Die Reihe an der Tafel — 20:45 Ausstieg an der Endhaltestelle, 21:00–22:00 Tod, gegen 02:00 Handkarren auf dem Dammweg und Wassergeräusche, am 16. um 07:20 der erste Sack. Von gegen 02:00 bis zum 16. um 07:20 sind es gut neunundzwanzig Stunden. Bei 150 m pro Stunde ergeben neunundzwanzig Stunden rund 4,4 km.",
+"2gj2u8hdcnw": "Die Reihe an der Tafel — 20:45 Ausstieg an der Endhaltestelle, 21:00–22:00 Tod, gegen 02:00 Handkarren auf dem Dammweg und Wassergeräusche, am 16. um 07:20 der erste Sack. Vom 15. gegen 02:00 bis zum 16. um 07:20 sind es gut neunundzwanzig Stunden. Bei 150 m pro Stunde ergeben neunundzwanzig Stunden rund 4,4 km.",
 "s4y6c4taqi": "Am Rand der Tafel, aus dem Gewahrsamsbuch übertragen: Aufnahme am 14., 22:40 · Entlassung am 15., 06:10.",
 "3ydfnhxs8d": "Fotomappe",
 "g0fwfrcn90": "Fotos der Spurensicherung, Originalnegative der Zeitung, Dunkelkammerfotos der Wiederaufnahme. Antippen, wo etwas auffällt.",
