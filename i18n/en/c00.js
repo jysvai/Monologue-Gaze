@@ -360,7 +360,7 @@ MG.I18N.put("en", "c00", {
 "168ai2x4et9": "With the password she had been given in September, Jae-hee logged in to Seo-yun's account from her fair booth, put up the “staying in” post and ordered the porridge. The porridge was delivered and sat outside the door, untouched.",
 "rtg591ijdi": "Seo-yun's phone left that night in Jae-hee's canvas bag and was never found. The latte photo in the “staying in” post was one Seo-yun had sent Jae-hee over the summer.",
 "6d8cf46cm2": "The original of “Blue Bus Stop,” a file with 14 layers, was still on Seo-yun's laptop. The fourteenth layer was named “Signature (SY).”",
-"1acye63em4": "You filed the report, and the team leader jerked a chin at M's drawer. “M put in for the transfer to Euncheon Station. Nobody pushed. The slots that are left are yours now.” → Back to the records room, starting with CASE 01.",
+"1acye63em4": "You filed the report, and the team leader nodded at M's drawer. “M put in for the transfer to Euncheon Station. Nobody pushed. The slots that are left are yours now.” → Back to the records room, starting with CASE 01.",
 "86in5mh8gj": "Close-examination photo",
 "1eqb9r7xh6n": "Overhead photo of the work desk in Unit 504",
 "1311on745s": "Records room folder cover — laptop with an evidence tag",
