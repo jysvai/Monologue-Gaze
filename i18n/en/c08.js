@@ -171,7 +171,7 @@ MG.I18N.put("en", "c08", {
 "sotd77sgsd": "9 p.m. time signal",
 "1fei6t1z0z": ["time signal","9 o'clock news","nine o'clock news","bong","9 o'clock time signal"],
 "n1mqs3aclh": "Jun-yeong's birthday",
-"hq4ciwc8jc": ["birthday","April 23","0423","born April 23, 1969","April 23, 1969","4/23"],
+"hq4ciwc8jc": ["birthday","April 23","0423","born April 23, 1969","April 23, 1969","4/23","23 April","2304","23/4"],
 "45x6rgx7br": "I'd like to ask about Jun-yeong's birthday.",
 "1eltxto6nk7": "Evening of Nov. 4",
 "2g34i7xnt9b": ["day he went missing","evening of the 4th","November 4","Nov. 4","evening of November 4"],

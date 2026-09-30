@@ -171,7 +171,7 @@ MG.I18N.put("de", "c08", {
 "sotd77sgsd": "9-Uhr-Zeitzeichen",
 "1fei6t1z0z": ["Zeitzeichen","Neun-Uhr-Nachrichten","9-Uhr-Nachrichten","Ding"],
 "n1mqs3aclh": "Jun-yeongs Geburtstag",
-"hq4ciwc8jc": ["Geburtstag","Geburtsdatum","23. April","0423","23. April 1969","geb. 23. April 1969","23.04.1969"],
+"hq4ciwc8jc": ["Geburtstag","Geburtsdatum","23. April","0423","23. April 1969","geb. 23. April 1969","23.04.1969","2304","23.04."],
 "45x6rgx7br": "Jun-yeongs Geburtstag — dazu hätte ich ein paar Fragen.",
 "1eltxto6nk7": "Abend des 4. November",
 "2g34i7xnt9b": ["Tag des Verschwindens","4. November","Abend des 4."],
