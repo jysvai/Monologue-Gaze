@@ -20,7 +20,7 @@ MG.I18N.put("en", "c00", {
 "1po4mwnul3v": "Examination",
 "1a3liym7xpz": "Decomposition advanced; time of death hard to fix (Oct 9 – Oct 12)",
 "22hn266b9ye": "Initial theory",
-"1p5pu6o42b": "Oct 11 social media post · 10.12 delivery order → leaning toward “died after the 12th”",
+"1p5pu6o42b": "Oct 11 social media post · Oct 12 delivery order → leaning toward “died after the 12th”",
 "xwct3ucr1r": "Seized",
 "8xc5u66o74": "1 laptop, the victim's (phone not found)",
 "2cwsek5ngxl": "When was the real last day?",

@@ -358,7 +358,7 @@ MG.I18N.put("de", "c08", {
 "p4l7q78vt1": "Die aufgezeichneten Anrufe werden samt Kassetten verwahrt; Mitschnitte und Hintergrundgeräusche gesondert zur [[Tonbandanalyse|k_voice]] an die Kriminaltechnik im Präsidium gegeben.",
 "y6d253pmnd": "Kommissar Yeo Sang-cheol (Siegel)",
 "15glp4qzk5w": "Vermisst",
-"rk7kpxomm8": "Verteilt am 1991.11.12 · Polizeirevier Hanul · Familie",
+"rk7kpxomm8": "Verteilt am 12.11.1991 · Polizeirevier Hanul · Familie",
 "1cmf71ckx86": "Platz für das Foto (Druck verschmiert, das Gesicht ist nicht zu erkennen)",
 "22g4rp1y31w": "Name",
 "1vmrrkbqua2": "Baek Jun-yeong (22) · männlich",

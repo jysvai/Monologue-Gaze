@@ -358,7 +358,7 @@ MG.I18N.put("en", "c08", {
 "p4l7q78vt1": "Recorded calls kept on the original tapes; transcripts and background sounds sent separately to the HQ forensic science unit for [[recording analysis|k_voice]].",
 "y6d253pmnd": "Inspector Yeo Sang-cheol (seal)",
 "15glp4qzk5w": "Missing Person",
-"rk7kpxomm8": "Distributed 1991. 11. 12 · Hanul Police Station · family",
+"rk7kpxomm8": "Distributed Nov 12, 1991 · Hanul Police Station · family",
 "1cmf71ckx86": "Photo area of the flyer (the print is smeared; the face can't be made out)",
 "22g4rp1y31w": "Name",
 "1vmrrkbqua2": "Baek Jun-yeong (22) · male",
