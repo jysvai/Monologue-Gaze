@@ -71,12 +71,40 @@
       if (Array.isArray(t)) h[k] = uniq([...t, ...[].concat(v)]);
     });
   }
+  /* 한글이 없어 번역 꾸러미에 들지 않는 표 칸의 날짜(10.09 20:31 · 1922.10.14 · ① 11/5 07:40 · 6.20 ~)를
+   * 그 언어의 순서로: 독일어·러시아어는 일.월, 영어는 달 이름. 칸 전체가 날짜일 때만 바꾸고, 답으로 치는 칸은 건드리지 않는다. */
+  const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const DT = String.raw`(?:(\d{4}|\d{2})\.\s?)?(\d{1,2})(?:\.\s?|\/)(\d{1,2})\.?((?:\s+\d{1,2}:\d{2}(?::\d{2})?)(?:\s·\s\d{1,2}:\d{2})*)?`;
+  const CELL = new RegExp(String.raw`^([①-⑳]\s)?(?:${DT})?(\s*~\s*)?(?:${DT})?$`);
+  const DKEEP = new Set([...SKIP, 'match', 'code', 'answer', 'alias', 'osd']);
+  function cellDate(s) {
+    const m = s.match(CELL);
+    if (!m || !m[3] && !m[8] || m[3] && m[8] && !m[6]) return null;
+    const one = (y, mo, d, t) => {
+      if (mo == null) return '';
+      if (+mo < 1 || +mo > 12 || +d < 1 || +d > 31) throw 0;
+      const yy = y && y.length === 2 ? '19' + y : y;
+      const s = lang === 'en' ? `${MON[mo - 1]} ${+d}${yy ? ', ' + yy : ''}`
+        : lang === 'ru' ? `${p2(d)}.${p2(mo)}${y ? '.' + y : ''}` : `${+d}.${+mo}.${y || ''}`;
+      return s + (t || '');
+    };
+    try { return (m[1] || '') + one(m[2], m[3], m[4], m[5]) + (m[6] || '') + one(m[7], m[8], m[9], m[10]); } catch (e) { return null; }
+  }
+  function localDates(o) {
+    for (const k of Object.keys(o)) {
+      if (!Array.isArray(o) && (DKEEP.has(k) || k[0] === '_')) continue;
+      const v = o[k];
+      if (typeof v === 'string') { if (!HAN.test(v) && /\d[./]\s?\d/.test(v)) { const r = cellDate(v.trim()); if (r != null) o[k] = r; } }
+      else if (v && typeof v === 'object') localDates(v);
+    }
+  }
   function applyCase(c) {
     const tr = packs[c.id];
     if (lang === 'ko' || !tr) return;
     const ko = {};
     Object.entries(c.keywords || {}).forEach(([id, k]) => { ko[id] = k.label; });
     apply(c, tr);
+    if (/^(en|de|ru)$/.test(lang) && c.docs) localDates(c.docs);
     // 한국어 이름도 별칭으로 남긴다: 검색창에 한국어로 쳐도, 번역이 빠진 글의 [[한국어]] 도 그 단어를 찾는다
     Object.entries(c.keywords || {}).forEach(([id, k]) => { if (ko[id] && k.label !== ko[id]) k.alias = uniq([...(k.alias || []), ko[id]]); });
     // 얼굴 동그라미의 한 글자: 이름이 번역됐으면 번역된 이름의 첫 글자로 (엔진이 name[0] 을 쓴다)
