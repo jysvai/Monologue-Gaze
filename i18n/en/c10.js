@@ -2,7 +2,7 @@
 MG.I18N.put("en", "c10", {
 "1ayz1jy3s8o": "The Last Call",
 "1z3homjbtx7": "Haejin New Port area (fictional port city)",
-"zu5no5sf9t": "Motif: a pattern shared by missing-person cases in regional cities in the 2010s (original story)",
+"zu5no5sf9t": "Inspired by a pattern shared by missing-person cases in regional cities in the 2010s (original story)",
 "27ltrko0gu3": "About 35 min",
 "2a7bjdzxcdz": "November 2014, Haejin New Port. Start with the last call on the victim's phone.",
 "2vckufqxhl": "**Evidence File 10** · Case 2014-Haejin-1187 · Exhibit 3: victim's office laptop (Eunho Seafood) · voluntarily submitted 2014.11.24 · Haejin Police Station, Criminal Investigation Division",

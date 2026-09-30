@@ -2,7 +2,7 @@
 MG.I18N.put("en", "c09", {
 "1sgs1491o0z": "Thirteen Steps",
 "s7m6oit126": "Eungol-dong, Euncheon (fictional place)",
-"olgx9w3z5r": "Motif: the Sinjeong-dong serial murders (2005–2006) · heavily adapted",
+"olgx9w3z5r": "Inspired by the Sinjeong-dong serial murders (2005–2006) · heavily adapted",
 "27ltrko0gu3": "About 35 min",
 "1kgmnddkqzp": "Late autumn 2006, Eungol-dong. A rainy night, the stairs on the way home from work.",
 "1lipr49cmhr": "**Evidence File 09** · Case 2006-Euncheon-0412 · Investigation PC, Violent Crimes Unit 3, Euncheon Police Station · Mini-homepages preserved 2006.10.20",

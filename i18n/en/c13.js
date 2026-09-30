@@ -2,7 +2,7 @@
 MG.I18N.put("en", "c13", {
 "xi0ko26aqv": "Crescent Stamp",
 "n9hfspw1l0": "Saesol-dong, Haram City (a fictional new town outside Seoul)",
-"1w5687oik1": "Motif: the common pattern of 2020s “drop” drug-dealing cases (fiction)",
+"1w5687oik1": "Inspired by the common pattern of 2020s “drop” drug-dealing cases (fiction)",
 "2513yeksu3r": "About 40 min",
 "w84c1eeu5f": "Before the next batch hits the street",
 "1oy6ot03xxn": "Team Leader Han",

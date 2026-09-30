@@ -2,7 +2,7 @@
 MG.I18N.put("en", "c11", {
 "23ex4h4lucg": "Against the Current",
 "81xit0gldl": "Mokgol-dong, Euncheon · Euncheon River (fictional)",
-"up9cb8b7ci": "Motif: the common pattern of 1980s riverside dismemberment cases (fiction)",
+"up9cb8b7ci": "Inspired by the common pattern of 1980s riverside dismemberment cases (fiction)",
 "az66g87x5": "About 45 min",
 "2bvurvn63i6": "The postmortem and forensic records in this file describe dismembered body parts, cut surfaces, waterlogged flesh and bloodstains in detail, and it includes a photo of an arm protruding from a sack.",
 "2cijzazek7g": "November 1986, the Euncheon River. One by one, white rice sacks rose out of the river mist.",

@@ -2,7 +2,7 @@
 MG.I18N.put("en", "c15", {
 "lyt310rt9h": "After the Watch Stopped",
 "1nuboth3tas": "Mirinae-dong area, Garam City (fictional city)",
-"1ims9c6sd37": "Motif: the common pattern of 2020s stalking and dating-violence cases (fiction)",
+"1ims9c6sd37": "Inspired by the common pattern of 2020s stalking and dating-violence cases (fiction)",
 "1sgdp6bge7t": "About 50 min",
 "1vg57hb0nxi": "Sunset · critical window",
 "125mk53t6z0": "Team Leader Gu",

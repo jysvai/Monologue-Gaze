@@ -2,7 +2,7 @@
 MG.I18N.put("en", "c14", {
 "ecici4dxtc": "One Tangerine",
 "1w9p61jd2is": "Solmae-dong, Gaon (fictional city)",
-"1fo908g59ym": "Motif: the common pattern of 2020s voice-phishing cash-collector cases (fiction)",
+"1fo908g59ym": "Inspired by the common pattern of 2020s voice-phishing cash-collector cases (fiction)",
 "az66g87x5": "About 45 min",
 "2cymgfn8sqp": "Crypto withdrawal lock lifts",
 "1z5l5g93czz": "Team leader",

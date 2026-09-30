@@ -2,7 +2,7 @@
 MG.I18N.put("en", "c12", {
 "6kkauo10z2": "Twenty-One Bags",
 "w9eg9iby1i": "Kashiwadai, Asagi Ward, Tokyo (fictional)",
-"1v1iqne2wmt": "Motif: the 1994 Tokyo park dismemberment case · heavily adapted",
+"1v1iqne2wmt": "Inspired by the 1994 Tokyo park dismemberment case · heavily adapted",
 "az66g87x5": "About 45 min",
 "1jg6txq3jtl": "These case records contain detailed autopsy and forensic descriptions of a dismembered body, flesh showing through plastic bags, and blood and bone dust in a drain, along with photographs of them.",
 "h4a3zpig6e": "October, Heisei 6. A park at dawn. The same bags turned up in seven trash bins.",
