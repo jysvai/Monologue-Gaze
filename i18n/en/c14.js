@@ -28,7 +28,7 @@ MG.I18N.put("en", "c14", {
 "2fdqoimftrl": "Case file",
 "1uc46ha9oqg": "112 call sheet, handover report, statements, voluntarily submitted material. It grows as the investigation moves on.",
 "1hge5zxattk": "Nothing filed yet.",
-"4fb0hbulv0": "Team group chat",
+"4fb0hbulv0": "Team Group Chat",
 "5eebnsreuh": "Financial Crimes 2 (5)",
 "2g0f52z61y8": "Messenger",
 "1t5o4ttd75c": "No messages yet.",

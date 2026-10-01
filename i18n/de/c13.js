@@ -31,7 +31,7 @@ MG.I18N.put("de", "c13", {
 "1i4i81abzsm": "Ermittlungsakte",
 "llezamavup": "Erstbericht der Wache, Unterlagen von Rettungsdienst und Klinik, Notizen zur Leichenschau. Mit der Zeit kommt mehr dazu.",
 "2ce3x411lom": "Noch keine Akten eingegangen.",
-"4fb0hbulv0": "Team-Chat",
+"4fb0hbulv0": "Team-Gruppenchat",
 "16x1svgatza": "Drogenfahndung (4)",
 "2bhnk9nxhd1": "DoranTalk",
 "zlol3ot010": "Teamleiter Han · Obermeister Gu · Polizeimeisterin Seo Da-eun · ich",
