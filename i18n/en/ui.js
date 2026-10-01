@@ -144,7 +144,7 @@ MG.I18N.put("en", "ui", {
 "기각 — ": "Rejected — ",
 "<span class=\"sr\"> (찾아봄)</span>": "<span class=\"sr\"> (searched)</span>",
 "'{0}' 검색 결과 {1}건": "Results for '{0}': {1}",
-"「{0}」 {1}건": "“{0}”: {1} file(s)",
+"「{0}」 {1}건": "On file for “{0}”: {1}",
 "'{0}'에 대한 검색 결과가 없습니다.": "No results for '{0}'.",
 "「{0}」에 해당하는 자료가 없다.": "Nothing on file for “{0}”.",
 "찾을 단어": "Search term",
