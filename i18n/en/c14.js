@@ -5,7 +5,7 @@ MG.I18N.put("en", "c14", {
 "1fo908g59ym": "Inspired by the common pattern of 2020s voice-phishing cash-collector cases (fiction)",
 "az66g87x5": "About 45 min",
 "2cymgfn8sqp": "Crypto withdrawal lock lifts",
-"1z5l5g93czz": "Team leader",
+"1z5l5g93czz": "Team Leader",
 "10x4r1vxmr5": "It's 12:31. A withdrawal just went out of the CoinNaru account — to an overseas wallet. Her money is beyond reach now. We still get the people.",
 "1osedeq1e72": "Thursday afternoon, November 18, 2021, Gaon Police Station. The hallway outside the interview recording room smells of tangerines.",
 "2dbiqk7da05": "**Investigation terminal** · Gaon Police Station, Investigations Division, Financial Crimes Investigation Unit 2 · Case 2021-Gaon-3108 · Live · Involves juveniles (identities withheld)",
