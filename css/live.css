@@ -42,11 +42,11 @@
 @media (orientation:landscape) and (max-height:500px){.lv-notes{width:min(300px,40vw);gap:6px}.lv-msg{-webkit-line-clamp:1}} /* 가로 휴대폰: 알림이 화면 반을 덮지 않게 한 줄로 */ /* 휴대폰에서는 알림이 화면 폭을 거의 다 쓴다 (실제 휴대폰 배너처럼) */
 
 /* ───────── 탭의 새 소식 수 ───────── */
-.tab-n{min-width:17px;height:17px;padding:0 5px;border-radius:9px;background:#e5483b;color:#fff;font:700 10.5px/17px var(--f-web);text-align:center}
+.tab-n{min-width:17px;height:17px;padding:0 5px;border-radius:9px;background:#d63e32;color:#fff;font:700 10.5px/17px var(--f-web);text-align:center}
 
 /* ───────── 단톡방 ───────── */
 .lv-room .item-t{display:flex;align-items:center;gap:6px}
-.lv-n{min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#e5483b;color:#fff;font:700 10.5px/18px var(--f-web);text-align:center}
+.lv-n{min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#d63e32;color:#fff;font:700 10.5px/18px var(--f-web);text-align:center}
 .lv-feed .doc-b{display:flow-root}
 .lv-sys{clear:both;margin:10px auto;max-width:92%;padding:5px 10px;border-radius:10px;background:rgba(0,0,0,.08);font:12px/1.5 var(--f-web);text-align:center;color:#2b3137}
 .lv-sys time{font-family:var(--f-mono);opacity:.7}

@@ -588,4 +588,4 @@ body:has(.case-view[data-graphic])::before{background:radial-gradient(ellipse at
   .tl-mv{grid-column:2;grid-row:1/3;align-self:center}
 }
 @media (hover:none){.notes .del{opacity:.85}} /* 손가락 기기에는 올려 볼 마우스가 없다: 메모 지우기 × 가 보이게 */
-.nb-case .snd{opacity:.9}
+.nb-case .snd{opacity:1} /* 종이 위 11px 글씨: 흐리게 하면 대비가 4.5:1 아래로 (켜짐/꺼짐은 글자가 말해 준다) */
