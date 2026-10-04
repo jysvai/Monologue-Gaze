@@ -322,7 +322,7 @@ MG.I18N.put("de", "ui", {
 "천천히 보셔도 됩니다. 이거, 기억나십니까?": "Lassen Sie sich Zeit. Erinnern Sie sich daran?",
 "…이거다.": "…Das ist es.",
 "맞아떨어진다.": "Das passt.",
-"그래, 여기서 이어지는구나.": "Ja — hier hängt es zusammen.",
+"그래, 여기서 이어지는구나.": "Ja, hier hängt es zusammen.",
 "범인은… 이 사람입니다.": "Es war… diese Person.",
 "…아직 뭔가 빠져 있어.": "…Da fehlt noch etwas.",
 "사건 종결. 선배, 하나 닫았습니다.": "Fall abgeschlossen. Wieder eine Akte zu, M."

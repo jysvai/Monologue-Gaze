@@ -22,7 +22,7 @@ MG.I18N.put("en", "c03", {
 "11rgwn2377d": "The papers pointed to “[[Baek Nancho|k_baek]],” a café waitress who had money dealings with the victim. She denied it and was released for lack of evidence",
 "bc8n42vyn4": "Attached",
 "1vmom2c1orh": "Cheonggu Ilbo clippings · Jongno Police Station papers (translated from the Japanese) · copies of telegram forms · seized ledgers",
-"p566sok9il": "The woman's voice at [[9 p.m.|k_nine]] — start over with the people who heard it.",
+"t1o739x17u": "The woman's voice at [[9 p.m.|k_nine]] . Start over with the people who heard it.",
 "q8l0naa9ar": "Search not only by people's names but also by the names of shops, things and neighborhoods.",
 "8xi0dlssir": "To request a copy of a telegram from the post office, you need to know both the sender and the recipient.",
 "133n00k6okd": "Cheonggu Ilbo Research Dept. Clippings",

@@ -22,7 +22,7 @@ MG.I18N.put("de", "c03", {
 "11rgwn2377d": "Die Zeitungen verdächtigen die Café-Kellnerin „[[Baek Nan-cho|k_baek]]“, die mit dem Opfer Geldgeschäfte hatte. Sie bestreitet die Tat; mangels Beweisen freigelassen.",
 "bc8n42vyn4": "Anlagen",
 "1vmom2c1orh": "Ausschnitte der Cheonggu Ilbo · Akten des Polizeireviers Jongno (aus dem japanischen Original übersetzt) · Abschriften von Telegrammformularen · beschlagnahmte Bücher",
-"p566sok9il": "Die Frauenstimme um [[neun Uhr abends|k_nine]] — zuerst alle noch einmal aufsuchen, die sie gehört haben.",
+"t1o739x17u": "Die Frauenstimme um [[neun Uhr abends|k_nine]] . Zuerst alle noch einmal aufsuchen, die sie gehört haben.",
 "q8l0naa9ar": "Nicht nur nach Namen suchen — auch nach Geschäften, Dingen und Vierteln.",
 "8xi0dlssir": "Eine Telegrammabschrift gibt das Postamt nur heraus, wenn man Absender und Empfänger kennt.",
 "133n00k6okd": "Ausschnittsammlung der Cheonggu Ilbo",

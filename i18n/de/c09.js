@@ -58,7 +58,7 @@ MG.I18N.put("de", "c09", {
 "183t4cizdrk": "Eisentreppe — Stufenzahl",
 "2foks8zdte0": "Von unten gezählt: eine Stufe aus Beton als Sockel, sieben eiserne Trittstufen, der Treppenabsatz. In der Gegenrichtung fünf eiserne Trittstufen. Insgesamt dreizehn Stufen. Auf jeder Trittstufe ist die Stelle, auf die man tritt, zwischen dem Rost blank gelaufen.",
 "crz2262ggc": "Kante des Treppenabsatzes",
-"623mgdsd5s": "An der Vorderkante der Stahlplatte des Treppenabsatzes sechs Spuren von herabgelaufenem Schlammwasser, in gleichen Abständen nebeneinander. In der Fuge an der Kante weiße Styroporkrümel. Nur zwischen den Spuren ist die Kante dick verrostet — hier standen sechs Dinge in einer Reihe.",
+"iguog7s7me": "An der Vorderkante der Stahlplatte des Treppenabsatzes sechs Spuren von herabgelaufenem Schlammwasser, in gleichen Abständen nebeneinander. In der Fuge an der Kante weiße Styroporkrümel. Nur zwischen den Spuren ist die Kante dick verrostet. Offenbar standen hier sechs Dinge in einer Reihe.",
 "131iaser1zz": "Wohnungstür OG",
 "14c63gbsv3c": "Holztür, ein Schlüsselloch — kein Zahlenschloss. Direkt rechts vom Ende der Treppe. Auf Augenhöhe eine runde Stelle, an der die Farbe weniger verblichen ist, am Rand gelbe Papierfetzen und klebrige Reste.",
 "23ds34pzix4": "Telefonleitung",

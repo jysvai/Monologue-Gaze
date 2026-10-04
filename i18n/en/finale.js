@@ -2,7 +2,7 @@
 MG.I18N.put("en", "finale", {
 "2culseuxv9s": "If this letter is in your hands, you've closed all {n} files in the drawer.",
 "1no2jff1a9j": "I never managed to solve these records. Every time I thought I had, one piece was off. So I only left notes in the margins and waited for the next person.",
-"hf6z4kah0h": "You made them fit. With a corner of a newspaper, a line in a guest register, the time a door last opened.",
+"bewqkhm4v0": "You made them fit. You checked newspaper corners against guest registers and worked out when a door was last opened.",
 "bbk04uyid5": "You're the first to read these files against one another all the way to the end.",
 "gjti4gb4ze": "I'm not writing my name here. I'm in one of the records in this drawer too, a line or so. Anyone who counted the margin notes all the way through will find me.",
 "2g3wrw4w6m7": "I left slot {next} empty. That's where your case goes.",

@@ -322,7 +322,7 @@ MG.I18N.put("en", "ui", {
 "천천히 보셔도 됩니다. 이거, 기억나십니까?": "Take your time. Do you remember this?",
 "…이거다.": "…This is it.",
 "맞아떨어진다.": "It fits.",
-"그래, 여기서 이어지는구나.": "Right — so this is where it connects.",
+"그래, 여기서 이어지는구나.": "Right, so this is where it connects.",
 "범인은… 이 사람입니다.": "The culprit is… this person.",
 "…아직 뭔가 빠져 있어.": "…Something's still missing.",
 "사건 종결. 선배, 하나 닫았습니다.": "Case closed. That's one more, M."

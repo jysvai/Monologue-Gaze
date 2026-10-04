@@ -506,7 +506,7 @@ MG.I18N.put("de", "c05", {
 "b7e3zpyw0v": "Ob es richtig war, seinen Namen zu drucken, weiß ich bis heute nicht.",
 "eay14g5u4o": "Das kann man in der Redaktion nicht wissen.",
 "qyjbd088m": "(schiebt einen Stapel Manuskripte zur Seite) Das ist nie auf meinem Schreibtisch gelandet.",
-"xertlmre0e": "Am gefährlichsten ist es, etwas zu drucken, was man nicht weiß. Ich weiß es nicht.",
+"1fi68u7tg7c": "Was nicht bestätigt ist, drucken wir nicht. Davon weiß ich nichts.",
 "15px7ur843b": "Überlebender vom Cedar Creek (27) · Autoverkäufer",
 "24avepcdsdl": "Städtisches Krankenhaus Knowlton → erholt sich zu Hause",
 "1l9wq8bt": "Woran ich mich erinnere, ist das Licht der Taschenlampe … und seine Stimme. Tief und ruhig.",

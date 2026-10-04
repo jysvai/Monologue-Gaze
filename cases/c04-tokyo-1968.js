@@ -25,17 +25,17 @@
       scrawl: '그날 그 길로 차가 온다는 걸, 누가 알았나?',
     },
     start: ['k_0628', 'k_johsui', 'k_bank', 'k_hinosawa', 'k_whitebike'],
-    tips: ['물건이 많다고 다 증거는 아니다. 서로 다른 서류에 같은 것이 두 번 나오는 곳을 찾을 것.'],
+    tips: ['유류품을 전부 훑을 필요는 없다. 서로 다른 서류에 같은 것이 두 번 나오는 곳을 찾을 것.'],
     sources: [
       { id: 'paper', type: 'archive', name: '水尾新報 축쇄판', skin: 'news', paper: '水尾新報', desc: '지역 신문 「미즈오 신보」 축쇄판. 기사마다 한국어 번역지가 끼워져 있다.', placeholder: '찾을 말 (사람, 장소, 물건)' },
       { id: 'ev', type: 'list', name: '유류품 대장', skin: 'card', paper: '遺留品', desc: '현장과 버려진 수송차 주변에서 거둔 유류품 112점 가운데 카드로 따로 정리된 것. 협박장 원본 사본도 여기 있다.' },
       { id: 'labph', type: 'photo', name: '감식 사진', desc: '과학수사연구소 감식계가 찍은 유류품 사진. 확대경을 대고 구석구석 살핀다. 눈에 걸리는 곳을 누르거나, 칸을 나눠 살필 수 있다.',
         scenes: [{
           id: 'ph_bike', title: '유류품 No.1 — 오토바이 전경', meta: '감식계 차고 · 6월 29일 촬영 · 흑백 인화', art: 'bikephoto',
-          intro: ['현장에서 끌어온 오토바이를 감식계 차고 벽 앞에 세워 두고 찍은 사진. 붓 자국, 긁힌 자리, 떼어 낸 자리 — 눈에 걸리는 곳을 눌러 본다.'],
+          intro: ['현장에서 끌어온 오토바이를 감식계 차고 벽 앞에 세워 두고 찍은 사진. 붓 자국이나 긁힌 자리, 떼어 낸 자리처럼 눈에 걸리는 곳을 눌러 본다.'],
           spots: [
             { id: 'sp_box', x: 12, y: 23, r: 11, label: '짐받이의 나무 상자', keys: ['k_stencil'], body: [
-              { p: '상자 뒤판은 얇은 합판이다. 흰 칠을 두 번 했는데, 빛을 비스듬히 대면 칠 아래로 굵은 글자 한쪽이 떠오른다 — 「…回」(…회). 앞 글자는 판째 잘려 나갔다.', f: 'f_box_sign' },
+              { p: '상자 뒤판은 얇은 합판이다. 흰 칠을 두 번 했는데, 빛을 비스듬히 대면 칠 아래로 굵은 글자 한쪽 「…回」(…회)가 떠오른다. 앞 글자는 판째 잘려 나갔다.', f: 'f_box_sign' },
               '떠오른 획은 일정한 자리에서 끊겨 있다. 판을 대고 쓴 [[스텐실 글자]]다.',
             ] },
             { id: 'sp_wind', x: 74.5, y: 18, r: 5, label: '바람막이 아래 모서리', keys: ['k_yashiro'], body: ['가격표 스티커를 손톱으로 긁어낸 자리. 종이 섬유 사이로 「…シロ」, 「¥2,8…」가 남았다. 시내 [[야시로 모터스]]의 가격표 규격이다.'] },
@@ -413,7 +413,7 @@
         '25일, 수송차 운전사가 창문을 내리고 푸념했다. "28일 아침에도 이리 가야 하나. 그날은 상여금이라 짐이 무겁다." 이리에는 그 말을 일지에 적었다. 문의가 있으면 적으라고 했으니까. 협박장이 이미 세 통이나 와 있어서, 은행 사람들은 "폭탄" 소리를 들으면 의심하지 않을 참이었다.',
         '28일 아침, 그는 현장에 나오지 않았다. 비가 왔고 담장길에는 아무도 없었다. 1억 7,420만 엔은 끝내 한 장도 나오지 않았다. 8월, 이리에는 미나미 라인공업을 그만두었다. 그 뒤의 행방은 이 서류철에 없다.',
       ],
-      next: '서랍 다음 칸 — CASE 05. 1969년 캘리포니아, 신문사로 온 편지 끝에는 모래시계가 그려져 있었다.',
+      next: '서랍 다음 칸은 CASE 05다. 1969년 캘리포니아, 신문사로 온 편지 끝에는 모래시계가 그려져 있었다.',
     },
     artStyle: 'Late-1960s Japanese press and police evidence photography, Tokyo suburbs in the rainy season of 1968: black-and-white 35mm Tri-X film, pushed grain, slightly soft focus, flat overcast light, wet asphalt sheen, muted grey tonality; evidence-card shots on a plain board with a small ruler, occasionally as faded early color prints with a cyan shift. Showa-era details only. No readable text, no logos, no recognizable faces.',
     art: {
