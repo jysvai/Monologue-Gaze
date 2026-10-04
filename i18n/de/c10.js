@@ -386,7 +386,7 @@ MG.I18N.put("de", "c10", {
 "hvx03lcvp2": "Aushilfe: „Das ist ein Mann aus einem Mehrfamilienhaus hier in der Nähe. Kam ziemlich betrunken rein, hat das gekauft und ist gleich nach Hause.“",
 "2y7cjiyou4": "Ehefrau des Opfers · hat die Vermisstenanzeige erstattet",
 "j86pc8z7fp": "Wohnanlage Hanul, Block 105",
-"e4z18wzamf": "Er hat mir an dem Abend „Bin zu Hause“ geschrieben — ich war bei meinen Eltern. Bis vor die Haustür ist er gekommen… Warum sollte er ans Meer? Er angelt ja nicht mal.",
+"e4z18wzamf": "Er hat mir an dem Abend „Bin zu Hause“ geschrieben. Ich war bei meinen Eltern. Bis vor die Haustür ist er gekommen… Warum sollte er ans Meer? Er angelt ja nicht mal.",
 "2g0te8ymn29": "Den Büro-Laptop habe ich der Polizei gegeben. Der Messenger müsste noch an sein. Die Sperre ist bestimmt seine [[Bieternummer|k_bidno]]. Seine Passwörter sind alle diese Nummer.",
 "1ex2mvrhksw": "Um 23:57 schrieb er, er sei zu Hause, und um 00:12 kam „Hyungnim will mich kurz sprechen“. Das war das Letzte. Ich habe geschlafen und nicht geantwortet.",
 "2dv694fm5qp": "Hyungnim? Das heißt „großer Bruder“ — so nennt er jeden, der älter ist. Myeong-su, Herrn Bang, den Abteilungsleiter bei der Genossenschaft.",

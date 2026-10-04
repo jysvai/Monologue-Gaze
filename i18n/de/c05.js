@@ -548,7 +548,7 @@ MG.I18N.put("de", "c05", {
 "146agqwp0kr": "Die junge Frau kenne ich nicht. Ich habe ihren Namen am Montag auf der Titelseite gelesen, das ist alles.",
 "3t81tl5ddz": "Lowell? Die Lokalchefin, meinen Sie. Druckt den Brief eines Mörders auf der Titelseite und sagt dann, sie habe ihn nicht ignorieren können — eine armselige Ausrede.",
 "lnmugzvihg": "Auf ihrem Schreibtisch landen auch jeden Monat meine Briefe. Ob sie sie überhaupt liest, weiß ich nicht.",
-"2aa8aco64l5": "Der junge Mann, dessen Name in der Zeitung stand? Auf ein Wort der Familie hin den Namen eines jungen Menschen auf die Titelseite setzen — so ist der Courier eben.",
+"2aa8aco64l5": "Der junge Mann, dessen Name in der Zeitung stand? Auf ein Wort der Familie hin setzt er den Namen eines jungen Menschen auf die Titelseite. So ist der Courier eben.",
 "1lvnf83wtxn": "So etwas fragen Sie besser die Zeitung.",
 "1b3dhywsvxv": "Warum fragen Sie das mich? Wollen Sie die Arbeit der Polizei auf die Bürger abwälzen?",
 "2a62ng9tm1t": "Schon als ich Versicherungen verkauft habe, habe ich gesagt: Was ich nicht weiß, weiß ich nicht.",
