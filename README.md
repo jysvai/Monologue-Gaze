@@ -2,19 +2,19 @@
 
 > 시간은 흐르지만, 새겨진 기록은 거짓말을 하지 않는다.
 
-**English** — A free detective game that runs in the browser. A detective who transferred out left you a drawer of cold case files; you work each case by reading its records (newspapers, statements, letters, chat logs) and by searching and questioning people with the words you write in your notebook. 16 cases, from London in 1888 to Seoul in 2025. Playable in English, Japanese, Simplified Chinese, Russian, German and Korean.
+**English:** A free detective game that runs in the browser. A detective who transferred out left you a drawer of cold case files. You read the records of each case (newspapers, statements, letters, chat logs), write words in your notebook, and use them to search the archive and question people. 16 cases, from London in 1888 to Seoul in 2025. Playable in English, Japanese, Simplified Chinese, Russian, German and Korean.
 **Play:** https://jysvai.itch.io/monologue-gaze · **Press kit:** https://jysvai.github.io/Monologue-Gaze/press/
 
-한 세기에 걸친 미제 사건 열두 건을 **기록만으로** 쫓고, 시계가 도는 현행 사건 세 건을 **직접 수사하는** 웹 추리 게임.
+기록을 읽어 사건을 푸는 웹 추리 게임. 1888년부터 2014년까지의 미제 사건 열두 건과 수사 시계가 도는 현행 사건 세 건이 들어 있다.
 플레이어는 서울서부경찰서 강력2팀의 신입 형사가 되어, 전임자 M이 남긴 서랍 속 사건 파일을 연다.
-직접 걸어 다니지 않는다. 그 시대의 신문, 진술서, 편지, 숙박부, 녹취록, 미니홈피, 메신저를 뒤지고
+걸어 다니는 장면은 없다. 그 시대의 신문, 진술서, 편지, 숙박부, 녹취록, 미니홈피, 메신저를 뒤지고
 수첩에 적은 단어로 다음 기록을 찾아 들어간다.
 
 - **CASE 00** 청운하이츠 504호 (2025, 튜토리얼)
 - **CASE 01–12** 1888 런던 · 1923 바이에른 · 1935 경성 · 1968 도쿄 · 1968–69 미국 서부 · 1969 노르웨이 · 1971 서울 · 1991 서울 · 2006 은천 · 2014 항구도시 · 1986 은천강 · 1994 도쿄
-- **CASE 13–15 · 현행 사건** 2023 마약 「던지기」 유통 · 2021 보이스피싱 현금 수거에 이용된 10대 · 2024 스토킹 피해자 실종 — 수사 시계가 돌고, 영장을 신청하고, 기한 안에 끝내야 한다
+- **CASE 13–15 · 현행 사건** 2023 마약 「던지기」 유통 · 2021 보이스피싱 현금 수거에 이용된 10대 · 2024 스토킹 피해자 실종. 수사 시계가 도는 동안 영장을 신청해 가며 기한 안에 끝내야 한다
 
-난이도는 ★3 부터 ★5 까지. 별이 **빨간** 사건은 잔혹한 내용이 있어 폴더에 「혐오감 주의」가 붙고, 처음 열 때 한 번 더 묻는다. 이런 사건은 화면 가장자리와 기록지에 마른 핏자국이 번지고, 현장 사진이 가림 없이 나오며, 검안서·감식 기록·진술이 더 참혹한 판으로 바뀐다 (단서와 숫자는 같다). 끔찍한 기록을 처음 펼치면 파리 떼나 뼈톱 소리와 함께 화면이 잠깐 검붉게 가라앉는다. 기록실 위쪽 「잔혹 표현」 단추로 이런 연출을 모두 끌 수 있다 — 끄면 핏자국이 사라지고, 사진은 흐리게 가려지며 (시신이 드러난 사진은 천을 덮은 판으로), 글은 건조한 원래 판으로 돌아간다.
+난이도는 ★3 부터 ★5 까지. 별이 **빨간** 사건은 잔혹한 내용이 있어 폴더에 「혐오감 주의」가 붙고, 처음 열 때 한 번 더 묻는다. 이런 사건은 화면 가장자리와 기록지에 마른 핏자국이 번지고, 현장 사진이 가림 없이 나오며, 검안서·감식 기록·진술이 더 참혹한 판으로 바뀐다 (단서와 숫자는 같다). 끔찍한 기록을 처음 펼치면 파리 떼나 뼈톱 소리와 함께 화면이 잠깐 검붉게 가라앉는다. 기록실 위쪽 「잔혹 표현」 단추로 이런 연출을 모두 끌 수 있다. 끄면 핏자국이 사라지고, 사진은 흐리게 가려지며 (시신이 드러난 사진은 천을 덮은 판으로), 글은 건조한 원래 판으로 돌아간다.
 
 한국어 원문에 더해 **영어 · 일본어 · 중국어(간체) · 러시아어 · 독일어**로 할 수 있다. 기록실 위쪽 언어 칸에서 고르고, 처음 여는 사람은 브라우저 언어로 열린다 (주소에 `?lang=en` 을 붙여도 된다). 화면 글자, 사건 기록, 탐문 대사, 서랍 밑의 편지가 모두 옮겨지고, 언어마다 손글씨·활자 글꼴을 따로 쓴다. 목소리는 한국어 그대로이고 주인공 속말에는 번역 자막이 붙는다.
 
@@ -51,51 +51,51 @@ itch.io 는 게임을 다른 주소(html-classic.itch.zone)에서 돌리므로, 
    - **기록 조회**: 차량 번호·전화번호·송장 번호처럼 알아낸 값을 넣어 대장을 조회한다.
    - **정밀 관찰**: 현장 스케치를 눌러 숨은 것을 찾는다.
    - 그 밖에 암호 해독, 잠긴 메신저, 지도가 있다.
-6. **현행 사건**(기록실 아래 「당직 · 현행 사건」)은 다 지난 기록을 읽는 사건이 아니라, 2020년대에 실제로 돌았던 사건을 그날 그 시각부터 다시 돌리는 당직 훈련이다. 화면 아래에 수사 시계가 돌고, 문서를 처음 읽거나 묻고 조회할 때마다 시간이 흐른다.
+5. **현행 사건**(기록실 아래 「당직 · 현행 사건」)은 2020년대 사건을 그날 그 시각부터 다시 돌려 보는 당직 훈련이다. 화면 아래에 수사 시계가 돌고, 문서를 처음 읽거나 묻고 조회할 때마다 시간이 흐른다.
    - **영장·공문**: 신청서를 골라 소명 자료(수첩 메모 하나)를 붙여 올린다. 근거가 맞으면 접수되어 몇 시간 뒤 회신이 오고, 틀리면 기각된다.
    - **팀 단톡방**: 동료 보고와 팀장 지시가 시간이 흐르거나 수사가 진척되면 새로 온다. 새 소식은 화면 위에 휴대폰 알림으로 뜬다. 「회신 기다리기」로 다음 소식까지 시간을 보낼 수 있다.
    - 구속 기한 같은 **기한**이 있다. 넘겨도 풀 수는 있지만 결말이 달라진다.
-5. **수사 보고서**는 수첩 아래 「보고서 펼쳐 쓰기」로 넓은 칸에서 쓴다. 범인(수첩의 인물)을 고르고, 주장마다 메모를 하나씩 붙인다 — 메모는 출처별로 묶여 전문이 다 보이고, 낱말로 찾을 수도 있다. 전부 맞아야 사건이 종결된다. 별이 많을수록 틀렸을 때 알려 주는 것이 줄어든다.
+6. **수사 보고서**는 수첩 아래 「보고서 펼쳐 쓰기」로 넓은 칸에서 쓴다. 범인(수첩의 인물)을 고르고, 주장마다 메모를 하나씩 붙인다. 메모는 출처별로 묶여 전문이 다 보이고, 낱말로 찾을 수도 있다. 전부 맞아야 사건이 종결된다. 별이 많을수록 틀렸을 때 알려 주는 것이 줄어든다.
 
 ## 구조
 
 ```
 index.html            게임 페이지 (스크립트 로드 순서가 곧 사건 목록)
-js/engine.js          엔진 — 기록실, 조사 도구, 수첩, 보고서 판정, 저장
+js/engine.js          엔진: 기록실, 조사 도구, 수첩, 보고서 판정, 저장
 js/finale.js          본 사건을 모두 종결한 뒤 나오는 M의 편지
-js/mood.js            사건마다 다른 공기 — 조명 빛깔, 날씨, 합성 배경음, 사건을 여는 장면
+js/mood.js            사건마다 다른 공기: 조명 빛깔, 날씨, 합성 배경음, 사건을 여는 장면
 js/audio.js           효과음·목소리·말소리(글자 찍히는 소리)·주인공 속말 자막
 js/ui.js              말풍선 도움말 (title 대신)
 js/fonts.js           사건마다 따로 부르는 시대별 글꼴 목록
-js/i18n.js            언어 — 고르기, 화면 글자 T, 사건 기록에 번역 덮기, 날짜 꼴, 언어별 글꼴
-i18n/<언어>/          번역 꾸러미 — ui.js (화면 글자), finale.js (편지), cNN.js (사건). tools/i18n.js 가 만든다
+js/i18n.js            언어: 고르기, 화면 글자 T, 사건 기록에 번역 덮기, 날짜 꼴, 언어별 글꼴
+i18n/<언어>/          번역 꾸러미: ui.js (화면 글자), finale.js (편지), cNN.js (사건). tools/i18n.js 가 만든다
 audio/                ElevenLabs 로 만든 효과음·목소리 mp3 와 audio/manifest.js (자동 생성)
 css/base.css          책상·기록실·화면 틀(papers / crt / laptop)·수첩
 css/skins.css         문서 스킨 (신문, 진술조서, 편지, 전보, 장부, 녹취록, 미니홈피, 폴더폰 …)
 css/mood.css          사건의 공기 (조명 8가지 · 날씨 8가지 · 여는 장면)
-css/drama.css         연출 — 탐문 대화, 수사 보고서, 단서 발견 효과, 속말 자막, 그림 위 이름표
-css/ui.css            공통 조작부 — 스크롤바, 선택 표시, 말풍선 도움말, 보고서의 표시
-css/live.css          현행 사건 — 수사 시계, 휴대폰 알림, 단톡방, 영장·공문 신청서, 당직 칸
+css/drama.css         연출: 탐문 대화, 수사 보고서, 단서 발견 효과, 속말 자막, 그림 위 이름표
+css/ui.css            공통 조작부: 스크롤바, 선택 표시, 말풍선 도움말, 보고서의 표시
+css/live.css          현행 사건: 수사 시계, 휴대폰 알림, 단톡방, 영장·공문 신청서, 당직 칸
 css/i18n.css          언어별 글꼴 (base.css 글꼴 변수의 앞자리)
 cases/cNN-*.js        사건 데이터 (사건 하나 = 파일 하나)
 img/manifest.js       실제 이미지 목록 (자동 생성)
 img/<사건>/<키>.webp  AI 로 만든 이미지를 넣는 곳
 docs/CASE_AUTHORING.md  사건 작성 가이드 (데이터 형식 전부)
-docs/TRANSLATION.md     번역 — 어떻게 덮이는지, 번역 넣기·검사, 사건을 고칠 때 할 일
+docs/TRANSLATION.md     번역: 어떻게 덮이는지, 번역 넣기·검사, 사건을 고칠 때 할 일
 docs/IMAGE_PROMPTS.md   이미지 프롬프트 모음 (자동 생성)
 docs/IMAGE_REDO.md      검수에서 걸려 다시 뽑을 이미지 목록 (자동 생성)
 docs/IMAGE_SVG.md       아직 SVG 로 남은 도해를 그림으로 바꿀 목록과 프롬프트 (자동 생성)
 docs/examples/        새 조사 방식·현행 사건(live) 최소 예시
-tools/validate.js     사건 검사기 — 형식 + "처음 단서에서 정답 증거까지 실제로 따라갈 수 있는가"
-tools/smoke.js        화면 점검 — 가짜 DOM 에서 모든 문서·인물·도구 화면을 그려 본다
+tools/validate.js     사건 검사기: 형식 + "처음 단서에서 정답 증거까지 실제로 따라갈 수 있는가"
+tools/smoke.js        화면 점검: 가짜 DOM 에서 모든 문서·인물·도구 화면을 그려 본다
 tools/prompts.js      사건 파일의 프롬프트를 모아 docs/IMAGE_PROMPTS.md 생성
 tools/optimize-images.js  img/ 에 넣은 png·jpg 를 webp 로 줄이고(원본은 img/_src/) 게임에 연결
 tools/manifest.js     img/ 폴더를 훑어 img/manifest.js 생성
 tools/gen-images.js   (선택) OpenAI API 키가 있으면 프롬프트 전부를 한 번에 그려 img/ 에 넣는다
 tools/voices.js       (선택) ElevenLabs 로 목소리·효과음을 만든다. 사람마다 목소리·말소리 높이 배정표가 들어 있다
-tools/eleven.js       ElevenLabs API 호출 (키는 .env 의 ELEVENLABS_API_KEY — 저장소에 올리지 않는다)
-tools/itch-zip.js     itch.io 에 올릴 zip — 게임에 쓰는 파일만 골라 dist/ 에 묶는다
-tools/i18n.js         번역 — 원문 토막 뽑기, 번역 넣기(검사 포함), 언어·사건마다 빠진 곳 세기
+tools/eleven.js       ElevenLabs API 호출 (키는 .env 의 ELEVENLABS_API_KEY, 저장소에는 올리지 않는다)
+tools/itch-zip.js     itch.io 에 올릴 zip: 게임에 쓰는 파일만 골라 dist/ 에 묶는다
+tools/i18n.js         번역: 원문 토막 뽑기, 번역 넣기(검사 포함), 언어·사건마다 빠진 곳 세기
 ```
 
 ## 도구
@@ -105,18 +105,18 @@ node tools/validate.js            # 모든 사건 검사 (특정 파일만: node
 node tools/smoke.js cases/*.js    # 모든 화면이 깨지지 않고 그려지는지
 node tools/prompts.js             # docs/IMAGE_PROMPTS.md · IMAGE_REDO.md 다시 만들기
 node tools/optimize-images.js     # img/ 에 넣은 png·jpg 를 webp 로 바꿔 게임에 연결 (ffmpeg 필요)
-node tools/i18n.js check          # 언어 × 사건마다 번역이 몇 곳 빠졌는지 (원문을 고치면 그 토막의 번역이 떨어진다 — docs/TRANSLATION.md)
-node tools/itch-zip.js            # itch.io 에 올릴 dist/monologue-gaze-itch.zip — 빠진 그림·소리, 경로 대소문자, itch.io 한도를 먼저 본다
+node tools/i18n.js check          # 언어 × 사건마다 번역이 몇 곳 빠졌는지 (원문을 고치면 그 토막의 번역이 떨어진다. docs/TRANSLATION.md 참고)
+node tools/itch-zip.js            # itch.io 에 올릴 dist/monologue-gaze-itch.zip. 빠진 그림·소리, 경로 대소문자, itch.io 한도를 먼저 본다
 ```
 
 ## 소리
 
 - **효과음**: 단서 발견(북 한 번), 맞아떨어짐(북 두 번), 추궁·번복(심장 박동과 금관), 어긋남, 사건 종결(도장과 북), 잠금 풀림, 사진 속 발견, 잔혹 사진, 연필, 종이, 열쇠, 누름. 빨간 별 사건에서 끔찍한 기록을 처음 펼칠 때는 파리 떼와 긁는 현, 루미놀 기록에서는 뼈톱.
-- **배경음**: 빗소리·바람·파도·항구·강물·시계·딱딱이 같은 합성음에, 빨간 별 사건에는 드문드문 녹음된 소리가 섞인다 — 헛간이 삐걱이는 소리(02), 무전 잡음(05), 불타는 소리(06), 파리 떼(11·12). 잔혹 표현을 끄면 이 소리들도 빠진다.
+- **배경음**: 빗소리·바람·파도·항구·강물·시계·딱딱이 같은 합성음에, 빨간 별 사건에는 드문드문 녹음된 소리가 섞인다. 헛간이 삐걱이는 소리(02), 무전 잡음(05), 불타는 소리(06), 파리 떼(11·12). 잔혹 표현을 끄면 이 소리들도 빠진다.
 - **목소리는 결정적인 순간에만**: 증거를 들이밀었을 때 바뀌는 진술(용의자·참고인 목소리), 형사가 끼어드는 추궁, 보고서를 올릴 때의 지목과 결론. 나머지 대사는 사람마다 높이가 다른 짧은 말소리로 한 글자씩 찍힌다.
 - 주인공의 결정적인 한마디는 목소리와 함께 화면 아래 속말 자막으로 뜬다.
 - 파일이 없으면 엔진이 합성음으로 대신한다. 새 대사를 만들려면 `.env` 에 `ELEVENLABS_API_KEY=...` 를 넣고 `node tools/voices.js --dry` 로 확인한 뒤 `node tools/voices.js` (없는 파일만 만든다).
-- 목소리·효과음: [ElevenLabs](https://elevenlabs.io) 로 생성 (무료 요금제 — 출처 표기, 비상업적 이용).
+- 목소리·효과음: [ElevenLabs](https://elevenlabs.io) 로 생성 (무료 요금제라 출처를 밝히고 비상업적으로만 쓴다).
 
 ## 이미지 넣기
 
@@ -124,7 +124,7 @@ node tools/itch-zip.js            # itch.io 에 올릴 dist/monologue-gaze-itch.
 
 1. `docs/IMAGE_PROMPTS.md` 의 프롬프트로 이미지를 만든다. [그림 프롬프트 + 사건 공통 스타일 + 맨 위 「추가 스타일」] 순서로 붙인다.
 2. 표에 적힌 경로·이름으로 저장한다, 예: `img/c01/cover.png` (`.jpg` 도 됨).
-3. `node tools/optimize-images.js` 실행 — webp 로 줄여 연결하고 원본은 `img/_src/` 로 옮긴다. 없는 이미지는 SVG 임시 그림으로 남는다.
+3. `node tools/optimize-images.js` 실행. webp 로 줄여 연결하고 원본은 `img/_src/` 로 옮긴다. 없는 이미지는 SVG 임시 그림으로 남는다.
 4. 다시 뽑은 그림은 사건 파일 `art` 항목의 `redo` 표시를 지우고 `node tools/prompts.js` 를 돌린다.
 
 ## 사건 추가
