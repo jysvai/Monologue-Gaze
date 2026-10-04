@@ -667,7 +667,7 @@ MG.I18N.put("de", "c02", {
 "oxhu9n0hh": "Der Knauer? Am 22. Januar hat er die Kufen an seinem [[Schimmelschlitten|k_schlitten]] neu beschlagen lassen. Zum Lichtmessmarkt wollt er Vieh damit fahren, hat er gesagt. Bezahlt hat er gleich bar.",
 "180ri2k4lx3": "Ein Lastschlitten, mit einem Schimmel davor. Einen Schimmel hat in der Gegend bloß der Knauer.",
 "1vf70cizfzf": "Der Pfänzl? Im Dezember, an dem Tag, wo sie ihn hinausgeworfen haben, war er bei mir und hat lang über den Alten geschimpft. Ende Januar hab ich ihn gar nicht gesehen. Nach [[Kelbach|k_kelbach]] sei er, glaub ich.",
-"lma8pjiigh": "Ein Gespenst fürchtet sich nicht vor einem Schloss. Aber der Alte hat sich gefürchtet.",
+"23xb7latc01": "Von Gespenstern hat der Alte nichts gesagt. Er hat sich ein neues Schloss für die Haustür machen lassen, also hatte er Angst vor einem Menschen.",
 "10ecjhzsf06": "Die Bäuerin hat in der Schmiede nichts zu tun gehabt. Wenn man sich vor der Kirche begegnet ist, hat sie bloß den Kopf geneigt und ist weiter.",
 "omwjfcuxi": "Die Rosa ist manchmal im Auftrag vom Alten gekommen. Ein Mädel, das schnell gerechnet und nie gehandelt hat.",
 "nj81mgjrl2": "Die neue Magd hab ich nie gesehen.",

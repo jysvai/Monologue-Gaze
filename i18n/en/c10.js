@@ -520,7 +520,7 @@ MG.I18N.put("en", "c10", {
 "1ow3hxni9yo": "I called a different driver that night, so I've never even seen his face.",
 "hww8mjyqwo": "The auntie at the sashimi place? Best sashimi in Seonchang. Eun-ho and I were both regulars for years.",
 "rwgukldtxg": "(Pulls off his work gloves and sets them on the desk) The New Port security fellow? I run into him now and then when he does his rounds by the Pier 1 warehouse.",
-"1clnjaa4wiq": "Walking the piers all night — it's a tough job.",
+"1clnjaa4wiq": "Walking the piers all night is a tough job.",
 "pjuzkskxor": "I've got nothing to say about that.",
 "10hg0y5u1bp": "(Tilts his head) I did say ask me anything, but that one I don't know either.",
 "1gxtdtlkfkg": "I'm buried in cold-storage work. I don't know about things like that.",

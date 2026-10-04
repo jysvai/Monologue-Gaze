@@ -575,7 +575,7 @@ MG.I18N.put("de", "c04", {
 "1u3jrhetjjx": "Der Vorarbeiter? Striche ziehen kann er wie kein Zweiter. Der Rest ist Gemecker.",
 "29dv7ko3cbe": "Minami? Eine Firma, die Striche zieht und Flaggen schwenkt. Der Lohn ist ein Witz.",
 "28hrojy1iri": "Dank der Wasserleitung gibt's was zum Flaggeschwenken. Am 10. Juli ist Schluss.",
-"1m56sentsoj": "Sakae-chō? Da wohn ich und da arbeite ich. Augen auf — Kreuzung, Augen zu — Kreuzung.",
+"1ta280x934v": "Sakae-chō? Da wohn ich und da arbeite ich. Ich steh den ganzen Tag an der Kreuzung.",
 "1g20zyvjq3c": "Der Mauerweg am Wasserwerk? Da fahren bloß die Fabrikwagen lang. Ich hab an der Kreuzung nur die Flagge geschwenkt.",
 "1rrtzmhyu6": "So ein Bankwagen fährt ja nicht mit Firmenschild rum. Ich schwenk die Flagge und schau bloß auf die Kühlerhauben.",
 "17h85y2uy7e": "(Zuckt mit den Schultern) Ein Bankfilialleiter? Wann kriegt unsereins schon so einen hohen Herrn von der Bank zu Gesicht.",

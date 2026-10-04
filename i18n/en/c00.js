@@ -345,7 +345,7 @@ MG.I18N.put("en", "c00", {
 "1ovt291ixa0": "That night I was in [[Busan|k_busan]].",
 "15u9b33wxxj": "Jae-hee? She was Seo-yun's best friend. Though Seo-yun did say things had been a bit weird between them lately.",
 "175sd0ewdeb": "…I didn't do everything right. But I'd never do something like that.",
-"3rmfb4l7x5": "Tofu? …That cat never once came to me. Not till the end.",
+"3rmfb4l7x5": "Tofu? …That cat never would come to me, right to the end.",
 "n9afl5hv2u": "The building manager would know my face. I was in and out a lot when we were together. Haven't run into each other since we broke up.",
 "1we18sp2zfq": "(smiles bitterly) Seo-yun's college friend, right? I bet she didn't have anything nice to say about me.",
 "1fn2zwd4rpo": "No idea. Since we broke up I don't really know what's going on with her.",

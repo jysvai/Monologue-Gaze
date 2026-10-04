@@ -653,7 +653,7 @@ MG.I18N.put("de", "c15", {
 "12b3kezzny0": "Sie ist Bibliothekarin in der [[Bibliothek Beodeul|k_library]]. Seit acht Jahren. Samstagvormittags liest sie Kindern vor, in der [[Bilderbuchrunde|k_picturebook]], und donnerstagabends spielt sie Futsal im [[Sportpark Garam|k_futsal]]. Im Tor.",
 "2fobx1nh4il": "Sie ist nicht ängstlich, sie ist gründlich. Die Polizei wollte Beweise, also hat sie alles festgehalten — Datum, Uhrzeit, sogar Fotos.",
 "19g67axb7gc": "Als sie im Juli zum ersten Mal die Polizei gerufen hat, hieß es nur „Streit unter Verliebten“, und die Polizei ist wieder gefahren. Danach wurde es schlimmer.",
-"1ywqe3gfyvv": "Seit er die Fußfessel hat, ist er nicht mehr aufgetaucht. Aber Da-som meinte, das macht ihr noch mehr Angst. „Er selbst kommt nicht, aber irgendwas kommt immer wieder.“",
+"17x40nd6vaz": "Seit er die Fußfessel hat, ist er nicht mehr aufgetaucht. Aber Da-som meinte, das macht ihr noch mehr Angst. „Er selbst kommt nicht, aber es passieren immer wieder komische Sachen.“",
 "1wsj24jbk65": "In der Bibliothek gab es einen Nutzer, der ihr Zettel gegeben hat. [[Choi U-bin|k_woobin]] heißt er, lernt im Lesesaal für eine Prüfung. Die Bibliotheksleitung hat das unterbunden, hieß es — aber sie hat ihn auch auf seinem Liefermotorrad am Haus vorbeifahren sehen.",
 "1p1bd0afiut": "Der silberne Kleinwagen. Am Montag hat sie gesagt: „Nachts hat es beim Auto geklickt.“ Am Samstag wollte sie damit in die Werkstatt…",
 "1qgu40bb2qc": "Wer den Brief geschickt hat? Kein Name, nur „Jun-hyeoks Freund“. Da-som meinte, vielleicht der große Schulfreund, den sie einmal getroffen hat, als die beiden zusammen waren. An den Namen hat sie sich nie erinnert.",
