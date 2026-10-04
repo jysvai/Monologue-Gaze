@@ -27,3 +27,10 @@ html[lang="zh"]{
 
 /* 제목은 어느 언어에서나 로마자라 타자기 글꼴 그대로 */
 .cab-title{font-family:"Special Elite",var(--f-type)}
+
+/* 일본어·중국어는 글자 사이 어디서나 줄을 바꾼다. base.css 의 keep-all(한국어 낱말을 지키는 설정)을 그대로 두면 「、」「。」에서만 줄이 바뀌어
+ * 수첩처럼 좁은 칸에서 「※」만 한 줄에 남고 줄 끝이 들쭉날쭉해진다. 줄머리 금칙(「。」「ー」로 줄을 시작하지 않기)은 strict 로 지킨다 */
+html:is([lang="ja"],[lang="zh"]) :is(body,.c-q,.c-bub,.rep-memo,.rep-empty){word-break:normal;line-break:strict}
+/* 큰 손글씨 메모와 제목은 짧아서 낱말 중간에서 끊기면 「いつなの/か？」처럼 한두 글자가 남는다. 일본어는 구절 단위(auto-phrase, 크롬)로, 못 쓰는 브라우저와 중국어는 문장부호에서 끊는다 */
+html[lang="ja"] :is(.scrawl,h1,h2,h3){word-break:keep-all;word-break:auto-phrase}
+html[lang="zh"] .scrawl{word-break:keep-all}
