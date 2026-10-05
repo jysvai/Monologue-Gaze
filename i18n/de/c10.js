@@ -542,7 +542,7 @@ MG.I18N.put("de", "c10", {
 "84c7d0hbba": "Überwachungskamera im Minimarkt Guhang-dong — 00:40, Cha Myeong-su an der Kasse (von hinten)",
 "2g0h8tdco1t": "Vermisstenbeitrag im Forum — die Mütze mit der Bieternummer, die das Opfer immer trug",
 "2rtr5wbl9z": "Foto aus dem Gruppenchat — das Essen im großen Nebenzimmer des Leuchtturms",
-"11vw4dstxoy": "An sich selbst geschicktes Foto — Spuren vom Umpacken der Kisten im Kühlhaus (Motiv)",
-"17x6eufdboi": "An sich selbst geschicktes Foto — Spuren vom Umpacken der Kisten im Kühlhaus",
+"2gogefhjjju": "Foto im Chat, in dem nur noch er selbst übrig war — Spuren vom Umpacken der Kisten im Kühlhaus (Motiv)",
+"jol2caq1nn": "Foto im Chat, in dem nur noch er selbst übrig war — Spuren vom Umpacken der Kisten im Kühlhaus",
 "1r0pxv252sx": "Foto aus einer Beschwerde im Forum — Baustelle an Pier 3 im Neuhafen bei Tag"
 });

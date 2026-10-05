@@ -332,7 +332,7 @@ MG.I18N.put("zh", "c01", {
 "1khs8f3gn58": "T.奎因",
 "r8kiduhwgy": "擅闯码头仓库",
 "4rr7sm5lyc": "06:00 移交治安法官",
-"22ripcqb4t8": "收押时刻",
+"22ripcqb4t8": "到达时刻",
 "22g4rp1y31w": "姓名",
 "1lnpyw7l192": "事由",
 "1ahtvq01gky": "释放时刻",

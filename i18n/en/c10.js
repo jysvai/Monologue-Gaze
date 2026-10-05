@@ -542,7 +542,7 @@ MG.I18N.put("en", "c10", {
 "84c7d0hbba": "Guhang-dong convenience store CCTV — 00:40 Cha Myeong-su at the counter (from behind)",
 "2g0h8tdco1t": "Missing-person post on the forum — the bidder-number cap the victim always wore",
 "2rtr5wbl9z": "Group chat photo — the work dinner in the big room at Lighthouse Sashimi House",
-"11vw4dstxoy": "Photo sent to himself — signs of fish repacked between boxes in the cold-storage warehouse (motive)",
-"17x6eufdboi": "Photo sent to himself — signs of fish repacked between boxes in the cold-storage warehouse",
+"2gogefhjjju": "Photo posted to the chat with only himself left in it — signs of fish repacked between boxes in the cold-storage warehouse (motive)",
+"jol2caq1nn": "Photo posted to the chat with only himself left in it — signs of fish repacked between boxes in the cold-storage warehouse",
 "1r0pxv252sx": "Photo from a complaint post on the forum — the New Port Pier 3 construction site by day"
 });

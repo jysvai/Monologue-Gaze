@@ -541,7 +541,7 @@ MG.I18N.put("en", "c01", {
 "1f7rf7ky1ky": "Mr Arthur Dill? The porter in Patrol 1 I walked with for the vigilance piece. We went round from Candle Market to the dock road together.",
 "kuccxu5hbh": "That wouldn't make a story.",
 "13oyamqzs9t": "(rolls his pen between his fingers) Nothing about that has reached the newsroom yet.",
-"g63sg5n27d": "I'm up against a deadline. You'll have to ask elsewhere.",
+"g63sg5n27d": "We go to press shortly. You'll have to ask elsewhere.",
 "1uujfx6p2zp": "Cooper · Vigilance Committee treasurer · witness",
 "20sclepj0ip": "Cooper's workshop behind Candle Market",
 "h23uosgwrv": "(wipes his hands on his apron) Ask what you like. I've told you everything I saw that night. Catch that sailor and it's all over.",

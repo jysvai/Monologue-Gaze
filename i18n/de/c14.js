@@ -44,7 +44,7 @@ MG.I18N.put("de", "c14", {
 "klhmb58vg7": "Wir fahren nach Darae-dong. Obermeister Bae, Oberkommissarin Han. Haus- und Wohnungsnummer sind abgeschnitten, also warten wir vor Siedlung 3. Wer zuerst rausfindet, welche Oma es ist, postet es sofort.",
 "u4wrgmaw7y": "Habe die Verwaltung von Siedlung 3 um eine Liste der allein lebenden Senioren gebeten.",
 "v6fwm77oln": "Obermeister Bae",
-"6uffowqkyd": "Liste ist da. Allein in Siedlung 3 gibt es elf Leute über achtzig, die allein leben. Klingeln wir einmal an der falschen Tür, merken es die Kids zuerst. Dieselben Typen haben bestimmt mit derselben Nummer angerufen — sag uns vor halb sechs, wer es ist.",
+"6uffowqkyd": "Liste ist da. Allein in Siedlung 3 gibt es elf Leute in den Achtzigern, die allein leben. Klingeln wir einmal an der falschen Tür, merken es die Kids zuerst. Dieselben Typen haben bestimmt mit derselben Nummer angerufen — sag uns vor halb sechs, wer es ist.",
 "1mfetil9gq": "K schreibt dauernd aufs Arbeitshandy. „Warum antwortest du nicht“ „Geh ran“… Wenn ich sie öffne, geht die Lesebestätigung raus. Was soll ich machen?",
 "2f2ej6j8iys": "Nicht öffnen. Nur Screenshots von den Benachrichtigungen machen.",
 "p097j2f956": "K: „Schon gut. Dann schick ich einen anderen.“ Seitdem ist Ruhe.",

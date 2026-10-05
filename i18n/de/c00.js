@@ -146,7 +146,7 @@ MG.I18N.put("de", "c00", {
 "vfzdewk1bv": "Kang Do-hyun (@dohyun.k)",
 "z9dt9jh2ao": "Snaplog · 203 Follower",
 "10mm5uaaxbb": "9.10.2025 (Do) 22:40 · 📍Strand Gwangalli, Suyeong-gu, [[Busan|k_busan]] — Gleich am ersten Tag der Dienstreise Überstunden … aber das Meer ist schön",
-"1wv78eoy9ki": "└ Filiale Busan, Hr. Jung · 10.09 22:52 — Danke für heute, Do-hyun! Das Meeting morgen um 9 ist im großen Konferenzraum im 3. OG",
+"1wv78eoy9ki": "└ Filiale Busan, Jung · 10.09 22:52 — Danke für heute, Do-hyun! Das Meeting morgen um 9 ist im großen Konferenzraum im 3. OG",
 "22z0z47bzd7": "1.9.2025 — 100 Tage Training",
 "1sxa1kwln95": "Cheongun Heights – Bewohnerforum",
 "4i5jqm660v": "Nachbarn in Cheongun-dong",

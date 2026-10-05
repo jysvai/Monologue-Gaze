@@ -269,7 +269,7 @@ MG.I18N.put("en", "c12", {
 "wdkv0mi5vu": "Among the people of the [[2-chome shopping street|k_nichome]], there is talk of “people who come knocking on doors late at night.” The company would say only that these are “legitimate negotiations.”",
 "7l24bqhg5g": "Tue., August 9, 1994 · evening edition · page 8",
 "1rsayty7bky": "Sixty Years of the “Black Bath” — Kashiwa-yu, Kashiwadai 2-chome",
-"1kw6chaf2a3": "Kashiwa-yu's chimney. The wood-fired boiler is still lit at two o'clock every afternoon.",
+"15288eya2gr": "Kashiwa-yu's chimney. The wood-fired boiler is still lit at two o'clock in the afternoon on every day the bath is open.",
 "1wic157jrld": "Five minutes from Kashiwadai Station along the shopping street, when you see the chimney, you've reached [[Kashiwa-yu|k_kashiwayu]]. The pride of this bathhouse, opened in 1934, is the brown water drawn up from a deep well, which people call the “black bath.”",
 "273qb903h81": "The owner, [[Hayama Toshie|k_toshie]] (71), laughed: “My late husband dug that well. The water's good, so people come from far away.” The wood-fired [[boiler|k_boiler]] is looked after by her son, who quit his company job and came home three years ago. “My son splits the firewood for me. That's how I keep going.”",
 "sftmpsmygz": "Since every lot around it was sold off, Kashiwa-yu has stood like an island among the empty lots. “I've no intention of selling. Not as long as the customers keep coming.”",

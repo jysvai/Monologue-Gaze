@@ -269,7 +269,7 @@ MG.I18N.put("de", "c12", {
 "wdkv0mi5vu": "In der [[Einkaufsstraße von 2-chōme|k_nichome]] erzählt man sich, „es kommen Leute spätabends und klopfen an die Türen“. Die Firma sprach nur von „rechtmäßigen Verhandlungen“.",
 "7l24bqhg5g": "Di., 9. August 1994, Abendausgabe · S. 8",
 "1rsayty7bky": "60 Jahre „schwarzes Bad“ — das „Kashiwa-yu“ in Kashiwadai 2-chōme",
-"1kw6chaf2a3": "Der Schornstein des Kashiwa-yu. Den Holzkessel heizt man bis heute jeden Tag um zwei Uhr nachmittags an.",
+"15288eya2gr": "Der Schornstein des Kashiwa-yu. Den Holzkessel heizt man bis heute an jedem Öffnungstag um zwei Uhr nachmittags an.",
 "1wic157jrld": "Vom Bahnhof Kashiwadai fünf Minuten die Einkaufsstraße entlang: Wo der Schornstein auftaucht, ist das [[Kashiwa-yu|k_kashiwayu]]. Der Stolz des 1934 eröffneten Badehauses ist das braune Wasser, das aus einem tiefen Brunnen heraufgepumpt wird und „schwarzes Bad“ heißt.",
 "273qb903h81": "Inhaberin [[Hayama Toshie|k_toshie]] (71) lacht: „Den Brunnen hat mein verstorbener Mann gegraben. Das Wasser ist gut, deshalb kommen die Leute auch von weiter her.“ Um den holzbefeuerten [[Kessel|k_boiler]] kümmert sich der Sohn, der vor drei Jahren seine Firma verlassen hat und zurückgekommen ist. „Weil mein Sohn das Holz hackt, halten wir durch.“",
 "sftmpsmygz": "Seit alle Parzellen ringsum verkauft sind, steht das Kashiwa-yu wie eine Insel zwischen Brachflächen. „Ans Verkaufen denke ich nicht. Solange noch Gäste kommen.“",
