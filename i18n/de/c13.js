@@ -65,7 +65,7 @@ MG.I18N.put("de", "c13", {
 "srv4ig6l9e": "Screenshot Stellenanzeige",
 "26uxv0k5xgc": "Das „check“ kam vor dem Foto? Dann hatte der Kerl die Gasse im Blick.",
 "2fgcec4tqt3": "Die Antwort zum IP-Anschluss ist da. Es ist der Anschluss des Ladens.",
-"1bahltbya4u": "Ein Anschluss ist kein Mensch. Prüf nach, wer zu diesen Zeiten im Laden war, und dann schreib den Antrag.",
+"wo2awagzsf": "Ein Anschluss allein nagelt keinen fest. Prüf nach, wer zu diesen Zeiten im Laden war, und dann schreib den Antrag.",
 "1e44h60v1if": "Notruf aus einer Einzimmerwohnung in Saesol Block 3. Zweiundzwanzig, dieselbe Prägung. Der Mitbewohner hat sofort die 119 gerufen, er atmet wieder. Liegt auf der Intensivstation.",
 "1mab0ahkhs9": "Beschlüsse · Ersuchen",
 "1nmh63nwn6": "Noch keine Grundlage für einen Antrag. Erst am Tatort und in den Akten suchen.",

@@ -65,7 +65,7 @@ MG.I18N.put("en", "c13", {
 "srv4ig6l9e": "Job ad screenshot",
 "26uxv0k5xgc": "The “confirmed” came before the photo? Then that guy was watching the alley.",
 "2fgcec4tqt3": "The IP subscriber reply is in. It's the store's line.",
-"1bahltbya4u": "A line isn't a person. Work out who was in that store at those times, then write the application.",
+"wo2awagzsf": "A line alone won't pin it on a person. Work out who was in that store at those times, then write the application.",
 "1e44h60v1if": "A call from a studio in Saesol Complex 3. Twenty-two, same stamp. The roommate called 119 right away and got them breathing again. In the ICU now.",
 "1mab0ahkhs9": "Warrants & Requests",
 "1nmh63nwn6": "No grounds to file a request yet. Look at the scene and the records first.",

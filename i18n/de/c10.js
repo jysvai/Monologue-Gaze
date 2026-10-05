@@ -494,7 +494,7 @@ MG.I18N.put("de", "c10", {
 "1786anpbfok": "(trinkt einen Schluck Wasser, statt zu antworten)",
 "1lp6ppobm5p": "Der Fahrer hat mich vor Block 108 abgesetzt. Ich bin hoch und hab mich gleich schlafen gelegt.",
 "1nhwr87l5wq": "Angerufen… hab ich. Ich hab mir Sorgen gemacht, ob er gut heimgekommen ist. Er sagte ja, also hab ich aufgelegt.",
-"9tohfzjd94": "— 3 Minuten lang? Und 3 Minuten später ging die Nachricht „Hyungnim will mich kurz sprechen“ raus.",
+"159pj3iw1yd": "— 3 Minuten lang? Und gleich nach dem Auflegen ging die Nachricht „Hyungnim will mich kurz sprechen“ raus.",
 "t9zf2vrz7l": "Die Nummer? An dem Abend hab ich mit niemandem telefoniert. Ich war betrunken und bin gleich ins Bett, sag ich doch.",
 "1i99uyig08n": "Zum Lager. Der Alarm vom Kühlaggregat ist losgegangen, da bin ich kurz hin. Unser Lager ist ja im Neuhafen.",
 "133z47ojupq": "— Das Lager ist an Pier 1. Eun-hos Handy ist an Pier 3 ausgegangen.",

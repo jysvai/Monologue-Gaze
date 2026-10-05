@@ -334,7 +334,7 @@ MG.I18N.put("de", "c03", {
 "1n3robc1btz": "Schuldner",
 "tl9pzkcfz7": "Verliehen am",
 "1hn11ik1m9v": "Frist",
-"20avmfd1yja": "Abrechnung am Abend des 4. November: Bargeld im Geldschrank 62 Yen 30 Sen.",
+"16bhnzup8uy": "Abrechnung am Abend des 4. November (mit den 20 Yen von Oh Sun-deok): Bargeld im Geldschrank 62 Yen 30 Sen.",
 "18l6bfvt1w4": "[Anm. d. Übers.] Handschrift des Opfers, chinesische Schriftzeichen und Hangul gemischt.",
 "mjjotmujpe": "Bonheft des Café Schwarzer Schwan — 4. November",
 "2nji7hotuj": "Honmachi 2-chōme · Bons nach Kellnerinnen · beschlagnahmt am 9. November",

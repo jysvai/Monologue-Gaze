@@ -558,7 +558,7 @@ MG.I18N.put("en", "c04", {
 "1a2ii4uq35t": "Flagman and painter, Minami Line Industries (29)",
 "11uty0s5mn4": "Waving a flag's my job. Rain or shine. The day of that police-bike business, I was out at Sakae-cho holding the flag too.",
 "66k7r9toj7": "…Ah, the 28th. I was in bed at my lodgings with a cold that day. Every day's the same, so I got mixed up.",
-"29rn9bgqong": "— Did anyone see you?",
+"hiffwxvhy7": "— Did anyone see you?",
 "18mh4w5iogt": "I live alone. Who'd see me?",
 "5bk3p8ok68": "The 28th? I told you. I was at the site. Rain like that, it was murder.",
 "9o4brn14va": "…Chatty old geezer. He asked, so I answered, that's all. And the log — I was told to write it down, so I wrote it.",

@@ -329,7 +329,7 @@ MG.I18N.put("en", "c07", {
 "15wg2rns78q": "A Page from Sgt. Koo Tae-seop's Notebook",
 "rjiuepra1f": "Pencil · dates out of order · tucked inside the back cover of the file",
 "2akt41nuwu": "Oct 24 Section chief — “Either a love affair or money. Wrap it up with the driver.”",
-"kpxosqy5ds": "Oct 25 Got a few copies from the telephone office. In the drawer. Haven't gone through them.",
+"1nxlqm5wqk2": "Oct 28 Got a few copies from the telephone office. In the drawer. Haven't gone through them.",
 "atj4egz5ys": "Oct 26 [[Saehan Ilbo|k_saehan]] reporters camped outside the station. Talk of “[[guests in the ledger|k_rumor]].”",
 "zq22woekcl": "Oct 29 3rd interrogation. Small hours. I was told to stay out.",
 "se41nnu51c": "Oct 31 Sent to prosecution. Kang never once looked me in the eye.",

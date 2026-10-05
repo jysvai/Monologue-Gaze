@@ -334,7 +334,7 @@ MG.I18N.put("en", "c03", {
 "1n3robc1btz": "Debtor",
 "tl9pzkcfz7": "Lent",
 "1hn11ik1m9v": "Due",
-"20avmfd1yja": "Evening count, Nov. 4: cash in safe 62 won 30 jeon.",
+"16bhnzup8uy": "Evening count, Nov. 4 (with Oh Sun-deok's 20 won in): cash in safe 62 won 30 jeon.",
 "18l6bfvt1w4": "[Translator's note] In the victim's hand, Chinese characters mixed with Hangul.",
 "mjjotmujpe": "Café Black Swan Order Slips — Nov. 4",
 "2nji7hotuj": "Honmachi 2-chōme · slips by waitress · seized Nov. 9",

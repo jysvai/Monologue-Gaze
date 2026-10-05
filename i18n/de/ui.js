@@ -234,7 +234,7 @@ MG.I18N.put("de", "ui", {
 "형사 수첩": "Dienstnotizbuch",
 "혐오감 주의": "Verstörende Inhalte",
 "이 사건 기록에는 시신 훼손 같은 잔혹한 내용과 강한 묘사가 들어 있습니다.": "Diese Fallakten enthalten drastische Inhalte wie verstümmelte Leichen und eindringliche Schilderungen.",
-"모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국, 가림 없는 사진, 참혹한 묘사와 소리는 「잔혹 표현」 단추로 끌 수 있습니다 — 끄면 사진은 가려지고 기록은 건조한 판으로 바뀝니다.": "Alle Personen und Ereignisse sind erfunden. Wenn es zu viel wird, können Sie jederzeit ins Archiv zurückkehren. Blutflecken, unverdeckte Fotos, grausige Schilderungen und Geräusche lassen sich mit der Schaltfläche „Drastische Inhalte“ abschalten — dann werden Fotos verdeckt und die Akten wechseln in eine nüchterne Fassung.",
+"모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국, 가림 없는 사진, 참혹한 묘사와 소리는 「잔혹 표현」 단추로 끌 수 있습니다. 끄면 사진은 가려지고 기록은 건조한 판으로 바뀝니다.": "Alle Personen und Ereignisse sind erfunden. Wenn es zu viel wird, können Sie jederzeit ins Archiv zurückkehren. Blutflecken, unverdeckte Fotos, grausige Schilderungen und Geräusche lassen sich mit der Schaltfläche „Drastische Inhalte“ abschalten. Dann werden Fotos verdeckt und die Akten wechseln in eine nüchterne Fassung.",
 "기록을 연다": "Akten öffnen",
 "돌아간다": "Zurück",
 " · 현행 {0} / {1}": " · Echtzeit {0} / {1}",

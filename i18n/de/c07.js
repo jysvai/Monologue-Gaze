@@ -329,7 +329,7 @@ MG.I18N.put("de", "c07", {
 "15wg2rns78q": "Ein Blatt aus dem Notizbuch von Kriminalmeister Gu",
 "rjiuepra1f": "Bleistift · Daten durcheinander · innen im hinteren Aktendeckel eingeklemmt",
 "2akt41nuwu": "24.10. Kripoleiter — „Eifersucht oder Geld. Auf den Fahrer hin abschließen.“",
-"kpxosqy5ds": "25.10. Vom Fernmeldeamt ein paar Kopien bekommen. In der Schublade. Nicht durchgesehen.",
+"1nxlqm5wqk2": "28.10. Vom Fernmeldeamt ein paar Kopien bekommen. In der Schublade. Nicht durchgesehen.",
 "atj4egz5ys": "26.10. Reporter der [[Saehan Ilbo|k_saehan]] belagern das Revier. Irgendwas vom „[[Gast im Buch|k_rumor]]“.",
 "zq22woekcl": "29.10. 3. Vernehmung. Frühmorgens. Ich soll draußen bleiben.",
 "se41nnu51c": "31.10. Abgabe an die Staatsanwaltschaft. Kang hat mir bis zum Schluss nicht in die Augen gesehen.",

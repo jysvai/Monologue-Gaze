@@ -234,7 +234,7 @@ MG.I18N.put("en", "ui", {
 "형사 수첩": "Detective's notebook",
 "혐오감 주의": "Disturbing content",
 "이 사건 기록에는 시신 훼손 같은 잔혹한 내용과 강한 묘사가 들어 있습니다.": "These case records contain graphic material, such as mutilated bodies, and strong descriptions.",
-"모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국, 가림 없는 사진, 참혹한 묘사와 소리는 「잔혹 표현」 단추로 끌 수 있습니다 — 끄면 사진은 가려지고 기록은 건조한 판으로 바뀝니다.": "All people and events are fictional. If it becomes too much, you can go back to the records room at any time. Bloodstains, uncovered photos, gruesome descriptions and sounds can be switched off with the “Graphic content” button — photos are then covered and the records switch to drier versions.",
+"모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국, 가림 없는 사진, 참혹한 묘사와 소리는 「잔혹 표현」 단추로 끌 수 있습니다. 끄면 사진은 가려지고 기록은 건조한 판으로 바뀝니다.": "All people and events are fictional. If it becomes too much, you can go back to the records room at any time. Bloodstains, uncovered photos, gruesome descriptions and sounds can be switched off with the “Graphic content” button. Photos are then covered and the records switch to drier versions.",
 "기록을 연다": "Open the records",
 "돌아간다": "Go back",
 " · 현행 {0} / {1}": " · live {0} / {1}",

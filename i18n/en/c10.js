@@ -494,7 +494,7 @@ MG.I18N.put("en", "c10", {
 "1786anpbfok": "(Drinks some water instead of answering)",
 "1lp6ppobm5p": "The driver parked it outside Building 108 and left. I went up and went straight to bed.",
 "1nhwr87l5wq": "I did… call him. I was worried whether he'd got in all right. He said he had, so I hung up.",
-"9tohfzjd94": "— For three minutes? And three minutes later, the message “Hyung wants to see me for a sec” went out.",
+"159pj3iw1yd": "— For three minutes? And right after that call ended, the message “Hyung wants to see me for a sec” went out.",
 "t9zf2vrz7l": "That number? I didn't talk to anyone on the phone that night. I told you, I was drunk and fell asleep the moment I got in.",
 "1i99uyig08n": "The warehouse. The refrigeration alarm went off, so I went over for a bit. Our warehouse is at the New Port, after all.",
 "133z47ojupq": "— Your warehouse is at Pier 1. Eun-ho's phone went dead at Pier 3.",

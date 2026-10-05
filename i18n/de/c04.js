@@ -558,7 +558,7 @@ MG.I18N.put("de", "c04", {
 "1a2ii4uq35t": "Verkehrsregler und Markierungsmaler bei Minami Linienbau (29)",
 "11uty0s5mn4": "Die Flagge schwenken, das ist mein Job. Ob's regnet oder die Sonne scheint. An dem Tag mit dem Wirbel um das Polizeimotorrad hab ich auch in Sakae-chō mit der Flagge gestanden.",
 "66k7r9toj7": "…Ach, der 28. An dem Tag lag ich mit Erkältung in meinem Zimmer. Ist jeden Tag dasselbe, da hab ich's verwechselt.",
-"29rn9bgqong": "— Hat Sie jemand gesehen?",
+"hiffwxvhy7": "— Hat Sie jemand gesehen?",
 "18mh4w5iogt": "Ich wohn allein, wer soll mich da sehen.",
 "5bk3p8ok68": "Der 28.? Hab ich doch gesagt. Ich war auf der Baustelle. Bei dem Regen war's zum Verrecken.",
 "9o4brn14va": "…Ein geschwätziger Alter war das. Er hat gefragt, ich hab geantwortet, das ist alles. Ins Buch eingetragen hab ich's, weil man's so soll.",
