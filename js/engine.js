@@ -1176,6 +1176,7 @@
     el.innerHTML = h;
     el.dataset.type = s.type;
     if (s.type === 'map') mapTidy();
+    if (NUDGE) renderNudge(); // 짚은 곳을 해냈으면 수첩의 쪽지를 거둔다
   }
   function renderRead() {
     const el = $('#paneRead');
@@ -1311,10 +1312,181 @@
         <p class="rep-sum">${T`${esc(FORM().short)} <b>${ST.report.culprit && C.keywords[ST.report.culprit] ? esc(C.keywords[ST.report.culprit].label) : '—'}</b> · 증거 <b>${sol.claims.filter(cl => ST.report.claims[cl.id] && (ST.notes.some(n => String(n.id) === String(ST.report.claims[cl.id])) || (ST.solved && ST.report.kept && ST.report.kept[String(ST.report.claims[cl.id])]))).length}</b> / ${sol.claims.length}`}</p>
         <p class="submit-row"><button type="button" class="btn-hand" data-open-rep>${esc(ST.solved ? T`올린 ${FORM().title} 보기` : FORM().open)}</button><span class="tries">${ST.tries ? T`올린 횟수 ${ST.tries}` : ''}</span></p>
         <p class="verdict">${esc(VERDICT)}</p>
+        ${ST.solved ? '' : nudgeRow()}
         <div id="solvedBox">${ST.solved ? solvedHtml(false) : ''}</div>
       </section>
       <footer class="nb-foot"><button type="button" class="reset" data-reset>${T`이 사건 처음부터`}</button><p>${esc(C.disclaimer || T('실제 미제 사건의 모티프만 빌린 창작입니다. 인물·장소·기관은 모두 지어낸 것입니다.'))}</p></footer>`;
     if (top) nb.scrollTop = top;
+  }
+
+  /* ───────── 막혔을 때: 짚어 보기 ─────────
+   * 지금 수첩과 읽은 기록으로 앞으로 나갈 수 있는 곳을 하나 짚는다. 처음엔 어느 쪽인지만 (어느 철, 누구), 한 번 더 누르면 무엇인지 (문서 제목, 단어).
+   * ★5 는 어느 쪽인지만. 보고서의 정답 증거는 짚지 않는다 — 쓸 메모가 없는 주장 번호만 (★3·★4). */
+  let NUDGE = null; // { c: 사건 id, key: 짚은 곳, more: 자세히 펼쳤나 }
+  // 기록 한 덩이(문서·대답·지점…)에 든 단어 링크와 사실
+  function bagOf(parts) {
+    const o = { k: new Set(), f: new Set() };
+    const kw = t => String(t ?? '').replace(/\[\[([^\]|]+?)(?:\|([\w-]+))?\]\]/g, (m, l, kid) => { const id = kid || C._lab[norm(l)]; if (id && C.keywords[id]) o.k.add(id); return m; });
+    const walk = arr => (Array.isArray(arr) ? arr : [arr]).forEach(b => {
+      if (b == null) return;
+      if (typeof b === 'string') return kw(b);
+      if (typeof b !== 'object') return;
+      ['p', 'note', 'say', 'msg', 'cap', 'h', 'divider', 'stamp', 'sign', 'm'].forEach(x => { if (b[x] != null) kw(b[x]); });
+      (b.list || []).forEach(kw);
+      (b.rows || []).forEach(r => (r || []).forEach(kw));
+      (b.f == null ? [] : typeof b.f === 'string' ? [b.f] : Object.values(b.f)).forEach(f => { if (f) o.f.add(f); }); // 표·목록은 줄마다: 배열이나 { 줄 번호: 사실 }
+    });
+    parts.forEach(walk);
+    return o;
+  }
+  // 사건마다 한 번: 플레이어가 볼 수 있는 글 덩이 목록. seen() = 이미 읽었나, go = 거기로 가는 길
+  function nudgeIndex() {
+    if (C._nix) return C._nix;
+    const bags = [], br = C.brief || {};
+    bags.push({ ...bagOf([...(br.lines || []).map(l => l[1]), br.scrawl]), title: T('사건 개요'), go: null, seen: () => true }); // 수첩 맨 위 개요 카드
+    C.sources.forEach(s => bags.push({ ...bagOf([s.desc, s.intro || []]), title: plain(s.name), go: { t: 'src', src: s.id }, seen: () => srcVisible(s) })); // 탭 안내 글
+    C.sources.forEach(s => [...(s.sets || []), ...(s.scenes || [])].forEach(x => bags.push({ ...bagOf([x.intro || [], x.meta]), title: plain(x.title), go: { t: s.type === 'photo' ? 'scene' : 'src', id: x.id, src: s.id }, seen: () => srcVisible(s) && ok(x.need) })));
+    Object.values(C.docs).forEach(d => bags.push({ ...bagOf([d.title, d.meta, d.kicker, d.body || []]), title: plain(d.title), go: { t: 'doc', id: d.id, src: d.src }, seen: () => ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)) }));
+    Object.values(C.people).forEach(p => {
+      const go = { t: 'person', id: p.id, src: p.src };
+      bags.push({ ...bagOf([p.intro || []]), title: p.name, go, seen: () => ST.asked[p.id] != null });
+      const ans = (e, arr) => bags.push({ ...bagOf([arr || []]), title: p.name, go, seen: () => (ST.asked[p.id] || []).includes(e), ask: { p: p.id, e } });
+      Object.entries(p.ask || {}).forEach(([k, a]) => { if (isCond(a)) { ans(k + '!', a.a); if (a.else != null) ans(k, a.else); } else ans(k, a); });
+      if (p.self && !(p.ask || {})[p.key]) ans(p.key, p.self);
+    });
+    C.sources.forEach(s => {
+      const go = { t: 'src', src: s.id };
+      if (s.type === 'timeline' || s.type === 'cipher') bags.push({ ...bagOf([s.solved || []]), title: plain(s.title || s.name), go, seen: () => ST.unl.includes(s.id) });
+      (s.sets || []).forEach(x => bags.push({ ...bagOf([x.solved || []]), title: plain(x.title), go, seen: () => ST.unl.includes(x.id) }));
+      (s.scenes || []).forEach(x => (x.spots || []).forEach(sp => bags.push({ ...bagOf([sp.body || []]), title: plain(x.title), go: { t: 'scene', id: x.id, src: s.id }, seen: () => ST.unl.includes(sp.id) })));
+      (s.type === 'feed' ? s.items || [] : []).forEach(it => bags.push({ ...bagOf([it.msg]), title: plain(s.name), go, seen: () => !!(ST.live && it.id in ST.live.fd), ...(it.f ? { f: new Set([it.f, ...bagOf([it.msg]).f]) } : {}) }));
+    });
+    return (C._nix = bags);
+  }
+  // 앞을 막고 있는 조건들: 조건 목록과, 그 조건이 열어 주는 것
+  function gates() {
+    const g = [];
+    Object.values(C.docs).forEach(d => g.push(d.need));
+    C.sources.forEach(s => {
+      g.push(s.need, s.solveNeed);
+      [...(s.spots || []), ...(s.sets || []), ...(s.scenes || []), ...(s.records || []), ...(s.items || [])].forEach(x => g.push(x.need, x.solveNeed));
+      (s.scenes || []).forEach(x => (x.spots || []).forEach(sp => g.push(sp.need)));
+    });
+    Object.values(C.people).forEach(p => { g.push(p.need); Object.values(p.ask || {}).forEach(a => { if (isCond(a)) g.push(a.need); }); });
+    return g.filter(n => n && n.length);
+  }
+  const quote = x => ({ en: `“${x}”`, ru: `«${x}»`, de: `„${x}“` }[MG.I18N.lang] || `「${x}」`); // 이름 하나만 짚을 때의 따옴표 (그 언어의 것)
+  function leads() {
+    const out = [], add = (key, a, b, go) => { if (!out.some(x => x.key === key)) out.push({ key, a, b, go }); };
+    const bags = nudgeIndex(), seen = bags.filter(b => b.seen());
+    const noted = f => ST.notes.some(n => n.f === f);
+    const factHome = f => seen.find(b => b.f.has(f));
+    const vis = C.sources.filter(srcVisible);
+    // 1. 보이는데 아직 펼치지 않은 기록, 아직 만나지 않은 사람
+    vis.forEach(s => {
+      const docs = [];
+      if (s.type === 'list' && srcOpen(s)) docs.push(...C._srcDocs[s.id].filter(d => ok(d.need)));
+      if (s.type === 'archive') docs.push(...(s.start || []).map(id => C.docs[id]).filter(d => d && ok(d.need)));
+      if (s.type === 'map') docs.push(...(s.spots || []).filter(sp => ok(sp.need)).map(sp => C.docs[sp.doc]).filter(Boolean));
+      if (s.type === 'query') docs.push(...(ST.found[s.id] || []).map(id => C.docs[id]).filter(Boolean));
+      if (s.type === 'request') docs.push(...(s.items || []).filter(r => { const q = reqState(r.id); return q && q.st === 'done'; }).map(r => C.docs[r.doc]).filter(Boolean));
+      if (s.type === 'feed' && ST.live) docs.push(...(s.items || []).filter(it => it.doc && it.id in ST.live.fd).map(it => C.docs[it.doc]).filter(Boolean)); // 단톡방에 온 첨부
+      docs.filter(d => (!d.lock || ST.unl.includes(d.id)) && !ST.seen.includes(d.id)).forEach(d => add('doc:' + d.id, T`「${plain(s.name)}」에 아직 펼쳐 보지 않은 기록이 있다.`, quote(plain(d.title)), { t: 'doc', id: d.id, src: s.id }));
+    });
+    Object.values(C.people).filter(p => personVisible(p) && srcVisible(C.sources.find(s => s.id === p.src) || {}) && ST.asked[p.id] == null).forEach(p => add('meet:' + p.id, T('아직 찾아가 보지 않은 사람이 있다.'), p.name, { t: 'person', id: p.id, src: p.src }));
+    // 2. 읽은 기록 속에 있는데 아직 수첩에 적지 않은 단어
+    seen.forEach(b => b.k.forEach(k => { if (!ST.keys.includes(k)) add('word:' + k, T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${C.keywords[k].label}」`, b.go); }));
+    // 3·4. 탐문 — 수첩을 내밀어 다시 물을 것, 새 단어나 쓸 만한 사실이 나올 물음
+    const useful = new Set([...gates().flat().filter(n => n[0] === '!').map(n => n.slice(1)), ...C.solution.claims.flatMap(cl => cl.accept || [])]); // 앞을 여는 사실, 보고서에 쓸 사실 (어느 쪽인지는 말하지 않는다)
+    const people = Object.values(C.people).filter(p => personVisible(p) && ST.asked[p.id] != null);
+    people.forEach(p => ST.keys.forEach(k => {
+      const e = askEntry(p, k), asked = ST.asked[p.id] || [];
+      if (e.endsWith('!') && !asked.includes(e) && asked.includes(k)) add(`press:${p.id}|${k}`, T('수첩을 내밀어 다시 물어볼 사람이 있다.'), T`${p.name} — 「${C.keywords[k].label}」`, { t: 'person', id: p.id, src: p.src });
+    }));
+    people.forEach(p => ST.keys.forEach(k => {
+      if (!C.keywords[k] || (k === p.key && rawAns(p, k) == null)) return;
+      const e = askEntry(p, k);
+      if ((ST.asked[p.id] || []).includes(e)) return;
+      const b = bags.find(x => x.ask && x.ask.p === p.id && x.ask.e === e);
+      if (b && ([...b.k].some(x => !ST.keys.includes(x)) || [...b.f].some(f => useful.has(f) && !noted(f)) || e.endsWith('!'))) add(`ask:${p.id}|${e}`, T('수첩의 단어로 아직 물어보지 않은 것이 있다.'), T`${p.name} — 「${C.keywords[k].label}」`, { t: 'person', id: p.id, src: p.src });
+    }));
+    // 5. 자료실 — 수첩의 단어로 찾으면 새 기록이 나오는 곳 (잠긴 문서는 잠금 쪽(7)에서 짚는다)
+    vis.filter(s => s.type === 'archive').forEach(s => ST.keys.forEach(k => {
+      if (!C.keywords[k]) return;
+      if (C._srcDocs[s.id].some(d => ok(d.need) && (d.find || []).includes(k) && !ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)))) add(`find:${s.id}|${k}`, T`「${plain(s.name)}」에서 수첩의 단어로 아직 찾아보지 않은 것이 있다.`, quote(C.keywords[k].label), { t: 'src', src: s.id });
+    }));
+    // 6. 앞을 막는 조건 가운데 수첩 메모 하나만 모자란 것 — 그 대목은 이미 읽은 기록에 있다
+    gates().forEach(need => {
+      const miss = need.filter(n => !okOne(n));
+      if (!miss.length || !miss.every(n => n[0] === '!')) return;
+      miss.forEach(n => { const h = factHome(n.slice(1)); if (h) add('fact:' + n.slice(1), T('읽은 기록 가운데 수첩에 적어 둘 대목이 남아 있다.'), T`「${h.title}」의 한 대목`, h.go); });
+    });
+    reqItems().forEach(r => { // 소명 메모가 모자란 신청서
+      const q = reqState(r.id);
+      if (!ok(r.need) || (q && q.st !== 'no') || !(r.why || []).length || r.why.some(noted)) return;
+      const h = r.why.map(factHome).find(Boolean);
+      if (h) add('why:' + r.id, T('읽은 기록 가운데 수첩에 적어 둘 대목이 남아 있다.'), T`「${h.title}」의 한 대목`, h.go);
+    });
+    // 7. 잠금 — 열 단서가 이미 모였다
+    vis.forEach(s => { if (s.lock && !ST.unl.includes(s.id) && ok(s.lock.need)) add('lock:' + s.id, T`「${plain(s.name)}」 잠금을 열 단서는 이미 모였다.`, plain(s.lock.hint2 || s.lock.hint || ''), { t: 'src', src: s.id }); });
+    Object.values(C.docs).forEach(d => {
+      if (!d.lock || ST.unl.includes(d.id) || !ok(d.lock.need) || !ok(d.need)) return;
+      const s = C.sources.find(x => x.id === d.src);
+      if (s && srcVisible(s) && (s.type !== 'archive' || (s.start || []).includes(d.id) || (d.find || []).some(k => ST.keys.includes(k)))) add('lock:' + d.id, T`「${plain(d.title)}」 잠금을 열 단서는 이미 모였다.`, plain(d.lock.hint2 || d.lock.hint || ''), { t: 'doc', id: d.id, src: d.src });
+    });
+    // 8. 재구성·암호·대조·관찰·조회 — 풀 거리가 모였는데 아직 안 푼 것
+    vis.forEach(s => {
+      if ((s.type === 'timeline' || s.type === 'cipher') && !ST.unl.includes(s.id) && ok(s.solveNeed)) add('solve:' + s.id, T`「${plain(s.name)}」에 필요한 기록은 이미 모였다.`, '', { t: 'src', src: s.id });
+      if (s.type === 'compare') (s.sets || []).forEach(x => { if (ok(x.need) && !ST.unl.includes(x.id) && ok(x.solveNeed)) add('cmp:' + x.id, T`「${plain(s.name)}」에 아직 가려내지 못한 감정이 있다.`, quote(plain(x.title)), { t: 'src', src: s.id }); });
+      if (s.type === 'photo') (s.scenes || []).forEach(x => { if (!ok(x.need)) return; const sp = (x.spots || []).find(y => ok(y.need) && !ST.unl.includes(y.id)); if (sp) add('spot:' + sp.id, T`「${plain(x.title)}」에 아직 찾지 못한 곳이 있다.`, sp.label ? quote(plain(sp.label)) : '', { t: 'scene', id: x.id, src: s.id }); });
+      if (s.type === 'query') (s.records || []).forEach(r => {
+        if (!ok(r.need) || !C.docs[r.doc] || ST.seen.includes(r.doc) || (ST.found[s.id] || []).includes(r.doc)) return;
+        const k = (r.need || []).filter(n => C.keywords[n] && !(s.need || []).includes(n)).pop();
+        add('query:' + r.doc, T`「${plain(s.name)}」에 넣어 볼 값이 이미 기록에 나와 있다.`, k ? T`「${C.keywords[k].label}」에 얽힌 ${(s.fields || []).map(f => plain(f.label)).join(' · ')}` : '', { t: 'src', src: s.id });
+      });
+    });
+    // 9. 현행 사건 — 올릴 수 있는 신청서, 기다리면 오는 것
+    if (liveOn()) {
+      reqItems().forEach(r => { const q = reqState(r.id), s = C.sources.find(x => x.id === r.src); if (s && srcVisible(s) && ok(r.need) && (!q || q.st === 'no') && (!(r.why || []).length || r.why.some(noted))) add('req:' + r.id, T`「${plain(s.name)}」에 올릴 수 있는 신청서가 있다.`, quote(plain(r.title)), { t: 'req', id: r.id, src: r.src }); });
+      if (nextDue() != null) add('wait', T('지금은 기다릴 차례다. 회신이나 새 소식이 오고 있다.'), T('화면 아래 단추로 시간을 넘길 수 있다.'), null);
+    }
+    return out;
+  }
+  function nudgeHtml() {
+    if (ST.solved || !NUDGE || NUDGE.c !== C.id) return '';
+    const L = leads(), sol = C.solution, fm = FORM();
+    let n = NUDGE.key ? L.find(x => x.key === NUDGE.key) : L[0];
+    // 짚은 곳을 해냈으면 쪽지를 거둔다 (다음 곳은 다시 눌러야 — 저절로 다음 곳을 보여 주지 않게)
+    if (!n && NUDGE.key && (NUDGE.key !== 'done' || L.length)) { NUDGE = null; return ''; }
+    if (!n) { // 더 열 것이 없으면 보고서 쪽으로: 쓸 메모가 아직 없는 주장 번호만
+      const empty = sol.claims.map((cl, i) => ((cl.accept || []).some(f => ST.notes.some(x => x.f === f)) ? 0 : i + 1)).filter(Boolean);
+      n = { key: 'done', a: T`더 열어 볼 기록은 없다. 적은 메모로 ${fm.title}${josa(fm.title, '을', '를')} 쓴다.`, b: empty.length ? T`${empty.join('·')}번을 받칠 메모가 아직 수첩에 없다.` : T('쓸 메모는 수첩에 다 있다. 메모끼리 맞대 본다.') };
+    }
+    NUDGE.key = n.key;
+    const more = lv() < 5 && n.b;
+    const go = n.go ? `<button type="button" class="nudge-go" data-nudge-go="${esc([n.go.t, n.go.src || '', n.go.id || ''].join('|'))}">${T`펼치기`}</button>` : '';
+    return `<div class="nudge" role="status"><p class="nudge-a">${esc(n.a)}</p>${more ? (NUDGE.more ? `<p class="nudge-b">${esc(n.b)} ${go}</p>` : `<button type="button" class="nudge-more" data-nudge-more>${T`더 짚어 보기`}</button>`) : ''}</div>`;
+  }
+  function nudgeRow() { const box = nudgeHtml(); return `<div class="nudge-row"><button type="button" class="nudge-btn" data-nudge aria-expanded="${!!box}" aria-controls="nudgeBox">${T`막혔을 때 짚어 보기`}</button><div id="nudgeBox">${box}</div></div>`; }
+  function renderNudge() {
+    const b = $('#nudgeBox'); if (!b) return;
+    const was = b.innerHTML, h = nudgeHtml();
+    if (h !== was) b.innerHTML = h;
+    const btn = $('[data-nudge]'); if (btn) btn.setAttribute('aria-expanded', String(!!h));
+  }
+  function toggleNudge() {
+    if (NUDGE && NUDGE.c === C.id) NUDGE = null;
+    else { NUDGE = { c: C.id, key: null, more: false }; ST.nudges = (ST.nudges || 0) + 1; save(); sfx('pen'); }
+    renderNudge();
+  }
+  function nudgeGo(v) {
+    const [t, src, id] = v.split('|');
+    if (src && C.sources.some(s => s.id === src && srcVisible(s))) { keepPos(); ST.view.src = src; }
+    if (t === 'doc' || t === 'person' || t === 'req') openItem({ t, id });
+    else if (t === 'scene') openItem({ t: 'photo', id });
+    else { const s = curSrc(); ST.view.open = s && (s.type === 'cipher' || s.type === 'timeline') ? { t: s.type, id: s.id } : narrow() ? null : ST.view.open; save(); renderRead(); }
+    renderTabs(); renderList();
+    if (!beside()) $('.stage').scrollIntoView({ block: 'start' });
   }
 
   /* ───────── screens ───────── */
@@ -2141,7 +2313,8 @@
     else if (lv() >= 5) VERDICT = sol.far || T('반려. 어디가 틀렸는지는 적혀 있지 않다.');
     else {
       VERDICT = wrong === 1 ? sol.near || T('딱 한 군데가 어긋난다.') : sol.far || T('아직 이야기가 이어지지 않는다. 더 쫓아가 보자.');
-      if (lv() <= 3) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`;
+      // ★3 은 한 칸만 남았을 때 그 칸을 짚어 준다. 여러 칸이 틀렸을 때까지 칸을 알려 주면 칸마다 메모를 바꿔 끼워 찍기로 풀린다
+      if (lv() <= 3 && wrong === 1) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`;
     }
     save();
     // 연출: 지목 → 침묵 → 판정
@@ -2233,6 +2406,9 @@
         else if (i.value.length < 8) i.value += k;
         return;
       }
+      if (t.closest('[data-nudge]')) return toggleNudge();
+      if (t.closest('[data-nudge-more]')) { if (NUDGE) { NUDGE.more = true; renderNudge(); const g = $('#nudgeBox .nudge-go'); if (g && e.detail === 0) g.focus(); } return; }
+      if ((el = t.closest('[data-nudge-go]'))) return nudgeGo(el.dataset.nudgeGo);
       if ((el = t.closest('[data-pin]'))) return pin(el.dataset.pin);
       if ((el = t.closest('[data-kw]'))) return addKey(el.dataset.kw);
       if ((el = t.closest('[data-bub]')) && !getSelection().toString()) return pin(el.dataset.bub); // 말풍선을 누르면 수첩에
@@ -2445,4 +2621,5 @@
   };
   MG.state = () => S;
   MG.sfx = kind => sfx(kind); // 여는 장면(js/mood.js)의 무전 소리
+  MG.dev = { leads: () => leads(), nudge: () => nudgeHtml(), st: () => ST, advance: (k, m) => advance(k, m), wait: () => waitNext(), toggle: () => toggleNudge(), more: () => { if (NUDGE) NUDGE.more = true; } }; // tools/nudge-sim.js 가 짚어 보기만 따라 사건을 끝까지 가 본다
 })();
