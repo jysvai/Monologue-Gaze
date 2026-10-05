@@ -559,7 +559,7 @@ MG.I18N.put("en", "c07", {
 "wyt382607w": "(Sits behind the wire mesh, head bowed) …You again. I said all I had to say at the trial.",
 "1708cyafnua": "She was a good person. She always spoke politely, even to a driver. If the car smelled of cigarettes, the first thing she did was open the window.",
 "1r8q72sbsjd": "(Silent for a long while) …Maybe the car clock was fast. That clock never kept good time anyway.",
-"1htkll5esu3": "— What if it was 11:20?",
+"1ijw78fmoe9": "— Even if it runs eleven minutes fast, that makes it 11:39. What if it was 11:20?",
 "1jmmxztyo1a": "…I don't know.",
 "1jh23eka93t": "It was 11:50. How many times do I have to say it?",
 "17kdjrd2yoz": "…I stopped where I was told to stop. Where the two willows stand.",

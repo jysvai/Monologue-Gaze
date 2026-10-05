@@ -424,7 +424,7 @@ MG.I18N.put("de", "c03", {
 "o8b5yqc7jc": "250 Yen… ja, geliehen hab ich sie. Am 5. war die Frist. Na und? Ich wollte zahlen. Mein Bruder hatte versprochen zu helfen.",
 "1hb6mjq96l5": "Ein paar Schulden hatte ich schon. Wer in diesem Viertel hatte beim alten Herrn keine Schulden?",
 "1yt1l9rmdp5": "(sein Gesicht erstarrt) ……",
-"16dhr61vffe": "— Um 9:20 standen Sie am Schalter des Postamts Jongno. Und das, obwohl Sie um halb zehn im Laden Radio gehört haben wollen. „Geld beschafft, nicht kommen.“ Was für Geld?",
+"1msjd92tjf": "— Auf der Wache haben Sie das Postamt mit keinem Wort erwähnt. 9:20, Schalter des Postamts Jongno. „Geld beschafft, nicht kommen.“ Was für Geld?",
 "1osj1x2i0kt": "Ein Telegramm? In der Nacht war ich nicht mal in der Nähe vom Postamt. Laden zu und direkt zur Straßenbahn.",
 "13su70u2ktr": "Den Brunnen teilen sich die beiden Häuser. Die Hintertüren liegen sich gegenüber. Der Gehilfe vom Bochundang kommt auch jeden Tag Wasser holen.",
 "2d0xnnjs28x": "Kurz vor zehn bin ich rein. Die Kellnerinnen haben's alle gesehen.",

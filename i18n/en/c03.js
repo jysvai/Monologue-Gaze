@@ -424,7 +424,7 @@ MG.I18N.put("en", "c03", {
 "o8b5yqc7jc": "250 won… Yes, I borrowed it. The 5th was the deadline. So what? I was going to pay. My brother had promised to help.",
 "1hb6mjq96l5": "I had a few debts, sure. Who in this neighborhood didn't owe the old man money?",
 "1yt1l9rmdp5": "(his face stiffens) ……",
-"16dhr61vffe": "— At 9:20 you were at the window of the Jongno Post Office. You, who said you heard the radio in your shop at half past nine. “Money raised, no need to come.” What money?",
+"1msjd92tjf": "— At the police station you never said a word about the post office. 9:20, the window at the Jongno Post Office. “Money raised, no need to come.” What money?",
 "1osj1x2i0kt": "A telegram? That night I went nowhere near the post office. I closed up and went straight to catch the streetcar.",
 "13su70u2ktr": "The two houses share the well. The back doors face each other. The Bochundang clerk comes over to draw water every day.",
 "2d0xnnjs28x": "I went in a little before ten. The waitresses will all have seen me.",

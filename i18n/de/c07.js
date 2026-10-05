@@ -559,7 +559,7 @@ MG.I18N.put("de", "c07", {
 "wyt382607w": "(Sitzt mit gesenktem Kopf hinter dem Drahtgitter) …Sie schon wieder? Was ich zu sagen hatte, habe ich vor Gericht gesagt.",
 "1708cyafnua": "Sie war ein guter Mensch. Sogar mit dem Fahrer hat sie immer höflich gesprochen. Wenn es im Wagen nach Rauch roch, hat sie als Erstes das Fenster aufgemacht.",
 "1r8q72sbsjd": "(Schweigt lange) …Vielleicht ging die Uhr im Wagen vor. Die ging sowieso nie richtig.",
-"1htkll5esu3": "— Und wenn es 23:20 Uhr war?",
+"1ijw78fmoe9": "— Selbst wenn sie elf Minuten vorgeht, wäre es 23:39 Uhr. Und wenn es 23:20 Uhr war?",
 "1jmmxztyo1a": "…Ich weiß es nicht.",
 "1jh23eka93t": "Um 23:50 Uhr. Wie oft soll ich das noch sagen.",
 "17kdjrd2yoz": "…Ich habe da angehalten, wo ich anhalten sollte. Wo die zwei Weiden stehen.",
