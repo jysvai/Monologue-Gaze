@@ -114,6 +114,7 @@
       ] },
       d_snap_dohyun: { src: 'web', find: ['k_dohyun', 'k_busan'], title: '강도현 (@dohyun.k)', meta: '스냅로그 · 팔로워 203', paper: '스냅로그', bar: '#9c4f5e', body: [
         { img: 'bridge', cap: '2025.10.09 (목) 22:40 · 📍[[부산]] 수영구 광안리해수욕장 — 출장 첫날부터 야근… 그래도 바다는 좋네', f: 'f_alibi' },
+        '└ 부산지사 정 대리 · 10.09 22:52 — 도현 씨 오늘 고생 많았어요! 내일 9시 회의는 3층 대회의실이에요',
         '2025.09.01 — 운동 100일',
       ] },
       d_board: { src: 'web', find: ['k_heights', 'k_delivery', 'k_night', 'k_neighbor'], title: '청운하이츠 입주민 게시판', meta: '청운동 이웃', paper: '청운동 이웃', bar: '#5d6b3a', body: [

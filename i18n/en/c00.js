@@ -146,6 +146,7 @@ MG.I18N.put("en", "c00", {
 "vfzdewk1bv": "Kang Do-hyun (@dohyun.k)",
 "z9dt9jh2ao": "Snaplog · 203 followers",
 "10mm5uaaxbb": "Oct 9, 2025 (Thu) 22:40 · 📍Gwangalli Beach, Suyeong-gu, [[Busan|k_busan]] — Working late on day one of the business trip… still, the sea's nice",
+"1wv78eoy9ki": "└ Busan branch, Asst. Mgr. Jung · 10.09 22:52 — Thanks for all your work today, sir! Tomorrow's 9:00 meeting is in the big conference room on 3F",
 "22z0z47bzd7": "Sep 1, 2025 — 100 days of working out",
 "1sxa1kwln95": "Cheongun Heights Residents' Board",
 "4i5jqm660v": "Cheongun-dong Neighbors",
