@@ -508,7 +508,7 @@ MG.I18N.put("de", "c07", {
 "6d2zxaxq2m": "Das Vermittlungsbuch ist bei den Zeiten genau. Die Minuten einzeln zählen.",
 "4jo54ca1bx": "Verbindungsliste der Handvermittlung, Zweigamt Beodeulgae (Kopie)",
 "1kwcdth4mwt": "Fernmeldeamt Seoha, Zweigamt Beodeulgae · 22.–27. Oktober 1971 · Vermittlungsschrank Nr. 2 (ZB-Betrieb)",
-"15y5nqk0sev": "Im Bereich des Zweigamts Beodeulgae wird noch von Hand vermittelt. Hebt ein Teilnehmer den Hörer ab, fragt die Vermittlung nach der Nummer, stellt die Verbindung her und trägt die Uhrzeit in die Verbindungsliste ein.",
+"21jmh4x2a0t": "Im Bereich des Zweigamts Beodeulgae wird noch von Hand vermittelt. Hebt ein Teilnehmer den Hörer ab, fragt die Vermittlung nach der Nummer, trägt die Uhrzeit in die Verbindungsliste ein und stellt dann die Verbindung her. Weil der Anruf über das Stadtamt und die Vermittlung beim Empfänger läuft, steht dort meist eine Minute später.",
 "19995lowf2e": "22., 21:10",
 "xemqwj3od1": "Beodeulgae 7 (Reismühle)",
 "2djj4yq80mb": "Reisgroßhandel, Innenstadt",

@@ -508,7 +508,7 @@ MG.I18N.put("en", "c07", {
 "6d2zxaxq2m": "The switchboard log keeps exact time. Count to the minute.",
 "4jo54ca1bx": "Beodeulgae Branch Exchange — Manual Connection Sheet (copy)",
 "1kwcdth4mwt": "Seoha Telephone Office, Beodeulgae Branch · October 22–27, 1971 · Common-battery switchboard No. 2",
-"15y5nqk0sev": "The Beodeulgae branch area is still manual. When a subscriber lifts the receiver, the operator asks for the number, puts the call through, then writes the time on the connection sheet.",
+"21jmh4x2a0t": "The Beodeulgae branch area is still manual. When a subscriber lifts the receiver, the operator asks for the number, writes the time on the connection sheet, then puts the call through. Since the call passes through the city exchange and the receiving switchboard, the time logged at the other end often runs about a minute later.",
 "19995lowf2e": "22nd 21:10",
 "xemqwj3od1": "Beodeulgae 7 (rice mill)",
 "2djj4yq80mb": "Rice wholesaler, city",
