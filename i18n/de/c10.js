@@ -529,7 +529,7 @@ MG.I18N.put("de", "c10", {
 "184xqn8k9pw": "Die Wege des Täters in jener Nacht",
 "a16h21lxi5": "Motiv",
 "29gb6txgubu": "Az. 2014-Haejin-1187 · wiederaufgenommen",
-"l2rwa7003e": "Am 21. November um 23:58 Uhr ließ Bang Geun-tae sich von einem Fahrer bis vor Block 108 der Wohnanlage Hanul bringen. 18 Minuten später fuhr er denselben Wagen selbst durch die Schranke am Haupttor. In den Unterlagen folgen der Reihe nach das Gespräch von 3 Minuten um 00:09, um 00:12 „Hyungnim will mich kurz sprechen“ und um 00:14 die Beifahrertür auf der Dashcam.",
+"cqmsvnhsuf": "Am 21. November um 23:58 Uhr hielt der Fahrdienstfahrer mit Bang Geun-tae vor Block 108 der Wohnanlage Hanul. 18 Minuten später fuhr er denselben Wagen selbst durch die Schranke am Haupttor. In den Unterlagen folgen der Reihe nach das Gespräch von 3 Minuten um 00:09, um 00:12 „Hyungnim will mich kurz sprechen“ und um 00:14 die Beifahrertür auf der Dashcam.",
 "f1sto4vnnv": "Der schwarze SUV fuhr über die Haejin-Brücke, passierte die Mautstelle Neuhafen und hielt hinten auf dem dunklen Pier 3. Um 00:47 sendete Eun-hos Handy dort sein letztes Signal. Kurz nach eins traf die Taschenlampe des Wachmanns einen Wagen, an dem ein Nebelscheinwerfer nicht brannte.",
 "uuk1dopr8a": "Zum Termin bei der Innenrevision der Genossenschaft am Montag um 10 Uhr kam Eun-ho nicht mehr. Im Notizchat des Messengers auf seinem Laptop standen 42 Tonnen, 38 Tonnen und die Nummer 117.",
 "24bqb09iqzs": "Als der Anhänger wieder am Laptop festgebunden ist, bekommt man im nächsten Fach der Schublade einen Hefter aus Graupapier zu fassen: Revier Euncheon, 1986. → Zurück ins Archiv, weiter mit CASE 11.",

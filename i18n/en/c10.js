@@ -529,7 +529,7 @@ MG.I18N.put("en", "c10", {
 "184xqn8k9pw": "The culprit's movements that night",
 "a16h21lxi5": "Motive",
 "29gb6txgubu": "Case 2014-Haejin-1187 · Re-examined",
-"l2rwa7003e": "At 11:58 p.m. on November 21, Bang Geun-tae had a designated driver bring his car to the front of Hanul Apartments Building 108. Eighteen minutes later, he drove the same car through the main gate barrier himself. The records then show a three-minute call at 00:09, “Hyung wants to see me for a sec” at 00:12, and the passenger door on the dashcam at 00:14.",
+"cqmsvnhsuf": "At 11:58 p.m. on November 21, the designated driver carrying Bang Geun-tae pulled up in front of Hanul Apartments Building 108. Eighteen minutes later, he drove the same car through the main gate barrier himself. The records then show a three-minute call at 00:09, “Hyung wants to see me for a sec” at 00:12, and the passenger door on the dashcam at 00:14.",
 "f1sto4vnnv": "The black SUV crossed Haejin Bridge, passed the New Port Tollgate and stopped deep inside the unlit Pier 3. Eun-ho's phone sent its last signal from there at 00:47. A little after one, the guard's flashlight fell on a car with one fog lamp out.",
 "uuk1dopr8a": "Eun-ho never made it to the Monday 10:00 meeting with the co-op audit team. In the memo chat of the messenger on his laptop, he had written 42 tons, 38 tons, number 117.",
 "24bqb09iqzs": "As you tie the tag back onto the laptop, your hand catches on a 1986 Euncheon Police Station file in coarse newsprint in the next slot of the drawer. → Back to the records room, on to CASE 11.",

@@ -547,7 +547,7 @@ MG.I18N.put("en", "c09", {
 "1nr8kmz06de": "…Back then I thought it had nothing to do with me.",
 "1y014xh1jm7": "I only know about her from the news, too. When it happened again in the summer, Eun-bi told me not to go around alone at night.",
 "1upmn788j5f": "I moved here because the rent was cheap. Everyone said it was a quiet neighborhood, if you could put up with the planes…",
-"1x7498oeak3": "It was the only place with its lights on. All I could get out was “Lock the door.”",
+"1rl9gg3zf2": "All the alleys looked the same, so I wandered for a long time. It was the only place with its lights on. All I could get out was “Lock the door.”",
 "1gmuuglkcwq": "It's where I always got off after work. That night I didn't have an umbrella, so I stood under the streetlight waiting for the rain to stop.",
 "1khc5ij9p7a": "I'm scared. But I'll go. If I walk that way again, maybe I'll remember one more thing.",
 "2de655uflsu": "Min So-ra. …Why did you become a detective? I'm just curious.",

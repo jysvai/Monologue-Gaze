@@ -547,7 +547,7 @@ MG.I18N.put("de", "c09", {
 "1nr8kmz06de": "… Damals dachte ich, das betrifft nur andere.",
 "1y014xh1jm7": "Sie kenne ich auch nur aus den Nachrichten. Als im Sommer wieder so etwas passiert ist, hat Eun-bi gesagt, ich soll nachts nicht allein unterwegs sein.",
 "1upmn788j5f": "Ich bin wegen der billigen Miete hergezogen. Wenn man den Fluglärm aushält, ist es ein ruhiges Viertel … haben alle gesagt.",
-"1x7498oeak3": "Nur dort brannte Licht. Ich habe nichts rausgebracht außer: Schließen Sie die Tür ab.",
+"1rl9gg3zf2": "Die Gassen sahen alle gleich aus, ich bin lange herumgeirrt. Nur dort brannte Licht. Ich habe nichts rausgebracht außer: Schließen Sie die Tür ab.",
 "1gmuuglkcwq": "Da steige ich nach dem Job immer aus. An dem Abend stand ich ohne Schirm unter der Laterne und habe gewartet, dass der Regen aufhört.",
 "1khc5ij9p7a": "Ich habe Angst. Aber ich gehe mit. Wenn ich den Weg noch einmal gehe, fällt mir vielleicht noch etwas ein.",
 "2de655uflsu": "Min So-ra. … Warum sind Sie eigentlich zur Kripo gegangen? Nur so, aus Neugier.",
