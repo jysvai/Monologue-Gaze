@@ -242,7 +242,7 @@
   const HORROR = ['drone', 'flies', 'creak', 'crackle', 'static'];
   function rec(k, vol, a, b) {
     if (MG.sound && MG.sound.preload) MG.sound.preload([k]);
-    every(a, b, () => { if (MG.sound) MG.sound.play(k, vol); });
+    every(a, b, () => { if (MG.sound && !(MG.sound.speaking && MG.sound.speaking())) MG.sound.play(k, vol); }); // 누가 말하는 중이면 이번엔 건너뛴다
   }
   function startAmb(list) {
     try {

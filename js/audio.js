@@ -12,10 +12,10 @@
   // 자주 나는 잔소리(종이·연필·자판·타자기)
   const SMALL = /^sfx\/(pen|page|click|key|write|typewriter|tw1|oldkbd|kbd|tap)$/;
 
-  let ax = null, out = null;
+  let ax = null, out = null, fx = null; // fx: 효과음 묶음 (목소리가 나오는 동안 낮춘다)
   function ctx() {
     try {
-      if (!ax) { ax = new (window.AudioContext || window.webkitAudioContext)(); out = ax.createGain(); out.connect(ax.destination); }
+      if (!ax) { ax = new (window.AudioContext || window.webkitAudioContext)(); out = ax.createGain(); out.connect(ax.destination); fx = ax.createGain(); fx.connect(out); }
       if (ax.state === 'suspended' && !document.hidden) ax.resume().catch(() => {});
       return ax;
     } catch (e) { return null; } // 소리를 낼 수 없는 브라우저
@@ -51,21 +51,29 @@
       let v = vol == null ? 0.9 : vol;
       if (small) { src.playbackRate.value = 0.92 + Math.random() * 0.16; v *= 0.85 + Math.random() * 0.15; }
       g.gain.value = v;
-      src.connect(g).connect(out);
+      src.connect(g).connect(fx);
       src.start();
     };
     if (p.buf) go(p.buf); else p.then(go);
     return true;
   };
 
-  // 목소리: 한 번에 하나. 나오는 동안 배경음을 낮춘다. 끝나면 done 이 풀린다.
+  // 목소리: 한 번에 하나. 나오는 동안 배경음과 효과음을 낮춘다. 끝나면 done 이 풀린다.
+  // 말이 끝나도 곧바로 올리지 않고 잠깐 기다린다 (말풍선 사이 짧은 틈마다 음악이 치솟지 않게)
+  let relT = 0;
+  const hush = on => {
+    clearTimeout(relT);
+    if (MG.mood) MG.mood.duck(on);
+    if (fx && ax) fx.gain.setTargetAtTime(on ? 0.4 : 1, ax.currentTime, on ? 0.06 : 0.25);
+  };
+  const release = () => { clearTimeout(relT); relT = setTimeout(() => { if (!cur) hush(false); }, 1200); };
   // 엔진은 v.audio.currentTime / duration 으로 글자를 목소리 진행에 맞춰 찍는다 (<audio> 와 같은 이름으로 내어 준다)
   let cur = null;
   let stopVoice = function () {
     if (!cur) return;
     const v = cur; cur = null;
     v.halt();
-    if (MG.mood) MG.mood.duck(false);
+    hush(false);
   };
   let voice = function (k) {
     const st = S();
@@ -85,7 +93,7 @@
       hold() { if (!src || over) return; offset = v.audio.currentTime; src.onended = null; try { src.stop(); } catch (e) { /* */ } src = null; held = true; },
       unhold() { if (!held || over) return; held = false; start(); },
     };
-    const finish = () => { if (over) return; over = true; src = null; if (cur === v) { cur = null; if (MG.mood) MG.mood.duck(false); } resolve(); };
+    const finish = () => { if (over) return; over = true; src = null; if (cur === v) { cur = null; release(); } resolve(); };
     function start() {
       if (over || !p.buf) return;
       if (document.hidden) { held = true; return; }
@@ -95,11 +103,12 @@
       src.start(0, offset);
     }
     cur = v;
-    if (MG.mood) MG.mood.duck(true);
+    hush(true);
     p.then(buf => { if (!buf) finish(); else if (cur === v) start(); });
     return v;
   };
   const hasVoice = k => !!url(k) && S().sound && S().voice !== false;
+  let speaking = () => !!cur; // 지금 누가 말하는 중인지 (배경의 녹음된 소리가 말을 덮지 않게)
   // 다른 탭에 가 있는 동안 목소리는 멈춰 둔다 (배경음처럼). 돌아오면 그 자리부터 이어서 — 자막도 목소리가 끝날 때까지 기다린다
   document.addEventListener('visibilitychange', () => {
     if (!cur) return;
@@ -120,6 +129,7 @@
       a.play().catch(() => {}); return true;
     };
     let fa = null;
+    speaking = () => !!fa;
     stopVoice = () => { if (!fa) return; const a = fa; fa = null; a.pause(); if (a._done) a._done(); if (MG.mood) MG.mood.duck(false); };
     voice = k => {
       const st = S(); if (!st.sound || st.voice === false) return null;
@@ -178,5 +188,5 @@
   document.addEventListener('pointerdown', function once() { ctx(); warm(); document.removeEventListener('pointerdown', once); }, { passive: true });
 
   const preload = ks => { if (S().sound) ks.forEach(k => url(k) && load(k)); }; // 곧 날 소리를 미리 받아 둔다 (처음 한 번이 늦어 건너뛰지 않게)
-  MG.sound = { play, voice, stopVoice, hasVoice, blip, tone, hero, caption, warm, preload, line: k => MG.T((A().say || {})['hero/' + k] || '') };
+  MG.sound = { play, voice, stopVoice, hasVoice, speaking: () => speaking(), blip, tone, hero, caption, warm, preload, line: k => MG.T((A().say || {})['hero/' + k] || '') };
 })();

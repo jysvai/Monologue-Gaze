@@ -477,7 +477,9 @@
     };
     const dots = document.createElement('p'); dots.className = 'c-dots'; dots.setAttribute('aria-hidden', 'true'); dots.innerHTML = '<i></i><i></i><i></i>';
     const me = { timer: 0, saved: new Map() };
+    let cur = null; // 지금 나오는 목소리 구간 { key, v, chars, done }
     me.finish = quiet => {
+      if (quiet && cur && cur.v && !cur.over && snd) snd.stopVoice(); // 다른 것을 물으면 앞사람 목소리는 거기서 끊는다
       if (!quiet && TALK === me && qa.isConnected) say(items.map(el => { const c = el.cloneNode(true); c.querySelectorAll('[data-pin],[aria-hidden="true"]').forEach(x => x.remove()); return c.textContent.trim(); }).filter(Boolean).join(' ')); // 화면 읽기 프로그램에 대답을 읽어 준다 (다른 곳으로 옮겨 가며 끊은 것은 말고)
       if (TALK === me) TALK = null;
       clearTimeout(me.timer);
@@ -489,7 +491,7 @@
     TALK = me;
     const alive = () => TALK === me && qa.isConnected;
     me.alive = alive; // 다시 그려져 사라진 대답은 더는 「건너뛰기」 대상이 아니다 (그 뒤의 첫 누름을 먹지 않게)
-    const later = (ms, fn) => { me.timer = setTimeout(() => { if (alive()) fn(); else if (TALK === me) TALK = null; }, fast ? Math.min(ms, 40) : ms); };
+    const later = (ms, fn) => { me.timer = setTimeout(() => { if (alive()) fn(); else if (TALK === me) TALK = null; }, fast && ms < 60000 ? Math.min(ms, 40) : ms); };
     items.forEach(el => el.classList.add('wait'));
     qa.classList.add('live');
     // 목소리 구간: 첫 구간(키 그대로, span 줄) + 줄마다 따로 붙은 것(키.번호)
@@ -501,7 +503,6 @@
       if (snd.hasVoice(`${base}.${i}`)) return { key: `${base}.${i}`, from: i, to: i };
       return null;
     };
-    let cur = null; // { key, v, chars, done }
     let n = 0;
     const next = () => {
       if (n >= items.length) return me.finish();
@@ -510,15 +511,21 @@
       el.classList.remove('wait');
       keep(el);
       const tt = el.classList.contains('c-bub') && el.querySelector('.c-t');
-      if (!tt || fast) return later(el.classList.contains('c-act') ? 520 : 200, next);
+      if (!tt) return later(el.classList.contains('c-act') ? 520 : 200, next);
       const i = +el.dataset.i, isMe = el.classList.contains('me');
       const sg = seg(i);
       if (sg && (!cur || cur.key !== sg.key)) {
         const bubs = items.filter(x => x.classList.contains('c-bub') && +x.dataset.i >= sg.from && +x.dataset.i <= sg.to);
         const c = cur = { key: sg.key, v: snd.voice(sg.key), chars: bubs.reduce((s, x) => s + x.querySelector('.c-t').textContent.length, 0), done: 0, last: bubs[bubs.length - 1], over: false };
-        if (c.v) c.v.done.then(() => { c.over = true; }); // 재생이 막히거나 끊겨도 글자는 끝까지
+        if (c.v) { // 재생이 막히거나 끊겨도 글자는 끝까지
+          c.v.done.then(() => { c.over = true; clearInterval(c.watch); });
+          // 목록으로 돌아가거나 다른 문서·탭으로 옮겨 이 사람 화면을 떠나면 목소리도 멈춘다
+          const st0 = ST, o0 = JSON.stringify(ST.view && ST.view.open);
+          c.watch = setInterval(() => { if (c.over || qa.isConnected || (ST === st0 && JSON.stringify(ST.view && ST.view.open) === o0 && $('.per-tr'))) return; clearInterval(c.watch); snd.stopVoice(); }, 200);
+        }
       } else if (!sg) cur = null;
       const v = cur && cur.v;
+      if (fast) { const wait = v && cur.last === el ? v.done : Promise.resolve(); return void wait.then(() => { if (alive()) later(200, next); }); }
       me.saved.set(el, tt.innerHTML);
       // 글자마다 감싸 두고 하나씩 보이게 (자리는 미리 잡혀 있어 줄이 흔들리지 않는다)
       const chars = [];
@@ -571,9 +578,12 @@
     const st = document.createElement('div'); st.className = 'cue-stamp press'; st.setAttribute('aria-hidden', 'true'); st.innerHTML = `<span>${soft ? T('확인') : T('추궁')}</span>`;
     document.body.appendChild(st); setTimeout(() => st.remove(), 1900);
     const t = playTalk(qa, { p, lead: 600000 }); // 대답은 내 말이 끝난 뒤
-    const hv = MG.sound ? MG.sound.voice('hero/' + pressKey(p, k)) : null;
     const go = () => { if (t && TALK === t && qa.isConnected) { t.finish(true); playTalk(qa, { p, voice: `v/${C.id}/${p.id}/${k}`, lead: 1000 }); } };
-    if (hv) hv.done.then(go); else setTimeout(go, 1500);
+    setTimeout(() => {
+      if (t && (TALK !== t || !qa.isConnected)) return;
+      const hv = MG.sound ? MG.sound.voice('hero/' + pressKey(p, k)) : null;
+      if (hv) hv.done.then(go); else setTimeout(go, 1050);
+    }, 450);
   }
 
   function cipherParts(s) {
@@ -816,7 +826,8 @@
       while (box.children.length > 3) box.firstChild.remove();
       requestAnimationFrame(() => el.classList.add('on'));
       // 마우스를 올려 읽고 있거나 초점이 있는 알림은 붙들어 둔다 (손을 떼면 조금 뒤에 걷힌다)
-      const gone = () => { if (!el.isConnected) return; if (el.matches(':hover') || el === document.activeElement || el.classList.contains('drag')) return void setTimeout(gone, 1500); el.classList.remove('on'); setTimeout(() => el.remove(), 400); };
+      let held = 0;
+      const gone = () => { if (!el.isConnected) return; if ((el.matches(':hover') && held++ < 3) || el === document.activeElement || el.classList.contains('drag')) return void setTimeout(gone, 1500); el.classList.remove('on'); setTimeout(() => el.remove(), 400); };
       setTimeout(gone, 6500);
       if (i === 0) {
         sfx(n.late ? 'miss' : 'buzz');
@@ -1901,7 +1912,7 @@
       setTimeout(() => s.remove(), 1900);
     }
     const lines = HEROSAY[kind];
-    if (lines && MG.sound) { HEROI = (HEROI + 1 + (Date.now() & 1)) % lines.length; const k = lines[HEROI], c0 = C, s0 = ST; setTimeout(() => { if (C === c0 && ST === s0) MG.sound.hero(k); }, 900); }
+    if (lines && MG.sound) { HEROI = (HEROI + 1 + (Date.now() & 1)) % lines.length; const k = lines[HEROI], c0 = C, s0 = ST; setTimeout(() => { if (C === c0 && ST === s0) MG.sound.hero(k); }, 1300); }
   }
   const whoBtn = open => `<button type="button" class="snd who" data-roster aria-expanded="${!!open}">${T`담당 · ${esc(who(roster().list.find(p => p.id === PID)))}`}</button>`;
   const mildBtn = () => `<button type="button" class="snd mild" data-mild aria-pressed="${!S.mild}">${S.mild ? T('잔혹 표현 꺼짐') : T('잔혹 표현 켜짐')}</button>`;
@@ -2148,7 +2159,7 @@
       const before = census();
       ST.unl.push(s.id);
       ((s.reward && s.reward.keys) || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
-      save(); refreshAll(); liveSync(); cue('match', T('해독')); land(['#paneRead .c-done', '#paneRead .doc-t']);
+      save(); refreshAll(); liveSync(); cue('match', T('해독')); land(['#paneRead .c-done', '#paneRead .doc-t']); showDone();
       const gained = census() - before;
       toast(T`해독했다${gained > 0 ? T` · 새로 열린 것 ${gained}` : ''}`);
     } else {
@@ -2165,6 +2176,7 @@
     say(t); // 칸을 새로 그린 바로 뒤라 그 칸에서는 읽히지 않을 수 있다
   }
   // 풀어서 칸·단추가 사라져 초점이 몸통으로 떨어졌으면 새로 드러난 것으로 (force: 떨어지지 않았어도)
+  const showDone = () => { const d = beside() && $('#paneRead .c-done'); if (d) d.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); };
   function land(sels, force) {
     const a = document.activeElement;
     if (!force && a && a !== document.body && a.isConnected) return;
@@ -2177,7 +2189,7 @@
     const before = census();
     if (!ST.unl.includes(id)) ST.unl.push(id);
     ((reward && reward.keys) || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
-    save(); refreshAll(); cue('match', stamp || T('일치')); land(['#paneRead .c-done', '#paneRead .doc-t']);
+    save(); refreshAll(); cue('match', stamp || T('일치')); land(['#paneRead .c-done', '#paneRead .doc-t']); showDone();
     const gained = census() - before;
     toast(msg + (gained > 0 ? T` · 새로 열린 것 ${gained}` : ''));
     liveSync();
@@ -2347,7 +2359,7 @@
           if (document.activeElement === document.body) { box.tabIndex = -1; box.focus({ preventScroll: true }); } // 키보드로 올렸으면 결말부터 읽히게
         }
         cue('solved', T('사건 종결')); say(T('사건 종결')); renderBar(); // 아래 줄의 시계도 「종결」로
-        if (MG.sound) setTimeout(() => { if (C === c0 && ST === s0) MG.sound.hero('solved'); }, 1300);
+        if (MG.sound) setTimeout(() => { if (C === c0 && ST === s0) MG.sound.hero('solved'); }, 2000);
       } else if (wrong === 0) toast(T('이미 닫힌 사건이다'));
       else {
         cue('miss'); say(VERDICT);
@@ -2589,7 +2601,8 @@
     document.addEventListener('focusout', e => { if (CIPHL != null && e.target.closest && e.target.closest('[data-sym]') && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-sym]'))) cipherHl(null); });
     document.addEventListener('input', e => {
       // 칸에 적는 소리: 노트북은 얕은 자판, 2006년 모니터와 90년대 종이 사건은 자판, 그 앞은 타자기, 1950년 앞은 연필 (소리 파일이 있을 때만, 너무 잦지 않게)
-      if (C && S.sound && MG.sound && e.target.matches('input:not([type="radio"])') && e.target.closest('.case-view')) {
+      if (C && S.sound && e.data && e.target.closest('.lock-phone')) dtmf(e.data.slice(-1));
+      else if (C && S.sound && MG.sound && e.target.matches('input:not([type="radio"])') && e.target.closest('.case-view')) {
         const ink = inkKind(), now = Date.now(), f = ink === 'tap' ? ['click', 0.16, 45] : ink === 'kbd' || ink === 'oldkbd' ? ['key', 0.24, 45] : ink === 'typewriter' ? ['tw1', 0.24, 60] : ['pen', 0.14, 120];
         if (now - TYPED > f[2]) { TYPED = now; MG.sound.play('sfx/' + f[0], f[1]); }
       }
