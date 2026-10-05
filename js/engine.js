@@ -1217,10 +1217,11 @@
   /* ───────── 수사 보고서 (읽기 칸에 넓게) ───────── */
   let REPOPEN = null; // 메모 고르기가 펼쳐진 주장
   let PTR = false; // 마지막 손길이 마우스·손가락이었나 (키보드면 false)
-  const FORM = () => Object.assign({ title: T('수사 보고서'), culprit: T('범인은'), short: T('범인'), submit: T('보고서 올리기'), open: T('보고서 펼쳐 쓰기'), lead: T('범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다.'), judging: T('보고서를 올렸다. 반장이 한 장씩 넘긴다…') }, C.solution.form || {});
+  const FORM = () => Object.assign({ title: T('수사 보고서'), culprit: T('범인은'), short: T('범인'), submit: T('보고서 올리기'), open: T('보고서 펼쳐 쓰기'), lead: T('범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다.'), judging: T('보고서를 올렸다. 팀장이 한 장씩 넘긴다…') }, C.solution.form || {});
   function reportHtml() {
     const sol = C.solution, notes = ST.notes, FM = FORM();
-    const persons = ST.keys.filter(k => C.keywords[k] && C.keywords[k].type === 'person');
+    if (!ST.solved && ST.report.culprit && (C.keywords[ST.report.culprit] || {}).nick) ST.report.culprit = null;
+    const persons = ST.keys.filter(k => C.keywords[k] && C.keywords[k].type === 'person' && !C.keywords[k].nick); // 온라인 별명은 계정일 뿐, 영장에 적을 사람이 아니다
     const roleOf = k => { const p = Object.values(C.people || {}).find(x => x.key === k); return p && p.role ? plain(p.role) : ''; };
     const groups = noteGroups(notes);
     const shut = ST.solved; // 종결된 보고서는 결재가 끝난 서류: 고칠 수 없다

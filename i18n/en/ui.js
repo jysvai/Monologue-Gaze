@@ -169,7 +169,7 @@ MG.I18N.put("en", "ui", {
 "보고서 올리기": "Submit report",
 "보고서 펼쳐 쓰기": "Open the report",
 "범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다.": "Pick the culprit, then attach a note as evidence to each claim.",
-"보고서를 올렸다. 반장이 한 장씩 넘긴다…": "Report submitted. The chief turns the pages one by one…",
+"보고서를 올렸다. 팀장이 한 장씩 넘긴다…": "Report submitted. The team leader turns the pages one by one…",
 " <small class=\"rep-used\">· {0}번에 붙임</small>": " <small class=\"rep-used\">· attached to #{0}</small>",
 "<p class=\"rep-empty\">아직 붙인 메모가 없다.</p>": "<p class=\"rep-empty\">No note attached yet.</p>",
 "접기": "Collapse",

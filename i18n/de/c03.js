@@ -506,7 +506,7 @@ MG.I18N.put("de", "c03", {
 "1w4cz1pqwzi": "Ich renne nur dahin, wohin der Ressortleiter mich schickt; davon weiß ich nichts.",
 "1x1dcwtvqjo": "Was war die „Frauenstimme“, die gegen neun im Bochundang zu hören war?",
 "1mmcpjcecuz": "Welche Aussage des Täters kann nicht stimmen?",
-"zv20oz89rb": "Was hat der Täter in jener Nacht an sich gebracht?",
+"1ca9mk44r2q": "Geld, das der Täter nach jener Nacht auf einmal hatte",
 "a16h21lxi5": "Motiv",
 "pfbj187xeq": "Shōwa 10, Nr. 1127 · neu geprüft",
 "4tnugugkkc": "Am 4. November um neun Uhr abends kam aus dem Radio im Hinterzimmer des Bochundang Baek Nan-chos „Die Supyo-Brücke im Regen“. Kang Deok-su drehte ganz laut auf und setzte sich, dem Radio zugewandt. Durch die Tür zum Hinterhof kam Seo Gi-ryong herüber. Am nächsten Tag lief die Frist für die 250 Yen ab.",

@@ -5,7 +5,7 @@ MG.I18N.put("de", "finale", {
 "bewqkhm4v0": "Du hast es zusammengesetzt. Du hast Meldungen vom Zeitungsrand mit Gästebüchern abgeglichen und herausgefunden, wann eine Tür zuletzt aufging.",
 "bbk04uyid5": "Vor dir hat noch niemand diese Akten bis zum Ende übereinandergelegt.",
 "gjti4gb4ze": "Meinen Namen schreibe ich hier nicht hin. In einer der Akten in dieser Schublade stehe ich auch, eine Zeile vielleicht. Wer die Randnotizen bis zum Ende gezählt hat, wird mich finden.",
-"2g3wrw4w6m7": "Das {next}. Fach habe ich freigelassen. Da kommt dein Fall hin.",
+"2ff87wuliaa": "Das letzte Fach habe ich freigelassen. Da kommt dein Fall hin.",
 "noey1ikfx5": "Wer war M in den Akten?",
 "1iso1kacv5m": "Ein Name aus den Akten",
 "1isirb3fuch": ["Min So-ra","So-ra","Sora","Min Sora"],

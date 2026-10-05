@@ -704,7 +704,7 @@ MG.I18N.put("en", "c07", {
 "2dwyrwniiwx": "Wife of Kang Man-sik",
 "1b27c0cmoz5": "Main house, Solbat-dong · a new black-and-white television in the front hall",
 "1x42pddyods": "(Sends the children into the other room) He wouldn't hurt a fly. And yet he says he did it… What can I say?",
-"19btuha08wy": "When he went out that night he said, “I'll be a bit late tonight.” He's not one to say that sort of thing.",
+"mbf605lliw": "He had his supper and went out like any other night. I only found out what had happened when the police came.",
 "eswog8lbz6": "That's the landlady where we used to live. Old Mrs. Yang at the Zelkova House. We lived in her gate room. We borrowed her phone, too.",
 "23rz2ttgmjt": "…Two days after it happened, the landlady called me to the phone. It was a man who said he was Manager Seok from Daeyang. He said, “Don't worry about the children's father. The company will take care of the family.”",
 "dd5mcyuoj9": "The next week a driver named Noh brought a manila envelope. They found us this house on a [[jeonse lease|k_jeonse]], too. When I visited my husband, all he said was, “Take it.”",

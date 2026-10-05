@@ -506,7 +506,7 @@ MG.I18N.put("en", "c03", {
 "1w4cz1pqwzi": "I only chase what the desk chief sends me after, so I don't know much about that.",
 "1x1dcwtvqjo": "What the “woman's voice” heard from Bochundang around 9 o'clock really was",
 "1mmcpjcecuz": "What in the culprit's statement cannot be true",
-"zv20oz89rb": "What the culprit got hold of that night",
+"1ca9mk44r2q": "Money the culprit came into after that night",
 "a16h21lxi5": "Motive",
 "pfbj187xeq": "Shōwa 10, No. 1127 · Reviewed",
 "4tnugugkkc": "At 9 p.m. on November 4, Baek Nancho's “Supyo Bridge in the Rain” came from the radio in Bochundang's inner room. Kang Deok-su turned it all the way up and sat turned toward the radio. Seo Gi-ryong came over through the door that opened onto the backyard. The next day was the deadline for the 250 won.",

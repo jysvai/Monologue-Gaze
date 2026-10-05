@@ -576,7 +576,7 @@
       p_yeom: { name: '염창수', role: '목골 제재소 야경원 (64)', where: '제재소 경비실 · 톱밥 난로와 트랜지스터라디오', key: 'k_yeom', color: '#4f5a4a', initial: '염',
         intro: ['(난로에 톱밥을 한 줌 넣는다) 신문에 난 "염모씨"가 나요. 기자 양반들한테는 아무것도 못 봤다고 했지. 괜히 엮이기 싫어서.', '경찰도 반나절 와서 묻더니 그만이더군.'],
         ask: {
-          k_mokgol: [{ p: '15일 새벽 두 시 순찰 돌 때요. 불 없는 리어카 하나가 목골 골목 쪽에서 나와 둑길을 따라 나루로 내려갔소. 포대 같은 걸 싣고.', f: 'f_watch_cart' }, { p: '좀 있다 풍덩, 풍덩. 서너 번. 나는 연탄재 버리는 줄 알았소. 이 동네 사람들 밤에 몰래 강에 버리는 일이 흔하니까.', gore: '좀 있다 풍덩, 풍덩. 서너 번. 나는 연탄재 버리는 줄 알았소. 이 동네 사람들 밤에 몰래 강에 버리는 일이 흔하니까. (난로 불빛에 손을 비빈다) 지금 생각하면 연탄재치곤 소리가 너무 묵직했소. 신문에 그 포대들이 나고부터는 밤마다 그 소리가 귀에 붙어서, 순찰 돌 때 나루 쪽은 쳐다보지도 않소.' }],
+          k_mokgol: [{ p: '15일 새벽 두 시 순찰 돌 때요. 불 없는 리어카 하나가 목골 골목 쪽에서 나와 둑길을 따라 나루로 내려갔소. 포대 같은 걸 싣고.', f: 'f_watch_cart' }, { p: '좀 있다 풍덩, 풍덩. 서너 번. 나는 연탄재 버리는 줄 알았소. 이 동네 사람들 밤에 몰래 강에 버리는 일이 흔하니까.', f: 'f_watch_cart', gore: '좀 있다 풍덩, 풍덩. 서너 번. 나는 연탄재 버리는 줄 알았소. 이 동네 사람들 밤에 몰래 강에 버리는 일이 흔하니까. (난로 불빛에 손을 비빈다) 지금 생각하면 연탄재치곤 소리가 너무 묵직했소. 신문에 그 포대들이 나고부터는 밤마다 그 소리가 귀에 붙어서, 순찰 돌 때 나루 쪽은 쳐다보지도 않소.' }],
           k_night: ['그날은 제재소가 쉬는 날이라 기계는 안 돌았소. 나 혼자 경비실을 지켰지.', { p: '두 시 순찰 때 본 게 하나 있긴 하오. 불도 안 켠 리어카가 목골 골목에서 나와 둑길로 나루까지 내려갔지. 그러고 물소리가 서너 번.', f: 'f_watch_cart' }],
           k_sawmill: ['우리 제재소는 미송하고 낙엽송만 켜오. 톱밥도 다 그 나무 톱밥이지. 한 포대 오백 원에 시장 정육점이며 여관 보일러실에 팔고.'],
           k_sawdust: ['톱밥이야 나무마다 다르오. 우리 건 누렇고 송진 냄새가 나지. 오동나무 톱밥은 하얗고 가볍소. 불에 넣으면 금방 사그라지고.'],
@@ -675,7 +675,7 @@
         '편상구는 8시 45분 목골 종점에서 내려 골목 맨 안쪽 공방으로 걸어 들어갔다. 공방에는 이불에 싸여 노끈에 묶인 자개장 열두 짝이 쌓여 있었다. "물건으로 받아 가겠다"는 말이 오갔을 것이다. 아홉 시 반 무렵, 자개를 두드려 붙이던 쇠망치가 그의 왼쪽 머리를 쳤다. 쌍화차는 아직 위 속에 있었다.',
         '함덕규는 달아날 생각을 버렸다. 배수구 옆 시멘트 바닥에서, 아버지가 쓰던 양날톱으로 관절이 아닌 뼈 한가운데를 켰다. 톱밥을 뿌려 피를 먹이고, 물로 씻고, 쌀집에서 사 둔 빈 포대에 나눠 담아 자개장을 묶던 짐 매듭으로 조였다. 넷째 포대에는 아궁이 벽돌 네 장을 달았다. 새벽 두 시, 불 없는 리어카가 둑길을 내려갔다. 세 시 십 분, 그는 용달을 취소했다.',
         '토요일 아침 여덟 시 반, 그는 대성철물에서 새 양날톱과 노끈과 양잿물을 외상으로 샀다. 수금 가방과 일수 수첩은 아궁이에서 탔고, 수금 가방 속 돈 가운데 만 원짜리 몇 장이 쌀집과 철물점 외상을 갚는 데 먼저 나갔다. 그사이 포대는 은천강을 따라 시간당 150m씩 떠내려가, 16일부터 하나씩 사람들 눈에 띄었다.',
-        '수사본부가 "토막 내겠다"던 정육점 주인을 붙들고 있는 동안, 성냥갑 안쪽의 두 번째 번호는 조회되지 않은 채 철 맨 뒤에 끼워져 있었다. 우만복은 그 밤 내내 갈밭 지서 보호실에 있었다. 창피해서 그 말을 못 했다. 그 번호가 조회된 것은 넉 달 뒤였다.',
+        '우만복이 풀려난 뒤에도 과장은 정육점 쪽 보강만 시켰고, 적외선으로 살아난 성냥갑 안쪽의 두 번째 번호는 조회되지 않은 채 철 맨 뒤에 끼워졌다. 우만복은 그 밤 내내 갈밭 지서 보호실에 있었다. 창피해서 그 말을 못 했다. 그 번호가 조회된 것은 넉 달 뒤였다.',
       ],
     },
     artStyle: 'Provincial South Korea in 1986, a slow river city in late autumn: 35mm press and police photography on Kodak Tri-X black-and-white or faded Fujicolor negative film, coarse grain, harsh on-camera flash or flat overcast light, slightly lifted blacks, a coarse newspaper halftone dot screen and yellowed newsprint where it appears in print. Period details: cement-block and tin-roof houses, stacks of coal briquettes, reed beds, concrete bridges on piers, an old iron sluice gate, hand carts, white woven polypropylene rice sacks, green-and-cream city buses with round headlights. No readable text, no logos or emblems, no recognizable faces (backs, silhouettes or out-of-focus figures only). Graphic content is limited to dried bloodstains on surfaces and covered or sacked remains seen at a distance: no wounds, no cut surfaces, no gore close-ups.',

@@ -704,7 +704,7 @@ MG.I18N.put("de", "c07", {
 "2dwyrwniiwx": "Ehefrau von Kang Man-sik",
 "1b27c0cmoz5": "Haupthaus in Solbat-dong · in der Diele ein neuer Schwarzweißfernseher",
 "1x42pddyods": "(Schickt die Kinder ins Zimmer) Mein Mann tut keiner Fliege etwas zuleide. Und jetzt soll er es selbst gewesen sein… Was soll ich da noch sagen.",
-"19btuha08wy": "Als er in der Nacht aus dem Haus ging, sagte er: „Heute wird's etwas später.“ Das sagt er sonst nie.",
+"mbf605lliw": "Er hat an dem Tag wie immer zu Abend gegessen und ist dann los. Was passiert war, habe ich erst erfahren, als die Polizei kam.",
 "eswog8lbz6": "Das war unsere frühere Vermieterin. Die alte Frau Yang vom Ulmenhaus. Wir haben in ihrer Torkammer gewohnt. Ihr Telefon durften wir auch benutzen.",
 "23rz2ttgmjt": "…Zwei Tage nach der Sache rief mich die Vermieterin ans Telefon. Es war einer, der sagte, er sei Direktor Seok von Daeyang. „Machen Sie sich wegen Ihres Mannes keine Sorgen, für die Familie sorgt die Firma.“",
 "dd5mcyuoj9": "In der Woche darauf brachte ein Fahrer Noh einen braunen Umschlag. Diese [[Kautionswohnung|k_jeonse]] haben die uns auch besorgt. Mein Mann hat beim Besuch nur gesagt: „Nimm's an.“",

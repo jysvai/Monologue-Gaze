@@ -5,7 +5,7 @@ MG.I18N.put("en", "finale", {
 "bewqkhm4v0": "You made them fit. You checked newspaper corners against guest registers and worked out when a door was last opened.",
 "bbk04uyid5": "You're the first to read these files against one another all the way to the end.",
 "gjti4gb4ze": "I'm not writing my name here. I'm in one of the records in this drawer too, a line or so. Anyone who counted the margin notes all the way through will find me.",
-"2g3wrw4w6m7": "I left slot {next} empty. That's where your case goes.",
+"2ff87wuliaa": "I left the last slot empty. That's where your case goes.",
 "noey1ikfx5": "Who was M in the records?",
 "1iso1kacv5m": "A name written in the records",
 "1isirb3fuch": ["Min So-ra","So-ra","Sora"],
