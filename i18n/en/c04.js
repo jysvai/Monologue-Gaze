@@ -461,7 +461,7 @@ MG.I18N.put("en", "c04", {
 "39b0uectvu": "Something went hiss under the car with a red light, then smoke came pouring out. I thought it was the bomb.",
 "jc1jbz907t": "The composite? Mostly made from what young Nakai said. I couldn't see the face well in the rain. Looked over twenty, though.",
 "1zp8z75926z": "Young Nakai's a steady lad, five years at the bank. That day he dropped his umbrella and ran.",
-"1ruoklw34ec": "We go to the factory with the pay on the 25th of every month, and with the summer and winter bonuses. I've been the one driving for ten years.",
+"1vxnmkso0s1": "We go to the factory with the pay on the 25th of every month, and with the summer and winter bonuses. In between I drop by now and then to run papers over. I've been the one driving for ten years.",
 "4dg15po3h5": "The manager's gone gaunt since the letters started. Told us to watch our mouths I don't know how many times.",
 "1tu7xg07jdw": "The rain was pouring down. Halfway along the wall road a police bike blocked us, and while the four of us ran for the wall, the car was gone.",
 "8dt2ln99ud": "Ten years behind the wheel, and that's the first time anyone's taken the car off me.",

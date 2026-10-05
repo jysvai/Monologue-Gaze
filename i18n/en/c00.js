@@ -340,7 +340,7 @@ MG.I18N.put("en", "c00", {
 "plug0xnge3": "(looks down) I wouldn't really know about that.",
 "1obthovo86j": "Seo-yun's ex-boyfriend",
 "10fpehz6l02": "We broke up two months ago. I only got in touch about my stuff.",
-"n1n4s2e8ml": "…I wanted to see if she'd really changed the code, so I tried it once in the early hours of the 9th. It didn't open, so I just left.",
+"1giqoddptfs": "…I wanted to see if she'd really changed the code, so I tried it a few times in the early hours of the 9th. It didn't open, so I just left.",
 "16t2cemu0rh": "I took the 6 p.m. KTX down on the 9th. It was a business trip, so the company has all the records.",
 "1ovt291ixa0": "That night I was in [[Busan|k_busan]].",
 "15u9b33wxxj": "Jae-hee? She was Seo-yun's best friend. Though Seo-yun did say things had been a bit weird between them lately.",

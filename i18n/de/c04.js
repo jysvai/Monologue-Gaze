@@ -461,7 +461,7 @@ MG.I18N.put("de", "c04", {
 "39b0uectvu": "Unter dem Wagen hat's rot gezischt, und dann kam der Rauch auf einen Schlag. Ich hab gedacht, das ist die Bombe.",
 "jc1jbz907t": "Das Phantombild? Das ist zum großen Teil nach dem, was der junge Nakai gesagt hat. Ich hab wegen dem Regen das Gesicht kaum gesehen. Über zwanzig war er wohl.",
 "1zp8z75926z": "Der junge Nakai ist seit fünf Jahren bei der Bank, ein anständiger Kerl. An dem Tag hat er sogar seinen Schirm fallen lassen, so ist er gerannt.",
-"1ruoklw34ec": "Jeden Monat am 25. mit den Löhnen und zu den Sommer- und Wintergratifikationen fahren wir zur Fabrik. Am Steuer sitz ich seit zehn Jahren.",
+"1vxnmkso0s1": "Jeden Monat am 25. mit den Löhnen und zu den Sommer- und Wintergratifikationen fahren wir zur Fabrik. Dazwischen schau ich ab und zu mit Papieren vorbei. Am Steuer sitz ich seit zehn Jahren.",
 "4dg15po3h5": "Seit die Drohbriefe kommen, ist der Herr Filialleiter nur noch ein Schatten seiner selbst. Uns hat er, ich weiß nicht wie oft, eingeschärft, den Mund zu halten.",
 "1tu7xg07jdw": "Es hat geschüttet. Auf halber Höhe vom Mauerweg hat sich das Polizeimotorrad vor uns gestellt, und während wir vier zur Mauer gerannt sind, war der Wagen weg.",
 "8dt2ln99ud": "Zehn Jahre fahr ich, und zum ersten Mal hat man mir den Wagen weggenommen.",
