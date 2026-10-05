@@ -916,7 +916,6 @@ MG.I18N.put("en", "c11", {
 "27cvwwy3cqw": "The tool used",
 "25h0wsca974": "When and where the sacks went into the water",
 "1l4g51md3f6": "Who met Pyeon Sang-gu that night",
-"450xqen87t": "Just one thing is off. Let's go against the current one more time.",
 "11mj4dtvk8r": "Rejected. Something doesn’t match the records.",
 "1y5ioc0rbzy": "Euncheon Station 86-VC-411 · Reviewed",
 "1xvtsfw3v86": "As you tie up the newsprint file with string, a bundle of confidential Japanese copies stamped “部外秘” slides out of the next slot in the drawer. → Back to the records room for CASE 12.",

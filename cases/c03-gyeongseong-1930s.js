@@ -424,8 +424,8 @@
       culprit: 'k_seo',
       claims: [
         { id: 'c1', q: '9시 무렵 보춘당에서 들렸다는 「여자 목소리」의 정체', accept: ['f_listing', 'f_song_aired', 'f_kang_waiting', 'f_voice_song', 'f_voice_stop'] },
-        { id: 'c2', q: '범인의 진술 가운데 사실일 수 없는 것', accept: ['f_outage', 'f_changgeuk_late', 'f_shutter'] },
-        { id: 'c3', q: '범인이 그날 밤 손에 넣은 것', accept: ['f_pawn_redeem', 'f_seo_wire', 'f_brother_reply'] },
+        { id: 'c2', q: '범인의 진술 가운데 사실일 수 없는 것', accept: ['f_outage', 'f_changgeuk_late', 'f_shutter', 'f_seo_claim', 'f_no_gramophone'] },
+        { id: 'c3', q: '범인이 그날 밤 손에 넣은 것', accept: ['f_pawn_redeem', 'f_seo_wire', 'f_brother_reply', 'f_cafe_pay'] },
         { id: 'c4', q: '동기', accept: ['f_debt', 'f_kang_wire', 'f_forfeit'] },
       ],
       stamp: '소화 10년 1127호 · 재검토',

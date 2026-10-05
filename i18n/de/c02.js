@@ -767,7 +767,6 @@ MG.I18N.put("de", "c02", {
 "212k958iinz": "Der Hof nach dem Tod der vier",
 "1bammo2lyuy": "Belege gegen die eigenen Angaben des Täters über seinen Verbleib",
 "a16h21lxi5": "Motiv",
-"123q0whjmq0": "Nur an einer Stelle passt es nicht. Die Tage noch einmal nachzählen.",
 "2o1rbyaqht": "Tgb.-Nr. 41/1923 · Nachprüfung",
 "1e3c2qzb1q3": "Im Oktober 1922 kaufte Valentin Knauer den Wald im Tannenschlag. Zwei Drittel des Preises sollte er mit dem „Wert von 80 Zentner Roggen, an Lichtmess nach Tagespreis“ bezahlen, und er stellte darüber einen Schein aus. Die Schuld, im Herbst 230.000 Mark, lag um den Lichtmessmarkt bei über drei Millionen Mark. Der Schein war nicht notariell beurkundet und existierte nur in einem Stück, in Michaels Kassette.",
 "vw8nmecwnf": "Seit dem Herbst beobachtete Knauer den Hof von der Waldhütte aus und schlich sich ein paarmal auf den Dachboden. Das waren die Schritte, die Magdalena hörte. Nachdem Moosbauer ihm am 12. Januar die Stundung verweigert hatte, nahm er den Schlüssel vom Türstock.",

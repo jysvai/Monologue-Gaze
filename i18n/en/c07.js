@@ -743,7 +743,6 @@ MG.I18N.put("en", "c07", {
 "8xzgi484li": "When the shot rang out",
 "w2x6buadop": "At that hour, the culprit was not where they said they were",
 "vdc0eirrfy": "Why the driver confessed and then kept quiet",
-"4ynkyqciwm": "One thing doesn't fit. Let's line up that night's times again.",
 "13rjsd6funf": "Seoha Stn. 71-Crim-1022 · Reviewed",
 "1a6u6bmt7x7": "At 9:38 p.m. on October 22, Bae Ok-hui rang the Saehan Ilbo city desk from the accounts office phone. What she meant to hand over was a copy of the Daeyang credit ledger. On every date marked “※” a bill ten times the cost of the drinks went out, and the man who put the difference in envelopes and passed them to the guest in the Orchid Room was Seok Tae-ho.",
 "oizqqtkc34": "At ten, Seok Tae-ho checked at the switchboard room where that call had gone, and took the Corona key from Noh. To Kang Man-sik he said only, “Pull up by the willows on the riverside. There's something I need to discuss quietly.” At 11:20, as the serial “The Ferry Girl” was ending, a single shot rang out from the back seat of the Crown. The manila envelope vanished into the city in the Corona with its lights off.",

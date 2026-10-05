@@ -551,10 +551,9 @@
       claims: [
         { id: 'c1', q: '총이 발사된 자리', accept: ['f_angle', 'f_butt', 'f_backdoor_mud'] },
         { id: 'c2', q: '총성이 울린 시각', accept: ['f_bang_tv', 'f_tv_sched', 'f_patrol_bang', 'f_recon_bang'] },
-        { id: 'c3', q: '그 시각 범인은 자기가 말한 자리에 없었다', accept: ['f_sw_noanswer', 'f_songhak_left', 'f_driver_key', 'f_patrol', 'f_mud', 'f_recon_gap'] },
+        { id: 'c3', q: '그 시각 범인은 자기가 말한 자리에 없었다', accept: ['f_sw_noanswer', 'f_songhak_left', 'f_driver_key', 'f_patrol', 'f_mud', 'f_recon_gap', 'f_seok_smokes'] },
         { id: 'c4', q: '운전사가 시인하고 입을 닫은 까닭', accept: ['f_landlord_call', 'f_wife_envelope', 'f_mansik_school', 'f_jeonse'] },
       ],
-      near: '딱 한 군데가 어긋난다. 그 밤의 시각표를 다시 맞춰 보자.',
       stamp: '서하서 71-형-1022 · 재검토',
       epilogue: [
         '10월 22일 밤 9시 38분, 배옥희는 경리실 전화로 새한일보 사회부를 불렀다. 넘기려던 것은 대양 외상 장부의 사본이었다. "※" 표가 붙은 날마다 술값보다 열 배 많은 청구서가 나갔고, 그 차액을 봉투에 담아 난초방의 손님에게 건넨 사람은 석태호였다.',

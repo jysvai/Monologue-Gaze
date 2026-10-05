@@ -595,10 +595,9 @@
       claims: [
         { id: 'c1', q: '협박 전화가 걸려 온 곳', accept: ['f_booth_saeteo', 'f_church_news', 'f_tl_sounds'] },
         { id: 'c2', q: '범인은 그 전화를 걸 수 있는 자리에 있었다', accept: ['f_shop_owner', 'f_shop_ledger', 'f_attend'] },
-        { id: 'c3', q: '범인의 목소리와 말버릇', accept: ['f_foreman_shimai', 'f_tak_shimai', 'f_voiceprint'] },
+        { id: 'c3', q: '범인의 목소리와 말버릇', accept: ['f_foreman_shimai', 'f_tak_shimai', 'f_voiceprint', 'f_tape_shimai', 'f_victim_shimai'] },
         { id: 'c4', q: '범인이 창고 문을 열 수 있었던 까닭', accept: ['f_key_unreturned', 'f_key_ledger'] },
       ],
-      near: '딱 한 군데가 어긋난다. 소리 하나를 지도 위에 다시 올려 보자.',
       stamp: '한울서 91-강력-1104 · 재검토',
       epilogue: [
         '1990년 여름, 가람동 현장의 비계가 무너졌다. 소장 탁상원은 모든 책임을 떠안고 퇴직금 없이 쫓겨났다. 반납하지 않은 3번 열쇠는 1년 넘게 그의 공구함에 들어 있었다. 해솔이 돈줄이 막혀 가람동 공사를 멈췄다는 소식이 들린 9월, 그는 새터역 앞 2층에 간판만 건 사무실을 얻었다.',

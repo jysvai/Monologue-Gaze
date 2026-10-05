@@ -290,8 +290,8 @@
       claims: [
         { id: 'c1', q: '서윤이 실제로 숨진 때를 보여 주는 기록', accept: ['f_noise', 'f_door_night', 'f_bag', 'f_silence', 'f_neighbor_door', 'f_tl_night'] },
         { id: 'c2', q: '11일과 12일의 흔적을 남긴 것은 서윤이 아니다', accept: ['f_device', 'f_order'] },
-        { id: 'c3', q: '범인이 그날 밤 늦게까지 504호에 있었다', accept: ['f_door_night', 'f_neighbor_door', 'f_lastmsg', 'f_tl_night', 'f_twocups'] },
-        { id: 'c4', q: '동기', accept: ['f_threat', 'f_psd', 'f_sketch', 'f_hdd'] },
+        { id: 'c3', q: '범인이 그날 밤 늦게까지 504호에 있었다', accept: ['f_door_night', 'f_neighbor_door', 'f_tl_night'] },
+        { id: 'c4', q: '동기', accept: ['f_threat', 'f_psd', 'f_sketch', 'f_hdd', 'f_hist'] },
       ],
       stamp: '2025.10.17 · 강력2팀',
       epilogue: [

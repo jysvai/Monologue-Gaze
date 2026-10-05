@@ -695,7 +695,6 @@ MG.I18N.put("de", "c08", {
 "78fymnpzcq": "Der Täter war in der Lage, von dort anzurufen",
 "cn1pq9cxfh": "Stimme und Redensart des Täters",
 "4ga6iksstx": "Warum der Täter die Schuppentür öffnen konnte",
-"2cudxagqziq": "Nur an einer Stelle passt es nicht. Ein Geräusch noch einmal auf die Karte legen.",
 "19exjpyi9vz": "Revier Hanul 91-Gewalt-1104 · Wiederaufnahme",
 "2g1koth91dl": "Im Sommer 1990 stürzte auf der Baustelle Garam-dong ein Gerüst ein. Bauleiter Tak Sang-won musste die ganze Schuld auf sich nehmen und wurde ohne Abfindung hinausgeworfen. Den nicht zurückgegebenen Schlüssel Nr. 3 hatte er über ein Jahr lang in seinem Werkzeugkasten. Im September, als es hieß, Haesol sei das Geld ausgegangen und der Bau in Garam-dong stehe still, mietete er vor dem Bahnhof Saeteo ein Büro im Obergeschoss, an dem nur ein Schild hing.",
 "tz97svx0tz": "Dass er sich Ende Oktober auf der Baustelle in Daejeon eintragen ließ, war sein Alibi. An jedem Tag, an dem er anrufen wollte, fehlte er wegen „Erledigungen in Seoul“, und im Laden unten ließ er Telefonkarten anschreiben. Er rief aus der Zelle vor dem Bahnhof Saeteo an, wo die Kirchenglocke sechsmal schlägt und die Züge über die Brücke fahren, ein Taschentuch vor dem Mund.",

@@ -743,7 +743,6 @@ MG.I18N.put("de", "c07", {
 "8xzgi484li": "Wann der Schuss fiel",
 "w2x6buadop": "Zur Tatzeit war der Täter nicht dort, wo er angeblich war",
 "vdc0eirrfy": "Warum der Fahrer gestand und schwieg",
-"4ynkyqciwm": "Nur an einer Stelle passt es nicht. Den Zeitplan der Nacht noch einmal abgleichen.",
 "13rjsd6funf": "Revier Seoha 71-K-1022 · Wiederaufnahme",
 "1a6u6bmt7x7": "Am 22. Oktober um 21:38 Uhr rief Bae Ok-hee vom Telefon der Buchhaltung aus die Lokalredaktion der Saehan Ilbo an. Übergeben wollte sie die Abschrift des Daeyang-Kontobuchs. An jedem mit „※“ markierten Tag ging eine Rechnung hinaus, zehnmal so hoch wie die Zeche, und wer die Differenz im Umschlag an den Gast im Orchideenzimmer weitergab, war Seok Tae-ho.",
 "oizqqtkc34": "Um 22 Uhr vergewisserte sich Seok Tae-ho im Telefonzimmer, wohin der Anruf gegangen war, und nahm Fahrer Noh den Schlüssel des Corona ab. Kang Man-sik sagte er nur: „Halten Sie am Ufer bei den Weiden. Ich habe etwas unter vier Augen zu besprechen.“ Um 23:20 Uhr, als die Serie „Das Fährmädchen“ gerade endete, fiel auf dem Rücksitz des Crown ein einziger Schuss. Der braune Aktenumschlag verschwand im Corona ohne Licht in Richtung Stadt.",

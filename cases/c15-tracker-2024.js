@@ -524,7 +524,7 @@
           ['188', '[[해오름셀프세차]] (세차 부스 4 · 기계실)', '2024.05 폐업 · 임차인 성○재'],
           ['192', '농자재 비닐하우스', '겨울 휴장'],
           ['196', '교회 수양관', '주말만 사용'],
-        ], head: ['지번', '건물', '현황'], f: { 2: 'f_carwash_owner' } },
+        ], head: ['지번', '건물', '현황'], f: { 2: 'f_carwash_lot' } },
         { img: 'carwash', cap: '거리뷰 (2024.08) — 산업로 188. 셔터 내린 세차 부스와 옆의 철문' },
       ] },
     },
@@ -651,7 +651,7 @@
       claims: [
         { id: 'c1', q: '21시 47분, 그 골목에 있던 차', accept: ['f_plate_photo', 'f_helmet_car', 'f_gps_scene', 'f_strap'] },
         { id: 'c2', q: '그 차를 몬 사람', accept: ['f_renter', 'f_minjae_scene'] },
-        { id: 'c3', q: '그녀가 있는 곳', accept: ['f_carwash_owner', 'f_gps_stop', 'f_tl_night'] },
+        { id: 'c3', q: '그녀가 있는 곳', accept: ['f_carwash_owner', 'f_carwash_lot'] },
         { id: 'c4', q: '그녀가 언제 집에 닿을지 그가 알았던 까닭', accept: ['f_share', 'f_exmsg_route', 'f_note_hand'] },
       ],
       near: '한 군데가 어긋난다. 고쳐서 다시 올릴 것.',

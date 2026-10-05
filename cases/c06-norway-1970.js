@@ -580,7 +580,7 @@
       claims: [
         { id: 'c1', q: '그녀가 누구였는지 보여 주는 기록', accept: ['f_brussels', 'f_anvers_id'] },
         { id: 'c2', q: '동기', accept: ['f_vt_claim', 'f_repaint'] },
-        { id: 'c3', q: '범인과 그녀를 잇는 기록', accept: ['f_callslip', 'f_phonebook', 'f_bumper'] },
+        { id: 'c3', q: '범인과 그녀를 잇는 기록', accept: ['f_callslip', 'f_phonebook', 'f_bumper', 'f_cipher_tlf'] },
         { id: 'c4', q: '범인이 스스로 댄 행적과 어긋나는 기록', accept: ['f_fuel', 'f_sig', 'f_absent'] },
       ],
       far: '반려. 서류가 그대로 되돌아왔다. 어디가 틀렸는지는 적혀 있지 않다.',

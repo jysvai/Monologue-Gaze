@@ -572,7 +572,7 @@
     solution: {
       culprit: 'k_tak',
       claims: [
-        { id: 'c1', q: '생존자의 기억과 맞아떨어지는 집', accept: ['f_house_match', 'f_sticker_gone', 'f_stairs_photo'] },
+        { id: 'c1', q: '생존자의 기억과 맞아떨어지는 집', accept: ['f_house_match', 'f_sticker_gone', 'f_stairs_photo', 'f_sticker_photo', 'f_landing_marks'] },
         { id: 'c2', q: '그날 밤 생존자가 그 집까지 따라간 까닭', accept: ['f_sms_parcel', 'f_parcel_sora'] },
         { id: 'c3', q: '앞선 두 피해자와 범인을 잇는 기록', accept: ['f_parcel_haeun', 'f_frame_seon'] },
         { id: 'c4', q: '범인이 그날 밤 그 집에 있었다', accept: ['f_call', 'f_shop_closed'] },

@@ -654,8 +654,8 @@
       culprit: 'k_shinji',
       claims: [
         { id: 'c1', q: '그 새벽, 봉투를 나른 사람의 길', accept: ['f_route', 'f_bike_sento'] },
-        { id: 'c2', q: '시신이 씻기고 나뉜 곳', accept: ['f_boiler', 'f_luminol'] },
-        { id: 'c3', q: '그 손이 익힌 일', accept: ['f_shibaura', 'f_knot_match'] },
+        { id: 'c2', q: '시신이 씻기고 나뉜 곳', accept: ['f_boiler', 'f_luminol', 'f_water_match'] },
+        { id: 'c3', q: '그 손이 익힌 일', accept: ['f_shibaura', 'f_knot_match', 'f_saw_match'] },
         { id: 'c4', q: '피해자가 그 밤 그곳에 간 까닭', accept: ['f_pager_kashiwayu', 'f_wp_loan'] },
       ],
       near: '딱 한 군데가 어긋난다. 그 메모가 정말 그 사람의 손을 가리키는가?',

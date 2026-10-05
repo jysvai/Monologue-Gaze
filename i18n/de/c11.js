@@ -916,7 +916,6 @@ MG.I18N.put("de", "c11", {
 "27cvwwy3cqw": "Das Werkzeug",
 "25h0wsca974": "Wann und wo die Säcke ins Wasser kamen",
 "1l4g51md3f6": "Wer Pyeon Sang-gu in jener Nacht empfing",
-"450xqen87t": "Genau eine Stelle stimmt nicht. Noch einmal gegen den Strom zurückgehen.",
 "11mj4dtvk8r": "Zurückgegeben. Etwas passt nicht zu den Akten.",
 "1y5ioc0rbzy": "Revier Euncheon 86-Gewalt-411 · erneut geprüft",
 "1xvtsfw3v86": "Als der Hefter aus Graupapier mit der Schnur zugebunden ist, rutscht aus dem nächsten Fach der Schublade ein Bündel japanischer Abschriften mit dem Stempel „部外秘“. → Zurück ins Archiv, weiter mit CASE 12.",

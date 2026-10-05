@@ -695,7 +695,6 @@ MG.I18N.put("en", "c08", {
 "78fymnpzcq": "The culprit was in a position to make those calls",
 "cn1pq9cxfh": "The culprit's voice and verbal tic",
 "4ga6iksstx": "Why the culprit could open the shed door",
-"2cudxagqziq": "Just one thing is off. Put one of the sounds back on the map.",
 "19exjpyi9vz": "Hanul PS 91-VC-1104 · Reviewed",
 "2g1koth91dl": "In the summer of 1990, the scaffolding at the Garam-dong site collapsed. Site manager Tak Sang-won took all the blame and was thrown out without severance pay. Key No. 3, never returned, sat in his toolbox for over a year. In September, when word came that Haesol had run out of money and halted work at Garam-dong, he rented a second-floor office by Saeteo Station with nothing in it but a sign.",
 "tz97svx0tz": "Putting his name down at the Daejeon site at the end of October was an alibi. On every day he meant to call, he was absent for “business in Seoul,” and he ran up a tab for phone cards at the grocery downstairs. He made the calls from the booth by Saeteo Station, where the church bell rang six times and the trains crossed the rail bridge, with a handkerchief over his mouth.",
