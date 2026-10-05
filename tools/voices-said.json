@@ -1,200 +1,992 @@
 {
- "hero/accuse": "범인은… 이 사람입니다.",
- "hero/match1": "…이거다.",
- "hero/match2": "맞아떨어진다.",
- "hero/match3": "그래, 여기서 이어지는구나.",
- "hero/press1": "이걸 보시죠. 그래도 같은 말씀입니까?",
- "hero/press2": "다시 묻겠습니다. 이건 어떻게 설명하시겠습니까?",
- "hero/press3": "기록에 남아 있습니다. 이번엔 사실대로 말씀해 주시죠.",
- "hero/press4": "처음 하신 말씀과 다릅니다. 무엇이 사실입니까?",
- "hero/recall1": "이걸 한번 봐 주시겠습니까. 떠오르는 게 있으신지요.",
- "hero/recall2": "천천히 보셔도 됩니다. 이거, 기억나십니까?",
- "hero/solved": "사건 종결. 선배, 하나 닫았습니다.",
- "hero/wrong": "…아직 뭔가 빠져 있어.",
- "v/c00/p_jaehee/k_door": "…10시에 나왔다니까요. 도어락이 잘못 찍힌 거겠죠.",
- "v/c00/p_jaehee/k_ipad": "그건… 서윤이가 부탁해서요. 마감 때문에 대신 올려 달라고. 9월에요.",
- "v/c00/p_jaehee/k_ipad.1": "10월 11일에도요?",
- "v/c00/p_jaehee/k_sketch": "정류장 그림이 한둘인가요. 비슷한 구도는 흔해요.",
- "v/c01/p_croft/k_coal": "…그 밤엔 석탄이 모자란 줄 알았소. 내가 착각했나 보지.",
- "v/c01/p_croft/k_dill": "딜 그 사람은 시계를 볼 줄 모르오. 교회 종소리로 시간을 재는 사람이라. 45분인지 55분인지 어찌 알겠소.",
- "v/c01/p_croft/k_fund": "등불 기름, 완장, 인쇄비… 돈 들 데가 한두 군데요? 영수증은 집에 있소.",
- "v/c01/p_croft/k_thread": "매듭장이 표식 아니오. 신문에 다 났던 거요.",
- "v/c01/p_croft/k_thread.1": "신문엔 목이라고 났소. 손목이라고 한 사람은 당신뿐이오. 소매 속이라 안치소에서야 보였고.",
- "v/c01/p_croft/k_thread.2": "……할 말은 치안판사 앞에서 하겠소.",
- "v/c01/p_croft/k_threekeys": "…아, 석탄. 석탄이 떨어져서 잠깐 골목 끝 석탄 광에 다녀왔소. 문은 버릇처럼 잠갔고. 잠깐이었소, 잠깐.",
- "v/c01/p_vane/k_knotsman": "…끝을 잘라 냈는데도 그게 남았군요. 반 페니 신문이 어떻게 버티는지 아십니까. 매듭장이가 처음 실린 주에 부수가 세 배가 됐습니다. 사람을 해친 건 아니에요. 그 밤 저는 조판실에 있었습니다.",
- "v/c01/p_vane/k_rose": "그 주엔 투서가 하루 수백 통이었습니다. 매듭장이 것만 골라 읽었어요… 이게 그 더미 속에 있었다고요?",
- "v/c01/p_vane/k_thread": "손목이요? 크로프트 씨가 그렇게 말했습니다. 2시 40분쯤 코트 입구에서요. 제 수첩에 받아 적은 그대로 호외에 실었고, 호외는 4시 정각에 인쇄에 들어갔습니다.",
- "v/c02/p_knauer/k_haselod": "…1월에 한 번 갔소. 셈 얘기 하러. 문간에서 몇 마디 하고 왔지.",
- "v/c02/p_knauer/k_haselod.1": "성촉절 것을 봄까지 미뤄 달라고요. 영감은 안 된다고 했고.",
- "v/c02/p_knauer/k_haselod.2": "…증서대로 하자더군. 그게 다요.",
- "v/c02/p_knauer/k_huette": "…눈이 덮었겠지. 내가 어디 있었든, 그 집엔 안 갔소.",
- "v/c02/p_knauer/k_schuldschein": "…영감이 제멋대로 적어 둔 거요. 호밀로 치르기로 한 건 맞소. 봄에 치를 참이었지.",
- "v/c02/p_knauer/k_stern": "…금요일에 간 게 아니라 월요일에 갔소. 헷갈렸소. 장 앞두고 이것저것 하느라.",
- "v/c02/p_pfaenzl/k_freitag": "…그래, 유치장에 있었소. 25일 밤부터 29일 아침까지. 누이 집에 있었다고 한 건 창피해서였소.",
- "v/c03/p_baek/k_voice": "아홉 시… 그 목소리, 제 노래였겠네요. 영감님은 제 방송 날엔 라디오를 한껏 크게 트신다고 했어요.",
- "v/c03/p_seo/k_debtbook": "250원… 그래, 빌렸소. 5일이 기한이었고. 그래서 뭐요? 갚을 참이었소. 형님이 도와주기로 했으니.",
- "v/c03/p_seo/k_pawn": "재봉틀 찾은 게 죄요? 평양 서기봉 형님이 돈을 부쳐 줬소. 논을 판다더니 서둘러 줬지. 전보로 몇 번 기별이 오갔소.",
- "v/c03/p_seo/k_radio": "…방송이 끊겼었다고? 그럼 내가 들은 건… 축음기였겠지. 영감님이 창극 판을 트셨나 보오.",
- "v/c03/p_seo/k_radio.1": "보춘당엔 축음기가 없었습니다. 점원도 그렇게 말했고요.",
- "v/c03/p_seo/k_telegram.1": "경찰서에선 우편국 얘기를 한마디도 안 하셨지요. 9시 20분, 종로우편국 창구. 돈 마련됐다, 올 것 없다. 무슨 돈입니까.",
- "v/c04/p_irie/k_0628": "…아, 28일. 그날은 감기로 하숙에서 잤소. 날마다 똑같으니 헷갈렸지.",
- "v/c04/p_irie/k_0628.1": "누가 봤나?",
- "v/c04/p_irie/k_0628.2": "혼자 사는데 누가 보겠소.",
- "v/c04/p_irie/k_okabe": "…수다스러운 영감이었지. 물어보길래 대답했을 뿐이오. 일지는 적으라니까 적은 거고.",
- "v/c04/p_okabe/k_flagman": "…그래요, 25일에 물었소. 깃발 든 젊은 친구한테. 28일 아침에도 이리 가야 하나, 그날은 상여금이라 짐이 무겁다 하고. 그냥 푸념이었소.",
- "v/c05/p_brennan/k_route7": "…몇 번 바꿔 탔소. 북쪽 길이 한가해서. 그게 무슨 상관이오.",
- "v/c05/p_brennan/k_route7.1": "몇 번이나요? 어느 일요일에요?",
- "v/c05/p_brennan/k_timecard": "영 시 삼십일 분? 1분 늦었군. 길 건너 주유소에서 커피를 뽑았으니까.",
- "v/c05/p_brennan/k_timecard.1": "커피 뽑기 전에, 전화는요?",
- "v/c05/p_brennan/k_timecard.2": "…커피를 뽑았다고 했소.",
- "v/c05/p_pell/k_typewriter": "…좋소. 그 타자 편지는 내가 쳤소. 신문이 미치광이 편지를 1면에 싣는 꼴이 보기 싫어서 한번 골려 주려고 했지. 그게 다요.",
- "v/c06/p_brate/k_lie": "…리가 부두에 있었다면, 차는 제가 몰았겠지요. 바람을 쐬러 나갔습니다. 크비트달 쪽은 아닙니다.",
- "v/c06/p_brate/k_plate": "…회사 차는 그날 사무원 리가 몰고 나갔을 겁니다. 부품을 가지러요. 저는 사무실에 있었고요.",
- "v/c06/p_brate/k_tlf": "…전화야 하루에도 수십 통 옵니다. 16일요? 배를 빌리고 싶다는 외국 여자가 있긴 했습니다. 오스트리아 골동품상이라던가.",
- "v/c06/p_brate/k_vesleterne": "…페인트 자국이야 배마다 있습니다. 헌 배를 사다 이름을 바꾸는 건 흔한 일이고요.",
- "v/c06/p_remmert/k_1018": "…17일 밤 열 시 연안선을 탔습니다. 20일에 노르보그에서 내렸고요. 사무장이 승선 명부를 갖고 있을 겁니다.",
- "v/c06/p_remmert/k_plate": "제가 빌린 차도 에이치 이십사로 시작했을 겁니다. 하지만 18일엔 제 손에 없었어요. 장부에 반납 시각이 있을 겁니다.",
- "v/c06/p_remmert/k_rental": "…빌렸습니다. 회색 아마존. 거래처가 시 밖에 있어서요. 15일 아침부터 17일 저녁까지.",
- "v/c06/p_remmert/k_schlosser": "…식사를 한 번 했습니다. 15일에. 아내에겐 말하지 말아 주십시오.",
- "v/c07/p_mansik/k_night": "…차 시계가 빨리 갔는지도 모르지요. 그 차 시계는 원래 잘 안 맞았습니다.",
- "v/c07/p_mansik/k_night.1": "11분 빠르다 쳐도 11시 39분입니다. 11시 20분이었다면요?",
- "v/c07/p_mansik/k_night.2": "…저는 모릅니다.",
- "v/c07/p_mansik/k_pachul": "…전화를 한 통 한 건 맞습니다. 파출소에 먼저 알리려고요.",
- "v/c07/p_mansik/k_pachul.1": "파출소가 바로 삼백 미터 앞인데요?",
- "v/c07/p_mansik/k_seok": "부장님 차가… 그 길에 있었다고요. …저는 할 말 없습니다. 제가 입을 열면 우리 식구는 길바닥입니다.",
- "v/c07/p_mansik/k_tire": "…세우라는 자리에 세운 겁니다. 버드나무 두 그루 선 데요.",
- "v/c07/p_mansik/k_wife": "…애들 학교만 끝까지 보내 주면 된다고 했습니다. 12년이면 큰놈이 스무 살입니다. 누가 약속했는지는 묻지 마십시오.",
- "v/c07/p_no/k_jeonse": "…부장님이 시키셔서 도장만 찍었습니다. 돈은 부장님이 봉투째 주셨고요. 저는 심부름꾼입니다.",
- "v/c07/p_operator/k_bunkuk": "11시 55분 전화요… 버들개 분국 교환이 난초방 석 부장님 지명이라고 해서 이었어요. 남자였는데 숨이 턱에 찼어요. 부장님, 저… 하는 데까지 들었어요.",
- "v/c07/p_operator/k_nancho": "11시 15분에 사모님 전화가 와서 난초방 벨을 세 번 울렸는데 아무도 안 받았어요. 그래서 자리 비우셨다고 했죠.",
- "v/c07/p_operator/k_seok": "…그 줄 보시고 오셨구나. 석 부장님이 10시쯤 교환실에 오셔서 아까 경리실에서 어디다 걸었냐고 물으셨어요.",
- "v/c07/p_seok/k_exchange": "집사람 전화를 못 받은 거야 변소에 가 있었으니 그렇지. 요정 변소가 좀 멀어요.",
- "v/c07/p_seok/k_exchange.1": "30분 동안요?",
- "v/c07/p_seok/k_exchange.2": "…속이 안 좋았소.",
- "v/c07/p_seok/k_reporter": "그 아가씨가 어디다 전화를 했든 내 알 바 아니오.",
- "v/c07/p_seok/k_scar": "그 번호가 내 차라고? …누가 몰고 나갔는지 내가 어찌 알겠소. 열쇠는 늘 차에 꽂아 두니까.",
- "v/c07/p_seok/k_songhak": "…국장님이 먼저 일어나셨던가. 술이 좀 됐었소. 아무튼 나는 그 뒤로도 방에 있었소.",
- "v/c07/p_seok/k_wife": "강 기사 식구가 딱해서 회사에서 조금 도와준 건 있소. 그게 죄요? 인정머리 없는 회사 소리 듣기 싫었을 뿐이오.",
- "v/c07/p_wife/k_no": "노 기사요? 봉투 가져온 사람이에요. 올 때마다 신발도 안 벗고 서서 말하다 갔어요.",
- "v/c07/p_wife/k_seok": "…사건 이틀 뒤에 주인집 할머니가 전화 왔다고 부르더라고요. 대양 석 부장이라는 분이었어요. 애 아버지 일은 걱정 말라, 식구는 회사가 책임진다고요.",
- "v/c08/p_father/k_driver": "…그 시각에 경찰서 조사실에 앉아 있었다고? 그럼 대체 누가….",
- "v/c08/p_tak/k_daejeon": "…서울에 자재 보러 하루 이틀 다녀간 거야 있지. 그게 무슨 죄요.",
- "v/c08/p_tak/k_daejeon.1": "전화 협박이 있던 날마다 서울 볼일이던데요.",
- "v/c08/p_tak/k_key": "그 열쇠? 잃어버렸소. 나가던 날 어디 뒀는지도 몰라.",
- "v/c08/p_tak/k_key.1": "자물쇠를 안 바꾼 건 아셨습니까?",
- "v/c08/p_tak/k_shop": "…전화카드야 사다 두면 쓰는 사람이 있겠지. 사무실에 드나드는 사람이 한둘이오?",
- "v/c08/p_tak/k_shop.1": "직원 없이 혼자 쓰시는 사무실이던데요.",
- "v/c08/p_tak/k_voice": "…전화로 딴 목소리 가지고 뭘 어쩌겠다는 거요. 서울 사내 목소리야 다 거기서 거기지.",
- "v/c08/p_tak/k_voice.1": "4월 8일, 이 사무실 전화입니다. 오늘은 이쯤에서 시마이합시다.",
- "v/c08/p_tutor/k_saeteo": "…네, 새터동 하숙집에 삽니다. 교회 바로 뒤예요. 저녁 여섯 시 종소리요? 매일 듣지요.",
- "v/c09/p_courier/k_oct14": "…영업소 아니었어요. PC방에 있었어요. 야간 상차 빼먹은 거 회사가 알면 잘려요. 그래서 거짓말했어요.",
- "v/c09/p_courier/k_pcbang": "카운터 앞 23번 자리요. 기록 뽑아 보시면 제가 한 번이라도 나갔는지 나와요.",
- "v/c09/p_sora/k_parcel": "…택배. 맞아요. 택배 가지러 간 거예요. 그 사람이 먼저 택배 찾으러 온 아가씨죠? 했어요. 그래서 안심했어요. 제 이름이 적힌 상자를 갖고 있는 사람이니까.",
- "v/c09/p_tak/k_bell": "…어머니 전화였을 거예요. 시골에서 밤에 가끔 하세요.",
- "v/c09/p_tak/k_bell.1": "가게에 계셨다면서요. 집 전화는 누가 받았습니까.",
- "v/c09/p_tak/k_nick": "…사진 몇 장 내렸어요. 동네가 뒤숭숭하길래. 집 사진 올려 두는 게 찜찜하잖아요.",
- "v/c09/p_tak/k_nick.1": "새벽 세 시에요? 그 일이 뉴스에 나온 건 월요일입니다.",
- "v/c09/p_tak/k_nick.2": "…잠이 안 와서 컴퓨터 켰다가 그랬나 보죠.",
- "v/c09/p_tak/k_oct14": "셔터는… 내렸죠. 손님 안 받으려고요. 안에서 작업하는 사람도 있어요.",
- "v/c09/p_tak/k_oct14.1": "불을 다 끄고 액자를 짭니까?",
- "v/c09/p_tak/k_oct14.2": "… 그날은 좀 일찍 들어갔나 봐요. 기억이 잘 안 나네.",
- "v/c09/p_tak/k_parcel": "아, 그거. 기사가 저녁에 맡기고 간 거요. 잠깐 집에 들렀을 때 받았어요. 받아만 놓고 다시 가게로 나갔고.",
- "v/c09/p_tak/k_sticker": "아, 현관 거요. 조카 녀석이 붙이고 간 거. 비 맞아서 너덜너덜하길래 뗐어요.",
- "v/c09/p_tak/k_sticker.1": "언제 떼셨습니까.",
- "v/c09/p_tak/k_sticker.2": "…요 며칠 새요. 날짜까지 기억하고 사는 사람이 어딨어요.",
- "v/c09/p_tak/k_styro": "날 추워지면 텃밭은 끝이에요. 옷장도 낡아서 버린 거고. 그게 뭐가 이상해요?",
- "v/c09/p_tak/k_styro.1": "전화기는요?",
- "v/c09/p_tak/k_styro.2": "…고장 났어요.",
- "v/c10/p_bang/k_audit": "…은호가 홧김에 한 소리려니 했어요. 월요일 전에 풀면 될 줄 알았고.",
- "v/c10/p_bang/k_audit.1": "그래서 금요일 밤에 풀러 가셨습니까.",
- "v/c10/p_bang/k_foglamp": "…조수석 쪽이요. 몇 달 전에 깨졌는데 귀찮아서 못 갈았어요. 그게 왜요.",
- "v/c10/p_bang/k_nov21": "…차를 좀 뺐어요. 주차 자리가 영 이상해서 다시 대려고.",
- "v/c10/p_bang/k_nov21.1": "한 시간 반 동안요?",
- "v/c10/p_bang/k_num5821": "전화는… 했어요. 잘 들어갔나 걱정돼서. 들어갔다길래 끊었어요.",
- "v/c10/p_bang/k_num5821.1": "3분 동안요? 그리고 3분 뒤에 형님이 잠깐 보자네라는 메시지가 나갔습니다.",
- "v/c10/p_bang/k_origin": "그건 은호가 오해한 거예요. 서류 정리만 하면 되는 일이었어요. 번호를 잠깐 빌린 것뿐이고.",
- "v/c10/p_bang/k_sinhang": "창고요. 냉동기 알람이 울려서 잠깐 갔어요. 우리 창고가 신항에 있으니까.",
- "v/c10/p_bang/k_sinhang.1": "창고는 1부두인데, 은호 씨 휴대폰은 3부두에서 꺼졌습니다.",
- "v/c10/p_miran/k_origin": "…요즘 밤에 뭘 계속 맞춰 보더라고요. 창고에도 몇 번 다녀오고. 내 번호가 엉뚱한 데 찍혀 있다고 했어요.",
- "v/c10/p_myeongsu/k_nov21": "…그래요, 멱살 잡았어요. 경매 순번 얘기를 사람들 앞에서 꺼내길래. 내가 돈이 좀 급해서 순번 당겨 달라고 했었거든.",
- "v/c11/p_gil/k_ilsubook": "…아침에 아궁이 재를 치웠어요. 재 속에 타다 만 비닐 쪼가리가 있었는데 수첩 표지 같았어요. 파란 비닐에 대원 도장 반쪽.",
- "v/c11/p_gil/k_inn": "네, 소양여관이요. 여관에서 자 본 건 그때가 처음이었어요. 잠이 안 와서 새벽까지 천장만 봤어요.",
- "v/c11/p_gil/k_night": "…사장님이 일곱 시 반쯤 여관비를 주셨어요. 오늘 밤엔 짐 쌀 게 있으니 공방에 오지 마라, 소양여관 가서 자라고요. 이튿날 여섯 시 넘어서 오라고.",
- "v/c11/p_ham/k_luminol": "그 바닥 피는 용수 놈이 끌에 손을 베였을 때 흘린 거요. 공방에서 손 안 베는 날이 없소.",
- "v/c11/p_ham/k_night": "…용수를 여관에 보낸 건 맞소. 짐을 싸려고. 빚쟁이들 몰래 새벽에 뜨려고 했소. 그게 죄요?",
- "v/c11/p_ham/k_pyeon": "…전화는 왔소. 여덟 시쯤. 오라 했지. 오면 이자라도 쥐여 보내려고.",
- "v/c11/p_ham/k_saw": "…헌 톱은 날이 나가서 버렸소. 새 톱 사는 게 죄요?",
- "v/c11/p_ham/k_saw.1": "토요일 아침 여덟 시 반에요? 철물점 문 열자마자?",
- "v/c11/p_ham/k_truck": "…용달을 부른 것도 맞고 취소한 것도 맞소. 새벽 세 시에. 마음이 바뀌었다니까.",
- "v/c11/p_woo/k_night": "…갈밭 지서 보호실에 있었소. 포장마차에서 옆자리 놈 멱살을 잡았다가 끌려갔지.",
- "v/c11/p_woo/k_pocha": "갈밭 삼거리 포장마차요. 소주 세 병. 옆에 앉은 놈이 정육점 칼잡이 어쩌고 하길래.",
- "v/c12/p_murakoshi/k_1014": "…신주쿠 만덕장이오. 13일 밤 9시부터 14일 아침 6시 반까지 한자리에 앉아 있었소. 판돈 걸린 마작이라 말 못 한 거요. 새벽 4시 20분에 사에키 삐삐를 친 것도 거기 카운터 전화요. 끝까지 안 받더군.",
- "v/c12/p_murakoshi/k_1014.1": "왜 처음엔 집에 있었다고 했습니까?",
- "v/c12/p_murakoshi/k_1014.2": "회사가 망해 가는 판에 도박장에서 밤을 새운 걸 은행이 알면 끝이오.",
- "v/c12/p_shinji/k_1013": "…불은 땠소. 쉬는 날에 탕 물을 다 빼고 타일을 닦았으니까. 대청소요. 어머니가 없으니 혼자 하려면 하루가 꼬박 걸리오.",
- "v/c12/p_shinji/k_1013.1": "물을 세 번이나 갈았습니까? 장작을 평소의 두 배나 때고?",
- "v/c12/p_shinji/k_1013.2": "더러우면 가는 거요.",
- "v/c12/p_shinji/k_saeki": "…탈의실 앞 분홍 전화 말이오? 손님 누구나 10엔 넣고 거는 전화요. 그날 밤 누가 걸었는지 내가 어떻게 아오.",
- "v/c12/p_shinji/k_saeki.1": "이삼삼공은 가시와유가 문을 닫는 시각입니다.",
- "v/c12/p_shinji/k_saeki.2": "…목욕탕 문 닫는 시각이야 동네 사람이 다 아오.",
- "v/c13/p_jihan/k_paper": "…제가 알려 줬어요. 도하가 잠을 너무 못 자서. 저도 받아 봤는데 괜찮았으니까.",
- "v/c13/p_jihan/k_paper.1": "휴대폰에서 페이퍼는 언제 지웠습니까.",
- "v/c13/p_jihan/k_paper.2": "구급차 안에서요. 무서워서요. 걔가 저 때문에 그렇게 된 것 같아서…",
- "v/c13/p_jihan/k_pill": "…정품 수면제라고 했어요. 병원 약이랑 똑같이 생겼다고.",
- "v/c13/p_jihan/k_pill.1": "지한 씨도 받으셨죠.",
- "v/c13/p_jihan/k_pill.2": "두 번이요. 한 번은 먹었고… 한 알은 아직 제 서랍에 있어요. 가져가세요. 제발요.",
- "v/c13/p_oh/k_paper": "…가게 PC는 알바들도 써요. 누가 뭘 깔았는지 제가 어떻게 압니까.",
- "v/c13/p_oh/k_paper.1": "새벽 세 시 십이 분, 다섯 시 이십 분. 근무표상 전부 점주님 혼자 계신 시간입니다.",
- "v/c13/p_oh/k_parcel": "반값택배는 셀프예요. 손님들이 알아서 붙이고 가요.",
- "v/c13/p_oh/k_parcel.1": "새벽 다섯 시 십이 분입니다. 60일 동안 아홉 번, 전부 목금토 밤을 넘긴 새벽이고요.",
- "v/c13/p_oh/k_parcel.2": "…물건 채우느라 창고에 있었을 수도 있죠.",
- "v/c13/p_oh/k_stakeout": "제가요? 형사님들 커피까지 타 드렸는데요.",
- "v/c13/p_oh/k_stakeout.1": "창가 자리 부탁드린 게 19시 58분, 짭 깔림이 20시 13분입니다. 그 15분 동안 어디 계셨습니까.",
- "v/c13/p_oh/k_stakeout.2": "…창고에요. 물건 정리하느라.",
- "v/c13/p_woojin/k_alley": "…네. 제가 놨어요. 창고에서 물건 받아서, 좌표 찍어서 창고지기한테 보냈어요. 새솔중앙 골목, 3단지 상가 뒤, 공원. 하룻밤에 세 군데, 일곱 봉지.",
- "v/c13/p_woojin/k_alley.1": "창고는 어디죠?",
- "v/c13/p_woojin/k_alley.2": "하람역 무인택배함이요. 번호랑 비번은 그날그날 와요.",
- "v/c13/p_woojin/k_coinnaru": "제 계정이요? 급여 받으려고 만든 거예요. 창고지기가 문자로 온 인증번호 불러 달래서 불러 줬어요. 급여 연결한다고.",
- "v/c13/p_woojin/k_coinnaru.1": "그 계정으로 두 달 동안 이천팔백만 원이 드나들었습니다.",
- "v/c13/p_woojin/k_coinnaru.2": "…네? 저는 한 번에 이삼십만 원밖에 못 받았어요.",
- "v/c14/p_seok/k_morning": "…아, 잠깐 나갔었네요. 부품 사러요. 예비 차 타고.",
- "v/c14/p_seok/k_morning.1": "어디로요? 영수증은요?",
- "v/c14/p_seok/k_morning.2": "공구상가요. 현금으로 샀어요. 영수증은… 버렸죠. 그게 무슨 상관입니까.",
- "v/c14/p_siwoo/k_fakedoc": "…PC방 아니에요. 솔매시장 공영주차장 B3 기둥 뒤에 봉투가 있었어요. 아침 여덟 시에. 종이 한 장. 저는 뽑은 적 없어요.",
- "v/c14/p_siwoo/k_fakedoc.2": "그럼 왜 PC방이라고 했어?",
- "v/c14/p_siwoo/k_fakedoc.3": "…종이가 사무실 정산서랑 똑같았어요. 한쪽에 줄 가 있는 거. 그 생각 하기 싫었어요.",
- "v/c14/p_taeo/k_ad": "…보낸 건 맞아요. 시우한테도, 현수한테도. 저도 받은 거예요. 애들한테 돌리면 제 빚에서 오십 빼 준다고 해서.",
- "v/c14/p_taeo/k_ad.2": "누가?",
- "v/c14/p_taeo/k_ad.3": "…그건 말 못 해요. 저 여기서 나가면 일해야 돼요.",
- "v/c14/p_taeo/k_coin": "…10월 말에 사무실에서 만들었어요. 지사장님이 정산 계좌가 필요하다고. 제 폰으로 신분증이랑 얼굴만 찍으라 하셨어요. 나머지는 지사장님 폰으로 하셨고요.",
- "v/c14/p_taeo/k_coin.2": "거기로 오늘 이천삼백이 들어왔다가 나갔어.",
- "v/c14/p_taeo/k_coin.3": "…저 열아홉이에요. 저 이제 어떻게 돼요?",
- "v/c15/p_jisu/k_tracker.1": "그 얘기는 기록에 없습니다.",
- "v/c15/p_junhyuk/k_tonight": "…걔가 좀 늦게 왔어요. 열한 시 다 돼서.",
- "v/c15/p_junhyuk/k_tonight.1": "일곱 시부터 같이 축구를 봤다고 하셨습니다.",
- "v/c15/p_junhyuk/k_tonight.2": "경찰이 괜히 엮을까 봐 그랬죠. 걔는 이 일이랑 상관없어요. 맥주 사 들고 온 게 다예요.",
- "v/c15/p_junhyuk/k_tracker": "…사귈 때 단 거예요. 걔가 밤늦게 운전하는 게 걱정돼서.",
- "v/c15/p_junhyuk/k_tracker.1": "헤어진 지 석 달이 넘었습니다.",
- "v/c15/p_junhyuk/k_tracker.2": "떼는 걸 깜빡했어요. 10월부터는 앱 한 번도 안 열었어요. 기록 보면 알잖아요.",
- "v/c15/p_junhyuk/k_waiver": "합의해 달라고 한 게 죄예요? 내일, 아니 오늘이 재판인데.",
- "v/c15/p_junhyuk/k_waiver.1": "사인만 받아 오면 빌린 돈을 없던 걸로 해 준다고 쓰셨죠.",
- "v/c15/p_junhyuk/k_waiver.2": "말이 그렇다는 거죠. 걔가 알아서 한 거예요.",
- "v/c15/p_landlord/k_phone": "여기요. 꺼서 넣어 뒀어요. 가져가요. 지난주에 내가 다솜 씨한테 한 말 있잖아요. 동네 사람들 다 들었고. 그 휴대폰이 내 방에서 나오면 누가 내 말을 믿겠어요.",
- "v/c15/p_landlord/k_phone.3": "그래서 22시 11분에 끄셨습니까.",
- "v/c15/p_landlord/k_phone.4": "…무서웠어요. 미안합니다.",
- "v/c15/p_landlord/k_tonight": "…나갔어요. 열 시 조금 넘어서. 순찰차 나가고 나서.",
- "v/c15/p_landlord/k_tonight.1": "손전등을 들고요.",
- "v/c15/p_landlord/k_tonight.2": "다솜 씨 차 뒤에서 휴대폰이 번쩍번쩍하는 거예요. 누가 자꾸 전화를 하는지.",
- "v/c15/p_landlord/k_villacam": "…내가 뽑았어요. 한 달 됐어요.",
- "v/c15/p_landlord/k_villacam.1": "고장이라고 하셨습니다.",
- "v/c15/p_landlord/k_villacam.2": "구청에서 주차장 월세 놓는 거 단속 나온다길래. 바깥 차 드나드는 게 찍히면 안 되니까.",
- "v/c15/p_minjae/k_carwash": "거기 이제 제 거 아니에요. 5월에 문 닫았어요.",
- "v/c15/p_minjae/k_carwash.1": "임대 계약은 12월까지고, 기계실 열쇠는 아직 갖고 계시죠.",
- "v/c15/p_minjae/k_carwash.2": "…변호사 부를게요.",
- "v/c15/p_minjae/k_nubi": "얘기만 하려고 했어요. 편지도 보냈고, 도서관에도 갔는데 쳐다도 안 보니까.",
- "v/c15/p_minjae/k_nubi.1": "조수석 문은 21시 47분에 열렸다 닫혔습니다.",
- "v/c15/p_minjae/k_tonight": "…차 빌린 건 맞아요. 드라이브 좀 했어요. 머리 식히러.",
- "v/c15/p_minjae/k_tonight.1": "미리내동 골목에서 시동을 켠 채 17분 동안요?",
- "v/c15/p_woobin/k_tonight.1": "오늘 미리내동엔 안 갔다고 하셨습니다."
+ "hero/accuse": {
+  "t": "범인은… 이 사람입니다.",
+  "v": "river eleven_v4_turbo 1 0.6 [calm]",
+  "p": 1
+ },
+ "hero/match1": {
+  "t": "…이거다.",
+  "v": "river eleven_v4_turbo 1 0.6 [calm]",
+  "p": 1
+ },
+ "hero/match2": {
+  "t": "맞아떨어진다.",
+  "v": "river eleven_v4_turbo 1 0.6 [calm]",
+  "p": 1
+ },
+ "hero/match3": {
+  "t": "그래, 여기서 이어지는구나.",
+  "v": "river eleven_v4_turbo 1 0.6 [calm]",
+  "p": 1
+ },
+ "hero/press1": {
+  "t": "이걸 보시죠. 그래도 같은 말씀입니까?",
+  "v": "river eleven_v4_turbo 1 0.6 [calm]",
+  "p": 1
+ },
+ "hero/press2": {
+  "t": "다시 묻겠습니다. 이건 어떻게 설명하시겠습니까?",
+  "v": "river eleven_v4_turbo 1 0.6 [calm]",
+  "p": 1
+ },
+ "hero/press3": {
+  "t": "기록에 남아 있습니다. 이번엔 사실대로 말씀해 주시죠.",
+  "v": "river eleven_v4_turbo 1 0.6 [calm]",
+  "p": 1
+ },
+ "hero/press4": {
+  "t": "처음 하신 말씀과 다릅니다. 무엇이 사실입니까?",
+  "v": "river eleven_v4_turbo 1 0.6 [calm]",
+  "p": 1
+ },
+ "hero/recall1": {
+  "t": "이걸 한번 봐 주시겠습니까. 떠오르는 게 있으신지요.",
+  "v": "river eleven_v4_turbo 1 0.6 [calm]",
+  "p": 1
+ },
+ "hero/recall2": {
+  "t": "천천히 보셔도 됩니다. 이거, 기억나십니까?",
+  "v": "river eleven_v4_turbo 1 0.6 [calm]",
+  "p": 1
+ },
+ "hero/solved": {
+  "t": "사건 종결. 선배, 하나 닫았습니다.",
+  "v": "river eleven_v4_turbo 1 0.6 [calm]",
+  "p": 1
+ },
+ "hero/wrong": {
+  "t": "…아직 뭔가 빠져 있어.",
+  "v": "river eleven_v4_turbo 1 0.6 [calm]",
+  "p": 1
+ },
+ "v/c00/p_jaehee/k_door": {
+  "t": "…10시에 나왔다니까요. 도어락이 잘못 찍힌 거겠죠.",
+  "v": "laura eleven_v4_turbo 1 0.3 [shaky]",
+  "p": 1
+ },
+ "v/c00/p_jaehee/k_ipad": {
+  "t": "그건… 서윤이가 부탁해서요. 마감 때문에 대신 올려 달라고. 9월에요.",
+  "v": "laura eleven_v4_turbo 1 0.3 [shaky]",
+  "p": 1
+ },
+ "v/c00/p_jaehee/k_ipad.1": {
+  "t": "10월 11일에도요?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c00/p_jaehee/k_sketch": {
+  "t": "정류장 그림이 한둘인가요. 비슷한 구도는 흔해요.",
+  "v": "laura eleven_v4_turbo 1 0.3 [shaky]",
+  "p": 1
+ },
+ "v/c01/p_croft/k_coal": {
+  "t": "…그 밤엔 석탄이 모자란 줄 알았소. 내가 착각했나 보지.",
+  "v": "callum eleven_v4_turbo 0.92 0.35 [gruff]",
+  "p": 1
+ },
+ "v/c01/p_croft/k_dill": {
+  "t": "딜 그 사람은 시계를 볼 줄 모르오. 교회 종소리로 시간을 재는 사람이라. 45분인지 55분인지 어찌 알겠소.",
+  "v": "callum eleven_v4_turbo 0.92 0.35 [gruff]",
+  "p": 1
+ },
+ "v/c01/p_croft/k_fund": {
+  "t": "등불 기름, 완장, 인쇄비… 돈 들 데가 한두 군데요? 영수증은 집에 있소.",
+  "v": "callum eleven_v4_turbo 0.92 0.35 [gruff]",
+  "p": 1
+ },
+ "v/c01/p_croft/k_thread": {
+  "t": "매듭장이 표식 아니오. 신문에 다 났던 거요.",
+  "v": "callum eleven_v4_turbo 0.92 0.35 [gruff]",
+  "p": 1
+ },
+ "v/c01/p_croft/k_thread.1": {
+  "t": "신문엔 목이라고 났소. 손목이라고 한 사람은 당신뿐이오. 소매 속이라 안치소에서야 보였고.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c01/p_croft/k_thread.2": {
+  "t": "……할 말은 치안판사 앞에서 하겠소.",
+  "v": "callum eleven_v4_turbo 0.92 0.35 [gruff]",
+  "p": 1
+ },
+ "v/c01/p_croft/k_threekeys": {
+  "t": "…아, 석탄. 석탄이 떨어져서 잠깐 골목 끝 석탄 광에 다녀왔소. 문은 버릇처럼 잠갔고. 잠깐이었소, 잠깐.",
+  "v": "callum eleven_v4_turbo 0.92 0.35 [gruff]",
+  "p": 1
+ },
+ "v/c01/p_vane/k_knotsman": {
+  "t": "…끝을 잘라 냈는데도 그게 남았군요. 반 페니 신문이 어떻게 버티는지 아십니까. 매듭장이가 처음 실린 주에 부수가 세 배가 됐습니다. 사람을 해친 건 아니에요. 그 밤 저는 조판실에 있었습니다.",
+  "v": "daniel eleven_v4_turbo 1.05 0.45 [defensive]",
+  "p": 1
+ },
+ "v/c01/p_vane/k_rose": {
+  "t": "그 주엔 투서가 하루 수백 통이었습니다. 매듭장이 것만 골라 읽었어요… 이게 그 더미 속에 있었다고요?",
+  "v": "daniel eleven_v4_turbo 1.05 0.45 [defensive]",
+  "p": 1
+ },
+ "v/c01/p_vane/k_thread": {
+  "t": "손목이요? 크로프트 씨가 그렇게 말했습니다. 2시 40분쯤 코트 입구에서요. 제 수첩에 받아 적은 그대로 호외에 실었고, 호외는 4시 정각에 인쇄에 들어갔습니다.",
+  "v": "daniel eleven_v4_turbo 1.05 0.45 [defensive]",
+  "p": 1
+ },
+ "v/c02/p_knauer/k_haselod": {
+  "t": "…1월에 한 번 갔소. 셈 얘기 하러. 문간에서 몇 마디 하고 왔지.",
+  "v": "adam eleven_v4_turbo 0.9 0.45 [cold]",
+  "p": 1
+ },
+ "v/c02/p_knauer/k_haselod.1": {
+  "t": "성촉절 것을 봄까지 미뤄 달라고요. 영감은 안 된다고 했고.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c02/p_knauer/k_haselod.2": {
+  "t": "…증서대로 하자더군. 그게 다요.",
+  "v": "adam eleven_v4_turbo 0.9 0.45 [cold]",
+  "p": 1
+ },
+ "v/c02/p_knauer/k_huette": {
+  "t": "…눈이 덮었겠지. 내가 어디 있었든, 그 집엔 안 갔소.",
+  "v": "adam eleven_v4_turbo 0.9 0.45 [cold]",
+  "p": 1
+ },
+ "v/c02/p_knauer/k_schuldschein": {
+  "t": "…영감이 제멋대로 적어 둔 거요. 호밀로 치르기로 한 건 맞소. 봄에 치를 참이었지.",
+  "v": "adam eleven_v4_turbo 0.9 0.45 [cold]",
+  "p": 1
+ },
+ "v/c02/p_knauer/k_stern": {
+  "t": "…금요일에 간 게 아니라 월요일에 갔소. 헷갈렸소. 장 앞두고 이것저것 하느라.",
+  "v": "adam eleven_v4_turbo 0.9 0.45 [cold]",
+  "p": 1
+ },
+ "v/c02/p_pfaenzl/k_freitag": {
+  "t": "…그래, 유치장에 있었소. 25일 밤부터 29일 아침까지. 누이 집에 있었다고 한 건 창피해서였소.",
+  "v": "harry eleven_v4_turbo 0.95 0.35 [sullen]",
+  "p": 1
+ },
+ "v/c03/p_baek/k_voice": {
+  "t": "아홉 시… 그 목소리, 제 노래였겠네요. 영감님은 제 방송 날엔 라디오를 한껏 크게 트신다고 했어요.",
+  "v": "lily eleven_v4_turbo 0.95 0.35 [nervous]",
+  "p": 1
+ },
+ "v/c03/p_seo/k_debtbook": {
+  "t": "250원… 그래, 빌렸소. 5일이 기한이었고. 그래서 뭐요? 갚을 참이었소. 형님이 도와주기로 했으니.",
+  "v": "eric eleven_v4_turbo 0.93 0.4 [hesitant]",
+  "p": 1
+ },
+ "v/c03/p_seo/k_pawn": {
+  "t": "재봉틀 찾은 게 죄요? 평양 서기봉 형님이 돈을 부쳐 줬소. 논을 판다더니 서둘러 줬지. 전보로 몇 번 기별이 오갔소.",
+  "v": "eric eleven_v4_turbo 0.93 0.4 [hesitant]",
+  "p": 1
+ },
+ "v/c03/p_seo/k_radio": {
+  "t": "…방송이 끊겼었다고? 그럼 내가 들은 건… 축음기였겠지. 영감님이 창극 판을 트셨나 보오.",
+  "v": "eric eleven_v4_turbo 0.93 0.4 [hesitant]",
+  "p": 1
+ },
+ "v/c03/p_seo/k_radio.1": {
+  "t": "보춘당엔 축음기가 없었습니다. 점원도 그렇게 말했고요.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c03/p_seo/k_telegram.1": {
+  "t": "경찰서에선 우편국 얘기를 한마디도 안 하셨지요. 9시 20분, 종로우편국 창구. 돈 마련됐다, 올 것 없다. 무슨 돈입니까.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c04/p_irie/k_0628": {
+  "t": "…아, 28일. 그날은 감기로 하숙에서 잤소. 날마다 똑같으니 헷갈렸지.",
+  "v": "liam eleven_v4_turbo 1 0.3 [nervous]",
+  "p": 1
+ },
+ "v/c04/p_irie/k_0628.1": {
+  "t": "누가 봤나?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c04/p_irie/k_0628.2": {
+  "t": "혼자 사는데 누가 보겠소.",
+  "v": "liam eleven_multilingual_v2 1 0.3 [nervous]",
+  "p": 1
+ },
+ "v/c04/p_irie/k_okabe": {
+  "t": "…수다스러운 영감이었지. 물어보길래 대답했을 뿐이오. 일지는 적으라니까 적은 거고.",
+  "v": "liam eleven_v4_turbo 1 0.3 [nervous]",
+  "p": 1
+ },
+ "v/c04/p_okabe/k_flagman": {
+  "t": "…그래요, 25일에 물었소. 깃발 든 젊은 친구한테. 28일 아침에도 이리 가야 하나, 그날은 상여금이라 짐이 무겁다 하고. 그냥 푸념이었소.",
+  "v": "roger eleven_v4_turbo 0.95 0.4 [tired]",
+  "p": 1
+ },
+ "v/c05/p_brennan/k_route7": {
+  "t": "…몇 번 바꿔 탔소. 북쪽 길이 한가해서. 그게 무슨 상관이오.",
+  "v": "chris eleven_v4_turbo 0.95 0.35 [nervous]",
+  "p": 1
+ },
+ "v/c05/p_brennan/k_route7.1": {
+  "t": "몇 번이나요? 어느 일요일에요?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c05/p_brennan/k_timecard": {
+  "t": "영 시 삼십일 분? 1분 늦었군. 길 건너 주유소에서 커피를 뽑았으니까.",
+  "v": "chris eleven_v4_turbo 0.95 0.35 [nervous]",
+  "p": 1
+ },
+ "v/c05/p_brennan/k_timecard.1": {
+  "t": "커피 뽑기 전에, 전화는요?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c05/p_brennan/k_timecard.2": {
+  "t": "…커피를 뽑았다고 했소.",
+  "v": "chris eleven_v4_turbo 0.95 0.35 [nervous]",
+  "p": 1
+ },
+ "v/c05/p_pell/k_typewriter": {
+  "t": "…좋소. 그 타자 편지는 내가 쳤소. 신문이 미치광이 편지를 1면에 싣는 꼴이 보기 싫어서 한번 골려 주려고 했지. 그게 다요.",
+  "v": "george eleven_multilingual_v2 0.95 0.45 [defensive]",
+  "p": 1
+ },
+ "v/c06/p_brate/k_lie": {
+  "t": "…리가 부두에 있었다면, 차는 제가 몰았겠지요. 바람을 쐬러 나갔습니다. 크비트달 쪽은 아닙니다.",
+  "v": "brian eleven_v4_turbo 0.92 0.45 [cold]",
+  "p": 1
+ },
+ "v/c06/p_brate/k_plate": {
+  "t": "…회사 차는 그날 사무원 리가 몰고 나갔을 겁니다. 부품을 가지러요. 저는 사무실에 있었고요.",
+  "v": "brian eleven_v4_turbo 0.92 0.45 [cold]",
+  "p": 1
+ },
+ "v/c06/p_brate/k_tlf": {
+  "t": "…전화야 하루에도 수십 통 옵니다. 16일요? 배를 빌리고 싶다는 외국 여자가 있긴 했습니다. 오스트리아 골동품상이라던가.",
+  "v": "brian eleven_v4_turbo 0.92 0.45 [cold]",
+  "p": 1
+ },
+ "v/c06/p_brate/k_vesleterne": {
+  "t": "…페인트 자국이야 배마다 있습니다. 헌 배를 사다 이름을 바꾸는 건 흔한 일이고요.",
+  "v": "brian eleven_v4_turbo 0.92 0.45 [cold]",
+  "p": 1
+ },
+ "v/c06/p_remmert/k_1018": {
+  "t": "…17일 밤 열 시 연안선을 탔습니다. 20일에 노르보그에서 내렸고요. 사무장이 승선 명부를 갖고 있을 겁니다.",
+  "v": "chris eleven_v4_turbo 1 0.4 [hesitant]",
+  "p": 1
+ },
+ "v/c06/p_remmert/k_plate": {
+  "t": "제가 빌린 차도 에이치 이십사로 시작했을 겁니다. 하지만 18일엔 제 손에 없었어요. 장부에 반납 시각이 있을 겁니다.",
+  "v": "chris eleven_v4_turbo 1 0.4 [hesitant]",
+  "p": 1
+ },
+ "v/c06/p_remmert/k_rental": {
+  "t": "…빌렸습니다. 회색 아마존. 거래처가 시 밖에 있어서요. 15일 아침부터 17일 저녁까지.",
+  "v": "chris eleven_v4_turbo 1 0.4 [hesitant]",
+  "p": 1
+ },
+ "v/c06/p_remmert/k_schlosser": {
+  "t": "…식사를 한 번 했습니다. 15일에. 아내에겐 말하지 말아 주십시오.",
+  "v": "chris eleven_v4_turbo 1 0.4 [hesitant]",
+  "p": 1
+ },
+ "v/c07/p_mansik/k_night": {
+  "t": "…차 시계가 빨리 갔는지도 모르지요. 그 차 시계는 원래 잘 안 맞았습니다.",
+  "v": "roger eleven_v4_turbo 0.9 0.3 [tired]",
+  "p": 1
+ },
+ "v/c07/p_mansik/k_night.1": {
+  "t": "11분 빠르다 쳐도 11시 39분입니다. 11시 20분이었다면요?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c07/p_mansik/k_night.2": {
+  "t": "…저는 모릅니다.",
+  "v": "roger eleven_v4_turbo 0.9 0.3 [tired]",
+  "p": 1
+ },
+ "v/c07/p_mansik/k_pachul": {
+  "t": "…전화를 한 통 한 건 맞습니다. 파출소에 먼저 알리려고요.",
+  "v": "roger eleven_v4_turbo 0.9 0.3 [tired]",
+  "p": 1
+ },
+ "v/c07/p_mansik/k_pachul.1": {
+  "t": "파출소가 바로 삼백 미터 앞인데요?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c07/p_mansik/k_seok": {
+  "t": "부장님 차가… 그 길에 있었다고요. …저는 할 말 없습니다. 제가 입을 열면 우리 식구는 길바닥입니다.",
+  "v": "roger eleven_v4_turbo 0.9 0.3 [tired]",
+  "p": 1
+ },
+ "v/c07/p_mansik/k_tire": {
+  "t": "…세우라는 자리에 세운 겁니다. 버드나무 두 그루 선 데요.",
+  "v": "roger eleven_v4_turbo 0.9 0.3 [tired]",
+  "p": 1
+ },
+ "v/c07/p_mansik/k_wife": {
+  "t": "…애들 학교만 끝까지 보내 주면 된다고 했습니다. 12년이면 큰놈이 스무 살입니다. 누가 약속했는지는 묻지 마십시오.",
+  "v": "roger eleven_v4_turbo 0.9 0.3 [tired]",
+  "p": 1
+ },
+ "v/c07/p_no/k_jeonse": {
+  "t": "…부장님이 시키셔서 도장만 찍었습니다. 돈은 부장님이 봉투째 주셨고요. 저는 심부름꾼입니다.",
+  "v": "chris eleven_v4_turbo 0.95 0.35 [hesitant]",
+  "p": 1
+ },
+ "v/c07/p_operator/k_bunkuk": {
+  "t": "11시 55분 전화요… 버들개 분국 교환이 난초방 석 부장님 지명이라고 해서 이었어요. 남자였는데 숨이 턱에 찼어요. 부장님, 저… 하는 데까지 들었어요.",
+  "v": "jessica eleven_v4_turbo 1.05 0.35 [nervous]",
+  "p": 1
+ },
+ "v/c07/p_operator/k_nancho": {
+  "t": "11시 15분에 사모님 전화가 와서 난초방 벨을 세 번 울렸는데 아무도 안 받았어요. 그래서 자리 비우셨다고 했죠.",
+  "v": "jessica eleven_v4_turbo 1.05 0.35 [nervous]",
+  "p": 1
+ },
+ "v/c07/p_operator/k_seok": {
+  "t": "…그 줄 보시고 오셨구나. 석 부장님이 10시쯤 교환실에 오셔서 아까 경리실에서 어디다 걸었냐고 물으셨어요.",
+  "v": "jessica eleven_v4_turbo 1.05 0.35 [nervous]",
+  "p": 1
+ },
+ "v/c07/p_seok/k_exchange": {
+  "t": "집사람 전화를 못 받은 거야 변소에 가 있었으니 그렇지. 요정 변소가 좀 멀어요.",
+  "v": "adam eleven_v4_turbo 0.95 0.45 [cold]",
+  "p": 1
+ },
+ "v/c07/p_seok/k_exchange.1": {
+  "t": "30분 동안요?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c07/p_seok/k_exchange.2": {
+  "t": "…속이 안 좋았소.",
+  "v": "adam eleven_v4_turbo 0.95 0.45 [cold]",
+  "p": 1
+ },
+ "v/c07/p_seok/k_reporter": {
+  "t": "그 아가씨가 어디다 전화를 했든 내 알 바 아니오.",
+  "v": "adam eleven_v4_turbo 0.95 0.45 [cold]",
+  "p": 1
+ },
+ "v/c07/p_seok/k_scar": {
+  "t": "그 번호가 내 차라고? …누가 몰고 나갔는지 내가 어찌 알겠소. 열쇠는 늘 차에 꽂아 두니까.",
+  "v": "adam eleven_v4_turbo 0.95 0.45 [cold]",
+  "p": 1
+ },
+ "v/c07/p_seok/k_songhak": {
+  "t": "…국장님이 먼저 일어나셨던가. 술이 좀 됐었소. 아무튼 나는 그 뒤로도 방에 있었소.",
+  "v": "adam eleven_v4_turbo 0.95 0.45 [cold]",
+  "p": 1
+ },
+ "v/c07/p_seok/k_wife": {
+  "t": "강 기사 식구가 딱해서 회사에서 조금 도와준 건 있소. 그게 죄요? 인정머리 없는 회사 소리 듣기 싫었을 뿐이오.",
+  "v": "adam eleven_v4_turbo 0.95 0.45 [cold]",
+  "p": 1
+ },
+ "v/c07/p_wife/k_no": {
+  "t": "노 기사요? 봉투 가져온 사람이에요. 올 때마다 신발도 안 벗고 서서 말하다 갔어요.",
+  "v": "bella eleven_v4_turbo 0.95 0.3 [bitter]",
+  "p": 1
+ },
+ "v/c07/p_wife/k_seok": {
+  "t": "…사건 이틀 뒤에 주인집 할머니가 전화 왔다고 부르더라고요. 대양 석 부장이라는 분이었어요. 애 아버지 일은 걱정 말라, 식구는 회사가 책임진다고요.",
+  "v": "bella eleven_v4_turbo 0.95 0.3 [bitter]",
+  "p": 1
+ },
+ "v/c08/p_father/k_driver": {
+  "t": "…그 시각에 경찰서 조사실에 앉아 있었다고? 그럼 대체 누가….",
+  "v": "brian eleven_v4_turbo 1 0.35 [defensive]",
+  "p": 1
+ },
+ "v/c08/p_tak/k_daejeon": {
+  "t": "…서울에 자재 보러 하루 이틀 다녀간 거야 있지. 그게 무슨 죄요.",
+  "v": "callum eleven_v4_turbo 0.92 0.4 [gruff]",
+  "p": 1
+ },
+ "v/c08/p_tak/k_daejeon.1": {
+  "t": "전화 협박이 있던 날마다 서울 볼일이던데요.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c08/p_tak/k_key": {
+  "t": "그 열쇠? 잃어버렸소. 나가던 날 어디 뒀는지도 몰라.",
+  "v": "callum eleven_v4_turbo 0.92 0.4 [gruff]",
+  "p": 1
+ },
+ "v/c08/p_tak/k_key.1": {
+  "t": "자물쇠를 안 바꾼 건 아셨습니까?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c08/p_tak/k_shop": {
+  "t": "…전화카드야 사다 두면 쓰는 사람이 있겠지. 사무실에 드나드는 사람이 한둘이오?",
+  "v": "callum eleven_v4_turbo 0.92 0.4 [gruff]",
+  "p": 1
+ },
+ "v/c08/p_tak/k_shop.1": {
+  "t": "직원 없이 혼자 쓰시는 사무실이던데요.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c08/p_tak/k_voice": {
+  "t": "…전화로 딴 목소리 가지고 뭘 어쩌겠다는 거요. 서울 사내 목소리야 다 거기서 거기지.",
+  "v": "callum eleven_v4_turbo 0.92 0.4 [gruff]",
+  "p": 1
+ },
+ "v/c08/p_tak/k_voice.1": {
+  "t": "4월 8일, 이 사무실 전화입니다. 오늘은 이쯤에서 시마이합시다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c08/p_tutor/k_saeteo": {
+  "t": "…네, 새터동 하숙집에 삽니다. 교회 바로 뒤예요. 저녁 여섯 시 종소리요? 매일 듣지요.",
+  "v": "will eleven_v4_turbo 1 0.4 [nervous]",
+  "p": 1
+ },
+ "v/c09/p_courier/k_oct14": {
+  "t": "…영업소 아니었어요. PC방에 있었어요. 야간 상차 빼먹은 거 회사가 알면 잘려요. 그래서 거짓말했어요.",
+  "v": "charlie eleven_v4_turbo 1.05 0.35 [defensive]",
+  "p": 1
+ },
+ "v/c09/p_courier/k_pcbang": {
+  "t": "카운터 앞 23번 자리요. 기록 뽑아 보시면 제가 한 번이라도 나갔는지 나와요.",
+  "v": "charlie eleven_v4_turbo 1.05 0.35 [defensive]",
+  "p": 1
+ },
+ "v/c09/p_sora/k_parcel": {
+  "t": "…택배. 맞아요. 택배 가지러 간 거예요. 그 사람이 먼저 택배 찾으러 온 아가씨죠? 했어요. 그래서 안심했어요. 제 이름이 적힌 상자를 갖고 있는 사람이니까.",
+  "v": "sarah eleven_v4_turbo 0.95 0.3 [shaky]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_bell": {
+  "t": "…어머니 전화였을 거예요. 시골에서 밤에 가끔 하세요.",
+  "v": "eric eleven_v4_turbo 0.92 0.45 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_bell.1": {
+  "t": "가게에 계셨다면서요. 집 전화는 누가 받았습니까.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_nick": {
+  "t": "…사진 몇 장 내렸어요. 동네가 뒤숭숭하길래. 집 사진 올려 두는 게 찜찜하잖아요.",
+  "v": "eric eleven_v4_turbo 0.92 0.45 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_nick.1": {
+  "t": "새벽 세 시에요? 그 일이 뉴스에 나온 건 월요일입니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_nick.2": {
+  "t": "…잠이 안 와서 컴퓨터 켰다가 그랬나 보죠.",
+  "v": "eric eleven_v4_turbo 0.92 0.45 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_oct14": {
+  "t": "셔터는… 내렸죠. 손님 안 받으려고요. 안에서 작업하는 사람도 있어요.",
+  "v": "eric eleven_v4_turbo 0.92 0.45 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_oct14.1": {
+  "t": "불을 다 끄고 액자를 짭니까?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_oct14.2": {
+  "t": "… 그날은 좀 일찍 들어갔나 봐요. 기억이 잘 안 나네.",
+  "v": "eric eleven_v4_turbo 0.92 0.45 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_parcel": {
+  "t": "아, 그거. 기사가 저녁에 맡기고 간 거요. 잠깐 집에 들렀을 때 받았어요. 받아만 놓고 다시 가게로 나갔고.",
+  "v": "eric eleven_v4_turbo 0.92 0.45 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_sticker": {
+  "t": "아, 현관 거요. 조카 녀석이 붙이고 간 거. 비 맞아서 너덜너덜하길래 뗐어요.",
+  "v": "eric eleven_v4_turbo 0.92 0.45 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_sticker.1": {
+  "t": "언제 떼셨습니까.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_sticker.2": {
+  "t": "…요 며칠 새요. 날짜까지 기억하고 사는 사람이 어딨어요.",
+  "v": "eric eleven_v4_turbo 0.92 0.45 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_styro": {
+  "t": "날 추워지면 텃밭은 끝이에요. 옷장도 낡아서 버린 거고. 그게 뭐가 이상해요?",
+  "v": "eric eleven_v4_turbo 0.92 0.45 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_styro.1": {
+  "t": "전화기는요?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c09/p_tak/k_styro.2": {
+  "t": "…고장 났어요.",
+  "v": "eric eleven_v4_turbo 0.92 0.45 [calm]",
+  "p": 1
+ },
+ "v/c10/p_bang/k_audit": {
+  "t": "…은호가 홧김에 한 소리려니 했어요. 월요일 전에 풀면 될 줄 알았고.",
+  "v": "brian eleven_v4_turbo 0.95 0.4 [defensive]",
+  "p": 1
+ },
+ "v/c10/p_bang/k_audit.1": {
+  "t": "그래서 금요일 밤에 풀러 가셨습니까.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c10/p_bang/k_foglamp": {
+  "t": "…조수석 쪽이요. 몇 달 전에 깨졌는데 귀찮아서 못 갈았어요. 그게 왜요.",
+  "v": "brian eleven_v4_turbo 0.95 0.4 [defensive]",
+  "p": 1
+ },
+ "v/c10/p_bang/k_nov21": {
+  "t": "…차를 좀 뺐어요. 주차 자리가 영 이상해서 다시 대려고.",
+  "v": "brian eleven_v4_turbo 0.95 0.4 [defensive]",
+  "p": 1
+ },
+ "v/c10/p_bang/k_nov21.1": {
+  "t": "한 시간 반 동안요?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c10/p_bang/k_num5821": {
+  "t": "전화는… 했어요. 잘 들어갔나 걱정돼서. 들어갔다길래 끊었어요.",
+  "v": "brian eleven_v4_turbo 0.95 0.4 [defensive]",
+  "p": 1
+ },
+ "v/c10/p_bang/k_num5821.1": {
+  "t": "3분 동안요? 그리고 3분 뒤에 형님이 잠깐 보자네라는 메시지가 나갔습니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c10/p_bang/k_origin": {
+  "t": "그건 은호가 오해한 거예요. 서류 정리만 하면 되는 일이었어요. 번호를 잠깐 빌린 것뿐이고.",
+  "v": "brian eleven_v4_turbo 0.95 0.4 [defensive]",
+  "p": 1
+ },
+ "v/c10/p_bang/k_sinhang": {
+  "t": "창고요. 냉동기 알람이 울려서 잠깐 갔어요. 우리 창고가 신항에 있으니까.",
+  "v": "brian eleven_v4_turbo 0.95 0.4 [defensive]",
+  "p": 1
+ },
+ "v/c10/p_bang/k_sinhang.1": {
+  "t": "창고는 1부두인데, 은호 씨 휴대폰은 3부두에서 꺼졌습니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c10/p_miran/k_origin": {
+  "t": "…요즘 밤에 뭘 계속 맞춰 보더라고요. 창고에도 몇 번 다녀오고. 내 번호가 엉뚱한 데 찍혀 있다고 했어요.",
+  "v": "matilda eleven_v4_turbo 0.95 0.3 [sad]",
+  "p": 1
+ },
+ "v/c10/p_myeongsu/k_nov21": {
+  "t": "…그래요, 멱살 잡았어요. 경매 순번 얘기를 사람들 앞에서 꺼내길래. 내가 돈이 좀 급해서 순번 당겨 달라고 했었거든.",
+  "v": "chris eleven_v4_turbo 0.95 0.4 [hesitant]",
+  "p": 1
+ },
+ "v/c11/p_gil/k_ilsubook": {
+  "t": "…아침에 아궁이 재를 치웠어요. 재 속에 타다 만 비닐 쪼가리가 있었는데 수첩 표지 같았어요. 파란 비닐에 대원 도장 반쪽.",
+  "v": "liam eleven_v4_turbo 1 0.3 [nervous]",
+  "p": 1
+ },
+ "v/c11/p_gil/k_inn": {
+  "t": "네, 소양여관이요. 여관에서 자 본 건 그때가 처음이었어요. 잠이 안 와서 새벽까지 천장만 봤어요.",
+  "v": "liam eleven_v4_turbo 1 0.3 [nervous]",
+  "p": 1
+ },
+ "v/c11/p_gil/k_night": {
+  "t": "…사장님이 일곱 시 반쯤 여관비를 주셨어요. 오늘 밤엔 짐 쌀 게 있으니 공방에 오지 마라, 소양여관 가서 자라고요. 이튿날 여섯 시 넘어서 오라고.",
+  "v": "liam eleven_v4_turbo 1 0.3 [nervous]",
+  "p": 1
+ },
+ "v/c11/p_ham/k_luminol": {
+  "t": "그 바닥 피는 용수 놈이 끌에 손을 베였을 때 흘린 거요. 공방에서 손 안 베는 날이 없소.",
+  "v": "george eleven_v4_turbo 0.9 0.4 [tired]",
+  "p": 1
+ },
+ "v/c11/p_ham/k_night": {
+  "t": "…용수를 여관에 보낸 건 맞소. 짐을 싸려고. 빚쟁이들 몰래 새벽에 뜨려고 했소. 그게 죄요?",
+  "v": "george eleven_v4_turbo 0.9 0.4 [tired]",
+  "p": 1
+ },
+ "v/c11/p_ham/k_pyeon": {
+  "t": "…전화는 왔소. 여덟 시쯤. 오라 했지. 오면 이자라도 쥐여 보내려고.",
+  "v": "george eleven_v4_turbo 0.9 0.4 [tired]",
+  "p": 1
+ },
+ "v/c11/p_ham/k_saw": {
+  "t": "…헌 톱은 날이 나가서 버렸소. 새 톱 사는 게 죄요?",
+  "v": "george eleven_v4_turbo 0.9 0.4 [tired]",
+  "p": 1
+ },
+ "v/c11/p_ham/k_saw.1": {
+  "t": "토요일 아침 여덟 시 반에요? 철물점 문 열자마자?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c11/p_ham/k_truck": {
+  "t": "…용달을 부른 것도 맞고 취소한 것도 맞소. 새벽 세 시에. 마음이 바뀌었다니까.",
+  "v": "george eleven_v4_turbo 0.9 0.4 [tired]",
+  "p": 1
+ },
+ "v/c11/p_woo/k_night": {
+  "t": "…갈밭 지서 보호실에 있었소. 포장마차에서 옆자리 놈 멱살을 잡았다가 끌려갔지.",
+  "v": "adam eleven_v4_turbo 0.92 0.35 [gruff]",
+  "p": 1
+ },
+ "v/c11/p_woo/k_pocha": {
+  "t": "갈밭 삼거리 포장마차요. 소주 세 병. 옆에 앉은 놈이 정육점 칼잡이 어쩌고 하길래.",
+  "v": "adam eleven_v4_turbo 0.92 0.35 [gruff]",
+  "p": 1
+ },
+ "v/c12/p_murakoshi/k_1014": {
+  "t": "…신주쿠 만덕장이오. 13일 밤 9시부터 14일 아침 6시 반까지 한자리에 앉아 있었소. 판돈 걸린 마작이라 말 못 한 거요. 새벽 4시 20분에 사에키 삐삐를 친 것도 거기 카운터 전화요. 끝까지 안 받더군.",
+  "v": "george eleven_v4_turbo 0.95 0.4 [cold]",
+  "p": 1
+ },
+ "v/c12/p_murakoshi/k_1014.1": {
+  "t": "왜 처음엔 집에 있었다고 했습니까?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c12/p_murakoshi/k_1014.2": {
+  "t": "회사가 망해 가는 판에 도박장에서 밤을 새운 걸 은행이 알면 끝이오.",
+  "v": "george eleven_v4_turbo 0.95 0.4 [cold]",
+  "p": 1
+ },
+ "v/c12/p_shinji/k_1013": {
+  "t": "…불은 땠소. 쉬는 날에 탕 물을 다 빼고 타일을 닦았으니까. 대청소요. 어머니가 없으니 혼자 하려면 하루가 꼬박 걸리오.",
+  "v": "roger eleven_v4_turbo 0.9 0.35 [sullen]",
+  "p": 1
+ },
+ "v/c12/p_shinji/k_1013.1": {
+  "t": "물을 세 번이나 갈았습니까? 장작을 평소의 두 배나 때고?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c12/p_shinji/k_1013.2": {
+  "t": "더러우면 가는 거요.",
+  "v": "roger eleven_v4_turbo 0.9 0.35 [sullen]",
+  "p": 1
+ },
+ "v/c12/p_shinji/k_saeki": {
+  "t": "…탈의실 앞 분홍 전화 말이오? 손님 누구나 10엔 넣고 거는 전화요. 그날 밤 누가 걸었는지 내가 어떻게 아오.",
+  "v": "roger eleven_v4 0.9 0.35 [sullen]",
+  "p": 1
+ },
+ "v/c12/p_shinji/k_saeki.1": {
+  "t": "이삼삼공은 가시와유가 문을 닫는 시각입니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c12/p_shinji/k_saeki.2": {
+  "t": "…목욕탕 문 닫는 시각이야 동네 사람이 다 아오.",
+  "v": "roger eleven_multilingual_v2 0.9 0.35 [sullen]",
+  "p": 1
+ },
+ "v/c13/p_jihan/k_paper": {
+  "t": "…제가 알려 줬어요. 도하가 잠을 너무 못 자서. 저도 받아 봤는데 괜찮았으니까.",
+  "v": "will eleven_v4_turbo 1 0.3 [hesitant]",
+  "p": 1
+ },
+ "v/c13/p_jihan/k_paper.1": {
+  "t": "휴대폰에서 페이퍼는 언제 지웠습니까.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c13/p_jihan/k_paper.2": {
+  "t": "구급차 안에서요. 무서워서요. 걔가 저 때문에 그렇게 된 것 같아서…",
+  "v": "will eleven_v4_turbo 1 0.3 [hesitant]",
+  "p": 1
+ },
+ "v/c13/p_jihan/k_pill": {
+  "t": "…정품 수면제라고 했어요. 병원 약이랑 똑같이 생겼다고.",
+  "v": "will eleven_v4_turbo 1 0.3 [hesitant]",
+  "p": 1
+ },
+ "v/c13/p_jihan/k_pill.1": {
+  "t": "지한 씨도 받으셨죠.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c13/p_jihan/k_pill.2": {
+  "t": "두 번이요. 한 번은 먹었고… 한 알은 아직 제 서랍에 있어요. 가져가세요. 제발요.",
+  "v": "will eleven_v4_turbo 1 0.3 [hesitant]",
+  "p": 1
+ },
+ "v/c13/p_oh/k_paper": {
+  "t": "…가게 PC는 알바들도 써요. 누가 뭘 깔았는지 제가 어떻게 압니까.",
+  "v": "brian eleven_v4_turbo 0.95 0.4 [defensive]",
+  "p": 1
+ },
+ "v/c13/p_oh/k_paper.1": {
+  "t": "새벽 세 시 십이 분, 다섯 시 이십 분. 근무표상 전부 점주님 혼자 계신 시간입니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c13/p_oh/k_parcel": {
+  "t": "반값택배는 셀프예요. 손님들이 알아서 붙이고 가요.",
+  "v": "brian eleven_v4_turbo 0.95 0.4 [defensive]",
+  "p": 1
+ },
+ "v/c13/p_oh/k_parcel.1": {
+  "t": "새벽 다섯 시 십이 분입니다. 60일 동안 아홉 번, 전부 목금토 밤을 넘긴 새벽이고요.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c13/p_oh/k_parcel.2": {
+  "t": "…물건 채우느라 창고에 있었을 수도 있죠.",
+  "v": "brian eleven_v4_turbo 0.95 0.4 [defensive]",
+  "p": 1
+ },
+ "v/c13/p_oh/k_stakeout": {
+  "t": "제가요? 형사님들 커피까지 타 드렸는데요.",
+  "v": "brian eleven_v4_turbo 0.95 0.4 [defensive]",
+  "p": 1
+ },
+ "v/c13/p_oh/k_stakeout.1": {
+  "t": "창가 자리 부탁드린 게 19시 58분, 짭 깔림이 20시 13분입니다. 그 15분 동안 어디 계셨습니까.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c13/p_oh/k_stakeout.2": {
+  "t": "…창고에요. 물건 정리하느라.",
+  "v": "brian eleven_v4_turbo 0.95 0.4 [defensive]",
+  "p": 1
+ },
+ "v/c13/p_woojin/k_alley": {
+  "t": "…네. 제가 놨어요. 창고에서 물건 받아서, 좌표 찍어서 창고지기한테 보냈어요. 새솔중앙 골목, 3단지 상가 뒤, 공원. 하룻밤에 세 군데, 일곱 봉지.",
+  "v": "charlie eleven_v4_turbo 1.05 0.3 [nervous]",
+  "p": 1
+ },
+ "v/c13/p_woojin/k_alley.1": {
+  "t": "창고는 어디죠?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c13/p_woojin/k_alley.2": {
+  "t": "하람역 무인택배함이요. 번호랑 비번은 그날그날 와요.",
+  "v": "charlie eleven_v4_turbo 1.05 0.3 [nervous]",
+  "p": 1
+ },
+ "v/c13/p_woojin/k_coinnaru": {
+  "t": "제 계정이요? 급여 받으려고 만든 거예요. 창고지기가 문자로 온 인증번호 불러 달래서 불러 줬어요. 급여 연결한다고.",
+  "v": "charlie eleven_v4_turbo 1.05 0.3 [nervous]",
+  "p": 1
+ },
+ "v/c13/p_woojin/k_coinnaru.1": {
+  "t": "그 계정으로 두 달 동안 이천팔백만 원이 드나들었습니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c13/p_woojin/k_coinnaru.2": {
+  "t": "…네? 저는 한 번에 이삼십만 원밖에 못 받았어요.",
+  "v": "charlie eleven_v4_turbo 1.05 0.3 [nervous]",
+  "p": 1
+ },
+ "v/c14/p_seok/k_morning": {
+  "t": "…아, 잠깐 나갔었네요. 부품 사러요. 예비 차 타고.",
+  "v": "eric eleven_v4_turbo 0.95 0.4 [calm]",
+  "p": 1
+ },
+ "v/c14/p_seok/k_morning.1": {
+  "t": "어디로요? 영수증은요?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c14/p_seok/k_morning.2": {
+  "t": "공구상가요. 현금으로 샀어요. 영수증은… 버렸죠. 그게 무슨 상관입니까.",
+  "v": "eric eleven_v4_turbo 0.95 0.4 [calm]",
+  "p": 1
+ },
+ "v/c14/p_siwoo/k_fakedoc": {
+  "t": "…PC방 아니에요. 솔매시장 공영주차장 B3 기둥 뒤에 봉투가 있었어요. 아침 여덟 시에. 종이 한 장. 저는 뽑은 적 없어요.",
+  "v": "will eleven_v4_turbo 0.95 0.25 [shaky]",
+  "p": 1
+ },
+ "v/c14/p_siwoo/k_fakedoc.2": {
+  "t": "그럼 왜 PC방이라고 했어?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c14/p_siwoo/k_fakedoc.3": {
+  "t": "…종이가 사무실 정산서랑 똑같았어요. 한쪽에 줄 가 있는 거. 그 생각 하기 싫었어요.",
+  "v": "will eleven_v4_turbo 0.95 0.25 [shaky]",
+  "p": 1
+ },
+ "v/c14/p_taeo/k_ad": {
+  "t": "…보낸 건 맞아요. 시우한테도, 현수한테도. 저도 받은 거예요. 애들한테 돌리면 제 빚에서 오십 빼 준다고 해서.",
+  "v": "liam eleven_v4_turbo 1 0.3 [defensive]",
+  "p": 1
+ },
+ "v/c14/p_taeo/k_ad.2": {
+  "t": "누가?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c14/p_taeo/k_ad.3": {
+  "t": "…그건 말 못 해요. 저 여기서 나가면 일해야 돼요.",
+  "v": "liam eleven_v4_turbo 1 0.3 [defensive]",
+  "p": 1
+ },
+ "v/c14/p_taeo/k_coin": {
+  "t": "…10월 말에 사무실에서 만들었어요. 지사장님이 정산 계좌가 필요하다고. 제 폰으로 신분증이랑 얼굴만 찍으라 하셨어요. 나머지는 지사장님 폰으로 하셨고요.",
+  "v": "liam eleven_v4_turbo 1 0.3 [defensive]",
+  "p": 1
+ },
+ "v/c14/p_taeo/k_coin.2": {
+  "t": "거기로 오늘 이천삼백이 들어왔다가 나갔어.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c14/p_taeo/k_coin.3": {
+  "t": "…저 열아홉이에요. 저 이제 어떻게 돼요?",
+  "v": "liam eleven_v4_turbo 1 0.3 [defensive]",
+  "p": 1
+ },
+ "v/c15/p_jisu/k_tracker.1": {
+  "t": "그 얘기는 기록에 없습니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c15/p_junhyuk/k_tonight": {
+  "t": "…걔가 좀 늦게 왔어요. 열한 시 다 돼서.",
+  "v": "daniel eleven_v4_turbo 0.95 0.35 [cold]",
+  "p": 1
+ },
+ "v/c15/p_junhyuk/k_tonight.1": {
+  "t": "일곱 시부터 같이 축구를 봤다고 하셨습니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c15/p_junhyuk/k_tonight.2": {
+  "t": "경찰이 괜히 엮을까 봐 그랬죠. 걔는 이 일이랑 상관없어요. 맥주 사 들고 온 게 다예요.",
+  "v": "daniel eleven_v4_turbo 0.95 0.35 [cold]",
+  "p": 1
+ },
+ "v/c15/p_junhyuk/k_tracker": {
+  "t": "…사귈 때 단 거예요. 걔가 밤늦게 운전하는 게 걱정돼서.",
+  "v": "daniel eleven_v4_turbo 0.95 0.35 [cold]",
+  "p": 1
+ },
+ "v/c15/p_junhyuk/k_tracker.1": {
+  "t": "헤어진 지 석 달이 넘었습니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c15/p_junhyuk/k_tracker.2": {
+  "t": "떼는 걸 깜빡했어요. 10월부터는 앱 한 번도 안 열었어요. 기록 보면 알잖아요.",
+  "v": "daniel eleven_v4_turbo 0.95 0.35 [cold]",
+  "p": 1
+ },
+ "v/c15/p_junhyuk/k_waiver": {
+  "t": "합의해 달라고 한 게 죄예요? 내일, 아니 오늘이 재판인데.",
+  "v": "daniel eleven_v4_turbo 0.95 0.35 [cold]",
+  "p": 1
+ },
+ "v/c15/p_junhyuk/k_waiver.1": {
+  "t": "사인만 받아 오면 빌린 돈을 없던 걸로 해 준다고 쓰셨죠.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c15/p_junhyuk/k_waiver.2": {
+  "t": "말이 그렇다는 거죠. 걔가 알아서 한 거예요.",
+  "v": "daniel eleven_v4_turbo 0.95 0.35 [cold]",
+  "p": 1
+ },
+ "v/c15/p_landlord/k_phone": {
+  "t": "여기요. 꺼서 넣어 뒀어요. 가져가요. 지난주에 내가 다솜 씨한테 한 말 있잖아요. 동네 사람들 다 들었고. 그 휴대폰이 내 방에서 나오면 누가 내 말을 믿겠어요.",
+  "v": "bill eleven_v4_turbo 0.9 0.4 [annoyed]",
+  "p": 1
+ },
+ "v/c15/p_landlord/k_phone.3": {
+  "t": "그래서 22시 11분에 끄셨습니까.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c15/p_landlord/k_phone.4": {
+  "t": "…무서웠어요. 미안합니다.",
+  "v": "bill eleven_v4_turbo 0.9 0.4 [annoyed]",
+  "p": 1
+ },
+ "v/c15/p_landlord/k_tonight": {
+  "t": "…나갔어요. 열 시 조금 넘어서. 순찰차 나가고 나서.",
+  "v": "bill eleven_v4_turbo 0.9 0.4 [annoyed]",
+  "p": 1
+ },
+ "v/c15/p_landlord/k_tonight.1": {
+  "t": "손전등을 들고요.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c15/p_landlord/k_tonight.2": {
+  "t": "다솜 씨 차 뒤에서 휴대폰이 번쩍번쩍하는 거예요. 누가 자꾸 전화를 하는지.",
+  "v": "bill eleven_v4_turbo 0.9 0.4 [annoyed]",
+  "p": 1
+ },
+ "v/c15/p_landlord/k_villacam": {
+  "t": "…내가 뽑았어요. 한 달 됐어요.",
+  "v": "bill eleven_v4_turbo 0.9 0.4 [annoyed]",
+  "p": 1
+ },
+ "v/c15/p_landlord/k_villacam.1": {
+  "t": "고장이라고 하셨습니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c15/p_landlord/k_villacam.2": {
+  "t": "구청에서 주차장 월세 놓는 거 단속 나온다길래. 바깥 차 드나드는 게 찍히면 안 되니까.",
+  "v": "bill eleven_v4_turbo 0.9 0.4 [annoyed]",
+  "p": 1
+ },
+ "v/c15/p_minjae/k_carwash": {
+  "t": "거기 이제 제 거 아니에요. 5월에 문 닫았어요.",
+  "v": "callum eleven_v4_turbo 0.9 0.3 [hesitant]",
+  "p": 1
+ },
+ "v/c15/p_minjae/k_carwash.1": {
+  "t": "임대 계약은 12월까지고, 기계실 열쇠는 아직 갖고 계시죠.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c15/p_minjae/k_carwash.2": {
+  "t": "…변호사 부를게요.",
+  "v": "callum eleven_v4_turbo 0.9 0.3 [hesitant]",
+  "p": 1
+ },
+ "v/c15/p_minjae/k_nubi": {
+  "t": "얘기만 하려고 했어요. 편지도 보냈고, 도서관에도 갔는데 쳐다도 안 보니까.",
+  "v": "callum eleven_v4_turbo 0.9 0.3 [hesitant]",
+  "p": 1
+ },
+ "v/c15/p_minjae/k_nubi.1": {
+  "t": "조수석 문은 21시 47분에 열렸다 닫혔습니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c15/p_minjae/k_tonight": {
+  "t": "…차 빌린 건 맞아요. 드라이브 좀 했어요. 머리 식히러.",
+  "v": "callum eleven_v4_turbo 0.9 0.3 [hesitant]",
+  "p": 1
+ },
+ "v/c15/p_minjae/k_tonight.1": {
+  "t": "미리내동 골목에서 시동을 켠 채 17분 동안요?",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c15/p_woobin/k_tonight.1": {
+  "t": "오늘 미리내동엔 안 갔다고 하셨습니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ }
 }
