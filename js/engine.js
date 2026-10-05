@@ -292,7 +292,7 @@
     if (b.m != null) {
       // 선배의 글씨를 처음 만나는 때: 잉크가 배어 나오듯 나타나고, 한마디 (기록실의 「M의 메모」에 모인다)
       const first = !ST.m;
-      if (first) { ST.m = true; save(); const c0 = C; setTimeout(() => { if (C === c0) { sfx('pen'); toast(c0.frame === 'laptop' || c0.frame === 'crt' ? T('화면에 포스트잇 한 장이 붙어 있다. 낯익은 글씨 — M') : T('여백에 낯익은 글씨가 있다 — M')); } }, 1100); }
+      if (first) { ST.m = true; save(); const c0 = C; setTimeout(() => { if (C === c0) { sfx('write'); toast(c0.frame === 'laptop' || c0.frame === 'crt' ? T('화면에 포스트잇 한 장이 붙어 있다. 낯익은 글씨 — M') : T('여백에 낯익은 글씨가 있다 — M')); } }, 1100); }
       return `<p class="b-m${first ? ' fresh' : ''}">${inline(b.m)}<span class="b-m-sig">— M</span></p>`;
     }
     if (b.img != null) {
@@ -1476,7 +1476,7 @@
   }
   function toggleNudge() {
     if (NUDGE && NUDGE.c === C.id) NUDGE = null;
-    else { NUDGE = { c: C.id, key: null, more: false }; ST.nudges = (ST.nudges || 0) + 1; save(); sfx('pen'); }
+    else { NUDGE = { c: C.id, key: null, more: false }; ST.nudges = (ST.nudges || 0) + 1; save(); sfx('ink'); }
     renderNudge();
   }
   function nudgeGo(v) {
@@ -1777,10 +1777,22 @@
     return actx;
   };
   const SFXFILE = { stamp: 'solved', lock: 'unlock' };
+  // 수첩·보고서에 적는 소리는 사건의 시대를 따른다: 1950년 앞은 연필, 1990년 앞의 종이 사건은 타자기, 90년대 종이 사건은 옛 컴퓨터 자판, 2006년 모니터는 사무용 자판, 노트북은 얕은 자판
+  const inkKind = () => {
+    if (!C) return 'write';
+    if (C.frame === 'laptop') return 'tap';
+    if (C.frame === 'crt') return 'kbd';
+    const y = parseInt(C.year, 10) || 2000;
+    return y < 1950 ? 'write' : y < 1990 ? 'typewriter' : 'oldkbd';
+  };
+  const SMALL = /^(pen|page|click|key|ink|write|typewriter|tw1|oldkbd|kbd|tap)$/;
   function sfx(kind) {
     if (!S.sound) return;
     if (kind === 'page' && C) kind = C.frame === 'laptop' ? 'click' : C.frame === 'crt' ? 'key' : 'page'; // 화면 속 문서는 종이 넘기는 소리 대신 딸깍
-    if (MG.sound && MG.sound.play('sfx/' + (SFXFILE[kind] || kind), kind === 'pen' || kind === 'page' || kind === 'click' || kind === 'key' ? 0.5 : 0.9)) return;
+    if (kind === 'ink') kind = inkKind();
+    if (MG.sound && MG.sound.play('sfx/' + (SFXFILE[kind] || kind), SMALL.test(kind) ? 0.5 : 0.9)) return;
+    if (kind === 'write') kind = 'pen';
+    else if (/^(typewriter|tw1|oldkbd|kbd|tap)$/.test(kind)) kind = 'key';
     try {
       if (!ac()) return;
       const t = actx.currentTime;
@@ -1794,7 +1806,7 @@
         const g = actx.createGain(); g.gain.setValueAtTime(gain, t); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
         src.connect(f).connect(g).connect(actx.destination); src.start(t);
       };
-      if (kind === 'pen') { noise(0.09, 'bandpass', 3200, 1.2, 0.18); setTimeout(() => noise(0.07, 'bandpass', 2600, 1.2, 0.12), 90); }
+      if (kind === 'pen') { noise(0.09, 'bandpass', 1900, 0.9, 0.16); setTimeout(() => noise(0.07, 'bandpass', 1600, 0.9, 0.11), 90); }
       else if (kind === 'page') noise(0.22, 'lowpass', 1400, 0.7, 0.22);
       else if (kind === 'click' || kind === 'key') noise(kind === 'key' ? 0.06 : 0.03, 'highpass', kind === 'key' ? 1800 : 3500, 0.8, 0.2);
       else if (kind === 'stamp') {
@@ -1962,7 +1974,7 @@
     const before = census();
     ST.keys.push(id); save();
     const gained = census() - before;
-    if (gained > 0) cue('clue'); else sfx('pen');
+    if (gained > 0) cue('clue'); else sfx('ink');
     $$('.kw').forEach(b => { if (b.dataset.kw === id) b.classList.add('on'); });
     renderTabs(); renderList(); renderNotebook();
     const kc = $(`.kchip[data-chip="${id}"]`); // 방금 적은 단어는 연필로 써 넣듯 (메모와 같게)
@@ -1985,7 +1997,7 @@
     const before = census();
     ST.notes.push({ id: ++ST.nid, ref, t: p.t, f: p.f, src: p.src });
     save();
-    if (census() > before) cue('clue'); else sfx('pen');
+    if (census() > before) cue('clue'); else sfx('ink');
     $$('.pin').forEach(b => { if (b.dataset.pin === ref) { b.classList.add('on'); b.innerHTML = IC_TICK; b.setAttribute('aria-label', T('수첩에 적음')); b.dataset.tip = T('수첩에 적음'); } });
     renderNotebook();
     const li = $(`.notes li[data-nid="${ST.nid}"]`);
@@ -2566,19 +2578,19 @@
       if (e.target.closest('[data-pname]')) return renamePlayer(e.target.value);
       if (e.target.matches('[data-lang]')) return MG.I18N.set(e.target.value);
       const rq = e.target.closest('[data-rq-pick]');
-      if (rq && C) { tmp().rq[rq.dataset.rqPick] = rq.value; $$(`[data-rq-pick="${rq.dataset.rqPick}"]`).forEach(x => x.closest('.rep-opt').classList.toggle('on', x.checked)); sfx('pen'); return; }
+      if (rq && C) { tmp().rq[rq.dataset.rqPick] = rq.value; $$(`[data-rq-pick="${rq.dataset.rqPick}"]`).forEach(x => x.closest('.rep-opt').classList.toggle('on', x.checked)); sfx('ink'); return; }
       const s = e.target.closest('[data-rep]');
       if (!s || !C) return;
       // 마우스·손가락으로 고르면 목록을 접는다. 방향키로 고르는 중이면 펼쳐 둔다 (방향키는 옮기는 대로 골라지므로, 접으면 첫 메모에서 멈춘다 — 접기는 「접기」 단추로)
       if (s.dataset.rep === 'culprit') ST.report.culprit = s.value; else { ST.report.claims[s.dataset.rep] = s.value; if (PTR) REPOPEN = null; }
-      save(); sfx('pen'); renderRep();
+      save(); sfx('ink'); renderRep();
     });
     document.addEventListener('focusin', e => { const i = e.target.closest && e.target.closest('[data-sym]'); if (i) cipherHl(i.dataset.sym); });
     document.addEventListener('focusout', e => { if (CIPHL != null && e.target.closest && e.target.closest('[data-sym]') && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-sym]'))) cipherHl(null); });
     document.addEventListener('input', e => {
-      // 칸에 적는 소리: 2006년 모니터는 자판, 노트북은 얕은 자판, 종이 서식은 연필 (소리 파일이 있을 때만, 너무 잦지 않게)
+      // 칸에 적는 소리: 노트북은 얕은 자판, 2006년 모니터와 90년대 종이 사건은 자판, 그 앞은 타자기, 1950년 앞은 연필 (소리 파일이 있을 때만, 너무 잦지 않게)
       if (C && S.sound && MG.sound && e.target.matches('input:not([type="radio"])') && e.target.closest('.case-view')) {
-        const now = Date.now(), f = C.frame === 'crt' ? ['key', 0.24, 45] : C.frame === 'laptop' ? ['click', 0.16, 45] : ['pen', 0.14, 120];
+        const ink = inkKind(), now = Date.now(), f = ink === 'tap' ? ['click', 0.16, 45] : ink === 'kbd' || ink === 'oldkbd' ? ['key', 0.24, 45] : ink === 'typewriter' ? ['tw1', 0.24, 60] : ['pen', 0.14, 120];
         if (now - TYPED > f[2]) { TYPED = now; MG.sound.play('sfx/' + f[0], f[1]); }
       }
       const q = e.target.closest('[data-rep-filter]');

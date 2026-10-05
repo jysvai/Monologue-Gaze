@@ -9,6 +9,8 @@
   const S = () => MG.state();
   const A = () => MG.audio || { files: {}, span: {}, tone: {} };
   const url = k => A().files[k];
+  // 자주 나는 잔소리(종이·연필·자판·타자기)
+  const SMALL = /^sfx\/(pen|page|click|key|write|typewriter|tw1|oldkbd|kbd|tap)$/;
 
   let ax = null, out = null;
   function ctx() {
@@ -45,7 +47,7 @@
       const src = c.createBufferSource(), g = c.createGain();
       src.buffer = buf;
       // 자주 나는 잔소리(종이·연필·딸깍)는 매번 조금씩 다르게: 같은 녹음이 되풀이되는 티가 덜 난다
-      const small = /^sfx\/(pen|page|click|key)$/.test(k);
+      const small = SMALL.test(k);
       let v = vol == null ? 0.9 : vol;
       if (small) { src.playbackRate.value = 0.92 + Math.random() * 0.16; v *= 0.85 + Math.random() * 0.15; }
       g.gain.value = v;
@@ -112,7 +114,7 @@
       if (!S().sound) return false;
       const a0 = get(k); if (!a0) return false;
       const a = a0.paused ? a0 : a0.cloneNode();
-      const small = /^sfx\/(pen|page|click|key)$/.test(k);
+      const small = SMALL.test(k);
       a.volume = (vol == null ? 0.9 : vol) * (small ? 0.85 + Math.random() * 0.15 : 1); a.preservesPitch = !small; a.playbackRate = small ? 0.92 + Math.random() * 0.16 : 1;
       try { a.currentTime = 0; } catch (e) { /* not loaded yet */ }
       a.play().catch(() => {}); return true;
@@ -172,7 +174,7 @@
   const tone = id => A().tone[id] || 130;
 
   // 자주 쓰는 효과음은 첫 손길에 미리 받아 둔다 (소리가 꺼져 있으면 받지 않는다)
-  function warm() { if (S().sound) ['sfx/clue', 'sfx/match', 'sfx/confess', 'sfx/miss', 'sfx/find', 'sfx/pen', 'sfx/page', 'sfx/click', 'sfx/key'].forEach(load); }
+  function warm() { if (S().sound) ['sfx/clue', 'sfx/match', 'sfx/confess', 'sfx/miss', 'sfx/find', 'sfx/pen', 'sfx/write', 'sfx/typewriter', 'sfx/tw1', 'sfx/oldkbd', 'sfx/kbd', 'sfx/tap', 'sfx/page', 'sfx/click', 'sfx/key'].forEach(load); }
   document.addEventListener('pointerdown', function once() { ctx(); warm(); document.removeEventListener('pointerdown', once); }, { passive: true });
 
   const preload = ks => { if (S().sound) ks.forEach(k => url(k) && load(k)); }; // 곧 날 소리를 미리 받아 둔다 (처음 한 번이 늦어 건너뛰지 않게)
