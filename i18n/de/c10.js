@@ -66,7 +66,7 @@ MG.I18N.put("de", "c10", {
 "1w6pjme3ojt": "Abfrageergebnisse, Verbindungsdaten, Funkzellenprotokoll, Dashcam. Jede Quelle hat ihre Uhrzeiten, aber niemand hat sie je in eine Reihe gelegt.",
 "t50i55x6kk": "Die Karten mit ▲▼ verschieben und den Uhrzeiten der Felder zuordnen. Die Uhrzeiten stehen genau so da wie in den Akten.",
 "nnfwv95437": "Rekonstruktion — 23:52 Fahrer steigt aus · 23:58 12ga 3471 Einfahrt Haupttor · 00:09 Anruf von 5821, 3 Min. · 00:14 Opfer auf dem Beifahrersitz des SUV · 00:16 12ga 3471 Ausfahrt Haupttor · 00:34 12ga 3471 Mautstelle (Richtung Neuhafen) · 00:47 letztes Signal vom Handy des Opfers an Pier 3 · 01:21 12ga 3471 Mautstelle (Richtung Innenstadt).",
-"14higekqivv": "Hinweis — Vom Haupttor der Wohnanlage Hanul bis zur Mautstelle Neuhafen über die Haejin-Brücke gut 15 Minuten mit dem Auto.",
+"1h39lkqnmqd": "Hinweis — Vom Haupttor der Wohnanlage Hanul bis zur Mautstelle Neuhafen über die Haejin-Brücke gut 15 Minuten mit dem Auto. Der Rückweg (Mautstelle 01:21 → Haupttor 01:52) dauerte über 30 Minuten; wo der Wagen dazwischen stand, zeigt keine Aufzeichnung.",
 "xbhsun7w7h": "Die Uhrzeiten fügen sich zu einer lückenlosen Reihe",
 "1am5xk6z3l4": "Befragung",
 "1p1p5zicrhe": "Aufsuchen lassen sich nur Personen, deren Name im Notizbuch steht.",

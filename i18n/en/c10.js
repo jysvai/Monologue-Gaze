@@ -66,7 +66,7 @@ MG.I18N.put("en", "c10", {
 "1w6pjme3ojt": "Query replies, call records, cell-tower logs, dashcams. Each has its own timestamps, but no one has ever laid them out on one line.",
 "t50i55x6kk": "Move the cards with ▲▼ to match each slot's time. The slot times are exactly as written in the records.",
 "nnfwv95437": "Reconstruction — 23:52 driver drops him off · 23:58 12ga 3471 in at main gate · 00:09 incoming call from 5821, 3 min · 00:14 victim into SUV passenger seat · 00:16 12ga 3471 out at main gate · 00:34 12ga 3471 at tollgate (toward New Port) · 00:47 victim's phone, last signal at Pier 3 · 01:21 12ga 3471 at tollgate (toward downtown).",
-"14higekqivv": "Note — from the Hanul Apartments main gate to the New Port Tollgate via Haejin Bridge: a little over 15 minutes by car.",
+"1h39lkqnmqd": "Note — from the Hanul Apartments main gate to the New Port Tollgate via Haejin Bridge: a little over 15 minutes by car. The way back (tollgate 01:21 → main gate 01:52) took more than 30 minutes; no record shows where the car stopped in between.",
 "xbhsun7w7h": "The times line up",
 "1am5xk6z3l4": "Interviews",
 "1p1p5zicrhe": "You can only visit people whose names are in your notebook.",
