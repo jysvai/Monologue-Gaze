@@ -2230,7 +2230,10 @@
     $$('.pin').forEach(b => { if (b.dataset.pin === ref) { b.classList.add('on'); b.innerHTML = IC_TICK; b.setAttribute('aria-label', T('수첩에 적음')); b.dataset.tip = T('수첩에 적음'); } });
     renderNotebook();
     const li = $(`.notes li[data-nid="${ST.nid}"]`);
-    if (li) { const d = li.closest('details'); if (d && !d.open) { NGSHUT.delete(C.id + '|' + d.dataset.ng); d.open = true; } if (!(MG.writeIn && MG.writeIn(li, { duration: 900 }))) li.classList.add('fresh'); if (beside()) li.scrollIntoView({ block: 'nearest' }); }
+    if (li) { const d = li.closest('details'); if (d && !d.open) { NGSHUT.delete(C.id + '|' + d.dataset.ng); d.open = true; } if (!(MG.writeIn && MG.writeIn(li, { duration: 900 }))) li.classList.add('fresh'); if (beside()) { // 사건 요약 카드를 보고 있으면 수첩을 끌어내리지 않고 메모 수만 한 번 튄다 — 적을 때마다 요약과 보고서 줄이 화면 밖으로 밀려나지 않게
+        const nb = $('#nb'), br = nb && nb.querySelector('.brief'), top = br && br.getBoundingClientRect().bottom > nb.getBoundingClientRect().top + 60;
+        const n = top && li.closest('.nb-sec') && li.closest('.nb-sec').querySelector('.hh small');
+        if (n) { n.classList.remove('bump'); void n.offsetWidth; n.classList.add('bump'); } else li.scrollIntoView({ block: 'nearest' }); } }
     const gained = census() - before;
     if (gained > 0) { renderTabs(); renderList(); }
     const chips = $('#askChips');

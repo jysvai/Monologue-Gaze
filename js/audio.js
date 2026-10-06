@@ -153,18 +153,18 @@
     return el;
   };
   if (document.body) capBox();
-  function caption(t, v) {
+  function caption(t, v, top) {
     const el = capBox();
     const my = ++capN;
     clearTimeout(capT);
-    el.textContent = t; el.classList.remove('on'); void el.offsetWidth; el.classList.add('on');
+    el.textContent = t; el.classList.remove('on'); el.classList.toggle('top', !!top); void el.offsetWidth; el.classList.add('on');
     const hide = ms => { if (my === capN) capT = setTimeout(() => { if (my === capN) el.classList.remove('on'); }, ms); };
     if (v) v.done.then(() => hide(900)); else hide(1500 + t.length * 80);
   }
   function hero(k) {
     const t = MG.T((A().say || {})['hero/' + k]); // 목소리는 한국어 그대로, 자막만 고른 언어로
     const v = voice('hero/' + k);
-    if (t) caption(t, v);
+    if (t) caption(t, v, /^(accuse|solved|wrong)$/.test(k)); // 보고서를 낼 때의 자막은 위에 — 아래쪽 결말·「결과 옮겨 적기」 줄을 가리지 않게
     return v;
   }
 
