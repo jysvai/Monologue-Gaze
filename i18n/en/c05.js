@@ -614,7 +614,7 @@ MG.I18N.put("en", "c05", {
 "28hfqrxmp8a": "The pay phone at the gas station across the street? All the drivers use it. One call each before they load up.",
 "19tbnkfhw0b": "Santa Reina? First town Route 7 stops at. A few newsstands and the paper box outside the post office.",
 "1a1cph72chl": "The lighthouse road? We pass it near the end of Route 7. At that hour all you see is the lighthouse beam.",
-"1yjy3t39qjg": "Carl asked me to swap a few times. Came by the warehouse on a Friday and said the north road was quiet. The city is stop-and-go, hard driving, so it suited me fine.",
+"1uoo1uayehr": "Carl asked me to swap a few times. Came by the warehouse on a Friday and said the north road was quiet. The city is stop-and-go, hard driving, but it finishes early, so it suited me fine.",
 "fiwd7b53oc": "Carl doesn't talk. On his breaks he sits in his truck hunched over the puzzle on the back page.",
 "209laj3d0jd": "That night? If it was a day we swapped, I'd have run No. 1 in the city. It'll all be in the roster.",
 "2fv4us7d612": "I always punch in before midnight. If I'm late, Wallace gets on me.",
