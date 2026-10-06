@@ -450,6 +450,34 @@
     const a = rawAns(p, k);
     return ((a && a.need) || []).filter(n => n[0] === '!').map(n => ST.notes.find(x => x.f === n.slice(1))).filter(Boolean);
   }
+  // 붉은 테 단어를 누르면 어떤 메모를 내밀지 고른다 — 맞는 메모를 고르는 것까지가 추궁이다 (엔진이 대신 골라 주지 않는다)
+  let PICK = null; // { pid, k, miss, tries }
+  const MISS = () => [T('(메모를 훑어본다) 이게 그 얘기하고 무슨 상관입니까?'), T('(어깨를 으쓱한다) 그걸 보여 주셔도 드릴 말씀은 같습니다.'), T('…그 메모로 뭘 말씀하시려는 건지 모르겠군요.')];
+  const MISS_SOFT = () => [T('(메모를 한참 들여다본다) …글쎄요, 이걸로는 떠오르는 게 없는데요.'), T('(고개를 갸웃한다) 이건 제가 말씀드린 거하고는 다른 얘기 같은데요.')];
+  function pickHtml(p) {
+    const k = PICK.k, L = (C.keywords[k] || {}).label || k;
+    const list = ST.notes.slice().reverse().map(n => `<button type="button" class="rep-opt press-opt" data-press-note="${n.id}"><span class="t">${esc(n.t)}</span> <small class="src">— ${esc(n.src || '')}</small></button>`).join('');
+    return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
+      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss)}</p>` : ''}
+      <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p></div>`;
+  }
+  function choosePress(id) {
+    const o = ST.view.open;
+    if (!PICK || !o || o.t !== 'person' || o.id !== PICK.pid) { PICK = null; return; }
+    const p = C.people[PICK.pid], k = PICK.k, n = ST.notes.find(x => String(x.id) === String(id));
+    if (!p || !n) return;
+    const want = ((rawAns(p, k) || {}).need || []).filter(x => x[0] === '!').map(x => x.slice(1));
+    if (n.f && want.includes(n.f)) { ask(k, true); return; }
+    const L = isSoft(p, k) ? MISS_SOFT() : MISS();
+    PICK.tries = (PICK.tries || 0) + 1;
+    PICK.miss = L[(PICK.tries - 1 + hash(p.id)) % L.length];
+    sfx('miss');
+    const w = ($('#paneRead [data-press-filter]') || {}).value || '';
+    renderRead();
+    const f = $('#paneRead [data-press-filter]');
+    if (f) { f.value = w; if (w) f.dispatchEvent(new Event('input', { bubbles: true })); }
+    const pk = $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest' });
+  }
   const DASH = /^\s*—\s*/;
   const MIDACT = MG.I18N.lang === 'ko' ? /\(([^()<>\d]*[가-힣][^()<>\d]*)\)/g : /[(（]([^()（）<>\d]*\p{L}[^()（）<>\d]*)[)）]/gu; // 말 도중의 몸짓 (숫자가 든 괄호 — 나이·번호 — 는 말 그대로 둔다). 중국어·일본어 번역은 전각 괄호（…）도
   function chatLines(arr, base, src) {
@@ -482,7 +510,7 @@
     }).join('');
     return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}</div></header>
       <div class="per-tr" data-who="${esc(p.id)}">${tr}</div>
-      <div class="per-ask"><p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 붉은 테: 메모를 들이밀어 다시 물을 수 있다')}${liveOn() ? T` · 물을 때마다 ${hm(lcost('ask'))}` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
+      ${PICK && PICK.pid === p.id ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}><p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 붉은 테: 메모를 들이밀어 다시 물을 수 있다')}${liveOn() ? T` · 물을 때마다 ${hm(lcost('ask'))}` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
   }
 
   /* 대화 재생: 몸짓은 스르르, 말은 한 글자씩(사람마다 다른 말소리). 목소리가 있는 말풍선은 재생 시각에 맞춰 찍는다. 누르면 건너뛴다 */
@@ -1550,7 +1578,7 @@
     const people = Object.values(C.people).filter(p => personVisible(p) && ST.asked[p.id] != null);
     people.forEach(p => ST.keys.forEach(k => {
       const e = askEntry(p, k), asked = ST.asked[p.id] || [];
-      if (e.endsWith('!') && !asked.includes(e) && asked.includes(k)) add(`press:${p.id}|${k}`, T('수첩을 내밀어 다시 물어볼 사람이 있다.'), T`${p.name} — 「${C.keywords[k].label}」`, { t: 'person', id: p.id, src: p.src });
+      if (e.endsWith('!') && !asked.includes(e) && asked.includes(k)) { const ev = evidence(p, k)[0]; add(`press:${p.id}|${k}`, T('수첩을 내밀어 다시 물어볼 사람이 있다.'), ev && ev.src ? T`${p.name} — 「${C.keywords[k].label}」 · 내밀 메모는 ${ev.src}에서` : T`${p.name} — 「${C.keywords[k].label}」`, { t: 'person', id: p.id, src: p.src }); }
     }));
     people.forEach(p => ST.keys.forEach(k => {
       if (!C.keywords[k] || (k === p.key && rawAns(p, k) == null)) return;
@@ -1903,7 +1931,7 @@
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
       <header class="cab-top"><p class="cab-kicker">${T`서울서부경찰서 강력2팀 · 미제사건 기록실`}</p><h1 class="cab-title">Monologue Gaze</h1><p class="cab-sub">${T`시간은 흐르지만, 새겨진 기록은 거짓말을 하지 않는다.`}</p>
-        <p class="cab-ctl">${whoBtn(showRoster)}${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}${langSel()}</p><p class="cab-stat">${T`종결 <b>${solvedMain}</b> / ${main.length}${live.length ? T` · 현행 <b>${solvedLive}</b> / ${live.length}` : ''} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}`}</p>${rate}</header>
+        <p class="cab-ctl">${whoBtn(showRoster)}${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}${langSel()}</p><p class="cab-stat">${T`종결 <b>${solvedMain}</b> / ${main.length}${live.length ? T` · 현행 사건 <b>${solvedLive}</b> / ${live.length}` : ''} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}`}</p>${rate}</header>
       ${showRoster ? rosterHtml(showRoster === 'ask') : ''}
       ${intro}
       <section class="drawer" aria-label="${T`사건 파일`}">${MG.cases.filter(c => !c.live).map(folder).join('')}</section>
@@ -2229,6 +2257,7 @@
     const first = (o.t === 'doc' || o.t === 'photo') && !ST.seen.includes(o.id);
     keepPos();
     ST.view.open = o;
+    PICK = null;
     if (o.t === 'person' && C.people[o.id]) { ST.asked[o.id] ||= []; CHIPS = null; } // 찾아가 첫마디를 들었으면 목록의 빨간 표시는 걷힌다 (문서를 펼치면 걷히듯)
     save(); sfx('page');
     renderRead(); renderList();
@@ -2265,13 +2294,22 @@
     if (narrow()) { ST.view.open = null; renderRead(); }
     if (!beside()) $('.stage').scrollIntoView({ block: 'start' });
   }
-  function ask(k) {
+  function ask(k, chosen) {
     const o = ST.view.open;
     if (!o || o.t !== 'person') return;
     const p = C.people[o.id];
     const e = askEntry(p, k);
     const a = (ST.asked[p.id] ||= []);
     const fresh = !a.includes(e);
+    // 붉은 테(한 번 물어본 뒤 메모가 생긴 단어)는 내밀 메모부터 고른다. 처음 묻는 말에 저절로 내미는 것(soft·같은 기록)은 그대로
+    if (!chosen && fresh && e.endsWith('!') && a.includes(k) && evidence(p, k).length) {
+      PICK = { pid: p.id, k };
+      renderRead();
+      const pk = $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' });
+      land(['#paneRead [data-press-filter]'], true);
+      return;
+    }
+    PICK = null;
     // 이미 물은 것을 다시 누르면(두 번 톡 누름 포함) 그 대답만 짚어 준다 — 한창 나오는 대답을 다시 그려 끊지 않는다
     if (!fresh && TALK && TALK.alive()) {
       const q0 = $$('.per-tr .qa').find(x => x.dataset.qa === e);
@@ -2653,6 +2691,8 @@
         return;
       }
       if ((el = t.closest('[data-ph]'))) return photoClick(el, e);
+      if ((el = t.closest('[data-press-note]'))) return choosePress(el.dataset.pressNote);
+      if (t.closest('[data-press-cancel]')) { PICK = null; renderRead(); land(['#askChips .chip.again', '#askChips .chip'], true); return; }
       if ((el = t.closest('[data-ask]'))) return ask(el.dataset.ask);
       if ((el = t.closest('[data-search]'))) return search(el.dataset.search);
       if ((el = t.closest('[data-chip]'))) return chip(el.dataset.chip);
@@ -2721,6 +2761,16 @@
       } finally { SYNC = false; }
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && TALK && TALK.alive() && !$('.zoom')) TALK.finish(); }); // 대화 건너뛰기 (키보드)
+    // 내밀 메모 고르기: Esc 는 그만두기, 찾기 칸의 Enter 는 걸린 메모가 하나뿐이면 그것을 내민다
+    document.addEventListener('keydown', e => {
+      if (!C || !PICK || e.isComposing || e.keyCode === 229) return;
+      if (e.key === 'Escape' && !$('.zoom') && !(TALK && TALK.alive())) { PICK = null; renderRead(); land(['#askChips .chip.again', '#askChips .chip'], true); return; }
+      if (e.key === 'Enter' && e.target.matches && e.target.matches('[data-press-filter]')) {
+        e.preventDefault();
+        const hits = [...e.target.parentNode.querySelectorAll('.press-opt:not([hidden])')];
+        if (hits.length === 1) choosePress(hits[0].dataset.pressNote);
+      }
+    });
     // Ctrl+S: 브라우저의 「다른 이름으로 저장」 창 대신 — 수첩과 진행은 서랍에 저절로 남는다
     document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && !e.altKey && !e.shiftKey && (e.key === 's' || e.key === 'S')) { e.preventDefault(); toast(T('적은 것은 서랍에 저절로 남는다. 따로 저장할 것은 없다.')); } });
     // 보고서는 「올리기」 단추로만 올린다: 범인·메모를 고르다가, 메모를 찾다가 Enter 를 눌러 모르고 올라가지 않게 (양식의 Enter 제출을 막는다).
@@ -2786,6 +2836,13 @@
       else if (C && S.sound && MG.sound && e.target.matches('input:not([type="radio"])') && e.target.closest('.case-view')) {
         const ink = inkKind(), now = Date.now(), f = ink === 'tap' ? ['click', 0.16, 45] : ink === 'kbd' || ink === 'oldkbd' ? ['key', 0.24, 45] : ink === 'typewriter' ? ['tw1', 0.24, 60] : ['pen', 0.14, 120];
         if (now - TYPED > f[2]) { TYPED = now; MG.sound.play('sfx/' + f[0], f[1]); }
+      }
+      const pq = e.target.closest('[data-press-filter]');
+      if (pq) { // 내밀 메모 찾기
+        const w = pq.value.trim().toLowerCase(), box = pq.parentNode;
+        let any = 0; box.querySelectorAll('.press-opt').forEach(o => { const hit = !w || o.textContent.toLowerCase().includes(w); o.hidden = !hit; any += hit; });
+        const none = box.querySelector('.press-none'); if (none) none.hidden = !!any;
+        return;
       }
       const q = e.target.closest('[data-rep-filter]');
       if (q) { // 메모 찾기: 낱말이 든 메모만 남긴다

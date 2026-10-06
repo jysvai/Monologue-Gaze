@@ -33,7 +33,7 @@
       '점선 밑줄 단어를 누르면 수첩에 적힌다.',
       '수첩의 단어로 검색하고, 사람을 찾아가 물어본다.',
       '문장 옆 ✎ 를 누르면 메모가 된다. 보고서엔 메모를 증거로 붙인다.',
-      '「감식 사진」은 사진을 직접 눌러 살핀다. 「타임라인」은 그날 밤을 가리키는 단어를 수첩에 적으면 열린다. 카드를 옮겨 시각에 맞춘다.',
+      '「감식 사진」은 사진을 직접 눌러 살핀다. 「타임라인」은 그날 밤을 가리키는 단어를 수첩에 적으면 열린다 — 사람들의 말이나 게시판 댓글 속에 있다. 카드를 옮겨 시각에 맞춘다.',
     ],
     sources: [
       { id: 'web', type: 'archive', name: '누리 검색', skin: 'web', desc: '노트북 브라우저에 로그인된 채 남은 검색 사이트.', placeholder: '사람, 장소, 무엇이든', start: ['d_hist'], startLabel: '브라우저에 남은 기록' },
@@ -72,7 +72,8 @@
       k_heights: { label: '청운하이츠', type: 'place', alias: ['504호', '청운동', '오피스텔'] },
       k_kintex: { label: '킨텍스', type: 'place', alias: ['일산', '고양시', '일러스트 페어', '페어'] },
       k_busan: { label: '부산', type: 'place', alias: ['광안리', 'KTX'] },
-      k_bus: { label: '푸른 정류장', type: 'thing', alias: ['공모전', '청록일러스트', '대상'] },
+      k_bus: { label: '푸른 정류장', type: 'thing', alias: ['대상', '수상작'] },
+      k_contest: { label: '청록일러스트 공모전', type: 'thing', alias: ['공모전', '청록일러스트'] },
       k_sketch: { label: '버스정류장 연작', type: 'thing', alias: ['버스정류장', '스케치', '연작'] },
       k_ipad: { label: 'JH의 iPad', type: 'thing', alias: ['iPad', '아이패드', '태블릿'] },
       k_door: { label: '도어락', type: 'thing', alias: ['홈키퍼', '출입 기록'] },
@@ -85,7 +86,7 @@
     docs: {
       /* ── 누리 검색 ── */
       d_hist: { src: 'web', title: '최근 검색어', meta: 'seoyun.draws 님의 기록', paper: '누리', bar: '#c35c28', body: [
-        { rows: [['[[원본 파일]] 레이어 증거 효력', '10.09 20:31'], ['공모전 표절 신고 방법', '10.09 20:24'], ['[[도어락]] 비밀번호 바꾸는 법', '10.08 20:02'], ['고양이 사료 추천', '10.03 23:41'], ['청록일러스트 [[공모전|k_bus]] 결과', '09.21 00:37']], head: ['검색어', '시각'], f: { 1: 'f_hist' } },
+        { rows: [['[[원본 파일]] 레이어 증거 효력', '10.09 20:31'], ['공모전 표절 신고 방법', '10.09 20:24'], ['[[도어락]] 비밀번호 바꾸는 법', '10.08 20:02'], ['고양이 사료 추천', '10.03 23:41'], ['청록일러스트 [[공모전|k_contest]] 결과', '09.21 00:37']], head: ['검색어', '시각'], f: { 1: 'f_hist' } },
         { note: '검색어를 누르는 대신, 위 검색창에 직접 쳐 보자.' },
       ] },
       d_news: { src: 'web', find: ['k_seoyun', 'k_heights'], title: '서대문구 오피스텔서 20대 여성 숨진 채 발견… 경찰 "12일 이후 사망 추정"', meta: '누리뉴스 · 2025.10.15 07:12 · 사회부', paper: '누리뉴스', bar: '#24344d', body: [
@@ -105,7 +106,7 @@
         { img: 'sketch', cap: '2024.11.03 — 작업 중인 스케치. [[버스정류장 연작]] #1. 완성하면 공모전에 낼 거임 ☔', f: 'f_sketch' },
         '[[jaehee.draws|k_jaehee]] 와 구도 미쳤다 · 2024.11.03',
       ] },
-      d_snap_jaehee: { src: 'web', find: ['k_jaehee', 'k_kintex', 'k_bus'], title: '윤재희 (@jaehee.draws)', meta: '스냅로그 · 팔로워 8,902', paper: '스냅로그', bar: '#9c4f5e', body: [
+      d_snap_jaehee: { src: 'web', find: ['k_jaehee', 'k_kintex', 'k_bus', 'k_contest'], title: '윤재희 (@jaehee.draws)', meta: '스냅로그 · 팔로워 8,902', paper: '스냅로그', bar: '#9c4f5e', body: [
         'illustrator · 제3회 청록일러스트 대상',
         { img: 'booth', cap: '2025.10.12 (일) 19:30 · 📍고양 [[킨텍스]] — 페어 2일차 끝! 엽서 전부 완판 😭' },
         { p: '2025.10.11 (토) 10:50 · 📍고양 [[킨텍스]] 제2전시장 — 일산 일러스트 페어 D-day! 이틀 내내 부스 C-12에 있어요', f: 'f_fair' },
@@ -130,7 +131,7 @@
         { note: '202호 · 10.06 (월) 20:11' },
         '기둥 C 근처요. 어두워서 무섭네요.',
       ] },
-      d_contest: { src: 'web', find: ['k_bus'], title: '제3회 청록일러스트 공모전 수상작 발표', meta: '2025.09.20 · 응모작 1,146점', paper: '청록일러스트 공모전', bar: '#2f6a66', body: [
+      d_contest: { src: 'web', find: ['k_bus', 'k_contest'], title: '제3회 청록일러스트 공모전 수상작 발표', meta: '2025.09.20 · 응모작 1,146점', paper: '청록일러스트 공모전', bar: '#2f6a66', body: [
         { img: 'award', cap: '대상 — 〈[[푸른 정류장]]〉 [[윤재희]] · 디지털 페인팅', f: 'f_award' },
         '심사평: 비 오는 정류장에 선 한 사람. 절제된 구도와 여백이 돋보인다.',
         '최우수 〈세탁소의 밤〉 오한결 · 우수 〈골목 끝 여름〉 서다온',
@@ -140,7 +141,7 @@
         { list: ['C-10 · 모래시계 스튜디오', 'C-11 · 한여름 문구', 'C-12 · [[윤재희]] (@jaehee.draws)', 'C-13 · 곰곰 드로잉'], f: { 2: 'f_fair' } },
         { note: '※ 참가 작가는 운영 시간 동안 부스에 상주해야 합니다.' },
       ] },
-      d_kin_plag: { src: 'web', find: ['k_psd', 'k_bus', 'k_sketch'], title: 'Q. 공모전에 제 그림을 베낀 작품이 상을 받았어요. 어떻게 신고하나요?', meta: '누리지식in · 비공개 질문', paper: '누리지식in', bar: '#5f4a82', body: [
+      d_kin_plag: { src: 'web', find: ['k_psd', 'k_bus', 'k_contest', 'k_sketch'], title: 'Q. 공모전에 제 그림을 베낀 작품이 상을 받았어요. 어떻게 신고하나요?', meta: '누리지식in · 비공개 질문', paper: '누리지식in', bar: '#5f4a82', body: [
         'A. 주최 측 신고가 먼저입니다. [[원본 파일]](작성일·레이어 기록)이 가장 강력한 증거예요. 파일은 외부 저장소에 꼭 백업해 두세요.',
         '그리고 상대방과 단둘이 만나서 해결하려는 건 추천하지 않습니다.',
       ] },
@@ -203,7 +204,7 @@
 
       /* ── 내 문서 ── */
       d_psd: { src: 'files', title: '작업\\버스정류장_연작01.psd', meta: 'Photoshop 이미지 · 48.2MB', body: [
-        { img: 'sketch', cap: '미리 보기' },
+        { img: 'psd_preview', cap: '미리 보기' },
         { rows: [['만든 날짜', '2024-11-02 01:47'], ['수정한 날짜', '2024-11-02 01:47'], ['레이어', '14개 — 가이드선 · 하늘 · 달 · 빗줄기 · 지평선 · 정류장 지붕 · 기둥 · 벤치 · 표지판 · 우산 · 우산 든 사람 · 그림자 · 질감 · 서명(SY)']], f: { 0: 'f_psd' } },
       ] },
       d_todo: { src: 'files', cls: 'txt', title: '할일.txt', meta: '2025-10-09 12:55', skin: 'memo', body: [
@@ -252,6 +253,7 @@
           k_heights: ['서윤이 사는 데요. 14일에 같이 가 보기로 했는데 제가 회사에서 못 빠졌어요.'],
           k_birthday: ['3월 17일이요. 올해도 케이크 사진 올렸잖아요. [[두부]]랑 같이.'],
           k_jaehee: ['13일에 재희가 먼저 연락했어요. "서윤이 연락 안 된다"고. 11일, 12일엔 재희가 페어 때문에 바빴다더라고요.'],
+          k_contest: ['공모전이요? 재희가 대상 받았다고 단톡방이 한동안 시끄러웠어요. 그림 제목이 [[푸른 정류장]]이었나.'],
           k_bus: ['그 그림… 서윤이가 작년부터 그리던 [[버스정류장 연작]]이랑 비슷하긴 했어요. 서윤이는 아무 말 안 했는데 표정이 안 좋았어요.'],
           k_sketch: ['서윤이가 [[원본 파일]] 백업해야 한다고 외장하드 산다 그랬어요.'],
           k_seoyun: ['착한 애예요. 싫은 소리를 잘 못 하는.'],
@@ -268,6 +270,8 @@
           k_door: { need: ['!f_door_night'], a: ['(한참 말이 없다) …10시에 나왔다니까요. 도어락이 잘못 찍힌 거겠죠.'], else: ['도어락이요? 그냥 문 열고 나왔죠. 왜요?'] },
           k_ipad: { need: ['!f_device'], a: ['그건… 서윤이가 부탁해서요. 마감 때문에 대신 올려 달라고. 9월에요.', '— 10월 11일에도요?', '……'], else: ['제 아이패드요? 페어에서 카드 결제용으로 썼는데요.'] },
           k_bus: ['제 그림이에요. 서윤이도 축하해 줬어요.'],
+          k_dubu: ['두부요? 서윤이 고양이요. 제가 가면 늘 현관까지 마중 나왔어요.'],
+          k_contest: ['청록일러스트요? 제가 대상 받았어요. 서윤이가 제일 먼저 축하해 줬고요.'],
           k_sketch: { need: ['!f_psd'], a: ['정류장 그림이 한둘인가요. 비슷한 구도는 흔해요.'], else: ['서윤이 스케치요? 기억 안 나요.'] },
           k_kintex: ['11일, 12일 이틀 내내 부스에 있었어요. 사람들이 다 봤어요.'],
           k_night: ['9시 반에 가서 10시에 나왔어요. 몇 번을 말해요.'],
@@ -322,6 +326,7 @@
         prompt: 'A fluffy white Korean shorthair cat lying across a laptop keyboard on a cluttered illustrator\'s desk, drawing tablet and pencils nearby, soft daylight, playful.' },
       cake: { use: '서윤 계정 — 3월 17일 생일 케이크 (비밀번호 단서)', alt: '서윤 계정 — 3월 17일 생일 케이크 사진', ratio: '4:3', svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#f3dfd8"/><ellipse cx="100" cy="118" rx="62" ry="10" fill="#fbf7f2"/><rect x="58" y="78" width="84" height="38" rx="4" fill="#fff6ec"/><rect x="58" y="94" width="84" height="6" fill="#e59aa0"/><rect x="58" y="72" width="84" height="10" rx="4" fill="#f7c9cc"/><g fill="#f2b440"><ellipse cx="80" cy="51" rx="3" ry="5"/><ellipse cx="100" cy="47" rx="3" ry="5"/><ellipse cx="120" cy="51" rx="3" ry="5"/></g><circle cx="170" cy="118" r="9" fill="#f7f4ec"/></svg>',
         prompt: 'A small strawberry birthday cake with three lit candles on a white table, a white cat\'s ear and paw peeking in from the edge of the frame, pink and cream tones, warm evening indoor light.' },
+      psd_preview: { use: '버스정류장_연작01.psd 미리 보기 — 같은 스케치를 스캔한 연필 선 레이어', alt: '포토샵 파일 미리 보기 — 비 오는 버스 정류장 연필 스케치 스캔, 오른쪽 아래 SY 서명', ratio: '10:7', svg: busStop({ bg: '#fbfaf7', line: '#55524c', acc: '#9a968e', rain: '#bdb9b1', moon: '#e4e0d6', sig: true }) },
       sketch: { use: '서윤의 2024년 연필 스케치 「버스정류장 연작 #1」 (핵심 증거)', alt: '서윤의 연필 스케치 「버스정류장 연작 #1」', ratio: '4:3', svg: busStop({ bg: '#f1ece0', line: '#6e6a62', acc: '#a7a299', rain: '#c2bdb2', moon: '#dcd6c8', sig: true }),
         prompt: 'Graphite pencil sketch on off-white drawing paper: a lonely bus stop shelter at night in the rain, a single figure holding an umbrella standing to the right of the shelter beside a round bus-stop sign, a small moon in the upper right, diagonal rain strokes, loose construction lines, tiny initials "SY" in the lower right corner.',
         avoid: '이 그림과 award 는 반드시 같은 구도여야 한다. sketch 를 먼저 만들고, award 는 이 이미지를 참고 이미지로 넣어 "같은 구도로 채색" 요청할 것.' },

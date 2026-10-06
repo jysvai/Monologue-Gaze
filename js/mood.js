@@ -326,7 +326,9 @@
     };
     introKey = once;
     document.addEventListener('keydown', once);
-    introTimer = setTimeout(hideIntro, reduce.matches ? 1600 : 3600);
+    // 저절로 걷히는 건 한 줄을 다 읽을 시간이 지난 뒤 — 써 내려가는 데 2.4초, 글자 수만큼 더 (영어 줄은 길다)
+    const read = String(m.line || '').length * 55;
+    introTimer = setTimeout(hideIntro, reduce.matches ? Math.min(7000, Math.max(3200, 1200 + read)) : Math.min(9000, Math.max(5000, 2600 + read)));
   }
 
   /* ───────── 엔진이 부르는 곳 ───────── */

@@ -207,3 +207,13 @@ body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,
 @media (prefers-reduced-motion:reduce){.case-view .pane-read>.enter{animation:none}}
 
 @keyframes cueFade{0%,100%{opacity:0}15%,75%{opacity:.9}}
+/* 추궁: 붉은 테 단어를 누르면 내밀 메모를 고른다 */
+.press-pick{padding-top:10px;border-top:1px dashed rgba(43,40,35,.3)}
+.press-pick .per-ask-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-bottom:8px}
+.press-x{margin-left:auto;padding:2px 9px;border:1px solid rgba(43,40,35,.4);background:transparent;color:inherit;font:12px var(--f-mono);cursor:pointer}
+.press-list{max-height:min(46vh,420px);overflow-y:auto;overscroll-behavior:contain}
+button.press-opt{width:100%;text-align:left;color:inherit}
+.press-opt .src{color:var(--pencil);font-size:12px}
+.press-opt[hidden]{display:none}
+.press-no{margin:0 0 8px;padding:6px 10px;border-left:3px solid var(--red);background:rgba(160,40,30,.06);font:14px/1.6 var(--f-web)}
+.press-no b{margin-right:4px}
