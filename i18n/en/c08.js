@@ -57,7 +57,7 @@ MG.I18N.put("en", "c08", {
 "1eqqm2s4noo": "Nov 19 (Tue) 21:00",
 "1xir902kt04": "Nov 29 (Fri) 18:01",
 "1l8p52q3ijs": "“Two bags, travel bags.” — Behind him, a loudspeaker calling “rice cakes, buckwheat jelly” fades away.",
-"2fhz0fey82": "“I'll call again Saturday.” — A bell, six strokes. Eight seconds of rattling steel bury his words.",
+"16xnfzglvlt": "“…I'll call again tomorrow.” — A bell, six strokes. Eight seconds of rattling steel bury his words.",
 "t89ilr0pa2": "“That's it for today.” — A four-note chime, children pouring out.",
 "zlqx9clsrl": "“I'll call again tomorrow evening at seven-thirty.” — A “bong” time signal, faint news music.",
 "11k2e1tpw2n": "“There's a note in the phone book.” — Market noise, a junk truck's loudspeaker.",
