@@ -73,6 +73,10 @@ img{max-width:100%}
 .cab-sub{margin:4px 0 0;font:700 16px/1.5 var(--f-doc);color:#cdbf9f}
 .cab-stat{margin:10px 0 0;font:12.5px var(--f-type);color:#a99a7e}
 .cab-stat b{color:#efe4c9;font-weight:700}
+.cab-rate{margin:10px 0 0;max-width:640px;font:13px/1.6 var(--f-doc);color:#cdbf9f} /* 사건을 닫은 뒤 한 줄: 별점·댓글 부탁 */
+.cab-rate a{color:#efe4c9;text-underline-offset:3px}
+.cab-rate-x{margin:0 0 0 6px;padding:0 6px;background:none;border:0;color:#a99a7e;font:16px/1 var(--f-type);cursor:pointer;vertical-align:baseline}
+.cab-rate-x:hover{color:#efe4c9}
 .intro{position:relative;max-width:620px;margin:0 0 30px;padding:22px 24px 20px;transform:rotate(-.6deg);background-color:var(--memo);background-image:var(--noise);color:var(--sheet-ink);font:14.5px/1.75 var(--f-doc);box-shadow:0 12px 30px rgba(0,0,0,.45)}
 .intro p{margin:0 0 10px;text-wrap:pretty}
 /* 자바스크립트가 꺼진 브라우저: 책상 위에 쪽지 한 장 (index.html noscript) */

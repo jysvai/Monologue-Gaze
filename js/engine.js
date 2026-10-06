@@ -1783,11 +1783,14 @@
     };
     const intro = S.intro ? '' : `<div class="intro"><p>${T`서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.`}</p><p>${T`서랍 속에는 한 세기에 걸친 미제 기록 ${numk(main.length)} 건. 신문 스크랩, 진술서, 편지, 사진. 선배가 끝내 풀지 못하고 두고 간 것들이다.`}</p><p class="intro-hand">${T`처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장`}</p><button type="button" class="btn-hand" data-intro-ok>${T`서랍을 연다`}</button></div>`;
     const letter = allShut ? `<article class="m-letter${newLetter ? ' fresh' : ''}"><h3>${T`서랍 맨 밑의 편지`}</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p>${mWho()}</article>` : '';
+    // 사건을 하나라도 닫은 사람에게만 (기록실에만, 사건 안에는 넣지 않는다). itch 는 별점·댓글이 쌓인 게임을 목록에 더 자주 올린다. 닫으면 다시 안 나온다
+    const onItch = /itch.(zone|io)$/.test(location.hostname);
+    const rate = solvedMain + solvedLive && !S.rateOff ? `<p class="cab-rate">${onItch ? T('재미있으셨다면 이 화면 아래 itch.io 페이지에서 별점이나 댓글을 남겨 주세요. 평가가 쌓이면 itch 목록에 더 자주 뜹니다.') : T('재미있으셨다면 <a href="https://jysvai.itch.io/monologue-gaze" target="_blank" rel="noopener">itch.io 페이지</a>에서 별점이나 댓글을 남겨 주세요. 평가가 쌓이면 itch 목록에 더 자주 뜹니다.')}<button type="button" class="cab-rate-x" data-rate-off aria-label="${T('이 안내 닫기')}">×</button></p>` : '';
     const hero = MG.images['_global/hero'];
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
       <header class="cab-top"><p class="cab-kicker">${T`서울서부경찰서 강력2팀 · 미제사건 기록실`}</p><h1 class="cab-title">Monologue Gaze</h1><p class="cab-sub">${T`시간은 흐르지만, 새겨진 기록은 거짓말을 하지 않는다.`}</p>
-        <p class="cab-ctl">${whoBtn(showRoster)}${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}${langSel()}</p><p class="cab-stat">${T`종결 <b>${solvedMain}</b> / ${main.length}${live.length ? T` · 현행 <b>${solvedLive}</b> / ${live.length}` : ''} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}`}</p></header>
+        <p class="cab-ctl">${whoBtn(showRoster)}${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}${langSel()}</p><p class="cab-stat">${T`종결 <b>${solvedMain}</b> / ${main.length}${live.length ? T` · 현행 <b>${solvedLive}</b> / ${live.length}` : ''} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}`}</p>${rate}</header>
       ${showRoster ? rosterHtml(showRoster === 'ask') : ''}
       ${intro}
       <section class="drawer" aria-label="${T`사건 파일`}">${MG.cases.filter(c => !c.live).map(folder).join('')}</section>
@@ -2447,6 +2450,7 @@
       if (t.closest('[data-roster]')) return toggleRoster();
       if ((el = t.closest('[data-player]'))) return usePlayer(el.dataset.player);
       if ((el = t.closest('[data-drop]'))) return armed(el, T('한 번 더 누르면 그 서랍이 비워진다'), () => dropPlayer(el.dataset.drop));
+      if (t.closest('[data-rate-off]')) { S.rateOff = true; save(); cabinet(); return; }
       if (t.closest('[data-intro-ok]')) { S.intro = true; save(); cabinet(); if (e.detail === 0) { const c0 = $('[data-open="c00"]'); if (c0) c0.focus(); } return; } // 키보드로 서랍을 열었으면 쪽지가 가리킨 CASE 00 폴더로
       if ((el = t.closest('[data-wipe]'))) return armed(el, roster().list.length > 1 ? T('한 번 더 누르면 내 기록이 지워진다') : T('한 번 더 누르면 전부 지워진다'), () => { S = Object.assign(blank(), { sound: S.sound, voice: S.voice, mild: S.mild }); forget(); save(); cabinet(); /* 수사 기록만 지운다: 소리·목소리·잔혹 표현 설정은 그대로 */ });
       if (!C) return;
