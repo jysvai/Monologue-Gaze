@@ -718,7 +718,7 @@ MG.I18N.put("en", "c06", {
 "17g81i9xgi5": "Records that link the culprit to her",
 "1bammo2lyuy": "Records that contradict the culprit's own account",
 "1lstzwoecxa": "Returned. The papers came back untouched. Nothing says what was wrong.",
-"hqbzmyr8pm": "Sak nr. 2213/69 · Re-examined",
+"hqbzmyr8pm": "Sak nr. 2213/69 · Reviewed",
 "1nuwtdy8p7b": "Her name was Mireille Dasson, thirty-six. She was a marine casualty investigator for the Antwerp Maritime Mutual. After the 3.9 million kroner insurance on the Vesle Terne, “sunk” in the North Sea in February 1968, was paid to Havbris Shipping of Hellesund, word reached Antwerp that a Panamanian-flagged cargo ship very like her was coming into Hellesund every Saturday.",
 "12gskt9xk8o": "Moving from hotel to hotel under three names and three wigs, Dasson watched the Havørn every Saturday at dawn from windows overlooking Nordkai. Photo No. 7, the VESLE TE… beneath the new paint, was what she had been looking for.",
 "1smeolfd43n": "On the morning of the 16th, as Vera Schlosser, Austrian antiques dealer, she called 24 318 and said she wanted to charter a boat. That night she told Antwerp: “Saw VT, will confirm Saturday.” On that call Einar Brate offered to drive her to the Kvitdal trailhead, and the next day, in a second call, they fixed the time.",

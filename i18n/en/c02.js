@@ -779,7 +779,7 @@ MG.I18N.put("en", "c02", {
 "rd584dndl8": "Records showing someone was at the farm after the four had died",
 "1bammo2lyuy": "Records that contradict the culprit's own account of his movements",
 "a16h21lxi5": "Motive",
-"2o1rbyaqht": "Tgb.-Nr. 41/1923 · Re-examined",
+"2o1rbyaqht": "Tgb.-Nr. 41/1923 · Reviewed",
 "1e3c2qzb1q3": "In October 1922, when Valentin Knauer bought the Tannenschlag wood, he agreed to pay two thirds of the price as “price of 80 Zentner of rye, at Candlemas, at that day's rate,” and wrote out a single note. That debt, 230,000 marks in the autumn, stood at more than three million marks by the time of the Candlemas market. The note had never been notarized; there was one copy in the world, and it lay in Michael's strongbox.",
 "vw8nmecwnf": "From the autumn on, Knauer watched the farm from the forest hut, and several times he crept into the attic. Those were the footsteps Magdalena heard. On January 12, refused when he asked for the debt to be put off, he took the key from the doorpost.",
 "20squbok7ej": "On the night of Friday, January 26, before the new maid had even unpacked, it was over. Knauer opened the strongbox with the key from the waistcoat pocket, took out the one note, and put the key back. He did not touch the bundles of banknotes.",
