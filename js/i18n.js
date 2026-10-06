@@ -152,6 +152,14 @@
 
   /* ── 꾸러미 부르기 ── */
   const BOOT = { en: 'Opening the drawer…', ja: '引き出しを開けています…', zh: '正在打开抽屉…', ru: 'Открываю ящик…', de: 'Die Schublade geht auf…' };
+  // 검색 결과·링크 미리보기에 뜨는 설명 (한국어는 index.html 에 적힌 그대로)
+  const DESC = {
+    en: 'A free detective game in the browser. Follow twelve cold cases across a century and three live cases on a running clock, using only the records: newspapers, statements, letters and transcripts.',
+    ja: 'ブラウザで遊べる無料の推理ゲーム。新聞、供述調書、手紙、録取記録だけを手がかりに、一世紀にわたる未解決事件12件と、捜査時計が進む現行事件3件を追う。',
+    zh: '可在浏览器中免费游玩的推理游戏。只凭报纸、口供、信件和笔录，追查横跨一个世纪的12起悬案，以及侦查时钟不停走动的3起现案。',
+    ru: 'Бесплатный детектив в браузере. Двенадцать нераскрытых дел за целый век и три оперативных дела на часах, только по документам: газеты, показания, письма, протоколы.',
+    de: 'Ein kostenloses Detektivspiel im Browser. Zwölf ungelöste Fälle aus einem Jahrhundert und drei laufende Fälle mit tickender Uhr, gelöst nur über Akten: Zeitungen, Aussagen, Briefe, Protokolle.',
+  };
   // 글꼴: css/i18n.css 가 쓰는 그 언어의 글꼴 (Google Fonts · 중국어 손글씨는 jsDelivr 의 LXGW WenKai)
   const GF = 'https://fonts.googleapis.com/css2?display=swap&family=';
   const FONTS = {
@@ -165,6 +173,7 @@
   function early() {
     const html = document.documentElement;
     html.lang = lang;
+    const md = document.querySelector('meta[name="description"]'); if (md && DESC[lang]) md.setAttribute('content', DESC[lang]);
     (FONTS[lang] || []).forEach(href => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); });
     const b = document.querySelector('#app .boot');
     if (b && BOOT[lang]) b.textContent = BOOT[lang];
