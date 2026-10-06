@@ -717,7 +717,7 @@ MG.I18N.put("en", "c15", {
 "27wbvfwft8m": "I was asleep. Since nine. Didn't hear a thing.",
 "wwcjww7aku": "(Opens a drawer)",
 "c5ll5zf1x3": "Here. I switched it off and put it away. Take it.",
-"2esksf9o4j4": "You know what I said to Da-som last week. The whole neighborhood heard. If that phone turned up in my room, who'd believe a word I said?",
+"vyd7ok7oez": "A few days ago I yelled at Da-som over the parking spot, and the whole neighborhood heard. If that phone turned up in my room, who'd believe a word I said?",
 "6gbl2uwbra": "— So you switched it off at 22:11.",
 "192j3fiz9ie": "…I was scared. I'm sorry.",
 "hsusq63zo8": "How would I know anything about a phone?",

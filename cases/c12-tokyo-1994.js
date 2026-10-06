@@ -76,7 +76,7 @@
                 { p: '배수구 뚜껑과 트랩 입구가 가장 밝게 빛난다. 오랫동안 많은 양이 이곳으로 흘러 들어갔다.', f: 'f_luminol' } ] },
               { id: 'sp_l_grout', x: 45, y: 62, r: 9, label: '타일 줄눈의 격자', body: [
                 '타일 면은 어둡고 줄눈만 격자처럼 빛난다. 줄눈 틈에 스민 것은 닦이지 않았다.' ] },
-              { id: 'sp_l_wipe', x: 30, y: 52, r: 8, label: '호를 그린 자국', body: [
+              { id: 'sp_l_wipe', x: 27, y: 55, r: 12, label: '호를 그린 자국', body: [
                 '팔 길이만 한 반원이 겹겹이 빛난다 — 걸레나 솔로 닦아낸 자국.' ] },
               { id: 'sp_l_drip', x: 30, y: 32, r: 8, label: '문 쪽으로 이어진 점들', body: [
                 '보일러실 문에서 세척장 가운데까지 둥근 점이 줄지어 빛난다. 지름 5~8mm, 가장자리가 고르다 — 곧게 떨어진 낙하흔. 무언가를 들고 걸어간 길.' ] },
@@ -458,7 +458,7 @@
       d_q_pager: { cls: 'printed', src: 'q', skin: 'ledger', kicker: '東都テレコール · 着信記録', meta: '1994년 10월 23일 회신 · 10월 12일~14일',
         title: '호출 수신 기록 — 030-58-2147', body: [
         { note: '삐삐는 숫자만 받는다. 거는 사람이 전화 버튼으로 누른 숫자가 그대로 뜬다. 대개 "이 번호로 전화하라"는 뜻이고, 짧은 숫자를 덧붙이기도 한다.' },
-        { rows: [['10.12 17:52', '3551-2280', '(번호만)'], ['10.12 21:47', '[[3712-0931]]', '「2330」'], ['10.13 09:05', '3551-2280', '(번호만)'], ['10.13 13:30', '3551-2280', '「999」'], ['10.13 19:48', '3868-4410', '(번호만)'], ['10.13 23:10', '3354-8812', '(번호만)'], ['10.14 04:20', '[[3354-8812]]', '「999」'], ['10.14 09:40', '3551-2280', '(번호만)']], head: ['받은 때', '보낸 번호', '덧붙인 숫자'] },
+        { rows: [['10.12 17:52', '3551-2280', '(번호만)'], ['10.12 21:47', '[[3712-0931]]', '「2330」'], ['10.13 09:05', '3551-2280', '(번호만)'], ['10.13 13:30', '3551-2280', '「999」'], ['10.13 19:48', '3868-4410', '(번호만)'], ['10.13 23:10', '3354-8812', '(번호만)'], ['10.14 04:20', '[[3354-8812]]', '「999」'], ['10.14 09:40', '3551-2280', '(번호만)']], head: ['받은 때', '보낸 번호', '덧붙인 숫자'], f: { 1: 'f_pager_2330' } },
         '3551-2280은 가게노 흥업 사무실, 3868-4410은 가시와다이역 개찰구 앞 공중전화.',
         '단말기가 어디 있는지는 알 수 없음. 10월 14일 이후로도 이 번호로 호출이 계속 들어옴.',
       ] },
@@ -529,6 +529,7 @@
       p_ishiguro: { name: '이시구로 마유미', role: '신용금고 직원 (31) · 아침 조깅', where: '가시와다이역 앞 신용금고 뒷문', key: 'k_ishiguro', color: '#7a5a6a', initial: '石',
         intro: ['출근 전에 연못을 두 바퀴 돌아요. 역 쪽 서문으로 들어가서요. 스톱워치를 차고 뛰니까 시간은 정확해요.'],
         ask: {
+          k_park: ['공원이요? 날마다 출근 전에 뛰는 데예요. 서문으로 들어가서 연못을 두 바퀴. 그날 본 건 말씀드린 그대로예요.'],
           k_1014: [{ p: '04:38에 서문으로 들어갔어요. 연못 서쪽을 지날 때 6번 통이 봉투로 불룩했던 게 기억나요. 동문 앞에 닿은 게 04:44. 그때 한 남자가 3번 통 뚜껑을 닫고 짐자전거에 올라 동문 밖으로 나가더니, 상점가 쪽으로 꺾었어요.', f: 'f_jogger' }],
           k_cargobike: ['뒤에 큰 나무 짐상자를 단 배달용 자전거요. 상자가 비었는지 덜컹덜컹 소리가 났어요.'],
           k_boots: ['장화 소리가 났어요. 철벅철벅. 모자를 눌러쓰고 있었고요. 얼굴은 못 봤어요.'],
@@ -544,6 +545,7 @@
       p_ogawa: { name: '오가와 사토시', role: '편의점 야간 점원 (20) · 대학생', where: '선라이즈 가시와다이역앞점 계산대', key: 'k_ogawa', color: '#5a7a5a', initial: '小',
         intro: ['밤 10시부터 아침 6시까지 혼자예요. 새벽 4시대엔 한 시간에 손님이 한두 명.'],
         ask: {
+          k_bags: ['젖빛 봉투요? 그 짐자전거 짐상자에 몇 개 남아 있던 거요. 쓰레기 버리러 가는 줄만 알았어요.'],
           k_receipt: [{ p: '04:31이면… 테이프랑 캔커피. 기억나요. 고무장화에서 물이 뚝뚝 떨어져서, 그 사람 나가고 바닥을 닦았거든요. 가까이 왔을 때 목욕탕 냄새가 났어요. 비누 냄새 말고, 뜨거운 흙물 같은 냄새.', f: 'f_clerk' }],
           k_cargobike: [{ p: '밖에 짐자전거를 세워 뒀어요. 짐상자에 젖빛 봉투가 몇 개 남아 있었는데… 쓰레기 버리러 가는 사람인 줄 알았어요.', gore: '밖에 짐자전거를 세워 뒀어요. 짐상자에 젖빛 봉투가 몇 개 남아 있었는데… 쓰레기 버리러 가는 사람인 줄 알았어요. 문 앞 형광등 밑이라, 짐상자 모서리에 눌린 봉투 하나에 안에 든 허연 게 둥글게 비쳤어요. 무나 배추 같은 건 줄 알았어요. 그날 밤 석간을 보고 화장실에서 다 게웠어요. 요새는 새벽에 자전거 세우는 소리만 나도 손이 떨려요.' }],
           k_boots: ['검은 고무장화요. 바지를 장화 안에 넣어 신었고요. 손끝이 하얗게 불어 있었어요. 테이프 뜯는 게 서툴렀어요.'],
@@ -656,7 +658,7 @@
         { id: 'c1', q: '그 새벽, 봉투를 나른 사람의 길', accept: ['f_route', 'f_bike_sento'] },
         { id: 'c2', q: '시신이 씻기고 나뉜 곳', accept: ['f_boiler', 'f_luminol', 'f_water_match'] },
         { id: 'c3', q: '그 손이 익힌 일', accept: ['f_shibaura', 'f_knot_match', 'f_saw_match'] },
-        { id: 'c4', q: '피해자가 그 밤 그곳에 간 까닭', accept: ['f_pager_kashiwayu', 'f_wp_loan'] },
+        { id: 'c4', q: '피해자가 그 밤 그곳에 간 까닭', accept: ['f_pager_kashiwayu', 'f_pager_2330', 'f_wp_loan'] },
       ],
       near: '딱 한 군데가 어긋난다. 그 메모가 정말 그 사람의 손을 가리키는가?',
       far: '반려. 스물한 개의 봉투 가운데 아직 제자리를 찾지 못한 것이 있다.',
@@ -717,7 +719,7 @@
       sento: { use: '신문 사진 — 굴뚝이 선 동네 목욕탕 「가시와유」', ratio: '3:4',
         svg: '<svg viewBox="0 0 150 200" xmlns="http://www.w3.org/2000/svg"><rect width="150" height="200" fill="#b8b6ae"/><rect x="96" y="10" width="14" height="110" fill="#6a4a3a"/><path d="M10 120 L75 84 L140 120Z" fill="#4a4a48"/><rect x="18" y="120" width="114" height="60" fill="#8a7a64"/><rect x="58" y="140" width="34" height="40" fill="#3a3430"/><rect x="0" y="180" width="150" height="20" fill="#6e6e68"/><rect x="62" y="130" width="26" height="8" fill="#e8e0c8"/></svg>',
         prompt: 'Black-and-white 1994 newspaper halftone photo of an old wooden Tokyo public bathhouse with a temple-like tiled gable roof and a tall brick chimney, standing alone between empty fenced vacant lots after a land-assembly buyout, a short cloth curtain at the entrance, a stack of scrap firewood by the side wall, late-afternoon light, curtain lettering illegible.' },
-      boiler: { use: '가마 일지 첨부 — 가시와유 보일러실 아궁이와 장작', ratio: '4:3', sensitive: true,
+      boiler: { use: '감식 보고 첨부 — 가시와유 보일러실 아궁이와 장작', ratio: '4:3', sensitive: true,
         svg: '<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="150" fill="#3a3430"/><rect y="110" width="200" height="40" fill="#5a534a"/><rect x="70" y="40" width="70" height="70" fill="#2a2522" stroke="#6a5a4a" stroke-width="3"/><path d="M84 110 v-30 a21 21 0 0 1 42 0 v30z" fill="#140f0c"/><path d="M92 108 q12 -30 26 0z" fill="#d8742a"/><g fill="#8a6a44"><rect x="8" y="80" width="54" height="8"/><rect x="10" y="90" width="50" height="8"/><rect x="6" y="100" width="56" height="8"/></g><g fill="#5a130c" opacity=".7"><circle cx="150" cy="96" r="2"/><circle cx="156" cy="92" r="1.5"/><circle cx="146" cy="90" r="1.2"/><path d="M150 126 q10 -4 18 2 q-8 5 -18 -2z"/></g><path d="M170 70 v40" stroke="#888" stroke-width="3"/></svg>',
         prompt: 'Interior of a cramped 1994 Tokyo bathhouse boiler room lit by camera flash: a soot-blackened iron firebox door of a wood-fired water heater with a low orange glow, split scrap firewood stacked to waist height, an iron poker leaning against the wall, a concrete floor with a hose drain, dozens of fine dried dark brown spatter dots on the whitewashed wall 40 to 70 cm above the floor beside the door, their little tails pointing upward, a forensic scale ruler taped beside them, and a line of round dried drip stains leading across the floor from the firebox toward the doorway.',
         must: '문 옆 벽 낮은 자리의 비산흔 수십 점 (꼬리가 위로) · 바닥을 가로지르는 둥근 낙하흔 한 줄',

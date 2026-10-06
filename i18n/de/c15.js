@@ -717,7 +717,7 @@ MG.I18N.put("de", "c15", {
 "27wbvfwft8m": "Ich hab geschlafen. Seit neun. Nichts gehört.",
 "wwcjww7aku": "(zieht eine Schublade auf)",
 "c5ll5zf1x3": "Hier. Hab's ausgemacht und reingelegt. Nehmen Sie's mit.",
-"2esksf9o4j4": "Was ich letzte Woche zu Frau Jeong gesagt hab, hat die ganze Nachbarschaft gehört. Wenn ihr Handy in meiner Wohnung auftaucht, wer glaubt mir dann noch?",
+"vyd7ok7oez": "Vor ein paar Tagen hab ich Frau Jeong wegen dem Parkplatz angeschrien, die ganze Nachbarschaft hat es gehört. Wenn ihr Handy in meiner Wohnung auftaucht, wer glaubt mir dann noch?",
 "6gbl2uwbra": "— Deshalb haben Sie es um 22:11 ausgeschaltet.",
 "192j3fiz9ie": "…Ich hatte Angst. Tut mir leid.",
 "hsusq63zo8": "Was weiß ich denn von einem Handy.",

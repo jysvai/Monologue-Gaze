@@ -290,6 +290,7 @@
     if (b == null) return '';
     if (typeof b === 'string') b = { p: b };
     b = gv(b);
+    if (b.need && !ok(b.need)) return ''; // 조건이 붙은 문단 (결말에서 플레이어가 실제로 한 일에 맞춰)
     const cls = b.cls ? ' ' + esc(b.cls) : '';
     if (b.h != null) return `<h4 class="b-h${cls}">${inline(b.h)}</h4>`;
     if (b.sep) return `<hr class="b-sep">`;
@@ -1025,7 +1026,7 @@
     } else {
       L.req[id] = { st: 'no', at: L.t, note: n.id, tries: (q ? q.tries || 0 : 0) + 1 };
       cue('miss');
-      { const why1 = plain(r.deny || T('소명이 부족하다.')).split(/(?<=[.?!])\s|(?<=[。？！])/)[0]; toast(T('기각 — ') + (why1.length > 70 ? trunc(why1, 70) : why1), 4500); } // 사유는 첫 문장까지 (전문은 신청서에)
+      { const ss = plain(r.deny || T('소명이 부족하다.')).split(/(?<=[.?!])\s|(?<=[。？！])/), why1 = ss[0] + (ss[1] && ss[1].length <= 40 ? ' ' + ss[1] : ''); toast(T('기각 — ') + (why1.length > 90 ? trunc(why1, 90) : why1), 5000); } // 사유는 첫 문장까지 (전문은 신청서에)
     }
     delete tmp().rq[id];
     save(); liveSync(prev); renderTabs(); renderList(); renderRead();
@@ -1447,7 +1448,10 @@
     });
     Object.values(C.people).filter(p => personVisible(p) && srcVisible(C.sources.find(s => s.id === p.src) || {}) && ST.asked[p.id] == null).forEach(p => add('meet:' + p.id, T('아직 찾아가 보지 않은 사람이 있다.'), p.name, { t: 'person', id: p.id, src: p.src }));
     // 2. 읽은 기록 속에 있는데 아직 수첩에 적지 않은 단어
-    seen.forEach(b => b.k.forEach(k => { if (!ST.keys.includes(k)) add('word:' + k, T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${C.keywords[k].label}」`, b.go); }));
+    //    앞으로 이어지는 단어(그 말로 찾으면 나오는 기록이 있거나, 조건에 걸려 있거나, 누군가 그 말에 따로 대답하는 것)를 먼저 짚는다. 아무 데도 안 이어지는 단어부터 짚으면 헛걸음이 된다
+    const opens = k => Object.values(C.docs).some(d => (d.find || []).includes(k) && !ST.seen.includes(d.id)) || gates().some(need => need.includes(k)) || Object.values(C.people).some(p => rawAns(p, k) != null);
+    const words = []; seen.forEach(b => b.k.forEach(k => { if (!ST.keys.includes(k) && C.keywords[k]) words.push([k, b]); }));
+    [...words.filter(([k]) => opens(k)), ...words.filter(([k]) => !opens(k))].forEach(([k, b]) => add('word:' + k, T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${C.keywords[k].label}」`, b.go));
     // 3·4. 탐문 — 수첩을 내밀어 다시 물을 것, 새 단어나 쓸 만한 사실이 나올 물음
     const useful = new Set([...gates().flat().filter(n => n[0] === '!').map(n => n.slice(1)), ...C.solution.claims.flatMap(cl => cl.accept || [])]); // 앞을 여는 사실, 보고서에 쓸 사실 (어느 쪽인지는 말하지 않는다)
     const people = Object.values(C.people).filter(p => personVisible(p) && ST.asked[p.id] != null);
@@ -2019,11 +2023,16 @@
   function refreshAll() { renderTabs(); renderList(); renderRead(); renderNotebook(); }
 
   // 누른 말과 수첩에 적히는 이름이 다르면 둘 다 보인다 (「켈바흐 장」을 눌렀는데 「장날」만 뜨면 어디 갔나 찾게 된다)
-  const bigrams = w => { const s = String(w).toLowerCase().replace(/[^\p{L}\p{N}]/gu, ''); return s.length < 2 ? [s] : [...s].slice(1).map((c, i) => s[i] + c); };
+  // 같은 말로 치는 것: 한쪽이 다른 쪽을 품을 때(「크로프트 씨」 · 「크로프트」), 아니면 짧은 쪽 글자 쌍의 7할 이상이 겹칠 때.
+  // 「전화」 하나만 겹치는 「신고 전화 → 공중전화」, 성만 겹치는 「헬레순 택시 → 오드 헬레」는 다른 것이라 화살표를 단다
+  const flat = w => String(w).toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+  const bigrams = s => (s.length < 2 ? [s] : [...s].slice(1).map((c, i) => s[i] + c));
   const saidAs = (said, label) => {
     if (!said) return label;
-    const a = bigrams(said), b = new Set(bigrams(label)), sa = a.join(''), sb = [...b].join('');
-    return a.some(x => x && b.has(x)) || (sa && (sb.includes(sa) || sa.includes(sb))) ? label : `${said.trim()} → ${label}`;
+    const sa = flat(said), sb = flat(label);
+    if (!sa || !sb || sa.includes(sb) || sb.includes(sa)) return label;
+    const a = new Set(bigrams(sa)), b = new Set(bigrams(sb)), [lo, hi] = a.size <= b.size ? [a, b] : [b, a];
+    return [...lo].filter(x => hi.has(x)).length >= 0.7 * lo.size ? label : `${said.trim()} → ${label}`;
   };
   function addKey(id, quiet, said) {
     const k = C.keywords[id];
@@ -2158,7 +2167,7 @@
     const fresh = !a.includes(e);
     // 이미 물은 것을 다시 누르면(두 번 톡 누름 포함) 그 대답만 짚어 준다 — 한창 나오는 대답을 다시 그려 끊지 않는다
     if (!fresh && TALK && TALK.alive()) {
-      const q0 = $('.per-tr .qa').find(x => x.dataset.qa === e);
+      const q0 = $$('.per-tr .qa').find(x => x.dataset.qa === e);
       if (q0) { q0.classList.remove('flash'); void q0.offsetWidth; q0.classList.add('flash'); }
       return;
     }

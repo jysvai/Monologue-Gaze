@@ -194,7 +194,7 @@
       k_tlf: { label: '24318', type: 'thing', alias: ['24 318', '전화번호'] },
       k_plate: { label: 'H-24', type: 'thing', alias: ['번호판', '회색 볼보', '볼보 아마존'] },
       k_havorn: { label: '하브외른', type: 'thing', alias: ['Havørn', '하브외른 호'] },
-      k_vesleterne: { label: '베슬레 테르네', type: 'thing', alias: ['Vesle Terne', 'VT'] },
+      k_vesleterne: { label: '베슬레 테르네', type: 'thing', alias: ['Vesle Terne', 'VT', 'Vesle', 'Vesle Te', '베슬레'] },
       k_havbris: { label: '하브브리스 해운', type: 'thing', alias: ['하브브리스', 'Havbris'] },
       k_mutuelle: { label: '앤트워프 해상공제', type: 'thing', alias: ['해상공제', 'Mutuelle'] },
       k_kystrute: { label: '연안선', type: 'thing', alias: ['노르비엔 호', '승선 명부'] },
@@ -508,6 +508,7 @@
       p_solveig: { name: '솔베이 하우그', role: '브뤼겐 호텔 프런트 직원', where: '브뤼겐 호텔 로비', key: 'k_solveig', color: '#7a5f78', initial: '솔',
         intro: ['솔베이 하우그예요. 브뤼겐 호텔 프런트에서 일한 지 11년 됐어요.'],
         ask: {
+          k_sjomann: ['선원 호텔이요? 슐로서 씨가 7일 아침 떠나실 때 행선지를 여쭈니 그렇게 말씀하셨어요. 장부에도 그대로 적었고요. 그 뒤로는 모르겠어요.'],
           k_schlosser: ['슐로서 부인요. 오스트리아 여권을 내셨어요. 독일어를 쓰다가, 식당 지배인이 프랑스어로 말을 거니 그걸로 대답하시더군요. 영어도 하셨고요.', '방에서 시내 전화를 몇 번 거셨어요. 요금은 [[교환 기록]]에 다 남아요.'],
           k_bryggen: [{ p: '첫날 214호를 드렸는데 이튿날 아침 항구 쪽 방으로 바꿔 달라고 하셨어요. [[노르카이]]가 내려다보이는 쪽으로요. 14일에 다시 오셨을 때도 407호, 같은 쪽이었어요.', f: 'f_rooms' }],
           k_remmert: [{ p: '렘메르트 씨요? 15일 저녁 식당에서 슐로서 부인이랑 둘이 식사를 했어요. 그 뒤로 그분이 두 번이나 부인 방 번호를 물었는데 안 알려 드렸어요.', f: 'f_dinner' }, '늘 검은 외투에 모자 차림이세요. 17일 저녁엔 급하게 계산하고 나가셨고요.'],
