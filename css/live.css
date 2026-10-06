@@ -17,6 +17,7 @@
 .lv-wait.over,.lv-wait.arm{border-color:#e0685c;color:#ffb3aa} /* 기다리면 기한을 넘긴다 */
 .case-view[data-frame="crt"] .lv-wait:is(.over,.arm){border-color:#b0342a;color:#b0342a}
 .case-view[data-frame="crt"] .lv-clock b{background:rgba(0,0,0,.12)}
+.case-view[data-frame="crt"] .lv-step{color:#9a5a00}
 .case-view[data-frame="crt"] .lv-wait{border-color:#8c8a84;background:#e8e5dd;border-radius:2px}
 @container stage (max-width:600px){ .scr-bar.live{height:auto;min-height:30px;flex-wrap:wrap;padding:5px 10px;row-gap:3px} .lv-clock{font-size:11.5px;letter-spacing:0} .lv-wait{margin-left:auto;padding:0 8px;font-size:10.5px} .lv-dl{order:3;flex-basis:100%;margin-left:0;font-size:11px} }
 
@@ -117,3 +118,7 @@
 
 /* 신청서 칸의 기다리기 단추도 아래 줄 단추처럼: 이번 기다림이 기한을 넘기면 붉게, 한 번 눌러 「한 번 더」 상태면 더 붉게 */
 .lv-waitrow button:is(.arm,.over){border-color:#b0342a;color:#b0342a;background:rgba(176,52,42,.07);opacity:1}
+/* 방금 한 일에 든 시간: 시계 옆에 잠깐 떴다 사라진다 */
+.lv-step{display:inline-block;margin-left:7px;color:#ffd46a;font-weight:700;animation:lvStep 2.4s ease-out forwards}
+@keyframes lvStep{0%{opacity:0;transform:translateY(3px)}12%{opacity:1;transform:none}70%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.lv-step{animation:lvStepR 2.4s step-end forwards}@keyframes lvStepR{to{opacity:0}}}

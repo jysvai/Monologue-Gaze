@@ -21,10 +21,12 @@
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const esc = s => String(s ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
   // 로마자·키릴 문자의 발음 부호는 떼고 비교한다 (Oberröding = Oberroding, ё = е)
-  const FOLD = { ä: 'a', ö: 'o', ü: 'u', ß: 'ss', é: 'e', è: 'e', ê: 'e', ë: 'e', à: 'a', á: 'a', â: 'a', å: 'a', æ: 'ae', ø: 'o', œ: 'oe', ç: 'c', ñ: 'n', ï: 'i', í: 'i', ì: 'i', î: 'i', ó: 'o', ò: 'o', ô: 'o', ú: 'u', ù: 'u', û: 'u', ý: 'y', ё: 'е' };
+  const FOLD = { ä: 'a', ö: 'o', ü: 'u', ß: 'ss', é: 'e', è: 'e', ê: 'e', ë: 'e', à: 'a', á: 'a', â: 'a', å: 'a', æ: 'ae', ø: 'o', œ: 'oe', ç: 'c', ñ: 'n', ï: 'i', í: 'i', ì: 'i', î: 'i', ó: 'o', ò: 'o', ô: 'o', ú: 'u', ù: 'u', û: 'u', ý: 'y', ā: 'a', ē: 'e', ī: 'i', ō: 'o', ū: 'u', ё: 'е' };
   // 일본어 입력기로 친 하이픈(ー)과 여러 대시는 숫자·로마자 옆에서 하이픈으로 본다 (H－24617 = Hー24617), 히라가나는 가타카나로 (はんそゆん = ハンソユン)
   const norm = s => String(s ?? '').normalize('NFKC').toLowerCase().replace(/[‐-―−]|(?<=[0-9a-z])ー|ー(?=[0-9a-z])/g, '').replace(/[ぁ-ゖ]/g, c => String.fromCharCode(c.charCodeAt(0) + 0x60)).replace(/[\s'"`.,!?·・()[\]{}\-_/@:;~「」『』〈〉《》“”‘’„«»]/g, '').replace(/[äöüßéèêëàáâåæøœçñïíìîóòôúùûýё]/g, c => FOLD[c]);
-  const plain = s => String(s ?? '').replace(/\[\[([^\]|]+?)(?:\|[\w-]+)?\]\]/g, '$1').replace(/\*\*(.+?)\*\*/g, '$1').replace(/~~(.+?)~~/g, '$1');
+  // **굵게** — 가린 번호(010-****-3382 · ***-**-4419)의 별표는 굵게 표시로 먹지 않게
+  const BOLD = /(?<![\w*-])\*\*(?![\s*-])(.+?)(?<![\s*-])\*\*(?![\w*])/g;
+  const plain = s => String(s ?? '').replace(/\[\[([^\]|]+?)(?:\|[\w-]+)?\]\]/g, '$1').replace(BOLD, '$1').replace(/~~(.+?)~~/g, '$1');
   const trunc = (s, n) => (s.length > n ? s.slice(0, n - 1) + '…' : s);
   const pad = n => String(n).padStart(2, '0');
   const hash = s => { let h = 0; for (const ch of String(s)) h = (h * 31 + ch.charCodeAt(0)) | 0; return Math.abs(h); };
@@ -245,6 +247,8 @@
   const opened = (n, b) => T` · 새로 열린 것 ${n}` + where(b);
 
   /* ───────── text rendering ───────── */
+  // 표 칸의 1,234,000 같은 숫자는 번역되지 않고 남으므로, 독일어·러시아어에서는 그 나라 자릿점으로 (5,600 이 5.6 으로 읽히지 않게)
+  const numLocal = x => { const sep = { de: '.', ru: ' ' }[MG.I18N.lang]; return sep && typeof x === 'string' ? x.replace(/(?<![\d.,])\d{1,3}(?:,\d{3})+(?![\d,]|\.\d)/g, m => m.replace(/,/g, sep)) : x; };
   function inline(t) {
     let h = esc(t).replace(/✎/g, () => `<span class="ic-in" role="img" aria-label="${T`연필 표시`}">${IC_PEN}</span>`); // 글 속의 ✎ 도 단추와 같은 연필 그림으로
     // 단어 단추 앞의 여는 괄호·뒤의 닫는 괄호와 문장 부호는 단추와 한 줄에 (「（」만 줄 끝에 남지 않게)
@@ -255,7 +259,7 @@
     });
     // 11.07-③ · 010-1234-5678 같은 번호는 붙임표에서 줄이 갈리지 않게 (태그 밖 글자에만)
     h = h.replace(/(^|>)([^<]+)/g, (m, a, txt) => a + txt.replace(/\d+(?:[.-]\d+)*-[\d①-⑳]+/g, '<span class="nw">$&</span>'));
-    return h.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/~~(.+?)~~/g, '<s>$1</s>').replace(/\n/g, '<br>');
+    return h.replace(BOLD, '<b>$1</b>').replace(/~~(.+?)~~/g, '<s>$1</s>').replace(/\n/g, '<br>');
   }
 
   function art(key, cls, svgOnly) {
@@ -320,7 +324,7 @@
     }
     if (b.rows) {
       const head = b.head ? `<thead><tr>${b.head.map(x => `<th>${inline(x)}</th>`).join('')}<th class="pc"></th></tr></thead>` : '';
-      const rows = b.rows.map((r, ri) => `<tr>${r.map(x => `<td>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, r.join(' · '), b.f && b.f[ri], src)}</td></tr>`).join('');
+      const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map(x => `<td>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
       return `<div class="b-tbl${cls}"><table>${b.cap ? `<caption>${inline(b.cap)}</caption>` : ''}${head}<tbody>${rows}</tbody></table></div>`;
     }
     if (b.list) {
@@ -478,7 +482,7 @@
     }).join('');
     return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}</div></header>
       <div class="per-tr" data-who="${esc(p.id)}">${tr}</div>
-      <div class="per-ask"><p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${lv() < 5 ? T(' · 붉은 테: 메모를 들이밀어 다시 물을 수 있다') : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
+      <div class="per-ask"><p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${lv() < 5 ? T(' · 붉은 테: 메모를 들이밀어 다시 물을 수 있다') : ''}${liveOn() ? T` · 물을 때마다 ${hm(lcost('ask'))}` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
   }
 
   /* 대화 재생: 몸짓은 스르르, 말은 한 글자씩(사람마다 다른 말소리). 목소리가 있는 말풍선은 재생 시각에 맞춰 찍는다. 누르면 건너뛴다 */
@@ -769,11 +773,13 @@
   const feedName = id => { const s = C.sources.find(x => x.id === id); return s ? s.name : T('단톡방'); };
   const firstFeed = () => { const s = C.sources.find(x => x.type === 'feed'); return s && s.id; };
 
+  let stepMin = 0; // 방금 한 일에 든 시간: 시계 옆에 잠깐 「+15분」으로 (무엇에 얼마가 드는지 몸으로 알게)
   function advance(kind, min) {
     if (!liveOn() || ST.solved) return liveSync();
     const m = min != null ? min : lcost(kind);
     const prev = ST.live.t;
     ST.live.t += m || 0;
+    if (m > 0 && kind !== 'wait') stepMin += m;
     liveSync(prev);
   }
   // 시간이 흐르거나 새 단서가 생겼을 때: 회신 도착, 단톡방 새 말, 기한 넘김
@@ -943,7 +949,8 @@
     const was = ($('.scr-bar.live .lv-clock') || {}).textContent;
     b.outerHTML = liveBar();
     const c = $('.scr-bar.live .lv-clock'); // 수사 시각이 넘어가는 순간 시계가 잠깐 밝아진다
-    if (c && was && c.textContent !== was) c.classList.add('tick');
+    if (c && was && c.textContent !== was) { c.classList.add('tick'); if (stepMin) c.insertAdjacentHTML('beforeend', `<span class="lv-step" aria-hidden="true">+${esc(hm(stepMin))}</span>`); }
+    stepMin = 0;
   }
   const NEWSR = id => (ST.seen.includes(id) ? '' : T('<span class="sr"> (새 자료)</span>')); // 붉은 점은 눈에만 보이니
   const feedCount = s => { const L = ST.live; return L ? (s.items || []).filter(it => it.id in L.fd && !it.me).length + L.fx.filter(x => (x.src || firstFeed()) === s.id).length : 0; }; // 내가 보낸 말은 안 읽은 말이 아니다
@@ -1026,6 +1033,7 @@
     if (n && q && q.st === 'no' && String(q.note) === String(n.id)) { sayMsg(T('방금 기각된 그 소명 그대로다. 다른 메모를 붙여야 한다.')); sfx('miss'); return; } // 같은 신청서를 또 올려 시간만 쓰지 않게
     const prev = L.t;
     L.t += lcost('write') + (q && lv() >= 5 ? 60 : 0);
+    stepMin += L.t - prev;
     const eta = r.eta != null ? r.eta : 120;
     if (!why || r.why.includes(n.f)) {
       L.req[id] = { st: 'wait', at: L.t, due: L.t + eta, note: n ? n.id : null, tries: q ? q.tries || 0 : 0 };
@@ -1717,7 +1725,7 @@
     if (c.graphic && !cs(c).cw) return warnScreen(c);
     C = c; ST = cs(c); VERDICT = '';
     S.current = id; save();
-    document.title = `CASE ${pad(c.no)} 「${c.title}」 — Monologue Gaze`;
+    document.title = `CASE ${pad(c.no)} ${quote(c.title)} — Monologue Gaze`;
     renderCase();
     liveSync();
     guard();
@@ -1744,7 +1752,7 @@
     if (MG.mood) MG.mood.leave();
     document.body.dataset.screen = 'cabinet';
     document.title = 'Monologue Gaze';
-    app.innerHTML = `<div class="cw"><div class="cw-card" role="region" aria-labelledby="cwH" tabindex="-1">${S.mild ? '' : stains(c.id + 'cw', 2, 'acd', 'corner')}<p class="cw-t">${T`혐오감 주의`}</p><h2 id="cwH">CASE ${pad(c.no)} 「${esc(c.title)}」 ${starsHtml(c)}</h2>
+    app.innerHTML = `<div class="cw"><div class="cw-card" role="region" aria-labelledby="cwH" tabindex="-1">${S.mild ? '' : stains(c.id + 'cw', 2, 'acd', 'corner')}<p class="cw-t">${T`혐오감 주의`}</p><h2 id="cwH">CASE ${pad(c.no)} ${quote(esc(c.title))} ${starsHtml(c)}</h2>
       <p>${esc(c.warn || T('이 사건 기록에는 시신 훼손 같은 잔혹한 내용과 강한 묘사가 들어 있습니다.'))}</p><p class="cw-s">${T`모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국, 가림 없는 사진, 참혹한 묘사와 소리는 「잔혹 표현」 단추로 끌 수 있습니다. 끄면 사진은 가려지고 기록은 건조한 판으로 바뀝니다.`}</p><p>${mildBtn()}</p>
       <p class="cw-b"><button type="button" class="btn-hand" data-cw-ok="${esc(c.id)}">${T`기록을 연다`}</button> <button type="button" class="reset" data-cabinet>${T`돌아간다`}</button></p></div></div>`;
     window.scrollTo(0, 0);
@@ -2276,7 +2284,9 @@
   const QW = { cho: 'r R s e E f a q Q t T d w W c z x v g'.split(' '), jung: 'k o i O j p u P h hk ho hl y n nj np nl b m ml l'.split(' '), jong: ['', ...'r R rt s sw sg e f fr fa fq ft fx fv fg a q qt t T d w c z x v g'.split(' ')] };
   const JAMO = 'ㄱㄲㄳㄴㄵㄶㄷㄸㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅃㅄㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ';
   const JKEY = 'r R rt s sw sg e E f fr fa fq ft fx fv fg a q Q qt t T d w W c z x v g k o i O j p u P h hk ho hl y n nj np nl b m ml l'.split(' ');
-  const qwerty = v => String(v ?? '').replace(/[\uac00-\ud7a3\u3131-\u3163]/g, ch => { const c = ch.charCodeAt(0); if (c < 0xac00) return JKEY[JAMO.indexOf(ch)] || ch; const x = c - 0xac00; return QW.cho[Math.floor(x / 588)] + QW.jung[Math.floor((x % 588) / 28)] + QW.jong[x % 28]; });
+  // \ub7ec\uc2dc\uc544\uc5b4 \uc790\ud310(\u0419\u0426\u0423\u041a\u0415\u041d)\uc73c\ub85c \uce5c \uae00\uc790\ub3c4 \uac19\uc740 \uc790\ub9ac\uc758 \ub85c\ub9c8\uc790\ub85c (\u0435\u0449\u0430\u04330317 = tofu0317)
+  const JCUK = '\u0439\u0446\u0443\u043a\u0435\u043d\u0433\u0448\u0449\u0437\u0445\u044a\u0444\u044b\u0432\u0430\u043f\u0440\u043e\u043b\u0434\u0436\u044d\u044f\u0447\u0441\u043c\u0438\u0442\u044c\u0431\u044e', JCUK_Q = "qwertyuiop[]asdfghjkl;'zxcvbnm,.";
+  const qwerty = v => String(v ?? '').replace(/[\u0430-\u044f\u0451\u0410-\u042f\u0401]/g, ch => { const c = ch.toLowerCase(); return JCUK_Q[JCUK.indexOf(c === '\u0451' ? '\u0435' : c)] ?? ch; }).replace(/[\uac00-\ud7a3\u3131-\u3163]/g, ch => { const c = ch.charCodeAt(0); if (c < 0xac00) return JKEY[JAMO.indexOf(ch)] || ch; const x = c - 0xac00; return QW.cho[Math.floor(x / 588)] + QW.jung[Math.floor((x % 588) / 28)] + QW.jong[x % 28]; });
   function tryLock(id, v) {
     const target = C.docs[id] || C.sources.find(s => s.id === id);
     const lock = target && target.lock;
