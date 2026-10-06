@@ -606,6 +606,7 @@ MG.I18N.put("en", "c05", {
 "3lux5aqbn4": "Knowlton Courier delivery truck driver · Route 7's regular driver",
 "y8g4zr83xn": "Break room, Dock Street delivery warehouse",
 "1ertsx6ukvq": "No. 7 is my route, sure. Why the police want me, I don't know.",
+"28hfqrxmp8a": "The pay phone at the gas station across the street? All the drivers use it. One call each before they load up.",
 "19tbnkfhw0b": "Santa Reina? First town Route 7 stops at. A few newsstands and the paper box outside the post office.",
 "1a1cph72chl": "The lighthouse road? We pass it near the end of Route 7. At that hour all you see is the lighthouse beam.",
 "1yjy3t39qjg": "Carl asked me to swap a few times. Came by the warehouse on a Friday and said the north road was quiet. The city is stop-and-go, hard driving, so it suited me fine.",

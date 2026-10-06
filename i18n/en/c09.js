@@ -4,6 +4,7 @@ MG.I18N.put("en", "c09", {
 "s7m6oit126": "Eungol-dong, Euncheon (fictional place)",
 "olgx9w3z5r": "Inspired by the Sinjeong-dong serial murders (2005–2006) · heavily adapted",
 "27ltrko0gu3": "About 35 min",
+"1fnj70e7cru": "Eun-bi",
 "1kgmnddkqzp": "Late autumn 2006, Eungol-dong. A rainy night, the stairs on the way home from work.",
 "1lipr49cmhr": "**Evidence File 09** · Case 2006-Euncheon-0412 · Investigation PC, Violent Crimes Unit 3, Euncheon Police Station · Mini-homepages preserved Oct 20, 2006",
 "12b2w7cjkzk": "A work of fiction that borrows only the motif of a real unsolved case. Eungol-dong, Euncheon Police Station, HaruHome, Hanbit Express and every other person, place, institution and service here are invented and have no connection to the victims or anyone involved in the real case.",

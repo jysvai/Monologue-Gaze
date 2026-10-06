@@ -167,6 +167,7 @@ MG.I18N.put("en", "c11", {
 "17l28qv62e": "Park Sun-rye",
 "vuf757trqh": ["Mrs. Park","Park","Sun-rye","Park Sunrye"],
 "nuvnvypk4a": "So Byeong-guk",
+"dabcw45m0d": "Inspector, Euncheon Station Criminal Division · filed the 1986 report",
 "2gbj208zmwm": ["Inspector So","So","Byeong-guk","So Byeongguk","detective in charge"],
 "1l3ff8vb2ul": "Daewon Trading",
 "26b4y2p7gac": ["Daewon","loan office","moneylender","Daewon office"],

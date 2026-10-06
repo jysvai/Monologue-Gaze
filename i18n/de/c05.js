@@ -606,6 +606,7 @@ MG.I18N.put("de", "c05", {
 "3lux5aqbn4": "Lieferwagenfahrer beim Knowlton Courier · eigentlicher Fahrer der Route 7",
 "y8g4zr83xn": "Pausenraum im Auslieferungslager, Dock Street",
 "1ertsx6ukvq": "Die 7 ist meine Route, das stimmt. Warum die Polizei zu mir kommt, weiß ich nicht.",
+"28hfqrxmp8a": "Das Münztelefon an der Tankstelle gegenüber? Das benutzen alle Fahrer. Jeder einen Anruf, bevor geladen wird.",
 "19tbnkfhw0b": "Santa Reina? Der erste Ort, an dem Route 7 hält. Ein paar Verkaufsstellen und der Zeitungskasten vor der Post.",
 "1a1cph72chl": "Die Leuchtturmstraße? Die kommt fast am Ende von Route 7. Um die Zeit sieht man nur das Licht vom Leuchtturm.",
 "1yjy3t39qjg": "Carl wollte ein paarmal tauschen. Kam freitags ins Lager und meinte, die Nordstrecke sei ruhiger. In der Stadt ist es ein ewiges Anhalten und Anfahren, ganz schön mühsam — mir war's trotzdem recht.",

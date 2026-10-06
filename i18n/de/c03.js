@@ -360,6 +360,8 @@ MG.I18N.put("de", "c03", {
 "zaj9cjb1u": "Ladengehilfe im Bochundang · fand den Toten",
 "1sb1t3snk50": "Holzdiele im Laden des Bochundang",
 "15ycsity4e0": "(hält die Mütze mit beiden Händen) Ich habe morgens aufgeschlossen. Der alte Herr lag im Hinterzimmer vor dem Radio, auf dem Gesicht… und das Radio war noch eingeschaltet.",
+"2drpao2qfqz": "Das Pfandhaus? Dort soll Herrn Seos Nähmaschine versetzt sein. Ich war nie drin.",
+"1x47zw1xa1d": "Das sind die Pillen unseres Ladens. Den Anzeigentext hat der Meister selbst geschrieben. Ich habe nur die Kräuter geschnitten und gekocht.",
 "1vmmw8qb8w4": "Streng war er, aber gerecht. Abends im Hinterzimmer das [[Radio|k_radio]] laut aufdrehen, das war seine Freude. Die Wände sind dünn, das hat man bestimmt bis nebenan gehört.",
 "2conuodrcji": "Sie kam gegen 8:20, zahlte 20 Yen von dem Geliehenen zurück und ging wieder. Der alte Herr lachte und sagte: „Sing nachher um neun schön!“ An den Tagen, wenn ihr Lied kam, drehte er das Radio ganz laut auf.",
 "21vtztevey": "Den Schlüssel zum Geldschrank trug der alte Herr immer am Gürtel. Die Schuldscheine lagen im Geldschrank, und wem er wie viel geliehen hatte, schrieb er extra ins [[Zinsbuch|k_debtbook]] und hob es in der Ladentischschublade auf.",
@@ -393,7 +395,7 @@ MG.I18N.put("de", "c03", {
 "11xz41mlgtm": "Eine Frauenstimme? Ich bin um halb neun aus dem Haus. Wer danach kam, weiß ich nicht.",
 "1nd7xtffop8": "Er war streng, aber von mir hat er nur wenig Zinsen genommen. Die komischen Gerüchte… das sind bloß Geschichten, die die Leute gern hören.",
 "ndp6qn7lvk": "Der Schneider? Vor dem Bochundang hab ich ihn ein paarmal gesehen. Jedes Mal, wenn er am Laden vom alten Herrn vorbeiging, drehte er den Kopf weg.",
-"1azcpcc4ud8": "Die Leute vom Funkhaus haben mich im Warteraum festgehalten. Es könnte gleich wieder losgehen, hieß es. Als die Sendung schließlich wieder lief, kam zuerst das Changgeuk.",
+"1vxn8x1l84o": "Die Leute vom Funkhaus haben mich im Warteraum festgehalten. Es könnte gleich wieder losgehen, hieß es. Um 9:40 Uhr sagten sie, ich solle einfach gehen, also bin ich gegangen. Später hörte ich, dass bei der Wiederaufnahme zuerst das Changgeuk kam.",
 "dmruwtf8q4": "…Ja, ich hab mein [[Grammophon|k_gramophone]] versetzt. Mir fehlte Geld, um den alten Herrn zu bezahlen. Das kommt jetzt wohl auch noch in die Zeitung.",
 "152lg3ons98": "Ein Lied von einer, die unter der Supyo-Brücke auf jemanden wartet, der fortgegangen ist. Die erste Zeile geht am höchsten.",
 "e0de9caefh": "Die Leute im Schwarzen Schwan halten zu mir. [[Midori|k_midori]], die Ältere von uns, schneidet mir jeden Tag die Zeitungsartikel aus.",
@@ -451,6 +453,7 @@ MG.I18N.put("de", "c03", {
 "250ayrcchv8": "Wirtin des Gasthauses Songhak",
 "xpvknhjkiw": "Diele im Gasthaus Songhak, Sunamgol",
 "17urp16ggt9": "Ach Gott, wer hätte gedacht, dass ein Satz zum Herrn Reporter so groß in der Zeitung landet. Ich hab nur gesagt, was ich gehört hab. Wenn Sie wissen wollen, was in der Nacht war, fragen Sie auch den [[alten Kwak|k_kwak]] mit der Klapper. Der geht ja die ganze Nacht durch die Gasse.",
+"kytx1xly2k": "Neun Uhr abends? Da war ich auf dem Hof, auf dem Weg zum Abort. Von Bochundang her kam eine Frauenstimme und brach plötzlich ab. Danach war es still.",
 "2lwnj9sjuw": "Kurz nach neun bin ich raus auf den Hof, zum Abort. Da kam vom Bochundang her was. Ich hab auch rüber zur Schneiderei auf der anderen Gassenseite geschaut. Morgens hat der junge Park geschrien, da hab ich das Reiskochen stehen gelassen und bin raus.",
 "1pfp7p12o1j": "Kurz nach neun. Vom Bochundang her kam eine Frauenstimme, halb wie Flehen, halb wie Gesang… ging ganz hoch hinauf und brach dann mit einem Mal ab. Wie mit dem Messer abgeschnitten.",
 "94xwgsltk": "Danach war's still. Eine ganze Weile.",
@@ -535,5 +538,6 @@ MG.I18N.put("de", "c03", {
 "16xge99d210": "Läden",
 "un4qykdh8m": "Hinterzimmer",
 "1zhxi1t9sm3": "Werkstatt",
-"7o39uh9o2j": "Pfad (Runde des Nachtwächters)"
+"7o39uh9o2j": "Pfad (Runde des Nachtwächters)",
+"1azcpcc4ud8": "Die Leute vom Funkhaus haben mich im Warteraum festgehalten. Es könnte gleich wieder losgehen, hieß es. Als die Sendung schließlich wieder lief, kam zuerst das Changgeuk."
 });

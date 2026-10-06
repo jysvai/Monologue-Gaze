@@ -840,8 +840,9 @@
     const box = statusBox('lvNotes', 'lv-notes');
     const gen = NOTEGEN, now = ST.live.t;
     news = news.map((n, i) => [n, i]).sort((a, b) => (a[0].at ?? now) - (b[0].at ?? now) || a[1] - b[1]).map(x => x[0]); // 온 차례대로, 각자 온 시각을 달고
-    const more = news.length - 3; // 한꺼번에 너무 많이 오면 앞의 것은 접고 「+N」 — 회신(서류가 열리는 것)과 기한 알림은 접지 않는다
-    if (more > 0) { const keep = new Set(news.filter(n => n.late || n.t === 'doc').slice(-3)); news.slice().reverse().forEach(n => { if (keep.size < 3) keep.add(n); }); news = news.filter(n => keep.has(n)); }
+    const cap = window.matchMedia && matchMedia('(max-width:560px) and (orientation:portrait)').matches ? 1 : 3; // 휴대폰 세로: 한 장씩 (석 장이면 화면 반을 덮고 손가락에 걸린다)
+    const more = news.length - cap; // 한꺼번에 너무 많이 오면 앞의 것은 접고 「+N」 — 회신(서류가 열리는 것)과 기한 알림은 접지 않는다
+    if (more > 0) { const keep = new Set(news.filter(n => n.late || n.t === 'doc').slice(-cap)); news.slice().reverse().forEach(n => { if (keep.size < cap) keep.add(n); }); news = news.filter(n => keep.has(n)); }
     news.forEach((n, i) => setTimeout(() => {
       if (!C || !box.isConnected || gen !== NOTEGEN) return;
       const el = document.createElement('button');
@@ -849,12 +850,12 @@
       if (n.t) { el.dataset.lvT = n.t; el.dataset.lvId = n.id || ''; el.dataset.lvSrc = n.src || ''; }
       el.innerHTML = `<span class="lv-app"><span>${esc(n.app || '')}${i === 0 && more > 0 ? T` <small>외 ${more}건</small>` : ''}</span><time>${esc(ltime(n.at ?? now))}</time></span><b>${esc(n.who)}</b><span class="lv-msg">${esc(trunc(n.msg, 70))}</span>`;
       box.appendChild(el); swipeAway(el);
-      while (box.children.length > 3) box.firstChild.remove();
+      while (box.children.length > cap) box.firstChild.remove();
       requestAnimationFrame(() => el.classList.add('on'));
       // 마우스를 올려 읽고 있거나 초점이 있는 알림은 붙들어 둔다 (손을 떼면 조금 뒤에 걷힌다)
       let held = 0;
       const gone = () => { if (!el.isConnected) return; if ((el.matches(':hover') && held++ < 3) || el === document.activeElement || el.classList.contains('drag')) return void setTimeout(gone, 1500); el.classList.remove('on'); setTimeout(() => el.remove(), 400); };
-      setTimeout(gone, 6500);
+      setTimeout(gone, cap === 1 ? 4500 : 6500);
       if (i === 0) {
         sfx(n.late ? 'miss' : 'buzz');
         if (S.sound && navigator.vibrate && (!navigator.userActivation || navigator.userActivation.hasBeenActive)) try { navigator.vibrate([90, 60, 90]); } catch (e) { /* not allowed */ }
@@ -1029,7 +1030,7 @@
     } else {
       L.req[id] = { st: 'no', at: L.t, note: n.id, tries: (q ? q.tries || 0 : 0) + 1 };
       cue('miss');
-      { const ss = plain(r.deny || T('소명이 부족하다.')).split(/(?<=[.?!])\s|(?<=[。？！])/), why1 = ss[0] + (ss[1] && ss[1].length <= 40 ? ' ' + ss[1] : ''); toast(T('기각 — ') + (why1.length > 90 ? trunc(why1, 90) : why1), 5000); } // 사유는 첫 문장까지 (전문은 신청서에)
+      { const w = /^(ko|ja|zh)/.test(MG.I18N.lang) ? 1 : 2.4, ss = plain(r.deny || T('소명이 부족하다.')).split(/(?<=[.?!])\s|(?<=[。？！])/), why1 = ss[0] + (ss[1] && ss[1].length <= 45 * w ? ' ' + ss[1] : ''); toast(T('기각 — ') + (why1.length > 100 * w ? trunc(why1, 100 * w) : why1), Math.min(9000, 4000 + why1.length * 40 / w)); } // 글자가 넓게 퍼지는 언어는 같은 말이 두세 배 길다 // 사유는 첫 문장까지 (전문은 신청서에)
     }
     delete tmp().rq[id];
     save(); liveSync(prev); renderTabs(); renderList(); renderRead();
@@ -1073,10 +1074,10 @@
     }
     const start = (s.start || []).map(id => C.docs[id]).filter(d => d && ok(d.need));
     const chips = keyChips(s);
-    return `<form class="arch-f" data-arch="${esc(s.id)}" role="search"><input id="aq-${esc(s.id)}" value="${esc(q)}" placeholder="${esc(s.placeholder || T('찾을 단어'))}" aria-label="${T`${esc(s.name)} 검색어`}" autocomplete="off"><button type="submit">${C.frame !== 'papers' ? T('검색') : T('찾기')}</button></form>
+    return `<div class="arch"><form class="arch-f" data-arch="${esc(s.id)}" role="search"><input id="aq-${esc(s.id)}" value="${esc(q)}" placeholder="${esc(s.placeholder || T('찾을 단어'))}" aria-label="${T`${esc(s.name)} 검색어`}" autocomplete="off"><button type="submit">${C.frame !== 'papers' ? T('검색') : T('찾기')}</button></form>
       ${chips ? `<p class="chips-t">${T`수첩의 단어로 찾기`}</p><div class="chips">${chips}</div>` : ''}
       <div class="res">${res}</div>
-      ${start.length ? `<p class="res-n">${esc(s.startLabel || T('처음부터 있던 자료'))}</p>${start.map(itemBtn).join('')}` : ''}`;
+      ${start.length ? `<p class="res-n">${esc(s.startLabel || T('처음부터 있던 자료'))}</p>${start.map(itemBtn).join('')}` : ''}</div>`;
   }
   function listList(s) {
     const docs = C._srcDocs[s.id].filter(d => ok(d.need));
@@ -1125,15 +1126,17 @@
     };
     if (first) C.sources.forEach(s => { kn[s.id] = srcKeys(s); });
     bar.innerHTML = vis.map(s => { const b = tabBadge(s); return `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" tabindex="${s.id === ST.view.src ? 0 : -1}" aria-controls="paneList" id="tab-${esc(s.id)}" data-src="${esc(s.id)}">${esc(s.name)}${s.lock && !ST.unl.includes(s.id) ? T('<span class="tab-lock">잠김</span>') : ''}${b || (fresh(s) ? T('<span class="tab-new" role="img" aria-label="새로 열린 자료"></span>') : '')}</button>`; }).join('');
-    // 탭이 넘쳐 옆으로 밀리는 좁은 화면: 고른 탭이 가려져 있으면 보이는 데까지 민다
-    const on = bar.querySelector('.tab.on');
-    if (on && bar.scrollWidth > bar.clientWidth) {
-      const b = bar.getBoundingClientRect(), r = on.getBoundingClientRect();
-      if (r.left < b.left + 8) bar.scrollLeft -= b.left + 8 - r.left;
-      else if (r.right > b.right - 8) bar.scrollLeft += r.right - (b.right - 8);
-    }
+    tabShow(bar);
     tabEdge(bar);
     const pl = $('#paneList'); if (pl && ST.view.src) { pl.setAttribute('aria-labelledby', 'tab-' + ST.view.src); } // 목록 칸 = 고른 탭의 내용
+  }
+  // 탭이 넘쳐 옆으로 밀리는 좁은 화면: 고른 탭이 가려져 있으면 보이는 데까지 민다 (화면을 돌려 폭이 바뀌어도)
+  function tabShow(bar) {
+    const on = bar && bar.querySelector('.tab.on');
+    if (!on || bar.scrollWidth <= bar.clientWidth) return;
+    const b = bar.getBoundingClientRect(), r = on.getBoundingClientRect();
+    if (r.left < b.left + 8) bar.scrollLeft -= b.left + 8 - r.left;
+    else if (r.right > b.right - 8) bar.scrollLeft += r.right - (b.right - 8);
   }
   // 가려진 탭이 남은 쪽 끝을 흐리게 한다 (옆으로 밀면 더 있다는 표시)
   function tabEdge(bar) {
@@ -2638,7 +2641,7 @@
       if (n !== t) n.click();
     });
     document.addEventListener('scroll', e => { const t = e.target; if (t.id === 'srcTabs') tabEdge(t); else if (t.classList && t.classList.contains('b-tbl')) tblEdge(t); else if (t.matches && t.matches('.skin-news.vertical .doc-b')) colEdge(t); }, { capture: true, passive: true });
-    window.addEventListener('resize', () => { tabEdge($('#srcTabs')); edges(); }, { passive: true });
+    window.addEventListener('resize', () => { tabShow($('#srcTabs')); tabEdge($('#srcTabs')); edges(); }, { passive: true });
     if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { tabEdge($('#srcTabs')); edges(); }); // 글꼴이 늦게 와 탭·표 너비가 바뀐 때
     // 세로쓰기 신문 위에서 휠을 굴리면 읽는 방향(왼쪽)으로 넘긴다. 끝까지 읽었으면 휠은 원래대로 칸을 내린다
     // (문서 전체가 아니라 읽기 칸에만 건다: 문서 전체에 걸면 어디서 굴리든 브라우저가 이 손을 기다리느라 굴림이 굼떠진다)

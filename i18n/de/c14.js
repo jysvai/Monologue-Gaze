@@ -82,7 +82,7 @@ MG.I18N.put("de", "c14", {
 "1j7utstyi69": "Polizeirevier Gaon, Digitalforensik",
 "15fpwr1m5a6": "[[Arbeitshandy|k_workphone]] (vertragsloses Gerät mit Prepaid-SIM) · eigenes Handy",
 "gctygseyqy": "Auslesen von Messenger-Chats, Anrufliste, Fotos, Banking-Apps",
-"xzoa9klgan": "Es ist nicht begründet, dass dieses Handy bei der Tat benutzt wurde. Benachrichtigungen auf dem Sperrbildschirm reichen nicht — es braucht einen Nachweis, was mit dem Gerät gemacht wurde.",
+"187cmsth8ll": "Es ist nicht begründet, dass dieses Handy bei der Tat benutzt wurde. Es braucht einen Nachweis oder eine Aussage, wer auf diesem Gerät welche Anweisungen bekam.",
 "1l0hmwopnpl": "Erste Forensik-Ergebnisse sind da. Der Chat mit K war auf automatische Löschung nach 7 Tagen gestellt. Gut, dass wir heute gesichert haben.",
 "2alu8pjbzss": "Verkehrsdatenabfrage",
 "1f1028ucev2": "Verkehrsdatenauskunft · Nummer, die beim Opfer anrief",
@@ -247,8 +247,10 @@ MG.I18N.put("de", "c14", {
 "13bvi8nvhhd": "Teamleiter K",
 "28hew9hh04c": ["K","Teamleiter K","K-Teamleiter"],
 "aemo8apj9b": "Seo Bok-nam",
+"19p01cmz198": "Bewohnerin, Haus 312, Darae-Siedlung 3 (81)",
 "2ajrq2npb1a": ["Bok-nam","Frau Seo","Oma aus Darae-dong","Darae-dong-Oma"],
 "1n25ssl3yrw": "Lee Hyeon-su",
+"vuckyt2wzl": "Schüler, um 17:40 Uhr vor der Siedlung aufgegriffen (16)",
 "1w7oul4xevo": ["Hyeon-su","Hyunsu","Hyun-su"],
 "1u683k9kwkt": "Wohnanlage Haengbok",
 "1fxamuncedf": ["Haengbok","Wohnanlage","Nr. 103","Wohnung 103","Haengbok-Wohnanlage"],
@@ -969,5 +971,6 @@ MG.I18N.put("de", "c14", {
 "2clg68lbgk1": "Beschlagnahmt — silbernes X aus Klebeband auf der Rückseite der Lieferbox am Ersatzkraftrad 4417",
 "1v7bdwsdf7j": "Foto vor der Wohnungstür Nr. 103, Wohnanlage Haengbok",
 "86in5mh8gj": "Foto zur genauen Untersuchung",
-"241xkvicjjf": "Videostandbild Schließfächer Busbahnhof"
+"241xkvicjjf": "Videostandbild Schließfächer Busbahnhof",
+"xzoa9klgan": "Es ist nicht begründet, dass dieses Handy bei der Tat benutzt wurde. Benachrichtigungen auf dem Sperrbildschirm reichen nicht — es braucht einen Nachweis, was mit dem Gerät gemacht wurde."
 });

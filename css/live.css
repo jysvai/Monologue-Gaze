@@ -73,7 +73,7 @@
 .skin-form .btn-hand{height:auto;padding:8px 20px;border-radius:6px;background:#2f5fc8;color:#fff;font:700 13px/1.2 var(--f-web);transform:none}
 @media (hover:hover){.skin-form .btn-hand:hover{background:#2551b0}}
 .skin-form .rep-opt.on{border-left-color:#2f5fc8;background:#eef3fd}
-.skin-form .rep-opt.on::after{left:auto;right:10px;top:9px;width:14px;height:14px;background:#2f5fc8;transform:none;animation:none}
+.skin-form .rep-opt.on::after{left:10.5px;right:auto;top:10.5px;width:14px;height:14px;background:#2f5fc8;transform:none;animation:none}
 .rq-no{margin:10px 0;padding:8px 12px;border-left:4px solid #b0342a;background:rgba(176,52,42,.07);font:13px/1.6 var(--f-web)}
 .rq-no b{margin-right:6px;color:#b0342a}
 .rq-no small{margin-left:6px;font:11px var(--f-mono);opacity:.7}

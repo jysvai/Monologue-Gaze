@@ -167,6 +167,7 @@ MG.I18N.put("de", "c11", {
 "17l28qv62e": "Park Sun-rye",
 "vuf757trqh": ["Frau Park","Park","Park Sunrye","Bak Sun-rye"],
 "nuvnvypk4a": "So Byeong-guk",
+"dabcw45m0d": "Inspektor, Kriminalabteilung Euncheon · Verfasser des Berichts von 1986",
 "2gbj208zmwm": ["Kommissar So","zuständiger Ermittler","So Byeongguk"],
 "1l3ff8vb2ul": "Daewon Handel",
 "26b4y2p7gac": ["Daewon","Kreditbüro","Firma Daewon","Geldverleih"],

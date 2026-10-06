@@ -4,6 +4,7 @@ MG.I18N.put("de", "c09", {
 "s7m6oit126": "Eungol-dong, Euncheon (fiktiver Ort)",
 "olgx9w3z5r": "Motiv: Mordserie von Sinjeong-dong (2005–2006) · stark abgewandelt",
 "27ltrko0gu3": "ca. 35 Min.",
+"1fnj70e7cru": "Eun-bi",
 "1kgmnddkqzp": "Spätherbst 2006, Eungol-dong. Eine Regennacht, die Treppe auf dem Heimweg.",
 "1lipr49cmhr": "**Beweisakte 09** · Fall 2006-Euncheon-0412 · Ermittlungs-PC, Revier Euncheon, Gewaltdezernat, Team 3 · Minihomepages gesichert 20.10.2006",
 "12b2w7cjkzk": "Eine erfundene Geschichte, die nur das Motiv eines realen ungelösten Falls übernimmt. Eungol-dong, das Revier Euncheon, HaruHome, der Hanbit-Paketdienst sowie alle Personen, Orte, Behörden und Dienste sind frei erfunden und haben nichts mit Opfern oder Beteiligten des realen Falls zu tun.",

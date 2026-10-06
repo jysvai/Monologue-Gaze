@@ -200,6 +200,11 @@ img{max-width:100%}
   #app{height:auto}
   .case-view{height:auto;grid-template-columns:minmax(0,1fr)}
   .stage{height:600px;height:max(min(600px,calc(100svh - 24px)),84svh)} /* 작은 휴대폰(높이 640 안팎)에서는 화면을 넘지 않게 */
+  /* 수첩이 화면 밑으로 내려가면 보고서·「짚어 보기」를 사건 개요 바로 밑으로 — 메모가 쌓이면 맨 끝까지 열 번 넘게 밀어 내려야 했다 */
+  .nb{display:flex;flex-direction:column}
+  .nb>*{order:2}
+  .nb>.nb-rings,.nb>.nb-top,.nb>.brief{order:0}
+  .nb>.nb-rep{order:1}
 }
 /* 가로로 눕힌 휴대폰·태블릿: 수사 화면이 화면 높이를 넘지 않게 (한눈에 들어오고, 그 밑의 수첩으로 내려가기 쉽게) */
 @media (max-width:1099px) and (orientation:landscape){ .stage{height:max(320px,calc(100svh - 24px))} }
@@ -264,6 +269,14 @@ img{max-width:100%}
 .arch-f button{padding:0 14px;border:0;background:var(--arch-line,#5a4a2e);color:#fff;font:700 13px var(--f-web);cursor:pointer}
 .chips-t{margin:10px 0 4px;font:11px var(--f-mono);opacity:.7}
 .chips{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 10px}
+/* 좁은 화면: 단어가 서른, 마흔 개로 늘면 칩 더미가 검색 결과와 대답을 화면 밖으로 밀어낸다 — 칩 칸은 제 안에서 굴리고, 찾은 결과는 검색창 바로 밑에 */
+@container stage (max-width:700px){
+  .chips{max-height:min(196px,34svh);overflow-y:auto;overscroll-behavior:contain;padding:2px 2px 6px;box-shadow:inset 0 -10px 8px -10px rgba(0,0,0,.25)}
+  .arch{display:flex;flex-direction:column}
+  .arch>*{order:3}
+  .arch>.arch-f{order:0}
+  .arch>.res:not(:empty){order:1;margin-bottom:12px}
+}
 .chip{padding:3px 9px 1px;border:1px dashed #8e7f5c;border-radius:2px;background:#f4ebc6;color:var(--ink);font:17px/1.15 var(--f-hand);cursor:pointer}
 @media (hover:hover){.chip:hover{background:#efe1a8}}
 .chip.done{opacity:.72;border-style:solid;border-color:transparent;background:#e7dcb8}

@@ -360,6 +360,8 @@ MG.I18N.put("en", "c03", {
 "zaj9cjb1u": "Clerk at Bochundang · found the body",
 "1sb1t3snk50": "Shop floor, Bochundang",
 "15ycsity4e0": "(clutching his cap in both hands) I opened up in the morning. The master was lying face down in front of the radio in the inner room… and the radio was still switched on.",
+"2drpao2qfqz": "The pawnshop? That's where they say Mr. Seo's sewing machine is pawned. I've never been inside.",
+"1x47zw1xa1d": "Those are our shop's pills. The master wrote the ad copy himself. I only cut and boiled the herbs.",
 "1vmmw8qb8w4": "He was strict, but he was fair. His pleasure in the evenings was playing the [[radio|k_radio]] loud in the inner room. The walls are thin, so the whole house next door must have heard it.",
 "2conuodrcji": "She came around 8:20, paid back 20 won of what she'd borrowed, and left. The master laughed and said, “Sing well on the nine o'clock broadcast later.” On days her songs were on, he turned the radio up as loud as it would go.",
 "21vtztevey": "The master always kept the safe key at his waist. The IOUs went in the safe, and who he'd lent how much he wrote down separately in the [[loan ledger|k_debtbook]], which he kept in the counter drawer.",
@@ -393,7 +395,7 @@ MG.I18N.put("en", "c03", {
 "11xz41mlgtm": "A woman's voice? I left that house at half past eight. I don't know who came after that.",
 "1nd7xtffop8": "He was a strict man, but he charged me only a little interest. The ugly rumors… they're just stories people like to hear.",
 "ndp6qn7lvk": "The tailor? I saw him a few times in front of Bochundang. Every time he passed Mr. Kang's shop, he turned his head away.",
-"1azcpcc4ud8": "The station people kept me in the waiting room. They said I might go back on soon. In the end, when the broadcast came back, the changgeuk went on first.",
+"1vxn8x1l84o": "The station people kept me in the waiting room. They said I might go back on soon. At 9:40 they told me to just go home, so I left. I heard later that when the broadcast came back, the changgeuk went on first.",
 "dmruwtf8q4": "…Yes, I pawned my [[gramophone|k_gramophone]]. I was short of what I owed Mr. Kang. I suppose that'll be in the papers too.",
 "152lg3ons98": "It's a song about waiting under Supyo Bridge for someone who went away. The first line is the highest.",
 "e0de9caefh": "The people at the Black Swan are on my side. [[Midori|k_midori]] brings me clippings from the papers every day.",
@@ -451,6 +453,7 @@ MG.I18N.put("en", "c03", {
 "250ayrcchv8": "Landlady of the Songhak Inn",
 "xpvknhjkiw": "Open hall, Songhak Inn, Sunamgol",
 "17urp16ggt9": "Goodness, who'd have thought one word to that reporter would end up so big in the paper? I only said what I heard. If you want to know about that night, go and ask [[Old Gwak|k_kwak]] with the clappers too. He walks the alley all night long.",
+"kytx1xly2k": "Nine at night? That's when I came out into the yard to use the privy. A woman's voice came from the Bochundang side and stopped short. It was quiet after that.",
 "2lwnj9sjuw": "A little after nine I came out into the yard to go to the privy. That's when there was a sound from the Bochundang side. I looked across the alley at the tailor's too. In the morning I ran out in the middle of making breakfast when young Park yelled.",
 "1pfp7p12o1j": "A little after nine. A woman's voice came from the Bochundang side. Could've been pleading, could've been singing… it climbed up high and then stopped short. Like it was cut with a knife.",
 "94xwgsltk": "Then it was quiet. For a good long while.",
@@ -535,5 +538,6 @@ MG.I18N.put("en", "c03", {
 "16xge99d210": "Shutters",
 "un4qykdh8m": "Inner room",
 "1zhxi1t9sm3": "Workroom",
-"7o39uh9o2j": "Back lane (watchman's round)"
+"7o39uh9o2j": "Back lane (watchman's round)",
+"1azcpcc4ud8": "The station people kept me in the waiting room. They said I might go back on soon. In the end, when the broadcast came back, the changgeuk went on first."
 });

@@ -82,7 +82,7 @@ MG.I18N.put("en", "c14", {
 "1j7utstyi69": "Gaon Police Station, Digital Forensics Section",
 "15fpwr1m5a6": "[[Work phone|k_workphone]] (blank handset with a prepaid SIM) · his own phone",
 "gctygseyqy": "Extract messenger chats, call logs, photos and banking apps",
-"xzoa9klgan": "No grounds that this phone was used in the crime. Lock-screen notifications alone aren't enough — we need a record showing what was done with this device.",
+"187cmsth8ll": "No grounds that this phone was used in the crime. We need a record or a statement showing who was given what orders on this device.",
 "1l0hmwopnpl": "Preliminary forensics are in. The K chat was set to auto-delete after 7 days. Lucky we pulled it today.",
 "2alu8pjbzss": "Telecom records",
 "1f1028ucev2": "Request for call-detail records · Number that called the victim",
@@ -247,8 +247,10 @@ MG.I18N.put("en", "c14", {
 "13bvi8nvhhd": "Manager K",
 "28hew9hh04c": ["K","Team Leader K","K manager","Mgr K"],
 "aemo8apj9b": "Seo Bok-nam",
+"19p01cmz198": "Resident, Building 312, Darae Complex 3 (81)",
 "2ajrq2npb1a": ["Bok-nam","Boknam","Mrs. Seo","Grandma Seo","Darae-dong grandmother","Darae grandma"],
 "1n25ssl3yrw": "Lee Hyun-su",
+"vuckyt2wzl": "Student picked up outside the complex at 17:40 (16)",
 "1w7oul4xevo": ["Hyun-su","Hyunsu","Hyeon-su"],
 "1u683k9kwkt": "Haengbok Villa",
 "1fxamuncedf": ["villa","Haengbok","Happiness Villa","Unit 103","103"],
@@ -969,5 +971,6 @@ MG.I18N.put("en", "c14", {
 "2clg68lbgk1": "Seized item — silver X of tape on the rear of the delivery box on spare motorbike 4417",
 "1v7bdwsdf7j": "Photo of the front door of Haengbok Villa Unit 103",
 "86in5mh8gj": "Close-examination photo",
-"241xkvicjjf": "Terminal locker CCTV capture"
+"241xkvicjjf": "Terminal locker CCTV capture",
+"xzoa9klgan": "No grounds that this phone was used in the crime. Lock-screen notifications alone aren't enough — we need a record showing what was done with this device."
 });
