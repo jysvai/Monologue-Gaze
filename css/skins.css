@@ -147,6 +147,7 @@
 .case-view[data-frame="laptop"] .skin-ledger{background-color:#f4f3ee}
 .case-view[data-frame="laptop"] .skin-ledger .b-tbl table{font:12.5px/1.5 var(--f-mono)}
 .case-view[data-frame="laptop"] .skin-ledger .b-tbl td{border-right:0;border-bottom:1px solid rgba(0,0,0,.12)}
+@container stage (max-width:520px){.case-view:not([data-frame="laptop"]) .skin-ledger:not(.printed) .b-tbl td{font-size:15.5px;line-height:1.35}} /* 좁은 화면: 붓글씨 장부 표는 12.5px 로 줄면 읽히지 않는다 */
 .case-view[data-frame="laptop"] .skin-ledger .b-tbl th{background:rgba(0,0,0,.06)}
 .doc.typed .b-tbl table{font:13px/1.55 var(--f-type)}
 .doc.typed .b-tbl td{border-bottom-style:dotted;border-bottom-color:rgba(0,0,0,.28)}
