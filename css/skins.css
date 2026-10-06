@@ -31,7 +31,7 @@
 .b-tbl.scrolls td.pc{background-color:var(--pc-bg,transparent);background-image:var(--pc-bgi,none)}
 .b-tbl.scrolls th.pc{background-color:var(--pc-bg,transparent);background-image:linear-gradient(rgba(0,0,0,.05),rgba(0,0,0,.05)),var(--pc-bgi,none)}
 .b-tbl.more-r .pc{box-shadow:-8px 0 8px -6px rgba(0,0,0,.3)}
-@container stage (max-width:520px){.b-tbl th,.b-tbl td{padding:5px;word-break:keep-all;overflow-wrap:break-word;min-width:3em}.b-tbl .pc{position:sticky;right:0;width:28px;min-width:0}} /* 폰: 이름·금액은 한 덩어리로 두고 표는 옆으로 넘긴다. ✎ 칸은 오른쪽에 붙어 있다 */
+@container stage (max-width:520px){.b-tbl th,.b-tbl td{padding:5px 4px;word-break:keep-all;overflow-wrap:break-word;min-width:3em}.b-tbl td{font-size:12.5px;hyphens:auto;-webkit-hyphens:auto}.b-tbl th{letter-spacing:0;font-size:10.5px;hyphens:auto;-webkit-hyphens:auto}.b-tbl .pc{position:sticky;right:0;width:24px;min-width:0;padding-left:2px;padding-right:2px}.skin-web .doc-b>.b-tbl{margin-left:-10px;margin-right:-10px}} /* 폰: 이름·금액은 한 덩어리로 두고 표는 옆으로 넘긴다. ✎ 칸은 오른쪽에 붙어 있다 */
 .b-list{margin:4px 0 14px;padding-left:20px}
 .b-list li{margin:3px 0}
 .b-div{display:flex;align-items:center;gap:10px;margin:16px 0 10px;font:11.5px var(--f-mono);opacity:.75}
