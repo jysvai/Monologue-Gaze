@@ -454,6 +454,16 @@
   let PICK = null; // { pid, k, miss, tries }
   const MISS = () => [T('(메모를 훑어본다) 이게 그 얘기하고 무슨 상관입니까?'), T('(어깨를 으쓱한다) 그걸 보여 주셔도 드릴 말씀은 같습니다.'), T('…그 메모로 뭘 말씀하시려는 건지 모르겠군요.')];
   const MISS_SOFT = () => [T('(메모를 한참 들여다본다) …글쎄요, 이걸로는 떠오르는 게 없는데요.'), T('(고개를 갸웃한다) 이건 제가 말씀드린 거하고는 다른 얘기 같은데요.')];
+  // 틀린 메모를 내밀면: 몸짓 하나 + 그 사람이 평소 모른다고 할 때 쓰는 말 — 부두 인부와 여고생이 같은 존댓말로 손사래 치지 않게
+  const GLANCE = () => [T('(메모를 훑어보더니 도로 밀어 놓는다)'), T('(메모를 힐끗 보고 고개를 젓는다)'), T('(메모와 당신을 번갈아 본다)')];
+  const GLANCE_SOFT = () => [T('(메모를 한참 들여다본다)'), T('(메모를 읽고 나서 고개를 갸웃한다)')];
+  function missLine(p, soft, n) {
+    const own = (Array.isArray(p.idle) ? p.idle : []).map(x => String(x && typeof x === 'object' ? x.p || '' : x).replace(/^\s*[(（][^)）]*[)）]\s*/, '')).filter(Boolean);
+    if (!own.length) { const L = soft ? MISS_SOFT() : MISS(); return L[(n + hash(p.id)) % L.length]; }
+    const g = soft ? GLANCE_SOFT() : GLANCE(), h = hash(p.id);
+    const a = g[(n + h) % g.length], b = own[(n + h) % own.length];
+    return a + (/[）]$/.test(a) ? '' : ' ') + b;
+  }
   function pickHtml(p) {
     const k = PICK.k, L = (C.keywords[k] || {}).label || k;
     const list = ST.notes.slice().reverse().map(n => `<button type="button" class="rep-opt press-opt" data-press-note="${n.id}"><span class="t">${esc(n.t)}</span> <small class="src">— ${esc(n.src || '')}</small></button>`).join('');
@@ -468,9 +478,8 @@
     if (!p || !n) return;
     const want = ((rawAns(p, k) || {}).need || []).filter(x => x[0] === '!').map(x => x.slice(1));
     if (n.f && want.includes(n.f)) { ask(k, true); return; }
-    const L = isSoft(p, k) ? MISS_SOFT() : MISS();
     PICK.tries = (PICK.tries || 0) + 1;
-    PICK.miss = L[(PICK.tries - 1 + hash(p.id)) % L.length];
+    PICK.miss = missLine(p, isSoft(p, k), PICK.tries - 1);
     sfx('miss');
     const w = ($('#paneRead [data-press-filter]') || {}).value || '';
     renderRead();
