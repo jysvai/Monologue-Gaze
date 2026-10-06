@@ -1866,6 +1866,10 @@
     if (!S.seen) S.seen = { done: doneIds, m: mIds, letter: allShut };
     const newDone = doneIds.filter(id => !S.seen.done.includes(id)), newM = mIds.filter(id => !S.seen.m.includes(id)), newLetter = allShut && !S.seen.letter;
     S.seen.done.push(...newDone); S.seen.m.push(...newM); S.seen.letter = allShut; save();
+    // 연습 사건만 닫고 아직 서랍을 하나도 안 열었으면, 다음에 열 폴더에 팀장이 연필로 표시해 둔다
+    const touched = c => { const st = S.cases[c.id]; return st && (st.solved || (st.notes || []).length || (st.seen || []).length); };
+    const tut = MG.cases.find(c => c.kind === 'tutorial');
+    const nextId = tut && S.cases[tut.id] && S.cases[tut.id].solved && !main.concat(live).some(touched) && main[0] ? main[0].id : null;
     const folder = c => {
       const st = S.cases[c.id];
       const status = st && st.solved ? 'done' : st && ((st.notes || []).length || (st.seen || []).length) ? 'going' : 'new'; // 예전 판의 저장에 칸이 빠져 있어도 기록실은 열린다
@@ -1879,7 +1883,7 @@
         <span class="f-tab">CASE ${pad(c.no)}</span>
         <span class="f-body"><span class="f-kind">${kind} · ${esc(c.year)} ${c.kind === 'tutorial' ? T('<span class="stars t">연습</span>') : starsHtml(c)}</span><span class="f-label"><span class="f-title">${esc(c.title)}</span><span class="f-place">${esc(c.place)}</span></span>
         <span class="f-motif">${esc(c.motif || '')}</span>${c.length ? `<span class="f-len">${esc(c.length)}</span>` : ''}
-        ${status === 'done' ? `<span class="f-stamp${newDone.includes(c.id) ? ' fresh' : ''}">${T`종결`}</span>` : status === 'going' ? `<span class="f-going">${T`수사 중${stop ? `<small>${stop}</small>` : ''}`}</span>` : ''}</span></button>`;
+        ${status === 'done' ? `<span class="f-stamp${newDone.includes(c.id) ? ' fresh' : ''}">${T`종결`}</span>` : status === 'going' ? `<span class="f-going">${T`수사 중${stop ? `<small>${stop}</small>` : ''}`}</span>` : c.id === nextId ? `<span class="f-going f-next">${T`다음은 여기부터`}</span>` : ''}</span></button>`;
     };
     const intro = S.intro ? '' : `<div class="intro"><p>${T`서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.`}</p><p>${T`서랍 속에는 한 세기에 걸친 미제 기록 ${numk(main.length)} 건. 신문 스크랩, 진술서, 편지, 사진. 선배가 끝내 풀지 못하고 두고 간 것들이다.`}</p><p class="intro-hand">${T`처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장`}</p><button type="button" class="btn-hand" data-intro-ok>${T`서랍을 연다`}</button></div>`;
     const letter = allShut ? `<article class="m-letter${newLetter ? ' fresh' : ''}"><h3>${T`서랍 맨 밑의 편지`}</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p>${mWho()}</article>` : '';

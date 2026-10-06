@@ -273,6 +273,7 @@ MG.I18N.put("de", "ui", {
 "<span class=\"f-warn\">혐오감 주의</span>": "<span class=\"f-warn\">Verstörende Inhalte</span>",
 "<span class=\"stars t\">연습</span>": "<span class=\"stars t\">Übung</span>",
 "수사 중{0}": "In Ermittlung{0}",
+"다음은 여기부터": "Als Nächstes hier",
 "서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.": "Polizeirevier Seoul-Seobu, Gewaltdezernat, Team 2. <b>M</b> – lange im Team, jetzt ans Revier Euncheon versetzt – hat den Schlüssel zu einer Schreibtischschublade dagelassen.",
 "서랍 속에는 한 세기에 걸친 미제 기록 {0} 건. 신문 스크랩, 진술서, 편지, 사진. 선배가 끝내 풀지 못하고 두고 간 것들이다.": "In der Schublade: {0} ungelöste Fallakten aus einem ganzen Jahrhundert. Zeitungsausschnitte, Aussagen, Briefe, Fotos. Alles, was M nie lösen konnte und zurückgelassen hat.",
 "처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장": "Beim ersten Mal mit CASE 00 anfangen. Dort lernen, wie man ermittelt. — Teamleiter",

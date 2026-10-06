@@ -273,6 +273,7 @@ MG.I18N.put("en", "ui", {
 "<span class=\"f-warn\">혐오감 주의</span>": "<span class=\"f-warn\">Disturbing content</span>",
 "<span class=\"stars t\">연습</span>": "<span class=\"stars t\">Practice</span>",
 "수사 중{0}": "In progress{0}",
+"다음은 여기부터": "Start here next",
 "서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.": "Seoul Seobu Police Station, Violent Crimes Unit 2. <b>M</b>, a senior detective transferred to Euncheon Station, left behind the key to a desk drawer.",
 "서랍 속에는 한 세기에 걸친 미제 기록 {0} 건. 신문 스크랩, 진술서, 편지, 사진. 선배가 끝내 풀지 못하고 두고 간 것들이다.": "Inside the drawer: {0} unsolved case files spanning a century. Newspaper clippings, statements, letters, photographs. The ones M never managed to solve and left behind.",
 "처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장": "If this is your first time, start with CASE 00. Learn how to investigate there. — Team leader",
