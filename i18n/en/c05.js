@@ -242,7 +242,7 @@ MG.I18N.put("en", "c05", {
 "1ouexmgmome": "Circulation manager [[Vernon Osgood|k_osgood]] said, “A Courier on every Sunday breakfast table.”",
 "1lqhnxsvlpq": "Lighthouse Stakeout Comes Up Empty — No Sign of Hourglass",
 "1o13widbgim": "Monday, August 18, 1969 · Page 3",
-"kqdq47f9tv": "Graylock Lighthouse road, the morning after the stakeout.",
+"1piz3iq7ehm": "Graylock Lighthouse road, the night of the stakeout.",
 "1ohcxz1e40x": "Police staked out the area around [[Graylock Lighthouse|k_graylock]] from the night of the 16th until the morning of the 17th but found no one suspicious. The move followed reports that couples often park near the lighthouse.",
 "19eftb4prmq": "“Only a handful of cars went by all night,” a police source said.",
 "ckhz6ottbp": "Radio Log — Early Hours of December 15",

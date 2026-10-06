@@ -242,7 +242,7 @@ MG.I18N.put("de", "c05", {
 "1ouexmgmome": "Vertriebsleiter [[Vernon Osgood|k_osgood]]: „Auf jeden Frühstückstisch am Sonntag einen Courier.“",
 "1lqhnxsvlpq": "Observation am Leuchtturm ergebnislos — Sanduhr zeigt sich nicht",
 "1o13widbgim": "Montag, 18. August 1969 · Seite 3",
-"kqdq47f9tv": "Die Straße zum Leuchtturm Graylock am Morgen nach der Observation.",
+"1piz3iq7ehm": "Die Straße zum Leuchtturm Graylock in der Nacht der Observation.",
 "1ohcxz1e40x": "Die Polizei hat vom Abend des 16. bis zum Morgen des 17. die Gegend rund um den [[Leuchtturm Graylock|k_graylock]] observiert, aber keine verdächtige Person entdeckt. Anlass war, dass in der Nähe des Leuchtturms häufig Liebespaare mit dem Auto halten.",
 "19eftb4prmq": "Ein Polizeisprecher sagte: „Die ganze Nacht über sind nur wenige Autos vorbeigekommen.“",
 "ckhz6ottbp": "Funkprotokoll — früher Morgen des 15. Dezember",
