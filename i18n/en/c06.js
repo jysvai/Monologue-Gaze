@@ -184,7 +184,7 @@ MG.I18N.put("en", "c06", {
 "gizg8lqfvy": ["notebook","symbol notebook","cipher notebook"],
 "1rml8v1ulfm": ["map","tourist map"],
 "2b7ztyhshht": "Switchboard log",
-"d4ihd3f9qv": ["switchboard","telephone exchange","Sentralbord","call log","phone log","switchboard record"],
+"1osgayja0h3": ["switchboard","telephone exchange","Sentralbord","call log","phone log","switchboard record","phone records","call records","hotel phone"],
 "5wut87fyjc": ["24 318","phone number","telephone number","TLF 24318"],
 "1zgr97vmuoz": ["license plate","number plate","plate","gray Volvo","grey Volvo","Volvo Amazon","gray Amazon","grey Amazon"],
 "1at3gwhhcm9": "Havørn",

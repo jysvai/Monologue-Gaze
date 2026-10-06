@@ -157,7 +157,7 @@
       k_terminal: { label: '목골 종점', type: 'place', alias: ['종점', '버스 종점'] },
       k_inn: { label: '소양여관', type: 'place', alias: ['여관', '소양'] },
       k_ricestore: { label: '목골 쌀상회', type: 'place', alias: ['쌀상회', '쌀집'] },
-      k_cheonghak: { label: '청학 나전칠기', type: 'place', alias: ['청학', '청학 공방', '자개 공방'] },
+      k_cheonghak: { label: '청학 나전칠기', type: 'place', alias: ['청학', '청학 공방', '자개 공방', '가구 공방'] },
       k_hardware: { label: '대성철물', type: 'place', alias: ['철물점', '목골 철물점'] },
       k_sacks: { label: '쌀 포대', type: 'thing', alias: ['포대', '마대', '쌀부대'] },
       k_stamp: { label: '도정 스탬프', type: 'thing', alias: ['스탬프', '도정 번호', '도정 일자'] },
@@ -282,7 +282,7 @@
         { note: '※ 압수품은 감정 뒤 은천서로 돌려보냄.' },
         { stamp: '국과수 법의학과' },
       ] },
-      d_items: { src: 'rec', find: ['k_jacket'], blood: true, title: '증거물 목록 — 셋째 포대 동봉물', kicker: '은천서 86-강-411 · 17', meta: '1986년 11월 18일 · 하구 수문 거름망 수거분 · 보관 번호 86-411-③', body: [
+      d_items: { src: 'rec', find: ['k_jacket', 'k_cheongja'], blood: true, title: '증거물 목록 — 셋째 포대 동봉물', kicker: '은천서 86-강-411 · 17', meta: '1986년 11월 18일 · 하구 수문 거름망 수거분 · 보관 번호 86-411-③', body: [
         { img: 'items_table', cap: '잠바와 주머니에서 나온 것.' },
         { list: [
           '[[곤색 잠바]] (남성용 · 비닐 누빔) 1 — 편상구의 것 (고소인 확인)',
@@ -356,7 +356,7 @@
         '원장에는 이름 대신 동네 첫 글자와 번호만 적혀 있다. 시 = 중앙시장, 목 = 목골, 상 = 상포동.',
         { note: '※ 번호와 사람을 잇는 명부는 원장에 없음. 고소인은 "머릿속에 있다"고 함. (소)' },
       ] },
-      d_diary2: { cls: 'f-gaegu ink-pencil', src: 'rec', find: ['k_matchbox'], need: ['k_han'], skin: 'memo', title: '수사 일지 (소병국) — 2', meta: '1986. 11. 27 ~ 1987. 1. 10 · 연필', body: [
+      d_diary2: { cls: 'f-gaegu ink-pencil', src: 'rec', find: ['k_matchbox', 'k_cheongja'], need: ['k_han'], skin: 'memo', title: '수사 일지 (소병국) — 2', meta: '1986. 11. 27 ~ 1987. 1. 10 · 연필', body: [
         '11/27 청자다방 레지 한정미. 편이 그 밤 전화를 걸기 전에 성냥갑 안쪽에 번호를 적었다고 한다. 성냥갑은 물에 불어 글씨가 번졌다. 감식계에 [[적외선 촬영]] 의뢰.',
         '12/3 감식계 회보. 볼펜 자국이 적외선에 살아났다고. 인화 석 장. 조회는 내일.',
         '12/4 과장: "조회는 됐고 정육점 보강이나 해." 우는 벌써 풀려났는데 보강이라니.',

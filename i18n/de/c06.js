@@ -184,7 +184,7 @@ MG.I18N.put("de", "c06", {
 "gizg8lqfvy": ["Zeichenheft","Notizbuch","Notizbüchlein","Heft mit Zeichen"],
 "1rml8v1ulfm": ["Karte","Stadtplan","Wanderkarte"],
 "2b7ztyhshht": "Vermittlungsprotokoll",
-"d4ihd3f9qv": ["Telefonvermittlung","Vermittlung","Telefonzentrale","Sentralbord"],
+"1osgayja0h3": ["Telefonvermittlung","Vermittlung","Telefonzentrale","Sentralbord","Telefonprotokoll","Anrufliste","Hoteltelefon"],
 "5wut87fyjc": ["24 318","Telefonnummer","Nummer 24318"],
 "1zgr97vmuoz": ["Nummernschild","Kennzeichen","grauer Volvo","Volvo Amazon","grauer Amazon"],
 "1at3gwhhcm9": "Havørn",

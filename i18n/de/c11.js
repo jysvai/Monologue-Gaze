@@ -200,7 +200,7 @@ MG.I18N.put("de", "c11", {
 "2conibr2gpo": "Reishandlung Mokgol",
 "1hmopupoin7": ["Reishandlung","Reisladen"],
 "1p5izlq064j": "Perlmuttwerkstatt Cheonghak",
-"29jb4acu54x": ["Cheonghak","Werkstatt Cheonghak","Perlmuttwerkstatt","Lackwerkstatt","Perlmuttbude"],
+"27io01r1qb4": ["Cheonghak","Werkstatt Cheonghak","Perlmuttwerkstatt","Lackwerkstatt","Perlmuttbude","Möbelwerkstatt","Möbel"],
 "1hdj6p9q7re": "Eisenwaren Daeseong",
 "1coja261ix1": ["Eisenwarenladen","Eisenwaren","Eisenwarenhandlung","Daeseong"],
 "1djl024wrnb": "Reissäcke",

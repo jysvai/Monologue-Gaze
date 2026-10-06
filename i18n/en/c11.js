@@ -200,7 +200,7 @@ MG.I18N.put("en", "c11", {
 "2conibr2gpo": "Mokgol Rice Store",
 "1hmopupoin7": ["rice store","rice shop"],
 "1p5izlq064j": "Cheonghak Lacquerware",
-"29jb4acu54x": ["Cheonghak","Cheonghak workshop","inlay workshop","inlay shop","lacquer workshop","mother-of-pearl workshop","workshop"],
+"27io01r1qb4": ["Cheonghak","Cheonghak workshop","inlay workshop","inlay shop","lacquer workshop","mother-of-pearl workshop","workshop","furniture workshop","furniture"],
 "1hdj6p9q7re": "Daeseong Hardware",
 "1coja261ix1": ["hardware store","hardware","Daeseong","Mokgol hardware store"],
 "1djl024wrnb": "Rice Sacks",

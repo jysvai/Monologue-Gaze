@@ -1282,8 +1282,9 @@
   }
   function reportHtml() {
     const sol = C.solution, notes = ST.notes, FM = FORM();
-    if (!ST.solved && ST.report.culprit && ((C.keywords[ST.report.culprit] || {}).nick || (C.keywords[ST.report.culprit] || {}).victim)) ST.report.culprit = null;
-    const persons = ST.keys.filter(k => C.keywords[k] && C.keywords[k].type === 'person' && !C.keywords[k].nick && !C.keywords[k].victim); // 별명(온라인 닉네임)과 피해자는 범인 칸에 내지 않는다 // 온라인 별명은 계정일 뿐, 영장에 적을 사람이 아니다
+    const victim = k => { const w = C.keywords[k] || {}; return w.victim || (w.victimIf || []).some(okOne); }; // victimIf: 피해자의 다른 이름 — 그녀가 누구였는지 밝힌 메모가 수첩에 오르면 범인 칸에서 빠진다
+    if (!ST.solved && ST.report.culprit && ((C.keywords[ST.report.culprit] || {}).nick || victim(ST.report.culprit))) ST.report.culprit = null;
+    const persons = ST.keys.filter(k => C.keywords[k] && C.keywords[k].type === 'person' && !C.keywords[k].nick && !victim(k)); // 별명(온라인 닉네임)과 피해자는 범인 칸에 내지 않는다 // 온라인 별명은 계정일 뿐, 영장에 적을 사람이 아니다
     const roleOf = k => { const p = Object.values(C.people || {}).find(x => x.key === k), r = (p && p.role) || (C.keywords[k] || {}).role; return r ? plain(r) : ''; }; // 찾아갈 수 없는 사람도 단어에 role 이 있으면 한 줄 붙인다
     const groups = noteGroups(notes);
     const shut = ST.solved; // 종결된 보고서는 결재가 끝난 서류: 고칠 수 없다
