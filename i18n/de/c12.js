@@ -917,6 +917,7 @@ MG.I18N.put("de", "c12", {
 "xhfdzmdf2v": "Wo die Leiche gewaschen und zerteilt wurde",
 "1bnl4lh6nng": "Was diese Hände gelernt haben",
 "yes62daim": "Warum das Opfer in jener Nacht dorthin ging",
+"1wgiydssgbs": "Eine Stelle passt nicht. Sagt diese Notiz, warum das Opfer in jener Nacht dorthin ging?",
 "13vnea249wq": "Genau eine Stelle stimmt nicht. Zeigt diese Notiz wirklich auf die Hände dieser Person?",
 "20ttdpog4fs": "Zurück. Unter den einundzwanzig Beuteln ist einer, der noch nicht an seinem Platz liegt.",
 "1brr2lqcth3": "浅葱署 特捜 6-041 · Wiederaufnahme",

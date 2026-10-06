@@ -304,7 +304,7 @@
     if (b.h != null) return `<h4 class="b-h${cls}">${inline(b.h)}</h4>`;
     if (b.sep) return `<hr class="b-sep">`;
     if (b.divider != null) return `<p class="b-div"><span>${inline(b.divider)}</span></p>`;
-    if (b.note != null) return `<p class="b-note${cls}">${inline(b.note)}</p>`;
+    if (b.note != null) return `<p class="b-note${cls}">${inline(b.note)}${b.pin || b.f ? pinBtn(ref, b.note, b.f, src) : ''}</p>`; // 감식 메모처럼 증거가 되는 주석은 수첩에 옮겨 적을 수 있게 (pin)
     if (b.stamp != null) return `<p class="b-stamp${cls}"><span>${inline(b.stamp)}</span></p>`;
     if (b.sign != null) return `<p class="b-sign${cls}">${inline(b.sign)}</p>`;
     if (b.m != null) {
@@ -326,7 +326,7 @@
       const head = b.head ? `<thead><tr>${b.head.map(x => `<th>${inline(x)}</th>`).join('')}<th class="pc"></th></tr></thead>` : '';
       // 줄을 메모로 옮길 때 짧은 칸(숫자·표시)에는 머리글을 붙인다 — 보고서에서 「1.27 · 20 · 18 · —」만 남아 무슨 숫자인지 모르게 되지 않게
       const hd = (b.head || []).map(x => plain(numLocal(x)).trim());
-      const rowNote = r => r.map((x, i) => { const v = plain(x).trim(); return i && hd[i] && v.length <= 16 ? `${hd[i]}: ${v}` : v; }).join(' · ');
+      const rowNote = r => r.map((x, i) => { const v = plain(x).trim(), h = hd[i] && plain(hd[i]).trim(); return i && h && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).join(' · '); // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
       const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map(x => `<td>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, b.head ? rowNote(r) : r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
       return `<div class="b-tbl${cls}"><table>${b.cap ? `<caption>${inline(b.cap)}</caption>` : ''}${head}<tbody>${rows}</tbody></table></div>`;
     }
@@ -475,16 +475,16 @@
     const k = PICK.k, L = (C.keywords[k] || {}).label || k;
     const list = ST.notes.slice().reverse().map(n => `<button type="button" class="rep-opt press-opt" data-press-note="${n.id}" title="${esc(n.t)}"><span class="t">${esc(n.t)}</span> <small class="src">— ${esc(n.src || '')}</small></button>`).join('');
     return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
-      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}
-      <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p></div>`;
+      <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
+      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}</div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
   }
   function choosePress(id) {
     const o = ST.view.open;
     if (!PICK || !o || o.t !== 'person' || o.id !== PICK.pid) { PICK = null; return; }
     const p = C.people[PICK.pid], k = PICK.k, n = ST.notes.find(x => String(x.id) === String(id));
     if (!p || !n) return;
-    const want = ((rawAns(p, k) || {}).need || []).filter(x => x[0] === '!').map(x => x.slice(1));
-    if (n.f && want.includes(n.f)) { ask(k, true); return; }
+    const ra = rawAns(p, k) || {}, want = [...(ra.need || []).filter(x => x[0] === '!').map(x => x.slice(1)), ...(ra.also || [])]; // also: 붉은 테를 여는 조건은 아니지만 내밀어도 통하는 사실 (같은 거짓말을 깨는 다른 기록)
+    if (n.f && want.includes(n.f)) { (ST.held ||= {})[`${p.id}|${k}!`] = n.id; ask(k, true); return; } // 화면에는 고른 그 메모만 내민다 (같은 사실의 다른 메모나, 함께 걸린 다른 사실의 메모가 끼어들지 않게)
     PICK.tries = (PICK.tries || 0) + 1;
     PICK.miss = missLine(p, isSoft(p, k), PICK.tries - 1);
     sfx('miss');
@@ -520,7 +520,8 @@
     let tr = `<div class="qa qa-first" data-qa="_">${chatLines(p.intro, `${p.id}@_`, src)}</div>`;
     tr += asked.map(e => {
       const k = e.replace(/!$/, ''), press = e.endsWith('!');
-      const ev = press ? evidence(p, k) : [];
+      const hid = press && ST.held && ST.held[`${p.id}|${e}`], held = hid != null && ST.notes.find(x => String(x.id) === String(hid));
+      const ev = press ? (held ? [held] : evidence(p, k)) : [];
       return `<div class="qa${press ? ' press' : ''}" data-qa="${esc(e)}"><div class="c-q"><span class="c-t">${esc(qText(p, e))}</span>${press ? '' : `<small class="c-k">${esc((C.keywords[k] || {}).label || k)}</small>`}</div>
         ${ev.map(n => `<p class="c-ev"><span class="c-ev-k">${isSoft(p, k) ? T('수첩을 펴 보인다') : T('수첩을 내민다')}</span>${esc(n.t)}</p>`).join('')}
         <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div></div>`;
@@ -1596,7 +1597,7 @@
     //    앞으로 이어지는 단어(그 말로 찾으면 나오는 기록이 있거나, 조건에 걸려 있거나, 누군가 그 말에 따로 대답하는 것)를 먼저 짚는다. 아무 데도 안 이어지는 단어부터 짚으면 헛걸음이 된다
     const opens = k => Object.values(C.docs).some(d => (d.find || []).includes(k) && !ST.seen.includes(d.id)) || gates().some(need => need.includes(k)) || Object.values(C.people).some(p => rawAns(p, k) != null);
     const words = []; seen.forEach(b => b.k.forEach(k => { if (!ST.keys.includes(k) && C.keywords[k]) words.push([k, b]); }));
-    [...words.filter(([k]) => opens(k)), ...words.filter(([k]) => !opens(k))].forEach(([k, b]) => add('word:' + k, T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${C.keywords[k].label}」`, b.go));
+    [...words.filter(([k]) => opens(k)), ...words.filter(([k]) => !opens(k))].forEach(([k, b]) => add('word:' + k, b.go && b.go.t === 'person' ? T('들은 대답 속에 아직 수첩에 적지 않은 단어가 있다.') : T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${C.keywords[k].label}」`, b.go));
     // 3·4. 탐문 — 수첩을 내밀어 다시 물을 것, 새 단어나 쓸 만한 사실이 나올 물음
     const useful = new Set([...gates().flat().filter(n => n[0] === '!').map(n => n.slice(1)), ...C.solution.claims.flatMap(cl => cl.accept || [])]); // 앞을 여는 사실, 보고서에 쓸 사실 (어느 쪽인지는 말하지 않는다)
     const people = Object.values(C.people).filter(p => personVisible(p) && ST.asked[p.id] != null);
@@ -2569,10 +2570,10 @@
     const sig = JSON.stringify([ST.report.culprit, sol.claims.map(cl => String(ST.report.claims[cl.id]))]);
     if (!ST.solved && ST.lastRep === sig) { VERDICT = T`방금 반려된 ${fm.title} 그대로다. 어딘가 고쳐서 올린다.`; renderRep(); say(VERDICT); sfx('miss'); return; }
     ST.tries++;
-    const bad = ST.report.culprit === sol.culprit ? [] : [fm.short];
+    const bad = ST.report.culprit === sol.culprit ? [] : [fm.short], badCl = [];
     sol.claims.forEach((cl, i) => {
       const n = ST.notes.find(x => String(x.id) === String(ST.report.claims[cl.id]));
-      if (!n || !(cl.accept || []).includes(n.f)) bad.push(T`${i + 1}번`);
+      if (!n || !(cl.accept || []).includes(n.f)) { bad.push(T`${i + 1}번`); badCl.push(cl); }
     });
     const wrong = bad.length;
     const fresh = wrong === 0 && !ST.solved;
@@ -2580,7 +2581,8 @@
     if (wrong === 0) { ST.solved = true; VERDICT = ''; }
     else if (lv() >= 5) VERDICT = sol.far || T('반려. 어디가 틀렸는지는 적혀 있지 않다.');
     else {
-      VERDICT = wrong === 1 ? sol.near || T('딱 한 군데가 어긋난다.') : sol.far || T('아직 이야기가 이어지지 않는다. 더 쫓아가 보자.');
+      // 한 칸만 틀렸고 그 주장에 따로 적어 둔 말이 있으면 그것으로 (「어떻게 알았나」 같은 주장에 「그 사람을 가리키는가」는 엇나간 말이다)
+      VERDICT = wrong === 1 ? (badCl.length === 1 && badCl[0].near) || sol.near || T('딱 한 군데가 어긋난다.') : sol.far || T('아직 이야기가 이어지지 않는다. 더 쫓아가 보자.');
       // ★3 은 한 칸만 남았을 때 그 칸을 짚어 준다. 여러 칸이 틀렸을 때까지 칸을 알려 주면 칸마다 메모를 바꿔 끼워 찍기로 풀린다 (연습 사건만 전부 알려 준다)
       if (lv() <= 3 && (wrong === 1 || C.kind === 'tutorial')) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`;
     }

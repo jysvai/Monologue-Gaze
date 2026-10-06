@@ -917,6 +917,7 @@ MG.I18N.put("en", "c12", {
 "xhfdzmdf2v": "Where the body was washed and cut apart",
 "1bnl4lh6nng": "The work those hands learned",
 "yes62daim": "Why the victim went there that night",
+"1wgiydssgbs": "One thing doesn't fit. Does that note say why the victim went there that night?",
 "13vnea249wq": "One thing doesn't fit. Does that note really point to that person's hands?",
 "20ttdpog4fs": "Returned. Of the twenty-one bags, some still haven't found their place.",
 "1brr2lqcth3": "浅葱署 特捜 6-041 · Reviewed",

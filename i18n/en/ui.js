@@ -233,6 +233,7 @@ MG.I18N.put("en", "ui", {
 "「{0}」에 아직 펼쳐 보지 않은 기록이 있다.": "There's a record in “{0}” you haven't opened yet.",
 "아직 찾아가 보지 않은 사람이 있다.": "There's someone you haven't gone to see yet.",
 "읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.": "A record you've read has a word that isn't in the notebook yet.",
+"들은 대답 속에 아직 수첩에 적지 않은 단어가 있다.": "An answer you've heard has a word that isn't in the notebook yet.",
 "「{0}」 속 「{1}」": "“{1}” in “{0}”",
 "수첩을 내밀어 다시 물어볼 사람이 있다.": "Someone is worth asking again with the notebook held out.",
 "{0} — 「{1}」 · 내밀 메모는 {2}에서": "{0} — “{1}” · the note to show is from {2}",

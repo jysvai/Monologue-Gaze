@@ -233,6 +233,7 @@ MG.I18N.put("de", "ui", {
 "「{0}」에 아직 펼쳐 보지 않은 기록이 있다.": "In „{0}“ liegt noch ein ungeöffneter Eintrag.",
 "아직 찾아가 보지 않은 사람이 있다.": "Eine Person wurde noch nicht aufgesucht.",
 "읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.": "In den gelesenen Akten steht ein Wort, das noch nicht im Notizbuch ist.",
+"들은 대답 속에 아직 수첩에 적지 않은 단어가 있다.": "In einer Antwort, die Sie gehört haben, steht ein Wort, das noch nicht im Notizbuch ist.",
 "「{0}」 속 「{1}」": "„{1}“ in „{0}“",
 "수첩을 내밀어 다시 물어볼 사람이 있다.": "Bei jemandem lohnt es sich, mit dem Notizbuch noch einmal nachzufragen.",
 "{0} — 「{1}」 · 내밀 메모는 {2}에서": "{0} — „{1}“ · die Notiz dafür stammt aus: {2}",
