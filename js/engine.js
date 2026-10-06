@@ -787,11 +787,13 @@
       return `<button type="button" class="item${o && o.t === 'photo' && o.id === x.id ? ' on' : ''}${ST.seen.includes(x.id) ? '' : ' new'}" data-scene="${esc(x.id)}"><span class="item-t">${esc(plain(x.title))}${NEWSR(x.id)}</span><span class="item-m">${T`찾은 것 ${n}${tot}${x.meta ? ' · ' + esc(plain(x.meta)) : ''}`}</span></button>`;
     }).join('');
   }
+  // 찾은 순서대로 번호를 단다 — 정의 순서로 매기면 앞쪽 것을 나중에 찾을 때 이미 붙은 번호가 바뀐다
+  const foundSpots = x => (x.spots || []).filter(sp => ST.unl.includes(sp.id)).sort((a, b) => ST.unl.indexOf(a.id) - ST.unl.indexOf(b.id));
   const PHGRID = new Set(); // 「칸을 나눠 살피기」를 펼쳐 둔 사진 (찾을 때마다 다시 그려져도 펼친 채로 — 키보드로 칸을 옮겨 다니는 중이므로)
   function photoHtml(x) {
     if (!x) return '';
     if (!ST.seen.includes(x.id)) { ST.seen.push(x.id); save(); }
-    const found = (x.spots || []).filter(sp => ST.unl.includes(sp.id));
+    const found = foundSpots(x);
     const tot = sceneSpots(x).length;
     const marks = found.map((sp, i) => `<span class="ph-mk" style="left:${+sp.x}%;top:${+sp.y}%" aria-hidden="true">${i + 1}</span>`).join('');
     const cells = [];
@@ -2527,7 +2529,7 @@
     const hit = photoFind(el.dataset.ph, near);
     const x = !hit && C._scenes[el.dataset.ph], old = x && (x.spots || []).find(sp => ST.unl.includes(sp.id) && near(sp));
     if (old) { // 이미 찾은 자리: 헛짚었다고 하지 않고 그 번호 동그라미를 한 번 짚는다
-      const i = (x.spots || []).filter(sp => ST.unl.includes(sp.id)).indexOf(old), mk = el.querySelectorAll('.ph-mk')[i];
+      const i = foundSpots(x).indexOf(old), mk = el.querySelectorAll('.ph-mk')[i];
       toast(T`이미 찾은 것: ${plain(old.label)}`);
       if (mk) { mk.classList.remove('again'); void mk.offsetWidth; mk.classList.add('again'); }
       return;
