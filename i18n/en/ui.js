@@ -170,7 +170,7 @@ MG.I18N.put("en", "ui", {
 "찾기": "Find",
 "수첩의 단어로 찾기": "Search with notebook words",
 "앞서 열어 본 것": "Opened before",
-"앞서 꺼내 본 자료": "Pulled earlier",
+"앞서 꺼내 본 자료": "Looked at earlier",
 "처음부터 있던 자료": "On hand from the start",
 "아직 아무것도 없다.": "Nothing yet.",
 "아직 찾아갈 사람이 없다. 이름을 알아내야 한다.": "No one to visit yet. Find out a name first.",

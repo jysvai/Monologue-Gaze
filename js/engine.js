@@ -2544,6 +2544,7 @@
       return;
     }
     if (!hit) {
+      const tb = $('#toast'); if (tb) { clearTimeout(toastTimer); tb.classList.remove('on'); } // 앞서 찾은 것의 알림이 떠 있으면 헛짚은 이 자리도 찾은 것처럼 보인다
       const d = document.createElement('span');
       d.className = 'ph-miss'; d.style.left = px + '%'; d.style.top = py + '%';
       el.appendChild(d); setTimeout(() => d.remove(), 700);
