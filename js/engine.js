@@ -412,7 +412,7 @@
     const asked = ST.asked[p.id] || [];
     return chipOrder(p, ST.keys.filter(k => C.keywords[k] && (k !== p.key || rawAns(p, k) != null))).map(k => { // 제 이름은 따로 할 말(self)이 있을 때만 묻는다 — 없으면 「모르겠다」가 되돌아와 어색하다
       const e = askEntry(p, k);
-      const state = asked.includes(e) ? ' done' : e.endsWith('!') && asked.includes(k) && lv() < 5 ? ' again' : '';
+      const state = asked.includes(e) ? ' done' : e.endsWith('!') && asked.includes(k) ? ' again' : '';
       return `<button type="button" class="chip${state}" data-ask="${k}">${esc(C.keywords[k].label)}${state === ' done' ? T('<span class="sr"> (물어봄)</span>') : state ? T('<span class="sr"> (메모를 들이밀어 다시 물을 수 있음)</span>') : ''}</button>`; // 테두리·흐림은 눈에만 보이니 말로도
     }).join('');
   }
@@ -482,7 +482,7 @@
     }).join('');
     return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}</div></header>
       <div class="per-tr" data-who="${esc(p.id)}">${tr}</div>
-      <div class="per-ask"><p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${lv() < 5 ? T(' · 붉은 테: 메모를 들이밀어 다시 물을 수 있다') : ''}${liveOn() ? T` · 물을 때마다 ${hm(lcost('ask'))}` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
+      <div class="per-ask"><p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 붉은 테: 메모를 들이밀어 다시 물을 수 있다')}${liveOn() ? T` · 물을 때마다 ${hm(lcost('ask'))}` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
   }
 
   /* 대화 재생: 몸짓은 스르르, 말은 한 글자씩(사람마다 다른 말소리). 목소리가 있는 말풍선은 재생 시각에 맞춰 찍는다. 누르면 건너뛴다 */
@@ -654,8 +654,16 @@
     const ids = (s.events || []).map(e => e.id);
     let o = ST.tl[s.id];
     if (!o || o.length !== ids.length || !ids.every(id => o.includes(id))) {
-      o = [...ids].sort((a, b) => hash(s.id + a) - hash(s.id + b));
-      if (o.every((id, i) => id === ids[i])) o.push(o.shift());
+      // 사건마다 같은 순서로 섞되, 카드 한두 장만 옮기면 맞는 판은 다시 섞는다 (옮길 장수 = 전체 − 이미 제자리 순서인 가장 긴 줄)
+      const need = ord => { const r = ord.map(id => ids.indexOf(id)), L = r.map(() => 1); r.forEach((v, i) => { for (let j = 0; j < i; j++) if (r[j] < v) L[i] = Math.max(L[i], L[j] + 1); }); return r.length - Math.max(0, ...L); };
+      const want = Math.min(ids.length - 1, Math.max(2, Math.ceil(ids.length / 2)));
+      for (let k = 0; k < 40; k++) {
+        let seed = hash(s.id + '#' + k) || 1;
+        const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x80000000;
+        o = [...ids];
+        for (let i = o.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [o[i], o[j]] = [o[j], o[i]]; }
+        if (need(o) >= want) break;
+      }
       ST.tl[s.id] = o;
     }
     return o;
@@ -2245,6 +2253,8 @@
     const n = norm(q), sq = ((ST.view.sq ||= {})[srcId] ||= []), again = sq.includes(n); if (n && !again) { sq.push(n); if (sq.length > 120) sq.splice(0, sq.length - 120); } // 찾아본 말 (칩을 흐리게) — 기록이 한없이 불지 않게 최근 것만
     save();
     renderTabs(); renderList();
+    const hit = n && $('.arch .res .item, .arch .res .res-none'); // 수첩 칩이 많아지면 결과가 화면 밑으로 밀린다 — 첫 결과가 보이게
+    if (hit) { const b = hit.getBoundingClientRect(); if (b.top < 0 || b.bottom > innerHeight - 90) hit.scrollIntoView({ block: 'center', behavior: reduced() ? 'auto' : 'smooth' }); } // 화면 아래 증거물 꼬리표에 가리지 않게
     if (n && !again) { const src = C.sources.find(x => x.id === srcId); advance('search', src && archiveHits(src, q).length ? undefined : 1); } // 한 번 찾아본 말을 다시 찾는 데는 수사 시간이 들지 않는다 (결과를 다시 펼칠 뿐) · 아무것도 안 나온 검색은 1분만 (표기를 바꿔 몇 번 쳐 보다 시계가 한 시간씩 가지 않게)
   }
   function search(kid) {

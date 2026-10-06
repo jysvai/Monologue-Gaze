@@ -108,6 +108,7 @@ MG.I18N.put("ja", "c05", {
 "1ag1pp34rg4": "フランク・デルガド",
 "1kl4qy6wdiq": ["デルガド","Delgado","フランク","Frank Delgado"],
 "1rkkibvvriq": "ハーヴェイ・ストーン巡査部長",
+"1rjs64mnlm6": "ノールトン警察署 当直巡査部長",
 "z9gpdmuiai": ["ストーン","Stone","当直の巡査部長","当直巡査部長","ストーン巡査部長","ハーヴェイ・ストーン","ハービー・ストーン","Harvey Stone"],
 "1rhf48ued06": "サンタ・レイナ",
 "1kjdrxjjmeg": "ミルブルック",

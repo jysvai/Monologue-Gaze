@@ -127,7 +127,7 @@
       k_osgood: { label: '버넌 오스굿', type: 'person', alias: ['오스굿', 'Osgood', '배송부장'] },
       k_brennan: { label: '칼 브레넌', type: 'person', alias: ['브레넌', 'Brennan'] },
       k_delgado: { label: '프랭크 델가도', type: 'person', alias: ['델가도', 'Delgado'] },
-      k_stone: { label: '하비 스톤 경사', type: 'person', alias: ['스톤', 'Stone', '당직 경사'] },
+      k_stone: { label: '하비 스톤 경사', type: 'person', role: '놀턴 경찰서 당직 경사', alias: ['스톤', 'Stone', '당직 경사'] },
       k_santareina: { label: '산타 레이나', type: 'place', alias: ['Santa Reina'] },
       k_millbrook: { label: '밀브룩', type: 'place', alias: ['Millbrook'] },
       k_porthaley: { label: '포트 헤일리', type: 'place', alias: ['Port Haley'] },
@@ -232,7 +232,7 @@
       n_0507: { src: 'morgue', find: ['k_misprint', 'k_morris'], blood: false, title: '바로잡습니다', kicker: 'WEDNESDAY', meta: '1969년 5월 7일 (수) · 2면', body: [
         { p: '5일자 1면 시더 크릭 사건 기사에서 피해자 이름 「앤 노리스」는 「[[앤 모리스]]」의 [[오자]]이기에 바로잡습니다. 유족께 사과드립니다.', f: 'f_misprint' },
       ] },
-      n_0509: { src: 'morgue', find: ['k_cipher', 'k_sketch', 'k_star'], blood: false, title: '"풀어 보라" — 모래시계의 암호문 전문', kicker: 'FRIDAY · FINAL EDITION', meta: '1969년 5월 9일 (금) · 1면', body: [
+      n_0509: { src: 'morgue', find: ['k_cipher', 'k_sketch', 'k_star', 'k_hourglass'], blood: false, title: '"풀어 보라" — 모래시계의 암호문 전문', kicker: 'FRIDAY · FINAL EDITION', meta: '1969년 5월 9일 (금) · 1면', body: [
         '본사는 6일 도착한 편지에 들어 있던 [[암호문]]을 그대로 싣는다. 경찰과 대학 언어학과가 풀이에 나섰으나 아직 뜻을 밝히지 못했다.',
         { cipher: CIPHER_LINE },
         { img: 'sketch', cap: '생존자의 기억을 바탕으로 경찰이 만든 [[몽타주]].' },

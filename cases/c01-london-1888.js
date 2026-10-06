@@ -72,14 +72,14 @@
       k_croft: { label: '새뮤얼 크로프트', type: 'person', alias: ['크로프트', 'S. 크로프트', 'S.C.'] },
       k_peggy: { label: '페기 톨', type: 'person', alias: ['페기', '톨 부인', '야간 관리인'] },
       k_dill: { label: '아서 딜', type: 'person', alias: ['딜', 'A. 딜'] },
-      k_phipps: { label: '조 핍스', type: 'person', alias: ['핍스'] },
-      k_sailor: { label: '챙모자 선원', type: 'person', alias: ['선원', '챙모자'] },
-      k_knotsman: { label: '매듭장이', type: 'person', alias: ['Knotsman', '매듭장이 편지'] },
-      k_redman: { label: '레드먼 경위', type: 'person', alias: ['레드먼'] },
-      k_surgeon: { label: '던스터블 의사', type: 'person', alias: ['던스터블', '경찰의'] },
-      k_scrivener: { label: '대서인 모티머', type: 'person', alias: ['모티머', '대서인'] },
-      k_hollis: { label: '홀리스 편집장', type: 'person', alias: ['홀리스', '편집장'] },
-      k_lamplighter: { label: '점등부 골', type: 'person', alias: ['점등부', '피터 골'] },
+      k_phipps: { label: '조 핍스', type: 'person', role: '자경위원회 1조 순찰원 · 석탄 배달꾼', alias: ['핍스'] },
+      k_sailor: { label: '챙모자 선원', type: 'person', role: '새벽 호외 목격담 속의 키 큰 사내', alias: ['선원', '챙모자'] },
+      k_knotsman: { label: '매듭장이', type: 'person', role: '신문사에 편지를 보낸 이름 모를 사람', alias: ['Knotsman', '매듭장이 편지'] },
+      k_redman: { label: '레드먼 경위', type: 'person', role: 'Q 분서 경위 · 사건 담당', alias: ['레드먼'] },
+      k_surgeon: { label: '던스터블 의사', type: 'person', role: 'Q 분서 촉탁 의사 · 검안 담당', alias: ['던스터블', '경찰의', '촉탁의'] },
+      k_scrivener: { label: '대서인 모티머', type: 'person', role: '세인트 에드윈 교회 앞 대서인', alias: ['모티머', '대서인'] },
+      k_hollis: { label: '홀리스 편집장', type: 'person', role: '이스트엔드 스타 편집장', alias: ['홀리스', '편집장'] },
+      k_lamplighter: { label: '점등부 골', type: 'person', role: '화이트게이트 가스등 점등부', alias: ['점등부', '피터 골'] },
 
       k_whitegate: { label: '화이트게이트', type: 'place', alias: ['화이트게이트 하이 스트리트', '하이 스트리트'] },
       k_ropewalk: { label: '로프워크 코트', type: 'place', alias: ['로프워크'] },
@@ -115,7 +115,7 @@
     },
     docs: {
       /* ───────── 이스트엔드 스타 자료실 ───────── */
-      d_s1029: { src: 'star', find: ['k_bill', 'k_rose'], kicker: 'No. 1,238 · 반 페니 · 1888년 10월 29일 월요일', title: '로프워크 코트 사건 — 옛 동거인 체포', meta: '2면 · 본지 사회부', body: [
+      d_s1029: { src: 'star', find: ['k_bill', 'k_rose', 'k_ropewalk', 'k_sailor', 'k_knotsman', 'k_redman', 'k_threekeys', 'k_bluelantern', 'k_saltlane', 'k_qdiv'], kicker: 'No. 1,238 · 반 페니 · 1888년 10월 29일 월요일', title: '로프워크 코트 사건 — 옛 동거인 체포', meta: '2면 · 본지 사회부', body: [
         '일요일 새벽 [[로프워크 코트]]에서 숨진 채 발견된 [[로즈 캘러웨이]](34)의 옛 동거인이 어제 오후 부두 쪽 숙소에서 체포되었다. 부두 인부 [[빌 코델]](39)이다.',
         '[[스리 키스]] 주점 여급의 말에 따르면, [[토요일 밤]] 11시 40분께 두 사람은 술청에서 큰 소리로 다투었다. 캘러웨이가 침대값 4펜스를 청하자 코델은 "나한테선 한 푼도 없다"며 탁자를 내리쳤고, 주인에게 떠밀려 밖으로 나갔다 한다.',
         '코델은 "그 뒤로는 아무것도 기억나지 않는다"는 말만 되풀이하고 있다. [[Q 분서]]의 [[레드먼 경위]]는 "아직 아무것도 단정하지 않았다"고 했으나, [[솔트 레인]] 사람들은 벌써 그를 두고 수군댄다.',
@@ -124,7 +124,7 @@
         '피해자는 그날 밤 1시가 넘어 묵던 [[블루 랜턴]] 숙소에서 침대값이 없어 밖으로 나온 것으로 보인다. 숙소 사람들은 "조용하고 부지런한 사람이었다. 남의 집 바닥을 닦아 먹고살았다"고 전한다.',
         { note: '— 「[[매듭장이]]」는 부두에 있는가, 유치장에 있는가. 본지는 계속 쫓는다. —' },
       ] },
-      d_s1028: { src: 'star', find: ['k_special', 'k_sailor', 'k_night27'], kicker: 'SPECIAL EDITION · 호외 · 1888년 10월 28일 일요일 오전 4시', title: '매듭장이, 세 번째', meta: '본지 기자 [[C. V.|k_vane]] · 로프워크 코트 현장에서', body: [
+      d_s1028: { src: 'star', find: ['k_special', 'k_sailor', 'k_night27', 'k_knotsman', 'k_quarrell', 'k_croft', 'k_ropewalk', 'k_tanners', 'k_candle', 'k_threekeys', 'k_mortuary'], kicker: 'SPECIAL EDITION · 호외 · 1888년 10월 28일 일요일 오전 4시', title: '매듭장이, 세 번째', meta: '본지 기자 [[C. V.|k_vane]] · 로프워크 코트 현장에서', body: [
         { img: 's_court', cap: '가스등이 꺼진 로프워크 코트. 본지 화공이 새벽에 그림.' },
         '오늘 새벽 2시 12분, 순찰 중이던 [[쿼럴 순경]]이 [[로프워크 코트]] 막다른 안쪽에서 쓰러진 여인을 발견하고 호루라기를 불었다. 여인은 이미 숨져 있었다. 9월의 [[태너스 야드]], 10월의 [[캔들 마켓]]에 이어 세 번째다.',
         '가장 먼저 달려온 이는 [[자경위원회]] 회계 [[새뮤얼 크로프트]] 씨(통장이, 41)다. 크로프트 씨는 그 시각 [[스리 키스]] 뒷방에서 순찰대의 귀소를 받고 있었다고 한다. 그는 기자에게 이렇게 말했다.',
@@ -133,46 +133,46 @@
         '시신은 날이 밝기 전 [[구빈원 안치소]]로 옮겨졌다. 이 호외를 찍는 지금까지 경찰은 더 밝힌 것이 없다.',
         { note: '※ 본 호외는 오전 4시 정각 인쇄에 들어감. 자세한 소식은 월요일 자에.' },
       ] },
-      d_s0917: { src: 'star', find: ['k_ann', 'k_tanners', 'k_sep16'], kicker: 'No. 1,202 · 반 페니 · 1888년 9월 17일 월요일 · 제1판', title: '태너스 레인에서 여인 숨진 채 발견', meta: '3면 · 본지 사회부', body: [
+      d_s0917: { src: 'star', find: ['k_ann', 'k_tanners', 'k_sep16', 'k_surgeon'], kicker: 'No. 1,202 · 반 페니 · 1888년 9월 17일 월요일 · 제1판', title: '태너스 레인에서 여인 숨진 채 발견', meta: '3면 · 본지 사회부', body: [
         '[[9월 16일]] 일요일 새벽 4시 50분께, [[화이트게이트]] 태너스 레인에서 짐마차꾼 한 사람이 길가에 쓰러진 여인을 발견했다. 여인은 이미 숨져 있었다. 성냥과 구두끈을 팔러 다니던 행상 [[애니 필비]](50)라 한다.',
-        '경찰의에 따르면 목이 졸린 흔적이 있다. 주머니에는 성냥 두 갑과 1페니 동전 하나가 남아 있었다.',
+        '경찰 촉탁의에 따르면 목이 졸린 흔적이 있다. 주머니에는 성냥 두 갑과 1페니 동전 하나가 남아 있었다.',
         { img: 's_tanners', cap: '새벽의 태너스 거리. 본지 화공.' },
         '동네 사람들은 "요 몇 해 사이 이렇게 흉한 일은 처음"이라며 밤길을 두려워한다. 행상들은 해가 지면 서둘러 숙소로 들어간다.',
       ] },
-      d_s0918: { src: 'star', find: ['k_ann', 'k_tanners', 'k_inquest'], kicker: 'No. 1,203 · 1888년 9월 18일 화요일', title: '태너스 야드 사건 검시 심리 열려', meta: '2면 · 본지 사회부', body: [
+      d_s0918: { src: 'star', find: ['k_ann', 'k_tanners', 'k_inquest', 'k_surgeon', 'k_stedwin'], kicker: 'No. 1,203 · 1888년 9월 18일 화요일', title: '태너스 야드 사건 검시 심리 열려', meta: '2면 · 본지 사회부', body: [
         { p: '**정정** — 어제 본지 제1판은 사건이 일어난 곳을 「태너스 레인」, 숨진 이를 「애니 필비(50)」라 적었으나, 이는 [[태너스 야드]]와 [[앤 필비]](46)의 잘못이다. 제2판부터 바로잡았다. 독자께 사과드린다.', f: 'f_correction' },
-        '어제 오후 세인트 에드윈 교구 회관에서 [[검시 심리]]가 열렸다. 경찰의 [[던스터블 의사]]는 "사인은 질식이다. 목에 끈 자국이 있으나 끈은 현장에서 나오지 않았다"고 증언했다.',
+        '어제 오후 세인트 에드윈 교구 회관에서 [[검시 심리]]가 열렸다. 경찰 촉탁의 [[던스터블 의사]]는 "사인은 질식이다. 목에 끈 자국이 있으나 끈은 현장에서 나오지 않았다"고 증언했다.',
         '배심은 "성명 불상자에 의한 고의적 살인"으로 평결하고 심리를 미루었다.',
         '[[세인트 에드윈 교회]]의 목사는 주일 설교에서 "골목마다 등불을 하나씩 더 달아 달라"고 교구에 호소했다.',
       ] },
-      d_s1008: { src: 'star', find: ['k_bridget', 'k_candle', 'k_oct6'], kicker: 'No. 1,220 · 1888년 10월 8일 월요일', title: '캔들 마켓 통 창고 마당서 두 번째 변', meta: '1면 · 본지 사회부', body: [
+      d_s1008: { src: 'star', find: ['k_bridget', 'k_candle', 'k_oct6', 'k_tanners', 'k_qdiv'], kicker: 'No. 1,220 · 1888년 10월 8일 월요일', title: '캔들 마켓 통 창고 마당서 두 번째 변', meta: '1면 · 본지 사회부', body: [
         '[[10월 6일]] 토요일 새벽 5시 10분, [[캔들 마켓]] 뒤 통 창고 마당에서 세탁부 [[브리짓 쿠니]](39)가 숨진 채 발견되었다. 목이 졸린 흔적이 있어, 경찰은 지난달 [[태너스 야드]] 사건과 같은 자의 소행으로 보고 있다.',
         { img: 's_candle', cap: '캔들 마켓 뒤 통 창고 마당. 본지 화공.' },
         '목격담은 제각각이다. 채소 노점을 하는 한 여인은 "사냥 모자를 쓴 키 큰 신사"를, 마차꾼은 "보따리를 든 작달막한 사내"를, 또 다른 이는 "외투 깃을 세운 젊은이"를 보았다고 한다. 기자가 만난 세 사람의 말이 모두 달랐다.',
         '[[Q 분서]]는 밤 순찰을 두 배로 늘렸다. 동네 상인들은 스스로 순찰대를 꾸리자는 이야기를 나누고 있다.',
       ] },
-      d_s1011: { src: 'star', find: ['k_knotsman', 'k_postmark'], kicker: 'No. 1,223 · 1888년 10월 11일 목요일', title: '「매듭장이」를 자처하는 편지, 본사에 도착', meta: '1면 · 본지 사회부 [[시릴 베인]]', body: [
+      d_s1011: { src: 'star', find: ['k_knotsman', 'k_postmark', 'k_surgeon', 'k_tanners', 'k_candle', 'k_qdiv'], kicker: 'No. 1,223 · 1888년 10월 11일 목요일', title: '「매듭장이」를 자처하는 편지, 본사에 도착', meta: '1면 · 본지 사회부 [[시릴 베인]]', body: [
         '어제 첫 우편으로 본사 사회부 앞으로 붉은 잉크로 쓴 편지 한 통이 배달되었다. 편지를 쓴 자는 스스로 「[[매듭장이]]」라 부르며, 두 사건이 모두 제 솜씨라고 떠벌린다.',
         '[[소인]]은 화이트게이트 우체국, 10월 9일 밤 10시 15분. 본지는 편지를 곧바로 [[Q 분서]]에 넘겼으며, 경찰의 허락을 얻어 그 일부를 싣는다.',
         { p: '"…경찰 나리들 헛발질하는 구경이 이렇게 재미날 줄 몰랐소. … 태너스 레인의 애니는 내 첫 솜씨, 캔들 마켓의 브리짓은 두 번째. … 셋째는 곧…"', cls: 'quote', f: 'f_misprint' },
         '편지 끝에는 「당신의 벗 매듭장이」라는 서명과 함께 매듭 하나가 그려져 있다.',
         '본지는 이 편지가 장난인지 아닌지 판단하지 않는다. 다만 독자 여러분께 밤길을 조심하시라 당부할 뿐이다.',
       ] },
-      d_s1013: { src: 'star', find: ['k_committee', 'k_armband'], kicker: 'No. 1,225 · 1888년 10월 13일 토요일', title: '화이트게이트 자경위원회 결성 — 현상금 모금 시작', meta: '2면 · 본지 사회부', body: [
+      d_s1013: { src: 'star', find: ['k_committee', 'k_armband', 'k_fund', 'k_croft', 'k_threekeys'], kicker: 'No. 1,225 · 1888년 10월 13일 토요일', title: '화이트게이트 자경위원회 결성 — 현상금 모금 시작', meta: '2면 · 본지 사회부', body: [
         '두 번째 변을 겪은 동네 상인들이 지난 화요일 밤 [[스리 키스]] 주점 뒷방에 모여 [[화이트게이트 자경위원회]]를 꾸렸다. 위원장은 식료품상 J. 배로 씨가 맡았다.',
         '위원들은 밤마다 두 사람씩 짝을 지어 손등불을 들고 거리를 돈다. 멀리서도 알아보도록 왼팔에 [[흰 완장]]을 두른다.',
         '범인을 잡는 데 도움이 되는 제보에는 [[현상금]]을 건다. 모금함은 스리 키스 뒷방에 두며, 화요일 밤 입회인 앞에서 셈하고 이튿날 수요일 아침 회계 [[새뮤얼 크로프트]] 씨(통장이)가 은행에 넣는다.',
         '결성하던 날 밤 그 자리에서 돌린 모금함에 38파운드 6실링이 모였다. 주점에 있던 부두 인부들까지 반 페니씩 보탰다 한다.',
         { img: 's_fundbox', cap: '스리 키스 뒷방의 모금함.' },
       ] },
-      d_s1016: { src: 'star', find: ['k_committee', 'k_patrollog', 'k_armband'], kicker: 'No. 1,227 · 1888년 10월 16일 화요일', title: '흰 완장과 함께 걸은 밤 — 자경단 순찰 동행기', meta: '3면 · [[시릴 베인]]', body: [
+      d_s1016: { src: 'star', find: ['k_committee', 'k_patrollog', 'k_armband', 'k_croft', 'k_dill', 'k_phipps', 'k_candle', 'k_threekeys', 'k_stedwin'], kicker: 'No. 1,227 · 1888년 10월 16일 화요일', title: '흰 완장과 함께 걸은 밤 — 자경단 순찰 동행기', meta: '3면 · [[시릴 베인]]', body: [
         '자정을 조금 넘기면 [[스리 키스]] 뒷방에서 두 사람씩 짝을 지은 위원들이 손등불을 들고 나선다. 기자는 [[아서 딜]] 씨(짐꾼)와 [[조 핍스]] 씨(석탄 배달꾼)의 1조를 따라 [[캔들 마켓]]에서 부두 길까지 걸었다.',
         { img: 's_patrol', cap: '손등불을 든 자경단원. 본지 화공.' },
         '한 바퀴를 돌면 뒷방으로 돌아와 이상이 없다고 알린다. 뒷방을 지키는 회계 크로프트 씨가 그 시각을 [[순찰 일지]]에 적는다. "기록이 곧 순찰"이라는 것이 그의 말이다.',
         '[[세인트 에드윈 교회]] 종이 45분을 칠 때 딜 씨는 "이 동네 시계는 저 종 하나뿐"이라며 웃었다.',
         '밤안개 속의 흰 완장은 멀리서도 눈에 띈다. 딜 씨의 말로는 "여자들이 먼저 알아보고 숙소까지 데려다 달라 한다"는 것이다.',
       ] },
-      d_s1020: { src: 'star', find: ['k_knotsman', 'k_thread'], kicker: 'No. 1,231 · 1888년 10월 20일 토요일', title: '매듭장이의 두 번째 편지 — "다음엔 붉은 실을"', meta: '1면 · [[시릴 베인]]', body: [
+      d_s1020: { src: 'star', find: ['k_knotsman', 'k_thread', 'k_redman'], kicker: 'No. 1,231 · 1888년 10월 20일 토요일', title: '매듭장이의 두 번째 편지 — "다음엔 붉은 실을"', meta: '1면 · [[시릴 베인]]', body: [
         '목요일 밤 소인이 찍힌 두 번째 편지가 어제 본사에 닿았다. 역시 붉은 잉크, 역시 같은 서명이다. 그 일부를 싣는다.',
         { p: '"…나리들이 내 표식을 몰라보니 섭섭하군. 다음번엔 목에 [[붉은 실]]을 한 바퀴 매어 두지. 그래야 누가 내 것인지 알 테니."', cls: 'quote', f: 'f_letter_neck' },
         '편지를 본 [[레드먼 경위]]는 "장난일 공산이 크다"고 했다. 그러나 이 편지가 실린 뒤 화이트게이트의 포목점마다 붉은 실이 동났다는, 웃지 못할 이야기도 들린다.',
@@ -183,19 +183,21 @@
         '[[점등부 골]] 씨는 "바람에 꺼질 등이 아니다. 누가 기둥의 꼭지를 잠그고 가는 것"이라며, 밤늦게 돌아다니는 취객의 장난으로 보고 있다.',
         '가스 회사는 꼭지에 자물쇠를 달겠다고 했으나 아직 소식이 없다.',
       ] },
-      d_s1103: { src: 'star', find: ['k_knotsman', 'k_postmark'], kicker: 'No. 1,243 · 1888년 11월 3일 토요일', title: '매듭장이의 엽서 — "이번엔 손목이었지"', meta: '1면 · [[시릴 베인]]', body: [
+      d_s1103: { src: 'star', find: ['k_knotsman', 'k_postmark', 'k_ropewalk', 'k_qdiv'], kicker: 'No. 1,243 · 1888년 11월 3일 토요일', title: '매듭장이의 엽서 — "이번엔 손목이었지"', meta: '1면 · [[시릴 베인]]', body: [
         '10월 29일 월요일 아침 첫 수거분 [[소인]]이 찍힌 엽서 한 장이, 10월 30일 경찰이 본사에서 가져간 투서 더미 속에서 뒤늦게 나왔다. 붉은 잉크로 휘갈겨 쓴 짧은 글이다.',
         { p: '"로프워크의 로즈는 내 솜씨. 이번엔 손목에 감아 줬지. 나리들은 목만 들여다보더군. — 매듭장이"', cls: 'quote' },
         '엽서가 늦게 발견된 것은 로프워크 사건 뒤 본사에 투서가 하루 수백 통씩 밀려든 탓이다. 그 대부분은 장난이거나, 제보를 가장한 이웃 간의 앙갚음이다.',
         { note: '[[Q 분서]]는 이 엽서에 대해 아무 논평도 하지 않았다.' },
       ] },
-      d_s1110: { src: 'star', find: ['k_fund'], kicker: 'No. 1,249 · 1888년 11월 10일 토요일', title: '화이트게이트 자경위원회 현상금 기금 결산 공고', meta: '6면 · 광고·공고란', body: [
+      d_s1110: { src: 'star', find: ['k_fund', 'k_committee'], kicker: 'No. 1,249 · 1888년 11월 10일 토요일', title: '화이트게이트 자경위원회 현상금 기금 결산 공고', meta: '6면 · 광고·공고란', body: [
         '본 위원회는 규약에 따라 10월 말까지의 [[현상금 기금]]을 아래와 같이 공고함.',
         { rows: [
-          ['화요일 밤 셈 합계 (10.9 · 10.16 · 10.23)', '101파운드 18실링'],
-          ['은행 예치 합계 (10.10 · 10.17 · 10.24)', '68파운드'],
-          ['지출 (등불 기름 · 완장 · 인쇄)', '4파운드 2실링'],
-        ], head: ['항목', '금액'], f: { 1: 'f_fund_gap' } },
+          ['10.9 · 10.10', '38파운드 6실링', '31파운드'],
+          ['10.16 · 10.17', '34파운드 10실링', '22파운드'],
+          ['10.23 · 10.24', '29파운드 2실링', '15파운드'],
+          ['합계', '101파운드 18실링', '68파운드'],
+        ], head: ['주', '화요일 밤 셈', '수요일 아침 은행 예치'], f: { 0: 'f_fund_gap', 1: 'f_fund_gap', 2: 'f_fund_gap', 3: 'f_fund_gap' } },
+        '같은 기간 지출 (등불 기름 · 완장 · 인쇄): 4파운드 2실링.',
         '회계 [[S. 크로프트|k_croft]] 위원은 10월 30일부로 사임하였음. 후임은 J. 배로 위원장이 겸함.',
         { sign: '화이트게이트 자경위원회' },
       ] },
@@ -243,7 +245,7 @@
           ['02:20', '〃', '자경위원 [[S. 크로프트|k_croft]] 달려옴. 1시 50분에 선원을 보았다 함.'],
         ], head: ['시각', '지점', '기록'], f: { 3: 'f_door_locked', 5: 'f_rose_steps', 6: 'f_door_locked', 7: 'f_beat_empty', 9: 'f_pair_wait' } },
       ] },
-      d_q_mortuary: { src: 'qdiv', need: ['k_mortuary'], title: '경찰의 소견 — 로즈 캘러웨이', meta: '10월 28일 05시 30분 · 구빈원 안치소 · 경찰의 A. 던스터블', body: [
+      d_q_mortuary: { src: 'qdiv', need: ['k_mortuary'], title: '검안 소견 — 로즈 캘러웨이', meta: '10월 28일 05시 30분 · 구빈원 안치소 · 경찰 촉탁의 A. 던스터블', body: [
         '사인: 질식. 목에 가는 끈에 의한 자국. 끈은 현장에서 발견되지 않음.',
         '사망 추정: 28일 오전 1시 30분에서 2시 10분 사이. 옷은 비에 젖어 있었음.',
         { p: '옷을 벗기던 중, 왼쪽 소맷부리 안쪽 손목에 [[붉은 실]] 한 가닥이 두 번 감겨 매듭지어 있는 것을 발견함. 소매를 걷기 전에는 보이지 않는 자리임. 쿼럴 순경의 현장 보고에는 실에 관한 기재가 없음.', f: 'f_thread_cuff' },
@@ -311,7 +313,7 @@
         { note: '[Q 분서 메모] 10.31 J. 켈 불러 물음. 27일 밤엔 선원 숙소 식당에서 새벽까지 카드놀이를 했다 함. 동석자 다섯 — 모두 같은 배 선원.' },
       ] },
       d_l_rose: { cls: 'ink-sepia', src: 'post', need: ['k_scrivener'], title: '스타 신문 기자 양반께', meta: '10월 26일(금) 대필 · 10월 27일(토) 첫 우편 도착 · 뜯지 않은 채 발견', body: [
-        { img: 'roseletter', cap: '「매듭장이」 투서 더미 속에서 뜯기지 않은 채 나온 봉투 (본지 도판).' },
+        { img: 'roseletter', cap: '「매듭장이」 투서 더미 속에서 뜯기지 않은 채 나온 봉투 (Q 분서 촬영).' },
         '스타 신문 기자 양반께.',
         '저는 [[솔트 레인]] [[블루 랜턴]]에 묵는 로즈 캘러웨이라는 사람입니다. 글을 몰라 교회 앞 대서인에게 불러 적게 합니다.',
         { p: '저는 수요일과 토요일 아침마다 [[스리 키스]] 뒷방 바닥을 닦습니다. 지난 [[수요일 아침]], 모금함을 맡은 양반이 함을 열어 은행 가방에 돈을 옮기다가, 금화 몇 닢과 은화 한 줌을 따로 자기 조끼 주머니에 넣는 것을 보았습니다. 제가 문간에 서 있는 것을 그 양반도 보았습니다.', f: 'f_rose_letter' },
@@ -339,7 +341,7 @@
         { m: '편지 얘기는 신문에 다 났다. 장부 쪽을 한 줄씩 셀 것.' },
       ] },
       d_b_patrol: { src: 'books', need: ['k_patrollog'], title: '자경위원회 순찰 일지 — 10월 27일(토) ~ 28일(일)', meta: '스리 키스 뒷방 · 기록 S. C. · 10월 30일 압수', body: [
-        { img: 'patrollog', cap: '압수한 일지를 펼친 면 (본지 도판).' },
+        { img: 'patrollog', cap: '압수한 일지를 펼친 면 (Q 분서 촬영).' },
         { rows: [
           ['00:55', '뒷방 엶. 등불 다섯에 기름 채움.', 'S.C.'],
           ['01:00', '1조 [[딜|k_dill]] · [[핍스|k_phipps]] 나감 (캔들 마켓 – 부두 길)', 'S.C.'],
@@ -353,13 +355,10 @@
       ] },
       d_b_fund: { src: 'books', need: ['k_fund'], title: '현상금 기금 장부', meta: '화이트게이트 자경위원회 · 회계 S. 크로프트 · 10월 30일 압수', body: [
         { rows: [
-          ['10.9 (화) 밤', '함 셈', '38파운드 6실링', '입회: 주점 주인 · J. 배로'],
-          ['10.10 (수) 아침', '은행 예치', '31파운드', 'S.C.'],
-          ['10.16 (화) 밤', '함 셈', '34파운드 10실링', '입회: 주점 주인 · [[A. 딜|k_dill]]'],
-          ['10.17 (수) 아침', '은행 예치', '22파운드', 'S.C.'],
-          ['10.23 (화) 밤', '함 셈', '29파운드 2실링', '입회: 주점 주인 · J. 배로'],
-          ['10.24 (수) 아침', '은행 예치', '15파운드', 'S.C.'],
-        ], head: ['날짜', '내용', '금액', '서명 · 입회'], f: { 0: 'f_fund_ledger', 1: 'f_fund_ledger', 2: 'f_fund_ledger', 3: 'f_fund_ledger', 4: 'f_fund_ledger', 5: 'f_fund_ledger' } },
+          ['10.9 (화) 밤 → 10.10 (수) 아침', '38파운드 6실링 (입회: 주점 주인 · J. 배로)', '31파운드 (S.C.)'],
+          ['10.16 (화) 밤 → 10.17 (수) 아침', '34파운드 10실링 (입회: 주점 주인 · [[A. 딜|k_dill]])', '22파운드 (S.C.)'],
+          ['10.23 (화) 밤 → 10.24 (수) 아침', '29파운드 2실링 (입회: 주점 주인 · J. 배로)', '15파운드 (S.C.)'],
+        ], head: ['주', '함 셈 · 입회', '은행 예치 · 서명'], f: { 0: 'f_fund_ledger', 1: 'f_fund_ledger', 2: 'f_fund_ledger' } },
         { note: '[역주] 셈은 화요일 밤 입회인 앞에서, 예치는 이튿날 아침 회계가 혼자 은행에 가서 했다. 셈을 마친 함은 다시 잠가 뒷방에 두었다.' },
       ] },
       d_b_night: { src: 'books', need: ['k_composing'], title: '스타 조판실 야간 일지 — 10월 27일(토) ~ 28일(일)', meta: '월요일 자 조판 · 조판 반장 기록', body: [
@@ -388,6 +387,10 @@
       p_quarrell: { name: '쿼럴 순경', role: 'Q 분서 순경 · PC 212Q · 첫 발견자', where: '화이트게이트 Q 분서 당직실', key: 'k_quarrell', color: '#3d4a63', initial: '쿼',
         intro: ['(헬멧을 벗어 무릎에 올려놓는다) 그날 밤 제 순찰로는 한 바퀴에 14분이었습니다. 시계처럼 돌았지요. 형사님들이 자꾸 묻는데, 저는 선원 같은 건 못 봤습니다.'],
         ask: {
+          k_saltlane: ['솔트 레인 14번지 공동숙소 말이지요. 제 순찰로에 듭니다. 밤새 드나드는 사람이 많은 집이라 문 앞에서 한 번씩 멈춰 섭니다.'],
+          k_bluelantern: ['블루 랜턴은 솔트 레인 14번지 공동숙소입니다. 4펜스 침대 집이지요. 한 바퀴에 한 번씩 그 앞을 지납니다.'],
+          k_armband: ['자경단 사람들은 왼팔에 흰 완장을 찹니다. 그 밤에도 스리 키스 뒷문 앞에서 완장 찬 두 사람을 지나쳤습니다.'],
+          k_thread: ['실은 못 봤습니다. 제가 한 일은 등불을 비추고 호루라기를 분 것까지입니다. 소매 안쪽까지는 들추지 않았습니다.'],
           k_redman: ['레드먼 경위님은 형사과 분이십니다. 그 밤 제가 본 건 수첩에 적은 그대로 보고드렸습니다.'],
           k_night27: ['비가 오락가락하던 밤이었습니다. 한 바퀴 14분, 시계처럼 돌았지요. 교회 계단에 여자가 혼자 앉아 있던 것, 로프워크 코트 안쪽 등이 꺼져 있던 것. 제가 본 건 그 두 가지입니다.'],
           k_ropewalk: ['1시 58분에 입구에서 들여다봤을 땐 안쪽 가스등이 꺼져 있었습니다. 요즘 자주 꺼지던 등이라 바람 탓인 줄 알았지요. 다음 바퀴, 2시 12분에 등불을 비추고 들어갔다가… (말을 멈춘다) 그때 들어갔어야 했습니다.'],
@@ -413,6 +416,7 @@
       p_bill: { name: '빌 코델', role: '부두 인부 · 피해자의 옛 동거인 · 구금 중', where: 'Q 분서 유치장', key: 'k_bill', color: '#5b4a3a', initial: '빌',
         intro: ['(손등의 닻 문신을 문지른다) 난 로즈한테 손끝 하나 안 댔소. 그날 밤 싸운 건 맞소. 4펜스 달라길래 없다고 했지. 진짜로 없었으니까.'],
         ask: {
+          k_shawl: ['갈색 숄이면 로즈 거요. 겨울이고 여름이고 그것 하나로 났소.'],
           k_rose: ['2년을 같이 살았소. 내가 술만 끊었어도… (고개를 젓는다) 요즘은 남의 집 바닥을 닦는다고 했소. 뭘 봤다든가, 신문사에 알린다든가, 그런 소리를 했는데 난 흘려들었지.'],
           k_night27: ['스리 키스에서 쫓겨나서 부두 쪽 맥줏집에서 두어 잔 더 했소. 그다음은 기억이 없소. 정신이 드니 아침이고, [[크레인 부두]] 쪽이었소.', '(고개를 돌린다) 어디서 잤느냐고? 모르오. 기억이 없다니까.'],
           k_threekeys: ['11시 50분에 주인한테 떠밀려 나왔소. 로즈는 그때 멀쩡히 술청에 앉아 있었고.'],
@@ -430,6 +434,8 @@
       p_vane: { name: '시릴 베인', role: '이스트엔드 스타 사회부 기자', where: '하이 스트리트 스타 편집국', key: 'k_vane', color: '#6a4f7a', initial: '베',
         intro: ['형사님, 매듭장이 편지가 오면 싣습니다. 우리가 안 실으면 다른 신문이 싣거든요. 그게 제 일입니다.'],
         ask: {
+          k_tanners: ['태너스 야드 사건은 9월에 제가 쓴 기사입니다. 검시 심리까지 따라갔지요. 그때만 해도 매듭장이라는 이름은 없었습니다.'],
+          k_ann: ['앤 필비, 성냥과 구두끈을 팔던 여자입니다. 9월 17일 자에 제가 썼습니다.'],
           k_sailor: ['챙모자 선원요? 크로프트 씨 목격담을 그대로 실었습니다. 삽화도 그 말을 듣고 화공이 그렸고요.'],
           k_committee: ['자경위원회요? 동행기는 제가 썼습니다. 딜 씨네 1조를 따라 캔들 마켓에서 부두 길까지 걸었지요.'],
           k_knotsman: { need: ['!f_letter_cut', '!f_slip_paper'], a: ['(쪽지와 편지 사진을 번갈아 본다. 오래 말이 없다)', '…끝을 잘라 냈는데도 그게 남았군요.', '반 페니 신문이 어떻게 버티는지 아십니까. 매듭장이가 처음 실린 주에 부수가 세 배가 됐습니다. 사람을 해친 건 아니에요. 그 밤 저는 조판실에 있었습니다.'], else: ['첫 우편으로 왔습니다. 소인도 있고요. 제가 쓴 거라면 왜 제 앞으로 부쳤겠습니까.'] },
@@ -455,12 +461,15 @@
       p_croft: { name: '새뮤얼 크로프트', role: '통장이 · 자경위원회 회계 · 목격자', where: '캔들 마켓 뒤 통 공방', key: 'k_croft', color: '#4f5b3a', initial: '크',
         intro: ['(앞치마에 손을 닦는다) 뭐든 물어보시오. 난 그 밤 본 대로 다 말했소. 그 선원 놈만 잡으면 끝나는 일인데.'],
         ask: {
+          k_phipps: ['핍스도 1조요. 딜이랑 1시 45분에 돌아왔소. 일지 보시오.'],
+          k_inquest: ['검시 심리에서 다 말했소. 1시 50분, 키 큰 선원. 뒷방은 한순간도 비운 적 없고.'],
+          k_oct6: ['10월 6일? 캔들 마켓 통 창고 마당 일 말이오. 내 공방 바로 옆이오. 그 일 뒤로 위원회를 꾸린 거요.'],
           k_night27: ['12시 55분에 뒷방을 열고 밤새 거기 있었소. 1시 50분에 뒷문에서 그 선원 놈을 봤고. 몇 번을 말해야 하오.'],
           k_sailor: ['키가 컸고, 챙 달린 모자에, 뱃사람처럼 몸을 흔들며 걸었소. 1시 50분이오. 뒷문에서 똑똑히 봤소.'],
           k_threekeys: { need: ['!f_door_locked'], a: ['(잠시 멈춘다) …아, 석탄. 석탄이 떨어져서 잠깐 골목 끝 석탄 광에 다녀왔소. 문은 버릇처럼 잠갔고. 잠깐이었소, 잠깐.'], else: ['12시 55분에 뒷방을 열고 3시 반까지 거기 있었소. 순찰대 귀소를 받는 게 내 일이니까. 일지에 다 있소.'] },
           k_coal: { need: ['!f_coal_stocked'], a: ['…그 밤엔 석탄이 모자란 줄 알았소. 내가 착각했나 보지.'], else: ['석탄 광은 아치 골목 끝에 있소. 주점 것이오.'] },
           k_dill: { need: ['!f_pair_wait'], a: ['딜 그 사람은 시계를 볼 줄 모르오. 교회 종소리로 시간을 재는 사람이라. 45분인지 55분인지 어찌 알겠소.'], else: ['딜과 핍스는 1조요. 1시 45분에 돌아왔소. 일지에 있잖소.'] },
-          k_thread: { need: ['!f_thread_cuff', '!f_croft_wrist'], a: ['매듭장이 표식 아니오. 신문에 다 났던 거요.', '— 신문엔 「목」이라고 났습니다. 「손목」이라고 한 사람은 크로프트 씨뿐이고요. 소매 속이라 안치소에서야 보였습니다.', '(한참 말이 없다) ……할 말은 치안판사 앞에서 하겠소.'], else: ['신문에서 읽었소. 그놈 표식이라지.'] },
+          k_thread: { need: ['!f_thread_cuff', '!f_croft_wrist'], a: ['매듭장이 표식 아니오. 신문에 다 났던 거요.', { p: '— 신문엔 「목」이라고 났습니다. 「손목」이라고 한 사람은 크로프트 씨뿐이고요. 소매 속이라 안치소에서야 보였습니다.', f: 'f_croft_wrist' }, '(한참 말이 없다) ……할 말은 치안판사 앞에서 하겠소.'], else: ['신문에서 읽었소. 그놈 표식이라지.'] },
           k_rose: ['불쌍한 여자요. 가끔 주점 바닥을 닦던 여자라고 들었소.'],
           k_fund: { need: ['!f_fund_ledger'], a: ['등불 기름, 완장, 인쇄비… 돈 들 데가 한두 군데요? 영수증은 집에 있소.'], else: ['한 푼도 빠짐없이 은행에 넣었소. 매주 수요일 아침에.'] },
           k_hannah: ['군감자 장수? 교회 모퉁이 화로 말이오. 순찰 도는 위원들이 거기서 손을 녹이곤 하지.'],
@@ -479,6 +488,11 @@
       p_hannah: { name: '해나 브래그', role: '군감자 장수 · 블루 랜턴 숙박인', where: '세인트 에드윈 교회 모퉁이', key: 'k_hannah', color: '#8a5a3c', initial: '해',
         intro: ['(깡통 화로에 감자를 굴린다) 로즈 얘기라면 해야지. 그 밤 교회 계단에 혼자 앉아 있길래 감자 반쪽을 줬수.'],
         ask: {
+          k_ropewalk: ['로프워크 코트야 스리 키스 뒤 막다른 데지. 난 그 밤에 그쪽엔 얼씬도 안 했수. 화로를 두고 갈 수야 없지.'],
+          k_bridget: ['브리짓 일이야 동네가 다 알지. 난 얼굴만 알았수. 그 뒤로 여자들이 밤에 혼자 안 다니려 했는데, 4펜스가 없으면 별수 있수.'],
+          k_qdiv: ['Q 분서 순경들이야 밤마다 이 모퉁이를 지나가우. 내 화로에 손 녹이고 가는 양반도 있고.'],
+          k_dill: ['짐꾼 딜 말이우? 완장 차고 돌다가 내 화로 앞에서 손을 녹이고 가는 양반이우. 말수는 적어도 감자 값은 꼬박꼬박 내지.'],
+          k_shawl: ['로즈는 그 밤에도 갈색 숄을 머리까지 덮어쓰고 있었수. 그것 하나로 철을 나는 여자였지.'],
           k_saltlane: ['솔트 레인 14번지가 블루 랜턴이우. 내 4번 침대가 거기 있수.'],
           k_rose: [{ p: '에드윈 교회 종이 45분을 칠 때였수. 흰 완장 찬 사내가 손등불을 들고 와서 로즈한테 뭐라 다정하게 말하더니, 둘이 교회 길로 해서 하이 스트리트 쪽으로 올라갔수. 자경단 양반이 데려다주나 보다 했지.', f: 'f_hannah_lantern' }, '얼굴은 못 봤수. 등불을 제 얼굴 앞에 들고 있었거든.'],
           k_night27: ['그 밤도 교회 모퉁이에서 화로를 피웠수. 로즈가 계단에 혼자 앉아 있길래 감자 반쪽을 줬지. 얼마 안 가 누가 와서 데려갔수. 난 호루라기 소리에 겁이 나서 2시 반이 다 돼서야 블루 랜턴으로 들어갔고.'],
@@ -498,6 +512,7 @@
       p_peggy: { name: '페기 톨', role: '블루 랜턴 공동숙소 야간 관리인', where: '솔트 레인 14번지 부엌', key: 'k_peggy', color: '#6e5a78', initial: '페',
         intro: ['(숙박부를 덮는다) 4펜스 없으면 내보내는 게 규칙이오. 나도 좋아서 한 게 아니오. 로즈는 1시 20분까지 부엌 불가에서 버텼지.'],
         ask: {
+          k_whitegate: ['이 동네 여자들 태반이 한 번쯤은 이 숙소에 묵어 갔소. 4펜스만 있으면 누구든 받지.'],
           k_rose: [{ p: '로즈는 부지런했소. [[수요일 아침|k_wednesday]]이랑 토요일 아침마다 스리 키스 뒷방, 그 자경단 방 바닥을 닦았지. 그 돈으로 침대값을 댔는데, 그 주엔 품삯을 못 받았다더군.', f: 'f_rose_char' }, '금요일엔 교회 앞 [[대서인 모티머]]한테 가서 편지를 한 통 썼다더군. 신문사에 보낸다고. 무슨 일이냐 물었더니 "월요일이면 다 알게 될 거"라고만 했소.'],
           k_night27: ['1시 20분에 내보냈소. 월요일엔 갚는다길래 외상으로 재워 줄까 하다가… (한숨) 주인 눈이 무서워서.'],
           k_threekeys: ['그 주점 뒷방은 자경단이 쓰오. 로즈가 거기 청소를 했지.'],
@@ -515,6 +530,11 @@
       p_dill: { name: '아서 딜', role: '짐꾼 · 자경단 1조', where: '캔들 마켓 짐꾼 대기소', key: 'k_dill', color: '#4a6670', initial: '딜',
         intro: ['(젖은 모자를 쥐어짠다) 그 밤 비가 추적추적 왔지요. 핍스랑 한 바퀴 돌고 뒷방으로 돌아갔는데…'],
         ask: {
+          k_ann: ['앤 필비 말이오? 9월에 태너스 쪽에서 쓰러져 있던 여자요. 성냥 파는 걸 몇 번 봤지.'],
+          k_bridget: ['캔들 마켓 통 창고 마당에서 그리 됐지. 내 일터 바로 뒤요. 그 일 뒤로 우리가 완장을 찬 거요.'],
+          k_hannah: ['군감자 장수 해나 말이오? 추운 밤엔 그 화로에 손을 녹이고 가오. 감자도 한 알씩 사고.'],
+          k_ropewalk: ['스리 키스 뒷문에서 아치 골목만 건너면 그 코트 입구요. 안쪽 가스등이 요새 자주 꺼져서 밤엔 굴속 같지.'],
+          k_gaslamp: ['그 등 말이오? 요새 걸핏하면 꺼져 있소. 점등부 골 씨가 누가 꼭지를 잠근다고 투덜대더군.'],
           k_knotsman: ['매듭장이 편지 말이오? 신문에 날 때마다 대기소가 그 얘기뿐이오. 그러니 우리가 밤마다 등불 들고 도는 거고.'],
           k_tanners: ['태너스 쪽 말이오? 9월에 앤이 쓰러져 있던 데지. 신문에서 읽은 것밖엔 모르오.'],
           k_threekeys: [{ p: '에드윈 교회 종이 45분을 치고 한참 뒤였으니 1시 55분쯤이었을 거요. 뒷문이 잠겨 있고 불도 꺼져 있었소. 두드려도 대답이 없어서 처마 밑에서 비를 피하며 기다렸지. 2시가 넘어서야 크로프트 씨가 골목 안쪽 어둠에서 걸어 나왔소.', f: 'f_pair_wait' }, '[[석탄]] 가지러 갔었다더군. 그런데 빈손이었소. 비에 흠뻑 젖어서.'],
@@ -547,7 +567,7 @@
       epilogue: [
         '10월 24일 수요일 아침, 스리 키스 뒷방. 은행 가방에 돈을 옮기던 새뮤얼 크로프트는 문간에 선 로즈 캘러웨이와 눈이 마주쳤다. 이틀 뒤 로즈는 대서인에게 1페니를 주고 신문사에 편지를 썼고, 그 편지는 뜯기지도 않은 채 「매듭장이」의 편지 더미 속에 묻혔다.',
         '27일 밤, 크로프트는 순경이 몇 분마다 어디를 지나는지 알고 있었다. 1시 25분에 뒷방을 잠그고 나가, 교회 계단의 로즈에게 흰 완장과 손등불을 보였다. "데려다주리다." 로즈는 자경단의 등불을 믿었다. 코트 안쪽 가스등의 꼭지는 그가 몇 번이나 잠가 보았던 것이었다.',
-        '그는 두 번째 편지에서 읽은 「붉은 실」을 로즈의 손목, 소맷부리 속에 감아 두었다. 그리고 새벽 2시 40분, 기자에게 그것을 먼저 말해 버렸다. 호외는 4시에 인쇄에 들어갔고, 경찰의는 5시 반에야 소매를 걷었다.',
+        '그는 두 번째 편지에서 읽은 「붉은 실」을 감아 두려 했다. 목에는 끈 자국이 깊어 실이 묻힐 것 같았고, 순경의 등불은 벌써 골목 어귀를 돌고 있었다. 그는 실을 로즈의 손목, 소맷부리 속에 감았다. 그리고 새벽 2시 40분, 기자에게 그것을 먼저 말해 버렸다. 호외는 4시에 인쇄에 들어갔고, 경찰 촉탁의는 5시 반에야 소매를 걷었다.',
         '빌 코델은 크레인 부두 분서의 유치 기록부가 온 11월 2일에 풀려났다.',
         '「매듭장이」라는 사람은 없었다. 그 이름은 시릴 베인이 신문을 팔려고 지어냈고, 크로프트가 가져다 썼다. 태너스 야드와 캔들 마켓에서 두 사람을 해친 범인은 끝내 밝혀지지 않았다.',
       ],
@@ -603,7 +623,7 @@
         svg: eng('#3e3a33', '<rect x="40" y="30" width="120" height="90" fill="#f6f2e8"/><path d="M70 80 q20 -26 40 0 t30 -4" stroke="#b3261e" stroke-width="2.2" fill="none"/><circle cx="96" cy="72" r="5" fill="none" stroke="#b3261e" stroke-width="2.2"/><rect x="48" y="104" width="50" height="8" fill="#c9bfa8"/>', '카드 위의 붉은 실'),
         prompt: 'A short length of red cotton thread tied in a small knot, laid on a plain white evidence card with a blank paper label, on a police surgeon\'s wooden table beside a magnifying glass, clinical still life. The thread is bright red, the only colour in the image, as if hand-tinted.',
         must: '실은 붉은색 (흑백 판화라도 실만 붉게)' },
-      map: { svg: `<svg viewBox="0 0 200 150" role="img" aria-label="Q 분서 순찰 구역 약도"><rect width="200" height="150" fill="#ece3c9"/><g fill="#d6caa6"><rect x="0" y="20" width="200" height="12"/><rect x="20" y="20" width="10" height="104"/><rect x="20" y="112" width="170" height="10"/><rect x="118" y="20" width="7" height="100"/><rect x="125" y="48" width="42" height="11"/></g><g fill="#b8a984" stroke="#6b5d40" stroke-width=".6"><rect x="84" y="34" width="32" height="26"/><rect x="64" y="94" width="34" height="16"/><rect x="34" y="84" width="28" height="24"/><rect x="136" y="4" width="38" height="14"/><rect x="130" y="62" width="44" height="40"/><rect x="128" y="34" width="46" height="12"/><rect x="104" y="100" width="12" height="10"/></g><path d="M118 36 q3.5 -5 7 0" stroke="#6b5d40" fill="none"/><path d="M48 84 v-8 M44 80 h8" stroke="#6b5d40"/><circle cx="162" cy="53.5" r="2.4" fill="#3b3326"/><rect x="115" y="47" width="3" height="7" fill="#b0342a"/><circle cx="25" cy="26" r="2.2" fill="#b0342a"/><path d="M25 26 H121.5 V117 H25 Z" fill="none" stroke="#b0342a" stroke-width="1.2" stroke-dasharray="3 2"/><g font-size="6" fill="#3b3326" font-family="sans-serif"><text x="40" y="29">하이 스트리트</text><text x="60" y="120">솔트 레인</text><text x="86" y="48">스리 키스</text><text x="128" y="56.5">로프워크 코트</text><text x="67" y="104">블루 랜턴</text><text x="33" y="81">세인트 에드윈</text><text x="139" y="13">스타 신문사</text><text x="4" y="16">우체통</text><text x="103" y="98">석탄 광</text></g><g font-size="5.5" fill="#3b3326" font-family="sans-serif"><text transform="translate(27 78) rotate(-90)">교회 길</text><text transform="translate(123.5 94) rotate(-90)">아치 골목</text></g></svg>`, use: '지도 (글자는 게임이 얹는다)', alt: 'Q 분서 순찰 구역 약도', ratio: '4:3', own: true, prompt: 'Hand-drawn 1888 London police beat map, pen and ink with pale watercolour washes on yellowed paper, seen straight from above like a plan. A main street runs across the top; a narrow lane runs down the left side; another lane runs along the bottom; a narrow alley runs down the right side from the main street. Buildings are small washed rectangles: a newspaper office above the main street at the top right, a public house in the upper middle with a small red square marking its back door on its right wall, a small enclosed courtyard with a dot at the right, a church with a tiny cross at the left middle, a larger building at the bottom middle, a tiny coal shed at the lower right of the block, a pillar box at the top left corner. A red dashed line traces one rectangular patrol loop around the whole block along the four streets. Leave all building and street names blank: no words, no letters anywhere.', must: '블록 한 바퀴를 도는 붉은 점선 순찰로 · 위쪽 가운데 선술집 오른쪽 벽의 작은 붉은 네모 (뒷문) · 글자 없음 (지명은 게임이 얹는다)', labels: [['하이 스트리트',22,18.5,'l'],['솔트 레인',30,80,'l'],['스리 키스',43,32,'l'],['로프워크 코트',69,30,'l'],['블루 랜턴',40,66,'l'],['세인트 에드윈',16.5,54,'l'],['스타 신문사',66,8,'l'],['우체통',14.5,14.5,'l'],['석탄 광',77,62,'l'],['교회 길',12.5,36,'c'],['아치 골목',63.5,24,'c']], swap: 'svg', raster: true },
+      map: { svg: `<svg viewBox="0 0 200 150" role="img" aria-label="Q 분서 순찰 구역 약도"><rect width="200" height="150" fill="#ece3c9"/><g fill="#d6caa6"><rect x="0" y="20" width="200" height="12"/><rect x="20" y="20" width="10" height="104"/><rect x="20" y="112" width="170" height="10"/><rect x="118" y="20" width="7" height="100"/><rect x="125" y="48" width="42" height="11"/></g><g fill="#b8a984" stroke="#6b5d40" stroke-width=".6"><rect x="84" y="34" width="32" height="26"/><rect x="64" y="94" width="34" height="16"/><rect x="34" y="84" width="28" height="24"/><rect x="136" y="4" width="38" height="14"/><rect x="130" y="62" width="44" height="40"/><rect x="128" y="34" width="46" height="12"/><rect x="104" y="100" width="12" height="10"/></g><path d="M118 36 q3.5 -5 7 0" stroke="#6b5d40" fill="none"/><path d="M48 84 v-8 M44 80 h8" stroke="#6b5d40"/><circle cx="162" cy="53.5" r="2.4" fill="#3b3326"/><rect x="115" y="47" width="3" height="7" fill="#b0342a"/><circle cx="25" cy="26" r="2.2" fill="#b0342a"/><path d="M25 26 H121.5 V117 H25 Z" fill="none" stroke="#b0342a" stroke-width="1.2" stroke-dasharray="3 2"/><g font-size="6" fill="#3b3326" font-family="sans-serif"><text x="40" y="29">하이 스트리트</text><text x="60" y="120">솔트 레인</text><text x="86" y="48">스리 키스</text><text x="128" y="56.5">로프워크 코트</text><text x="67" y="104">블루 랜턴</text><text x="33" y="81">세인트 에드윈</text><text x="139" y="13">스타 신문사</text><text x="4" y="16">우체통</text><text x="103" y="98">석탄 광</text></g><g font-size="5.5" fill="#3b3326" font-family="sans-serif"><text transform="translate(27 78) rotate(-90)">교회 길</text><text transform="translate(123.5 94) rotate(-90)">아치 골목</text></g></svg>`, use: '지도 (글자는 게임이 얹는다)', alt: 'Q 분서 순찰 구역 약도', ratio: '4:3', own: true, prompt: 'Hand-drawn 1888 London police beat map, pen and ink with pale watercolour washes on yellowed paper, seen straight from above like a plan. A main street runs across the top; a narrow lane runs down the left side; another lane runs along the bottom; a narrow alley runs down the right side from the main street. Buildings are small washed rectangles: a newspaper office above the main street at the top right, a public house in the upper middle with a small red square marking its back door on its right wall, a small enclosed courtyard with a dot at the right, a church with a tiny cross at the left middle, a larger building at the bottom middle, a tiny coal shed at the lower right of the block, a pillar box at the top left corner. A red dashed line traces one rectangular patrol loop around the whole block along the four streets. Leave all building and street names blank: no words, no letters anywhere.', must: '블록 한 바퀴를 도는 붉은 점선 순찰로 · 위쪽 가운데 선술집 오른쪽 벽의 작은 붉은 네모 (뒷문) · 글자 없음 (지명은 게임이 얹는다)', labels: [['하이 스트리트',22,18.5,'l'],['솔트 레인',30,80,'l'],['스리 키스',43,32,'l'],['로프워크 코트',69,30,'l'],['블루 랜턴',40,66,'l'],['세인트 에드윈',16.5,54,'l'],['스타 신문사',66,8,'l'],['우체통',14.5,14.5,'l'],['석탄 광',77,62,'l'],['교회 길',12.5,36,'c'],['아치 골목',66,47,'c']], swap: 'svg', raster: true },
     },
     fonts: ['batang'],
     css: `[data-case="c01"] .skin-news .doc-paper{font:400 34px/1.1 var(--f-frak);letter-spacing:.01em}

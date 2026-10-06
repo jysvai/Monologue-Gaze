@@ -108,6 +108,7 @@ MG.I18N.put("en", "c05", {
 "1ag1pp34rg4": "Frank Delgado",
 "1kl4qy6wdiq": ["Delgado","Frank","Frank Delgado"],
 "1rkkibvvriq": "Sgt. Harvey Stone",
+"1rjs64mnlm6": "Desk sergeant, Knowlton Police Department",
 "z9gpdmuiai": ["Stone","Harvey","Harvey Stone","Sergeant Stone","Sgt. Stone","desk sergeant","duty sergeant"],
 "1rhf48ued06": "Santa Reina",
 "1kjdrxjjmeg": "Millbrook",

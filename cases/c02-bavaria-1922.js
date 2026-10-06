@@ -103,11 +103,11 @@
       k_rottmayr: { label: '카스파르 로트마이어', type: 'person', alias: ['로트마이어', '대장장이', '대장간'] },
       k_pfaenzl: { label: '알로이스 펜츨', type: 'person', alias: ['펜츨', '알로이스', '머슴'] },
       k_knauer: { label: '발렌틴 크나우어', type: 'person', alias: ['크나우어', 'V. 크나우어', 'Knauer'] },
-      k_hausierer: { label: '에머란 슈퇴클', type: 'person', alias: ['슈퇴클', '행상인', '방물장수'] },
-      k_brandl: { label: '제프 브란들', type: 'person', alias: ['브란들', '마부'] },
-      k_schwertfeger: { label: '슈베르트페거 경사', type: 'person', alias: ['슈베르트페거', 'Schwertfeger'] },
-      k_neff: { label: '안톤 네프', type: 'person', alias: ['네프'] },
-      k_huber: { label: '크사버 후버', type: 'person', alias: ['후버'] },
+      k_hausierer: { label: '에머란 슈퇴클', type: 'person', role: '떠돌이 방물장수', alias: ['슈퇴클', '행상인', '방물장수'] },
+      k_brandl: { label: '제프 브란들', type: 'person', role: '켈바흐 역 삯마차꾼 (43)', alias: ['브란들', '마부'] },
+      k_schwertfeger: { label: '슈베르트페거 경사', type: 'person', role: '오버뢰딩 초소 경사', alias: ['슈베르트페거', 'Schwertfeger'] },
+      k_neff: { label: '안톤 네프', type: 'person', role: '이웃 농부 · 1919년 차용증의 채무자', alias: ['네프'] },
+      k_huber: { label: '크사버 후버', type: 'person', role: '이웃 농부 · 1921년 차용증의 채무자', alias: ['후버'] },
       k_resl: { label: '레지 오버마이어', type: 'person', alias: ['오버마이어', '슈테른 안주인'] },
 
       k_kasten: { label: '금고', type: 'thing', alias: ['쇠 금고', '궤짝', '돈궤'] },
@@ -383,7 +383,7 @@
         '마을 사람들은 지난가을 "그 집에 밤마다 발소리가 난다"며 일을 그만둔 [[전 하녀|k_magdalena]]의 이야기를 다시 입에 올리고 있다. 군청은 근거 없는 [[유령 소문]]을 퍼뜨리지 말 것을 당부하였다.',
         { note: '장례 날짜는 군청의 허가가 나는 대로 알린다.' },
       ] },
-      d_wb_0210: { src: 'blatt', blood: false, find: ['k_ghost', 'k_hausierer', 'k_pfaenzl'], title: '하젤외드를 둘러싼 소문 셋', kicker: '제12호 · 1923년 2월 10일 토요일', meta: '본보 기자', body: [
+      d_wb_0210: { src: 'blatt', blood: false, find: ['k_ghost', 'k_hausierer', 'k_pfaenzl', 'k_haselod'], title: '하젤외드를 둘러싼 소문 셋', kicker: '제12호 · 1923년 2월 10일 토요일', meta: '본보 기자', body: [
         '오버뢰딩 사건 뒤로 군내에 온갖 말이 떠돈다. 본보가 들은 것 가운데 셋을 적고, 군청에 물은 바를 덧붙인다.',
         { h: '하나, 귀신 든 집' },
         '지난가을 그 집을 나온 하녀가 "밤마다 발소리가 났다"고 한 것이 퍼져, 이제는 밤에 그 들판을 지나지 않는다는 이까지 있다. 군청은 웃어넘겼다.',

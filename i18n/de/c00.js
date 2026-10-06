@@ -27,7 +27,7 @@ MG.I18N.put("de", "c00", {
 "8qvy8632gv": "Gepunktet unterstrichene Wörter antippen – sie landen im Notizbuch.",
 "j69n53fbwk": "Mit den Wörtern aus dem Notizbuch suchen und Leute aufsuchen, um nachzufragen.",
 "p1erltklu4": "✎ neben einem Satz antippen – so wird er zur Notiz. Im Bericht werden Notizen als Beweise angeheftet.",
-"mnwsuiv5ne": "Bei „Tatortfotos“ direkt ins Foto tippen, um es zu untersuchen. Bei „Zeitleiste“ die Karten verschieben und den Uhrzeiten zuordnen.",
+"21b1jkq567d": "Bei „Tatortfotos“ direkt ins Foto tippen, um es zu untersuchen. Die „Zeitleiste“ öffnet sich, sobald ein Wort für jene Nacht im Notizbuch steht. Dann die Karten verschieben und den Uhrzeiten zuordnen.",
 "2afn3vjepvy": "Nuri Suche",
 "baxgq1qstd": "Eine Suchseite, im Browser des Laptops noch angemeldet.",
 "de3peuadb8": "Personen, Orte, alles",

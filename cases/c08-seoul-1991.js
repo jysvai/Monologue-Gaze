@@ -111,15 +111,15 @@
       k_junyoung: { label: '백준영', type: 'person', victim: true, alias: ['준영', '준영이', '장남'] },
       k_baek: { label: '백만호', type: 'person', alias: ['백 사장', '사장님', '아버지'] },
       k_mother: { label: '강미숙', type: 'person', alias: ['어머니', '준영 어머니'] },
-      k_soyoung: { label: '백소영', type: 'person', alias: ['소영', '소영이'] },
+      k_soyoung: { label: '백소영', type: 'person', role: '백준영의 여동생 · 고2', alias: ['소영', '소영이'] },
       k_driver: { label: '한경호', type: 'person', alias: ['한 기사', '전 운전기사'] },
       k_tutor: { label: '염진우', type: 'person', alias: ['염 선생', '과외 선생', '과외 선생님'] },
       k_shop: { label: '오순례', type: 'person', alias: ['새터슈퍼', '새터슈퍼 주인', '슈퍼 아주머니'] },
       k_foreman: { label: '장두만', type: 'person', alias: ['장 반장', '현장 반장', '반장'] },
       k_tak: { label: '탁상원', type: 'person', alias: ['탁 사장', '탁 소장', '새터설비 사장'] },
-      k_yeo: { label: '여상철', type: 'person', alias: ['여 반장', '담당 형사'] },
-      k_friend: { label: '나윤석', type: 'person', alias: ['윤석', '학과 동기'] },
-      k_clerk: { label: '도경민', type: 'person', alias: ['역무원', '가람역 역무원'] },
+      k_yeo: { label: '여상철', type: 'person', role: '한울경찰서 강력반 경위 · 사건 담당', alias: ['여 반장', '담당 형사'] },
+      k_friend: { label: '나윤석', type: 'person', role: '백준영의 학과 동기', alias: ['윤석', '학과 동기'] },
+      k_clerk: { label: '도경민', type: 'person', role: '가람역 역무원 (31)', alias: ['역무원', '가람역 역무원'] },
       k_garam: { label: '가람역', type: 'place', alias: ['가람', '3번 출구', '가람역 3번 출구'] },
       k_saeteo: { label: '새터역', type: 'place', alias: ['새터', '새터동', '새터역 앞'] },
       k_church: { label: '새터제일교회', type: 'place', alias: ['교회', '종탑'] },
@@ -285,7 +285,7 @@
         '철교 아래 새터역 앞 상가 주민들은 "전동차가 지날 때마다 덜컹거리는 쇳소리에 공중전화 부스 유리까지 떤다"고 입을 모았다.',
         '지하철공사는 내년까지 방음벽을 세우겠다고 밝혔다.',
       ] },
-      d_nschool: { src: 'paper', find: ['k_chime'], kicker: '1991년 3월 5일 (화) 조간 · 교육', title: '국민학교 수업 종, "딩동댕동" 네 음으로', meta: '한울구 국민학교 새 학기 풍경', body: [
+      d_nschool: { src: 'paper', find: ['k_chime', 'k_school'], kicker: '1991년 3월 5일 (화) 조간 · 교육', title: '국민학교 수업 종, "딩동댕동" 네 음으로', meta: '한울구 국민학교 새 학기 풍경', body: [
         '새 학기부터 한울구 국민학교 두 곳이 수업 시작과 끝을 알리는 종을 네 음 차임으로 바꿨다. 나머지 다섯 곳은 예전 종을 그대로 쓴다.',
         { p: '새 차임을 먼저 단 곳은 아직 2부제 수업을 하는 [[새터국민학교]]와 솔마루국민학교다. 두 학교 오후반은 오후 3시 50분에 수업이 끝난다.', f: 'f_school' },
         '학부모들은 "교실이 모자라 오전반·오후반을 나누는 2부제가 언제 끝나느냐"고 하소연했다.',
@@ -388,7 +388,7 @@
         '목격자: "기둥 뒤에서 자꾸 시계를 봤다. 형사들이 움직이니까 철교 쪽 계단으로 내려갔다."',
         { note: '부친 백만호는 몽타주를 보자마자 "한경호"라고 함.' },
       ] },
-      d_victim: { src: 'rec', find: ['k_warehouse'], title: '피해자 진술조서 — 백준영', kicker: '한울서 91-강력-1104 · 31', meta: '1991년 12월 2일 · 동림대 부속병원 병실 · 진술인 백준영 (22)', body: [
+      d_victim: { src: 'rec', find: ['k_warehouse', 'k_junyoung'], title: '피해자 진술조서 — 백준영', kicker: '한울서 91-강력-1104 · 31', meta: '1991년 12월 2일 · 동림대 부속병원 병실 · 진술인 백준영 (22)', body: [
         '문: 납치된 경위는.',
         '답: 4일 저녁 가람역 앞에서 "해솔 가람동 현장 사람"이라는 남자가 "아버지가 현장에서 급히 찾으신다"고 해서 소형 트럭에 탔습니다. 타자마자 눈을 가렸어요.',
         '문: 얼굴은 보았는가.',

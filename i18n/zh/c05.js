@@ -108,6 +108,7 @@ MG.I18N.put("zh", "c05", {
 "1ag1pp34rg4": "弗兰克·德尔加多",
 "1kl4qy6wdiq": ["德尔加多","Delgado","弗兰克","Frank Delgado","Frank"],
 "1rkkibvvriq": "哈维·斯通警佐",
+"1rjs64mnlm6": "诺尔顿警察局值班警佐",
 "z9gpdmuiai": ["斯通","Stone","值班警佐","斯通警佐","哈维","Harvey Stone"],
 "1rhf48ued06": "圣雷纳",
 "1kjdrxjjmeg": "米尔布鲁克",
