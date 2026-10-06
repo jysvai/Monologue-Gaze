@@ -8,7 +8,7 @@ MG.I18N.put("en", "finale", {
 "2ff87wuliaa": "I left the last slot empty. That's where your case goes.",
 "noey1ikfx5": "Who was M in the records?",
 "1iso1kacv5m": "A name written in the records",
-"1isirb3fuch": ["Min So-ra","So-ra","Sora"],
+"eex0b1i4dr": ["Min So-ra","So-ra","Sora"],
 "1nflo2g0dw6": "That's not the name",
 "1c8sjurg8ja": "What were the margin notes counting? Who counted numbers when scared?",
 "1nofb3d61tb": "P.S.",

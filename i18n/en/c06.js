@@ -114,7 +114,7 @@ MG.I18N.put("en", "c06", {
 "sxp3iziwfi": "Kvitdal",
 "25ywdbhh79l": ["Kvitdal","Kvitdal valley","Kvitdal trail","Kvitdal path"],
 "1ecq34ug88z": "Railway station",
-"1lxkd44d58b": ["station square","NSB","Hellesund station","train station","railway station","Jernbanetorget"],
+"mda9qhkmfr": ["station square","NSB","Hellesund station","train station","railway station","Jernbanetorget"],
 "29gee36fcnf": "Left-luggage office",
 "1lq99pf4o76": ["left luggage","luggage office","claim ticket","Garderobe","left-luggage counter","baggage room","luggage ticket","left-luggage ticket"],
 "1c1tlshneqv": "Hotel Bryggen",

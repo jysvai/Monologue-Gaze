@@ -8,7 +8,7 @@ MG.I18N.put("zh", "finale", {
 "2ff87wuliaa": "最后一格我空着。那是放你的案子的地方。",
 "noey1ikfx5": "M是记录中的谁",
 "1iso1kacv5m": "记录里写着的名字",
-"1isirb3fuch": ["闵素罗","素罗","Min Suluo","Suluo","閔素羅","素羅","Min So-ra","So-ra","Sora"],
+"eex0b1i4dr": ["闵素罗","素罗","Min Suluo","Suluo","閔素羅","素羅","Min So-ra","So-ra","Sora"],
 "1nflo2g0dw6": "不是这个名字",
 "1c8sjurg8ja": "页边的那些笔记，在数什么？害怕时会数数的人，是谁？",
 "1nofb3d61tb": "附言：",

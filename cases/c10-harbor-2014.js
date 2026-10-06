@@ -37,8 +37,8 @@
         desc: '아파트 차단기 서버와 신항요금소 하이패스에서 공문으로 받아 낸 차량별 출입 기록. 번호판을 정확히 넣어야 한다.',
         fields: [{ id: 'plate', label: '차량 번호', placeholder: '예: 00가 0000' }],
         records: [
-          { match: { plate: ['12가 3471', '12가3471'] }, doc: 'd_r_gate', need: ['k_plate'] },
-          { match: { plate: ['12가 3471', '12가3471'] }, doc: 'd_r_hipass', need: ['k_plate'] },
+          { match: { plate: ['12가 3471', '12가3471', '3471'] }, doc: 'd_r_gate', need: ['k_plate'] },
+          { match: { plate: ['12가 3471', '12가3471', '3471'] }, doc: 'd_r_hipass', need: ['k_plate'] },
           { match: { plate: ['34나 8820', '34나8820'] }, doc: 'd_q_8820', need: ['k_daeri'] },
           { match: { plate: ['56다 1204', '56다1204'] }, doc: 'd_q_1204', need: ['k_myeongsu', 'k_guhang'] },
         ],
@@ -317,7 +317,7 @@
       ] },
       d_v_taxi: { src: 'cam', need: ['k_suv'], title: '택시 블랙박스 제보 · 신항대로', meta: '제보 2014.11.30 · 해진 개인택시 · 전방 카메라', body: [
         { img: 'cam_taxi', osd: ['FRONT', '2014/11/22'], cap: '11.22 00:31:05 — 시내 방향으로 달리던 택시 앞으로 마주 지나가는 검은 SUV (신항 방향). 루프랙, 오른쪽 앞 안개등 꺼짐 (마주 오는 차라 화면에서는 왼쪽)', f: 'f_taxi_suv' },
-        '조수석에 사람 형체. 번호판은 흐림.',
+        '번호판은 흐림.',
         '택시 기사: "그 시간에 신항 들어가는 차는 거의 없어요. 화물차 아니면."',
       ] },
       d_v_pier: { src: 'cam', need: ['k_pier3'], title: '신항 3부두 공사장 정문 CCTV', meta: '시공사 제공 · 11.22 00:40 ~ 01:20 · 정문만 비춤', body: [

@@ -153,7 +153,7 @@
           { match: { no: ['5521-0418-3307', '552104183307'] }, doc: 'd_parcel', need: ['k_waybill'] },
           { match: { no: ['010-0000-1234', '01000001234'] }, doc: 'd_q_sender', need: ['k_waybill'] },
         ],
-        none: '조회된 기록이 없다. 한 글자만 틀려도 나오지 않는다.', foundLabel: '조회해 둔 기록' },
+        none: '조회된 기록이 없다. 번호는 한 글자만 틀려도 나오지 않는다. 거래소 입금 주소의 주인은 이 단말로는 나오지 않고, 거래소 회신으로만 알 수 있다.', foundLabel: '조회해 둔 기록' },
       { id: 'tl', type: 'timeline', name: '골목 재구성', need: ['#rq_wphone', '#rq_cctv'], title: '11월 17일 22시 · 새솔중앙 골목', meta: '후면 카메라(CH3) 기록과 정우진 휴대폰 기록을 한 줄로', openLabel: '재구성 판 펼치기',
         slots: ['22:13:20', '22:14:00', '22:14:31', '22:14:40', '22:15:02', '22:15:30'],
         events: [
@@ -197,7 +197,7 @@
       k_deposit: { label: '코인나루 입금 주소', type: 'thing', alias: ['입금 주소', '3Kx9…Qe41'] },
       k_coinnaru: { label: '코인나루', type: 'thing', alias: ['거래소'] },
       k_kick: { label: '하람킥', type: 'thing', alias: ['공유킥보드', '킥보드'] },
-      k_cam: { label: '후면 카메라', type: 'thing', alias: ['CH3', '뒷문 카메라'] },
+      k_cam: { label: '후면 카메라', type: 'thing', alias: ['CH3', '뒷문 카메라', 'CCTV', '돔 카메라', '무단투기'] },
       k_parcel: { label: '반값택배 키오스크', type: 'thing', alias: ['반값택배', '하루택배', '키오스크'] },
       k_waybill: { label: '5521-0418-3307', type: 'thing', alias: ['송장', '송장 번호'] },
       k_ad: { label: '일당모아', type: 'thing', alias: ['고액 알바', '간단 배송 알바', '구인 공고'] },

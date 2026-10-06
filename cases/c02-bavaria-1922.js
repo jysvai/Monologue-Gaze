@@ -53,8 +53,8 @@
             intro: ['외양간 안쪽에서 헛간으로 트인 문 쪽을 보고 그렸다. 군 수의사가 옆에서 소를 살피는 동안.'],
             spots: [
               { id: 'sp_krippe', x: 26.25, y: 59.6, r: 10, label: '소 구유', body: [{ p: '구유 바닥은 찌꺼기뿐인데, 구유 가장자리와 앞 통로에 흘린 건초가 무릎 높이로 수북하다. 한 끼에 줄 양의 몇 곱절.', f: 'f_fed' }] },
-              { id: 'sp_eimer', x: 75, y: 86, r: 8, label: '엎어진 우유 통과 착유 의자', body: ['돼지우리 앞에 엎어진 우유 통. 착유 의자는 소 쪽이 아니라 돼지우리 쪽을 보고 놓였다. 돼지 구유 바닥에 허옇게 말라붙은 자국.'] },
-              { id: 'sp_pferd', x: 92.5, y: 61.5, r: 9, label: '헛간 서쪽 칸 기둥', body: [{ p: '기둥 못에 흰 말털 몇 가닥이 걸려 있다. 바닥에는 말똥 한 무더기와 흘린 귀리. 이 집은 말을 기르지 않는다.', f: 'f_horse' }], keys: ['k_schlitten'] },
+              { id: 'sp_eimer', x: 75.5, y: 77, r: 10.5, label: '엎어진 우유 통과 착유 의자', body: ['돼지우리 앞에 엎어진 우유 통. 착유 의자는 소 쪽이 아니라 돼지우리 쪽을 보고 놓였다. 돼지 구유 바닥에 허옇게 말라붙은 자국.'] },
+              { id: 'sp_pferd', x: 93, y: 30, r: 10, label: '헛간 서쪽 칸 기둥', body: [{ p: '기둥 못에 흰 말털 몇 가닥이 걸려 있다. 바닥에는 말똥 한 무더기와 흘린 귀리. 이 집은 말을 기르지 않는다.', f: 'f_horse' }], keys: ['k_schlitten'] },
             ] },
         ] },
       { id: 'amt', type: 'archive', name: '켈바흐 군청 문서고', skin: 'ledger', desc: 'Bezirksamt Kelbach. 장부·대장·배달 수첩 따위를 사람 이름이나 장소로 찾아 달라고 청할 수 있다.', placeholder: '이름, 장소, 물건', startLabel: '서고 담당이 먼저 내준 것' },
@@ -125,7 +125,7 @@
 
       k_freitag: { label: '1월 26일', type: 'time', alias: ['26일', '그 금요일'] },
       k_lichtmess: { label: '성촉절', type: 'time', alias: ['Lichtmess', '2월 2일'] },
-      k_markt: { label: '장날', type: 'time', alias: ['가축 시장', 'Lichtmessmarkt'] },
+      k_markt: { label: '장날', type: 'time', alias: ['가축 시장', 'Lichtmessmarkt', '켈바흐 장'] },
     },
     docs: {
       /* ── 오버뢰딩 초소 수사철 ── */

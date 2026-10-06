@@ -678,7 +678,8 @@
   const flipWords = v => { const w = String(v ?? '').trim().split(/[\s,]+/).filter(Boolean); return w.length > 1 && w.length < 4 ? w.reverse().join(' ') : null; };
   function queryHits(s, inp) {
     if (!Object.values(inp).some(v => norm(v))) return null;
-    const fits = (vals, v) => { const L = (Array.isArray(vals) ? vals : [vals]).map(norm); return L.includes(norm(v)) || (flipWords(v) != null && L.includes(norm(flipWords(v)))); };
+    const bare = v => String(v ?? '').replace(/\s*[(（][^()（）]*[)）]\s*$/, ''); // 「1968.12.15 (일)」 「31 007 (역 안내)」처럼 기록에 보이는 대로 옮겨 친 것
+    const fits = (vals, v) => { const L = (Array.isArray(vals) ? vals : [vals]).map(norm); return [v, bare(v)].some(x => L.includes(norm(x)) || (flipWords(x) != null && L.includes(norm(flipWords(x))))); };
     return (s.records || []).filter(r => Object.entries(r.match || {}).every(([f, vals]) => fits(vals, inp[f]))).map(r => r.doc).filter((id, i, a) => C.docs[id] && a.indexOf(id) === i);
   }
   function queryList(s) {
@@ -2126,12 +2127,18 @@
     if (o && o.t === 'person') { ask(k); if (!beside()) $('.stage').scrollIntoView({ block: 'start' }); return; }
     search(k);
   }
+  // 한글 자판인 채로 영문 비밀번호를 치면 (dubu → 여ㅠㅕ) 같은 자리의 영문 글쇠로 되돌려 본다 (두벌식)
+  const QW = { cho: 'r R s e E f a q Q t T d w W c z x v g'.split(' '), jung: 'k o i O j p u P h hk ho hl y n nj np nl b m ml l'.split(' '), jong: ['', ...'r R rt s sw sg e f fr fa fq ft fx fv fg a q qt t T d w c z x v g'.split(' ')] };
+  const JAMO = 'ㄱㄲㄳㄴㄵㄶㄷㄸㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅃㅄㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ';
+  const JKEY = 'r R rt s sw sg e E f fr fa fq ft fx fv fg a q Q qt t T d w W c z x v g k o i O j p u P h hk ho hl y n nj np nl b m ml l'.split(' ');
+  const qwerty = v => String(v ?? '').replace(/[\uac00-\ud7a3\u3131-\u3163]/g, ch => { const c = ch.charCodeAt(0); if (c < 0xac00) return JKEY[JAMO.indexOf(ch)] || ch; const x = c - 0xac00; return QW.cho[Math.floor(x / 588)] + QW.jung[Math.floor((x % 588) / 28)] + QW.jong[x % 28]; });
   function tryLock(id, v) {
     const target = C.docs[id] || C.sources.find(s => s.id === id);
     const lock = target && target.lock;
     if (!lock) return;
     if (!norm(v)) { const i = $(`#lk-${CSS.escape(id)}`); if (i) i.focus(); return; } // 아무것도 넣지 않고 누른 것은 틀린 번호로 세지 않는다
-    if ((lock.code || []).map(norm).includes(norm(v))) {
+    const codes = (lock.code || []).map(norm);
+    if ([v, qwerty(v), String(v).replace(/[#*]/g, '')].some(x => codes.includes(norm(x)))) {
       const before = census();
       if (!ST.unl.includes(id)) ST.unl.push(id);
       (lock.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });

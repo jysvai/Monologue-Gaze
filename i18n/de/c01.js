@@ -144,7 +144,7 @@ MG.I18N.put("de", "c01", {
 "f83tmqjk36": "Brauner Schal",
 "iagdm97ggq": ["Schal","Umschlagtuch"],
 "14sh781ired": "Nacht des 27. Oktober",
-"1pzx9ftu9fw": ["27. Oktober","Nacht des 27.","Samstagnacht","Samstagabend","27.10.","27.10.1888"],
+"ual0s64cjk": ["27. Oktober","Nacht des 27.","Samstagnacht","Samstagabend","27.10.","27.10.1888"],
 "15symy72kqv": "16. September",
 "1545iisamsl": ["erster Fall","erster Mord","16.9.","16.09."],
 "11za8br9nrq": "6. Oktober",

@@ -12,7 +12,7 @@ window.MG.finale = [
 window.MG.finaleWho = {
   q: 'M은 기록 속 누구였나',
   placeholder: '기록에 적힌 이름',
-  answer: ['민소라', '소라'],
+  answer: ['민소라', '소라', '민소라 씨', '소라소라'],
   miss: '그 이름이 아니다',
   hint: '여백의 메모들은 무엇을 세고 있었나. 무서울 때 숫자를 세는 사람은 누구였나.',
   ps: [

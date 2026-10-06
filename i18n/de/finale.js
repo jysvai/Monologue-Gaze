@@ -8,7 +8,7 @@ MG.I18N.put("de", "finale", {
 "2ff87wuliaa": "Das letzte Fach habe ich freigelassen. Da kommt dein Fall hin.",
 "noey1ikfx5": "Wer war M in den Akten?",
 "1iso1kacv5m": "Ein Name aus den Akten",
-"1isirb3fuch": ["Min So-ra","So-ra","Sora","Min Sora"],
+"eex0b1i4dr": ["Min So-ra","So-ra","Sora","Min Sora"],
 "1nflo2g0dw6": "Das ist nicht der Name",
 "1c8sjurg8ja": "Was haben die Randnotizen gezählt? Und wer hat gezählt, wenn die Angst kam?",
 "1nofb3d61tb": "PS:",

@@ -172,7 +172,7 @@ MG.I18N.put("de", "c02", {
 "1h8n5g4as1z": "Lichtmess",
 "6d5guo9ldw": ["Lichtmess","Lichtmeß","Mariä Lichtmess","2. Februar"],
 "w1p3g8mb8l": "Markttag",
-"fvcn4dd2ov": ["Viehmarkt","Lichtmessmarkt","Markt"],
+"28k74mc4k2t": ["Viehmarkt","Lichtmessmarkt","Markt"],
 "yf038c8znu": "Meldung über einen Leichenfund",
 "15gmwnfkuyf": "5. Februar 1923, nachts · Stationskommandant → Bezirksamt Kelbach",
 "1t5prvgt5ya": "Am 5. Februar 1923, nachmittags 4 Uhr 10, erschienen auf hiesiger Station der Postbote der Postagentur Oberröding [[Martin Gerstl|k_gerstl]] und der benachbarte Bauer [[Franz Hubmann|k_hubmann]] und meldeten, dass man die Bewohner des [[Einödhofes Haselöd|k_haselod]] seit mehreren Tagen nicht gesehen habe und dass sie beide soeben in das Anwesen hineingesehen hätten.",

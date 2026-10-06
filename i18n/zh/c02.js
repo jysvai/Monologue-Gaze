@@ -172,7 +172,7 @@ MG.I18N.put("zh", "c02", {
 "1h8n5g4as1z": "圣烛节",
 "6d5guo9ldw": ["Lichtmess","2月2日","Mariä Lichtmess"],
 "w1p3g8mb8l": "集市日",
-"fvcn4dd2ov": ["牲口集市","Lichtmessmarkt","圣烛节集市","克尔巴赫集市","集市"],
+"28k74mc4k2t": ["牲口集市","Lichtmessmarkt","圣烛节集市","克尔巴赫集市","集市"],
 "yf038c8znu": "发现尸体报告",
 "15gmwnfkuyf": "1923年2月5日夜 · 所长 → 克尔巴赫县公署",
 "1t5prvgt5ya": "1923年2月5日下午4时10分，上勒丁邮局邮差[[马丁·格斯特尔|k_gerstl]]与邻近农户[[弗朗茨·胡布曼|k_hubmann]]来本所报称：[[哈泽勒德农庄|k_haselod]]一家已多日不见人影，二人方才进农庄内查看过。",

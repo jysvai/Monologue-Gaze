@@ -87,10 +87,10 @@
         desc: '차량 등록원부, 제품 등록 대장, 사업자·건축물 대장. 번호와 이름을 정확히 넣어야 나온다.',
         fields: [{ id: 'v', label: '번호 · 이름 · 주소', placeholder: '예: 00허 0000 / 제품 일련번호 / 도로명' }],
         records: [
-          { match: { v: ['31허 7724'] }, doc: 'd_q_car', need: ['k_plate'], keys: ['k_nubi'] },
+          { match: { v: ['31허 7724', '7724'] }, doc: 'd_q_car', need: ['k_plate'], keys: ['k_nubi'] },
           { match: { v: ['DT4-K7-20931', '20931'] }, doc: 'd_q_tracker', need: ['k_serial'] },
-          { match: { v: ['58너 2291'] }, doc: 'd_q_mycar', need: ['k_car'] },
-          { match: { v: ['성민재', '해오름셀프세차'] }, doc: 'd_q_biz', need: ['k_minjae'] },
+          { match: { v: ['58너 2291', '2291'] }, doc: 'd_q_mycar', need: ['k_car'] },
+          { match: { v: ['성민재', '해오름셀프세차', '해오름', '해오름 세차장', '해오름셀프세차장'] }, doc: 'd_q_biz', need: ['k_minjae'] },
           { match: { v: ['갈매동 산업로', '산업로', '갈매동 산업로 188', '산업로 188', '갈매동 산업로 180', '산업로 180', '갈매동 산업로 180 ~ 196', '산업로 180 ~ 196', '가람구 갈매동 산업로 188', '갈매동 산업로 196', '산업로 196'] }, doc: 'd_q_road', need: ['k_sanup'] },
         ],
         none: '조회 결과가 없다. 한 글자만 달라도 나오지 않는다.', foundLabel: '조회해 둔 기록' },
@@ -180,8 +180,8 @@
       k_tracker: { label: '위치추적기', type: 'thing', alias: ['트래커', '도트 파인더'] },
       k_serial: { label: 'DT4-K7-20931', type: 'thing', alias: ['20931'] },
       k_phone: { label: '다솜의 휴대폰', type: 'thing', alias: ['휴대폰'] },
-      k_note: { label: '앞유리 쪽지', type: 'thing', alias: ['와이퍼 쪽지'] },
-      k_letter: { label: '합의 요청 편지', type: 'thing', alias: ['편지', '11.06 편지'] },
+      k_note: { label: '앞유리 쪽지', type: 'thing', alias: ['와이퍼 쪽지', '쪽지', '2024.10.25', '10.25'] },
+      k_letter: { label: '합의 요청 편지', type: 'thing', alias: ['편지', '11.06 편지', '11.06', '11.6', '2024.11.06'] },
       k_waiver: { label: '처벌불원서', type: 'thing', alias: ['합의서'] },
       k_anklet: { label: '전자장치', type: 'thing', alias: ['전자발찌', '발찌'] },
       k_notice: { label: '주차 경고문', type: 'thing', alias: ['경고문'] },
@@ -192,8 +192,8 @@
       k_app: { label: '달리미', type: 'thing', alias: ['배달 앱'] },
       k_tonight: { label: '11월 21일 밤', type: 'time', alias: ['오늘 밤', '21일 밤'] },
       k_trial: { label: '첫 공판', type: 'time', alias: ['공판', '재판'], q: ['첫 공판 얘기를 들으신 적 있습니까?', '첫 공판을 앞두고 있었지요. 알고 계셨습니까?'] },
-      k_july: { label: '7월 신고', type: 'time', alias: ['7월 13일', '교제폭력 신고'], q: ['7월에 들어간 신고 말입니다. 그때 무슨 일이 있었습니까?', '7월 신고에 대해 아시는 대로 말씀해 주시죠.'] },
-      k_order: { label: '잠정조치', type: 'word', alias: ['접근금지'] },
+      k_july: { label: '7월 신고', type: 'time', alias: ['7월 13일', '교제폭력 신고', '교제폭력', '7.13', '07.13', '2024.07.13'], q: ['7월에 들어간 신고 말입니다. 그때 무슨 일이 있었습니까?', '7월 신고에 대해 아시는 대로 말씀해 주시죠.'] },
+      k_order: { label: '잠정조치', type: 'word', alias: ['접근금지', '09.10', '2024.09.10', '10.05', '2024.10.05'] },
       k_debt: { label: '빌린 돈', type: 'word', alias: ['이천삼백', '2300만 원'] },
       k_picturebook: { label: '그림책 모임', type: 'word', alias: ['그림책'] },
     },
@@ -518,7 +518,7 @@
           ['임대차', '2022.04 ~ 2024.12.31 (중도 해지 없음) · 월세 3개월 체납'],
         ], head: ['항목', '내용'], f: { 1: 'f_carwash_owner', 4: 'f_carwash_owner' } },
       ] },
-      d_q_road: { src: 'q', title: '건축물 조회 — 갈매동 산업로 180 ~ 196', meta: '건축물대장 · 사업자 연계 · 거리뷰 2024.08', body: [
+      d_q_road: { src: 'q', title: '건축물 조회 — 갈매동 산업로 180 ~ 196', meta: '건축물대장 · 사업자 연계 · 거리뷰 2024.10', body: [
         { rows: [
           ['180', '고물상', '영업 중 · 야간 무인'],
           ['184', '물류 창고', '2023 폐쇄'],
@@ -526,7 +526,7 @@
           ['192', '농자재 비닐하우스', '겨울 휴장'],
           ['196', '교회 수양관', '주말만 사용'],
         ], head: ['지번', '건물', '현황'], f: { 2: 'f_carwash_lot' } },
-        { img: 'carwash', cap: '거리뷰 (2024.08) — 산업로 188. 셔터 내린 세차 부스와 옆의 철문' },
+        { img: 'carwash', cap: '거리뷰 (2024.10) — 산업로 188. 셔터 내린 세차 부스와 옆의 철문' },
       ] },
     },
     people: {

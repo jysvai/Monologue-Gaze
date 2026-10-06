@@ -86,7 +86,7 @@
               { id: 'sp_soap', x: 62.5, y: 58, r: 5.5, label: '구겨진 종이', keys: ['k_fjordheim'], body: ['구겨진 호텔 비누 포장지. 인쇄된 이름: [[피오르헤임 호텔]].'] },
               { id: 'sp_box', x: 82, y: 60, r: 9, label: '빈 신발 상자', keys: ['k_randi'], body: ['빈 종이 상자. 가게 도장 찍힌 쪽은 찢겨 나갔지만, 안쪽에 붙은 가격표에 [[에이데 신발|k_randi]]이라는 가게 이름이 남았다.'] },
               { id: 'sp_money', x: 37, y: 83, r: 16, label: '봉투 둘', body: [{ p: '돈을 지갑 없이 봉투 둘에 나눠 담았다. 노르웨이 크로네 1,340 · 서독 마르크 200 · 벨기에 프랑 500.', f: 'f_money' }] },
-              { id: 'sp_ticket', x: 68, y: 83.7, r: 4, label: '기차표', body: [{ p: '10월 18일(토) 저녁 7시 40분 헬레순 → 오슬로 2등 기차표 한 장. 쓰지 않았다.', f: 'f_ticket' }] },
+              { id: 'sp_ticket', x: 70.3, y: 79.5, r: 5, label: '기차표', body: [{ p: '10월 18일(토) 저녁 7시 40분 헬레순 → 오슬로 2등 기차표 한 장. 쓰지 않았다.', f: 'f_ticket' }] },
             ] },
         ] },
       { id: 'kode', type: 'cipher', name: '수첩의 기호', need: ['k_notebook'], skin: 'cipher', title: '가방 속 수첩 — 기호로 적은 쪽', meta: '증거물 11-6 · 연필', openLabel: '해독지 펼치기',
@@ -110,7 +110,7 @@
         desc: '텔레베르케 번호부의 번호순 부록과 차량 검사소 등록 카드를 전화로 조회한다. 교환수는 번호를 정확히 불러야 찾아 준다.',
         fields: [{ id: 'no', label: '번호 (전화 · 차량)', placeholder: '예: 24 000 · H-00000' }],
         records: [
-          { match: { no: ['24318', '24 318'] }, doc: 'd_katalog', need: ['k_tlf'] },
+          { match: { no: ['24318', '24 318', 'TLF 24318', 'TLF 24 318'] }, doc: 'd_katalog', need: ['k_tlf'] },
           { match: { no: ['22140', '22 140'] }, doc: 'd_q_22140', need: ['k_sentralbord'] },
           { match: { no: ['31007', '31 007'] }, doc: 'd_q_31007', need: ['k_sentralbord'] },
           { match: { no: ['H-24617', 'H24617', 'H 24617'] }, doc: 'd_q_hl24617', need: ['k_plate', 'k_rental'] },
@@ -153,7 +153,7 @@
     keywords: {
       k_hellesund: { label: '헬레순', type: 'place', alias: ['Hellesund', '헬레순 시'] },
       k_kvitdal: { label: '크비트달', type: 'place', alias: ['Kvitdal', '크비트달 계곡', '크비트달 등산로'] },
-      k_station: { label: '기차역', type: 'place', alias: ['역 광장', 'NSB'] },
+      k_station: { label: '기차역', type: 'place', alias: ['역 광장', 'NSB', '헬레순 역'] },
       k_garderobe: { label: '수하물 보관소', type: 'place', alias: ['보관소', '보관표', 'Garderobe'] },
       k_bryggen: { label: '브뤼겐 호텔', type: 'place', alias: ['브뤼겐', 'Hotel Bryggen'] },
       k_sjomann: { label: '선원 호텔', type: 'place', alias: ['Sjømannshjemmet', '선원 숙소'] },

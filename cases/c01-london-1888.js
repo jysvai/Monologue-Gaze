@@ -107,7 +107,7 @@
       k_coal: { label: '석탄 통', type: 'thing', alias: ['석탄', '석탄 광'] },
       k_shawl: { label: '갈색 숄', type: 'thing', alias: ['숄'] },
 
-      k_night27: { label: '10월 27일 밤', type: 'time', alias: ['27일 밤', '토요일 밤'] },
+      k_night27: { label: '10월 27일 밤', type: 'time', alias: ['27일 밤', '토요일 밤', '10월 27일', '10월 28일'] },
       k_sep16: { label: '9월 16일', type: 'time', alias: ['첫 번째 사건'] },
       k_oct6: { label: '10월 6일', type: 'time', alias: ['두 번째 사건'] },
       k_wednesday: { label: '수요일 아침', type: 'time', alias: ['수요일'] },

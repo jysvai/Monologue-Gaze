@@ -8,7 +8,7 @@ MG.I18N.put("ja", "finale", {
 "2ff87wuliaa": "最後の仕切りは空けておいた。君の事件を入れる場所だ。",
 "noey1ikfx5": "Mは記録の中の誰だったのか",
 "1iso1kacv5m": "記録に書かれた名前",
-"1isirb3fuch": ["ミン・ソラ","ソラ","みん・そら","そら","Min So-ra","Min Sora","So-ra","Sora"],
+"eex0b1i4dr": ["ミン・ソラ","ソラ","みん・そら","そら","Min So-ra","Min Sora","So-ra","Sora"],
 "1nflo2g0dw6": "その名前ではない",
 "1c8sjurg8ja": "余白のメモは何を数えていたのか。怖いときに数を数えるのは誰だったか。",
 "1nofb3d61tb": "追伸。",

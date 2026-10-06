@@ -144,7 +144,7 @@ MG.I18N.put("en", "c01", {
 "f83tmqjk36": "Brown Shawl",
 "iagdm97ggq": ["shawl","brown shawl"],
 "14sh781ired": "Night of Oct 27",
-"1pzx9ftu9fw": ["night of the 27th","27th","Saturday night","27 October","October 27","Oct 27","27 Oct","10/27","27/10"],
+"ual0s64cjk": ["night of the 27th","27th","Saturday night","27 October","October 27","Oct 27","27 Oct","10/27","27/10"],
 "15symy72kqv": "Sept 16",
 "1545iisamsl": ["first case","first murder","16 September","September 16","Sept 16","Sep 16","16 Sept","16 Sep","9/16","16/9"],
 "11za8br9nrq": "Oct 6",

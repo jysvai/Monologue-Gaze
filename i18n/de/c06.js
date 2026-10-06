@@ -114,7 +114,7 @@ MG.I18N.put("de", "c06", {
 "sxp3iziwfi": "Kvitdal",
 "25ywdbhh79l": ["Kvitdal","Kvitdal-Tal","Kvitdal-Wanderweg","Kvitdalweg","Kvitdalsveien"],
 "1ecq34ug88z": "Bahnhof",
-"1lxkd44d58b": ["Bahnhofsplatz","NSB","Bahnhof Hellesund"],
+"mda9qhkmfr": ["Bahnhofsplatz","NSB","Bahnhof Hellesund"],
 "29gee36fcnf": "Gepäckaufbewahrung",
 "1lq99pf4o76": ["Aufbewahrung","Gepäckschein","Garderobe","Gepäckabgabe"],
 "1c1tlshneqv": "Hotel Bryggen",

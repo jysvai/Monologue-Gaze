@@ -22,9 +22,11 @@
 
   /* 배차 대장 조회: 날짜를 여러 표기로 받는다 */
   const MON = ['', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+  const MONTH = ['', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
   const DV = (y, m, d) => {
     const p = n => String(n).padStart(2, '0'), yy = String(y).slice(2);
-    return [`${y}.${m}.${d}`, `${y}.${p(m)}.${p(d)}`, `${yy}.${m}.${d}`, `${yy}.${p(m)}.${p(d)}`, `${m}.${d}`, `${p(m)}.${p(d)}`, `${m}월 ${d}일`, `${y}년 ${m}월 ${d}일`, `${m}월 ${d}일 일요일`, `${y}년 ${m}월 ${d}일 일요일`, `${MON[m]} ${d}`, `${MON[m]} ${d} ${y}`, `${m}/${d}/${yy}`, `${m}/${d}/${y}`];
+    const base = [`${y}.${m}.${d}`, `${y}.${p(m)}.${p(d)}`, `${yy}.${m}.${d}`, `${yy}.${p(m)}.${p(d)}`, `${m}.${d}`, `${p(m)}.${p(d)}`, `${m}월 ${d}일`, `${y}년 ${m}월 ${d}일`, `${yy}년 ${m}월 ${d}일`, `${MON[m]} ${d}`, `${MON[m]} ${d} ${y}`, `${MONTH[m]} ${d}`, `${MONTH[m]} ${d} ${y}`, `${d} ${MON[m]}`, `${d} ${MON[m]} ${y}`, `${d} ${MONTH[m]} ${y}`, `${m}/${d}/${yy}`, `${m}/${d}/${y}`];
+    return [...base, ...base.map(s => s + ' 일요일'), ...base.map(s => s + ' sunday')]; // 「(일)」처럼 괄호로 붙인 요일은 엔진이 떼고 맞춘다
   };
 
   MG.registerCase({
