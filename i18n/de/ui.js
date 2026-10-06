@@ -180,7 +180,7 @@ MG.I18N.put("de", "ui", {
 "범인": "Täter",
 "보고서 올리기": "Bericht einreichen",
 "보고서 펼쳐 쓰기": "Bericht aufschlagen",
-"범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다.": "Den Täter bestimmen und jedem Punkt eine Notiz als Beweis anheften.",
+"범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다. 들어맞는 메모가 여럿이면 어느 것을 붙여도 된다.": "Den Täter bestimmen und jedem Punkt eine Notiz als Beweis anheften. Passen mehrere Notizen, genügt eine davon.",
 "보고서를 올렸다. 팀장이 한 장씩 넘긴다…": "Bericht eingereicht. Der Teamleiter blättert Seite für Seite um…",
 "→ 기록실로": "→ Zurück ins Archiv",
 " <small class=\"rep-used\">· {0}번에 붙임</small>": " <small class=\"rep-used\">· angeheftet an Nr. {0}</small>",

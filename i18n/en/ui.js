@@ -180,7 +180,7 @@ MG.I18N.put("en", "ui", {
 "범인": "Culprit",
 "보고서 올리기": "Submit report",
 "보고서 펼쳐 쓰기": "Open the report",
-"범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다.": "Pick the culprit, then attach a note as evidence to each claim.",
+"범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다. 들어맞는 메모가 여럿이면 어느 것을 붙여도 된다.": "Pick the culprit, then attach a note as evidence to each claim. If several notes fit, any one of them will do.",
 "보고서를 올렸다. 팀장이 한 장씩 넘긴다…": "Report submitted. The team leader turns the pages one by one…",
 "→ 기록실로": "→ Back to the records room",
 " <small class=\"rep-used\">· {0}번에 붙임</small>": " <small class=\"rep-used\">· attached to #{0}</small>",

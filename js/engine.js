@@ -1302,7 +1302,7 @@
   /* ───────── 수사 보고서 (읽기 칸에 넓게) ───────── */
   let REPOPEN = null; // 메모 고르기가 펼쳐진 주장
   let PTR = false; // 마지막 손길이 마우스·손가락이었나 (키보드면 false)
-  const FORM = () => Object.assign({ title: T('수사 보고서'), culprit: T('범인은'), short: T('범인'), submit: T('보고서 올리기'), open: T('보고서 펼쳐 쓰기'), lead: T('범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다.'), judging: T('보고서를 올렸다. 팀장이 한 장씩 넘긴다…') }, C.solution.form || {});
+  const FORM = () => Object.assign({ title: T('수사 보고서'), culprit: T('범인은'), short: T('범인'), submit: T('보고서 올리기'), open: T('보고서 펼쳐 쓰기'), lead: T('범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다. 들어맞는 메모가 여럿이면 어느 것을 붙여도 된다.'), judging: T('보고서를 올렸다. 팀장이 한 장씩 넘긴다…') }, C.solution.form || {});
   // 결말 끝줄의 「→ …」 는 눌러서 기록실로 돌아가는 단추 (빨간 손글씨 그대로)
   function nextHtml(t) {
     const i = t.lastIndexOf('→'), head = i >= 0 ? t.slice(0, i).trimEnd() : t, go = i >= 0 ? t.slice(i) : T('→ 기록실로');
@@ -1478,7 +1478,7 @@
       <section class="ruled nb-sec"><h3 class="hh">${T`단어 <small>${keys.length}</small>`}</h3>
         ${groups.map(([t, a]) => `<p class="kg"><span class="kg-t">${ktypeName(t)}</span> ${a.map(k => `<button type="button" class="kchip" data-chip="${k}">${esc(C.keywords[k].label)}</button>`).join(' ')}</p>`).join('')}
       </section>
-      <section class="ruled nb-sec"><h3 class="hh">${T`메모 <small>${notes.length}</small>`}</h3>
+      <section class="ruled nb-sec"><h3 class="hh">${T`메모 <small>${notes.length}</small>`}</h3>${notes.length >= 6 && !ST.solved ? `<p class="nb-jump-row"><button type="button" class="nb-jump" data-open-rep>${esc(FORM().open)} →</button></p>` : ''}
         ${(C.tips || []).length ? `<ol class="notes">${C.tips.map(t => `<li class="tip">※ ${inline(t)}</li>`).join('')}</ol>` : notes.length ? '' : T('<ol class="notes"><li class="tip">아직 적은 메모가 없다.</li></ol>')}
         ${noteGroups(notes).map(g => `<details class="ng" data-ng="${esc(g.src)}"${NGSHUT.has(C.id + '|' + g.src) ? '' : ' open'}><summary><span class="ng-t">${esc(g.src)}</span> <small>${g.items.length}</small></summary><ol class="notes">${g.items.map(([n, i]) => `<li data-nid="${n.id}" style="--r:${(hash(n.ref) % 5 - 2) * 0.25}deg"><span class="n">${i + 1}.</span> ${esc(n.t)}${repMark(n)}<button type="button" class="del" data-del="${n.id}" aria-label="${T`메모 ${i + 1} 지우기`}">×</button></li>`).join('')}</ol></details>`).join('')}
       </section>
