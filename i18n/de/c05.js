@@ -312,7 +312,7 @@ MG.I18N.put("de", "c05", {
 "8vwf61lpwe": "Anschluss des Anrufers ermittelt — [[Münztelefon|k_payphone]] neben der Tankstelle, [[Dock Street|k_dockst]] 212 (KN 4-0917)",
 "mw44i2l680": "Streifenwagen trifft ein. Hörer hing pendelnd an der Schnur. Niemand in der Nähe",
 "2ek138wwlt9": "Bemerkung",
-"ft9t9i5cj6": "Vermerk der Streife — Laderampe des Lagers gegenüber beleuchtet. Mehrere Lastwagen werden mit laufendem Motor beladen",
+"fjcmkbq5ty": "Vermerk der Streife — Laderampe des Lagers gegenüber beleuchtet. Ein Lieferwagen wird mit laufendem Motor beladen, auch hinter dem Lager laufen Motoren",
 "21ccisgg3b2": "Zeit",
 "1asabu37jws": "Vorgang",
 "18ax2nhyxgx": "Mehrere Fingerabdrücke vom Hörer und von den Scheiben der Zelle gesichert — mit denen von Tankstellenkunden vermischt, kaum zuzuordnen.",

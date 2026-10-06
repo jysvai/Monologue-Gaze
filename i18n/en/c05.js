@@ -312,7 +312,7 @@ MG.I18N.put("en", "c05", {
 "8vwf61lpwe": "Calling line identified — [[pay phone|k_payphone]] beside the gas station, 212 [[Dock Street|k_dockst]] (KN 4-0917)",
 "mw44i2l680": "Patrol car arrives. Receiver swinging on its cord. No one around",
 "2ek138wwlt9": "Remarks",
-"ft9t9i5cj6": "Patrol car log — lights on at the warehouse loading dock across the street. Several trucks being loaded with their engines running",
+"fjcmkbq5ty": "Patrol car log — lights on at the warehouse loading dock across the street. A delivery truck being loaded with its engine running, and more engines running behind the warehouse",
 "21ccisgg3b2": "Time",
 "1asabu37jws": "Details",
 "18ax2nhyxgx": "Several fingerprints lifted from the receiver and the booth glass — mixed in with gas station customers', hard to sort out.",
