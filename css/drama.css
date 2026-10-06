@@ -169,6 +169,10 @@ body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,
 .zoom figure img,.zoom figure .art-wrap{max-width:100%;max-height:86svh;width:auto;height:auto;object-fit:contain;box-shadow:0 20px 50px rgba(0,0,0,.6)}
 .zoom figure .art-wrap>img{max-height:86svh;width:auto}
 .zoom p{margin:0;font:11px var(--f-mono);letter-spacing:.08em;color:#bdb4a0}
+.zoom.big{align-items:flex-start;justify-content:flex-start}
+.zoom.big figure{flex:none;margin:auto 0;width:calc(200vw - 32px);max-width:none;max-height:none;transform:none}
+.zoom.big figure img,.zoom.big figure .art-wrap,.zoom.big figure .art-wrap>img{width:100%;max-width:none;max-height:none}
+.zoom.big p{display:none}
 @keyframes zoomIn{from{opacity:0}to{opacity:1}}
 
 /* 지도: 넓은 화면에서는 읽기 칸에 크게, 목록 칸의 작은 지도는 점만 */

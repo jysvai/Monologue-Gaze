@@ -300,7 +300,7 @@ MG.I18N.put("en", "ui", {
 "목소리 꺼짐": "Voices off",
 "그림 크게 보기": "View image larger",
 "누르거나 Esc — 닫힌다": "Tap or Esc — close",
-"누르면 닫힌다": "Tap to close",
+"그림을 누르면 두 배로 · 바깥을 누르면 닫힌다": "Tap the picture to enlarge · tap outside to close",
 "이미 수첩에 있다: {0}": "Already in notebook: {0}",
 "수첩에 적었다: {0}{1}": "Written in notebook: {0}{1}",
 "이미 적어 둔 메모다 — {0}번": "Already noted — #{0}",

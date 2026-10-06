@@ -300,7 +300,7 @@ MG.I18N.put("de", "ui", {
 "목소리 꺼짐": "Stimmen: aus",
 "그림 크게 보기": "Bild in Großansicht",
 "누르거나 Esc — 닫힌다": "Tippen oder Esc — schließen",
-"누르면 닫힌다": "Tippen zum Schließen",
+"그림을 누르면 두 배로 · 바깥을 누르면 닫힌다": "Bild antippen: doppelt so groß · außerhalb antippen: schließen",
 "이미 수첩에 있다: {0}": "Schon im Notizbuch: {0}",
 "수첩에 적었다: {0}{1}": "Notiert: {0}{1}",
 "이미 적어 둔 메모다 — {0}번": "Schon notiert — Nr. {0}",

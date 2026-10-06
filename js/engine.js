@@ -1994,10 +1994,18 @@
     const fc = img.closest('figure') && img.closest('figure').querySelector('figcaption');
     const cap = fc ? [...fc.childNodes].filter(n => !(n.classList && n.classList.contains('pin'))).map(n => n.textContent).join('').trim() : '';
     if (C) z.dataset.frame = C.frame;
-    z.innerHTML = `<figure>${w ? w.outerHTML : `<img src="${esc(img.getAttribute('src'))}" alt="${esc(img.alt || '')}">`}</figure>${cap ? `<p class="z-cap">${esc(cap)}</p>` : ''}<p>${matchMedia('(hover:hover) and (pointer:fine)').matches ? T('누르거나 Esc — 닫힌다') : T('누르면 닫힌다')}</p>`;
+    const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+    z.innerHTML = `<figure>${w ? w.outerHTML : `<img src="${esc(img.getAttribute('src'))}" alt="${esc(img.alt || '')}">`}</figure>${cap ? `<p class="z-cap">${esc(cap)}</p>` : ''}<p>${fine ? T('누르거나 Esc — 닫힌다') : T('그림을 누르면 두 배로 · 바깥을 누르면 닫힌다')}</p>`;
     const close = () => { z.remove(); document.removeEventListener('keydown', key); };
     const key = e => { if (e.key === 'Escape') close(); };
-    z.addEventListener('click', close);
+    // 손가락 화면: 그림을 누르면 누른 자리를 가운데 두고 두 배로 (옆으로 밀어 본다), 다시 누르면 원래대로 — 작은 휴대폰에서 사진 구석을 들여다보게
+    z.addEventListener('click', e => {
+      const f = !fine && e.isTrusted && e.target.closest && e.target.closest('figure');
+      if (!f) return close();
+      const r = f.getBoundingClientRect(), rx = (e.clientX - r.left) / r.width, ry = (e.clientY - r.top) / r.height;
+      z.classList.toggle('big');
+      if (z.classList.contains('big')) { const q = f.getBoundingClientRect(); z.scrollLeft = rx * q.width - z.clientWidth / 2; z.scrollTop = ry * q.height - z.clientHeight / 2; }
+    });
     document.addEventListener('keydown', key);
     document.body.appendChild(z); z.focus();
     sfx('page');
