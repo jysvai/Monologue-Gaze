@@ -22,7 +22,8 @@
   const esc = s => String(s ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
   // 로마자·키릴 문자의 발음 부호는 떼고 비교한다 (Oberröding = Oberroding, ё = е)
   const FOLD = { ä: 'a', ö: 'o', ü: 'u', ß: 'ss', é: 'e', è: 'e', ê: 'e', ë: 'e', à: 'a', á: 'a', â: 'a', å: 'a', æ: 'ae', ø: 'o', œ: 'oe', ç: 'c', ñ: 'n', ï: 'i', í: 'i', ì: 'i', î: 'i', ó: 'o', ò: 'o', ô: 'o', ú: 'u', ù: 'u', û: 'u', ý: 'y', ё: 'е' };
-  const norm = s => String(s ?? '').normalize('NFKC').toLowerCase().replace(/[\s'"`.,!?·・()[\]{}\-_/@:;~「」『』〈〉《》“”‘’„«»]/g, '').replace(/[äöüßéèêëàáâåæøœçñïíìîóòôúùûýё]/g, c => FOLD[c]);
+  // 일본어 입력기로 친 하이픈(ー)과 여러 대시는 숫자·로마자 옆에서 하이픈으로 본다 (H－24617 = Hー24617), 히라가나는 가타카나로 (はんそゆん = ハンソユン)
+  const norm = s => String(s ?? '').normalize('NFKC').toLowerCase().replace(/[‐-―−]|(?<=[0-9a-z])ー|ー(?=[0-9a-z])/g, '').replace(/[ぁ-ゖ]/g, c => String.fromCharCode(c.charCodeAt(0) + 0x60)).replace(/[\s'"`.,!?·・()[\]{}\-_/@:;~「」『』〈〉《》“”‘’„«»]/g, '').replace(/[äöüßéèêëàáâåæøœçñïíìîóòôúùûýё]/g, c => FOLD[c]);
   const plain = s => String(s ?? '').replace(/\[\[([^\]|]+?)(?:\|[\w-]+)?\]\]/g, '$1').replace(/\*\*(.+?)\*\*/g, '$1').replace(/~~(.+?)~~/g, '$1');
   const trunc = (s, n) => (s.length > n ? s.slice(0, n - 1) + '…' : s);
   const pad = n => String(n).padStart(2, '0');
@@ -246,10 +247,11 @@
   /* ───────── text rendering ───────── */
   function inline(t) {
     let h = esc(t).replace(/✎/g, () => `<span class="ic-in" role="img" aria-label="${T`연필 표시`}">${IC_PEN}</span>`); // 글 속의 ✎ 도 단추와 같은 연필 그림으로
-    h = h.replace(/\[\[([^\]|]+?)(?:\|([\w-]+))?\]\]/g, (m, label, kid) => {
+    // 단어 단추 앞의 여는 괄호·뒤의 닫는 괄호와 문장 부호는 단추와 한 줄에 (「（」만 줄 끝에 남지 않게)
+    h = h.replace(/([（「『〈《“‘(]?)\[\[([^\]|]+?)(?:\|([\w-]+))?\]\]([）」』〉》”’)、。，．,.!?！？:;：；]*)/g, (m, pre, label, kid, post) => {
       const id = kid || C._lab[norm(label)];
-      if (!id || !C.keywords[id]) return `<span class="kw-x">${label}</span>`;
-      return `<button type="button" class="kw${ST.keys.includes(id) ? ' on' : ''}" data-kw="${id}">${label}</button>`;
+      const w = !id || !C.keywords[id] ? `<span class="kw-x">${label}</span>` : `<button type="button" class="kw${ST.keys.includes(id) ? ' on' : ''}" data-kw="${id}">${label}</button>`;
+      return (pre || post) && w[1] === 'b' ? `<span class="nw">${pre}${w}${post}</span>` : pre + w + post;
     });
     return h.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/~~(.+?)~~/g, '<s>$1</s>').replace(/\n/g, '<br>');
   }
@@ -930,7 +932,7 @@
     const pend = waits.length && nd === Math.min(...waits); // 「회신 기다리기」는 다음에 오는 것이 회신일 때만 (먼저 단톡방 말이 끼면 「시간 보내기」)
     const over = waitsPast(); // 이번 기다림이 기한을 넘긴다: 단추를 붉게, 한 번 더 눌러야 간다
     const d0 = liveDate(0), d1 = liveDate(t), dday = Math.round((new Date(d1.getFullYear(), d1.getMonth(), d1.getDate()) - new Date(d0.getFullYear(), d0.getMonth(), d0.getDate())) / 864e5); // 달력 날짜로 센다 (자정을 넘기면 D+1)
-    return `<div class="scr-bar live"><span class="lv-clock"><b>D+${dday}</b> ${esc(lstamp(t))}</span>${dl ? `<span class="lv-dl${ST.solved ? ' done' : left < 0 ? ' over' : left < 360 ? ' hot' : ''}">${esc(dl.label || T('기한'))} · ${ST.solved ? T('종결') : left >= 0 ? hm(left) + T(' 남음') : hm(-left) + T(' 넘김')}</span>` : ''}${nd != null && !ST.solved ? `<button type="button" class="lv-wait${over ? ' over' : ''}" data-wait>${pend ? T('회신 기다리기') : T('시간 보내기')} · ${hm(nd - t)}${over ? T(' · 기한 넘김') : ''}</button>` : ''}</div>`;
+    return `<div class="scr-bar live"><span class="lv-clock"><b>D+${dday}</b> ${esc(lstamp(t))}</span>${dl ? `<span class="lv-dl${ST.solved ? ' done' : left < 0 ? ' over' : left < 360 ? ' hot' : ''}">${esc(dl.label || T('기한'))} · ${ST.solved ? T('종결') : left >= 0 ? T`${hm(left)} 남음` : T`${hm(-left)} 넘김`}</span>` : ''}${nd != null && !ST.solved ? `<button type="button" class="lv-wait${over ? ' over' : ''}" data-wait>${pend ? T('회신 기다리기') : T('시간 보내기')} · ${hm(nd - t)}${over ? T(' · 기한 넘김') : ''}</button>` : ''}</div>`;
   }
   function renderBar() {
     if (!liveOn()) return;
@@ -1125,13 +1127,20 @@
       return k.some(x => !was.includes(x));
     };
     if (first) C.sources.forEach(s => { kn[s.id] = srcKeys(s); });
-    bar.innerHTML = vis.map(s => { const b = tabBadge(s); return `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" tabindex="${s.id === ST.view.src ? 0 : -1}" aria-controls="paneList" id="tab-${esc(s.id)}" data-src="${esc(s.id)}">${esc(s.name)}${s.lock && !ST.unl.includes(s.id) ? T('<span class="tab-lock">잠김</span>') : ''}${b || (fresh(s) ? T('<span class="tab-new" role="img" aria-label="새로 열린 자료"></span>') : '')}</button>`; }).join('');
+    bar.innerHTML = vis.map(s => { const b = tabBadge(s); return `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" tabindex="${s.id === ST.view.src ? 0 : -1}" aria-controls="paneList" id="tab-${esc(s.id)}" data-src="${esc(s.id)}"><span class="tab-t">${esc(s.name)}</span>${s.lock && !ST.unl.includes(s.id) ? T('<span class="tab-lock">잠김</span>') : ''}${b || (fresh(s) ? T('<span class="tab-new" role="img" aria-label="새로 열린 자료"></span>') : '')}</button>`; }).join('');
     tabShow(bar);
     tabEdge(bar);
     const pl = $('#paneList'); if (pl && ST.view.src) { pl.setAttribute('aria-labelledby', 'tab-' + ST.view.src); } // 목록 칸 = 고른 탭의 내용
   }
+  // 탭 이름이 긴 말(영어·독일어·러시아어)이라 넓은 화면에서도 넘치면: 고르지 않은 탭의 긴 이름부터 줄여 한 줄에 다 보이게 하고, 줄인 탭에는 온 이름을 말풍선으로
+  function tabFit(bar) {
+    bar.classList.remove('t1', 't2');
+    if (bar.clientWidth >= 600 && bar.scrollWidth > bar.clientWidth + 1) { bar.classList.add('t1'); if (bar.scrollWidth > bar.clientWidth + 1) bar.classList.add('t2'); }
+    bar.querySelectorAll('.tab').forEach(t => { const x = t.querySelector('.tab-t'); if (x && x.scrollWidth > x.clientWidth + 1) t.dataset.tip = x.textContent; else delete t.dataset.tip; });
+  }
   // 탭이 넘쳐 옆으로 밀리는 좁은 화면: 고른 탭이 가려져 있으면 보이는 데까지 민다 (화면을 돌려 폭이 바뀌어도)
   function tabShow(bar) {
+    if (bar) tabFit(bar);
     const on = bar && bar.querySelector('.tab.on');
     if (!on || bar.scrollWidth <= bar.clientWidth) return;
     const b = bar.getBoundingClientRect(), r = on.getBoundingClientRect();
@@ -2154,7 +2163,7 @@
     const n = norm(q), sq = ((ST.view.sq ||= {})[srcId] ||= []), again = sq.includes(n); if (n && !again) { sq.push(n); if (sq.length > 120) sq.splice(0, sq.length - 120); } // 찾아본 말 (칩을 흐리게) — 기록이 한없이 불지 않게 최근 것만
     save();
     renderTabs(); renderList();
-    if (n && !again) advance('search'); // 한 번 찾아본 말을 다시 찾는 데는 수사 시간이 들지 않는다 (결과를 다시 펼칠 뿐)
+    if (n && !again) { const src = C.sources.find(x => x.id === srcId); advance('search', src && archiveHits(src, q).length ? undefined : 1); } // 한 번 찾아본 말을 다시 찾는 데는 수사 시간이 들지 않는다 (결과를 다시 펼칠 뿐) · 아무것도 안 나온 검색은 1분만 (표기를 바꿔 몇 번 쳐 보다 시계가 한 시간씩 가지 않게)
   }
   function search(kid) {
     let s = curSrc();
@@ -2642,7 +2651,7 @@
     });
     document.addEventListener('scroll', e => { const t = e.target; if (t.id === 'srcTabs') tabEdge(t); else if (t.classList && t.classList.contains('b-tbl')) tblEdge(t); else if (t.matches && t.matches('.skin-news.vertical .doc-b')) colEdge(t); }, { capture: true, passive: true });
     window.addEventListener('resize', () => { tabShow($('#srcTabs')); tabEdge($('#srcTabs')); edges(); }, { passive: true });
-    if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { tabEdge($('#srcTabs')); edges(); }); // 글꼴이 늦게 와 탭·표 너비가 바뀐 때
+    if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { tabShow($('#srcTabs')); tabEdge($('#srcTabs')); edges(); }); // 글꼴이 늦게 와 탭·표 너비가 바뀐 때
     // 세로쓰기 신문 위에서 휠을 굴리면 읽는 방향(왼쪽)으로 넘긴다. 끝까지 읽었으면 휠은 원래대로 칸을 내린다
     // (문서 전체가 아니라 읽기 칸에만 건다: 문서 전체에 걸면 어디서 굴리든 브라우저가 이 손을 기다리느라 굴림이 굼떠진다)
     const vwheel = e => {

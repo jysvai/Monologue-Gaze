@@ -67,9 +67,9 @@
     },
     start: ['k_hellesund', 'k_kvitdal', 'k_woman', 'k_labels'],
     sources: [
-      { id: 'politi', type: 'list', name: '헬레순 경찰 수사철', skin: 'report', desc: 'Hellesund Politikammer · Kriminalavdelingen. 강력반이 묶은 보고서와 증거물 목록.', empty: '아직 철해진 서류가 없다.' },
+      { id: 'politi', type: 'list', name: '경찰 수사철', skin: 'report', desc: 'Hellesund Politikammer · Kriminalavdelingen. 강력반이 묶은 보고서와 증거물 목록.', empty: '아직 철해진 서류가 없다.' },
       { id: 'arkiv', type: 'archive', name: '시내 장부 대조', skin: 'ledger', desc: '호텔 숙박부, 항만 기록, 차량 등록부, 주유소 장부, 신문 스크랩. 경찰이 시내 곳곳에서 빌려 온 장부들이다. 이름·장소·배 이름으로 찾는다.', placeholder: '이름, 호텔, 장소, 배 이름' },
-      { id: 'telex', type: 'list', name: '텔렉스·전보철', skin: 'telegram', desc: '인터폴 오슬로 사무국을 거친 조회와 회신.', empty: '아직 보낸 조회가 없다.' },
+      { id: 'telex', type: 'list', name: '텔렉스철', skin: 'telegram', desc: '인터폴 오슬로 사무국을 거친 조회와 회신.', empty: '아직 보낸 조회가 없다.' },
       { id: 'bevis', type: 'photo', name: '증거물 사진', skin: 'photo', need: ['k_garderobe'], desc: '감식반이 찍은 증거물 사진. 눌러서 하나씩 살핀다.', empty: '아직 찍은 증거물 사진이 없다.',
         scenes: [
           { id: 'ph_bags', title: '증거물 11~12호 — 가방 두 개의 내용물', meta: '1969.10.23 · 감식반 · 탁자에 펼쳐 위에서 촬영', art: 'bags_table',
@@ -508,6 +508,7 @@
       p_solveig: { name: '솔베이 하우그', role: '브뤼겐 호텔 프런트 직원', where: '브뤼겐 호텔 로비', key: 'k_solveig', color: '#7a5f78', initial: '솔',
         intro: ['솔베이 하우그예요. 브뤼겐 호텔 프런트에서 일한 지 11년 됐어요.'],
         ask: {
+          k_hellesund: ['여기서 나고 자랐어요. 프런트에 11년 서 있다 보니 항구에 드나드는 사람들 얼굴은 웬만큼 알죠.'],
           k_sjomann: ['선원 호텔이요? 슐로서 씨가 7일 아침 떠나실 때 행선지를 여쭈니 그렇게 말씀하셨어요. 장부에도 그대로 적었고요. 그 뒤로는 모르겠어요.'],
           k_schlosser: ['슐로서 부인요. 오스트리아 여권을 내셨어요. 독일어를 쓰다가, 식당 지배인이 프랑스어로 말을 거니 그걸로 대답하시더군요. 영어도 하셨고요.', '방에서 시내 전화를 몇 번 거셨어요. 요금은 [[교환 기록]]에 다 남아요.'],
           k_bryggen: [{ p: '첫날 214호를 드렸는데 이튿날 아침 항구 쪽 방으로 바꿔 달라고 하셨어요. [[노르카이]]가 내려다보이는 쪽으로요. 14일에 다시 오셨을 때도 407호, 같은 쪽이었어요.', f: 'f_rooms' }],
@@ -558,6 +559,7 @@
       p_brate: { name: '에이나르 브라테', role: '브라테 해운대리점 대표 · 전 하브브리스 해운 대표', where: '노르카이 5 · 대리점 사무실', key: 'k_brate', color: '#3f4a52', initial: '브',
         intro: ['에이나르 브라테입니다. 노르카이에서 해운대리점을 합니다. 그 외국 여자 일은 신문에서 봤습니다.'],
         ask: {
+          k_bryggen: ['브뤼겐 호텔요? 거래처 손님을 모시고 그 식당에 가끔 갑니다. 그 이상은 모릅니다.'],
           k_1018: [{ p: '18일 토요일요? 아침 아홉 시부터 오후 두 시까지 사무실에 있었고, 그 뒤엔 집에 있었습니다. 토요일엔 배가 들어오니까요.', f: 'f_brate_claim' }],
           k_woman: ['만난 적 없습니다. 신문에서 본 게 다예요.'],
           k_schlosser: ['슐로서? 처음 듣는 이름입니다.'],

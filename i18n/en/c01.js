@@ -33,7 +33,7 @@ MG.I18N.put("en", "c01", {
 "1h457xlla1t": "Newsroom Postbag",
 "gmz6uc03c9": "Bundles of letters sent to the East End Star's newsroom. The Knotsman letters went to Q Division as soon as they arrived, and the paper kept copies. The police took away the rest of the lot on October 30.",
 "1krmnfs2ygf": "No letters to take out yet.",
-"7frmfda60z": "Handwriting Analysis",
+"7frmfda60z": "Handwriting",
 "1bg44tf6oag": "A comparison Q Division sent to a court-registered handwriting examiner. The writing in the letters is set against each sample, habit by habit.",
 "19dz61d2lmz": "No sample to send yet. First get hold of some handwriting to set against the letters.",
 "1em9veah9l8": "Handwriting of the “Knotsman” Letters",

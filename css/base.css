@@ -173,6 +173,9 @@ img{max-width:100%}
 .case-view[data-frame="crt"] .src-tabs::after{margin:-4px 0 -4px -37px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 80%);mask-image:linear-gradient(90deg,transparent,#000 80%)}
 .tab{flex:none;display:inline-flex;align-items:center;gap:6px;padding:7px 14px 6px;border:0;background:none;cursor:pointer;white-space:nowrap}
 .tab-lock{font:10px var(--f-mono);padding:1px 5px;border:1px solid currentColor;opacity:.7}
+.tab-t{overflow:hidden;text-overflow:ellipsis}
+.src-tabs.t1 .tab:not(.on) .tab-t{max-width:10.5em}
+.src-tabs.t2 .tab:not(.on) .tab-t{max-width:7em}
 .tab-new{flex:none;width:7px;height:7px;margin-left:-1px;border-radius:50%;background:var(--red);box-shadow:0 0 0 1.5px rgba(255,250,235,.55)} /* 새로 열린 자료가 있는 탭 (js renderTabs) */
 .case-view:is([data-frame="laptop"],[data-frame="crt"]) .tab-new{background:#e5483b;box-shadow:0 0 0 1.5px rgba(255,255,255,.7)}
 .tabs-new{position:absolute;top:var(--tabs-mid,18px);z-index:6;display:none;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--red);box-shadow:0 0 0 1.5px rgba(255,250,235,.6);pointer-events:none} /* 가려진 탭에 새 자료가 있을 때 그쪽 끝에 (js tabEdge) */
@@ -296,6 +299,7 @@ img{max-width:100%}
 .read-empty{display:grid;place-items:center;min-height:60%;padding:30px;text-align:center}
 .read-empty p{max-width:30ch;font:22px/1.35 var(--f-hand);color:var(--pencil)}
 .doc{max-width:760px;margin:0 auto 24px}
+.nw{white-space:nowrap}
 .kw{display:inline;margin:0;padding:0 1px;border:0;border-radius:2px;background:none;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit;text-decoration:underline dotted;text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:pointer}
 @media (hover:hover){.kw:hover{background:rgba(223,182,76,.38)}}
 .kw.on{text-decoration-style:solid;text-decoration-color:rgba(176,52,42,.6)}

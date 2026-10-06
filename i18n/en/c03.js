@@ -25,11 +25,11 @@ MG.I18N.put("en", "c03", {
 "t1o739x17u": "Start over with the people who heard the woman's voice at [[9 p.m.|k_nine]].",
 "q8l0naa9ar": "Search not only by people's names but also by the names of shops, things and neighborhoods.",
 "8xi0dlssir": "To request a copy of a telegram from the post office, you need to know both the sender and the recipient.",
-"133n00k6okd": "Cheonggu Ilbo Research Dept. Clippings",
+"133n00k6okd": "Cheonggu Ilbo Clippings",
 "84ydvvute8": "Clippings from the Korean daily Cheonggu Ilbo, autumn of Shōwa 10. Articles set in vertical columns are read by sliding them sideways.",
 "1y9iqazovb2": "People, shops, neighborhoods…",
 "i6zhnmvrt2": "First page of the scrapbook",
-"1gsgk9espfx": "Jongno Police Station Case Papers",
+"1gsgk9espfx": "Jongno Police Papers",
 "2ghw05n9k3n": "File of the Judicial Section, Jongno Police Station (京城鍾路警察署). Copies translated from the Japanese originals. You must know whose paper it is, and what kind, to take it out.",
 "1o132ogj0m6": "Telegram Form Requests",
 "jc6re7q094": "Request copy",
@@ -538,6 +538,5 @@ MG.I18N.put("en", "c03", {
 "16xge99d210": "Shutters",
 "un4qykdh8m": "Inner room",
 "1zhxi1t9sm3": "Workroom",
-"7o39uh9o2j": "Back lane (watchman's round)",
-"1azcpcc4ud8": "The station people kept me in the waiting room. They said I might go back on soon. In the end, when the broadcast came back, the changgeuk went on first."
+"7o39uh9o2j": "Back lane (watchman's round)"
 });

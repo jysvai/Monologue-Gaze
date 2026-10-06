@@ -25,11 +25,11 @@ MG.I18N.put("de", "c03", {
 "t1o739x17u": "Die Frauenstimme um [[neun Uhr abends|k_nine]] . Zuerst alle noch einmal aufsuchen, die sie gehört haben.",
 "q8l0naa9ar": "Nicht nur nach Namen suchen — auch nach Geschäften, Dingen und Vierteln.",
 "8xi0dlssir": "Eine Telegrammabschrift gibt das Postamt nur heraus, wenn man Absender und Empfänger kennt.",
-"133n00k6okd": "Ausschnittsammlung der Cheonggu Ilbo",
+"133n00k6okd": "Cheonggu Ilbo",
 "84ydvvute8": "Ausschnitte aus der Cheonggu Ilbo, einer koreanischen Tageszeitung, Herbst Shōwa 10. Die senkrecht gesetzten Artikel liest man, indem man sie zur Seite weiterschiebt.",
 "1y9iqazovb2": "Personen, Geschäfte, Viertel…",
 "i6zhnmvrt2": "Erste Seite des Sammelalbums",
-"1gsgk9espfx": "Ermittlungsakten des Reviers Jongno",
+"1gsgk9espfx": "Revier Jongno",
 "2ghw05n9k3n": "Akte der Kriminalabteilung, 京城鍾路警察署. Abschriften, aus dem japanischen Original übersetzt. Herausholen lässt sich ein Schriftstück erst, wenn man weiß, von wem es ist und worum es geht.",
 "1o132ogj0m6": "Telegrammformulare anfordern",
 "jc6re7q094": "Abschrift anfordern",
@@ -538,6 +538,5 @@ MG.I18N.put("de", "c03", {
 "16xge99d210": "Läden",
 "un4qykdh8m": "Hinterzimmer",
 "1zhxi1t9sm3": "Werkstatt",
-"7o39uh9o2j": "Pfad (Runde des Nachtwächters)",
-"1azcpcc4ud8": "Die Leute vom Funkhaus haben mich im Warteraum festgehalten. Es könnte gleich wieder losgehen, hieß es. Als die Sendung schließlich wieder lief, kam zuerst das Changgeuk."
+"7o39uh9o2j": "Pfad (Runde des Nachtwächters)"
 });
