@@ -108,7 +108,7 @@
       { id: 'ask', type: 'people', name: '탐문', desc: '1992년 봄. 수첩에 이름이 적힌 사람만 찾아갈 수 있다.' },
     ],
     keywords: {
-      k_junyoung: { label: '백준영', type: 'person', alias: ['준영', '준영이', '장남'] },
+      k_junyoung: { label: '백준영', type: 'person', victim: true, alias: ['준영', '준영이', '장남'] },
       k_baek: { label: '백만호', type: 'person', alias: ['백 사장', '사장님', '아버지'] },
       k_mother: { label: '강미숙', type: 'person', alias: ['어머니', '준영 어머니'] },
       k_soyoung: { label: '백소영', type: 'person', alias: ['소영', '소영이'] },

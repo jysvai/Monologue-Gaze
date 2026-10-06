@@ -216,23 +216,31 @@
   const narrow = () => { const b = $('#stageBody'); if (!b || !window.getComputedStyle) return false; const g = getComputedStyle(b).gridTemplateColumns; return /\(/.test(g) ? b.clientWidth <= 700 : g.trim().split(/\s+/).length < 2; }; // 칸이 하나뿐인가: CSS 의 @container (≤700px) 가 그린 칸 수 그대로 (그려지기 전이면 너비로)
   const beside = () => !window.matchMedia || matchMedia('(min-width:1100px)').matches; // 수첩이 수사 화면 옆에 있는가 (좁으면 밑으로 내려간다: base.css)
 
-  function census() {
+  function census(by) { // by 를 주면 탭마다 몇 개인지도 적는다
     let n = 0;
+    const add = (id, k = 1) => { n += k; if (by && k) by[id] = (by[id] || 0) + k; };
     C.sources.forEach(s => {
       if (!srcVisible(s)) return;
-      n++;
-      if (s.type === 'list' && srcOpen(s)) n += C._srcDocs[s.id].filter(d => ok(d.need)).length;
-      if (s.type === 'map') n += (s.spots || []).filter(sp => ok(sp.need)).length;
-      if (s.type === 'compare') n += (s.sets || []).filter(x => ok(x.need)).length;
-      if (s.type === 'photo') n += (s.scenes || []).filter(x => ok(x.need)).length;
+      add(s.id);
+      if (s.type === 'list' && srcOpen(s)) add(s.id, C._srcDocs[s.id].filter(d => ok(d.need)).length);
+      if (s.type === 'map') add(s.id, (s.spots || []).filter(sp => ok(sp.need)).length);
+      if (s.type === 'compare') add(s.id, (s.sets || []).filter(x => ok(x.need)).length);
+      if (s.type === 'photo') add(s.id, (s.scenes || []).filter(x => ok(x.need)).length);
     });
-    n += Object.values(C.people).filter(personVisible).length;
+    Object.values(C.people).filter(personVisible).forEach(p => add(p.src));
     if (C.live && ST.live) {
-      C.sources.filter(s => s.type === 'request' && srcVisible(s)).forEach(s => (s.items || []).forEach(r => { if (ok(r.need)) n++; if (ST.unl.includes(r.id)) n++; }));
-      n += feedItems().filter(it => it.id in ST.live.fd).length;
+      C.sources.filter(s => s.type === 'request' && srcVisible(s)).forEach(s => (s.items || []).forEach(r => { if (ok(r.need)) add(s.id); if (ST.unl.includes(r.id)) add(s.id); }));
+      C.sources.filter(s => s.type === 'feed').forEach(s => add(s.id, (s.items || []).filter(it => it.id in ST.live.fd).length));
     }
     return n;
   }
+  // 「새로 열린 것 1」만으로는 어디를 봐야 할지 모른다 — 새것이 생긴 탭 이름을 붙인다
+  function where(b) {
+    const by = {}; census(by);
+    const names = Object.keys(by).filter(id => by[id] > (b[id] || 0)).map(id => C.sources.find(x => x.id === id)).filter(Boolean).map(x => quote(plain(x.name)));
+    return names.length ? ' — ' + names.slice(0, 2).join(', ') + (names.length > 2 ? ' …' : '') : '';
+  }
+  const opened = (n, b) => T` · 새로 열린 것 ${n}` + where(b);
 
   /* ───────── text rendering ───────── */
   function inline(t) {
@@ -357,7 +365,8 @@
 
   const rawAns = (p, k) => { let a = p.ask && p.ask[k]; if (a == null && k === p.key) a = p.self; return a; };
   const isCond = a => a && !Array.isArray(a) && typeof a === 'object' && 'need' in a;
-  const askEntry = (p, k) => { const a = rawAns(p, k); return isCond(a) && ok(a.need) ? k + '!' : k; };
+  // 수첩을 내밀기 전에 먼저 그냥 묻는다 — 처음 듣는 사람에게 「처음 하신 말씀과 다릅니다」가 나가지 않게 (기억을 되살리는 soft 는 바로 보여 준다)
+  const askEntry = (p, k) => { const a = rawAns(p, k), asked = ST.asked[p.id] || []; return isCond(a) && ok(a.need) && (a.soft || asked.includes(k) || asked.includes(k + '!')) ? k + '!' : k; };
   // idle 이 여러 줄이면 돌아가며 한 줄씩 — 모르는 걸 스무 번 물어도 똑같은 말만 되풀이하지 않게 (앞서 모른다고 한 횟수로 고르니 다시 그려도 같은 줄)
   const fallsIdle = (p, e) => { const a = rawAns(p, e.replace(/!$/, '')); return a == null || (isCond(a) && !e.endsWith('!') && a.else == null); };
   const idleFor = (p, k) => {
@@ -376,9 +385,20 @@
     if (p.art && C.art[p.art]) return `<span class="per-art${big ? ' lg' : ''}">${art(p.art)}</span>`;
     return `<span class="ava${big ? ' lg' : ''}" style="--c:${esc(p.color || '#6b6155')}">${esc(p.initial || p.name[0])}</span>`;
   }
+  // 사람을 펼칠 때: 아직 묻지 않은 단어를 앞에, 물어본 것은 뒤로. 펼쳐 둔 동안에는 차례를 그대로 둔다 (누를 때마다 칩이 손 밑에서 움직이지 않게)
+  let CHIPS = null;
+  function chipOrder(p, ks) {
+    if (!CHIPS || CHIPS.id !== C.id + '|' + p.id) {
+      const asked = ST.asked[p.id] || [], fresh = ks.filter(k => !asked.includes(askEntry(p, k)));
+      CHIPS = { id: C.id + '|' + p.id, keys: [...fresh, ...ks.filter(k => !fresh.includes(k))], cut: fresh.length };
+    }
+    const extra = ks.filter(k => !CHIPS.keys.includes(k)); // 이야기 도중에 새로 적은 단어는 아직 묻지 않은 단어 끝에
+    if (extra.length) { CHIPS.keys.splice(CHIPS.cut, 0, ...extra); CHIPS.cut += extra.length; }
+    return CHIPS.keys.filter(k => ks.includes(k));
+  }
   function askChips(p) {
     const asked = ST.asked[p.id] || [];
-    return ST.keys.filter(k => C.keywords[k] && (k !== p.key || rawAns(p, k) != null)).map(k => { // 제 이름은 따로 할 말(self)이 있을 때만 묻는다 — 없으면 「모르겠다」가 되돌아와 어색하다
+    return chipOrder(p, ST.keys.filter(k => C.keywords[k] && (k !== p.key || rawAns(p, k) != null))).map(k => { // 제 이름은 따로 할 말(self)이 있을 때만 묻는다 — 없으면 「모르겠다」가 되돌아와 어색하다
       const e = askEntry(p, k);
       const state = asked.includes(e) ? ' done' : e.endsWith('!') && asked.includes(k) && lv() < 5 ? ' again' : '';
       return `<button type="button" class="chip${state}" data-ask="${k}">${esc(C.keywords[k].label)}${state === ' done' ? T('<span class="sr"> (물어봄)</span>') : state ? T('<span class="sr"> (메모를 들이밀어 다시 물을 수 있음)</span>') : ''}</button>`; // 테두리·흐림은 눈에만 보이니 말로도
@@ -679,7 +699,8 @@
   function queryHits(s, inp) {
     if (!Object.values(inp).some(v => norm(v))) return null;
     const bare = v => String(v ?? '').replace(/\s*[(（][^()（）]*[)）]\s*$/, ''); // 「1968.12.15 (일)」 「31 007 (역 안내)」처럼 기록에 보이는 대로 옮겨 친 것
-    const fits = (vals, v) => { const L = (Array.isArray(vals) ? vals : [vals]).map(norm); return [v, bare(v)].some(x => L.includes(norm(x)) || (flipWords(x) != null && L.includes(norm(flipWords(x))))); };
+    const hon = v => bare(v).replace(/\s*(댁|께|씨|님|에게|한테)$/, ''); // 「개성 어머니 댁」 「서 선생께」처럼 말하듯 붙인 꼬리
+    const fits = (vals, v) => { const L = (Array.isArray(vals) ? vals : [vals]).map(norm); return [v, bare(v), hon(v)].some(x => L.includes(norm(x)) || (flipWords(x) != null && L.includes(norm(flipWords(x))))); };
     return (s.records || []).filter(r => Object.entries(r.match || {}).every(([f, vals]) => fits(vals, inp[f]))).map(r => r.doc).filter((id, i, a) => C.docs[id] && a.indexOf(id) === i);
   }
   function queryList(s) {
@@ -1173,7 +1194,8 @@
     const s = curSrc();
     const el = $('#paneList');
     if (!s) { el.innerHTML = ''; return; }
-    let h = s.desc ? `<p class="src-desc">${inline(s.desc)}</p>` : '';
+    const dsc = s.descOpen && s.lock && srcOpen(s) ? s.descOpen : s.desc; // 잠금을 푼 뒤의 안내 (「다시 로그인해야 한다」가 남지 않게)
+    let h = dsc ? `<p class="src-desc">${inline(dsc)}</p>` : '';
     if (s.type === 'archive') h += archiveList(s);
     else if (s.type === 'list') h += srcOpen(s) ? listList(s) : lockHtml(s.id, s.lock, s.name);
     else if (s.type === 'people') h += peopleList(s);
@@ -1219,10 +1241,15 @@
   let REPOPEN = null; // 메모 고르기가 펼쳐진 주장
   let PTR = false; // 마지막 손길이 마우스·손가락이었나 (키보드면 false)
   const FORM = () => Object.assign({ title: T('수사 보고서'), culprit: T('범인은'), short: T('범인'), submit: T('보고서 올리기'), open: T('보고서 펼쳐 쓰기'), lead: T('범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다.'), judging: T('보고서를 올렸다. 팀장이 한 장씩 넘긴다…') }, C.solution.form || {});
+  // 결말 끝줄의 「→ …」 는 눌러서 기록실로 돌아가는 단추 (빨간 손글씨 그대로)
+  function nextHtml(t) {
+    const i = t.lastIndexOf('→'), head = i >= 0 ? t.slice(0, i).trimEnd() : t, go = i >= 0 ? t.slice(i) : T('→ 기록실로');
+    return `<p class="epi-next">${head ? inline(head) + ' ' : ''}<button type="button" class="epi-go" data-cabinet>${esc(go)}</button></p>`;
+  }
   function reportHtml() {
     const sol = C.solution, notes = ST.notes, FM = FORM();
-    if (!ST.solved && ST.report.culprit && (C.keywords[ST.report.culprit] || {}).nick) ST.report.culprit = null;
-    const persons = ST.keys.filter(k => C.keywords[k] && C.keywords[k].type === 'person' && !C.keywords[k].nick); // 온라인 별명은 계정일 뿐, 영장에 적을 사람이 아니다
+    if (!ST.solved && ST.report.culprit && ((C.keywords[ST.report.culprit] || {}).nick || (C.keywords[ST.report.culprit] || {}).victim)) ST.report.culprit = null;
+    const persons = ST.keys.filter(k => C.keywords[k] && C.keywords[k].type === 'person' && !C.keywords[k].nick && !C.keywords[k].victim); // 별명(온라인 닉네임)과 피해자는 범인 칸에 내지 않는다 // 온라인 별명은 계정일 뿐, 영장에 적을 사람이 아니다
     const roleOf = k => { const p = Object.values(C.people || {}).find(x => x.key === k); return p && p.role ? plain(p.role) : ''; };
     const groups = noteGroups(notes);
     const shut = ST.solved; // 종결된 보고서는 결재가 끝난 서류: 고칠 수 없다
@@ -1286,7 +1313,7 @@
     const dl = C.live && C.live.deadline, dlSeen = dl && (late || ok(dl.need)); // 끝내 몰랐던 기한은 말하지 않는다
     const cjk = /^(ja|zh)$/.test(MG.I18N.lang), dlName = esc(dl && dl.label || T('기한')); // 일본어·중국어는 전각 괄호
     const fin = C.live && ST.live ? `<p class="lv-fin">${T`수사 개시부터 ${hm(ST.live.t)}${dlSeen ? ` · ${late ? T('기한 넘김') : T('기한 안에 종결')}${cjk ? `<small>（${dlName}）</small>` : ` <small>(${dlName})</small>`}` : ''}`}</p>` : '';
-    return `<div class="stamp${fresh ? ' fresh' : ''}"><div>${T`사건<br>종결<small>${esc(sol.stamp || '')}</small>`}</div></div>${fin}<div class="epi">${epi}</div>${sol.next ? `<p class="epi-next">${inline(sol.next)}</p>` : ''}`;
+    return `<div class="stamp${fresh ? ' fresh' : ''}"><div>${T`사건<br>종결<small>${esc(sol.stamp || '')}</small>`}</div></div>${fin}<div class="epi">${epi}</div>${sol.next ? nextHtml(sol.next) : ''}`;
   }
   // 메모는 어디서 적었는지(문서·사람)끼리 묶는다. 접어 둔 묶음은 기억한다
   const NGSHUT = new Set();
@@ -1421,12 +1448,13 @@
       const e = askEntry(p, k);
       if ((ST.asked[p.id] || []).includes(e)) return;
       const b = bags.find(x => x.ask && x.ask.p === p.id && x.ask.e === e);
-      if (b && ([...b.k].some(x => !ST.keys.includes(x)) || [...b.f].some(f => useful.has(f) && !noted(f)) || e.endsWith('!'))) add(`ask:${p.id}|${e}`, T('수첩의 단어로 아직 물어보지 않은 것이 있다.'), T`${p.name} — 「${C.keywords[k].label}」`, { t: 'person', id: p.id, src: p.src });
+      const a0 = rawAns(p, k), pre = isCond(a0) && ok(a0.need); // 내밀 메모가 있으면 그냥 묻는 것부터
+      if (pre || (b && ([...b.k].some(x => !ST.keys.includes(x)) || [...b.f].some(f => useful.has(f) && !noted(f)) || e.endsWith('!')))) add(`ask:${p.id}|${e}`, T('수첩의 단어로 아직 물어보지 않은 것이 있다.'), T`${p.name} — 「${C.keywords[k].label}」`, { t: 'person', id: p.id, src: p.src });
     }));
     // 5. 자료실 — 수첩의 단어로 찾으면 새 기록이 나오는 곳 (잠긴 문서는 잠금 쪽(7)에서 짚는다)
     vis.filter(s => s.type === 'archive').forEach(s => ST.keys.forEach(k => {
       if (!C.keywords[k]) return;
-      if (C._srcDocs[s.id].some(d => ok(d.need) && (d.find || []).includes(k) && !ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)))) add(`find:${s.id}|${k}`, T`「${plain(s.name)}」에서 수첩의 단어로 아직 찾아보지 않은 것이 있다.`, quote(C.keywords[k].label), { t: 'src', src: s.id });
+      if (C._srcDocs[s.id].some(d => ok(d.need) && (d.find || []).includes(k) && !ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)))) add(`find:${s.id}|${k}`, T`「${plain(s.name)}」에서 수첩의 단어로 아직 찾아보지 않은 것이 있다.`, quote(C.keywords[k].label), { t: 'find', src: s.id, id: k });
     }));
     // 6. 앞을 막는 조건 가운데 수첩 메모 하나만 모자란 것 — 그 대목은 이미 읽은 기록에 있다
     gates().forEach(need => {
@@ -1495,7 +1523,8 @@
   function nudgeGo(v) {
     const [t, src, id] = v.split('|');
     if (src && C.sources.some(s => s.id === src && srcVisible(s))) { keepPos(); ST.view.src = src; }
-    if (t === 'doc' || t === 'person' || t === 'req') openItem({ t, id });
+    if (t === 'find' && C.keywords[id]) { setQ(src, C.keywords[id].label); if (narrow()) { ST.view.open = null; renderRead(); } } // 짚은 단어로 바로 찾아 준다
+    else if (t === 'doc' || t === 'person' || t === 'req') openItem({ t, id });
     else if (t === 'scene') openItem({ t: 'photo', id });
     else { const s = curSrc(); ST.view.open = s && (s.type === 'cipher' || s.type === 'timeline') ? { t: s.type, id: s.id } : narrow() ? null : ST.view.open; save(); renderRead(); }
     renderTabs(); renderList();
@@ -1974,17 +2003,25 @@
   }
   function refreshAll() { renderTabs(); renderList(); renderRead(); renderNotebook(); }
 
-  function addKey(id, quiet) {
+  // 누른 말과 수첩에 적히는 이름이 다르면 둘 다 보인다 (「켈바흐 장」을 눌렀는데 「장날」만 뜨면 어디 갔나 찾게 된다)
+  const bigrams = w => { const s = String(w).toLowerCase().replace(/[^\p{L}\p{N}]/gu, ''); return s.length < 2 ? [s] : [...s].slice(1).map((c, i) => s[i] + c); };
+  const saidAs = (said, label) => {
+    if (!said) return label;
+    const a = bigrams(said), b = new Set(bigrams(label)), sa = a.join(''), sb = [...b].join('');
+    return a.some(x => x && b.has(x)) || (sa && (sb.includes(sa) || sa.includes(sb))) ? label : `${said.trim()} → ${label}`;
+  };
+  function addKey(id, quiet, said) {
     const k = C.keywords[id];
     if (!k) return;
+    const shown = saidAs(said, k.label);
     if (ST.keys.includes(id)) {
       if (quiet) return;
-      toast(T`이미 수첩에 있다: ${k.label}`);
+      toast(T`이미 수첩에 있다: ${shown}`);
       const kc = $(`.kchip[data-chip="${id}"]`); // 수첩의 그 단어에 형광펜 한 번
       if (kc) { kc.classList.remove('again'); void kc.offsetWidth; kc.classList.add('again'); if (beside()) kc.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); }
       return;
     }
-    const before = census();
+    const BY = {}, before = census(BY);
     ST.keys.push(id); save();
     const gained = census() - before;
     if (gained > 0) cue('clue'); else sfx('ink');
@@ -1994,7 +2031,7 @@
     if (kc) { kc.classList.add('fresh'); if (beside()) kc.scrollIntoView({ block: 'nearest' }); }
     const chips = $('#askChips');
     if (chips && ST.view.open && ST.view.open.t === 'person') chips.innerHTML = askChips(C.people[ST.view.open.id]);
-    if (!quiet) toast(T`수첩에 적었다: ${k.label}${gained > 0 ? T` · 새로 열린 것 ${gained}` : ''}`);
+    if (!quiet) toast(T`수첩에 적었다: ${shown}${gained > 0 ? opened(gained, BY) : ''}`);
     liveSync();
   }
   function pin(ref) {
@@ -2007,7 +2044,7 @@
       if (li) { const d = li.closest('details'); if (d && !d.open) d.open = true; li.classList.remove('again'); void li.offsetWidth; li.classList.add('again'); if (beside()) li.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); }
       return;
     }
-    const before = census();
+    const BY = {}, before = census(BY);
     ST.notes.push({ id: ++ST.nid, ref, t: p.t, f: p.f, src: p.src });
     save();
     if (census() > before) cue('clue'); else sfx('ink');
@@ -2019,7 +2056,7 @@
     if (gained > 0) { renderTabs(); renderList(); }
     const chips = $('#askChips');
     if (chips && ST.view.open && ST.view.open.t === 'person') chips.innerHTML = askChips(C.people[ST.view.open.id]);
-    toast(T`메모 ${ST.notes.length}번을 적었다${gained > 0 ? T` · 새로 열린 것 ${gained}` : ''}`);
+    toast(T`메모 ${ST.notes.length}번을 적었다${gained > 0 ? opened(gained, BY) : ''}`);
     liveSync();
   }
   // 메모 지우기: 연필로 줄을 긋고 나서 지운다
@@ -2063,7 +2100,7 @@
     const first = (o.t === 'doc' || o.t === 'photo') && !ST.seen.includes(o.id);
     keepPos();
     ST.view.open = o;
-    if (o.t === 'person' && C.people[o.id]) ST.asked[o.id] ||= []; // 찾아가 첫마디를 들었으면 목록의 빨간 표시는 걷힌다 (문서를 펼치면 걷히듯)
+    if (o.t === 'person' && C.people[o.id]) { ST.asked[o.id] ||= []; CHIPS = null; } // 찾아가 첫마디를 들었으면 목록의 빨간 표시는 걷힌다 (문서를 펼치면 걷히듯)
     save(); sfx('page');
     renderRead(); renderList();
     if (o.t === 'feed') { renderTabs(); const pr = $('#paneRead'); if (pr) setTimeout(() => { pr.scrollTop = pr.scrollHeight; }, 0); }
@@ -2112,7 +2149,7 @@
     }
     if (fresh) a.push(e);
     save();
-    const before = census();
+    const BY = {}, before = census(BY);
     tmp().met.add(p.id);
     renderRead(); renderList();
     const qa = $$('.per-tr .qa').find(x => x.dataset.qa === e);
@@ -2139,12 +2176,12 @@
     if (!norm(v)) { const i = $(`#lk-${CSS.escape(id)}`); if (i) i.focus(); return; } // 아무것도 넣지 않고 누른 것은 틀린 번호로 세지 않는다
     const codes = (lock.code || []).map(norm);
     if ([v, qwerty(v), String(v).replace(/[#*]/g, '')].some(x => codes.includes(norm(x)))) {
-      const before = census();
+      const BY = {}, before = census(BY);
       if (!ST.unl.includes(id)) ST.unl.push(id);
       (lock.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
       save(); refreshAll(); cue('unlock', T('열림')); land(C.docs[id] ? ['#paneRead .doc-t', '#paneList .item.on'] : ['#paneList .item', '#srcTabs .tab.on']);
       const gained = census() - before;
-      toast((lock.ok || T('열렸다.')) + (gained > 0 ? T` · 새로 열린 것 ${gained}` : ''));
+      toast((lock.ok || T('열렸다.')) + (gained > 0 ? opened(gained, BY) : ''));
       liveSync();
     } else {
       tmp().fail[id] = (tmp().fail[id] || 0) + 1;
@@ -2164,12 +2201,12 @@
     const given = s.given || {};
     const right = syms.filter(y => norm(given[y] || g[y]) === norm(s.key[y])).length;
     if (right === syms.length) {
-      const before = census();
+      const BY = {}, before = census(BY);
       ST.unl.push(s.id);
       ((s.reward && s.reward.keys) || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
       save(); refreshAll(); liveSync(); cue('match', T('해독')); land(['#paneRead .c-done', '#paneRead .doc-t']); showDone();
       const gained = census() - before;
-      toast(T`해독했다${gained > 0 ? T` · 새로 열린 것 ${gained}` : ''}`);
+      toast(T`해독했다${gained > 0 ? opened(gained, BY) : ''}`);
     } else {
       sfx('miss');
       sayMsg((s.feedback || (lv() >= 5 ? 'none' : 'count')) === 'none' ? T('아직 문장이 되지 않는다.') : T`기호 ${syms.length}개 중 ${right}개가 맞는 것 같다.`);
@@ -2194,12 +2231,12 @@
     el.focus({ preventScroll: true });
   }
   function solveThing(id, reward, msg, stamp) {
-    const before = census();
+    const BY = {}, before = census(BY);
     if (!ST.unl.includes(id)) ST.unl.push(id);
     ((reward && reward.keys) || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
     save(); refreshAll(); cue('match', stamp || T('일치')); land(['#paneRead .c-done', '#paneRead .doc-t']); showDone();
     const gained = census() - before;
-    toast(msg + (gained > 0 ? T` · 새로 열린 것 ${gained}` : ''));
+    toast(msg + (gained > 0 ? opened(gained, BY) : ''));
     liveSync();
   }
   function moveTl(arg) {
@@ -2268,14 +2305,14 @@
     if (!again) { done.push(sig); if (done.length > 120) done.splice(0, done.length - 120); }
     ST.view.qin[s.id] = inp;
     ST.view.qres[s.id] = hits || [];
-    const before = census();
+    const BY = {}, before = census(BY);
     const fr = (ST.found[s.id] ||= []);
     (hits || []).forEach(id => { if (!fr.includes(id)) fr.push(id); });
     (s.records || []).filter(r => (hits || []).includes(r.doc)).forEach(r => (r.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); }));
     save(); sfx('page');
     renderTabs(); renderList(); renderNotebook();
     if (hits && hits.length === 1) openItem({ t: 'doc', id: hits[0] });
-    if (census() > before) { cue('clue'); toast(T`새로 열린 것 ${census() - before}`); }
+    if (census() > before) { cue('clue'); toast(T`새로 열린 것 ${census() - before}` + where(BY)); }
     if (!again) advance('query');
   }
   function photoFind(xid, test) {
@@ -2283,14 +2320,14 @@
     if (!x) return false;
     const sp = sceneSpots(x).find(p => !ST.unl.includes(p.id) && test(p));
     if (!sp) return false;
-    const before = census();
+    const BY = {}, before = census(BY);
     ST.unl.push(sp.id);
     (sp.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
     save(); refreshAll(); liveSync(); // 현행 사건: 사진에서 찾은 것으로 조건이 찬 단톡방 말·기한도 바로
     const gained = census() - before;
     const all = sceneSpots(x).every(p => ST.unl.includes(p.id));
     if (all) cue('match', T('관찰 끝')); else if (gained > 0) cue('clue'); else sfx('find');
-    toast(T`눈에 걸리는 것: ${plain(sp.label)}${gained > 0 ? T` · 새로 열린 것 ${gained}` : ''}`);
+    toast(T`눈에 걸리는 것: ${plain(sp.label)}${gained > 0 ? opened(gained, BY) : ''}`);
     const li = $$('.ph-found li').pop();
     if (li && !(MG.writeIn && MG.writeIn(li, { duration: 500 }))) li.classList.add('fresh');
     return true;
@@ -2442,7 +2479,7 @@
       if (t.closest('[data-nudge-more]')) { if (NUDGE) { NUDGE.more = true; renderNudge(); const g = $('#nudgeBox .nudge-go'); if (g && e.detail === 0) g.focus(); } return; }
       if ((el = t.closest('[data-nudge-go]'))) return nudgeGo(el.dataset.nudgeGo);
       if ((el = t.closest('[data-pin]'))) return pin(el.dataset.pin);
-      if ((el = t.closest('[data-kw]'))) return addKey(el.dataset.kw);
+      if ((el = t.closest('[data-kw]'))) return addKey(el.dataset.kw, false, el.textContent);
       if ((el = t.closest('[data-bub]')) && !getSelection().toString()) return pin(el.dataset.bub); // 말풍선을 누르면 수첩에
       if ((el = t.closest('[data-src]'))) {
         if (ST.view.src !== el.dataset.src) sfx('page'); // 다른 철·다른 창으로 넘어갈 때만

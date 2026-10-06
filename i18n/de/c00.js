@@ -36,6 +36,7 @@ MG.I18N.put("de", "c00", {
 "1rjp4zsy84q": "Seiten, auf denen Seo-yuns Konto angemeldet ist.",
 "2bhnk9nxhd1": "DoranTalk",
 "bjbthxqo9v": "Messenger. Erneute Anmeldung nötig.",
+"h1lnf0u01v": "Messenger. Wieder mit Seo-yuns Konto angemeldet.",
 "1yt9bunwqx7": "DoranTalk – Anmeldung",
 "hzt6eyy7rv": "seoyun.draws, bitte gib dein Passwort erneut ein.",
 "1kclgh6loc5": "Passwort",

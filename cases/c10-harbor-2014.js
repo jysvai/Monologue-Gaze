@@ -66,7 +66,7 @@
       { id: 'ask', type: 'people', name: '탐문', desc: '수첩에 이름이 적힌 사람만 찾아갈 수 있다.' },
     ],
     keywords: {
-      k_eunho: { label: '강은호', type: 'person', alias: ['은호', '강 사장', '은호수산'] },
+      k_eunho: { label: '강은호', type: 'person', victim: true, alias: ['은호', '강 사장', '은호수산'] },
       k_miran: { label: '박미란', type: 'person', alias: ['미란', '아내'] },
       k_sangmin: { label: '이상민', type: 'person', alias: ['이 기사', '상민'] },
       k_myeongsu: { label: '차명수', type: 'person', alias: ['명수', '차 사장', '명수상회'] },

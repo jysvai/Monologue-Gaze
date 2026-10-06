@@ -36,6 +36,7 @@ MG.I18N.put("zh", "c00", {
 "1rjp4zsy84q": "用瑞允的账号登录着的网站。",
 "2bhnk9nxhd1": "DoranTalk",
 "bjbthxqo9v": "聊天软件。需要重新登录。",
+"h1lnf0u01v": "聊天软件。已用瑞允的账号重新登录。",
 "1yt9bunwqx7": "DoranTalk 登录",
 "hzt6eyy7rv": "seoyun.draws，请重新输入密码。",
 "1kclgh6loc5": "密码",

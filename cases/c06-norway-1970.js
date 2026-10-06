@@ -165,7 +165,7 @@
       k_nordvag: { label: '노르보그', type: 'place', alias: ['Nordvåg'] },
       k_rental: { label: '헬레순 자동차 임대', type: 'place', alias: ['Bilutleie', '렌터카', '자동차 임대'] },
 
-      k_woman: { label: '크비트달의 여인', type: 'person', alias: ['신원 미상 여성', '그 여자'] },
+      k_woman: { label: '크비트달의 여인', type: 'person', victim: true, alias: ['신원 미상 여성', '그 여자'] },
       k_kari: { label: '카리 바트네', type: 'person', alias: ['카리', 'Kari Vatne'] },
       k_ingrid: { label: '잉리드 몰란', type: 'person', alias: ['잉리드'] },
       k_halvorsen: { label: '할보르센 경감', type: 'person', alias: ['할보르센'] },

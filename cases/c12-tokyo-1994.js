@@ -189,7 +189,7 @@
       k_hakkaku: { label: '만덕장', type: 'place', alias: ['萬徳荘', '마작장'] },
 
       k_takano: { label: '다카노 기요시', type: 'person', alias: ['다카노', '청소원', '발견자', '타카노', '타카노 키요시'] },
-      k_saeki: { label: '사에키 준지', type: 'person', alias: ['사에키', '피해자'] },
+      k_saeki: { label: '사에키 준지', type: 'person', victim: true, alias: ['사에키', '피해자'] },
       k_murakoshi: { label: '무라코시 데쓰야', type: 'person', alias: ['무라코시', '무라코시 사장', '무라코시 테츠야', '무라코시 데츠야'] },
       k_noda: { label: '노다 게이코', type: 'person', alias: ['노다', '사무원'] },
       k_ishiguro: { label: '이시구로 마유미', type: 'person', alias: ['이시구로', '조깅'] },

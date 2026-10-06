@@ -155,7 +155,7 @@
       { id: 'ask', type: 'people', name: '탐문·조사', desc: '전화, 방문, 조사실. 수첩에 이름이 있어야 찾아갈 수 있다.' },
     ],
     keywords: {
-      k_dasom: { label: '정다솜', type: 'person', alias: ['다솜'] },
+      k_dasom: { label: '정다솜', type: 'person', victim: true, alias: ['다솜'] },
       k_harin: { label: '민하린', type: 'person', alias: ['하린'] },
       k_junhyuk: { label: '권준혁', type: 'person', alias: ['준혁'] },
       k_minjae: { label: '성민재', type: 'person', alias: ['민재'] },

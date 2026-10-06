@@ -124,9 +124,9 @@
       { id: 'ask', type: 'people', name: '탐문', desc: '수첩에 이름이 적힌 사람만 찾아갈 수 있다.' },
     ],
     keywords: {
-      k_sora: { label: '민소라', type: 'person', alias: ['소라', '소라소라'] },
-      k_haeun: { label: '주하은', type: 'person', alias: ['하은', '하은쌤'] },
-      k_seonyoung: { label: '노선영', type: 'person', alias: ['선영', '선영이네'] },
+      k_sora: { label: '민소라', type: 'person', victim: true, alias: ['소라', '소라소라'] },
+      k_haeun: { label: '주하은', type: 'person', victim: true, alias: ['하은', '하은쌤'] },
+      k_seonyoung: { label: '노선영', type: 'person', victim: true, alias: ['선영', '선영이네'] },
       k_eunbi: { label: '한은비', type: 'person', alias: ['은비', '비오는날'] },
       k_courier: { label: '구태현', type: 'person', alias: ['태현', 'bike_taehyun', '택배 기사'] },
       k_jinwoo: { label: '하진우', type: 'person', alias: ['진우'] },

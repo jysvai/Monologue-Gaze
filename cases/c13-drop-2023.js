@@ -170,7 +170,7 @@
         solveNeed: ['!f_cctv_courier', '!f_confirm_early'] },
     ],
     keywords: {
-      k_doha: { label: '이도하', type: 'person', alias: ['도하'] },
+      k_doha: { label: '이도하', type: 'person', victim: true, alias: ['도하'] },
       k_jihan: { label: '박지한', type: 'person', alias: ['지한', '룸메이트'] },
       k_oh: { label: '오승철', type: 'person', alias: ['오 사장', '점주'] },
       k_woojin: { label: '정우진', type: 'person', alias: ['우진'] },

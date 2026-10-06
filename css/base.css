@@ -399,7 +399,9 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 .stamp small{display:block;margin-top:4px;font:10px var(--f-mono)}
 @keyframes stamp{from{opacity:0;transform:rotate(-14deg) scale(2.2)}to{opacity:.82;transform:rotate(-14deg) scale(1)}}
 .epi .b-p,.epi p{margin:0;font-size:19px}
-.epi-next{margin:0;color:var(--red)}
+.epi-next{margin:0 0 64px;color:var(--red)} /* 아래 여백: 끝까지 내리면 「사건 종결」 자막이 이 줄을 가리지 않는다 */
+.epi-go{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:inherit;text-decoration:underline dotted;text-underline-offset:3px}
+.epi-go:hover{text-decoration-style:solid}
 .nb-foot{padding:14px 16px 20px;border-top:1px dashed rgba(120,90,40,.35);font:11px/1.6 var(--f-mono);color:#6d6552}
 .nb-foot p{margin:6px 0 0}
 .reset{padding:4px 10px;border:1px solid #a89b78;background:transparent;font:11px var(--f-mono);color:inherit;cursor:pointer}
@@ -487,7 +489,7 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 @media (hover:hover){.ph-cell:hover{background:rgba(255,255,255,.18)}}
 .ph-cell:focus-visible{background:rgba(255,255,255,.18)}
 .ph-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 8px;font:12px var(--f-mono);color:var(--ink-soft)}
-.ph-bar button{padding:3px 8px;border:1px dashed #8e7f5c;background:#f4ebc6;color:var(--ink);font:12px var(--f-web);cursor:pointer}
+.ph-bar button{padding:3px 8px;border:1px dashed #8e7f5c;background:rgba(244,235,198,.55);color:var(--ink);font:12px var(--f-type);letter-spacing:.04em;cursor:pointer} /* 종이 위 단추: 타자 글씨로 */
 .ph-found{margin:0;padding-left:1.4em}
 .ph-found li{margin:0 0 8px}
 .ph-found li.fresh{animation:write .5s ease-out}

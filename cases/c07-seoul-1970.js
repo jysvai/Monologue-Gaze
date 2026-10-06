@@ -60,7 +60,7 @@
       { id: 'ask', type: 'people', name: '탐문', desc: '1972년 봄. 판결은 났지만 수첩에 이름이 적힌 사람은 아직 찾아갈 수 있다.' },
     ],
     keywords: {
-      k_okhee: { label: '배옥희', type: 'person', alias: ['옥희', '배 양', '미스 배', '배양'] },
+      k_okhee: { label: '배옥희', type: 'person', victim: true, alias: ['옥희', '배 양', '미스 배', '배양'] },
       k_mansik: { label: '강만식', type: 'person', alias: ['강 기사', '만식', '운전사', '운전기사'] },
       k_madam: { label: '한금주', type: 'person', alias: ['한 마담', '마담', '송월각 마담'] },
       k_operator: { label: '오정자', type: 'person', alias: ['미스 오', '교환양', '교환원'] },

@@ -38,7 +38,7 @@
     sources: [
       { id: 'web', type: 'archive', name: '누리 검색', skin: 'web', desc: '노트북 브라우저에 로그인된 채 남은 검색 사이트.', placeholder: '사람, 장소, 무엇이든', start: ['d_hist'], startLabel: '브라우저에 남은 기록' },
       { id: 'marks', type: 'list', name: '즐겨찾기', skin: 'web', desc: '서윤의 계정으로 로그인된 사이트들.' },
-      { id: 'talk', type: 'list', name: '도란톡', skin: 'chat', desc: '메신저. 다시 로그인해야 한다.',
+      { id: 'talk', type: 'list', name: '도란톡', skin: 'chat', desc: '메신저. 다시 로그인해야 한다.', descOpen: '메신저. 서윤의 계정으로 다시 로그인했다.',
         lock: { title: '도란톡 로그인', desc: 'seoyun.draws 님, 비밀번호를 다시 입력해 주세요.', label: '비밀번호', password: true, code: ['dubu0317', '두부0317', 'tofu0317', 'doobu0317', 'dooboo0317'], hint: '비밀번호 힌트: 우리 집 막내 이름(영문) + 내 생일 4자리', hint2: '막내는 사진에 자주 나온다. 생일은… 케이크 사진이 올라온 날?', ok: '도란톡에 로그인했다', need: ['k_dubu', 'k_birthday'] } },
       { id: 'files', type: 'list', name: '내 문서', skin: 'files', desc: 'C:\\사용자\\서윤\\내 문서' },
       { id: 'ask', type: 'people', name: '탐문', desc: '수첩에 이름이 적힌 사람만 찾아갈 수 있다.' },
@@ -63,7 +63,7 @@
         ok: '그날 밤이 이어졌다', solveNeed: ['#talk', 'k_door', 'k_night'] },
     ],
     keywords: {
-      k_seoyun: { label: '한서윤', type: 'person', alias: ['서윤', 'seoyun', 'seoyun.draws'] },
+      k_seoyun: { label: '한서윤', type: 'person', victim: true, alias: ['서윤', 'seoyun', 'seoyun.draws'] },
       k_jaehee: { label: '윤재희', type: 'person', alias: ['재희', 'jaehee', 'jaehee.draws'] },
       k_dohyun: { label: '강도현', type: 'person', alias: ['도현', 'dohyun', 'dohyun.k'] },
       k_minji: { label: '민지', type: 'person', alias: ['minji', 'minji_0404'] },

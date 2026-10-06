@@ -133,7 +133,7 @@
         ] },
     ],
     keywords: {
-      k_pyeon: { label: '편상구', type: 'person', alias: ['상구', '편씨'] },
+      k_pyeon: { label: '편상구', type: 'person', victim: true, alias: ['상구', '편씨'] },
       k_jin: { label: '진영달', type: 'person', alias: ['진 사장', '대원상사 사장'] },
       k_woo: { label: '우만복', type: 'person', alias: ['우 사장', '우모씨', '우모', '우씨'] },
       k_han: { label: '한정미', type: 'person', alias: ['미스 한', '레지'] },

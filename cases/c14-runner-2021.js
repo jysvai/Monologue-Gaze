@@ -210,7 +210,7 @@
         ] },
     ],
     keywords: {
-      k_jeongrye: { label: '오정례', type: 'person', alias: ['정례', '정례 할머니', '피해자'] },
+      k_jeongrye: { label: '오정례', type: 'person', victim: true, alias: ['정례', '정례 할머니', '피해자'] },
       k_oksun: { label: '권옥순', type: 'person', alias: ['옥순', '102호', '신고자'] },
       k_siwoo: { label: '박시우', type: 'person', alias: ['시우', 'A군', '수거책'] },
       k_eunju: { label: '김은주', type: 'person', alias: ['시우 어머니', '보호자'] },

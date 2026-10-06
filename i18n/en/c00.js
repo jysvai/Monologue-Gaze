@@ -36,6 +36,7 @@ MG.I18N.put("en", "c00", {
 "1rjp4zsy84q": "Sites logged in with Seo-yun's account.",
 "2bhnk9nxhd1": "DoranTalk",
 "bjbthxqo9v": "Messenger. You have to log in again.",
+"h1lnf0u01v": "Messenger. Logged back in to Seo-yun's account.",
 "1yt9bunwqx7": "DoranTalk Login",
 "hzt6eyy7rv": "seoyun.draws, please enter your password again.",
 "1kclgh6loc5": "Password",
