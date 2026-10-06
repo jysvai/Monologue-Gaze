@@ -253,6 +253,8 @@
       const w = !id || !C.keywords[id] ? `<span class="kw-x">${label}</span>` : `<button type="button" class="kw${ST.keys.includes(id) ? ' on' : ''}" data-kw="${id}">${label}</button>`;
       return (pre || post) && w[1] === 'b' ? `<span class="nw">${pre}${w}${post}</span>` : pre + w + post;
     });
+    // 11.07-③ · 010-1234-5678 같은 번호는 붙임표에서 줄이 갈리지 않게 (태그 밖 글자에만)
+    h = h.replace(/(^|>)([^<]+)/g, (m, a, txt) => a + txt.replace(/\d+(?:[.-]\d+)*-[\d①-⑳]+/g, '<span class="nw">$&</span>'));
     return h.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/~~(.+?)~~/g, '<s>$1</s>').replace(/\n/g, '<br>');
   }
 
@@ -1032,7 +1034,7 @@
     } else {
       L.req[id] = { st: 'no', at: L.t, note: n.id, tries: (q ? q.tries || 0 : 0) + 1 };
       cue('miss');
-      { const w = /^(ko|ja|zh)/.test(MG.I18N.lang) ? 1 : 2.4, ss = plain(r.deny || T('소명이 부족하다.')).split(/(?<=[.?!])\s|(?<=[。？！])/), why1 = ss[0] + (ss[1] && ss[1].length <= 45 * w ? ' ' + ss[1] : ''); toast(T('기각 — ') + (why1.length > 100 * w ? trunc(why1, 100 * w) : why1), Math.min(9000, 4000 + why1.length * 40 / w)); } // 글자가 넓게 퍼지는 언어는 같은 말이 두세 배 길다 // 사유는 첫 문장까지 (전문은 신청서에)
+      { const w = /^(ko|ja|zh)/.test(MG.I18N.lang) ? 1 : 2.4, ss = plain(r.deny || T('소명이 부족하다.')).split(/(?<=[.?!])\s|(?<=[。？！])/), why1 = ss[0] + (ss[1] && ss[1].length <= 45 * w ? (/^(ja|zh)/.test(MG.I18N.lang) ? '' : ' ') + ss[1] : ''); toast(T('기각 — ') + (why1.length > 100 * w ? trunc(why1, 100 * w) : why1), Math.min(9000, 4000 + why1.length * 40 / w)); } // 글자가 넓게 퍼지는 언어는 같은 말이 두세 배 길다 // 사유는 첫 문장까지 (전문은 신청서에)
     }
     delete tmp().rq[id];
     save(); liveSync(prev); renderTabs(); renderList(); renderRead();
