@@ -214,7 +214,7 @@ MG.I18N.put("en", "c14", {
 "1g1bxzahduk": "The background sound matches the Dallim Call branch admin PC's new-order alert. It's not the rider phone app. At 10:46, the branch dispatch PC was chiming right next to whoever was speaking.",
 "6t1f14vq5y": "Routes",
 "102cyfkdfj0": "Open the reconstruction board",
-"apk1mdy085": "Morning of November 18 — the path the money took",
+"1e5gttcad9d": "November 18 — the path the money took",
 "1bnbo15riga": "Financial Crimes 2 whiteboard",
 "105itm4rvdo": "CCTV, locker records, dispatch records, the bank's reply, forensics. Each has its own times written down, but no one has put them all on one timeline.",
 "1hm7mu1n3xm": "Move the cards with ▲▼ to match the time slots.",

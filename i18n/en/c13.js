@@ -429,7 +429,7 @@ MG.I18N.put("en", "c13", {
 "20ovg7okvnu": "Returned at Haram Station",
 "abkm9kf5ac": "Log",
 "1slhmv62fea": "23:20 return photo (taken by the user) — Haram Station Exit 2",
-"1ci7y79xmrz": "Same route 7 times in the last 4 weeks, on Friday and Saturday nights (Haram Station → Saesol Central → Complex 3 → park → Haram Station).",
+"82rz3lrdlc": "Same route on 7 of the 8 Friday and Saturday nights in the last 4 weeks (Haram Station → Saesol Central → Complex 3 → park → Haram Station).",
 "10xxtv5nykt": "CoinNaru — Reply to Request for Cooperation",
 "5dr033r88d": "CoinNaru Compliance Team · Nov 18",
 "1axyb9hbfhs": "Deposit address",
