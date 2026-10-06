@@ -221,11 +221,12 @@
     const add = (id, k = 1) => { n += k; if (by && k) by[id] = (by[id] || 0) + k; };
     C.sources.forEach(s => {
       if (!srcVisible(s)) return;
+      // 감정 대조·사진철은 맡길 것·꺼내 볼 것만 센다 — 빈 탭이 생긴 걸 「새로 열린 것」이라 하면 열어 봐도 아무것도 없다
+      if (s.type === 'compare') return add(s.id, (s.sets || []).filter(x => ok(x.need)).length);
+      if (s.type === 'photo') return add(s.id, (s.scenes || []).filter(x => ok(x.need)).length);
       add(s.id);
       if (s.type === 'list' && srcOpen(s)) add(s.id, C._srcDocs[s.id].filter(d => ok(d.need)).length);
       if (s.type === 'map') add(s.id, (s.spots || []).filter(sp => ok(sp.need)).length);
-      if (s.type === 'compare') add(s.id, (s.sets || []).filter(x => ok(x.need)).length);
-      if (s.type === 'photo') add(s.id, (s.scenes || []).filter(x => ok(x.need)).length);
     });
     Object.values(C.people).filter(personVisible).forEach(p => add(p.src));
     if (C.live && ST.live) {
@@ -367,7 +368,9 @@
   const rawAns = (p, k) => { let a = p.ask && p.ask[k]; if (a == null && k === p.key) a = p.self; return a; };
   const isCond = a => a && !Array.isArray(a) && typeof a === 'object' && 'need' in a;
   // 수첩을 내밀기 전에 먼저 그냥 묻는다 — 처음 듣는 사람에게 「처음 하신 말씀과 다릅니다」가 나가지 않게 (기억을 되살리는 soft 는 바로 보여 준다)
-  const askEntry = (p, k) => { const a = rawAns(p, k), asked = ST.asked[p.id] || []; return isCond(a) && ok(a.need) && (a.soft || asked.includes(k) || asked.includes(k + '!')) ? k + '!' : k; };
+  // 같은 기록(!f)으로 이미 털어놓은 사람은, 그 기록에 걸린 다른 낱말을 처음 물어도 다시 시치미 떼지 않는다
+  const pressedOn = (p, a) => (ST.asked[p.id] || []).some(e => { if (!e.endsWith('!')) return false; const b = rawAns(p, e.slice(0, -1)); return isCond(b) && (b.need || []).some(n => n[0] === '!' && (a.need || []).includes(n)); });
+  const askEntry = (p, k) => { const a = rawAns(p, k), asked = ST.asked[p.id] || []; return isCond(a) && ok(a.need) && (a.soft || asked.includes(k) || asked.includes(k + '!') || pressedOn(p, a)) ? k + '!' : k; };
   // idle 이 여러 줄이면 돌아가며 한 줄씩 — 모르는 걸 스무 번 물어도 똑같은 말만 되풀이하지 않게 (앞서 모른다고 한 횟수로 고르니 다시 그려도 같은 줄)
   const fallsIdle = (p, e) => { const a = rawAns(p, e.replace(/!$/, '')); return a == null || (isCond(a) && !e.endsWith('!') && a.else == null); };
   const idleFor = (p, k) => {
@@ -1251,7 +1254,7 @@
     const sol = C.solution, notes = ST.notes, FM = FORM();
     if (!ST.solved && ST.report.culprit && ((C.keywords[ST.report.culprit] || {}).nick || (C.keywords[ST.report.culprit] || {}).victim)) ST.report.culprit = null;
     const persons = ST.keys.filter(k => C.keywords[k] && C.keywords[k].type === 'person' && !C.keywords[k].nick && !C.keywords[k].victim); // 별명(온라인 닉네임)과 피해자는 범인 칸에 내지 않는다 // 온라인 별명은 계정일 뿐, 영장에 적을 사람이 아니다
-    const roleOf = k => { const p = Object.values(C.people || {}).find(x => x.key === k); return p && p.role ? plain(p.role) : ''; };
+    const roleOf = k => { const p = Object.values(C.people || {}).find(x => x.key === k), r = (p && p.role) || (C.keywords[k] || {}).role; return r ? plain(r) : ''; }; // 찾아갈 수 없는 사람도 단어에 role 이 있으면 한 줄 붙인다
     const groups = noteGroups(notes);
     const shut = ST.solved; // 종결된 보고서는 결재가 끝난 서류: 고칠 수 없다
     // 다른 주장에 이미 붙인 메모는 고를 때 알 수 있게 (같은 메모를 두 주장에 붙여도 되지만, 모르고 겹치지 않게)
