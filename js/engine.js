@@ -1338,7 +1338,66 @@
     const live = C.live && ST.live ? ' · ' + T`수사 ${hm(ST.live.t)}` : '';
     return `${head}\n${T`종결 · 보고서 제출 ${ST.tries || 1}회 · 짚어 보기 ${ST.nudges || 0}회`}${live}\n${ITCH_URL} #MonologueGaze`;
   }
-  const shareHtml = () => `<p class="epi-share"><button type="button" class="epi-sh" data-share>${T('결과 복사')}</button><a class="epi-sh" href="https://x.com/intent/post?text=${encodeURIComponent(shareText())}" target="_blank" rel="noopener">${T('X에 올리기')}</a></p>`;
+  const shareHtml = () => `<p class="epi-share"><button type="button" class="epi-sh" data-card>${T('결과 카드 저장')}</button><button type="button" class="epi-sh" data-share>${T('결과 복사')}</button><a class="epi-sh" href="https://x.com/intent/post?text=${encodeURIComponent(shareText())}" target="_blank" rel="noopener">${T('X에 올리기')}</a></p>`;
+  // 종결 결과 카드: 사건 사진 · 종결 도장 · 기록을 한 장 그림으로 (휴대폰은 공유 창, 컴퓨터는 내려받기). 범인·결말은 넣지 않는다
+  async function resultCard() {
+    const W = 1200, H = 630, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    const g = cv.getContext('2d'), cs = getComputedStyle(document.documentElement), fam = v => cs.getPropertyValue(v).trim() || 'serif';
+    const fDoc = fam('--f-doc'), fType = fam('--f-type'), fMono = fam('--f-mono');
+    const title = plain(C.title), stars = C.kind !== 'tutorial' && C.stars ? '★'.repeat(C.stars) + '☆'.repeat(Math.max(0, 5 - C.stars)) : '';
+    const rows = [T`보고서 제출 ${ST.tries || 1}회 · 짚어 보기 ${ST.nudges || 0}회`, C.live && ST.live ? T`수사 ${hm(ST.live.t)}` : ''].filter(Boolean);
+    const stampT = T('사건 종결');
+    try { await Promise.all([`800 44px ${fDoc}`, `22px ${fType}`, `20px ${fMono}`].map(f => document.fonts.load(f, title + rows.join('') + stampT + 'CASE Monologue Gaze'))); } catch (e) { /* 글꼴을 못 불러도 기본 글꼴로 그린다 */ }
+    const shadow = (b, y) => { g.shadowColor = 'rgba(0,0,0,.55)'; g.shadowBlur = b; g.shadowOffsetY = y; }, plainShadow = () => { g.shadowColor = 'transparent'; g.shadowBlur = 0; g.shadowOffsetY = 0; };
+    // 책상
+    g.fillStyle = '#1c1815'; g.fillRect(0, 0, W, H);
+    const vg = g.createRadialGradient(W * 0.45, H * 0.4, 60, W * 0.5, H * 0.5, W * 0.75); vg.addColorStop(0, 'rgba(125,88,52,.42)'); vg.addColorStop(1, 'rgba(0,0,0,.6)');
+    g.fillStyle = vg; g.fillRect(0, 0, W, H);
+    // 사건 사진 (잔혹 표현이 있는 사건은 기록실 폴더처럼 흐리게)
+    const src = MG.images[`${C.id}/cover`] || MG.images[`${C.id}/cover_s`];
+    const img = src ? await new Promise(res => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = src; }) : null;
+    let cx = W / 2 - 270;
+    if (img) {
+      cx = 600;
+      const pw = 470, ph = 352, ar = img.width / img.height; let sx = 0, sy = 0, sw = img.width, sh = img.height;
+      if (ar > pw / ph) { sw = img.height * pw / ph; sx = (img.width - sw) / 2; } else { sh = img.width * ph / pw; sy = (img.height - sh) / 2; }
+      g.save(); g.translate(305, 300); g.rotate(-0.045);
+      shadow(30, 14); g.fillStyle = '#f3eee0'; g.fillRect(-pw / 2 - 14, -ph / 2 - 14, pw + 28, ph + 56); plainShadow();
+      if (C.graphic) g.filter = 'sepia(.25) blur(5px) brightness(.8)';
+      g.drawImage(img, sx, sy, sw, sh, -pw / 2, -ph / 2, pw, ph); g.filter = 'none';
+      g.restore();
+    }
+    // 종결 기록 종이
+    g.save(); g.translate(cx, 92); g.rotate(0.015);
+    shadow(26, 12); g.fillStyle = '#ece2c6'; g.fillRect(0, 0, 540, 420); plainShadow();
+    g.fillStyle = 'rgba(120,90,40,.22)'; g.fillRect(0, 62, 540, 1.5);
+    g.textBaseline = 'alphabetic'; g.fillStyle = '#6b5b45'; g.font = `22px ${fType}`; g.fillText(`CASE ${pad(C.no)} · ${C.year}`, 34, 46);
+    // 제목: 두 줄까지 (띄어쓰기가 없는 말은 글자 단위로 끊는다)
+    g.fillStyle = '#221d17'; g.font = `800 42px ${fDoc}`;
+    const words = /\s/.test(title) ? title.split(/(?<=\s)/) : [...title], tl = [''];
+    words.forEach(w => { const k = tl.length - 1; if (g.measureText(tl[k] + w).width > 470 && tl[k]) tl.push(w.trimStart()); else tl[k] += w; });
+    if (tl.length > 2) { tl.length = 2; while (g.measureText(tl[1] + '…').width > 470) tl[1] = tl[1].slice(0, -1); tl[1] += '…'; }
+    tl.forEach((l, i) => g.fillText(l.trim(), 34, 128 + i * 52));
+    let y = 128 + tl.length * 52 + 8;
+    if (stars) { g.fillStyle = '#b0342a'; g.font = `26px ${fDoc}`; g.fillText(stars, 34, y); y += 44; }
+    g.fillStyle = '#3a342c'; g.font = `20px ${fMono}`; rows.forEach(r => { g.fillText(r, 34, y); y += 32; });
+    // 종결 도장
+    g.save(); g.translate(430, 330); g.rotate(-0.22); g.globalAlpha = 0.85; g.strokeStyle = '#b0342a'; g.fillStyle = '#b0342a';
+    g.lineWidth = 4; g.beginPath(); g.arc(0, 0, 74, 0, Math.PI * 2); g.stroke(); g.lineWidth = 2; g.beginPath(); g.arc(0, 0, 64, 0, Math.PI * 2); g.stroke();
+    g.textAlign = 'center'; g.textBaseline = 'middle'; let fs = 26; g.font = `800 ${fs}px ${fDoc}`; while (g.measureText(stampT).width > 112 && fs > 14) g.font = `800 ${--fs}px ${fDoc}`;
+    g.fillText(stampT, 0, 0); g.restore();
+    g.restore();
+    // 아래 줄: 게임 이름과 주소
+    g.fillStyle = '#efe3c8'; g.font = `34px ${fType}`; g.textBaseline = 'alphabetic'; g.fillText('Monologue Gaze', 56, H - 40);
+    g.fillStyle = '#bda983'; g.font = `18px ${fMono}`; g.textAlign = 'right'; g.fillText(ITCH_URL.replace(/^https:\/\//, ''), W - 56, H - 44);
+    const blob = await new Promise(r => cv.toBlob(r, 'image/png'));
+    if (!blob) return void toast(T('그림을 만들지 못했다.'));
+    const name = `monologue-gaze-case${pad(C.no)}.png`, file = typeof File === 'function' ? new File([blob], name, { type: 'image/png' }) : null;
+    if (file && matchMedia('(pointer:coarse)').matches && navigator.canShare && navigator.canShare({ files: [file] })) { try { await navigator.share({ files: [file], text: shareText() }); } catch (e) { /* 공유 창을 닫았다 */ } return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+    toast(T('결과 카드를 내려받았다.'), 2600);
+  }
   function copyText(t) {
     const old = () => { const a = document.createElement('textarea'); a.value = t; a.setAttribute('readonly', ''); a.style.cssText = 'position:fixed;left:-9999px;top:0'; document.body.append(a); a.select(); let ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; } a.remove(); return ok; };
     return navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(t).then(() => true, () => old()) : Promise.resolve(old());
@@ -2494,6 +2553,7 @@
       if (t.closest('[data-roster]')) return toggleRoster();
       if ((el = t.closest('[data-player]'))) return usePlayer(el.dataset.player);
       if ((el = t.closest('[data-drop]'))) return armed(el, T('한 번 더 누르면 그 서랍이 비워진다'), () => dropPlayer(el.dataset.drop));
+      if (t.closest('[data-card]')) { resultCard(); return; }
       if (t.closest('[data-share]')) { copyText(shareText()).then(ok => toast(ok ? T('결과를 복사했다. 붙여 넣어 올리면 된다.') : T('복사하지 못했다. 이 브라우저가 복사를 막고 있다.'), 3200)); return; }
       if (t.closest('[data-rate-off]')) { S.rateOff = true; save(); cabinet(); return; }
       if (t.closest('[data-intro-ok]')) { S.intro = true; save(); cabinet(); if (e.detail === 0) { const c0 = $('[data-open="c00"]'); if (c0) c0.focus(); } return; } // 키보드로 서랍을 열었으면 쪽지가 가리킨 CASE 00 폴더로

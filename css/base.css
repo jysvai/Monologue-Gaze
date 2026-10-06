@@ -108,7 +108,7 @@ img{max-width:100%}
 .folder{position:relative;display:flex;flex-direction:column;align-items:flex-start;padding:0;border:0;background:none;text-align:left;cursor:pointer;transform:rotate(var(--tilt,0deg));transition:transform .2s ease}
 .f-cover{position:absolute;top:-8px;right:12px;z-index:2;width:92px;height:68px;overflow:hidden;border:4px solid #f7f4ec;box-shadow:0 4px 10px rgba(0,0,0,.45);transform:rotate(5deg);background:#ddd}
 .f-cover svg,.f-cover img{display:block;width:100%;height:100%;object-fit:cover;filter:sepia(.25)}
-.cab-hero{margin:-20px 0 18px;height:clamp(160px,28vw,340px);overflow:hidden;border-radius:4px;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.cab-hero{margin:-20px 0 18px;height:clamp(150px,min(28vw,30vh),340px);overflow:hidden;border-radius:4px;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
 .cab-hero img{display:block;width:100%;height:100%;object-fit:cover}
 .folder:focus-visible{transform:rotate(0deg) translateY(-4px)}
 @media (hover:hover){.folder:hover{transform:rotate(0deg) translateY(-4px)}} /* 손가락으로 누른 뒤 폴더가 들린 채 남지 않게 */
