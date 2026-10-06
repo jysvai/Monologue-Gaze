@@ -868,7 +868,7 @@ MG.I18N.put("en", "c12", {
 "1ym2o0vpsxp": "What would an old woman know. All my life I've only minded the bathhouse counter.",
 "1is8srq17b6": "(Turns her eyes to the window) Lying in the hospital, I don't know what goes on outside.",
 "w2nyjn5qbs": "My chest tightens and I can't think for long. I'm sorry.",
-"74ku9f3sev": "(Folds her hands on the blanket) Oh, asking an old woman like me about that. I don't know.",
+"74ku9f3sev": "(Folds her hands on the blanket) Oh, what's an old woman like me supposed to say to that? I don't know.",
 "399n0juw0j": "(Reaches for the cup by her pillow, then stops) Well… I never heard of that in our neighborhood.",
 "2427ewjz420": "Stoker, Kashiwa-yu (37) · the owner's son",
 "1i0uug0zxsa": "Outside the Kashiwa-yu boiler room",

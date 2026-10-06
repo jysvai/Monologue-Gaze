@@ -223,3 +223,5 @@ button.press-opt{width:100%;text-align:left;color:inherit}
 .nb-jump-row{margin:-2px 0 4px;text-align:right}
 .nb-jump{padding:0 0 1px;border:0;border-bottom:1px solid currentColor;background:none;color:var(--red);font:12px/1.3 var(--f-mono);letter-spacing:.02em;cursor:pointer}
 @media (hover:hover){.nb-jump:hover{opacity:.75}}
+/* 고르는 목록에서 긴 메모(부검 소견 한 줄 따위)는 세 줄까지만 — 마흔 장 넘는 목록에서 한 장이 화면을 다 먹지 않게. 고른 것은 다 펼치고, 전문은 title 로 */
+.rep-opt:not(.on):not([hidden]){display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;overflow:hidden}

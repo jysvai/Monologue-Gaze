@@ -578,7 +578,7 @@ MG.I18N.put("en", "c04", {
 "1l42476zgph": "I wouldn't know. I'm not with that company anymore.",
 "gy104w72s1": "(Sighs) These days all I do is pore over Toyo Precision's books.",
 "r8zdmm45hg": "You keep asking me things I don't know. It feels like I'm under suspicion all over again.",
-"elsbwh2547": "(Pushes his teacup to the edge of the low table) Since I left Mizuo, I don't listen to anything from there.",
+"elsbwh2547": "(Pushes his teacup to the edge of the low table) Since I left Mizuo, I've shut my ears to anything from there.",
 "153rz8ihk5p": "(Smiles bitterly) You came all the way to Yokohama to ask me that? I don't know.",
 "1a2ii4uq35t": "Flagman and painter, Minami Line Industries (29)",
 "11uty0s5mn4": "Waving a flag's my job. Rain or shine. The day of that police-bike business, I was out at Sakae-cho holding the flag too.",

@@ -312,7 +312,7 @@ MG.I18N.put("en", "c00", {
 "7znklvkt0n": "I don't think that ever came up on the board.",
 "kn0eri892d": "People in this building just say hello and that's it. I wouldn't know.",
 "19p9362w7q6": "I just live in 503. I wouldn't know anything like that.",
-"1sc781nuf13": "(scrolls on a phone for a moment, then stops) No, never heard of that.",
+"1sc781nuf13": "(starts scrolling through the phone, then stops) No, never heard of that.",
 "ortesxob5p": "Seo-yun's college classmate",
 "t32cj5hr11": "Seo-yun and I have been friends since college.",
 "vu6wgfhbil": "Tofu? Seo-yun's cat. It was in her birthday cake photo too, remember?",

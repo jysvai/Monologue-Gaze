@@ -528,7 +528,7 @@ MG.I18N.put("en", "c03", {
 "17l3zxirifb": "Couldn't say. I'm only a man who walks the alley.",
 "cq5oiw89po": "(strokes his clappers) What goes on outside the alley doesn't reach this old man.",
 "n9i7snk7d1": "How would an old man dozing on and off in a watch hut know that?",
-"t0bp5moju3": "(fills his long pipe) I hear all sorts in the alley every night, but not that.",
+"t0bp5moju3": "(fills his pipe) I hear all sorts in the alley every night, but not that.",
 "o462d8gg1x": "(counts on his fingers, then shakes his head) No, think as I might, I don't remember anything like that.",
 "1esf0xamjmi": "City desk reporter, Cheonggu Ilbo",
 "22j2s0pn72z": "Cheonggu Ilbo newsroom, Gyeonji-jeong",

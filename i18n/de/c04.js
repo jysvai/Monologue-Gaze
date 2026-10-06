@@ -558,7 +558,7 @@ MG.I18N.put("de", "c04", {
 "1l3fn6vy5ig": "(Wischt sich die Hände an einem öligen Lappen ab) Und wenn die Polizei dreimal kommt — was ich nicht weiß, weiß ich nicht.",
 "1xmhotla87y": "Ein Händler weiß, was ein Motorrad kostet, sonst nichts. Von dem, was draußen passiert, versteh ich nichts.",
 "18f2z92anoo": "(Zieht mit dem Schraubenschlüssel eine Schraube fest) Weiß ich nicht. Das hier muss fertig sein, bevor Kundschaft kommt.",
-"22z2fjjlqwa": "Den Laden gibt's hier schon seit meinem Vater, aber davon hör ich zum ersten Mal.",
+"22z2fjjlqwa": "Wir sind hier seit Vaters Zeiten im Geschäft, aber davon hör ich zum ersten Mal.",
 "13n1w8dqeog": "Ehemaliger Buchhalter bei Hinosawa Elektrik (35) · jetzt in Yokohama beschäftigt",
 "gfjtj2kv13": "Untermietzimmer in Yokohama",
 "1klseqin3p4": "Schon wieder diese Geschichte? Man hat mich im März rausgeworfen, und jetzt lebe ich in [[Yokohama|k_yokohama]].",

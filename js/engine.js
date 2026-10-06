@@ -405,7 +405,8 @@
   function chipOrder(p, ks) {
     if (!CHIPS || CHIPS.id !== C.id + '|' + p.id) {
       const asked = ST.asked[p.id] || [], fresh = ks.filter(k => !asked.includes(askEntry(p, k)));
-      CHIPS = { id: C.id + '|' + p.id, keys: [...fresh, ...ks.filter(k => !fresh.includes(k))], cut: fresh.length };
+      const again = fresh.filter(k => askEntry(p, k).endsWith('!') && asked.includes(k)); // 붉은 테(메모를 들이밀 수 있는 것)는 맨 앞에 — 서른 개 넘는 칩 사이에 묻히지 않게
+      CHIPS = { id: C.id + '|' + p.id, keys: [...again, ...fresh.filter(k => !again.includes(k)), ...ks.filter(k => !fresh.includes(k))], cut: fresh.length };
     }
     const extra = ks.filter(k => !CHIPS.keys.includes(k)); // 이야기 도중에 새로 적은 단어는 아직 묻지 않은 단어 끝에
     if (extra.length) { CHIPS.keys.splice(CHIPS.cut, 0, ...extra); CHIPS.cut += extra.length; }
@@ -461,7 +462,10 @@
   const GLANCE = () => [T('(메모를 훑어보더니 도로 밀어 놓는다)'), T('(메모를 힐끗 보고 고개를 젓는다)'), T('(메모와 당신을 번갈아 본다)')];
   const GLANCE_SOFT = () => [T('(메모를 한참 들여다본다)'), T('(메모를 읽고 나서 고개를 갸웃한다)')];
   function missLine(p, soft, n) {
-    const own = (Array.isArray(p.idle) ? p.idle : []).map(x => String(x && typeof x === 'object' ? x.p || '' : x).replace(/^\s*[(（][^)）]*[)）]\s*/, '')).filter(Boolean);
+    // 제 몸짓이 앞에 붙은 줄은 그 몸짓에 기대어 말하는 일이 있다 (「…아직도 꺼져 있어요」는 전화를 거는 몸짓이 있어야 말이 된다) — 말만으로 서는 줄을 먼저 쓴다
+    const lines = (Array.isArray(p.idle) ? p.idle : []).map(x => String(x && typeof x === 'object' ? x.p || '' : x).trim()).filter(Boolean);
+    const LEAD = /^[(（][^)）]*[)）]\s*/, bare = lines.filter(x => !LEAD.test(x));
+    const own = bare.length ? bare : lines.map(x => x.replace(LEAD, '')).filter(Boolean);
     if (!own.length) { const L = soft ? MISS_SOFT() : MISS(); return L[(n + hash(p.id)) % L.length]; }
     const g = soft ? GLANCE_SOFT() : GLANCE(), h = hash(p.id);
     const a = g[(n + h) % g.length], b = own[(n + h) % own.length];
@@ -469,7 +473,7 @@
   }
   function pickHtml(p) {
     const k = PICK.k, L = (C.keywords[k] || {}).label || k;
-    const list = ST.notes.slice().reverse().map(n => `<button type="button" class="rep-opt press-opt" data-press-note="${n.id}"><span class="t">${esc(n.t)}</span> <small class="src">— ${esc(n.src || '')}</small></button>`).join('');
+    const list = ST.notes.slice().reverse().map(n => `<button type="button" class="rep-opt press-opt" data-press-note="${n.id}" title="${esc(n.t)}"><span class="t">${esc(n.t)}</span> <small class="src">— ${esc(n.src || '')}</small></button>`).join('');
     return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
       ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}
       <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p></div>`;
@@ -1339,7 +1343,7 @@
     const claim = (cl, i) => {
       const cur = notes.find(n => String(n.id) === String(ST.report.claims[cl.id])) || (shut && ST.report.kept && ST.report.kept[String(ST.report.claims[cl.id])]) || null;
       const open = !shut && REPOPEN === cl.id;
-      const list = groups.map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${cur && cur.id === n.id ? ' on' : ''}"><input type="radio" name="rep-${esc(cl.id)}" value="${n.id}" data-rep="${esc(cl.id)}"${cur && cur.id === n.id ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span>${usedBy(n, i)}</label>`).join('')}</details>`).join('');
+      const list = groups.map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${cur && cur.id === n.id ? ' on' : ''}" title="${esc(n.t)}"><input type="radio" name="rep-${esc(cl.id)}" value="${n.id}" data-rep="${esc(cl.id)}"${cur && cur.id === n.id ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span>${usedBy(n, i)}</label>`).join('')}</details>`).join('');
       return `<section class="rep-claim${cur ? ' filled' : ''}${open ? ' open' : ''}" data-claim="${esc(cl.id)}">
         <h4 id="rh-${esc(cl.id)}"><span class="no">${i + 1}</span> ${inline(cl.q)}</h4>
         <div class="rep-pick">${cur ? `<p class="rep-memo"><span class="n">${notes.includes(cur) ? notes.indexOf(cur) + 1 + '.' : '—'}</span> ${esc(cur.t)} <span class="src">— ${esc(cur.src || '')}</span></p>` : T('<p class="rep-empty">아직 붙인 메모가 없다.</p>')}

@@ -647,7 +647,7 @@ MG.I18N.put("en", "c06", {
 "vh4vykdxtk": "I've no way of knowing what happens outside the hotel. I'm sorry.",
 "1ggu6jey56s": "(Leafs through the register) The register only has names and room numbers, so I couldn't say.",
 "xwkn6wh2l2": "(Hangs a room key on the rack behind the desk) Eleven years at this desk, and that's the first I've heard of it.",
-"1bad6ln0uib": "I wouldn't want to give you a guess. I really don't know about that.",
+"1bad6ln0uib": "I wouldn't want to guess. I really don't know about that.",
 "1ckym47qaqe": "Driver, Hellesund Taxi car No. 7",
 "2bzof2x8l6x": "Taxi rank outside Hellesund station",
 "1nyresi0z43": "Odd Helle. Hellesund Taxi, car 7.",
