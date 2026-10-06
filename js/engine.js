@@ -772,7 +772,9 @@
     const inp = ST.view.qin[s.id] || {};
     const res = ST.view.qres[s.id];
     const found = (ST.found[s.id] || []).filter(id => !(res || []).includes(id)).map(id => C.docs[id]).filter(Boolean); // 방금 조회한 결과는 위에만
-    const fields = (s.fields || []).map(f => `<label class="qf"><span>${esc(f.label)}</span><input data-qf="${esc(f.id)}" value="${esc(inp[f.id] || '')}" placeholder="${esc(f.placeholder || '')}" autocomplete="off"></label>`).join('');
+    // pick: 이름을 대는 칸이면 수첩에 적힌 그 갈래의 단어를 고를 수 있게 (철자를 그대로 옮겨 치지 않아도 되게)
+    const pick = f => f.pick ? [...new Set(Object.entries(C.keywords).filter(([id, k]) => ST.keys.includes(id) && f.pick.includes(k.type)).map(([, k]) => k.label))] : [];
+    const fields = (s.fields || []).map(f => { const L = pick(f), lid = `ql-${s.id}-${f.id}`; return `<label class="qf"><span>${esc(f.label)}</span><input data-qf="${esc(f.id)}" value="${esc(inp[f.id] || '')}" placeholder="${esc(f.placeholder || '')}" autocomplete="off"${L.length ? ` list="${esc(lid)}"` : ''}></label>${L.length ? `<datalist id="${esc(lid)}">${L.map(x => `<option value="${esc(x)}"></option>`).join('')}</datalist>` : ''}`; }).join('');
     let out = '';
     if (res) out = res.filter(id => C.docs[id]).length ? `<p class="res-n">${T`조회 결과 ${res.filter(id => C.docs[id]).length}건`}</p>${res.filter(id => C.docs[id]).map(id => itemBtn(C.docs[id])).join('')}` : `<p class="res-none">${esc(s.none || T('해당하는 기록이 없다.'))}</p>`;
     return `<form class="q-f" data-query="${esc(s.id)}" data-slip="${esc(s.slip || s.name || '')}">${fields}<button type="submit">${esc(s.button || T('조회'))}</button></form>

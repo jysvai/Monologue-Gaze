@@ -38,7 +38,7 @@
       { id: 'rec', type: 'archive', name: '수사본부 기록철', skin: 'report', desc: '은천서 86-강-411. 표지에 "수사본부 해체 · 1987. 1. 10". 뒤쪽에 재조사 첨부가 끼워져 있다.', placeholder: '사람, 장소, 물건…', start: ['d_occ'], startLabel: '철 맨 앞장' },
       { id: 'ask', type: 'people', name: '탐문', desc: '1987년 3월. 수사본부는 해체됐지만 수첩에 이름이 적힌 사람은 찾아갈 수 있다.' },
       { id: 'reg', type: 'query', name: '대장 조회', need: ['k_stamp'], desc: '은천서 조회실. 번호나 성명을 한 글자도 틀리지 않게 넣어야 대장이 나온다.',
-        fields: [{ id: 'no', label: '번호', placeholder: '도정 번호 · 전화번호' }, { id: 'name', label: '성명', placeholder: '숙박부 색인 · 주민등록' }],
+        fields: [{ id: 'no', label: '번호', placeholder: '도정 번호 · 전화번호' }, { id: 'name', label: '성명', placeholder: '숙박부 색인 · 주민등록', pick: ['person'] }],
         button: '조회', none: '해당하는 대장이 없다. 번호나 성명은 기록에 적힌 그대로 넣을 것.', foundLabel: '조회해 둔 대장',
         records: [
           { match: { no: ['11.07-③', '1107-③', '11.07-3', '1107-3', '11073', '86.11.07-3', '861107-3', '11.7-3', '07.11-③', '0711-③', '07.11-3', '0711-3', '07113', '7.11-3', '7.11.-3'] }, doc: 'd_q_mill', need: ['k_stamp'] }, // 일·월 순서로 옮겨 적어도 받는다
