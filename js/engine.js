@@ -1885,7 +1885,8 @@
     const letter = allShut ? `<article class="m-letter${newLetter ? ' fresh' : ''}"><h3>${T`서랍 맨 밑의 편지`}</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p>${mWho()}</article>` : '';
     // 사건을 하나라도 닫은 사람에게만 (기록실에만, 사건 안에는 넣지 않는다). itch 는 별점·댓글이 쌓인 게임을 목록에 더 자주 올린다. 닫으면 다시 안 나온다
     const onItch = typeof location !== 'undefined' && /(^|\.)itch\.(zone|io)$/.test(location.hostname);
-    const rate = solvedMain + solvedLive && !S.rateOff ? `<p class="cab-rate">${onItch ? T('재미있으셨다면 이 화면 아래 itch.io 페이지에서 별점이나 댓글을 남겨 주세요. 평가가 쌓이면 itch 목록에 더 자주 뜹니다.') : T('재미있으셨다면 <a href="https://jysvai.itch.io/monologue-gaze" target="_blank" rel="noopener">itch.io 페이지</a>에서 별점이나 댓글을 남겨 주세요. 평가가 쌓이면 itch 목록에 더 자주 뜹니다.')}<button type="button" class="cab-rate-x" data-rate-off aria-label="${T('이 안내 닫기')}">×</button></p>` : '';
+    const solvedAny = MG.cases.some(c => S.cases[c.id] && S.cases[c.id].solved); // 연습 사건(CASE 00)만 닫은 사람에게도: 긴 사건 하나를 끝까지 가는 사람은 적다
+    const rate = solvedAny && !S.rateOff ? `<p class="cab-rate">${onItch ? T('재미있으셨다면 이 화면 아래 itch.io 페이지에서 별점이나 댓글을 남겨 주세요. 평가가 쌓이면 itch 목록에 더 자주 뜹니다.') : T('재미있으셨다면 <a href="https://jysvai.itch.io/monologue-gaze" target="_blank" rel="noopener">itch.io 페이지</a>에서 별점이나 댓글을 남겨 주세요. 평가가 쌓이면 itch 목록에 더 자주 뜹니다.')}<button type="button" class="cab-rate-x" data-rate-off aria-label="${T('이 안내 닫기')}">×</button></p>` : '';
     const hero = MG.images['_global/hero'];
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
