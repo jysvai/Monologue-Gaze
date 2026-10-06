@@ -20,6 +20,8 @@
 
 모든 사건은 실제 미제 사건의 **모티프만** 빌려 새로 지은 이야기다. 인물·장소·기관·사이트는 전부 허구다.
 
+실황, 방송, 영상 업로드는 자유롭게 해도 된다 (수익 창출 가능, 연락 불필요). Streams and videos are welcome, monetized ones included; no need to ask.
+
 ## 플레이
 
 **바로 하기: https://jysvai.itch.io/monologue-gaze** (itch.io) · https://jysvai.github.io/Monologue-Gaze/ (GitHub Pages)

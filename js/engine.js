@@ -1313,7 +1313,19 @@
     const dl = C.live && C.live.deadline, dlSeen = dl && (late || ok(dl.need)); // 끝내 몰랐던 기한은 말하지 않는다
     const cjk = /^(ja|zh)$/.test(MG.I18N.lang), dlName = esc(dl && dl.label || T('기한')); // 일본어·중국어는 전각 괄호
     const fin = C.live && ST.live ? `<p class="lv-fin">${T`수사 개시부터 ${hm(ST.live.t)}${dlSeen ? ` · ${late ? T('기한 넘김') : T('기한 안에 종결')}${cjk ? `<small>（${dlName}）</small>` : ` <small>(${dlName})</small>`}` : ''}`}</p>` : '';
-    return `<div class="stamp${fresh ? ' fresh' : ''}"><div>${T`사건<br>종결<small>${esc(sol.stamp || '')}</small>`}</div></div>${fin}<div class="epi">${epi}</div>${sol.next ? nextHtml(sol.next) : ''}`;
+    return `<div class="stamp${fresh ? ' fresh' : ''}"><div>${T`사건<br>종결<small>${esc(sol.stamp || '')}</small>`}</div></div>${fin}<div class="epi">${epi}</div>${shareHtml()}${sol.next ? nextHtml(sol.next) : ''}`;
+  }
+  // 종결한 사람이 결과를 옮겨 적을 수 있게: 범인·결말은 빼고 사건 번호, 제목, 별, 제출 횟수, 짚어 보기 횟수, 링크만
+  const ITCH_URL = 'https://jysvai.itch.io/monologue-gaze';
+  function shareText() {
+    const head = `Monologue Gaze · CASE ${pad(C.no)} ${plain(C.title)}${C.kind !== 'tutorial' && C.stars ? ' ' + '★'.repeat(C.stars) : ''}`;
+    const live = C.live && ST.live ? ' · ' + T`수사 ${hm(ST.live.t)}` : '';
+    return `${head}\n${T`종결 · 보고서 제출 ${ST.tries || 1}회 · 짚어 보기 ${ST.nudges || 0}회`}${live}\n${ITCH_URL} #MonologueGaze`;
+  }
+  const shareHtml = () => `<p class="epi-share"><button type="button" class="epi-sh" data-share>${T('결과 복사')}</button><a class="epi-sh" href="https://x.com/intent/post?text=${encodeURIComponent(shareText())}" target="_blank" rel="noopener">${T('X에 올리기')}</a></p>`;
+  function copyText(t) {
+    const old = () => { const a = document.createElement('textarea'); a.value = t; a.setAttribute('readonly', ''); a.style.cssText = 'position:fixed;left:-9999px;top:0'; document.body.append(a); a.select(); let ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; } a.remove(); return ok; };
+    return navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(t).then(() => true, () => old()) : Promise.resolve(old());
   }
   // 메모는 어디서 적었는지(문서·사람)끼리 묶는다. 접어 둔 묶음은 기억한다
   const NGSHUT = new Set();
@@ -2450,6 +2462,7 @@
       if (t.closest('[data-roster]')) return toggleRoster();
       if ((el = t.closest('[data-player]'))) return usePlayer(el.dataset.player);
       if ((el = t.closest('[data-drop]'))) return armed(el, T('한 번 더 누르면 그 서랍이 비워진다'), () => dropPlayer(el.dataset.drop));
+      if (t.closest('[data-share]')) { copyText(shareText()).then(ok => toast(ok ? T('결과를 복사했다. 붙여 넣어 올리면 된다.') : T('복사하지 못했다. 이 브라우저가 복사를 막고 있다.'), 3200)); return; }
       if (t.closest('[data-rate-off]')) { S.rateOff = true; save(); cabinet(); return; }
       if (t.closest('[data-intro-ok]')) { S.intro = true; save(); cabinet(); if (e.detail === 0) { const c0 = $('[data-open="c00"]'); if (c0) c0.focus(); } return; } // 키보드로 서랍을 열었으면 쪽지가 가리킨 CASE 00 폴더로
       if ((el = t.closest('[data-wipe]'))) return armed(el, roster().list.length > 1 ? T('한 번 더 누르면 내 기록이 지워진다') : T('한 번 더 누르면 전부 지워진다'), () => { S = Object.assign(blank(), { sound: S.sound, voice: S.voice, mild: S.mild }); forget(); save(); cabinet(); /* 수사 기록만 지운다: 소리·목소리·잔혹 표현 설정은 그대로 */ });
