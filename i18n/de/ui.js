@@ -169,6 +169,8 @@ MG.I18N.put("de", "ui", {
 "검색": "Suchen",
 "찾기": "Suchen",
 "수첩의 단어로 찾기": "Mit Wörtern aus dem Notizbuch suchen",
+"앞서 열어 본 것": "Schon geöffnet",
+"앞서 꺼내 본 자료": "Schon ausgehoben",
 "처음부터 있던 자료": "Von Anfang an vorhanden",
 "아직 아무것도 없다.": "Noch nichts.",
 "아직 찾아갈 사람이 없다. 이름을 알아내야 한다.": "Noch niemand zum Befragen. Erst einen Namen herausfinden.",

@@ -185,7 +185,7 @@ img{max-width:100%}
 .screen.new-l>.tabs-new.l,.screen.new-r>.tabs-new.r{display:block}
 .case-view:is([data-frame="laptop"],[data-frame="crt"]) .tabs-new{background:#e5483b}
 .stage-body{flex:1;min-height:0;display:grid;grid-template-columns:minmax(210px,300px) minmax(0,1fr)}
-.pane-list{min-height:0;overflow:auto;padding:14px 12px 20px}
+.pane-list{min-height:0;overflow:auto;padding:14px 12px 40px} /* 아래 여백: 비스듬한 증거철 꼬리표가 맨 끝 항목을 가리지 않게 (읽기 칸과 같은 40px) */
 .pane-read{position:relative;min-height:0;overflow:auto;padding:18px 18px 40px}
 .back-list{display:none;margin:0 0 12px;padding:6px 12px;border:1px solid rgba(0,0,0,.25);background:rgba(255,255,255,.6);font:13px var(--f-web);cursor:pointer}
 @container stage (max-width:700px){

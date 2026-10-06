@@ -57,7 +57,7 @@
               { id: 'sp_pferd', x: 93, y: 30, r: 10, label: '헛간 서쪽 칸 기둥', body: [{ p: '기둥 못에 흰 말털 몇 가닥이 걸려 있다. 바닥에는 말똥 한 무더기와 흘린 귀리. 이 집은 말을 기르지 않는다.', f: 'f_horse' }], keys: ['k_schlitten'] },
             ] },
         ] },
-      { id: 'amt', type: 'archive', name: '켈바흐 군청 문서고', skin: 'ledger', desc: 'Bezirksamt Kelbach. 장부·대장·배달 수첩 따위를 사람 이름이나 장소로 찾아 달라고 청할 수 있다.', placeholder: '이름, 장소, 물건', startLabel: '서고 담당이 먼저 내준 것' },
+      { id: 'amt', type: 'archive', name: '켈바흐 군청 문서고', skin: 'ledger', desc: 'Bezirksamt Kelbach. 장부·대장·배달 수첩 따위를 청할 수 있다. 장부는 그것을 적은 사람이나 가게·관청, 또는 그 장부에 오른 땅과 사람 이름으로 꽂혀 있다.', placeholder: '이름, 장소, 물건', startLabel: '서고 담당이 먼저 내준 것', none: '서고 담당이 목록 카드를 넘겨 보다 고개를 젓는다. 그 일을 적어 두었을 만한 가게나 관청 이름을 대 보라고 한다.' },
       { id: 'blatt', type: 'archive', name: '켈바흐 주보 철', skin: 'news', paper: 'Kelbacher Wochenblatt', desc: '수요일과 토요일, 주 두 번 나오는 군내 신문. 1922~23년 치가 끈으로 묶여 있다.', placeholder: '기사에서 찾을 말' },
       { id: 'zeit', type: 'timeline', name: '열흘 재구성', need: ['k_milch', 'k_zeitung'], skin: 'board', title: '하젤외드의 열흘 — 1월 24일부터 2월 3일까지', meta: '초소 벽에 핀으로 꽂은 판',
         desc: '장부·수첩·진술에서 날짜가 붙은 일을 카드로 뽑아 두었다. 카드를 제 날짜 칸에 맞춰 꽂는다.', openLabel: '재구성 판 펼치기',
@@ -103,7 +103,7 @@
       k_rottmayr: { label: '카스파르 로트마이어', type: 'person', alias: ['로트마이어', '대장장이', '대장간'] },
       k_pfaenzl: { label: '알로이스 펜츨', type: 'person', alias: ['펜츨', '알로이스', '머슴'] },
       k_knauer: { label: '발렌틴 크나우어', type: 'person', alias: ['크나우어', 'V. 크나우어', 'Knauer'] },
-      k_hausierer: { label: '에머란 슈퇴클', type: 'person', role: '떠돌이 방물장수', alias: ['슈퇴클', '행상인', '방물장수'] },
+      k_hausierer: { label: '방물장수', type: 'person', role: '떠돌이 방물장수', alias: ['에머란 슈퇴클', '슈퇴클', '행상인'] }, // 바이사흐 전보가 오기 전엔 아무도 이름을 모른다
       k_brandl: { label: '제프 브란들', type: 'person', role: '켈바흐 역 삯마차꾼 (43)', alias: ['브란들', '마부'] },
       k_schwertfeger: { label: '슈베르트페거 경사', type: 'person', role: '오버뢰딩 초소 경사', alias: ['슈베르트페거', 'Schwertfeger'] },
       k_neff: { label: '안톤 네프', type: 'person', role: '이웃 농부 · 1919년 차용증의 채무자', alias: ['네프'] },
@@ -302,7 +302,7 @@
         { m: '우편함에 뭐가 쌓이고 뭐가 비었는지. 날짜를 하루씩 셀 것.' },
         { note: '※ 주보는 수·토 발행. 하젤외드 우편함은 대문 기둥에 달려 있다.' },
       ] },
-      d_milch: { src: 'amt', blood: false, find: ['k_milch', 'k_stall'], title: '오버뢰딩 우유 수거 장부', kicker: 'MILCHSAMMELSTELLE OBERRÖDING', meta: '수거소: 프란츠 후프만 집 · 1923년 1월 22~27일 · 단위 리터', body: [
+      d_milch: { src: 'amt', blood: false, find: ['k_milch', 'k_stall', 'k_hubmann'], title: '오버뢰딩 우유 수거 장부', kicker: 'MILCHSAMMELSTELLE OBERRÖDING', meta: '수거소: 프란츠 후프만 집 · 1923년 1월 22~27일 · 단위 리터', body: [
         { rows: [
           ['1.22 (월)', '21', '18', '26', '15', '—'],
           ['1.23 (화)', '20', '18', '25', '14', '—'],
@@ -324,7 +324,7 @@
         ], head: ['날짜', '주문한 사람', '일', '찾아감'], f: { 3: 'f_lock' } },
         { img: 'lock', cap: '대장간 선반에 그대로 있는 새 자물쇠 (2월 8일 촬영)' },
       ] },
-      d_grundbuch: { src: 'amt', blood: false, find: ['k_tannenschlag'], title: '토지 대장 발췌 — 오버뢰딩 지번 410~412', kicker: 'GRUNDBUCHAMT KELBACH', meta: '켈바흐 군 등기소 · 1923년 2월 9일 떼어 줌', body: [
+      d_grundbuch: { src: 'amt', blood: false, find: ['k_tannenschlag', 'k_haselod', 'k_michael', 'k_knauer'], title: '토지 대장 발췌 — 오버뢰딩 지번 410~412', kicker: 'GRUNDBUCHAMT KELBACH', meta: '켈바흐 군 등기소 · 1923년 2월 9일 떼어 줌', body: [
         { rows: [
           ['410', '하젤외드 집터·마당·텃밭 0.6헥타르', '미하엘 모스바우어', '—'],
           ['411', '하젤외드 풀밭·밭 11.2헥타르', '미하엘 모스바우어', '1884년 혼인 계약으로 처와 공유'],
@@ -363,7 +363,7 @@
         ], head: ['날', '호밀', '밀', '비고'], f: { 5: 'f_rye' } },
         { note: '성촉절 장 날은 장터가 붐벼 시세가 하루에도 두어 번 바뀜.' },
       ] },
-      d_vermittlung: { src: 'amt', blood: false, find: ['k_thekla', 'k_magdalena'], title: '켈바흐 직업소개소 장부 (하녀·머슴)', kicker: 'DIENSTBOTENVERMITTLUNG KELBACH', meta: '1922년 11월 ~ 1923년 1월', body: [
+      d_vermittlung: { src: 'amt', blood: false, find: ['k_thekla', 'k_magdalena', 'k_pfaenzl', 'k_haselod', 'k_lichtmess', 'k_unterroding'], title: '켈바흐 직업소개소 장부 (하녀·머슴)', kicker: 'DIENSTBOTENVERMITTLUNG KELBACH', meta: '1922년 11월 ~ 1923년 1월', body: [
         { rows: [
           ['1922.11.21', '[[마그달레나 뷔르츠]] (24)', '하젤외드(모스바우어) → 그만둠', '"그 집에 뭔가 있다" 함. 켈바흐 빵집에 소개'],
           ['1922.12.9', '알로이스 펜츨 (29)', '하젤외드 → 쫓겨남', '새 자리 없음'],
@@ -602,7 +602,7 @@
       stamp: 'Tgb.-Nr. 41/1923 · 재검토',
       epilogue: [
         '1922년 10월, 발렌틴 크나우어는 태넨슐라크 숲을 사면서 값의 3분의 2를 "호밀 80첸트너 값, 성촉절에 그날 시세로" 치르기로 하고 증서 한 장을 써 주었다. 가을에 23만 마르크였던 그 빚은 성촉절 장 무렵에는 3백만 마르크를 넘었다. 공증을 거치지 않은 증서는 세상에 한 장, 미하엘의 금고 속에 있었다.',
-        '크나우어는 가을부터 숲 오두막에서 농가를 지켜보았고, 몇 번은 다락에 숨어들었다. 마그달레나가 들은 발소리였다. 1월 12일 빚을 미뤄 달라는 말을 거절당한 뒤, 그는 문설주의 열쇠를 가져갔다.',
+        '크나우어는 가을부터 숲 오두막에서 농가를 지켜보았고, 몇 번은 다락에 숨어들었다. 마그달레나가 들은 발소리였다. 1월 12일 빚을 미뤄 달라는 말을 거절당했고, 며칠 뒤 문설주의 열쇠를 가져갔다.',
         '1월 26일 금요일 밤, 새 하녀가 짐을 풀기도 전에 일은 끝났다. 크나우어는 조끼 주머니의 열쇠로 금고를 열어 증서 한 장만 꺼내고, 열쇠를 도로 넣었다. 지폐 다발에는 손대지 않았다.',
         '그는 사흘을 더 머물렀다. 흰 말을 헛간에 들이고, 소에게 여물을 주고, 짠 젖을 돼지에게 붓고, 주보를 들여다 놓고, 굴뚝에 연기를 올렸다. 지나가던 사람들은 그 연기를 보고 식구들이 집에 있는 줄 알았다. 1월 29일 월요일 저녁 그는 골데너 슈테른에 들었고, 그날부터 "금요일부터 장 보러 와 있었다"고 말하기 시작했다.',
         '증서는 끝내 나오지 않았다. 미하엘의 수첩에는 우유 리터 수 사이에 이런 줄이 적혀 있었다. "V.K.에게 넘김… 호밀 80첸트너 값… 증서 한 장 써 받음 — 궤에."',

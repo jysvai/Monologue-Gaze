@@ -324,7 +324,10 @@
     }
     if (b.rows) {
       const head = b.head ? `<thead><tr>${b.head.map(x => `<th>${inline(x)}</th>`).join('')}<th class="pc"></th></tr></thead>` : '';
-      const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map(x => `<td>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
+      // 줄을 메모로 옮길 때 짧은 칸(숫자·표시)에는 머리글을 붙인다 — 보고서에서 「1.27 · 20 · 18 · —」만 남아 무슨 숫자인지 모르게 되지 않게
+      const hd = (b.head || []).map(x => plain(numLocal(x)).trim());
+      const rowNote = r => r.map((x, i) => { const v = plain(x).trim(); return i && hd[i] && v.length <= 16 ? `${hd[i]}: ${v}` : v; }).join(' · ');
+      const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map(x => `<td>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, b.head ? rowNote(r) : r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
       return `<div class="b-tbl${cls}"><table>${b.cap ? `<caption>${inline(b.cap)}</caption>` : ''}${head}<tbody>${rows}</tbody></table></div>`;
     }
     if (b.list) {
@@ -468,7 +471,7 @@
     const k = PICK.k, L = (C.keywords[k] || {}).label || k;
     const list = ST.notes.slice().reverse().map(n => `<button type="button" class="rep-opt press-opt" data-press-note="${n.id}"><span class="t">${esc(n.t)}</span> <small class="src">— ${esc(n.src || '')}</small></button>`).join('');
     return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
-      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss)}</p>` : ''}
+      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}
       <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p></div>`;
   }
   function choosePress(id) {
@@ -486,6 +489,7 @@
     const f = $('#paneRead [data-press-filter]');
     if (f) { f.value = w; if (w) f.dispatchEvent(new Event('input', { bubbles: true })); }
     const pk = $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest' });
+    land([`#paneRead [data-press-note="${n.id}"]`, '#paneRead [data-press-filter]']); // 다시 그려 초점이 사라졌으면 방금 고른 메모로 — 키보드로 다음 메모로 바로 넘어가게
   }
   const DASH = /^\s*—\s*/;
   const MIDACT = MG.I18N.lang === 'ko' ? /\(([^()<>\d]*[가-힣][^()<>\d]*)\)/g : /[(（]([^()（）<>\d]*\p{L}[^()（）<>\d]*)[)）]/gu; // 말 도중의 몸짓 (숫자가 든 괄호 — 나이·번호 — 는 말 그대로 둔다). 중국어·일본어 번역은 전각 괄호（…）도
@@ -1123,17 +1127,20 @@
   }
   function archiveList(s) {
     const q = ST.view.q[s.id] || '';
-    let res = '';
+    let res = '', hits = [];
+    const scr = C.frame !== 'papers'; // 화면 속 검색창은 소프트웨어의 말투, 종이 자료실은 서고 담당의 말투
     if (q) {
-      const hits = archiveHits(s, q);
-      const scr = C.frame !== 'papers'; // 화면 속 검색창은 소프트웨어의 말투, 종이 자료실은 서고 담당의 말투
-      res = hits.length ? `<p class="res-n">${scr ? T`'${esc(q)}' 검색 결과 ${hits.length}건` : T`「${esc(q)}」 ${hits.length}건`}</p>${hits.map(itemBtn).join('')}` : `<p class="res-none">${scr ? T`'${esc(q)}'에 대한 검색 결과가 없습니다.` : T`「${esc(q)}」에 해당하는 자료가 없다.`}</p>`;
+      hits = archiveHits(s, q);
+      res = hits.length ? `<p class="res-n">${scr ? T`'${esc(q)}' 검색 결과 ${hits.length}건` : T`「${esc(q)}」 ${hits.length}건`}</p>${hits.map(itemBtn).join('')}` : `<p class="res-none">${scr ? T`'${esc(q)}'에 대한 검색 결과가 없습니다.` : T`「${esc(q)}」에 해당하는 자료가 없다.`}${s.none ? ' ' + inline(s.none) : ''}</p>`;
     }
     const start = (s.start || []).map(id => C.docs[id]).filter(d => d && ok(d.need));
+    // 앞서 찾아 열어 본 것은 검색을 새로 해도 남겨 둔다 — 같은 날짜를 여러 장부에서 맞대 보려고 매번 다시 찾지 않게
+    const past = C._srcDocs[s.id].filter(d => ok(d.need) && ST.seen.includes(d.id) && !hits.includes(d) && !start.includes(d));
     const chips = keyChips(s);
     return `<div class="arch"><form class="arch-f" data-arch="${esc(s.id)}" role="search"><input id="aq-${esc(s.id)}" value="${esc(q)}" placeholder="${esc(s.placeholder || T('찾을 단어'))}" aria-label="${T`${esc(s.name)} 검색어`}" autocomplete="off"><button type="submit">${C.frame !== 'papers' ? T('검색') : T('찾기')}</button></form>
       ${chips ? `<p class="chips-t">${T`수첩의 단어로 찾기`}</p><div class="chips">${chips}</div>` : ''}
       <div class="res">${res}</div>
+      ${past.length ? `<p class="res-n">${scr ? T('앞서 열어 본 것') : T('앞서 꺼내 본 자료')}</p>${past.map(itemBtn).join('')}` : ''}
       ${start.length ? `<p class="res-n">${esc(s.startLabel || T('처음부터 있던 자료'))}</p>${start.map(itemBtn).join('')}` : ''}</div>`;
   }
   function listList(s) {
