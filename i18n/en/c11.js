@@ -957,6 +957,7 @@ MG.I18N.put("en", "c11", {
 "1as69cw28ba": "Where the body was cut up",
 "1487wuo2p7m": "One thing doesn't fit. Does that note tie the blood or sawdust on that floor to the victim and that workshop, and not to someone else?",
 "27cvwwy3cqw": "The tool used",
+"1u3c03ekpp7": "One thing doesn't fit. What kind of blade left the marks on the bone, and did a saw like that go missing from the workshop, or a new one turn up?",
 "25h0wsca974": "When and where the sacks went into the water",
 "4jwcwolrvl": "One thing doesn't fit. When, and at which ferry, did the sacks go into the water? Did anyone on the riverbank see something that night?",
 "1l4g51md3f6": "Who met Pyeon Sang-gu that night",

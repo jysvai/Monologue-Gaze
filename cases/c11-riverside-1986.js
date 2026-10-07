@@ -685,7 +685,7 @@
       culprit: 'k_ham',
       claims: [
         { id: 'c1', q: '몸을 가른 곳', accept: ['f_nacre', 'f_lumi_type'], near: '한 군데가 어긋난다. 그 바닥의 피나 톱밥이, 다른 누구 것이 아니라 피해자와 그 공방을 잇는다고 보여 주는 메모인가?' },
-        { id: 'c2', q: '쓰인 도구', accept: ['f_saw_match', 'f_hardware', 'f_newsaw', 'f_sawmark'] },
+        { id: 'c2', q: '쓰인 도구', accept: ['f_saw_match', 'f_hardware', 'f_newsaw', 'f_sawmark'], near: '한 군데가 어긋난다. 뼈에 남은 자국이 어떤 날의 것인지, 그리고 그 공방에서 그런 톱이 사라지거나 새로 들어온 흔적이 있는가?' },
         { id: 'c3', q: '포대가 물에 든 때와 자리', accept: ['f_tl_river', 'f_watch_cart'], near: '한 군데가 어긋난다. 포대가 언제, 어느 나루에서 물에 들어갔는지 — 그 밤 강가에서 무언가를 본 사람이 있었는가?' },
         { id: 'c4', q: '그 밤 편상구를 맞은 사람', accept: ['f_tel_sub', 'f_ashbook', 'f_ham_call'], near: '한 군데가 어긋난다. 편상구가 목골에 간 것까지는 맞다. 그가 건 번호가 누구 것인지, 아니면 그를 맞은 사람이 남긴 흔적이 있는가?' },
       ],

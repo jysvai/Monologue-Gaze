@@ -957,6 +957,7 @@ MG.I18N.put("de", "c11", {
 "1as69cw28ba": "Wo der Körper zerteilt wurde",
 "1487wuo2p7m": "Eine Stelle passt nicht. Zeigt diese Notiz, dass das Blut oder Sägemehl auf dem Boden das Opfer mit der Werkstatt verbindet — und nicht jemand anderen?",
 "27cvwwy3cqw": "Das Werkzeug",
+"1u3c03ekpp7": "Eine Stelle passt nicht. Von was für einem Sägeblatt stammen die Spuren am Knochen — und ist in der Werkstatt eine solche Säge verschwunden oder eine neue aufgetaucht?",
 "25h0wsca974": "Wann und wo die Säcke ins Wasser kamen",
 "4jwcwolrvl": "Eine Stelle passt nicht. Wann und an welchem Anleger kamen die Säcke ins Wasser? Hat in der Nacht jemand am Ufer etwas gesehen?",
 "1l4g51md3f6": "Wer Pyeon Sang-gu in jener Nacht empfing",
