@@ -649,7 +649,7 @@ MG.I18N.put("de", "c13", {
 "ra3gmfqxnu": "Da laufen die Leute aus den Häusern lang. Nachts ist da kaum jemand.",
 "zqoxsr2l9f": "Ich bin seit sieben Jahren Franchisenehmer. Zurzeit… ist es hart. Wegen der Vertragsstrafe an die Zentrale kann ich nicht mal zumachen. (Lacht) Aber man muss eben durchhalten.",
 "bnjo8tlbbm": "…Den PC im Laden benutzen auch die Aushilfen. Wie soll ich wissen, wer was installiert hat?",
-"k1fyu9nqqo": "— 3:12 Uhr morgens, 5:20 Uhr morgens. Laut Dienstplan alles Zeiten, in denen Sie allein im Laden waren.",
+"1e3b0te9kgp": "— 3:12 Uhr morgens, 5:20 Uhr morgens. Wer steht um diese Zeit hier an der Kasse?",
 "nxi10hww65": "(Wischt statt einer Antwort über den Tresen)",
 "1o0hvqb2hm4": "Paper? Das, was die jungen Leute benutzen? Ich komm ja kaum mit DoranTalk klar.",
 "1hsqrs2hbe9": "Die Sparpakete sind Selbstbedienung. Die Kunden kleben die Etiketten selbst drauf und gehen.",
