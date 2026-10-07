@@ -350,6 +350,7 @@ function check(c) {
     ['role', 'where'].forEach(k => p[k] && scanText(p[k], `${w}.${k}`, bi));
     scanBlocks(p.intro, `${w}.intro`, bi);
     if (p.idle) scanBlocks(p.idle, `${w}.idle`, mk(`per:${id}:idle`));
+    if (p.idleT) scanBlocks([p.idleT], `${w}.idleT`, mk(`per:${id}:idle`));
     if (p.self) scanBlocks(p.self, `${w}.self`, mk(`per:${id}:self`));
     Object.entries(p.ask || {}).forEach(([k, a]) => {
       if (!K[k]) err(`${w}.ask: 없는 단어 ${k}`);

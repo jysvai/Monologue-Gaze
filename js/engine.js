@@ -385,7 +385,7 @@
   const pressedOn = (p, a) => (ST.asked[p.id] || []).some(e => { if (!e.endsWith('!')) return false; const b = rawAns(p, e.slice(0, -1)); return isCond(b) && (b.need || []).some(n => n[0] === '!' && (a.need || []).includes(n)); });
   const askEntry = (p, k) => { const a = rawAns(p, k), asked = ST.asked[p.id] || []; return isCond(a) && ok(a.need) && (a.soft || asked.includes(k) || asked.includes(k + '!') || pressedOn(p, a)) ? k + '!' : k; };
   // idle 이 여러 줄이면 돌아가며 한 줄씩 — 모르는 걸 스무 번 물어도 똑같은 말만 되풀이하지 않게 (앞서 모른다고 한 횟수로 고르니 다시 그려도 같은 줄)
-  const fallsIdle = (p, e) => { const a = rawAns(p, e.replace(/!$/, '')); return a == null || (isCond(a) && !e.endsWith('!') && a.else == null); };
+  const fallsIdle = (p, e) => { const k = e.replace(/!$/, ''), a = rawAns(p, k); if (p.idleT && (C.keywords[k] || {}).type === 'time') return false; return a == null || (isCond(a) && !e.endsWith('!') && a.else == null); };
   const idleFor = (p, k) => {
     if (!Array.isArray(p.idle) || p.idle.length < 2) return p.idle;
     let n = 0; for (const e of ST.asked[p.id] || []) { if (e === k) break; if (fallsIdle(p, e)) n++; }
@@ -395,8 +395,10 @@
     const conf = entry.endsWith('!');
     const k = conf ? entry.slice(0, -1) : entry;
     const a = rawAns(p, k);
-    if (isCond(a)) return conf ? a.a : a.else ?? idleFor(p, k) ?? T('…글쎄요.');
-    return a ?? idleFor(p, k) ?? T('…글쎄요, 잘 모르겠네요.');
+    // 날짜·시각을 물었는데 따로 할 말이 없는 사람은 「처음 듣는 소리」 대신 그때를 두고 하는 말 (idleT)
+    const idleT = (C.keywords[k] || {}).type === 'time' && p.idleT ? [p.idleT] : null;
+    if (isCond(a)) return conf ? a.a : a.else ?? idleT ?? idleFor(p, k) ?? T('…글쎄요.');
+    return a ?? idleT ?? idleFor(p, k) ?? T('…글쎄요, 잘 모르겠네요.');
   }
   function portrait(p, big) {
     if (p.art && C.art[p.art]) return `<span class="per-art${big ? ' lg' : ''}">${art(p.art)}</span>`;
