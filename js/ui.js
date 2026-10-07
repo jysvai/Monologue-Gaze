@@ -238,12 +238,12 @@
   // 같은 단추가 없어졌으면(맞춰 본 감정 후보·올린 신청서 등) 같은 칸의 같은 종류 단추 → 목록에서 지금 보고 있는 항목 → 「목록으로」 차례로. (마우스로 누른 때는 건드리지 않는다)
   document.addEventListener('click', e => {
     if (e.detail !== 0) return;
-    const b = e.target && e.target.closest ? e.target.closest('button') : null;
+    const b = e.target && e.target.closest ? e.target.closest('button,.kw[role="button"]') : null;
     if (!b || document.activeElement !== b) return;
     const q = v => (window.CSS && CSS.escape ? CSS.escape(v) : v);
     const attrs = [...b.attributes].filter(a => a.name.startsWith('data-') && !/^data-(tip|ui|ui-key)$/.test(a.name));
     if (!attrs.length) return;
-    const sel = 'button' + attrs.map(a => `[${a.name}="${q(a.value)}"]`).join('');
+    const sel = (b.tagName === 'BUTTON' ? 'button' : '[role="button"]') + attrs.map(a => `[${a.name}="${q(a.value)}"]`).join('');
     const pane = b.closest('#paneList, #paneRead'), kin = pane ? `#${pane.id} button[${attrs[0].name}]:not(:disabled)` : '';
     setTimeout(() => {
       const now = document.activeElement;

@@ -271,14 +271,14 @@
   const numLocal = x => { const sep = { de: '.', ru: ' ' }[MG.I18N.lang]; return sep && typeof x === 'string' ? x.replace(/(?<![\d.,])\d{1,3}(?:,\d{3})+(?![\d,]|\.\d)/g, m => m.replace(/,/g, sep)) : x; };
   function inline(t) {
     let h = esc(t).replace(/✎/g, () => `<span class="ic-in" role="img" aria-label="${T`연필 표시`}">${IC_PEN}</span>`); // 글 속의 ✎ 도 단추와 같은 연필 그림으로
-    // 단어 단추 앞의 여는 괄호·뒤의 닫는 괄호와 문장 부호는 단추와 한 줄에 (「（」만 줄 끝에 남지 않게)
+    // 단어 앞의 여는 괄호·뒤의 닫는 괄호와 문장 부호까지 함께 잡는다 (예전 <button> 시절엔 괄호만 줄 끝에 남지 않게 한 덩어리로 묶었다)
     h = h.replace(/([（「『〈《“‘(«„]?)\[\[([^\]|]+?)(?:\|([\w-]+))?\]\]([）」』〉》”’)、。，．,.!?！？:;：；»“]*)/g, (m, pre, label, kid, post) => { // 러시아어 «», 독일어 „“ 도
       const id = kid || C._lab[norm(label)];
-      const w = !id || !C.keywords[id] ? `<span class="kw-x">${label}</span>` : `<button type="button" class="kw${ST.keys.includes(id) ? ' on' : ''}" data-kw="${id}">${label}</button>`;
-      return (pre || post) && w[1] === 'b' ? `<span class="nw">${pre}${w}${post}</span>` : pre + w + post;
+      const w = !id || !C.keywords[id] ? `<span class="kw-x">${label}</span>` : `<span role="button" tabindex="0" class="kw${ST.keys.includes(id) ? ' on' : ''}" data-kw="${id}">${label}</span>`;
+      return pre + w + post; // 단어가 글줄 안의 글자라서 괄호·문장 부호와 사이에서는 원래 줄이 갈리지 않는다
     });
     // 11.07-③ · 010-1234-5678 같은 번호는 붙임표에서 줄이 갈리지 않게 (태그 밖 글자에만)
-    h = h.replace(/(^|>)([^<]+)/g, (m, a, txt) => a + txt.replace(/\d+(?:[.-]\d+)*-[\d①-⑳]+/g, '<span class="nw">$&</span>').replace(/№ (?=\S)/g, '№ ')); // 「№」만 줄 끝에 남지 않게
+    h = h.replace(/(^|>)([^<]+)/g, (m, a, txt) => a + txt.replace(/\d+(?:[.-]\d+)*-[\d①-⑳]+/g, '<span class="nw">$&</span>').replace(/№ (?=\S)/g, '№ ').replace(/(\d) (?=\d{3}(?!\d))/g, '$1\u00a0').replace(/(\d)–(?=\d)/g, '$1–\u2060')); // 「№」만 줄 끝에 남지 않게. 러시아어 「174 200 000」·「20–29」도 한 덩어리로
     return h.replace(BOLD, '<b>$1</b>').replace(/~~(.+?)~~/g, '<s>$1</s>').replace(/\n/g, '<br>');
   }
 
@@ -2689,7 +2689,8 @@
     else if (lv() >= 5) { VERDICT = sol.far || T('반려. 어디가 틀렸는지는 적혀 있지 않다.'); if (ST.tries >= 2) VERDICT += T` (어긋난 곳: ${wrong}군데)`; } // ★5 도 두 번째 반려부터는 몇 군데가 틀렸는지만 — 한 칸씩 바꿔 봐도 아무것도 알 수 없어 손을 놓지 않게
     else {
       // 한 칸만 틀렸고 그 주장에 따로 적어 둔 말이 있으면 그것으로 (「어떻게 알았나」 같은 주장에 「그 사람을 가리키는가」는 엇나간 말이다)
-      VERDICT = wrong === 1 ? (badCl.length === 1 && badCl[0].near) || sol.near || T('딱 한 군데가 어긋난다.') : sol.far || T('아직 이야기가 이어지지 않는다. 더 쫓아가 보자.');
+      // 세 번째 제출부터는 near2 가 있으면 그것으로: 같은 말만 되풀이하면 어느 기록을 찾아야 하는지 끝내 모른다
+      VERDICT = wrong === 1 ? (badCl.length === 1 && ((ST.tries >= 3 && badCl[0].near2) || badCl[0].near)) || sol.near || T('딱 한 군데가 어긋난다.') : sol.far || T('아직 이야기가 이어지지 않는다. 더 쫓아가 보자.');
       // ★3 은 한 칸만 남았을 때 그 칸을 짚어 준다. 여러 칸이 틀렸을 때까지 칸을 알려 주면 칸마다 메모를 바꿔 끼워 찍기로 풀린다 (연습 사건만 전부 알려 준다)
       if (lv() <= 3 && (wrong === 1 || C.kind === 'tutorial')) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`;
       else if (ST.tries >= 3 && wrong === 1) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`; // ★4: 세 번째부터는 한 칸 남았을 때 그 칸을
@@ -2903,6 +2904,8 @@
       } finally { SYNC = false; }
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && TALK && TALK.alive() && !$('.zoom')) TALK.finish(); }); // 대화 건너뛰기 (키보드)
+    // 글 속 단어는 <button> 이 아니라 글줄을 따라 꺾이는 <span role=button> 이다 (단추는 통째로 한 덩어리가 되어 긴 단어가 칸 가운데에 섬처럼 놓인다). Enter·Space 로도 누른다
+    document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('.kw[role="button"]')) { e.preventDefault(); e.target.click(); } });
     // 내밀 메모 고르기: Esc 는 그만두기, 찾기 칸의 Enter 는 걸린 메모가 하나뿐이면 그것을 내민다
     document.addEventListener('keydown', e => {
       if (!C || !PICK || e.isComposing || e.keyCode === 229) return;

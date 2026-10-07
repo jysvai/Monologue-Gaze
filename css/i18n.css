@@ -19,9 +19,11 @@ html[lang="ja"]{
   --l-serif:"Noto Serif JP",; --l-old:"New Tegomin",; --l-sans:"Noto Sans JP",; --l-heavy:"Dela Gothic One",;
   --l-mono:"M PLUS 1 Code",; --l-type:"Special Elite","M PLUS 1 Code",; --l-pixel:"DotGothic16",; --l-cjk:"Noto Sans JP",;
 }
+/* ZCOOL XiaoWei 는 「回」와 回 가 들어간 글자(徊 등)를 까만 네모(■)로 그린다. 그 글자들만 Noto Serif SC 에서 떼어 와 먼저 쓴다 */
+@font-face{font-family:"MG Hui";src:url(../fonts/zh-hui.woff2) format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+56DE,U+5EFB,U+5F8A,U+6D04,U+8334,U+86D4}
 html[lang="zh"]{
   --l-hand:"LXGW WenKai",; --l-hand2:"Long Cang",; --l-hand3:"ZCOOL KuaiLe",;
-  --l-serif:"Noto Serif SC",; --l-old:"ZCOOL XiaoWei",; --l-sans:"Noto Sans SC",; --l-heavy:"ZCOOL QingKe HuangYou",; --l-brush:"Ma Shan Zheng",;
+  --l-serif:"Noto Serif SC",; --l-old:"MG Hui","ZCOOL XiaoWei",; --l-sans:"Noto Sans SC",; --l-heavy:"ZCOOL QingKe HuangYou",; --l-brush:"Ma Shan Zheng",;
   --l-mono:"Noto Sans SC",; --l-type:"Special Elite","Noto Sans SC",; --l-pixel:"Noto Sans SC",; --l-cjk:"Noto Sans SC",;
 }
 

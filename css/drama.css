@@ -48,7 +48,7 @@
 
 /* ───────── 수사 보고서 (읽기 칸) ───────── */
 .nb-rep .rep-sum{margin:0;font:21px/32px var(--f-hand)}
-.nb-rep .rep-sum b{font-weight:400;color:var(--red)}
+.nb-rep .rep-sum b{font-weight:400;color:var(--red);white-space:nowrap}
 .rep-view .doc-b{font:14px/1.7 var(--f-web)}
 .rep-view h4{margin:0 0 8px;font:800 15px/1.4 var(--f-doc)}
 .rep-view h4 .no{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:6px;border:1.5px solid currentColor;border-radius:50%;font:11px var(--f-mono)}
