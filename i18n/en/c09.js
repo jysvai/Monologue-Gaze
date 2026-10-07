@@ -661,7 +661,7 @@ MG.I18N.put("en", "c09", {
 "262cd1nimtm": "(leafs through the lease ledger, then shuts it) If it's not in a contract, I don't know it either.",
 "uswyh620n9": "Twenty years in business in this neighborhood, and what I don't know, I don't know.",
 "vt0gmz7fra": "(waves a hand, the phone receiver wedged against her shoulder) Don't know that one. I've got a client on the line.",
-"r2fql0i8ho": "Never heard of it. Is that what people are saying now?",
+"r2fql0i8ho": "Can't help you there. Is that what people are saying now?",
 "2lx2coukbt": "Owner of Eungol Framing",
 "zzqvya2w4m": "Eungol Market Alley 2 · Eungol Framing",
 "23t794u59ri": "Yuk Seong-gyu, I do framing. You detectives have been combing the whole neighborhood, and now you've come to me. Go ahead, ask.",

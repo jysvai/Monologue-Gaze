@@ -743,7 +743,7 @@ MG.I18N.put("en", "c06", {
 "1kfkmlwfuu6": "That's not my business.",
 "ibexu5rgpz": "(Doesn't look up from his papers) I wouldn't know. I'm behind on the arrival papers.",
 "1276xxt5670": "Shipping keeps me busy enough. I know nothing about that sort of thing.",
-"daut7gy5bt": "(Taps the desk with the tip of his fountain pen) Never heard of it. If that's all you came for, let's leave it there.",
+"daut7gy5bt": "(Taps the desk with the tip of his fountain pen) Can't help you there. If that's all you came for, let's leave it there.",
 "9ccyzzjfjx": "You came all the way to a shipping agency to ask that? I don't know.",
 "19qasjec0uo": "Records that show who she was",
 "a16h21lxi5": "Motive",

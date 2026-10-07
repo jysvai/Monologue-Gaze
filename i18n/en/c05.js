@@ -696,7 +696,7 @@ MG.I18N.put("en", "c05", {
 "115mjq489kr": "(Rolls the truck key around in his hand) …Don't know anything about it.",
 "rjvu1pg3gt": "Why ask a driver about something like that.",
 "1mm5fpah7tr": "(Folds his arms) Don't know. Ask somebody else.",
-"cn3ppockvl": "Never heard of it. Other people's business is none of mine.",
+"cn3ppockvl": "Can't help you there. Other people's business is none of mine.",
 "5s8dwn8ir0": "The route the letters were mailed along, and the culprit",
 "1yp5judqipo": "The call to the police that night, and the culprit",
 "1us1ukvxf6j": "What only the letter writer could have known",

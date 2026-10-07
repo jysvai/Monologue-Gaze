@@ -841,7 +841,7 @@ MG.I18N.put("en", "c14", {
 "1npad3rtd1j": "(Stares only at the corner of the desk) …I don't know about that.",
 "105thfe900j": "I just did what I was told. They said not to ask.",
 "4xr1gd6m99": "(Glances at his mother) I really don't know. Mom, I really don't.",
-"261sg8inaia": "(Pulls his coat sleeves down over his hands) Never heard of it. I'm not lying.",
+"261sg8inaia": "(Pulls his coat sleeves down over his hands) Can't help you there. I'm not lying.",
 "1zls71pj835": "Park Si-woo's mother · care worker (night shift)",
 "2g0mwm270j3": "Waiting room next to the interview recording room, Gaon Police Station",
 "w20p7nerhh": "(A padded coat thrown over her nursing home uniform. Her eyes are red) I work nights. I didn't know what he was doing at night. It's my fault.",

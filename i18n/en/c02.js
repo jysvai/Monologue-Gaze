@@ -795,7 +795,7 @@ MG.I18N.put("en", "c02", {
 "2svmbq7q3s": "Don't know. I'm a dealer, not a policeman.",
 "n54zoqhes7": "(Glances toward the timber yard) I don't lend my ears to things that don't pay.",
 "9ckph3nvgq": "Instead of digging into that, go and look somewhere else first.",
-"1r1h5l3kdwv": "(Strokes the cow's back) Never heard of it. It's feeding time, so let's keep this short.",
+"1r1h5l3kdwv": "(Strokes the cow's back) Can't help you there. It's feeding time, so let's keep this short.",
 "1ge5xm3rcie": "(Smirks) Go and ask the village womenfolk about that sort of thing.",
 "18mdglj98q1": "Records that show when the four died",
 "rd584dndl8": "Records showing someone was at the farm after the four had died",

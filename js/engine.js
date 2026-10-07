@@ -345,7 +345,7 @@
       const head = b.head ? `<thead><tr>${b.head.map(x => `<th>${inline(x)}</th>`).join('')}<th class="pc"></th></tr></thead>` : '';
       // 줄을 메모로 옮길 때 짧은 칸(숫자·표시)에는 머리글을 붙인다 — 보고서에서 「1.27 · 20 · 18 · —」만 남아 무슨 숫자인지 모르게 되지 않게
       const hd = (b.head || []).map(x => plain(numLocal(x)).trim());
-      const rowNote = r => r.map((x, i) => { const v = plain(x).trim(), h = hd[i] && plain(hd[i]).trim(); return i && h && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).join(' · '); // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
+      const rowNote = r => r.map((x, i) => { const v = plain(x).trim(), h = hd[i] && plain(hd[i]).trim(); return i && h && hd.length > 2 && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).filter(Boolean).join(' · '); // 빈칸은 빼고, 「항목 | 내용」 두 칸짜리 표는 머리글 없이 (「가입자 · 내용: 함덕규」가 되지 않게) // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
       const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map(x => `<td>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, b.head ? rowNote(r) : r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
       return `<div class="b-tbl${cls}"><table>${b.cap ? `<caption>${inline(b.cap)}</caption>` : ''}${head}<tbody>${rows}</tbody></table></div>`;
     }
@@ -2581,6 +2581,10 @@
     if (!s) return;
     const inp = {};
     (s.fields || []).forEach(fl => { const i = form.querySelector(`[data-qf="${fl.id}"]`); inp[fl.id] = i ? i.value.trim() : ''; });
+    // 기록마다 한 칸으로만 찾는 조회(번호 · 이름)에서 두 칸이 다 차 있으면, 방금 고쳐 쓴 칸으로만 — 남은 옛 번호로 같은 조회가 몰래 다시 돌지 않게
+    const last = form.dataset.last;
+    if (last && (s.fields || []).length > 1 && (s.records || []).every(r => Object.keys(r.match || {}).length <= 1) && (s.fields || []).filter(fl => inp[fl.id]).length > 1)
+      (s.fields || []).forEach(fl => { if (fl.id !== last) { inp[fl.id] = ''; const i = form.querySelector(`[data-qf="${fl.id}"]`); if (i) i.value = ''; } });
     const hits = queryHits(s, inp);
     if (!hits) { toast(T('조회할 것을 먼저 적는다')); const i = form.querySelector('input'); if (i) i.focus(); return; } // 빈칸 조회는 시간도 쓰지 않는다
     // 같은 조회를 다시 하면 결과만 다시 펼친다 (수사 시간이 들지 않는다)
@@ -2950,6 +2954,7 @@
     document.addEventListener('mouseup', e => { if (SELQ && e.target === SELQ) e.preventDefault(); SELQ = null; });
     document.addEventListener('focusout', e => { if (CIPHL != null && e.target.closest && e.target.closest('[data-sym]') && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-sym]'))) cipherHl(null); });
     document.addEventListener('input', e => {
+      if (e.target.matches && e.target.matches('[data-qf]') && e.target.form) e.target.form.dataset.last = e.target.dataset.qf; // 조회 칸: 마지막으로 고쳐 쓴 칸 (runQuery)
       // 칸에 적는 소리: 노트북은 얕은 자판, 2006년 모니터와 90년대 종이 사건은 자판, 그 앞은 타자기, 1950년 앞은 연필 (소리 파일이 있을 때만, 너무 잦지 않게)
       if (C && S.sound && e.data && e.target.closest('.lock-phone')) dtmf(e.data.slice(-1));
       else if (C && S.sound && MG.sound && e.target.matches('input:not([type="radio"])') && e.target.closest('.case-view')) {

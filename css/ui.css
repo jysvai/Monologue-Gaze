@@ -272,6 +272,8 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
 .case-view[data-frame="papers"] .c-bub:not(.me){background:#fbf7ea;border-color:rgba(90,70,40,.24);box-shadow:0 1px 2px rgba(60,40,10,.14);font:15px/1.72 var(--f-doc)}
 .case-view[data-frame="papers"][data-era="old"] .c-bub:not(.me){font-family:var(--f-batang)}
 .case-view[data-frame="papers"] .c-bub:has(.pin.on) .c-t{text-decoration:underline 1.5px rgba(78,72,66,.5);text-underline-offset:.45em;text-decoration-skip-ink:none}
+/* 적어 둔 줄의 밑줄에 아직 수첩에 없는 단어의 점선이 묻히지 않게 — 그 단어에만 옅은 형광 */
+:is(.c-bub,.b-p,.b-say,.b-list li,figcaption,tr):has(.pin.on) .kw:not(.on){background:rgba(223,182,76,.26);text-decoration-color:rgba(120,70,20,.9)}
 .case-view[data-frame="papers"] :is(.c-q,.c-bub.me){padding:0 4px 2px 12px;border:0;border-radius:0;background:none;box-shadow:none;color:#34405a;font:21px/1.3 var(--f-hand)}
 .case-view[data-frame="papers"] .c-q .c-k{margin-top:0;color:var(--pencil);opacity:.8}
 .case-view[data-frame="papers"] .qa.press .c-q{background:none;box-shadow:none;color:#8e2a20;text-decoration:underline 1.5px rgba(142,42,32,.45);text-underline-offset:.22em}
