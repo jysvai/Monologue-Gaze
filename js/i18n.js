@@ -44,8 +44,19 @@
     if (k === undefined) { k = s.reduce((a, x, i) => (i ? a + '{' + (i - 1) + '}' + x : x), ''); keys.set(s, k); }
     const t = lang === 'ko' ? null : (packs.ui || {})[k];
     if (t == null) return s.reduce((a, x, i) => (i ? a + String(v[i - 1]) + x : x), '');
-    return t.replace(/\{(\d+)\}/g, (m, n) => (+n < v.length ? String(v[+n]) : m));
+    const r = t.replace(/\{(\d+)\}/g, (m, n) => (+n < v.length ? String(v[+n]) : m));
+    return lang === 'ru' && /«[^»]*«/.test(r) ? nestQ(r) : r;
   };
+  // 러시아어: «…» 안에 다시 «…»가 들어가면 안쪽은 „…“ 로 (「По запросу «Багетная „Ынголь“» …」)
+  function nestQ(s) {
+    let d = 0, o = '';
+    for (const ch of s) {
+      if (ch === '«') { o += d ? '„' : '«'; d++; }
+      else if (ch === '»' && d) { d--; o += d ? '“' : '»'; }
+      else o += ch;
+    }
+    return o;
+  }
 
   /* ── 사건 기록 ──
    * 번역할 것: 한글이 든 문자열. 그림을 만드는 데만 쓰는 칸(svg·prompt …)은 건너뛴다.

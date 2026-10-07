@@ -164,6 +164,7 @@
     for (const [id, d] of Object.entries(c.docs)) { d.id = id; (c._srcDocs[d.src] ||= []).push(d); }
     // 자료실 문서는 그 안에 밑줄 그어진 단어로도 찾힌다 — 「톱밥」이 찍힌 기사를 「톱밥」으로 찾아도 안 나오는 일이 없게
     const arch = new Set(c.sources.filter(s => s.type === 'archive').map(s => s.id));
+    const broad = new Set((c.start || []).filter(id => c.keywords[id] && /^(place|time)$/.test(c.keywords[id].type))); // 처음부터 수첩에 있는 동네·날짜는 글에 찍혀 있어도 검색어로 잇지 않는다
     for (const d of Object.values(c.docs)) {
       if (!arch.has(d.src) || !d.find) continue;
       const ids = new Set(d.find);
@@ -172,7 +173,7 @@
       // 밑줄 없이 그냥 적힌 단어 이름도 — 한자·한글·가나는 두 글자부터, 로마자·키릴 문자는 네 글자부터 낱말째로
       const raw = txt.replace(/\[\[([^\]|]+)\|k_\w+\]\]/g, '$1'), flat = norm(raw), lite = raw.normalize('NFKC').toLowerCase(); // norm 은 띄어쓰기를 지우므로, 로마자는 lite 에서 낱말 경계를 본다
       for (const [kid, k] of Object.entries(c.keywords)) {
-        if (ids.has(kid) || !k.label) continue;
+        if (ids.has(kid) || !k.label || broad.has(kid)) continue;
         const l = norm(k.label), w = String(k.label).normalize('NFKC').toLowerCase().trim();
         const cjk = /[぀-鿿가-힣]/.test(l);
         if (cjk ? l.length >= 2 && flat.includes(l) : l.length >= 4 && new RegExp(`(^|[^\\p{L}\\p{N}])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^\\p{L}\\p{N}])`, 'u').test(lite)) ids.add(kid);
@@ -271,13 +272,13 @@
   function inline(t) {
     let h = esc(t).replace(/✎/g, () => `<span class="ic-in" role="img" aria-label="${T`연필 표시`}">${IC_PEN}</span>`); // 글 속의 ✎ 도 단추와 같은 연필 그림으로
     // 단어 단추 앞의 여는 괄호·뒤의 닫는 괄호와 문장 부호는 단추와 한 줄에 (「（」만 줄 끝에 남지 않게)
-    h = h.replace(/([（「『〈《“‘(]?)\[\[([^\]|]+?)(?:\|([\w-]+))?\]\]([）」』〉》”’)、。，．,.!?！？:;：；]*)/g, (m, pre, label, kid, post) => {
+    h = h.replace(/([（「『〈《“‘(«„]?)\[\[([^\]|]+?)(?:\|([\w-]+))?\]\]([）」』〉》”’)、。，．,.!?！？:;：；»“]*)/g, (m, pre, label, kid, post) => { // 러시아어 «», 독일어 „“ 도
       const id = kid || C._lab[norm(label)];
       const w = !id || !C.keywords[id] ? `<span class="kw-x">${label}</span>` : `<button type="button" class="kw${ST.keys.includes(id) ? ' on' : ''}" data-kw="${id}">${label}</button>`;
       return (pre || post) && w[1] === 'b' ? `<span class="nw">${pre}${w}${post}</span>` : pre + w + post;
     });
     // 11.07-③ · 010-1234-5678 같은 번호는 붙임표에서 줄이 갈리지 않게 (태그 밖 글자에만)
-    h = h.replace(/(^|>)([^<]+)/g, (m, a, txt) => a + txt.replace(/\d+(?:[.-]\d+)*-[\d①-⑳]+/g, '<span class="nw">$&</span>'));
+    h = h.replace(/(^|>)([^<]+)/g, (m, a, txt) => a + txt.replace(/\d+(?:[.-]\d+)*-[\d①-⑳]+/g, '<span class="nw">$&</span>').replace(/№ (?=\S)/g, '№ ')); // 「№」만 줄 끝에 남지 않게
     return h.replace(BOLD, '<b>$1</b>').replace(/~~(.+?)~~/g, '<s>$1</s>').replace(/\n/g, '<br>');
   }
 
@@ -346,7 +347,7 @@
       const head = b.head ? `<thead><tr>${b.head.map(x => `<th${nw(x)}>${inline(x)}</th>`).join('')}<th class="pc"></th></tr></thead>` : '';
       // 줄을 메모로 옮길 때 짧은 칸(숫자·표시)에는 머리글을 붙인다 — 보고서에서 「1.27 · 20 · 18 · —」만 남아 무슨 숫자인지 모르게 되지 않게
       const hd = (b.head || []).map(x => plain(numLocal(x)).trim());
-      const rowNote = r => r.map((x, i) => { const v = plain(x).trim(), h = hd[i] && plain(hd[i]).trim(); return i && h && hd.length > 2 && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).filter(Boolean).join(' · '); // 빈칸은 빼고, 「항목 | 내용」 두 칸짜리 표는 머리글 없이 (「가입자 · 내용: 함덕규」가 되지 않게) // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
+      const rowNote = r => r.map((x, i) => { const v = plain(x).trim(), h = hd[i] && plain(hd[i]).trim().replace(/\s+·\s+/g, '/'); return i && h && hd.length > 2 && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).filter(Boolean).join(' · '); // 빈칸은 빼고, 「항목 | 내용」 두 칸짜리 표는 머리글 없이 (「가입자 · 내용: 함덕규」가 되지 않게) // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
       const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map(x => `<td${nw(x)}>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, b.head ? rowNote(r) : r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
       return `<div class="b-tbl${cls}"><table>${b.cap ? `<caption>${inline(b.cap)}</caption>` : ''}${head}<tbody>${rows}</tbody></table></div>`;
     }
