@@ -287,3 +287,17 @@
 /* 1980년 뒤의 신문: 송명 같은 옛 활자 대신 요즘 신문 명조 */
 :where(.case-view[data-era=""]) .skin-news :is(.doc-t,.doc-b,.b-h,.doc-k,.doc-m){font-family:var(--f-doc)}
 .b-tbl :is(td,th).nw{white-space:nowrap} /* 짧은 칸(이름·머리글)은 한 줄로 — 중국어·일본어에서 한 글자씩 꺾이지 않게 (js docHtml rows) */
+/* 휴대폰 폭: 칸이 많은 표는 줄마다 쌓는다. 머리글은 칸 앞에 작게, ✎ 은 줄 오른쪽 위에 */
+@container stage (max-width:520px){
+  .b-tbl.stack{overflow:visible}
+  .b-tbl.stack :is(table,tbody){display:block}
+  .b-tbl.stack thead{display:none}
+  .b-tbl.stack tr{display:block;position:relative;padding:7px 38px 7px 0;border-bottom:1px solid rgba(0,0,0,.16)}
+  .b-tbl.stack td{display:block;min-width:0;padding:1px 4px !important;border:0 !important;white-space:normal}
+  .b-tbl.stack td[data-h]{position:relative;padding-left:calc(5.2em + 10px) !important}
+  .b-tbl.stack td[data-h]::before{content:attr(data-h);position:absolute;left:4px;top:1px;width:5.2em;overflow-wrap:anywhere;font:700 10.5px/1.7 var(--f-mono);letter-spacing:.03em;opacity:.6}
+  .b-tbl.stack td:not(.pc):empty{display:none}
+  .b-tbl.stack td.pc{position:absolute;top:6px;right:0;width:auto;background:none !important;box-shadow:none !important}
+}
+/* 전보의 가타카나는 낱말(띄어 쓴 덩어리) 가운데서 줄이 갈리지 않게 — 「ジ / ユントク」 */
+.b-p.jp{word-break:keep-all;line-break:strict}

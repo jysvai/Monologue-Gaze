@@ -326,9 +326,9 @@
     };
     introKey = once;
     document.addEventListener('keydown', once);
-    // 저절로 걷히는 건 한 줄을 다 읽을 시간이 지난 뒤 — 써 내려가는 데 2.4초, 글자 수만큼 더 (영어 줄은 길다)
-    const read = [...String(m.line || '')].reduce((t, ch) => t + (/[\u1100-\u11ff\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/.test(ch) ? 90 : 55), 0); // 한글·한자·가나는 한 글자에 뜻이 더 실려 있어 더 오래
-    introTimer = setTimeout(hideIntro, reduce.matches ? Math.min(7000, Math.max(3200, 1200 + read)) : Math.min(9000, Math.max(5000, 2600 + read)));
+    // 저절로 걷히는 건 한 줄을 다 읽을 시간이 지난 뒤 — 써 내려가는 데 2.4초, 글자 수만큼 더 (영어 줄은 길다). 다 써진 뒤 겨우 두어 초면 읽다 만다 (중국어 블라인드 테스트)
+    const read = [...String(m.line || '')].reduce((t, ch) => t + (/[\u1100-\u11ff\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/.test(ch) ? 140 : 60), 0); // 한글·한자·가나는 한 글자에 뜻이 더 실려 있어 더 오래
+    introTimer = setTimeout(hideIntro, reduce.matches ? Math.min(7000, Math.max(3200, 1200 + read)) : Math.min(11000, Math.max(6000, 3400 + read)));
   }
 
   /* ───────── 엔진이 부르는 곳 ───────── */

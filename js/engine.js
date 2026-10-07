@@ -278,7 +278,7 @@
       return pre + w + post; // 단어가 글줄 안의 글자라서 괄호·문장 부호와 사이에서는 원래 줄이 갈리지 않는다
     });
     // 11.07-③ · 010-1234-5678 같은 번호는 붙임표에서 줄이 갈리지 않게 (태그 밖 글자에만)
-    h = h.replace(/(^|>)([^<]+)/g, (m, a, txt) => a + txt.replace(/\d+(?:[.-]\d+)*-[\d①-⑳]+/g, '<span class="nw">$&</span>').replace(/№ (?=\S)/g, '№ ').replace(/(\d) (?=\d{3}(?!\d))/g, '$1\u00a0').replace(/(\d)–(?=\d)/g, '$1–\u2060')); // 「№」만 줄 끝에 남지 않게. 러시아어 「174 200 000」·「20–29」도 한 덩어리로
+    h = h.replace(/(^|>)([^<]+)/g, (m, a, txt) => a + txt.replace(/\d+(?:[.-]\d+)*-[\d①-⑳]+/g, '<span class="nw">$&</span>').replace(/№ (?=\S)/g, '№ ').replace(/(\d) (?=\d{3}(?!\d))/g, '$1\u00a0').replace(/(\d)–(?=\d)/g, '$1–\u2060').replace(/\bCASE (?=\d)/g, 'CASE\u00a0')); // 「№」만 줄 끝에 남지 않게. 러시아어 「174 200 000」·「20–29」도 한 덩어리로
     return h.replace(BOLD, '<b>$1</b>').replace(/~~(.+?)~~/g, '<s>$1</s>').replace(/\n/g, '<br>');
   }
 
@@ -343,13 +343,16 @@
       return `<figure class="b-img${cls}">${art(b.img)}${cap}</figure>`;
     }
     if (b.rows) {
-      const nw = x => (/^\S{1,5}$/.test(plain(String(x)).trim()) ? ' class="nw"' : ''); // 짧은 칸은 한 줄로 — 중국어·일본어에서 「李/相/民」처럼 한 글자씩 꺾이지 않게
+      const nw = x => { const v = plain(String(x)).trim(); return /^\S{1,5}$/.test(v) || (v.length <= 14 && /^[\d.:/~–-]+(?:\s*\S{0,2}\s*[\d:.]+)?$/.test(v)) ? ' class="nw"' : ''; }; // 짧은 칸과 「11.5 上午10:20」 같은 날짜·시각 칸은 한 줄로 — 중국어·일본어에서 「李/相/民」처럼 한 글자씩 꺾이지 않게
       const head = b.head ? `<thead><tr>${b.head.map(x => `<th${nw(x)}>${inline(x)}</th>`).join('')}<th class="pc"></th></tr></thead>` : '';
       // 줄을 메모로 옮길 때 짧은 칸(숫자·표시)에는 머리글을 붙인다 — 보고서에서 「1.27 · 20 · 18 · —」만 남아 무슨 숫자인지 모르게 되지 않게
       const hd = (b.head || []).map(x => plain(numLocal(x)).trim());
       const rowNote = r => r.map((x, i) => { const v = plain(x).trim(), h = hd[i] && plain(hd[i]).trim().replace(/\s+·\s+/g, '/'); return i && h && hd.length > 2 && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).filter(Boolean).join(' · '); // 빈칸은 빼고, 「항목 | 내용」 두 칸짜리 표는 머리글 없이 (「가입자 · 내용: 함덕규」가 되지 않게) // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
-      const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map(x => `<td${nw(x)}>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, b.head ? rowNote(r) : r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
-      return `<div class="b-tbl${cls}"><table>${b.cap ? `<caption>${inline(b.cap)}</caption>` : ''}${head}<tbody>${rows}</tbody></table></div>`;
+      // 칸이 많거나 긴 표는 휴대폰 폭에서 줄마다 「머리글 값」으로 쌓는다 (옆으로 밀어 봐야 하는 표는 ✎ 이 가린 칸 너머를 못 본다)
+      const stack = b.head && (b.head.length >= 4 || (b.head.length === 3 && b.rows.some(r => r.some(x => plain(String(x)).length > 60))));
+      const dh = i => (stack && hd[i] ? ` data-h="${esc(hd[i])}"` : '');
+      const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map((x, i) => `<td${nw(x)}${dh(i)}>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, b.head ? rowNote(r) : r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
+      return `<div class="b-tbl${stack ? ' stack' : ''}${cls}"><table>${b.cap ? `<caption>${inline(b.cap)}</caption>` : ''}${head}<tbody>${rows}</tbody></table></div>`;
     }
     if (b.list) {
       return `<ul class="b-list${cls}">${b.list.map((x, li) => `<li>${inline(x)}${pinBtn(`${ref}.${li}`, x, b.f && b.f[li], src)}</li>`).join('')}</ul>`;
