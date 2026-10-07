@@ -630,7 +630,7 @@ MG.I18N.put("de", "c09", {
 "1uxhlgeife0": "(dreht nur die kalte Kaffeetasse) Davon hat Seon-yeong nie etwas erzählt.",
 "1ja4y6617os": "Wie könnte ich jetzt noch behaupten, etwas zu wissen … Ich weiß es nicht.",
 "18ygm1w4o6h": "… Entschuldigung. Davon habe ich nie etwas gehört.",
-"2g19cgya283": "(wirft einen Blick auf die Uhr) Ich muss gleich wieder ins Büro. Das weiß ich nicht.",
+"2g19cgya283": "(wirft einen Blick auf die Uhr) Ich muss gleich wieder ins Büro. Davon weiß ich nichts.",
 "2n0e12fb34": "Inhaberin von Immobilien Eungol",
 "1gsuozjryqw": "Eingang Eungol-Markt",
 "qjw3baqf3y": "Zwanzig Jahre mach ich hier in Eungol-dong Immobilien. Die Häuser in diesem Viertel kennt keiner besser als ich.",

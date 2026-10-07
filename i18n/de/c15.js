@@ -679,7 +679,7 @@ MG.I18N.put("de", "c15", {
 "cgpx2b98yo": "Sie hat alles sorgfältig aufgenommen. Aber was bringt das Aufschreiben. Verhindert hat sie nie etwas.",
 "91h66oqid6": "Das weiß ich nicht. Bitte finden Sie Da-som.",
 "cvwjrk79x7": "(starrt nur auf den Chat im Handy) Weiß ich nicht. Ist das jetzt wichtig?",
-"1ogc18p7xk8": "Ich arbeite im Schichtdienst im Krankenhaus, wir waren nicht jeden Tag zusammen. Das weiß ich nicht.",
+"1ogc18p7xk8": "Ich arbeite im Schichtdienst im Krankenhaus, wir waren nicht jeden Tag zusammen. Davon weiß ich nichts.",
 "1pcon6oo78b": "(wählt noch einmal Da-soms Nummer) Davon hat Da-som mir nichts erzählt. …Immer noch aus.",
 "1lq3ibjgx68": "Wenn Da-som so was erzählt hätte, wüsste ich das. Davon hör ich zum ersten Mal.",
 "1y3atb5gdz4": "Unter Schutzanordnung · trägt elektronische Fußfessel",

@@ -90,11 +90,18 @@
     };
     try { return (m[1] || '') + one(m[2], m[3], m[4], m[5]) + (m[6] || '') + one(m[7], m[8], m[9], m[10]); } catch (e) { return null; }
   }
+  const QUOTE = { en: '“”', de: '„“', ru: '«»' };
   function localDates(o) {
     for (const k of Object.keys(o)) {
       if (!Array.isArray(o) && (DKEEP.has(k) || k[0] === '_')) continue;
       const v = o[k];
-      if (typeof v === 'string') { if (!HAN.test(v) && /\d[./]\s?\d/.test(v)) { const r = cellDate(v.trim()); if (r != null) o[k] = r; } }
+      if (typeof v === 'string') {
+        if (HAN.test(v)) continue;
+        if (/\d[./]\s?\d/.test(v)) { const r = cellDate(v.trim()); if (r != null) { o[k] = r; continue; } }
+        // 번역에 들지 않는 표 칸의 「2330」·13:02~13:35 도 그 언어의 따옴표와 줄표로
+        const q = QUOTE[lang], w = v.replace(/「([^」]*)」/g, (m, x) => q[0] + x + q[1]).replace(/(\d)\s*~\s*(\d)/g, '$1–$2');
+        if (w !== v) o[k] = w;
+      }
       else if (v && typeof v === 'object') localDates(v);
     }
   }

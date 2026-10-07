@@ -8,7 +8,7 @@ MG.I18N.put("en", "c01", {
 "16fl9429k3x": "**Evidence File 01** · Metropolitan Police, Q Division · Case 1888-Q-341 · Rose Callaway (unsolved) · transcribed copy",
 "13ivmcx0ud9": "A work of fiction that borrows only the motif of the 1888 Whitechapel murders in London. Whitegate and every other place, person, newspaper and institution here is invented and has no connection to any real person or victim.",
 "27bkime9v1a": "A thick file from M's drawer: transcribed copies of Q Division's 1888 records and newspaper clippings from London. Pick a source from the tabs at the top.",
-"7qwjawjoec": "Unnatural Death — Case Summary",
+"7qwjawjoec": "Inquest Cases — Summary of Records",
 "gy6f7y4n9n": "Q Div. 1888-341",
 "1mv950753ce": "Victim",
 "s9cozr5ifn": "[[Rose Callaway|k_rose]] (34) · charwoman · lodged at a common lodging house in [[Salt Lane|k_saltlane]]",

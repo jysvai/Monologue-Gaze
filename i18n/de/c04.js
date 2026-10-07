@@ -485,7 +485,7 @@ MG.I18N.put("de", "c04", {
 "1hav3u0chgd": "Ich hab gehört, dass er im Frühjahr aufgehört hat. Danach hab ich ihn nicht mehr gesehen.",
 "qyh1b2is2a": "Tja, ich bin bloß gefahren.",
 "17nrg21upj": "Was in der Bank läuft, wissen die da oben. Ein Fahrer weiß das nicht.",
-"1ngkch126t0": "(Blickt nur aus dem Fenster des Bereitschaftsraums) Seit dem Tag ist mein Kopf wie leer. Das weiß ich nicht.",
+"1ngkch126t0": "(Blickt nur aus dem Fenster des Bereitschaftsraums) Seit dem Tag ist mein Kopf wie leer. Ich weiß es nicht.",
 "18pqq9vay6w": "Zehn Jahre sitz ich schon am Steuer, aber davon hör ich zum ersten Mal.",
 "1pn2lg8uhy5": "(Lässt den Kopf hängen) Was wollen Sie einen Fahrer noch fragen, dem man den Wagen abgenommen hat?",
 "1df1vf28s0w": "Filialleiter der Tama-Shōwa-Bank, Filiale Mizuo",

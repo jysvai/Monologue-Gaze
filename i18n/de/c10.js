@@ -505,7 +505,7 @@ MG.I18N.put("de", "c10", {
 "3bhhcbzaet": "Der Fahrer aus dem Kommentar? Hab ich auch gelesen, aber ich hab ein Auto gesehen, dessen Kennzeichen ich nicht mal erkannt hab. Wem es gehört, kann ich nicht sagen.",
 "udlguh72m7": "Das weiß ich nicht. Ich kümmere mich nur um den Pier.",
 "1nudu2lfv4z": "(spielt mit der Taschenlampe) Was ich im Forum geschrieben hab, ist alles, was ich weiß.",
-"hl3n2kx257": "Ein Wachmann darf nur sagen, was er gesehen und gehört hat. Das weiß ich nicht.",
+"hl3n2kx257": "Ein Wachmann darf nur sagen, was er gesehen und gehört hat. Dazu kann ich nichts sagen.",
 "1g3mwkhfq8n": "(dreht das Funkgerät leiser) Am Pier hab ich davon nie was gehört.",
 "a0sdiyhj8h": "Wenn ich das wüsste, hätte ich's längst ins Forum gestellt. Ich weiß es nicht.",
 "k7blcn28rf": "Zwischenhändler Nr. 121 an der Fischauktion Haejin · Inhaber von Kühlhaus Haejin",

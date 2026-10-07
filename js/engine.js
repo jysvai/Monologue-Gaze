@@ -162,6 +162,23 @@
     c._srcDocs = {};
     c.sources.forEach(s => (c._srcDocs[s.id] = []));
     for (const [id, d] of Object.entries(c.docs)) { d.id = id; (c._srcDocs[d.src] ||= []).push(d); }
+    // 자료실 문서는 그 안에 밑줄 그어진 단어로도 찾힌다 — 「톱밥」이 찍힌 기사를 「톱밥」으로 찾아도 안 나오는 일이 없게
+    const arch = new Set(c.sources.filter(s => s.type === 'archive').map(s => s.id));
+    for (const d of Object.values(c.docs)) {
+      if (!arch.has(d.src) || !d.find) continue;
+      const ids = new Set(d.find);
+      const txt = JSON.stringify([d.title, d.body]);
+      for (const m of txt.matchAll(/\[\[([^\]|]+)(?:\|(k_\w+))?\]\]/g)) { const id = m[2] || c._lab[norm(m[1])]; if (id && c.keywords[id]) ids.add(id); }
+      // 밑줄 없이 그냥 적힌 단어 이름도 — 한자·한글·가나는 두 글자부터, 로마자·키릴 문자는 네 글자부터 낱말째로
+      const raw = txt.replace(/\[\[([^\]|]+)\|k_\w+\]\]/g, '$1'), flat = norm(raw), lite = raw.normalize('NFKC').toLowerCase(); // norm 은 띄어쓰기를 지우므로, 로마자는 lite 에서 낱말 경계를 본다
+      for (const [kid, k] of Object.entries(c.keywords)) {
+        if (ids.has(kid) || !k.label) continue;
+        const l = norm(k.label), w = String(k.label).normalize('NFKC').toLowerCase().trim();
+        const cjk = /[぀-鿿가-힣]/.test(l);
+        if (cjk ? l.length >= 2 && flat.includes(l) : l.length >= 4 && new RegExp(`(^|[^\\p{L}\\p{N}])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^\\p{L}\\p{N}])`, 'u').test(lite)) ids.add(kid);
+      }
+      d.find = [...ids];
+    }
     const firstPeople = c.sources.find(s => s.type === 'people');
     for (const [id, p] of Object.entries(c.people)) { p.id = id; p.src ||= firstPeople && firstPeople.id; }
     c._sets = {}; c._scenes = {};
@@ -1187,7 +1204,8 @@
     const o = ST.view.open;
     if (!ps.length) return `<p class="res-none">${esc(s.empty || T('아직 찾아갈 사람이 없다. 이름을 알아내야 한다.'))}</p>`;
     // 아직 만나지 않은 사람은 수첩에 적힌 이름으로 (가게 점원 · 택시 기사처럼 이름을 모르고 찾아가는 사람)
-    const nameOf = pname, roleOf = p => (p.role && norm(plain(p.role)) !== norm(nameOf(p)) ? plain(p.role) : '');
+    // 아직 안 만난 사람은 직함의 첫 마디만 — 「새터설비 사장 · 해솔건설 전 현장 소장」처럼 뒤에 붙은 내력은 만나서 들을 때까지 덮어 둔다
+    const nameOf = pname, roleOf = p => { const r = p.role ? plain(p.role) : '', r1 = ST.asked[p.id] ? r : r.split(' · ')[0]; return r1 && norm(r1) !== norm(nameOf(p)) ? r1 : ''; };
     return ps.map(p => `<button type="button" class="item person${o && o.t === 'person' && o.id === p.id ? ' on' : ''}${ST.asked[p.id] ? '' : ' new'}" data-person="${p.id}">${portrait(p)}<span class="item-t">${esc(nameOf(p))}${ST.asked[p.id] ? '' : T('<span class="sr"> (아직 안 만남)</span>')}</span>${roleOf(p) ? `<span class="item-m">${esc(roleOf(p))}</span>` : ''}</button>`).join('');
   }
   // 지도: 목록 칸에는 작은 지도(점만), 아무것도 펼치지 않았을 때는 읽기 칸에 크게(이름까지)
@@ -2269,7 +2287,7 @@
     }
     const BY = {}, before = census(BY);
     const met = Object.values(C.people || {}).some(p => p.key === id && ST.asked[p.id]);
-    if (unsaid(said, id) && !met) { if (!asWas()) ST.kas = { lang: MG.I18N.lang, m: {} }; ST.kas.m[id] = said.trim(); }
+    if (unsaid(said, id) && !met) { if (!asWas()) ST.kas = { lang: MG.I18N.lang, m: {} }; ST.kas.m[id] = C.keywords[id].hear || said.trim(); } // hear: 가게 이름으로만 불리는 사람은 「기무라 씨」처럼 사람으로 적는다
     ST.keys.push(id); save();
     const gained = census() - before;
     if (gained > 0) cue('clue'); else sfx('ink');
@@ -2645,12 +2663,14 @@
     const fresh = wrong === 0 && !ST.solved;
     ST.lastRep = wrong ? sig : null;
     if (wrong === 0) { ST.solved = true; VERDICT = ''; }
-    else if (lv() >= 5) VERDICT = sol.far || T('반려. 어디가 틀렸는지는 적혀 있지 않다.');
+    else if (lv() >= 5) { VERDICT = sol.far || T('반려. 어디가 틀렸는지는 적혀 있지 않다.'); if (ST.tries >= 2) VERDICT += T` (어긋난 곳: ${wrong}군데)`; } // ★5 도 두 번째 반려부터는 몇 군데가 틀렸는지만 — 한 칸씩 바꿔 봐도 아무것도 알 수 없어 손을 놓지 않게
     else {
       // 한 칸만 틀렸고 그 주장에 따로 적어 둔 말이 있으면 그것으로 (「어떻게 알았나」 같은 주장에 「그 사람을 가리키는가」는 엇나간 말이다)
       VERDICT = wrong === 1 ? (badCl.length === 1 && badCl[0].near) || sol.near || T('딱 한 군데가 어긋난다.') : sol.far || T('아직 이야기가 이어지지 않는다. 더 쫓아가 보자.');
       // ★3 은 한 칸만 남았을 때 그 칸을 짚어 준다. 여러 칸이 틀렸을 때까지 칸을 알려 주면 칸마다 메모를 바꿔 끼워 찍기로 풀린다 (연습 사건만 전부 알려 준다)
       if (lv() <= 3 && (wrong === 1 || C.kind === 'tutorial')) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`;
+      else if (ST.tries >= 3 && wrong === 1) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`; // ★4: 세 번째부터는 한 칸 남았을 때 그 칸을
+      else if (ST.tries >= 2 && wrong > 1) VERDICT += T` (어긋난 곳: ${wrong}군데)`;
     }
     save();
     // 연출: 지목 → 침묵 → 판정

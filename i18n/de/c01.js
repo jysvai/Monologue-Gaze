@@ -673,7 +673,7 @@ MG.I18N.put("de", "c01", {
 "24yxdf6bhmp": "Ich hüte die ganze Nacht bloß diese Küche. Davon weiß ich nichts.",
 "26e469almjb": "(Stochert mit dem Schürhaken im Feuer) Das fragen Sie jemanden, der mit dem Bettgeldzählen schon genug zu tun hat?",
 "i2gs2p4957": "(Klappt das Übernachtungsbuch zu) So was schreibt man nicht ins Buch.",
-"fsok65aj30": "Ich kenne die Namen von denen, die ihre vier Pence zahlen. Das weiß ich nicht.",
+"fsok65aj30": "Ich kenne die Namen von denen, die ihre vier Pence zahlen. Mehr nicht.",
 "2chc5kqj3nu": "Lastträger · Bürgerwehr, Streife 1",
 "7krdgvuidk": "Trägerstube am Candle Market",
 "1kmgu6if9cd": "(Wringt seine nasse Mütze aus) In der Nacht hat's immerzu genieselt. Phipps und ich sind eine Runde gegangen und dann zurück ins Hinterzimmer, aber…",
