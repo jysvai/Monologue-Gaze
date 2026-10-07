@@ -350,8 +350,8 @@
       const rowNote = r => r.map((x, i) => { const v = plain(x).trim(), h = hd[i] && plain(hd[i]).trim().replace(/\s+·\s+/g, '/'); return i && h && hd.length > 2 && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).filter(Boolean).join(' · '); // 빈칸은 빼고, 「항목 | 내용」 두 칸짜리 표는 머리글 없이 (「가입자 · 내용: 함덕규」가 되지 않게) // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
       // 칸이 많거나 긴 표는 휴대폰 폭에서 줄마다 「머리글 값」으로 쌓는다 (옆으로 밀어 봐야 하는 표는 ✎ 이 가린 칸 너머를 못 본다)
       const stack = b.head && (b.head.length >= 4 || (b.head.length === 3 && b.rows.some(r => r.some(x => plain(String(x)).length > 60))));
-      const dh = i => (stack && hd[i] ? ` data-h="${esc(hd[i])}"` : '');
-      const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map((x, i) => `<td${nw(x)}${dh(i)}>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, b.head ? rowNote(r) : r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
+      const dh = (i, x) => (stack && i && hd[i] ? ` data-h="${esc(hd[i])}"${/^[—–-]?$/.test(plain(String(x)).trim()) ? ' data-nil' : ''}` : ''); // 첫 칸(날짜·이름·번호)은 쌓인 줄의 제목이 된다. 「—」 칸은 쌓을 때 뺀다
+      const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map((x, i) => `<td${nw(x)}${dh(i, x)}>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, b.head ? rowNote(r) : r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
       return `<div class="b-tbl${stack ? ' stack' : ''}${cls}"><table>${b.cap ? `<caption>${inline(b.cap)}</caption>` : ''}${head}<tbody>${rows}</tbody></table></div>`;
     }
     if (b.list) {
@@ -1293,6 +1293,11 @@
   // 옆으로 넘는 표(폰): 오른쪽에 붙은 ✎ 칸에 문서 종이 빛깔을 깔고(밑으로 지나가는 글자가 ✎ 와 겹치지 않게),
   // 뒤로 더 있으면 그 칸 가장자리에 그늘을 드리운다 (폰에서는 가로 스크롤 막대가 숨어 있어 표가 더 있는 줄 모른다)
   function tblEdge(t) {
+    if (t.classList.contains('stack')) { // 칸 많은 표가 읽기 칸보다 넓으면 (PC 의 좁은 칸) 폰처럼 줄마다 쌓는다. 칸이 다시 넓어지면 되돌린다
+      const w = t.classList.contains('wide');
+      if (!w && t.scrollWidth - t.clientWidth > 2) { t.dataset.nat = t.scrollWidth; t.classList.add('wide'); }
+      else if (w && t.clientWidth >= +t.dataset.nat) t.classList.remove('wide');
+    }
     const m = t.scrollWidth - t.clientWidth, x = Math.abs(t.scrollLeft);
     t.classList.toggle('scrolls', m > 2);
     t.classList.toggle('more-r', m > 2 && x < m - 2);

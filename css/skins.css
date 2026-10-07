@@ -294,10 +294,22 @@
   .b-tbl.stack thead{display:none}
   .b-tbl.stack tr{display:block;position:relative;padding:7px 38px 7px 0;border-bottom:1px solid rgba(0,0,0,.16)}
   .b-tbl.stack td{display:block;min-width:0;padding:1px 4px !important;border:0 !important;white-space:normal}
-  .b-tbl.stack td[data-h]{position:relative;padding-left:calc(5.2em + 10px) !important}
-  .b-tbl.stack td[data-h]::before{content:attr(data-h);position:absolute;left:4px;top:1px;width:5.2em;overflow-wrap:anywhere;font:700 10.5px/1.7 var(--f-mono);letter-spacing:.03em;opacity:.6}
-  .b-tbl.stack td:not(.pc):empty{display:none}
+  .b-tbl.stack td:first-child{font-weight:700}
+  .b-tbl.stack td[data-h]{display:flow-root;padding-left:90px !important}
+  .b-tbl.stack td[data-h]::before{content:attr(data-h);float:left;width:80px;margin-left:-86px;overflow-wrap:anywhere;font:700 10.5px/1.7 var(--f-mono);letter-spacing:.03em;opacity:.6} /* 긴 머리글은 줄을 바꿔도 다음 칸을 덮지 않고 그 칸을 늘린다 */
+  .b-tbl.stack td:not(.pc):is(:empty,[data-nil]){display:none}
   .b-tbl.stack td.pc{position:absolute;top:6px;right:0;width:auto;background:none !important;box-shadow:none !important}
 }
+/* PC: 읽기 칸보다 넓은 표도 같은 모양으로 (js tblEdge 가 .wide 를 붙인다) */
+.b-tbl.stack.wide{overflow:visible}
+.b-tbl.stack.wide :is(table,tbody){display:block}
+.b-tbl.stack.wide thead{display:none}
+.b-tbl.stack.wide tr{display:block;position:relative;padding:7px 38px 7px 0;border-bottom:1px solid rgba(0,0,0,.16)}
+.b-tbl.stack.wide td{display:block;min-width:0;padding:1px 4px !important;border:0 !important;white-space:normal}
+.b-tbl.stack.wide td:first-child{font-weight:700}
+.b-tbl.stack.wide td[data-h]{display:flow-root;padding-left:90px !important}
+.b-tbl.stack.wide td[data-h]::before{content:attr(data-h);float:left;width:80px;margin-left:-86px;overflow-wrap:anywhere;font:700 10.5px/1.7 var(--f-mono);letter-spacing:.03em;opacity:.6} /* 긴 머리글은 줄을 바꿔도 다음 칸을 덮지 않고 그 칸을 늘린다 */
+.b-tbl.stack.wide td:not(.pc):is(:empty,[data-nil]){display:none}
+.b-tbl.stack.wide td.pc{position:absolute;top:6px;right:0;width:auto;background:none !important;box-shadow:none !important}
 /* 전보의 가타카나는 낱말(띄어 쓴 덩어리) 가운데서 줄이 갈리지 않게 — 「ジ / ユントク」 */
 .b-p.jp{word-break:keep-all;line-break:strict}
