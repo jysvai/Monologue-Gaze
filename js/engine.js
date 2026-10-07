@@ -1030,6 +1030,7 @@
     const dl = C.live.deadline, nd = nextDue();
     return !!(dl && ok(dl.need) && nd != null && ST.live.t <= dl.at && nd > dl.at);
   }
+  let waitT = 0; // 시간 보내기를 연달아 눌러 몇 시간을 한꺼번에 건너뛰지 않게: 누른 뒤 잠깐은 다시 받지 않는다 (단추 글자가 바뀌며 자리가 밀린다)
   function waitNext() {
     const d = nextDue();
     if (d == null || ST.solved) { toast(T('지금은 기다릴 것이 없다')); renderBar(); return; }
@@ -2789,7 +2790,7 @@
         if (src && C.sources.some(s => s.id === src)) { ST.view.src = src; renderTabs(); renderList(); }
         openItem({ t: tt, id }); land(['#paneList .item.on', '#srcTabs .tab.on']); return;
       }
-      if ((el = t.closest('[data-wait]'))) return waitsPast() ? armed(el, T('한 번 더 누르면 기한을 넘긴다'), waitNext) : waitNext();
+      if ((el = t.closest('[data-wait]'))) { if (performance.now() - waitT < 900) return; waitT = performance.now(); return waitsPast() ? armed(el, T('한 번 더 누르면 기한을 넘긴다'), waitNext) : waitNext(); }
       if ((el = t.closest('[data-req]'))) return openItem({ t: 'req', id: el.dataset.req });
       if ((el = t.closest('[data-rq-go]'))) return submitReq(el.dataset.rqGo);
       if ((el = t.closest('[data-feed]'))) return openItem({ t: 'feed', id: el.dataset.feed });
