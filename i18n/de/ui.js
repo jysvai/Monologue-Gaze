@@ -325,6 +325,7 @@ MG.I18N.put("de", "ui", {
 "그림을 누르면 두 배로 · 바깥을 누르면 닫힌다": "Bild antippen: doppelt so groß · außerhalb antippen: schließen",
 "이미 수첩에 있다: {0}": "Schon im Notizbuch: {0}",
 "수첩에 적었다: {0}{1}": "Notiert: {0}{1}",
+"수첩의 이름을 고쳐 적었다: {0} → {1}": "Im Notizbuch berichtigt: {0} → {1}",
 "이미 적어 둔 메모다 — {0}번": "Schon notiert — Nr. {0}",
 "메모 {0}번을 적었다{1}": "Notiz Nr. {0} festgehalten{1}",
 "{0} {1}번에 붙인 메모다 — × 를 한 번 더 누르면 지운다": "Angeheftet: {0}, Nr. {1} — zum Löschen × noch einmal tippen",

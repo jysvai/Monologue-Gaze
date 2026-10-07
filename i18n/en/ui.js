@@ -325,6 +325,7 @@ MG.I18N.put("en", "ui", {
 "그림을 누르면 두 배로 · 바깥을 누르면 닫힌다": "Tap the picture to enlarge · tap outside to close",
 "이미 수첩에 있다: {0}": "Already in notebook: {0}",
 "수첩에 적었다: {0}{1}": "Noted: {0}{1}",
+"수첩의 이름을 고쳐 적었다: {0} → {1}": "Corrected in the notebook: {0} → {1}",
 "이미 적어 둔 메모다 — {0}번": "Already noted — #{0}",
 "메모 {0}번을 적었다{1}": "Wrote note #{0}{1}",
 "{0} {1}번에 붙인 메모다 — × 를 한 번 더 누르면 지운다": "Note attached to {0} #{1} — tap × again to delete",
