@@ -718,6 +718,7 @@ MG.I18N.put("en", "c09", {
 "bv05vfxl5q": "Why the survivor followed him to that house that night",
 "1556ci2knr2": "A record linking the two earlier victims to the culprit",
 "ekimcnv99y": "The culprit's account of that night is false",
+"nb6h9pvblk": "One thing doesn't fit. Where did he say he was that night? Is there a record that he wasn't there at that hour?",
 "ff1fzxp2i1": "Case 2006-Euncheon-0412 · Reviewed",
 "2gcad7jk80s": "At 7:10 p.m. on October 14, the Hanbit Express driver left So-ra's parcel on the second floor of No. 217-3, as he always did. Among the drivers it was known as “the house that's good about taking parcels.” In March, Ha-eun had also vanished on her way home from work, going to pick up a parcel left at that house. In August, Seon-yeong was to call ahead before going to pick up her frame on Friday evening. That Friday, the shutter at Eungol Framing came down early.",
 "1m9f8560jkk": "At 9:54 p.m., someone with a black umbrella was waiting for So-ra at the mouth of the alley. Thirteen iron steps, the turn at the eighth, the styrofoam boxes on the landing, the yellow smiley sticker on the door. At 10:17 p.m. the phone rang, a call from his mother in the countryside, and in that 1 minute and 12 seconds So-ra came down the stairs.",

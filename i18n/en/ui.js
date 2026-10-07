@@ -211,7 +211,7 @@ MG.I18N.put("en", "ui", {
 "담당": "Officer",
 "과장": "Section chief",
 "<span class=\"ok\">결재</span>": "<span class=\"ok\">OK</span>",
-"<span class=\"no\">반려</span>": "<span class=\"no\">No</span>",
+"<span class=\"no\">반려</span>": "<span class=\"no\">Returned</span>",
 "<p class=\"rep-empty\">수첩에 적힌 인물이 없다.</p>": "<p class=\"rep-empty\">No people in the notebook yet.</p>",
 "종결 · 철해 둠": "Closed · filed away",
 "결재 완료": "Approved",

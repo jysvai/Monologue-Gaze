@@ -211,7 +211,7 @@ MG.I18N.put("ru", "ui", {
 "담당": "Исполнитель",
 "과장": "Начальник отдела",
 "<span class=\"ok\">결재</span>": "<span class=\"ok\">Утв.</span>",
-"<span class=\"no\">반려</span>": "<span class=\"no\">Нет</span>",
+"<span class=\"no\">반려</span>": "<span class=\"no\">Возврат</span>",
 "<p class=\"rep-empty\">수첩에 적힌 인물이 없다.</p>": "<p class=\"rep-empty\">В блокноте не записано ни одного человека.</p>",
 "종결 · 철해 둠": "Закрыто · подшито в архив",
 "결재 완료": "Утверждено",
