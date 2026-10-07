@@ -681,9 +681,9 @@
     solution: {
       culprit: 'k_shinji',
       claims: [
-        { id: 'c1', q: '그 새벽, 봉투를 나른 사람의 길', accept: ['f_route', 'f_bike_sento', 'f_clerk', 'f_boots_yard'] },
-        { id: 'c2', q: '시신이 씻기고 나뉜 곳', accept: ['f_boiler', 'f_luminol', 'f_water_match'] },
-        { id: 'c3', q: '그 손이 익힌 일', accept: ['f_shibaura', 'f_knot_match', 'f_saw_match', 'f_cut'] },
+        { id: 'c1', q: '그 새벽, 봉투를 나른 사람의 길', accept: ['f_route', 'f_bike_sento', 'f_clerk', 'f_boots_yard'], near: '딱 한 군데가 어긋난다. 봉투가 놓인 자리만으로는 모자란다. 그 짐을 나른 바퀴나 장화 자국, 그 새벽 그 사람을 본 눈이 어디로 이어지나?' },
+        { id: 'c2', q: '시신이 씻기고 나뉜 곳', accept: ['f_boiler', 'f_luminol', 'f_water_match'], near: '딱 한 군데가 어긋난다. 시신을 씻고 나눈 곳에는 물과 피가 많이 흘렀다. 봉투 속 물기나 배수구, 그 밤 물을 데운 기록이 어디를 가리키나?' },
+        { id: 'c3', q: '그 손이 익힌 일', accept: ['f_shibaura', 'f_knot_match', 'f_saw_match', 'f_cut'], near2: '딱 한 군데가 어긋난다. 그 메모가 그 사람의 손을 가리키는가? 관절만 골라 끊는 솜씨, 매듭 버릇, 그 사람이 전에 몇 년 무슨 일을 했는지.' },
         { id: 'c4', q: '피해자가 그 밤 그곳에 간 까닭', accept: ['f_pager_kashiwayu', 'f_wp_loan'], near: '딱 한 군데가 어긋난다. 그 메모가, 피해자가 그 밤 그곳을 찾아간 까닭을 말해 주는가?' },
       ],
       near: '딱 한 군데가 어긋난다. 그 메모가 정말 그 사람의 손을 가리키는가?',
