@@ -229,3 +229,4 @@ button.press-opt{width:100%;text-align:left;color:inherit}
 .hh small.bump{display:inline-block;animation:nbump .7s ease-out}
 @keyframes nbump{0%{transform:scale(1);color:inherit}30%{transform:scale(1.5);color:var(--red)}100%{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.hh small.bump{animation:none}}
+body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.lv-fin){display:none} /* 올린 보고서 칸에 결말이 펼쳐져 있으면 수첩에는 도장과 다음 사건만 (같은 글이 두 번 보이지 않게) */
