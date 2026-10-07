@@ -226,6 +226,7 @@ button.press-opt{width:100%;text-align:left;color:inherit}
 @media (hover:hover){.nb-jump:hover{opacity:.75}}
 /* 고르는 목록에서 긴 메모(부검 소견 한 줄 따위)는 세 줄까지만 — 마흔 장 넘는 목록에서 한 장이 화면을 다 먹지 않게. 고른 것은 다 펼치고, 전문은 title 로 */
 .rep-opt:not(.on):not([hidden]){display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;overflow:hidden}
+.rep-opt:not(.on):not([hidden]):focus-within{display:block;-webkit-line-clamp:unset;line-clamp:none} /* 화살표로 옮겨 다니면 고르기 전에 끝까지 읽힌다 (마우스는 title 풍선으로) */
 .hh small.bump{display:inline-block;animation:nbump .7s ease-out}
 @keyframes nbump{0%{transform:scale(1);color:inherit}30%{transform:scale(1.5);color:var(--red)}100%{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.hh small.bump{animation:none}}
