@@ -442,7 +442,8 @@
   const PRESS = ['press1', 'press2', 'press3', 'press4'];
   const RECALL = ['recall1', 'recall2']; // soft: 거짓말한 적 없는 사람(피해자·유족·목격자)에게 메모를 보여 기억을 되살릴 때
   const isSoft = (p, k) => !!(rawAns(p, k) || {}).soft;
-  const pressKey = (p, k) => { const L = isSoft(p, k) ? RECALL : PRESS; return L[hash(p.id + k) % L.length]; };
+  // pq: 이 추궁에 맞는 물음을 정해 둔다 — 앞서 다른 말을 한 적 없는 사람에게 「처음 하신 말씀과 다릅니다」가 나가지 않게
+  const pressKey = (p, k) => { const a = rawAns(p, k) || {}; if (a.pq && PRESS.includes(a.pq)) return a.pq; const L = isSoft(p, k) ? RECALL : PRESS; return L[hash(p.id + k) % L.length]; };
   function qText(p, e) {
     const k = e.replace(/!$/, ''), kw = C.keywords[k] || {}, L = kw.label || k;
     if (e.endsWith('!')) return (MG.sound && MG.sound.line(pressKey(p, k))) || (isSoft(p, k) ? T('이걸 한번 봐 주시겠습니까. 떠오르는 게 있으신지요.') : T('이걸 보시죠. 그래도 같은 말씀입니까?'));
@@ -680,12 +681,13 @@
     const g = ST.ciph[s.id] || {};
     const given = s.given || {};
     const solved = ST.unl.includes(s.id);
-    return toks.map(t => {
-      if (t === '\n') return '<br>';
-      if (keep.has(t)) return `<span class="cc sp">${t === ' ' ? '&nbsp;' : esc(t)}</span>`;
+    const cell = t => {
+      if (keep.has(t)) return `<span class="cc sp">${esc(t)}</span>`;
       const v = solved ? s.key[t] : given[t] || g[t] || '';
       return `<span class="cc${v ? ' has' : ''}${t === CIPHL ? ' hl' : ''}"><b>${esc(t)}</b><i>${esc(v || '·')}</i></span>`;
-    }).join('');
+    };
+    // 줄은 줄대로, 띄어 쓴 덩어리는 한 덩어리로 — 좁은 화면에서도 한 낱말의 기호가 두 줄로 갈라지거나 다음 줄과 붙지 않게
+    return toks.join('').split('\n').map(line => `<div class="c-line">${line.split(' ').filter(w => w).map(w => `<span class="c-word">${Array.from(w).map(cell).join('')}</span>`).join('')}</div>`).join('');
   }
   function cipherHtml(s) {
     if (!s) return '';
@@ -2861,7 +2863,10 @@
       if (s.dataset.rep === 'culprit') ST.report.culprit = s.value; else { ST.report.claims[s.dataset.rep] = s.value; if (PTR) REPOPEN = null; }
       save(); sfx('ink'); renderRep();
     });
-    document.addEventListener('focusin', e => { const i = e.target.closest && e.target.closest('[data-sym]'); if (i) cipherHl(i.dataset.sym); });
+    // 조회·찾기 칸에 다시 들어오면 앞서 친 말을 통째로 골라 둔다 — 새로 치면 바뀌고, 이어 쳐서 「2431822140」이 되지 않게
+    let SELQ = null;
+    document.addEventListener('focusin', e => { const i = e.target.closest && e.target.closest('[data-sym]'); if (i) cipherHl(i.dataset.sym); const q = e.target.closest && e.target.closest('.arch-f input, .q-f input'); if (q && q.value) { q.select(); SELQ = q; } });
+    document.addEventListener('mouseup', e => { if (SELQ && e.target === SELQ) e.preventDefault(); SELQ = null; });
     document.addEventListener('focusout', e => { if (CIPHL != null && e.target.closest && e.target.closest('[data-sym]') && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-sym]'))) cipherHl(null); });
     document.addEventListener('input', e => {
       // 칸에 적는 소리: 노트북은 얕은 자판, 2006년 모니터와 90년대 종이 사건은 자판, 그 앞은 타자기, 1950년 앞은 연필 (소리 파일이 있을 때만, 너무 잦지 않게)

@@ -43,7 +43,7 @@ MG.I18N.put("de", "ui", {
 "<span class=\"sr\"> (메모를 들이밀어 다시 물을 수 있음)</span>": "<span class=\"sr\"> (mit einer Notiz nachhaken möglich)</span>",
 "{0} 얘기를 좀 여쭙겠습니다.": "{0} — dazu hätte ich ein paar Fragen.",
 "{0}에 대해 아시는 대로 말씀해 주시죠.": "{0}. Erzählen Sie mir, was Sie wissen.",
-"{0}{1} 관련해서 여쭙겠습니다.": "Stichwort {0}. Ich hätte da ein paar Fragen.",
+"{0}{1} 관련해서 여쭙겠습니다.": "Stichwort: {0}. Ich hätte da ein paar Fragen.",
 "{0}, 거기에 대해 아시는 대로 말씀해 주시죠.": "{0}. Erzählen Sie mir, was Sie darüber wissen.",
 "{0} 얘기를 좀 들려주시죠.": "{0}. Erzählen Sie mir davon.",
 "{0}, 그때 얘기를 좀 들려주시죠.": "{0}. Erzählen Sie mir von damals.",

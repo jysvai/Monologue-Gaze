@@ -335,7 +335,9 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 .lock-h{margin:10px 0 0;font-size:12.5px;color:#5d5444}
 .lock-e{min-height:1.4em;margin:6px 0 0;font-size:12.5px;color:var(--red)}
 .lock-h2{margin:4px 0 0;font:20px/1.2 var(--f-hand);color:var(--ink)}
-.c-grid{display:flex;flex-wrap:wrap;gap:4px 2px;margin:14px 0;padding:14px;background:rgba(255,255,255,.5);border:1px solid rgba(0,0,0,.2)}
+.c-grid{margin:14px 0;padding:14px;background:rgba(255,255,255,.5);border:1px solid rgba(0,0,0,.2)}
+.c-line{display:flex;flex-wrap:wrap;gap:2px 14px}.c-line+.c-line{margin-top:14px;padding-top:12px;border-top:1px dashed rgba(0,0,0,.12)}
+.c-word{display:inline-flex;gap:2px}
 .cc{display:inline-flex;flex-direction:column;align-items:center;min-width:24px;font:18px/1.2 var(--f-mono)}
 .cc b{font-weight:400}
 .cc i{font:15px/1.2 var(--f-hand);font-style:normal;color:var(--pencil)}
@@ -573,7 +575,8 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 .brief:has(.stain) :is(h2,dl,.scrawl){position:relative;z-index:4} /* 사건 개요도 폴더처럼: 핏자국은 종이에 스며 있고 글자는 그 위에 (「마지막 목격」 같은 칸 이름이 가려지지 않게) */
 .f-blood{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
 .f-blood .stain{opacity:.55}
-.folder:has(.f-blood) :is(.f-label,.f-kind,.f-motif,.f-len){position:relative;z-index:3} /* 핏자국은 종이에 스며 있고 글자는 그 위에 (연도·난이도·모티프가 가려지지 않게) */
+.folder:has(.f-blood) :is(.f-label,.f-kind,.f-motif,.f-len){position:relative;z-index:3}
+.folder:has(.f-blood) :is(.f-kind,.f-motif,.f-len){text-shadow:0 0 2px var(--kraft),0 0 4px var(--kraft),0 0 7px var(--kraft)} /* 얼룩 위에 놓인 모티프 줄도 읽히게: 종이색으로 글자 둘레를 살짝 걷어 낸다 */ /* 핏자국은 종이에 스며 있고 글자는 그 위에 (연도·난이도·모티프가 가려지지 않게) */
 .cw-card{position:relative;overflow:hidden}
 .cw-card:focus{outline:0} /* 여는 때 초점을 받는 경고문 자체에는 테를 두르지 않는다 (단추들은 Tab 으로) */
 .cw-card>*:not(.stain){position:relative;z-index:4}
