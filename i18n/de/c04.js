@@ -506,7 +506,7 @@ MG.I18N.put("de", "c04", {
 "ifm9598f75": "Bei der Observierung am Schrein am Abend des 20. ging statt einer Angestellten eine Polizistin mit dem Tuchbündel hin. Es kam niemand. Zwei Tage später kam ein Brief: „Ich habe alles gesehen.“",
 "11xs0ey3si5": "Was Hinosawa angeht … Herr [[Shimada Ryōhei|k_shimada]] aus der Buchhaltung, der im Frühjahr ausgeschieden ist, ist einmal an unserem Schalter laut geworden. Seine Abfindung sei falsch berechnet, sagte er.",
 "1s8ipruv1q7": "Das Café am Bahnhof. Ich war nie dort. Die jüngeren Angestellten gehen wohl ab und zu mittags hin.",
-"11lcno895gf": "Der Leiter der Buchhaltung bei Hinosawa Elektro. Höhe und Termin der Prämien teilen die uns mit; den Transport übernehmen wir.",
+"11lcno895gf": "Der Leiter der Buchhaltung bei Hinosawa Elektrik. Höhe und Termin der Prämien teilen die uns mit; den Transport übernehmen wir.",
 "29mqsb5lnyq": "Das Kennzeichen des Geldtransportwagens ist 多摩 5 さ 12-34. Den Namen der Bank schreiben wir nicht auf den Wagen. Damit er nicht auffällt.",
 "1syzhpz40w7": "Der Tag der Gratifikation stand ja in der Zeitung. Aber nur wir wussten, um wie viel Uhr und auf welchem Weg.",
 "1hv9zf42jz8": "Herr Okabe fährt seit zehn Jahren den Wagen unserer Filiale. Seit jenem Tag kommt er kaum noch aus dem Bereitschaftsraum.",

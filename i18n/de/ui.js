@@ -69,7 +69,7 @@ MG.I18N.put("de", "ui", {
 "(고개를 갸웃한다) 이건 제가 말씀드린 거하고는 다른 얘기 같은데요.": "(Legt den Kopf schief) Das scheint um etwas anderes zu gehen als das, was ich Ihnen gesagt habe.",
 "(메모를 훑어보더니 도로 밀어 놓는다)": "(Überfliegt die Notiz und schiebt sie zurück)",
 "(메모를 힐끗 보고 고개를 젓는다)": "(Wirft einen Blick auf die Notiz und schüttelt den Kopf)",
-"(메모와 당신을 번갈아 본다)": "(Sieht von der Notiz zu Ihnen und wieder zurück)",
+"(메모와 당신을 번갈아 본다)": "(Sieht abwechselnd die Notiz und Sie an)",
 "(메모를 한참 들여다본다)": "(Betrachtet die Notiz lange)",
 "(메모를 읽고 나서 고개를 갸웃한다)": "(Liest die Notiz und legt den Kopf schief)",
 "「{0}」 — 어떤 메모를 내밀까?": "„{0}“ — welche Notiz halten Sie vor?",

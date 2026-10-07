@@ -718,6 +718,8 @@ MG.I18N.put("de", "c01", {
 "lyd009xau3": "Der Täter war zur fraglichen Zeit nicht dort, wo er gewesen sein will",
 "gbnp81ga9c": "Etwas, das nur der Täter wissen konnte",
 "a16h21lxi5": "Motiv",
+"1fuqiwrixdf": "Genau eine Stelle stimmt nicht. Wer den Fonds verwaltet hat, ist für sich noch kein Motiv. Was ist mit dem Geld passiert, und wer wusste davon?",
+"26huo70pklr": "Genau eine Stelle stimmt nicht. Das Kassenbuch des Belohnungsfonds liegt bei den beschlagnahmten Büchern, und die Abrechnung stand im Anzeigenteil der Zeitung. Ist das Geld, das am Dienstagabend gezählt wurde, am Mittwochmorgen vollständig auf die Bank gekommen?",
 "1fdn0dp3h2e": "1888-Q-341 · Wiederaufnahme",
 "jdll29s07l": "Mittwoch, 24. Oktober, morgens, im Hinterzimmer des Three Keys. Samuel Croft füllte gerade das Geld in die Banktasche um, als sein Blick den von Rose Callaway traf, die in der Tür stand. Zwei Tage später gab Rose einem Schreiber einen Penny für einen Brief an die Zeitung. Der Brief blieb ungeöffnet und ging im Stapel der „Knotsman“-Zuschriften unter.",
 "16lvd4vduju": "In der Nacht des 27. wusste Croft, wann der Constable wo vorbeikam. Um 1:25 Uhr schloss er das Hinterzimmer ab, ging hinaus und zeigte Rose auf den Kirchenstufen seine weiße Armbinde und seine Handlaterne. „Ich bring Sie heim.“ Rose vertraute der Laterne der Bürgerwehr. Den Hahn der Gaslaterne hinten im Court hatte er vorher schon mehrmals probeweise zugedreht.",

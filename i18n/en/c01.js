@@ -718,6 +718,8 @@ MG.I18N.put("en", "c01", {
 "lyd009xau3": "At that hour, the culprit was not where they claimed to be",
 "gbnp81ga9c": "Something only the culprit could have known",
 "a16h21lxi5": "Motive",
+"1fuqiwrixdf": "One thing doesn't fit. Who looked after the fund isn't a motive on its own. What happened to that money, and who knew?",
+"26huo70pklr": "One thing doesn't fit. The Reward Fund ledger is among the seized books, and the statement ran in the paper's notices. Did the money counted on Tuesday night all go into the bank on Wednesday morning?",
 "1fdn0dp3h2e": "1888-Q-341 · Reviewed",
 "jdll29s07l": "Wednesday morning, 24 October, the back room of the Three Keys. Moving the money into the bank bag, Samuel Croft looked up and met the eyes of Rose Callaway, standing in the doorway. Two days later Rose paid a scrivener a penny to write to the newspaper, and the letter was buried, unopened, in the heap of “Knotsman” letters.",
 "16lvd4vduju": "On the night of the 27th, Croft knew where the constable would pass, and how many minutes apart. At 1:25 he locked the back room, went out, and showed Rose on the church steps his white armband and his hand lantern. “I'll see you home.” Rose trusted the vigilance men's lantern. The tap on the lamp at the far end of the court was one he had turned off several times before.",
