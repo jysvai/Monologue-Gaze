@@ -169,8 +169,33 @@
   "v": "lily eleven_v4_turbo 0.95 0.35 [nervous]",
   "p": 1
  },
+ "v/c03/p_seo/k_changgeuk": {
+  "t": "…아홉 시 오십 분에야 시작했다고? 그럼… 내가 시계를 잘못 봤나 보오. 덧문 닫은 게 열 시 가까이였는지도 모르지.",
+  "v": "eric eleven_v4_turbo 0.93 0.4 [hesitant]",
+  "p": 1
+ },
+ "v/c03/p_seo/k_changgeuk.1": {
+  "t": "9시 40분에 종로 3정목에서 전차를 타셨다고 하셨지요. 열 시 가까이 가게에 계셨다면 그 전차는 못 타십니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
  "v/c03/p_seo/k_debtbook": {
   "t": "250원… 그래, 빌렸소. 5일이 기한이었고. 그래서 뭐요? 갚을 참이었소. 형님이 도와주기로 했으니.",
+  "v": "eric eleven_v4_turbo 0.93 0.4 [hesitant]",
+  "p": 1
+ },
+ "v/c03/p_seo/k_nov4": {
+  "t": "최 씨 부인이 잘못 봤겠지. 난 아홉 시 반까지 가게에 있었소.",
+  "v": "eric eleven_v4_turbo 0.93 0.4 [hesitant]",
+  "p": 1
+ },
+ "v/c03/p_seo/k_nov4.1": {
+  "t": "아홉 시 조금 넘어 덧문은 닫혀 있고 불도 꺼져 있었답니다. 송학여관 대문에서 훤히 보인다더군요.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c03/p_seo/k_nov4.2": {
+  "t": "…불은 일찍 껐소. 안쪽 작업실에서 마무리를 하느라. 그게 무슨 죄요.",
   "v": "eric eleven_v4_turbo 0.93 0.4 [hesitant]",
   "p": 1
  },
@@ -187,6 +212,21 @@
  "v/c03/p_seo/k_radio.1": {
   "t": "보춘당엔 축음기가 없었습니다. 점원도 그렇게 말했고요.",
   "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c03/p_seo/k_seobrother": {
+  "t": "…형님이 그렇게 보냈소?",
+  "v": "eric eleven_v4_turbo 0.93 0.4 [hesitant]",
+  "p": 1
+ },
+ "v/c03/p_seo/k_seobrother.1": {
+  "t": "무슨 돈이냐. 알려 다오. 평양에서 온 답전입니다. 형님은 돈을 만들어 준 적이 없습니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]",
+  "p": 1
+ },
+ "v/c03/p_seo/k_seobrother.2": {
+  "t": "…형님은 아무것도 모르오. 형님까지 끌어들이지 마시오.",
+  "v": "eric eleven_v4_turbo 0.93 0.4 [hesitant]",
   "p": 1
  },
  "v/c03/p_seo/k_telegram.1": {
@@ -216,6 +256,11 @@
  },
  "v/c04/p_okabe/k_flagman": {
   "t": "…그래요, 25일에 물었소. 깃발 든 젊은 친구한테. 28일 아침에도 이리 가야 하나, 그날은 상여금이라 짐이 무겁다 하고. 그냥 푸념이었소.",
+  "v": "roger eleven_v4_turbo 0.95 0.4 [tired]",
+  "p": 1
+ },
+ "v/c04/p_okabe/k_irie": {
+  "t": "이리에? …그 깃발 든 젊은 친구 이름이오? 이름은 몰랐소. 교차로에서 몇 번 얼굴만 봤지.",
   "v": "roger eleven_v4_turbo 0.95 0.4 [tired]",
   "p": 1
  },
