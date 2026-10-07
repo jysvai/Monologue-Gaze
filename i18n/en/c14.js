@@ -113,6 +113,7 @@ MG.I18N.put("en", "c14", {
 "2d0l2cf0qiy": "Sign-up and verification details · access logs · purchases and withdrawals · time the withdrawal lock lifts",
 "xsguijt159": "Nothing shows that the exchange account is linked to the victim's money.",
 "legmz82qqw": "CoinNaru replied. The withdrawal lock lifts at 12:31 p.m. on the 19th. We have to get there with a warrant before that to freeze the account.",
+"7notjbogtz": "CoinNaru replied. The withdrawal lock already lifted at 12:31 p.m. on the 19th. The account will be empty.",
 "19xgdrsjid2": "Cooperation request to delivery agency HQ · Dispatch records",
 "1syi0c16j0t": "Dallim Call Inc. HQ, Operations Team (Seoul)",
 "174p8vjh1e9": "[[Dallim Call|k_dalim]] Solmae branch · dispatch records for the morning of Nov 18",

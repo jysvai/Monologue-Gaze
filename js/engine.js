@@ -907,8 +907,9 @@
         q.st = 'done';
         if (!ST.unl.includes(r.id)) ST.unl.push(r.id);
         (r.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
-        const who = (r.feed && r.feed.who) || r.from || plain(r.to || '') || T('회신'), msg = (r.feed && r.feed.msg) || T`회신 — ${plain(r.title)}`;
-        L.fx.push({ t: q.due, who, msg, doc: r.doc, src: (r.feed && r.feed.src) || null });
+        const fdl = C.live.deadline, rf = r.feedLate && fdl && q.due > fdl.at ? r.feedLate : r.feed; // 기한을 넘겨 온 회신은 「그 전에 가야 한다」 대신 이미 늦었다는 말로
+        const who = (rf && rf.who) || r.from || plain(r.to || '') || T('회신'), msg = (rf && rf.msg) || T`회신 — ${plain(r.title)}`;
+        L.fx.push({ t: q.due, who, msg, doc: r.doc, src: (rf && rf.src) || null });
         news.push({ who, msg, app: r.app || T('회신'), t: 'doc', id: r.doc, src: r.src, at: q.due });
         continue;
       }

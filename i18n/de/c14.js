@@ -113,6 +113,7 @@ MG.I18N.put("de", "c14", {
 "2d0l2cf0qiy": "Registrierungs- und Verifizierungsdaten · Log-ins · Käufe und Auszahlungen · Zeitpunkt der Auszahlungssperre",
 "xsguijt159": "Es ist nicht begründet, dass dieses Börsenkonto mit dem Schadensgeld zusammenhängt.",
 "legmz82qqw": "CoinNaru hat geantwortet. Die Auszahlungssperre endet am 19. um 12:31 mittags. Nur wenn wir vorher mit einem Beschluss dort sind, wird das Konto eingefroren.",
+"7notjbogtz": "CoinNaru hat geantwortet. Die Auszahlungssperre ist am 19. um 12:31 mittags schon abgelaufen. Das Konto wird leer sein.",
 "19xgdrsjid2": "Auskunftsersuchen an Lieferdienst-Zentrale · Dispositionsdaten",
 "1syi0c16j0t": "Dallim-Call GmbH, Zentrale, Betriebsteam (Seoul)",
 "174p8vjh1e9": "[[Dallim-Call|k_dalim]] Filiale Solmae · Dispositionsdaten 18.11. vormittags",
