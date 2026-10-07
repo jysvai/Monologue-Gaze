@@ -2040,10 +2040,11 @@
     const solvedAny = MG.cases.some(c => S.cases[c.id] && S.cases[c.id].solved); // 연습 사건(CASE 00)만 닫은 사람에게도: 긴 사건 하나를 끝까지 가는 사람은 적다
     const rate = solvedAny && !S.rateOff ? `<p class="cab-rate">${T('재미있으셨다면 <a href="https://jysvai.itch.io/monologue-gaze/rate?source=game" target="_blank" rel="noopener">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 평가가 쌓이면 itch 목록에 더 자주 뜹니다.')}<button type="button" class="cab-rate-x" data-rate-off aria-label="${T('이 안내 닫기')}">×</button></p>` : '';
     const hero = MG.images['_global/hero'];
+    // 종결·현행·M의 메모 셈은 연습 사건 다음 사건을 연 뒤부터: 처음 온 사람에게 「종결 0 / 12」는 뜻 모를 숫자다 (연습 사건은 셈에 들지 않는다)
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
       <header class="cab-top"><p class="cab-kicker">${T`서울서부경찰서 강력2팀 · 미제사건 기록실`}</p><h1 class="cab-title">Monologue Gaze</h1><p class="cab-sub">${T`시간은 흐르지만, 새겨진 기록은 거짓말을 하지 않는다.`}</p>
-        <p class="cab-ctl">${whoBtn(showRoster)}${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}${langSel()}</p><p class="cab-stat">${T`종결 <b>${solvedMain}</b> / ${main.length}${live.length ? T` · 현행 사건 <b>${solvedLive}</b> / ${live.length}` : ''} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}`}</p>${rate}</header>
+        <p class="cab-ctl">${whoBtn(showRoster)}${soundBtn()}${MG.cases.some(c => c.graphic) ? mildBtn() : ''}${langSel()}</p>${MG.cases.some(c => c.kind !== 'tutorial' && S.cases[c.id]) ? `<p class="cab-stat">${T`종결 <b>${solvedMain}</b> / ${main.length}${live.length ? T` · 현행 사건 <b>${solvedLive}</b> / ${live.length}` : ''} · M의 메모 <b>${mList.length}</b> / ${MG.cases.filter(c => c._m).length}`}</p>` : ''}${rate}</header>
       ${showRoster ? rosterHtml(showRoster === 'ask') : ''}
       ${intro}
       <section class="drawer" aria-label="${T`사건 파일`}">${MG.cases.filter(c => !c.live).map(folder).join('')}</section>
