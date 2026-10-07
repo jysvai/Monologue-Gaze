@@ -569,6 +569,7 @@ MG.I18N.put("de", "c04", {
 "13n1w8dqeog": "Ehemaliger Buchhalter bei Hinosawa Elektrik (35) · jetzt in Yokohama beschäftigt",
 "gfjtj2kv13": "Untermietzimmer in Yokohama",
 "1klseqin3p4": "Schon wieder diese Geschichte? Man hat mich im März rausgeworfen, und jetzt lebe ich in [[Yokohama|k_yokohama]].",
+"ssolbd2d4s": "Im März haben sie mich entlassen. Und die Abfindung falsch berechnet. Groll? …Wenn Sie so wollen. Aber ich gehöre nicht mehr zu der Firma.",
 "1njvhh24qfd": "An dem Tag habe ich um 8 Uhr morgens in der Fabrik in Yokohama meine Stempelkarte gestempelt. Fragen Sie nach. Das haben Sie ja wohl schon.",
 "1f471juj8xg": "Ja, ich war Stammgast im Angela. Solange ich in Mizuo gewohnt habe, jeden Tag. Von diesen Streichhölzern haben die am Bahnhof bestimmt Tausende Schachteln verteilt.",
 "28qi4dntleo": "„3 · 7“? Keine Ahnung. Wissen Sie, wie viele Leute Telefonnummern auf Café-Streichhölzer schreiben?",

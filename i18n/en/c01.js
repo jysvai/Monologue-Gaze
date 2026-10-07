@@ -514,6 +514,7 @@ MG.I18N.put("en", "c01", {
 "klf6irn5a7": "Dock labourer · the victim's former companion · in custody",
 "9itcd2xisu": "Cells, Q Division station",
 "c2o6yxl77s": "(rubs the anchor tattoo on the back of his hand) I never laid a finger on Rose. We had words that night, right enough. She asked me for fourpence and I said I hadn't got it. Because I hadn't.",
+"buitfc3izm": "(Jerks his chin at the bars) This is the Q Division lock-up. The police have got me down as the man who did it.",
 "16nqvtzka20": "Didn't know those women. Only heard the talk going round the docks.",
 "1kmxe7ob8ys": "Brown shawl, that's Rose's. Winter and summer, she got by on that one.",
 "1ofaygo9041": "Two years we lived together. If I'd only kept off the drink… (shakes his head) She said she was scrubbing other people's floors these days. Said something about seeing something, about telling the newspaper. I never paid it any mind.",

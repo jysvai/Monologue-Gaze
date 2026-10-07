@@ -514,6 +514,7 @@ MG.I18N.put("de", "c01", {
 "klf6irn5a7": "Hafenarbeiter · früherer Lebensgefährte des Opfers · in Haft",
 "9itcd2xisu": "Zellen der Q-Division",
 "c2o6yxl77s": "(Reibt die Anker-Tätowierung auf seinem Handrücken) Ich hab Rose nicht angerührt, keinen Finger. Dass wir uns in der Nacht gestritten haben, stimmt. Sie wollte 4 Pence, ich hab gesagt, ich hab keine. Ich hatte ja wirklich keine.",
+"buitfc3izm": "(Deutet mit dem Kinn auf die Gitter) Das hier ist die Arrestzelle der Q-Division. Die Polizei hat mich längst als Täter abgestempelt.",
 "16nqvtzka20": "Die Frauen kannte ich nicht. Hab nur gehört, was an den Docks so geredet wurde.",
 "1kmxe7ob8ys": "Ein brauner Schal, das ist der von Rose. Winter wie Sommer ist sie mit dem einen ausgekommen.",
 "1ofaygo9041": "Zwei Jahre haben wir zusammengelebt. Wenn ich bloß mit dem Saufen aufgehört hätte… (Schüttelt den Kopf) Zuletzt hat sie gesagt, sie schrubbt in fremden Häusern die Böden. Irgendwas hätte sie gesehen, und sie wollte es der Zeitung melden oder so, aber ich hab nicht hingehört.",

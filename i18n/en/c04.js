@@ -569,6 +569,7 @@ MG.I18N.put("en", "c04", {
 "13n1w8dqeog": "Former accounts clerk, Hinosawa Electric (35) · now working in Yokohama",
 "gfjtj2kv13": "Lodgings in Yokohama",
 "1klseqin3p4": "This again? I was fired in March, and I live in [[Yokohama|k_yokohama]] now.",
+"ssolbd2d4s": "They fired me in March. And they botched my severance pay. A grudge? …I suppose you could call it that. But I'm not one of theirs any more.",
 "1njvhh24qfd": "That day I punched my time card at the Yokohama plant at 8 in the morning. Check it. Though you already have, I expect.",
 "1f471juj8xg": "Yes, I was a regular at the Angela. Went every day when I lived in Mizuo. They must have handed out thousands of those matchboxes in front of the station.",
 "28qi4dntleo": "「3 · 7」? How would I know? Do you know how many people jot phone numbers on coffee-shop matches?",
