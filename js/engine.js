@@ -2712,6 +2712,8 @@
       VERDICT = wrong === 1 ? (badCl.length === 1 && ((ST.tries >= 2 && badCl[0].near2) || badCl[0].near)) || sol.near || T('딱 한 군데가 어긋난다.') : sol.far || T('아직 이야기가 이어지지 않는다. 더 쫓아가 보자.');
       // ★3 은 한 칸만 남았을 때 그 칸을 짚어 준다. 여러 칸이 틀렸을 때까지 칸을 알려 주면 칸마다 메모를 바꿔 끼워 찍기로 풀린다 (연습 사건만 전부 알려 준다)
       if (lv() <= 3 && (wrong === 1 || C.kind === 'tutorial')) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`;
+      // 연습 사건은 여러 칸이 틀려도 칸마다 무엇을 대야 하는지 한 줄씩 (칸 번호만 보고 되는 대로 바꿔 끼우며 배우지 않게)
+      if (C.kind === 'tutorial' && wrong > 1) VERDICT += [ST.report.culprit !== sol.culprit && sol.culpritTip ? `${fm.short} — ${sol.culpritTip}` : '', ...badCl.map(cl => cl.tip ? `${T`${sol.claims.indexOf(cl) + 1}번`} — ${cl.tip}` : '')].filter(Boolean).map(x => '\n' + x).join('');
       else if (ST.tries >= 3 && wrong === 1) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`; // ★4: 세 번째부터는 한 칸 남았을 때 그 칸을
       else if (ST.tries >= 2 && wrong > 1) VERDICT += T` (어긋난 곳: ${wrong}군데)`;
     }

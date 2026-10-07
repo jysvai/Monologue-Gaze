@@ -412,7 +412,7 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 .btn-hand{height:30px;padding:0 16px;border:0;border-radius:2px;background:var(--ink);color:var(--paper);font:21px/30px var(--f-hand);transform:rotate(-1deg);cursor:pointer}
 @media (hover:hover){.btn-hand:hover{background:#34405a}}
 .tries{font-size:17px;color:var(--pencil)}
-.verdict{margin:0;min-height:32px;color:var(--red)}
+.verdict{margin:0;min-height:32px;color:var(--red);white-space:pre-line}
 /* 막혔을 때 짚어 보기: 연필로 흐리게 적어 둔 한 줄 (보고서 칸 밑) */
 .nudge-btn,.nudge-more,.nudge-go{padding:0;border:0;background:none;color:var(--pencil);font:19px/32px var(--f-hand);text-decoration:underline dashed rgba(101,95,82,.55);text-underline-offset:5px;cursor:pointer}
 @media (hover:hover){.nudge-btn:hover,.nudge-more:hover,.nudge-go:hover{color:var(--ink)}}
