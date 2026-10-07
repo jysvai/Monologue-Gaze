@@ -591,9 +591,9 @@
     solution: {
       culprit: 'k_tak',
       claims: [
-        { id: 'c1', q: '생존자의 기억과 맞아떨어지는 집', accept: ['f_house_match', 'f_sticker_gone', 'f_stairs_photo', 'f_sticker_photo', 'f_landing_marks', 'f_home_workshop', 'f_call'] },
-        { id: 'c2', q: '그날 밤 생존자가 그 집까지 따라간 까닭', accept: ['f_sms_parcel', 'f_parcel_sora'] },
-        { id: 'c3', q: '앞선 두 피해자와 범인을 잇는 기록', accept: ['f_parcel_haeun', 'f_frame_seon'] },
+        { id: 'c1', q: '생존자의 기억과 맞아떨어지는 집', accept: ['f_house_match', 'f_sticker_gone', 'f_stairs_photo', 'f_sticker_photo', 'f_landing_marks', 'f_home_workshop', 'f_call'], near: '딱 한 군데가 어긋난다. 생존자가 기억한 것 — 계단, 스티커, 들린 소리 — 이 그대로 들어맞는 집이라는 기록인가?' },
+        { id: 'c2', q: '그날 밤 생존자가 그 집까지 따라간 까닭', accept: ['f_sms_parcel', 'f_parcel_sora'], near: '딱 한 군데가 어긋난다. 그날 밤 생존자가 그 집까지 간 건 무엇 때문이었나? 생존자를 불러낸 연락이 있었나.' },
+        { id: 'c3', q: '앞선 두 피해자와 범인을 잇는 기록', accept: ['f_parcel_haeun', 'f_frame_seon'], near: '딱 한 군데가 어긋난다. 앞선 두 피해자에게도 범인과 닿은 흔적이 있는가? 같은 방식이었는지.' },
         { id: 'c4', q: '범인이 댄 그날 밤 행적은 사실이 아니다', accept: ['f_call', 'f_shop_closed'], near: '딱 한 군데가 어긋난다. 그 사람은 그 밤 어디에 있었다고 했는가. 그 시각, 그 자리에 그가 없었다는 기록이 있는가?' },
       ],
       stamp: '사건 2006-은천-0412 · 재검토',

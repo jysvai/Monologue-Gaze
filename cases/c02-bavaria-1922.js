@@ -605,8 +605,8 @@
       culprit: 'k_knauer',
       claims: [
         { id: 'c1', q: '네 사람이 숨진 때를 가리키는 기록', accept: ['f_milk', 'f_unpacked', 'f_calendar', 'f_lock', 'f_thekla_arrive', 'f_church'], near: '딱 한 군데가 어긋난다. 몇 시였는지가 아니라 어느 날이었는지 — 그 날짜를 못 박는 기록인가?' },
-        { id: 'c2', q: '네 사람이 숨진 뒤에도 농가에 누가 있었다는 기록', accept: ['f_paper_taken', 'f_smoke', 'f_fed', 'f_bread', 'f_after_tracks'] },
-        { id: 'c3', q: '범인이 스스로 댄 행적과 어긋나는 기록', accept: ['f_inn', 'f_hut', 'f_tl_monday'] },
+        { id: 'c2', q: '네 사람이 숨진 뒤에도 농가에 누가 있었다는 기록', accept: ['f_paper_taken', 'f_smoke', 'f_fed', 'f_bread', 'f_after_tracks'], near: '딱 한 군데가 어긋난다. 네 사람이 숨진 뒤에도 농가 일이 돌아갔다는 기록인가? 누가 굴뚝에 연기를 올리고, 가축을 먹이고, 우편함을 비웠나.' },
+        { id: 'c3', q: '범인이 스스로 댄 행적과 어긋나는 기록', accept: ['f_inn', 'f_hut', 'f_tl_monday'], near: '딱 한 군데가 어긋난다. 발렌틴 크나우어는 그 주에 어디에 있었다고 했나? 그 말과 맞지 않는 날짜가 적힌 기록인가?' },
         { id: 'c4', q: '동기', accept: ['f_hausbuch', 'f_kasten'], near: '딱 한 군데가 어긋난다. 지폐 다발은 손도 대지 않았다. 그렇다면 금고에서 무엇이 빠졌는가, 숲값은 어떻게 치르기로 했는가?' },
       ],
       stamp: 'Tgb.-Nr. 41/1923 · 재검토',

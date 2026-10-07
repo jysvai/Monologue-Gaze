@@ -426,9 +426,9 @@
       culprit: 'k_irie',
       claims: [
         { id: 'c1', q: '범인은 그날 수송차가 그 길을 지난다는 것을 어떻게 알았나', accept: ['f_log25', 'f_driver_flag', 'f_log20'], near: '딱 한 군데가 어긋난다. 그 메모로, 범인이 28일 아침 수송차가 그 길로 온다는 걸 알 수 있었다고 말할 수 있는가?', near2: '딱 한 군데가 어긋난다. 범인은 28일 아침 일을 누군가에게서 미리 들었을 것이다. 깃발 든 사람들은 길에서 받은 물음을 어디에 적어 두었나?' },
-        { id: 'c2', q: '가짜 백바이와 범인을 잇는 흔적', accept: ['f_paint', 'f_shop_paint', 'f_paint_ours', 'f_box_sign', 'f_fake_addr'] },
-        { id: 'c3', q: '사건 당일 오전 9시 무렵, 범인의 행적', accept: ['f_absent', 'f_irie_sick', 'f_log_blank'] },
-        { id: 'c4', q: '협박장과 범인을 잇는 흔적', accept: ['f_postmark', 'f_letter_paint', 'f_stencil_ours', 'f_site_post'] },
+        { id: 'c2', q: '가짜 백바이와 범인을 잇는 흔적', accept: ['f_paint', 'f_shop_paint', 'f_paint_ours', 'f_box_sign', 'f_fake_addr'], near: '딱 한 군데가 어긋난다. 가짜 백바이를 칠하고 꾸민 손이 누구 것인가 — 그 페인트와 그 물건이 어디서 나왔나?' },
+        { id: 'c3', q: '사건 당일 오전 9시 무렵, 범인의 행적', accept: ['f_absent', 'f_irie_sick', 'f_log_blank'], near: '딱 한 군데가 어긋난다. 사건 당일 아침 9시 무렵 범인은 어디에 있다고 되어 있었고, 실제로 그 자리에 있었나?' },
+        { id: 'c4', q: '협박장과 범인을 잇는 흔적', accept: ['f_postmark', 'f_letter_paint', 'f_stencil_ours', 'f_site_post'], near: '딱 한 군데가 어긋난다. 협박장의 종이·소인·글자 모양 가운데, 범인 곁에서 나온 것이 있는가?' },
       ],
       near: '딱 한 군데가 어긋난다. 그 메모가 정말 그 사람을 가리키는가?',
       stamp: '水尾署 特捜 43-017 · 재검토',

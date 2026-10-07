@@ -466,10 +466,10 @@
     solution: {
       culprit: 'k_bang',
       claims: [
-        { id: 'c1', q: '피해자를 다시 밖으로 불러낸 마지막 연락', accept: ['f_lastcall', 'f_chat_wife', 'f_base_call'] },
+        { id: 'c1', q: '피해자를 다시 밖으로 불러낸 마지막 연락', accept: ['f_lastcall', 'f_chat_wife', 'f_base_call'], near: '딱 한 군데가 어긋난다. 피해자가 그 밤 다시 밖으로 나간 건 누구의 연락 때문이었나? 마지막 통화나 메시지.' },
         { id: 'c2', q: '마지막 전화를 건 번호의 주인', accept: ['f_num_match', 'f_bang_daeri', 'f_bang_call'], near: '딱 한 군데가 어긋난다. 번호만으로는 사람이 나오지 않는다. 그 번호 옆에 이름이 같이 적힌 기록이 있는가?' },
-        { id: 'c3', q: '그날 밤 범인의 행적', accept: ['f_gate_out', 'f_hipass', 'f_tl_night'] },
-        { id: 'c4', q: '동기', accept: ['f_chat_threat', 'f_memo_origin', 'f_audit'] },
+        { id: 'c3', q: '그날 밤 범인의 행적', accept: ['f_gate_out', 'f_hipass', 'f_tl_night'], near: '딱 한 군데가 어긋난다. 그날 밤 범인이 어디로 나가 어디를 지났는지 찍힌 기록인가?' },
+        { id: 'c4', q: '동기', accept: ['f_chat_threat', 'f_memo_origin', 'f_audit'], near: '딱 한 군데가 어긋난다. 범인이 피해자 때문에 잃게 될 것이 무엇이었나? 둘 사이에 오간 말이나 서류.' },
       ],
       stamp: '사건 2014-해진-1187 · 재검토',
       epilogue: [
