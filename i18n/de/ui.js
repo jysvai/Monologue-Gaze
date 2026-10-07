@@ -143,6 +143,8 @@ MG.I18N.put("de", "ui", {
 "도착한 회신": "Eingegangene Antworten",
 "접수": "Eingang",
 "회신 전에 사건 종결": "Fall vor der Antwort abgeschlossen",
+"회신 전에 종결": "Vor der Antwort abgeschlossen",
+"다시 올리면 재검토에 1시간이 더 든다.": "Ein neuer Antrag kostet eine Stunde mehr für die Prüfung.",
 "회신 예정 {0} <small>({1} 뒤)</small>": "Antwort erwartet: {0} <small>(in {1})</small>",
 "접수 {0} · {1}": "Eingang {0} · {1}",
 "회신 {0}": "Beantwortet {0}",

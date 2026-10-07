@@ -143,6 +143,8 @@ MG.I18N.put("en", "ui", {
 "도착한 회신": "Replies received",
 "접수": "Filed",
 "회신 전에 사건 종결": "Case closed before the reply",
+"회신 전에 종결": "Closed before the reply",
+"다시 올리면 재검토에 1시간이 더 든다.": "Filing it again adds an hour for review.",
 "회신 예정 {0} <small>({1} 뒤)</small>": "Reply due {0} <small>(in {1})</small>",
 "접수 {0} · {1}": "Filed {0} · {1}",
 "회신 {0}": "Replied {0}",

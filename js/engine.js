@@ -1103,7 +1103,7 @@
     const btn = (r, meta, cls) => `<button type="button" class="item rq-i${cls ? ' ' + cls : ''}${o && o.t === 'req' && o.id === r.id ? ' on' : ''}" data-req="${esc(r.id)}"><span class="item-t">${esc(plain(r.title))}</span><span class="item-m">${meta}</span></button>`;
     const draft = items.filter(r => !st(r) || st(r).st === 'no'), wait = items.filter(r => st(r) && st(r).st === 'wait'), done = items.filter(r => st(r) && st(r).st === 'done');
     return `${draft.length ? `<p class="res-n">${ST.solved ? T('올리지 않은 신청서') : T('쓸 수 있는 신청서')}</p>${draft.map(r => btn(r, `${esc(r.kind || T('요청'))}${ST.solved ? '' : T` · 회신까지 약 ${hm(r.eta != null ? r.eta : 120)}`}${st(r) ? T(' · 기각됨') : ''}`, st(r) ? 'no' : '')).join('')}` : ''}
-      ${wait.length ? `<p class="res-n">${T`회신 기다리는 중`}</p>${wait.map(r => btn(r, T`회신 예정 ${esc(lstamp(st(r).due))}`, 'wait')).join('')}${waitRow(T('회신 기다리기'))}` : ''}
+      ${wait.length ? `<p class="res-n">${ST.solved ? T('회신 전에 종결') : T`회신 기다리는 중`}</p>${wait.map(r => btn(r, ST.solved ? T('회신 전에 사건 종결') : T`회신 예정 ${esc(lstamp(st(r).due))}`, 'wait')).join('')}${waitRow(T('회신 기다리기'))}` : ''}
       ${done.length ? `<p class="res-n">${T`도착한 회신`}</p>${done.map(r => (C.docs[r.doc] ? itemBtn(C.docs[r.doc]) : '')).join('')}` : ''}`;
   }
   function requestHtml(r) {
@@ -1117,7 +1117,7 @@
     else {
       const sel = tmp().rq[r.id] != null ? tmp().rq[r.id] : ''; // 신청서마다 고른 소명 메모 (올리기 전)
       const pick = !why ? '' : `<section class="rq-why"><h4 id="rqh-${esc(r.id)}">${T`소명 자료 <small>이 요청이 왜 필요한지 보여 줄 메모 하나</small>`}</h4>${notes.length ? `<div role="radiogroup" aria-labelledby="rqh-${esc(r.id)}">` + noteGroups(notes).map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${String(sel) === String(n.id) ? ' on' : ''}"><input type="radio" name="rq-${esc(r.id)}" value="${n.id}" data-rq-pick="${esc(r.id)}"${String(sel) === String(n.id) ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span></label>`).join('')}</details>`).join('') + '</div>' : T('<p class="rep-empty">수첩에 메모가 없다. 근거가 될 문장을 먼저 적어 둔다.</p>')}</section>`;
-      const no = q && q.st === 'no' ? `<p class="rq-no">${T`<b>기각</b> ${inline(r.deny || T('소명이 부족하다.'))} <small>${esc(lstamp(q.at))}</small>`}</p>` : '';
+      const no = q && q.st === 'no' ? `<p class="rq-no">${T`<b>기각</b> ${inline(r.deny || T('소명이 부족하다.'))} <small>${esc(lstamp(q.at))}</small>`}${lv() >= 5 ? `<small class="rq-cost">${T('다시 올리면 재검토에 1시간이 더 든다.')}</small>` : ''}</p>` : '';
       foot = `${no}${pick}<p class="submit-row"><button type="button" class="btn-hand" data-rq-go="${esc(r.id)}">${esc(r.button || (q ? T('다시 신청하기') : T('신청서 올리기')))}</button><span class="c-msg"></span></p>`;
     }
     return `<article class="doc skin-${esc(r.skin || 'form')} rq"><header class="doc-h"><p class="doc-k">${esc(r.kind || T('수사 요청'))}</p><h3 class="doc-t">${inline(r.title)}</h3>${r.meta ? `<p class="doc-m">${inline(r.meta)}</p>` : ''}</header>
@@ -2712,7 +2712,7 @@
           box.innerHTML = solvedHtml(true); box.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' });
           if (document.activeElement === document.body) { box.tabIndex = -1; box.focus({ preventScroll: true }); } // 키보드로 올렸으면 결말부터 읽히게
         }
-        cue('solved', T('사건 종결')); say(T('사건 종결')); renderBar(); // 아래 줄의 시계도 「종결」로
+        cue('solved', T('사건 종결')); say(T('사건 종결')); renderBar(); renderList(); // 아래 줄의 시계도 「종결」로, 목록 칸의 「회신 기다리기」도 걷는다
         if (MG.sound) setTimeout(() => { if (C === c0 && ST === s0) MG.sound.hero('solved'); }, 2000);
       } else if (wrong === 0) toast(T('이미 닫힌 사건이다'));
       else {
@@ -2798,9 +2798,12 @@
         const kept = el.closest('#srcTabs') && document.activeElement && document.activeElement.closest && document.activeElement.closest('#srcTabs'); // 탭 줄을 다시 그려도 초점은 고른 탭에
         keepPos();
         ST.view.src = el.dataset.src;
-        const s = curSrc();
+        const s = curSrc(), o0 = ST.view.open;
+        // 탐문 탭을 떠나면 하던 대화는 접어 둔다 (다른 탭 목록 옆에 남은 질문 칩으로 엉뚱한 사람에게 묻지 않게). 탐문 탭으로 돌아오면 그 사람을 다시 편다
+        if (o0 && o0.t === 'person' && s.type !== 'people') { ST.view.lastP = o0.id; ST.view.open = null; }
         if (s.type === 'cipher' || s.type === 'timeline') ST.view.open = { t: s.type, id: s.id };
         else if (narrow()) ST.view.open = null;
+        else if (s.type === 'people' && !ST.view.open && ST.view.lastP && C.people[ST.view.lastP]) ST.view.open = { t: 'person', id: ST.view.lastP };
         else if (s.type === 'feed') ST.view.open = { t: 'feed', id: s.id }; // 단톡방 탭은 방이 하나뿐: 넓은 화면이면 누르자마자 방이 열린다 (읽기 칸에 사건 안내만 남지 않게)
         save(); renderTabs(); renderList(); renderRead();
         if (kept) { const on = $('#srcTabs .tab.on'); if (on) on.focus({ preventScroll: true }); }
