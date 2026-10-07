@@ -1872,6 +1872,7 @@
     caseFonts(c);
     if (c.graphic && !cs(c).cw) return warnScreen(c);
     C = c; ST = cs(c); VERDICT = '';
+    clearTimeout(toastTimer); const tb = document.getElementById('toast'); if (tb) tb.classList.remove('on'); // 앞 사건에서 뜬 알림(「메모 22번」 따위)이 다음 사건까지 따라오지 않게
     S.current = id; save();
     document.title = `CASE ${pad(c.no)} ${quote(c.title)} — Monologue Gaze`;
     renderCase();
