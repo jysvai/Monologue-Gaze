@@ -309,7 +309,7 @@ MG.I18N.put("zh", "ui", {
 "처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장": "第一次的话，从CASE 00开始。在那里学会怎么查案。——组长",
 "서랍을 연다": "打开抽屉",
 "서랍 맨 밑의 편지": "抽屉最底下的信",
-"재미있으셨다면 <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 평가가 쌓이면 itch 목록에 더 자주 뜹니다.": "如果觉得好玩，请<a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">在 itch.io 上打分</a>或留言。评分多了，游戏就更常出现在 itch 的列表里。",
+"재미있으셨다면 <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 별점이 쌓이면 다른 사람들도 이 기록실을 찾기 쉬워집니다.": "如果觉得好玩，请<a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">在 itch.io 上打分</a>或留言。评分多了，别人也更容易找到这间档案室。",
 "이 안내 닫기": "关闭此提示",
 "서울서부경찰서 강력2팀 · 미제사건 기록실": "首尔西部警察署重案二组 · 悬案档案室",
 "시간은 흐르지만, 새겨진 기록은 거짓말을 하지 않는다.": "时间会流逝，但刻下的记录不会说谎。",

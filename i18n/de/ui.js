@@ -309,7 +309,7 @@ MG.I18N.put("de", "ui", {
 "처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장": "Beim ersten Mal mit CASE 00 anfangen. Dort lernen, wie man ermittelt. — Teamleiter",
 "서랍을 연다": "Schublade öffnen",
 "서랍 맨 밑의 편지": "Der Brief ganz unten in der Schublade",
-"재미있으셨다면 <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 평가가 쌓이면 itch 목록에 더 자주 뜹니다.": "Wenn es Ihnen gefallen hat, <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">bewerten Sie das Spiel auf itch.io</a> oder hinterlassen Sie einen Kommentar. Mit mehr Bewertungen taucht das Spiel öfter in den Listen von itch auf.",
+"재미있으셨다면 <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 별점이 쌓이면 다른 사람들도 이 기록실을 찾기 쉬워집니다.": "Wenn es Ihnen gefallen hat, <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">bewerten Sie das Spiel auf itch.io</a> oder hinterlassen Sie einen Kommentar. Mit mehr Bewertungen finden auch andere dieses Archiv leichter.",
 "이 안내 닫기": "Hinweis schließen",
 "서울서부경찰서 강력2팀 · 미제사건 기록실": "Polizeirevier Seoul-Seobu, Gewaltdezernat, Team 2 · Archiv ungelöster Fälle",
 "시간은 흐르지만, 새겨진 기록은 거짓말을 하지 않는다.": "Die Zeit vergeht, doch was einmal festgehalten ist, lügt nicht.",

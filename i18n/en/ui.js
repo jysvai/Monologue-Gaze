@@ -309,7 +309,7 @@ MG.I18N.put("en", "ui", {
 "처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장": "If this is your first time, start with CASE 00. Learn how to investigate there. — Team leader",
 "서랍을 연다": "Open the drawer",
 "서랍 맨 밑의 편지": "The letter at the bottom of the drawer",
-"재미있으셨다면 <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 평가가 쌓이면 itch 목록에 더 자주 뜹니다.": "If you enjoyed it, please <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">rate it on itch.io</a> or leave a comment. Ratings help the game show up more often in itch's lists.",
+"재미있으셨다면 <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 별점이 쌓이면 다른 사람들도 이 기록실을 찾기 쉬워집니다.": "If you enjoyed it, please <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">rate it on itch.io</a> or leave a comment. Ratings help other people find this records room.",
 "이 안내 닫기": "Close this note",
 "서울서부경찰서 강력2팀 · 미제사건 기록실": "Seoul Seobu Police Station, Violent Crimes Unit 2 · Cold Case Records Room",
 "시간은 흐르지만, 새겨진 기록은 거짓말을 하지 않는다.": "Time passes, but what is set down in the record does not lie.",
