@@ -562,7 +562,7 @@ MG.I18N.put("en", "c10", {
 "ojl5xv7ntz": "(Squares up the papers on his desk) I don't know about that. Ask me anything else you like.",
 "1hv2eg0o5su": "The last contact that drew the victim back out",
 "y2t63cdyuq": "Whose number made the last call",
-"1sc2is2kkvg": "One claim is wrong. A number alone doesn't give you a person. Is there a record with a name written next to that number?",
+"1sc2is2kkvg": "One thing doesn't fit. A number alone doesn't give you a person. Is there a record with a name written next to that number?",
 "184xqn8k9pw": "The culprit's movements that night",
 "a16h21lxi5": "Motive",
 "29gb6txgubu": "Case 2014-Haejin-1187 · Reviewed",
