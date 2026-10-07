@@ -568,10 +568,10 @@
     solution: {
       culprit: 'k_seok',
       claims: [
-        { id: 'c1', q: '총이 발사된 자리', accept: ['f_angle', 'f_butt', 'f_backdoor_mud'] },
-        { id: 'c2', q: '총성이 울린 시각', accept: ['f_bang_tv', 'f_tv_sched', 'f_patrol_bang', 'f_recon_bang'] },
-        { id: 'c3', q: '그 시각 범인은 자기가 말한 자리에 없었다', accept: ['f_sw_noanswer', 'f_songhak_left', 'f_driver_key', 'f_patrol', 'f_mud', 'f_recon_gap', 'f_seok_smokes'] },
-        { id: 'c4', q: '운전사가 시인하고 입을 닫은 까닭', accept: ['f_landlord_call', 'f_wife_envelope', 'f_mansik_school', 'f_jeonse'] },
+        { id: 'c1', q: '총이 발사된 자리', accept: ['f_angle', 'f_butt', 'f_backdoor_mud'], near: '딱 한 군데가 어긋난다. 조서대로라면 운전석에서 쏜 것이다. 총알이 들어간 방향과 차 안에 남은 것은 다른 자리를 말하지 않나?' },
+        { id: 'c2', q: '총성이 울린 시각', accept: ['f_bang_tv', 'f_tv_sched', 'f_patrol_bang', 'f_recon_bang'], near: '딱 한 군데가 어긋난다. 차 시계가 아니라, 그 소리를 들은 사람들이 무엇에 맞춰 시각을 기억했나?' },
+        { id: 'c3', q: '그 시각 범인은 자기가 말한 자리에 없었다', accept: ['f_sw_noanswer', 'f_songhak_left', 'f_driver_key', 'f_patrol', 'f_mud', 'f_recon_gap', 'f_seok_smokes'], near: '딱 한 군데가 어긋난다. 석태호는 송월각 방에 있었다고 했다. 그 시각 그 자리를 비웠다는 기록인가?' },
+        { id: 'c4', q: '운전사가 시인하고 입을 닫은 까닭', accept: ['f_landlord_call', 'f_wife_envelope', 'f_mansik_school', 'f_jeonse'], near: '딱 한 군데가 어긋난다. 강만식이 입을 닫은 까닭은 겁보다 식구였다. 사건 뒤 그 집에 무엇이 들어왔나?' },
       ],
       stamp: '서하서 71-형-1022 · 재검토',
       epilogue: [

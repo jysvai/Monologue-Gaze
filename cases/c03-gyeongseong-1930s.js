@@ -469,10 +469,10 @@
     solution: {
       culprit: 'k_seo',
       claims: [
-        { id: 'c1', q: '9시 무렵 보춘당에서 들렸다는 「여자 목소리」의 정체', accept: ['f_listing', 'f_song_aired', 'f_kang_waiting', 'f_voice_song', 'f_voice_stop', 'f_outage'] },
-        { id: 'c2', q: '범인의 진술 가운데 사실일 수 없는 것', accept: ['f_outage', 'f_changgeuk_late', 'f_shutter', 'f_seo_claim', 'f_no_gramophone'] },
-        { id: 'c3', q: '그날 밤 뒤 범인에게 생긴 돈', accept: ['f_pawn_redeem', 'f_seo_wire', 'f_brother_reply', 'f_cafe_pay'] },
-        { id: 'c4', q: '동기', accept: ['f_debt', 'f_kang_wire', 'f_forfeit'] },
+        { id: 'c1', q: '9시 무렵 보춘당에서 들렸다는 「여자 목소리」의 정체', accept: ['f_listing', 'f_song_aired', 'f_kang_waiting', 'f_voice_song', 'f_voice_stop', 'f_outage'], near: '딱 한 군데가 어긋난다. 그 목소리가 누구 것이었는지보다, 그 시각 보춘당 안에서 무엇이 소리를 냈는지 — 라디오에선 그때 무엇이 나가고 있었나?' },
+        { id: 'c2', q: '범인의 진술 가운데 사실일 수 없는 것', accept: ['f_outage', 'f_changgeuk_late', 'f_shutter', 'f_seo_claim', 'f_no_gramophone'], near: '딱 한 군데가 어긋난다. 서기룡이 그 밤에 대해 한 말 가운데, 다른 기록과 맞대 보면 틀어지는 대목인가?' },
+        { id: 'c3', q: '그날 밤 뒤 범인에게 생긴 돈', accept: ['f_pawn_redeem', 'f_seo_wire', 'f_brother_reply', 'f_cafe_pay'], near: '딱 한 군데가 어긋난다. 그 밤 뒤로 서기룡에게 돈이 생긴 흔적인가? 무엇을 되찾았고, 어디서 무엇으로 셈했나.' },
+        { id: 'c4', q: '동기', accept: ['f_debt', 'f_kang_wire', 'f_forfeit'], near: '딱 한 군데가 어긋난다. 이웃 사이 다툼만으로는 모자란다. 기한이 닥치면 서기룡은 강덕수에게 무엇을 잃게 될 참이었나?' },
       ],
       stamp: '소화 10년 1127호 · 재검토',
       epilogue: [

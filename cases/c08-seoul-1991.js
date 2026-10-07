@@ -613,10 +613,10 @@
     solution: {
       culprit: 'k_tak',
       claims: [
-        { id: 'c1', q: '협박 전화가 걸려 온 곳', accept: ['f_booth_saeteo', 'f_church_news', 'f_tl_sounds'] },
-        { id: 'c2', q: '범인은 전화가 걸려 온 날 그 공중전화 가까이에 있었다', accept: ['f_shop_owner', 'f_shop_ledger', 'f_attend'] },
-        { id: 'c3', q: '범인의 목소리와 말버릇', accept: ['f_foreman_shimai', 'f_tak_shimai', 'f_voiceprint', 'f_tape_shimai', 'f_victim_shimai'] },
-        { id: 'c4', q: '범인이 창고 문을 열 수 있었던 까닭', accept: ['f_key_unreturned', 'f_key_ledger'] },
+        { id: 'c1', q: '협박 전화가 걸려 온 곳', accept: ['f_booth_saeteo', 'f_church_news', 'f_tl_sounds'], near: '딱 한 군데가 어긋난다. 전화 너머로 들린 소리가 어디를 가리키나? 그 소리가 나는 곳은 이 동네에 하나뿐이다.' },
+        { id: 'c2', q: '범인은 전화가 걸려 온 날 그 공중전화 가까이에 있었다', accept: ['f_shop_owner', 'f_shop_ledger', 'f_attend'], near: '딱 한 군데가 어긋난다. 전화가 온 날, 범인이 그 공중전화 근처에 있었다는 기록인가? 날짜가 맞아야 한다.' },
+        { id: 'c3', q: '범인의 목소리와 말버릇', accept: ['f_foreman_shimai', 'f_tak_shimai', 'f_voiceprint', 'f_tape_shimai', 'f_victim_shimai'], near: '딱 한 군데가 어긋난다. 녹음된 목소리의 말버릇이 누구의 입버릇과 같은가?' },
+        { id: 'c4', q: '범인이 창고 문을 열 수 있었던 까닭', accept: ['f_key_unreturned', 'f_key_ledger'], near: '딱 한 군데가 어긋난다. 창고 자물쇠는 억지로 딴 게 아니다. 그 열쇠는 누구 손에 남아 있었나?' },
       ],
       stamp: '한울서 91-강력-1104 · 재검토',
       epilogue: [

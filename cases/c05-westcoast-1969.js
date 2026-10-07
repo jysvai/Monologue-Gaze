@@ -577,10 +577,10 @@
     solution: {
       culprit: 'k_brennan',
       claims: [
-        { id: 'c1', q: '편지들이 부쳐진 길과 범인', accept: ['f_roster7', 'f_swap'] },
-        { id: 'c2', q: '그날 밤 경찰에 걸려 온 전화와 범인', accept: ['f_trace', 'f_timecard'] },
-        { id: 'c3', q: '편지를 쓴 사람만 알 수 있었던 것', accept: ['f_lantern_letter', 'f_withheld', 'f_lantern_dugan', 'f_brennan_slip'] },
-        { id: 'c4', q: '암호문이 털어놓은 것', accept: ['f_cipher_sunday', 'f_brennan_sunday'] },
+        { id: 'c1', q: '편지들이 부쳐진 길과 범인', accept: ['f_roster7', 'f_swap'], near: '딱 한 군데가 어긋난다. 편지가 부쳐진 날마다 그 길을 돈 사람이 같은가? 원래 그 길을 맡은 사람이 아니라, 바꿔 탄 사람.' },
+        { id: 'c2', q: '그날 밤 경찰에 걸려 온 전화와 범인', accept: ['f_trace', 'f_timecard'], near: '딱 한 군데가 어긋난다. 그 밤 전화가 어디서 걸려 왔는지, 그리고 그 시각 범인이 어디에 있었다고 적혀 있는지 — 둘이 맞물리는 기록인가?' },
+        { id: 'c3', q: '편지를 쓴 사람만 알 수 있었던 것', accept: ['f_lantern_letter', 'f_withheld', 'f_lantern_dugan', 'f_brennan_slip'], near: '딱 한 군데가 어긋난다. 경찰이 밖에 내놓지 않은 것을 편지가 알고 있었다. 현장 기록과 편지에 함께 나오는데 신문에는 실리지 않은 것은?' },
+        { id: 'c4', q: '암호문이 털어놓은 것', accept: ['f_cipher_sunday', 'f_brennan_sunday'], near: '딱 한 군데가 어긋난다. 풀어낸 암호문에서 범인이 제 일을 털어놓은 줄은 어디인가?' },
       ],
       near: '딱 한 군데가 어긋난다. 처음부터 한 줄씩 다시 짚어 볼 것.',
       stamp: 'KNOWLTON P.D. 68-1214 · 재검토',
