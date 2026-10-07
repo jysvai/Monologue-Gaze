@@ -350,9 +350,10 @@
       const rowNote = r => r.map((x, i) => { const v = plain(x).trim().replace(/^[—–-]$/, ''), h = hd[i] && plain(hd[i]).trim().replace(/\s+·\s+/g, '/'); return i && h && hd.length > 2 && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).filter(Boolean).join(' · '); // 빈칸은 빼고, 「항목 | 내용」 두 칸짜리 표는 머리글 없이 (「가입자 · 내용: 함덕규」가 되지 않게) // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
       // 칸이 많거나 긴 표는 휴대폰 폭에서 줄마다 「머리글 값」으로 쌓는다 (옆으로 밀어 봐야 하는 표는 ✎ 이 가린 칸 너머를 못 본다)
       const stack = b.head && (b.head.length >= 4 || (b.head.length === 3 && b.rows.some(r => r.some(x => plain(String(x)).length > 60))));
-      const dh = (i, x) => (stack && i && hd[i] ? ` data-h="${esc(hd[i])}"${/^[—–-]?$/.test(plain(String(x)).trim()) ? ' data-nil' : ''}` : ''); // 첫 칸(날짜·이름·번호)은 쌓인 줄의 제목이 된다. 「—」 칸은 쌓을 때 뺀다
+      const st3 = !stack && b.head && b.head.length === 3; // 세 칸짜리는 넘칠 때만 쌓는다 (tblEdge)
+      const dh = (i, x) => ((stack || st3) && i && hd[i] ? ` data-h="${esc(hd[i])}"${/^[—–-]?$/.test(plain(String(x)).trim()) ? ' data-nil' : ''}` : ''); // 첫 칸(날짜·이름·번호)은 쌓인 줄의 제목이 된다. 「—」 칸은 쌓을 때 뺀다
       const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map((x, i) => `<td${nw(x)}${dh(i, x)}>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, b.head ? rowNote(r) : r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
-      return `<div class="b-tbl${stack ? ' stack' : ''}${cls}"><table>${b.cap ? `<caption>${inline(b.cap)}</caption>` : ''}${head}<tbody>${rows}</tbody></table></div>`;
+      return `<div class="b-tbl${stack ? ' stack' : st3 ? ' stack3' : ''}${cls}"><table>${b.cap ? `<caption>${inline(b.cap)}</caption>` : ''}${head}<tbody>${rows}</tbody></table></div>`;
     }
     if (b.list) {
       return `<ul class="b-list${cls}">${b.list.map((x, li) => `<li>${inline(x)}${pinBtn(`${ref}.${li}`, x, b.f && b.f[li], src)}</li>`).join('')}</ul>`;
@@ -1294,10 +1295,11 @@
   // 옆으로 넘는 표(폰): 오른쪽에 붙은 ✎ 칸에 문서 종이 빛깔을 깔고(밑으로 지나가는 글자가 ✎ 와 겹치지 않게),
   // 뒤로 더 있으면 그 칸 가장자리에 그늘을 드리운다 (폰에서는 가로 스크롤 막대가 숨어 있어 표가 더 있는 줄 모른다)
   function tblEdge(t) {
-    if (t.classList.contains('stack')) { // 칸 많은 표가 읽기 칸보다 넓으면 (PC 의 좁은 칸) 폰처럼 줄마다 쌓는다. 칸이 다시 넓어지면 되돌린다
+    const s3 = t.classList.contains('stack3');
+    if (s3 || t.classList.contains('stack')) { // 칸 많은 표가 읽기 칸보다 넓으면 (PC 의 좁은 칸) 폰처럼 줄마다 쌓는다. 칸이 다시 넓어지면 되돌린다
       const w = t.classList.contains('wide');
-      if (!w && t.scrollWidth - t.clientWidth > 2) { t.dataset.nat = t.scrollWidth; t.classList.add('wide'); }
-      else if (w && t.clientWidth >= +t.dataset.nat) t.classList.remove('wide');
+      if (!w && t.scrollWidth - t.clientWidth > 2) { t.dataset.nat = t.scrollWidth; t.classList.add('wide', 'stack'); }
+      else if (w && t.clientWidth >= +t.dataset.nat) { t.classList.remove('wide'); if (s3) t.classList.remove('stack'); }
     }
     const m = t.scrollWidth - t.clientWidth, x = Math.abs(t.scrollLeft);
     t.classList.toggle('scrolls', m > 2);
@@ -2809,13 +2811,18 @@
         if (ST.view.src !== el.dataset.src) sfx('page'); // 다른 철·다른 창으로 넘어갈 때만
         const kept = el.closest('#srcTabs') && document.activeElement && document.activeElement.closest && document.activeElement.closest('#srcTabs'); // 탭 줄을 다시 그려도 초점은 고른 탭에
         keepPos();
+        const from = ST.view.src;
         ST.view.src = el.dataset.src;
         const s = curSrc(), o0 = ST.view.open;
+        // 펼쳐 둔 문서·보고서는 그 탭에 맡겨 두고 돌아오면 다시 편다 (다른 탭 목록 옆에 남으면 그 탭의 조회 결과처럼 보인다)
+        if (o0 && o0.t !== 'person' && from !== s.id) { (ST.view.tabOpen ||= {})[from] = o0; ST.view.open = null; }
+        const back = from !== s.id && (ST.view.tabOpen || {})[s.id];
         // 탐문 탭을 떠나면 하던 대화는 접어 둔다 (다른 탭 목록 옆에 남은 질문 칩으로 엉뚱한 사람에게 묻지 않게). 탐문 탭으로 돌아오면 그 사람을 다시 편다
         if (o0 && o0.t === 'person' && s.type !== 'people') { ST.view.lastP = o0.id; ST.view.open = null; }
         if (s.type === 'cipher' || s.type === 'timeline') ST.view.open = { t: s.type, id: s.id };
         else if (narrow()) ST.view.open = null;
         else if (s.type === 'people' && !ST.view.open && ST.view.lastP && C.people[ST.view.lastP]) ST.view.open = { t: 'person', id: ST.view.lastP };
+        else if (back && (back.t !== 'doc' || C.docs[back.id])) ST.view.open = back;
         else if (s.type === 'feed') ST.view.open = { t: 'feed', id: s.id }; // 단톡방 탭은 방이 하나뿐: 넓은 화면이면 누르자마자 방이 열린다 (읽기 칸에 사건 안내만 남지 않게)
         save(); renderTabs(); renderList(); renderRead();
         if (kept) { const on = $('#srcTabs .tab.on'); if (on) on.focus({ preventScroll: true }); }

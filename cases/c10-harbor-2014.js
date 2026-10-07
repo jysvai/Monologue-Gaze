@@ -31,7 +31,7 @@
     tips: ['노트북의 프로그램과 경찰 조회 자료를 오가며 찾는다. 전화번호는 자료 조회의 검색어가 되고, 차량 번호는 차량 조회 창에 정확히 넣어야 한다.'],
     sources: [
       { id: 'talk', type: 'list', name: '말벗 PC', skin: 'chat', desc: '노트북에 로그인된 채 남은 메신저 PC 버전. 휴대폰과 대화가 동기화돼 있다.',
-        lock: { title: '말벗 PC · 잠금 모드', desc: 'eunho117 님, 잠금 모드가 켜져 있습니다. 비밀번호 네 자리를 입력하세요.', label: '비밀번호', password: true, code: ['0117'], hint: '비밀번호 힌트: 내 번호', hint2: '아내 말로는 그의 비밀번호는 전부 위판장 경매 번호였다. 네 자리로 맞춰 볼 것.', ok: '말벗 PC 잠금을 풀었다', need: ['k_bidno'] } },
+        lock: { title: '말벗 PC · 잠금 모드', desc: 'eunho117 님, 잠금 모드가 켜져 있습니다. 비밀번호 네 자리를 입력하세요.', label: '비밀번호', password: true, code: ['0117'], hint: '비밀번호 힌트: 내 번호', hint2: '아내 말로는 그의 비밀번호는 전부 위판장 경매 번호였다. 세 자리 번호라면 앞을 0으로 채워 네 자리로.', ok: '말벗 PC 잠금을 풀었다', need: ['k_bidno'] } },
       { id: 'cafe', type: 'archive', name: '다온카페', skin: 'web', paper: '다온카페 · 해진 사랑방', desc: '즐겨찾기에 있던 지역 카페 「해진 사랑방」. 회원 3만 명의 동네 게시판.', placeholder: '사람 · 장소 · 무엇이든' },
       { id: 'rec', type: 'archive', name: '수사 자료 조회', skin: 'ledger', desc: '형사과 공유 폴더로 넘겨받은 조회 회신. 이름, 전화번호, 업체 이름으로 찾는다.', placeholder: '이름 · 전화번호 · 업체' },
       { id: 'car', type: 'query', name: '차량 조회', skin: 'ledger', button: '조회 요청',
@@ -224,6 +224,7 @@
         ], head: ['일시', '기지국', '구분'], f: { 3: 'f_base_call', 5: 'f_base_move', 6: 'f_base_move', 7: 'f_base_last' } },
         { m: '폰이 꺼진 곳 말고, 그 전에 거친 기지국을 볼 것. 한 칸씩 셀 것.' },
         { note: '※ 00:47 이후 다시 켜진 적 없음. 항만 지역 기지국 반경 약 1km.' },
+        { note: '※ 착신 상대 번호는 기지국 기록에 남지 않는다. 번호는 [[통화 내역|k_phone]] 회신으로 따로 확인할 것.' },
       ] },
       d_r_calls: { cls: 'printed', src: 'rec', find: ['k_phone', 'k_hyungnim'], need: ['k_hyungnim'], title: '피해자 통화 내역 (11.21 ~ 22)', meta: '통신사 회신 2014.11.27 · 010-****-1170 · 조회 사유: 00:12 "형님" 메시지', body: [
         { rows: [
@@ -445,7 +446,7 @@
           k_sinhang: { need: ['!f_hipass'], a: ['창고요. 냉동기 알람이 울려서 잠깐 갔어요. 우리 창고가 신항에 있으니까.', '— 0시 34분에 신항으로 들어가서 1시 21분에 나오셨습니다. 냉동기 알람 하나 보는 데 47분이 걸립니까?', '…….'], else: ['신항에 창고가 있긴 하죠. 그날 밤엔 안 갔어요.'] },
           k_origin: { need: ['!f_memo_origin'], a: ['그건 은호가 오해한 거예요. 서류 정리만 하면 되는 일이었어요. 번호를 잠깐 빌린 것뿐이고.'], else: ['원산지요? 무슨 말씀인지 모르겠네.'] },
           k_foglamp: { need: ['!f_bang_foglamp'], a: ['…조수석 쪽이요. 몇 달 전에 깨졌는데 귀찮아서 못 갈았어요. 그게 왜요.'], else: ['안개등이요? 차는 제가 잘 안 봐요. 정비소에 물어보셔야지.'] },
-          k_suv: ['검은 SUV야 이 동네에 백 대는 될 거예요.'],
+          k_suv: { need: ['!f_cafe_suv|!f_taxi_suv'], take: ['f_cafe_suv', 'f_taxi_suv'], a: ['검은 SUV야 이 동네에 백 대는 될 거예요.', '— 그 시간에 신항으로 들어가는 차는 거의 없었답니다. 화물차 아니면요.', '(작업 장갑을 만지작거린다) …창고 일 하는 사람들은 밤에도 들락거려요. 검은 SUV 타는 사람이 저 하나겠어요?'], else: ['검은 SUV야 이 동네에 백 대는 될 거예요.'] },
           k_myeongsu: ['명수가 그날 은호 멱살 잡은 거 다 봤잖아요. 저는 말렸고.'],
           k_eunho: ['동생 같은 놈이었다니까요.'],
           k_audit: { need: ['!f_chat_threat'], a: ['(잔을 내려놓는다) …은호가 홧김에 한 소리려니 했어요. 월요일 전에 풀면 될 줄 알았고.', '— 그래서 금요일 밤에 풀러 가셨습니까.', '…….'], else: ['감사팀이요? …저는 모르는 얘긴데요.'] },
@@ -466,7 +467,7 @@
       culprit: 'k_bang',
       claims: [
         { id: 'c1', q: '피해자를 다시 밖으로 불러낸 마지막 연락', accept: ['f_lastcall', 'f_chat_wife', 'f_base_call'] },
-        { id: 'c2', q: '마지막 전화를 건 번호의 주인', accept: ['f_num_match', 'f_bang_daeri', 'f_bang_call'] },
+        { id: 'c2', q: '마지막 전화를 건 번호의 주인', accept: ['f_num_match', 'f_bang_daeri', 'f_bang_call'], near: '딱 한 군데가 어긋난다. 번호만으로는 사람이 나오지 않는다. 그 번호 옆에 이름이 같이 적힌 기록이 있는가?' },
         { id: 'c3', q: '그날 밤 범인의 행적', accept: ['f_gate_out', 'f_hipass', 'f_tl_night'] },
         { id: 'c4', q: '동기', accept: ['f_chat_threat', 'f_memo_origin', 'f_audit'] },
       ],
