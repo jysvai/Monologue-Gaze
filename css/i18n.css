@@ -21,10 +21,14 @@ html[lang="ja"]{
 }
 /* ZCOOL XiaoWei 는 「回」와 回 가 들어간 글자(徊 등)를 까만 네모(■)로 그린다. 그 글자들만 Noto Serif SC 에서 떼어 와 먼저 쓴다 */
 @font-face{font-family:"MG Hui";src:url(../fonts/zh-hui.woff2) format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+56DE,U+5EFB,U+5F8A,U+6D04,U+8334,U+86D4}
+/* Special Elite 의 「—」는 닳은 물결이라 중국어 「——」가 끊겨 보인다. 그 한 글자는 Noto Sans SC 것으로 */
+@font-face{font-family:"MG Dash";src:url(../fonts/zh-dash.woff2) format("woff2");font-display:swap;unicode-range:U+2014}
+/* Long Cang 은 「时」를 번체 「時」 꼴로, 「—」를 끊어진 두 토막으로 그린다. 그 두 글자만 같은 붓글씨 계열인 Ma Shan Zheng 에서 떼어 와 먼저 쓴다 */
+@font-face{font-family:"MG Shi";src:url(../fonts/zh-shi.woff2) format("woff2");font-display:swap;unicode-range:U+2014,U+65F6}
 html[lang="zh"]{
-  --l-hand:"LXGW WenKai",; --l-hand2:"Long Cang",; --l-hand3:"ZCOOL KuaiLe",;
+  --l-hand:"LXGW WenKai",; --l-hand2:"MG Shi","Long Cang",; --l-hand3:"ZCOOL KuaiLe",;
   --l-serif:"Noto Serif SC",; --l-old:"MG Hui","ZCOOL XiaoWei",; --l-sans:"Noto Sans SC",; --l-heavy:"ZCOOL QingKe HuangYou",; --l-brush:"Ma Shan Zheng",;
-  --l-mono:"Noto Sans SC",; --l-type:"Special Elite","Noto Sans SC",; --l-pixel:"Noto Sans SC",; --l-cjk:"Noto Sans SC",;
+  --l-mono:"Noto Sans SC",; --l-type:"MG Dash","Special Elite","Noto Sans SC",; --l-pixel:"Noto Sans SC",; --l-cjk:"Noto Sans SC",;
 }
 
 /* 제목은 어느 언어에서나 로마자라 타자기 글꼴 그대로 */
