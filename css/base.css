@@ -301,7 +301,7 @@ img{max-width:100%}
 .read-empty{display:grid;place-items:center;min-height:60%;padding:30px;text-align:center}
 .read-empty p{max-width:30ch;font:22px/1.35 var(--f-hand);color:var(--pencil)}
 .doc{max-width:760px;margin:0 auto 24px}
-.nw{white-space:nowrap}
+.nw{white-space:nowrap}.nw>.kw{white-space:normal} /* 단어와 붙은 괄호·따옴표는 떨어지지 않되, 여러 낱말 단어 자체는 좁은 화면에서 줄을 바꿀 수 있게 */
 .kw{display:inline;margin:0;padding:0 1px;border:0;border-radius:2px;background:none;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit;text-decoration:underline dotted;text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:pointer}
 @media (hover:hover){.kw:hover{background:rgba(223,182,76,.38)}}
 .kw.on{text-decoration-style:solid;text-decoration-color:rgba(176,52,42,.6)}
