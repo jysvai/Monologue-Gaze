@@ -173,7 +173,7 @@ MG.I18N.put("de", "c09", {
 "18qwnhkkrp5": "Fall 3 — Überlebende",
 "2ecxxhgqu9a": "14.10. (Sa) [[Min So-ra|k_sora]] (24). Wohnt im Souterrain, Eungol-dong Nr. 223-9. Aus einem fremden Haus selbst entkommen. Einschätzung des Teams: Wer dieses Haus findet, klärt auch die beiden ersten Fälle.",
 "ke2bktuguv": "Im Sanierungsgebiet 3 und am Eungol-Bach keine Überwachungskameras. Eine Überwachungskamera am Eingang des Eungol-Markts (installiert 09.2006).",
-"1e6yr5iq0yg": "Einsatzprotokoll Notruf 112",
+"1e6yr5iq0yg": "Einsatzprotokoll Polizeinotruf (112)",
 "f7owgkx1mo": "14.10.2006 (Sa) 22:29 eingegangen · Polizeiwache Eungol",
 "wrmqy0mv0a": "Eine Frau in den Zwanzigern läuft barfuß in den [[24-Stunden-Laden|k_convstore]] am Eungol-Markt (Überwachungskamera im Laden bestätigt)",
 "vl106qjpv1": "Aushilfe im Laden ruft 112 — „Sie sagt, jemand verfolgt sie. Ich soll die Tür abschließen.“",
