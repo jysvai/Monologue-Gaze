@@ -857,6 +857,7 @@ MG.I18N.put("en", "c11", {
 "1r9cga61nsy": "After reading the paper, for a while just seeing an empty sack turned my stomach.",
 "1cztlyn0vb9": "After reading the paper, for a while just seeing an empty sack turned my stomach. When I was scooping rice and my hand touched the bottom of a sack, I'd think I was about to feel something soft, and I'd snatch my hand back. Even now I sleep with the light on over by the sacks at night.",
 "463aoalms": "The terminus is right in front of the shop. I count my day by the sound of the No. 11 bus turning around. After nine at night there's not a soul.",
+"1v2xskfitir": "(Leafs through the delivery ledger) The 14th, that was a Friday. I pulled the shutter down at nine like always and went to the back room. The terminus is pitch dark by then.",
 "vrhg88077j": "Daewon Trading? All I've heard is it's a moneylending place upstairs at the market entrance. Selling rice is a business you run on credit, so I'm too scared to touch money with interest on it.",
 "1fh9vwa5vke": "Sawdust isn't rice-shop goods, so I don't know much. Only that it catches easily in a stove.",
 "10l16xcqy1v": "The Mokgol workshop people grind up shells and set them in cranes and flowers. In the old days, a bride always took a mother-of-pearl cabinet with her when she married.",

@@ -857,6 +857,7 @@ MG.I18N.put("de", "c11", {
 "1r9cga61nsy": "Nach der Zeitung ist mir eine Zeit lang schon beim Anblick leerer Säcke übel geworden.",
 "1cztlyn0vb9": "Nach der Zeitung ist mir eine Zeit lang schon beim Anblick leerer Säcke übel geworden. Wenn ich beim Reisschöpfen mit der Hand an den Boden vom Sack kam, dachte ich, gleich fühl ich was Weiches, und hab die Hand weggerissen. Heute noch lass ich nachts auf der Seite, wo die Säcke gestapelt sind, das Licht an.",
 "463aoalms": "Die Endhaltestelle ist direkt vor meinem Laden. Am Geräusch, wenn die Linie 11 wendet, zähl ich den Tag ab. Nach neun Uhr abends ist da keine Menschenseele mehr.",
+"1v2xskfitir": "(Blättert im Lieferbuch) Der 14., das war ein Freitag. Da hab ich wie immer um neun den Rollladen runtergelassen und bin nach hinten in die Stube. An der Endhaltestelle ist es um die Zeit stockdunkel.",
 "vrhg88077j": "Daewon? Ich hab nur gehört, dass das oben am Markteingang ein Geldverleih ist. Reishandel geht nur mit Anschreiben, da trau ich mich an Geld mit Zinsen nicht ran.",
 "1fh9vwa5vke": "Sägemehl ist keine Ware für einen Reisladen, davon versteh ich nichts. Nur dass es im Ofen gut brennt.",
 "10l16xcqy1v": "Das machen die Werkstattleute in Mokgol, die schleifen Muschelschalen und legen damit Kraniche und Blumen ein. Früher hat jede Braut einen Perlmuttschrank mit in die Ehe gebracht.",
