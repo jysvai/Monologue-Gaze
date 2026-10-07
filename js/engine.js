@@ -522,7 +522,8 @@
     const ra = rawAns(p, k) || {}, want = ra.take || (ra.need || []).filter(x => x[0] === '!').map(x => x.slice(1)); // take: 붉은 테를 연 조건과 별개로, 내밀어서 통하는 메모 (한 날짜를 짚어야 할 때)
     if (want.some(w => fIs(n.f, w))) { (ST.held ||= {})[`${p.id}|${k}!`] = n.id; ask(k, true); return; } // 화면에는 고른 그 메모만 내민다 (같은 사실의 다른 메모나, 함께 걸린 다른 사실의 메모가 끼어들지 않게)
     PICK.tries = (PICK.tries || 0) + 1;
-    PICK.miss = ra.close && (ra.close.f || []).some(w => fIs(n.f, w)) ? ra.close.a : missLine(p, isSoft(p, k), PICK.tries - 1); // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다
+    const near = [].concat(ra.close || []).find(c => (c.f || []).some(w => fIs(n.f, w))); // 여러 개일 수 있다: 메모마다 그 사람다운 핑계
+    PICK.miss = near ? near.a : missLine(p, isSoft(p, k), PICK.tries - 1); // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다
     sfx('miss');
     const w = ($('#paneRead [data-press-filter]') || {}).value || '', top = ($('#paneRead .press-list') || {}).scrollTop || 0;
     renderRead();
@@ -1408,7 +1409,7 @@
       return `<section class="rep-claim${cur ? ' filled' : ''}${open ? ' open' : ''}" data-claim="${esc(cl.id)}">
         <h4 id="rh-${esc(cl.id)}"><span class="no">${i + 1}</span> ${inline(cl.q)}</h4>
         <div class="rep-pick">${cur ? `<p class="rep-memo"><span class="n">${notes.includes(cur) ? notes.indexOf(cur) + 1 + '.' : '—'}</span> ${esc(cur.t)} <span class="src">— ${esc(cur.src || '')}</span></p>` : T('<p class="rep-empty">아직 붙인 메모가 없다.</p>')}
-          ${shut ? '' : `<button type="button" class="rep-tog" data-rep-open="${esc(cl.id)}" aria-expanded="${open}">${open ? T('접기') : cur ? T('다른 메모로 바꾸기') : T('메모에서 고르기')} <small>${notes.length}</small></button>`}</div>
+          ${shut ? '' : `<button type="button" class="rep-tog" data-rep-open="${esc(cl.id)}" aria-expanded="${open}">${open ? T('접기') : cur ? T('다른 메모로 바꾸기') : T('메모에서 고르기')} <small>(${notes.length})</small></button>`}</div>
         ${open ? `<div class="rep-acc">${notes.length ? `<input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-rep-filter aria-label="${T`메모 찾기`}"><div role="radiogroup" aria-labelledby="rh-${esc(cl.id)}">${list}</div><p class="rep-empty rep-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>` : T('<p class="rep-empty">수첩에 메모가 없다. 문서와 탐문에서 문장을 눌러 적어 둔다.</p>')}</div>` : ''}
       </section>`;
     };
