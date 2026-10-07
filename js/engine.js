@@ -258,12 +258,12 @@
     return n;
   }
   // 「새로 열린 것 1」만으로는 어디를 봐야 할지 모른다 — 새것이 생긴 탭 이름을 붙인다
-  function where(b) {
+  function where(b, skip) {
     const by = {}; census(by);
-    const names = Object.keys(by).filter(id => by[id] > (b[id] || 0)).map(id => C.sources.find(x => x.id === id)).filter(Boolean).map(x => quote(plain(x.name)));
+    const names = Object.keys(by).filter(id => id !== skip && by[id] > (b[id] || 0)).map(id => C.sources.find(x => x.id === id)).filter(Boolean).map(x => quote(plain(x.name)));
     return names.length ? ' — ' + names.slice(0, 2).join(', ') + (names.length > 2 ? ' …' : '') : '';
   }
-  const opened = (n, b) => T` · 새로 열린 것 ${n}` + where(b);
+  const opened = (n, b, skip) => T` · 새로 열린 것 ${n}` + where(b, skip); // skip: 방금 잠금을 푼 탭은 토스트 앞머리에 이미 이름이 있다
 
   /* ───────── text rendering ───────── */
   // 표 칸의 1,234,000 같은 숫자는 번역되지 않고 남으므로, 독일어·러시아어에서는 그 나라 자릿점으로 (5,600 이 5.6 으로 읽히지 않게)
@@ -342,11 +342,12 @@
       return `<figure class="b-img${cls}">${art(b.img)}${cap}</figure>`;
     }
     if (b.rows) {
-      const head = b.head ? `<thead><tr>${b.head.map(x => `<th>${inline(x)}</th>`).join('')}<th class="pc"></th></tr></thead>` : '';
+      const nw = x => (/^\S{1,5}$/.test(plain(String(x)).trim()) ? ' class="nw"' : ''); // 짧은 칸은 한 줄로 — 중국어·일본어에서 「李/相/民」처럼 한 글자씩 꺾이지 않게
+      const head = b.head ? `<thead><tr>${b.head.map(x => `<th${nw(x)}>${inline(x)}</th>`).join('')}<th class="pc"></th></tr></thead>` : '';
       // 줄을 메모로 옮길 때 짧은 칸(숫자·표시)에는 머리글을 붙인다 — 보고서에서 「1.27 · 20 · 18 · —」만 남아 무슨 숫자인지 모르게 되지 않게
       const hd = (b.head || []).map(x => plain(numLocal(x)).trim());
       const rowNote = r => r.map((x, i) => { const v = plain(x).trim(), h = hd[i] && plain(hd[i]).trim(); return i && h && hd.length > 2 && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).filter(Boolean).join(' · '); // 빈칸은 빼고, 「항목 | 내용」 두 칸짜리 표는 머리글 없이 (「가입자 · 내용: 함덕규」가 되지 않게) // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
-      const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map(x => `<td>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, b.head ? rowNote(r) : r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
+      const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map(x => `<td${nw(x)}>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, b.head ? rowNote(r) : r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
       return `<div class="b-tbl${cls}"><table>${b.cap ? `<caption>${inline(b.cap)}</caption>` : ''}${head}<tbody>${rows}</tbody></table></div>`;
     }
     if (b.list) {
@@ -2481,7 +2482,7 @@
       (lock.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
       save(); refreshAll(); cue('unlock', T('열림')); land(C.docs[id] ? ['#paneRead .doc-t', '#paneList .item.on'] : ['#paneList .item', '#srcTabs .tab.on']);
       const gained = census() - before;
-      toast((lock.ok || T('열렸다.')) + (gained > 0 ? opened(gained, BY) : ''));
+      toast((lock.ok || T('열렸다.')) + (gained > 0 ? opened(gained, BY, id) : ''));
       liveSync();
     } else {
       tmp().fail[id] = (tmp().fail[id] || 0) + 1;

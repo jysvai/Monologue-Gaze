@@ -112,6 +112,10 @@
     Object.entries(c.keywords || {}).forEach(([id, k]) => { ko[id] = k.label; });
     apply(c, tr);
     if (/^(en|de|ru)$/.test(lang) && c.docs) localDates(c.docs);
+    // 말 없는 대답 「…….」(한국어 말줄임표 + 마침표)은 번역에 들지 않는다: 일본어·중국어는 「……」, 나머지는 「…」
+    const hush = /^(ja|zh)$/.test(lang) ? '……' : '…';
+    const quiet = o => { for (const k of Object.keys(o)) { const v = o[k]; if (typeof v === 'string') { if (/^…+\.?$/.test(v) && v !== hush) o[k] = hush; } else if (v && typeof v === 'object') quiet(v); } };
+    if (c.people) quiet(c.people);
     // 한국어 이름도 별칭으로 남긴다: 검색창에 한국어로 쳐도, 번역이 빠진 글의 [[한국어]] 도 그 단어를 찾는다
     Object.entries(c.keywords || {}).forEach(([id, k]) => { if (ko[id] && k.label !== ko[id]) k.alias = uniq([...(k.alias || []), ko[id]]); });
     // 얼굴 동그라미의 한 글자: 이름이 번역됐으면 번역된 이름의 첫 글자로 (엔진이 name[0] 을 쓴다)

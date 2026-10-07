@@ -286,3 +286,4 @@
 :where(.case-view[data-era="old"]) .doc:not(.rep-view) .b-tbl th{font-family:var(--f-latin);letter-spacing:.02em}
 /* 1980년 뒤의 신문: 송명 같은 옛 활자 대신 요즘 신문 명조 */
 :where(.case-view[data-era=""]) .skin-news :is(.doc-t,.doc-b,.b-h,.doc-k,.doc-m){font-family:var(--f-doc)}
+.b-tbl :is(td,th).nw{white-space:nowrap} /* 짧은 칸(이름·머리글)은 한 줄로 — 중국어·일본어에서 한 글자씩 꺾이지 않게 (js docHtml rows) */
