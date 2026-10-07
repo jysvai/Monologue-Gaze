@@ -764,6 +764,7 @@ MG.I18N.put("de", "c02", {
 "13vzxuhz3j": "Meine Hütte. Im Winter mach ich dort Holz.",
 "d6ms9ychs2": "Ein Lastschlitten. Brennholz und Vieh fahr ich damit. Für den Markt hab ich letzten Monat beim Rottmayr die Kufen neu beschlagen lassen. Und einen Schimmel haben die Händler aus Regental auch.",
 "11t9j0lrocn": "Ein sturer Alter war er. Aber so was hat er nicht verdient.",
+"16pfnepnurf": "(tippt auf das Datum in der Abschrift) Da steht Oktober. Ich hab doch gesagt, danach hab ich keinen Fuß mehr hingesetzt.",
 "16ryursr9er": "(lässt die Abschrift des Hausbuchs nicht aus den Augen) …Im Januar war ich einmal dort. Wegen der Abrechnung. Ein paar Worte an der Tür, dann bin ich wieder gegangen.",
 "kx3ibmzxwj": "— Sie wollten das an Lichtmess Fällige bis zum Frühjahr gestundet haben. Und Herr Moosbauer hat nein gesagt.",
 "1m70a95qzl7": "…Es gilt der Schein, hat er gesagt. Das ist alles.",

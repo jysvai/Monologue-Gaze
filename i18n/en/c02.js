@@ -764,6 +764,7 @@ MG.I18N.put("en", "c02", {
 "13vzxuhz3j": "My hut. In winter I cut wood out there.",
 "d6ms9ychs2": "A work sledge. For hauling firewood and cattle. Had Rottmayr put new runners on it last month, for the market. And the Regental dealers drive white horses too.",
 "11t9j0lrocn": "A stubborn old man. Still, he didn't deserve that.",
+"16pfnepnurf": "(jabs a finger at the date on the copy) That says October. I told you I haven't set foot there since.",
 "16ryursr9er": "(Keeps his eyes on the copy of the book) …I went once in January. To talk about the reckoning. Said a few words at the door and left.",
 "kx3ibmzxwj": "— You asked him to put off the Candlemas payment till spring. And Mr. Moosbauer said no.",
 "1m70a95qzl7": "…Said we'd go by the note. That's all.",
