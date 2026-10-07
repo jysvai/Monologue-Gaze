@@ -46,7 +46,7 @@ MG.I18N.put("de", "c11", {
 "2ghgxa3byhd": ["3-1180","31180","Euncheon 3-1180","Euncheon 31180","Amt 3 1180","Amt 3, 1180","Amt 3-1180","Euncheon Amt 3 1180","Euncheon, Amt 3, 1180"],
 "8klbfcmsbc": ["Gil Yong-su","Gil Yongsu","Yong-su Gil","Yongsu Gil"],
 "18r8735xibo": ["Ham Deok-gyu","Ham Deokgyu","Deok-gyu Ham","Deokgyu Ham"],
-"2d14r6rgptd": "Gutachtenabgleich",
+"2d14r6rgptd": "Abgleich",
 "1y6dvu48jzo": "Befunde aus den Gutachten neben Vergleichsproben legen. Wer sich einmal irrt, kann erst mit einer neuen Spur wieder einen Auftrag erteilen.",
 "y5a6bg0pv7": "Sägespuren an der Schnittfläche",
 "r78m3ux4hl": "NFS-Gutachten Nr. 86-RM-1142 · Schnittfläche am Oberschenkelknochen",

@@ -176,8 +176,8 @@ img{max-width:100%}
 .tab{flex:none;display:inline-flex;align-items:center;gap:6px;padding:7px 14px 6px;border:0;background:none;cursor:pointer;white-space:nowrap}
 .tab-lock{font:10px var(--f-mono);padding:1px 5px;border:1px solid currentColor;opacity:.7}
 .tab-t{overflow:hidden;text-overflow:ellipsis}
-.src-tabs.t1 .tab:not(.on) .tab-t{max-width:10.5em}
-.src-tabs.t2 .tab:not(.on) .tab-t{max-width:7em}
+.src-tabs.t0 .tab{padding-left:10px;padding-right:10px;letter-spacing:0}
+.src-tabs.tcut .tab:not(.on) .tab-t{max-width:var(--tab-max,10.5em)}
 .tab-new{flex:none;width:7px;height:7px;margin-left:-1px;border-radius:50%;background:var(--red);box-shadow:0 0 0 1.5px rgba(255,250,235,.55)} /* 새로 열린 자료가 있는 탭 (js renderTabs) */
 .case-view:is([data-frame="laptop"],[data-frame="crt"]) .tab-new{background:#e5483b;box-shadow:0 0 0 1.5px rgba(255,255,255,.7)}
 .tabs-new{position:absolute;top:var(--tabs-mid,18px);z-index:6;display:none;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--red);box-shadow:0 0 0 1.5px rgba(255,250,235,.6);pointer-events:none} /* 가려진 탭에 새 자료가 있을 때 그쪽 끝에 (js tabEdge) */
@@ -278,6 +278,7 @@ img{max-width:100%}
 /* 좁은 화면: 단어가 서른, 마흔 개로 늘면 칩 더미가 검색 결과와 대답을 화면 밖으로 밀어낸다 — 칩 칸은 제 안에서 굴리고, 찾은 결과는 검색창 바로 밑에 */
 @container stage (max-width:700px){
   .chips{max-height:min(196px,34svh);overflow-y:auto;overscroll-behavior:contain;padding:2px 2px 6px;box-shadow:inset 0 -10px 8px -10px rgba(0,0,0,.25)}
+  .arch:has(>.res:empty):not(:has(>.res-n))>.chips{max-height:min(440px,58svh)} /* 아직 찾은 게 없으면 칩 칸이 빈 종이 대신 자리를 쓴다 */
   .arch{display:flex;flex-direction:column}
   .arch>*{order:3}
   .arch>.arch-f{order:0}

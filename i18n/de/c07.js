@@ -1,6 +1,6 @@
 /* 자동 생성: node tools/i18n.js put de c07 — Deutsch · 사건 c07: 한국어 글 한 토막의 지문 → 번역 */
 MG.I18N.put("de", "c07", {
-"14a4ujciu0g": "Die Bücher des Songwolgak",
+"14a4ujciu0g": "Songwolgak-Bücher",
 "1t6p6nl3pvk": "Beodeulgae, Seoha-gu, Seoul (fiktiver Ort)",
 "1p7s5pa4yek": "Motiv: der Todesfall von 1970, in den Mächtige verwickelt sein sollen",
 "27ltrko0gu3": "ca. 35 Min.",
@@ -33,7 +33,7 @@ MG.I18N.put("de", "c07", {
 "1cy47t2lmhv": "Ein Album mit Zeitungsausschnitten, die jemand eingeklebt hat. Sogar Anzeigenseiten und das Fernsehprogramm sind dabei.",
 "167kfzulp78": "Wort aus einem Artikel",
 "heyelnxpos": "Ein Stapel Bücher, im Restaurant beschlagnahmt. Die Gäste stehen darin nicht mit Namen, sondern mit Titeln und Beinamen.",
-"110r60ne2yf": "Vermittlungsprotokolle",
+"110r60ne2yf": "Vermittlung",
 "12brndxpan3": "Verbindungslisten, von Telefonistinnen mit Bleistift geführt. Wo keine Wählscheibe hinreichte, stellten Menschen die Verbindungen her.",
 "r7ic53ff7j": "Die Nacht",
 "ysi84y8snq": "Nacht des 22. Oktober — Rekonstruktionstafel",

@@ -1252,8 +1252,13 @@
   }
   // 탭 이름이 긴 말(영어·독일어·러시아어)이라 넓은 화면에서도 넘치면: 고르지 않은 탭의 긴 이름부터 줄여 한 줄에 다 보이게 하고, 줄인 탭에는 온 이름을 말풍선으로
   function tabFit(bar) {
-    bar.classList.remove('t1', 't2');
-    if (bar.clientWidth >= 600 && bar.scrollWidth > bar.clientWidth + 1) { bar.classList.add('t1'); if (bar.scrollWidth > bar.clientWidth + 1) bar.classList.add('t2'); }
+    // 먼저 탭 여백을 좁히고, 그래도 넘치면 고르지 않은 탭의 이름을 반 글자씩 줄여 남는 자리를 다 쓴다
+    const over = () => bar.scrollWidth > bar.clientWidth + 1;
+    bar.classList.remove('t0', 'tcut'); bar.style.removeProperty('--tab-max');
+    if (bar.clientWidth >= 600 && over()) {
+      bar.classList.add('t0');
+      if (over()) { bar.classList.add('tcut'); for (let em = 13; em >= 6 && over(); em -= 0.5) bar.style.setProperty('--tab-max', em + 'em'); }
+    }
     bar.querySelectorAll('.tab').forEach(t => { const x = t.querySelector('.tab-t'); if (x && x.scrollWidth > x.clientWidth + 1) t.dataset.tip = x.textContent; else delete t.dataset.tip; });
   }
   // 탭이 넘쳐 옆으로 밀리는 좁은 화면: 고른 탭이 가려져 있으면 보이는 데까지 민다 (화면을 돌려 폭이 바뀌어도)

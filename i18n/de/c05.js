@@ -24,7 +24,7 @@ MG.I18N.put("de", "c05", {
 "14y26gkoubv": "Trennen, was in der Zeitung stand und was nicht.",
 "qcal39b07o": "Redaktionspost",
 "2enge1eu0ol": "Kopien der Briefe an die Lokalredaktion des Knowlton Courier. Die Poststempel der Umschläge hat die Poststelle abgeschrieben. Deutsche Übersetzung.",
-"f1uzlg1c8u": "Archiv des Courier",
+"f1uzlg1c8u": "Courier-Archiv",
 "2dlj2vw2682": "Das Zeitungsarchiv, die „Morgue“. Ausschnittmappen nach Stichwort heraussuchen. Deutsche Übersetzung.",
 "10u7cg33mc3": "Suchwort (Person, Ort, Gegenstand)",
 "14qzabxb4ra": "Polizeiakten",

@@ -27,7 +27,7 @@ MG.I18N.put("en", "c11", {
 "eniehhsjlf": "The Euncheon Daily",
 "17ky8al6po4": "A scrapbook from the city desk. Even the ad pages are clipped and pasted in.",
 "167kfzulp78": "Word in an article",
-"hvn3vmxbsg": "Task Force File",
+"hvn3vmxbsg": "Task Force",
 "9lbu50fego": "Euncheon Station 86-VC-411. On the cover: “Task force disbanded · Jan 10, 1987.” Re-investigation attachments are tucked in at the back.",
 "n0scq09tmp": "People, places, things…",
 "1w66b3jteai": "Front of the file",

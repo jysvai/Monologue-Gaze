@@ -1,6 +1,6 @@
 /* 자동 생성: node tools/i18n.js put en c07 — English · 사건 c07: 한국어 글 한 토막의 지문 → 번역 */
 MG.I18N.put("en", "c07", {
-"14a4ujciu0g": "The Songwolgak Ledgers",
+"14a4ujciu0g": "Songwolgak Ledgers",
 "1t6p6nl3pvk": "Beodeulgae, Seoha-gu, Seoul (fictional place)",
 "1p7s5pa4yek": "Inspired by a 1970 death in which powerful men were suspected of involvement",
 "27ltrko0gu3": "About 35 min",
