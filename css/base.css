@@ -427,6 +427,7 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 .epi .b-p,.epi p{margin:0;font-size:19px}
 .epi .b-p+.b-p,.epi p+p{margin-top:.6em}
 .epi-share{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 10px} /* 종결 뒤 결과 옮겨 적기 */
+.epi-rate{margin:0 0 12px;font:13px/1.5 var(--f-web);color:var(--ink-soft)}.epi-rate a{color:#b0342a;text-decoration:underline;text-underline-offset:3px}
 .epi-sh{font:12.5px var(--f-type);letter-spacing:.03em;color:var(--ink-soft);background:none;border:1px solid rgba(38,48,63,.35);border-radius:3px;padding:4px 10px;cursor:pointer;text-decoration:none}
 .epi-sh:hover{color:var(--ink);border-color:var(--ink)}
 .epi-next{margin:0 0 64px;color:var(--red)} /* 아래 여백: 끝까지 내리면 「사건 종결」 자막이 이 줄을 가리지 않는다 */

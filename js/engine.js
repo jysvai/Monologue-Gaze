@@ -1449,25 +1449,30 @@
     const dl = C.live && C.live.deadline, dlSeen = dl && (late || ok(dl.need)); // 끝내 몰랐던 기한은 말하지 않는다
     const cjk = /^(ja|zh)$/.test(MG.I18N.lang), dlName = esc(dl && dl.label || T('기한')); // 일본어·중국어는 전각 괄호
     const fin = C.live && ST.live ? `<p class="lv-fin">${T`수사 개시부터 ${hm(ST.live.t)}${dlSeen ? ` · ${late ? T('기한 넘김') : T('기한 안에 종결')}${cjk ? `<small>（${dlName}）</small>` : ` <small>(${dlName})</small>`}` : ''}`}</p>` : '';
-    return `<div class="stamp${fresh ? ' fresh' : ''}"><div>${T`사건<br>종결<small>${esc(sol.stamp || '')}</small>`}</div></div>${fin}<div class="epi">${epi}</div>${shareHtml()}${sol.next ? nextHtml(sol.next) : ''}`;
+    return `<div class="stamp${fresh ? ' fresh' : ''}"><div>${T`사건<br>종결<small>${esc(sol.stamp || '')}</small>`}</div></div>${fin}<div class="epi">${epi}</div>${shareHtml()}${rateHtml()}${sol.next ? nextHtml(sol.next) : ''}`;
   }
   // 종결한 사람이 결과를 옮겨 적을 수 있게: 범인·결말은 빼고 사건 번호, 제목, 별, 제출 횟수, 짚어 보기 횟수, 링크만
   const ITCH_URL = 'https://jysvai.itch.io/monologue-gaze';
+  // 자랑할 만한 것만: 짚어 보기 없이 · 보고서 한 번에 (연습 사건은 빼고)
+  const badges = () => C.kind === 'tutorial' ? [] : [ST.nudges ? '' : T('짚어 보기 없이 종결'), (ST.tries || 1) === 1 ? T('보고서 한 번에 통과') : ''].filter(Boolean);
+  const scrawlOf = () => (C.brief && C.brief.scrawl ? plain(C.brief.scrawl) : '');
   function shareText() {
     const head = `Monologue Gaze · CASE ${pad(C.no)} ${plain(C.title)}${C.kind !== 'tutorial' && C.stars ? ' ' + '★'.repeat(C.stars) : ''}`;
     const live = C.live && ST.live ? ' · ' + T`수사 ${hm(ST.live.t)}` : '';
-    return `${head}\n${T`종결 · 보고서 제출 ${ST.tries || 1}회 · 짚어 보기 ${ST.nudges || 0}회`}${live}\n${ITCH_URL} #MonologueGaze`;
+    const b = badges(), q = scrawlOf();
+    return `${head}${q ? `\n"${q}"` : ''}\n${T`종결 · 보고서 제출 ${ST.tries || 1}회 · 짚어 보기 ${ST.nudges || 0}회`}${live}${b.length ? `\n✔ ${b.join(' · ')}` : ''}\n${ITCH_URL} #MonologueGaze`;
   }
+  const rateHtml = () => (S.rateOff ? '' : `<p class="epi-rate">${T('이 사건이 마음에 드셨다면 <a href="https://jysvai.itch.io/monologue-gaze/rate?source=game" target="_blank" rel="noopener">itch.io에 별점</a>을 남겨 주세요.')}</p>`);
   const shareHtml = () => `<p class="epi-share"><button type="button" class="epi-sh" data-card>${T('결과 카드 저장')}</button><button type="button" class="epi-sh" data-share>${T('결과 복사')}</button><a class="epi-sh" href="https://x.com/intent/post?text=${encodeURIComponent(shareText())}" target="_blank" rel="noopener">${T('X에 올리기')}</a></p>`;
   // 종결 결과 카드: 사건 사진 · 종결 도장 · 기록을 한 장 그림으로 (휴대폰은 공유 창, 컴퓨터는 내려받기). 범인·결말은 넣지 않는다
   async function resultCard() {
     const W = 1200, H = 630, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
     const g = cv.getContext('2d'), cs = getComputedStyle(document.documentElement), fam = v => cs.getPropertyValue(v).trim() || 'serif';
-    const fDoc = fam('--f-doc'), fType = fam('--f-type'), fMono = fam('--f-mono');
+    const fDoc = fam('--f-doc'), fType = fam('--f-type'), fMono = fam('--f-mono'), fHand = fam('--f-hand');
     const title = plain(C.title), stars = C.kind !== 'tutorial' && C.stars ? '★'.repeat(C.stars) + '☆'.repeat(Math.max(0, 5 - C.stars)) : '';
     const rows = [T`보고서 제출 ${ST.tries || 1}회 · 짚어 보기 ${ST.nudges || 0}회`, C.live && ST.live ? T`수사 ${hm(ST.live.t)}` : ''].filter(Boolean);
     const stampT = T('사건 종결');
-    try { await Promise.all([`800 44px ${fDoc}`, `22px ${fType}`, `20px ${fMono}`].map(f => document.fonts.load(f, title + rows.join('') + stampT + 'CASE Monologue Gaze'))); } catch (e) { /* 글꼴을 못 불러도 기본 글꼴로 그린다 */ }
+    try { await Promise.all([`800 44px ${fDoc}`, `22px ${fType}`, `20px ${fMono}`, `28px ${fHand}`].map(f => document.fonts.load(f, title + rows.join('') + stampT + scrawlOf() + badges().join('') + 'CASE Monologue Gaze'))); } catch (e) { /* 글꼴을 못 불러도 기본 글꼴로 그린다 */ }
     const shadow = (b, y) => { g.shadowColor = 'rgba(0,0,0,.55)'; g.shadowBlur = b; g.shadowOffsetY = y; }, plainShadow = () => { g.shadowColor = 'transparent'; g.shadowBlur = 0; g.shadowOffsetY = 0; };
     // 책상
     g.fillStyle = '#1c1815'; g.fillRect(0, 0, W, H);
@@ -1500,7 +1505,14 @@
     tl.forEach((l, i) => g.fillText(l.trim(), 34, 128 + i * 52));
     let y = 128 + tl.length * 52 + 8;
     if (stars) { g.fillStyle = '#b0342a'; g.font = `26px ${fDoc}`; g.fillText(stars, 34, y); y += 44; }
+    const q = scrawlOf();
+    if (q) { // 사건 개요의 빨간 손글씨 한 줄 (처음부터 보이는 말이라 결말을 건드리지 않는다)
+      g.fillStyle = '#b0342a'; let fs = 28; g.font = `${fs}px ${fHand}`; while (g.measureText(q).width > 470 && fs > 16) g.font = `${--fs}px ${fHand}`;
+      g.fillText(q, 34, y); y += 42;
+    }
     g.fillStyle = '#3a342c'; g.font = `20px ${fMono}`; rows.forEach(r => { g.fillText(r, 34, y); y += 32; });
+    const bd = badges();
+    if (bd.length) { g.fillStyle = '#2f5d4a'; g.font = `700 20px ${fMono}`; bd.forEach(r => { g.fillText('✔ ' + r, 34, y); y += 30; }); }
     // 종결 도장
     g.save(); g.translate(430, 330); g.rotate(-0.22); g.globalAlpha = 0.85; g.strokeStyle = '#b0342a'; g.fillStyle = '#b0342a';
     g.lineWidth = 4; g.beginPath(); g.arc(0, 0, 74, 0, Math.PI * 2); g.stroke(); g.lineWidth = 2; g.beginPath(); g.arc(0, 0, 64, 0, Math.PI * 2); g.stroke();

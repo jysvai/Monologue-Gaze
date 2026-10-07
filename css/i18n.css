@@ -7,7 +7,7 @@
 
 html:is([lang="en"],[lang="de"]){
   --l-hand:"Caveat",; --l-hand2:"Shadows Into Light",; --l-hand3:"Patrick Hand",;
-  --l-serif:"Crimson Pro",; --l-old:"Old Standard TT",; --l-brush:"Old Standard TT",;
+  --l-serif:"Crimson Pro",; --l-old:"Old Standard TT",; --l-brush:"Old Standard TT",; --l-mono:"PT Mono",; /* 로마자 고정폭: 곧은따옴표가 아닌 “ ” 와 ō 가 한글 코딩 글꼴로 넘어가 넓게 벌어지지 않게 */
 }
 html[lang="ru"]{
   --l-hand:"Caveat",; --l-hand2:"Marck Script",; --l-hand3:"Pangolin",;
