@@ -687,6 +687,7 @@ MG.I18N.put("en", "c07", {
 "1sfwwxccqrm": "I hear that driver fella got twelve years. My old man clicked his tongue reading the paper.",
 "1rml7vcai0q": "Nobody called me for any trial. And the police haven't shown their faces since.",
 "6f3xp0heko": "It's a little post at the junction. Kwak sits there all night, and when he runs out of cigarettes he comes to my shop.",
+"1fi8q695yg": "Kwak? He's the watchman at the post by the junction. Sits up all night writing the number of every passing car in his notebook. Comes to my shop when he runs out of cigarettes.",
 "55zuoxq3q2": "However much we turn the antenna, our set only gets Dongbang TV. So me and the old man watch that every night.",
 "nyzhqsmcrk": "It's a short walk from my shop. That driver fella only went over there after he hung up.",
 "fxnyu5a09c": "It's the junction a little ways west of here. You go through it to get to the city. Kwak's post is on that corner too.",

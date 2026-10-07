@@ -687,6 +687,7 @@ MG.I18N.put("de", "c07", {
 "1sfwwxccqrm": "Zwölf Jahre hat der Fahrer gekriegt, hört man. Mein Alter hat beim Zeitunglesen mit der Zunge geschnalzt.",
 "1rml7vcai0q": "Zum Prozess hat mich keiner geholt. Und die Polizei hat sich danach auch nicht mehr blicken lassen.",
 "6f3xp0heko": "Ein kleiner Posten an der Kreuzung. Der Gwak sitzt die ganze Nacht da, und wenn ihm die Zigaretten ausgehen, kommt er zu mir.",
+"1fi8q695yg": "Der Gwak? Der Wachmann vom Posten an der Kreuzung. Sitzt die ganze Nacht da und schreibt jede Autonummer, die vorbeikommt, in sein Heft. Wenn ihm die Zigaretten ausgehen, kommt er zu mir.",
 "55zuoxq3q2": "Unser Fernseher kriegt nur Dongbang-TV rein, egal wie man die Antenne dreht. Deshalb schauen mein Alter und ich jeden Abend nur das.",
 "nyzhqsmcrk": "Von meinem Laden aus ist das zu Fuß ein Katzensprung. Der Fahrer ist erst hingegangen, nachdem er aufgelegt hatte.",
 "fxnyu5a09c": "Wenn man von hier ein Stück nach Westen geht, kommt die Kreuzung. Wer in die Stadt will, muss da durch. Gwaks Posten ist auch an der Ecke.",
