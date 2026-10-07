@@ -42,7 +42,7 @@ for (const c of mine) {
   const keys = ks => (ks || []).forEach(k => push(ST.keys, k));
   const src = id => c.sources.find(s => s.id === id);
   const fIs = (f, w) => !!f && (f === w || f.startsWith(w + '.'));
-  const okAll = need => (need || []).every(n => (n[0] === '!' ? ST.notes.some(x => fIs(x.f, n.slice(1))) : n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '@' || n[0] === '~' || n[0] === '?' ? true : ST.keys.includes(n)));
+  const okAll = need => (need || []).every(n => (n.includes('|') ? n.split('|').some(m => okAll([m])) : n[0] === '!' ? ST.notes.some(x => fIs(x.f, n.slice(1))) : n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '@' || n[0] === '~' || n[0] === '?' ? true : ST.keys.includes(n)));
   let steps = 0, last = '', same = 0, waits = 0;
   const kinds = {};
   for (; steps < 3000; steps++) {

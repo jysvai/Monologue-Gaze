@@ -230,7 +230,7 @@
 
   // 사실 id 는 「갈래.세부」로 나눌 수 있다 (f_swap.dec) — 보고서와 붉은 테는 갈래(f_swap)만 보고, 한 날짜를 꼭 집어야 하는 추궁은 세부까지 본다
   const fIs = (f, w) => !!f && !!w && (f === w || f.startsWith(w + '.'));
-  const okOne = n => (n[0] === '~' ? !okOne(n.slice(1)) : n[0] === '?' ? !!(ST.live && ST.live.req[n.slice(1)] && ST.live.req[n.slice(1)].st !== 'no') : n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '!' ? ST.notes.some(x => fIs(x.f, n.slice(1))) : n[0] === '@' ? !!ST.live && ST.live.t >= +n.slice(1) : ST.keys.includes(n)); // '~' = 아직 아님
+  const okOne = n => (n.includes('|') ? n.split('|').some(okOne) : n[0] === '~' ? !okOne(n.slice(1)) : n[0] === '?' ? !!(ST.live && ST.live.req[n.slice(1)] && ST.live.req[n.slice(1)].st !== 'no') : n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '!' ? ST.notes.some(x => fIs(x.f, n.slice(1))) : n[0] === '@' ? !!ST.live && ST.live.t >= +n.slice(1) : ST.keys.includes(n)); // '~' = 아직 아님 · 'a|b' = 둘 가운데 하나
   const ok = need => !need || !need.length || need.every(okOne);
   const srcVisible = s => ok(s.need);
   const srcOpen = s => !s.lock || ST.unl.includes(s.id);
@@ -268,7 +268,7 @@
 
   /* ───────── text rendering ───────── */
   // 표 칸의 1,234,000 같은 숫자는 번역되지 않고 남으므로, 독일어·러시아어에서는 그 나라 자릿점으로 (5,600 이 5.6 으로 읽히지 않게)
-  const numLocal = x => { const sep = { de: '.', ru: ' ' }[MG.I18N.lang]; if (typeof x === 'string' && /^(en|de|ru)$/.test(MG.I18N.lang)) x = x.replace(/(\d)\s*~\s*(?=\S)/g, '$1 – '); /* 「10.6 ~ 10.8」: 물결표 범위는 동아시아 표기라 줄표로 */ return sep && typeof x === 'string' ? x.replace(/(?<![\d.,])\d{1,3}(?:,\d{3})+(?![\d,]|\.\d)/g, m => m.replace(/,/g, sep)) : x; };
+  const numLocal = x => { const sep = { de: '.', ru: ' ' }[MG.I18N.lang]; if (typeof x === 'string' && /^(en|de|ru)$/.test(MG.I18N.lang)) x = x.replace(/(\d)\s*~\s*(?=\S)/g, '$1 – '); /* 「10.6 ~ 10.8」: 물결표 범위는 동아시아 표기라 줄표로 */ if (typeof x === 'string' && /^(en|de|ru)$/.test(MG.I18N.lang)) x = x.replace(/^((?:19|20)\d\d)\. (\d{1,2})$/, (m, y, mo) => mo.padStart(2, '0') + '/' + y); /* 칸 하나가 「1971. 6」(연. 월)뿐이면 「06/1971」 */ return sep && typeof x === 'string' ? x.replace(/(?<![\d.,])\d{1,3}(?:,\d{3})+(?![\d,]|\.\d)/g, m => m.replace(/,/g, sep)) : x; };
   function inline(t) {
     let h = esc(t).replace(/✎/g, () => `<span class="ic-in" role="img" aria-label="${T`연필 표시`}">${IC_PEN}</span>`); // 글 속의 ✎ 도 단추와 같은 연필 그림으로
     // 단어 앞의 여는 괄호·뒤의 닫는 괄호와 문장 부호까지 함께 잡는다 (예전 <button> 시절엔 괄호만 줄 끝에 남지 않게 한 덩어리로 묶었다)
@@ -519,7 +519,7 @@
     if (!PICK || !o || o.t !== 'person' || o.id !== PICK.pid) { PICK = null; return; }
     const p = C.people[PICK.pid], k = PICK.k, n = ST.notes.find(x => String(x.id) === String(id));
     if (!p || !n) return;
-    const ra = rawAns(p, k) || {}, want = ra.take || (ra.need || []).filter(x => x[0] === '!').map(x => x.slice(1)); // take: 붉은 테를 연 조건과 별개로, 내밀어서 통하는 메모 (한 날짜를 짚어야 할 때)
+    const ra = rawAns(p, k) || {}, want = ra.take || (ra.need || []).flatMap(x => x.split('|')).filter(x => x[0] === '!').map(x => x.slice(1)); // take: 붉은 테를 연 조건과 별개로, 내밀어서 통하는 메모 (한 날짜를 짚어야 할 때)
     if (want.some(w => fIs(n.f, w))) { (ST.held ||= {})[`${p.id}|${k}!`] = n.id; ask(k, true); return; } // 화면에는 고른 그 메모만 내민다 (같은 사실의 다른 메모나, 함께 걸린 다른 사실의 메모가 끼어들지 않게)
     PICK.tries = (PICK.tries || 0) + 1;
     const near = [].concat(ra.close || []).find(c => (c.f || []).some(w => fIs(n.f, w))); // 여러 개일 수 있다: 메모마다 그 사람다운 핑계

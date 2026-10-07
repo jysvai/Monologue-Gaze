@@ -152,7 +152,7 @@ function check(c) {
   const needCheck = (need, where) => {
     if (need == null) return;
     if (!Array.isArray(need)) return err(`${where}: need 는 배열`);
-    need.forEach(n => { if (!tokenOk(n)) err(`${where}: need "${n}" 대상이 없음`); if (n[0] === '!') factRefs.push([n.slice(1), where]); });
+    need.flatMap(n => n.split('|')).forEach(n => { if (!tokenOk(n)) err(`${where}: need "${n}" 대상이 없음`); if (n[0] === '!') factRefs.push([n.slice(1), where]); }); // 'a|b' = 둘 가운데 하나
   };
   const factRefs = [];
   if (!sources.length) err('sources 가 비어 있음');
@@ -402,7 +402,7 @@ function check(c) {
   const KN = new Set(c.start || []), F = new Set(), U = new Set(), RQ = new Set(), docsSeen = new Set(), perSeen = new Set();
   const roundK = {}, roundF = {}, roundD = {};
   (c.start || []).forEach(k => (roundK[k] = 0));
-  const okN = need => !need || need.every(n => (n[0] === '~' ? true : n[0] === '?' ? RQ.has(n.slice(1)) : n[0] === '#' ? U.has(n.slice(1)) : n[0] === '!' ? F.has(n.slice(1)) : n[0] === '@' ? true : KN.has(n)));
+  const okN = need => !need || need.every(n => (n.includes('|') ? n.split('|').some(m => okN([m])) : n[0] === '~' ? true : n[0] === '?' ? RQ.has(n.slice(1)) : n[0] === '#' ? U.has(n.slice(1)) : n[0] === '!' ? F.has(n.slice(1)) : n[0] === '@' ? true : KN.has(n)));
   let round = 0;
   for (;;) {
     round++;
