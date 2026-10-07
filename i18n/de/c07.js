@@ -380,7 +380,7 @@ MG.I18N.put("de", "c07", {
 "3nsn760nw9": "Das Nobelrestaurant Songwolgak in der Innenstadt. Das Tor ist seit vier Tagen geschlossen.",
 "11qtdo7ykvi": "Im Mordfall der Restaurant-Buchhalterin an der Uferstraße Beodeulgae gibt es auch nach vier Tagen keine greifbare Spur, dafür umso mehr Gerüchte.",
 "nn06kbhdhr": "Die getötete Bae führte im bekannten Nobelrestaurant Songwolgak in der Innenstadt das Gästebuch; in dem Lokal sollen sogenannte [[höhere Kreise|k_rumor]] aus Politik, Verwaltung und Wirtschaft verkehrt haben. Dass der Wagen, den Bae benutzte, auf ein Unternehmen zugelassen ist, heizt die Gerüchte zusätzlich an.",
-"13eqjsbs40x": "Die Polizei geht der Aussage nach, [[ein gewisser Choi|k_dongjin]] (29), ein Folksänger, der Bae einmal nahestand, habe sich am 15. vor dem Songwolgak heftig mit ihr gestritten, und überprüft seine Wege.",
+"gc4rr1di0q": "Die Polizei geht der Aussage nach, der Folksänger [[Choi Dong-jin|k_dongjin]] (29), der Bae einmal nahestand, habe sich am 15. vor dem Songwolgak heftig mit ihr gestritten, und überprüft seine Wege.",
 "1kme2i53vbt": "Ein leitender Polizeibeamter sagte: „Das Gerede über höhere Kreise ist haltloses Geschwätz.“ Man konzentriere sich „auf eine Beziehungstat oder Geldangelegenheiten“.",
 "1xa1vk5tjnz": "Ein Amtsleiter einer Behörde erklärte unterdessen am Telefon gegenüber unserer Zeitung knapp: „Von so einem Lokal habe ich noch nie gehört.“",
 "1jky8ovwaxw": "Sa., 30. Oktober 1971, Abendausgabe · Seite 7",

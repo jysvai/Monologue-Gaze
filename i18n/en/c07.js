@@ -380,7 +380,7 @@ MG.I18N.put("en", "c07", {
 "3nsn760nw9": "The Songwolgak, a salon in central Seoul. Its gate has been shut for four days.",
 "11qtdo7ykvi": "Four days on, the killing of the salon bookkeeper on Beodeulgae Riverside Road has produced no clear leads, only rumors of every kind.",
 "nn06kbhdhr": "The late Miss Bae kept the guest ledger at the Songwolgak, a well-known salon in the city center, and it is widely said that so-called [[people in high places|k_rumor]] from politics, the civil service and business frequented it. The fact that the car Miss Bae rode in is registered to a business firm has also fed the rumors.",
-"13eqjsbs40x": "Police have obtained a statement that [[a folk singer surnamed Choi|k_dongjin]] (29), once close to Miss Bae, had a loud quarrel with her in front of the Songwolgak on the 15th, and are looking into his movements.",
+"gc4rr1di0q": "Police have obtained a statement that folk singer [[Choi Dong-jin|k_dongjin]] (29), once close to Miss Bae, had a loud quarrel with her in front of the Songwolgak on the 15th, and are looking into his movements.",
 "1kme2i53vbt": "A senior police officer said, “Talk of people in high places is groundless rumor,” adding, “We are focusing on a romantic or financial motive.”",
 "1xa1vk5tjnz": "Meanwhile, a bureau director at a certain government office flatly told this paper's reporter by telephone, “I have never even heard the name of such a salon.”",
 "1jky8ovwaxw": "Saturday, October 30, 1971 · Evening edition · Page 7",
