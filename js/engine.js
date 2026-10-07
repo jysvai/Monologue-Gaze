@@ -529,7 +529,7 @@
       const k = e.replace(/!$/, ''), press = e.endsWith('!');
       const hid = press && ST.held && ST.held[`${p.id}|${e}`], held = hid != null && ST.notes.find(x => String(x.id) === String(hid));
       const ev = press ? (held ? [held] : evidence(p, k)) : [];
-      return `<div class="qa${press ? ' press' : ''}" data-qa="${esc(e)}"><div class="c-q"><span class="c-t">${esc(qText(p, e))}</span>${press ? '' : `<small class="c-k">${esc((C.keywords[k] || {}).label || k)}</small>`}</div>
+      return `<div class="qa${press ? ' press' : ''}" data-qa="${esc(e)}"><div class="c-q"><span class="c-t">${esc(qText(p, e))}</span>${press ? '' : `<small class="c-k">${esc(kl(k))}</small>`}</div>
         ${ev.map(n => `<p class="c-ev"><span class="c-ev-k">${isSoft(p, k) ? T('수첩을 펴 보인다') : T('수첩을 내민다')}</span>${esc(n.t)}</p>`).join('')}
         <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div></div>`;
     }).join('');
@@ -1179,7 +1179,7 @@
     const o = ST.view.open;
     if (!ps.length) return `<p class="res-none">${esc(s.empty || T('아직 찾아갈 사람이 없다. 이름을 알아내야 한다.'))}</p>`;
     // 아직 만나지 않은 사람은 수첩에 적힌 이름으로 (가게 점원 · 택시 기사처럼 이름을 모르고 찾아가는 사람)
-    const nameOf = p => (ST.asked[p.id] ? p.name : kl(p.key)), roleOf = p => (p.role && norm(plain(p.role)) !== norm(nameOf(p)) ? plain(p.role) : '');
+    const nameOf = pname, roleOf = p => (p.role && norm(plain(p.role)) !== norm(nameOf(p)) ? plain(p.role) : '');
     return ps.map(p => `<button type="button" class="item person${o && o.t === 'person' && o.id === p.id ? ' on' : ''}${ST.asked[p.id] ? '' : ' new'}" data-person="${p.id}">${portrait(p)}<span class="item-t">${esc(nameOf(p))}${ST.asked[p.id] ? '' : T('<span class="sr"> (아직 안 만남)</span>')}</span>${roleOf(p) ? `<span class="item-m">${esc(roleOf(p))}</span>` : ''}</button>`).join('');
   }
   // 지도: 목록 칸에는 작은 지도(점만), 아무것도 펼치지 않았을 때는 읽기 칸에 크게(이름까지)
@@ -1613,18 +1613,18 @@
       if (s.type === 'feed' && ST.live) docs.push(...(s.items || []).filter(it => it.doc && it.id in ST.live.fd).map(it => C.docs[it.doc]).filter(Boolean)); // 단톡방에 온 첨부
       docs.filter(d => (!d.lock || ST.unl.includes(d.id)) && !ST.seen.includes(d.id)).forEach(d => add('doc:' + d.id, T`「${plain(s.name)}」에 아직 펼쳐 보지 않은 기록이 있다.`, quote(plain(d.title)), { t: 'doc', id: d.id, src: s.id }));
     });
-    Object.values(C.people).filter(p => personVisible(p) && srcVisible(C.sources.find(s => s.id === p.src) || {}) && ST.asked[p.id] == null).forEach(p => add('meet:' + p.id, T('아직 찾아가 보지 않은 사람이 있다.'), p.name, { t: 'person', id: p.id, src: p.src }));
+    Object.values(C.people).filter(p => personVisible(p) && srcVisible(C.sources.find(s => s.id === p.src) || {}) && ST.asked[p.id] == null).forEach(p => add('meet:' + p.id, T('아직 찾아가 보지 않은 사람이 있다.'), pname(p), { t: 'person', id: p.id, src: p.src }));
     // 2. 읽은 기록 속에 있는데 아직 수첩에 적지 않은 단어
     //    앞으로 이어지는 단어(그 말로 찾으면 나오는 기록이 있거나, 조건에 걸려 있거나, 누군가 그 말에 따로 대답하는 것)를 먼저 짚는다. 아무 데도 안 이어지는 단어부터 짚으면 헛걸음이 된다
     const opens = k => Object.values(C.docs).some(d => (d.find || []).includes(k) && !ST.seen.includes(d.id)) || gates().some(need => need.includes(k)) || Object.values(C.people).some(p => rawAns(p, k) != null);
     const words = []; seen.forEach(b => b.k.forEach(k => { if (!ST.keys.includes(k) && C.keywords[k]) words.push([k, b]); }));
-    [...words.filter(([k]) => opens(k)), ...words.filter(([k]) => !opens(k))].forEach(([k, b]) => add('word:' + k, b.go && b.go.t === 'person' ? T('들은 대답 속에 아직 수첩에 적지 않은 단어가 있다.') : T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${C.keywords[k].label}」`, b.go));
+    [...words.filter(([k]) => opens(k)), ...words.filter(([k]) => !opens(k))].forEach(([k, b]) => add('word:' + k, b.go && b.go.t === 'person' ? T('들은 대답 속에 아직 수첩에 적지 않은 단어가 있다.') : T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${kl(k)}」`, b.go));
     // 3·4. 탐문 — 수첩을 내밀어 다시 물을 것, 새 단어나 쓸 만한 사실이 나올 물음
     const useful = new Set([...gates().flat().filter(n => n[0] === '!').map(n => n.slice(1)), ...C.solution.claims.flatMap(cl => cl.accept || [])]); // 앞을 여는 사실, 보고서에 쓸 사실 (어느 쪽인지는 말하지 않는다)
     const people = Object.values(C.people).filter(p => personVisible(p) && ST.asked[p.id] != null);
     people.forEach(p => ST.keys.forEach(k => {
       const e = askEntry(p, k), asked = ST.asked[p.id] || [];
-      if (e.endsWith('!') && !asked.includes(e) && asked.includes(k)) { const ev = evidence(p, k)[0]; add(`press:${p.id}|${k}`, T('수첩을 내밀어 다시 물어볼 사람이 있다.'), ev && ev.src ? T`${p.name} — 「${C.keywords[k].label}」 · 내밀 메모는 ${ev.src}에서` : T`${p.name} — 「${C.keywords[k].label}」`, { t: 'person', id: p.id, src: p.src }); }
+      if (e.endsWith('!') && !asked.includes(e) && asked.includes(k)) { const ev = evidence(p, k)[0]; add(`press:${p.id}|${k}`, T('수첩을 내밀어 다시 물어볼 사람이 있다.'), ev && ev.src ? T`${pname(p)} — 「${kl(k)}」 · 내밀 메모는 ${ev.src}에서` : T`${pname(p)} — 「${kl(k)}」`, { t: 'person', id: p.id, src: p.src }); }
     }));
     people.forEach(p => ST.keys.forEach(k => {
       if (!C.keywords[k] || (k === p.key && rawAns(p, k) == null)) return;
@@ -1632,12 +1632,12 @@
       if ((ST.asked[p.id] || []).includes(e)) return;
       const b = bags.find(x => x.ask && x.ask.p === p.id && x.ask.e === e);
       const a0 = rawAns(p, k), pre = isCond(a0) && ok(a0.need); // 내밀 메모가 있으면 그냥 묻는 것부터
-      if (pre || (b && ([...b.k].some(x => !ST.keys.includes(x)) || [...b.f].some(f => [...useful].some(w => fIs(f, w)) && !noted(f)) || e.endsWith('!')))) add(`ask:${p.id}|${e}`, T('수첩의 단어로 아직 물어보지 않은 것이 있다.'), T`${p.name} — 「${C.keywords[k].label}」`, { t: 'person', id: p.id, src: p.src });
+      if (pre || (b && ([...b.k].some(x => !ST.keys.includes(x)) || [...b.f].some(f => [...useful].some(w => fIs(f, w)) && !noted(f)) || e.endsWith('!')))) add(`ask:${p.id}|${e}`, T('수첩의 단어로 아직 물어보지 않은 것이 있다.'), T`${pname(p)} — 「${kl(k)}」`, { t: 'person', id: p.id, src: p.src });
     }));
     // 5. 자료실 — 수첩의 단어로 찾으면 새 기록이 나오는 곳 (잠긴 문서는 잠금 쪽(7)에서 짚는다)
     vis.filter(s => s.type === 'archive').forEach(s => ST.keys.forEach(k => {
       if (!C.keywords[k]) return;
-      if (C._srcDocs[s.id].some(d => ok(d.need) && (d.find || []).includes(k) && !ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)))) add(`find:${s.id}|${k}`, T`「${plain(s.name)}」에서 수첩의 단어로 아직 찾아보지 않은 것이 있다.`, quote(C.keywords[k].label), { t: 'find', src: s.id, id: k });
+      if (C._srcDocs[s.id].some(d => ok(d.need) && (d.find || []).includes(k) && !ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)))) add(`find:${s.id}|${k}`, T`「${plain(s.name)}」에서 수첩의 단어로 아직 찾아보지 않은 것이 있다.`, quote(kl(k)), { t: 'find', src: s.id, id: k });
     }));
     // 6. 앞을 막는 조건 가운데 수첩 메모 하나만 모자란 것 — 그 대목은 이미 읽은 기록에 있다
     gates().forEach(need => {
@@ -2216,8 +2216,17 @@
   // 아직 이름을 못 들은 사람은 처음 본 말 그대로(「곽씨」 「대양 석 부장」 「jaehee.draws」) 수첩에 적어 두고,
   // 기록에서 본이름을 눌러 보거나 직접 만나 첫마디를 들으면 그때 고쳐 적는다 (수첩이 먼저 알려 주지 않게). 언어를 바꾸면 본이름으로
   const asWas = () => (ST.kas && ST.kas.lang === MG.I18N.lang ? ST.kas.m : null);
-  const unsaid = (said, k) => !!said && k.type === 'person' && !k.nick && saidAs(said, k.label) !== k.label;
+  // 누른 말이 본이름의 낱말을 다 품었는지 (러시아어 격변화 「Квака Чунгиля」도 「Квак Чунгиль」로 친다). 성만, 이름만, 별명만이면 아직 못 들은 것
+  const nameToks = w => String(w).toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+  const covers = (said, label) => {
+    const S = nameToks(said);
+    return nameToks(label).every(t => S.some(x => x.includes(t)
+      || (t.length === 1 && x[0] === t) // 머리글자 (「O. 리」의 O)
+      || (t.length > 2 && x.startsWith(t.slice(0, Math.min(4, t.length - 1)))))); // 격변화·조사
+  };
+  const unsaid = (said, k) => !!said && k.type === 'person' && !k.nick && !k.victim && !covers(said, k.label);
   function kl(id) { const k = C.keywords[id], m = asWas(); return k ? (m && m[id]) || k.label : id; }
+  function pname(p) { return ST.asked[p.id] ? p.name : kl(p.key); } // 아직 안 만난 사람은 수첩에 적힌 이름으로
   function renameKey(id) {
     const m = asWas(), k = C.keywords[id];
     if (!m || !m[id] || !k) return false;
