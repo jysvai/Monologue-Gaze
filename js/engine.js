@@ -210,7 +210,9 @@
     [READPOS, NGSHUT].forEach(m => [...m.keys()].forEach(k => { if (!id || k.startsWith(id + '|')) m.delete(k); }));
   }
 
-  const okOne = n => (n[0] === '~' ? !okOne(n.slice(1)) : n[0] === '?' ? !!(ST.live && ST.live.req[n.slice(1)] && ST.live.req[n.slice(1)].st !== 'no') : n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '!' ? ST.notes.some(x => x.f === n.slice(1)) : n[0] === '@' ? !!ST.live && ST.live.t >= +n.slice(1) : ST.keys.includes(n)); // '~' = 아직 아님
+  // 사실 id 는 「갈래.세부」로 나눌 수 있다 (f_swap.dec) — 보고서와 붉은 테는 갈래(f_swap)만 보고, 한 날짜를 꼭 집어야 하는 추궁은 세부까지 본다
+  const fIs = (f, w) => !!f && !!w && (f === w || f.startsWith(w + '.'));
+  const okOne = n => (n[0] === '~' ? !okOne(n.slice(1)) : n[0] === '?' ? !!(ST.live && ST.live.req[n.slice(1)] && ST.live.req[n.slice(1)].st !== 'no') : n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '!' ? ST.notes.some(x => fIs(x.f, n.slice(1))) : n[0] === '@' ? !!ST.live && ST.live.t >= +n.slice(1) : ST.keys.includes(n)); // '~' = 아직 아님
   const ok = need => !need || !need.length || need.every(okOne);
   const srcVisible = s => ok(s.need);
   const srcOpen = s => !s.lock || ST.unl.includes(s.id);
@@ -452,7 +454,8 @@
   // 추궁할 때 내미는 증거: 조건(need)에 걸린 수첩 메모
   function evidence(p, k) {
     const a = rawAns(p, k);
-    return ((a && a.need) || []).filter(n => n[0] === '!').map(n => ST.notes.find(x => x.f === n.slice(1))).filter(Boolean);
+    const want = (a && a.take) || ((a && a.need) || []).filter(n => n[0] === '!').map(n => n.slice(1));
+    return want.map(w => ST.notes.find(x => fIs(x.f, w))).filter(Boolean);
   }
   // 붉은 테 단어를 누르면 어떤 메모를 내밀지 고른다 — 맞는 메모를 고르는 것까지가 추궁이다 (엔진이 대신 골라 주지 않는다)
   let PICK = null; // { pid, k, miss, tries }
@@ -483,10 +486,10 @@
     if (!PICK || !o || o.t !== 'person' || o.id !== PICK.pid) { PICK = null; return; }
     const p = C.people[PICK.pid], k = PICK.k, n = ST.notes.find(x => String(x.id) === String(id));
     if (!p || !n) return;
-    const ra = rawAns(p, k) || {}, want = [...(ra.need || []).filter(x => x[0] === '!').map(x => x.slice(1)), ...(ra.also || [])]; // also: 붉은 테를 여는 조건은 아니지만 내밀어도 통하는 사실 (같은 거짓말을 깨는 다른 기록)
-    if (n.f && want.includes(n.f)) { (ST.held ||= {})[`${p.id}|${k}!`] = n.id; ask(k, true); return; } // 화면에는 고른 그 메모만 내민다 (같은 사실의 다른 메모나, 함께 걸린 다른 사실의 메모가 끼어들지 않게)
+    const ra = rawAns(p, k) || {}, want = ra.take || (ra.need || []).filter(x => x[0] === '!').map(x => x.slice(1)); // take: 붉은 테를 연 조건과 별개로, 내밀어서 통하는 메모 (한 날짜를 짚어야 할 때)
+    if (want.some(w => fIs(n.f, w))) { (ST.held ||= {})[`${p.id}|${k}!`] = n.id; ask(k, true); return; } // 화면에는 고른 그 메모만 내민다 (같은 사실의 다른 메모나, 함께 걸린 다른 사실의 메모가 끼어들지 않게)
     PICK.tries = (PICK.tries || 0) + 1;
-    PICK.miss = missLine(p, isSoft(p, k), PICK.tries - 1);
+    PICK.miss = ra.close && (ra.close.f || []).some(w => fIs(n.f, w)) ? ra.close.a : missLine(p, isSoft(p, k), PICK.tries - 1); // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다
     sfx('miss');
     const w = ($('#paneRead [data-press-filter]') || {}).value || '';
     renderRead();
@@ -1093,7 +1096,7 @@
     L.t += lcost('write') + (q && lv() >= 5 ? 60 : 0);
     stepMin += L.t - prev;
     const eta = r.eta != null ? r.eta : 120;
-    if (!why || r.why.includes(n.f)) {
+    if (!why || r.why.some(w => fIs(n.f, w))) {
       L.req[id] = { st: 'wait', at: L.t, due: L.t + eta, note: n ? n.id : null, tries: q ? q.tries || 0 : 0 };
       cue('unlock', r.stamp || T('접수'));
       toast(eta ? T`접수됐다 · 회신 예정 ${lstamp(L.t + eta)}` : T('접수됐다'));
@@ -1578,8 +1581,8 @@
   function leads() {
     const out = [], add = (key, a, b, go) => { if (!out.some(x => x.key === key)) out.push({ key, a, b, go }); };
     const bags = nudgeIndex(), seen = bags.filter(b => b.seen());
-    const noted = f => ST.notes.some(n => n.f === f);
-    const factHome = f => seen.find(b => b.f.has(f));
+    const noted = f => ST.notes.some(n => fIs(n.f, f));
+    const factHome = f => seen.find(b => [...b.f].some(x => fIs(x, f)));
     const vis = C.sources.filter(srcVisible);
     // 1. 보이는데 아직 펼치지 않은 기록, 아직 만나지 않은 사람
     vis.forEach(s => {
@@ -1611,7 +1614,7 @@
       if ((ST.asked[p.id] || []).includes(e)) return;
       const b = bags.find(x => x.ask && x.ask.p === p.id && x.ask.e === e);
       const a0 = rawAns(p, k), pre = isCond(a0) && ok(a0.need); // 내밀 메모가 있으면 그냥 묻는 것부터
-      if (pre || (b && ([...b.k].some(x => !ST.keys.includes(x)) || [...b.f].some(f => useful.has(f) && !noted(f)) || e.endsWith('!')))) add(`ask:${p.id}|${e}`, T('수첩의 단어로 아직 물어보지 않은 것이 있다.'), T`${p.name} — 「${C.keywords[k].label}」`, { t: 'person', id: p.id, src: p.src });
+      if (pre || (b && ([...b.k].some(x => !ST.keys.includes(x)) || [...b.f].some(f => [...useful].some(w => fIs(f, w)) && !noted(f)) || e.endsWith('!')))) add(`ask:${p.id}|${e}`, T('수첩의 단어로 아직 물어보지 않은 것이 있다.'), T`${p.name} — 「${C.keywords[k].label}」`, { t: 'person', id: p.id, src: p.src });
     }));
     // 5. 자료실 — 수첩의 단어로 찾으면 새 기록이 나오는 곳 (잠긴 문서는 잠금 쪽(7)에서 짚는다)
     vis.filter(s => s.type === 'archive').forEach(s => ST.keys.forEach(k => {
@@ -1662,7 +1665,7 @@
     // 짚은 곳을 해냈으면 쪽지를 거둔다 (다음 곳은 다시 눌러야 — 저절로 다음 곳을 보여 주지 않게)
     if (!n && NUDGE.key && (NUDGE.key !== 'done' || L.length)) { NUDGE = null; return ''; }
     if (!n) { // 더 열 것이 없으면 보고서 쪽으로: 쓸 메모가 아직 없는 주장 번호만
-      const empty = sol.claims.map((cl, i) => ((cl.accept || []).some(f => ST.notes.some(x => x.f === f)) ? 0 : i + 1)).filter(Boolean);
+      const empty = sol.claims.map((cl, i) => ((cl.accept || []).some(f => ST.notes.some(x => fIs(x.f, f))) ? 0 : i + 1)).filter(Boolean);
       n = { key: 'done', a: T`더 열어 볼 기록은 없다. 적은 메모로 ${fm.title}${josa(fm.title, '을', '를')} 쓴다.`, b: empty.length ? T`${empty.join('·')}번을 받칠 메모가 아직 수첩에 없다.` : T('쓸 메모는 수첩에 다 있다. 메모끼리 맞대 본다.') };
     }
     NUDGE.key = n.key;
@@ -2573,7 +2576,7 @@
     const bad = ST.report.culprit === sol.culprit ? [] : [fm.short], badCl = [];
     sol.claims.forEach((cl, i) => {
       const n = ST.notes.find(x => String(x.id) === String(ST.report.claims[cl.id]));
-      if (!n || !(cl.accept || []).includes(n.f)) { bad.push(T`${i + 1}번`); badCl.push(cl); }
+      if (!n || !(cl.accept || []).some(w => fIs(n.f, w))) { bad.push(T`${i + 1}번`); badCl.push(cl); }
     });
     const wrong = bad.length;
     const fresh = wrong === 0 && !ST.solved;

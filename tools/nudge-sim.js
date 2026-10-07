@@ -41,7 +41,8 @@ for (const c of mine) {
   const push = (a, x) => { if (!a.includes(x)) a.push(x); };
   const keys = ks => (ks || []).forEach(k => push(ST.keys, k));
   const src = id => c.sources.find(s => s.id === id);
-  const okAll = need => (need || []).every(n => (n[0] === '!' ? ST.notes.some(x => x.f === n.slice(1)) : n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '@' || n[0] === '~' || n[0] === '?' ? true : ST.keys.includes(n)));
+  const fIs = (f, w) => !!f && (f === w || f.startsWith(w + '.'));
+  const okAll = need => (need || []).every(n => (n[0] === '!' ? ST.notes.some(x => fIs(x.f, n.slice(1))) : n[0] === '#' ? ST.unl.includes(n.slice(1)) : n[0] === '@' || n[0] === '~' || n[0] === '?' ? true : ST.keys.includes(n)));
   let steps = 0, last = '', same = 0, waits = 0;
   const kinds = {};
   for (; steps < 3000; steps++) {
@@ -92,11 +93,12 @@ for (const c of mine) {
   const D2 = MG.dev.nudge; // 끝 쪽지 (보고서 쪽으로) 가 제대로 그려지나
   D.toggle(); D.more(); const end = D2();
   const claims = c.solution.claims.filter(cl => !(cl.accept || []).some(f => {
+    const RX = new RegExp('"' + f + '[".]'), RXF = new RegExp('"f":"' + f + '[".]'); // 「갈래.세부」 사실도 갈래 이름으로 찾는다
     // 그 사실이 든 덩이를 이미 읽었나 — 문서는 seen, 대답은 asked
-    const inDoc = Object.values(c.docs).some(d => ST.seen.includes(d.id) && JSON.stringify(d.body || []).includes(`"f":"${f}"`) || ST.seen.includes(d.id) && JSON.stringify(d.body || []).includes(`"${f}"`));
-    const inAns = Object.values(c.people).some(p => Object.entries(p.ask || {}).some(([k, a]) => JSON.stringify(a).includes(`"${f}"`) && (ST.asked[p.id] || []).some(e => e.replace(/!$/, '') === k)) || (ST.asked[p.id] && JSON.stringify(p.intro || []).includes(`"${f}"`)));
-    const inSpot = c.sources.some(s => (s.scenes || []).some(sc => (sc.spots || []).some(sp => ST.unl.includes(sp.id) && JSON.stringify(sp.body || []).includes(`"${f}"`))));
-    const inMisc = c.sources.some(s => (ST.unl.includes(s.id) && JSON.stringify(s.solved || []).includes(`"${f}"`)) || (s.sets || []).some(x => ST.unl.includes(x.id) && JSON.stringify(x.solved || []).includes(`"${f}"`)) || (s.items || []).some(it => it.f === f && ST.live && it.id in ST.live.fd));
+    const inDoc = Object.values(c.docs).some(d => ST.seen.includes(d.id) && JSON.stringify(d.body || []).match(RXF) || ST.seen.includes(d.id) && JSON.stringify(d.body || []).match(RX));
+    const inAns = Object.values(c.people).some(p => Object.entries(p.ask || {}).some(([k, a]) => JSON.stringify(a).match(RX) && (ST.asked[p.id] || []).some(e => e.replace(/!$/, '') === k)) || (ST.asked[p.id] && JSON.stringify(p.intro || []).match(RX)));
+    const inSpot = c.sources.some(s => (s.scenes || []).some(sc => (sc.spots || []).some(sp => ST.unl.includes(sp.id) && JSON.stringify(sp.body || []).match(RX))));
+    const inMisc = c.sources.some(s => (ST.unl.includes(s.id) && JSON.stringify(s.solved || []).match(RX)) || (s.sets || []).some(x => ST.unl.includes(x.id) && JSON.stringify(x.solved || []).match(RX)) || (s.items || []).some(it => fIs(it.f, f) && ST.live && it.id in ST.live.fd));
     return inDoc || inAns || inSpot || inMisc;
   })).map(cl => cl.id);
   const ok = !docs.length && !claims.length && /nudge/.test(end);

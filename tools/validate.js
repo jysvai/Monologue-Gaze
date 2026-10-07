@@ -8,7 +8,7 @@ const path = require('path');
 const vm = require('vm');
 
 const norm = s => String(s ?? '').toLowerCase().replace(/[\s'"`.,!?·・()[\]{}\-_/@:;~「」『』〈〉《》“”‘’]/g, '');
-const BLOCK_KEYS = new Set(['p', 'h', 'sep', 'divider', 'note', 'stamp', 'sign', 'm', 'img', 'cap', 'rows', 'head', 'list', 'msg', 'who', 'at', 'me', 'say', 'cipher', 'f', 'cls', 'nopin', 'osd', 'gore', 'goreRows']);
+const BLOCK_KEYS = new Set(['p', 'h', 'sep', 'divider', 'note', 'stamp', 'sign', 'm', 'img', 'cap', 'rows', 'head', 'list', 'msg', 'who', 'at', 'me', 'say', 'cipher', 'f', 'cls', 'nopin', 'pin', 'osd', 'gore', 'goreRows']);
 const TEXT_KEYS = ['p', 'h', 'divider', 'note', 'stamp', 'sign', 'm', 'cap', 'msg', 'say'];
 const SKINS = new Set(['plain', 'report', 'news', 'letter', 'telegram', 'ledger', 'card', 'transcript', 'memo', 'photo', 'web', 'chat', 'sms', 'home', 'files', 'cipher', 'board', 'lab', 'form']);
 const TYPES = new Set(['archive', 'list', 'people', 'map', 'cipher', 'timeline', 'compare', 'query', 'photo', 'request', 'feed']);
@@ -97,9 +97,10 @@ function check(c) {
     }
   };
   const addFact = (fid, where, b) => {
-    if (typeof fid !== 'string' || !/^f_[a-z0-9_]+$/.test(fid)) warn(`${where}: 사실 id "${fid}" 는 f_소문자 형식을 권장`);
+    if (typeof fid !== 'string' || !/^f_[a-z0-9_]+(\.[a-z0-9_]+)?$/.test(fid)) warn(`${where}: 사실 id "${fid}" 는 f_소문자 형식을 권장`);
     (factWhere[fid] ||= []).push(where);
     b.f.add(fid);
+    if (typeof fid === 'string' && fid.includes('.')) { const fam = fid.split('.')[0]; (factWhere[fam] ||= []).push(where); b.f.add(fam); } // 「갈래.세부」 — 갈래 이름으로도 닿는다
   };
   const scanBlocks = (arr, where, b) => {
     if (arr == null) return;
