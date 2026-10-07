@@ -79,7 +79,8 @@
 .rq-no b{margin-right:6px;color:#b0342a}
 .rq-no small{margin-left:6px;font:11px var(--f-mono);opacity:.7}
 .rq-st{margin:6px 0 10px;font:13px/1.6 var(--f-web)}
-.rq-st small{opacity:.7}
+.rq-st small{opacity:.7;white-space:nowrap}
+.rq-stamp+.rq-st{padding-right:92px} /* 도장이 오른쪽 위에 걸치니, 접수·회신 줄의 글자가 그 밑으로 들어가지 않게 (긴 언어·폰) */
 .rq-stamp{margin:14px 0 4px;height:0;text-align:right;pointer-events:none}
 .rq-stamp span{display:inline-block;padding:6px 12px 5px;border:3px double #b0342a;color:#b0342a;font:800 18px/1 var(--f-doc);letter-spacing:.2em;transform:rotate(-9deg) translateY(-4px);opacity:.85;mix-blend-mode:multiply}
 .rq-stamp.ok span{border-color:#2f5d9a;color:#2f5d9a}

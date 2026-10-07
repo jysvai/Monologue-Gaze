@@ -441,6 +441,14 @@
     thing: [L => T`${L} 말입니다. 아시는 대로 말씀해 주시죠.`, L => T`${L}에 대해 짚이는 게 있습니까?`], // 몸값을 들고 나간 어머니에게 「몸값, 이게 뭔지 아십니까?」가 되지 않게
     word: [L => T`${L} 얘기를 좀 여쭙겠습니다.`, L => T`${L}에 대해 아시는 대로 말씀해 주시죠.`], // 회사·신문·절차 이름에 「~이라는 말」은 어색하다 — 은어나 인용구는 단어가 q 로 그 물음을 가진다
   };
+  // young: 미성년 참고인에게는 반말로 묻는다 (보호자 옆의 열일곱에게 「아시는 대로 말씀해 주시죠」가 되지 않게)
+  const QTY = {
+    person: [L => T`${L} 얘기 좀 해 줄래?`, L => T`${L}에 대해 아는 대로 말해 줘.`],
+    place: [L => T`${L}, 거기 얘기 좀 해 줄래?`, L => T`${L}에 대해 아는 대로 말해 줘.`],
+    time: [L => T`${L}, 그때 얘기 좀 해 줄래?`, L => T`${L}에 무슨 일이 있었어?`],
+    thing: [L => T`${L} 말이야. 아는 대로 말해 줘.`, L => T`${L}, 짚이는 거 있어?`],
+    word: [L => T`${L} 얘기 좀 해 줄래?`, L => T`${L}에 대해 아는 대로 말해 줘.`],
+  };
   const PRESS = ['press1', 'press2', 'press3', 'press4'];
   const RECALL = ['recall1', 'recall2']; // soft: 거짓말한 적 없는 사람(피해자·유족·목격자)에게 메모를 보여 기억을 되살릴 때
   const isSoft = (p, k) => !!(rawAns(p, k) || {}).soft;
@@ -448,10 +456,10 @@
   const pressKey = (p, k) => { const a = rawAns(p, k) || {}; if (a.pq && PRESS.includes(a.pq)) return a.pq; const L = isSoft(p, k) ? RECALL : PRESS; return L[hash(p.id + k) % L.length]; };
   function qText(p, e) {
     const k = e.replace(/!$/, ''), kw = C.keywords[k] || {}, L = kl(k);
-    if (e.endsWith('!')) return (MG.sound && MG.sound.line(pressKey(p, k))) || (isSoft(p, k) ? T('이걸 한번 봐 주시겠습니까. 떠오르는 게 있으신지요.') : T('이걸 보시죠. 그래도 같은 말씀입니까?'));
-    if (k === p.key) return T('본인 이야기를 좀 듣고 싶습니다.');
+    if (e.endsWith('!')) return p.young ? T('이거 봐. 그래도 그렇게 말할 거야?') : (MG.sound && MG.sound.line(pressKey(p, k))) || (isSoft(p, k) ? T('이걸 한번 봐 주시겠습니까. 떠오르는 게 있으신지요.') : T('이걸 보시죠. 그래도 같은 말씀입니까?'));
+    if (k === p.key) return p.young ? T('네 얘기를 좀 듣고 싶어.') : T('본인 이야기를 좀 듣고 싶습니다.');
     if (kw.q) { const qs = [].concat(kw.q); return qs[hash(p.id + k) % qs.length]; } // 틀에 안 맞는 단어(기한·판결·통금 등)는 단어가 제 물음을 가진다
-    const t = QT[kw.type] || QT.word;
+    const Q = p.young ? QTY : QT, t = Q[kw.type] || Q.word;
     return t[hash(p.id + k) % t.length](L);
   }
   // 추궁할 때 내미는 증거: 조건(need)에 걸린 수첩 메모
@@ -666,7 +674,7 @@
     const go = () => { if (t && TALK === t && qa.isConnected) { t.finish(true); playTalk(qa, { p, voice: `v/${C.id}/${p.id}/${k}`, lead: 1000 }); } };
     setTimeout(() => {
       if (t && (TALK !== t || !qa.isConnected)) return;
-      const hv = MG.sound ? MG.sound.voice('hero/' + pressKey(p, k)) : null;
+      const hv = MG.sound && !p.young ? MG.sound.voice('hero/' + pressKey(p, k)) : null; // 녹음된 추궁은 존댓말이라 미성년에게는 소리 없이
       if (hv) hv.done.then(go); else setTimeout(go, 1050);
     }, 450);
   }
@@ -1197,7 +1205,8 @@
   // 탭마다 지금 보이는 항목 ('@' = 탭 자체). 새로 열린 자료가 어느 탭에 생겼는지 점으로 알리는 데 쓴다
   function srcKeys(s) {
     if (!srcVisible(s)) return [];
-    const k = ['@'], add = (list, pass) => (list || []).forEach(x => { if (pass(x)) k.push(x.id); });
+    // 감정 대조·사진철은 탭이 생긴 것만으로는 점을 찍지 않는다 — 맡길 시료·꺼낼 사진이 생겨야 (census 와 같게)
+    const k = s.type === 'compare' || s.type === 'photo' ? [] : ['@'], add = (list, pass) => (list || []).forEach(x => { if (pass(x)) k.push(x.id); });
     if (s.type === 'list' && srcOpen(s)) add(C._srcDocs[s.id], d => ok(d.need));
     else if (s.type === 'map') add(s.spots, x => ok(x.need));
     else if (s.type === 'compare') add(s.sets, x => ok(x.need));
@@ -1602,7 +1611,14 @@
     const noted = f => ST.notes.some(n => fIs(n.f, f));
     const factHome = f => seen.find(b => [...b.f].some(x => fIs(x, f)));
     const vis = C.sources.filter(srcVisible);
-    // 1. 보이는데 아직 펼치지 않은 기록, 아직 만나지 않은 사람
+    const opens = k => Object.values(C.docs).some(d => (d.find || []).includes(k) && !ST.seen.includes(d.id)) || gates().some(need => need.includes(k)) || Object.values(C.people).some(p => rawAns(p, k) != null);
+    const useful = new Set([...gates().flat().filter(n => n[0] === '!').map(n => n.slice(1)), ...C.solution.claims.flatMap(cl => cl.accept || [])]); // 앞을 여는 사실, 보고서에 쓸 사실 (어느 쪽인지는 말하지 않는다)
+    // 만나면 앞이 열리는 사람: 이미 수첩에 있는 말로 물었을 때(또는 첫마디에서) 새 단어나 쓸 만한 사실이 나온다
+    const promising = p => bags.some(b => b.go && b.go.t === 'person' && b.go.id === p.id && (!b.ask || (!b.ask.e.endsWith('!') && ST.keys.includes(b.ask.e)))
+      && ([...b.k].some(x => C.keywords[x] && !ST.keys.includes(x) && opens(x)) || [...b.f].some(f => [...useful].some(w => fIs(f, w)) && !noted(f))));
+    const unmet = Object.values(C.people).filter(p => personVisible(p) && srcVisible(C.sources.find(s => s.id === p.src) || {}) && ST.asked[p.id] == null);
+    const meet = p => add('meet:' + p.id, T('아직 찾아가 보지 않은 사람이 있다.'), pname(p), { t: 'person', id: p.id, src: p.src });
+    // 1. 보이는데 아직 펼치지 않은 기록, 만나면 앞이 열리는 사람
     vis.forEach(s => {
       const docs = [];
       if (s.type === 'list' && srcOpen(s)) docs.push(...C._srcDocs[s.id].filter(d => ok(d.need)));
@@ -1613,14 +1629,13 @@
       if (s.type === 'feed' && ST.live) docs.push(...(s.items || []).filter(it => it.doc && it.id in ST.live.fd).map(it => C.docs[it.doc]).filter(Boolean)); // 단톡방에 온 첨부
       docs.filter(d => (!d.lock || ST.unl.includes(d.id)) && !ST.seen.includes(d.id)).forEach(d => add('doc:' + d.id, T`「${plain(s.name)}」에 아직 펼쳐 보지 않은 기록이 있다.`, quote(plain(d.title)), { t: 'doc', id: d.id, src: s.id }));
     });
-    Object.values(C.people).filter(p => personVisible(p) && srcVisible(C.sources.find(s => s.id === p.src) || {}) && ST.asked[p.id] == null).forEach(p => add('meet:' + p.id, T('아직 찾아가 보지 않은 사람이 있다.'), pname(p), { t: 'person', id: p.id, src: p.src }));
+    unmet.filter(promising).forEach(meet);
     // 2. 읽은 기록 속에 있는데 아직 수첩에 적지 않은 단어
     //    앞으로 이어지는 단어(그 말로 찾으면 나오는 기록이 있거나, 조건에 걸려 있거나, 누군가 그 말에 따로 대답하는 것)를 먼저 짚는다. 아무 데도 안 이어지는 단어부터 짚으면 헛걸음이 된다
-    const opens = k => Object.values(C.docs).some(d => (d.find || []).includes(k) && !ST.seen.includes(d.id)) || gates().some(need => need.includes(k)) || Object.values(C.people).some(p => rawAns(p, k) != null);
     const words = []; seen.forEach(b => b.k.forEach(k => { if (!ST.keys.includes(k) && C.keywords[k]) words.push([k, b]); }));
     [...words.filter(([k]) => opens(k)), ...words.filter(([k]) => !opens(k))].forEach(([k, b]) => add('word:' + k, b.go && b.go.t === 'person' ? T('들은 대답 속에 아직 수첩에 적지 않은 단어가 있다.') : T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${kl(k)}」`, b.go));
+    unmet.forEach(meet); // 만나도 아직 새로 나올 게 없는 사람은 적지 않은 단어 뒤에
     // 3·4. 탐문 — 수첩을 내밀어 다시 물을 것, 새 단어나 쓸 만한 사실이 나올 물음
-    const useful = new Set([...gates().flat().filter(n => n[0] === '!').map(n => n.slice(1)), ...C.solution.claims.flatMap(cl => cl.accept || [])]); // 앞을 여는 사실, 보고서에 쓸 사실 (어느 쪽인지는 말하지 않는다)
     const people = Object.values(C.people).filter(p => personVisible(p) && ST.asked[p.id] != null);
     people.forEach(p => ST.keys.forEach(k => {
       const e = askEntry(p, k), asked = ST.asked[p.id] || [];
