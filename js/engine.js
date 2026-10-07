@@ -2698,7 +2698,11 @@
     const fresh = wrong === 0 && !ST.solved;
     ST.lastRep = wrong ? sig : null;
     if (wrong === 0) { ST.solved = true; VERDICT = ''; }
-    else if (lv() >= 5) { VERDICT = sol.far || T('반려. 어디가 틀렸는지는 적혀 있지 않다.'); if (ST.tries >= 2) VERDICT += T` (어긋난 곳: ${wrong}군데)`; } // ★5 도 두 번째 반려부터는 몇 군데가 틀렸는지만 — 한 칸씩 바꿔 봐도 아무것도 알 수 없어 손을 놓지 않게
+    else if (lv() >= 5) {
+      VERDICT = sol.far || T('반려. 어디가 틀렸는지는 적혀 있지 않다.');
+      if (ST.tries >= 5 && wrong === 1) VERDICT = ((badCl.length === 1 && (badCl[0].near2 || badCl[0].near)) || sol.near || T('딱 한 군데가 어긋난다.')) + T` (어긋난 칸: ${bad.join(', ')})`; // 다섯 번째부터: 한 칸만 남았으면 그 칸을 짚는다 (숫자만 보고 열 번 넘게 끼워 맞추지 않게)
+      else if (ST.tries >= 2) VERDICT += T` (어긋난 곳: ${wrong}군데)`; // ★5 도 두 번째 반려부터는 몇 군데가 틀렸는지만 — 한 칸씩 바꿔 봐도 아무것도 알 수 없어 손을 놓지 않게
+    }
     else {
       // 한 칸만 틀렸고 그 주장에 따로 적어 둔 말이 있으면 그것으로 (「어떻게 알았나」 같은 주장에 「그 사람을 가리키는가」는 엇나간 말이다)
       // 세 번째 제출부터는 near2 가 있으면 그것으로: 같은 말만 되풀이하면 어느 기록을 찾아야 하는지 끝내 모른다

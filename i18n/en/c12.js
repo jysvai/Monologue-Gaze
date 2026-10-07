@@ -60,7 +60,7 @@ MG.I18N.put("en", "c12", {
 "3llkfrp10x": "The drain just outside the back door's sill — where water from the washing floor collects and runs off. The gap around the cover has been filled with new cement, still light in color. Past the sill, a few lines of grout between the washing-area tiles are bleached white.",
 "2fcyw36f1v1": "→ Asked forensics for a luminol test of the washing area and for the drain trap to be taken apart.",
 "179an8kzbpp": "Rubber boots",
-"z4iglvye7": "A pair of black rubber boots. Wavy sole pattern, 27 cm.",
+"299ji8xoqag": "A pair of black rubber boots. Wavy sole pattern, 27 cm. Same pattern and same length as the boot prints in the mud by Bin 1 in the park.",
 "tm8iupzshu": "Firewood pile",
 "28la0lkch1n": "Scrap wood from the lumberyard, stacked waist-high beside the boiler. An axe is stuck in it.",
 "1w7jct2w831": "Washing area — luminol photography",

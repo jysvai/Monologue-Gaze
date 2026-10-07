@@ -60,7 +60,7 @@ MG.I18N.put("de", "c12", {
 "3llkfrp10x": "Abfluss direkt vor der Türschwelle der Hintertür — hier sammelt sich das Wasser vom Boden des Waschraums und läuft ab. Der Spalt rund um den Deckel ist mit frischem Zement verschmiert, noch hell. Jenseits der Schwelle sind einige Fugenreihen der Kacheln im Waschraum von Bleichmittel weiß ausgeblichen.",
 "2fcyw36f1v1": "→ Spurensicherung um Luminoltest im Waschraum und Zerlegen des Abflusssiphons gebeten.",
 "179an8kzbpp": "Gummistiefel",
-"z4iglvye7": "Ein Paar schwarze Gummistiefel. Sohle mit Wellenmuster, 27 cm.",
+"299ji8xoqag": "Ein Paar schwarze Gummistiefel. Sohle mit Wellenmuster, 27 cm. Muster und Länge wie bei den Stiefelabdrücken im Schlamm vor Korb 1 im Park.",
 "tm8iupzshu": "Brennholzstapel",
 "28la0lkch1n": "Altholz, vom Sägewerk geholt. Neben dem Kessel hüfthoch gestapelt. Eine Axt steckt darin.",
 "1w7jct2w831": "Waschraum — Luminolaufnahme",
