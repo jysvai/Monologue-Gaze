@@ -81,7 +81,29 @@
 <script>
 (function () {
   function start(data) {
-    try { window.MG.I18N.ready(function () { boot(data); }); } catch (e) { boot(data); } // 고른 언어의 꾸러미를 받은 뒤에 연다
+    again(function () {
+      try { window.MG.I18N.ready(function () { boot(data); }); } catch (e) { boot(data); } // 고른 언어의 꾸러미를 받은 뒤에 연다
+    });
+  }
+  // 받다가 끊긴 사건 파일은 주소 끝을 바꿔 한 번 더 받는다 (서랍에 사건 몇 개가 통째로 빠진 채 열리지 않게)
+  function again(cb) {
+    var miss = [];
+    try {
+      Array.prototype.forEach.call(document.querySelectorAll('script[src^="cases/"]'), function (t) {
+        var m = /cases\/(c\d+)-/.exec(t.getAttribute('src'));
+        if (m && !window.MG.byId[m[1]]) miss.push(t.getAttribute('src'));
+      });
+    } catch (e) { return cb(); }
+    var left = miss.length;
+    if (!left) return cb();
+    var fired = false, go = function () { if (!fired) { fired = true; cb(); } };
+    miss.forEach(function (src) {
+      var s = document.createElement('script');
+      s.src = src + '?r=' + Date.now();
+      s.onload = s.onerror = function () { if (--left <= 0) go(); };
+      document.head.appendChild(s);
+    });
+    setTimeout(go, 15000);
   }
   function boot(data) {
     try { window.MG.boot(data); } catch (e) { // 사건 파일 하나가 잘못 받아졌어도 빈 책상만 남기지 않는다
