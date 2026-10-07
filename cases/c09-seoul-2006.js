@@ -132,7 +132,7 @@
       k_courier: { label: '구태현', type: 'person', alias: ['태현', 'bike_taehyun', '택배 기사'] },
       k_jinwoo: { label: '하진우', type: 'person', alias: ['진우'] },
       k_tak: { label: '육성규', type: 'person', alias: ['육 사장', '성규'] },
-      k_realtor: { label: '오정란', type: 'person', alias: ['은골부동산', '부동산 사장'] },
+      k_realtor: { label: '오정란', type: 'person', heard: false, alias: ['은골부동산', '부동산 사장'] },
       k_moon: { label: '문순례', type: 'person', role: '은골동 217-3 1층 집주인 (71)', alias: ['문 할머니'] },
       k_choi: { label: '최 권사', type: 'person', role: '219-8 1층에 사는 교회 권사', alias: ['최 권사님', '권사님'] },
       k_byun: { label: '변재호', type: 'person', role: '204-11 2층 세입자 (35)', alias: ['재호'] },

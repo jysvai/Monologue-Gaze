@@ -2218,13 +2218,17 @@
   const asWas = () => (ST.kas && ST.kas.lang === MG.I18N.lang ? ST.kas.m : null);
   // 누른 말이 본이름의 낱말을 다 품었는지 (러시아어 격변화 「Квака Чунгиля」도 「Квак Чунгиль」로 친다). 성만, 이름만, 별명만이면 아직 못 들은 것
   const nameToks = w => String(w).toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean);
-  const covers = (said, label) => {
+  // 이름표의 직함·설명 낱말(그 사람 역할에 나오는 말, 「Editor」 「여급」 「PC」)은 이름이 아니니 못 봤어도 된다
+  const TITLE = ['the', 'der', 'die', 'das', 'mr', 'mrs', 'ms', 'miss', 'herr', 'frau', '씨', 'さん'];
+  const covers = (said, label, drop) => {
     const S = nameToks(said);
-    return nameToks(label).every(t => S.some(x => x.includes(t)
+    return nameToks(label).filter(t => !(drop && drop.has(t))).every(t => S.some(x => x.includes(t)
       || (t.length === 1 && x[0] === t) // 머리글자 (「O. 리」의 O)
       || (t.length > 2 && x.startsWith(t.slice(0, Math.min(4, t.length - 1)))))); // 격변화·조사
   };
-  const unsaid = (said, k) => !!said && k.type === 'person' && !k.nick && !k.victim && !covers(said, k.label);
+  const roleToks = id => { const p = Object.values(C.people || {}).find(x => x.key === id); return new Set([...TITLE, ...nameToks((C.keywords[id] || {}).role || ''), ...nameToks((p && p.role) || '')]); };
+  // heard: false — 가게 이름으로만 불리는 사람(「새터슈퍼」 「기무라 정육점」)은 가게 이름 대신 이름표를 적는다
+  const unsaid = (said, id) => { const k = C.keywords[id] || {}; return !!said && k.type === 'person' && !k.nick && !k.victim && k.heard !== false && !covers(said, k.label, roleToks(id)); };
   function kl(id) { const k = C.keywords[id], m = asWas(); return k ? (m && m[id]) || k.label : id; }
   function pname(p) { return ST.asked[p.id] ? p.name : kl(p.key); } // 아직 안 만난 사람은 수첩에 적힌 이름으로
   function renameKey(id) {
@@ -2241,7 +2245,7 @@
     if (!k) return;
     const shown = saidAs(said, k.label);
     if (ST.keys.includes(id)) {
-      if (asWas() && asWas()[id] && said && !unsaid(said, k)) { renameKey(id); return; }
+      if (asWas() && asWas()[id] && said && !unsaid(said, id)) { renameKey(id); return; }
       if (quiet) return;
       toast(T`이미 수첩에 있다: ${asWas() && asWas()[id] ? saidAs(said, asWas()[id]) : shown}`);
       const kc = $(`.kchip[data-chip="${id}"]`); // 수첩의 그 단어에 형광펜 한 번
@@ -2250,7 +2254,7 @@
     }
     const BY = {}, before = census(BY);
     const met = Object.values(C.people || {}).some(p => p.key === id && ST.asked[p.id]);
-    if (unsaid(said, k) && !met) { if (!asWas()) ST.kas = { lang: MG.I18N.lang, m: {} }; ST.kas.m[id] = said.trim(); }
+    if (unsaid(said, id) && !met) { if (!asWas()) ST.kas = { lang: MG.I18N.lang, m: {} }; ST.kas.m[id] = said.trim(); }
     ST.keys.push(id); save();
     const gained = census() - before;
     if (gained > 0) cue('clue'); else sfx('ink');

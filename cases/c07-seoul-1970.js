@@ -64,7 +64,7 @@
       k_mansik: { label: '강만식', type: 'person', alias: ['강 기사', '만식', '운전사', '운전기사'] },
       k_madam: { label: '한금주', type: 'person', alias: ['한 마담', '마담', '송월각 마담'] },
       k_operator: { label: '오정자', type: 'person', alias: ['미스 오', '교환양', '교환원'] },
-      k_granny: { label: '우물집 할머니', type: 'person', alias: ['우물집', '담배가게'] },
+      k_granny: { label: '우물집 할머니', type: 'person', heard: false, alias: ['우물집', '담배가게'] },
       k_seok: { label: '석태호', type: 'person', alias: ['석 부장', '대양 석 부장', '석태호 부장'] },
       k_wife: { label: '박옥순', type: 'person', alias: ['강만식의 처', '기사 부인', '옥순'] },
       k_dongjin: { label: '최동진', type: 'person', role: '배옥희의 옛 애인 · 통기타 가수 (29)', alias: ['최모씨', '옛 애인', '통기타 가수'] },
