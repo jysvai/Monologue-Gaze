@@ -268,7 +268,7 @@
 
   /* ───────── text rendering ───────── */
   // 표 칸의 1,234,000 같은 숫자는 번역되지 않고 남으므로, 독일어·러시아어에서는 그 나라 자릿점으로 (5,600 이 5.6 으로 읽히지 않게)
-  const numLocal = x => { const sep = { de: '.', ru: ' ' }[MG.I18N.lang]; return sep && typeof x === 'string' ? x.replace(/(?<![\d.,])\d{1,3}(?:,\d{3})+(?![\d,]|\.\d)/g, m => m.replace(/,/g, sep)) : x; };
+  const numLocal = x => { const sep = { de: '.', ru: ' ' }[MG.I18N.lang]; if (typeof x === 'string' && /^(en|de|ru)$/.test(MG.I18N.lang)) x = x.replace(/(\d)\s*~\s*(?=\S)/g, '$1 – '); /* 「10.6 ~ 10.8」: 물결표 범위는 동아시아 표기라 줄표로 */ return sep && typeof x === 'string' ? x.replace(/(?<![\d.,])\d{1,3}(?:,\d{3})+(?![\d,]|\.\d)/g, m => m.replace(/,/g, sep)) : x; };
   function inline(t) {
     let h = esc(t).replace(/✎/g, () => `<span class="ic-in" role="img" aria-label="${T`연필 표시`}">${IC_PEN}</span>`); // 글 속의 ✎ 도 단추와 같은 연필 그림으로
     // 단어 앞의 여는 괄호·뒤의 닫는 괄호와 문장 부호까지 함께 잡는다 (예전 <button> 시절엔 괄호만 줄 끝에 남지 않게 한 덩어리로 묶었다)
@@ -347,7 +347,7 @@
       const head = b.head ? `<thead><tr>${b.head.map(x => `<th${nw(x)}>${inline(x)}</th>`).join('')}<th class="pc"></th></tr></thead>` : '';
       // 줄을 메모로 옮길 때 짧은 칸(숫자·표시)에는 머리글을 붙인다 — 보고서에서 「1.27 · 20 · 18 · —」만 남아 무슨 숫자인지 모르게 되지 않게
       const hd = (b.head || []).map(x => plain(numLocal(x)).trim());
-      const rowNote = r => r.map((x, i) => { const v = plain(x).trim(), h = hd[i] && plain(hd[i]).trim().replace(/\s+·\s+/g, '/'); return i && h && hd.length > 2 && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).filter(Boolean).join(' · '); // 빈칸은 빼고, 「항목 | 내용」 두 칸짜리 표는 머리글 없이 (「가입자 · 내용: 함덕규」가 되지 않게) // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
+      const rowNote = r => r.map((x, i) => { const v = plain(x).trim().replace(/^[—–-]$/, ''), h = hd[i] && plain(hd[i]).trim().replace(/\s+·\s+/g, '/'); return i && h && hd.length > 2 && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).filter(Boolean).join(' · '); // 빈칸은 빼고, 「항목 | 내용」 두 칸짜리 표는 머리글 없이 (「가입자 · 내용: 함덕규」가 되지 않게) // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
       // 칸이 많거나 긴 표는 휴대폰 폭에서 줄마다 「머리글 값」으로 쌓는다 (옆으로 밀어 봐야 하는 표는 ✎ 이 가린 칸 너머를 못 본다)
       const stack = b.head && (b.head.length >= 4 || (b.head.length === 3 && b.rows.some(r => r.some(x => plain(String(x)).length > 60))));
       const dh = (i, x) => (stack && i && hd[i] ? ` data-h="${esc(hd[i])}"${/^[—–-]?$/.test(plain(String(x)).trim()) ? ' data-nil' : ''}` : ''); // 첫 칸(날짜·이름·번호)은 쌓인 줄의 제목이 된다. 「—」 칸은 쌓을 때 뺀다
@@ -1402,7 +1402,7 @@
     const victim = k => { const w = C.keywords[k] || {}; return w.victim || (w.victimIf || []).some(okOne); }; // victimIf: 피해자의 다른 이름 — 그녀가 누구였는지 밝힌 메모가 수첩에 오르면 범인 칸에서 빠진다
     if (!ST.solved && ST.report.culprit && ((C.keywords[ST.report.culprit] || {}).nick || victim(ST.report.culprit))) ST.report.culprit = null;
     const persons = ST.keys.filter(k => C.keywords[k] && C.keywords[k].type === 'person' && !C.keywords[k].nick && !victim(k)); // 별명(온라인 닉네임)과 피해자는 범인 칸에 내지 않는다 // 온라인 별명은 계정일 뿐, 영장에 적을 사람이 아니다
-    const roleOf = k => { const p = Object.values(C.people || {}).find(x => x.key === k), r = (p && p.role) || (C.keywords[k] || {}).role; return r ? plain(r) : ''; }; // 찾아갈 수 없는 사람도 단어에 role 이 있으면 한 줄 붙인다
+    const roleOf = k => { const p = Object.values(C.people || {}).find(x => x.key === k), r = (p && p.role) || (C.keywords[k] || {}).role, v = r ? plain(r) : ''; return p && v === plain(kl(k)) ? plain(p.name) : v; }; // 찾아갈 수 없는 사람도 단어에 role 이 있으면 한 줄 붙인다. 하는 일로만 적힌 사람(「신발 가게 점원」)은 이름을
     const groups = noteGroups(notes);
     const shut = ST.solved; // 종결된 보고서는 결재가 끝난 서류: 고칠 수 없다
     // 다른 주장에 이미 붙인 메모는 고를 때 알 수 있게 (같은 메모를 두 주장에 붙여도 되지만, 모르고 겹치지 않게)
