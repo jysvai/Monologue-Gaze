@@ -379,7 +379,7 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
 /* 결재란: 담당 · 팀장 · 과장. 종이 기록철에는 없다 (붉은 동그라미 자리가 대신한다) */
 .rep-sign{display:none}
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-sign{display:table;float:right;margin:0 0 6px 12px;border-collapse:collapse;font:11px/1.2 var(--f-web);text-align:center}
-.rep-sign th{padding:3px 0;border:1px solid #9aa0a6;background:#eef0f2;font-weight:700;color:#3b4148}
+.rep-sign th{padding:3px 6px;border:1px solid #9aa0a6;background:#eef0f2;font-weight:700;color:#3b4148}
 .rep-sign td{width:54px;height:40px;padding:2px;border:1px solid #9aa0a6;background:#fff;color:#3b4148;vertical-align:middle;word-break:keep-all}
 .rep-sign span{display:inline-grid;place-items:center;width:34px;height:34px;border:2px solid currentColor;border-radius:50%;font:800 11px/1 var(--f-doc);transform:rotate(-12deg);-webkit-mask-image:var(--inkmask);mask-image:var(--inkmask);-webkit-mask-size:140px;mask-size:140px}
 .rep-sign tr+tr td:first-child{min-width:54px;width:auto;padding:2px 6px;white-space:nowrap}
@@ -487,3 +487,6 @@ input.pw{-webkit-text-security:disc;text-security:disc}
 /* 화면 속 문서의 M 메모: 종이 여백의 붓글씨 대신 모니터에 붙인 노란 메모지 */
 .case-view:is([data-frame="laptop"],[data-frame="crt"]) .screen .b-m{border-left:0;background:#fff4b8;box-shadow:0 3px 8px rgba(0,0,0,.18);transform:rotate(-1.5deg)}
 @media (max-width:560px){.case-view[data-frame="laptop"] .cam{top:2px}}
+.lv-feed .doc-b>.fresh{animation:lvFresh 2.6s ease-out both} /* 보던 단톡방에 방금 들어온 말 */
+@keyframes lvFresh{from{background-color:rgba(255,214,90,.42)}to{background-color:transparent}}
+@media (prefers-reduced-motion:reduce){.lv-feed .doc-b>.fresh{animation:none;box-shadow:inset 3px 0 0 rgba(214,160,40,.7)}}

@@ -492,11 +492,12 @@
     PICK.tries = (PICK.tries || 0) + 1;
     PICK.miss = ra.close && (ra.close.f || []).some(w => fIs(n.f, w)) ? ra.close.a : missLine(p, isSoft(p, k), PICK.tries - 1); // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다
     sfx('miss');
-    const w = ($('#paneRead [data-press-filter]') || {}).value || '';
+    const w = ($('#paneRead [data-press-filter]') || {}).value || '', top = ($('#paneRead .press-list') || {}).scrollTop || 0;
     renderRead();
     const f = $('#paneRead [data-press-filter]');
     if (f) { f.value = w; if (w) f.dispatchEvent(new Event('input', { bubbles: true })); }
-    const pk = $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest' });
+    const pl = $('#paneRead .press-list'); if (pl) pl.scrollTop = top; // 메모가 많아도 방금 누른 메모가 목록 속 제자리에 남게
+    const pk = $('#paneRead .press-no') || $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest' }); // 목록 밑의 대답까지 보이게
     land([`#paneRead [data-press-note="${n.id}"]`, '#paneRead [data-press-filter]']); // 다시 그려 초점이 사라졌으면 방금 고른 메모로 — 키보드로 다음 메모로 바로 넘어가게
   }
   const DASH = /^\s*—\s*/;
@@ -908,8 +909,17 @@
     const off = () => { if (pr.scrollHeight - pr.clientHeight - pr.scrollTop < 40) { b.remove(); pr.removeEventListener('scroll', off); } };
     pr.addEventListener('scroll', off, { passive: true });
   }
-  // 새 소식: 화면 오른쪽 위에 휴대폰 알림처럼 (누르면 그곳으로)
+  // 새 소식: 화면 오른쪽 위에 휴대폰 알림처럼 (누르면 그곳으로). 사건을 여는 장면이 떠 있으면 그 장면이 걷힌 뒤에 (제목 위로 알림이 덮이지 않게)
   function notify(news) {
+    const cid = C && C.id;
+    setTimeout(() => {
+      if (!C || C.id !== cid) return;
+      if (!document.querySelector('.case-intro')) return notifyNow(news);
+      const go = () => { document.removeEventListener('mg:intro-out', go); if (C && C.id === cid) setTimeout(() => notifyNow(news), 350); };
+      document.addEventListener('mg:intro-out', go);
+    }, 0);
+  }
+  function notifyNow(news) {
     const box = statusBox('lvNotes', 'lv-notes');
     const gen = NOTEGEN, now = ST.live.t;
     news = news.map((n, i) => [n, i]).sort((a, b) => (a[0].at ?? now) - (b[0].at ?? now) || a[1] - b[1]).map(x => x[0]); // 온 차례대로, 각자 온 시각을 달고
@@ -1324,6 +1334,7 @@
     const fd = o && o.t === 'feed' && el.dataset.fd === o.id ? { low: el.scrollHeight - el.clientHeight - el.scrollTop < 80, n: rows(), pill: !!el.querySelector('.lv-more') } : null;
     el.innerHTML = `<button type="button" class="back-list" data-back>${T`← 목록으로`}</button>${h}`;
     el.dataset.fd = o && o.t === 'feed' ? o.id : '';
+    if (fd && rows() > fd.n) { const fb = el.querySelector('.lv-feed .doc-b'); [...fb.children].slice(fd.n).forEach(x => x.classList.add('fresh')); } // 보던 방에 들어온 말은 알림이 따로 안 뜨니, 방 안에서 잠깐 밝혀 둔다
     if (fd && (rows() > fd.n || fd.pill)) { if (fd.low) el.scrollTop = el.scrollHeight; else newBelow(el); }
     $('#stageBody').classList.toggle('reading', !!(o && h));
     edges();
