@@ -808,7 +808,7 @@ MG.I18N.put("de", "c13", {
 "10b0u5fm8m8": "Wo kann man das Bild dieser Kamera sehen?",
 "10gl3x8gudt": "Wer „check“ schickte, sah die Gasse auf einem Bildschirm. Das CH3-Bild läuft neben der Kasse im Harumart.",
 "1i9jx35296o": "Wer stand in den frühen Morgenstunden, als Gerät B sich einloggte, an dieser Kasse?",
-"oxdnbx2pt1": "Dienstplan November: Die Nachtschichten Do · Fr · Sa (22:00–08:00) übernimmt der Inhaber selbst.",
+"e5xkkf5z3w": "Die Nachtschichten Do · Fr · Sa übernimmt der Inhaber selbst.",
 "w3pwmqggjl": "Wer macht in diesem Laden die Nachtschicht?",
 "14i84sxt2om": "Als die Observation am Samstagabend abgebrochen wurde, stand der Inhaber noch an der Kasse. Er sagte, er bleibe die ganze Nacht im Laden.",
 "1m6xh956r1l": "In der Nacht, in der U-jin festgenommen wurde — wer war im Laden?",

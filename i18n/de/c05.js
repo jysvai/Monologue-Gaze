@@ -714,7 +714,7 @@ MG.I18N.put("de", "c05", {
 "106ek29nhb8": "Was meldete der Funk vom Tatort in jener Nacht?",
 "1h303lni0zo": "Brief (2): Im Licht der Campinglaterne, die der junge Mann aufs Autodach gestellt hatte, seien beide gut zu sehen gewesen.",
 "1x5e8jlmmmw": "Was sagt der zweite Brief über Cedar Creek?",
-"hvvcir13wb": "Die Campinglaterne auf dem Dach gehört zu den zurückgehaltenen Details. Sie ging nicht über Funk. Davon wissen nur der Überlebende, die vier Beamten am Tatort und die beiden Redaktionen.",
+"25q53k2z2qc": "Die Campinglaterne auf dem Dach gehört zu den zurückgehaltenen Details. Sie ging nicht über Funk.",
 "xn3gt4runf": "Was ging weder in die Zeitung noch über Funk?",
 "jf1biar29b": "Das mit dem Radio konnte jeder schreiben, der den Polizeifunk gehört hatte. Die Laterne kam weder über Funk noch in die Zeitung. Wer Brief (2) schrieb, war in jener Nacht in Cedar Creek.",
 "y8qgtb7j8": "Warum wurde jeder Brief in einem anderen Ort aufgegeben?",

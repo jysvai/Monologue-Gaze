@@ -1003,7 +1003,7 @@ MG.I18N.put("en", "c14", {
 "1aq6j9dnbo1": "Where was this certificate printed?",
 "1w2de1kiwtu": "Held to the light, the certificate shows a faint dot repeating every 8.4 cm (3 cm from the left) and a grey line along the right edge.",
 "ppvh17q8k7": "What's left on the certificate's paper?",
-"1407rjl4fpu": "Shown K's message from the night before, “certificate's inside,” Si-woo said he never printed anything at the PC café. It was in the envelope from the start.",
+"f0oexvwbe8": "In the end Si-woo said he never printed anything at the PC café. The certificate was in the envelope from the start.",
 "248zrku5rhd": "“I printed it at the PC café” — is that right?",
 "1ht8oc1ao1j": "The dots and line match the Dallim Call Solmae branch pay statement — same place, same interval. Same printer.",
 "1xg0j94yiuj": "Which printer did this certificate come out of?",

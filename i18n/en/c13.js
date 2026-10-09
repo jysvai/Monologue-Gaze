@@ -808,7 +808,7 @@ MG.I18N.put("en", "c13", {
 "10b0u5fm8m8": "Where can that camera's feed be watched?",
 "10gl3x8gudt": "Whoever sent “confirmed” was watching the alley on a screen. The CH3 feed is on beside the Haru Mart register.",
 "1i9jx35296o": "In the small hours when Device B logged in, who was behind that register?",
-"oxdnbx2pt1": "November shift chart: the owner works the Thu · Fri · Sat night shifts (22:00–08:00) himself.",
+"e5xkkf5z3w": "The owner works the Thu · Fri · Sat night shifts himself.",
 "w3pwmqggjl": "Who works the night shift at that store?",
 "14i84sxt2om": "On Saturday night, when the stakeout was pulled, the owner was still at the register. He said he was minding the store all night.",
 "1m6xh956r1l": "The night Woo-jin was caught — who was in the store?",

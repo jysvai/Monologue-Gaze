@@ -1003,7 +1003,7 @@ MG.I18N.put("de", "c14", {
 "1aq6j9dnbo1": "Wo wurde diese Bescheinigung gedruckt?",
 "1w2de1kiwtu": "Gegen das Licht gehalten zeigt die Bescheinigung alle 8,4 cm einen blassen Punkt (3 cm vom linken Rand) und am rechten Rand einen grauen Streifen.",
 "ppvh17q8k7": "Was ist auf dem Papier der Bescheinigung zurückgeblieben?",
-"1407rjl4fpu": "Mit der Nachricht von K vom Vorabend konfrontiert – „Bescheinigung ist drin“ –, sagte Si-u, er habe nie etwas im PC-Café gedruckt. Sie lag von Anfang an im Umschlag.",
+"f0oexvwbe8": "Am Ende sagte Si-u, er habe nie etwas im PC-Café gedruckt. Die Bescheinigung lag von Anfang an im Umschlag.",
 "248zrku5rhd": "Die Bescheinigung im PC-Café ausgedruckt — stimmt das?",
 "1ht8oc1ao1j": "Punkte und Streifen stimmen mit der Abrechnung der Dallim-Call Filiale Solmae überein — gleiche Stelle, gleicher Abstand. Derselbe Drucker.",
 "1xg0j94yiuj": "Aus welchem Drucker kam diese Bescheinigung?",

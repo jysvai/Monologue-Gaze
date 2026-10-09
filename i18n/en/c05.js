@@ -714,7 +714,7 @@ MG.I18N.put("en", "c05", {
 "106ek29nhb8": "What did the radio traffic from the scene report that night?",
 "1h303lni0zo": "Letter (2): in the light of the camping lantern the young man had put on the car roof, both of them could be seen plain as day.",
 "1x5e8jlmmmw": "What does the second letter say about Cedar Creek?",
-"hvvcir13wb": "The camping lantern on the roof is a withheld detail. It never went out over the radio. Only the survivor, the four officers at the scene and the two newsrooms know of it.",
+"25q53k2z2qc": "The camping lantern on the roof is a withheld detail. It never went out over the radio.",
 "xn3gt4runf": "What never went out in the papers or over the radio?",
 "jf1biar29b": "Anyone who listened to the police band could have written the part about the radio. The lantern never went out over the radio or into print. Whoever wrote letter (2) was at Cedar Creek that night.",
 "y8qgtb7j8": "Why was each letter mailed from a different town?",
