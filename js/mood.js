@@ -1,6 +1,6 @@
 /* Monologue Gaze — 사건마다 다른 공기: 조명 색, 날씨, 배경음, 사건을 여는 장면.
  * 사건 파일의 mood: { light, fx, amb: [...], line } 을 읽는다 (docs/CASE_AUTHORING.md 12절).
- * 배경음은 「소리 켜짐」일 때만 난다. 기기에서 움직임 줄이기를 켜 두면 날씨는 멈추고 여는 장면은 짧게 지나간다.
+ * 배경음은 「소리 켜짐」에 「배경음 켜짐」까지 골랐을 때만 난다 (잔잔한 비·바람·파도·방 소리만). 기기에서 움직임 줄이기를 켜 두면 날씨는 멈추고 여는 장면은 짧게 지나간다.
  */
 (function () {
   const MG = window.MG;
@@ -161,7 +161,6 @@
     const s = ax.createBufferSource(); s.buffer = noiseBuf(type); s.loop = true;
     chain(s, ...fx).connect(bus); s.start(0, rnd(0, 3)); srcs.push(s); return s;
   }
-  function tone(type, f, ...fx) { const o = ax.createOscillator(); o.type = type; o.frequency.value = f; chain(o, ...fx).connect(bus); o.start(); srcs.push(o); return o; }
   function every(a, b, fn) { // a~b 초마다 한 번씩
     const h = { id: 0 }; timers.push(h);
     // 탭을 떠나 소리가 멈춘 동안(시계가 서 있는 동안)은 소리를 쌓아 두지 않는다 — 돌아왔을 때 한꺼번에 터지지 않게
@@ -172,11 +171,6 @@
     const s = ax.createBufferSource(); s.buffer = noiseBuf('white');
     const e = gain(0); e.gain.setValueAtTime(v, t); e.gain.exponentialRampToValueAtTime(0.0005, t + dur);
     chain(s, filt(type, f, q), e).connect(bus); s.start(t, rnd(0, 3)); s.stop(t + dur + 0.05);
-  }
-  function blip(t, type, f0, f1, dur, v, lp) { // 짧은 음 한 번
-    const o = ax.createOscillator(); o.type = type; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur);
-    const e = gain(0); e.gain.setValueAtTime(0.0005, t); e.gain.exponentialRampToValueAtTime(v, t + Math.min(0.02, dur / 4)); e.gain.exponentialRampToValueAtTime(0.0005, t + dur);
-    chain(o, ...(lp ? [filt('lowpass', lp)] : []), e).connect(bus); o.start(t); o.stop(t + dur + 0.05);
   }
   const AMB = {
     rain() { loop('white', filt('highpass', 900), filt('lowpass', 7000), gain(0.06)); every(0.06, 0.3, t => burst(t, 0.03, 'bandpass', rnd(2500, 6000), 2, rnd(0.01, 0.03))); },
@@ -189,67 +183,21 @@
       const v = gain(0.03); loop('pink', filt('lowpass', 750), v);
       every(6.5, 10, t => { v.gain.setTargetAtTime(rnd(0.13, 0.2), t, 1.1); v.gain.setTargetAtTime(0.025, t + 2.8, 1.8); });
     },
-    harbor() {
-      const v = gain(0.03); loop('pink', filt('bandpass', 520, 0.8), v);
-      every(1, 2.6, t => { v.gain.setTargetAtTime(rnd(0.04, 0.08), t, 0.3); v.gain.setTargetAtTime(0.02, t + 0.6, 0.5); });
-    },
-    river() { loop('pink', filt('bandpass', 900, 0.6), gain(0.045)); every(0.4, 1.6, t => blip(t, 'sine', rnd(380, 820), rnd(700, 1400), 0.06, 0.012)); },
-    city() {
-      loop('brown', filt('lowpass', 170), gain(0.09));
-      every(16, 38, t => { // 멀리 지나가는 차 한 대
-        const s = ax.createBufferSource(); s.buffer = noiseBuf('brown'); const f = filt('lowpass', 180); const e = gain(0.0005);
-        f.frequency.setValueAtTime(180, t); f.frequency.linearRampToValueAtTime(650, t + 2.2); f.frequency.linearRampToValueAtTime(160, t + 4.5);
-        e.gain.setValueAtTime(0.0005, t); e.gain.exponentialRampToValueAtTime(0.16, t + 2.2); e.gain.exponentialRampToValueAtTime(0.0005, t + 4.6);
-        chain(s, f, e).connect(bus); s.start(t); s.stop(t + 4.7);
-      });
-    },
-    clock() {
-      let n = 0;
-      const tick = () => { if (!bus || document.hidden || ax.state !== 'running') return; const t = ax.currentTime; burst(t, 0.02, 'highpass', n % 2 ? 2600 : 3400, 1, n % 2 ? 0.035 : 0.05); n++; };
-      timers.push({ id: setInterval(tick, 1000), iv: true });
-    },
-    clapper() { // 야경꾼 딱딱이, 멀리서
-      every(26, 48, t => { const k = Math.random() < 0.5 ? 2 : 3; for (let i = 0; i < k; i++) { burst(t + i * 0.24, 0.06, 'bandpass', 1150, 6, 0.08); blip(t + i * 0.24, 'triangle', 760, 700, 0.09, 0.035, 1600); } });
-    },
-    bell() { // 먼 교회 종
-      every(42, 80, t => [[196, 0.05], [392, 0.03], [467, 0.022], [588, 0.016], [784, 0.01]].forEach(([f, v]) => {
-        const o = ax.createOscillator(); o.frequency.value = f; const e = gain(0.0005);
-        e.gain.setValueAtTime(0.0005, t); e.gain.exponentialRampToValueAtTime(v, t + 0.02); e.gain.exponentialRampToValueAtTime(0.0005, t + 5.5);
-        chain(o, filt('lowpass', 1500), e).connect(bus); o.start(t); o.stop(t + 5.6);
-      }));
-    },
-    horn() { // 먼 뱃고동·무적
-      every(40, 78, t => [98, 147].forEach(f => {
-        const o = ax.createOscillator(); o.type = 'sawtooth'; o.frequency.value = f; const e = gain(0.0005);
-        e.gain.setValueAtTime(0.0005, t); e.gain.exponentialRampToValueAtTime(0.045, t + 0.7); e.gain.setValueAtTime(0.045, t + 2.4); e.gain.exponentialRampToValueAtTime(0.0005, t + 3.8);
-        chain(o, filt('lowpass', 360), e).connect(bus); o.start(t); o.stop(t + 3.9);
-      }));
-    },
-    hum() { tone('sine', 60, gain(0.014)); tone('sine', 120, gain(0.007)); tone('sine', 180, gain(0.003)); },
-    fan() { loop('pink', filt('lowpass', 420), gain(0.03)); tone('sine', 118, gain(0.004)); },
+    harbor() { loop('pink', filt('bandpass', 520, 0.8), gain(0.04)); },
+    river() { loop('pink', filt('bandpass', 900, 0.6), gain(0.045)); },
+    city() { loop('brown', filt('lowpass', 170), gain(0.09)); },
+    fan() { loop('pink', filt('lowpass', 420), gain(0.03)); },
     room() { loop('pink', filt('lowpass', 360), gain(0.02)); },
-    drip() { every(1.4, 4.6, t => { blip(t, 'sine', 1500, 460, 0.08, 0.045); if (Math.random() < 0.4) blip(t + 0.11, 'sine', 1900, 700, 0.05, 0.015); }); },
-    drone() { // 빨간 별 사건: 낮게 깔린 울림
-      tone('sine', 46, gain(0.035)); tone('sine', 46.7, gain(0.03));
-      loop('brown', filt('lowpass', 110), gain(0.035));
-    },
-    // 빨간 별 사건의 녹음된 소리 (잔혹 표현을 끄면 나지 않는다): 이따금, 어디선가
-    flies() { rec('sfx/flies', 1, 38, 80); },
-    creak() { rec('sfx/creak', 0.4, 45, 95); },
-    crackle() { rec('sfx/crackle', 0.7, 40, 85); },
-    static() { rec('sfx/static', 0.65, 45, 90); },
   };
-  const HORROR = ['drone', 'flies', 'creak', 'crackle', 'static'];
-  function rec(k, vol, a, b) {
-    if (MG.sound && MG.sound.preload) MG.sound.preload([k]);
-    every(a, b, () => { if (MG.sound && !(MG.sound.speaking && MG.sound.speaking())) MG.sound.play(k, vol); }); // 누가 말하는 중이면 이번엔 건너뛴다
-  }
+  // 사건 파일의 amb 가운데 위의 잔잔한 바탕 소리만 난다. 종·뱃고동·시계·물방울·낮은 울림·녹음된 섬뜩한 소리(drone, bell, horn, clock, clapper, drip, hum, flies, creak, crackle, static)는
+  // 이따금 불쑥 튀어나와 「이상한 배경음」으로 들린다는 말을 듣고 뺐다 (2026-10-09). 사건 파일에 남아 있어도 나지 않는다.
+  const LOUD = 0.55; // 배경음 전체 크기 (말소리·효과음 밑에 깔리게)
   function startAmb(list) {
     try {
       ax = ax || new (window.AudioContext || window.webkitAudioContext)();
       if (ax.state === 'suspended') ax.resume().catch(() => {});
       bus = ax.createGain(); bus.gain.value = 0.0001; bus.connect(ax.destination);
-      bus.gain.setTargetAtTime(0.8, ax.currentTime + 0.3, 0.9);
+      bus.gain.setTargetAtTime(LOUD, ax.currentTime + 0.3, 0.9);
       (list || []).forEach(k => AMB[k] && AMB[k]());
     } catch (e) { bus = null; }
   }
@@ -262,8 +210,8 @@
   }
   function syncAmb(c) {
     const st = S(), m = (c && c.mood) || {};
-    const list = (m.amb || []).filter(k => !HORROR.includes(k) || !st.mild);
-    const sig = c && st.sound ? c.id + ':' + list.join(',') : '';
+    const list = (m.amb || []).filter(k => AMB[k]);
+    const sig = c && st.sound && st.amb === true && list.length ? c.id + ':' + list.join(',') : ''; // 배경음은 「배경음」 단추로 켠 사람에게만 (처음엔 꺼져 있다)
     if (sig === ampSig) return;
     stopAmb(); ampSig = sig;
     if (sig) startAmb(list);
@@ -350,6 +298,6 @@
       if (layer) { layer.remove(); layer = null; }
     },
     sound() { syncAmb(cur ? MG.byId[cur] : null); },
-    duck(on) { if (bus && ax) bus.gain.setTargetAtTime(on ? 0.25 : 0.8, ax.currentTime, 0.25); }, // 목소리가 나오는 동안 배경음을 낮춘다
+    duck(on) { if (bus && ax) bus.gain.setTargetAtTime(on ? LOUD * 0.3 : LOUD, ax.currentTime, 0.25); }, // 목소리가 나오는 동안 배경음을 낮춘다
   };
 })();

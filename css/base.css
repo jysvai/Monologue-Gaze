@@ -60,6 +60,11 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;ba
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:91;background-image:var(--grain);opacity:.22}
 body[data-screen="cabinet"]{height:auto}
 #app{height:100%}
+/* 글자 크기 (수첩 위 「글자」 단추): 목록·기록·수첩 칸 안을 통째로 키운다 — 칸 너비는 그대로라 글줄이 다시 흐르고, 줄 간격·수첩의 괘선·도장도 같은 비율로 커진다 */
+:root{--rz:1.12}
+html[data-ts="0"]{--rz:1}
+html[data-ts="2"]{--rz:1.25}
+#paneList>*,#paneRead>*,#nb>*,.cabinet>:not(.cab-hero){zoom:var(--rz)}
 body[data-screen="cabinet"] #app{height:auto}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--red);outline-offset:2px}

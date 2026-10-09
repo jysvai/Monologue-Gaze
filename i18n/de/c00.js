@@ -26,7 +26,7 @@ MG.I18N.put("de", "c00", {
 "2cwsek5ngxl": "Wann war wirklich der letzte Tag?",
 "8qvy8632gv": "Gepunktet unterstrichene Wörter antippen – sie landen im Notizbuch.",
 "j69n53fbwk": "Mit den Wörtern aus dem Notizbuch suchen und Leute befragen.",
-"p1erltklu4": "✎ neben einem Satz antippen – so wird er zur Notiz. Im Bericht werden Notizen als Beweise angeheftet.",
+"1fsb2j71j24": "✎ steht nur neben Sätzen, die man sich merken sollte. Antippen macht eine Notiz daraus; im Bericht werden diese Notizen als Beweise angeheftet.",
 "1by95tihlp5": "Bei „Tatortfotos“ direkt ins Foto tippen, um es zu untersuchen. Die „Zeitleiste“ öffnet sich, sobald ein Wort für jene Nacht im Notizbuch steht — es fällt in dem, was die Leute sagen, oder in den Kommentaren im Forum. Dann die Karten mit ▲▼ verschieben und den Uhrzeiten zuordnen.",
 "2afn3vjepvy": "Nuri Suche",
 "baxgq1qstd": "Eine Suchseite, im Browser des Laptops noch angemeldet.",
@@ -416,5 +416,5 @@ MG.I18N.put("de", "c00", {
 "183ak2zmemc": "Kang Do-hyuns Konto — Gwangalli, Busan, am Abend des 9. Oktober (Alibi)",
 "258r6rdc5z3": "Kang Do-hyuns Konto — Nachtfoto von Gwangalli, Busan, 9. Oktober",
 "wmjpnp1jbc": "Yun Jae-hees Konto — Foto ihres Stands auf der Illustrationsmesse",
-"2fapj1rciyy": "Liefer-App — Liefertüte vor der Tür von Wohnung 504 (Foto vom Kurier)"
+"2fapj1rciyy": "Liefer-App — Liefertüte vor der Tür von Wohnung 504 (Foto vom Kurier)",
 });

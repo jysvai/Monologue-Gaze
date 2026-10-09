@@ -79,6 +79,7 @@ const LINES = {
 };
 
 // 효과음 (초 단위 길이)
+// clue·match·confess·solved·find·unlock·gore·bonesaw 는 만든 뒤 ffmpeg 로 줄이고 짧게 다듬었다 (2026-10-09: 「두두둥 하고 요란하게 뜬다」는 피드백 — confess 는 첫 북 한 번, match·solved 는 앞 0.6초). 파일이 있으면 다시 만들지 않는다
 const SFX = {
   clue: ['a single soft low taiko drum hit with a faint paper rustle, subtle discovery cue for a detective game, no music', 1.4],
   match: ['two heavy taiko drum hits, dum... dum, followed by a deep cinematic sub boom and a short rising swell, evidence confirmed sting, no melody', 3],
