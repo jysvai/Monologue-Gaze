@@ -274,3 +274,15 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 .rep-grp.rep-th>summary{color:var(--red)}
 .rep-th-who{margin-top:2px;font:600 11px/1.3 var(--f-mono);letter-spacing:.04em;color:var(--red)}
 .rep-th-who.out{color:var(--pencil);text-decoration:none}
+/* 보고서: 얼굴이 있는 사람은 얼굴과 함께 고른다 · 사건을 닫으면 범인의 얼굴 사진이 결말 옆에 */
+.rep-per.has-face{display:grid;grid-template-columns:auto 1fr;column-gap:9px;align-items:center;justify-items:start}
+.rep-per.has-face>.face{grid-row:1/span 3;width:38px;height:38px;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+.rep-per.has-face>:not(.face):not(input){grid-column:2}
+.rep-per.on>.face{box-shadow:0 0 0 2px var(--red)}
+.rep-solved .sv-face{float:left;margin:4px 16px 8px 0;padding:5px 5px 4px;background:#fbf8f0;box-shadow:0 6px 14px -8px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.08);transform:rotate(-2deg)}
+.sv-face .face.lg{box-shadow:none;border-radius:2px}
+.sv-face figcaption{max-width:104px;margin-top:4px;font:700 11px/1.3 var(--f-mono);text-align:center;color:#5a5048}
+.sv-face.fresh{animation:svIn .6s .3s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes svIn{from{opacity:0;transform:translateY(-12px) rotate(-7deg)}}
+@container stage (max-width:520px){.rep-solved .sv-face{margin:2px 12px 6px 0}.rep-solved .sv-face .face.lg{width:64px;height:80px}.sv-face figcaption{max-width:64px;font-size:10px}}
+@media (prefers-reduced-motion:reduce){.sv-face.fresh{animation:none}}

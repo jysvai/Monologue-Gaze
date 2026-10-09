@@ -421,6 +421,12 @@
   const isPressAsk = (p, k) => { const a = rawAns(p, k); return isCond(a) && (!!(a.take || []).length || (a.need || []).some(n => n.split('|').some(x => x[0] === '!'))); };
   // 헛짚기: 엉뚱한 메모를 내밀면 한 번, 정해진 만큼 쌓이면 그 사람은 입을 닫는다 — 새 단서(내밀 수 있는 메모)가 생기면 다시 따질 수 있다. 메모를 하나씩 다 내밀어 보는 찍기를 막는다
   const VS_MAX = () => (lv() >= 5 ? 2 : 3);
+  // 참을성 눈금: 엉뚱한 메모를 몇 번 더 받아 줄지 (한 번이라도 헛짚은 뒤에만 보인다)
+  function patHtml(p) {
+    const v = ST && !ST.solved && (ST.vs || {})[p.id], n = v && v.shut == null ? v.n || 0 : 0, max = VS_MAX();
+    if (!n) return '<span class="per-pat" hidden></span>';
+    return `<span class="per-pat" role="img" aria-label="${T`참을성 ${max - n} / ${max}`}"><span class="pat-t">${T('참을성')}</span>${Array.from({ length: max }, (_, i) => `<i${i < max - n ? ' class="on"' : ''}></i>`).join('')}</span>`;
+  }
   const vsOf = p => { const v = (ST.vs ||= {})[p.id]; if (v && v.shut != null && proof().length > v.shut) { delete ST.vs[p.id]; return null; } return v || null; };
   const clammed = p => { const v = vsOf(p); return !!(v && v.shut != null); };
   // idle 이 여러 줄이면 돌아가며 한 줄씩 — 모르는 걸 스무 번 물어도 똑같은 말만 되풀이하지 않게 (앞서 모른다고 한 횟수로 고르니 다시 그려도 같은 줄)
@@ -591,9 +597,11 @@
     PICK.miss = fits ? (isSoft(p, k) ? T('(메모를 한참 들여다본다) …이것만으로는 잘 모르겠어요.') : T('(메모를 보고 잠시 멈칫한다) …그것 하나로 뭘 말씀하시려는 겁니까?'))
       : near ? near.a : missLine(p, isSoft(p, k), PICK.tries - 1); // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다 (헛짚기로 치지 않는다)
     sfx('miss');
+    faceAnim(fits || near || PICK.other ? 'flinch' : 'nope', 700);
     if (!fits && !near && !PICK.other) {
       const v = (ST.vs ||= {})[p.id] ||= { n: 0 };
       v.n++;
+      const pt = $('#paneRead .per-h .per-pat'); if (pt) pt.outerHTML = patHtml(p);
       if (v.n >= VS_MAX()) { v.shut = proof().length; v.last = PICK.miss; PICK = null; save(); renderRead(); land(['#paneRead .vs-shut', '#askChips .chip']); return; }
     }
     save();
@@ -634,7 +642,7 @@
         ${ev.map(n => `<p class="c-ev"><span class="c-ev-k">${isSoft(p, k) ? T('수첩을 펴 보인다') : T('수첩을 내민다')}</span>${esc(n.t)}</p>`).join('')}
         <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div>${!press && vsOpen && !asked.includes(k + '!') ? `<p class="c-vs"><button type="button" class="chip vs${lv() <= 3 && isPressAsk(p, k) && ok((rawAns(p, k) || {}).need) ? ' again' : ''}" data-vs="${esc(k)}">${T('메모를 내민다')}</button></p>` : ''}</div>`;
     }).join('');
-    return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h${faceOf(p) ? ' has-face' : ''}">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}</div></header>
+    return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h${faceOf(p) ? ' has-face' : ''}">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}${patHtml(p)}</div></header>
       <div class="per-tr" data-who="${esc(p.id)}">${tr}</div>
       ${PICK && PICK.pid === p.id ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}>${shut ? `<p class="vs-shut" tabindex="-1"><b>${esc(p.name)}</b> ${inline(ST.vs[p.id].last || '').replace(MIDACT, '<i class="c-mid">$&</i>')} <span>${T('— 입을 닫았다. 새 단서를 찾아 오면 다시 따질 수 있다.')}</span></p>` : ''}<p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」')}${liveOn() ? T` · 물을 때마다 ${hm(lcost('ask'))}` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
   }
@@ -644,7 +652,14 @@
   const reduced = () => !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   function stopTalk() { if (TALK) TALK.finish(true); }
   // 얼굴 움직임: 가끔 눈을 감고, 그 사람의 말이 찍히는 동안 입이 열렸다 닫힌다. 움직임 줄이기를 켜 두면 가만히 (표정만 바뀐다)
-  let FACE_IV = 0, FACE_SAID = 0, FACE_BLINK = 0, FACE_OPEN = false;
+  let FACE_IV = 0, FACE_SAID = 0, FACE_BLINK = 0, FACE_OPEN = false, FACE_HOLD = 0;
+  // 몸짓(「(시선을 피한다)」 같은 줄)이 지나갈 때 눈을 잠깐 감는다 — 말 사이의 숨
+  function faceBeat(ms = 380) { if (reduced()) return; FACE_BLINK = performance.now(); FACE_HOLD = ms; }
+  const faceAnim = (cls, ms) => { if (reduced()) return; $$('#paneRead .face.lg').forEach(el => { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); setTimeout(() => el.classList.remove(cls), ms); }); };
+  // 따질 거리가 있는 대답 뒤: 눈을 두 번 빨리 깜빡이고 움찔한다. ★3 은 늘, ★4 는 따질 메모를 쥐었을 때만, ★5 는 보이지 않는다 (「메모를 내민다」의 깜빡임과 같은 셈)
+  const tellOn = (p, k) => !!faceOf(p) && isPressAsk(p, k) && !(ST.asked[p.id] || []).includes(k + '!') && (lv() <= 3 || (lv() === 4 && ok((rawAns(p, k) || {}).need)));
+  function faceHit() { const h = $('#paneRead .per-h.has-face'); if (!h || reduced()) return; h.classList.remove('hit'); void h.offsetWidth; h.classList.add('hit'); setTimeout(() => h.classList.remove('hit'), 1600); }
+  function faceTell() { if (reduced()) return; faceBeat(110); setTimeout(() => faceBeat(110), 330); faceAnim('flinch', 700); }
   function faceSet(el, c, r) {
     if (r != null && String(r) !== el.dataset.r) { el.dataset.r = r; if (r > 0 && !reduced()) { el.classList.remove('jolt'); void el.offsetWidth; el.classList.add('jolt'); } }
     el.dataset.f = c;
@@ -669,8 +684,8 @@
       if (!fs.length) { clearInterval(FACE_IV); FACE_IV = 0; return; }
       const now = performance.now(), talking = now - FACE_SAID < 180;
       FACE_OPEN = talking && !FACE_OPEN;
-      const blink = !FACE_OPEN && now >= FACE_BLINK && now < FACE_BLINK + 150;
-      if (now >= FACE_BLINK + 150) FACE_BLINK = now + 2200 + Math.random() * 3800;
+      const len = FACE_HOLD || 150, blink = !FACE_OPEN && now >= FACE_BLINK && now < FACE_BLINK + len;
+      if (now >= FACE_BLINK + len) { FACE_BLINK = now + 2200 + Math.random() * 3800; FACE_HOLD = 0; }
       const c = FACE_OPEN ? 2 : blink ? 1 : 0;
       fs.forEach(el => { if (el.dataset.f !== String(c)) faceSet(el, c); });
     }, 110);
@@ -707,6 +722,7 @@
       qa.classList.remove('live');
       scanSoon(500); // 다 들은 대답 속 증거는 그때 적는다
       if (!quiet) leadNews(); // 방금 들은 진술과 어긋나는 메모가 수첩에 있으면 그때 알린다
+      if (!quiet && opt.tell) setTimeout(faceTell, 260);
     };
     TALK = me;
     const alive = () => TALK === me && qa.isConnected;
@@ -731,7 +747,7 @@
       el.classList.remove('wait');
       keep(el);
       const tt = el.classList.contains('c-bub') && el.querySelector('.c-t');
-      if (!tt) return later(el.classList.contains('c-act') ? 520 : 200, next);
+      if (!tt) { if (el.classList.contains('c-act')) faceBeat(520); return later(el.classList.contains('c-act') ? 520 : 200, next); }
       const i = +el.dataset.i, isMe = el.classList.contains('me');
       const sg = seg(i);
       if (sg && (!cur || cur.key !== sg.key)) {
@@ -776,6 +792,7 @@
           if (!v && /\S/.test(chars[k - 1].textContent) && k % 2 && snd) snd.blip(isMe ? htone : tone);
         }
         if (!isMe && k > k0 && /\S/.test(chars[k - 1].textContent) && !chars[k - 1].classList.contains('c-mid')) FACE_SAID = performance.now(); // 얼굴의 입이 따라 움직인다
+        else if (!isMe && k > k0 && chars[k - 1].classList.contains('c-mid')) faceBeat(420);
         if (k % 10 === 1) keep(el);
         if (k >= chars.length) return end();
         const ch = chars[k - 1] ? chars[k - 1].textContent : '';
@@ -792,7 +809,7 @@
     const qa = $$('.per-tr .qa').find(x => x.dataset.qa === e);
     if (!qa) return;
     const k = e.replace(/!$/, '');
-    if (!e.endsWith('!')) return playTalk(qa, { p });
+    if (!e.endsWith('!')) return playTalk(qa, { p, tell: tellOn(p, k) });
     qa.classList.add('pressing');
     $$('#paneRead .face.lg').forEach(el => faceSet(el, 0, faceRow(p, true)));
     const soft = isSoft(p, k);
@@ -800,7 +817,7 @@
     const st = document.createElement('div'); st.className = 'cue-stamp press'; st.setAttribute('aria-hidden', 'true'); st.innerHTML = `<span>${soft ? T('확인') : T('추궁')}</span>`;
     document.body.appendChild(st); setTimeout(() => st.remove(), 1900);
     const t = playTalk(qa, { p, lead: 600000 }); // 대답은 내 말이 끝난 뒤
-    const go = () => { if (t && TALK === t && qa.isConnected) { t.finish(true); $$('#paneRead .face.lg').forEach(el => faceSet(el, 0, faceRow(p))); playTalk(qa, { p, voice: `v/${C.id}/${p.id}/${k}`, lead: 1000 }); } };
+    const go = () => { if (t && TALK === t && qa.isConnected) { t.finish(true); $$('#paneRead .face.lg').forEach(el => faceSet(el, 0, faceRow(p))); if (!soft) faceHit(); playTalk(qa, { p, voice: `v/${C.id}/${p.id}/${k}`, lead: 1000 }); } };
     setTimeout(() => {
       if (t && (TALK !== t || !qa.isConnected)) return;
       const hv = MG.sound && !p.young ? MG.sound.voice('hero/' + pressKey(p, k)) : null; // 녹음된 추궁은 존댓말이라 미성년에게는 소리 없이
@@ -1542,10 +1559,10 @@
     const sign = C.frame === 'crt' || C.frame === 'laptop' ? `<table class="rep-sign" aria-label="${T`결재`}"><tr><th>${T`담당`}</th><th>${T`팀장`}</th><th>${T`과장`}</th></tr><tr><td>${esc(who(me))}</td><td>${ST.solved ? T('<span class="ok">결재</span>') : back ? T('<span class="no">반려</span>') : ''}</td><td>${ST.solved ? T('<span class="ok">결재</span>') : ''}</td></tr></table>` : '';
     return `<article class="doc skin-report rep-view"><header class="doc-h">${sign}<p class="doc-k">${esc(FM.title)}</p><h3 class="doc-t">${esc(C.title)}</h3><p class="doc-m">${esc(FM.lead)}</p></header>
       <div class="doc-b"><form id="rep" autocomplete="off"${shut ? ' class="shut"' : ''}>
-        <section class="rep-sec"><h4 id="rh-culprit">${esc(FM.culprit)}</h4><div class="rep-people" role="radiogroup" aria-labelledby="rh-culprit">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => `<label class="rep-per${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}><b>${esc(kl(k))}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}${shut ? '' : thWho(k)}</label>`).join('') || T('<p class="rep-empty">수첩에 적힌 인물이 없다.</p>')}</div></section>
+        <section class="rep-sec"><h4 id="rh-culprit">${esc(FM.culprit)}</h4><div class="rep-people" role="radiogroup" aria-labelledby="rh-culprit">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => { const per = Object.values(C.people || {}).find(x => x.key === k), fc = per && faceOf(per); return `<label class="rep-per${fc ? ' has-face' : ''}${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}>${fc ? portrait(per) : ''}<b>${esc(kl(k))}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}${shut ? '' : thWho(k)}</label>`; }).join('') || T('<p class="rep-empty">수첩에 적힌 인물이 없다.</p>')}</div></section>
         ${sol.claims.map(claim).join('')}
         <p class="submit-row">${shut ? `<span class="rep-filed">${esc(FM.filed || (C.frame === 'papers' ? T('종결 · 철해 둠') : T('결재 완료')))}</span>` : `<button type="submit" class="btn-hand">${esc(FM.submit)}</button>`}<span class="tries">${ST.tries ? T`올린 횟수 ${ST.tries}` : ''}</span></p>
-      </form><p class="verdict">${esc(VERDICT)}</p>${ST.solved ? `<div class="rep-solved">${solvedHtml(false)}</div>` : ''}</div></article>`;
+      </form><p class="verdict">${esc(VERDICT)}</p>${ST.solved ? `<div class="rep-solved">${solvedHtml(false, true)}</div>` : ''}</div></article>`;
   }
   function renderRep() {
     const a = document.activeElement, k = focusKey(a);
@@ -1570,8 +1587,9 @@
   }
 
   /* ───────── notebook ───────── */
-  function solvedHtml(fresh) {
-    const sol = C.solution;
+  function solvedHtml(fresh, rep) {
+    const sol = C.solution, cp = rep && Object.values(C.people || {}).find(x => x.key === sol.culprit);
+    const mug = cp && faceOf(cp) ? `<figure class="sv-face${fresh ? ' fresh' : ''}">${portrait(cp, true)}<figcaption>${esc(cp.name)}</figcaption></figure>` : '';
     NOPIN = true;
     const late = !!(C.live && ST.live && ST.live.late);
     // 현행 사건 결말의 {{t}} · {{d}} = 보고서를 올린 시각. 결말은 글이라 시계 숫자 대신 글로 (15시 40분 · 11월 22일 금요일 15시 40분 · 새벽이면 「새벽 3시 10분」)
@@ -1584,7 +1602,7 @@
     const dl = C.live && C.live.deadline, dlSeen = dl && (late || ok(dl.need)); // 끝내 몰랐던 기한은 말하지 않는다
     const cjk = /^(ja|zh)$/.test(MG.I18N.lang), dlName = esc(dl && dl.label || T('기한')); // 일본어·중국어는 전각 괄호
     const fin = C.live && ST.live ? `<p class="lv-fin">${T`수사 개시부터 ${hm(ST.live.t)}${dlSeen ? ` · ${late ? T('기한 넘김') : T('기한 안에 종결')}${cjk ? `<small>（${dlName}）</small>` : ` <small>(${dlName})</small>`}` : ''}`}</p>` : '';
-    return `<div class="stamp${fresh ? ' fresh' : ''}"><div>${T`사건<br>종결<small>${esc(sol.stamp || '')}</small>`}</div></div>${fin}<div class="epi">${epi}</div>${shareHtml()}${rateHtml()}${sol.next ? nextHtml(sol.next) : ''}`;
+    return `${mug}<div class="stamp${fresh ? ' fresh' : ''}"><div>${T`사건<br>종결<small>${esc(sol.stamp || '')}</small>`}</div></div>${fin}<div class="epi">${epi}</div>${shareHtml()}${rateHtml()}${sol.next ? nextHtml(sol.next) : ''}`;
   }
   // 종결한 사람이 결과를 옮겨 적을 수 있게: 범인·결말은 빼고 사건 번호, 제목, 별, 제출 횟수, 짚어 보기 횟수, 링크만
   const ITCH_URL = 'https://jysvai.itch.io/monologue-gaze';
@@ -3010,7 +3028,7 @@
       if (fresh) {
         const box = $('.rep-view .rep-solved') || $('#solvedBox');
         if (box) {
-          box.innerHTML = solvedHtml(true); box.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' });
+          box.innerHTML = solvedHtml(true, box.classList.contains('rep-solved')); box.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' });
           if (document.activeElement === document.body) { box.tabIndex = -1; box.focus({ preventScroll: true }); } // 키보드로 올렸으면 결말부터 읽히게
         }
         cue('solved', T('사건 종결')); say(T('사건 종결')); renderBar(); renderList(); // 아래 줄의 시계도 「종결」로, 목록 칸의 「회신 기다리기」도 걷는다

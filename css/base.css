@@ -674,3 +674,16 @@ body:has(.case-view[data-graphic])::before{background:radial-gradient(ellipse at
 }
 @media (hover:none){.notes .del{opacity:.85}} /* 손가락 기기에는 올려 볼 마우스가 없다: 메모 지우기 × 가 보이게 */
 .nb-case .snd{opacity:1} /* 종이 위 11px 글씨: 흐리게 하면 대비가 4.5:1 아래로 (켜짐/꺼짐은 글자가 말해 준다) */
+/* 탐문의 몸짓: 걸리는 진술 뒤 움찔(flinch), 엉뚱한 메모엔 고개 젓기(nope), 진술이 깨지면 얼굴이 가까이(hit) */
+.face.lg.flinch{animation:faceFlinch .6s ease-out}
+@keyframes faceFlinch{25%{transform:translate(2px,1px) scale(.985)}55%{transform:translate(-1px,0) scale(.99)}}
+.face.lg.nope{animation:faceNope .6s ease-in-out}
+@keyframes faceNope{20%{transform:rotate(-2.5deg)}45%{transform:rotate(2deg)}70%{transform:rotate(-1deg)}}
+.per-h.hit .face.lg,.per-h.hit .face.lg.jolt{z-index:2;animation:faceHit 1.5s cubic-bezier(.2,.8,.3,1) both;transform-origin:0 50%}
+@keyframes faceHit{0%{transform:scale(1)}12%{transform:scale(1.2) translateX(-3px);box-shadow:0 0 0 2px var(--red),0 0 22px 4px rgba(176,52,42,.45)}20%{transform:scale(1.18) translateX(3px)}30%{transform:scale(1.18)}75%{transform:scale(1.14);box-shadow:0 0 0 2px rgba(176,52,42,.6),0 8px 16px -8px rgba(0,0,0,.5)}100%{transform:scale(1)}}
+/* 참을성 눈금: 헛짚을 때마다 하나씩 빈다 */
+.per-pat{display:inline-flex;align-items:center;gap:3px;margin-top:4px;font:600 11px/1 var(--f-mono);letter-spacing:.04em;color:var(--pencil)}
+.per-pat .pat-t{margin-right:3px}
+.per-pat i{width:9px;height:9px;border:1.5px solid var(--red);border-radius:50%;opacity:.45}
+.per-pat i.on{background:var(--red);opacity:.85}
+@media (prefers-reduced-motion:reduce){.face.lg.flinch,.face.lg.nope,.per-h.hit .face.lg{animation:none}}

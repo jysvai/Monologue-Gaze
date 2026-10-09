@@ -37,6 +37,8 @@ MG.I18N.put("en", "ui", {
 "비밀번호": "Password",
 "열기": "Open",
 "{0} ({1}회)": "{0} (×{1})",
+"참을성 {0} / {1}": "Patience {0} / {1}",
+"참을성": "Patience",
 "…글쎄요.": "…Well.",
 "…글쎄요, 잘 모르겠네요.": "…Well, I really couldn't say.",
 "<span class=\"sr\"> (물어봄)</span>": "<span class=\"sr\"> (asked)</span>",
