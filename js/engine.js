@@ -2984,6 +2984,9 @@
     toast(T`눈에 걸리는 것: ${plain(sp.label)}${gained > 0 ? opened(gained, BY) : ''}`);
     const li = $$('.ph-found li').pop();
     if (li && !(MG.writeIn && MG.writeIn(li, { duration: 500 }))) li.classList.add('fresh');
+    // 눌러서 찾은 것은 이미 본 것: 그 설명 속 증거 줄은 사진 밑까지 내려 읽지 않아도 곧 수첩에 (찾았는데 메모가 없다고 헷갈리지 않게)
+    const c0 = C, refs = li ? $$('.pin:not(.on)', li).map(b => b.dataset.pin).filter(r => PIN[r] && PIN[r].f && !(ST.drop || []).includes(r)) : [];
+    if (refs.length) setTimeout(() => { if (C === c0 && li.isConnected) collect(refs); }, 900);
     return true;
   }
   function photoClick(el, e) {
