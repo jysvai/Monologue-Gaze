@@ -590,7 +590,7 @@ MG.I18N.put("en", "c03", {
 "2dyko4x9gzj": "It was Baek Nancho's song on the radio. It began at nine and was cut off at 9:05 by the broadcast outage; until 9:50 the radio made no sound at all.",
 "1c601y98q6j": "“At half past nine I heard the changgeuk through the wall” — is that true?",
 "2bxu4v3peye": "Reply from the broadcasting station: the changgeuk “Simcheongga” did not go out at the scheduled 9:15. It only began at 9:50, when the broadcast came back.",
-"15snirf6xh9": "When did the changgeuk actually go out that night? What did the station reply to the police inquiry?",
+"1qsi9jaeyud": "When did the changgeuk actually go out that night? Is the station's reply in the Jongno Police files?",
 "1b7o02jmi18": "I pointed out the outage to Seo Gi-ryong. “Then what I heard must have been a gramophone. The old man must have put on a changgeuk record.”",
 "pqtknkoy57": "The radio through the wall — was it really playing at that hour?",
 "3u76nlix70": "Park Man-su: there was no gramophone at Bochundang.",

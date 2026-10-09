@@ -590,7 +590,7 @@ MG.I18N.put("de", "c03", {
 "2dyko4x9gzj": "Es war Baek Nan-chos Lied im Radio. Es begann um neun und brach um 21:05 Uhr durch den Sendeausfall ab; bis 21:50 Uhr kam aus dem Radio kein Ton.",
 "1c601y98q6j": "„Um halb zehn habe ich durch die Wand das Changgeuk gehört“ — stimmt das?",
 "2bxu4v3peye": "Antwort des Funkhauses: Das Changgeuk „Simcheongga“ konnte nicht wie vorgesehen um 21:15 Uhr gesendet werden. Es begann erst um 21:50 Uhr, als die Sendung weiterlief.",
-"15snirf6xh9": "Wann lief das Changgeuk an jenem Abend wirklich? Was antwortete das Funkhaus auf die Anfrage?",
+"1qsi9jaeyud": "Wann lief das Changgeuk an jenem Abend wirklich? Liegt im Revier Jongno die Antwort des Funkhauses vor?",
 "1b7o02jmi18": "Ich habe Seo Gi-ryong auf den Sendeausfall hingewiesen. „Dann war das, was ich gehört hab, wohl das Grammophon. Der alte Herr wird eine Changgeuk-Platte aufgelegt haben.“",
 "pqtknkoy57": "Das Radio hinter der Wand — lief es zu der Zeit wirklich?",
 "3u76nlix70": "Park Man-su: Im Bochundang gab es kein Grammophon.",

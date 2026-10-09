@@ -264,6 +264,7 @@ MG.I18N.put("en", "ui", {
 "의문 {0} 풀림 — {1}": "Question {0} solved — {1}",
 "새 의문 — {0}": "New question — {0}",
 "의문 {0} — 빈칸 하나를 채웠다 ({1}/{2})": "Question {0} — one gap filled ({1}/{2})",
+"{0}에게 「{1}」 이야기를 아직 듣지 못했다.": "You haven’t heard {0} on “{1}” yet.",
 "{0}에게서 아직 듣지 못한 말이 있다.": "There’s something {0} hasn’t said yet.",
 "아직 듣지 못한 말이 있다.": "There’s something you haven’t heard yet.",
 "메모 {0}번 보기": "Show note #{0}",
