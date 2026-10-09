@@ -735,7 +735,7 @@ MG.I18N.put("de", "c05", {
 "2cfjwktsk5a": "Als ich Pell das Gutachten vorhielt, gab er es zu. Er habe den Brief getippt, um die Zeitung hereinzulegen, die die Briefe eines Irren auf die Titelseite bringt.",
 "1sxvfr8fh2u": "Pell sagt, Schreibmaschinen gebe es überall. Hat er mit dem Brief wirklich nichts zu tun?",
 "r8wqzs1slb": "Vom 3. Mai, 21:10 Uhr, bis zum nächsten Morgen um 07:00 Uhr saß Pell in der Sammelzelle des County-Gefängnisses.",
-"1mlbuvs3wby": "Wo war Pell in der Nacht des 3. Mai?",
+"g8ewwitugx": "Wo Pell in der Nacht zum 3. Mai gewesen sein will — gibt es dort ein Ein- und Ausgangsbuch?",
 "229f88oujqg": "Brief (3) war ein Streich von Waldo Pell. Er hat den Druckfehler der Zeitung übernommen, und in der Nacht des 3. Mai saß er im Gefängnis. Pell scheidet aus.",
 "18j0ychj4fx": "Was sagt die Geheimschrift?",
 "p0jqi1a0wl": "Die Geheimschrift, gelöst: „Der Sand rinnt. Ich lege euch eure Sonntage vor die Tür. Ihr lest mich und seht mich nicht.“",
