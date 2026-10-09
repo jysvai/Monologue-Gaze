@@ -4,6 +4,7 @@
  *   node tools/i18n.js src <부분> [파일]      번역할 원문을 JSON 으로 뽑는다 (부분: ui · finale · c00 … c15)
  *   node tools/i18n.js put <언어> <부분> <파일>  번역 JSON 을 i18n/<언어>/<부분>.js 에 넣는다 (검사를 통과한 것만)
  *   node tools/i18n.js check [언어] [부분]      빠진 것 · 낡은 것(원문이 바뀐 것) · 어긋난 것을 알려 준다
+ *   node tools/i18n.js prune [언어] [부분]      낡은 것(지금 원문에 없는 열쇠)을 번역 파일에서 걷어 낸다
  *
  * 원문 JSON (src)
  *   ui:  [{ k: 한국어 열쇠, ph: { 0: '자리 표시의 코드', … }, at: 'js/engine.js:123' }]  — 번역 파일은 { 한국어 열쇠: 번역 }
@@ -275,6 +276,19 @@ function cmdCheck(langs, parts) {
   return total;
 }
 
+function cmdPrune(langs, parts) {
+  for (const part of parts) {
+    const us = unitsOf(part), order = us.map(u => keyOf(part, u)), keys = new Set(order);
+    for (const lang of langs) {
+      const pack = readPack(lang, part), stale = Object.keys(pack).filter(k => !keys.has(k));
+      if (!stale.length) continue;
+      stale.forEach(k => delete pack[k]);
+      writePack(lang, part, pack, order);
+      console.log(`${lang} ${part}: 낡은 것 ${stale.length} 걷어 냄`);
+    }
+  }
+}
+
 const [cmd, a, b, c2] = process.argv.slice(2).filter(x => x !== '-v');
 try {
   if (cmd === 'src' && a) cmdSrc(a, b);
@@ -283,6 +297,10 @@ try {
     const langs = a && LANGS.includes(a) ? [a] : LANGS;
     const part = a && !LANGS.includes(a) ? a : b;
     cmdCheck(langs, part ? [part] : partsAll());
+  } else if (cmd === 'prune') {
+    const langs = a && LANGS.includes(a) ? [a] : LANGS;
+    const part = a && !LANGS.includes(a) ? a : b;
+    cmdPrune(langs, part ? [part] : partsAll());
   } else {
     console.log(fs.readFileSync(__filename, 'utf8').split('\n').slice(1, 14).join('\n').replace(/^ ?\*\/?/gm, ''));
     process.exit(1);

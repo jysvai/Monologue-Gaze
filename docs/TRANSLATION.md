@@ -41,6 +41,7 @@ node tools/i18n.js src c03 dist/i18n-work/c03.json      # 원문 토막 목록 (
 node tools/i18n.js put en c03 dist/i18n-work/en/c03.1.json   # 검사를 통과한 것만 i18n/en/c03.js 에 넣는다
 node tools/i18n.js check                                 # 언어 × 부분마다 채운 수 · 빠짐 · 낡음 · 어긋남
 node tools/i18n.js check en c03 -v                       # 빠진 토막과 어긋난 곳을 하나씩
+node tools/i18n.js prune c03                             # 원문이 바뀌어 아무도 안 쓰는 낡은 번역을 걷어 낸다 (put 은 넣기만 한다)
 ```
 
 `put` 이 거르는 것: 걸린 단어 id 가 원문과 다름, 없는 단어 id, `**굵게**` · `~~줄~~` · `{{t}}` · `{n}` 개수가 다름, 화면 글자의 태그·자리 표시가 다름, 답 값이 빈 배열,
