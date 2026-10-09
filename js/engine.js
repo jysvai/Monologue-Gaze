@@ -1814,7 +1814,9 @@
   function thHtml() {
     const V = thView();
     if (!V.length) return '';
-    const nd = V.filter(x => x.done).length, LIVE = V.filter(x => !x.done).slice(-3); // 풀리지 않은 의문이 많으면 새로 나온 셋만 펼쳐 둔다 (수첩이 몇 화면씩 늘어지지 않게)
+    // 풀리지 않은 의문이 많으면 셋만 펼쳐 둔다 (수첩이 몇 화면씩 늘어지지 않게): 빈칸 하나만 남은 것부터, 나머지는 새로 나온 것 — 다 풀어 가던 의문이 접혀 남은 한 칸을 잊지 않게
+    const open = V.filter(x => !x.done), one = open.filter(x => x.got.filter(g => !g).length === 1).slice(-2);
+    const nd = V.filter(x => x.done).length, LIVE = [...one, ...open.filter(x => !one.includes(x)).slice(-(3 - one.length))];
     const step = (x, s, j) => {
       // 따질 말을 아직 듣지 못했으면 그 말을 앞질러 옮기지 않는다 (「긁힌 데 하나 없다는 말, 맞나?」가 그 사람을 만나기도 전에 보이지 않게)
       const unheard = s.press && !(ST.asked[s.press.split(':')[0]] || []).includes(s.press.split(':')[1]);
