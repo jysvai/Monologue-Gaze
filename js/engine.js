@@ -609,7 +609,7 @@
     save();
     pickRefresh();
     faceAnim(react, 700);
-    const pk = $('#paneRead .press-no') || $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest' }); // 목록 밑의 대답까지 보이게
+    const pk = $('#paneRead .press-pick .vs-left') || $('#paneRead .press-no') || $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest' }); // 목록 밑의 대답과 남은 횟수까지 보이게
     land([`#paneRead [data-press-note="${n.id}"]`, '#paneRead [data-press-filter]']); // 다시 그려 초점이 사라졌으면 방금 고른 메모로 — 키보드로 다음 메모로 바로 넘어가게
   }
   const DASH = /^\s*—\s*/;
