@@ -827,7 +827,7 @@ MG.I18N.put("de", "c02", {
 "rjm6af8uqp": "Im gefrorenen Blut im Stadel sind Abdrücke genagelter Stiefel. Betreten, nachdem das Blut erstarrt war.",
 "1rhmxdxapl5": "Was ist auf dem Boden des Stadels zurückgeblieben?",
 "1iucapmtk5s": "Ja. Von der Nacht des 26. bis etwa zum 29. blieb jemand in dem Haus, heizte, fütterte das Vieh und leerte den Briefkasten.",
-"sbp7cfwuq6": "Wo war Alois, der davongejagte Knecht, in jener Woche?",
+"ihnsteofza": "Wo war der Knecht, der früher auf Haselöd gearbeitet hatte, in jener Woche?",
 "kq4y8kil5r": "Pfänzl: Er sei in der Woche bei seiner Schwester in Kelbach gewesen.",
 "1glkoqv8bsw": "Wo will der Knecht in jener Woche gewesen sein?",
 "1mpjea81w5r": "Arrestbuch des Bezirksamts Kelbach: Pfänzl am 25. Januar um 22:10 Uhr eingeliefert, am 29. um 9 Uhr früh entlassen. Rauferei in einem Gasthof, vier Tage statt Geldstrafe.",

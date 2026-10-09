@@ -765,7 +765,7 @@ MG.I18N.put("en", "c13", {
 "ihhspeyhvk": "00:18: a man in a navy padded jacket reached under the AC unit. Do-ha's clothes.",
 "21m560ax5ue": "When did Do-ha get there?",
 "s9xdmtwm09": "Do-ha bought the pills from Moonlight Pharmacy's @moonlight with crypto. At 00:18 he picked up the baggie left under the AC unit at 22:14.",
-"u65smn5tld": "Did Ji-han really not know what Do-ha was taking?",
+"21l54by9jwu": "Did Ji-han know what Do-ha was taking?",
 "1w8pf26fkn3": "Nov 10: Ji-han sent Do-ha an invite link to Moonlight Pharmacy. “i've ordered twice and i'm totally fine.”",
 "54z69guwm6": "Who told Do-ha about that channel?",
 "oiwmd41v0n": "Shown that chat, Ji-han said he deleted Paper in the ambulance. That's why he wouldn't show his phone.",

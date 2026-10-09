@@ -846,7 +846,7 @@ MG.I18N.put("en", "c15", {
 "wj6bjsr559": "The owner of Haeoreum Self Car Wash is Seong Min-jae. The lease runs to December 31 and was not terminated early.",
 "wim0r4ee9w": "Whose place is it?",
 "1x2wrgfbhjz": "Da-som is at 188 Saneop-ro, Galmae-dong, in the closed Haeoreum Self Car Wash. The lease on that place is still in Seong Min-jae's name.",
-"b78sfy167g": "Was the building owner really “asleep since nine”?",
+"120x4d90gly": "What did the building owner, Baek Sang-cheol, do tonight?",
 "huxv9s7x5": "The parking-lot camera he called “broken” has its power cord pulled from the outlet. There is dust on the plug.",
 "5hikg1gnwv": "The “broken” camera?",
 "1b530hd0gs1": "Shown the camera, the building owner said he unplugged it himself a month ago, worried about a crackdown on renting out parking spaces.",

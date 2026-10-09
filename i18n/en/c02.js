@@ -827,7 +827,7 @@ MG.I18N.put("en", "c02", {
 "rjm6af8uqp": "Hobnailed boot prints are pressed into the frozen blood in the barn. Trodden after the blood had set.",
 "1rhmxdxapl5": "What was left on the barn floor?",
 "1iucapmtk5s": "Yes. From the night of the 26th until about the 29th, someone stayed on in that house, kept the fire going, fed the animals and emptied the mailbox.",
-"sbp7cfwuq6": "Where was Alois, the dismissed farmhand, that week?",
+"ihnsteofza": "Where was Haselöd's former farmhand that week?",
 "kq4y8kil5r": "Pfänzl: says that week he was at his sister's in Kelbach.",
 "1glkoqv8bsw": "Where does the farmhand say he was that week?",
 "1mpjea81w5r": "Kelbach District Office lock-up register: Pfänzl brought in at 10:10 p.m. on January 25, released at 9 a.m. on the 29th. A brawl at an inn; four days in lieu of a fine.",

@@ -846,7 +846,7 @@ MG.I18N.put("de", "c15", {
 "wj6bjsr559": "Inhaber des SB-Waschparks Haeoreum ist Seong Min-jae. Der Mietvertrag läuft bis 31. Dezember und wurde nicht vorzeitig gekündigt.",
 "wim0r4ee9w": "Wem gehört der Ort?",
 "1x2wrgfbhjz": "Da-som ist in der Saneop-ro 188, Galmae-dong, im geschlossenen SB-Waschpark Haeoreum. Der Mietvertrag dafür läuft noch auf Seong Min-jae.",
-"b78sfy167g": "Hat der Hausbesitzer wirklich „seit neun geschlafen“?",
+"120x4d90gly": "Was hat Hausbesitzer Baek Sang-cheol heute Abend getan?",
 "huxv9s7x5": "Bei der angeblich „kaputten“ Parkplatzkamera ist das Stromkabel aus der Steckdose gezogen. Auf dem Stecker liegt Staub.",
 "5hikg1gnwv": "Die „kaputte“ Kamera?",
 "1b530hd0gs1": "Auf die Kamera angesprochen, sagte der Hausbesitzer, er habe sie vor einem Monat selbst ausgesteckt — aus Sorge vor einer Kontrolle wegen der vermieteten Stellplätze.",

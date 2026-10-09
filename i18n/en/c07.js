@@ -831,7 +831,7 @@ MG.I18N.put("en", "c07", {
 "2cs8qrzm3ab": "I held the granny’s account up to Kang Man-sik. The police box was 300 m ahead, but he made a phone call first.",
 "2g2c5va1x6y": "Kang Man-sik says he ran straight to the police box. Is that true?",
 "68kle7d2rf": "Before going to the police box, Kang Man-sik called Manager Seok in the Songwolgak Orchid Room from the Well House payphone. The report came after that.",
-"hwiiu5hy7m": "Was Seok Tae-ho really in the Orchid Room all night?",
+"vgfhrlhiwa": "Was Manager Seok in the Orchid Room all through that night?",
 "67tsaezrdc": "Guest ledger: Mr. Songhak, in the same room, rose first at 22:40 and left by the back gate in his own car.",
 "1hzpai1vxfc": "When did the other guest in that room leave? Check the guest ledger.",
 "1judbyorm91": "Noh Bong-chul: around 10 p.m. Manager Seok came out to the courtyard and took the Corona key himself. That had never happened before.",

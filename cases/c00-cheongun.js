@@ -320,7 +320,7 @@
           { f: 'f_silence', t: '밤마다 나던 음악 소리가 9일 밤 뒤로 한 번도 나지 않았다.', hint: '그 뒤로 504호는 어땠지?' },
         ],
         a: '10월 9일 밤이다. 그 뒤로 서윤에게서는 아무 기척도 없다.' },
-      { id: 't_why', q: '서윤은 9일 저녁에 무엇을 따지려 했나?', when: ['!f_hist|!f_hdd|!f_sketch|!f_threat'], for: 'c4',
+      { id: 't_why', q: '서윤은 숨지기 전 무엇을 하려 했나?', when: ['!f_hist|!f_hdd|!f_sketch|!f_threat'], for: 'c4',
         steps: [
           { f: 'f_hist', t: '9일 저녁 서윤은 「공모전 표절 신고 방법」과 「원본 파일 레이어 증거 효력」을 찾아봤다.', hint: '서윤이 그날 저녁 찾아본 것은?' },
           { f: 'f_sketch', t: '서윤은 2024년 11월에 「버스정류장 연작 #1」 스케치를 그렸다.', hint: '서윤이 그리던 그림은?' },
@@ -328,7 +328,7 @@
           { f: 'f_threat', t: '9일 밤 서윤이 재희에게 보냈다 — 「내일까지 네가 말 안 하면 내가 원본 파일 올릴게.」', hint: '서윤은 그 얘기를 누구에게 했지?' },
         ],
         a: '〈푸른 정류장〉은 서윤의 그림이었다. 9일 밤, 서윤은 재희에게 원본 파일을 올리겠다고 했다.' },
-      { id: 't_who', q: '9일 밤, 504호에 누가 왔나?', when: ['!f_door_in|!f_door_night|!f_tl_night|!f_noise|!f_neighbor_door|!f_postit|!f_lastmsg|!f_statement'], who: 'k_jaehee',
+      { id: 't_who', q: '서윤이 숨질 무렵, 504호에는 누가 있었나?', when: ['!f_door_in|!f_door_night|!f_tl_night|!f_noise|!f_neighbor_door|!f_postit|!f_lastmsg|!f_statement'], who: 'k_jaehee',
         steps: [
           { f: ['f_door_in', 'f_tl_night'], t: '21시 33분에 초인종이 울리고, 1분 뒤 안에서 문이 열렸다. 서윤이 직접 누군가를 들였다.', hint: '그날 밤 문은 어떻게 열렸지?' },
           { f: ['f_postit', 'f_lastmsg'], t: '그날 밤 재희가 서윤을 찾아오기로 되어 있었다.', hint: '서윤은 그날 밤 누구를 기다렸지?' },
@@ -349,7 +349,7 @@
           { press: 'p_jaehee:k_ipad', t: '재희에게 기기 기록을 내밀었다. 9월에 부탁받았다더니, 「10월 11일에도요?」에는 대답이 없다.', hint: 'iPad 주인의 말, 기록과 맞나?' },
         ],
         a: '재희의 iPad 다. 9월에 받아 둔 비밀번호로, 페어 부스에서 서윤인 척 글을 올리고 죽을 시켰다.' },
-      { id: 't_dohyun', q: '강도현은 그날 밤 어디 있었나?', when: ['k_dohyun'], out: 'k_dohyun',
+      { id: 't_dohyun', q: 'dohyun.k는 서윤이 숨질 무렵 어디 있었나?', when: ['k_dohyun'], out: 'k_dohyun',
         steps: [
           { f: ['f_door_fail', 'f_dh_door'], t: '9일 새벽, 바깥에서 누가 비밀번호를 거듭 틀려 문을 열지 못했다.', hint: '도현이 그 문을 열 수 있었나?' },
           { f: ['f_dh_ktx', 'f_alibi'], t: '9일 밤 도현은 부산에 출장 가 있었다.', hint: '9일 밤 도현은 어디에 있었지?' },

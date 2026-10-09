@@ -994,7 +994,7 @@ MG.I18N.put("de", "c14", {
 "t8mg8oe5vp": "Das Geräusch hinter der Sprachnachricht von K um 10:46 ist das Neuer-Auftrag-Signal am Admin-PC der Dallim-Call-Filiale.",
 "n1nx8mvnmk": "Was ist hinter der Sprachnachricht zu hören?",
 "245vbflivno": "Die 7291 steckte im alten Handy, das Filialleiter Seok Chang-min früher mit der 3382 nutzte. Die Sprachnachricht von K wurde neben dem Dispo-PC der Filiale aufgenommen.",
-"yv87gzlx97": "Steckt der Neffe Oh Chang-hun, der vom Geld angefangen hatte, mit drin?",
+"44g4vje4tu": "Steckt der Neffe Oh Chang-hun mit drin?",
 "khhj4vdfce": "Kalendernotizen: Anrufe nahm sie nur von 02-****-8800 an. „Hat in der Familie neulich jemand über Geld geredet? → Chang-hun?“ steht auf derselben Seite.",
 "l1mnilrokt": "Von welcher Nummer kamen die Anrufe bei der alten Frau?",
 "1d3gvjwx810": "Die Nummer 8800 rief auch Seo Bok-nam (81) in Darae-dong an. Von Chang-huns Nummer gibt es keinerlei Verbindung mit ihr.",

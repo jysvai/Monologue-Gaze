@@ -994,7 +994,7 @@ MG.I18N.put("en", "c14", {
 "t8mg8oe5vp": "The sound behind K's 10:46 voice message is the new-order alert on the Dallim Call branch admin PC.",
 "n1nx8mvnmk": "The sound behind the voice message?",
 "245vbflivno": "7291 sat in the old phone that branch manager Seok Chang-min had used as 3382. K's voice message was recorded next to the branch dispatch PC.",
-"yv87gzlx97": "Was nephew Oh Chang-hoon, who had brought up money, in on this?",
+"44g4vje4tu": "Was nephew Oh Chang-hoon in on this?",
 "khhj4vdfce": "Calendar notes: she took calls only from 02-****-8800. “Anyone in the family talk about money lately? → Chang-hoon?” is on the same page.",
 "l1mnilrokt": "What number did the calls to the grandmother come from?",
 "1d3gvjwx810": "The 8800 number also called Seo Bok-nam (81) in Darae-dong. Chang-hoon's number has no calls to or from it.",

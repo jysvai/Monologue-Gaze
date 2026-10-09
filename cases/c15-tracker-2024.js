@@ -670,7 +670,7 @@
           { f: 'f_carwash_owner', t: '해오름셀프세차 대표는 성민재. 임대차는 12월 31일까지 남았고 중도 해지가 없다.', hint: '그곳의 주인은?' },
         ],
         a: '다솜은 갈매동 산업로 188, 문 닫은 해오름셀프세차에 있다. 그 자리의 임대차는 아직 성민재 이름이다.' },
-      { id: 't_landlord', q: '건물주의 「아홉 시부터 잤다」는 사실인가?', when: ['!f_phone_stay', 'k_landlord'], out: 'k_landlord',
+      { id: 't_landlord', q: '건물주 백상철은 오늘 밤 무엇을 했나?', when: ['!f_phone_stay', 'k_landlord'], out: 'k_landlord',
         steps: [
           { f: 'f_cam_unplugged', t: '「고장」이라던 주차장 카메라는 전원선이 콘센트에서 빠져 있다. 플러그에 먼지가 앉았다.', hint: '「고장」이라는 카메라?' },
           { press: 'p_landlord:k_villacam', t: '카메라를 짚자 건물주는 한 달 전에 자기가 뽑았다고 했다. 주차 칸 월세 단속에 걸릴까 봐서.', hint: '오래전에 고장 났다는 말?' },

@@ -831,7 +831,7 @@ MG.I18N.put("de", "c07", {
 "2cs8qrzm3ab": "Kang Man-sik habe ich die Aussage der Oma vorgehalten. Der Polizeiposten lag 300 m weiter, doch er telefonierte zuerst.",
 "2g2c5va1x6y": "Kang Man-sik sagt, er sei direkt zum Polizeiposten gelaufen. Stimmt das?",
 "68kle7d2rf": "Bevor er zum Polizeiposten ging, rief Kang Man-sik vom Münzfernsprecher am Brunnenhaus Direktor Seok im Orchideenzimmer des Songwolgak an. Die Anzeige kam erst danach.",
-"hwiiu5hy7m": "War Seok Tae-ho wirklich die ganze Nacht im Orchideenzimmer?",
+"vgfhrlhiwa": "War Direktor Seok die ganze Nacht über im Orchideenzimmer?",
 "67tsaezrdc": "Gästebuch: Herr Songhak aus demselben Zimmer brach schon um 22:40 Uhr auf und fuhr im eigenen Wagen durchs Hintertor.",
 "1hzpai1vxfc": "Wann ging der andere Gast aus diesem Zimmer? Was steht im Gästebuch?",
 "1judbyorm91": "Noh Bong-chul: Gegen 22 Uhr kam Direktor Seok in den Hof und nahm den Schlüssel vom Corona selbst an sich. Das war das erste Mal.",

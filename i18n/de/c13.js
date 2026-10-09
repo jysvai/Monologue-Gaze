@@ -765,7 +765,7 @@ MG.I18N.put("de", "c13", {
 "ihhspeyhvk": "00:18: Ein Mann in dunkelblauer Daunenjacke griff unter das Außengerät. Do-has Kleidung.",
 "21m560ax5ue": "Wann kam Do-ha dorthin?",
 "s9xdmtwm09": "Do-ha kaufte die Tabletten bei @Mondlicht von der Mondlicht-Apotheke gegen Krypto. Das Tütchen, das um 22:14 unter das Außengerät gelegt worden war, holte er um 00:18 ab.",
-"u65smn5tld": "Wusste Ji-han wirklich nicht, was Do-ha nahm?",
+"21l54by9jwu": "Wusste Ji-han, was Do-ha nahm?",
 "1w8pf26fkn3": "10.11.: Ji-han schickte Do-ha einen Einladungslink zur Mondlicht-Apotheke. „hab schon zweimal was geholt, alles gut“.",
 "54z69guwm6": "Von wem wusste Do-ha von dem Kanal?",
 "oiwmd41v0n": "Mit dem Chat konfrontiert, sagte Ji-han, er habe Paper schon im Rettungswagen gelöscht. Deshalb wollte er sein Handy nicht zeigen.",
