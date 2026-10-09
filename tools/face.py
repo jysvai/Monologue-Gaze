@@ -14,6 +14,8 @@
 사용: python tools/face.py merge <부모.png> <편집본.png> <out.png>
       python tools/face.py whole <calm.png> <표정 편집본.png> <out.png>
       python tools/face.py sheet <폴더> <out.webp> [calm,shaken,broken]
+      python tools/face.py overlay <부모.png> <덧그린 편집본.png> <옮길 칸.png> <out.png> [문턱=40]
+        (안경처럼 나중에 덧그린 것을 눈 감은 칸 · 입 벌린 칸에도 — 편집본은 부모 칸에만 받는다)
 (opencv-python · numpy · Pillow 필요)
 """
 import sys, os, json, cv2, numpy as np
@@ -117,11 +119,29 @@ def whole(parent, edit, out):
     print(json.dumps({'out': out, 'shift': [round(float(warp[0, 2]), 2), round(float(warp[1, 2]), 2)]}))
 
 
+def overlay(parent, edit, target, out, thr=40.0):
+    # 덧그린 것(안경 등)만 다른 칸에 옮긴다: 편집본에서 또렷이 달라진 픽셀(테)만 골라 붙이고, 렌즈 안쪽처럼 거의 그대로인 곳은
+    # 그 칸의 것을 둔다 — 눈 감은 칸에 뜬 눈이 비치지 않게
+    B = load(parent)
+    A, warp = align(B, load(edit, (B.shape[1], B.shape[0])))
+    T = load(target, (B.shape[1], B.shape[0]))
+    hard = (np.abs(B - A).mean(axis=2) > float(thr)).astype(np.uint8)
+    hard = cv2.morphologyEx(hard, cv2.MORPH_OPEN, np.ones((2, 2), np.uint8))  # 다시 그리며 생긴 점 같은 잔무늬는 버린다
+    hard = cv2.dilate(hard, np.ones((3, 3), np.uint8))
+    m = np.clip(cv2.GaussianBlur(hard.astype(np.float32), (0, 0), 0.8) * 1.4, 0, 1)
+    O = T * (1 - m[..., None]) + A * m[..., None]
+    Image.fromarray(np.clip(O, 0, 255).astype(np.uint8)).save(out)
+    print(json.dumps({'out': out, 'area': round(float(hard.mean()), 4), 'shift': [round(float(warp[0, 2]), 2), round(float(warp[1, 2]), 2)]}))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'merge':
         merge(*sys.argv[2:5])
     elif cmd == 'whole':
         whole(*sys.argv[2:5])
+    elif cmd == 'overlay':
+        p, e, t, o = sys.argv[2:6]
+        overlay(p, e, t, o, float(sys.argv[6]) if len(sys.argv) > 6 else 40.0)
     elif cmd == 'sheet':
         sheet(sys.argv[2], sys.argv[3], sys.argv[4].split(',') if len(sys.argv) > 4 else None)
