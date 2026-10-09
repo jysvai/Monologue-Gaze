@@ -3005,10 +3005,10 @@
     if (JUDGING) return;
     const sol = C.solution, c0 = C, s0 = ST, fm = FORM(); // 판정이 나오기 전에 다른 수사관 서랍으로 바뀌면 그 사람 화면에 이 결말을 띄우지 않는다
     const has = id => ST.notes.some(n => String(n.id) === String(id));
-    if (!ST.report.culprit || sol.claims.some(cl => !ST.report.claims[cl.id] || !has(ST.report.claims[cl.id]))) { VERDICT = T`빈칸이 남아 있다. ${fm.short}${josa(fm.short, '을', '를')} 고르고, 칸마다 메모를 붙여야 올릴 수 있다.`; renderRep(); say(VERDICT); sfx('miss'); return; }
+    if (!ST.report.culprit || sol.claims.some(cl => !ST.report.claims[cl.id] || !has(ST.report.claims[cl.id]))) { VERDICT = T`빈칸이 남아 있다. ${fm.short}${josa(fm.short, '을', '를')} 고르고, 칸마다 메모를 붙여야 올릴 수 있다.`; renderRep(); showVerdict(); say(VERDICT); sfx('miss'); return; }
     // 방금 반려된 보고서를 한 칸도 고치지 않고 다시 올리면: 제출 횟수를 쓰지 않고 그렇다고만 알려 준다
     const sig = JSON.stringify([ST.report.culprit, sol.claims.map(cl => String(ST.report.claims[cl.id]))]);
-    if (!ST.solved && ST.lastRep === sig) { VERDICT = T`방금 반려된 ${fm.title} 그대로다. 어딘가 고쳐서 올린다.`; renderRep(); say(VERDICT); sfx('miss'); return; }
+    if (!ST.solved && ST.lastRep === sig) { VERDICT = T`방금 반려된 ${fm.title} 그대로다. 어딘가 고쳐서 올린다.`; renderRep(); showVerdict(); say(VERDICT); sfx('miss'); return; }
     ST.tries++;
     const bad = ST.report.culprit === sol.culprit ? [] : [fm.short], badCl = [];
     sol.claims.forEach((cl, i) => {
@@ -3067,12 +3067,19 @@
         if (MG.sound) setTimeout(() => { if (C === c0 && ST === s0) MG.sound.hero('solved'); }, 2000);
       } else if (wrong === 0) toast(T('이미 닫힌 사건이다'));
       else {
-        cue('miss'); say(VERDICT);
+        cue('miss'); say(VERDICT); showVerdict();
         repFace('nope', 700); // 반려: 지목한 사람이 고개를 젓는다
         const r = $('.rep-view'); if (r) { r.classList.remove('bounced'); void r.offsetWidth; r.classList.add('bounced'); }
         if (MG.sound) setTimeout(() => { if (C === c0 && ST === s0) MG.sound.hero('wrong'); }, 500);
       }
     });
+  }
+  // 반려 사유는 보고서 맨 밑에 적힌다 — 긴 보고서면 화면 밖이라 소리로 나온 짧은 말만 듣고 끝나지 않게, 그 줄까지 내려 보여 준다
+  function showVerdict() {
+    const v = $('.rep-view .verdict') || $('.verdict');
+    if (!v || !v.textContent.trim()) return;
+    v.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' });
+    v.classList.remove('again'); void v.offsetWidth; v.classList.add('again');
   }
   function repFace(cls, ms) { if (reduced()) return; $$('.rep-per.on .face').forEach(f => { f.classList.remove(cls); void f.offsetWidth; f.classList.add(cls); setTimeout(() => f.classList.remove(cls), ms); }); }
   function armed(el, label, fn) {
