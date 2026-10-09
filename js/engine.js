@@ -2599,6 +2599,7 @@
     if (chips && ST.view.open && ST.view.open.t === 'person') chips.innerHTML = askChips(C.people[ST.view.open.id]);
     if (!quiet) toast(T`수첩에 적었다: ${asWas() && asWas()[id] ? asWas()[id] : shown}${gained > 0 ? opened(gained, BY) : ''}`);
     liveSync();
+    if (C.threads && !ST.solved) threadNews(1500); // 단어로 열리는 의문은 그 단어를 적은 그때 (다음 메모까지 쌓였다가 한꺼번에 쏟아지지 않게)
   }
   function pin(ref) {
     const p = PIN[ref];
@@ -3383,5 +3384,5 @@
   };
   MG.state = () => S;
   MG.sfx = kind => sfx(kind); // 여는 장면(js/mood.js)의 무전 소리
-  MG.dev = { leads: () => leads(), th: () => thView().map(x => ({ id: x.t.id, no: x.no, got: x.got.filter(Boolean).length, of: x.got.length, done: x.done })), nudge: () => nudgeHtml(), st: () => ST, advance: (k, m) => advance(k, m), wait: () => waitNext(), toggle: () => toggleNudge(), more: () => { if (NUDGE) NUDGE.more = true; }, render: () => { save(); renderCase(); }, pin: ref => PIN[ref], lead: () => leadMap() }; // tools/nudge-sim.js 가 짚어 보기만 따라 사건을 끝까지 가 본다
+  MG.dev = { leads: () => leads(), th: () => thView().map(x => ({ id: x.t.id, no: x.no, got: x.got.filter(Boolean).length, of: x.got.length, done: x.done })), thNews: () => threadNews(0), thAll: () => ((C && C.threads) || []).map(t => { const v = thView().find(x => x.t.id === t.id); return { id: t.id, open: !!v, role: t.who ? 'who' : t.out ? 'out' : t.for || '-', miss: t.steps.filter((s, j) => !(v ? v.got[j] : thGot(s))).map(s => s.press || [].concat(s.f).join('|')) }; }), nudge: () => nudgeHtml(), st: () => ST, advance: (k, m) => advance(k, m), wait: () => waitNext(), toggle: () => toggleNudge(), more: () => { if (NUDGE) NUDGE.more = true; }, render: () => { save(); renderCase(); }, pin: ref => PIN[ref], lead: () => leadMap() }; // tools/nudge-sim.js 가 짚어 보기만 따라 사건을 끝까지 가 본다
 })();
