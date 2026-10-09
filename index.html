@@ -85,22 +85,24 @@
       try { window.MG.I18N.ready(function () { boot(data); }); } catch (e) { boot(data); } // 고른 언어의 꾸러미를 받은 뒤에 연다
     }); });
   }
-  // 받다가 끊긴 언어 · 엔진 파일도 한 번 더 받는다 (언어 파일이 빠지면 뒤의 스크립트가 줄줄이 서지 못해 빈 책상만 남는다). 서로 기대니 차례대로 하나씩
-  function core(cb) {
-    var MG = window.MG || {}, need = [];
-    [['js/i18n.js', 'I18N'], ['js/ui.js', 'writeIn'], ['js/fonts.js', 'fonts'], ['js/engine.js', 'boot'], ['js/finale.js', 'finale'], ['js/mood.js', 'mood'], ['audio/manifest.js', 'audio'], ['js/audio.js', 'sound'], ['img/manifest.js', 'images']]
-      .forEach(function (x) { var v = MG[x[1]]; if (!v || (x[1] === 'images' && !Object.keys(v).length)) need.push(x[0]); }); // 그림 목록은 엔진이 빈 것을 먼저 만들어 둔다
-    (function next() {
-      var src = need.shift();
-      if (!src) return cb();
-      var s = document.createElement('script');
-      s.src = src + '?r=' + Date.now();
-      s.onload = s.onerror = next;
-      document.head.appendChild(s);
-    })();
+  // 받다가 끊긴 언어 · 엔진 파일도 다시 받는다 (언어 파일이 빠지면 뒤의 스크립트가 줄줄이 서지 못해 빈 책상만 남는다). 서로 기대니 차례대로 하나씩,
+  // 그래도 빠진 것이 있으면 조금 쉬었다가 세 번까지 (붐비는 망에서는 다시 받는 것도 끊긴다)
+  var CORE = [['js/i18n.js', 'I18N'], ['js/ui.js', 'writeIn'], ['js/fonts.js', 'fonts'], ['js/engine.js', 'boot'], ['js/finale.js', 'finale'], ['js/mood.js', 'mood'], ['audio/manifest.js', 'audio'], ['js/audio.js', 'sound'], ['img/manifest.js', 'images']];
+  function has(k) { var v = (window.MG || {})[k]; return !!v && !(k === 'images' && !Object.keys(v).length); } // 그림 목록은 엔진이 빈 것을 먼저 만들어 둔다
+  function load(src, done) { var s = document.createElement('script'); s.src = src + '?r=' + Date.now(); s.onload = s.onerror = done; document.head.appendChild(s); }
+  function core(cb, n) {
+    n = n || 0;
+    var need = CORE.filter(function (x) { return !has(x[1]); });
+    if (!need.length || n >= 3) return cb();
+    setTimeout(function next() {
+      var x = need.shift();
+      if (!x) return core(cb, n + 1);
+      load(x[0], next);
+    }, n * 500);
   }
-  // 받다가 끊긴 사건 파일은 주소 끝을 바꿔 한 번 더 받는다 (서랍에 사건 몇 개가 통째로 빠진 채 열리지 않게)
-  function again(cb) {
+  // 받다가 끊긴 사건 파일도 주소 끝을 바꿔 다시 받는다 (서랍에 사건 몇 개가 통째로 빠진 채 열리지 않게) — 이것도 세 번까지
+  function again(cb, n) {
+    n = n || 0;
     var miss = [];
     try {
       Array.prototype.forEach.call(document.querySelectorAll('script[src^="cases/"]'), function (t) {
@@ -109,15 +111,12 @@
       });
     } catch (e) { return cb(); }
     var left = miss.length;
-    if (!left) return cb();
-    var fired = false, go = function () { if (!fired) { fired = true; cb(); } };
-    miss.forEach(function (src) {
-      var s = document.createElement('script');
-      s.src = src + '?r=' + Date.now();
-      s.onload = s.onerror = function () { if (--left <= 0) go(); };
-      document.head.appendChild(s);
-    });
-    setTimeout(go, 15000);
+    if (!left || n >= 3) return cb();
+    var fired = false, go = function () { if (!fired) { fired = true; again(cb, n + 1); } };
+    setTimeout(function () {
+      miss.forEach(function (src) { load(src, function () { if (--left <= 0) go(); }); });
+      setTimeout(go, 15000);
+    }, n * 500);
   }
   function boot(data) {
     try { window.MG.boot(data); } catch (e) { // 사건 파일 하나가 잘못 받아졌어도 빈 책상만 남기지 않는다
