@@ -75,7 +75,7 @@
   "p": 1
  },
  "v/c00/p_jaehee/k_sketch": {
-  "t": "정류장 그림이 한둘인가요. 비슷한 구도는 흔해요.",
+  "t": "…봤어요. 서윤이가 올렸을 때 댓글도 달았고요.",
   "v": "laura eleven_v4_turbo 1 0.3 [shaky]",
   "p": 1
  },
@@ -209,11 +209,6 @@
   "v": "eric eleven_v4_turbo 0.93 0.4 [hesitant]",
   "p": 1
  },
- "v/c03/p_seo/k_radio.1": {
-  "t": "보춘당엔 축음기가 없었습니다. 점원도 그렇게 말했고요.",
-  "v": "river eleven_v4_turbo 1 0.5 [calm]",
-  "p": 1
- },
  "v/c03/p_seo/k_seobrother": {
   "t": "…형님이 그렇게 보냈소?",
   "v": "eric eleven_v4_turbo 0.93 0.4 [hesitant]",
@@ -296,11 +291,6 @@
  },
  "v/c06/p_brate/k_lie": {
   "t": "…리가 부두에 있었다면, 차는 제가 몰았겠지요. 바람을 쐬러 나갔습니다. 크비트달 쪽은 아닙니다.",
-  "v": "brian eleven_v4_turbo 0.92 0.45 [cold]",
-  "p": 1
- },
- "v/c06/p_brate/k_plate": {
-  "t": "…회사 차는 그날 사무원 리가 몰고 나갔을 겁니다. 부품을 가지러요. 저는 사무실에 있었고요.",
   "v": "brian eleven_v4_turbo 0.92 0.45 [cold]",
   "p": 1
  },
@@ -437,11 +427,6 @@
  "v/c07/p_wife/k_seok": {
   "t": "…사건 이틀 뒤에 주인집 할머니가 전화 왔다고 부르더라고요. 대양 석 부장이라는 분이었어요. 애 아버지 일은 걱정 말라, 식구는 회사가 책임진다고요.",
   "v": "bella eleven_v4_turbo 0.95 0.3 [bitter]",
-  "p": 1
- },
- "v/c08/p_father/k_driver": {
-  "t": "…그 시각에 경찰서 조사실에 앉아 있었다고? 그럼 대체 누가….",
-  "v": "brian eleven_v4_turbo 1 0.35 [defensive]",
   "p": 1
  },
  "v/c08/p_tak/k_daejeon": {

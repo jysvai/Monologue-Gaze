@@ -24,6 +24,14 @@ const PIN = {
   'v/c04/p_irie/k_0628.2': 'eleven_multilingual_v2', 'v/c05/p_pell/k_typewriter': 'eleven_multilingual_v2',
   'v/c12/p_shinji/k_saeki': 'eleven_v4', 'v/c12/p_shinji/k_saeki.2': 'eleven_multilingual_v2',
 };
+// 문장 한가운데서 목소리가 툭 내려앉아 긁히는 줄 (tools/voice-check.py 로 잡은 것, 2026-10-09): 안정도를 올려 다시 녹음한다.
+// 안정도가 낮고 감정 지시가 붙은 줄일수록 잦았다. 녹음할 때마다 voice-check 로 다시 재어, 내려앉으면 두 번까지 다시 받고 가장 나은 것을 둔다
+const STEADY = 0.55;
+const SHAKY = new Set(['v/c01/p_croft/k_fund', 'v/c01/p_croft/k_dill', 'v/c01/p_vane/k_rose', 'v/c03/p_seo/k_radio', 'v/c03/p_seo/k_pawn', 'v/c03/p_seo/k_changgeuk',
+  'v/c05/p_brennan/k_route7', 'v/c06/p_brate/k_tlf', 'v/c06/p_remmert/k_plate', 'v/c07/p_mansik/k_wife', 'v/c07/p_no/k_jeonse', 'v/c08/p_tak/k_shop', 'v/c08/p_tutor/k_saeteo',
+  'v/c09/p_courier/k_pcbang', 'v/c09/p_sora/k_parcel', 'v/c09/p_tak/k_styro', 'v/c10/p_bang/k_audit', 'v/c10/p_bang/k_foglamp', 'v/c10/p_bang/k_origin', 'v/c11/p_gil/k_ilsubook',
+  'v/c11/p_gil/k_inn', 'v/c11/p_woo/k_pocha', 'v/c13/p_jihan/k_pill', 'v/c13/p_oh/k_stakeout', 'v/c13/p_woojin/k_alley', 'v/c13/p_woojin/k_coinnaru', 'v/c14/p_seok/k_morning.2',
+  'v/c14/p_taeo/k_ad', 'v/c14/p_taeo/k_coin', 'v/c15/p_junhyuk/k_tonight.2', 'v/c15/p_junhyuk/k_tracker.2', 'v/c15/p_minjae/k_nubi']);
 const modelOf = j => j.model || MODEL;
 const rate = j => /turbo|flash/.test(modelOf(j)) ? 0.5 : 1; // 글자당 크레딧 (말투 지시도 글자로 센다)
 const said_ = j => j.tag && !/multilingual_v2/.test(modelOf(j)) ? `${j.tag} ${j.text}` : j.text; // v2 는 말투 지시를 소리 내어 읽는다
@@ -160,21 +168,33 @@ function jobs() {
       });
     }
   }
-  list.forEach(j => { if (PIN[j.key]) j.model = PIN[j.key]; });
+  list.forEach(j => { if (PIN[j.key]) j.model = PIN[j.key]; if (SHAKY.has(j.key) && j.stab < STEADY) j.stab = STEADY; });
   return { list, tone };
 }
 
-function writeManifest(list, tone) {
+function writeManifest(list, tone, stale = () => false) {
   const files = {}, span = {};
-  list.forEach(j => { if (fs.existsSync(path.join(root, j.file))) { files[j.key] = j.file; if (j.span > 1) span[j.key] = j.span; } });
+  // 다시 녹음할 때까지 빼 두는 줄: 대사 글자가 바뀌어 화면과 다른 말을 하는 것, 내려앉음이 잡혀 안정도를 올려 다시 받을 것 — 그 말풍선은 다른 대사처럼 말소리로 나온다
+  let off = 0;
+  list.forEach(j => { if (!fs.existsSync(path.join(root, j.file))) return; if (stale(j)) { off++; return; } files[j.key] = j.file; if (j.span > 1) span[j.key] = j.span; });
+  if (off) console.log(`다시 녹음할 때까지 뺀 목소리 ${off}개`);
   const lines = Object.fromEntries(Object.entries(LINES).map(([k, t]) => ['hero/' + k, t])); // 주인공 대사는 속말 자막으로도 띄운다
   const body = `/* 자동 생성: node tools/voices.js — 목소리·효과음 파일 목록, 사람마다 말소리 높이, 주인공 대사 자막 */\nwindow.MG = window.MG || {};\nwindow.MG.audio = ${JSON.stringify({ files, span, tone: { hero: HERO.tone, ...tone }, say: lines }, null, 1)};\n`;
   fs.writeFileSync(path.join(OUT, 'manifest.js'), body);
   console.log(`audio/manifest.js — 파일 ${Object.keys(files).length}개 · 말소리 ${Object.keys(tone).length + 1}명`);
 }
 
+// tools/voice-check.py 로 잰 가장 깊은 내려앉음 (반음, 없으면 0). 파이썬이 없으면 검사 없이 0
+function dropOf(file) {
+  const r = require('child_process').spawnSync('python', [path.join(__dirname, 'voice-check.py'), file], { encoding: 'utf8' });
+  try { return JSON.parse(r.stdout.trim().split(/\r?\n/).pop()).worst || 0; } catch (e) { return 0; }
+}
+
 async function main() {
   const dry = process.argv.includes('--dry'), only = process.argv.includes('--manifest');
+  // --redo=키,키 : 그 줄만 (글자·목소리가 그대로여도) 다시 녹음한다. VOICE_RESERVE: 남겨 둘 크레딧 (기본 150)
+  const redo = new Set(((process.argv.find(a => a.startsWith('--redo=')) || '').slice(7) || '').split(',').filter(Boolean));
+  const RESERVE = +(process.env.VOICE_RESERVE || 150);
   const { list, tone } = jobs();
   fs.mkdirSync(OUT, { recursive: true });
   const said = fs.existsSync(SAID) ? JSON.parse(fs.readFileSync(SAID, 'utf8')) : {};
@@ -187,7 +207,7 @@ async function main() {
     else if (typeof said[j.key] === 'string') said[j.key] = { t: said[j.key], v: sig(j) };
   });
   const stale = j => j.kind === 'tts' && has(j) && (said[j.key].t !== j.text || said[j.key].v !== sig(j));
-  const todo = list.filter(j => !has(j) || stale(j));
+  const todo = redo.size ? list.filter(j => redo.has(j.key)) : list.filter(j => !has(j) || stale(j));
   const keep = () => { const k = new Set(list.map(j => j.key)); fs.writeFileSync(SAID, JSON.stringify(Object.fromEntries(Object.entries(said).filter(([x]) => k.has(x)).sort()), null, 1) + '\n'); };
   const chars = todo.filter(j => j.kind === 'tts').reduce((n, j) => n + said_(j).length * rate(j), 0);
   const secs = todo.filter(j => j.kind === 'sfx').reduce((n, j) => n + j.secs, 0);
@@ -198,17 +218,29 @@ async function main() {
     console.log(`남은 크레딧 ${left}`);
     for (const j of todo) {
       const cost = j.kind === 'tts' ? Math.ceil(said_(j).length * rate(j)) : j.secs * 10;
-      if (left - cost < 150) { console.log('크레딧이 모자라 멈춤:', j.key); break; }
+      if (left - cost < RESERVE) { console.log('크레딧이 모자라 멈춤:', j.key); break; }
       try {
-        if (j.kind === 'sfx') await el.sfx(path.join(root, j.file), j.text, j.secs);
-        else await el.tts(j.voice, path.join(root, j.file), said_(j), modelOf(j), j.speed, j.stab);
-        if (j.kind === 'tts') { post(path.join(root, j.file), j.vname === 'river'); said[j.key] = { t: j.text, v: sig(j), p: 1 }; }
-        left -= cost; console.log('✓', j.key, cost);
+        if (j.kind === 'sfx') { await el.sfx(path.join(root, j.file), j.text, j.secs); left -= cost; }
+        else { // 녹음 → 다듬기 → 내려앉음 검사. 걸리면 크레딧이 되는 만큼 두 번까지 다시 받아 가장 덜 내려앉은 것을 둔다
+          const out = path.join(root, j.file), takes = [];
+          for (let n = 0; n < 3; n++) {
+            if (n && left - cost < RESERVE) break;
+            const tmp = out.replace(/\.mp3$/, `.take${n}.mp3`);
+            await el.tts(j.voice, tmp, said_(j), modelOf(j), j.speed, j.stab);
+            post(tmp, j.vname === 'river'); left -= cost;
+            const w = dropOf(tmp); takes.push({ tmp, w }); console.log(`  take ${n + 1}: ${w ? w + '반음 내려앉음' : '깨끗함'}`);
+            if (!w) break;
+          }
+          const best = takes.reduce((a, b) => (Math.abs(b.w) < Math.abs(a.w) ? b : a));
+          fs.copyFileSync(best.tmp, out); takes.forEach(t => fs.unlinkSync(t.tmp));
+          said[j.key] = { t: j.text, v: sig(j), p: 1 };
+        }
+        console.log('✓', j.key, cost);
       } catch (e) { console.log('✗', j.key, e.message.slice(0, 160)); if (/quota|credits|401|403/.test(e.message)) break; }
     }
   }
   keep();
-  writeManifest(list, tone);
+  writeManifest(list, tone, stale);
 }
 if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });
 module.exports = { jobs, sig, said_ };

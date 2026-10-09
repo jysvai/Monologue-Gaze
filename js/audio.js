@@ -15,7 +15,13 @@
   let ax = null, out = null, fx = null; // fx: 효과음 묶음 (목소리가 나오는 동안 낮춘다)
   function ctx() {
     try {
-      if (!ax) { ax = new (window.AudioContext || window.webkitAudioContext)(); out = ax.createGain(); out.connect(ax.destination); fx = ax.createGain(); fx.connect(out); }
+      if (!ax) {
+        ax = new (window.AudioContext || window.webkitAudioContext)(); out = ax.createGain(); fx = ax.createGain(); fx.connect(out);
+        // 마지막에 소리 크기 막이: 목소리 · 효과음 · 추궁 북소리가 한꺼번에 겹쳐도 넘쳐서 찢어지지 않게 (평소 크기에는 손대지 않는다)
+        let tail = out;
+        try { const lim = ax.createDynamicsCompressor(); lim.threshold.value = -4; lim.knee.value = 4; lim.ratio.value = 16; lim.attack.value = 0.002; lim.release.value = 0.2; out.connect(lim); tail = lim; } catch (e) { /* 막이가 없는 브라우저 */ }
+        tail.connect(ax.destination);
+      }
       if (ax.state === 'suspended' && !document.hidden) ax.resume().catch(() => {});
       return ax;
     } catch (e) { return null; } // 소리를 낼 수 없는 브라우저

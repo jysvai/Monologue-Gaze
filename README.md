@@ -97,6 +97,7 @@ tools/manifest.js     img/ 폴더를 훑어 img/manifest.js 생성
 tools/face.py         살아 있는 초상: 편집한 얼굴(눈 감음·입 벌림·표정)에서 고친 곳만 붙여 탐문 얼굴 한 장(img/<사건>/face_<사람>.webp)을 만든다
 tools/gen-images.js   (선택) OpenAI API 키가 있으면 프롬프트 전부를 한 번에 그려 img/ 에 넣는다
 tools/voices.js       (선택) ElevenLabs 로 목소리·효과음을 만든다. 사람마다 목소리·말소리 높이 배정표가 들어 있다
+tools/voice-check.py  목소리 점검: 대사 도중 목소리가 툭 내려앉아 긁히는 곳을 두 가지 음높이 측정으로 찾는다 (voices.js 가 녹음할 때마다 불러, 걸리면 다시 받는다)
 tools/eleven.js       ElevenLabs API 호출 (키는 .env 의 ELEVENLABS_API_KEY, 저장소에는 올리지 않는다)
 tools/itch-zip.js     itch.io 에 올릴 zip: 게임에 쓰는 파일만 골라 dist/ 에 묶는다
 tools/i18n.js         번역: 원문 토막 뽑기, 번역 넣기(검사 포함), 언어·사건마다 빠진 곳 세기
