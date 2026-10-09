@@ -92,6 +92,7 @@ MG.I18N.put("en", "ui", {
 "(메모를 한참 들여다본다) …이것만으로는 잘 모르겠어요.": "(Studies the note for a long while) …I can't say, from just this.",
 "(메모를 보고 잠시 멈칫한다) …그것 하나로 뭘 말씀하시려는 겁니까?": "(Glances at the note and stops for a moment) …And what is that one thing supposed to prove?",
 "{0} 탐문": "Interview: {0}",
+"모순": "Contradiction",
 "수첩을 펴 보인다": "shows the notebook",
 "수첩을 내민다": "holds out the notebook",
 "메모를 내민다": "Hold out a note",

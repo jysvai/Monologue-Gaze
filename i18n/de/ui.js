@@ -92,6 +92,7 @@ MG.I18N.put("de", "ui", {
 "(메모를 한참 들여다본다) …이것만으로는 잘 모르겠어요.": "(Betrachtet die Notiz lange) …Allein daraus kann ich nichts sagen.",
 "(메모를 보고 잠시 멈칫한다) …그것 하나로 뭘 말씀하시려는 겁니까?": "(Sieht auf die Notiz und stockt kurz) …Und was soll das allein beweisen?",
 "{0} 탐문": "Befragung: {0}",
+"모순": "Widerspruch",
 "수첩을 펴 보인다": "zeigt das Notizbuch",
 "수첩을 내민다": "hält das Notizbuch hin",
 "메모를 내민다": "Notiz vorhalten",

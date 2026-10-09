@@ -629,6 +629,7 @@
       return `${m ? `<p class="c-act" data-i="${i}">${inline(m[1])}</p>` : ''}<div class="c-bub${me ? ' me' : ''}" data-i="${i}"${pb ? ` data-bub="${esc(ref)}"` : ''}><span class="c-t">${said}</span>${pb}</div>`;
     }).join('');
   }
+  const BROKE = new Set(); // 「모순」 도장을 이미 찍어 보인 진술 (다시 그릴 때 또 찍지 않게)
   function personHtml(p) {
     const asked = (ST.asked[p.id] || []).filter(e => { const k = e.replace(/!$/, ''); return k === p.key || C.keywords[k]; }); // 예전 판 저장에 남은, 지금은 없는 단어는 건너뛴다 (단어 id 가 글로 새지 않게)
     const src = T`${p.name} 탐문`;
@@ -638,7 +639,9 @@
       const k = e.replace(/!$/, ''), press = e.endsWith('!');
       const hid = press && ST.held && ST.held[`${p.id}|${e}`], held = hid != null && ST.notes.find(x => String(x.id) === String(hid));
       const ev = press ? (held ? [held] : evidence(p, k)) : [];
-      return `<div class="qa${press ? ' press' : ''}" data-qa="${esc(e)}"><div class="c-q"><span class="c-t">${esc(qText(p, e))}</span>${press ? '' : `<small class="c-k">${esc(kl(k))}</small>`}</div>
+      const broke = !press && asked.includes(k + '!') && isPressAsk(p, k) && !isSoft(p, k), bk = `${C.id}|${p.id}|${k}`;
+      const bNew = broke && !BROKE.has(bk) && asked[asked.length - 1] === k + '!' && !reduced(); if (broke) BROKE.add(bk);
+      return `<div class="qa${press ? ' press' : ''}${broke ? ' broke' : ''}" data-qa="${esc(e)}">${broke ? `<span class="c-broke${bNew ? ' new' : ''}">${T('모순')}</span>` : ''}<div class="c-q"><span class="c-t">${esc(qText(p, e))}</span>${press ? '' : `<small class="c-k">${esc(kl(k))}</small>`}</div>
         ${ev.map(n => `<p class="c-ev"><span class="c-ev-k">${isSoft(p, k) ? T('수첩을 펴 보인다') : T('수첩을 내민다')}</span>${esc(n.t)}</p>`).join('')}
         <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div>${!press && vsOpen && !asked.includes(k + '!') ? `<p class="c-vs"><button type="button" class="chip vs${lv() <= 3 && isPressAsk(p, k) && ok((rawAns(p, k) || {}).need) ? ' again' : ''}" data-vs="${esc(k)}">${T('메모를 내민다')}</button></p>` : ''}</div>`;
     }).join('');
