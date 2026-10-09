@@ -1967,7 +1967,9 @@
     // 2. 읽은 기록 속에 있는데 아직 수첩에 적지 않은 단어
     //    앞으로 이어지는 단어(그 말로 찾으면 나오는 기록이 있거나, 조건에 걸려 있거나, 누군가 그 말에 따로 대답하는 것)를 먼저 짚는다. 아무 데도 안 이어지는 단어부터 짚으면 헛걸음이 된다
     const words = []; seen.forEach(b => b.k.forEach(k => { if (!ST.keys.includes(k) && C.keywords[k] && !C._dead.has(k)) words.push([k, b]); }));
-    [...words.filter(([k]) => opens(k)), ...words.filter(([k]) => !opens(k))].forEach(([k, b]) => add('word:' + k, b.go && b.go.t === 'person' ? T('들은 대답 속에 아직 수첩에 적지 않은 단어가 있다.') : T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${kl(k)}」`, b.go));
+    // 이어지는 단어끼리는 더 많이 여는 것부터: 탭·기록·지도 자리를 한꺼번에 여는 단어가 기록 한 건 찾는 단어보다 앞 (읽은 차례로만 짚으면 막힌 데와 상관없는 단어를 먼저 짚는다)
+    const shut = gates().filter(n => !ok(n)), reach = k => shut.filter(n => n.some(x => String(x).split('|').includes(k))).length * 2 + Object.values(C.docs).filter(d => (d.find || []).includes(k) && !ST.seen.includes(d.id)).length;
+    [...words.filter(([k]) => opens(k)).sort((x, y) => reach(y[0]) - reach(x[0])), ...words.filter(([k]) => !opens(k))].forEach(([k, b]) => add('word:' + k, b.go && b.go.t === 'person' ? T('들은 대답 속에 아직 수첩에 적지 않은 단어가 있다.') : T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${kl(k)}」`, b.go));
     unmet.forEach(meet); // 만나도 아직 새로 나올 게 없는 사람은 적지 않은 단어 뒤에
     // 3·4. 탐문 — 수첩을 내밀어 다시 물을 것, 새 단어나 쓸 만한 사실이 나올 물음
     const people = Object.values(C.people).filter(p => personVisible(p) && ST.asked[p.id] != null);
