@@ -246,3 +246,31 @@ button.press-opt{width:100%;text-align:left;color:inherit}
 @keyframes nbump{0%{transform:scale(1);color:inherit}30%{transform:scale(1.5);color:var(--red)}100%{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.hh small.bump{animation:none}}
 body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.lv-fin){display:none} /* 올린 보고서 칸에 결말이 펼쳐져 있으면 수첩에는 도장과 다음 사건만 (같은 글이 두 번 보이지 않게) */
+
+/* 의문: 수첩 맨 위 「지금 밝혀야 할 것」 — 찾아낸 빈칸은 잉크, 아직인 빈칸은 흐린 연필 물음. 줄은 공책 줄(32px)에 맞춘다 */
+.th-list{list-style:none;margin:0;padding:0}
+.th>details>summary{display:block;list-style:none;cursor:pointer;font:21px/32px var(--f-hand);color:var(--ink)}
+.th>details>summary::-webkit-details-marker{display:none}
+.th-no{color:var(--pencil)}
+.th-cnt{margin-left:4px;font:600 12px/1 var(--f-mono);letter-spacing:.04em;color:var(--pencil);white-space:nowrap;vertical-align:2px}
+.th-stamp{display:inline-block;margin-left:6px;padding:0 5px;border:1.5px solid var(--red);border-radius:3px;color:var(--red);font:600 12px/1.35 var(--f-mono);letter-spacing:.04em;white-space:nowrap;vertical-align:2px;transform:rotate(-4deg)}
+.th.done .th-q{color:var(--ink-soft);text-decoration:line-through 1.5px rgba(176,52,42,.5)}
+.th-steps{list-style:none;margin:0;padding:0 0 0 22px}
+.th-steps li{position:relative;font:19px/32px var(--f-hand)}
+.th-steps li::before{position:absolute;left:-20px;top:0;width:16px;text-align:center}
+.th-got::before{content:"✓";color:var(--red)}
+.th-gap{color:var(--pencil);opacity:.75}
+.th-gap::before{content:"?";font-weight:700}
+.th-memo{display:inline-block;min-width:1.4em;margin-left:3px;padding:0 4px;border:1.2px solid rgba(101,95,82,.6);border-radius:50%;background:none;color:var(--pencil);font:16px/1.2 var(--f-hand);text-align:center;cursor:pointer;vertical-align:1px}
+@media (hover:hover){.th-memo:hover{border-color:var(--red);color:var(--red)}}
+.th-press{font:600 11px/1 var(--f-mono);letter-spacing:.04em;color:var(--pencil);vertical-align:2px}
+.th-a{margin:0;padding-left:22px;color:var(--red);font:20px/32px var(--f-hand)}
+.th.lit{animation:noteAgain 1.6s ease-out}
+.th.lit .th-stamp{animation:leadStamp .55s cubic-bezier(.2,.8,.3,1.2) both}
+@media (prefers-reduced-motion:reduce){.th.lit,.th.lit .th-stamp{animation:none}}
+/* 보고서: 주장 밑에 걸린 의문 한 줄, 범인 칸에 「의문 n」 · 「뺌」 */
+.rep-th-hint,.rep-th-a{margin:0 0 8px;font:16px/1.4 var(--f-hand);color:var(--pencil);word-break:keep-all}
+.rep-th-a{color:var(--red)}
+.rep-grp.rep-th>summary{color:var(--red)}
+.rep-th-who{margin-top:2px;font:600 11px/1.3 var(--f-mono);letter-spacing:.04em;color:var(--red)}
+.rep-th-who.out{color:var(--pencil);text-decoration:none}

@@ -388,6 +388,25 @@ function check(c) {
     (cl.accept || []).forEach(f => { if (!factWhere[f]) err(`claim ${cl.id}: 사실 ${f} 가 어느 블록에도 없음`); });
     if ((cl.accept || []).length === 1) warn(`claim ${cl.id}: 인정되는 증거가 1개뿐 — 경로를 하나 더 두는 편이 안전`);
   });
+  // threads (의문): 빈칸마다 사실(f) 또는 깨뜨릴 진술(press: '사람id:물은것') 하나
+  const thIds = new Set();
+  (c.threads || []).forEach((t, i) => {
+    const w = `threads[${i}]${t && t.id ? ' ' + t.id : ''}`;
+    if (!t.id || !t.q || !t.a) err(`${w}: id · q · a 필요`);
+    if (thIds.has(t.id)) err(`${w}: id 가 겹침`);
+    thIds.add(t.id);
+    needCheck(t.when, `${w}.when`);
+    if (!Array.isArray(t.steps) || !t.steps.length) err(`${w}: steps 가 비어 있음`);
+    (t.steps || []).forEach((st, j) => {
+      const sw = `${w}.steps[${j}]`;
+      if (!st.t) err(`${sw}: t 필요`);
+      if (!st.f === !st.press) err(`${sw}: f 와 press 가운데 하나만`);
+      [].concat(st.f || []).forEach(f => { if (!factWhere[f]) err(`${sw}: 사실 ${f} 가 어느 블록에도 없음`); });
+      if (st.press) { const [pid, k] = st.press.split(':'), a = P[pid] && P[pid].ask && P[pid].ask[k]; if (!a || Array.isArray(a) || !a.need) err(`${sw}: press ${st.press} — 그 사람에게 그 추궁(need 가 있는 대답)이 없음`); }
+    });
+    if (t.for && !(sol.claims || []).some(cl => cl.id === t.for)) err(`${w}: for ${t.for} 주장이 없음`);
+    ['who', 'out'].forEach(x => { if (t[x] && !(K[t[x]] && K[t[x]].type === 'person')) err(`${w}: ${x} ${t[x]} 는 person 단어여야`); });
+  });
   if (!Array.isArray(sol.epilogue) || !sol.epilogue.length) err('solution.epilogue 가 비어 있음');
   factRefs.forEach(([f, w]) => { if (!factWhere[f]) err(`${w}: !${f} 사실이 없음`); });
   if (mWhere.length === 0 && c.kind !== 'tutorial' && !c.live) warn('M 의 메모({m:...}) 블록이 없음');

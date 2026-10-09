@@ -1524,9 +1524,14 @@
     const claim = (cl, i) => {
       const cur = notes.find(n => String(n.id) === String(ST.report.claims[cl.id])) || (shut && ST.report.kept && ST.report.kept[String(ST.report.claims[cl.id])]) || null;
       const open = !shut && REPOPEN === cl.id;
-      const list = groups.map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${cur && cur.id === n.id ? ' on' : ''}${repLead(n) ? ' lead' : ''}" title="${esc(n.t)}"><input type="radio" name="rep-${esc(cl.id)}" value="${n.id}" data-rep="${esc(cl.id)}"${cur && cur.id === n.id ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span>${repLead(n) ? ' ' + leadMark({ vs: [], rep: repLead(n).rep }) : ''}${isSus(n) ? ` <span class="n-sus">${T('의심')}</span>` : ''}${usedBy(n, i)}</label>`).join('')}</details>`).join('');
+      const opt = (n, j) => `<label class="rep-opt${cur && cur.id === n.id ? ' on' : ''}${repLead(n) ? ' lead' : ''}" title="${esc(n.t)}"><input type="radio" name="rep-${esc(cl.id)}" value="${n.id}" data-rep="${esc(cl.id)}"${cur && cur.id === n.id ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span>${repLead(n) ? ' ' + leadMark({ vs: [], rep: repLead(n).rep }) : ''}${isSus(n) ? ` <span class="n-sus">${T('의심')}</span>` : ''}${usedBy(n, i)}</label>`;
+      // 이 주장에 걸린 의문이 풀렸으면, 그 빈칸을 채운 메모를 맨 위에 따로 모은다 (아래 묶음에서는 뺀다)
+      const tf = shut ? null : thFor(cl.id), top = tf ? tf.ns : [];
+      const list = (top.length ? `<details class="rep-grp rep-th" open><summary>${T`의문 ${tf.x.no}에서 밝혀낸 것`} <small>${top.length}</small></summary>${top.map(n => opt(n, notes.indexOf(n))).join('')}</details>` : '')
+        + groups.map(g => { const it = g.items.filter(([n]) => !top.includes(n)); return it.length ? `<details class="rep-grp" open><summary>${esc(g.src)} <small>${it.length}</small></summary>${it.map(([n, j]) => opt(n, j)).join('')}</details>` : ''; }).join('');
+      const thLine = !tf ? '' : tf.x.done ? `<p class="rep-th-a">${T`의문 ${tf.x.no}`} → ${esc(tf.x.t.a)}</p>` : `<p class="rep-th-hint">${T`의문 ${tf.x.no} 「${esc(tf.x.t.q)}」 — 빈칸이 남았다 (${tf.x.got.filter(Boolean).length}/${tf.x.got.length}).`}</p>`;
       return `<section class="rep-claim${cur ? ' filled' : ''}${open ? ' open' : ''}" data-claim="${esc(cl.id)}">
-        <h4 id="rh-${esc(cl.id)}"><span class="no">${i + 1}</span> ${inline(cl.q)}</h4>
+        <h4 id="rh-${esc(cl.id)}"><span class="no">${i + 1}</span> ${inline(cl.q)}</h4>${thLine}
         <div class="rep-pick">${cur ? `<p class="rep-memo"><span class="n">${notes.includes(cur) ? notes.indexOf(cur) + 1 + '.' : '—'}</span> ${esc(cur.t)} <span class="src">— ${esc(cur.src || '')}</span></p>` : T('<p class="rep-empty">아직 붙인 메모가 없다.</p>')}
           ${shut ? '' : `<button type="button" class="rep-tog" data-rep-open="${esc(cl.id)}" aria-expanded="${open}">${open ? T('접기') : cur ? T('다른 메모로 바꾸기') : T('메모에서 고르기')} <small>(${pool.length})</small></button>`}</div>
         ${open ? `<div class="rep-acc">${pool.length ? `<input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-rep-filter aria-label="${T`메모 찾기`}">${nLead ? ` <button type="button" class="lead-f" data-lead-f aria-pressed="false">${T`유력 ${nLead}`}</button>` : ''}<div role="radiogroup" aria-labelledby="rh-${esc(cl.id)}">${list}</div><p class="rep-empty rep-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>` : T`<p class="rep-empty">수첩에 내밀 만한 메모가 없다. 기록에서 ${inline('✎')} 표시가 붙은 문장을 적어 둔다.</p>`}</div>` : ''}
@@ -1537,7 +1542,7 @@
     const sign = C.frame === 'crt' || C.frame === 'laptop' ? `<table class="rep-sign" aria-label="${T`결재`}"><tr><th>${T`담당`}</th><th>${T`팀장`}</th><th>${T`과장`}</th></tr><tr><td>${esc(who(me))}</td><td>${ST.solved ? T('<span class="ok">결재</span>') : back ? T('<span class="no">반려</span>') : ''}</td><td>${ST.solved ? T('<span class="ok">결재</span>') : ''}</td></tr></table>` : '';
     return `<article class="doc skin-report rep-view"><header class="doc-h">${sign}<p class="doc-k">${esc(FM.title)}</p><h3 class="doc-t">${esc(C.title)}</h3><p class="doc-m">${esc(FM.lead)}</p></header>
       <div class="doc-b"><form id="rep" autocomplete="off"${shut ? ' class="shut"' : ''}>
-        <section class="rep-sec"><h4 id="rh-culprit">${esc(FM.culprit)}</h4><div class="rep-people" role="radiogroup" aria-labelledby="rh-culprit">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => `<label class="rep-per${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}><b>${esc(kl(k))}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}</label>`).join('') || T('<p class="rep-empty">수첩에 적힌 인물이 없다.</p>')}</div></section>
+        <section class="rep-sec"><h4 id="rh-culprit">${esc(FM.culprit)}</h4><div class="rep-people" role="radiogroup" aria-labelledby="rh-culprit">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => `<label class="rep-per${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}><b>${esc(kl(k))}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}${shut ? '' : thWho(k)}</label>`).join('') || T('<p class="rep-empty">수첩에 적힌 인물이 없다.</p>')}</div></section>
         ${sol.claims.map(claim).join('')}
         <p class="submit-row">${shut ? `<span class="rep-filed">${esc(FM.filed || (C.frame === 'papers' ? T('종결 · 철해 둠') : T('결재 완료')))}</span>` : `<button type="submit" class="btn-hand">${esc(FM.submit)}</button>`}<span class="tries">${ST.tries ? T`올린 횟수 ${ST.tries}` : ''}</span></p>
       </form><p class="verdict">${esc(VERDICT)}</p>${ST.solved ? `<div class="rep-solved">${solvedHtml(false)}</div>` : ''}</div></article>`;
@@ -1709,16 +1714,78 @@
   // 새로 맞물린 단서를 알린다: 수첩에서 그 메모에 도장이 찍히고, 한 줄 알림. 이미 알린 메모는 다시 알리지 않는다 (ST.lit)
   function leadNews() {
     if (!C || !ST || ST.solved) return;
+    threadNews(leadLit() ? 3900 : 900); // 「유력!」 알림과 겹치지 않게 의문 알림은 그 뒤에
+  }
+  function leadLit() {
     const LM = leadMap(), now = [...LM.keys()].map(String);
-    if (!ST.lit) { ST.lit = now; save(); return; } // 예전 기록을 처음 열 때는 조용히
+    if (!ST.lit) { ST.lit = now; save(); return false; } // 예전 기록을 처음 열 때는 조용히
     const fresh = now.filter(id => !ST.lit.includes(id));
-    if (!fresh.length) return;
+    if (!fresh.length) return false;
     ST.lit = [...new Set([...ST.lit, ...fresh])];
     save();
     renderNotebook();
     fresh.forEach(id => { const li = $(`.notes li[data-nid="${id}"]`); if (!li) return; const d = li.closest('details'); if (d && !d.open) d.open = true; li.classList.remove('lit'); void li.offsetWidth; li.classList.add('lit'); });
     const nums = fresh.map(noteNo).filter(Boolean).sort((a, b) => a - b), e = LM.get(ST.notes[nums[0] - 1].id);
     setTimeout(() => { if (!ST.solved) { toast(T`유력! 메모 ${nums.join('·')}번 — ${leadTip(e).split(' · ')[0]}`, 3000); sfx('match'); } }, 900);
+    return true;
+  }
+
+  /* ───────── 의문: 지금 밝혀야 할 것 ─────────
+   * 사건 data 의 threads: [{ id, q, when?, steps: [{ f | press, t, hint }], a, for?, who?, out? }]
+   * 빈칸(steps)은 그 사실이 든 메모를 적거나 (f: 사실 id, 배열이면 그 가운데 하나), 진술을 깨뜨리면 (press: '사람id:물은것') 채워진다.
+   * 의문은 when 이 맞으면 수첩 맨 위에 나타나고 (한 번 나타나면 그대로), 빈칸이 다 차면 형사가 결론(a)을 적는다. 고르는 것 없이 찾아낸 만큼 차오른다.
+   * for: 결론이 받쳐 주는 보고서 주장 — 풀리면 보고서의 그 주장에 붙일 메모를 맨 위에 모아 준다. who · out: 범인 칸에서 그 사람 옆에 「의문 n」 · 「뺌」 */
+  const thNote = s => { const fs = [].concat(s.f || []); return fs.length ? ST.notes.find(n => fs.some(w => fIs(n.f, w))) || null : null; };
+  const thGot = s => (s.press ? (ST.asked[s.press.split(':')[0]] || []).includes(s.press.split(':')[1] + '!') : !!thNote(s));
+  const THX = new Map(); // 의문 펼침: 풀린 것은 접어 두고, 플레이어가 손댄 것은 그대로
+  // 수첩에 나온 의문만, 나온 차례대로 (번호도 그 차례)
+  function thView() {
+    const ts = (C && C.threads) || [], seen = (ST && ST.th && ST.th.seen) || [];
+    return seen.map(id => ts.find(t => t.id === id)).filter(Boolean).map((t, i) => { const got = t.steps.map(thGot); return { t, no: i + 1, got, done: got.every(Boolean) }; });
+  }
+  function thFor(clId) {
+    const x = thView().find(v => v.t.for === clId), cl = C.solution.claims.find(c => c.id === clId);
+    if (!x || !cl) return null;
+    return { x, ns: x.done ? [...new Set(x.t.steps.map(thNote).filter(Boolean))].filter(n => (cl.accept || []).some(w => fIs(n.f, w))) : [] };
+  }
+  function thWho(k) {
+    const x = thView().find(v => v.done && (v.t.who === k || v.t.out === k));
+    return !x ? '' : x.t.out === k ? `<span class="rep-th-who out">${T`뺌 · 의문 ${x.no}`}</span>` : `<span class="rep-th-who">${T`의문 ${x.no}`}</span>`;
+  }
+  function threadNews(delay = 900) {
+    const ts = (C && C.threads) || [];
+    if (!ts.length || !ST || ST.solved) return;
+    const first = !ST.th, th = ST.th ||= { seen: [], done: [], got: [] };
+    const fresh = ts.filter(t => !th.seen.includes(t.id) && ok(t.when)).map(t => t.id);
+    th.seen.push(...fresh);
+    const V = thView();
+    const got = V.flatMap(x => x.got.map((g, j) => (g ? `${x.t.id}.${j}` : ''))).filter(Boolean), newGot = got.filter(k => !th.got.includes(k));
+    const newDone = V.filter(x => x.done && !th.done.includes(x.t.id)).map(x => x.t.id);
+    th.got.push(...newGot); th.done.push(...newDone);
+    if (!first && !fresh.length && !newGot.length && !newDone.length) return;
+    save(); renderNotebook();
+    if (first) return; // 사건을 처음 열 때(또는 예전 기록)는 조용히 적어 둔다
+    const idOf = k => k.slice(0, k.lastIndexOf('.'));
+    const hit = [...new Set([...fresh, ...newDone, ...newGot.map(idOf)])];
+    hit.forEach(id => { const el = $(`.th[data-th="${id}"]`); if (!el) return; const d = el.querySelector('details'); if (d && !d.open && !newDone.includes(id)) d.open = true; el.classList.remove('lit'); void el.offsetWidth; el.classList.add('lit'); });
+    const by = id => V.find(x => x.t.id === id);
+    const msg = newDone.length ? T`의문 ${by(newDone[0]).no} 풀림 — ${plain(by(newDone[0]).t.q)}`
+      : fresh.length ? T`새 의문 — ${plain(by(fresh[0]).t.q)}`
+      : (x => T`의문 ${x.no} — 빈칸 하나를 채웠다 (${x.got.filter(Boolean).length}/${x.got.length})`)(by(idOf(newGot[0])));
+    const c0 = C;
+    setTimeout(() => { if (C === c0 && !ST.solved) { toast(msg, 3400); sfx(newDone.length ? 'match' : 'write'); } }, delay);
+  }
+  function thHtml() {
+    const V = thView();
+    if (!V.length) return '';
+    const nd = V.filter(x => x.done).length;
+    const step = (x, s, j) => {
+      if (!x.got[j]) return `<li class="th-gap">${esc(s.hint || '……')}</li>`;
+      const n = thNote(s);
+      return `<li class="th-got">${esc(s.t)}${n ? ` <button type="button" class="th-memo" data-th-memo="${n.id}" aria-label="${T`메모 ${noteNo(n.id)}번 보기`}">${noteNo(n.id)}</button>` : s.press ? ` <span class="th-press">${T('추궁')}</span>` : ''}</li>`;
+    };
+    return `<section class="ruled nb-sec nb-th"><h3 class="hh">${T`의문 <small>${nd} / ${V.length} 풀림</small>`}</h3>
+      <ol class="th-list">${V.map(x => { const k = C.id + '|' + x.t.id, open = THX.has(k) ? THX.get(k) : !x.done; return `<li class="th${x.done ? ' done' : ''}" data-th="${esc(x.t.id)}"><details${open ? ' open' : ''}><summary><span class="th-no">${x.no}.</span> <span class="th-q">${esc(x.t.q)}</span>${x.done ? ` <span class="th-stamp">${T('풀림')}</span>` : ` <span class="th-cnt" aria-label="${T`빈칸 ${x.got.length}개 가운데 ${x.got.filter(Boolean).length}개`}">${x.got.filter(Boolean).length}/${x.got.length}</span>`}</summary><ul class="th-steps">${x.t.steps.map((s, j) => step(x, s, j)).join('')}</ul>${x.done ? `<p class="th-a">→ ${esc(x.t.a)}</p>` : ''}</details></li>`; }).join('')}</ol></section>`;
   }
   function noteGroups(notes) {
     const groups = [];
@@ -1748,6 +1815,7 @@
       <article class="brief"><svg class="clip" viewBox="0 0 24 64" aria-hidden="true"><path d="M8 20 V50 a6 6 0 0 0 12 0 V12 a8 8 0 0 0 -16 0 V46" fill="none" stroke="#8d918f" stroke-width="2.6" stroke-linecap="round"/></svg>
         ${gore() ? `<span class="brief-blood" aria-hidden="true">${stains(C.id + 'brief', 1, 'bd', true)}</span>` : ''}<h2>${esc(b.title || C.title)} <small>${esc(b.no || '')}</small></h2>
         <dl>${(b.lines || []).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${inline(v)}</dd>`).join('')}</dl>${b.scrawl ? `<p class="scrawl">${inline(b.scrawl)}</p>` : ''}</article>
+      ${thHtml()}
       <section class="ruled nb-sec"><h3 class="hh">${T`단어 <small>${keys.length}</small>`}</h3>
         ${groups.map(([t, a]) => `<p class="kg"><span class="kg-t">${ktypeName(t)}</span> ${a.map(k => `<button type="button" class="kchip" data-chip="${k}">${esc(kl(k))}</button>`).join(' ')}</p>`).join('')}
       </section>
@@ -2006,7 +2074,7 @@
     PIN = {};
     { const pr = $('#paneRead'); if (pr && pr.addEventListener && MG._vwheel) pr.addEventListener('wheel', MG._vwheel, { passive: false }); } // 세로 신문: 휠을 읽는 방향으로
     renderTabs(); renderList(); renderRead(); renderNotebook();
-    if (!ST.lit) leadNews(); // 예전 기록: 이미 맞물린 것은 알리지 않고 적어 둔다
+    if (!ST.lit || (C.threads && !ST.th)) leadNews(); // 예전 기록: 이미 맞물린 것·나와 있던 의문은 알리지 않고 적어 둔다
     if ($('.scr-clock')) { tickClock(); clockT ||= setInterval(tickClock, 15000); }
   }
   // 사건마다 쓰는 특수 글꼴은 그 사건을 열 때만 부른다 (공통 글꼴은 index.html). 신문 양식은 송명·옛 로마자를 쓴다.
@@ -3022,6 +3090,13 @@
         else if (i.value.length < 8) i.value += k;
         return;
       }
+      if ((el = t.closest('[data-th-memo]'))) { // 의문의 빈칸을 채운 메모로
+        if (NBF) { NBF = ''; renderNotebook(); }
+        const li = $(`.notes li[data-nid="${+el.dataset.thMemo}"]`); if (!li) return;
+        const d = li.closest('details'); if (d && !d.open) { NGSHUT.delete(C.id + '|' + d.dataset.ng); d.open = true; }
+        li.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); li.classList.remove('again'); void li.offsetWidth; li.classList.add('again'); return;
+      }
+      if ((el = t.closest('.th > details > summary'))) { const th = el.closest('.th'); THX.set(C.id + '|' + th.dataset.th, !el.parentNode.open); return; }
       if (t.closest('[data-nudge]')) return toggleNudge();
       if (t.closest('[data-nudge-more]')) { if (NUDGE) { NUDGE.more = true; renderNudge(); const g = $('#nudgeBox .nudge-go'); if (g && e.detail === 0) g.focus(); } return; }
       if ((el = t.closest('[data-nudge-go]'))) return nudgeGo(el.dataset.nudgeGo);
@@ -3285,5 +3360,5 @@
   };
   MG.state = () => S;
   MG.sfx = kind => sfx(kind); // 여는 장면(js/mood.js)의 무전 소리
-  MG.dev = { leads: () => leads(), nudge: () => nudgeHtml(), st: () => ST, advance: (k, m) => advance(k, m), wait: () => waitNext(), toggle: () => toggleNudge(), more: () => { if (NUDGE) NUDGE.more = true; }, render: () => { save(); renderCase(); }, pin: ref => PIN[ref], lead: () => leadMap() }; // tools/nudge-sim.js 가 짚어 보기만 따라 사건을 끝까지 가 본다
+  MG.dev = { leads: () => leads(), th: () => thView().map(x => ({ id: x.t.id, no: x.no, got: x.got.filter(Boolean).length, of: x.got.length, done: x.done })), nudge: () => nudgeHtml(), st: () => ST, advance: (k, m) => advance(k, m), wait: () => waitNext(), toggle: () => toggleNudge(), more: () => { if (NUDGE) NUDGE.more = true; }, render: () => { save(); renderCase(); }, pin: ref => PIN[ref], lead: () => leadMap() }; // tools/nudge-sim.js 가 짚어 보기만 따라 사건을 끝까지 가 본다
 })();
