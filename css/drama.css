@@ -293,3 +293,10 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 .c-broke.new{animation:brokeIn .42s 2.3s cubic-bezier(.2,1.5,.45,1) both}
 @keyframes brokeIn{from{opacity:0;transform:rotate(-7deg) scale(2.2)}}
 @media (prefers-reduced-motion:reduce){.c-broke.new{animation:none}}
+/* 보고서를 올릴 때: 지목한 얼굴이 판정을 기다리고(judged), 맞으면 움찔(caught), 반려되면 고개를 젓는다(nope) */
+.rep-per .face.judged{animation:faceJudge .9s ease-in-out infinite alternate}
+@keyframes faceJudge{to{transform:scale(1.16);box-shadow:0 0 0 2px var(--red)}}
+.rep-per .face.caught{animation:faceCaught .75s ease-out}
+@keyframes faceCaught{25%{transform:scale(1.28) rotate(-4deg)}55%{transform:scale(1.2) rotate(3deg)}}
+.rep-per .face.nope{animation:faceNope .6s ease-in-out}
+@media (prefers-reduced-motion:reduce){.rep-per .face.judged,.rep-per .face.caught,.rep-per .face.nope{animation:none}}

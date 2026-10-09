@@ -3025,6 +3025,7 @@
     $$('.verdict').forEach(v => { v.textContent = FORM().judging; v.classList.add('wait'); });
     say(FORM().judging);
     const view = $('.rep-view'); if (view) view.classList.add('judging');
+    if (!reduced()) $$('.rep-per.on .face').forEach(f => f.classList.add('judged')); // 지목한 얼굴: 판정을 기다리는 동안 숨을 죽인다
     sfx('page');
     const v = MG.sound ? MG.sound.hero('accuse') : null;
     (v ? v.done.then(() => wait(900)) : wait(1800)).then(() => {
@@ -3037,16 +3038,19 @@
           box.innerHTML = solvedHtml(true, box.classList.contains('rep-solved')); box.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' });
           if (document.activeElement === document.body) { box.tabIndex = -1; box.focus({ preventScroll: true }); } // 키보드로 올렸으면 결말부터 읽히게
         }
+        repFace('caught', 800); // 맞았으면 무너진 얼굴로 바뀌며 움찔
         cue('solved', T('사건 종결')); say(T('사건 종결')); renderBar(); renderList(); // 아래 줄의 시계도 「종결」로, 목록 칸의 「회신 기다리기」도 걷는다
         if (MG.sound) setTimeout(() => { if (C === c0 && ST === s0) MG.sound.hero('solved'); }, 2000);
       } else if (wrong === 0) toast(T('이미 닫힌 사건이다'));
       else {
         cue('miss'); say(VERDICT);
+        repFace('nope', 700); // 반려: 지목한 사람이 고개를 젓는다
         const r = $('.rep-view'); if (r) { r.classList.remove('bounced'); void r.offsetWidth; r.classList.add('bounced'); }
         if (MG.sound) setTimeout(() => { if (C === c0 && ST === s0) MG.sound.hero('wrong'); }, 500);
       }
     });
   }
+  function repFace(cls, ms) { if (reduced()) return; $$('.rep-per.on .face').forEach(f => { f.classList.remove(cls); void f.offsetWidth; f.classList.add(cls); setTimeout(() => f.classList.remove(cls), ms); }); }
   function armed(el, label, fn) {
     if (!el.classList.contains('arm')) {
       const orig = el.textContent;
