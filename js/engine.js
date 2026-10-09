@@ -313,11 +313,13 @@
   const IC_PEN = '<svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 12.8l.9-3.1 7.2-7.2a1.2 1.2 0 0 1 1.7 0l.5.5a1.2 1.2 0 0 1 0 1.7L6.3 11.9z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9.9 3.9l2.2 2.2M4.1 9.7l2.2 2.2" stroke="currentColor" stroke-width="1.1"/></svg>';
   const IC_TICK = '<svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.6 8.4c1.4.9 2.4 2.1 3.2 3.6 1.8-4.2 4.3-7.3 7.6-9.3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   // ✎ 는 증거가 되는 줄(f)과 사건을 쓴 사람이 적어 둘 만하다고 표시한 줄(pin)에만 붙는다 — 보이는 문장마다 적다 보면 수첩이 쓸모없는 메모로 차서 보고서를 맞출 수 없다
+  // 같은 말을 두 번 들으면 (처음 대답 · 따진 뒤 되풀이한 대답) 메모는 하나 — 메모 고르기 · 보고서에 같은 줄이 겹쳐 보이지 않게
+  const noteAt = ref => { const p = PIN[ref]; return ST.notes.findIndex(n => n.ref === ref || (p && p.f && n.f === p.f && n.t === p.t)); };
   function pinBtn(ref, t, f, src, keep) {
     if (NOPIN) return '';
-    const on = ST.notes.some(n => n.ref === ref);
-    if (!f && !keep && !on) return '';
     PIN[ref] = { t: plain(t).trim(), f: f || null, src };
+    const on = noteAt(ref) >= 0;
+    if (!f && !keep && !on) { delete PIN[ref]; return ''; }
     const lab = on ? T('수첩에 적음') : T('수첩에 적기');
     return `<button type="button" class="pin${on ? ' on' : ''}" data-pin="${esc(ref)}" aria-label="${lab}" data-tip="${lab}">${on ? IC_TICK : IC_PEN}</button>`;
   }
@@ -2625,7 +2627,7 @@
   function pin(ref) {
     const p = PIN[ref];
     if (!p) return;
-    const had = ST.notes.findIndex(n => n.ref === ref);
+    const had = noteAt(ref);
     if (had >= 0) { // 이미 적은 줄: 수첩의 그 메모를 짚어 준다 (접힌 묶음이면 펼쳐서)
       toast(T`이미 적어 둔 메모다 — ${had + 1}번`);
       const li = $(`.notes li[data-nid="${ST.notes[had].id}"]`);
@@ -2639,7 +2641,7 @@
     const BY = {}, before = census(BY), had = proof().length, ids = [];
     refs.forEach(ref => {
       const p = PIN[ref];
-      if (!p || ST.notes.some(n => n.ref === ref)) return;
+      if (!p || noteAt(ref) >= 0) return;
       ST.notes.push({ id: ++ST.nid, ref, t: p.t, f: p.f, src: p.src }); ids.push(ST.nid);
       if (ST.drop) ST.drop = ST.drop.filter(x => x !== ref);
     });
