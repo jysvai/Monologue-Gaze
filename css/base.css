@@ -400,6 +400,7 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 .hh small{font-size:19px;color:var(--pencil)}
 .kg{margin:0}
 .kg-t{color:var(--pencil);font-size:17px}
+.kg-tip{margin:0 0 6px;color:var(--pencil);font-size:17px;line-height:1.35} /* 아직 스스로 적은 단어가 없을 때만: 점선 단어를 누르면 적힌다 */
 .kchip{display:inline;margin:0;padding:0 2px;border:0;background:none;color:var(--ink);font:21px/32px var(--f-hand);text-decoration:underline;text-decoration-color:rgba(38,48,63,.35);text-underline-offset:4px;cursor:pointer}
 @media (hover:hover){.kchip:hover{color:var(--red)}}
 .notes{list-style:none;margin:0;padding:0}

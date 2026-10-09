@@ -1876,7 +1876,7 @@
         ${gore() ? `<span class="brief-blood" aria-hidden="true">${stains(C.id + 'brief', 1, 'bd', true)}</span>` : ''}<h2>${esc(b.title || C.title)} <small>${esc(b.no || '')}</small></h2>
         <dl>${(b.lines || []).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${inline(v)}</dd>`).join('')}</dl>${b.scrawl ? `<p class="scrawl">${inline(b.scrawl)}</p>` : ''}</article>
       ${thHtml()}
-      <section class="ruled nb-sec"><h3 class="hh">${T`단어 <small>${keys.length}</small>`}</h3>
+      <section class="ruled nb-sec"><h3 class="hh">${T`단어 <small>${keys.length}</small>`}</h3>${!ST.solved && C.kind !== 'tutorial' && ST.keys.every(k => (C.start || []).includes(k)) ? `<p class="kg-tip">${T('※ 기록 속 점선 밑줄 단어를 누르면 여기 적힌다. 적은 단어로 자료를 찾고, 사람에게 묻는다.')}</p>` : ''}
         ${groups.map(([t, a]) => `<p class="kg"><span class="kg-t">${ktypeName(t)}</span> ${a.map(k => `<button type="button" class="kchip" data-chip="${k}">${esc(kl(k))}</button>`).join(' ')}</p>`).join('')}
       </section>
       <section class="ruled nb-sec${NBF ? ' f-' + NBF : ''}"><h3 class="hh">${T`메모 <small>${notes.length}</small>`}${fb('lead', nLead, T`유력 ${nLead}`)}${fb('sus', nSus, T`의심 ${nSus}`)}</h3>${notes.length >= 6 && !ST.solved ? `<p class="nb-jump-row"><button type="button" class="nb-jump" data-open-rep>${esc(FORM().open)} →</button></p>` : ''}

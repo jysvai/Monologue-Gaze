@@ -280,6 +280,7 @@ MG.I18N.put("en", "ui", {
 "메모 {0} 의심으로 표시": "Mark note {0} as a doubt",
 "← 기록실": "← Records room",
 "단어 <small>{0}</small>": "Words <small>{0}</small>",
+"※ 기록 속 점선 밑줄 단어를 누르면 여기 적힌다. 적은 단어로 자료를 찾고, 사람에게 묻는다.": "※ Tap a word with a dotted underline in any record to note it here. Search the files and question people with the words you note.",
 "메모 <small>{0}</small>": "Notes <small>{0}</small>",
 "의심 {0}": "Doubts {0}",
 "<ol class=\"notes\"><li class=\"tip\">아직 적은 메모가 없다.</li></ol>": "<ol class=\"notes\"><li class=\"tip\">No notes written yet.</li></ol>",
