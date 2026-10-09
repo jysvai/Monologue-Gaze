@@ -264,6 +264,7 @@ MG.I18N.put("de", "ui", {
 "의문 {0} 풀림 — {1}": "Frage {0} geklärt — {1}",
 "새 의문 — {0}": "Neue Frage — {0}",
 "의문 {0} — 빈칸 하나를 채웠다 ({1}/{2})": "Frage {0} — eine Lücke gefüllt ({1}/{2})",
+"아직 듣지 못한 말이 있다.": "Eine Aussage fehlt noch.",
 "메모 {0}번 보기": "Notiz Nr. {0} zeigen",
 "의문 <small>{0} / {1} 풀림</small>": "Fragen <small>{0} / {1} geklärt</small>",
 "풀림": "Geklärt",

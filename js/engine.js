@@ -360,7 +360,7 @@
       const head = b.head ? `<thead><tr>${b.head.map(x => `<th${nw(x)}>${inline(x)}</th>`).join('')}<th class="pc"></th></tr></thead>` : '';
       // 줄을 메모로 옮길 때 짧은 칸(숫자·표시)에는 머리글을 붙인다 — 보고서에서 「1.27 · 20 · 18 · —」만 남아 무슨 숫자인지 모르게 되지 않게
       const hd = (b.head || []).map(x => plain(numLocal(x)).trim());
-      const rowNote = r => r.map((x, i) => { const v = plain(x).trim().replace(/^[—–-]$/, ''), h = hd[i] && plain(hd[i]).trim().replace(/\s+·\s+/g, '/'); return i && h && hd.length > 2 && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).filter(Boolean).join(' · '); // 빈칸은 빼고, 「항목 | 내용」 두 칸짜리 표는 머리글 없이 (「가입자 · 내용: 함덕규」가 되지 않게) // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
+      const rowNote = r => r.map((x, i) => { const v = plain(x).trim().replace(/^[—–-]$/, ''), h = hd[i] && plain(hd[i]).trim().replace(/\s+·\s+/g, '/'); return v && i && h && hd.length > 2 && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).filter(Boolean).join(' · '); // 빈칸은 빼고, 「항목 | 내용」 두 칸짜리 표는 머리글 없이 (「가입자 · 내용: 함덕규」가 되지 않게) // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
       // 칸이 많거나 긴 표는 휴대폰 폭에서 줄마다 「머리글 값」으로 쌓는다 (옆으로 밀어 봐야 하는 표는 ✎ 이 가린 칸 너머를 못 본다)
       const stack = b.head && (b.head.length >= 4 || (b.head.length === 3 && b.rows.some(r => r.some(x => plain(String(x)).length > 60))));
       const st3 = !stack && b.head && b.head.length === 3; // 세 칸짜리는 넘칠 때만 쌓는다 (tblEdge)
@@ -1811,7 +1811,9 @@
     if (!V.length) return '';
     const nd = V.filter(x => x.done).length;
     const step = (x, s, j) => {
-      if (!x.got[j]) return `<li class="th-gap">${esc(s.hint || '……')}</li>`;
+      // 따질 말을 아직 듣지 못했으면 그 말을 앞질러 옮기지 않는다 (「긁힌 데 하나 없다는 말, 맞나?」가 그 사람을 만나기도 전에 보이지 않게)
+      const unheard = s.press && !(ST.asked[s.press.split(':')[0]] || []).includes(s.press.split(':')[1]);
+      if (!x.got[j]) return `<li class="th-gap">${esc(unheard ? T('아직 듣지 못한 말이 있다.') : s.hint || '……')}</li>`;
       const n = thNote(s);
       return `<li class="th-got">${esc(s.t)}${n ? ` <button type="button" class="th-memo" data-th-memo="${n.id}" aria-label="${T`메모 ${noteNo(n.id)}번 보기`}">${noteNo(n.id)}</button>` : s.press ? ` <span class="th-press">${T('추궁')}</span>` : ''}</li>`;
     };
@@ -2934,7 +2936,7 @@
     (s.records || []).filter(r => (hits || []).includes(r.doc)).forEach(r => (r.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); }));
     save(); sfx('page');
     renderTabs(); renderList(); renderNotebook();
-    if (hits && hits.length === 1) openItem({ t: 'doc', id: hits[0] });
+    if (hits && (hits.length === 1 || (hits.length > 1 && !narrow()))) openItem({ t: 'doc', id: hits[0] }); // 여럿이면 나란히 보는 화면에서만 첫 건을 (옆 칸에 앞서 조회한 기록이 남아 있지 않게)
     if (census() > before) { cue('clue'); toast(T`새로 열린 것 ${census() - before}` + where(BY)); }
     if (!again) advance('query');
   }
