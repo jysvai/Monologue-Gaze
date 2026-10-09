@@ -81,9 +81,23 @@
 <script>
 (function () {
   function start(data) {
-    again(function () {
+    core(function () { again(function () {
       try { window.MG.I18N.ready(function () { boot(data); }); } catch (e) { boot(data); } // 고른 언어의 꾸러미를 받은 뒤에 연다
-    });
+    }); });
+  }
+  // 받다가 끊긴 언어 · 엔진 파일도 한 번 더 받는다 (언어 파일이 빠지면 뒤의 스크립트가 줄줄이 서지 못해 빈 책상만 남는다). 서로 기대니 차례대로 하나씩
+  function core(cb) {
+    var MG = window.MG || {}, need = [];
+    [['js/i18n.js', 'I18N'], ['js/ui.js', 'writeIn'], ['js/fonts.js', 'fonts'], ['js/engine.js', 'boot'], ['js/finale.js', 'finale'], ['js/mood.js', 'mood'], ['audio/manifest.js', 'audio'], ['js/audio.js', 'sound'], ['img/manifest.js', 'images']]
+      .forEach(function (x) { var v = MG[x[1]]; if (!v || (x[1] === 'images' && !Object.keys(v).length)) need.push(x[0]); }); // 그림 목록은 엔진이 빈 것을 먼저 만들어 둔다
+    (function next() {
+      var src = need.shift();
+      if (!src) return cb();
+      var s = document.createElement('script');
+      s.src = src + '?r=' + Date.now();
+      s.onload = s.onerror = next;
+      document.head.appendChild(s);
+    })();
   }
   // 받다가 끊긴 사건 파일은 주소 끝을 바꿔 한 번 더 받는다 (서랍에 사건 몇 개가 통째로 빠진 채 열리지 않게)
   function again(cb) {
@@ -108,7 +122,8 @@
   function boot(data) {
     try { window.MG.boot(data); } catch (e) { // 사건 파일 하나가 잘못 받아졌어도 빈 책상만 남기지 않는다
       var a = document.getElementById('app');
-      if (a) a.innerHTML = '<p class="nojs">' + window.MG.T('서랍이 걸려 열리지 않는다.<br>새로 고침을 눌러 다시 열어 본다. 그래도 걸리면 조금 있다가 다시 연다.') + '</p>';
+      var T = window.MG && typeof window.MG.T === 'function' ? window.MG.T : function (x) { return x; };
+      if (a) a.innerHTML = '<p class="nojs">' + T('서랍이 걸려 열리지 않는다.<br>새로 고침을 눌러 다시 열어 본다. 그래도 걸리면 조금 있다가 다시 연다.') + '</p>';
       if (window.console) console.error(e);
     }
   }
