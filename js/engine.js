@@ -413,10 +413,16 @@
 
   const rawAns = (p, k) => { let a = p.ask && p.ask[k]; if (a == null && k === p.key) a = p.self; return a; };
   const isCond = a => a && !Array.isArray(a) && typeof a === 'object' && 'need' in a;
-  // 수첩을 내밀기 전에 먼저 그냥 묻는다 — 처음 듣는 사람에게 「처음 하신 말씀과 다릅니다」가 나가지 않게 (기억을 되살리는 soft 는 바로 보여 준다)
+  // 수첩을 내밀기 전에 먼저 그냥 묻는다 — 처음 듣는 사람에게 「처음 하신 말씀과 다릅니다」가 나가지 않게. 기억을 되살리는 soft 도 먼저 듣고, 메모는 플레이어가 골라 내민다
   // 같은 기록(!f)으로 이미 털어놓은 사람은, 그 기록에 걸린 다른 낱말을 처음 물어도 다시 시치미 떼지 않는다
   const pressedOn = (p, a) => (ST.asked[p.id] || []).some(e => { if (!e.endsWith('!')) return false; const b = rawAns(p, e.slice(0, -1)); return isCond(b) && (b.need || []).some(n => n[0] === '!' && (a.need || []).includes(n)); });
-  const askEntry = (p, k) => { const a = rawAns(p, k), asked = ST.asked[p.id] || []; return isCond(a) && ok(a.need) && (a.soft || asked.includes(k) || asked.includes(k + '!') || pressedOn(p, a)) ? k + '!' : k; };
+  const askEntry = (p, k) => { const a = rawAns(p, k), asked = ST.asked[p.id] || []; return isCond(a) && ok(a.need) && (asked.includes(k) || asked.includes(k + '!') || pressedOn(p, a)) ? k + '!' : k; };
+  // 메모를 내밀어야 말이 바뀌는 물음 (추궁·확인): 조건에 수첩 메모(!f)나 take 가 걸린 것. 단어만 걸린 것은 알게 되면 저절로 달리 대답한다
+  const isPressAsk = (p, k) => { const a = rawAns(p, k); return isCond(a) && (!!(a.take || []).length || (a.need || []).some(n => n.split('|').some(x => x[0] === '!'))); };
+  // 헛짚기: 엉뚱한 메모를 내밀면 한 번, 정해진 만큼 쌓이면 그 사람은 입을 닫는다 — 새 단서(내밀 수 있는 메모)가 생기면 다시 따질 수 있다. 메모를 하나씩 다 내밀어 보는 찍기를 막는다
+  const VS_MAX = () => (lv() >= 5 ? 2 : 3);
+  const vsOf = p => { const v = (ST.vs ||= {})[p.id]; if (v && v.shut != null && proof().length > v.shut) { delete ST.vs[p.id]; return null; } return v || null; };
+  const clammed = p => { const v = vsOf(p); return !!(v && v.shut != null); };
   // idle 이 여러 줄이면 돌아가며 한 줄씩 — 모르는 걸 스무 번 물어도 똑같은 말만 되풀이하지 않게 (앞서 모른다고 한 횟수로 고르니 다시 그려도 같은 줄)
   const fallsIdle = (p, e) => { const k = e.replace(/!$/, ''), a = rawAns(p, k); if (p.idleT && (C.keywords[k] || {}).type === 'time') return false; return a == null || (isCond(a) && !e.endsWith('!') && a.else == null); };
   const idleFor = (p, k) => {
@@ -442,8 +448,7 @@
   function chipOrder(p, ks) {
     if (!CHIPS || CHIPS.id !== C.id + '|' + p.id) {
       const asked = ST.asked[p.id] || [], fresh = ks.filter(k => !asked.includes(askEntry(p, k)));
-      const again = fresh.filter(k => askEntry(p, k).endsWith('!') && asked.includes(k)); // 붉은 테(메모를 들이밀 수 있는 것)는 맨 앞에 — 서른 개 넘는 칩 사이에 묻히지 않게
-      CHIPS = { id: C.id + '|' + p.id, keys: [...again, ...fresh.filter(k => !again.includes(k)), ...ks.filter(k => !fresh.includes(k))], cut: fresh.length };
+      CHIPS = { id: C.id + '|' + p.id, keys: [...fresh, ...ks.filter(k => !fresh.includes(k))], cut: fresh.length };
     }
     const extra = ks.filter(k => !CHIPS.keys.includes(k)); // 이야기 도중에 새로 적은 단어는 아직 묻지 않은 단어 끝에
     if (extra.length) { CHIPS.keys.splice(CHIPS.cut, 0, ...extra); CHIPS.cut += extra.length; }
@@ -451,11 +456,10 @@
   }
   function askChips(p) {
     const asked = ST.asked[p.id] || [];
-    const ord = chipOrder(p, ST.keys.filter(k => C.keywords[k] && (k !== p.key || rawAns(p, k) != null))), redo = k => { const e = askEntry(p, k); return e.endsWith('!') && asked.includes(k) && !asked.includes(e); }; // 새 메모로 다시 물을 수 있게 된 단어는 맨 앞으로 — 단어 마흔 개 사이에 묻히지 않게
-    return [...ord.filter(redo), ...ord.filter(k => !redo(k))].map(k => { // 제 이름은 따로 할 말(self)이 있을 때만 묻는다 — 없으면 「모르겠다」가 되돌아와 어색하다
-      const e = askEntry(p, k);
-      const state = asked.includes(e) ? ' done' : e.endsWith('!') && asked.includes(k) ? ' again' : '';
-      return `<button type="button" class="chip${state}" data-ask="${k}">${esc(kl(k))}${state === ' done' ? T('<span class="sr"> (물어봄)</span>') : state ? T('<span class="sr"> (메모를 들이밀어 다시 물을 수 있음)</span>') : ''}</button>`; // 테두리·흐림은 눈에만 보이니 말로도
+    const ord = chipOrder(p, ST.keys.filter(k => C.keywords[k] && (k !== p.key || rawAns(p, k) != null)));
+    return ord.map(k => { // 제 이름은 따로 할 말(self)이 있을 때만 묻는다 — 없으면 「모르겠다」가 되돌아와 어색하다
+      const state = asked.includes(k) || asked.includes(askEntry(p, k)) ? ' done' : ''; // 메모로 따질 대답이 남았어도 칩은 「물어봄」 — 따지는 것은 그 대답 밑에서
+      return `<button type="button" class="chip${state}" data-ask="${k}">${esc(kl(k))}${state ? T('<span class="sr"> (물어봄)</span>') : ''}</button>`; // 흐림은 눈에만 보이니 말로도
     }).join('');
   }
   /* 탐문은 대화처럼: 내가 묻는 말풍선 → 상대가 한 글자씩 답한다. 앞의 (…) 는 몸짓, 「— 」 로 시작하면 내가 끼어든 말 */
@@ -502,7 +506,7 @@
     const want = (a && a.take) || ((a && a.need) || []).filter(n => n[0] === '!').map(n => n.slice(1));
     return want.map(w => ST.notes.find(x => fIs(x.f, w))).filter(Boolean);
   }
-  // 붉은 테 단어를 누르면 어떤 메모를 내밀지 고른다 — 맞는 메모를 고르는 것까지가 추궁이다 (엔진이 대신 골라 주지 않는다)
+  // 대답 밑 「메모를 내민다」를 누르면 어떤 메모를 내밀지 고른다 — 어느 대답이 기록과 어긋나는지, 무엇으로 깨지는지 맞히는 것까지가 추궁이다 (엔진이 대신 골라 주지 않는다)
   let PICK = null; // { pid, k, miss, tries }
   const MISS = () => [T('(메모를 훑어본다) 이게 그 얘기하고 무슨 상관입니까?'), T('(어깨를 으쓱한다) 그걸 보여 주셔도 드릴 말씀은 같습니다.'), T('…그 메모로 뭘 말씀하시려는 건지 모르겠군요.')];
   const MISS_SOFT = () => [T('(메모를 한참 들여다본다) …글쎄요, 이걸로는 떠오르는 게 없는데요.'), T('(고개를 갸웃한다) 이건 제가 말씀드린 거하고는 다른 얘기 같은데요.')];
@@ -524,7 +528,8 @@
     const list = proof().reverse().map(n => `<button type="button" class="rep-opt press-opt" data-press-note="${n.id}" title="${esc(n.t)}"><span class="t">${esc(n.t)}</span> <small class="src">— ${esc(n.src || '')}</small></button>`).join('');
     return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
       <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
-      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}</div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
+      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${T('이것만으로는 모자라다. 함께 맞댈 기록이 더 있다.')}</p>` : ''}
+      <p class="vs-left">${T`엉뚱한 메모를 ${VS_MAX() - ((vsOf(p) || {}).n || 0)}번 더 내밀면 입을 닫는다. 새 단서를 찾아 오면 다시 따질 수 있다.`}</p></div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
   }
   function choosePress(id) {
     const o = ST.view.open;
@@ -532,11 +537,20 @@
     const p = C.people[PICK.pid], k = PICK.k, n = ST.notes.find(x => String(x.id) === String(id));
     if (!p || !n) return;
     const ra = rawAns(p, k) || {}, want = ra.take || (ra.need || []).flatMap(x => x.split('|')).filter(x => x[0] === '!').map(x => x.slice(1)); // take: 붉은 테를 연 조건과 별개로, 내밀어서 통하는 메모 (한 날짜를 짚어야 할 때)
-    if (want.some(w => fIs(n.f, w))) { (ST.held ||= {})[`${p.id}|${k}!`] = n.id; ask(k, true); return; } // 화면에는 고른 그 메모만 내민다 (같은 사실의 다른 메모나, 함께 걸린 다른 사실의 메모가 끼어들지 않게)
+    const fits = isPressAsk(p, k) && want.some(w => fIs(n.f, w));
+    if (fits && ok(ra.need)) { (ST.held ||= {})[`${p.id}|${k}!`] = n.id; ask(k, true); return; } // 화면에는 고른 그 메모만 내민다 (같은 사실의 다른 메모나, 함께 걸린 다른 사실의 메모가 끼어들지 않게)
     PICK.tries = (PICK.tries || 0) + 1;
-    const near = [].concat(ra.close || []).find(c => (c.f || []).some(w => fIs(n.f, w))); // 여러 개일 수 있다: 메모마다 그 사람다운 핑계
-    PICK.miss = near ? near.a : missLine(p, isSoft(p, k), PICK.tries - 1); // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다
+    const near = !fits && [].concat(ra.close || []).find(c => (c.f || []).some(w => fIs(n.f, w))); // 여러 개일 수 있다: 메모마다 그 사람다운 핑계
+    PICK.part = fits; // 맞는 메모지만 함께 맞댈 기록이 아직 모자라다 — 헛짚기로 치지 않는다
+    PICK.miss = fits ? (isSoft(p, k) ? T('(메모를 한참 들여다본다) …이것만으로는 잘 모르겠어요.') : T('(메모를 보고 잠시 멈칫한다) …그것 하나로 뭘 말씀하시려는 겁니까?'))
+      : near ? near.a : missLine(p, isSoft(p, k), PICK.tries - 1); // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다 (헛짚기로 치지 않는다)
     sfx('miss');
+    if (!fits && !near) {
+      const v = (ST.vs ||= {})[p.id] ||= { n: 0 };
+      v.n++;
+      if (v.n >= VS_MAX()) { v.shut = proof().length; v.last = PICK.miss; PICK = null; save(); renderRead(); land(['#paneRead .vs-shut', '#askChips .chip']); return; }
+    }
+    save();
     const w = ($('#paneRead [data-press-filter]') || {}).value || '', top = ($('#paneRead .press-list') || {}).scrollTop || 0;
     renderRead();
     const f = $('#paneRead [data-press-filter]');
@@ -568,6 +582,7 @@
   function personHtml(p) {
     const asked = (ST.asked[p.id] || []).filter(e => { const k = e.replace(/!$/, ''); return k === p.key || C.keywords[k]; }); // 예전 판 저장에 남은, 지금은 없는 단어는 건너뛴다 (단어 id 가 글로 새지 않게)
     const src = T`${p.name} 탐문`;
+    const shut = clammed(p), vsOpen = !shut && proof().length > 0 && !(PICK && PICK.pid === p.id); // 대답마다 붙는 「메모를 내민다」: 내밀 메모가 있고, 입을 닫지 않았을 때
     let tr = `<div class="qa qa-first" data-qa="_">${chatLines(p.intro, `${p.id}@_`, src)}</div>`;
     tr += asked.map(e => {
       const k = e.replace(/!$/, ''), press = e.endsWith('!');
@@ -575,11 +590,11 @@
       const ev = press ? (held ? [held] : evidence(p, k)) : [];
       return `<div class="qa${press ? ' press' : ''}" data-qa="${esc(e)}"><div class="c-q"><span class="c-t">${esc(qText(p, e))}</span>${press ? '' : `<small class="c-k">${esc(kl(k))}</small>`}</div>
         ${ev.map(n => `<p class="c-ev"><span class="c-ev-k">${isSoft(p, k) ? T('수첩을 펴 보인다') : T('수첩을 내민다')}</span>${esc(n.t)}</p>`).join('')}
-        <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div></div>`;
+        <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div>${!press && vsOpen && !asked.includes(k + '!') ? `<p class="c-vs"><button type="button" class="chip vs${lv() <= 3 && isPressAsk(p, k) && ok((rawAns(p, k) || {}).need) ? ' again' : ''}" data-vs="${esc(k)}">${T('메모를 내민다')}</button></p>` : ''}</div>`;
     }).join('');
     return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}</div></header>
       <div class="per-tr" data-who="${esc(p.id)}">${tr}</div>
-      ${PICK && PICK.pid === p.id ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}><p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 붉은 테: 메모를 들이밀어 다시 물을 수 있다')}${liveOn() ? T` · 물을 때마다 ${hm(lcost('ask'))}` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
+      ${PICK && PICK.pid === p.id ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}>${shut ? `<p class="vs-shut" tabindex="-1"><b>${esc(p.name)}</b> ${inline(ST.vs[p.id].last || '').replace(MIDACT, '<i class="c-mid">$&</i>')} <span>${T('— 입을 닫았다. 새 단서를 찾아 오면 다시 따질 수 있다.')}</span></p>` : ''}<p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」')}${liveOn() ? T` · 물을 때마다 ${hm(lcost('ask'))}` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
   }
 
   /* 대화 재생: 몸짓은 스르르, 말은 한 글자씩(사람마다 다른 말소리). 목소리가 있는 말풍선은 재생 시각에 맞춰 찍는다. 누르면 건너뛴다 */
@@ -616,6 +631,7 @@
       items.forEach(el => { el.classList.remove('wait', 'typing'); const h = me.saved.get(el); if (h != null) el.querySelector('.c-t').innerHTML = h; });
       me.saved.clear();
       qa.classList.remove('live');
+      scanSoon(500); // 다 들은 대답 속 증거는 그때 적는다
     };
     TALK = me;
     const alive = () => TALK === me && qa.isConnected;
@@ -1402,6 +1418,7 @@
     if (fd && (rows() > fd.n || fd.pill)) { if (fd.low) el.scrollTop = el.scrollHeight; else newBelow(el); }
     $('#stageBody').classList.toggle('reading', !!(o && h));
     edges();
+    scanSoon(900);
   }
 
   /* ───────── 수사 보고서 (읽기 칸에 넓게) ───────── */
@@ -1707,7 +1724,7 @@
     people.forEach(p => ST.keys.forEach(k => {
       if (!C.keywords[k] || (k === p.key && rawAns(p, k) == null)) return;
       const e = askEntry(p, k);
-      if ((ST.asked[p.id] || []).includes(e)) return;
+      if ((ST.asked[p.id] || []).includes(e) || (e.endsWith('!') && (ST.asked[p.id] || []).includes(k))) return; // 들은 대답에 메모를 내밀 차례면 3번(press)이 짚는다
       const b = bags.find(x => x.ask && x.ask.p === p.id && x.ask.e === e);
       const a0 = rawAns(p, k), pre = isCond(a0) && ok(a0.need); // 내밀 메모가 있으면 그냥 묻는 것부터
       if (pre || (b && ([...b.k].some(x => !ST.keys.includes(x)) || [...b.f].some(f => [...useful].some(w => fIs(f, w)) && !noted(f)) || e.endsWith('!')))) add(`ask:${p.id}|${e}`, T('수첩의 단어로 아직 물어보지 않은 것이 있다.'), T`${pname(p)} — 「${kl(k)}」`, { t: 'person', id: p.id, src: p.src });
@@ -2363,23 +2380,54 @@
       if (li) { const d = li.closest('details'); if (d && !d.open) d.open = true; li.classList.remove('again'); void li.offsetWidth; li.classList.add('again'); if (beside()) li.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); }
       return;
     }
-    const BY = {}, before = census(BY);
-    ST.notes.push({ id: ++ST.nid, ref, t: p.t, f: p.f, src: p.src });
+    collect([ref]);
+  }
+  // 수첩에 옮겨 적기 (여러 줄을 한 번에). 읽는 칸에서 저절로 적은 것도, ✎ 를 눌러 적은 것도 여기로
+  function collect(refs) {
+    const BY = {}, before = census(BY), had = proof().length, ids = [];
+    refs.forEach(ref => {
+      const p = PIN[ref];
+      if (!p || ST.notes.some(n => n.ref === ref)) return;
+      ST.notes.push({ id: ++ST.nid, ref, t: p.t, f: p.f, src: p.src }); ids.push(ST.nid);
+      if (ST.drop) ST.drop = ST.drop.filter(x => x !== ref);
+    });
+    if (!ids.length) return;
     save();
     if (census() > before) cue('clue'); else sfx('ink');
-    $$('.pin').forEach(b => { if (b.dataset.pin === ref) { b.classList.add('on'); b.innerHTML = IC_TICK; b.setAttribute('aria-label', T('수첩에 적음')); b.dataset.tip = T('수첩에 적음'); } });
+    $$('.pin').forEach(b => { if (refs.includes(b.dataset.pin)) { b.classList.add('on'); b.innerHTML = IC_TICK; b.setAttribute('aria-label', T('수첩에 적음')); b.dataset.tip = T('수첩에 적음'); } });
     renderNotebook();
-    const li = $(`.notes li[data-nid="${ST.nid}"]`);
+    ids.forEach((nid, i) => { const li = $(`.notes li[data-nid="${nid}"]`); if (!li) return; const d = li.closest('details'); if (d && !d.open) { NGSHUT.delete(C.id + '|' + d.dataset.ng); d.open = true; } if (i < ids.length - 1 && !(MG.writeIn && MG.writeIn(li, { duration: 900 }))) li.classList.add('fresh'); });
+    const li = $(`.notes li[data-nid="${ids[ids.length - 1]}"]`);
     if (li) { const d = li.closest('details'); if (d && !d.open) { NGSHUT.delete(C.id + '|' + d.dataset.ng); d.open = true; } if (!(MG.writeIn && MG.writeIn(li, { duration: 900 }))) li.classList.add('fresh'); if (beside()) { // 사건 요약 카드를 보고 있으면 수첩을 끌어내리지 않고 메모 수만 한 번 튄다 — 적을 때마다 요약과 보고서 줄이 화면 밖으로 밀려나지 않게
         const nb = $('#nb'), br = nb && nb.querySelector('.brief'), top = br && br.getBoundingClientRect().bottom > nb.getBoundingClientRect().top + 60;
         const n = top && li.closest('.nb-sec') && li.closest('.nb-sec').querySelector('.hh small');
         if (n) { n.classList.remove('bump'); void n.offsetWidth; n.classList.add('bump'); } else li.scrollIntoView({ block: 'nearest' }); } }
     const gained = census() - before;
     if (gained > 0) { renderTabs(); renderList(); }
-    const chips = $('#askChips');
-    if (chips && ST.view.open && ST.view.open.t === 'person') chips.innerHTML = askChips(C.people[ST.view.open.id]);
-    toast(T`메모 ${ST.notes.length}번을 적었다${gained > 0 ? opened(gained, BY) : ''}`);
+    const o = ST.view.open, chips = $('#askChips');
+    // 사람 앞에서 새 단서가 생기면: 「메모를 내민다」가 처음 생기거나, 입을 닫았던 사람이 다시 말을 받는다 — 대답이 나오는 중이 아니면 다시 그린다
+    if (o && o.t === 'person' && !(TALK && TALK.alive()) && !PICK && (had === 0 || (ST.vs && ST.vs[o.id] && ST.vs[o.id].shut != null))) { const pr = $('#paneRead'), top = pr.scrollTop; renderRead(); pr.scrollTop = top; }
+    else if (chips && o && o.t === 'person') chips.innerHTML = askChips(C.people[o.id]);
+    const n0 = ST.notes.length - ids.length + 1;
+    toast((ids.length > 1 ? T`메모 ${n0}~${ST.notes.length}번을 적었다` : T`메모 ${ST.notes.length}번을 적었다`) + (gained > 0 ? opened(gained, BY) : ''));
     liveSync();
+  }
+  // 읽으면 적힌다: 증거가 되는 줄(✎)이 읽는 칸에 다 들어와 잠깐 머물면 형사가 수첩에 옮겨 적는다 — 보이는 줄마다 눌러 적지 않아도 되게.
+  // 나오는 중인 대답, 가려 둔 사진 설명, 지운 메모(drop)는 건너뛴다. 사진 설명처럼 ✎ 만 붙은 주석(pin)은 눌러야 적힌다
+  let SCAN = 0;
+  const scanSoon = (ms = 700) => { clearTimeout(SCAN); SCAN = setTimeout(scanPins, ms); };
+  function scanPins() {
+    const pr = $('#paneRead');
+    if (!pr || !C || !ST || document.hidden) return;
+    const box = pr.getBoundingClientRect(), top = Math.max(box.top, 0), bot = Math.min(box.bottom, window.innerHeight);
+    if (bot - top < 40) return;
+    const refs = $$('.pin:not(.on)', pr).filter(b => {
+      const q = PIN[b.dataset.pin];
+      if (!q || !q.f || (ST.drop || []).includes(b.dataset.pin) || b.closest('.wait,.typing,.qa.live,.press-pick,[hidden]')) return false;
+      const line = b.closest('.b-p,.b-say,.b-msg,tr,li,figcaption,.c-bub,.c-act,.b-note,p') || b, r = line.getBoundingClientRect();
+      return r.height > 0 && ((r.top >= top - 2 && r.bottom <= bot + 2) || (r.height > bot - top - 60 && r.top < top + 60 && r.bottom > bot - 60)); // 줄이 다 보이거나, 칸보다 긴 줄은 칸을 거의 채울 때
+    }).map(b => b.dataset.pin);
+    if (refs.length) collect([...new Set(refs)]);
   }
   // 메모 지우기: 연필로 줄을 긋고 나서 지운다
   function delNote(id) {
@@ -2405,6 +2453,7 @@
     const sib = li && (li.nextElementSibling || li.previousElementSibling), grp = li && li.closest('.ng');
     const to = had && (sib ? `.notes li[data-nid="${sib.dataset.nid}"] .del` : grp ? `.ng[data-ng="${CSS.escape(grp.dataset.ng)}"] > summary` : '');
     ST.notes = ST.notes.filter(x => x.id !== id);
+    if (n && n.f) (ST.drop ||= []).push(n.ref); // 지운 증거 줄은 읽어도 다시 적지 않는다 (✎ 를 누르면 다시 적힌다)
     // 종결된 보고서는 결재가 끝난 서류: 수첩에서 메모를 지워도 보고서에 붙은 증거는 그대로 남는다 (지운 메모의 글은 보고서 쪽에 옮겨 둔다)
     if (ST.solved) { if (n && Object.values(ST.report.claims).some(v => String(v) === String(id))) (ST.report.kept ||= {})[String(id)] = { id: n.id, t: n.t, src: n.src }; }
     else Object.keys(ST.report.claims).forEach(k => { if (String(ST.report.claims[k]) === String(id)) ST.report.claims[k] = ''; });
@@ -2463,20 +2512,13 @@
     const o = ST.view.open;
     if (!o || o.t !== 'person') return;
     const p = C.people[o.id];
-    const e = askEntry(p, k);
-    const a = (ST.asked[p.id] ||= []);
+    const a = (ST.asked[p.id] ||= []), e0 = askEntry(p, k);
+    // 메모를 내미는 것은 대답 밑 「메모를 내민다」로만 (chosen). 칩을 다시 누르면 들은 대답을 짚어 준다. 같은 기록으로 이미 털어놓은 사람은 그대로 (pressedOn)
+    const e = !chosen && e0.endsWith('!') && !a.includes(e0) && a.includes(k) ? k : e0;
     const fresh = !a.includes(e);
-    // 붉은 테(한 번 물어본 뒤 메모가 생긴 단어)는 내밀 메모부터 고른다. 처음 묻는 말에 저절로 내미는 것(soft·같은 기록)은 그대로
-    if (!chosen && fresh && e.endsWith('!') && a.includes(k) && evidence(p, k).length) {
-      PICK = { pid: p.id, k };
-      renderRead();
-      const pk = $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' });
-      land(['#paneRead [data-press-filter]'], true);
-      return;
-    }
     PICK = null;
     // 이미 물은 것을 다시 누르면(두 번 톡 누름 포함) 그 대답만 짚어 준다 — 한창 나오는 대답을 다시 그려 끊지 않는다
-    if (!fresh && TALK && TALK.alive()) {
+    if (!fresh && (TALK && TALK.alive() || e !== e0)) {
       const q0 = $$('.per-tr .qa').find(x => x.dataset.qa === e);
       if (q0) { q0.classList.remove('flash'); void q0.offsetWidth; q0.classList.add('flash'); }
       return;
@@ -2843,6 +2885,7 @@
       if (t.closest('[data-nudge]')) return toggleNudge();
       if (t.closest('[data-nudge-more]')) { if (NUDGE) { NUDGE.more = true; renderNudge(); const g = $('#nudgeBox .nudge-go'); if (g && e.detail === 0) g.focus(); } return; }
       if ((el = t.closest('[data-nudge-go]'))) return nudgeGo(el.dataset.nudgeGo);
+      if ((el = t.closest('[data-vs]'))) { const o = ST.view.open; if (!o || o.t !== 'person') return; stopTalk(); PICK = { pid: o.id, k: el.dataset.vs }; renderRead(); const pk = $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); land(['#paneRead [data-press-filter]'], true); return; } // 이 대답에 메모를 내민다
       if ((el = t.closest('[data-pin]'))) return pin(el.dataset.pin);
       if ((el = t.closest('[data-kw]'))) return addKey(el.dataset.kw, false, el.textContent);
       if ((el = t.closest('[data-bub]')) && !getSelection().toString()) return pin(el.dataset.bub); // 말풍선을 누르면 수첩에
@@ -2995,6 +3038,8 @@
       const n = tabs[(j + tabs.length) % tabs.length];
       if (n !== t) n.click();
     });
+    document.addEventListener('scroll', () => { if (ST && ST.view && ST.view.open) scanSoon(); }, { capture: true, passive: true }); // 읽어 내려가는 대로 적는다
+    window.addEventListener('resize', () => { if (ST && ST.view && ST.view.open) scanSoon(); });
     document.addEventListener('scroll', e => { const t = e.target; if (t.id === 'srcTabs') tabEdge(t); else if (t.classList && t.classList.contains('b-tbl')) tblEdge(t); else if (t.matches && t.matches('.skin-news.vertical .doc-b')) colEdge(t); }, { capture: true, passive: true });
     window.addEventListener('resize', () => { tabShow($('#srcTabs')); tabEdge($('#srcTabs')); edges(); }, { passive: true });
     if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { tabShow($('#srcTabs')); tabEdge($('#srcTabs')); edges(); }); // 글꼴이 늦게 와 탭·표 너비가 바뀐 때
