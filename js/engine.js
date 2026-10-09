@@ -1060,6 +1060,7 @@
     const o = ST.view.open; // 보고 있는 단톡방을 먼저 그려야 탭의 안 읽은 수가 맞다
     if (o && (o.t === 'feed' || o.t === 'req')) { const pr = $('#paneRead'), top = pr ? pr.scrollTop : 0; renderRead(); if (pr && o.t === 'req') pr.scrollTop = top; } // 단톡방의 굴림은 renderRead 가 맡는다
     renderTabs(); renderList(); renderNotebook();
+    if (C.threads) threadNews(1800); // 회신·새 말로 열리는 의문은 그 소식이 온 그때 (다음 메모와 한꺼번에 오지 않게)
   }
   let NOTEGEN = 0;
   function newBelow(pr) {
