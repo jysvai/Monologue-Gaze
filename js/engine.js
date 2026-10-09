@@ -669,6 +669,18 @@
   const faceAnim = (cls, ms) => { if (reduced()) return; $$('#paneRead .face.lg').forEach(el => { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); setTimeout(() => el.classList.remove(cls), ms); }); };
   // 따질 거리가 있는 대답 뒤: 눈을 두 번 빨리 깜빡이고 움찔한다. ★3 은 늘, ★4 는 따질 메모를 쥐었을 때만, ★5 는 보이지 않는다 (「메모를 내민다」의 깜빡임과 같은 셈)
   const tellOn = (p, k) => !!faceOf(p) && isPressAsk(p, k) && !(ST.asked[p.id] || []).includes(k + '!') && (lv() <= 3 || (lv() === 4 && ok((rawAns(p, k) || {}).need)));
+  // 대답을 읽어 내려가면 붙박이 얼굴 칸을 작게 (큰 얼굴 칸이 위 줄 서너 개를 덮어 「잘려 보인다」) — 맨 위로 돌아오면 다시 크게.
+  // 줄이는 문턱(140)과 되돌리는 문턱(24)을 떼어 두고, 줄일 때는 칸 높이가 준 만큼 스크롤을 맞춰 글이 튀지 않게
+  function faceMini(pr) {
+    const h = pr.querySelector('.per-h.has-face');
+    if (!h) return;
+    const on = h.classList.contains('mini'), want = on ? pr.scrollTop > 24 : pr.scrollTop > 140;
+    if (want === on) return;
+    const h0 = h.offsetHeight, t0 = pr.scrollTop;
+    h.classList.toggle('mini', want);
+    pr.scrollTop = want ? t0 + h.offsetHeight - h0 : t0; // 되돌릴 때는 맨 위로 온 것이니 그 자리 그대로 (브라우저가 스크롤을 붙잡아 밀어도 되돌린다)
+    pr.style.scrollPaddingTop = h.offsetHeight + 8 + 'px';
+  }
   function faceHit() { const h = $('#paneRead .per-h.has-face'); if (!h || reduced()) return; h.classList.remove('hit'); void h.offsetWidth; h.classList.add('hit'); setTimeout(() => h.classList.remove('hit'), 1600); }
   function faceTell() { if (reduced()) return; faceBeat(110); setTimeout(() => faceBeat(110), 330); faceAnim('flinch', 700); }
   function faceSet(el, c, r) {
@@ -3329,7 +3341,7 @@
     });
     document.addEventListener('scroll', () => { if (ST && ST.view && ST.view.open) scanSoon(); }, { capture: true, passive: true }); // 읽어 내려가는 대로 적는다
     window.addEventListener('resize', () => { if (ST && ST.view && ST.view.open) scanSoon(); });
-    document.addEventListener('scroll', e => { const t = e.target; if (t.id === 'srcTabs') tabEdge(t); else if (t.classList && t.classList.contains('b-tbl')) tblEdge(t); else if (t.matches && t.matches('.skin-news.vertical .doc-b')) colEdge(t); }, { capture: true, passive: true });
+    document.addEventListener('scroll', e => { const t = e.target; if (t.id === 'paneRead') faceMini(t); if (t.id === 'srcTabs') tabEdge(t); else if (t.classList && t.classList.contains('b-tbl')) tblEdge(t); else if (t.matches && t.matches('.skin-news.vertical .doc-b')) colEdge(t); }, { capture: true, passive: true });
     window.addEventListener('resize', () => { tabShow($('#srcTabs')); tabEdge($('#srcTabs')); edges(); }, { passive: true });
     if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { tabShow($('#srcTabs')); tabEdge($('#srcTabs')); edges(); }); // 글꼴이 늦게 와 탭·표 너비가 바뀐 때
     // 세로쓰기 신문 위에서 휠을 굴리면 읽는 방향(왼쪽)으로 넘긴다. 끝까지 읽었으면 휠은 원래대로 칸을 내린다

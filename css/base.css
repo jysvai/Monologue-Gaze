@@ -690,3 +690,8 @@ body:has(.case-view[data-graphic])::before{background:radial-gradient(ellipse at
 .per-pat i{width:9px;height:9px;border:1.5px solid var(--red);border-radius:50%;opacity:.45}
 .per-pat i.on{background:var(--red);opacity:.85}
 @media (prefers-reduced-motion:reduce){.face.lg.flinch,.face.lg.nope,.per-h.hit .face.lg,.per-h.hit>div{animation:none}}
+/* 대답을 읽어 내려가면 얼굴 칸을 작게: 얼굴은 남기고 직함 · 있는 곳 줄은 접는다 (참을성은 그대로) */
+.per-h.has-face.mini{padding:8px 0 6px}
+.per-h.has-face.mini .face.lg{width:56px;height:70px}
+.per-h.has-face.mini>div>p{display:none}
+@media (max-width:720px){.per-h.has-face.mini{padding:5px 0 4px}.per-h.has-face.mini .face.lg{width:44px;height:55px}}
