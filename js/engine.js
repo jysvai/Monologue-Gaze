@@ -439,7 +439,26 @@
     if (isCond(a)) return conf ? a.a : a.else ?? idleT ?? idleFor(p, k) ?? T('…글쎄요.');
     return a ?? idleT ?? idleFor(p, k) ?? T('…글쎄요, 잘 모르겠네요.');
   }
+  // 살아 있는 초상: img/<사건>/face_<사람 id>.webp 가 있으면 이니셜 대신 얼굴을 보인다.
+  // 한 장에 가로 3칸(그대로 · 눈 감음 · 입 벌림) × 줄(평소 · 흔들림 · 무너짐), 칸은 4:5. 고친 곳(눈 · 입 · 표정) 말고는 픽셀이 같아 칸을 바꿔도 흔들리지 않는다
+  function faceOf(p) {
+    const k = `${C.id}/face_${p.id}`, file = MG.images && MG.images[k];
+    if (!file) return null;
+    const sz = (MG.imageSize || {})[k];
+    return { file, rows: sz ? Math.max(1, Math.round(sz[1] / (sz[0] / 3 * 5 / 4))) : 1 };
+  }
+  // 지금 얼굴의 줄: 추궁이 통한 뒤에는 흔들리고, 사건을 닫으면 범인은 무너진다. before: 방금 물은 것을 빼고 (대답이 나오기 전의 얼굴)
+  function faceRow(p, before) {
+    const f = faceOf(p);
+    if (!f || f.rows < 2) return 0;
+    if (ST.solved && C.solution.culprit === p.key && f.rows > 2) return 2;
+    const a = ST.asked[p.id] || [], e = a[a.length - 1 - (before ? 1 : 0)] || '';
+    return e.endsWith('!') && !isSoft(p, e.slice(0, -1)) ? 1 : 0;
+  }
+  const facePos = (rows, r, c) => `${c * 50}% ${rows > 1 ? r / (rows - 1) * 100 : 0}%`;
   function portrait(p, big) {
+    const f = faceOf(p);
+    if (f) { const r = faceRow(p); return `<span class="face${big ? ' lg' : ''}" aria-hidden="true" data-rows="${f.rows}" data-r="${r}" data-f="0"><i style="background-image:url('${esc(f.file)}');background-size:300% ${f.rows * 100}%;background-position:${facePos(f.rows, r, 0)}"></i></span>`; }
     if (p.art && C.art[p.art]) return `<span class="per-art${big ? ' lg' : ''}">${art(p.art)}</span>`;
     return `<span class="ava${big ? ' lg' : ''}" style="--c:${esc(p.color || '#6b6155')}">${esc(p.initial || p.name[0])}</span>`;
   }
@@ -604,7 +623,7 @@
         ${ev.map(n => `<p class="c-ev"><span class="c-ev-k">${isSoft(p, k) ? T('수첩을 펴 보인다') : T('수첩을 내민다')}</span>${esc(n.t)}</p>`).join('')}
         <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div>${!press && vsOpen && !asked.includes(k + '!') ? `<p class="c-vs"><button type="button" class="chip vs${lv() <= 3 && isPressAsk(p, k) && ok((rawAns(p, k) || {}).need) ? ' again' : ''}" data-vs="${esc(k)}">${T('메모를 내민다')}</button></p>` : ''}</div>`;
     }).join('');
-    return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}</div></header>
+    return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h${faceOf(p) ? ' has-face' : ''}">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}</div></header>
       <div class="per-tr" data-who="${esc(p.id)}">${tr}</div>
       ${PICK && PICK.pid === p.id ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}>${shut ? `<p class="vs-shut" tabindex="-1"><b>${esc(p.name)}</b> ${inline(ST.vs[p.id].last || '').replace(MIDACT, '<i class="c-mid">$&</i>')} <span>${T('— 입을 닫았다. 새 단서를 찾아 오면 다시 따질 수 있다.')}</span></p>` : ''}<p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」')}${liveOn() ? T` · 물을 때마다 ${hm(lcost('ask'))}` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
   }
@@ -613,6 +632,38 @@
   let TALK = null;
   const reduced = () => !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   function stopTalk() { if (TALK) TALK.finish(true); }
+  // 얼굴 움직임: 가끔 눈을 감고, 그 사람의 말이 찍히는 동안 입이 열렸다 닫힌다. 움직임 줄이기를 켜 두면 가만히 (표정만 바뀐다)
+  let FACE_IV = 0, FACE_SAID = 0, FACE_BLINK = 0, FACE_OPEN = false;
+  function faceSet(el, c, r) {
+    if (r != null && String(r) !== el.dataset.r) { el.dataset.r = r; if (r > 0 && !reduced()) { el.classList.remove('jolt'); void el.offsetWidth; el.classList.add('jolt'); } }
+    el.dataset.f = c;
+    const i = el.firstElementChild;
+    if (i) i.style.backgroundPosition = facePos(+el.dataset.rows || 1, +el.dataset.r || 0, c);
+  }
+  // 붙박이 머리 칸은 밑으로 지나가는 대화를 가려야 해서, 화면 바탕(사건마다 다른 종이·화면 색)을 그대로 옮겨 칠한다
+  function faceBg() {
+    const h = window.getComputedStyle && $('#paneRead .per-h.has-face');
+    for (let e = h && $('#paneRead'); e && e !== document.body; e = e.parentElement) {
+      const cs = getComputedStyle(e);
+      if (cs.backgroundImage === 'none' && cs.backgroundColor === 'rgba(0, 0, 0, 0)') continue;
+      h.style.backgroundColor = cs.backgroundColor; h.style.backgroundImage = cs.backgroundImage;
+      return;
+    }
+  }
+  function faceWake() {
+    if (FACE_IV || reduced() || !$('#paneRead .face.lg')) return;
+    FACE_BLINK = performance.now() + 1500 + Math.random() * 2500;
+    FACE_IV = setInterval(() => {
+      const fs = $$('#paneRead .face.lg');
+      if (!fs.length) { clearInterval(FACE_IV); FACE_IV = 0; return; }
+      const now = performance.now(), talking = now - FACE_SAID < 180;
+      FACE_OPEN = talking && !FACE_OPEN;
+      const blink = !FACE_OPEN && now >= FACE_BLINK && now < FACE_BLINK + 150;
+      if (now >= FACE_BLINK + 150) FACE_BLINK = now + 2200 + Math.random() * 3800;
+      const c = FACE_OPEN ? 2 : blink ? 1 : 0;
+      fs.forEach(el => { if (el.dataset.f !== String(c)) faceSet(el, c); });
+    }, 110);
+  }
   function playTalk(qa, opt) {
     stopTalk();
     const box = qa && (qa.querySelector('.c-ans') || qa);
@@ -704,7 +755,7 @@
       };
       const step = () => {
         if (!alive()) return;
-        const d = v && v.audio.duration;
+        const k0 = k, d = v && v.audio.duration;
         if (v && cur.over) while (k < chars.length) chars[k++].classList.add('on');
         else if (d && isFinite(d)) { // 목소리 진행만큼 찍는다
           const want = Math.ceil(v.audio.currentTime / d * cur.chars) - cur.done;
@@ -713,6 +764,7 @@
           chars[k++].classList.add('on');
           if (!v && /\S/.test(chars[k - 1].textContent) && k % 2 && snd) snd.blip(isMe ? htone : tone);
         }
+        if (!isMe && k > k0 && /\S/.test(chars[k - 1].textContent) && !chars[k - 1].classList.contains('c-mid')) FACE_SAID = performance.now(); // 얼굴의 입이 따라 움직인다
         if (k % 10 === 1) keep(el);
         if (k >= chars.length) return end();
         const ch = chars[k - 1] ? chars[k - 1].textContent : '';
@@ -731,12 +783,13 @@
     const k = e.replace(/!$/, '');
     if (!e.endsWith('!')) return playTalk(qa, { p });
     qa.classList.add('pressing');
+    $$('#paneRead .face.lg').forEach(el => faceSet(el, 0, faceRow(p, true)));
     const soft = isSoft(p, k);
     cue(soft ? 'clue' : 'confess');
     const st = document.createElement('div'); st.className = 'cue-stamp press'; st.setAttribute('aria-hidden', 'true'); st.innerHTML = `<span>${soft ? T('확인') : T('추궁')}</span>`;
     document.body.appendChild(st); setTimeout(() => st.remove(), 1900);
     const t = playTalk(qa, { p, lead: 600000 }); // 대답은 내 말이 끝난 뒤
-    const go = () => { if (t && TALK === t && qa.isConnected) { t.finish(true); playTalk(qa, { p, voice: `v/${C.id}/${p.id}/${k}`, lead: 1000 }); } };
+    const go = () => { if (t && TALK === t && qa.isConnected) { t.finish(true); $$('#paneRead .face.lg').forEach(el => faceSet(el, 0, faceRow(p))); playTalk(qa, { p, voice: `v/${C.id}/${p.id}/${k}`, lead: 1000 }); } };
     setTimeout(() => {
       if (t && (TALK !== t || !qa.isConnected)) return;
       const hv = MG.sound && !p.young ? MG.sound.voice('hero/' + pressKey(p, k)) : null; // 녹음된 추궁은 존댓말이라 미성년에게는 소리 없이
@@ -1432,6 +1485,8 @@
     $('#stageBody').classList.toggle('reading', !!(o && h));
     edges();
     scanSoon(900);
+    faceBg();
+    faceWake();
   }
 
   /* ───────── 수사 보고서 (읽기 칸에 넓게) ───────── */
