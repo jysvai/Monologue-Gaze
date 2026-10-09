@@ -785,7 +785,7 @@ MG.I18N.put("de", "c13", {
 "oskew52dnq": "Der PC, über den das Geld lief, und das Terminal, über das die Ware verschickt wurde, stehen beide im Harumart Saesol-Mitte.",
 "1rij2pindsh": "Ist Jeong U-jin der Hintermann der Mondlicht-Apotheke?",
 "1eqt0ty64aj": "26.09.: U-jin las @Lagerwart den SMS-Bestätigungscode der Börse vor: „482913“. Er glaubte, es sei „zum Verknüpfen für die Bezahlung“.",
-"27nee5g567w": "Was ging zwischen U-jin und @Lagerwart hin und her?",
+"1ebhaujvhe4": "Mit wem hat Woo-jin was ausgetauscht?",
 "28p0a65w8c4": "Mit der Antwort der Börse konfrontiert, sagte U-jin, er habe jedes Mal nur zwei-, dreihunderttausend Won bekommen. Über das Konto liefen in zwei Monaten 28 Millionen Won.",
 "1cn3yt02zg6": "„So was wie ein Börsenkonto hab ich nicht“ — stimmt das?",
 "6exl6ioj0n": "Um 00:41, zwei Stunden nach U-jins Festnahme, gab es auf seinem Konto einen Login von einem Windows-PC und einen Auszahlungsversuch.",

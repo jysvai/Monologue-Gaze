@@ -785,7 +785,7 @@ MG.I18N.put("en", "c13", {
 "oskew52dnq": "The PC that moved the money and the kiosk that shipped the stock are both at Haru Mart Saesol Central.",
 "1rij2pindsh": "Is Jeong Woo-jin the top of Moonlight Pharmacy?",
 "1eqt0ty64aj": "Sep 26: Woo-jin read the exchange's text verification code “482913” to @stashkeeper. He believed it was “to link your pay.”",
-"27nee5g567w": "What passed between Woo-jin and @stashkeeper?",
+"1ebhaujvhe4": "Who did Woo-jin trade with, and what passed between them?",
 "28p0a65w8c4": "Shown the exchange's reply, Woo-jin said he only ever got two or three hundred thousand won at a time. ₩28 million went through the account in two months.",
 "1cn3yt02zg6": "“I don't have an exchange account” — is that right?",
 "6exl6ioj0n": "At 00:41, two hours after Woo-jin's arrest, someone logged into his account from a Windows PC and tried to withdraw.",

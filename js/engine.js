@@ -1813,7 +1813,8 @@
     const step = (x, s, j) => {
       // 따질 말을 아직 듣지 못했으면 그 말을 앞질러 옮기지 않는다 (「긁힌 데 하나 없다는 말, 맞나?」가 그 사람을 만나기도 전에 보이지 않게)
       const unheard = s.press && !(ST.asked[s.press.split(':')[0]] || []).includes(s.press.split(':')[1]);
-      if (!x.got[j]) return `<li class="th-gap">${esc(unheard ? T('아직 듣지 못한 말이 있다.') : s.hint || '……')}</li>`;
+      const who = unheard && C.people[s.press.split(':')[0]], known = who && ST.keys.includes(who.key); // 아는 사람이면 이름까지 (누구에게 더 물을지는 알려 준다)
+      if (!x.got[j]) return `<li class="th-gap">${esc(unheard ? (known ? T`${pname(who)}에게서 아직 듣지 못한 말이 있다.` : T('아직 듣지 못한 말이 있다.')) : s.hint || '……')}</li>`;
       const n = thNote(s);
       return `<li class="th-got">${esc(s.t)}${n ? ` <button type="button" class="th-memo" data-th-memo="${n.id}" aria-label="${T`메모 ${noteNo(n.id)}번 보기`}">${noteNo(n.id)}</button>` : s.press ? ` <span class="th-press">${T('추궁')}</span>` : ''}</li>`;
     };
