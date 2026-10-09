@@ -600,15 +600,15 @@
     PICK.miss = fits ? (isSoft(p, k) ? T('(메모를 한참 들여다본다) …이것만으로는 잘 모르겠어요.') : T('(메모를 보고 잠시 멈칫한다) …그것 하나로 뭘 말씀하시려는 겁니까?'))
       : near ? near.a : missLine(p, isSoft(p, k), PICK.tries - 1); // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다 (헛짚기로 치지 않는다)
     sfx('miss');
-    faceAnim(fits || near || PICK.other ? 'flinch' : 'nope', 700);
+    const react = fits || near || PICK.other ? 'flinch' : 'nope'; // 얼굴은 다시 그린 뒤에 (먼저 걸면 다시 그리면서 사라진다)
     if (!fits && !near && !PICK.other) {
       const v = (ST.vs ||= {})[p.id] ||= { n: 0 };
       v.n++;
-      const pt = $('#paneRead .per-h .per-pat'); if (pt) pt.outerHTML = patHtml(p);
-      if (v.n >= VS_MAX()) { v.shut = proof().length; v.last = PICK.miss; PICK = null; save(); renderRead(); land(['#paneRead .vs-shut', '#askChips .chip']); return; }
+      if (v.n >= VS_MAX()) { v.shut = proof().length; v.last = PICK.miss; PICK = null; save(); renderRead(); faceAnim('nope', 700); land(['#paneRead .vs-shut', '#askChips .chip']); return; }
     }
     save();
     pickRefresh();
+    faceAnim(react, 700);
     const pk = $('#paneRead .press-no') || $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest' }); // 목록 밑의 대답까지 보이게
     land([`#paneRead [data-press-note="${n.id}"]`, '#paneRead [data-press-filter]']); // 다시 그려 초점이 사라졌으면 방금 고른 메모로 — 키보드로 다음 메모로 바로 넘어가게
   }
