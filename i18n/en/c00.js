@@ -27,6 +27,7 @@ MG.I18N.put("en", "c00", {
 "8qvy8632gv": "Tap a word with a dotted underline to write it in your notebook.",
 "2bpziut906f": "Search with the words in your notebook, and go ask people about them. If an answer clashes with the records, use “Hold out a note” under it.",
 "ax5e5ccujt": "As you read down a record, the detective copies the sentences worth noting into the notebook. In the report, you attach those notes as evidence.",
+"2ah8pkln4se": "When a note ties in with another clue, it gets a red “Lead!” stamp: a note that clashes with a statement you heard, or one that another record backs up. Tap “Leads” in the notebook to see only those.",
 "1by95tihlp5": "In “Crime Scene Photos,” tap the photo itself to examine it. “Timeline” opens once a word for that night is in your notebook — listen to what people say, or read the comments on the boards. Move the cards with ▲▼ to match the times.",
 "2afn3vjepvy": "Nuri Search",
 "baxgq1qstd": "A search site, still logged in on the laptop's browser.",
@@ -416,5 +417,5 @@ MG.I18N.put("en", "c00", {
 "183ak2zmemc": "Kang Do-hyun's account — Gwangalli, Busan, night of Oct 9 (alibi)",
 "258r6rdc5z3": "Kang Do-hyun's account — night photo of Gwangalli, Busan, Oct 9",
 "wmjpnp1jbc": "Yun Jae-hee's account — photo of her booth at the illustration fair",
-"2fapj1rciyy": "Delivery app — delivery bag left outside Unit 504 (taken by rider)",
+"2fapj1rciyy": "Delivery app — delivery bag left outside Unit 504 (taken by rider)"
 });

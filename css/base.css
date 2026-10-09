@@ -398,6 +398,18 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 @media (hover:hover){.notes li:hover .del{opacity:1}}
 .notes .del:focus-visible{opacity:1}
 .n-rep{display:inline-block;min-width:1.35em;margin-left:6px;padding:1px 5px 0;border:1.5px solid rgba(176,52,42,.75);border-radius:50%;color:var(--red);font:19px/1.1 var(--f-hand);white-space:nowrap;text-align:center;vertical-align:1px;transform:rotate(-8deg)} /* 보고서에 붙인 메모: 빨간 연필로 친 주장 번호 동그라미 */
+/* 유력: 발로 뛰어 서로 맞물린 단서에만 찍는 붉은 도장 (들은 진술과 어긋나거나, 다른 기록이 같은 일을 받쳐 줄 때) */
+.n-lead{display:inline-block;margin-left:6px;padding:0 5px;border:1.5px solid var(--red);border-radius:3px;background:transparent;color:var(--red);font:600 13px/1.35 var(--f-mono);letter-spacing:.04em;white-space:nowrap;vertical-align:1px;transform:rotate(-4deg)}
+button.n-lead{cursor:pointer}
+@media (hover:hover){button.n-lead:hover{background:rgba(176,52,42,.08)}}
+.notes li.lead{background:linear-gradient(90deg,rgba(176,52,42,.08),transparent 75%)}
+.notes li.lit .n-lead{animation:leadStamp .55s cubic-bezier(.2,.8,.3,1.2) both}
+@keyframes leadStamp{0%{opacity:0;transform:rotate(-4deg) scale(1.9)}60%{opacity:1}100%{transform:rotate(-4deg) scale(1)}}
+@media (prefers-reduced-motion:reduce){.notes li.lit .n-lead{animation:none}}
+.lead-f{margin-left:8px;padding:0 8px;border:1px solid rgba(176,52,42,.55);border-radius:10px;background:transparent;color:var(--red);font:12px/1.6 var(--f-mono);cursor:pointer;vertical-align:2px}
+.lead-f[aria-pressed="true"]{background:var(--red);color:#fff}
+.nb-sec.lead-only .notes li:not(.lead):not(.tip),.nb-sec.lead-only details.ng:not(.has-lead){display:none}
+.lead-only .rep-opt:not(.lead),.lead-only .rep-grp.no-lead{display:none}
 .notes li.arm{background:rgba(176,52,42,.08)} /* 보고서에 붙인 메모의 × 를 한 번 누른 때: 한 번 더 누르면 지워진다 */
 .notes li.arm .del{opacity:1;color:var(--red)}
 .notes li.fresh,.kchip.fresh{animation:write .9s ease-out both}

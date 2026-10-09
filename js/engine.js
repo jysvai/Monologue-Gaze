@@ -524,12 +524,23 @@
     return a + (/[）]$/.test(a) ? '' : ' ') + b;
   }
   function pickHtml(p) {
-    const k = PICK.k, L = kl(k);
-    const list = proof().reverse().map(n => `<button type="button" class="rep-opt press-opt" data-press-note="${n.id}" title="${esc(n.t)}"><span class="t">${esc(n.t)}</span> <small class="src">— ${esc(n.src || '')}</small></button>`).join('');
+    const k = PICK.k, L = kl(k), LM = leadMap(), mine = n => (LM.get(n.id) || { vs: [] }).vs.some(v => v.pid === p.id); // 도장은 이 사람의 진술과 어긋나는 메모에만
+    const pool = proof().reverse(), nLead = pool.filter(mine).length;
+    const list = pool.map(n => `<button type="button" class="rep-opt press-opt${mine(n) ? ' lead' : ''}" data-press-note="${n.id}" title="${esc(n.t)}"><span class="t">${esc(n.t)}</span> ${mine(n) ? `<span class="n-lead" role="img" aria-label="${T`유력 — ${pname(p)}의 대답과 어긋난다`}">${T('유력!')}</span> ` : ''}<small class="src">— ${esc(n.src || '')}</small></button>`).join('');
     return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
-      <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
-      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${T('이것만으로는 모자라다. 함께 맞댈 기록이 더 있다.')}</p>` : ''}
+      <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}">${nLead ? ` <button type="button" class="lead-f" data-lead-f aria-pressed="false">${T`유력 ${nLead}`}</button>` : ''}<div class="press-list">${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
+      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${T('이것만으로는 모자라다. 함께 맞댈 기록이 더 있다.')}</p>` : ''}${PICK.other ? `<p class="vs-part">${T('이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.')}</p>` : ''}
       <p class="vs-left">${T`엉뚱한 메모를 ${VS_MAX() - ((vsOf(p) || {}).n || 0)}번 더 내밀면 입을 닫는다. 새 단서를 찾아 오면 다시 따질 수 있다.`}</p></div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
+  }
+  // 수첩의 「유력!」을 누르면: ★3·4 는 어긋나는 진술을 한 사람에게로, 아니면 맞물린 메모들을 짚어 준다
+  function leadGo(id) {
+    const e = leadMap().get(+id) || leadMap().get(id);
+    if (!e) return;
+    const pid = e.vs.length && lv() < 5 ? e.vs[0].pid : null;
+    if (pid) { const p = C.people[pid]; if (C.sources.some(s => s.id === p.src && srcVisible(s))) { keepPos(); ST.view.src = p.src; } openItem({ t: 'person', id: pid }); renderTabs(); renderList(); if (!beside()) $('.stage').scrollIntoView({ block: 'start' }); return; }
+    toast(leadTip(e), 3000);
+    const ids = [id, ...e.rep.flatMap(r => r.by.map(x => x.id))];
+    ids.forEach(x => { const li = $(`.notes li[data-nid="${x}"]`); if (!li) return; const d = li.closest('details'); if (d && !d.open) d.open = true; li.classList.remove('again'); void li.offsetWidth; li.classList.add('again'); });
   }
   function choosePress(id) {
     const o = ST.view.open;
@@ -542,10 +553,11 @@
     PICK.tries = (PICK.tries || 0) + 1;
     const near = !fits && [].concat(ra.close || []).find(c => (c.f || []).some(w => fIs(n.f, w))); // 여러 개일 수 있다: 메모마다 그 사람다운 핑계
     PICK.part = fits; // 맞는 메모지만 함께 맞댈 기록이 아직 모자라다 — 헛짚기로 치지 않는다
+    PICK.other = !fits && !near && ((leadMap().get(n.id) || { vs: [] }).vs.some(v => v.pid === p.id && v.k !== k)); // 유력한 메모를 같은 사람의 다른 대답에 댔다 — 길은 맞으니 헛짚기로 치지 않고 그 대답 쪽으로
     PICK.miss = fits ? (isSoft(p, k) ? T('(메모를 한참 들여다본다) …이것만으로는 잘 모르겠어요.') : T('(메모를 보고 잠시 멈칫한다) …그것 하나로 뭘 말씀하시려는 겁니까?'))
       : near ? near.a : missLine(p, isSoft(p, k), PICK.tries - 1); // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다 (헛짚기로 치지 않는다)
     sfx('miss');
-    if (!fits && !near) {
+    if (!fits && !near && !PICK.other) {
       const v = (ST.vs ||= {})[p.id] ||= { n: 0 };
       v.n++;
       if (v.n >= VS_MAX()) { v.shut = proof().length; v.last = PICK.miss; PICK = null; save(); renderRead(); land(['#paneRead .vs-shut', '#askChips .chip']); return; }
@@ -632,6 +644,7 @@
       me.saved.clear();
       qa.classList.remove('live');
       scanSoon(500); // 다 들은 대답 속 증거는 그때 적는다
+      if (!quiet) leadNews(); // 방금 들은 진술과 어긋나는 메모가 수첩에 있으면 그때 알린다
     };
     TALK = me;
     const alive = () => TALK === me && qa.isConnected;
@@ -1423,6 +1436,7 @@
 
   /* ───────── 수사 보고서 (읽기 칸에 넓게) ───────── */
   let REPOPEN = null; // 메모 고르기가 펼쳐진 주장
+  let LEADONLY = false; // 수첩 메모를 「유력!」 붙은 것만 보기
   let PTR = false; // 마지막 손길이 마우스·손가락이었나 (키보드면 false)
   const FORM = () => Object.assign({ title: T('수사 보고서'), culprit: T('범인은'), short: T('범인'), submit: T('보고서 올리기'), open: T('보고서 펼쳐 쓰기'), lead: T('범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다. 들어맞는 메모가 여럿이면 어느 것을 붙여도 된다.'), judging: T('보고서를 올렸다. 팀장이 한 장씩 넘긴다…') }, C.solution.form || {});
   // 결말 끝줄의 「→ …」 는 눌러서 기록실로 돌아가는 단추 (빨간 손글씨 그대로)
@@ -1437,18 +1451,19 @@
     const persons = ST.keys.filter(k => C.keywords[k] && C.keywords[k].type === 'person' && !C.keywords[k].nick && !victim(k)); // 별명(온라인 닉네임)과 피해자는 범인 칸에 내지 않는다 // 온라인 별명은 계정일 뿐, 영장에 적을 사람이 아니다
     const roleOf = k => { const p = Object.values(C.people || {}).find(x => x.key === k), r = (p && p.role) || (C.keywords[k] || {}).role, v = r ? plain(r) : ''; return p && v === plain(kl(k)) ? plain(p.name) : v; }; // 찾아갈 수 없는 사람도 단어에 role 이 있으면 한 줄 붙인다. 하는 일로만 적힌 사람(「신발 가게 점원」)은 이름을
     const groups = noteGroups(pool).map(g => ({ ...g, items: g.items.map(([n]) => [n, notes.indexOf(n)]) })); // 번호는 수첩의 번호 그대로
+    const LM = ST.solved ? new Map() : leadMap(), repLead = n => { const e = LM.get(n.id); return e && e.rep.length ? e : null; }, nLead = pool.filter(repLead).length; // 보고서에선 보고서 쪽 맞물림만
     const shut = ST.solved; // 종결된 보고서는 결재가 끝난 서류: 고칠 수 없다
     // 다른 주장에 이미 붙인 메모는 고를 때 알 수 있게 (같은 메모를 두 주장에 붙여도 되지만, 모르고 겹치지 않게)
     const usedBy = (n, i) => { const u = sol.claims.map((c, j) => (j !== i && String(ST.report.claims[c.id]) === String(n.id) ? j + 1 : 0)).filter(Boolean); return u.length ? T` <small class="rep-used">· ${u.join('·')}번에 붙임</small>` : ''; };
     const claim = (cl, i) => {
       const cur = notes.find(n => String(n.id) === String(ST.report.claims[cl.id])) || (shut && ST.report.kept && ST.report.kept[String(ST.report.claims[cl.id])]) || null;
       const open = !shut && REPOPEN === cl.id;
-      const list = groups.map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${cur && cur.id === n.id ? ' on' : ''}" title="${esc(n.t)}"><input type="radio" name="rep-${esc(cl.id)}" value="${n.id}" data-rep="${esc(cl.id)}"${cur && cur.id === n.id ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span>${usedBy(n, i)}</label>`).join('')}</details>`).join('');
+      const list = groups.map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n, j]) => `<label class="rep-opt${cur && cur.id === n.id ? ' on' : ''}${repLead(n) ? ' lead' : ''}" title="${esc(n.t)}"><input type="radio" name="rep-${esc(cl.id)}" value="${n.id}" data-rep="${esc(cl.id)}"${cur && cur.id === n.id ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span>${repLead(n) ? ' ' + leadMark({ vs: [], rep: repLead(n).rep }) : ''}${usedBy(n, i)}</label>`).join('')}</details>`).join('');
       return `<section class="rep-claim${cur ? ' filled' : ''}${open ? ' open' : ''}" data-claim="${esc(cl.id)}">
         <h4 id="rh-${esc(cl.id)}"><span class="no">${i + 1}</span> ${inline(cl.q)}</h4>
         <div class="rep-pick">${cur ? `<p class="rep-memo"><span class="n">${notes.includes(cur) ? notes.indexOf(cur) + 1 + '.' : '—'}</span> ${esc(cur.t)} <span class="src">— ${esc(cur.src || '')}</span></p>` : T('<p class="rep-empty">아직 붙인 메모가 없다.</p>')}
           ${shut ? '' : `<button type="button" class="rep-tog" data-rep-open="${esc(cl.id)}" aria-expanded="${open}">${open ? T('접기') : cur ? T('다른 메모로 바꾸기') : T('메모에서 고르기')} <small>(${pool.length})</small></button>`}</div>
-        ${open ? `<div class="rep-acc">${pool.length ? `<input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-rep-filter aria-label="${T`메모 찾기`}"><div role="radiogroup" aria-labelledby="rh-${esc(cl.id)}">${list}</div><p class="rep-empty rep-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>` : T`<p class="rep-empty">수첩에 내밀 만한 메모가 없다. 기록에서 ${inline('✎')} 표시가 붙은 문장을 적어 둔다.</p>`}</div>` : ''}
+        ${open ? `<div class="rep-acc">${pool.length ? `<input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-rep-filter aria-label="${T`메모 찾기`}">${nLead ? ` <button type="button" class="lead-f" data-lead-f aria-pressed="false">${T`유력 ${nLead}`}</button>` : ''}<div role="radiogroup" aria-labelledby="rh-${esc(cl.id)}">${list}</div><p class="rep-empty rep-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>` : T`<p class="rep-empty">수첩에 내밀 만한 메모가 없다. 기록에서 ${inline('✎')} 표시가 붙은 문장을 적어 둔다.</p>`}</div>` : ''}
       </section>`;
     };
     // 화면 속(모니터·노트북) 보고서는 전산 양식이라 머리에 결재란: 담당은 지금 서랍 주인, 종결되면 팀장·과장 칸에 결재 도장
@@ -1586,6 +1601,55 @@
   // 메모는 어디서 적었는지(문서·사람)끼리 묶는다. 접어 둔 묶음은 기억한다
   const NGSHUT = new Set();
   const proof = () => ST.notes.filter(n => n.f); // 보고서·추궁·신청서에 내밀 수 있는 메모 (예전에 아무 문장이나 적던 때의 메모는 빼고)
+  // 유력: 발로 뛰어 서로 맞물린 단서에만 붉은 「유력!」을 찍는다. 메모 하나만으로는 붙지 않는다 — 보이는 것을 다 눌러 보는 길로는 늘지 않고, 이어 가면 는다.
+  //  vs  — 들은 진술과 어긋나는 메모: 그 진술을 깨는 데 걸린 메모가 다 수첩에 있고, 아직 따지지 않았을 때 (진술을 들어야 붙는다)
+  //  rep — 보고서에 쓸 메모: 같은 주장을 서로 다른 기록 둘 이상이 받치거나, 그 메모로 누군가의 진술을 깨뜨렸을 때
+  // 어디에도 안 쓰이는 곁가지 메모에는 끝내 붙지 않는다. 어느 사람·어느 주장인지는 ★ 에 따라 덜 말한다
+  function leadMap() {
+    const m = new Map(), pool = proof();
+    const put = (n, k, v) => { const e = m.get(n.id) || { vs: [], rep: [] }; e[k].push(v); m.set(n.id, e); };
+    const wantOf = a => a.take || (a.need || []).flatMap(x => x.split('|')).filter(x => x[0] === '!').map(x => x.slice(1));
+    const broke = new Set(); // 진술을 깨뜨린 메모 (추궁에서 내밀어 통한 것)
+    Object.values(C.people).forEach(p => { const asked = ST.asked[p.id] || []; asked.forEach(e => {
+      const k = e.replace(/!$/, '');
+      if (!isPressAsk(p, k)) return;
+      if (e.endsWith('!')) { const h = (ST.held || {})[`${p.id}|${e}`]; if (h != null) broke.add(String(h)); else pool.forEach(n => { if (wantOf(rawAns(p, k)).some(w => fIs(n.f, w))) broke.add(String(n.id)); }); return; }
+      const a = rawAns(p, k);
+      if (asked.includes(k + '!') || !ok(a.need)) return;
+      pool.forEach(n => { if (wantOf(a).some(w => fIs(n.f, w))) put(n, 'vs', { pid: p.id, k }); });
+    }); });
+    C.solution.claims.forEach(cl => {
+      const acc = cl.accept || [], hits = pool.filter(n => acc.some(w => fIs(n.f, w)));
+      const two = new Set(hits.map(n => n.src || '')).size >= 2;
+      hits.forEach(n => { const by = two ? hits.filter(x => x !== n && (x.src || '') !== (n.src || '')) : []; if (by.length || broke.has(String(n.id))) put(n, 'rep', { by, broke: broke.has(String(n.id)) }); });
+    });
+    return m;
+  }
+  const noteNo = id => ST.notes.findIndex(n => String(n.id) === String(id)) + 1;
+  // 「유력!」에 붙는 한 줄: 무엇과 맞물렸는지 (★5 는 사람 이름을 대지 않는다)
+  function leadTip(e) {
+    const out = [];
+    if (e.vs.length) { const who = [...new Set(e.vs.map(v => v.pid))].map(id => pname(C.people[id])); out.push(lv() >= 5 ? T('들은 진술과 어긋난다') : T`${who.join('·')}의 대답과 어긋난다`); }
+    const by = [...new Set(e.rep.flatMap(r => r.by.map(x => noteNo(x.id))))].filter(Boolean).sort((a, b) => a - b);
+    if (by.length) out.push(T`${by.slice(0, 5).join('·')}번 메모와 맞물린다`);
+    if (e.rep.some(r => r.broke)) out.push(T('진술을 깨뜨린 기록이다'));
+    return out.join(' · ');
+  }
+  const leadMark = (e, tag = 'span') => e ? `<${tag}${tag === 'button' ? ' type="button"' : ''} class="n-lead" data-tip="${esc(leadTip(e))}" aria-label="${esc(T`유력 — ${leadTip(e)}`)}"${tag === 'button' ? '' : ' role="img"'}>${T('유력!')}</${tag}>` : '';
+  // 새로 맞물린 단서를 알린다: 수첩에서 그 메모에 도장이 찍히고, 한 줄 알림. 이미 알린 메모는 다시 알리지 않는다 (ST.lit)
+  function leadNews() {
+    if (!C || !ST || ST.solved) return;
+    const LM = leadMap(), now = [...LM.keys()].map(String);
+    if (!ST.lit) { ST.lit = now; save(); return; } // 예전 기록을 처음 열 때는 조용히
+    const fresh = now.filter(id => !ST.lit.includes(id));
+    if (!fresh.length) return;
+    ST.lit = [...new Set([...ST.lit, ...fresh])];
+    save();
+    renderNotebook();
+    fresh.forEach(id => { const li = $(`.notes li[data-nid="${id}"]`); if (!li) return; const d = li.closest('details'); if (d && !d.open) d.open = true; li.classList.remove('lit'); void li.offsetWidth; li.classList.add('lit'); });
+    const nums = fresh.map(noteNo).filter(Boolean).sort((a, b) => a - b), e = LM.get(ST.notes[nums[0] - 1].id);
+    setTimeout(() => { if (!ST.solved) { toast(T`유력! 메모 ${nums.join('·')}번 — ${leadTip(e).split(' · ')[0]}`, 3000); sfx('match'); } }, 900);
+  }
   function noteGroups(notes) {
     const groups = [];
     notes.forEach((n, i) => { const src = n.src || T('기타'); let g = groups.find(x => x.src === src); if (!g) groups.push(g = { src, items: [] }); g.items.push([n, i]); });
@@ -1603,6 +1667,8 @@
     const onRep = {}; // 보고서 주장에 증거로 붙인 메모: 끝에 주장 번호를 빨간 연필로 (지우면 그 칸이 빈다는 것도 보이게)
     sol.claims.forEach((cl, i) => { const v = ST.report.claims[cl.id]; if (v !== '' && v != null) (onRep[String(v)] ||= []).push(i + 1); });
     const repMark = n => { const u = onRep[String(n.id)]; if (!u) return ''; const t = T`${FORM().title} ${u.join('·')}번에 붙인 메모`; return `<span class="n-rep" role="img" aria-label="${t}" data-tip="${t}">${u.join('·')}</span>`; };
+    const LM = ST.solved ? new Map() : leadMap(), nLead = LM.size;
+    if (!nLead) LEADONLY = false;
     const top = nb.firstChild ? nb.scrollTop : 0;
     nb.innerHTML = `
       <div class="nb-rings" aria-hidden="true"></div>
@@ -1613,9 +1679,9 @@
       <section class="ruled nb-sec"><h3 class="hh">${T`단어 <small>${keys.length}</small>`}</h3>
         ${groups.map(([t, a]) => `<p class="kg"><span class="kg-t">${ktypeName(t)}</span> ${a.map(k => `<button type="button" class="kchip" data-chip="${k}">${esc(kl(k))}</button>`).join(' ')}</p>`).join('')}
       </section>
-      <section class="ruled nb-sec"><h3 class="hh">${T`메모 <small>${notes.length}</small>`}</h3>${notes.length >= 6 && !ST.solved ? `<p class="nb-jump-row"><button type="button" class="nb-jump" data-open-rep>${esc(FORM().open)} →</button></p>` : ''}
+      <section class="ruled nb-sec${LEADONLY ? ' lead-only' : ''}"><h3 class="hh">${T`메모 <small>${notes.length}</small>`}${nLead ? ` <button type="button" class="lead-f" data-lead-only aria-pressed="${LEADONLY}">${T`유력 ${nLead}`}</button>` : ''}</h3>${notes.length >= 6 && !ST.solved ? `<p class="nb-jump-row"><button type="button" class="nb-jump" data-open-rep>${esc(FORM().open)} →</button></p>` : ''}
         ${(C.tips || []).length ? `<ol class="notes">${C.tips.map(t => `<li class="tip">※ ${inline(t)}</li>`).join('')}</ol>` : notes.length ? '' : T('<ol class="notes"><li class="tip">아직 적은 메모가 없다.</li></ol>')}
-        ${noteGroups(notes).map(g => `<details class="ng" data-ng="${esc(g.src)}"${NGSHUT.has(C.id + '|' + g.src) ? '' : ' open'}><summary><span class="ng-t">${esc(g.src)}</span> <small>${g.items.length}</small></summary><ol class="notes">${g.items.map(([n, i]) => `<li data-nid="${n.id}" style="--r:${(hash(n.ref) % 5 - 2) * 0.25}deg"><span class="n">${i + 1}.</span> ${esc(n.t)}${repMark(n)}<button type="button" class="del" data-del="${n.id}" aria-label="${T`메모 ${i + 1} 지우기`}">×</button></li>`).join('')}</ol></details>`).join('')}
+        ${noteGroups(notes).map(g => `<details class="ng${g.items.some(([n]) => LM.has(n.id)) ? ' has-lead' : ''}" data-ng="${esc(g.src)}"${NGSHUT.has(C.id + '|' + g.src) && !LEADONLY ? '' : ' open'}><summary><span class="ng-t">${esc(g.src)}</span> <small>${g.items.length}</small></summary><ol class="notes">${g.items.map(([n, i]) => `<li data-nid="${n.id}"${LM.has(n.id) ? ' class="lead"' : ''} style="--r:${(hash(n.ref) % 5 - 2) * 0.25}deg"><span class="n">${i + 1}.</span> ${esc(n.t)}${repMark(n)}${LM.has(n.id) ? leadMark(LM.get(n.id), 'button').replace('class="n-lead"', `class="n-lead" data-lead="${n.id}"`) : ''}<button type="button" class="del" data-del="${n.id}" aria-label="${T`메모 ${i + 1} 지우기`}">×</button></li>`).join('')}</ol></details>`).join('')}
       </section>
       <section class="ruled nb-sec nb-rep"><h3 class="hh">${esc(FORM().title)}</h3>
         <p class="rep-sum">${T`${esc(FORM().short)} <b>${ST.report.culprit && C.keywords[ST.report.culprit] ? esc(kl(ST.report.culprit)) : '—'}</b> · 증거 <b>${sol.claims.filter(cl => ST.report.claims[cl.id] && (ST.notes.some(n => String(n.id) === String(ST.report.claims[cl.id])) || (ST.solved && ST.report.kept && ST.report.kept[String(ST.report.claims[cl.id])]))).length}</b> / ${sol.claims.length}`}</p>
@@ -1868,6 +1934,7 @@
     PIN = {};
     { const pr = $('#paneRead'); if (pr && pr.addEventListener && MG._vwheel) pr.addEventListener('wheel', MG._vwheel, { passive: false }); } // 세로 신문: 휠을 읽는 방향으로
     renderTabs(); renderList(); renderRead(); renderNotebook();
+    if (!ST.lit) leadNews(); // 예전 기록: 이미 맞물린 것은 알리지 않고 적어 둔다
     if ($('.scr-clock')) { tickClock(); clockT ||= setInterval(tickClock, 15000); }
   }
   // 사건마다 쓰는 특수 글꼴은 그 사건을 열 때만 부른다 (공통 글꼴은 index.html). 신문 양식은 송명·옛 로마자를 쓴다.
@@ -2411,6 +2478,7 @@
     const n0 = ST.notes.length - ids.length + 1;
     toast((ids.length > 1 ? T`메모 ${n0}~${ST.notes.length}번을 적었다` : T`메모 ${ST.notes.length}번을 적었다`) + (gained > 0 ? opened(gained, BY) : ''));
     liveSync();
+    leadNews();
   }
   // 읽으면 적힌다: 증거가 되는 줄(✎)이 읽는 칸에 다 들어와 잠깐 머물면 형사가 수첩에 옮겨 적는다 — 보이는 줄마다 눌러 적지 않아도 되게.
   // 나오는 중인 대답, 가려 둔 사진 설명, 지운 메모(drop)는 건너뛴다. 사진 설명처럼 ✎ 만 붙은 주석(pin)은 눌러야 적힌다
@@ -2885,6 +2953,9 @@
       if (t.closest('[data-nudge]')) return toggleNudge();
       if (t.closest('[data-nudge-more]')) { if (NUDGE) { NUDGE.more = true; renderNudge(); const g = $('#nudgeBox .nudge-go'); if (g && e.detail === 0) g.focus(); } return; }
       if ((el = t.closest('[data-nudge-go]'))) return nudgeGo(el.dataset.nudgeGo);
+      if ((el = t.closest('[data-lead-only]'))) { LEADONLY = !LEADONLY; renderNotebook(); const b = $('#nb [data-lead-only]'); if (b) b.focus(); return; }
+      if ((el = t.closest('[data-lead-f]'))) { const on = el.getAttribute('aria-pressed') !== 'true', box = el.parentNode; el.setAttribute('aria-pressed', String(on)); box.classList.toggle('lead-only', on); box.querySelectorAll('.rep-grp').forEach(g => g.classList.toggle('no-lead', !g.querySelector('.rep-opt.lead'))); return; } // 고르는 칸: 유력한 메모만
+      if ((el = t.closest('[data-lead]'))) return leadGo(el.dataset.lead);
       if ((el = t.closest('[data-vs]'))) { const o = ST.view.open; if (!o || o.t !== 'person') return; stopTalk(); PICK = { pid: o.id, k: el.dataset.vs }; renderRead(); const pk = $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); land(['#paneRead [data-press-filter]'], true); return; } // 이 대답에 메모를 내민다
       if ((el = t.closest('[data-pin]'))) return pin(el.dataset.pin);
       if ((el = t.closest('[data-kw]'))) return addKey(el.dataset.kw, false, el.textContent);
@@ -3134,5 +3205,5 @@
   };
   MG.state = () => S;
   MG.sfx = kind => sfx(kind); // 여는 장면(js/mood.js)의 무전 소리
-  MG.dev = { leads: () => leads(), nudge: () => nudgeHtml(), st: () => ST, advance: (k, m) => advance(k, m), wait: () => waitNext(), toggle: () => toggleNudge(), more: () => { if (NUDGE) NUDGE.more = true; }, render: () => { save(); renderCase(); }, pin: ref => PIN[ref] }; // tools/nudge-sim.js 가 짚어 보기만 따라 사건을 끝까지 가 본다
+  MG.dev = { leads: () => leads(), nudge: () => nudgeHtml(), st: () => ST, advance: (k, m) => advance(k, m), wait: () => waitNext(), toggle: () => toggleNudge(), more: () => { if (NUDGE) NUDGE.more = true; }, render: () => { save(); renderCase(); }, pin: ref => PIN[ref], lead: () => leadMap() }; // tools/nudge-sim.js 가 짚어 보기만 따라 사건을 끝까지 가 본다
 })();
