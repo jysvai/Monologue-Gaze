@@ -76,7 +76,7 @@ MG.I18N.put("de", "ui", {
 "유력 — {0}의 대답과 어긋난다": "Spur — passt nicht zu dem, was {0} sagte",
 "유력!": "Spur!",
 "의심": "Zweifel",
-"유력 — 이 사람의 대답과 어긋나는 메모": "Spuren — Notizen, die nicht zu den Antworten dieser Person passen",
+"유력 — 이 사람이 한 말 어딘가와 어긋나는 메모 (이 대답과는 다를 수도 있다)": "Spuren — Notizen, die einer Aussage dieser Person widersprechen (nicht unbedingt dieser)",
 "의심 — 내가 표시해 둔 메모": "Zweifel — Notizen, die Sie markiert haben",
 "탐문에서 들은 말": "Was Ihnen Leute erzählt haben",
 "기록에서 찾은 것": "In den Unterlagen gefunden",

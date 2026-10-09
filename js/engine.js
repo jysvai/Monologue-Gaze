@@ -557,7 +557,7 @@
     const opt = n => `<button type="button" class="rep-opt press-opt${mine(n) ? ' lead' : ''}" data-press-note="${n.id}" title="${esc(n.t)}"><span class="t">${esc(n.t)}</span> ${mine(n) ? `<span class="n-lead" role="img" aria-label="${T`유력 — ${pname(p)}의 대답과 어긋난다`}">${T('유력!')}</span> ` : isSus(n) ? `<span class="n-sus">${T('의심')}</span> ` : ''}<small class="src">— ${esc(n.src || '')}</small></button>`;
     // 내밀 메모를 묶어서: 유력(이 사람의 대답과 어긋남) · 의심(내가 표시해 둔 것) · 탐문에서 들은 말 · 기록에서 찾은 것. 위 두 묶음이 있으면 아래 둘은 접어 둔다
     const rest = pool.filter(n => !mine(n) && !isSus(n));
-    const groups = [['lead', T('유력 — 이 사람의 대답과 어긋나는 메모'), pool.filter(mine)], ['sus', T('의심 — 내가 표시해 둔 메모'), pool.filter(n => !mine(n) && isSus(n))],
+    const groups = [['lead', T('유력 — 이 사람이 한 말 어딘가와 어긋나는 메모 (이 대답과는 다를 수도 있다)'), pool.filter(mine)], ['sus', T('의심 — 내가 표시해 둔 메모'), pool.filter(n => !mine(n) && isSus(n))],
       ['talk', T('탐문에서 들은 말'), rest.filter(heardNote).sort((a, b) => (heardNote(a) === p.id) - (heardNote(b) === p.id))], ['rec', T('기록에서 찾은 것'), rest.filter(n => !heardNote(n))]];
     const top = groups[0][2].length + groups[1][2].length;
     const list = groups.map(([g, t, ns]) => ns.length || (g === 'sus' && !(ST.sus || []).length) ? `<details class="pk-g pk-${g}" data-pk-g="${g}"${G[g] ?? (g === 'lead' || g === 'sus' || !top) ? ' open' : ''}><summary>${t} <small>${ns.length}</small></summary>${ns.length ? ns.map(opt).join('') : `<p class="pk-hint">${T('수첩의 메모 끝 「?」를 누르면 의심으로 표시해 둔다. 표시한 메모는 여기 따로 모인다.')}</p>`}</details>` : '').join('');

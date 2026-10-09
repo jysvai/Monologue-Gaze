@@ -76,7 +76,7 @@ MG.I18N.put("en", "ui", {
 "유력 — {0}의 대답과 어긋난다": "Lead — clashes with what {0} said",
 "유력!": "Lead!",
 "의심": "Doubt",
-"유력 — 이 사람의 대답과 어긋나는 메모": "Leads — notes that clash with this person’s answers",
+"유력 — 이 사람이 한 말 어딘가와 어긋나는 메모 (이 대답과는 다를 수도 있다)": "Leads — notes that clash with something this person said (maybe not this answer)",
 "의심 — 내가 표시해 둔 메모": "Doubts — notes you marked",
 "탐문에서 들은 말": "What people told you",
 "기록에서 찾은 것": "Found in the records",
