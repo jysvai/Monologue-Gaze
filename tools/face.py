@@ -87,10 +87,13 @@ def sheet(d, out, rows=None):
     names = ['calm', 'shaken', 'broken']
     rows = rows or [r for r in names if os.path.exists(os.path.join(d, r + '.png'))]
     base = load(os.path.join(d, 'calm.png'))
-    blink = load(os.path.join(d, 'blink.png'), (base.shape[1], base.shape[0]))
-    _, keep = change_mask(base, blink)
-    ys, xs = np.nonzero(keep)
-    eye = (xs.mean(), ys.mean())
+    if os.path.exists(os.path.join(d, 'blink.png')):
+        blink = load(os.path.join(d, 'blink.png'), (base.shape[1], base.shape[0]))
+        _, keep = change_mask(base, blink)
+        ys, xs = np.nonzero(keep)
+        eye = (xs.mean(), ys.mean())
+    else:  # 눈 감은 판이 아직 없으면: 초상의 틀(머리 높이 45%, 머리 위 12%)에서 눈이 오는 자리
+        eye = (base.shape[1] * 0.5, base.shape[0] * 0.37)
     box = crop_box((base.shape[1], base.shape[0]), eye)
     S = Image.new('RGB', (FW * 3, FH * len(rows)))
     for r, row in enumerate(rows):
