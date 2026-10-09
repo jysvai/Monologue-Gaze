@@ -80,6 +80,16 @@
 <script src="cases/c15-tracker-2024.js"></script>
 <script>
 (function () {
+  // 받다가 끊긴 스타일시트도 제자리에 다시 (빠지면 책상이 맨 글자로 펼쳐진다). 이 스크립트가 돌 때는 앞의 스타일시트가 이미 다 받아졌거나 끊긴 뒤다
+  function sheet(l, n) {
+    var ok = false; try { ok = !!(l.sheet && l.sheet.cssRules.length); } catch (e) { ok = false; } // 끊긴 시트는 규칙을 읽으려 하면 오류가 난다 (같은 곳의 파일만 보므로)
+    if (ok || n >= 3) return;
+    var c = l.cloneNode();
+    c.href = l.getAttribute('href').split('?')[0] + '?r=' + Date.now();
+    c.onload = c.onerror = function () { setTimeout(function () { sheet(c, n + 1); }, 400); };
+    l.parentNode.insertBefore(c, l.nextSibling); l.parentNode.removeChild(l);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('link[rel="stylesheet"][href^="css/"]'), function (l) { sheet(l, 0); });
   function start(data) {
     core(function () { again(function () {
       try { window.MG.I18N.ready(function () { boot(data); }); } catch (e) { boot(data); } // 고른 언어의 꾸러미를 받은 뒤에 연다
