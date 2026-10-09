@@ -268,6 +268,7 @@ MG.I18N.put("de", "ui", {
 "의문 <small>{0} / {1} 풀림</small>": "Fragen <small>{0} / {1} geklärt</small>",
 "풀림": "Geklärt",
 "빈칸 {0}개 가운데 {1}개": "{1} von {0} Lücken gefüllt",
+"의문을 모두 풀었다 — {0}에 옮겨 적는다": "Alle Fragen geklärt — {0} schreiben",
 "{0} {1}번에 붙인 메모": "Angeheftet: {0}, Nr. {1}",
 "메모 {0} 의심 표시 풀기": "Zweifel-Markierung von Notiz {0} entfernen",
 "메모 {0} 의심으로 표시": "Notiz {0} als Zweifel markieren",

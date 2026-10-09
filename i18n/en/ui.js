@@ -268,6 +268,7 @@ MG.I18N.put("en", "ui", {
 "의문 <small>{0} / {1} 풀림</small>": "Questions <small>{0} / {1} solved</small>",
 "풀림": "Solved",
 "빈칸 {0}개 가운데 {1}개": "{1} of {0} gaps filled",
+"의문을 모두 풀었다 — {0}에 옮겨 적는다": "Every question solved — put it in the {0}",
 "{0} {1}번에 붙인 메모": "Note attached to {0} #{1}",
 "메모 {0} 의심 표시 풀기": "Unmark note {0} as a doubt",
 "메모 {0} 의심으로 표시": "Mark note {0} as a doubt",
