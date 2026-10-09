@@ -1793,6 +1793,8 @@
     const c0 = C;
     setTimeout(() => { if (C === c0 && !ST.solved) { toast(msg, 3400); sfx(newDone.length ? 'match' : 'write'); } }, delay);
   }
+  // 사람을 짚거나 빼 준 의문이 풀리면, 「풀림」 옆에 그 사람의 얼굴 (뺀 사람은 흐리게)
+  const thFace = t => { const k = t.who || t.out, per = k && Object.values(C.people || {}).find(x => x.key === k); return per && faceOf(per) ? portrait(per).replace('class="face"', `class="face th-face${t.out ? ' out' : ''}"`) : ''; };
   function thHtml() {
     const V = thView();
     if (!V.length) return '';
@@ -1803,7 +1805,7 @@
       return `<li class="th-got">${esc(s.t)}${n ? ` <button type="button" class="th-memo" data-th-memo="${n.id}" aria-label="${T`메모 ${noteNo(n.id)}번 보기`}">${noteNo(n.id)}</button>` : s.press ? ` <span class="th-press">${T('추궁')}</span>` : ''}</li>`;
     };
     return `<section class="ruled nb-sec nb-th"><h3 class="hh">${T`의문 <small>${nd} / ${V.length} 풀림</small>`}</h3>
-      <ol class="th-list">${V.map(x => { const k = C.id + '|' + x.t.id, open = THX.has(k) ? THX.get(k) : !x.done; return `<li class="th${x.done ? ' done' : ''}" data-th="${esc(x.t.id)}"><details${open ? ' open' : ''}><summary><span class="th-no">${x.no}.</span> <span class="th-q">${esc(x.t.q)}</span>${x.done ? ` <span class="th-stamp">${T('풀림')}</span>` : ` <span class="th-cnt" aria-label="${T`빈칸 ${x.got.length}개 가운데 ${x.got.filter(Boolean).length}개`}">${x.got.filter(Boolean).length}/${x.got.length}</span>`}</summary><ul class="th-steps">${x.t.steps.map((s, j) => step(x, s, j)).join('')}</ul>${x.done ? `<p class="th-a">→ ${esc(x.t.a)}</p>` : ''}</details></li>`; }).join('')}</ol></section>`;
+      <ol class="th-list">${V.map(x => { const k = C.id + '|' + x.t.id, open = THX.has(k) ? THX.get(k) : !x.done; return `<li class="th${x.done ? ' done' : ''}" data-th="${esc(x.t.id)}"><details${open ? ' open' : ''}><summary><span class="th-no">${x.no}.</span> <span class="th-q">${esc(x.t.q)}</span>${x.done ? ` <span class="th-stamp">${T('풀림')}</span>${thFace(x.t)}` : ` <span class="th-cnt" aria-label="${T`빈칸 ${x.got.length}개 가운데 ${x.got.filter(Boolean).length}개`}">${x.got.filter(Boolean).length}/${x.got.length}</span>`}</summary><ul class="th-steps">${x.t.steps.map((s, j) => step(x, s, j)).join('')}</ul>${x.done ? `<p class="th-a">→ ${esc(x.t.a)}</p>` : ''}</details></li>`; }).join('')}</ol></section>`;
   }
   function noteGroups(notes) {
     const groups = [];

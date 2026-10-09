@@ -286,3 +286,5 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 @keyframes svIn{from{opacity:0;transform:translateY(-12px) rotate(-7deg)}}
 @container stage (max-width:520px){.rep-solved .sv-face{margin:2px 12px 6px 0}.rep-solved .sv-face .face.lg{width:64px;height:80px}.sv-face figcaption{max-width:64px;font-size:10px}}
 @media (prefers-reduced-motion:reduce){.sv-face.fresh{animation:none}}
+.th .th-face{display:inline-block;width:28px;height:28px;margin-left:7px;vertical-align:-8px;box-shadow:0 0 0 1.5px var(--red)}
+.th .th-face.out{filter:grayscale(1);opacity:.65;box-shadow:0 0 0 1px rgba(101,95,82,.5)}
