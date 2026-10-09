@@ -309,3 +309,4 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 @media (prefers-reduced-motion:reduce){.press-no{animation:none}}
 .th-a1{display:block;padding-left:22px;color:var(--red);font:19px/32px var(--f-hand)} /* 접힌 풀린 의문: 내린 결론은 보이게 (펼치면 밑의 .th-a 로) */
 .th>details[open]>summary .th-a1{display:none}
+.per-ask-t .lv-cost{color:var(--red);font-weight:700} /* 현행 사건: 물을 때마다 드는 시간은 눈에 띄게 (기한을 모르고 물음을 늘어놓지 않게) */
