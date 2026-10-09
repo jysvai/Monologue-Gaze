@@ -85,6 +85,7 @@ MG.I18N.put("en", "ui", {
 "그만두기": "Never mind",
 "메모에서 낱말 찾기": "Find a word in your notes",
 "메모 찾기": "Search notes",
+"이 사람이 한 말과 어긋나 보이는 메모는 아직 수첩에 없다.": "Nothing in the notebook yet looks like it contradicts what this person said.",
 "그 낱말이 든 메모가 없다.": "No note contains that word.",
 "이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.": "This memo looks right, but the record to set beside it isn’t in the notebook yet. Find that first.",
 "이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.": "Try this note against a different answer this person gave.",

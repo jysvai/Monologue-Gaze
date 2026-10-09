@@ -564,7 +564,7 @@
     const top = groups[0][2].length + groups[1][2].length;
     const list = groups.map(([g, t, ns]) => ns.length || (g === 'sus' && !(ST.sus || []).length) ? `<details class="pk-g pk-${g}" data-pk-g="${g}"${G[g] ?? (g === 'lead' || g === 'sus' || !top) ? ' open' : ''}><summary>${t} <small>${ns.length}</small></summary>${ns.length ? ns.map(opt).join('') : `<p class="pk-hint">${T('수첩의 메모 끝 「?」를 누르면 의심으로 표시해 둔다. 표시한 메모는 여기 따로 모인다.')}</p>`}</details>` : '').join('');
     return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
-      <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
+      <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${groups[0][2].length ? '' : `<p class="pk-hint pk-nolead">${T('이 사람이 한 말과 어긋나 보이는 메모는 아직 수첩에 없다.')}</p>`}${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
       ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${T('이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.')}</p>` : ''}${PICK.other ? `<p class="vs-part">${T('이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.')}</p>` : ''}
       <p class="vs-left">${T`엉뚱한 메모를 ${VS_MAX() - ((vsOf(p) || {}).n || 0)}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.`}</p></div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
   }
