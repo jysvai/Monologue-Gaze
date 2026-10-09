@@ -420,7 +420,16 @@ button.n-lead{cursor:pointer}
 @media (prefers-reduced-motion:reduce){.notes li.lit .n-lead{animation:none}}
 .lead-f{margin-left:8px;padding:0 8px;border:1px solid rgba(176,52,42,.55);border-radius:10px;background:transparent;color:var(--red);font:12px/1.6 var(--f-mono);cursor:pointer;vertical-align:2px}
 .lead-f[aria-pressed="true"]{background:var(--red);color:#fff}
-.nb-sec.lead-only .notes li:not(.lead):not(.tip),.nb-sec.lead-only details.ng:not(.has-lead){display:none}
+.nb-sec.f-lead .notes li:not(.lead):not(.tip),.nb-sec.f-lead details.ng:not(.has-lead),.nb-sec.f-sus .notes li:not(.sus):not(.tip),.nb-sec.f-sus details.ng:not(.has-sus){display:none}
+/* 의심: 플레이어가 메모 끝 「?」로 표시해 둔 것 — 붉은 「유력!」(게임이 찾은 맞물림)과 다르게 파란 연필 */
+.notes button.sus{margin-left:5px;padding:0 4px;min-width:18px;border:1px dashed rgba(47,95,143,.45);border-radius:9px;background:none;color:#2f5f8f;font:600 11px/1.45 var(--f-mono);opacity:.7;cursor:pointer;vertical-align:1px}
+@media (hover:hover){.notes button.sus:hover{opacity:1}}
+.notes button.sus:focus-visible{opacity:1}
+.notes button.sus.on,.n-sus{display:inline-block;padding:0 5px;border:1.5px solid #2f5f8f;border-radius:3px;color:#2f5f8f;font:600 12px/1.35 var(--f-mono);opacity:1;transform:rotate(3deg);white-space:nowrap}
+.n-sus{margin-left:4px;vertical-align:1px}
+.notes li.sus:not(.lead){background:linear-gradient(90deg,rgba(47,95,143,.08),transparent 75%)}
+.lead-f.sus-f{border-color:rgba(47,95,143,.55);color:#2f5f8f}
+.lead-f.sus-f[aria-pressed="true"]{background:#2f5f8f;color:#fff}
 .lead-only .rep-opt:not(.lead),.lead-only .rep-grp.no-lead{display:none}
 .notes li.arm{background:rgba(176,52,42,.08)} /* 보고서에 붙인 메모의 × 를 한 번 누른 때: 한 번 더 누르면 지워진다 */
 .notes li.arm .del{opacity:1;color:var(--red)}

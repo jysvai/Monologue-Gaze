@@ -27,7 +27,7 @@ MG.I18N.put("de", "c00", {
 "8qvy8632gv": "Gepunktet unterstrichene Wörter antippen – sie landen im Notizbuch.",
 "2bpziut906f": "Mit den Wörtern im Notizbuch suchen und Leute befragen. Passt eine Antwort nicht zu den Akten, darunter „Notiz vorhalten“ wählen.",
 "ax5e5ccujt": "Beim Lesen einer Akte überträgt der Ermittler die Sätze, die man sich merken sollte, ins Notizbuch. Im Bericht werden diese Notizen als Beweise angeheftet.",
-"2ah8pkln4se": "Greift eine Notiz mit einer anderen Spur ineinander, bekommt sie einen roten Stempel „Spur!“: eine Notiz, die einer gehörten Aussage widerspricht, oder eine, die ein anderer Eintrag bestätigt. Tippen Sie im Notizbuch auf „Spuren“, um nur diese zu sehen.",
+"vy5m0gwv4r": "Greift eine Notiz mit einer anderen Spur ineinander, bekommt sie einen roten Stempel „Spur!“. Kommt Ihnen eine Notiz verdächtig vor, markieren Sie sie selbst über das „?“ an ihrem Ende als „Zweifel“. Wenn Sie auf „Notiz vorhalten“ tippen, erscheinen Ihre Notizen geordnet nach Spuren, Zweifeln, dem, was Leute erzählt haben, und dem, was Sie in den Unterlagen gefunden haben.",
 "1by95tihlp5": "Bei „Tatortfotos“ direkt ins Foto tippen, um es zu untersuchen. Die „Zeitleiste“ öffnet sich, sobald ein Wort für jene Nacht im Notizbuch steht — es fällt in dem, was die Leute sagen, oder in den Kommentaren im Forum. Dann die Karten mit ▲▼ verschieben und den Uhrzeiten zuordnen.",
 "2afn3vjepvy": "Nuri Suche",
 "baxgq1qstd": "Eine Suchseite, im Browser des Laptops noch angemeldet.",

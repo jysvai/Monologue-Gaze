@@ -216,6 +216,14 @@ body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,
 button.press-opt{width:100%;text-align:left;color:inherit}
 .press-opt .src{color:var(--pencil);font-size:12px}
 .press-opt[hidden]{display:none}
+/* 내밀 메모 묶음: 유력 · 의심 · 탐문에서 들은 말 · 기록에서 찾은 것 */
+.pk-g{margin:2px 0 6px}
+.pk-g[hidden]{display:none}
+.pk-g>summary{padding:5px 2px 4px;color:var(--pencil);font:600 13px/1.4 var(--f-web);cursor:pointer;list-style-position:inside}
+.pk-g>summary small{margin-left:3px;font-weight:400;opacity:.8}
+.pk-lead>summary{color:var(--red)}
+.pk-sus>summary{color:#2f5f8f}
+.pk-hint{margin:2px 4px 6px;color:var(--pencil);font-size:13px}
 .press-no{margin:8px 0 0;padding:6px 10px;border-left:3px solid var(--red);background:rgba(160,40,30,.06);font:14px/1.6 var(--f-web)}
 .press-no b{margin-right:4px}
 /* 대답마다 「메모를 내민다」: 기록과 어긋나는 대답에 메모를 맞대 따진다 (나오는 중인 대답에는 아직 안 보인다) */

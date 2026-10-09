@@ -27,7 +27,7 @@ MG.I18N.put("en", "c00", {
 "8qvy8632gv": "Tap a word with a dotted underline to write it in your notebook.",
 "2bpziut906f": "Search with the words in your notebook, and go ask people about them. If an answer clashes with the records, use “Hold out a note” under it.",
 "ax5e5ccujt": "As you read down a record, the detective copies the sentences worth noting into the notebook. In the report, you attach those notes as evidence.",
-"2ah8pkln4se": "When a note ties in with another clue, it gets a red “Lead!” stamp: a note that clashes with a statement you heard, or one that another record backs up. Tap “Leads” in the notebook to see only those.",
+"vy5m0gwv4r": "When a note ties in with another clue, it gets a red “Lead!” stamp. If a note looks suspicious to you, tap the “?” at its end to mark it as a “Doubt” yourself. When you tap “Hold out a note”, your notes come sorted into leads, doubts, what people told you, and what you found in the records.",
 "1by95tihlp5": "In “Crime Scene Photos,” tap the photo itself to examine it. “Timeline” opens once a word for that night is in your notebook — listen to what people say, or read the comments on the boards. Move the cards with ▲▼ to match the times.",
 "2afn3vjepvy": "Nuri Search",
 "baxgq1qstd": "A search site, still logged in on the laptop's browser.",
