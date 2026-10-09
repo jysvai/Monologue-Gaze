@@ -306,3 +306,5 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 .press-no{animation:noIn .4s ease-out} /* 엉뚱한 메모: 그 사람의 대꾸가 들어오는 것이 보이게 */
 @keyframes noIn{from{opacity:0;transform:translateX(-6px)}}
 @media (prefers-reduced-motion:reduce){.press-no{animation:none}}
+.th-a1{display:block;padding-left:22px;color:var(--red);font:19px/32px var(--f-hand)} /* 접힌 풀린 의문: 내린 결론은 보이게 (펼치면 밑의 .th-a 로) */
+.th>details[open]>summary .th-a1{display:none}
