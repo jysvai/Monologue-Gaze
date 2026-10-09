@@ -1325,6 +1325,9 @@
     if (q) {
       hits = archiveHits(s, q);
       res = hits.length ? `<p class="res-n">${scr ? T`'${esc(q)}' 검색 결과 ${hits.length}건` : T`「${esc(q)}」 ${hits.length}건`}</p>${hits.map(itemBtn).join('')}` : `<p class="res-none">${scr ? T`'${esc(q)}'에 대한 검색 결과가 없습니다.` : T`「${esc(q)}」에 해당하는 자료가 없다.`}${s.none ? ' ' + inline(s.none) : ''}</p>`;
+      // 여기엔 없어도 다른 철에 있으면 그리로 건너가는 길을 (같은 말을 그 철에서 찾은 것으로)
+      if (!hits.length) res += C.sources.filter(o => o.id !== s.id && o.type === 'archive' && srcVisible(o)).map(o => [o, archiveHits(o, q).length]).filter(x => x[1])
+        .map(([o, n]) => `<p class="res-else"><button type="button" class="nb-jump" data-src="${esc(o.id)}" data-srcq="${esc(q)}">${T`${esc(o.name)}에는 ${n}건 있다`} →</button></p>`).join('');
     }
     const start = (s.start || []).map(id => C.docs[id]).filter(d => d && ok(d.need));
     // 앞서 찾아 열어 본 것은 검색을 새로 해도 남겨 둔다 — 같은 날짜를 여러 장부에서 맞대 보려고 매번 다시 찾지 않게
@@ -1819,8 +1822,14 @@
       const n = thNote(s);
       return `<li class="th-got">${esc(s.t)}${n ? ` <button type="button" class="th-memo" data-th-memo="${n.id}" aria-label="${T`메모 ${noteNo(n.id)}번 보기`}">${noteNo(n.id)}</button>` : s.press ? ` <span class="th-press">${T('추궁')}</span>` : ''}</li>`;
     };
+    // 같은 글의 빈칸은 한 줄로 (「아직 듣지 못한 말이 있다.」가 두 줄 겹치면 고장처럼 보인다)
+    const steps = x => {
+      const L = x.t.steps.map((s, j) => step(x, s, j)), one = `<li class="th-gap">${esc(T('아직 듣지 못한 말이 있다.'))}</li>`;
+      return L.filter((h, i) => !h.startsWith('<li class="th-gap">') || L.indexOf(h) === i)
+        .map(h => { const n = L.filter(y => y === h).length; return h === one && n > 1 ? `<li class="th-gap">${esc(T`아직 듣지 못한 말이 ${n}가지 있다.`)}</li>` : h; }).join('');
+    };
     return `<section class="ruled nb-sec nb-th"><h3 class="hh">${T`의문 <small>${nd} / ${V.length} 풀림</small>`}</h3>
-      <ol class="th-list">${V.map(x => { const k = C.id + '|' + x.t.id, open = THX.has(k) ? THX.get(k) : !x.done && LIVE.includes(x); return `<li class="th${x.done ? ' done' : ''}" data-th="${esc(x.t.id)}"><details${open ? ' open' : ''}><summary><span class="th-no">${x.no}.</span> <span class="th-q">${esc(x.t.q)}</span>${x.done ? ` <span class="th-stamp">${T('풀림')}</span>${thFace(x.t)}<span class="th-a1">→ ${esc(x.t.a)}</span>` : ` <span class="th-cnt" aria-label="${T`빈칸 ${x.got.length}개 가운데 ${x.got.filter(Boolean).length}개`}">${x.got.filter(Boolean).length}/${x.got.length}</span>`}</summary><ul class="th-steps">${x.t.steps.map((s, j) => step(x, s, j)).join('')}</ul>${x.done ? `<p class="th-a">→ ${esc(x.t.a)}</p>` : ''}</details></li>`; }).join('')}</ol>${!ST.solved && nd === V.length && V.length === C.threads.length ? `<p class="nb-jump-row th-all"><button type="button" class="nb-jump" data-open-rep>${T`의문을 모두 풀었다 — ${esc(FORM().title)}에 옮겨 적는다`} →</button></p>` : ''}</section>`;
+      <ol class="th-list">${V.map(x => { const k = C.id + '|' + x.t.id, open = THX.has(k) ? THX.get(k) : !x.done && LIVE.includes(x); return `<li class="th${x.done ? ' done' : ''}" data-th="${esc(x.t.id)}"><details${open ? ' open' : ''}><summary><span class="th-no">${x.no}.</span> <span class="th-q">${esc(x.t.q)}</span>${x.done ? ` <span class="th-stamp">${T('풀림')}</span>${thFace(x.t)}<span class="th-a1">→ ${esc(x.t.a)}</span>` : ` <span class="th-cnt" aria-label="${T`빈칸 ${x.got.length}개 가운데 ${x.got.filter(Boolean).length}개`}">${x.got.filter(Boolean).length}/${x.got.length}</span>`}</summary><ul class="th-steps">${steps(x)}</ul>${x.done ? `<p class="th-a">→ ${esc(x.t.a)}</p>` : ''}</details></li>`; }).join('')}</ol>${!ST.solved && nd === V.length && V.length === C.threads.length ? `<p class="nb-jump-row th-all"><button type="button" class="nb-jump" data-open-rep>${T`의문을 모두 풀었다 — ${esc(FORM().title)}에 옮겨 적는다`} →</button></p>` : ''}</section>`;
   }
   function noteGroups(notes) {
     const groups = [];
@@ -3161,6 +3170,7 @@
         keepPos();
         const from = ST.view.src;
         ST.view.src = el.dataset.src;
+        if (el.dataset.srcq) ST.view.q[el.dataset.src] = el.dataset.srcq; // 검색이 비었을 때 다른 철로 건너가는 단추
         const s = curSrc(), o0 = ST.view.open;
         // 펼쳐 둔 문서·보고서는 그 탭에 맡겨 두고 돌아오면 다시 편다 (다른 탭 목록 옆에 남으면 그 탭의 조회 결과처럼 보인다)
         if (o0 && o0.t !== 'person' && from !== s.id) { (ST.view.tabOpen ||= {})[from] = o0; ST.view.open = null; }

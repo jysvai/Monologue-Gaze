@@ -274,6 +274,7 @@ img{max-width:100%}
 .item.person .ava,.item.person .per-art{grid-row:span 2}
 .res-n{margin:14px 0 6px;font:11.5px var(--f-mono);letter-spacing:.04em;opacity:.75}
 .res-none{margin:10px 0;font:20px/1.3 var(--f-hand);color:var(--pencil)}
+.res-else{margin:-4px 0 10px}
 .arch-f{display:flex;margin:0 0 8px;border:2px solid var(--arch-line,#5a4a2e);background:#fffdf7}
 .arch-f input{flex:1;min-width:0;padding:8px 10px;border:0;background:transparent;font:14px var(--f-web);color:#222;outline:none;text-overflow:ellipsis}
 .case-view input[placeholder]{text-overflow:ellipsis} /* 긴 안내 글(독일어·러시아어)이 낱말 중간에서 잘리지 않게 */
