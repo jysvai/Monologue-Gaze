@@ -122,7 +122,10 @@
   let S = load(PID);
   let SYNC = false; // 다른 탭의 기록을 받아 다시 그리는 동안은 쓰지 않는다 (두 탭이 서로 덮어쓰며 핑퐁하지 않게)
   let unsaved = false; // 브라우저가 저장을 막으면(사이트 데이터 차단 등) 한 번만 알린다 — 조용히 잃지 않게
-  const save = () => { if (SYNC) return; try { localStorage.setItem(slot(PID), JSON.stringify(S)); } catch (e) { if (!unsaved) { unsaved = true; setTimeout(() => toast(T('이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다'), 6000), 900); } } };
+  // 의문은 무엇으로 열리든(메모 · 단어 · 풀린 자물쇠 · 대조 · 회신) 기록이 바뀐 조금 뒤에 한 번 더 살핀다 — 바로 알리는 곳(메모 적기 · 대답 끝 · 단어 · 새 소식)이 놓친 것까지
+  let THT = 0;
+  const thSoon = () => { if (!C || !C.threads || !ST || ST.solved) return; clearTimeout(THT); const c0 = C; THT = setTimeout(() => { if (C === c0) threadNews(); }, 1200); };
+  const save = () => { if (SYNC) return; thSoon(); try { localStorage.setItem(slot(PID), JSON.stringify(S)); } catch (e) { if (!unsaved) { unsaved = true; setTimeout(() => toast(T('이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다'), 6000), 900); } } };
 
   function cs(c) {
     const st = (S.cases[c.id] = S.cases[c.id] || {});
