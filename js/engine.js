@@ -564,7 +564,7 @@
     return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
       <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
       ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${T('이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.')}</p>` : ''}${PICK.other ? `<p class="vs-part">${T('이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.')}</p>` : ''}
-      <p class="vs-left">${T`엉뚱한 메모를 ${VS_MAX() - ((vsOf(p) || {}).n || 0)}번 더 내밀면 입을 닫는다. 새 단서를 찾아 오면 다시 따질 수 있다.`}</p></div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
+      <p class="vs-left">${T`엉뚱한 메모를 ${VS_MAX() - ((vsOf(p) || {}).n || 0)}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.`}</p></div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
   }
   // 고르는 칸을 다시 그린다: 찾던 낱말 · 목록을 굴린 자리는 그대로 (메모가 많아도 방금 누른 메모가 제자리에 남게)
   function pickRefresh() {
@@ -653,7 +653,7 @@
     }).join('');
     return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h${faceOf(p) ? ' has-face' : ''}">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}${patHtml(p)}</div></header>
       <div class="per-tr" data-who="${esc(p.id)}">${tr}</div>
-      ${PICK && PICK.pid === p.id ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}>${shut ? `<p class="vs-shut" tabindex="-1"><b>${esc(p.name)}</b> ${inline(ST.vs[p.id].last || '').replace(MIDACT, '<i class="c-mid">$&</i>')} <span>${T('— 입을 닫았다. 새 단서를 찾아 오면 다시 따질 수 있다.')}</span></p>` : ''}<p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」')}${liveOn() ? T` · 물을 때마다 ${hm(lcost('ask'))}` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
+      ${PICK && PICK.pid === p.id ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}>${shut ? `<p class="vs-shut" tabindex="-1"><b>${esc(p.name)}</b> ${inline(ST.vs[p.id].last || '').replace(MIDACT, '<i class="c-mid">$&</i>')} <span>${T('— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.')}</span></p>` : ''}<p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」')}${liveOn() ? T` · 물을 때마다 ${hm(lcost('ask'))}` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
   }
 
   /* 대화 재생: 몸짓은 스르르, 말은 한 글자씩(사람마다 다른 말소리). 목소리가 있는 말풍선은 재생 시각에 맞춰 찍는다. 누르면 건너뛴다 */
@@ -1809,7 +1809,7 @@
   function thHtml() {
     const V = thView();
     if (!V.length) return '';
-    const nd = V.filter(x => x.done).length;
+    const nd = V.filter(x => x.done).length, LIVE = V.filter(x => !x.done).slice(-3); // 풀리지 않은 의문이 많으면 새로 나온 셋만 펼쳐 둔다 (수첩이 몇 화면씩 늘어지지 않게)
     const step = (x, s, j) => {
       // 따질 말을 아직 듣지 못했으면 그 말을 앞질러 옮기지 않는다 (「긁힌 데 하나 없다는 말, 맞나?」가 그 사람을 만나기도 전에 보이지 않게)
       const unheard = s.press && !(ST.asked[s.press.split(':')[0]] || []).includes(s.press.split(':')[1]);
@@ -1818,7 +1818,7 @@
       return `<li class="th-got">${esc(s.t)}${n ? ` <button type="button" class="th-memo" data-th-memo="${n.id}" aria-label="${T`메모 ${noteNo(n.id)}번 보기`}">${noteNo(n.id)}</button>` : s.press ? ` <span class="th-press">${T('추궁')}</span>` : ''}</li>`;
     };
     return `<section class="ruled nb-sec nb-th"><h3 class="hh">${T`의문 <small>${nd} / ${V.length} 풀림</small>`}</h3>
-      <ol class="th-list">${V.map(x => { const k = C.id + '|' + x.t.id, open = THX.has(k) ? THX.get(k) : !x.done; return `<li class="th${x.done ? ' done' : ''}" data-th="${esc(x.t.id)}"><details${open ? ' open' : ''}><summary><span class="th-no">${x.no}.</span> <span class="th-q">${esc(x.t.q)}</span>${x.done ? ` <span class="th-stamp">${T('풀림')}</span>${thFace(x.t)}<span class="th-a1">→ ${esc(x.t.a)}</span>` : ` <span class="th-cnt" aria-label="${T`빈칸 ${x.got.length}개 가운데 ${x.got.filter(Boolean).length}개`}">${x.got.filter(Boolean).length}/${x.got.length}</span>`}</summary><ul class="th-steps">${x.t.steps.map((s, j) => step(x, s, j)).join('')}</ul>${x.done ? `<p class="th-a">→ ${esc(x.t.a)}</p>` : ''}</details></li>`; }).join('')}</ol>${!ST.solved && nd === V.length && V.length === C.threads.length ? `<p class="nb-jump-row th-all"><button type="button" class="nb-jump" data-open-rep>${T`의문을 모두 풀었다 — ${esc(FORM().title)}에 옮겨 적는다`} →</button></p>` : ''}</section>`;
+      <ol class="th-list">${V.map(x => { const k = C.id + '|' + x.t.id, open = THX.has(k) ? THX.get(k) : !x.done && LIVE.includes(x); return `<li class="th${x.done ? ' done' : ''}" data-th="${esc(x.t.id)}"><details${open ? ' open' : ''}><summary><span class="th-no">${x.no}.</span> <span class="th-q">${esc(x.t.q)}</span>${x.done ? ` <span class="th-stamp">${T('풀림')}</span>${thFace(x.t)}<span class="th-a1">→ ${esc(x.t.a)}</span>` : ` <span class="th-cnt" aria-label="${T`빈칸 ${x.got.length}개 가운데 ${x.got.filter(Boolean).length}개`}">${x.got.filter(Boolean).length}/${x.got.length}</span>`}</summary><ul class="th-steps">${x.t.steps.map((s, j) => step(x, s, j)).join('')}</ul>${x.done ? `<p class="th-a">→ ${esc(x.t.a)}</p>` : ''}</details></li>`; }).join('')}</ol>${!ST.solved && nd === V.length && V.length === C.threads.length ? `<p class="nb-jump-row th-all"><button type="button" class="nb-jump" data-open-rep>${T`의문을 모두 풀었다 — ${esc(FORM().title)}에 옮겨 적는다`} →</button></p>` : ''}</section>`;
   }
   function noteGroups(notes) {
     const groups = [];
