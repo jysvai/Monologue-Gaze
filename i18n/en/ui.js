@@ -86,7 +86,7 @@ MG.I18N.put("en", "ui", {
 "메모에서 낱말 찾기": "Find a word in your notes",
 "메모 찾기": "Search notes",
 "그 낱말이 든 메모가 없다.": "No note contains that word.",
-"이것만으로는 모자라다. 함께 맞댈 기록이 더 있다.": "Not enough on its own. Another record has to go with it.",
+"이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.": "This memo looks right, but the record to set beside it isn’t in the notebook yet. Find that first.",
 "이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.": "Try this note against a different answer this person gave.",
 "엉뚱한 메모를 {0}번 더 내밀면 입을 닫는다. 새 단서를 찾아 오면 다시 따질 수 있다.": "Hold out {0} more wrong note(s) and they stop talking. Bring a new clue and you can press again.",
 "(메모를 한참 들여다본다) …이것만으로는 잘 모르겠어요.": "(Studies the note for a long while) …I can't say, from just this.",

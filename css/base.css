@@ -680,10 +680,12 @@ body:has(.case-view[data-graphic])::before{background:radial-gradient(ellipse at
 .face.lg.nope{animation:faceNope .6s ease-in-out}
 @keyframes faceNope{20%{transform:rotate(-2.5deg)}45%{transform:rotate(2deg)}70%{transform:rotate(-1deg)}}
 .per-h.hit .face.lg,.per-h.hit .face.lg.jolt{z-index:2;animation:faceHit 1.5s cubic-bezier(.2,.8,.3,1) both;transform-origin:0 50%}
+.per-h.hit>div{animation:faceHitTxt 1.5s cubic-bezier(.2,.8,.3,1) both} /* 얼굴이 다가오는 동안 이름 줄은 비켜 선다 (얼굴이 이름을 덮지 않게) */
+@keyframes faceHitTxt{0%,100%{transform:none}12%,75%{transform:translateX(24px)}}
 @keyframes faceHit{0%{transform:scale(1)}12%{transform:scale(1.2) translateX(-3px);box-shadow:0 0 0 2px var(--red),0 0 22px 4px rgba(176,52,42,.45)}20%{transform:scale(1.18) translateX(3px)}30%{transform:scale(1.18)}75%{transform:scale(1.14);box-shadow:0 0 0 2px rgba(176,52,42,.6),0 8px 16px -8px rgba(0,0,0,.5)}100%{transform:scale(1)}}
 /* 참을성 눈금: 헛짚을 때마다 하나씩 빈다 */
 .per-pat{display:inline-flex;align-items:center;gap:3px;margin-top:4px;font:600 11px/1 var(--f-mono);letter-spacing:.04em;color:var(--pencil)}
 .per-pat .pat-t{margin-right:3px}
 .per-pat i{width:9px;height:9px;border:1.5px solid var(--red);border-radius:50%;opacity:.45}
 .per-pat i.on{background:var(--red);opacity:.85}
-@media (prefers-reduced-motion:reduce){.face.lg.flinch,.face.lg.nope,.per-h.hit .face.lg{animation:none}}
+@media (prefers-reduced-motion:reduce){.face.lg.flinch,.face.lg.nope,.per-h.hit .face.lg,.per-h.hit>div{animation:none}}

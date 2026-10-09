@@ -86,7 +86,7 @@ MG.I18N.put("de", "ui", {
 "메모에서 낱말 찾기": "Wort in den Notizen suchen",
 "메모 찾기": "Notizen durchsuchen",
 "그 낱말이 든 메모가 없다.": "Keine Notiz enthält dieses Wort.",
-"이것만으로는 모자라다. 함께 맞댈 기록이 더 있다.": "Das allein reicht nicht. Es braucht noch einen Eintrag, der dazu passt.",
+"이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.": "Diese Notiz scheint zu passen, aber der Beleg, der danebengehört, steht noch nicht im Notizbuch. Erst den finden.",
 "이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.": "Halten Sie diese Notiz gegen eine andere Antwort dieser Person.",
 "엉뚱한 메모를 {0}번 더 내밀면 입을 닫는다. 새 단서를 찾아 오면 다시 따질 수 있다.": "Noch {0}-mal eine falsche Notiz, und die Person schweigt. Mit einer neuen Spur lässt sich wieder nachhaken.",
 "(메모를 한참 들여다본다) …이것만으로는 잘 모르겠어요.": "(Betrachtet die Notiz lange) …Allein daraus kann ich nichts sagen.",
