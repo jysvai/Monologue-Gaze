@@ -773,7 +773,7 @@ MG.I18N.put("de", "c02", {
 "12rjxu00ts8": "Von Freitag bis Montag hab ich in meiner [[Hütte|k_huette]] im Wald Holz gemacht. Allein, gesehen hat mich keiner.",
 "10z83zdosz4": "Fragen Sie die Wirtin vom Stern. Ab Freitag war ich dort.",
 "19rz9frkcbc": "(antwortet nicht) …Das hat halt der Schnee zugedeckt. Wo ich auch war, in dem Haus war ich nicht.",
-"13vzxuhz3j": "Meine Hütte. Im Winter mach ich dort Holz.",
+"2ak27e8vfil": "Meine Hütte. Den ganzen Winter hab ich dort Holz gemacht. Bis vor ein paar Tagen bin ich da noch ein und aus gegangen.",
 "d6ms9ychs2": "Ein Lastschlitten. Brennholz und Vieh fahr ich damit. Für den Markt hab ich letzten Monat beim Rottmayr die Kufen neu beschlagen lassen. Und einen Schimmel haben die Händler aus Regental auch.",
 "11t9j0lrocn": "Ein sturer Alter war er. Aber so was hat er nicht verdient.",
 "125wjjjzpgs": "(blickt auf die Hand, die die Zügel hält) … Im November war ich einmal da. Wegen dem Roggenpreis. Das ist alles. Danach hab ich keinen Fuß mehr hingesetzt.",
@@ -845,5 +845,5 @@ MG.I18N.put("de", "c02", {
 "wmnvh6kpd6": "Leichenschau — vier Gestalten unter weißen Tüchern auf Brettern auf der Tenne",
 "86in5mh8gj": "Foto zur genauen Untersuchung",
 "2ggpeu37trv": "Bleistiftskizze vom Tatort — Küche in Haselöd",
-"24w1f3r8xvl": "Bleistiftskizze vom Tatort — Stall und Westteil des Stadels"
+"24w1f3r8xvl": "Bleistiftskizze vom Tatort — Stall und Westteil des Stadels",
 });

@@ -682,7 +682,7 @@ MG.I18N.put("en", "c09", {
 "248smrzq2a8": "Once it gets cold, that's the end of the vegetable patch. And the wardrobe was old, so I threw it out. What's strange about that?",
 "15es0h6g749": "— And the phone?",
 "d7rnscppu6": "…It was broken.",
-"2g19qizfn8v": "The patch on the stairs? I grow a little every year. Peppers, green onions. Share them with the neighbors.",
+"xnlc07kfe1": "The patch on the stairs? I grow a little every year. Peppers and green onions in styrofoam boxes, all still lined up on the stairs. I share them with the neighbors.",
 "gq8zrxgo1q": "Ah, the one on the front door. My little nephew stuck it there. It got rained on and was all tattered, so I peeled it off.",
 "1oqoz2amrg1": "— When did you take it off?",
 "1rw2pno10g2": "…Some time in the last few days. Who goes around remembering dates?",
@@ -750,5 +750,5 @@ MG.I18N.put("en", "c09", {
 "86in5mh8gj": "Close-examination photo",
 "zljj1faqvl": "No. 217-3 — outdoor stairs and second-floor door",
 "17khgikcove": "No. 219-8 — outdoor stairs and second-floor door",
-"o3x4hk5nyu": "Door-to-door canvass card photo — No. 230-5"
+"o3x4hk5nyu": "Door-to-door canvass card photo — No. 230-5",
 });

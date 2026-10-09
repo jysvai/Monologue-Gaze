@@ -835,7 +835,7 @@ MG.I18N.put("en", "c14", {
 "baepapldjy": "(Looks down) …When Mum goes to work, I hang out there.",
 "2g64ciulnif": "— The night before, K sent you “the certificate's inside.” It was in the envelope from the start, wasn't it? So why did you say you printed it at the PC café?",
 "1qj1jqty5px": "…I thought if I said I printed it there, everyone would just believe it. It was in the envelope. I never printed anything.",
-"zskbtna5do": "(Lowers his head) …When Mom goes to work, I'm there. I don't like being home alone.",
+"6vd05ao8kq": "(Lowers his head) …When Mom goes to work, I'm there. I don't like being home alone. That's where I printed the confirmation too.",
 "bdv1ig8893": "That's the sound the office PC makes when an order comes in. A jingle, twice. If you're at the office, it goes off all day.",
 "3nugmz3fmw": "Tae-o's. He can't work without it.",
 "2a3sm9ruxpd": "The one I used to ride. Ever since I went down on the wet road in October, even the sound of a motorbike scares me.",
@@ -968,7 +968,7 @@ MG.I18N.put("en", "c14", {
 "mw7cqxoru7": "(doesn't turn toward the monitor) …Order alerts sound the same at every branch.",
 "1o4s7xq5w1": "— The sound behind Manager K's voice message isn't the rider app. It's the branch admin PC's alert. At 10:46, the dispatch PC was chiming right next to whoever was speaking.",
 "oi7is1qibp": "(clicks the mouse a few times instead of answering. The alert chimes again)",
-"6isr8zn8o0": "(Glances at the monitor) That? It goes off when an order comes in. Hundreds of times a day. I can't get it out of my head anymore.",
+"1horg9vvkwg": "(Glances at the monitor) That? It goes off when an order comes in. The riders' phone app makes the exact same sound. Hundreds of times a day, so I can't get it out of my head anymore.",
 "1ocvqfd7j2j": "I've run the branch since 2019. After HQ takes its commission there's nothing left. Still, the kids have to eat.",
 "1cvlh3pfl15": "Hyun-su? …Him too. My God.",
 "25lzm7xbz0a": "Delivery boxes all crack and get taped up. That's just how it is.",
@@ -1030,5 +1030,5 @@ MG.I18N.put("en", "c14", {
 "2clg68lbgk1": "Seized item — silver X of tape on the rear of the delivery box on spare motorbike 4417",
 "1v7bdwsdf7j": "Photo of the front door of Haengbok Villa Unit 103",
 "86in5mh8gj": "Close-examination photo",
-"241xkvicjjf": "Terminal locker CCTV capture"
+"241xkvicjjf": "Terminal locker CCTV capture",
 });

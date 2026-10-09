@@ -625,7 +625,7 @@ MG.I18N.put("en", "c08", {
 "ayup01j4nw": "I'm Yeom Jin-u, So-yeong's tutor. Jun-yeong and I only ever said hello a few times.",
 "20uz1mlxgoz": "…Yes, I live in a boarding house in Saeteo-dong. Right behind the church. The six o'clock bell? I hear it every day.",
 "puvsabvplb": "But that doesn't mean I… When the call came at 9 p.m. on the 8th, I was in So-yeong's room at their house. Her mother knows.",
-"21h8ae3kr3": "Saeteo-dong? My boarding house is over that way.",
+"104uxmr5wue": "Saeteo-dong? My boarding house is over that way. It's a quiet neighborhood. The church doesn't even ring its bell anymore.",
 "3n74mxr723": "I heard the recording on the broadcast. It's nothing like my voice, is it? And I don't even smoke.",
 "13e3w49sxzz": "Mr. Baek's pager number? I don't know it. I always got in touch through the house phone.",
 "uczamu7l3n": "Meticulous, like you'd expect from someone in architecture. He'd even work through So-yeong's math problems with a ruler.",
@@ -713,7 +713,7 @@ MG.I18N.put("en", "c08", {
 "t535itrlt0": "That key? Lost it. Couldn't tell you where I put it the day I left.",
 "28epih0u5e7": "— Did you know they never changed the padlock?",
 "1hl1e5fu10c": "(takes off his glasses and wipes them)",
-"dpavfwxdzn": "What key are you talking about?",
+"wafafc457h": "What key are you talking about? I left every key behind when I came off the site. There's no way I'd have the storeroom key.",
 "1o2ok7o9bix": "Shimai? Show me one man who's worked a building site and doesn't say it.",
 "1fq29dlbrau": "(silent for a long while) …A voice you picked up off the telephone — what are you going to do with that? Seoul men's voices all sound the same.",
 "qgc5pj52w5": "— April 8, this office phone. “Let's call it shimai for today.”",
@@ -782,5 +782,5 @@ MG.I18N.put("en", "c08", {
 "neuc0p2iwg": "Voiceprint — Han Gyeong-ho",
 "14tniq0wciv": "Voiceprint — Yeom Jin-u",
 "rp1rzo9awl": "Voiceprint — Jang Du-man",
-"1rx3dganvul": "Voiceprint — Tak Sang-won office phone"
+"1rx3dganvul": "Voiceprint — Tak Sang-won office phone",
 });

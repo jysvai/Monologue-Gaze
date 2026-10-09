@@ -835,7 +835,7 @@ MG.I18N.put("de", "c14", {
 "baepapldjy": "(Senkt den Kopf) …Wenn Mama arbeiten geht, bin ich da.",
 "2g64ciulnif": "— K hat dir am Abend davor geschrieben: „Die Bescheinigung ist drin.“ Die war von Anfang an im Umschlag, oder? Warum hast du dann gesagt, du hättest sie im PC-Café gedruckt?",
 "1qj1jqty5px": "…Ich dachte, wenn ich sage, ich hab sie da gedruckt, glauben das alle. Sie war im Umschlag. Ich hab nichts gedruckt.",
-"zskbtna5do": "(Senkt den Kopf) …Wenn Mama zur Arbeit geht, bin ich da. Ich will nicht allein zu Hause sein.",
+"6vd05ao8kq": "(Senkt den Kopf) …Wenn Mama zur Arbeit geht, bin ich da. Ich will nicht allein zu Hause sein. Die Bestätigung hab ich auch da ausgedruckt.",
 "bdv1ig8893": "Das ist der Ton vom Büro-PC, wenn ein Auftrag reinkommt. Ein Klingeln, zweimal. Im Büro geht der den ganzen Tag.",
 "3nugmz3fmw": "Die von Tae-o. Ohne die kann er nicht arbeiten.",
 "2a3sm9ruxpd": "Die bin ich gefahren. Seit ich im Oktober im Regen gestürzt bin, krieg ich schon Angst, wenn ich nur einen Roller höre.",
@@ -968,7 +968,7 @@ MG.I18N.put("de", "c14", {
 "mw7cqxoru7": "(dreht sich nicht zum Monitor um) … Das Auftragssignal klingt in jeder Filiale gleich.",
 "1o4s7xq5w1": "— Hinter der Sprachnachricht von Teamleiter K klingelt nicht die Fahrer-App, sondern das Signal am Admin-PC der Filiale. Um 10:46 klingelte direkt neben der sprechenden Person der Dispo-PC.",
 "oi7is1qibp": "(klickt statt einer Antwort ein paarmal mit der Maus. Das Signal ertönt wieder)",
-"6isr8zn8o0": "(Schaut kurz zum Monitor) Das da? Das klingelt, wenn ein Auftrag reinkommt. Hunderte Male am Tag. Das kriege ich schon gar nicht mehr aus dem Ohr.",
+"1horg9vvkwg": "(Schaut kurz zum Monitor) Das da? Das klingelt, wenn ein Auftrag reinkommt. Die App auf den Handys der Fahrer macht genau denselben Ton. Hunderte Male am Tag, das kriege ich schon gar nicht mehr aus dem Ohr.",
 "1ocvqfd7j2j": "Seit 2019 leite ich die Filiale. Nach der Provision für die Zentrale bleibt nichts übrig. Aber die Jungs müssen ja trotzdem was zu essen haben.",
 "1cvlh3pfl15": "Hyeon-su? …Sogar der. Mein Gott.",
 "25lzm7xbz0a": "Lieferboxen gehen halt kaputt, dann kommt Klebeband drauf. Ist überall so.",
@@ -1030,5 +1030,5 @@ MG.I18N.put("de", "c14", {
 "2clg68lbgk1": "Beschlagnahmt — silbernes X aus Klebeband auf der Rückseite der Lieferbox am Ersatzkraftrad 4417",
 "1v7bdwsdf7j": "Foto vor der Wohnungstür Nr. 103, Wohnanlage Haengbok",
 "86in5mh8gj": "Foto zur genauen Untersuchung",
-"241xkvicjjf": "Videostandbild Schließfächer Busbahnhof"
+"241xkvicjjf": "Videostandbild Schließfächer Busbahnhof",
 });

@@ -773,7 +773,7 @@ MG.I18N.put("en", "c02", {
 "12rjxu00ts8": "Friday to Monday I was cutting wood at my [[hut|k_huette]] in the forest. Alone, so nobody saw me.",
 "10z83zdosz4": "Ask the landlady at the Stern. I was there from Friday on.",
 "19rz9frkcbc": "(No answer) …Snow would've covered it. Wherever I was, I didn't go to that house.",
-"13vzxuhz3j": "My hut. In winter I cut wood out there.",
+"2ak27e8vfil": "My hut. I've been cutting wood out there all winter. I was in and out of it till a few days ago.",
 "d6ms9ychs2": "A work sledge. For hauling firewood and cattle. Had Rottmayr put new runners on it last month, for the market. And the Regental dealers drive white horses too.",
 "11t9j0lrocn": "A stubborn old man. Still, he didn't deserve that.",
 "125wjjjzpgs": "(looks down at the hand gripping the reins) …I stopped by once in November. To talk about the price of rye. That's all. I haven't set foot there since.",
@@ -845,5 +845,5 @@ MG.I18N.put("en", "c02", {
 "wmnvh6kpd6": "Examination findings — four people under white sheets on planks on the barn's threshing floor",
 "86in5mh8gj": "Close-inspection image",
 "2ggpeu37trv": "Pencil scene sketch — Haselöd kitchen",
-"24w1f3r8xvl": "Pencil scene sketch — cowshed and west bay of the barn"
+"24w1f3r8xvl": "Pencil scene sketch — cowshed and west bay of the barn",
 });

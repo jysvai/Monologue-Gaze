@@ -690,7 +690,7 @@ MG.I18N.put("en", "c06", {
 "t31yorfqc9": "I told you, I said hello to her once in the lobby, and that's all.",
 "1wxj3da7tsh": "I was shocked when I saw the paper. Truly.",
 "1f5rw327sng": "…I took the ten o'clock [[coastal steamer|k_kystrute]] on the night of the 17th. I got off at Nordvåg on the 20th. The purser will have the passenger list.",
-"16oc6wd3zo8": "The 18th? I'd left Hellesund the day before. Must I account for what happened after that as well?",
+"7l50xcm0i1": "The 18th? I'd left Hellesund the day before. My customers there are only a few, all in town, so I made the rounds on foot. Must I account for what happened after that as well?",
 "2daidaebn2w": "I stay at the Bryggen every time I'm there on business. Room 305 is practically mine.",
 "1zadf3ofvr1": "Brate? I don't know the name.",
 "291ysrz5i04": "I don't know ship names. I only sell machinery.",
@@ -774,5 +774,5 @@ MG.I18N.put("en", "c06", {
 "kvs0uca36k": "Hotel Bryggen foreign guest registration slip",
 "tkirj6zy7i": "Hut visitors' book — the Kvitdal hut on the ridge",
 "266lvcn6omp": "1968 newspaper — cargo ship in a storm (blurred photo)",
-"a49pc2clbg": "Filling station credit ledger — the filling station on the Kvitdal road"
+"a49pc2clbg": "Filling station credit ledger — the filling station on the Kvitdal road",
 });

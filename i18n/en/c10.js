@@ -531,9 +531,9 @@ MG.I18N.put("en", "c10", {
 "157a64nre2m": "— You went into the new port at 0:34 and came out at 1:21. Forty-seven minutes to check one freezer alarm?",
 "68zf7thhg": "Sure, I've got a warehouse at the New Port. I didn't go there that night.",
 "16s2exsvcdn": "Eun-ho got that wrong. It just needed the paperwork cleaned up. I only borrowed his number for a while.",
-"wf5cc79tzg": "Country of origin? I don't know what you're talking about.",
+"1s4oo4rx05u": "Country of origin? Our goods go out labeled exactly as they came in. And every slip goes out under my number, 121, no other.",
 "1stlk0fxikq": "…The passenger side. It broke a few months ago and I never got around to replacing it. Why?",
-"aesp68c9y7": "Fog lamp? I don't pay much attention to the car. You'd have to ask the garage.",
+"1xn2in4g884": "Fog lamp? There isn't a scratch on my car. I keep it in good shape.",
 "13snaxvzp85": "There must be a hundred black SUVs in this town.",
 "2f9k4v5c688": "— They say hardly any cars head into the New Port at that hour. Only trucks.",
 "cmfzpu6hii": "(Fiddles with his work gloves) …People in the warehouse trade come and go at night too. Am I the only one who drives a black SUV?",
@@ -586,5 +586,5 @@ MG.I18N.put("en", "c10", {
 "2rtr5wbl9z": "Group chat photo — the work dinner in the big room at Lighthouse Sashimi House",
 "2gogefhjjju": "Photo posted to the chat with only himself left in it — signs of fish repacked between boxes in the cold-storage warehouse (motive)",
 "jol2caq1nn": "Photo posted to the chat with only himself left in it — signs of fish repacked between boxes in the cold-storage warehouse",
-"1r0pxv252sx": "Photo from a complaint post on the forum — the New Port Pier 3 construction site by day"
+"1r0pxv252sx": "Photo from a complaint post on the forum — the New Port Pier 3 construction site by day",
 });

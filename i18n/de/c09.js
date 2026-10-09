@@ -682,7 +682,7 @@ MG.I18N.put("de", "c09", {
 "248smrzq2a8": "Wenn's kalt wird, ist Schluss mit dem Beet. Und der Schrank war alt, den hab ich weggeworfen. Was ist daran seltsam?",
 "15es0h6g749": "— Und das Telefon?",
 "d7rnscppu6": "… War kaputt.",
-"2g19qizfn8v": "Das Beet auf der Treppe? Mach ich jedes Jahr ein bisschen. Chili, Frühlingszwiebeln. Verteil ich an die Nachbarn.",
+"xnlc07kfe1": "Das Beet auf der Treppe? Mach ich jedes Jahr ein bisschen. Chili und Frühlingszwiebeln in Styroporkisten, die stehen jetzt noch die Treppe entlang. Verteil ich an die Nachbarn.",
 "gq8zrxgo1q": "Ach, der an der Wohnungstür. Den hat mein Neffe hingeklebt. Der war vom Regen ganz zerfleddert, da hab ich ihn abgemacht.",
 "1oqoz2amrg1": "— Wann haben Sie ihn abgemacht?",
 "1rw2pno10g2": "… In den letzten Tagen. Wer merkt sich denn so was aufs Datum genau?",
@@ -750,5 +750,5 @@ MG.I18N.put("de", "c09", {
 "86in5mh8gj": "Foto zur genauen Untersuchung",
 "zljj1faqvl": "Nr. 217-3 — Außentreppe und Wohnungstür im OG",
 "17khgikcove": "Nr. 219-8 — Außentreppe und Wohnungstür im OG",
-"o3x4hk5nyu": "Foto Anwohnerbefragung — Nr. 230-5"
+"o3x4hk5nyu": "Foto Anwohnerbefragung — Nr. 230-5",
 });

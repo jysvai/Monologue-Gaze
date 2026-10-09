@@ -666,7 +666,7 @@ MG.I18N.put("de", "c05", {
 "21ljluzy9p8": "(die Schlüssel in seiner Hand halten still) … Sie meinen, ich hab da angerufen?",
 "125bk37nh18": "— Am 4. Mai um 0:18 kam der Anruf bei der Polizei von genau diesem Münztelefon. Als der Streifenwagen kam, baumelte nur noch der Hörer an der Schnur.",
 "1dgyn2x9157": "(die Hand um die Schlüssel spannt sich) An der Tankstelle hab ich mir nur einen Kaffee gezogen. Das Telefon hab ich nicht angerührt.",
-"t6magabnxq": "Das Münztelefon an der Tankstelle? Das benutzen alle. Nicht nur ich.",
+"jep36wo8od": "Das Münztelefon an der Tankstelle? Das benutzen alle. Ich hab in der Nacht am Dock geladen, sonst nichts. Über die Straße bin ich gar nicht gegangen.",
 "x6djmkugbd": "Die Geheimschrift? Das Ding aus der Zeitung? So was schau ich mir nicht an.",
 "1462qu6ee48": "Die Sonntagsausgabe wird in aller Frühe geladen und in aller Frühe abgeladen. Vor die Türen der Verkaufsstellen, in die Zeitungskästen. Vor Sonnenaufgang muss alles erledigt sein.",
 "hoed1selzd": "— Entschlüsselt heißt es: „Ich lege euch eure Sonntage vor die Tür.“ Wer die Sonntagsausgabe vor die Tür legt, sind die Lastwagenfahrer.",
@@ -745,5 +745,5 @@ MG.I18N.put("de", "c05", {
 "256kwcjnzoe": "Brief (3) — Umschlag und gefalteter Briefbogen",
 "1d52q3cu37": "Brief an den Evening Star — Umschlag und gefalteter Briefbogen",
 "21m8sj9k7cs": "Brief (4) — Umschlag und gefalteter Briefbogen",
-"189hlxrfmfc": "Brief an das Sheriffbüro — Umschlag und gefalteter Briefbogen"
+"189hlxrfmfc": "Brief an das Sheriffbüro — Umschlag und gefalteter Briefbogen",
 });

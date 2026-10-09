@@ -1719,7 +1719,7 @@
     const people = Object.values(C.people).filter(p => personVisible(p) && ST.asked[p.id] != null);
     people.forEach(p => ST.keys.forEach(k => {
       const e = askEntry(p, k), asked = ST.asked[p.id] || [];
-      if (e.endsWith('!') && !asked.includes(e) && asked.includes(k)) { const ev = evidence(p, k)[0]; add(`press:${p.id}|${k}`, T('수첩을 내밀어 다시 물어볼 사람이 있다.'), ev && ev.src ? T`${pname(p)} — 「${kl(k)}」 · 내밀 메모는 ${ev.src}에서` : T`${pname(p)} — 「${kl(k)}」`, { t: 'person', id: p.id, src: p.src }); }
+      if (e.endsWith('!') && !asked.includes(e) && asked.includes(k)) { const ev = evidence(p, k)[0]; add(`press:${p.id}|${k}`, T('들은 대답 가운데 기록과 어긋나는 것이 있다.'), ev && ev.src ? T`${pname(p)} — 「${kl(k)}」에 한 대답 · 내밀 메모는 ${ev.src}에서` : T`${pname(p)} — 「${kl(k)}」에 한 대답`, { t: 'person', id: p.id, src: p.src }); }
     }));
     people.forEach(p => ST.keys.forEach(k => {
       if (!C.keywords[k] || (k === p.key && rawAns(p, k) == null)) return;
@@ -2934,7 +2934,7 @@
       }
       if ((el = t.closest('[data-ph]'))) return photoClick(el, e);
       if ((el = t.closest('[data-press-note]'))) return choosePress(el.dataset.pressNote);
-      if (t.closest('[data-press-cancel]')) { PICK = null; renderRead(); land(['#askChips .chip.again', '#askChips .chip'], true); return; }
+      if (t.closest('[data-press-cancel]')) { const k = PICK && PICK.k; PICK = null; renderRead(); land([k ? `#paneRead [data-vs="${k}"]` : '', '#askChips .chip'].filter(Boolean), true); return; } // 그만두면 방금 그 대답의 「메모를 내민다」로
       if ((el = t.closest('[data-ask]'))) return ask(el.dataset.ask);
       if ((el = t.closest('[data-search]'))) return search(el.dataset.search);
       if ((el = t.closest('[data-chip]'))) return chip(el.dataset.chip);
@@ -3134,5 +3134,5 @@
   };
   MG.state = () => S;
   MG.sfx = kind => sfx(kind); // 여는 장면(js/mood.js)의 무전 소리
-  MG.dev = { leads: () => leads(), nudge: () => nudgeHtml(), st: () => ST, advance: (k, m) => advance(k, m), wait: () => waitNext(), toggle: () => toggleNudge(), more: () => { if (NUDGE) NUDGE.more = true; } }; // tools/nudge-sim.js 가 짚어 보기만 따라 사건을 끝까지 가 본다
+  MG.dev = { leads: () => leads(), nudge: () => nudgeHtml(), st: () => ST, advance: (k, m) => advance(k, m), wait: () => waitNext(), toggle: () => toggleNudge(), more: () => { if (NUDGE) NUDGE.more = true; }, render: () => { save(); renderCase(); }, pin: ref => PIN[ref] }; // tools/nudge-sim.js 가 짚어 보기만 따라 사건을 끝까지 가 본다
 })();

@@ -666,7 +666,7 @@ MG.I18N.put("en", "c05", {
 "21ljluzy9p8": "(the keys stop turning in his hand) …You're saying I made that call?",
 "125bk37nh18": "— Twelve eighteen on May 4, the call to the police station came from that pay phone. When the patrol car got there, the receiver was swinging on its cord.",
 "1dgyn2x9157": "(His hand tightens on the keys.) I stopped at the gas station for a coffee, that's all. Never touched the phone.",
-"t6magabnxq": "The gas station pay phone? Everybody uses it. Not just me.",
+"jep36wo8od": "The gas station pay phone? Everybody uses it. That night I was loading at the dock, that's all. I never even crossed the street.",
 "x6djmkugbd": "Cipher? The one in the paper? I don't look at that stuff.",
 "1462qu6ee48": "The Sunday paper, you load it before dawn and drop it before dawn. At the dealers' doors, in the newspaper boxes. Got to be done before sunup.",
 "hoed1selzd": "— Decoded, the cipher says: “I leave your Sundays at your door.” The ones who leave the Sunday paper at the door are the truck drivers.",
@@ -745,5 +745,5 @@ MG.I18N.put("en", "c05", {
 "256kwcjnzoe": "Letter (3) — envelope and folded sheet",
 "1d52q3cu37": "Letter to the Bay Evening Star — envelope and folded sheet",
 "21m8sj9k7cs": "Letter (4) — envelope and folded sheet",
-"189hlxrfmfc": "Letter to the Sheriff's Office — envelope and folded sheet"
+"189hlxrfmfc": "Letter to the Sheriff's Office — envelope and folded sheet",
 });

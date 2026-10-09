@@ -625,7 +625,7 @@ MG.I18N.put("de", "c08", {
 "ayup01j4nw": "Ich bin Yeom Jin-u, ich gebe So-yeong Nachhilfe. Mit Jun-yeong habe ich nur ein paarmal ein paar Worte gewechselt.",
 "20uz1mlxgoz": "… Ja, ich wohne in einer Pension in Saeteo-dong. Direkt hinter der Kirche. Die Glocke um sechs Uhr abends? Die höre ich jeden Tag.",
 "puvsabvplb": "Aber deswegen bin ich doch nicht … Als am 8. um 9 Uhr abends der Anruf kam, war ich bei der Familie in So-yeongs Zimmer. Frau Kang weiß das.",
-"21h8ae3kr3": "Saeteo-dong? Dort ist meine Pension.",
+"104uxmr5wue": "Saeteo-dong? Dort ist meine Pension. Ein ruhiges Viertel, die Kirche läutet ja nicht mal mehr.",
 "3n74mxr723": "Ich habe die Aufnahme aus den Nachrichten gehört. Das ist doch eine ganz andere Stimme als meine. Außerdem rauche ich nicht.",
 "13e3w49sxzz": "Die Piepsernummer von Direktor Baek? Kenne ich nicht. Ich habe mich immer über den Hausanschluss gemeldet.",
 "uczamu7l3n": "Sehr gründlich, wie ein angehender Architekt eben. So-yeongs Matheaufgaben hat er sogar mit dem Lineal gelöst.",
@@ -713,7 +713,7 @@ MG.I18N.put("de", "c08", {
 "t535itrlt0": "Der Schlüssel? Verloren. Wo ich den am letzten Tag hingelegt habe, weiß ich nicht mehr.",
 "28epih0u5e7": "— Wussten Sie, dass das Schloss nicht ausgetauscht worden war?",
 "1hl1e5fu10c": "(Nimmt die Brille ab und putzt sie)",
-"dpavfwxdzn": "Was für ein Schlüssel?",
+"wafafc457h": "Was für ein Schlüssel? Als ich von der Baustelle weg bin, hab ich alle Schlüssel dagelassen. Der Lagerschlüssel kann gar nicht bei mir sein.",
 "1o2ok7o9bix": "„Shimai“? Das sagt doch jeder, der mal auf dem Bau gearbeitet hat.",
 "1fq29dlbrau": "(Schweigt lange) … Was wollen Sie mit einer Stimme vom Telefon schon anfangen? Die Stimmen von Männern aus Seoul klingen doch alle gleich.",
 "qgc5pj52w5": "— Der 8. April, das Telefon in diesem Büro. „Machen wir shimai für heute.“",
@@ -782,5 +782,5 @@ MG.I18N.put("de", "c08", {
 "neuc0p2iwg": "Stimmabdruck — Han Gyeong-ho",
 "14tniq0wciv": "Stimmabdruck — Yeom Jin-u",
 "rp1rzo9awl": "Stimmabdruck — Jang Du-man",
-"1rx3dganvul": "Stimmabdruck — Bürotelefon Tak Sang-won"
+"1rx3dganvul": "Stimmabdruck — Bürotelefon Tak Sang-won",
 });

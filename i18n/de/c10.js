@@ -531,9 +531,9 @@ MG.I18N.put("de", "c10", {
 "157a64nre2m": "— Sie sind um 0:34 Uhr in den neuen Hafen rein und um 1:21 Uhr wieder raus. Siebenundvierzig Minuten für einen Kühlanlagen-Alarm?",
 "68zf7thhg": "Ein Lager im Neuhafen hab ich schon. Aber an dem Abend war ich nicht da.",
 "16s2exsvcdn": "Das hat Eun-ho falsch verstanden. Man hätte nur die Papiere in Ordnung bringen müssen. Ich hab mir die Nummer bloß kurz geliehen.",
-"wf5cc79tzg": "Die Herkunft? Ich weiß nicht, wovon Sie reden.",
+"1s4oo4rx05u": "Die Herkunft? Unsere Ware geht genau so beschriftet raus, wie sie reinkommt. Und jeder Beleg läuft nur unter meiner Nummer, der 121.",
 "1stlk0fxikq": "…Auf der Beifahrerseite. Ist vor ein paar Monaten kaputtgegangen, war mir zu lästig, ihn auszutauschen. Wieso?",
-"aesp68c9y7": "Nebelscheinwerfer? Um das Auto kümmere ich mich kaum. Da müssen Sie in der Werkstatt fragen.",
+"1xn2in4g884": "Nebelscheinwerfer? An meinem Auto ist kein Kratzer. Ich pflege es gründlich.",
 "13snaxvzp85": "Schwarze SUVs gibt's hier in der Gegend bestimmt hundert.",
 "2f9k4v5c688": "— Um die Zeit soll kaum jemand in den Neuhafen gefahren sein. Höchstens Lkw.",
 "cmfzpu6hii": "(Spielt mit seinen Arbeitshandschuhen) …Leute aus dem Lagergeschäft fahren auch nachts ein und aus. Bin ich etwa der Einzige mit einem schwarzen SUV?",
@@ -586,5 +586,5 @@ MG.I18N.put("de", "c10", {
 "2rtr5wbl9z": "Foto aus dem Gruppenchat — das Essen im großen Nebenzimmer des Leuchtturms",
 "2gogefhjjju": "Foto im Chat, in dem nur noch er selbst übrig war — Spuren vom Umpacken der Kisten im Kühlhaus (Motiv)",
 "jol2caq1nn": "Foto im Chat, in dem nur noch er selbst übrig war — Spuren vom Umpacken der Kisten im Kühlhaus",
-"1r0pxv252sx": "Foto aus einer Beschwerde im Forum — Baustelle an Pier 3 im Neuhafen bei Tag"
+"1r0pxv252sx": "Foto aus einer Beschwerde im Forum — Baustelle an Pier 3 im Neuhafen bei Tag",
 });

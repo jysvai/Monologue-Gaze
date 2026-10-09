@@ -690,7 +690,7 @@ MG.I18N.put("de", "c06", {
 "t31yorfqc9": "Ich sagte doch, wir haben uns in der Lobby einmal gegrüßt, das ist alles.",
 "1wxj3da7tsh": "Ich war erschrocken, als ich es in der Zeitung las. Wirklich.",
 "1f5rw327sng": "…Am 17. um zehn Uhr abends habe ich das [[Postschiff|k_kystrute]] genommen. Am 20. bin ich in Nordvåg von Bord gegangen. Der Zahlmeister hat die Passagierliste.",
-"16oc6wd3zo8": "Der 18.? Am Tag davor habe ich Hellesund verlassen. Muss ich Ihnen auch noch erzählen, was danach war?",
+"7l50xcm0i1": "Der 18.? Am Tag davor habe ich Hellesund verlassen. Meine Kunden dort sind nur ein paar, alle in der Stadt, die habe ich zu Fuß abgeklappert. Muss ich Ihnen auch noch erzählen, was danach war?",
 "2daidaebn2w": "Im Bryggen wohne ich auf jeder Dienstreise. Zimmer 305 ist praktisch meins.",
 "1zadf3ofvr1": "Brate? Den Namen kenne ich nicht.",
 "291ysrz5i04": "Schiffsnamen kenne ich nicht. Ich verkaufe nur Maschinen.",
@@ -774,5 +774,5 @@ MG.I18N.put("de", "c06", {
 "kvs0uca36k": "Meldezettel für Ausländer, Hotel Bryggen",
 "tkirj6zy7i": "Hüttenbuch — die Kvitdalshütte auf dem Bergrücken",
 "266lvcn6omp": "Zeitung von 1968 — Frachter im Sturm (unscharfes Foto)",
-"a49pc2clbg": "Anschreibebuch — Tankstelle am Kvitdalsveien"
+"a49pc2clbg": "Anschreibebuch — Tankstelle am Kvitdalsveien",
 });
