@@ -2672,7 +2672,7 @@
   function scanPins() {
     const pr = $('#paneRead');
     if (!pr || !C || !ST || document.hidden) return;
-    const box = pr.getBoundingClientRect(), top = Math.max(box.top, 0), bot = Math.min(box.bottom, window.innerHeight);
+    const ph = $('.per-h.has-face', pr), box = pr.getBoundingClientRect(), top = Math.max(box.top, ph ? ph.getBoundingClientRect().bottom : 0, 0), bot = Math.min(box.bottom, window.innerHeight); // 얼굴 머리띠 밑에 깔린 줄은 아직 읽지 않은 것
     if (bot - top < 40) return;
     const refs = $$('.pin:not(.on)', pr).filter(b => {
       const q = PIN[b.dataset.pin];
