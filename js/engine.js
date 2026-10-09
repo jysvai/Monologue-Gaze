@@ -638,7 +638,10 @@
     const src = T`${p.name} 탐문`;
     const shut = clammed(p), vsOpen = !shut && proof().length > 0 && !(PICK && PICK.pid === p.id); // 대답마다 붙는 「메모를 내민다」: 내밀 메모가 있고, 입을 닫지 않았을 때
     let tr = `<div class="qa qa-first" data-qa="_">${chatLines(p.intro, `${p.id}@_`, src)}</div>`;
-    tr += asked.map(e => {
+    // 따져 물은 대답은 그 진술 바로 밑에 (긴 탐문에서도 깨진 진술과 「모순」 도장, 새 대답이 한자리에 보이게)
+    const order = [];
+    asked.forEach(e => { if (e.endsWith('!') && asked.includes(e.slice(0, -1))) return; order.push(e); if (!e.endsWith('!') && asked.includes(e + '!')) order.push(e + '!'); });
+    tr += order.map(e => {
       const k = e.replace(/!$/, ''), press = e.endsWith('!');
       const hid = press && ST.held && ST.held[`${p.id}|${e}`], held = hid != null && ST.notes.find(x => String(x.id) === String(hid));
       const ev = press ? (held ? [held] : evidence(p, k)) : [];
@@ -1566,7 +1569,7 @@
     const sign = C.frame === 'crt' || C.frame === 'laptop' ? `<table class="rep-sign" aria-label="${T`결재`}"><tr><th>${T`담당`}</th><th>${T`팀장`}</th><th>${T`과장`}</th></tr><tr><td>${esc(who(me))}</td><td>${ST.solved ? T('<span class="ok">결재</span>') : back ? T('<span class="no">반려</span>') : ''}</td><td>${ST.solved ? T('<span class="ok">결재</span>') : ''}</td></tr></table>` : '';
     return `<article class="doc skin-report rep-view"><header class="doc-h">${sign}<p class="doc-k">${esc(FM.title)}</p><h3 class="doc-t">${esc(C.title)}</h3><p class="doc-m">${esc(FM.lead)}</p></header>
       <div class="doc-b"><form id="rep" autocomplete="off"${shut ? ' class="shut"' : ''}>
-        <section class="rep-sec"><h4 id="rh-culprit">${esc(FM.culprit)}</h4><div class="rep-people" role="radiogroup" aria-labelledby="rh-culprit">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => { const per = Object.values(C.people || {}).find(x => x.key === k), fc = per && faceOf(per); return `<label class="rep-per${fc ? ' has-face' : ''}${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}>${fc ? portrait(per) : ''}<b>${esc(kl(k))}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}${shut ? '' : thWho(k)}</label>`; }).join('') || T('<p class="rep-empty">수첩에 적힌 인물이 없다.</p>')}</div></section>
+        <section class="rep-sec"><h4 id="rh-culprit">${esc(FM.culprit)}</h4><div class="rep-people" role="radiogroup" aria-labelledby="rh-culprit">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => { const per = Object.values(C.people || {}).find(x => x.key === k), fc = per && faceOf(per), anyFace = Object.values(C.people || {}).some(faceOf); return `<label class="rep-per${anyFace ? ' has-face' : ''}${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}>${fc ? portrait(per) : anyFace ? `<span class="face none" aria-hidden="true">${esc(Array.from(plain(kl(k)))[0] || '?')}</span>` : ''}<b>${esc(kl(k))}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}${shut ? '' : thWho(k)}</label>`; }).join('') || T('<p class="rep-empty">수첩에 적힌 인물이 없다.</p>')}</div></section>
         ${sol.claims.map(claim).join('')}
         <p class="submit-row">${shut ? `<span class="rep-filed">${esc(FM.filed || (C.frame === 'papers' ? T('종결 · 철해 둠') : T('결재 완료')))}</span>` : `<button type="submit" class="btn-hand">${esc(FM.submit)}</button>`}<span class="tries">${ST.tries ? T`올린 횟수 ${ST.tries}` : ''}</span></p>
       </form><p class="verdict">${esc(VERDICT)}</p>${ST.solved ? `<div class="rep-solved">${solvedHtml(false, true)}</div>` : ''}</div></article>`;
@@ -2765,7 +2768,8 @@
     tmp().met.add(p.id);
     renderRead(); renderList();
     const qa = $$('.per-tr .qa').find(x => x.dataset.qa === e);
-    if (qa) $('#paneRead').scrollTop = qa.offsetTop - 12;
+    const was = e.endsWith('!') && $$('.per-tr .qa').find(x => x.dataset.qa === e.slice(0, -1)); // 따질 때는 깨질 진술의 끝자락(도장이 찍힐 자리)도 함께 보이게
+    if (qa) { const pr = $('#paneRead'), hh = (($('#paneRead .per-h.has-face') || {}).offsetHeight || 0); pr.scrollTop += qa.getBoundingClientRect().top - pr.getBoundingClientRect().top - 12 - hh - (was ? Math.min(was.offsetHeight, 150) : 0); } // 붙박이 얼굴 칸 밑으로
     if (census() > before) renderTabs();
     if (fresh) playAsk(p, e);
     else if (qa) { qa.classList.remove('flash'); void qa.offsetWidth; qa.classList.add('flash'); }
