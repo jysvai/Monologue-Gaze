@@ -567,7 +567,7 @@
     const list = groups.map(([g, t, ns]) => ns.length || (g === 'sus' && !(ST.sus || []).length) ? `<details class="pk-g pk-${g}" data-pk-g="${g}"${G[g] ?? (g === 'lead' || g === 'sus') ? ' open' : ''}><summary>${t} <small>${ns.length}</small></summary>${ns.length ? ns.map(opt).join('') : `<p class="pk-hint">${T('수첩의 메모 끝 「?」를 누르면 의심으로 표시해 둔다. 표시한 메모는 여기 따로 모인다.')}</p>`}</details>` : '').join('');
     return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
       <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${groups[0][2].length ? '' : `<p class="pk-hint pk-nolead">${T('이 사람이 한 말과 어긋나 보이는 메모는 아직 수첩에 없다.')}</p>`}${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
-      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${T('이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.')}</p>` : ''}${PICK.other ? `<p class="vs-part">${T('이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.')}</p>` : ''}
+      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${T('이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.')}</p>` : ''}${PICK.other ? `<p class="vs-part">${T('이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.')}</p>` : ''}${PICK.later ? `<p class="vs-part">${T('이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 다른 것부터 물어본다.')}</p>` : ''}
       ${groups[0][2].length ? `<p class="vs-left">${T`엉뚱한 메모를 ${VS_MAX() - ((vsOf(p) || {}).n || 0)}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.`}</p>` : ''}</div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
   }
   // 고르는 칸을 다시 그린다: 찾던 낱말 · 목록을 굴린 자리는 그대로 (메모가 많아도 방금 누른 메모가 제자리에 남게)
@@ -600,13 +600,17 @@
     PICK.tries = (PICK.tries || 0) + 1;
     const near = !fits && [].concat(ra.close || []).find(c => (c.f || []).some(w => fIs(n.f, w))); // 여러 개일 수 있다: 메모마다 그 사람다운 핑계
     PICK.part = fits; // 맞는 메모지만 함께 맞댈 기록이 아직 모자라다 — 헛짚기로 치지 않는다
-    PICK.other = !fits && !near && ((leadMap().get(n.id) || { vs: [] }).vs.some(v => v.pid === p.id && v.k !== k)); // 유력한 메모를 같은 사람의 다른 대답에 댔다 — 길은 맞으니 헛짚기로 치지 않고 그 대답 쪽으로
+    // 이 사람의 다른 추궁 갈래에 맞는 메모: 들은 대답이면 그쪽으로, 아직 묻지 않은 것이면 그것부터 물어 오게 — 어느 쪽이든 길은 맞으니 헛짚기로 치지 않는다
+    const heard = ST.asked[p.id] || [], wantOf = k2 => { const r = rawAns(p, k2) || {}; return r.take || (r.need || []).flatMap(x => x.split('|')).filter(x => x[0] === '!').map(x => x.slice(1)); };
+    const fitAsk = [...Object.keys(p.ask || {}), ...(p.key ? [p.key] : [])].filter(k2 => k2 !== k && isPressAsk(p, k2) && wantOf(k2).some(w => fIs(n.f, w)));
+    PICK.other = !fits && !near && ((leadMap().get(n.id) || { vs: [] }).vs.some(v => v.pid === p.id && v.k !== k) || fitAsk.some(k2 => heard.includes(k2))); // 유력한 메모를 같은 사람의 다른 대답에 댔다 — 길은 맞으니 헛짚기로 치지 않고 그 대답 쪽으로
+    PICK.later = !fits && !near && !PICK.other && fitAsk.length > 0;
     PICK.miss = fits ? (isSoft(p, k) ? T('(메모를 한참 들여다본다) …이것만으로는 잘 모르겠어요.') : T('(메모를 보고 잠시 멈칫한다) …그것 하나로 뭘 말씀하시려는 겁니까?'))
       : near ? near.a : missLine(p, isSoft(p, k), PICK.tries - 1); // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다 (헛짚기로 치지 않는다)
     sfx('miss');
-    const react = fits || near || PICK.other ? 'flinch' : 'nope'; // 얼굴은 다시 그린 뒤에 (먼저 걸면 다시 그리면서 사라진다)
+    const react = fits || near || PICK.other || PICK.later ? 'flinch' : 'nope'; // 얼굴은 다시 그린 뒤에 (먼저 걸면 다시 그리면서 사라진다)
     const noLead = !proof().some(x => (leadMap().get(x.id) || { vs: [] }).vs.some(v => v.pid === p.id)); // 이 사람의 말과 어긋나는 메모가 수첩에 하나도 없으면 (고르는 칸이 그렇다고 알려 준다) 헛짚어도 참을성은 깎지 않는다
-    if (!fits && !near && !PICK.other && !noLead) {
+    if (!fits && !near && !PICK.other && !PICK.later && !noLead) {
       const v = (ST.vs ||= {})[p.id] ||= { n: 0 };
       v.n++;
       if (v.n >= VS_MAX()) { v.shut = proof().length; v.last = PICK.miss; PICK = null; save(); renderRead(); faceAnim('nope', 700); land(['#paneRead .vs-shut', '#askChips .chip']); return; }
@@ -2377,7 +2381,15 @@
     if (actx.state === 'suspended') actx.resume().catch(() => {});
     return actx;
   };
-  const SFXFILE = { stamp: 'solved', lock: 'unlock' };
+  // 수사 소리는 실제 녹음이다 (audio/sfx/CREDITS.md). 찾기·단서·맞아떨어짐·열림·헛짚음은 사건의 시대를 따른다:
+  // 종이 기록 사건은 연필 동그라미·체크·덧그어 지우기·스테이플러·서랍 열쇠, 화면 속 사건(모니터·노트북)은 마우스와 사진기·엔터·백스페이스·화이트보드 자석·두 번 누름.
+  // 도장·책상에 놓는 기록철·봉투에서 꺼내는 사진·무전·휴대폰 진동은 어느 시대든 같다. 북·낮게 가라앉는 울림은 쓰지 않는다 (「기괴하다」는 말을 듣고, 2026-10-10)
+  const ERA = /^(find|clue|match|unlock|miss)$/;
+  const SFXFILE = { stamp: 'solved_stamp', solved: 'solved_stamp', confess: 'confess_desk', dread: 'dread_envelope', gore: 'dread_envelope', radio: 'radio_squelch', buzz: 'buzz_phone' };
+  const sfxFile = kind => (ERA.test(kind) ? kind + (C && C.frame !== 'papers' ? '_screen' : '_paper') : SFXFILE[kind] || kind);
+  // 오래된 종이 사건일수록 높은 소리를 조금 깎아 어둑하게 (3kHz 위를 1950년 앞은 5dB, 1980년 앞은 2.5dB)
+  const eraDark = () => { if (!C || C.frame !== 'papers') return 0; const y = parseInt(C.year, 10) || 2000; return y < 1950 ? 5 : y < 1980 ? 2.5 : 0; };
+  const VARY = /^(find|clue|miss|match)$/; // 자주 나는 수사 소리는 매번 조금씩 다르게
   // 수첩·보고서에 적는 소리는 사건의 시대를 따른다: 1950년 앞은 연필, 1990년 앞의 종이 사건은 타자기, 90년대 종이 사건은 옛 컴퓨터 자판, 2006년 모니터는 사무용 자판, 노트북은 얕은 자판
   const inkKind = () => {
     if (!C) return 'write';
@@ -2391,39 +2403,32 @@
     if (!S.sound) return;
     if (kind === 'page' && C) kind = C.frame === 'laptop' ? 'click' : C.frame === 'crt' ? 'key' : 'page'; // 화면 속 문서는 종이 넘기는 소리 대신 딸깍
     if (kind === 'ink') kind = inkKind();
-    if (MG.sound && MG.sound.play('sfx/' + (SFXFILE[kind] || kind), SMALL.test(kind) ? 0.5 : 0.9)) return;
+    if (kind === 'lock') kind = 'unlock';
+    const small = SMALL.test(kind);
+    if (MG.sound && MG.sound.play('sfx/' + sfxFile(kind), small ? 0.5 : 0.9, small ? null : { dark: eraDark(), vary: VARY.test(kind) })) return;
     if (kind === 'write') kind = 'pen';
     else if (/^(typewriter|tw1|oldkbd|kbd|tap)$/.test(kind)) kind = 'key';
+    else if (kind === 'solved') kind = 'stamp';
     try {
       if (!ac()) return;
       const t = actx.currentTime;
-      const noise = (dur, type, freq, q, gain) => {
+      // 걸러 낸 잡음 한 번 (at: 몇 초 뒤에). 두 번째 소리도 판의 시계로 잡는다 — setTimeout 으로 미루면 지나간 시각에 맞춰져 들리지 않는다
+      const noise = (dur, type, freq, q, gain, at = 0) => {
         const len = Math.floor(actx.sampleRate * dur);
         const buf = actx.createBuffer(1, len, actx.sampleRate);
         const d = buf.getChannelData(0);
         for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
         const src = actx.createBufferSource(); src.buffer = buf;
         const f = actx.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = q;
-        const g = actx.createGain(); g.gain.setValueAtTime(gain, t); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
-        src.connect(f).connect(g).connect(actx.destination); src.start(t);
+        const g = actx.createGain(); g.gain.setValueAtTime(gain, t + at); g.gain.exponentialRampToValueAtTime(0.001, t + at + dur);
+        src.connect(f).connect(g).connect(actx.destination); src.start(t + at);
       };
-      if (kind === 'pen') { noise(0.09, 'bandpass', 1900, 0.9, 0.16); setTimeout(() => noise(0.07, 'bandpass', 1600, 0.9, 0.11), 90); }
+      if (kind === 'pen') { noise(0.09, 'bandpass', 1900, 0.9, 0.16); noise(0.07, 'bandpass', 1600, 0.9, 0.11, 0.09); }
       else if (kind === 'page') noise(0.22, 'lowpass', 1400, 0.7, 0.22);
       else if (kind === 'click' || kind === 'key') noise(kind === 'key' ? 0.06 : 0.03, 'highpass', kind === 'key' ? 1800 : 3500, 0.8, 0.2);
-      else if (kind === 'stamp') {
-        const o = actx.createOscillator(); const g = actx.createGain();
-        o.frequency.setValueAtTime(120, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.18);
-        g.gain.setValueAtTime(0.5, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
-        o.connect(g).connect(actx.destination); o.start(t); o.stop(t + 0.26);
-        noise(0.12, 'lowpass', 900, 0.8, 0.3);
-      } else if (kind === 'lock') noise(0.05, 'highpass', 4000, 0.8, 0.15);
-      else if (kind === 'dread') { // 🔞 사진을 열 때: 낮게 가라앉는 울림
-        const o = actx.createOscillator(); const g = actx.createGain();
-        o.type = 'sine'; o.frequency.setValueAtTime(64, t); o.frequency.exponentialRampToValueAtTime(40, t + 1.9);
-        g.gain.setValueAtTime(0.001, t); g.gain.exponentialRampToValueAtTime(0.34, t + 0.35); g.gain.exponentialRampToValueAtTime(0.001, t + 2.1);
-        o.connect(g).connect(actx.destination); o.start(t); o.stop(t + 2.15);
-        noise(1.4, 'lowpass', 260, 0.6, 0.14);
-      } else if (kind === 'buzz') { // 휴대폰 진동 두 번: 낮은 사각파가 책상 위에서 드르륵
+      else if (kind === 'stamp') { noise(0.025, 'highpass', 2200, 0.8, 0.12); noise(0.1, 'bandpass', 700, 0.8, 0.14); } // 도장이 종이에 닿는 소리: 탁 (음높이 없는 잡음만)
+      else if (kind === 'dread' || kind === 'gore') noise(0.35, 'bandpass', 2600, 0.6, 0.04); // 🔞 사진을 꺼낼 때: 봉투에서 사진이 미끄러져 나오는 사각 소리
+      else if (kind === 'buzz') { // 휴대폰 진동 두 번: 낮은 사각파가 책상 위에서 드르륵
         [0, 0.26].forEach(at => {
           const o = actx.createOscillator(); const g = actx.createGain(); const f = actx.createBiquadFilter();
           o.type = 'square'; o.frequency.setValueAtTime(148, t + at); f.type = 'lowpass'; f.frequency.value = 420;
@@ -2456,18 +2461,12 @@
         o.type = 'square'; o.frequency.value = 1320;
         g.gain.setValueAtTime(0.0001, t + 0.3); g.gain.exponentialRampToValueAtTime(0.035, t + 0.31); g.gain.setValueAtTime(0.035, t + 0.38); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
         o.connect(g).connect(actx.destination); o.start(t + 0.3); o.stop(t + 0.42);
-      } else { // 낮은 북 한 번: 음높이가 뚝 떨어지는 사인파 + 가죽 치는 잡음. 어느 것이든 한 번만, 작게 (두두둥 하고 요란하게 울리지 않게)
-        const drum = (at, f0, v, len) => {
-          const o = actx.createOscillator(); const g = actx.createGain();
-          o.frequency.setValueAtTime(f0, t + at); o.frequency.exponentialRampToValueAtTime(f0 * 0.42, t + at + len);
-          g.gain.setValueAtTime(0.0001, t + at); g.gain.exponentialRampToValueAtTime(v, t + at + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + at + len);
-          o.connect(g).connect(actx.destination); o.start(t + at); o.stop(t + at + len + 0.05);
-        };
-        if (kind === 'clue' || kind === 'find') { drum(0, 110, 0.45, 0.5); noise(0.08, 'bandpass', 900, 1, 0.12); }
-        else if (kind === 'match' || kind === 'solved') { drum(0, 95, 0.3, 0.5); noise(0.3, 'lowpass', 300, 0.7, 0.1); }
-        else if (kind === 'confess') { drum(0, 80, 0.3, 0.35); }
-        else if (kind === 'miss') { drum(0, 140, 0.35, 0.18); noise(0.12, 'lowpass', 400, 0.8, 0.2); }
-        else if (kind === 'unlock') { noise(0.05, 'highpass', 4000, 0.8, 0.15); drum(0.12, 100, 0.4, 0.5); }
+      } else { // 파일을 못 받았을 때: 북·떨어지는 음 없이 짧게 거른 잡음만 — 연필로 긋는 사각, 종이·책상에 닿는 탁, 자물쇠 딸깍
+        if (kind === 'clue' || kind === 'find') { noise(0.05, 'bandpass', 3200, 0.9, 0.06); noise(0.09, 'bandpass', 2700, 0.9, 0.05, 0.08); }
+        else if (kind === 'match') { noise(0.02, 'highpass', 2600, 0.8, 0.1); noise(0.08, 'bandpass', 1100, 0.8, 0.08); }
+        else if (kind === 'confess') noise(0.08, 'bandpass', 650, 0.9, 0.1);
+        else if (kind === 'miss') { noise(0.07, 'bandpass', 1800, 0.8, 0.05); noise(0.07, 'bandpass', 1500, 0.8, 0.045, 0.09); }
+        else if (kind === 'unlock') { noise(0.03, 'highpass', 3500, 0.8, 0.09); noise(0.04, 'highpass', 2600, 0.8, 0.08, 0.12); }
       }
     } catch (e) { /* audio unavailable */ }
   }
@@ -2794,7 +2793,11 @@
     // 이미 물은 것을 다시 누르면(두 번 톡 누름 포함) 그 대답만 짚어 준다 — 한창 나오는 대답을 다시 그려 끊지 않는다
     if (!fresh && (TALK && TALK.alive() || e !== e0)) {
       const q0 = $$('.per-tr .qa').find(x => x.dataset.qa === e);
-      if (q0) { q0.classList.remove('flash'); void q0.offsetWidth; q0.classList.add('flash'); }
+      if (q0) {
+        const pr = $('#paneRead'), hh = (($('#paneRead .per-h.has-face') || {}).offsetHeight || 0), dy = q0.getBoundingClientRect().top - pr.getBoundingClientRect().top - 12 - hh;
+        if (!(TALK && TALK.alive()) && (dy < 0 || dy > pr.clientHeight * 0.6)) pr.scrollTo({ top: pr.scrollTop + dy, behavior: reduced() ? 'auto' : 'smooth' }); // 화면 밖의 대답이면 그 자리로 (깜빡임이 보이게)
+        q0.classList.remove('flash'); void q0.offsetWidth; q0.classList.add('flash');
+      }
       return;
     }
     if (fresh) a.push(e);

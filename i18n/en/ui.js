@@ -89,6 +89,7 @@ MG.I18N.put("en", "ui", {
 "그 낱말이 든 메모가 없다.": "No note contains that word.",
 "이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.": "This memo looks right, but the record to set beside it isn’t in the notebook yet. Find that first.",
 "이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.": "Try this note against a different answer this person gave.",
+"이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 다른 것부터 물어본다.": "You haven't yet heard anything from this person that this note would contradict. Ask about other things first.",
 "엉뚱한 메모를 {0}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.": "Hold out {0} more wrong note(s) and they stop talking. Note something new and you can press again.",
 "(메모를 한참 들여다본다) …이것만으로는 잘 모르겠어요.": "(Studies the note for a long while) …I can't say, from just this.",
 "(메모를 보고 잠시 멈칫한다) …그것 하나로 뭘 말씀하시려는 겁니까?": "(Glances at the note and stops for a moment) …And what is that one thing supposed to prove?",
