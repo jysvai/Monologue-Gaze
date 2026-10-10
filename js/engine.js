@@ -605,7 +605,7 @@
     const fitAsk = [...Object.keys(p.ask || {}), ...(p.key ? [p.key] : [])].filter(k2 => k2 !== k && isPressAsk(p, k2) && wantOf(k2).some(w => fIs(n.f, w)));
     PICK.other = !fits && !near && ((leadMap().get(n.id) || { vs: [] }).vs.some(v => v.pid === p.id && v.k !== k) || fitAsk.some(k2 => heard.includes(k2))); // 유력한 메모를 같은 사람의 다른 대답에 댔다 — 길은 맞으니 헛짚기로 치지 않고 그 대답 쪽으로
     PICK.later = !fits && !near && !PICK.other && fitAsk.length > 0;
-    PICK.miss = fits ? (isSoft(p, k) ? T('(메모를 한참 들여다본다) …이것만으로는 잘 모르겠어요.') : T('(메모를 보고 잠시 멈칫한다) …그것 하나로 뭘 말씀하시려는 겁니까?'))
+    PICK.miss = fits ? (isSoft(p, k) ? T('(메모를 한참 들여다본다)') : T('(메모를 보고 잠시 멈칫한다)')) // 몸짓만: 하오체로 말하는 사람이 존댓말로 되묻지 않게 (밑의 줄이 무엇이 모자란지 알려 준다)
       : near ? near.a : missLine(p, isSoft(p, k), PICK.tries - 1); // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다 (헛짚기로 치지 않는다)
     sfx('miss');
     const react = fits || near || PICK.other || PICK.later ? 'flinch' : 'nope'; // 얼굴은 다시 그린 뒤에 (먼저 걸면 다시 그리면서 사라진다)
@@ -750,7 +750,10 @@
       items.forEach(el => { el.classList.remove('wait', 'typing'); const h = me.saved.get(el); if (h != null) el.querySelector('.c-t').innerHTML = h; });
       me.saved.clear();
       qa.classList.remove('live');
-      scanSoon(500); // 다 들은 대답 속 증거는 그때 적는다
+      // 다 들은 대답 속 증거는 그때 적는다 — 화면 밖으로 밀려 올라간 줄도 (이어서 빨리 물으면 앞 대답의 증거가 읽는 칸을 스쳐 지나가 영영 안 적히던 것)
+      const heard = [...qa.querySelectorAll('.pin:not(.on)')].map(b => b.dataset.pin).filter(r => { const q = PIN[r]; return q && q.f && !(ST.drop || []).includes(r); }), st0 = ST;
+      if (heard.length) setTimeout(() => { if (ST === st0) collect([...new Set(heard)]); }, quiet ? 700 : 400);
+      scanSoon(500);
       if (!quiet) leadNews(); // 방금 들은 진술과 어긋나는 메모가 수첩에 있으면 그때 알린다
       if (!quiet && opt.tell) setTimeout(faceTell, 260);
     };
@@ -1755,10 +1758,10 @@
   // 탐문에서 들은 말이면 그 사람 id (대답 줄의 ref 는 「사람id@물은것#줄」)
   const heardNote = n => { const w = String(n.ref || '').split('@')[0]; return n.ref && String(n.ref).includes('@') && C.people[w] ? w : null; };
   // 「유력!」에 붙는 한 줄: 무엇과 맞물렸는지 (★5 는 사람 이름을 대지 않는다)
-  function leadTip(e) {
+  function leadTip(e, skip = []) { // skip: 함께 알리는 메모 번호 (「메모 37·39번 — 39번 메모와 맞물린다」처럼 저를 짝으로 대지 않게)
     const out = [];
     if (e.vs.length) { const who = [...new Set(e.vs.map(v => v.pid))].map(id => pname(C.people[id])); out.push(lv() >= 5 ? T('들은 진술과 어긋난다') : T`${who.join('·')}의 대답과 어긋난다`); }
-    const by = [...new Set(e.rep.flatMap(r => r.by.map(x => noteNo(x.id))))].filter(Boolean).sort((a, b) => a - b);
+    const by = [...new Set(e.rep.flatMap(r => r.by.map(x => noteNo(x.id))))].filter(n => n && !skip.includes(n)).sort((a, b) => a - b);
     if (by.length) out.push(T`${by.slice(0, 5).join('·')}번 메모와 맞물린다`);
     if (e.rep.some(r => r.broke)) out.push(T('진술을 깨뜨린 기록이다'));
     return out.join(' · ');
@@ -1779,7 +1782,7 @@
     renderNotebook();
     fresh.forEach(id => { const li = $(`.notes li[data-nid="${id}"]`); if (!li) return; const d = li.closest('details'); if (d && !d.open) d.open = true; li.classList.remove('lit'); void li.offsetWidth; li.classList.add('lit'); });
     const nums = fresh.map(noteNo).filter(Boolean).sort((a, b) => a - b), e = LM.get(ST.notes[nums[0] - 1].id);
-    setTimeout(() => { if (!ST.solved) { toast(T`유력! 메모 ${nums.join('·')}번 — ${leadTip(e).split(' · ')[0]}`, 3000); sfx('match'); } }, 900);
+    setTimeout(() => { if (!ST.solved) { toast(leadTip(e, nums) ? T`유력! 메모 ${nums.join('·')}번 — ${leadTip(e, nums).split(' · ')[0]}` : T`유력! 메모 ${nums.join('·')}번`, 3000); sfx('match'); } }, 900);
     return true;
   }
 
@@ -2126,7 +2129,7 @@
   }
   function renderCase() {
     document.body.dataset.screen = 'case'; applyTs();
-    if (gore() && MG.sound && MG.sound.preload) MG.sound.preload(['sfx/gore', 'sfx/bonesaw']); // 끔찍한 기록을 처음 펼칠 때 날 소리
+    if (gore() && MG.sound && MG.sound.preload) MG.sound.preload(['sfx/dread_envelope']); // 끔찍한 기록을 처음 펼칠 때 날 소리
     app.innerHTML = `${deskProps()}${gore() ?`<div class="gore-bg" aria-hidden="true">${stains(C.id + 'bg', 5, 'aacb', true)}</div>` : ''}<div class="case-view" data-case="${esc(C.id)}" data-frame="${esc(C.frame || 'papers')}" data-era="${(y => y < 1945 ? 'old' : y < 1980 ? 'mid' : '')(parseInt(C.year, 10) || 2000)}"${gore() ? ' data-graphic' : ''}>
       <main class="stage" aria-label="${T`조사 자료`}">
         <div class="stage-frame"><span class="cam" aria-hidden="true"></span>
@@ -2357,7 +2360,7 @@
       ${live.length ? `<section class="duty" aria-label="${T`현행 사건`}"><h2 class="duty-h">${T`당직 · 현행 사건`}</h2><p class="duty-sub">${T`몇 해 전 실제로 돌았던 현행 사건을 그날 그 시각부터 다시 돌리는 당직 훈련이다. 지원으로 붙은 형사 자리에 앉는다. 문서를 읽고 묻고 조회할 때마다 수사 시계가 돈다.`}</p><div class="drawer">${live.map(folder).join('')}</div></section>` : ''}
       ${mList.length ? `<section class="mbox"><h2>${T`M의 메모`}</h2><p class="mbox-sub">${T`기록 여백과 화면에 붙은 포스트잇에 남아 있던, 선배의 글씨.`}</p><ul>${mList.map(c => `<li${newM.includes(c.id) ? ' class="fresh"' : ''}><span class="mbox-case">CASE ${pad(c.no)}</span> ${esc(plain(c._m))}</li>`).join('')}</ul></section>` : ''}
       ${letter}
-      <footer class="cab-foot">${unsaved ? T('<p class="unsaved" role="note">이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다.</p>') : ''}<p>${T`모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.`}</p><p class="credit">${T`목소리·효과음`} <a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a></p><button type="button" class="reset" data-wipe>${roster().list.length > 1 ? T('내 기록 지우기') : T('모든 기록 지우기')}</button></footer>
+      <footer class="cab-foot">${unsaved ? T('<p class="unsaved" role="note">이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다.</p>') : ''}<p>${T`모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.`}</p><p class="credit">${T`목소리`} <a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a> · ${T`효과음`} <a href="https://freesound.org" target="_blank" rel="noopener">Freesound</a>·<a href="https://kenney.nl" target="_blank" rel="noopener">Kenney</a> (CC0)</p><button type="button" class="reset" data-wipe>${roster().list.length > 1 ? T('내 기록 지우기') : T('모든 기록 지우기')}</button></footer>
     </div>`;
     // 막 종결한 사건이면 그 폴더까지 내려가 도장을 찍는다
     const fresh = $('.f-stamp.fresh');

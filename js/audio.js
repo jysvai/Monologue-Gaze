@@ -8,7 +8,19 @@
   const MG = window.MG;
   const S = () => MG.state();
   const A = () => MG.audio || { files: {}, span: {}, tone: {} };
-  const url = k => A().files[k];
+  // 수사 소리: 실제로 녹음한 연필·도장·자물쇠·마우스 소리 (CC0, 출처는 audio/sfx/CREDITS.md). 엔진이 사건의 시대에 맞는 것을 고른다 (engine.js sfxFile).
+  // audio/manifest.js 는 tools/voices.js 가 ElevenLabs 로 만든 소리만 적으므로 여기 따로 둔다. 주소 뒤 ?v= 는 파일 내용 해시 (같은 이름으로 바꿔 넣어도 옛 소리를 붙들지 않게)
+  const FOLEY = {
+    'sfx/find_paper': 'audio/sfx/find_paper.mp3?v=f9230f9f', 'sfx/find_screen': 'audio/sfx/find_screen.mp3?v=39040b36',
+    'sfx/clue_paper': 'audio/sfx/clue_paper.mp3?v=be9d20c3', 'sfx/clue_screen': 'audio/sfx/clue_screen.mp3?v=6ef4dd62',
+    'sfx/match_paper': 'audio/sfx/match_paper.mp3?v=31f11a1b', 'sfx/match_screen': 'audio/sfx/match_screen.mp3?v=e063ebe3',
+    'sfx/unlock_paper': 'audio/sfx/unlock_paper.mp3?v=98086feb', 'sfx/unlock_screen': 'audio/sfx/unlock_screen.mp3?v=b5992052',
+    'sfx/miss_paper': 'audio/sfx/miss_paper.mp3?v=34aa9b00', 'sfx/miss_screen': 'audio/sfx/miss_screen.mp3?v=bd48b8d2',
+    'sfx/solved_stamp': 'audio/sfx/solved_stamp.mp3?v=bd104a2d', 'sfx/confess_desk': 'audio/sfx/confess_desk.mp3?v=def5754d',
+    'sfx/dread_envelope': 'audio/sfx/dread_envelope.mp3?v=de0c3e1f', 'sfx/radio_squelch': 'audio/sfx/radio_squelch.mp3?v=f222491f',
+    'sfx/buzz_phone': 'audio/sfx/buzz_phone.mp3?v=201adbc0',
+  };
+  const url = k => FOLEY[k] || A().files[k];
   // 자주 나는 잔소리(종이·연필·자판·타자기)
   const SMALL = /^sfx\/(pen|page|click|key|write|typewriter|tw1|oldkbd|kbd|tap)$/;
 
@@ -43,7 +55,8 @@
   }
 
   // 효과음: 겹쳐 울려도 된다. 아직 받는 중이면 받는 대로 (너무 늦으면 그 소리는 건너뛴다)
-  let play = function (k, vol) {
+  // opt.dark: 3kHz 위를 몇 dB 깎을지 (옛 종이 사건일수록 어둑하게) · opt.vary: 자주 나는 수사 소리를 매번 조금씩 다르게
+  let play = function (k, vol, opt) {
     if (!S().sound || !url(k)) return false;
     const c = ctx(), p = load(k);
     if (!c || !p) return false;
@@ -56,8 +69,11 @@
       const small = SMALL.test(k);
       let v = vol == null ? 0.9 : vol;
       if (small) { src.playbackRate.value = 0.92 + Math.random() * 0.16; v *= 0.85 + Math.random() * 0.15; }
+      else if (opt && opt.vary) { src.playbackRate.value = 0.96 + Math.random() * 0.08; v *= 0.88 + Math.random() * 0.12; }
       g.gain.value = v;
-      src.connect(g).connect(fx);
+      let head = src;
+      if (opt && opt.dark > 0) { const f = c.createBiquadFilter(); f.type = 'highshelf'; f.frequency.value = 3000; f.gain.value = -opt.dark; head = src.connect(f); }
+      head.connect(g).connect(fx);
       src.start();
     };
     if (p.buf) go(p.buf); else p.then(go);
@@ -125,12 +141,12 @@
   if (location.protocol === 'file:') {
     const pool = {};
     const get = k => { const u = url(k); if (!u) return null; if (!pool[k]) { pool[k] = new Audio(u); pool[k].preload = 'auto'; } return pool[k]; };
-    play = (k, vol) => {
+    play = (k, vol, opt) => { // opt.dark 는 여기서 쓰지 않는다 (<audio> 에는 거르개를 달 수 없다)
       if (!S().sound) return false;
       const a0 = get(k); if (!a0) return false;
       const a = a0.paused ? a0 : a0.cloneNode();
-      const small = SMALL.test(k);
-      a.volume = (vol == null ? 0.9 : vol) * (small ? 0.85 + Math.random() * 0.15 : 1); a.preservesPitch = !small; a.playbackRate = small ? 0.92 + Math.random() * 0.16 : 1;
+      const small = SMALL.test(k), vary = small || !!(opt && opt.vary);
+      a.volume = (vol == null ? 0.9 : vol) * (small ? 0.85 + Math.random() * 0.15 : vary ? 0.88 + Math.random() * 0.12 : 1); a.preservesPitch = !vary; a.playbackRate = small ? 0.92 + Math.random() * 0.16 : vary ? 0.96 + Math.random() * 0.08 : 1;
       try { a.currentTime = 0; } catch (e) { /* not loaded yet */ }
       a.play().catch(() => {}); return true;
     };
@@ -190,7 +206,7 @@
   const tone = id => A().tone[id] || 130;
 
   // 자주 쓰는 효과음은 첫 손길에 미리 받아 둔다 (소리가 꺼져 있으면 받지 않는다)
-  function warm() { if (S().sound) ['sfx/clue', 'sfx/match', 'sfx/confess', 'sfx/miss', 'sfx/find', 'sfx/pen', 'sfx/write', 'sfx/typewriter', 'sfx/tw1', 'sfx/oldkbd', 'sfx/kbd', 'sfx/tap', 'sfx/page', 'sfx/click', 'sfx/key'].forEach(load); }
+  function warm() { if (S().sound) [...Object.keys(FOLEY), 'sfx/pen', 'sfx/write', 'sfx/typewriter', 'sfx/tw1', 'sfx/oldkbd', 'sfx/kbd', 'sfx/tap', 'sfx/page', 'sfx/click', 'sfx/key'].forEach(load); }
   document.addEventListener('pointerdown', function once() { ctx(); warm(); document.removeEventListener('pointerdown', once); }, { passive: true });
 
   const preload = ks => { if (S().sound) ks.forEach(k => url(k) && load(k)); }; // 곧 날 소리를 미리 받아 둔다 (처음 한 번이 늦어 건너뛰지 않게)
