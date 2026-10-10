@@ -410,7 +410,9 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 .notes li.tip{color:var(--ink-soft)}
 .notes .n{color:var(--pencil)}
 .notes .src{color:var(--pencil);font-size:16px}
-.notes .del{position:absolute;right:0;top:4px;width:20px;height:20px;padding:0;border:0;background:none;color:var(--pencil);font:16px/1 var(--f-web);opacity:.5;cursor:pointer}
+.notes .del{position:absolute;right:0;top:4px;width:20px;height:20px;padding:0;border:0;background:none;color:var(--pencil);font:16px/1 var(--f-web);opacity:.62;cursor:pointer}
+.notes .del::after,.notes button.sus::after{content:"";position:absolute;inset:-8px} /* 보이는 크기는 그대로, 누르는 자리만 넓게 */
+.notes button.sus{position:relative}
 @media (hover:hover){.notes li:hover .del{opacity:1}}
 .notes .del:focus-visible{opacity:1}
 .n-rep{display:inline-block;min-width:1.35em;margin-left:6px;padding:1px 5px 0;border:1.5px solid rgba(176,52,42,.75);border-radius:50%;color:var(--red);font:19px/1.1 var(--f-hand);white-space:nowrap;text-align:center;vertical-align:1px;transform:rotate(-8deg)} /* 보고서에 붙인 메모: 빨간 연필로 친 주장 번호 동그라미 */
@@ -668,8 +670,8 @@ body:has(.case-view[data-graphic])::before{background:radial-gradient(ellipse at
 /* ───────── 좁은 화면(휴대폰)에서 찌그러지던 것들 ───────── */
 @container stage (max-width:520px){
   /* 진술·녹취: 말한 사람 이름이 길면 대사 칸이 한 글자 너비로 줄던 것 → 이름을 윗줄로 */
-  .b-say{grid-template-columns:minmax(0,1fr) auto}
-  .b-say .b-who{grid-column:1/-1;white-space:normal}
+  .b-say.b-say{grid-template-columns:minmax(0,1fr) auto} /* skins.css 의 같은 무게 규칙이 뒤에 와서 이기던 것 → 한 단계 무겁게 */
+  .b-say.b-say .b-who{grid-column:1/-1;white-space:normal}
   /* 사건 재구성 카드: 긴 시각 칸이 카드 글을 밀어내던 것 → 시각은 윗줄, 글은 아랫줄, 화살은 오른쪽 */
   .tl-e{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px}
   .tl-slot{min-width:0;grid-column:1}

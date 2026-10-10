@@ -683,10 +683,10 @@
     if (!h) return;
     const on = h.classList.contains('mini'), want = on ? pr.scrollTop > 24 : pr.scrollTop > 140;
     if (want === on) return;
-    const h0 = h.offsetHeight, t0 = pr.scrollTop;
+    const hgt = () => h.getBoundingClientRect().height, h0 = hgt(), t0 = pr.scrollTop; // 글자 크기(zoom)를 먹은 실제 높이
     h.classList.toggle('mini', want);
-    pr.scrollTop = want ? t0 + h.offsetHeight - h0 : t0; // 되돌릴 때는 맨 위로 온 것이니 그 자리 그대로 (브라우저가 스크롤을 붙잡아 밀어도 되돌린다)
-    pr.style.scrollPaddingTop = h.offsetHeight + 8 + 'px';
+    pr.scrollTop = want ? t0 + hgt() - h0 : t0; // 되돌릴 때는 맨 위로 온 것이니 그 자리 그대로 (브라우저가 스크롤을 붙잡아 밀어도 되돌린다)
+    pr.style.scrollPaddingTop = hgt() + 8 + 'px';
   }
   function faceHit() { const h = $('#paneRead .per-h.has-face'); if (!h || reduced()) return; h.classList.remove('hit'); void h.offsetWidth; h.classList.add('hit'); setTimeout(() => h.classList.remove('hit'), 1600); }
   function faceTell() { if (reduced()) return; faceBeat(110); setTimeout(() => faceBeat(110), 330); faceAnim('flinch', 700); }
@@ -1543,12 +1543,13 @@
     // 보던 단톡방에 새 말이 오면: 맨 아래를 보고 있었으면 따라 내려가고, 위의 말을 읽던 중이면 그 자리에 두고 「새 메시지 ↓」만 (메신저처럼)
     const rows = () => { const b = el.querySelector('.lv-feed .doc-b'); return b ? b.children.length : 0; };
     const fd = o && o.t === 'feed' && el.dataset.fd === o.id ? { low: el.scrollHeight - el.clientHeight - el.scrollTop < 80, n: rows(), pill: !!el.querySelector('.lv-more') } : null;
+    const wasMini = !!(o && o.t === 'person' && el.querySelector(`.per-tr[data-who="${o.id}"]`) && el.querySelector('.per-h.has-face.mini')); // 같은 사람을 다시 그릴 때는 줄어든 얼굴 칸 그대로 (커졌다 줄며 화면이 튀고, 부드러운 굴림이 끊기지 않게)
     el.innerHTML = `<button type="button" class="back-list" data-back>${T`← 목록으로`}</button>${h}`;
     el.dataset.fd = o && o.t === 'feed' ? o.id : '';
     if (fd && rows() > fd.n) { const fb = el.querySelector('.lv-feed .doc-b'); [...fb.children].slice(fd.n).forEach(x => x.classList.add('fresh')); } // 보던 방에 들어온 말은 알림이 따로 안 뜨니, 방 안에서 잠깐 밝혀 둔다
     if (fd && (rows() > fd.n || fd.pill)) { if (fd.low) el.scrollTop = el.scrollHeight; else newBelow(el); }
     $('#stageBody').classList.toggle('reading', !!(o && h));
-    const ph = el.querySelector('.per-h.has-face'); el.style.scrollPaddingTop = ph ? ph.offsetHeight + 8 + 'px' : ''; // 붙박이 얼굴 칸 밑으로 짚는다 (scrollIntoView 가 메모 고르기 머리 등을 얼굴 뒤에 숨기지 않게)
+    const ph = el.querySelector('.per-h.has-face'); if (ph && wasMini) ph.classList.add('mini'); el.style.scrollPaddingTop = ph ? ph.getBoundingClientRect().height + 8 + 'px' : ''; // 붙박이 얼굴 칸 밑으로 짚는다 (scrollIntoView 가 메모 고르기 머리 등을 얼굴 뒤에 숨기지 않게)
     edges();
     scanSoon(900);
     faceBg();
@@ -2802,7 +2803,7 @@
     if (!fresh && (TALK && TALK.alive() || e !== e0)) {
       const q0 = $$('.per-tr .qa').find(x => x.dataset.qa === e);
       if (q0) {
-        const pr = $('#paneRead'), hh = (($('#paneRead .per-h.has-face') || {}).offsetHeight || 0), dy = q0.getBoundingClientRect().top - pr.getBoundingClientRect().top - 12 - hh;
+        const pr = $('#paneRead'), hh = (($('#paneRead .per-h.has-face') || { getBoundingClientRect: () => ({ height: 0 }) }).getBoundingClientRect().height), dy = q0.getBoundingClientRect().top - pr.getBoundingClientRect().top - 12 - hh;
         if (!(TALK && TALK.alive()) && (dy < 0 || dy > pr.clientHeight * 0.6)) pr.scrollTo({ top: pr.scrollTop + dy, behavior: reduced() ? 'auto' : 'smooth' }); // 화면 밖의 대답이면 그 자리로 (깜빡임이 보이게)
         q0.classList.remove('flash'); void q0.offsetWidth; q0.classList.add('flash');
       }
@@ -2815,7 +2816,7 @@
     renderRead(); renderList();
     const qa = $$('.per-tr .qa').find(x => x.dataset.qa === e);
     const was = e.endsWith('!') && $$('.per-tr .qa').find(x => x.dataset.qa === e.slice(0, -1)); // 따질 때는 깨질 진술의 끝자락(도장이 찍힐 자리)도 함께 보이게
-    if (qa) { const pr = $('#paneRead'), hh = (($('#paneRead .per-h.has-face') || {}).offsetHeight || 0); pr.scrollTop += qa.getBoundingClientRect().top - pr.getBoundingClientRect().top - 12 - hh - (was ? Math.min(was.offsetHeight, 150) : 0); } // 붙박이 얼굴 칸 밑으로
+    if (qa) { const pr = $('#paneRead'), hh = (($('#paneRead .per-h.has-face') || { getBoundingClientRect: () => ({ height: 0 }) }).getBoundingClientRect().height); pr.scrollTop += qa.getBoundingClientRect().top - pr.getBoundingClientRect().top - 12 - hh - (was ? Math.min(was.offsetHeight, 150) : 0); } // 붙박이 얼굴 칸 밑으로
     if (census() > before) renderTabs();
     if (fresh) playAsk(p, e);
     else if (qa) { qa.classList.remove('flash'); void qa.offsetWidth; qa.classList.add('flash'); }

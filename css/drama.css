@@ -214,6 +214,7 @@ body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,
 .press-pick .per-ask-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-bottom:8px}
 .press-x{margin-left:auto;padding:2px 9px;border:1px solid rgba(43,40,35,.4);background:transparent;color:inherit;font:12px var(--f-mono);cursor:pointer}
 .press-list{max-height:min(46vh,420px);overflow-y:auto;overscroll-behavior:contain}
+@container stage (max-width:520px){.press-list{max-height:none;overflow:visible}} /* 휴대폰: 칸 속 칸으로 굴리면 메모가 한두 장만 보인다 → 읽는 칸 하나로 굴린다 */
 button.press-opt{width:100%;text-align:left;color:inherit}
 .press-opt .src{color:var(--pencil);font-size:12px}
 .press-opt[hidden]{display:none}
@@ -260,7 +261,7 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 .th-steps li{position:relative;font:19px/32px var(--f-hand)}
 .th-steps li::before{position:absolute;left:-20px;top:0;width:16px;text-align:center}
 .th-got::before{content:"✓";color:var(--red)}
-.th-gap{color:var(--pencil);opacity:.75}
+.th-gap{color:var(--pencil);opacity:.9}
 .th-gap::before{content:"?";font-weight:700}
 .th-memo{display:inline-block;min-width:1.4em;margin-left:3px;padding:0 4px;border:1.2px solid rgba(101,95,82,.6);border-radius:50%;background:none;color:var(--pencil);font:16px/1.2 var(--f-hand);text-align:center;cursor:pointer;vertical-align:1px}
 @media (hover:hover){.th-memo:hover{border-color:var(--red);color:var(--red)}}

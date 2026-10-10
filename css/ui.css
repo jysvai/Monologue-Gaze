@@ -469,7 +469,7 @@ input.pw{-webkit-text-security:disc;text-security:disc}
 .case-view:is([data-frame="laptop"],[data-frame="crt"]) .skin-plain{background-color:#fbfbf8;border:1px solid #e3e6ea}
 .case-view:is([data-frame="laptop"],[data-frame="crt"]) .skin-plain .doc-h{padding-bottom:10px;border-bottom:2px solid #1d1f22}
 /* 결재란이 좁은 화면에서 제목을 한 글자씩 꺾던 것 → 결재란은 제목 위 오른쪽에 따로 */
-@container stage (max-width:520px){.case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-sign{float:none;margin:0 0 10px auto}}
+@container stage (max-width:520px){.case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-sign{float:none;margin:0 0 10px auto;max-width:100%}.rep-sign th,.rep-sign tr+tr td:first-child{white-space:normal;overflow-wrap:anywhere;hyphens:auto}} /* 긴 직함(Dezernatsleiter)이 종이 밖으로 밀던 것 */
 /* 경찰 전자 서식 안의 빈칸 안내는 손글씨가 아니라 화면 글자 */
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .skin-form .rep-empty{font:13.5px/1.6 var(--f-web);color:#5f6570}
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-view .rep-empty{color:#5f6570}
