@@ -1993,6 +1993,10 @@
     const shut = gates().filter(n => !ok(n)), reach = k => shut.filter(n => n.some(x => String(x).split('|').includes(k))).length * 2 + Object.values(C.docs).filter(d => (d.find || []).includes(k) && !ST.seen.includes(d.id)).length;
     [...words.filter(([k]) => opens(k)).sort((x, y) => reach(y[0]) - reach(x[0])), ...words.filter(([k]) => !opens(k))].forEach(([k, b]) => add('word:' + k, b.go && b.go.t === 'person' ? T('들은 대답 속에 아직 수첩에 적지 않은 단어가 있다.') : T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${kl(k)}」`, b.go));
     unmet.forEach(meet); // 만나도 아직 새로 나올 게 없는 사람은 적지 않은 단어 뒤에
+    // 조건이 풀려 자료실에 새로 나온 기록(누구를 만나거나 무엇을 알아낸 뒤에야 찾히는 것)은 탐문보다 먼저 — 곁가지 추궁을 먼저 짚으면 앞길이 가려진다
+    vis.filter(s => s.type === 'archive').forEach(s => ST.keys.forEach(k => {
+      if (C.keywords[k] && C._srcDocs[s.id].some(d => (d.need || []).length && ok(d.need) && (d.find || []).includes(k) && !ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)))) add(`find:${s.id}|${k}`, T`「${plain(s.name)}」에서 수첩의 단어로 아직 찾아보지 않은 것이 있다.`, quote(kl(k)), { t: 'find', src: s.id, id: k });
+    }));
     // 3·4. 탐문 — 수첩을 내밀어 다시 물을 것, 새 단어나 쓸 만한 사실이 나올 물음
     const people = Object.values(C.people).filter(p => personVisible(p) && ST.asked[p.id] != null);
     people.forEach(p => ST.keys.forEach(k => {
