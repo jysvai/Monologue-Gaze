@@ -328,6 +328,7 @@ img{max-width:100%}
 @media (hover:hover){.kw:hover{background:rgba(223,182,76,.38)}}
 .kw.on{text-decoration-style:solid;text-decoration-color:rgba(176,52,42,.6)}
 .kw:not(.on){background:linear-gradient(transparent 62%,rgba(223,182,76,.3) 62%)} /* 아직 단어 칸에 없는 단어: 형광펜 한 줄 (적고 나면 붉은 밑줄만) */
+.kw{position:relative;padding-block:7px;-webkit-box-decoration-break:clone;box-decoration-break:clone;background-clip:content-box} /* 두 줄로 꺾인 단어: 위아래로 누르는 자리를 넓혀 줄 사이 틈을 눌러도 단어가 잡히게 (줄 높이는 그대로, 형광펜은 글자 칸에만) */
 @media (hover:hover){.kw:not(.on):hover{background:rgba(223,182,76,.38)}}
 .pin{display:inline-grid;place-items:center;width:22px;height:22px;margin-left:6px;padding:0;vertical-align:-4px;border:1px dashed rgba(90,80,60,.5);border-radius:50%;background:rgba(255,255,255,.4);color:#5a5040;font:13px/1 var(--f-web);opacity:.45;cursor:pointer;transition:opacity .15s}
 @media (hover:hover){.b-p:hover .pin,.b-say:hover .pin,.b-msg:hover .pin,tr:hover .pin,li:hover>.pin,figcaption:hover .pin{opacity:1}} /* 손가락으로 누른 뒤 밝은 채 남지 않게 */
