@@ -852,6 +852,10 @@
     const soft = isSoft(p, k);
     cue(soft ? 'clue' : 'confess');
     const st = document.createElement('div'); st.className = 'cue-stamp press'; st.setAttribute('aria-hidden', 'true'); st.innerHTML = `<span>${soft ? T('확인') : T('추궁')}</span>`;
+    { // 화면 한가운데(내 말 위)가 아니라, 내 말 옆의 빈 쪽 — 말풍선이 오른쪽에 붙는 대화창이면 왼쪽, 아니면 오른쪽 가장자리에
+      const pr = $('#paneRead'), R = pr && pr.getBoundingClientRect(), cq = qa.querySelector('.c-q .c-t') || qa.querySelector('.c-q') || qa, q = cq.getBoundingClientRect();
+      if (R && R.width > 200) { const left = q.left - R.left > R.right - q.right, m = Math.min(70, R.width * .16); st.classList.add('side'); st.style.left = (left ? R.left + m : R.right - m) + 'px'; const gap = left ? q.left - R.left : R.right - q.right; st.style.top = Math.max(R.top + 110, Math.min(R.bottom - 90, gap < 100 ? q.top - 34 : q.top + q.height / 2)) + 'px'; } // 옆이 좁은 폰이면 말풍선 위 빈자리에
+    }
     document.body.appendChild(st); setTimeout(() => st.remove(), 1900);
     const t = playTalk(qa, { p, lead: 600000 }); // 대답은 내 말이 끝난 뒤
     const go = () => { if (t && TALK === t && qa.isConnected) { t.finish(true); $$('#paneRead .face.lg').forEach(el => faceSet(el, 0, faceRow(p))); if (!soft) faceHit(); playTalk(qa, { p, voice: `v/${C.id}/${p.id}/${k}`, lead: 1000 }); } };
@@ -3270,8 +3274,8 @@
         if (s.type === 'cipher' || s.type === 'timeline') ST.view.open = { t: s.type, id: s.id };
         else if (narrow()) ST.view.open = null;
         else if (s.type === 'people' && !ST.view.open && ST.view.lastP && C.people[ST.view.lastP]) ST.view.open = { t: 'person', id: ST.view.lastP };
+        else if (s.type === 'feed') ST.view.open = { t: 'feed', id: s.id }; // 단톡방 탭은 방이 하나뿐: 넓은 화면이면 누르자마자 방이 열린다 (읽기 칸에 사건 안내만 남지 않게). 전에 본 첨부가 아니라 방으로 — 첨부는 방 안이나 목록에서 다시 연다
         else if (back && (back.t !== 'doc' || C.docs[back.id])) ST.view.open = back;
-        else if (s.type === 'feed') ST.view.open = { t: 'feed', id: s.id }; // 단톡방 탭은 방이 하나뿐: 넓은 화면이면 누르자마자 방이 열린다 (읽기 칸에 사건 안내만 남지 않게)
         save(); renderTabs(); renderList(); renderRead();
         if (kept) { const on = $('#srcTabs .tab.on'); if (on) on.focus({ preventScroll: true }); }
         return;

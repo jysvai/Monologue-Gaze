@@ -118,6 +118,8 @@
 .cue-stamp span{display:block;padding:8px 22px 6px;border:5px double var(--red);border-radius:6px;color:var(--red);font:800 34px/1 var(--f-doc);letter-spacing:.18em;background:rgba(236,226,198,.18);mix-blend-mode:multiply;animation:cueStamp 1.6s ease-out both}
 .cue-stamp.big span{padding:14px 34px 12px;font-size:54px;border-width:7px}
 .cue-stamp.press span{border-radius:50%;padding:22px 20px;font-size:30px;background:rgba(40,0,0,.12)}
+.cue-stamp.press.side span{padding:16px 14px;font-size:24px;opacity:.75} /* 읽기 칸 가장자리에 찍을 때는 조금 작게 */
+.per-tr:has(.qa.pressing){overflow-x:clip} /* 내민 수첩이 철썩 들어오는 동안 옆 굴림띠가 깜빡이지 않게 */
 @keyframes cueStamp{0%{opacity:0;transform:rotate(-12deg) scale(1.12)}12%{opacity:.85;transform:rotate(-12deg) scale(1)}70%{opacity:.8;transform:rotate(-12deg) scale(1)}100%{opacity:0;transform:rotate(-12deg) scale(1)}} /* 도장은 쾅 내려찍지 않고 살짝 눌러 찍힌다 */
 
 /* 주인공 속말 자막 */
