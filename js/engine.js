@@ -675,7 +675,9 @@
   let FACE_IV = 0, FACE_SAID = 0, FACE_BLINK = 0, FACE_OPEN = false, FACE_HOLD = 0;
   // 몸짓(「(시선을 피한다)」 같은 줄)이 지나갈 때 눈을 잠깐 감는다 — 말 사이의 숨
   function faceBeat(ms = 380) { if (reduced()) return; FACE_BLINK = performance.now(); FACE_HOLD = ms; }
-  const faceAnim = (cls, ms) => { if (reduced()) return; $$('#paneRead .face.lg').forEach(el => { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); setTimeout(() => el.classList.remove(cls), ms); }); };
+  // 읽어 내려가 얼굴 칸이 작아져 있으면, 몸짓이 나오는 동안만 얼굴을 크게 (자리는 그대로 두고 위에 겹쳐서 — 흠칫 · 도리질이 엄지손톱만 해서 안 보이던 것)
+  const facePop = ms => { const h = $('#paneRead .per-h.has-face.mini'); if (!h || reduced()) return; h.classList.add('pop'); clearTimeout(facePop.t); facePop.t = setTimeout(() => { const n = $('#paneRead .per-h.pop'); if (n) n.classList.remove('pop'); }, ms); };
+  const faceAnim = (cls, ms) => { if (reduced()) return; facePop(ms + 500); $$('#paneRead .face.lg').forEach(el => { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); setTimeout(() => el.classList.remove(cls), ms); }); };
   // 따질 거리가 있는 대답 뒤: 눈을 두 번 빨리 깜빡이고 움찔한다. ★3 은 늘, ★4 는 따질 메모를 쥐었을 때만, ★5 는 보이지 않는다 (「메모를 내민다」의 깜빡임과 같은 셈)
   const tellOn = (p, k) => !!faceOf(p) && isPressAsk(p, k) && !(ST.asked[p.id] || []).includes(k + '!') && (lv() <= 3 || (lv() === 4 && ok((rawAns(p, k) || {}).need)));
   // 대답을 읽어 내려가면 붙박이 얼굴 칸을 작게 (큰 얼굴 칸이 위 줄 서너 개를 덮어 「잘려 보인다」) — 맨 위로 돌아오면 다시 크게.
@@ -690,7 +692,7 @@
     pr.scrollTop = want ? t0 + hgt() - h0 : t0; // 되돌릴 때는 맨 위로 온 것이니 그 자리 그대로 (브라우저가 스크롤을 붙잡아 밀어도 되돌린다)
     pr.style.scrollPaddingTop = hgt() + 8 + 'px';
   }
-  function faceHit() { const h = $('#paneRead .per-h.has-face'); if (!h || reduced()) return; h.classList.remove('hit'); void h.offsetWidth; h.classList.add('hit'); setTimeout(() => h.classList.remove('hit'), 1600); }
+  function faceHit() { const h = $('#paneRead .per-h.has-face'); if (!h || reduced()) return; facePop(1900); h.classList.remove('hit'); void h.offsetWidth; h.classList.add('hit'); setTimeout(() => h.classList.remove('hit'), 1600); }
   function faceTell() { if (reduced()) return; faceBeat(110); setTimeout(() => faceBeat(110), 330); faceAnim('flinch', 700); }
   function faceSet(el, c, r) {
     if (r != null && String(r) !== el.dataset.r) { el.dataset.r = r; if (r > 0 && !reduced()) { el.classList.remove('jolt'); void el.offsetWidth; el.classList.add('jolt'); } }
@@ -1813,7 +1815,7 @@
     renderNotebook();
     fresh.forEach(id => { const li = $(`.notes li[data-nid="${id}"]`); if (!li) return; const d = li.closest('details'); if (d && !d.open) d.open = true; li.classList.remove('lit'); void li.offsetWidth; li.classList.add('lit'); });
     const nums = fresh.map(noteNo).filter(Boolean).sort((a, b) => a - b), e = LM.get(ST.notes[nums[0] - 1].id);
-    setTimeout(() => { if (!ST.solved) { toast(leadTip(e, nums) ? T`유력! 메모 ${nums.join('·')}번 — ${leadTip(e, nums).split(' · ')[0]}` : T`유력! 메모 ${nums.join('·')}번`, 3000); sfx('match'); } }, 900);
+    setTimeout(() => { if (!ST.solved) { toast(leadTip(e, nums) ? T`유력! 메모 ${nums.join('·')}번 — ${e.vs.length ? T('들은 진술과 어긋난다') : leadTip(e, nums).split(' · ')[0]}` : T`유력! 메모 ${nums.join('·')}번`, 3000); /* 알림에는 누구의 말인지 대지 않는다 (메모의 「유력!」에 손을 대면 나온다) — 누구에게 내밀지까지 알려 주면 추궁이 찾아보기가 된다 */ sfx('match'); } }, 900);
     return true;
   }
 
@@ -2858,7 +2860,7 @@
     save();
     const BY = {}, before = census(BY);
     tmp().met.add(p.id);
-    renderRead(); renderList();
+    renderRead(); renderList(); if (fresh && (C.threads || []).length) renderNotebook(); // 「○○에게 「…」 이야기를 아직 듣지 못했다」가 물은 뒤에도 남아 있지 않게
     const qa = $$('.per-tr .qa').find(x => x.dataset.qa === e);
     const was = e.endsWith('!') && $$('.per-tr .qa').find(x => x.dataset.qa === e.slice(0, -1)); // 따질 때는 깨질 진술의 끝자락(도장이 찍힐 자리)도 함께 보이게
     if (qa) { const pr = $('#paneRead'), hh = (($('#paneRead .per-h.has-face') || { getBoundingClientRect: () => ({ height: 0 }) }).getBoundingClientRect().height); pr.scrollTop += qa.getBoundingClientRect().top - pr.getBoundingClientRect().top - 12 - hh - (was ? Math.min(was.offsetHeight, 150) : 0); } // 붙박이 얼굴 칸 밑으로
@@ -3138,7 +3140,7 @@
       if (fresh) {
         const box = $('.rep-view .rep-solved') || $('#solvedBox');
         if (box) {
-          box.innerHTML = solvedHtml(true, box.classList.contains('rep-solved')); box.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' });
+          box.innerHTML = solvedHtml(true, box.classList.contains('rep-solved')); box.scrollIntoView({ block: 'start', behavior: reduced() ? 'auto' : 'smooth' }); // 결말은 첫 줄부터 (nearest 면 긴 결말의 끝자락에 내려앉는다)
           if (document.activeElement === document.body) { box.tabIndex = -1; box.focus({ preventScroll: true }); } // 키보드로 올렸으면 결말부터 읽히게
         }
         repFace('caught', 800); // 맞았으면 무너진 얼굴로 바뀌며 움찔
@@ -3217,7 +3219,7 @@
       if ((el = t.closest('[data-rq-go]'))) return submitReq(el.dataset.rqGo);
       if ((el = t.closest('[data-feed]'))) return openItem({ t: 'feed', id: el.dataset.feed });
       if (TALK && !TALK.alive()) TALK = null;
-      if (TALK && t.closest('.per-tr') && !t.closest('[data-pin]')) { TALK.finish(); return; } // 대화 건너뛰기
+      if (TALK && t.closest('.per-tr') && !t.closest('[data-pin]')) { TALK.finish(); if (!t.closest('[data-kw]')) return; } // 대화 건너뛰기 (찍히던 대답 속 밑줄 단어를 누른 것이면 건너뛰고 그 단어도 적는다)
       if ((el = t.closest('.cmp-art img, .b-img img, .map img'))) { if (!t.closest('[data-spot], .cens:not(.open)')) return zoom(el); }
       if ((el = t.closest('[data-pad]'))) { // 전화 번호판
         const f = el.closest('form'), i = f && f.querySelector('input'), k = el.dataset.pad;

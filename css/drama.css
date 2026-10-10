@@ -255,6 +255,8 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 .th-list{list-style:none;margin:0;padding:0}
 .th>details>summary{display:block;list-style:none;cursor:pointer;font:21px/32px var(--f-hand);color:var(--ink)}
 .th>details>summary::-webkit-details-marker{display:none}
+.th>details>summary::after{content:"▾";margin-left:6px;font:12px/1 var(--f-mono);color:var(--pencil);opacity:.75;vertical-align:2px}
+.th>details:not([open])>summary::after{content:"▸"} /* 접힌 의문도 펼칠 수 있다는 것이 보이게 */
 .th-no{color:var(--pencil)}
 .th-cnt{margin-left:4px;font:600 12px/1 var(--f-mono);letter-spacing:.04em;color:var(--pencil);white-space:nowrap;vertical-align:2px}
 .th-stamp{display:inline-block;margin-left:6px;padding:0 5px;border:1.5px solid var(--red);border-radius:3px;color:var(--red);font:600 12px/1.35 var(--f-mono);letter-spacing:.04em;white-space:nowrap;vertical-align:2px;transform:rotate(-4deg)}

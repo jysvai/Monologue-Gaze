@@ -702,3 +702,10 @@ body:has(.case-view[data-graphic])::before{background:radial-gradient(ellipse at
 .per-h.has-face.mini .face.lg{width:56px;height:70px}
 .per-h.has-face.mini>div>p{display:none}
 @media (max-width:720px){.per-h.has-face.mini{padding:5px 0 4px}.per-h.has-face.mini .face.lg{width:44px;height:55px}}
+/* 작아진 얼굴도 몸짓이 나오는 동안은 크게 (scale 은 흠칫 · 도리질의 transform 과 따로 겹친다). 자리는 그대로라 글이 밀리지 않는다 */
+.per-h.has-face.mini .face.lg{transform-origin:0 0;transition:scale .3s ease-in}
+.per-h.has-face.mini>div{transition:translate .3s ease-in}
+.per-h.has-face.mini.pop .face.lg{scale:1.85;transform-origin:0 0;z-index:5;transition:scale .16s ease-out}
+.per-h.has-face.mini.pop>div{translate:50px 0;transition:translate .16s ease-out}
+@media (max-width:720px){.per-h.has-face.mini.pop>div{translate:40px 0}}
+@media (prefers-reduced-motion:reduce){.per-h.has-face.mini.pop .face.lg{scale:none}.per-h.has-face.mini.pop>div{translate:none}}
