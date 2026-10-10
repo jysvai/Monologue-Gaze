@@ -414,7 +414,7 @@
     const marks = docMarks(d, skin);
     return `<article class="doc skin-${esc(skin)}${d.cls ? ' ' + esc(d.cls) : ''}${marks ? ' marked' : ''}"${d.bar ? ` style="--bar:${esc(d.bar)}"` : ''}>${docStains(d)}${marks}
       <header class="doc-h">${paper ? `<p class="doc-paper">${inline(paper)}</p>` : ''}${d.kicker ? `<p class="doc-k">${inline(d.kicker)}</p>` : ''}<h3 class="doc-t">${inline(d.title)}</h3>${d.meta ? `<p class="doc-m">${inline(d.meta)}</p>` : ''}</header>
-      <div class="doc-b">${blocks(d.body, d.id, plain(d.title))}</div></article>`;
+      <div class="doc-b">${blocks(d.body, d.id, skin === 'chat' && s.name ? T`${plain(s.name)} · ${plain(d.title)}` : plain(d.title))}</div></article>`; // 대화방 메모의 출처는 「도란톡 · 윤재희」처럼 (방 이름만 두면 서윤의 말이 윤재희의 말처럼 읽힌다)
   }
 
   const rawAns = (p, k) => { let a = p.ask && p.ask[k]; if (a == null && k === p.key) a = p.self; return a; };
@@ -609,7 +609,7 @@
     PICK.other = !fits && !near && ((leadMap().get(n.id) || { vs: [] }).vs.some(v => v.pid === p.id && v.k !== k) || fitAsk.some(k2 => heard.includes(k2))); // 유력한 메모를 같은 사람의 다른 대답에 댔다 — 길은 맞으니 헛짚기로 치지 않고 그 대답 쪽으로
     PICK.later = !fits && !near && !PICK.other && fitAsk.length > 0;
     PICK.miss = fits ? (isSoft(p, k) ? T('(메모를 한참 들여다본다)') : T('(메모를 보고 잠시 멈칫한다)')) // 몸짓만: 하오체로 말하는 사람이 존댓말로 되묻지 않게 (밑의 줄이 무엇이 모자란지 알려 준다)
-      : near ? near.a : missLine(p, isSoft(p, k), PICK.tries - 1); // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다 (헛짚기로 치지 않는다)
+      : near ? near.a : missLine(p, isSoft(p, k), (tmp().nope ||= {})[p.id] = ((tmp().nope[p.id] ?? -1) + 1)); // 고르는 칸을 다시 열어도 같은 말만 되풀이하지 않게: 사람마다 센다 // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다 (헛짚기로 치지 않는다)
     sfx('miss');
     const react = fits || near || PICK.other || PICK.later ? 'flinch' : 'nope'; // 얼굴은 다시 그린 뒤에 (먼저 걸면 다시 그리면서 사라진다)
     const noLead = !proof().some(x => (leadMap().get(x.id) || { vs: [] }).vs.some(v => v.pid === p.id)); // 이 사람의 말과 어긋나는 메모가 수첩에 하나도 없으면 (고르는 칸이 그렇다고 알려 준다) 헛짚어도 참을성은 깎지 않는다
@@ -2182,7 +2182,7 @@
           </div>
         </div>
         <div class="frame-foot" aria-hidden="true"></div>
-        ${C.tag ? `<div class="evtag">${inline(C.tag)}</div>` : ''}
+        ${C.tag ? `<div class="evtag">${inline(C.tag)}${ST.solved ? `<span class="evtag-st">${T('종결')}</span>` : ''}</div>` : ''}
       </main>
       <aside class="nb" id="nb" aria-label="${T`형사 수첩`}"></aside>
     </div>`;
