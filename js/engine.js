@@ -466,6 +466,8 @@
     const a = ST.asked[p.id] || [], e = a[a.length - 1 - (before ? 1 : 0)] || '';
     return e.endsWith('!') && !isSoft(p, e.slice(0, -1)) ? 1 : 0;
   }
+  // 탐문은 없고 이름만 나오는 인물(체포서 칸에만 서는 사람): img/<사건>/face_<단어 id>.webp 가 있으면 그 얼굴 (한 줄짜리 정지 초상)
+  const kwFace = k => MG.images && MG.images[`${C.id}/face_${k}`] ? { id: k, key: k, name: kl(k) } : null;
   const facePos = (rows, r, c) => `${c * 50}% ${rows > 1 ? r / (rows - 1) * 100 : 0}%`;
   function portrait(p, big) {
     const f = faceOf(p);
@@ -1588,7 +1590,7 @@
     const sign = C.frame === 'crt' || C.frame === 'laptop' ? `<table class="rep-sign" aria-label="${T`결재`}"><tr><th>${T`담당`}</th><th>${T`팀장`}</th><th>${T`과장`}</th></tr><tr><td>${esc(who(me))}</td><td>${ST.solved ? T('<span class="ok">결재</span>') : back ? T('<span class="no">반려</span>') : ''}</td><td>${ST.solved ? T('<span class="ok">결재</span>') : ''}</td></tr></table>` : '';
     return `<article class="doc skin-report rep-view"><header class="doc-h">${sign}<p class="doc-k">${esc(FM.title)}</p><h3 class="doc-t">${esc(C.title)}</h3><p class="doc-m">${esc(FM.lead)}</p></header>
       <div class="doc-b"><form id="rep" autocomplete="off"${shut ? ' class="shut"' : ''}>
-        <section class="rep-sec"><h4 id="rh-culprit">${esc(FM.culprit)}</h4><div class="rep-people" role="radiogroup" aria-labelledby="rh-culprit">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => { const per = Object.values(C.people || {}).find(x => x.key === k), fc = per && faceOf(per), anyFace = Object.values(C.people || {}).some(faceOf); return `<label class="rep-per${anyFace ? ' has-face' : ''}${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}>${fc ? portrait(per) : anyFace ? `<span class="face none" aria-hidden="true">${esc(Array.from(plain(kl(k)))[0] || '?')}</span>` : ''}<b>${esc(kl(k))}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}${shut ? '' : thWho(k)}</label>`; }).join('') || T('<p class="rep-empty">수첩에 적힌 인물이 없다.</p>')}</div></section>
+        <section class="rep-sec"><h4 id="rh-culprit">${esc(FM.culprit)}</h4><div class="rep-people" role="radiogroup" aria-labelledby="rh-culprit">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => { const per = Object.values(C.people || {}).find(x => x.key === k) || kwFace(k), fc = per && faceOf(per), anyFace = Object.values(C.people || {}).some(faceOf); return `<label class="rep-per${anyFace ? ' has-face' : ''}${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}>${fc ? portrait(per) : anyFace ? `<span class="face none" aria-hidden="true">${esc(Array.from(plain(kl(k)))[0] || '?')}</span>` : ''}<b>${esc(kl(k))}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}${shut ? '' : thWho(k)}</label>`; }).join('') || T('<p class="rep-empty">수첩에 적힌 인물이 없다.</p>')}</div></section>
         ${sol.claims.map(claim).join('')}
         <p class="submit-row">${shut ? `<span class="rep-filed">${esc(FM.filed || (C.frame === 'papers' ? T('종결 · 철해 둠') : T('결재 완료')))}</span>` : `<button type="submit" class="btn-hand">${esc(FM.submit)}</button>`}<span class="tries">${ST.tries ? T`올린 횟수 ${ST.tries}` : ''}</span></p>
       </form><p class="verdict">${esc(VERDICT)}</p>${ST.solved ? `<div class="rep-solved">${solvedHtml(false, true)}</div>` : ''}</div></article>`;
