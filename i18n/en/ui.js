@@ -190,6 +190,7 @@ MG.I18N.put("en", "ui", {
 "접수됐다": "Filed",
 "기각 — ": "Rejected — ",
 "<span class=\"sr\"> (찾아봄)</span>": "<span class=\"sr\"> (searched)</span>",
+"<span class=\"sr\"> (새 기록)</span>": "<span class=\"sr\"> (new records)</span>",
 "'{0}' 검색 결과 {1}건": "Results for '{0}': {1}",
 "「{0}」 {1}건": "On file for “{0}”: {1}",
 "'{0}'에 대한 검색 결과가 없습니다.": "No results for '{0}'.",

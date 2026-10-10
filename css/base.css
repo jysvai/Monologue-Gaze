@@ -294,6 +294,7 @@ img{max-width:100%}
 .chip{padding:3px 9px 1px;border:1px dashed #8e7f5c;border-radius:2px;background:#f4ebc6;color:var(--ink);font:17px/1.15 var(--f-hand);cursor:pointer}
 @media (hover:hover){.chip:hover{background:#efe1a8}}
 .chip.done{opacity:.72;border-style:solid;border-color:transparent;background:#e7dcb8}
+.chip.more::after{content:"";display:inline-block;width:6px;height:6px;margin-left:5px;border-radius:50%;background:var(--red);vertical-align:2px}
 .chip.again{border-style:solid;border-color:var(--red);color:var(--red);opacity:1}
 .ava{display:inline-grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:var(--c,#6b6155);color:#fff;font:700 14px/1 var(--f-web)}
 .ava.lg{width:64px;height:64px;font-size:24px}
@@ -407,12 +408,13 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 @media (hover:hover){.kchip:hover{color:var(--red)}}
 .notes{list-style:none;margin:0;padding:0}
 .notes li{position:relative;padding-right:22px;transform:rotate(var(--r,0deg))}
+.notes li:has(>button.sus),.notes li:has(button.sus){padding-right:48px} /* 「?」는 글 끝이 아니라 × 옆에 (문장 부호처럼 읽히지 않게) */
 .notes li.tip{color:var(--ink-soft)}
 .notes .n{color:var(--pencil)}
 .notes .src{color:var(--pencil);font-size:16px}
 .notes .del{position:absolute;right:0;top:4px;width:20px;height:20px;padding:0;border:0;background:none;color:var(--pencil);font:16px/1 var(--f-web);opacity:.62;cursor:pointer}
 .notes .del::after,.notes button.sus::after{content:"";position:absolute;inset:-8px} /* 보이는 크기는 그대로, 누르는 자리만 넓게 */
-.notes button.sus{position:relative}
+.notes button.sus{position:absolute;right:24px;top:5px;margin-left:0}
 @media (hover:hover){.notes li:hover .del{opacity:1}}
 .notes .del:focus-visible{opacity:1}
 .n-rep{display:inline-block;min-width:1.35em;margin-left:6px;padding:1px 5px 0;border:1.5px solid rgba(176,52,42,.75);border-radius:50%;color:var(--red);font:19px/1.1 var(--f-hand);white-space:nowrap;text-align:center;vertical-align:1px;transform:rotate(-8deg)} /* 보고서에 붙인 메모: 빨간 연필로 친 주장 번호 동그라미 */

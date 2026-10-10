@@ -190,6 +190,7 @@ MG.I18N.put("de", "ui", {
 "접수됐다": "Eingegangen",
 "기각 — ": "Abgelehnt — ",
 "<span class=\"sr\"> (찾아봄)</span>": "<span class=\"sr\"> (gesucht)</span>",
+"<span class=\"sr\"> (새 기록)</span>": "<span class=\"sr\"> (neue Akten)</span>",
 "'{0}' 검색 결과 {1}건": "Ergebnisse für „{0}“: {1}",
 "「{0}」 {1}건": "„{0}“: {1} Treffer",
 "'{0}'에 대한 검색 결과가 없습니다.": "Keine Ergebnisse für „{0}“.",

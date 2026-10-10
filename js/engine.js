@@ -364,8 +364,9 @@
       const hd = (b.head || []).map(x => plain(numLocal(x)).trim());
       const rowNote = r => r.map((x, i) => { const v = plain(x).trim().replace(/^[—–-]$/, ''), h = hd[i] && plain(hd[i]).trim().replace(/\s+·\s+/g, '/'); return v && i && h && hd.length > 2 && v.length <= 16 && !v.startsWith(h) ? `${h}: ${v}` : v; }).filter(Boolean).join(' · '); // 빈칸은 빼고, 「항목 | 내용」 두 칸짜리 표는 머리글 없이 (「가입자 · 내용: 함덕규」가 되지 않게) // 「교통정리: 교통정리 1명」처럼 칸 이름을 되풀이하지 않게
       // 칸이 많거나 긴 표는 휴대폰 폭에서 줄마다 「머리글 값」으로 쌓는다 (옆으로 밀어 봐야 하는 표는 ✎ 이 가린 칸 너머를 못 본다)
-      const stack = b.head && (b.head.length >= 4 || (b.head.length === 3 && b.rows.some(r => r.some(x => plain(String(x)).length > 60))));
-      const st3 = !stack && b.head && b.head.length === 3; // 세 칸짜리는 넘칠 때만 쌓는다 (tblEdge)
+      const tiny = b.head && b.rows.every(r => r.every((x, i) => !i || nw(x))); // 첫 칸 말고는 모두 짧은 칸(○ · 休 · 숫자)인 표: 폰에서도 들어가면 표 그대로
+      const stack = b.head && !tiny && (b.head.length >= 4 || (b.head.length === 3 && b.rows.some(r => r.some(x => plain(String(x)).length > 60))));
+      const st3 = !stack && b.head && (b.head.length === 3 || tiny); // 세 칸짜리와 짧은 칸만 있는 표는 넘칠 때만 쌓는다 (tblEdge)
       const dh = (i, x) => ((stack || st3) && i && hd[i] ? ` data-h="${esc(hd[i])}"${/^[—–-]?$/.test(plain(String(x)).trim()) ? ' data-nil' : ''}` : ''); // 첫 칸(날짜·이름·번호)은 쌓인 줄의 제목이 된다. 「—」 칸은 쌓을 때 뺀다
       const rows = b.rows.map((r, ri) => { r = r.map(numLocal); return `<tr>${r.map((x, i) => `<td${nw(x)}${dh(i, x)}>${inline(x)}</td>`).join('')}<td class="pc">${pinBtn(`${ref}.${ri}`, b.head ? rowNote(r) : r.join(' · '), b.f && b.f[ri], src)}</td></tr>`; }).join('');
       return `<div class="b-tbl${stack ? ' stack' : st3 ? ' stack3' : ''}${cls}"><table>${b.cap ? `<caption>${inline(b.cap)}</caption>` : ''}${head}<tbody>${rows}</tbody></table></div>`;
@@ -1330,7 +1331,7 @@
     return `<button type="button" class="item${on ? ' on' : ''}${ST.seen.includes(d.id) ? '' : ' new'}" data-doc="${d.id}"><span class="item-t">${esc(plain(d.title))}${NEWSR(d.id)}</span>${d.meta ? `<span class="item-m">${esc(plain(d.meta))}</span>` : ''}</button>`;
   };
   // 자료실의 「수첩의 단어로 찾기」: 찾아본 단어는 탐문에서 물어본 단어처럼 흐리게. 단, 그 단어로 걸리는 자료 가운데 안 읽은 것이 생기면 다시 진하게
-  const keyChips = s => { const sq = (ST.view.sq || {})[s.id] || []; return ST.keys.filter(k => C.keywords[k]).map(k => { const L = kl(k), done = sq.includes(norm(L)) && archiveHits(s, L).every(d => ST.seen.includes(d.id)); return `<button type="button" class="chip${done ? ' done' : ''}" data-search="${k}">${esc(L)}${done ? T('<span class="sr"> (찾아봄)</span>') : ''}</button>`; }).join(''); };
+  const keyChips = s => { const sq = (ST.view.sq || {})[s.id] || []; return ST.keys.filter(k => C.keywords[k]).map(k => { const L = kl(k), was = sq.includes(norm(L)), done = was && archiveHits(s, L).every(d => ST.seen.includes(d.id)), more = was && !done; return `<button type="button" class="chip${done ? ' done' : more ? ' more' : ''}" data-search="${k}">${esc(L)}${done ? T('<span class="sr"> (찾아봄)</span>') : more ? T('<span class="sr"> (새 기록)</span>') : ''}</button>`; /* more: 찾아본 단어인데 그 뒤로 새 기록이 걸린다 — 다시 찾아볼 생각을 못 하고 지나치지 않게 */ }).join(''); };
 
   function matchKeys(q) {
     const n = norm(q);
