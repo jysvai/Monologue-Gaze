@@ -934,6 +934,18 @@
   "v": "daniel eleven_v4_turbo 0.95 0.35 [cold]",
   "p": 1
  },
+ "v/c15/p_landlord/k_cctv": {
+  "t": "…내가 뽑았어요. 한 달 됐어요.",
+  "v": "bill eleven_v4_turbo 0.9 0.4 [annoyed]"
+ },
+ "v/c15/p_landlord/k_cctv.1": {
+  "t": "고장이라고 하셨습니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]"
+ },
+ "v/c15/p_landlord/k_cctv.2": {
+  "t": "구청에서 주차장 월세 놓는 거 단속 나온다길래. 바깥 차 드나드는 게 찍히면 안 되니까.",
+  "v": "bill eleven_v4_turbo 0.9 0.4 [annoyed]"
+ },
  "v/c15/p_landlord/k_phone": {
   "t": "여기요. 꺼서 넣어 뒀어요. 가져가요. 지난주에 내가 다솜 씨한테 한 말 있잖아요. 동네 사람들 다 들었고. 그 휴대폰이 내 방에서 나오면 누가 내 말을 믿겠어요.",
   "v": "bill eleven_v4_turbo 0.9 0.4 [annoyed]",
@@ -1003,6 +1015,10 @@
   "t": "조수석 문은 21시 47분에 열렸다 닫혔습니다.",
   "v": "river eleven_v4_turbo 1 0.5 [calm]",
   "p": 1
+ },
+ "v/c15/p_minjae/k_plate.1": {
+  "t": "조수석 문은 21시 47분에 열렸다 닫혔습니다.",
+  "v": "river eleven_v4_turbo 1 0.5 [calm]"
  },
  "v/c15/p_minjae/k_tonight": {
   "t": "…차 빌린 건 맞아요. 드라이브 좀 했어요. 머리 식히러.",
