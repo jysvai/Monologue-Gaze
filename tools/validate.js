@@ -402,7 +402,7 @@ function check(c) {
       if (!st.t) err(`${sw}: t 필요`);
       if (!st.f === !st.press) err(`${sw}: f 와 press 가운데 하나만`);
       [].concat(st.f || []).forEach(f => { if (!factWhere[f]) err(`${sw}: 사실 ${f} 가 어느 블록에도 없음`); });
-      if (st.press) { const [pid, k] = st.press.split(':'), a = P[pid] && P[pid].ask && P[pid].ask[k]; if (!a || Array.isArray(a) || !a.need) err(`${sw}: press ${st.press} — 그 사람에게 그 추궁(need 가 있는 대답)이 없음`); }
+      if (st.press) st.press.split('|').forEach(alt => { const [pid, k] = alt.split(':'), a = P[pid] && P[pid].ask && P[pid].ask[k]; if (!a || Array.isArray(a) || !a.need) err(`${sw}: press ${alt} — 그 사람에게 그 추궁(need 가 있는 대답)이 없음`); });
     });
     if (t.for && !(sol.claims || []).some(cl => cl.id === t.for)) err(`${w}: for ${t.for} 주장이 없음`);
     ['who', 'out'].forEach(x => { if (t[x] && !(K[t[x]] && K[t[x]].type === 'person')) err(`${w}: ${x} ${t[x]} 는 person 단어여야`); });

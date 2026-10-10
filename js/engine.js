@@ -1792,7 +1792,8 @@
    * 의문은 when 이 맞으면 수첩 맨 위에 나타나고 (한 번 나타나면 그대로), 빈칸이 다 차면 형사가 결론(a)을 적는다. 고르는 것 없이 찾아낸 만큼 차오른다.
    * for: 결론이 받쳐 주는 보고서 주장 — 풀리면 보고서의 그 주장에 붙일 메모를 맨 위에 모아 준다. who · out: 범인 칸에서 그 사람 옆에 「의문 n」 · 「뺌」 */
   const thNote = s => { const fs = [].concat(s.f || []); return fs.length ? ST.notes.find(n => fs.some(w => fIs(n.f, w))) || null : null; };
-  const thGot = s => (s.press ? (ST.asked[s.press.split(':')[0]] || []).includes(s.press.split(':')[1] + '!') : !!thNote(s));
+  const thAlt = s => String(s.press).split('|').map(x => x.split(':')); // press: '사람:물은것' — 같은 메모로 깨지는 대답이 여럿이면 | 로 (어느 쪽을 깨도 채운다)
+  const thGot = s => (s.press ? thAlt(s).some(([pid, k]) => (ST.asked[pid] || []).includes(k + '!')) : !!thNote(s));
   const THX = new Map(); // 의문 펼침: 풀린 것은 접어 두고, 플레이어가 손댄 것은 그대로
   // 수첩에 나온 의문만, 나온 차례대로 (번호도 그 차례)
   function thView() {
@@ -1841,9 +1842,9 @@
     const nd = V.filter(x => x.done).length, LIVE = [...one, ...open.filter(x => !one.includes(x)).slice(-(3 - one.length))];
     const step = (x, s, j) => {
       // 따질 말을 아직 듣지 못했으면 그 말을 앞질러 옮기지 않는다 (「긁힌 데 하나 없다는 말, 맞나?」가 그 사람을 만나기도 전에 보이지 않게)
-      const unheard = s.press && !(ST.asked[s.press.split(':')[0]] || []).includes(s.press.split(':')[1]);
-      const who = unheard && C.people[s.press.split(':')[0]], known = who && ST.keys.includes(who.key); // 아는 사람이면 이름까지 (누구에게 더 물을지는 알려 준다)
-      const tk = s.press && s.press.split(':')[1], topic = known && lv() <= 3 && ST.keys.includes(tk); // ★3 은 무엇을 물을지까지
+      const unheard = s.press && thAlt(s).every(([pid, k]) => !(ST.asked[pid] || []).includes(k));
+      const who = unheard && C.people[thAlt(s)[0][0]], known = who && ST.keys.includes(who.key); // 아는 사람이면 이름까지 (누구에게 더 물을지는 알려 준다)
+      const tk = s.press && thAlt(s)[0][1], topic = known && lv() <= 3 && ST.keys.includes(tk); // ★3 은 무엇을 물을지까지
       if (!x.got[j]) return `<li class="th-gap">${esc(unheard ? (topic ? T`${pname(who)}에게 「${kl(tk)}」 이야기를 아직 듣지 못했다.` : known ? T`${pname(who)}에게서 아직 듣지 못한 말이 있다.` : T('아직 듣지 못한 말이 있다.')) : s.hint || '……')}</li>`;
       const n = thNote(s);
       return `<li class="th-got">${esc(s.t)}${n ? ` <button type="button" class="th-memo" data-th-memo="${n.id}" aria-label="${T`메모 ${noteNo(n.id)}번 보기`}">${noteNo(n.id)}</button>` : s.press ? ` <span class="th-press">${T('추궁')}</span>` : ''}</li>`;
