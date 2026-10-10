@@ -558,6 +558,8 @@
   function pickHtml(p) {
     const k = PICK.k, L = kl(k), LM = leadMap(), mine = n => (LM.get(n.id) || { vs: [] }).vs.some(v => v.pid === p.id); // 도장은 이 사람의 진술과 어긋나는 메모에만
     const pool = proof().reverse(), G = PICK.g ||= {};
+    const ra = rawAns(p, k) || {}, want = ra.take || (ra.need || []).flatMap(x => x.split('|')).filter(x => x[0] === '!').map(x => x.slice(1));
+    const partFit = isPressAsk(p, k) && pool.some(n => want.some(w => fIs(n.f, w))); // 맞는 메모는 있는데 함께 맞댈 기록이 모자란 때 — 「어긋나는 메모가 없다」고 하면 내밀었을 때 「될 것 같은데」와 어긋난다
     const opt = n => `<button type="button" class="rep-opt press-opt${mine(n) ? ' lead' : ''}" data-press-note="${n.id}" title="${esc(n.t)}"><span class="t">${esc(n.t)}</span> ${mine(n) ? `<span class="n-lead" role="img" aria-label="${T`유력 — ${pname(p)}의 대답과 어긋난다`}">${T('유력!')}</span> ` : isSus(n) ? `<span class="n-sus">${T('의심')}</span> ` : ''}<small class="src">— ${esc(n.src || '')}</small></button>`;
     // 내밀 메모를 묶어서: 유력(이 사람의 대답과 어긋남) · 의심(내가 표시해 둔 것) · 탐문에서 들은 말 · 기록에서 찾은 것. 위 두 묶음이 있으면 아래 둘은 접어 둔다
     const rest = pool.filter(n => !mine(n) && !isSus(n));
@@ -566,7 +568,7 @@
     // 유력·의심 밖의 메모는 접어 둔다: 유력이 있으면 그것부터, 없으면 어느 메모로도 지금 들은 말은 깨지지 않는다 (펼쳐 두면 아무거나 눌러 참을성만 깎는다)
     const list = groups.map(([g, t, ns]) => ns.length || (g === 'sus' && !(ST.sus || []).length) ? `<details class="pk-g pk-${g}" data-pk-g="${g}"${G[g] ?? (g === 'lead' || g === 'sus') ? ' open' : ''}><summary>${t} <small>${ns.length}</small></summary>${ns.length ? ns.map(opt).join('') : `<p class="pk-hint">${T('수첩의 메모 끝 「?」를 누르면 의심으로 표시해 둔다. 표시한 메모는 여기 따로 모인다.')}</p>`}</details>` : '').join('');
     return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
-      <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${groups[0][2].length ? '' : `<p class="pk-hint pk-nolead">${T('이 사람이 한 말과 어긋나 보이는 메모는 아직 수첩에 없다.')}</p>`}${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
+      <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${groups[0][2].length ? '' : `<p class="pk-hint pk-nolead">${partFit ? T('이 대답에 들이밀 만한 메모는 있지만, 함께 맞댈 기록이 아직 모자라다.') : T('이 사람이 한 말과 어긋나 보이는 메모는 아직 수첩에 없다.')}</p>`}${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
       ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${T('이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.')}</p>` : ''}${PICK.other ? `<p class="vs-part">${T('이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.')}</p>` : ''}${PICK.later ? `<p class="vs-part">${T('이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 다른 것부터 물어본다.')}</p>` : ''}
       ${groups[0][2].length ? `<p class="vs-left">${T`엉뚱한 메모를 ${VS_MAX() - ((vsOf(p) || {}).n || 0)}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.`}</p>` : ''}</div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
   }
@@ -1872,7 +1874,7 @@
     const step = (x, s, j) => {
       // 따질 말을 아직 듣지 못했으면 그 말을 앞질러 옮기지 않는다 (「긁힌 데 하나 없다는 말, 맞나?」가 그 사람을 만나기도 전에 보이지 않게)
       const unheard = s.press && thAlt(s).every(([pid, k]) => !(ST.asked[pid] || []).includes(k));
-      const who = unheard && C.people[thAlt(s)[0][0]], known = who && ST.keys.includes(who.key); // 아는 사람이면 이름까지 (누구에게 더 물을지는 알려 준다)
+      const who = unheard && C.people[thAlt(s)[0][0]], known = who && ST.keys.includes(who.key) && (who.key !== C.solution.culprit || (ST.asked[who.id] || []).some(e => e.endsWith('!'))); // 아는 사람이면 이름까지 (누구에게 더 물을지는 알려 준다). 범인은 그 사람의 말을 한 번 깨뜨리기 전까지는 이름을 대지 않는다 (「잠복은 어디서 샜나?」 밑에 범인 이름이 먼저 뜨지 않게)
       const tk = s.press && thAlt(s)[0][1], topic = known && lv() <= 3 && ST.keys.includes(tk); // ★3 은 무엇을 물을지까지
       if (!x.got[j]) return `<li class="th-gap">${esc(unheard ? (topic ? T`${pname(who)}에게 「${kl(tk)}」 이야기를 아직 듣지 못했다.` : known ? T`${pname(who)}에게서 아직 듣지 못한 말이 있다.` : T('아직 듣지 못한 말이 있다.')) : s.hint || '……')}</li>`;
       const n = thNote(s);
@@ -2602,9 +2604,11 @@
   }
   // 화면 읽기 프로그램에만 들리는 한 줄 (판정처럼 칸을 새로 그리며 바뀌는 말은 새로 그린 칸에서 읽히지 않으므로 여기로)
   function say(t) { const b = statusBox('srSay', 'sr'); b.textContent = ''; if (t) setTimeout(() => { b.textContent = t; }, 60); }
-  function toast(msg, ms) {
+  function toast(msg, ms, act) {
     const t = statusBox('toast', 'toast');
     t.textContent = msg;
+    t.classList.toggle('act', !!act); // act: [단추 글, 누르면 할 일] — 지운 메모 되살리기처럼
+    if (act) { const b = document.createElement('button'); b.type = 'button'; b.className = 'toast-b'; b.textContent = act[0]; b.onclick = () => { t.classList.remove('on'); act[1](); }; t.append(' ', b); }
     t.classList.add('on');
     document.documentElement.style.setProperty('--toast-h', t.offsetHeight + 'px'); // 속말 자막이 이만큼 비켜 선다 (css/drama.css)
     clearTimeout(toastTimer);
@@ -2761,6 +2765,7 @@
     // 지운 메모의 × 에 초점이 있었으면 (키보드) 옆 메모의 × 로, 없으면 그 묶음 제목으로 옮긴다
     const li = $(`.notes li[data-nid="${id}"]`), had = li && li.contains(document.activeElement);
     const sib = li && (li.nextElementSibling || li.previousElementSibling), grp = li && li.closest('.ng');
+    if (n && !ST.solved) UNDO = { c: C.id, n, at: ST.notes.indexOf(n), cl: Object.keys(ST.report.claims).filter(k => String(ST.report.claims[k]) === String(id)) };
     const to = had && (sib ? `.notes li[data-nid="${sib.dataset.nid}"] .del` : grp ? `.ng[data-ng="${CSS.escape(grp.dataset.ng)}"] > summary` : '');
     ST.notes = ST.notes.filter(x => x.id !== id);
     if (n && n.f) (ST.drop ||= []).push(n.ref); // 지운 증거 줄은 읽어도 다시 적지 않는다 (✎ 를 누르면 다시 적힌다)
@@ -2772,6 +2777,18 @@
     renderRep();
     const f = to && ($(to) || $('[data-open-rep]'));
     if (f && (document.activeElement === document.body || !document.activeElement)) f.focus({ preventScroll: true });
+    if (UNDO && UNDO.n === n) toast(T`메모를 지웠다.`, 5000, [T`되살리기`, undoDrop]);
+  }
+  // 잘못 누른 × : 지운 메모를 제자리에, 붙여 두었던 보고서 칸에도 다시
+  let UNDO = null;
+  function undoDrop() {
+    const u = UNDO; UNDO = null;
+    if (!u || !C || C.id !== u.c || ST.notes.some(x => x.id === u.n.id)) return;
+    ST.notes.splice(Math.min(u.at, ST.notes.length), 0, u.n);
+    if (u.n.f && ST.drop) { const i = ST.drop.lastIndexOf(u.n.ref); if (i >= 0) ST.drop.splice(i, 1); }
+    u.cl.forEach(k => { if (!ST.report.claims[k]) ST.report.claims[k] = u.n.id; });
+    save(); refreshAll(); renderRep();
+    land(`.notes li[data-nid="${u.n.id}"] .del`, true);
   }
   // 읽던 자리: 다른 자료를 펼쳤다가 돌아오면 읽던 데서 다시 (이번 창에서만 — 새로 고치면 처음부터)
   const READPOS = new Map();
@@ -3281,7 +3298,7 @@
       }
       if ((el = t.closest('[data-ph]'))) return photoClick(el, e);
       if ((el = t.closest('[data-press-note]'))) return choosePress(el.dataset.pressNote);
-      if (t.closest('[data-press-cancel]')) { const k = PICK && PICK.k; PICK = null; renderRead(); land([k ? `#paneRead [data-vs="${k}"]` : '', '#askChips .chip'].filter(Boolean), true); return; } // 그만두면 방금 그 대답의 「메모를 내민다」로
+      if (t.closest('[data-press-cancel]')) { const k = PICK && PICK.k; PICK = null; renderRead(); land([k ? `#paneRead [data-vs="${k}"]` : '', '#askChips .chip'].filter(Boolean), true); const vb = k && $(`#paneRead [data-vs="${k}"]`); if (vb) vb.scrollIntoView({ block: 'nearest' }); return; } // 그만두면 방금 그 대답의 「메모를 내민다」로
       if ((el = t.closest('[data-ask]'))) return ask(el.dataset.ask);
       if ((el = t.closest('[data-search]'))) return search(el.dataset.search);
       if ((el = t.closest('[data-chip]'))) return chip(el.dataset.chip);
