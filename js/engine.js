@@ -1480,6 +1480,34 @@
   }
   // 지도 위 그림 이름표가 조사 지점(빨간 점·점 이름)에 깔리면 그 이름표는 접어 둔다 — 폰의 작은 지도에서 글자가 겹쳐 뭉개지지 않게 (크게 보기에는 다 나온다)
   function mapTidy() {
+    // 그림 위 이름표가 긴 번역으로 그림 밖까지 나가면: 붙은 자리의 반대쪽으로 돌리고, 그래도 모자라면 줄을 바꾼다
+    $$('.case-view .art-labs').forEach(g => {
+      const box = g.getBoundingClientRect(), out = r => r.right > box.right + 1 || r.left < box.left - 1;
+      $$('.art-lab', g).forEach(l => {
+        if (l.dataset.flip) { l.classList.toggle('r'); delete l.dataset.flip; }
+        l.style.maxWidth = ''; l.classList.remove('wrap');
+        let r = l.getBoundingClientRect(); if (!r.width || !out(r)) return;
+        l.classList.toggle('r'); l.dataset.flip = '1'; r = l.getBoundingClientRect();
+        if (!out(r)) return;
+        l.classList.toggle('r'); delete l.dataset.flip; r = l.getBoundingClientRect();
+        l.classList.add('wrap'); l.style.maxWidth = Math.max(60, (l.classList.contains('r') ? r.right - box.left : box.right - r.left) - 2) + 'px';
+      });
+      // 이름표끼리 겹치면 뒤의 것을 반대쪽 · 아래로 옮겨 가장 덜 겹치는 자리에 (그림 밖으로는 안 나가게)
+      const done = [], ov = (r, b) => Math.max(0, Math.min(r.right, b.right) - Math.max(r.left, b.left)) * Math.max(0, Math.min(r.bottom, b.bottom) - Math.max(r.top, b.top));
+      $$('.art-lab', g).forEach(l => {
+        l.classList.remove('dn');
+        const cost = () => { const r = l.getBoundingClientRect(); return done.reduce((n, b) => n + ov(r, b), 0) + (out(r) ? 1e6 : 0); };
+        let low = cost();
+        if (low && !l.classList.contains('wrap')) {
+          const tries = [['r'], ['dn'], ['r', 'dn']], cur = () => [l.classList.contains('r'), l.classList.contains('dn')], keep = cur();
+          let best = keep;
+          tries.forEach(t => { t.forEach(c => l.classList.toggle(c)); const v = cost(); if (v < low) { low = v; best = cur(); } t.forEach(c => l.classList.toggle(c)); });
+          if (best[0] !== keep[0]) { l.classList.toggle('r'); if (l.dataset.flip) delete l.dataset.flip; else l.dataset.flip = '1'; }
+          l.classList.toggle('dn', best[1]);
+        }
+        done.push(l.getBoundingClientRect());
+      });
+    });
     $$('.case-view .map').forEach(m => {
       const labs = $$('.art-lab', m);
       // 점 이름이 다른 점·이름표에 깔리거나 지도 밖으로 나가면, 아래 · 위 · 오른쪽 · 왼쪽 가운데 가장 덜 겹치는 자리로 옮긴다

@@ -596,7 +596,7 @@ button.n-lead{cursor:pointer}
 /* 같은 핏자국이라도 마른 정도가 다르다: 오래된 것은 갈색으로 */
 .stain:nth-of-type(3n+2){filter:sepia(.35) saturate(.8) brightness(1.08)}
 .stain:nth-of-type(4n+3){filter:saturate(1.15) brightness(.9)}
-.case-view[data-graphic] .doc{overflow:hidden;overflow:clip}
+.case-view[data-graphic] .doc,.doc:has(>.stain){overflow:hidden;overflow:clip} /* 커피 얼룩 같은 장식도 종이 밖으로 나가 옆으로 굴러가게 하지 않는다 */
 .case-view[data-graphic] .doc-b,.case-view[data-graphic] .doc-h{position:relative;z-index:1}
 .doc>.stain{z-index:0} /* 기록지의 핏자국은 글자 밑으로 (요약 카드·폴더처럼) — 표 끝·✎ 단추·사진 설명이 얼룩에 묻히지 않게 */
 .case-view[data-graphic] .doc-b{text-shadow:0 0 1px var(--sheet),0 0 3px var(--sheet)} /* 짙은 핏자국 위의 글자도 읽히게: 먹 둘레에 종이 빛 테 (핏자국 없는 자리에서는 보이지 않는다) */

@@ -168,6 +168,7 @@
 
 /* ───────── memo (쪽지) ───────── */
 .skin-memo{max-width:460px;transform:rotate(-.8deg);background-color:#f3e7a6;box-shadow:0 6px 14px rgba(0,0,0,.3)}
+@container stage (max-width:520px){.skin-memo{transform:rotate(-.25deg)}} /* 폰: 긴 쪽지가 기운 만큼 종이 밖으로 삐져 옆으로 굴러가던 것 */
 .skin-memo .doc-t{font:400 26px/1.2 var(--f-hand)}
 .skin-memo .doc-b{font:22px/1.45 var(--f-hand)}
 
