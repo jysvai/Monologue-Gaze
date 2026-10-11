@@ -109,7 +109,7 @@ MG.I18N.put("en", "c02", {
 "hpatdb9tpt": "19:40 Knauer · horse and sledge in the rear stable",
 "esx224vcf9": "Hut search record",
 "23xtf8z81zt": "No tracks on the forest path since the heavy snow on the night of the 27th · no freshly split wood, stove ashes long cold",
-"lfrnt1pznb": "Morning, handed Rosa a letter",
+"28f4a3vhaxw": "Handed Rosa a letter",
 "atgfiy9au2": "Chimney smoking · Saturday's paper taken in",
 "225l2996ihb": "White-horse sledge at the forest path · saw nobody",
 "1yex51xko52": "Morning, Rosa brought the milk",

@@ -87,7 +87,7 @@ MG.I18N.put("de", "c01", {
 "12th6z35529": "Streife 1, Dill und Phipps, um 1:45 zurück · steht im Wachbuch",
 "14z7mnsdh8g": "Gegen 1:55 zurück, Hintertür zu — Dill",
 "1zvlqxpuegd": "Um 1:50 von der Hintertür aus einen großen Seemann mit Schirm­mütze gesehen",
-"2njtzhwr30": "01:43 Hintertür zu · 01:44 niemand am Hofeingang · 01:57 zwei Mann der Bürgerwehr warten vor der Hintertür — Streifen­buch",
+"2njtzhwr30": "01:43 Hintertür zu · 01:44 niemand am Hofeingang · 01:57 zwei Bürgerwehrleute warten vor der Hintertür — Streifen­buch",
 "2abub3zt9sd": "Mit Phipps eine Runde vom Candle Market bis zur Hafenstraße",
 "26s03dt5e2l": "Gegen 1:55 zurück · Hintertür zu, kein Licht · keine Antwort",
 "81tzahhvk8": "Nach 2 Uhr kam Croft von hinten aus der Gasse, mit leeren Händen",

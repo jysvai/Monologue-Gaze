@@ -109,7 +109,7 @@ MG.I18N.put("de", "c02", {
 "hpatdb9tpt": "19:40 Knauer · Pferd und Schlitten im hinteren Stall",
 "esx224vcf9": "Durch­suchung der Hütte",
 "23xtf8z81zt": "Seit dem starken Schneefall in der Nacht des 27. keine Spuren auf dem Waldweg · kein frisch gespaltenes Holz, Asche im Ofen lange kalt",
-"lfrnt1pznb": "Vormittags Rosa einen Brief gegeben",
+"28f4a3vhaxw": "Rosa einen Brief gegeben",
 "atgfiy9au2": "Rauch aus dem Kamin · Wochen­blatt vom Samstag geholt",
 "225l2996ihb": "Schimmel­schlitten am Waldweg · niemanden gesehen",
 "1yex51xko52": "Morgens brachte Rosa die Milch",

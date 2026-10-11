@@ -97,7 +97,7 @@
             { at: [2, 5], t: '27일 밤 큰눈 뒤로 숲길에 드나든 자국 없음 · 새로 팬 나무 없음, 화덕 재는 오래 식음', f: 'f_hut' },
           ] },
           { who: 'p_gerstl', cells: [
-            { at: 1, t: '오전, 로자에게 편지를 건넸다', ask: 'k_rosa|k_freitag' },
+            { at: 1, t: '로자에게 편지를 건넸다', ask: 'k_rosa|k_freitag' },
             { at: 4, t: '굴뚝에 연기 · 토요일 주보는 가져갔다', ask: 'k_haselod' },
             { at: 4, t: '숲길 어귀에 흰 말 썰매 · 사람은 못 봤다', ask: 'k_schlitten' },
           ] },

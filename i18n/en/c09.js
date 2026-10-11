@@ -88,7 +88,7 @@ MG.I18N.put("en", "c09", {
 "vd6g3yco58": "Don't really take parcels · too much trouble",
 "1qnmhnc3np": "19:10 parcel for Min ○○ taken in · signed “Yuk” — handover record",
 "1lmp732y0cg": "Putting frames together at the shop till dawn · got home at dawn",
-"2eyt9ay7k8z": "21:20 · 23:40 shutter down, shop dark — patrol log",
+"3a9rbg55al": "21:20 shutter down, shop dark · still dark at 23:40 — patrol log",
 "8mebuu0p4o": "PC bang log",
 "lj9q8dx8t2": "bike_taehyun · seat 23 by the counter · 20:48–01:40",
 "17vjmwhnvnb": "Patrol log",
