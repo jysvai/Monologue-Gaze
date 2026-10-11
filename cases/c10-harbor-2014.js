@@ -80,6 +80,41 @@
         ],
         ok: '시각이 한 줄로 이어졌다',
         solveNeed: ['!f_gate_out', '!f_hipass', '!f_lastcall'] },
+      // 행적표: 회식이 끝난 23시부터 새벽 2시까지, 저마다 한 말과 기록에 찍힌 시각을 같은 칸에
+      { id: 'ab', type: 'alibi', name: '행적표', need: ['k_sangmin|k_myeongsu|k_bang|k_okja|k_guard'], title: '11월 21일 밤 — 누가 어디에',
+        intro: ['들은 말과 기록에 남은 시각을 30분 칸마다 나란히 적었다.'],
+        slots: ['23:00', '23:30', '00:00', '00:30', '01:00', '01:30'],
+        rows: [
+          { who: 'p_okja', cells: [
+            { at: [0, 1], t: '명수 씨, 은호 씨 순으로 대리를 불러 갔고, 방 사장은 10분쯤 뒤에 갔다', ask: 'k_daeri' }] },
+          { who: 'p_myeongsu', cells: [
+            { at: 0, t: '제일 먼저 대리로 구항 집에 갔다', ask: 'k_daeri' },
+            { at: [1, 5], t: '구항 집 앞 편의점에서 숙취해소제를 사 먹고 잤다', ask: 'k_hangover' },
+            { at: [3, 4], t: '그날 신항엔 안 갔다', ask: 'k_sinhang' }] },
+          { who: 'p_sangmin', cells: [
+            { at: 0, t: '11시 24분 등대횟집 앞에서 출발', ask: 'k_deungdae' },
+            { at: 1, t: '11시 52분 한울아파트 B구역에 대 줬다', ask: 'k_nov21' },
+            { at: 2, t: '다음 콜 때문에 N1 심야버스를 탔다', ask: 'k_busn1' }] },
+          { who: 'p_miran', cells: [
+            { at: 1, t: '11시 57분 「집 도착」', ask: 'k_nov21' },
+            { at: 2, t: '12시 12분 「형님이 잠깐 보자네」 · 마지막 문자', ask: 'k_nov21' }] },
+          { who: 'p_bang', cells: [
+            { at: [1, 5], t: '대리 기사가 108동 앞에 대 주고 갔다 · 올라가서 바로 잤다', ask: 'k_nov21', truth: '12가 3471 — 00:16 정문 출차, 01:52 다시 입차' },
+            { at: 2, t: '그날 밤 통화한 적 없다', ask: 'k_num5821', truth: '00:09 은호에게 3분 통화' },
+            { at: [3, 4], t: '그날 밤엔 신항에 안 갔다', ask: 'k_sinhang', truth: '하이패스 00:34 신항 방향 · 01:21 시내 방향' }] },
+          { who: 'p_guard', cells: [
+            { at: 2, t: '12시 순찰 땐 3부두에 아무것도 없었다', ask: 'k_nov21' },
+            { at: 4, t: '3부두 안쪽에 불 끈 SUV · 손전등에 떠났다', ask: 'k_suv' }] },
+          { label: '은호 휴대폰', cells: [
+            { at: 2, t: '00:09 5821에서 온 전화 · 3분', f: 'f_lastcall' },
+            { at: 3, t: '00:47 신항 3부두 기지국 · 마지막 신호', f: 'f_base_last' }] },
+          { label: '한울아파트 정문 차단기 12가 3471', cells: [
+            { at: 2, t: '00:16 출차', f: 'f_gate_out' },
+            { at: 5, t: '01:52 입차', f: 'f_gate_out' }] },
+          { label: '신항요금소 하이패스 12가 3471', cells: [
+            { at: 3, t: '00:34 신항 방향', f: 'f_hipass' },
+            { at: 4, t: '01:21 시내 방향', f: 'f_hipass' }] },
+        ] },
       { id: 'ask', type: 'people', name: '탐문', desc: '수첩에 이름이 적힌 사람만 찾아갈 수 있다.' },
     ],
     keywords: {
