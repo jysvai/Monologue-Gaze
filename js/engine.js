@@ -412,8 +412,10 @@
     const skin = d.skin || s.skin || 'plain';
     const paper = d.paper || s.paper;
     const marks = docMarks(d, skin);
-    return `<article class="doc skin-${esc(skin)}${d.cls ? ' ' + esc(d.cls) : ''}${marks ? ' marked' : ''}"${d.bar ? ` style="--bar:${esc(d.bar)}"` : ''}>${docStains(d)}${marks}
-      <header class="doc-h">${paper ? `<p class="doc-paper">${inline(paper)}</p>` : ''}${d.kicker ? `<p class="doc-k">${inline(d.kicker)}</p>` : ''}<h3 class="doc-t">${inline(d.title)}</h3>${d.meta ? `<p class="doc-m">${inline(d.meta)}</p>` : ''}</header>
+    // 세로쓰기 기사: 그 시절 지면 그대로 두되, 읽기 힘들면 가로로 펴 볼 수 있다 (고른 쪽은 모든 사건에 남는다)
+    const vert = /\bvertical\b/.test(d.cls || ''), cls = vert && S.hnews ? d.cls.replace(/\s*\bvertical\b/, '') : d.cls;
+    return `<article class="doc skin-${esc(skin)}${cls ? ' ' + esc(cls) : ''}${marks ? ' marked' : ''}"${d.bar ? ` style="--bar:${esc(d.bar)}"` : ''}>${docStains(d)}${marks}
+      <header class="doc-h">${paper ? `<p class="doc-paper">${inline(paper)}</p>` : ''}${d.kicker ? `<p class="doc-k">${inline(d.kicker)}</p>` : ''}<h3 class="doc-t">${inline(d.title)}</h3>${d.meta ? `<p class="doc-m">${inline(d.meta)}</p>` : ''}${vert ? `<button type="button" class="news-dir" data-newsdir aria-pressed="${S.hnews ? 'true' : 'false'}">${S.hnews ? T('세로로 읽기') : T('가로로 읽기')}</button>` : ''}</header>
       <div class="doc-b">${blocks(d.body, d.id, skin === 'chat' && s.name ? T`${plain(s.name)} · ${plain(d.title)}` : plain(d.title))}</div></article>`; // 대화방 메모의 출처는 「도란톡 · 윤재희」처럼 (방 이름만 두면 서윤의 말이 윤재희의 말처럼 읽힌다)
   }
 
@@ -663,7 +665,7 @@
         ${ev.map(n => `<p class="c-ev"><span class="c-ev-k">${isSoft(p, k) ? T('수첩을 펴 보인다') : T('수첩을 내민다')}</span>${esc(n.t)}</p>`).join('')}
         <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div>${!press && vsOpen && !asked.includes(k + '!') ? `<p class="c-vs"><button type="button" class="chip vs${lv() <= 3 && isPressAsk(p, k) && ok((rawAns(p, k) || {}).need) ? ' again' : ''}" data-vs="${esc(k)}">${T('메모를 내민다')}</button></p>` : ''}</div>`;
     }).join('');
-    return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h${faceOf(p) ? ' has-face' : ''}">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}${patHtml(p)}</div></header>
+    return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h${faceOf(p) ? ' has-face' : ''}">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}${patHtml(p)}</div>${recAge() && faceOf(p) ? '<span class="rec" aria-hidden="true"><i></i>REC <b class="rec-tc"></b></span>' : ''}</header>
       <div class="per-tr" data-who="${esc(p.id)}">${tr}</div>
       ${PICK && PICK.pid === p.id ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}>${shut ? `<p class="vs-shut" tabindex="-1"><b>${esc(p.name)}</b> ${inline(ST.vs[p.id].last || '').replace(MIDACT, '<i class="c-mid">$&</i>')} <span>${T('— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.')}</span></p>` : ''}<p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」')}${liveOn() ? `<b class="lv-cost">${T` · 물을 때마다 ${hm(lcost('ask'))}`}</b>` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
   }
@@ -702,8 +704,18 @@
     if (i) i.style.backgroundPosition = facePos(+el.dataset.rows || 1, +el.dataset.r || 0, c);
   }
   // 붙박이 머리 칸은 밑으로 지나가는 대화를 가려야 해서, 화면 바탕(사건마다 다른 종이·화면 색)을 그대로 옮겨 칠한다
+  // 녹화 시각: 그 사람 방에 처음 들어간 때부터 (녹화는 조금 먼저 켜 둔 채로). 다른 사람·다른 자료로 옮기면 멈춘다
+  const REC0 = {}; let RECT = 0;
+  function recTick() {
+    const o = ST && ST.view.open;
+    if (!$('#paneRead .rec-tc') || !o) { clearInterval(RECT); RECT = 0; return; }
+    const k = C.id + '|' + o.id, t0 = REC0[k] ||= Date.now() - (37 + hash(k) % 50) * 1000;
+    const put = () => { const b = $('#paneRead .rec-tc'); if (!b || !C || !ST) { clearInterval(RECT); RECT = 0; return; } const t = Math.floor((Date.now() - (REC0[C.id + '|' + ((ST.view.open || {}).id)] || t0)) / 1000); b.textContent = [t / 3600, t / 60 % 60, t % 60].map(v => String(Math.floor(v)).padStart(2, '0')).join(':'); };
+    put(); RECT ||= setInterval(put, 1000);
+  }
   function faceBg() {
     const h = window.getComputedStyle && $('#paneRead .per-h.has-face');
+    if (h && $('#paneRead.room')) { h.style.backgroundColor = h.style.backgroundImage = ''; return; } // 방에서는 css/era.css 가 칠한다
     for (let e = h && $('#paneRead'); e && e !== document.body; e = e.parentElement) {
       const cs = getComputedStyle(e);
       if (cs.backgroundImage === 'none' && cs.backgroundColor === 'rgba(0, 0, 0, 0)') continue;
@@ -1482,6 +1494,24 @@
     }
   }
   // 세로쓰기 신문: 오른쪽에서 왼쪽으로 읽어 나가므로, 왼쪽에 기사가 더 있으면 그쪽 끝을 흐린다 (다 읽어 가면 오른쪽 끝을)
+  // 세로쓰기 기사 속 숫자·로마자: 옆으로 누운 채 두지 않는다. 두 자리까지는 한 칸에 가로로 모아 세우고(16일 · (54)), 그보다 긴 것은 한 글자씩 세운다(1991 · KBS)
+  function tateNum(b) {
+    if (b.dataset.tcy) return;
+    b.dataset.tcy = '1';
+    const w = document.createTreeWalker(b, NodeFilter.SHOW_TEXT), ns = [];
+    while (w.nextNode()) { const n = w.currentNode; if (/[0-9A-Za-z]/.test(n.data) && !n.parentElement.closest('.pin,.cens-l,.tcy,.upr,button:not(.kw)')) ns.push(n); }
+    ns.forEach(n => {
+      const parts = n.data.split(/([0-9]+(?:[.,:][0-9]+)*|[A-Za-z]+)/);
+      if (parts.length < 2) return;
+      const f = document.createDocumentFragment();
+      parts.forEach((t, i) => {
+        if (!t) return;
+        if (i % 2) { const s = document.createElement('span'); s.className = t.length <= 2 && /^[0-9]+$/.test(t) ? 'tcy' : 'upr'; s.textContent = t; f.appendChild(s); }
+        else f.appendChild(document.createTextNode(t));
+      });
+      n.replaceWith(f);
+    });
+  }
   function colEdge(b) {
     const m = b.scrollWidth - b.clientWidth, x = Math.abs(b.scrollLeft);
     b.classList.toggle('more-l', m > 2 && x < m - 2);
@@ -1539,7 +1569,7 @@
     });
   }
   // 읽기 칸의 넘치는 것들을 다시 잰다 (그림·글꼴이 늦게 와 너비가 바뀐 때도)
-  function edges() { mapTidy(); const el = $('#paneRead'); if (!el) return; $$('.b-tbl', el).forEach(tblEdge); $$('.skin-news.vertical .doc-b', el).forEach(colEdge); }
+  function edges() { mapTidy(); const el = $('#paneRead'); if (!el) return; $$('.b-tbl', el).forEach(tblEdge); $$('.skin-news.vertical .doc-b', el).forEach(b => { tateNum(b); colEdge(b); }); }
   function renderList() {
     const s = curSrc();
     const el = $('#paneList');
@@ -1586,6 +1616,8 @@
     if (fd && rows() > fd.n) { const fb = el.querySelector('.lv-feed .doc-b'); [...fb.children].slice(fd.n).forEach(x => x.classList.add('fresh')); } // 보던 방에 들어온 말은 알림이 따로 안 뜨니, 방 안에서 잠깐 밝혀 둔다
     if (fd && (rows() > fd.n || fd.pill)) { if (fd.low) el.scrollTop = el.scrollHeight; else newBelow(el); }
     $('#stageBody').classList.toggle('reading', !!(o && h));
+    el.classList.toggle('room', !!(o && o.t === 'person' && h) && ageOf(C) !== 'old'); // 탐문: 읽는 칸이 그 시대의 방 (1960년 전 사건은 종이 그대로)
+    recTick();
     const ph = el.querySelector('.per-h.has-face'); if (ph && wasMini) ph.classList.add('mini'); el.style.scrollPaddingTop = ph ? ph.getBoundingClientRect().height + 8 + 'px' : ''; // 붙박이 얼굴 칸 밑으로 짚는다 (scrollIntoView 가 메모 고르기 머리 등을 얼굴 뒤에 숨기지 않게)
     edges();
     scanSoon(900);
@@ -2170,8 +2202,11 @@
     const d = new Date(+el.dataset.t0 + (Date.now() - +el.dataset.at));
     el.textContent = MG.I18N.date(d, 'clock');
   }
+  // 시대 (css/era.css): 책상·기록철·수첩·탐문하는 방이 바뀐다. 사건 data 의 age 가 있으면 그것으로
+  const ageOf = c => c.age || (y => y < 1960 ? 'old' : y < 1980 ? 'mid' : y < 2000 ? 'late' : y < 2010 ? 'y2k' : 'now')(parseInt(c.year, 10) || 2000);
+  const recAge = () => !!C && /^(y2k|now)$/.test(ageOf(C)); // 진술을 녹화하는 시대: 탐문 얼굴 칸에 ● REC 와 흐른 시간
   function renderCase() {
-    document.body.dataset.screen = 'case'; applyTs();
+    document.body.dataset.screen = 'case'; document.body.dataset.age = ageOf(C); applyTs();
     if (gore() && MG.sound && MG.sound.preload) MG.sound.preload(['sfx/dread_envelope']); // 끔찍한 기록을 처음 펼칠 때 날 소리
     app.innerHTML = `${deskProps()}${gore() ?`<div class="gore-bg" aria-hidden="true">${stains(C.id + 'bg', 5, 'aacb', true)}</div>` : ''}<div class="case-view" data-case="${esc(C.id)}" data-frame="${esc(C.frame || 'papers')}" data-era="${(y => y < 1945 ? 'old' : y < 1980 ? 'mid' : '')(parseInt(C.year, 10) || 2000)}"${gore() ? ' data-graphic' : ''}>
       <main class="stage" aria-label="${T`조사 자료`}">
@@ -2251,7 +2286,7 @@
   function warnScreen(c, again) {
     C = null; ST = null; S.current = null; save();
     if (MG.mood) MG.mood.leave();
-    document.body.dataset.screen = 'cabinet';
+    document.body.dataset.screen = 'cabinet'; delete document.body.dataset.age;
     document.title = 'Monologue Gaze';
     app.innerHTML = `<div class="cw"><div class="cw-card" role="region" aria-labelledby="cwH" tabindex="-1">${S.mild ? '' : stains(c.id + 'cw', 2, 'acd', 'corner')}<p class="cw-t">${T`혐오감 주의`}</p><h2 id="cwH">CASE ${pad(c.no)} ${quote(esc(c.title))} ${starsHtml(c)}</h2>
       <p>${esc(c.warn || T('이 사건 기록에는 시신 훼손 같은 잔혹한 내용과 강한 묘사가 들어 있습니다.'))}</p><p class="cw-s">${T`모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국, 가림 없는 사진, 참혹한 묘사와 소리는 「잔혹 표현」 단추로 끌 수 있습니다. 끄면 사진은 가려지고 기록은 건조한 판으로 바뀝니다.`}</p><p>${mildBtn()}</p>
@@ -2354,7 +2389,7 @@
     stopTalk(); if (MG.sound) MG.sound.stopVoice(); // 추궁 도중 기록실로 나가도 그 사람 목소리가 기록실까지 따라오지 않는다
     C = null; ST = null; S.current = null; save();
     if (MG.mood) MG.mood.leave();
-    document.body.dataset.screen = 'cabinet';
+    document.body.dataset.screen = 'cabinet'; delete document.body.dataset.age;
     document.title = 'Monologue Gaze';
     const main = MG.cases.filter(c => c.kind !== 'tutorial' && !c.live); // M 의 서랍: 미제 기록
     const live = MG.cases.filter(c => c.live); // 당직: 지금 강력2팀에 떨어진 사건
@@ -3199,6 +3234,7 @@
       if ((el = t.closest('[data-mild]'))) { S.mild = !S.mild; save(); if (C) { renderCase(); if (MG.mood) MG.mood.enter(C); } else if (t.closest('.cw')) { const id = app.querySelector('[data-cw-ok]'); if (id) warnScreen(MG.byId[id.dataset.cwOk], true); } else cabinet(); return; }
       if ((el = t.closest('[data-voice]'))) { S.voice = S.voice === false; save(); if (!S.voice && MG.sound) MG.sound.stopVoice(); el.outerHTML = voiceBtn(); return; }
       if ((el = t.closest('[data-tsize]'))) { S.ts = (tsOf() + 1) % 3; save(); applyTs(); const host = el.parentNode; el.outerHTML = tsBtn(); const nb = host && host.querySelector('[data-tsize]'); if (nb) nb.focus({ preventScroll: true }); return; } // 한 번 더 누르면 다음 크기로 (초점은 같은 단추에)
+      if ((el = t.closest('[data-newsdir]'))) { S.hnews = !S.hnews; save(); renderRead(); const nb = $('#paneRead [data-newsdir]'); if (nb) { nb.focus({ preventScroll: true }); nb.scrollIntoView({ block: 'nearest' }); } return; } // 세로 기사 ↔ 가로로 펴 읽기
       if ((el = t.closest('[data-amb]'))) { S.amb = S.amb !== true; save(); el.outerHTML = ambBtn(); if (MG.mood) MG.mood.sound(); return; }
       if ((el = t.closest('[data-sound]'))) { S.sound = !S.sound; save(); if (el.parentNode) el.parentNode.querySelectorAll('[data-voice],[data-amb]').forEach(b => b.remove()); if (!S.sound && MG.sound) MG.sound.stopVoice(); el.outerHTML = soundBtn(); if (S.sound) sfx('pen'); if (MG.mood) MG.mood.sound(); return; }
       if (t.closest('[data-roster]')) return toggleRoster();

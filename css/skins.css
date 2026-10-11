@@ -69,7 +69,7 @@
 .skin-news .doc-k{text-align:center;font-size:11px;border-bottom:1px solid #2b2823;padding-bottom:4px}
 .skin-news .doc-t{margin-top:10px;font:900 24px/1.3 var(--f-old);text-align:center}
 .skin-news .doc-m{text-align:center}
-.skin-news .doc-b{font:15px/1.85 var(--f-old);text-align:justify;word-break:normal} /* 옛 신문 단은 글자 단위로 끊어 양쪽을 맞춘다 */
+.skin-news .doc-b{font:15.5px/1.9 var(--f-old);letter-spacing:.025em;text-align:justify;word-break:normal} /* 옛 신문 단은 글자 단위로 끊어 양쪽을 맞춘다 */
 @container stage (min-width:900px){.skin-news .doc-b{column-count:2;column-gap:28px;column-rule:1px solid rgba(0,0,0,.2)}}
 .skin-news .b-img{break-inside:avoid;filter:grayscale(1) contrast(1.1)}
 .skin-news .b-h{font-family:var(--f-old);text-align:center}
@@ -77,8 +77,16 @@
 .skin-news.vertical .doc-b.more-l{-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.3),#000 26px);mask-image:linear-gradient(90deg,rgba(0,0,0,.3),#000 26px)}
 .skin-news.vertical .doc-b.more-r{-webkit-mask-image:linear-gradient(270deg,rgba(0,0,0,.3),#000 26px);mask-image:linear-gradient(270deg,rgba(0,0,0,.3),#000 26px)}
 .skin-news.vertical .doc-b.more-l.more-r{-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.3),#000 26px calc(100% - 26px),rgba(0,0,0,.3));mask-image:linear-gradient(90deg,rgba(0,0,0,.3),#000 26px calc(100% - 26px),rgba(0,0,0,.3))}
-.skin-news.vertical .doc-b{writing-mode:vertical-rl;column-count:auto;width:100%;height:min(62vh,540px);overflow-x:auto;text-align:start;line-height:2} /* 너비를 묶어야 좁은 화면에서 첫 줄(오른쪽)이 잘리지 않고 옆으로 넘겨 읽힌다 */
+.skin-news.vertical .doc-b{writing-mode:vertical-rl;column-count:auto;width:100%;height:min(62vh,540px);overflow-x:auto;text-align:start;font-size:16px;line-height:2.15;letter-spacing:.14em} /* 너비를 묶어야 좁은 화면에서 첫 줄(오른쪽)이 잘리지 않고 옆으로 넘겨 읽힌다 */
 .skin-news.vertical .b-p{margin:0 0 0 14px}
+/* 세로 기사 속 숫자·로마자 (js tateNum): 두 자리 숫자는 한 칸에 가로로, 긴 것은 한 글자씩 세운다 */
+.skin-news.vertical .tcy{text-combine-upright:all;-webkit-text-combine:horizontal;letter-spacing:0}
+.skin-news.vertical .upr{text-orientation:upright;letter-spacing:.02em}
+.skin-news.vertical .b-img{margin-block:4px 22px;margin-inline:0}
+.skin-news.vertical .b-img figcaption{margin-block-start:10px;letter-spacing:.06em}
+/* 세로 기사 ↔ 가로로 펴 읽기 */
+.news-dir{display:block;margin:10px 0 0 auto;padding:3px 10px 2px;border:1px solid rgba(43,40,35,.45);border-radius:2px;background:rgba(255,255,255,.35);color:#2b2823;font:12px/1.4 var(--f-web);cursor:pointer}
+@media (hover:hover){.news-dir:hover{background:rgba(255,255,255,.7)}}
 .skin-news.vertical .pin{writing-mode:horizontal-tb;margin:6px 0 0}
 /* 세로쓰기 신문 속 사진: 가로쓰기의 width:100% 가 먹지 않아 원래 크기(1280px)로 튀어나와 잘리던 것을, 한눈에 보이는 단 크기 안으로 줄인다 */
 .skin-news.vertical{container-type:inline-size}

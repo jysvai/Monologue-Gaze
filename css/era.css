@@ -1,0 +1,90 @@
+/* Monologue Gaze — 시대마다 다른 책상 (js/engine.js renderCase 가 body[data-age] 를 붙인다. 사건 data 의 age 로 바꿀 수 있다)
+ *  old   ~1959  나무 책상 · 크라프트 기록철 · 스프링 수첩 — base.css 그대로
+ *  mid   1960~79  철제 책상 · 녹회색 서류철 · 검은 천 표지 수첩 · 스탠드 하나 켠 취조실
+ *  late  1980~99  유리 깐 사무 책상 · 남색 바인더 · 흰 스프링 수첩 · 형광등 조사실 (위는 미색, 허리 아래는 초록 페인트)
+ *  y2k   2000~09  회색 사무 책상 · 모니터 · 진술녹화실 (캠코더 화면)
+ *  now   2010~    검은 책상 · 노트북 · 태블릿 메모 · 진술녹화실 (녹화 프로그램 화면)
+ * 탐문을 열면 읽는 칸이 그 시대의 방이 된다 (#paneRead.room). 대화·묻는 칸·메모 고르기는 방 벽 앞에 놓인 종이·창으로 둔다 */
+
+/* ───────── 책상 ───────── */
+body[data-age="mid"]{--desk:#1f231e;background-image:radial-gradient(ellipse 60% 48% at 26% 10%,rgba(255,210,140,.16) 0%,transparent 70%),radial-gradient(ellipse at 85% 95%,#151813 0%,transparent 55%),repeating-linear-gradient(0deg,rgba(255,255,255,.016) 0 1px,transparent 1px 3px),linear-gradient(180deg,#2b302a,#1b1e19)}
+body[data-age="late"]{--desk:#18241f;background-image:linear-gradient(116deg,transparent 0 34%,rgba(255,255,255,.05) 34% 41%,transparent 41% 57%,rgba(255,255,255,.035) 57% 59%,transparent 59%),radial-gradient(ellipse 70% 50% at 50% 0%,rgba(214,240,222,.12) 0%,transparent 70%),radial-gradient(ellipse at 15% 90%,#101a16 0%,transparent 55%),linear-gradient(180deg,#22332b,#17221d)}
+body[data-age="y2k"]{--desk:#1e2024;background-image:radial-gradient(ellipse 55% 45% at 30% 30%,rgba(150,180,230,.12) 0%,transparent 70%),radial-gradient(circle,rgba(255,255,255,.035) 1px,transparent 1.4px),linear-gradient(180deg,#2c2f34,#1c1e21);background-size:auto,5px 5px,auto}
+body[data-age="now"]{--desk:#111316;background-image:radial-gradient(ellipse 50% 46% at 32% 42%,rgba(96,140,255,.12) 0%,transparent 72%),radial-gradient(ellipse at 90% 100%,#0a0b0d 0%,transparent 60%),linear-gradient(180deg,#17191d,#0e1012)}
+body:is([data-age="y2k"],[data-age="now"])::after{opacity:.08} /* 화면 앞에서는 종이 결을 거의 걷는다 */
+
+/* ───────── 기록철 (종이 사건) ───────── */
+body[data-age="mid"] .case-view[data-frame="papers"]{--tab-bg:#cfd3c1;--tab-on:#eceadd;--tab-ink:#23271f}
+body[data-age="mid"] .case-view[data-frame="papers"] .stage-frame{background-color:#646e5c;box-shadow:0 30px 60px -24px rgba(0,0,0,.85),inset 0 0 50px rgba(20,30,15,.4)}
+body[data-age="late"] .case-view[data-frame="papers"]{--tab-bg:#d5d9df;--tab-on:#f1f1ec;--tab-ink:#1d2430}
+body[data-age="late"] .case-view[data-frame="papers"] .stage-frame{background-color:#2c3b52;background-image:radial-gradient(circle,rgba(255,255,255,.05) 1px,transparent 1.3px),linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.18));background-size:4px 4px,auto;box-shadow:0 30px 60px -24px rgba(0,0,0,.85),inset 0 0 0 1px rgba(255,255,255,.06),inset 0 0 40px rgba(0,0,0,.35)}
+body[data-age="late"] .case-view[data-frame="papers"] :is(.stage-body,.tab){background-image:var(--noise)} /* 섬유 결 대신 고른 사무용지 */
+body[data-age="late"] .case-view[data-frame="papers"] .tab{font-family:var(--f-web);font-weight:700;letter-spacing:0}
+body[data-age="late"] .case-view[data-frame="papers"] .pane-list{border-right:1px solid rgba(30,40,60,.18)}
+
+/* ───────── 노트북 화면 (2010년 뒤) — 누런 종이빛을 걷고 요즘 화면처럼 희고 또렷하게 ───────── */
+body[data-age="now"] .case-view[data-frame="laptop"] .screen{background:#e9ebee}
+body[data-age="now"] .case-view[data-frame="laptop"] .screen::after{mix-blend-mode:normal;background:radial-gradient(ellipse at center,transparent 72%,rgba(0,0,0,.07) 100%)}
+body[data-age="now"] .case-view[data-frame="laptop"] .src-tabs{background:#1f2329}
+body[data-age="now"] .case-view[data-frame="laptop"] .tab{background:rgba(255,255,255,.09);color:#e3e6ea}
+body[data-age="now"] .case-view[data-frame="laptop"] .tab.on{background:#fff;color:#1f2329}
+body[data-age="now"] .case-view[data-frame="laptop"] .src-tabs::before{background:linear-gradient(90deg,#1f2329 20%,rgba(31,35,41,0))}
+body[data-age="now"] .case-view[data-frame="laptop"] .src-tabs::after{background:linear-gradient(90deg,rgba(31,35,41,0),#1f2329 80%)}
+body[data-age="now"] .case-view[data-frame="laptop"] .stage-body{background:#fff;color:#1f2329}
+body[data-age="now"] .case-view[data-frame="laptop"] .pane-list{background:#f4f5f7;border-right-color:#e3e6ea}
+body[data-age="now"] .case-view[data-frame="laptop"] .item{--card:#fff;border-color:#e3e6ea;box-shadow:0 1px 2px rgba(20,30,50,.06)}
+
+/* ───────── 수첩 ───────── */
+/* 60~70년대: 검은 천 표지를 실로 맨 수사 수첩 */
+body[data-age="mid"] .nb{border-left:10px solid #1c1c1a;border-radius:3px 8px 8px 3px}
+body[data-age="mid"] .nb-rings{height:16px;border-bottom:0;background:repeating-linear-gradient(90deg,rgba(232,222,196,.55) 0 7px,transparent 7px 12px) 0 7px/100% 1.5px no-repeat,linear-gradient(#2a2925,#1c1c1a)}
+/* 80~90년대 · 2000년대: 흰 종이에 파란 줄, 은색 철사 스프링 */
+body:is([data-age="late"],[data-age="y2k"]) .nb{--paper:#f4f3ed;--rule:rgba(58,96,170,.3);--margin:rgba(214,72,72,.5);background-image:var(--noise),linear-gradient(180deg,rgba(255,255,255,.3),transparent 30%,rgba(60,70,90,.06));box-shadow:0 34px 60px -22px rgba(0,0,0,.8),inset 0 0 40px rgba(60,70,90,.12)}
+body:is([data-age="late"],[data-age="y2k"]) .nb-rings{height:26px;border-bottom:1px solid rgba(60,70,90,.18);background:radial-gradient(ellipse 3.2px 9px at 8px 11px,transparent 0 1.6px,#b9bec6 1.9px 3px,transparent 3.3px) 4px 0/16px 26px repeat-x,radial-gradient(circle at 8px 18px,var(--desk) 0 3px,rgba(0,0,0,.2) 3.6px,transparent 4.2px) 4px 0/16px 26px repeat-x}
+/* 2010년 뒤: 태블릿 메모 앱 — 검은 테 안의 흰 화면, 점 모눈, 펜으로 쓴 글씨는 그대로 */
+body[data-age="now"] .nb{--paper:#fbfbf9;--rule:rgba(60,70,90,.1);--margin:transparent;border:9px solid #0d0e10;border-radius:22px;background-color:#fbfbf9;background-image:radial-gradient(circle,rgba(40,50,70,.12) 1px,transparent 1.3px);background-size:16px 16px;box-shadow:0 34px 60px -22px rgba(0,0,0,.85),0 0 0 1px #2c2e33}
+body[data-age="now"] .nb-rings{height:22px;border-bottom:1px solid #e6e6e2;background:#f3f3f1}
+body[data-age="now"] .nb-rings::before{content:"";display:block;width:6px;height:6px;margin:8px auto 0;border-radius:50%;background:#1b1c1f;box-shadow:0 0 0 1.5px #2c2e33}
+body[data-age="now"] .brief{transform:none;border-radius:10px;background:#fff;font-family:var(--f-ui);box-shadow:0 1px 3px rgba(20,30,50,.12),0 0 0 1px #ebebe7}
+body[data-age="now"] .brief h2{font-family:var(--f-ui);border-bottom-color:#e3e3df}
+body[data-age="now"] .brief .clip{display:none}
+body[data-age="now"] .nb-back{border-color:#d6d6d1;border-radius:8px}
+body[data-age="now"] .nb-foot{border-top:1px solid #e6e6e2}
+
+/* ───────── 알림 ───────── */
+/* 화면 시대에는 종이 쪽지 대신 시스템 알림 */
+body:is([data-age="y2k"],[data-age="now"]) .toast{padding:10px 16px;border-radius:12px;background:#1f2329;color:#f1f3f5;font:600 14px/1.45 var(--f-ui);transform:translate(-50%,10px);box-shadow:0 10px 26px rgba(0,0,0,.5)}
+body:is([data-age="y2k"],[data-age="now"]) .toast.on{transform:translate(-50%,0)}
+body[data-age="y2k"] .toast{border-radius:3px;border:1px solid #0a246a;background:#ffffe1;color:#111;font:12.5px/1.5 var(--f-web);box-shadow:2px 2px 0 rgba(0,0,0,.35)}
+
+/* ───────── 탐문하는 방 ───────── */
+.pane-read.room :is(.press-pick,.per-ask:not([hidden])){margin-top:12px;padding:12px 14px;border-top:0;background-color:var(--sheet);background-image:var(--noise);color:var(--sheet-ink);box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.pane-read.room>.back-list{background:rgba(255,255,255,.88);color:#222}
+.pane-read.room .per-h.has-face{background:var(--room-head);box-shadow:0 10px 12px -12px rgba(0,0,0,.6)}
+.pane-read.room .per-h{color:var(--room-ink)}
+.pane-read.room .per-h :is(p,.per-pat){color:var(--room-soft)}
+.pane-read.room .per-h .face.lg{box-shadow:0 0 0 1px rgba(0,0,0,.4),0 10px 20px -8px rgba(0,0,0,.7)}
+/* 60~70년대 취조실: 어두운 벽, 머리 위 스탠드 한 개 */
+body[data-age="mid"] .pane-read.room{--room-head:#2c2822;--room-ink:#f0e7d2;--room-soft:#cdbf9f;background-color:#2c2822;background-image:radial-gradient(ellipse 66% 50% at 50% -6%,rgba(255,214,150,.4) 0%,rgba(255,214,150,.08) 55%,transparent 75%),repeating-linear-gradient(90deg,rgba(0,0,0,.08) 0 2px,transparent 2px 90px),linear-gradient(180deg,#3a352c,#24211b)}
+/* 80~90년대 조사실: 형광등, 미색 벽, 허리 아래 초록 페인트 */
+body[data-age="late"] .pane-read.room{--room-head:#b7c3b3;--room-ink:#1c241d;--room-soft:#3f4a40;background-color:#b7c3b3;background-image:linear-gradient(180deg,rgba(240,255,246,.55),transparent 26%),linear-gradient(180deg,transparent 0 70%,#2f4a3b 70% calc(70% + 3px),#4d6a58 calc(70% + 3px))}
+/* 2000년대 진술녹화실: 흡음재 벽 (회청색 칸) */
+body[data-age="y2k"] .pane-read.room{--room-head:#2a303a;--room-ink:#eef2f8;--room-soft:#b4bfcf;background-color:#2a303a;background-image:linear-gradient(90deg,rgba(0,0,0,.18) 1px,transparent 1px),linear-gradient(180deg,rgba(0,0,0,.18) 1px,transparent 1px),radial-gradient(ellipse 80% 50% at 50% 0%,rgba(200,215,240,.12),transparent 70%);background-size:44px 44px,44px 44px,100% 100%}
+/* 2010년 뒤 진술녹화실: 짙은 흡음 패널 벽 */
+body[data-age="now"] .pane-read.room{--room-head:#15181b;--room-ink:#f1f3f5;--room-soft:#a9b0ba;background-color:#1b1e22;background-image:radial-gradient(ellipse 80% 46% at 50% 0%,rgba(170,190,220,.1),transparent 72%),repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 1px,transparent 1px 48px)}
+/* 화면 속 사건의 묻는 칸·메모 고르기는 그 화면의 창 모양으로 */
+.case-view[data-frame="laptop"] .pane-read.room :is(.press-pick,.per-ask:not([hidden])){border:1px solid #e3e6ea;border-radius:12px;background:#fff;color:#1d1f22}
+.case-view[data-frame="crt"] .pane-read.room :is(.press-pick,.per-ask:not([hidden])){border:1px solid #7f9db9;border-radius:0;background:#fff;color:#111;box-shadow:none}
+.case-view[data-frame="laptop"] .pane-read.room .per-tr{box-shadow:0 2px 12px rgba(0,0,0,.35)}
+
+/* 녹화 표시: ● REC 와 흐른 시간 (js 가 1초마다) */
+.rec{position:absolute;right:4px;top:16px;display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border-radius:4px;background:rgba(0,0,0,.45);color:#f4f4f4;font:700 11px/1.2 var(--f-mono);letter-spacing:.08em;pointer-events:none}
+.rec i{width:8px;height:8px;border-radius:50%;background:#e5322b;animation:recBlink 1.6s steps(1) infinite}
+.rec b{font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+body[data-age="y2k"] .rec{border-radius:0;background:transparent;color:#fff;font:12px/1.2 var(--f-pixel);text-shadow:1px 1px 0 #000}
+.per-h.has-face.mini .rec{top:8px}
+.per-h:not(.has-face):has(.rec){position:relative}
+.per-h:has(.rec)>div{padding-right:120px}
+@media (max-width:720px){.rec{top:8px;padding:2px 6px;font-size:10px}.per-h:has(.rec)>div{padding-right:0}.per-h:has(.rec) h3{padding-right:96px}}
+@keyframes recBlink{50%{opacity:.15}}
+@media (prefers-reduced-motion:reduce){.rec i{animation:none}}

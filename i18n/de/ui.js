@@ -37,6 +37,8 @@ MG.I18N.put("de", "ui", {
 "비밀번호": "Passwort",
 "열기": "Öffnen",
 "{0} ({1}회)": "{0} ({1}×)",
+"세로로 읽기": "Senkrecht lesen",
+"가로로 읽기": "Waagerecht lesen",
 "참을성 {0} / {1}": "Geduld {0} / {1}",
 "참을성": "Geduld",
 "…글쎄요.": "…Nun ja.",
