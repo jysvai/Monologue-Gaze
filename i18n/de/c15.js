@@ -214,7 +214,7 @@ MG.I18N.put("de", "c15", {
 "2erfu0dd29u": "Anruf um 21:44 verpasst — unter der Dusche · um 22:07 zurückgerufen, keiner ging ran",
 "33qepg21vv": "Seit neun geschlafen · nichts gehört",
 "27wu23d9nkj": "22:08 mit Taschenlampe Richtung Parkplatz · 22:13 zurück — Kamera an der Gasse",
-"1bv62qdkwmz": "Von einem Licht kurz aufgewacht · in der Gasse stand ein Auto mit laufendem Motor",
+"xyasp1zet3": "Von einem Licht kurz aufgewacht · in der Gasse stand was mit laufendem Motor",
 "1imyxzptjon": "Heute nicht in Mirinae-dong · nur Beodeul-dong und Saebit-dong",
 "1d8t2gaxen9": "21:38 Liefermotorrad fährt in die Gasse · 21:41 wieder raus — Kamera an der Gasse",
 "uv1yxkgcs4": "21:44 Abholung in Beodeul-dong · 21:52 ausgeliefert",

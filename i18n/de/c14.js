@@ -149,7 +149,7 @@ MG.I18N.put("de", "c14", {
 "1n1f94oiq9i": "10:46 · 10:52 Solmae 3 (Gegend Solmae-Markt)",
 "nm3hhrko2o": "11:19 Mitte 1 (nahe Busbahnhof)",
 "bpfwawjcue": "11:48 Solmae 3",
-"15vvimmz6u7": "Busbahnhof · Fach 47",
+"15vvimmz6u7": "Busbahnhof · Kameras · Schließfächer",
 "1v1w4cxc5j7": "11:08 Junge legt Einkaufstüte in Fach 47, fotografiert",
 "1wj5wj5h71s": "11:21 schwarzer Helm öffnet Fach 47 per Code, nimmt die Tüte heraus",
 "1ezn4rsbguu": "Vernehmung",
