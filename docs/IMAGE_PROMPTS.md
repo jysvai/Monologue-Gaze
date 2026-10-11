@@ -1,7 +1,7 @@
 # Monologue Gaze — 이미지 프롬프트 모음
 
 > 이 파일은 `node tools/prompts.js` 로 자동 생성됩니다. 프롬프트를 고치려면 각 사건 파일(`cases/*.js`)의 `art` 항목을 고친 뒤 다시 생성하세요.
-총 **257장**.
+총 **260장**.
 
 
 ## 쓰는 법
@@ -60,18 +60,25 @@ A single blank rectangular warning sticker label, flat top-down scan, deep brick
 
 ## CASE 00 · 청운하이츠 504호 (2025, 서울 서대문구 (가상))
 
-- 사건 파일: `cases/c00-cheongun.js` · 이미지 10장
+- 사건 파일: `cases/c00-cheongun.js` · 이미지 11장
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 Casual smartphone photo taken in 2025 Seoul, natural window light, slightly soft focus, subtle JPEG compression, warm muted colors, social-media snapshot feel. No faces, no readable text, no logos.
 ```
 
 ### c00/desk — 정밀 관찰 사진
-- 저장 경로: `img/c00/desk.webp` · 비율: 3:2
+- 저장 경로: `img/c00/desk.webp` · 비율: 4:3
 ```
 Top-down photograph of a freelance illustrator's work desk in a small Seoul studio apartment, left exactly as it was found: an open laptop in the middle, a yellow sticky note stuck on the desk just left of the laptop near the top edge with a short handwritten line (blurred, unreadable), an unopened small cardboard delivery box at the upper right with a shipping label and its packing tape still sealed, two mugs of cold coffee side by side at the lower right, one with a faint lip-balm mark on the rim, a drawing tablet and pens, a few cat hairs, dull daylight through blinds, a still, stale feeling.
 ```
 - **꼭 보여야 할 것**: 노트북 왼쪽 위 포스트잇 · 오른쪽 위 뜯지 않은 택배 상자 · 오른쪽 아래 머그잔 두 개 (한 잔에만 립밤 자국)
+
+### c00/desk_snap — 서윤의 10.08 스냅로그 게시물 — 같은 책상 (감식 사진과 전후 대조)
+- 저장 경로: `img/c00/desk_snap.webp` · 비율: 4:3
+```
+Not a new picture: the desk photo itself, edited by hand (wood grain patched in from the same desk and blended at the edges) so both line up pixel for pixel. Removed the yellow sticky note left of the laptop, removed the plain white mug with the lip-balm mark together with its coaster and its long cast shadow down to the desk edge, and turned the street painting on the laptop screen back into a pencil line sketch on a blank canvas. Everything else is the unchanged pixels of desk.
+```
+- **꼭 보여야 할 것**: desk 와 같은 크기·같은 구도 · 포스트잇 없음 · 점박이 머그 하나만 · 택배 상자는 그대로 (테이프 붙은 채) · 노트북 화면은 연필 밑그림
 
 ### c00/cover — 기록실 폴더 표지 — 증거물 꼬리표가 달린 노트북
 - 저장 경로: `img/c00/cover.webp` · 비율: 4:3
@@ -1585,7 +1592,7 @@ Forensic luminol photograph from 1994, a 30-second exposure on the dark tiled wa
 
 ## CASE 13 · 초승달 각인 (2023, 하람시 새솔동 (가상의 수도권 신도시))
 
-- 사건 파일: `cases/c13-drop-2023.js` · 이미지 13장 · 난이도 ★★★★
+- 사건 파일: `cases/c13-drop-2023.js` · 이미지 14장 · 난이도 ★★★★
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 Stills from a 2023 new-town district of a Korean satellite city in November. CCTV frames: fixed high-angle fisheye, low-light sensor noise, greyish night-mode colour with a little sodium orange, H.264 compression blocking. Smartphone photos: 2020s phone camera, computational HDR, noise at night, harsh flash on close-ups. Police evidence photos: flat flash on a grey backdrop with a scale ruler. Officetels, narrow residential alleys with air-conditioner outdoor units, bright convenience stores. No on-screen overlays, no readable text or signs, no logos or brand marks, no identifiable faces (people only from behind, hooded or blurred), nothing graphic.
@@ -1671,6 +1678,13 @@ Forensic photograph taken straight down with an on-camera flash at 3 a.m. of the
 A hurried smartphone photo at night with harsh phone flash in a narrow residential alley, the kind a street dealer sends as a "drop location": a blue steel double gate between red-brick pillars at the left, a grey gas meter on the concrete wall beside the gate, a white air-conditioner outdoor unit on two small concrete feet against the wall in the middle with a strip of black electrical tape stuck in the gap under it, a small blank white sign board with a red band on the wall at the right, beyond the wall at the top right the corner of a building with a white dome security camera looking down toward the unit, two cigarette butts on the wet ground at the lower right, the alley running off into the dark.
 ```
 - **꼭 보여야 할 것**: 왼쪽 파란 철 대문 · 대문 옆 가스 계량기 · 가운데 실외기와 받침 아래 검정 테이프 · 오른쪽 위 담 너머 건물의 돔 카메라 · 빨간 띠 안내판 · 바닥의 꽁초 두 개
+
+### c13/drop_1006 — 전후 대조 — 정우진 사진첩, 10월 6일 같은 자리의 좌표 사진
+- 저장 경로: `img/c13/drop_1006.webp` · 비율: 4:3
+```
+Edit of the drop photo (same phone, same spot, same framing, six weeks earlier on 6 October 2023): the red-banded sign board removed from the concrete wall (bare stained concrete), the lens module behind the smoked dome cover faintly visible turned to the right and down (toward the store back door), three dumped white food-waste trash bags (one torn) at the foot of the wall right of the unit, the small red maple at the right edge still green. Everything else pixel-identical to drop.
+```
+- **꼭 보여야 할 것**: drop 과 같은 구도 · 안내판 없는 빈 벽 · 돔 덮개 속 렌즈가 오른쪽 아래를 봄 · 실외기 오른쪽 담 밑 음식물 쓰레기봉투 세 개 (하나 터짐) · 받침 아래 검정 테이프는 그대로 · 오른쪽 끝 나무는 아직 푸름
 
 ### c13/counter — 정밀 관찰 사진
 - 저장 경로: `img/c13/counter.webp` · 비율: 3:2
@@ -1781,7 +1795,7 @@ High-angle security-camera still inside a small Korean intercity bus terminal wa
 
 ## CASE 15 · 워치가 멈춘 뒤 (2024, 가람시 미리내동 일대 (가상 도시))
 
-- 사건 파일: `cases/c15-tracker-2024.js` · 이미지 13장 · 난이도 ★★★★★
+- 사건 파일: `cases/c15-tracker-2024.js` · 이미지 14장 · 난이도 ★★★★★
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 Korea, November 2024, a fictional mid-sized city at night. Smartphone photos: modern phone night mode, slight noise and over-sharpening, cold white LED and sodium streetlight, wet asphalt and gravel after a short shower. CCTV, elevator and helmet-camera frames: wide-angle fisheye, low-light sensor noise, H.264 compression blocking, washed-out blacks. Forensic photos: harsh on-camera flash, yellow scale rulers, blue nitrile gloves. Everyday details of 2020s Korean villa (dasedae) alleys, officetel entryways and industrial outskirts. No on-screen timestamps or overlays, no readable text, license plates or logos, no identifiable faces (people only from behind, from above, or as silhouettes), nothing graphic, no injuries.
@@ -1875,3 +1889,10 @@ Street-view style daytime photo of a closed-down coin-operated car wash on a ble
 Forensic photograph at 11 p.m. taken from behind a small silver hatchback parked in the narrow lot behind a four-storey Korean villa just after a rain shower, lit by a white work light on the far wall, a faint blue and red patrol-car glow at the right, wet gravel and asphalt glistening. Over the villa entrance at the upper left a small white security camera whose black power cable hangs loose, unplugged; a sheet of white paper with illegible marker scrawl tucked under the rear wiper; a small matte black box stuck under the rear bumper; a palm-sized dry rectangle on the wet ground beside the left rear wheel; at the lower right against the wall a tipped-over sports bag and a torn plastic bag with tangerines rolled out.
 ```
 - **꼭 보여야 할 것**: 가운데 은색 해치백 뒷모습 · 뒷유리 와이퍼 밑 종이 · 뒤 범퍼 밑 작은 검은 상자 · 왼쪽 뒷바퀴 옆 마른 직사각형 · 오른쪽 아래 엎어진 가방과 귤 · 왼쪽 위 전원선이 빠진 벽 카메라
+
+### c15/carlot_2154 — 전후 대조 — 21:54 순21호 도착 사진, 같은 자리 (왼쪽 뒷바퀴 옆에 떨어진 휴대폰)
+- 저장 경로: `img/c15/carlot_2154.webp` · 비율: 3:2
+```
+Edit of carlot (same frame, same pixels): the same lot at 21:54 during the shower, before anyone touched it — a black smartphone lies flat with its dark screen up on the wet gravel beside the left rear wheel, exactly over the patch that is dry at 23:05, beaded with raindrops and half in the wheel's shadow. Nothing else changes.
+```
+- **꼭 보여야 할 것**: 지금 사진(carlot)과 픽셀까지 같은 구도 · 23:05에 마른 직사각형 자리에 검은 휴대폰 (화면 꺼짐 · 빗방울) · 그 밖에는 바꾸지 않음

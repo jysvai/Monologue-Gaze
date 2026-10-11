@@ -152,7 +152,10 @@ MG.I18N.put("en", "c15", {
 "1oxwumsuzl4": "Scene photos uploaded by the forensics team. Tap the photo to find what catches your eye.",
 "1psb9dmro1v": "Victim's car · Mirinae Villa parking lot",
 "1j4455rtwz4": "Taken Nov 21 23:05 by the forensics team · from behind the car",
-"onhm5xjl8p": "Shot under work lights after the shower stopped. The car was locked, and Da-som was gone.",
+"dxe5ur5qo1": "21:54 Patrol 21",
+"1tlw3u4xq9k": "23:05 forensics",
+"1c2d0ps0t76": "Taken by the forensics team after the shower stopped. The car was locked, and Da-som was gone.",
+"1bwbohtybk6": "Laid over it is the photo Patrol 21 took from the same spot at 21:54, on arrival in the rain.",
 "26vi8samn0e": "Camera on the wall",
 "erz4hs086": "The parking-lot [[villa CCTV|k_villacam]] mounted on the villa's outer wall. Its power cord hangs loose, pulled from the outlet. There's dust on the plug, so it wasn't unplugged today.",
 "c7t4wesvf8": "Paper under the rear wiper",
@@ -162,7 +165,8 @@ MG.I18N.put("en", "c15", {
 "wboh6ajf28": "23:20 forensics — shot looking up inside the bumper",
 "wb6vke5hem": "Layer on layer of fingernail scratches around the charging cover. The only dust-free patch is around where the box sits, so it was recently taken off and stuck back on.",
 "1bvnwtkp8vb": "Ground by the rear wheel",
-"2kxb5h50ld": "Between the wet gravel and the curb, a rectangle about the size of a palm is dry. Something covered this spot during the shower and was taken away after it stopped.",
+"2e1y24htzex": "In the 21:54 photo a black phone lies on this spot. Its dark screen faces up, beaded with rain. In the wheel's shadow it is easy to miss.",
+"25e760q34w4": "At 23:05 the phone is gone. Only that spot is dry, a rectangle about the size of a palm. [[Da-som's phone|k_phone]] lay here until the shower stopped at 22:06, and someone picked it up after that.",
 "1yqskqxiqr2": "Bag by the wall",
 "1o0he63h8t7": "A futsal-shoe bag lies tipped over. A plastic bag has torn and five tangerines have rolled out; one is still in the bag. Written on it in marker: “Saturday [[picture-book group|k_picturebook]] 🍊”.",
 "1329lgeqwhl": "In the bag: goalkeeper gloves, a wet towel, a library ID badge, two ballpoint pens and a small notebook for futsal dues.",
@@ -955,5 +959,7 @@ MG.I18N.put("en", "c15", {
 "etsm7gicvf": "Beodeul FC group-chat photo — futsal court before the game (Da-som in goal)",
 "do1vbbpsln": "Street view from the building lookup — 188 Saneop-ro, closed self-service car wash and the machine-room steel door",
 "kn7mxf6ur4": "Villa parking lot at night, silver compact photographed from behind",
-"55mj7544s3": "Scene photo (close examination) — behind the victim's car, Mirinae Villa parking lot"
+"55mj7544s3": "Scene photo (close examination) — behind the victim's car, Mirinae Villa parking lot",
+"1s154jmc3op": "Before/after — Patrol 21's arrival photo at 21:54, same spot (a phone dropped beside the left rear wheel)",
+"ljvy402q4v": "Villa parking lot in the rain, a black phone on the ground beside the silver compact's left rear wheel"
 });

@@ -152,7 +152,10 @@ MG.I18N.put("de", "c15", {
 "1oxwumsuzl4": "Fotos der Spurensicherung. Auf das Foto tippen, um Auffälliges zu finden.",
 "1psb9dmro1v": "Auto des Opfers · Parkplatz Wohnhaus Mirinae",
 "1j4455rtwz4": "21.11. 23:05, Spurensicherung · von hinten aufgenommen",
-"onhm5xjl8p": "Nach dem Schauer bei aufgestellten Scheinwerfern aufgenommen. Das Auto war abgeschlossen, und Da-som war nicht da.",
+"dxe5ur5qo1": "21:54 Streife 21",
+"1tlw3u4xq9k": "23:05 Spurensicherung",
+"1c2d0ps0t76": "Nach dem Schauer von der Spurensicherung aufgenommen. Das Auto war abgeschlossen, und Da-som war nicht da.",
+"1bwbohtybk6": "Darübergelegt ist das Foto, das Streife 21 um 21:54 bei der Ankunft im Regen von derselben Stelle aus gemacht hat.",
 "26vi8samn0e": "Kamera an der Wand",
 "erz4hs086": "Die [[Hauskamera|k_villacam]] für den Parkplatz, an der Außenwand des Hauses. Das Stromkabel hängt lose, der Stecker steckt nicht in der Dose. Auf dem Stecker liegt Staub, er wurde also nicht heute gezogen.",
 "c7t4wesvf8": "Papier am Heckscheibenwischer",
@@ -162,7 +165,8 @@ MG.I18N.put("de", "c15", {
 "wboh6ajf28": "23:20 Spurensicherung — von unten in die Stoßstange fotografiert",
 "wb6vke5hem": "Rund um die Ladeklappe Kratzspuren von Fingernägeln, mehrere übereinander. Nur um das Kästchen herum kein Staub. Es wurde vor Kurzem abgenommen und wieder angebracht.",
 "1bvnwtkp8vb": "Boden neben dem Hinterrad",
-"2kxb5h50ld": "Zwischen nassem Kies und Bordstein ein handtellergroßes trockenes Rechteck. Während des Schauers lag hier etwas, das nach dem Schauer weggenommen wurde.",
+"2e1y24htzex": "Auf dem Foto von 21:54 liegt an dieser Stelle ein schwarzes Handy. Das dunkle Display zeigt nach oben, Regentropfen darauf. Im Schatten des Rads übersieht man es leicht.",
+"25e760q34w4": "Um 23:05 ist das Handy weg. Nur diese Stelle ist trocken, ein handtellergroßes Rechteck. [[Da-soms Handy|k_phone]] lag hier, bis der Schauer um 22:06 aufhörte; danach hat es jemand aufgehoben.",
 "1yqskqxiqr2": "Tasche unten an der Mauer",
 "1o0he63h8t7": "Eine Tasche für Futsalschuhe liegt umgekippt da. Die Plastiktüte ist gerissen, fünf Mandarinen sind herausgerollt. Eine ist in der Tüte geblieben. Auf der Tüte mit Marker: „Samstag [[Bilderbuchrunde|k_picturebook]] 🍊“.",
 "1329lgeqwhl": "In der Tasche: Torwarthandschuhe, ein nasses Handtuch, Bibliotheksausweis, zwei Kugelschreiber und ein kleines Notizbuch für die Futsal-Beiträge.",
@@ -955,5 +959,7 @@ MG.I18N.put("de", "c15", {
 "etsm7gicvf": "Foto aus dem Chat von Beodeul FC — Futsalplatz vor dem Spiel (im Tor: Da-som)",
 "do1vbbpsln": "Straßenansicht aus der Gebäudeabfrage — Saneop-ro 188, geschlossener SB-Waschpark und Stahltür zum Technikraum",
 "kn7mxf6ur4": "Nächtlicher Parkplatz am Wohnhaus, silberner Kleinwagen von hinten",
-"55mj7544s3": "Tatortfoto (genaue Untersuchung) — hinter dem Auto des Opfers, Parkplatz Wohnhaus Mirinae"
+"55mj7544s3": "Tatortfoto (genaue Untersuchung) — hinter dem Auto des Opfers, Parkplatz Wohnhaus Mirinae",
+"1s154jmc3op": "Vorher/nachher — Ankunftsfoto von Streife 21 um 21:54, dieselbe Stelle (ein Handy neben dem linken Hinterrad)",
+"ljvy402q4v": "Parkplatz am Wohnhaus im Regen, ein schwarzes Handy am Boden neben dem linken Hinterrad des silbernen Kleinwagens"
 });

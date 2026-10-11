@@ -14,7 +14,7 @@
 
 | 그림 | 종류 | 비율 | 상태 |
 |---|---|---|---|
-| `c00/desk` | 관찰 사진 | 3:2 | ✅ 들어옴 |
+| `c00/desk` | 관찰 사진 | 4:3 | ✅ 들어옴 |
 | `c01/sk_backroom` | 관찰 사진 | 3:2 | ✅ 들어옴 |
 | `c01/map` | 지도 | 4:3 | ✅ 들어옴 |
 | `c02/plan` | 지도 | 3:2 | ✅ 들어옴 |
@@ -58,7 +58,7 @@
 | `c15/carlot` | 관찰 사진 | 3:2 | ✅ 들어옴 |
 
 ## c00/desk — 관찰 사진 · 청운하이츠 504호 ✅
-- 저장 경로: `img/c00/desk.png` · 비율: 3:2
+- 저장 경로: `img/c00/desk.png` · 비율: 4:3
 - **꼭 보여야 할 것**: 노트북 왼쪽 위 포스트잇 · 오른쪽 위 뜯지 않은 택배 상자 · 오른쪽 아래 머그잔 두 개 (한 잔에만 립밤 자국)
 ```
 Top-down photograph of a freelance illustrator's work desk in a small Seoul studio apartment, left exactly as it was found: an open laptop in the middle, a yellow sticky note stuck on the desk just left of the laptop near the top edge with a short handwritten line (blurred, unreadable), an unopened small cardboard delivery box at the upper right with a shipping label and its packing tape still sealed, two mugs of cold coffee side by side at the lower right, one with a faint lip-balm mark on the rim, a drawing tablet and pens, a few cat hairs, dull daylight through blinds, a still, stale feeling. Casual smartphone photo taken in 2025 Seoul, natural window light, slightly soft focus, subtle JPEG compression, warm muted colors, social-media snapshot feel. No faces, no readable text, no logos. This image replaces a flat placeholder diagram in a detective game. Every clue object must sit where the prompt places it (left, right, top, bottom, middle), because the game puts clickable markers on those spots. Do not write any words, labels, numbers or captions anywhere; the game adds its own labels on top.
