@@ -64,7 +64,7 @@ MG.I18N.put("en", "c02", {
 "242m6lg38ud": "The archive clerk leafs through the index cards and suggests naming a shop or office that would have written it down.",
 "1ysrih4tnyh": "Wochenblatt",
 "ofleecyndg": "The district paper, out twice a week, on Wednesdays and Saturdays. The issues for 1922–23 are tied up with string.",
-"nnusbzk6k": "Word to look for in the articles",
+"nnusbzk6k": "Search the articles",
 "3li8gqclx7": "The Ten Days",
 "22duuc7b2zh": "Ten Days at Haselöd — January 24 to February 3",
 "1mram80sdi": "Board pinned to the station wall",

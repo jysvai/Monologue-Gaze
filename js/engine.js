@@ -2783,7 +2783,7 @@
   // heard: false — 가게 이름으로만 불리는 사람(「새터슈퍼」 「기무라 정육점」)은 가게 이름 대신 이름표를 적는다
   const unsaid = (said, id) => { const k = C.keywords[id] || {}; return !!said && k.type === 'person' && !k.nick && !k.victim && k.heard !== false && !covers(said, k.label, roleToks(id)); };
   function kl(id) { const k = C.keywords[id], m = asWas(); return k ? (m && m[id]) || k.label : id; }
-  function pname(p) { return ST.asked[p.id] ? p.name : kl(p.key); } // 아직 안 만난 사람은 수첩에 적힌 이름으로
+  function pname(p) { if (ST.asked[p.id]) return p.name; const s = String(kl(p.key)); return s.charAt(0).toLocaleUpperCase() + s.slice(1); } // 아직 안 만난 사람은 수첩에 적힌 이름으로 (영어의 「farmhand」처럼 소문자로 적혔으면 이름답게 첫 글자만 크게)
   function renameKey(id) {
     const m = asWas(), k = C.keywords[id];
     if (!m || !m[id] || !k) return false;
