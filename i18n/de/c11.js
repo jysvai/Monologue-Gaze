@@ -56,7 +56,7 @@ MG.I18N.put("de", "c11", {
 "1uk50sramr0": "19:50 Gil Yong-su checkt ein · 1 Nacht",
 "2bi7kap1ywv": "05:50 Gil Yong-su reist ab",
 "1x0zqaq4gtr": "Der Kassierer ist nicht gekommen · angerufen hat er auch nicht",
-"1osnny08jw4": "Die 2-7341 auf der Streichholzschachtel ist das Telefon der Werkstatt Cheonghak — Teilnehmerkartei",
+"yru7ldoa4g": "Die 2-7341 auf der Streichholzschachtel ist das Telefon der Werkstatt Cheonghak (Teilnehmer: Ham Deok-gyu) — Teilnehmerkartei",
 "24w6fk0jhvw": "Nie einen Transporter bestellt",
 "26r50jwu6t2": "03:10 vom Auftrag­geber selbst telefonisch abgesagt — Auftrags­buch",
 "by0tmx9lh2": "Früh schlafen gegangen · Yong-su war auch auf dem Dachboden",

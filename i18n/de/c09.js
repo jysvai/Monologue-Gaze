@@ -86,7 +86,7 @@ MG.I18N.put("de", "c09", {
 "vqjsqf9rzt": "Nachtverladung im Depot · bis nach Mitternacht",
 "1yl1zbjwg8y": "20:48–01:40 Platz 23, Internetcafé Eungol — PC-Café-Liste",
 "vd6g3yco58": "Nehme kaum Pakete an · zu lästig",
-"1qnmhnc3np": "19:10 Paket für Min ○○ · Unterschrift „Yuk“ — Hanbit-Liste",
+"1qnmhnc3np": "19:10 Paket für Min ○○ · Unterschrift „Yuk“ — Hanbit-Übergabeliste",
 "1lmp732y0cg": "Bis in den Morgen im Laden Rahmen gebaut · erst im Morgengrauen heim",
 "3a9rbg55al": "21:20 Rollladen unten, Laden dunkel · um 23:40 noch immer dunkel — Markt-Streife",
 "8mebuu0p4o": "PC-Café-Liste",
