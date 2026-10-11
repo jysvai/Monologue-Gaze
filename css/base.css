@@ -553,6 +553,7 @@ button.ab-c.log:hover{border-color:#5d6a76}
 .ab-c s{color:var(--ink-soft);text-decoration-color:var(--red);text-decoration-thickness:2px}
 .ab-tr{display:block;margin-top:3px;color:var(--red);font-size:12.5px}
 .ab-c.broke{border-left-color:var(--red)}
+.ab-c.after{border-left-style:dashed;border-left-color:var(--red)} /* 따진 뒤 고쳐 한 말 */
 .ab-none{padding:6px 2px;color:var(--ink-soft);font-size:12.5px}
 :lang(ja) :is(.ab-c,.ab-who),:lang(zh) :is(.ab-c,.ab-who){word-break:normal;line-break:strict} /* 낱말 사이 띄어쓰기가 없는 말은 keep-all 이면 넘칠 때만 끊겨 줄 머리에 「、」가 온다 */
 @container stage (max-width:520px){.ab{--ab-min:88px}.doc.alibi{padding-left:12px;padding-right:12px}.doc.alibi .ab{margin-inline:-4px}} /* 좁은 화면은 옆으로 밀어 보는 대신 칸을 넉넉히 (낱말 가운데서 끊기지 않게) */

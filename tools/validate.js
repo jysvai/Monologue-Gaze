@@ -407,7 +407,7 @@ function check(c) {
         if (at.some(x => !Number.isInteger(x) || x < 0 || x >= n) || (at[1] != null && at[1] < at[0])) err(`${cw}: at ${JSON.stringify(cl.at)} 이 slots 밖`);
         if ([cl.ask, cl.f, cl.need].filter(Boolean).length !== 1) err(`${cw}: ask · f · need 가운데 하나만`);
         if (cl.ask && !r.who) err(`${cw}: ask 는 사람 줄(who)에만`);
-        if (cl.ask && r.who && P[r.who]) String(cl.ask).split('|').forEach(k => { if (!(P[r.who].ask || {})[k]) err(`${cw}: ${r.who} 에게 ${k} 대답이 없음`); });
+        if (cl.ask && r.who && P[r.who]) String(cl.ask).split('|').map(k => k.replace(/!$/, '')).forEach(k => { if (!(P[r.who].ask || {})[k]) err(`${cw}: ${r.who} 에게 ${k} 대답이 없음`); });
         if (cl.f && !factWhere[cl.f]) err(`${cw}: 사실 ${cl.f} 가 어느 블록에도 없음`);
         if (cl.need) needCheck(cl.need, cw);
         if (cl.truth && !cl.ask) warn(`${cw}: truth 는 깨뜨린 말(ask)에만 보인다`);

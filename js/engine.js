@@ -957,9 +957,9 @@
     const rows = (s.rows || []).map(r => ({ r, cs: (r.cells || []).filter(c => abShown(r, c)) })).filter(({ r, cs }) => cs.length || (r.who && ST.asked[r.who]));
     const cell = (r, c) => {
       const broke = abBroke(r, c), tx = broke ? `<s>${inline(c.t)}</s>${c.truth ? `<span class="ab-tr">${inline(c.truth)}</span>` : ''}` : inline(c.t);
-      if (c.ask && !broke) return `<button type="button" class="ab-c said" style="${span(c)}" data-ab="${esc(r.who)}|${esc(abKeys(c).find(k => (ST.asked[r.who] || []).includes(k)) || abKeys(c)[0])}" title="${esc(T`${pname(C.people[r.who])}에게 이 말을 따진다`)}">${tx}</button>`;
+      if (c.ask && !broke && !/!$/.test(c.ask)) return `<button type="button" class="ab-c said" style="${span(c)}" data-ab="${esc(r.who)}|${esc(abKeys(c).find(k => (ST.asked[r.who] || []).includes(k)) || abKeys(c)[0])}" title="${esc(T`${pname(C.people[r.who])}에게 이 말을 따진다`)}">${tx}</button>`;
       const nt = c.f && thNote(c);
-      return nt ? `<button type="button" class="ab-c log" style="${span(c)}" data-ab-note="${nt.id}">${tx}</button>` : `<span class="ab-c${c.ask ? ' said broke' : ' log'}" style="${span(c)}">${tx}</span>`;
+      return nt ? `<button type="button" class="ab-c log" style="${span(c)}" data-ab-note="${nt.id}">${tx}</button>` : `<span class="ab-c${c.ask ? (broke ? ' said broke' : ' said after') : ' log'}" style="${span(c)}">${tx}</span>`; // ask: 'k!' — 따진 뒤에 고쳐 한 말 (깨진 뒤에만 보이고, 더 따질 것은 없다)
     };
     // 이름 칸은 시각 칸 묶음 밖에 따로 둔다: 옆으로 밀어도 이름이 그 줄 전체(한 단 더 내려간 말까지)를 덮고 남는다
     const grid = `--n:${n};grid-template-columns:repeat(${n},minmax(var(--ab-min,72px),1fr))`; // 칸 여섯이 노트북 화면(1280) 읽기 칸에 옆 스크롤 없이 들어가게
