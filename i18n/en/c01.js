@@ -832,7 +832,7 @@ MG.I18N.put("en", "c01", {
 "1wdyukpva2c": "Who was the last person Rose met?",
 "26umhud33yj": "Dill: after two o'clock, Croft came walking out of the dark down the alley. He said he'd gone for coal, but his hands were empty, and he was soaked through.",
 "1fk7gx5l88v": "What did the vigilance men coming back to the back room that night see?",
-"17zvowh64af": "Three Keys slate: the back-room coal scuttle was filled at 8 that evening.",
+"1rki2ek76o1": "The back-room coal scuttle wasn't short that night.",
 "1vx5jvxml11": "When was the back room's coal scuttle last filled?",
 "1wfsmix8fuy": "I put the business of the coal to Croft. “I went as far as the coal store and came back without any. Thought we were short. Must have been mistaken.”",
 "d8hremp7k3": "The coal scuttle running out early — is that really what happened?",

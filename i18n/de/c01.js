@@ -832,7 +832,7 @@ MG.I18N.put("de", "c01", {
 "1wdyukpva2c": "Wem ist Rose zuletzt begegnet?",
 "26umhud33yj": "Dill: Nach zwei Uhr kam Croft aus dem Dunkel weiter hinten in der Gasse. Er sei Kohle holen gewesen, sagte er, hatte aber nichts in den Händen und war klatschnass.",
 "1fk7gx5l88v": "Was haben die Bürgerwehrleute gesehen, die in jener Nacht zum Hinterzimmer zurückkamen?",
-"17zvowh64af": "Anschreibetafel des Three Keys: Der Kohleneimer im Hinterzimmer wurde an dem Abend um 8 Uhr gefüllt.",
+"1rki2ek76o1": "Der Kohleneimer im Hinterzimmer war in dieser Nacht nicht knapp.",
 "1vx5jvxml11": "Wann wurde der Kohleneimer im Hinterzimmer gefüllt?",
 "1wfsmix8fuy": "Ich habe Croft die Sache mit der Kohle vorgehalten. „Ich bin bis zum Kohlenschuppen und mit leeren Händen zurück. Dachte, die Kohle wär knapp. Hab mich wohl geirrt.“",
 "d8hremp7k3": "Der Kohleneimer sei früh leer gewesen — stimmt das wirklich?",

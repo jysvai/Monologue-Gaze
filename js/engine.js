@@ -3082,6 +3082,9 @@
     if (!ST.unl.includes(id)) ST.unl.push(id);
     ((reward && reward.keys) || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
     save(); refreshAll(); cue('match', stamp || T('일치')); land(['#paneRead .c-done', '#paneRead .doc-t']); showDone();
+    // 풀자마자 나온 결과(감정 소견 따위)가 읽기 칸 밑에 숨어 있으면 굴려 보여 준다: 보여야 읽은 것으로 수첩에 적힌다 (휴대폰에선 늘 한 화면 아래)
+    const pr = $('#paneRead'), cd = $('#paneRead .c-done');
+    if (pr && cd) { const a = pr.getBoundingClientRect(), r = cd.getBoundingClientRect(); if (r.bottom > a.bottom) pr.scrollTo({ top: pr.scrollTop + Math.min(r.bottom - a.bottom + 16, r.top - a.top - 16), behavior: reduced() ? 'auto' : 'smooth' }); }
     const gained = census() - before;
     toast(msg + (gained > 0 ? opened(gained, BY) : ''));
     liveSync();
