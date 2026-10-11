@@ -567,6 +567,15 @@ button.n-lead{cursor:pointer}
 /* ── 정밀 관찰 */
 .ph{position:relative;margin:10px 0 6px;border:6px solid #f7f4ec;box-shadow:0 3px 10px rgba(0,0,0,.35);background:#ddd;cursor:zoom-in;overflow:hidden;user-select:none}
 .ph>svg,.ph>img{display:block;width:100%;height:auto}
+/* 전후 대조 (js photoHtml 의 before): 같은 자리를 앞서 찍은 사진을 왼쪽부터 --cut 까지 덮는다. 경계선과 두 사진의 날짜표 */
+.ph-bef{position:absolute;inset:0;pointer-events:none;clip-path:inset(0 calc(100% - var(--cut,50%)) 0 0)}
+.ph-bef>img,.ph-bef>svg{display:block;width:100%;height:100%;object-fit:cover}
+.ph-cutl{position:absolute;top:0;bottom:0;left:var(--cut,50%);width:2px;margin-left:-1px;background:rgba(255,255,255,.92);box-shadow:0 0 0 1px rgba(0,0,0,.35);pointer-events:none}
+.ph-tag{position:absolute;top:6px;max-width:46%;padding:2px 7px;overflow:hidden;background:rgba(20,18,15,.68);color:#f4efe2;font:11px/1.4 var(--f-mono);white-space:nowrap;text-overflow:ellipsis;pointer-events:none}
+.ph-tag.l{left:6px}.ph-tag.r{right:6px}
+.ph-cmp{display:flex;align-items:center;gap:8px;margin:0 0 6px;font:12px var(--f-mono);color:var(--ink-soft)}
+.ph-cmp input{flex:1;min-width:60px;margin:0;accent-color:var(--red);cursor:ew-resize}
+.ph-cmp span{max-width:36%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .ph-mk{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;width:30px;height:30px;border:2px solid var(--red);border-radius:50%;color:var(--red);font:800 13px/1 var(--f-web);background:rgba(255,255,255,.35);pointer-events:none}
 .ph-miss{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border:1px solid rgba(40,40,40,.6);border-radius:50%;pointer-events:none;animation:phmiss .7s ease-out forwards}
 @keyframes phmiss{from{transform:scale(.4);opacity:1}to{transform:scale(1.6);opacity:0}}

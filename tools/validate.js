@@ -238,6 +238,8 @@ function check(c) {
       (s.scenes || []).forEach(x => {
         const xw = `${w}.scene ${x.id}`;
         if (!x.art || A[x.art] == null) err(`${xw}: art "${x.art}" 가 없음`);
+        if (x.before && (!x.before.art || A[x.before.art] == null)) err(`${xw}: 전후 대조 before.art "${x.before && x.before.art}" 가 없음`);
+        if (x.before && x.before.art === x.art) err(`${xw}: 전후 대조 before.art 가 지금 사진과 같다`);
         else if (typeof A[x.art] === 'object' && A[x.art].prompt && !A[x.art].raster) warn(`${xw}: 관찰 장면은 좌표가 맞아야 해서 SVG 로만 그린다 — prompt 는 쓰이지 않음 (지우거나 raster:true)`);
         if (!(x.spots || []).length) err(`${xw}: spots 가 비어 있음`);
         const ib = mk(`ph:${x.id}:i`);

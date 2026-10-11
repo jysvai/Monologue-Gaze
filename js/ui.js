@@ -121,7 +121,10 @@
   document.addEventListener('pointermove', e => {
     if (e.pointerType !== 'mouse') return;
     const ph = e.target.closest ? e.target.closest('.ph') : null;
-    const img = ph && [...ph.querySelectorAll('img.art')].find(i => !i.closest('.cens:not(.open)'));
+    const imgs = ph ? [...ph.querySelectorAll('img.art')].filter(i => !i.closest('.cens:not(.open)')) : [];
+    let img = imgs.find(i => !i.classList.contains('bef'));
+    const bef = imgs.find(i => i.classList.contains('bef')); // 전후 대조: 경계 왼쪽에서는 앞서 찍은 사진을 키운다
+    if (bef && img) { const r0 = img.getBoundingClientRect(), cut = parseFloat(ph.style.getPropertyValue('--cut')) || 0; if (e.clientX - r0.left < r0.width * cut / 100) img = bef; }
     if (!img || !img.complete || !img.naturalWidth) { if (lph && lph !== ph) lensOff(); return; }
     if (lph !== ph || !lens || !lens.isConnected) { lensOff(); lph = ph; lens = document.createElement('div'); lens.className = 'ph-lens'; lens.setAttribute('aria-hidden', 'true'); ph.appendChild(lens); ph.classList.add('lensing'); }
     const r = img.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, pr = ph.getBoundingClientRect();

@@ -1013,17 +1013,22 @@
   // 찾은 순서대로 번호를 단다 — 정의 순서로 매기면 앞쪽 것을 나중에 찾을 때 이미 붙은 번호가 바뀐다
   const foundSpots = x => (x.spots || []).filter(sp => ST.unl.includes(sp.id)).sort((a, b) => ST.unl.indexOf(a.id) - ST.unl.indexOf(b.id));
   const PHGRID = new Set(); // 「칸을 나눠 살피기」를 펼쳐 둔 사진 (찾을 때마다 다시 그려져도 펼친 채로 — 키보드로 칸을 옮겨 다니는 중이므로)
+  // 전후 대조: 장면에 before: { art, label } 이 있으면 같은 자리를 앞서 찍은 사진을 겹쳐 두고, 밀대로 경계를 옮겨 가며 달라진 곳을 찾는다.
+  // 두 사진은 같은 구도라 좌표가 같다 — 어느 쪽 사진을 눌러도 같은 자리를 짚는다. 경계는 장면마다 기억한다 (찾을 때마다 다시 그려져도 그 자리)
+  const PHCUT = new Map();
   function photoHtml(x) {
     if (!x) return '';
     if (!ST.seen.includes(x.id)) { ST.seen.push(x.id); save(); }
     const found = foundSpots(x);
     const tot = sceneSpots(x).length;
+    const bf = x.before && C.art[x.before.art] != null ? x.before : null, cut = bf ? (PHCUT.has(x.id) ? PHCUT.get(x.id) : 50) : 0;
     const marks = found.map((sp, i) => `<span class="ph-mk" style="left:${+sp.x}%;top:${+sp.y}%" aria-hidden="true">${i + 1}</span>`).join('');
     const cells = [];
     for (let r = 0; r < 3; r++) for (let q = 0; q < 4; q++) cells.push(`<button type="button" class="ph-cell" data-ph-cell="${esc(x.id)}|${q}|${r}" aria-label="${T`${r + 1}행 ${q + 1}열 살피기`}"></button>`);
     return `<article class="doc skin-${esc(x.skin || 'photo')} scene"><header class="doc-h"><p class="doc-k">${T`정밀 관찰`}</p><h3 class="doc-t">${inline(x.title)}</h3>${x.meta ? `<p class="doc-m">${inline(x.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(x.intro, `${x.id}@i`, plain(x.title))}
-        <div class="ph" data-ph="${esc(x.id)}">${art(x.art, 'art', true)}${marks}<div class="ph-grid"${PHGRID.has(x.id) ? '' : ' hidden'}>${cells.join('')}</div></div>
+        <div class="ph${bf ? ' cmp' : ''}" data-ph="${esc(x.id)}"${bf ? ` style="--cut:${cut}%"` : ''}>${art(x.art, 'art', true)}${bf ? `<div class="ph-bef" aria-hidden="true">${art(bf.art, 'art bef', true)}</div><span class="ph-cutl" aria-hidden="true"></span><span class="ph-tag l" aria-hidden="true">${esc(plain(bf.label || T('앞서 찍은 사진')))}</span><span class="ph-tag r" aria-hidden="true">${esc(plain(x.now || T('지금')))}</span>` : ''}${marks}<div class="ph-grid"${PHGRID.has(x.id) ? '' : ' hidden'}>${cells.join('')}</div></div>
+        ${bf ? `<p class="ph-cmp"><span>${esc(plain(bf.label || T('앞서 찍은 사진')))}</span><input type="range" min="0" max="100" step="1" value="${cut}" data-ph-cut="${esc(x.id)}" aria-label="${esc(T`두 사진의 경계 — 왼쪽은 ${plain(bf.label || T('앞서 찍은 사진'))}`)}"><span>${esc(plain(x.now || T('지금')))}</span></p>` : ''}
         <p class="ph-bar"><span>${T`찾은 것 ${found.length}${lv() >= 5 ? '' : ` / ${tot}`}`}</span><button type="button" data-ph-grid="${esc(x.id)}" aria-pressed="${PHGRID.has(x.id)}">${T`칸을 나눠 살피기`}</button></p>
         <ol class="ph-found">${found.map(sp => `<li><p class="ph-l">${inline(sp.label)}</p>${blocks(sp.body, `${sp.id}@b`, plain(x.title))}</li>`).join('')}</ol></div></article>`;
   }
@@ -3487,10 +3492,11 @@
     document.addEventListener('mouseup', e => { if (SELQ && e.target === SELQ) e.preventDefault(); SELQ = null; });
     document.addEventListener('focusout', e => { if (CIPHL != null && e.target.closest && e.target.closest('[data-sym]') && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-sym]'))) cipherHl(null); });
     document.addEventListener('input', e => {
+      if (e.target.matches && e.target.matches('[data-ph-cut]')) { const id = e.target.dataset.phCut, ph = $$('.ph[data-ph]').find(p => p.dataset.ph === id); PHCUT.set(id, +e.target.value); if (ph) ph.style.setProperty('--cut', e.target.value + '%'); return; } // 전후 대조: 앞서 찍은 사진을 어디까지 덮을지
       if (e.target.matches && e.target.matches('[data-qf]') && e.target.form) e.target.form.dataset.last = e.target.dataset.qf; // 조회 칸: 마지막으로 고쳐 쓴 칸 (runQuery)
       // 칸에 적는 소리: 노트북은 얕은 자판, 2006년 모니터와 90년대 종이 사건은 자판, 그 앞은 타자기, 1950년 앞은 연필 (소리 파일이 있을 때만, 너무 잦지 않게)
       if (C && S.sound && e.data && e.target.closest('.lock-phone')) dtmf(e.data.slice(-1));
-      else if (C && S.sound && MG.sound && e.target.matches('input:not([type="radio"])') && e.target.closest('.case-view')) {
+      else if (C && S.sound && MG.sound && e.target.matches('input:not([type="radio"]):not([type="range"])') && e.target.closest('.case-view')) {
         const ink = inkKind(), now = Date.now(), f = ink === 'tap' ? ['click', 0.16, 45] : ink === 'kbd' || ink === 'oldkbd' ? ['key', 0.24, 45] : ink === 'typewriter' ? ['tw1', 0.24, 60] : ['pen', 0.14, 120];
         if (now - TYPED > f[2]) { TYPED = now; MG.sound.play('sfx/' + f[0], f[1]); }
       }
