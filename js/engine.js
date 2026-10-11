@@ -958,7 +958,7 @@
       const nt = c.f && thNote(c);
       return nt ? `<button type="button" class="ab-c log" style="${span(c)}" data-ab-note="${nt.id}">${tx}</button>` : `<span class="ab-c${c.ask ? ' said broke' : ' log'}" style="${span(c)}">${tx}</span>`;
     };
-    const grid = `grid-template-columns:minmax(60px,.55fr) repeat(${n},minmax(72px,1fr))`; // 칸 여섯이 노트북 화면(1280) 읽기 칸에 옆 스크롤 없이 들어가게
+    const grid = `grid-template-columns:minmax(60px,.55fr) repeat(${n},minmax(var(--ab-min,72px),1fr))`; // 칸 여섯이 노트북 화면(1280) 읽기 칸에 옆 스크롤 없이 들어가게
     const head = `<div class="ab-row ab-head" style="${grid}" aria-hidden="true"><span></span>${sl.map(x => `<span class="ab-slot">${inline(x)}</span>`).join('')}</div>`;
     const body = rows.map(({ r, cs }) => `<div class="ab-row${r.who ? '' : ' logs'}" style="${grid}"><p class="ab-who">${r.who ? esc(pname(C.people[r.who])) : inline(r.label || '')}</p>${cs.length ? cs.map(c => cell(r, c)).join('') : `<span class="ab-none" style="grid-column:2 / ${n + 2}">${T('아직 이 시각에 대해 들은 말이 없다.')}</span>`}</div>`).join('');
     return `<article class="doc skin-${esc(s.skin || 'board')} alibi"><header class="doc-h"><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>
