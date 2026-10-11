@@ -554,7 +554,7 @@ button.ab-c.log:hover{border-color:#5d6a76}
 .ab-c.broke{border-left-color:var(--red)}
 .ab-none{padding:6px 2px;color:var(--ink-soft);font-size:12.5px}
 :lang(ja) :is(.ab-c,.ab-who),:lang(zh) :is(.ab-c,.ab-who){word-break:normal;line-break:strict} /* 낱말 사이 띄어쓰기가 없는 말은 keep-all 이면 넘칠 때만 끊겨 줄 머리에 「、」가 온다 */
-@container stage (max-width:520px){.ab{--ab-min:88px}} /* 좁은 화면은 옆으로 밀어 보는 대신 칸을 넉넉히 (낱말 가운데서 끊기지 않게) */
+@container stage (max-width:520px){.ab{--ab-min:88px}.doc.alibi{padding-left:12px;padding-right:12px}.doc.alibi .ab{margin-inline:-4px}} /* 좁은 화면은 옆으로 밀어 보는 대신 칸을 넉넉히 (낱말 가운데서 끊기지 않게) */
 .ab-help{margin:2px 0 8px;font:12px var(--f-mono);color:var(--ink-soft)}
 .tl{list-style:none;margin:12px 0;padding:0;counter-reset:tl}
 .tl-e{display:flex;align-items:center;gap:10px;margin:0 0 6px;padding:8px 10px;background:#fbf6e6;border:1px solid rgba(0,0,0,.14);border-left:4px solid #b9a77a;box-shadow:0 1px 2px rgba(0,0,0,.12)}
