@@ -102,7 +102,7 @@ MG.I18N.put("en", "c10", {
 "1rhflkrt158": "00:09, a 3-minute call to Eun-ho",
 "eyg4zbxfpn": "Didn't go to the New Port that night",
 "smwtfrp83f": "Hi-pass: 00:34 toward the New Port · 01:21 toward downtown",
-"1dp2l9lutc4": "On the midnight round, nothing at Pier 3",
+"kdszxfy9we": "On the midnight round, nothing there",
 "qjk7fvqdp7": "An SUV, lights off, inside Pier 3 · left when the flashlight hit it",
 "1anzxiqtn2c": "Eun-ho's phone",
 "i86ebcba3c": "00:09 incoming call from 5821 · 3 min",
