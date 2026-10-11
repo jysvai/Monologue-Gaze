@@ -942,6 +942,40 @@
       <div class="doc-b">${blocks(s.intro, `${s.id}@i`, s.name)}<ol class="tl">${rows}</ol>${act}</div></article>`;
   }
 
+  /* ── 행적표 (alibi): 그 시각 누가 어디 있었다고 했는지, 기록에는 무엇이 남았는지를 한 판에 늘어놓는다
+   * rows: [{ who: 사람id | label: '정문 차단기', cells: [{ at: 칸 | [첫 칸,끝 칸], t, ask: 물은 것 | f: 사실 | need, truth }] }]
+   * 칸은 그 대답을 들으면(ask) · 그 사실이 든 메모를 적으면(f) · 조건이 차면(need) 나타난다. 어긋나는 칸을 엔진이 짚어 주지는 않는다.
+   * 들은 말 칸을 누르면 그 사람에게 가서 그 대답에 메모를 내민다 (탐문과 같은 따지기). 깨뜨린 말에는 줄을 긋고 truth 를 적는다 */
+  const abShown = (r, c) => c.ask ? !!r.who && (ST.asked[r.who] || []).some(e => e === c.ask || e === c.ask + '!') : c.f ? !!thNote(c) : ok(c.need);
+  const abBroke = (r, c) => !!(c.ask && r.who && (ST.asked[r.who] || []).includes(c.ask + '!') && isPressAsk(C.people[r.who], c.ask));
+  function alibiHtml(s) {
+    if (!s) return '';
+    const sl = s.slots || [], n = sl.length || 1, span = c => { const [a, b] = [].concat(c.at ?? 0); return `grid-column:${+a + 2} / ${(b ?? a) + 3}`; };
+    const rows = (s.rows || []).map(r => ({ r, cs: (r.cells || []).filter(c => abShown(r, c)) })).filter(({ r, cs }) => cs.length || (r.who && ST.asked[r.who]));
+    const cell = (r, c) => {
+      const broke = abBroke(r, c), tx = broke ? `<s>${inline(c.t)}</s>${c.truth ? `<span class="ab-tr">${inline(c.truth)}</span>` : ''}` : inline(c.t);
+      if (c.ask && !broke) return `<button type="button" class="ab-c said" style="${span(c)}" data-ab="${esc(r.who)}|${esc(c.ask)}" title="${esc(T`${pname(C.people[r.who])}에게 이 말을 따진다`)}">${tx}</button>`;
+      const nt = c.f && thNote(c);
+      return nt ? `<button type="button" class="ab-c log" style="${span(c)}" data-ab-note="${nt.id}">${tx}</button>` : `<span class="ab-c${c.ask ? ' said broke' : ' log'}" style="${span(c)}">${tx}</span>`;
+    };
+    const grid = `grid-template-columns:minmax(76px,.8fr) repeat(${n},minmax(84px,1fr))`;
+    const head = `<div class="ab-row ab-head" style="${grid}" aria-hidden="true"><span></span>${sl.map(x => `<span class="ab-slot">${inline(x)}</span>`).join('')}</div>`;
+    const body = rows.map(({ r, cs }) => `<div class="ab-row${r.who ? '' : ' logs'}" style="${grid}"><p class="ab-who">${r.who ? esc(pname(C.people[r.who])) : inline(r.label || '')}</p>${cs.length ? cs.map(c => cell(r, c)).join('') : `<span class="ab-none" style="grid-column:2 / ${n + 2}">${T('아직 이 시각에 대해 들은 말이 없다.')}</span>`}</div>`).join('');
+    return `<article class="doc skin-${esc(s.skin || 'board')} alibi"><header class="doc-h"><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>
+      <div class="doc-b">${blocks(s.intro, `${s.id}@i`, s.name)}${rows.length ? `<div class="ab">${head}${body}</div><p class="ab-help">${T('들은 말 칸을 누르면 그 사람에게 가서 메모를 내민다.')}</p>` : `<p class="res-none">${T('아직 표에 올릴 말이 없다. 사람들에게 그 시각에 어디 있었는지 물어본다.')}</p>`}</div></article>`;
+  }
+  function abGo(arg) {
+    const [pid, k] = arg.split('|'), p = C.people[pid];
+    if (!p) return;
+    const ps = C.sources.find(x => x.id === p.src);
+    if (ps && srcVisible(ps)) { keepPos(); ST.view.src = ps.id; }
+    openItem({ t: 'person', id: pid });
+    if (!clammed(p) && proof().length) PICK = { pid, k }; // 입을 닫았거나 내밀 메모가 없으면 그 사람 화면까지만
+    renderTabs(); renderList(); renderRead();
+    const pk = $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest' });
+    land(['#paneRead [data-press-filter]', '#askChips .chip'], true);
+  }
+
   /* ── 대조 감정 (compare): 증거와 일치하는 시료를 고른다 */
   const cmpState = x => (ST.cmp[x.id] ||= { x: [], at: -1 });
   // 대조 감정 재시도 조건: 새 단어나 새 사실(아무 메모가 아니라 증거가 되는 메모)을 얻었는가
@@ -1587,6 +1621,7 @@
     else if (s.type === 'map') h += mapList(s);
     else if (s.type === 'cipher') h += `<button type="button" class="item" data-open-cipher="${esc(s.id)}"><span class="item-t">${esc(s.openLabel || T('해독지 펼치기'))}</span></button>`;
     else if (s.type === 'timeline') h += `<button type="button" class="item" data-open-tl="${esc(s.id)}"><span class="item-t">${ST.unl.includes(s.id) ? IC_TICK + ' ' : ''}${esc(s.openLabel || T('재구성 판 펼치기'))}</span></button>`;
+    else if (s.type === 'alibi') h += `<button type="button" class="item" data-open-ab="${esc(s.id)}"><span class="item-t">${esc(s.openLabel || T('행적표 펼치기'))}</span></button>`;
     else if (s.type === 'compare') h += compareList(s);
     else if (s.type === 'query') h += queryList(s);
     else if (s.type === 'photo') h += photoList(s);
@@ -1605,6 +1640,7 @@
     else if (o && o.t === 'person' && C.people[o.id]) h = personHtml(C.people[o.id]);
     else if (o && o.t === 'cipher') h = cipherHtml(C.sources.find(s => s.id === o.id));
     else if (o && o.t === 'timeline') h = timelineHtml(C.sources.find(s => s.id === o.id));
+    else if (o && o.t === 'alibi') h = alibiHtml(C.sources.find(s => s.id === o.id));
     else if (o && o.t === 'compare' && C._sets[o.id]) h = compareHtml(C._sets[o.id]);
     else if (o && o.t === 'photo' && C._scenes[o.id]) h = photoHtml(C._scenes[o.id]);
     else if (o && o.t === 'report') h = reportHtml();
@@ -2162,7 +2198,7 @@
     if (t === 'find' && C.keywords[id]) { setQ(src, kl(id)); if (narrow()) { ST.view.open = null; renderRead(); } } // 짚은 단어로 바로 찾아 준다
     else if (t === 'doc' || t === 'person' || t === 'req') openItem({ t, id });
     else if (t === 'scene') openItem({ t: 'photo', id });
-    else { const s = curSrc(); ST.view.open = s && (s.type === 'cipher' || s.type === 'timeline') ? { t: s.type, id: s.id } : narrow() ? null : ST.view.open; save(); renderRead(); }
+    else { const s = curSrc(); ST.view.open = s && (s.type === 'cipher' || s.type === 'timeline' || s.type === 'alibi') ? { t: s.type, id: s.id } : narrow() ? null : ST.view.open; save(); renderRead(); }
     renderTabs(); renderList();
     if (!beside()) $('.stage').scrollIntoView({ block: 'start' });
   }
@@ -3313,7 +3349,7 @@
         const back = from !== s.id && (ST.view.tabOpen || {})[s.id];
         // 탐문 탭을 떠나면 하던 대화는 접어 둔다 (다른 탭 목록 옆에 남은 질문 칩으로 엉뚱한 사람에게 묻지 않게). 탐문 탭으로 돌아오면 그 사람을 다시 편다
         if (o0 && o0.t === 'person' && s.type !== 'people') { ST.view.lastP = o0.id; ST.view.open = null; }
-        if (s.type === 'cipher' || s.type === 'timeline') ST.view.open = { t: s.type, id: s.id };
+        if (s.type === 'cipher' || s.type === 'timeline' || s.type === 'alibi') ST.view.open = { t: s.type, id: s.id };
         else if (narrow()) ST.view.open = null;
         else if (s.type === 'people' && !ST.view.open && ST.view.lastP && C.people[ST.view.lastP]) ST.view.open = { t: 'person', id: ST.view.lastP };
         else if (s.type === 'feed') ST.view.open = { t: 'feed', id: s.id }; // 단톡방 탭은 방이 하나뿐: 넓은 화면이면 누르자마자 방이 열린다 (읽기 칸에 사건 안내만 남지 않게). 전에 본 첨부가 아니라 방으로 — 첨부는 방 안이나 목록에서 다시 연다
@@ -3331,6 +3367,9 @@
       }
       if ((el = t.closest('[data-open-cipher]'))) return openItem({ t: 'cipher', id: el.dataset.openCipher });
       if ((el = t.closest('[data-open-tl]'))) return openItem({ t: 'timeline', id: el.dataset.openTl });
+      if ((el = t.closest('[data-open-ab]'))) return openItem({ t: 'alibi', id: el.dataset.openAb });
+      if ((el = t.closest('[data-ab]'))) return abGo(el.dataset.ab);
+      if ((el = t.closest('[data-ab-note]'))) { const li = $(`.notes li[data-nid="${el.dataset.abNote}"]`); if (li) { const d = li.closest('details'); if (d && !d.open) d.open = true; li.scrollIntoView({ block: 'nearest' }); li.classList.remove('again'); void li.offsetWidth; li.classList.add('again'); } return; } // 기록 칸: 그 메모를 수첩에서 짚는다
       if ((el = t.closest('[data-tl]'))) return moveTl(el.dataset.tl);
       if ((el = t.closest('[data-tl-check]'))) return checkTimeline(el.dataset.tlCheck);
       if ((el = t.closest('[data-cmp]'))) return openItem({ t: 'compare', id: el.dataset.cmp });

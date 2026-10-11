@@ -11,7 +11,8 @@ const norm = s => String(s ?? '').toLowerCase().replace(/[\s'"`.,!?·・()[\]{}\
 const BLOCK_KEYS = new Set(['p', 'h', 'sep', 'divider', 'note', 'stamp', 'sign', 'm', 'img', 'cap', 'rows', 'head', 'list', 'msg', 'who', 'at', 'me', 'say', 'cipher', 'f', 'cls', 'nopin', 'pin', 'osd', 'gore', 'goreRows', 'need']);
 const TEXT_KEYS = ['p', 'h', 'divider', 'note', 'stamp', 'sign', 'm', 'cap', 'msg', 'say'];
 const SKINS = new Set(['plain', 'report', 'news', 'letter', 'telegram', 'ledger', 'card', 'transcript', 'memo', 'photo', 'web', 'chat', 'sms', 'home', 'files', 'cipher', 'board', 'lab', 'form']);
-const TYPES = new Set(['archive', 'list', 'people', 'map', 'cipher', 'timeline', 'compare', 'query', 'photo', 'request', 'feed']);
+const TYPES = new Set(['archive', 'list', 'people', 'map', 'cipher', 'timeline', 'compare', 'query', 'photo', 'request', 'feed', 'alibi']);
+const isCondA = a => !!a && !Array.isArray(a) && typeof a === 'object' && (!!(a.take || []).length || (a.need || []).some(n => n.split('|').some(x => x[0] === '!')));
 const KT = new Set(['person', 'place', 'thing', 'time', 'word']);
 const FRAMES = new Set(['papers', 'laptop', 'crt']);
 
@@ -238,9 +239,9 @@ function check(c) {
       (s.scenes || []).forEach(x => {
         const xw = `${w}.scene ${x.id}`;
         if (!x.art || A[x.art] == null) err(`${xw}: art "${x.art}" 가 없음`);
+        else if (typeof A[x.art] === 'object' && A[x.art].prompt && !A[x.art].raster) warn(`${xw}: 관찰 장면은 좌표가 맞아야 해서 SVG 로만 그린다 — prompt 는 쓰이지 않음 (지우거나 raster:true)`);
         if (x.before && (!x.before.art || A[x.before.art] == null)) err(`${xw}: 전후 대조 before.art "${x.before && x.before.art}" 가 없음`);
         if (x.before && x.before.art === x.art) err(`${xw}: 전후 대조 before.art 가 지금 사진과 같다`);
-        else if (typeof A[x.art] === 'object' && A[x.art].prompt && !A[x.art].raster) warn(`${xw}: 관찰 장면은 좌표가 맞아야 해서 SVG 로만 그린다 — prompt 는 쓰이지 않음 (지우거나 raster:true)`);
         if (!(x.spots || []).length) err(`${xw}: spots 가 비어 있음`);
         const ib = mk(`ph:${x.id}:i`);
         ['title', 'meta'].forEach(k => x[k] && scanText(x[k], `${xw}.${k}`, ib));
@@ -389,6 +390,30 @@ function check(c) {
     if (!Array.isArray(cl.accept) || !cl.accept.length) err(`claim ${cl.id}: accept 가 비어 있음`);
     (cl.accept || []).forEach(f => { if (!factWhere[f]) err(`claim ${cl.id}: 사실 ${f} 가 어느 블록에도 없음`); });
     if ((cl.accept || []).length === 1) warn(`claim ${cl.id}: 인정되는 증거가 1개뿐 — 경로를 하나 더 두는 편이 안전`);
+  });
+  // 행적표 (alibi): 줄마다 사람(who) 또는 기록 이름(label), 칸마다 ask(그 사람에게 물은 것) · f(사실) · need 가운데 하나
+  c.sources.filter(s => s.type === 'alibi').forEach(s => {
+    const w = `source ${s.id}`, n = (s.slots || []).length;
+    if (!n) err(`${w}: slots 가 비어 있음`);
+    if (!(s.rows || []).length) err(`${w}: rows 가 비어 있음`);
+    (s.rows || []).forEach((r, i) => {
+      const rw = `${w}.rows[${i}]`;
+      if (!r.who === !r.label) err(`${rw}: who 와 label 가운데 하나만`);
+      if (r.who && !P[r.who]) err(`${rw}: 없는 사람 ${r.who}`);
+      if (!(r.cells || []).length) err(`${rw}: cells 가 비어 있음`);
+      (r.cells || []).forEach((cl, j) => {
+        const cw = `${rw}.cells[${j}]`, at = [].concat(cl.at ?? -1);
+        if (!cl.t) err(`${cw}: t 필요`);
+        if (at.some(x => !Number.isInteger(x) || x < 0 || x >= n) || (at[1] != null && at[1] < at[0])) err(`${cw}: at ${JSON.stringify(cl.at)} 이 slots 밖`);
+        if ([cl.ask, cl.f, cl.need].filter(Boolean).length !== 1) err(`${cw}: ask · f · need 가운데 하나만`);
+        if (cl.ask && !r.who) err(`${cw}: ask 는 사람 줄(who)에만`);
+        if (cl.ask && r.who && P[r.who] && !(P[r.who].ask || {})[cl.ask]) err(`${cw}: ${r.who} 에게 ${cl.ask} 대답이 없음`);
+        if (cl.f && !factWhere[cl.f]) err(`${cw}: 사실 ${cl.f} 가 어느 블록에도 없음`);
+        if (cl.need) needCheck(cl.need, cw);
+        if (cl.truth && !cl.ask) warn(`${cw}: truth 는 깨뜨린 말(ask)에만 보인다`);
+        if (cl.truth && cl.ask && r.who && P[r.who] && !isCondA((P[r.who].ask || {})[cl.ask])) warn(`${cw}: ${cl.ask} 는 따져서 깨지는 대답이 아니라 truth 가 보일 일이 없다`);
+      });
+    });
   });
   // threads (의문): 빈칸마다 사실(f) 또는 깨뜨릴 진술(press: '사람id:물은것') 하나
   const thIds = new Set();
