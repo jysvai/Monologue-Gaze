@@ -32,7 +32,7 @@ MG.I18N.put("en", "c03", {
 "1gsgk9espfx": "Jongno Police",
 "v6wi4bg343": "File of the Judicial Section, Jongno Police Station (京城鍾路警察署). Copies translated from the Japanese originals. A paper turns up here once your notebook names whose it is and what it concerns.",
 "1y10850lzrn": "Scene Plate",
-"25tg5gmtra7": "An enlargement from the plate the Judicial Section of the Jongno Police Station shot of the inner room. Put the magnifier to it and click whatever catches your eye.",
+"25tg5gmtra7": "An enlargement from the plate the Judicial Section of the Jongno Police Station shot of the inner room. Put the magnifier to it and point out whatever catches your eye.",
 "2boe7il66h7": "Bochundang, the Inner Room",
 "22fasbbd6vh": "Morning of Nov. 5 · taken by the Judicial Section, Jongno Police Station · enlarged print",
 "2103abbpke6": "After the body was moved, the camera was set up on the threshold of the inner room and the whole room taken in a single shot. Everything is where it was found.",
