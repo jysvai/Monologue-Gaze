@@ -62,6 +62,7 @@ body[data-age="y2k"] .toast{border-radius:3px;border:1px solid #0a246a;backgroun
 .pane-read.room>.back-list{background:rgba(255,255,255,.88);color:#222}
 .pane-read.room .per-h.has-face{background:var(--room-head);box-shadow:0 10px 12px -12px rgba(0,0,0,.6)}
 .pane-read.room .per-h{color:var(--room-ink)}
+.pane-read.room .ab-back{color:var(--room-ink);opacity:.9} /* 어두운 방 벽 위에서도 「← 행적표」가 보이게 */
 .pane-read.room .per-h :is(p,.per-pat){color:var(--room-soft)}
 .pane-read.room .per-h .face.lg{box-shadow:0 0 0 1px rgba(0,0,0,.4),0 10px 20px -8px rgba(0,0,0,.7)}
 /* 60~70년대 취조실: 어두운 벽, 머리 위 스탠드 한 개 */
