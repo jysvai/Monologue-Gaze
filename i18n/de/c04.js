@@ -71,7 +71,7 @@ MG.I18N.put("de", "c04", {
 "2g1gdehrp9o": "Irie ist ohne ein Wort nicht aufgetaucht, da hab ich die Flagge genommen",
 "1ra16y9z7o0": "Baustellenpapiere Sakae-chō",
 "knsj2fwx0v": "Protokoll 09:08 · Fahrer: „Müssen wir am 28. morgens auch diese Strecke fahren?“ · eingetragen von Irie",
-"jx8f6p3ymr": "Anwesenheitsliste: Irie „fehlt“ · Bautagebuch: ohne Nachricht nicht erschienen, Vorarbeiter Ōno übernimmt die Flagge",
+"ngelrhqol9": "Irie am 28.: nicht erschienen",
 "4h4xjisjx5": "Protokollbuch, 28.: kein Eintrag · kein Name",
 "ghzw4csvfb": "Bei Regen keine Kunden · Rollladen halb unten, im Laden geölt",
 "26n97dctj0a": "Um 8 in der Fabrik in Yokohama gestempelt",

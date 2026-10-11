@@ -71,7 +71,7 @@ MG.I18N.put("en", "c04", {
 "2g1gdehrp9o": "Irie didn't turn up, not a word, so I took the flag",
 "1ra16y9z7o0": "Sakae-cho site papers",
 "knsj2fwx0v": "Log 09:08 · driver: “Do I still have to take this road on the morning of the 28th?” · entered by Irie",
-"jx8f6p3ymr": "Attendance book: Irie “Absent” · Daily works report: failed to report, no word sent, Foreman Ono took the flag",
+"ngelrhqol9": "Irie on the 28th: absent",
 "4h4xjisjx5": "Flagman's log, the 28th: nothing written · no name",
 "ghzw4csvfb": "No customers in the rain · shutter half down, oiling things in the shop",
 "26n97dctj0a": "Punched the time card at the Yokohama plant at 8",
