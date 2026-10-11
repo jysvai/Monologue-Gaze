@@ -967,7 +967,9 @@
     // 이름 칸은 시각 칸 묶음 밖에 따로 둔다: 옆으로 밀어도 이름이 그 줄 전체(한 단 더 내려간 말까지)를 덮고 남는다
     const grid = `--n:${n};grid-template-columns:repeat(${n},minmax(var(--ab-min,72px),1fr))`; // 칸 여섯이 노트북 화면(1280) 읽기 칸에 옆 스크롤 없이 들어가게
     const head = `<div class="ab-row ab-head" aria-hidden="true"><span class="ab-who"></span><div class="ab-tk" style="${grid}">${sl.map(x => `<span class="ab-slot">${inline(x)}</span>`).join('')}</div></div>`;
-    const body = rows.map(({ r, cs }) => `<div class="ab-row${r.who ? '' : ' logs'}"><p class="ab-who">${r.who ? esc(pname(C.people[r.who])) : inline(r.label || '')}</p><div class="ab-tk" style="${grid}">${cs.length ? cs.map(c => cell(r, c)).join('') : `<span class="ab-none" style="grid-column:1 / ${n + 1}">${T('아직 이 시각에 대해 들은 말이 없다.')}</span>`}</div></div>`).join('');
+    // 만나 본 사람인데 칸이 비었으면: 이미 아는 말 가운데 어느 것을 물어야 여기 적히는지 짚는다 (아직 모르는 말은 짚지 않는다)
+    const askHint = r => { const k = (r.cells || []).flatMap(c => (c.ask ? abKeys(c).filter(x => !/!$/.test(x)) : [])).find(x => ST.keys.includes(x) && C.keywords[x]); return k ? T`「${esc(C.keywords[k].label)}」에 대해 물으면 여기 적힌다.` : T('아직 이 시각에 대해 들은 말이 없다.'); };
+    const body = rows.map(({ r, cs }) => `<div class="ab-row${r.who ? '' : ' logs'}"><p class="ab-who">${r.who ? esc(pname(C.people[r.who])) : inline(r.label || '')}</p><div class="ab-tk" style="${grid}">${cs.length ? cs.map(c => cell(r, c)).join('') : `<span class="ab-none" style="grid-column:1 / ${n + 1}">${askHint(r)}</span>`}</div></div>`).join('');
     return `<article class="doc skin-${esc(s.skin || 'board')} alibi"><header class="doc-h"><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(s.intro, `${s.id}@i`, s.name)}${rows.length ? `<div class="ab">${head}${body}</div><p class="ab-help">${T('들은 말 칸을 누르면 그 사람에게 가서 메모를 내민다.')}</p>` : `<p class="res-none">${T('아직 표에 올릴 말이 없다. 사람들에게 그 시각에 어디 있었는지 물어본다.')}</p>`}</div></article>`;
   }
@@ -1074,13 +1076,15 @@
     const tot = sceneSpots(x).length;
     const bf = x.before && C.art[x.before.art] != null ? x.before : null, cut = bf ? (PHCUT.has(x.id) ? PHCUT.get(x.id) : 50) : 0;
     const marks = found.map((sp, i) => `<span class="ph-mk" style="left:${+sp.x}%;top:${+sp.y}%" aria-hidden="true">${i + 1}</span>`).join('');
+    // 하나 남은 것이 앞 사진 밑에 가려져 있는데 밀대를 한 번도 옮기지 않았으면 한 줄로 일러 준다 (지금 사진에만 있는 것은 앞 사진 쪽에선 눈에 안 띈다)
+    const left = sceneSpots(x).filter(sp => !found.includes(sp)), phHint = bf && !PHCUT.has(x.id) && left.length === 1 && found.length > 0 && left.every(sp => +sp.x < cut);
     const cells = [];
     for (let r = 0; r < 3; r++) for (let q = 0; q < 4; q++) cells.push(`<button type="button" class="ph-cell" data-ph-cell="${esc(x.id)}|${q}|${r}" aria-label="${T`${r + 1}행 ${q + 1}열 살피기`}"></button>`);
     return `<article class="doc skin-${esc(x.skin || 'photo')} scene"><header class="doc-h"><p class="doc-k">${T`정밀 관찰`}</p><h3 class="doc-t">${inline(x.title)}</h3>${x.meta ? `<p class="doc-m">${inline(x.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(x.intro, `${x.id}@i`, plain(x.title))}
         <div class="ph${bf ? ' cmp' : ''}${bf && PHCUT.has(x.id) ? ' seen' : ''}" data-ph="${esc(x.id)}"${bf ? ` style="--cut:${cut}%"` : ''}>${art(x.art, 'art', true)}${bf ? `<div class="ph-bef" aria-hidden="true">${art(bf.art, 'art bef', true)}</div><span class="ph-cutl" aria-hidden="true"></span><span class="ph-tag l" aria-hidden="true">${esc(plain(bf.label || T('앞서 찍은 사진')))}</span><span class="ph-tag r" aria-hidden="true">${esc(plain(x.now || T('지금')))}</span>` : ''}${marks}<div class="ph-grid"${PHGRID.has(x.id) ? '' : ' hidden'}>${cells.join('')}</div></div>
         ${bf ? `<p class="ph-cmp"><span>${esc(plain(bf.label || T('앞서 찍은 사진')))}</span><input type="range" min="0" max="100" step="1" value="${cut}" data-ph-cut="${esc(x.id)}" aria-label="${esc(T`두 사진의 경계 — 왼쪽은 ${plain(bf.label || T('앞서 찍은 사진'))}`)}"><span>${esc(plain(x.now || T('지금')))}</span></p>` : ''}
-        <p class="ph-bar"><span>${T`찾은 것 ${found.length}${lv() >= 5 ? '' : ` / ${tot}`}`}</span><button type="button" data-ph-grid="${esc(x.id)}" aria-pressed="${PHGRID.has(x.id)}">${T`칸을 나눠 살피기`}</button></p>
+        <p class="ph-bar"><span>${T`찾은 것 ${found.length}${lv() >= 5 ? '' : ` / ${tot}`}`}</span><button type="button" data-ph-grid="${esc(x.id)}" aria-pressed="${PHGRID.has(x.id)}">${T`칸을 나눠 살피기`}</button></p>${phHint ? `<p class="ph-hint">${T('밀대를 옮기면 지금 사진의 가려진 쪽도 보인다.')}</p>` : ''}
         <ol class="ph-found">${found.map(sp => `<li><p class="ph-l">${inline(sp.label)}</p>${blocks(sp.body, `${sp.id}@b`, plain(x.title))}</li>`).join('')}</ol></div></article>`;
   }
 
@@ -1493,6 +1497,9 @@
     bar.innerHTML = vis.map(s => { const b = tabBadge(s); return `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" tabindex="${s.id === ST.view.src ? 0 : -1}" aria-controls="paneList" id="tab-${esc(s.id)}" data-src="${esc(s.id)}"><span class="tab-t">${esc(s.name)}</span>${s.lock && !ST.unl.includes(s.id) ? T('<span class="tab-lock">잠김</span>') : ''}${b || (fresh(s) ? T('<span class="tab-new" role="img" aria-label="새로 열린 자료"></span>') : '')}</button>`; }).join('');
     tabShow(bar);
     tabEdge(bar);
+    const ids = vis.map(s => s.id), seen = tabPeek.seen || {}, was = seen.c === C.id ? seen.ids : null;
+    tabPeek.seen = { c: C.id, ids };
+    if (was) { const add = ids.filter(x => !was.includes(x)); if (add.length) tabPeek(bar, add[add.length - 1]); }
     const pl = $('#paneList'); if (pl && ST.view.src) { pl.setAttribute('aria-labelledby', 'tab-' + ST.view.src); } // 목록 칸 = 고른 탭의 내용
   }
   // 탭 이름이 긴 말(영어·독일어·러시아어)이라 넓은 화면에서도 넘치면: 고르지 않은 탭의 긴 이름부터 줄여 한 줄에 다 보이게 하고, 줄인 탭에는 온 이름을 말풍선으로
@@ -1509,11 +1516,26 @@
   // 탭이 넘쳐 옆으로 밀리는 좁은 화면: 고른 탭이 가려져 있으면 보이는 데까지 민다 (화면을 돌려 폭이 바뀌어도)
   function tabShow(bar) {
     if (bar) tabFit(bar);
+    if (Date.now() < (tabPeek.until || 0)) return;
     const on = bar && bar.querySelector('.tab.on');
     if (!on || bar.scrollWidth <= bar.clientWidth) return;
     const b = bar.getBoundingClientRect(), r = on.getBoundingClientRect();
     if (r.left < b.left + 8) bar.scrollLeft -= b.left + 8 - r.left;
     else if (r.right > b.right - 8) bar.scrollLeft += r.right - (b.right - 8);
+  }
+  // 새로 열린 탭이 탭 줄 밖에 있으면 줄을 밀어 한 번 보여 주고 제자리로 (휴대폰에선 탭 서너 개가 오른쪽 밖에 있다. 알림만으로는 어디 생겼는지 모른다)
+  function tabPeek(bar, id) {
+    const t = bar.querySelector('#tab-' + CSS.escape(id)), b = bar.getBoundingClientRect();
+    if (!t || !b.width) return;
+    const r = t.getBoundingClientRect();
+    if (r.left >= b.left && r.right <= b.right) return;
+    const home = bar.scrollLeft, how = reduced() ? 'auto' : 'smooth';
+    const to = Math.max(0, Math.min(bar.scrollWidth - bar.clientWidth, home + (r.left < b.left ? r.left - b.left - 12 : r.right - b.right + 12)));
+    const src = ST.view.src;
+    bar.scrollTo({ left: to, behavior: how });
+    clearTimeout(tabPeek.t);
+    tabPeek.until = Date.now() + 1800; // 그동안 다시 그려도 고른 탭으로 되감지 않는다 (tabShow)
+    tabPeek.t = setTimeout(() => { if (bar.isConnected && ST && ST.view.src === src && Math.abs(bar.scrollLeft - to) < 24) bar.scrollTo({ left: home, behavior: how }); }, 1800); // 그사이 손으로 밀었거나 새 탭을 눌렀으면 그대로 둔다
   }
   // 가려진 탭이 남은 쪽 끝을 흐리게 한다 (옆으로 밀면 더 있다는 표시)
   function tabEdge(bar) {

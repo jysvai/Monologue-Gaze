@@ -1026,7 +1026,7 @@ MG.I18N.put("en", "c14", {
 "47khamku47": "Where else did that number call?",
 "1sfqew8qu76": "Chang-hoon's number never touched 8800, and the same number called another grandmother too. He's out.",
 "1aq6j9dnbo1": "Where was this certificate printed?",
-"1w2de1kiwtu": "Held to the light, the certificate shows a faint dot repeating every 8.4 cm (3 cm from the left) and a grey line along the right edge.",
+"1w2de1kiwtu": "Held to the light, the certificate shows a faint dot repeating every 8.4 cm (3 cm from the left) and a gray line along the right edge.",
 "ppvh17q8k7": "What's left on the certificate's paper?",
 "f0oexvwbe8": "In the end Si-woo said he never printed anything at the PC café. The certificate was in the envelope from the start.",
 "140l34l40nc": "Where did Si-woo get that sheet?",

@@ -688,7 +688,7 @@ MG.I18N.put("en", "c03", {
 "1ca9mk44r2q": "Money the culprit came into after that night",
 "1jb654mzymn": "One thing doesn't fit. Is it a trace of money coming to Seo Gi-ryong after that night? What did he get back, and where did he pay, and with what?",
 "a16h21lxi5": "Motive",
-"28rampxlwxr": "One thing doesn't fit. A quarrel between neighbours isn't enough. When the deadline came, what was Seo Gi-ryong about to lose to Kang Deok-su?",
+"28rampxlwxr": "One thing doesn't fit. A quarrel between neighbors isn't enough. When the deadline came, what was Seo Gi-ryong about to lose to Kang Deok-su?",
 "pfbj187xeq": "Shōwa 10, No. 1127 · Reviewed",
 "4tnugugkkc": "At 9 p.m. on November 4, Baek Nancho's “Supyo Bridge in the Rain” came from the radio in Bochundang's inner room. Kang Deok-su turned it all the way up and sat turned toward the radio. Seo Gi-ryong came over through the door that opened onto the backyard. The next day was the deadline for the 250 won.",
 "ssfi74ba03": "At 9:05 p.m., the vacuum tube in the transmitter at Jeongdong broke. The song was cut off as if with a knife, and Sunamgol was quiet for 45 minutes. Seo Gi-ryong took the cash and the IOUs from the safe, washed the iron and his hands at the well, and at 9:20, at the window of the Jongno Post Office, wired his brother in Pyongyang: “Money raised.”",
