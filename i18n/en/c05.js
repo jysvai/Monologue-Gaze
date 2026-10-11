@@ -791,7 +791,7 @@ MG.I18N.put("en", "c05", {
 "2cfjwktsk5a": "Shown the lab result, Pell admitted it. He typed it to have some fun with a paper that put a madman's letters on the front page.",
 "1sxvfr8fh2u": "Pell says typewriters are everywhere. Does he really have nothing to do with that letter?",
 "r8wqzs1slb": "From 21:10 on May 3 to 07:00 the next morning, Pell was in the common holding cell at the county jail.",
-"m2d974fqud": "On the night of May 3, where was Pell?",
+"bv6vr4b4v": "On the night of May 3, where was the man who typed it?",
 "229f88oujqg": "Letter (3) was Waldo Pell's prank. He copied the paper's misprint, and on the night of May 3 he was in jail. Pell is ruled out.",
 "18j0ychj4fx": "What does the cipher say?",
 "p0jqi1a0wl": "The cipher, solved: “The sand runs. I leave your Sundays at your door. You read me and do not see.”",

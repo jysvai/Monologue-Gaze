@@ -889,7 +889,15 @@
     return { toks, keep, syms };
   }
   let CIPHL = null; // 글자를 넣고 있는 기호: 암호문 속 같은 기호에 형광펜
-  const cipherHl = sym => { CIPHL = sym; const g = $('#cGrid'); if (g) $$('.cc:not(.sp)', g).forEach(c => c.classList.toggle('hl', c.firstChild.textContent === sym)); };
+  const cipherHl = sym => { CIPHL = sym; const g = $('#cGrid'); if (g) $$('.cc:not(.sp)', g).forEach(c => c.classList.toggle('hl', c.firstChild.textContent === sym)); cipherPrevSync(); };
+  // 좁은 화면: 열쇠 칸은 기호판보다 한참 아래라, 칸에 적는 동안 풀리는 글을 칸 위에 붙여 둔다 (지금 고른 기호는 표시)
+  function cipherPrev(s) { const { toks, keep } = cipherParts(s), g = ST.ciph[s.id] || {}, given = s.given || {}; return toks.map(t => (keep.has(t) ? esc(t) : `<i${t === CIPHL ? ' class="hl"' : ''}>${esc(given[t] || g[t] || '·')}</i>`)).join(''); }
+  function cipherPrevSync() {
+    const pv = $('#cPrev'), o = ST && ST.view.open, s = pv && o && o.t === 'cipher' && C.sources.find(x => x.id === o.id);
+    if (!s) return;
+    pv.innerHTML = cipherPrev(s);
+    const h = pv.querySelector('i.hl'); if (h) pv.scrollTop = Math.max(0, h.offsetTop - pv.clientHeight / 2);
+  }
   function cipherGrid(s) {
     const { toks, keep } = cipherParts(s);
     const g = ST.ciph[s.id] || {};
@@ -909,7 +917,7 @@
     const g = ST.ciph[s.id] || {};
     const given = s.given || {};
     const solved = ST.unl.includes(s.id);
-    const form = solved ? `<div class="c-done">${blocks(s.solved, `${s.id}@s`, s.name)}</div>` : `<form class="c-form" data-cipher="${esc(s.id)}"><div class="c-keys">${syms.map(y => `<label class="ck"><span>${esc(y)}</span><input data-sym="${esc(y)}" value="${esc(given[y] || g[y] || '')}" maxlength="${s.max || 2}"${given[y] ? ' readonly' : ''} aria-label="${T`기호 ${esc(y)}에 맞는 글자`}"></label>`).join('')}</div><p class="c-act"><button type="submit">${T`대조해 보기`}</button><span class="c-msg"></span></p></form>`;
+    const form = solved ? `<div class="c-done">${blocks(s.solved, `${s.id}@s`, s.name)}</div>` : `<form class="c-form" data-cipher="${esc(s.id)}"><p class="c-prev" id="cPrev" aria-hidden="true">${cipherPrev(s)}</p><div class="c-keys">${syms.map(y => `<label class="ck"><span>${esc(y)}</span><input data-sym="${esc(y)}" value="${esc(given[y] || g[y] || '')}" maxlength="${s.max || 2}"${given[y] ? ' readonly' : ''} aria-label="${T`기호 ${esc(y)}에 맞는 글자`}"></label>`).join('')}</div><p class="c-act"><button type="submit">${T`대조해 보기`}</button><span class="c-msg"></span></p></form>`;
     return `<article class="doc skin-${esc(s.skin || 'cipher')}"><header class="doc-h"><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(s.intro, `${s.id}@i`, s.name)}<div class="c-grid" id="cGrid">${cipherGrid(s)}</div>${form}</div></article>`;
   }
@@ -3622,6 +3630,7 @@
       save();
       const g = $('#cGrid');
       if (g) g.innerHTML = cipherGrid(C.sources.find(x => x.id === o.id));
+      cipherPrevSync();
     });
   }
 
