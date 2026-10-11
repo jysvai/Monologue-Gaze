@@ -377,7 +377,7 @@ article.person{max-width:720px;margin:0 auto} /* 탐문 화면 — 목록의 사
 .ck:focus-within{border-color:rgba(0,0,0,.5);background:rgba(255,236,170,.6)}
 .c-keys{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
 .c-prev{display:none}
-@container stage (max-width:700px){.c-prev{display:block;position:sticky;top:0;z-index:3;margin:0 0 10px;padding:6px 8px;max-height:6.6em;overflow-y:auto;border:1px solid rgba(0,0,0,.2);background:rgba(250,246,236,.97);color:#2b2823;box-shadow:0 6px 8px -6px rgba(0,0,0,.35);font:13px/1.6 var(--f-mono);white-space:pre-wrap;overflow-wrap:anywhere}.c-prev i{font-style:normal}.c-prev i.hl{background:rgba(190,60,40,.25)}} /* 휴대폰: 열쇠 칸에 적는 동안 풀리는 글 (기호판은 한 화면 위) */
+@container stage (max-width:700px){.c-prev{display:block;position:sticky;top:0;z-index:3;margin:0 0 10px;padding:6px 8px;max-height:calc(6.4em + 14px);overflow-y:auto;border:1px solid rgba(0,0,0,.2);background:rgba(250,246,236,.97);color:#2b2823;box-shadow:0 6px 8px -6px rgba(0,0,0,.35);font:13px/1.6 var(--f-mono);white-space:pre-wrap;overflow-wrap:anywhere}.c-prev i{font-style:normal}.c-prev i.hl{background:rgba(190,60,40,.25)}} /* 휴대폰: 열쇠 칸에 적는 동안 풀리는 글 (기호판은 한 화면 위) */
 .ck{display:inline-flex;align-items:center;gap:4px;padding:3px 6px;border:1px solid rgba(0,0,0,.25);background:rgba(255,255,255,.6)}
 .ck span{font:18px var(--f-mono);min-width:18px;text-align:center}
 .ck input{width:3.2em;padding:3px 4px;border:0;border-bottom:1px solid #777;background:transparent;font:18px var(--f-hand);text-align:center}
