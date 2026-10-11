@@ -95,7 +95,7 @@
         spots: [
           { id: 'sp_bus', label: '은골시장 정류장', x: 5, y: 31, doc: 'd_spot_bus' },
           { id: 'sp_conv', label: '24시 편의점', x: 15, y: 70, doc: 'd_spot_conv', need: ['k_convstore'] },
-          { id: 'sp_pyogu', label: '은골표구', x: 24, y: 38.5, doc: 'd_spot_pyogu', need: ['k_pyogu'] },
+          { id: 'sp_pyogu', label: '은골표구', x: 30, y: 60, doc: 'd_spot_pyogu', need: ['k_pyogu'] },
           { id: 'sp_217', label: '217-3', x: 45.5, y: 14, doc: 'd_house_217', need: ['k_canvass'] },
           { id: 'sp_204', label: '204-11', x: 25, y: 9, doc: 'd_house_204', need: ['k_canvass'] },
           { id: 'sp_219', label: '219-8', x: 60, y: 26, doc: 'd_house_219', need: ['k_canvass'] },
