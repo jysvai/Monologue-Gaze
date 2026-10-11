@@ -447,7 +447,7 @@ MG.I18N.put("de", "c00", {
 "e9mhdsrju7": "Was steht in Seo-yuns älteren Snaplog-Beiträgen?",
 "nk3vwlh5cn": "„Blaue Haltestelle“, mit der Jae-hee den Hauptpreis des Wettbewerbs gewann, zeigt eine Bushaltestelle im Regen.",
 "2dg05wvhoks": "Gibt es irgendwo ein Bild, das dieser Skizze ähnelt?",
-"1the0ri7wom": "Am Abend des 9. schrieb Seo-yun an Jae-hee: „Wenn du es bis morgen nicht den Veranstaltern sagst, stell ich die Originaldatei online.“",
+"h0gwgndcox": "Am Abend des 9. schrieb Seo-yun an Jae-hee: „Wenn du es bis morgen nicht den Veranstaltern sagst, stell ich die Originaldatei online.“",
 "t40tnsdul0": "Was steht in Seo-yuns Messenger-Chats?",
 "1iy78us8965": "„Blaue Haltestelle“ war Seo-yuns Bild. Am Abend des 9. kündigte Seo-yun Jae-hee an, die Originaldatei online zu stellen.",
 "4jlzloz04p": "Wer war um die Zeit, als Seo-yun starb, in Wohnung 504?",

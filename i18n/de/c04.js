@@ -675,7 +675,7 @@ MG.I18N.put("de", "c04", {
 "aol307lbp5": "Wer in der Bank kannte die Route?",
 "2a6x4qg9x16": "Protokollbuch der Verkehrsregelung, 25. Juni, 09:08 — der Fahrer des Bankwagens fragte: „Müssen wir am 28. morgens auch diese Strecke fahren?“ Eingetragen von Irie.",
 "g8stz0bbdj": "Was schrieben die Leute auf, die die Wagen auf den Mauerweg umleiteten?",
-"ol767nc69i": "Fahrer Okabe gibt es auch zu. Am 25. sagte er zu dem Mann mit der Flagge: „Am 28. auch hier lang? Da haben wir die Gratifikation drin, da ist die Fuhre schwer.“",
+"1cknxrribal": "Fahrer Okabe gibt es auch zu. Am 25. sagte er zu dem Mann mit der Flagge: „Müssen wir am 28. morgens auch hier lang? Da haben wir die Gratifikation drin, da ist die Fuhre schwer.“",
 "1ovghhaj8to": "Passt die Schilderung des Fahrers vom Zahltagmorgen zu dem, was an der Kreuzung aufgeschrieben wurde?",
 "1p0vg8gv8qn": "Am Morgen des 25. erzählte der Fahrer an der Kreuzung Sakae-chō einem Verkehrsregler vom Transport am 28. Wer es hörte und ins Protokollbuch eintrug, war Irie Shōji.",
 "1xsi0hoiry7": "Woher stammte das falsche Polizeimotorrad, und womit wurde es gestrichen?",

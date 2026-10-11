@@ -1012,7 +1012,7 @@ MG.I18N.put("de", "c12", {
 "1ciu83erlpg": "Murakoshi, der Chef, der mit Saeki Streit hatte: Wo war er in der Nacht des 13.?",
 "1b27qoe5sa7": "13., 19:40: Auf der Nachrichtentafel am Bahnhof Kashiwadai schrieb Murakoshi „Saeki — melde dich sofort“. Er telefonierte lange vom Münztelefon und ging dann Richtung Park.",
 "23woa4ribns": "Neben der Bahnhofssperre.",
-"1t6e4q3ro9l": "3354-8812, von der am 14. um 04:20 „999“ auf Saekis Pager kam, ist der Mahjong-Salon Mantoku-sō in Kabukichō. Der Wirt: „Vom 13. um neun Uhr abends bis halb sieben am Morgen des 14. hat er am selben Tisch gespielt.“",
+"1ryoxs7lj4w": "3354-8812, von der am 14. um 04:20 „999“ auf Saekis Pager kam, ist der Mahjong-Salon Mantoku-sō in Kabukichō. Der Wirt: „Kam am 13. gegen 9 Uhr abends und hat bis halb sieben am Morgen des 14. am selben Tisch gespielt.“",
 "2fpsj9eiu8d": "Die Nummer, die frühmorgens anpiepste.",
 "2b7fvtr7dvo": "Murakoshi, der „zu Hause geschlafen“ haben wollte, gab es vor der Auskunft zum Mantoku-sō zu: Mahjong um Geld, deshalb habe er geschwiegen.",
 "1unhr3fasy9": "„Frühmorgens am 14. zu Hause geschlafen“?",

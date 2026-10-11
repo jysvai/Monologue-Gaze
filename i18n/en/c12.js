@@ -1012,7 +1012,7 @@ MG.I18N.put("en", "c12", {
 "1ciu83erlpg": "Murakoshi, the boss who fought with Saeki: where was he on the night of the 13th?",
 "1b27qoe5sa7": "The 13th, 19:40: on the Kashiwadai Station message board, Murakoshi wrote “Saeki — call me right now.” He spent a long time at the payphones, then went out toward the park.",
 "23woa4ribns": "Beside the station ticket gates.",
-"1t6e4q3ro9l": "3354-8812, which paged Saeki “999” at 04:20 on the 14th, is the Mantoku-so mahjong parlor in Kabukicho. The owner: “He played in the same seat from nine on the night of the 13th till half past six on the morning of the 14th.”",
+"1ryoxs7lj4w": "3354-8812, which paged Saeki “999” at 04:20 on the 14th, is the Mantoku-so mahjong parlor in Kabukicho. The owner: “He came in around nine on the night of the 13th and played in the same seat till half past six on the morning of the 14th.”",
 "2fpsj9eiu8d": "The number that paged before dawn.",
 "2b7fvtr7dvo": "Murakoshi, who said he “slept at home,” came clean in front of the Mantoku-so reply: it was mahjong with money on the table, so he kept quiet.",
 "1unhr3fasy9": "“Asleep at home before dawn on the 14th”?",

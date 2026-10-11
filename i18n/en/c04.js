@@ -675,7 +675,7 @@ MG.I18N.put("en", "c04", {
 "aol307lbp5": "Who inside the bank knew the route?",
 "2a6x4qg9x16": "Flagman's log, June 25, 09:08 — the bank car's driver asked, “Do I still have to take this road on the morning of the 28th?” Entry written by Irie.",
 "g8stz0bbdj": "What did the men sending cars down the wall road write down?",
-"ol767nc69i": "Driver Okabe admits it too. On the 25th he said to the man with the flag: “This road on the 28th as well? It's the bonuses that day — heavy load.”",
+"1cknxrribal": "Driver Okabe admits it too. On the 25th he said to the man with the flag: “Do I still have to take this road on the morning of the 28th? It's the bonuses that day — heavy load.”",
 "1ovghhaj8to": "Does the driver's account of payday morning match what was written down at the crossing?",
 "1p0vg8gv8qn": "On the morning of the 25th, at the Sakae-cho crossing, the driver told a flagman about the run on the 28th. The man who heard it and wrote it in the log was Irie Shoji.",
 "1xsi0hoiry7": "Where did the fake police bike come from, and what was it painted with?",

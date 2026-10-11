@@ -634,7 +634,7 @@ MG.I18N.put("de", "c10", {
 "hqo6437kd": "Wie sah der Wagen aus?",
 "1u95tqw1oif": "In der Nacht fiel draußen am Neuhafen ein schwarzer SUV auf.",
 "xowrza0lv3": "Wer hat in der Nacht im Neuhafen einen SUV gesehen?",
-"1s1sbjoweu2": "Bang Geun-tae sagte, an seinem Auto sei „kein Kratzer“; vor dem Übernahmecheck änderte er seine Aussage: „Auf der Beifahrerseite. Ist vor ein paar Monaten kaputtgegangen.“",
+"1j1oxranyfh": "Bang Geun-tae sagte, an seinem Auto sei „kein Kratzer“; vor dem Übernahmecheck änderte er seine Aussage: „Auf der Beifahrerseite. Ist vor ein paar Monaten kaputtgegangen, war mir zu lästig, ihn auszutauschen.“",
 "1f4cfpdt03q": "Der Halter sagt, an seinem Auto sei kein Kratzer. Stimmt das?",
 "18frknqzhy7": "Es ist Bang Geun-taes 12ga 3471. Ein schwarzer SUV mit Dachträger und kaputtem Nebelscheinwerfer auf der Beifahrerseite, wie der Wagen, der in der Nacht im Neuhafen auffiel.",
 "1mcxdpbnkkn": "Wem gehört 010-****-5821, die Nummer, von der um 00:09 angerufen wurde?",

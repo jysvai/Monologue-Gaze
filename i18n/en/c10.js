@@ -634,7 +634,7 @@ MG.I18N.put("en", "c10", {
 "hqo6437kd": "What did that car look like?",
 "1u95tqw1oif": "That night a black SUV was spotted out by the New Port.",
 "xowrza0lv3": "Who saw an SUV at the New Port that night?",
-"1s1sbjoweu2": "Bang Geun-tae said there wasn't “a scratch” on his car, then changed his story when shown the check record: “The passenger side. It broke a few months ago.”",
+"1j1oxranyfh": "Bang Geun-tae said there wasn't “a scratch” on his car, then changed his story when shown the check record: “The passenger side. It broke a few months ago and I never got around to replacing it.”",
 "1f4cfpdt03q": "The car's owner says there isn't a scratch on it. Is that true?",
 "18frknqzhy7": "It's Bang Geun-tae's 12ga 3471. A black SUV with a roof rack and a broken passenger-side fog lamp, the same as the car spotted at the New Port that night.",
 "1mcxdpbnkkn": "Who is 010-****-5821, the number that called at 00:09?",

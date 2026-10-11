@@ -447,7 +447,7 @@ MG.I18N.put("en", "c00", {
 "e9mhdsrju7": "What's in Seo-yun's older Snaplog posts?",
 "nk3vwlh5cn": "“Blue Bus Stop,” the piece that won Jae-hee the contest’s grand prize, is a picture of a bus stop in the rain.",
 "2dg05wvhoks": "Is there a picture somewhere that looks like that sketch?",
-"1the0ri7wom": "On the night of the 9th, Seo-yun sent Jae-hee: “If you don’t tell the organizers by tomorrow, I’m posting the original file.”",
+"h0gwgndcox": "On the night of the 9th, Seo-yun sent Jae-hee: “If you don’t tell the organizers by tomorrow, I’m posting the original file.”",
 "t40tnsdul0": "What's in Seo-yun's messenger chats?",
 "1iy78us8965": "“Blue Bus Stop” was Seo-yun’s picture. On the night of the 9th, Seo-yun told Jae-hee she would post the original file.",
 "4jlzloz04p": "Around the time Seo-yun died, who was in Unit 504?",
