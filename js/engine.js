@@ -947,21 +947,24 @@
    * rows: [{ who: 사람id | label: '정문 차단기', cells: [{ at: 칸 | [첫 칸,끝 칸], t, ask: 물은 것 | f: 사실 | need, truth }] }]
    * 칸은 그 대답을 들으면(ask) · 그 사실이 든 메모를 적으면(f) · 조건이 차면(need) 나타난다. 어긋나는 칸을 엔진이 짚어 주지는 않는다.
    * 들은 말 칸을 누르면 그 사람에게 가서 그 대답에 메모를 내민다 (탐문과 같은 따지기). 깨뜨린 말에는 줄을 긋고 truth 를 적는다 */
-  const abShown = (r, c) => c.ask ? !!r.who && (ST.asked[r.who] || []).some(e => e === c.ask || e === c.ask + '!') : c.f ? !!thNote(c) : ok(c.need);
-  const abBroke = (r, c) => !!(c.ask && r.who && (ST.asked[r.who] || []).includes(c.ask + '!') && isPressAsk(C.people[r.who], c.ask) && !isSoft(C.people[r.who], c.ask)); // 떠올려 고친 대답(soft)은 거짓이 아니다 — 탐문처럼 줄을 긋지 않는다
+  // ask 는 'k_a|k_b' 처럼 여럿일 수 있다: 같은 말을 다른 물음으로도 들으면 (어느 쪽을 깨도 줄을 긋는다)
+  const abKeys = c => String(c.ask).split('|');
+  const abShown = (r, c) => c.ask ? !!r.who && abKeys(c).some(k => (ST.asked[r.who] || []).some(e => e === k || e === k + '!')) : c.f ? !!thNote(c) : ok(c.need);
+  const abBroke = (r, c) => !!(c.ask && r.who && abKeys(c).some(k => (ST.asked[r.who] || []).includes(k + '!') && isPressAsk(C.people[r.who], k) && !isSoft(C.people[r.who], k))); // 떠올려 고친 대답(soft)은 거짓이 아니다 — 탐문처럼 줄을 긋지 않는다
   function alibiHtml(s) {
     if (!s) return '';
-    const sl = s.slots || [], n = sl.length || 1, span = c => { const [a, b] = [].concat(c.at ?? 0); return `grid-column:${+a + 2} / ${(b ?? a) + 3}`; };
+    const sl = s.slots || [], n = sl.length || 1, span = c => { const [a, b] = [].concat(c.at ?? 0); return `grid-column:${+a + 1} / ${(b ?? a) + 2}`; };
     const rows = (s.rows || []).map(r => ({ r, cs: (r.cells || []).filter(c => abShown(r, c)) })).filter(({ r, cs }) => cs.length || (r.who && ST.asked[r.who]));
     const cell = (r, c) => {
       const broke = abBroke(r, c), tx = broke ? `<s>${inline(c.t)}</s>${c.truth ? `<span class="ab-tr">${inline(c.truth)}</span>` : ''}` : inline(c.t);
-      if (c.ask && !broke) return `<button type="button" class="ab-c said" style="${span(c)}" data-ab="${esc(r.who)}|${esc(c.ask)}" title="${esc(T`${pname(C.people[r.who])}에게 이 말을 따진다`)}">${tx}</button>`;
+      if (c.ask && !broke) return `<button type="button" class="ab-c said" style="${span(c)}" data-ab="${esc(r.who)}|${esc(abKeys(c).find(k => (ST.asked[r.who] || []).includes(k)) || abKeys(c)[0])}" title="${esc(T`${pname(C.people[r.who])}에게 이 말을 따진다`)}">${tx}</button>`;
       const nt = c.f && thNote(c);
       return nt ? `<button type="button" class="ab-c log" style="${span(c)}" data-ab-note="${nt.id}">${tx}</button>` : `<span class="ab-c${c.ask ? ' said broke' : ' log'}" style="${span(c)}">${tx}</span>`;
     };
-    const grid = `grid-template-columns:minmax(60px,.55fr) repeat(${n},minmax(var(--ab-min,72px),1fr))`; // 칸 여섯이 노트북 화면(1280) 읽기 칸에 옆 스크롤 없이 들어가게
-    const head = `<div class="ab-row ab-head" style="${grid}" aria-hidden="true"><span></span>${sl.map(x => `<span class="ab-slot">${inline(x)}</span>`).join('')}</div>`;
-    const body = rows.map(({ r, cs }) => `<div class="ab-row${r.who ? '' : ' logs'}" style="${grid}"><p class="ab-who">${r.who ? esc(pname(C.people[r.who])) : inline(r.label || '')}</p>${cs.length ? cs.map(c => cell(r, c)).join('') : `<span class="ab-none" style="grid-column:2 / ${n + 2}">${T('아직 이 시각에 대해 들은 말이 없다.')}</span>`}</div>`).join('');
+    // 이름 칸은 시각 칸 묶음 밖에 따로 둔다: 옆으로 밀어도 이름이 그 줄 전체(한 단 더 내려간 말까지)를 덮고 남는다
+    const grid = `--n:${n};grid-template-columns:repeat(${n},minmax(var(--ab-min,72px),1fr))`; // 칸 여섯이 노트북 화면(1280) 읽기 칸에 옆 스크롤 없이 들어가게
+    const head = `<div class="ab-row ab-head" aria-hidden="true"><span class="ab-who"></span><div class="ab-tk" style="${grid}">${sl.map(x => `<span class="ab-slot">${inline(x)}</span>`).join('')}</div></div>`;
+    const body = rows.map(({ r, cs }) => `<div class="ab-row${r.who ? '' : ' logs'}"><p class="ab-who">${r.who ? esc(pname(C.people[r.who])) : inline(r.label || '')}</p><div class="ab-tk" style="${grid}">${cs.length ? cs.map(c => cell(r, c)).join('') : `<span class="ab-none" style="grid-column:1 / ${n + 1}">${T('아직 이 시각에 대해 들은 말이 없다.')}</span>`}</div></div>`).join('');
     return `<article class="doc skin-${esc(s.skin || 'board')} alibi"><header class="doc-h"><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(s.intro, `${s.id}@i`, s.name)}${rows.length ? `<div class="ab">${head}${body}</div><p class="ab-help">${T('들은 말 칸을 누르면 그 사람에게 가서 메모를 내민다.')}</p>` : `<p class="res-none">${T('아직 표에 올릴 말이 없다. 사람들에게 그 시각에 어디 있었는지 물어본다.')}</p>`}</div></article>`;
   }
