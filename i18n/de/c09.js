@@ -74,7 +74,7 @@ MG.I18N.put("de", "c09", {
 "1zjtl7cgs7q": "Treppenabsatz",
 "153sjecvx77": "Drei Geranientöpfe. Sie gehören der Diakonin im Erdgeschoss. Keine Styroporkisten.",
 "13h9ltmg2xw": "Stahltür mit Zahlenschloss. Links vom Ende der Treppe. Ein gelber, eckiger Aufkleber — Zeichen für ein Zeitungsabo. Die Schrift darauf ist verblichen und nicht mehr lesbar.",
-"21e6ie487nt": "Wer war wo",
+"21e6ie487nt": "Aufenthaltstafel",
 "101ymfyqbjj": "Nacht des 14. Oktober (Sa) — Gegenüberstellung der Aufenthalte der Beteiligten",
 "5k1kcc78r7": "Fall 2006-Euncheon-0412 · Team 3",
 "1qxc7hfu359": "Eine Tafel, die nach Uhrzeit nebeneinanderstellt, wo die Beteiligten in jener Nacht gewesen sein wollen und was Protokolle und Aufzeichnungen festhalten.",
