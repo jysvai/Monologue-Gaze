@@ -1528,7 +1528,8 @@
   function tabPeek(bar, ids, back) {
     const b = bar && bar.getBoundingClientRect();
     if (!b || !b.width || !ST) return;
-    const how = reduced() ? 'auto' : 'smooth', busy = Date.now() < (tabPeek.until || 0);
+    const how = reduced() ? 'auto' : 'smooth', busy = Date.now() < (tabPeek.until || 0), key = [].concat(ids).sort().join('|');
+    if (back == null) { if (busy && tabPeek.key === key) return; tabPeek.key = key; } // 알림(where)과 탭 줄 다시 그리기가 같은 탭을 한순간에 두 번 부른다
     const home = back != null ? back : busy ? tabPeek.home : bar.scrollLeft, cw = bar.clientWidth;
     // 지금 줄 밖에 있는 새 탭만: 한 화면에 들어가면 함께, 넘치면 첫 탭부터 하나씩 차례로 (사이에 다른 탭이 끼어 있으면 둘이 한 화면에 안 든다)
     const hid = [].concat(ids).map(id => [id, bar.querySelector('#tab-' + CSS.escape(id))]).filter(([, t]) => t).map(([id, t]) => [id, t.getBoundingClientRect()]).filter(([, r]) => r.left < b.left || r.right > b.right);
