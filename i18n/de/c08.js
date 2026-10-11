@@ -78,6 +78,7 @@ MG.I18N.put("de", "c08", {
 "zlqx9clsrl": "„Ich rufe morgen Abend um halb acht wieder an.“ — Zeitzeichen „Ding“, leise Nachrichtenmelodie.",
 "11k2e1tpw2n": "„Im Telefonbuch steckt ein Zettel.“ — Marktlärm, Lautsprecher eines Altwarenlasters.",
 "1dina3oia0d": "(Mailbox) „Die Anzeige ist noch nicht erschienen.“ — Glocke, sechs Schläge, dazwischen metallisches Rattern.",
+"gkvwhrruzw": "(Sprachbox) noch nicht abgehörte Nachricht",
 "9kv4w2kox5": "(Mailbox) „Anzeige gesehen.“ — Gong mit vier Tönen, Kinderstimmen.",
 "x81sp2ha46": "(Mailbox) „Donnerstag, sieben Uhr.“ — Zeitzeichen und Nachrichtenmelodie, danach metallisches Rattern.",
 "vx7ntoplgf": "(Mailbox) „Gehen Sie noch heute Nacht hin.“ — Glocke, sechs Schläge.",

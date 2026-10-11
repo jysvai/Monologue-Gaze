@@ -109,6 +109,7 @@ MG.I18N.put("en", "ui", {
 "추궁": "Press",
 "기호 {0}에 맞는 글자": "Letter for symbol {0}",
 "대조해 보기": "Compare",
+"아직 열어 보지 않은 기록": "A record not opened yet",
 "{0} — 앞 칸으로": "{0} — move up",
 "{0} — 뒤 칸으로": "{0} — move down",
 "이 순서로 맞춰 보기": "Check this order",

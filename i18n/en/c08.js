@@ -78,6 +78,7 @@ MG.I18N.put("en", "c08", {
 "zlqx9clsrl": "“I'll call again tomorrow evening at seven-thirty.” — A “bong” time signal, faint news music.",
 "11k2e1tpw2n": "“There's a note in the phone book.” — Market noise, a junk truck's loudspeaker.",
 "1dina3oia0d": "(Voice mailbox) “The ad hasn't run yet, I see.” — A bell, six strokes, steel clatter in the middle.",
+"gkvwhrruzw": "(Voice mailbox) a message not heard yet",
 "9kv4w2kox5": "(Voice mailbox) “Saw the ad.” — A four-note chime, children's voices.",
 "x81sp2ha46": "(Voice mailbox) “Thursday, seven o'clock.” — Time signal and news music, then steel clatter.",
 "vx7ntoplgf": "(Voice mailbox) “Get there tonight.” — A bell, six strokes.",

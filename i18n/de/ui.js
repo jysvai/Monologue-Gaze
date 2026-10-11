@@ -109,6 +109,7 @@ MG.I18N.put("de", "ui", {
 "추궁": "Vorhalt",
 "기호 {0}에 맞는 글자": "Buchstabe für Zeichen {0}",
 "대조해 보기": "Prüfen",
+"아직 열어 보지 않은 기록": "Noch nicht geöffnete Unterlage",
 "{0} — 앞 칸으로": "{0} — nach oben",
 "{0} — 뒤 칸으로": "{0} — nach unten",
 "이 순서로 맞춰 보기": "Diese Reihenfolge prüfen",

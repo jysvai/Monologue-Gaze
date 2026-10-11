@@ -945,9 +945,10 @@
     if (!s) return '';
     const solved = ST.unl.includes(s.id);
     const ev = Object.fromEntries((s.events || []).map(e => [e.id, e]));
+    const evT = e => (e.seen && !solved && !ST.seen.includes(e.seen) ? e.mask || T('아직 열어 보지 않은 기록') : e.t); // seen: 그 문서를 펼치기 전에는 카드 글을 가린다 (잠긴 사서함 속 말을 칠판이 먼저 들려주지 않게)
     const order = solved ? s.events.map(e => e.id) : tlOrder(s);
     const hit = tmp().tl[s.id] || [];
-    const rows = order.map((id, i) => `<li class="tl-e${solved ? ' ok' : hit.includes(id) ? ' hit' : ''}" data-ev="${esc(id)}"><span class="tl-slot">${inline((s.slots || [])[i] || String(i + 1))}</span><span class="tl-t">${inline(ev[id].t)}</span>${solved ? '' : `<span class="tl-mv"><button type="button" data-tl="${esc(s.id)}|${esc(id)}|-1" aria-label="${T`${esc(trunc(plain(ev[id].t), 40))} — 앞 칸으로`}"${i === 0 ? ' disabled' : ''}>▲</button><button type="button" data-tl="${esc(s.id)}|${esc(id)}|1" aria-label="${T`${esc(trunc(plain(ev[id].t), 40))} — 뒤 칸으로`}"${i === order.length - 1 ? ' disabled' : ''}>▼</button></span>`}</li>`).join('');
+    const rows = order.map((id, i) => `<li class="tl-e${solved ? ' ok' : hit.includes(id) ? ' hit' : ''}" data-ev="${esc(id)}"><span class="tl-slot">${inline((s.slots || [])[i] || String(i + 1))}</span><span class="tl-t">${inline(evT(ev[id]))}</span>${solved ? '' : `<span class="tl-mv"><button type="button" data-tl="${esc(s.id)}|${esc(id)}|-1" aria-label="${T`${esc(trunc(plain(ev[id].t), 40))} — 앞 칸으로`}"${i === 0 ? ' disabled' : ''}>▲</button><button type="button" data-tl="${esc(s.id)}|${esc(id)}|1" aria-label="${T`${esc(trunc(plain(ev[id].t), 40))} — 뒤 칸으로`}"${i === order.length - 1 ? ' disabled' : ''}>▼</button></span>`}</li>`).join('');
     const act = solved ? `<div class="c-done">${blocks(s.solved, `${s.id}@s`, s.name)}</div>` : `<p class="c-act"><button type="button" data-tl-check="${esc(s.id)}">${T`이 순서로 맞춰 보기`}</button><span class="c-msg"></span></p>`;
     return `<article class="doc skin-${esc(s.skin || 'board')}"><header class="doc-h"><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(s.intro, `${s.id}@i`, s.name)}<ol class="tl">${rows}</ol>${act}</div></article>`;
@@ -1744,7 +1745,7 @@
     const victim = k => { const w = C.keywords[k] || {}; return w.victim || (w.victimIf || []).some(okOne); }; // victimIf: 피해자의 다른 이름 — 그녀가 누구였는지 밝힌 메모가 수첩에 오르면 범인 칸에서 빠진다
     if (!ST.solved && ST.report.culprit && ((C.keywords[ST.report.culprit] || {}).nick || victim(ST.report.culprit))) ST.report.culprit = null;
     const persons = ST.keys.filter(k => C.keywords[k] && C.keywords[k].type === 'person' && !C.keywords[k].nick && !victim(k)); // 별명(온라인 닉네임)과 피해자는 범인 칸에 내지 않는다 // 온라인 별명은 계정일 뿐, 영장에 적을 사람이 아니다
-    const roleOf = k => { const p = Object.values(C.people || {}).find(x => x.key === k), r = (p && p.role) || (C.keywords[k] || {}).role, met = !p || !!ST.asked[p.id], v0 = r ? plain(r) : '', v = met ? v0 : v0.split(' · ')[0]; return p && v === plain(kl(k)) ? (met ? plain(p.name) : '') : v; }; // 아직 안 만난 사람은 탐문 목록처럼 직함의 첫 마디만, 본이름은 덮어 둔다 // 찾아갈 수 없는 사람도 단어에 role 이 있으면 한 줄 붙인다. 하는 일로만 적힌 사람(「신발 가게 점원」)은 이름을
+    const roleOf = k => { const p = Object.values(C.people || {}).find(x => x.key === k), r = (p && p.role) || (C.keywords[k] || {}).role, met = !!(p && ST.asked[p.id]), v0 = r ? plain(r) : '', v = met ? v0 : v0.split(' · ')[0]; return p && v === plain(kl(k)) ? (met ? plain(p.name) : '') : v; }; // 아직 안 만난 사람은 탐문 목록처럼 직함의 첫 마디만, 본이름은 덮어 둔다 // 찾아갈 수 없는 사람도 단어에 role 이 있으면 한 줄 붙인다. 하는 일로만 적힌 사람(「신발 가게 점원」)은 이름을
     const groups = noteGroups(pool).map(g => ({ ...g, items: g.items.map(([n]) => [n, notes.indexOf(n)]) })); // 번호는 수첩의 번호 그대로
     const LM = ST.solved ? new Map() : leadMap(), repLead = n => { const e = LM.get(n.id); return e && e.rep.length ? e : null; }, nLead = pool.filter(repLead).length; // 보고서에선 보고서 쪽 맞물림만
     const shut = ST.solved; // 종결된 보고서는 결재가 끝난 서류: 고칠 수 없다
