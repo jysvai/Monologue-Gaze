@@ -87,7 +87,7 @@ MG.I18N.put("en", "c01", {
 "12th6z35529": "Patrol 1, Dill and Phipps, back 1:45 · it's in the log",
 "14z7mnsdh8g": "Back about 1:55, back door locked — Dill",
 "1zvlqxpuegd": "At 1:50, from the back door, saw a tall sailor in a peaked cap",
-"xgucioml8l": "01:43 back door locked · 01:44 nobody at the court entrance — Pocketbook",
+"2njtzhwr30": "01:43 back door locked · 01:44 nobody at the court entrance · 01:57 two vigilance men waiting at the back door — Pocketbook",
 "2abub3zt9sd": "Went one round with Phipps, Candle Market to the dock road",
 "26s03dt5e2l": "Back about 1:55 · back door locked, no light · no answer",
 "81tzahhvk8": "Gone two, Croft came out from down the alley, empty-handed",
