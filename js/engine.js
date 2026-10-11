@@ -655,6 +655,7 @@
     // 따져 물은 대답은 그 진술 바로 밑에 (긴 탐문에서도 깨진 진술과 「모순」 도장, 새 대답이 한자리에 보이게)
     const order = [];
     asked.forEach(e => { if (e.endsWith('!') && asked.includes(e.slice(0, -1))) return; order.push(e); if (!e.endsWith('!') && asked.includes(e + '!')) order.push(e + '!'); });
+    const inl = !!(PICK && PICK.pid === p.id && PICK.inline && order.includes(PICK.k)); // 행적표에서 짚어 온 대답: 고르는 칸을 그 대답 바로 밑에
     tr += order.map(e => {
       const k = e.replace(/!$/, ''), press = e.endsWith('!');
       const hid = press && ST.held && ST.held[`${p.id}|${e}`], held = hid != null && ST.notes.find(x => String(x.id) === String(hid));
@@ -663,11 +664,11 @@
       const bNew = broke && !BROKE.has(bk) && asked[asked.length - 1] === k + '!' && !reduced(); if (broke) BROKE.add(bk);
       return `<div class="qa${press ? ' press' : ''}${broke ? ' broke' : ''}" data-qa="${esc(e)}">${broke ? `<span class="c-broke${bNew ? ' new' : ''}">${T('모순')}</span>` : ''}<div class="c-q"><span class="c-t">${esc(qText(p, e))}</span>${press ? '' : `<small class="c-k">${esc(kl(k))}</small>`}</div>
         ${ev.map(n => `<p class="c-ev"><span class="c-ev-k">${isSoft(p, k) ? T('수첩을 펴 보인다') : T('수첩을 내민다')}</span>${esc(n.t)}</p>`).join('')}
-        <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div>${!press && vsOpen && !asked.includes(k + '!') ? `<p class="c-vs"><button type="button" class="chip vs${lv() <= 3 && isPressAsk(p, k) && ok((rawAns(p, k) || {}).need) ? ' again' : ''}" data-vs="${esc(k)}">${T('메모를 내민다')}</button></p>` : ''}</div>`;
+        <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div>${!press && vsOpen && !asked.includes(k + '!') ? `<p class="c-vs"><button type="button" class="chip vs${lv() <= 3 && isPressAsk(p, k) && ok((rawAns(p, k) || {}).need) ? ' again' : ''}" data-vs="${esc(k)}">${T('메모를 내민다')}</button></p>` : ''}${inl && e === PICK.k ? pickHtml(p) : ''}</div>`;
     }).join('');
     return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h${faceOf(p) ? ' has-face' : ''}">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}${patHtml(p)}</div>${recAge() && faceOf(p) ? '<span class="rec" aria-hidden="true"><i></i>REC <b class="rec-tc"></b></span>' : ''}</header>
       <div class="per-tr" data-who="${esc(p.id)}">${tr}</div>
-      ${PICK && PICK.pid === p.id ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}>${shut ? `<p class="vs-shut" tabindex="-1"><b>${esc(p.name)}</b> ${inline(ST.vs[p.id].last || '').replace(MIDACT, '<i class="c-mid">$&</i>')} <span>${T('— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.')}</span></p>` : ''}<p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」')}${liveOn() ? `<b class="lv-cost">${T` · 물을 때마다 ${hm(lcost('ask'))}`}</b>` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
+      ${PICK && PICK.pid === p.id && !inl ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}>${shut ? `<p class="vs-shut" tabindex="-1"><b>${esc(p.name)}</b> ${inline(ST.vs[p.id].last || '').replace(MIDACT, '<i class="c-mid">$&</i>')} <span>${T('— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.')}</span></p>` : ''}<p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」')}${liveOn() ? `<b class="lv-cost">${T` · 물을 때마다 ${hm(lcost('ask'))}`}</b>` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
   }
 
   /* 대화 재생: 몸짓은 스르르, 말은 한 글자씩(사람마다 다른 말소리). 목소리가 있는 말풍선은 재생 시각에 맞춰 찍는다. 누르면 건너뛴다 */
@@ -970,9 +971,12 @@
     const ps = C.sources.find(x => x.id === p.src);
     if (ps && srcVisible(ps)) { keepPos(); ST.view.src = ps.id; }
     openItem({ t: 'person', id: pid });
-    if (!clammed(p) && proof().length) PICK = { pid, k }; // 입을 닫았거나 내밀 메모가 없으면 그 사람 화면까지만
+    if (!clammed(p) && proof().length) PICK = { pid, k, inline: true }; // 입을 닫았거나 내밀 메모가 없으면 그 사람 화면까지만
     renderTabs(); renderList(); renderRead();
-    const pk = $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest' });
+    // 그 대답을 읽기 칸 위쪽에 두고 한 번 짚는다 (맨 끝에 들은 다른 대답 밑에 고르는 칸만 뜨면 무엇을 따지는지 헷갈린다)
+    const qa = $$('#paneRead .qa').find(q => q.dataset.qa === k || q.dataset.qa === k + '!'), pr = $('#paneRead'), hd = $('#paneRead .per-h');
+    if (qa && pr) { pr.scrollTop += qa.getBoundingClientRect().top - pr.getBoundingClientRect().top - (hd ? hd.offsetHeight : 0) - 8; qa.classList.remove('ab-hit'); void qa.offsetWidth; qa.classList.add('ab-hit'); }
+    else { const pk = $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest' }); }
     land(['#paneRead [data-press-filter]', '#askChips .chip'], true);
   }
 
