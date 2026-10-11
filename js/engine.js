@@ -1364,7 +1364,7 @@
       const sel = tmp().rq[r.id] != null ? tmp().rq[r.id] : ''; // 신청서마다 고른 소명 메모 (올리기 전)
       const pick = !why ? '' : `<section class="rq-why"><h4 id="rqh-${esc(r.id)}">${T`소명 자료 <small>이 요청이 왜 필요한지 보여 줄 메모 하나</small>`}</h4>${proof().length ? `<div role="radiogroup" aria-labelledby="rqh-${esc(r.id)}">` + noteGroups(proof()).map(g => `<details class="rep-grp" open><summary>${esc(g.src)} <small>${g.items.length}</small></summary>${g.items.map(([n]) => [n, notes.indexOf(n)]).map(([n, j]) => `<label class="rep-opt${String(sel) === String(n.id) ? ' on' : ''}"><input type="radio" name="rq-${esc(r.id)}" value="${n.id}" data-rq-pick="${esc(r.id)}"${String(sel) === String(n.id) ? ' checked' : ''}><span class="n">${j + 1}.</span> <span class="t">${esc(n.t)}</span></label>`).join('')}</details>`).join('') + '</div>' : T('<p class="rep-empty">수첩에 메모가 없다. 근거가 될 문장을 먼저 적어 둔다.</p>')}</section>`;
       const no = q && q.st === 'no' ? `<p class="rq-no">${T`<b>기각</b> ${inline(r.deny || T('소명이 부족하다.'))} <small>${esc(lstamp(q.at))}</small>`}${lv() >= 5 ? `<small class="rq-cost">${T('다시 올리면 재검토에 1시간이 더 든다.')}</small>` : ''}</p>` : '';
-      foot = `${no}${pick}<p class="submit-row"><button type="button" class="btn-hand" data-rq-go="${esc(r.id)}">${esc(r.button || (q ? T('다시 신청하기') : T('신청서 올리기')))}</button><span class="c-msg"></span></p>`;
+      foot = `${no}${pick}<p class="submit-row"><button type="button" class="btn-hand" data-rq-go="${esc(r.id)}">${esc(r.button || (q ? T('다시 신청하기') : T('신청서 올리기')))}</button><small class="rq-cost">${T`신청서를 쓰는 데 ${hm(lcost('write'))}`}</small><span class="c-msg"></span></p>`; // 기각돼도 쓴 시간은 돌아오지 않는다: 올리기 전에 안다
     }
     return `<article class="doc skin-${esc(r.skin || 'form')} rq"><header class="doc-h"><p class="doc-k">${esc(r.kind || T('수사 요청'))}</p><h3 class="doc-t">${inline(r.title)}</h3>${r.meta ? `<p class="doc-m">${inline(r.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(r.intro, `${r.id}@i`, plain(r.title))}<table class="rq-t"><tbody>${row(T('신청'), r.by || T('강력2팀'))}${row(T('수신'), r.to)}${row(T('대상'), r.target)}${row(T('요청 내용'), r.what)}${row(T('회신까지'), r.eta != null ? T('약 ') + hm(r.eta) : '')}</tbody></table>${foot}</div></article>`;
@@ -1394,7 +1394,9 @@
     delete tmp().rq[id];
     save(); liveSync(prev); renderTabs(); renderList(); renderRead();
     const st = L.req[id].st === 'wait' && $('#paneRead .rq-stamp');
-    if (st) st.classList.add('fresh'); // 서류의 접수 도장은 화면 가운데 큰 도장이 걷힐 때 찍힌다
+    if (st) st.classList.add('fresh');
+    const pr = $('#paneRead'), sr = L.req[id].st === 'no' && $('#paneRead .submit-row'); // 기각되면 사유와 다시 올리는 단추가 읽기 칸 밑에 숨지 않게
+    if (pr && sr) { const a = pr.getBoundingClientRect(), r2 = sr.getBoundingClientRect(), no = $('#paneRead .rq-no'), top = no ? no.getBoundingClientRect().top : r2.top; if (r2.bottom > a.bottom) pr.scrollTo({ top: pr.scrollTop + Math.min(r2.bottom - a.bottom + 16, top - a.top - 16), behavior: reduced() ? 'auto' : 'smooth' }); } // 서류의 접수 도장은 화면 가운데 큰 도장이 걷힐 때 찍힌다
   }
 
   /* ───────── panes ───────── */
@@ -3389,7 +3391,7 @@
       if ((el = t.closest('.pk-g > summary'))) { if (PICK) (PICK.g ||= {})[el.parentNode.dataset.pkG] = !el.parentNode.open; return; } // 접고 편 묶음은 다시 그려도 그대로
       if ((el = t.closest('[data-lead-f]'))) { const on = el.getAttribute('aria-pressed') !== 'true', box = el.parentNode; el.setAttribute('aria-pressed', String(on)); box.classList.toggle('lead-only', on); box.querySelectorAll('.rep-grp').forEach(g => g.classList.toggle('no-lead', !g.querySelector('.rep-opt.lead'))); return; } // 고르는 칸: 유력한 메모만
       if ((el = t.closest('[data-lead]'))) return leadGo(el.dataset.lead);
-      if ((el = t.closest('[data-vs]'))) { const o = ST.view.open; if (!o || o.t !== 'person') return; stopTalk(); PICK = { pid: o.id, k: el.dataset.vs }; renderRead(); const pk = $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); land(['#paneRead [data-press-filter]'], true); return; } // 이 대답에 메모를 내민다
+      if ((el = t.closest('[data-vs]'))) { const o = ST.view.open; if (!o || o.t !== 'person') return; stopTalk(); PICK = { pid: o.id, k: el.dataset.vs }; renderRead(); const pk = $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); land(matchMedia('(pointer: coarse)').matches ? ['#paneRead .press-pick button'] : ['#paneRead [data-press-filter]'], true); return; } // 이 대답에 메모를 내민다 (터치 화면에선 찾기 칸에 초점을 주지 않는다: 자판이 메모를 가린다)
       if ((el = t.closest('[data-pin]'))) return pin(el.dataset.pin);
       if ((el = t.closest('[data-kw]'))) return addKey(el.dataset.kw, false, el.textContent);
       if ((el = t.closest('[data-bub]')) && !getSelection().toString()) return pin(el.dataset.bub); // 말풍선을 누르면 수첩에

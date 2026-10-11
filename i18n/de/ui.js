@@ -188,6 +188,7 @@ MG.I18N.put("de", "ui", {
 "다시 올리면 재검토에 1시간이 더 든다.": "Ein neuer Antrag kostet eine Stunde mehr für die Prüfung.",
 "다시 신청하기": "Erneut beantragen",
 "신청서 올리기": "Antrag stellen",
+"신청서를 쓰는 데 {0}": "Antrag schreiben dauert {0}",
 "수사 요청": "Ermittlungsersuchen",
 "신청": "Von",
 "강력2팀": "Gewaltdezernat, Team 2",

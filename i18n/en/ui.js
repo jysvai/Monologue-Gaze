@@ -188,6 +188,7 @@ MG.I18N.put("en", "ui", {
 "다시 올리면 재검토에 1시간이 더 든다.": "Filing it again adds an hour for review.",
 "다시 신청하기": "Refile",
 "신청서 올리기": "File request",
+"신청서를 쓰는 데 {0}": "Filing takes {0}",
 "수사 요청": "Investigation request",
 "신청": "From",
 "강력2팀": "Violent Crimes Unit 2",

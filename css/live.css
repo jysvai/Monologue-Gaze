@@ -15,6 +15,7 @@
 .lv-wait{flex:none;height:20px;padding:0 10px;border:1px solid rgba(255,255,255,.3);border-radius:10px;background:rgba(255,255,255,.08);color:inherit;font:11px/18px var(--f-web);cursor:pointer}
 @media (hover:hover){.lv-wait:hover{background:rgba(255,255,255,.18)}}
 .lv-wait.over,.lv-wait.arm{border-color:#e0685c;color:#ffb3aa} /* 기다리면 기한을 넘긴다 */
+@media (pointer:coarse){.scr-bar.live{height:40px}.lv-wait{height:30px;line-height:28px;padding:0 12px}} /* 손가락으로 누르는 화면: 「시간 보내기」를 누를 만한 크기로 */
 .case-view[data-frame="crt"] .lv-wait:is(.over,.arm){border-color:#b0342a;color:#b0342a}
 .case-view[data-frame="crt"] .lv-clock b{background:rgba(0,0,0,.12)}
 .case-view[data-frame="crt"] .lv-step{color:#9a5a00}
@@ -124,3 +125,4 @@
 @keyframes lvStep{0%{opacity:0;transform:translateY(3px)}12%{opacity:1;transform:none}70%{opacity:1}100%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.lv-step{animation:lvStepR 2.4s step-end forwards}@keyframes lvStepR{to{opacity:0}}}
 .rq-no .rq-cost{display:block;margin-top:4px;font-size:.88em;opacity:.75} /* ★5 기각: 다시 올리면 드는 시간 */
+.submit-row .rq-cost{margin-left:10px;font-size:.85em;opacity:.7;white-space:nowrap} /* 올리기 전에: 신청서를 쓰는 데 드는 시간 */
