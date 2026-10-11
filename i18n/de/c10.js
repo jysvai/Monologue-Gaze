@@ -101,7 +101,7 @@ MG.I18N.put("de", "c10", {
 "xx1fiu589x": "Kein Telefonat an dem Abend",
 "xd3vvt7ijo": "00:09 Anruf bei Eun-ho, 3 Min. — Verbindungsdaten des Opfers",
 "eyg4zbxfpn": "War an dem Abend nicht im Neuhafen",
-"smwtfrp83f": "Hi-Pass: 00:34 Richtung Neuhafen · 01:21 Richtung Innenstadt",
+"64m79ptm0l": "00:34 Richtung Neuhafen · 01:21 Richtung Innenstadt — Maut Neuhafen Hi-Pass",
 "kdszxfy9we": "Bei der Runde um 12 war nichts",
 "qjk7fvqdp7": "SUV ohne Licht hinten an Pier 3 · fuhr weg, als die Lampe ihn traf",
 "1anzxiqtn2c": "Eun-hos Handy",
