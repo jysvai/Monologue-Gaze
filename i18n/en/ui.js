@@ -85,7 +85,7 @@ MG.I18N.put("en", "ui", {
 "수첩의 메모 끝 「?」를 누르면 의심으로 표시해 둔다. 표시한 메모는 여기 따로 모인다.": "Tap the “?” at the end of a note in your notebook to mark it as a doubt. Marked notes gather here.",
 "「{0}」 — 어떤 메모를 내밀까?": "“{0}” — which note do you hold out?",
 "그만두기": "Never mind",
-"메모에서 낱말 찾기": "Find a word in your notes",
+"메모에서 낱말 찾기": "Search your notes",
 "메모 찾기": "Search notes",
 "이 대답에 들이밀 만한 메모는 있지만, 함께 맞댈 기록이 아직 모자라다.": "A note here could answer this, but the record to set beside it isn’t in the notebook yet.",
 "이 사람이 한 말과 어긋나 보이는 메모는 아직 수첩에 없다.": "Nothing in the notebook yet looks like it contradicts what this person said.",

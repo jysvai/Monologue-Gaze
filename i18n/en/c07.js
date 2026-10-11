@@ -328,7 +328,7 @@ MG.I18N.put("en", "c07", {
 "166d36s6r9k": "Used by General Affairs Manager [[Seok Tae-ho|k_seok]] · driven by [[Noh Bong-chul|k_no]]",
 "15n9h6pole6": "Seoul 1ga-3310",
 "21ffi5aajmt": "Crown (gray), 1970 model",
-"pm5kzsfne": "Used by President [[Ko Ik-hwan|k_hoejang]]",
+"pm5kzsfne": "Used by Chairman [[Ko Ik-hwan|k_hoejang]]",
 "1d0xm2o13x8": "Seoul Yeong 7-0512",
 "1ryairvp9o0": "Truck, 2.5 tons",
 "mqj51hpd5u": "Used by Materials Section",
