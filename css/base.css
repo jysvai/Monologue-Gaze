@@ -615,6 +615,7 @@ button.ab-c.log:hover{border-color:#5d6a76}
 .ph.cmp.drag .ph-tag{opacity:1}
 .ph-cmp{display:flex;align-items:center;gap:8px;margin:0 0 6px;font:12px var(--f-mono);color:var(--ink-soft)}
 .ph-cmp input{flex:1;min-width:60px;margin:0;accent-color:var(--red);cursor:ew-resize}
+@media (pointer:coarse){.ph-cmp input{min-height:32px}} /* 손가락으로 끌 때 밀대가 18px뿐이라 놓치기 쉽다 */
 .ph-cmp span{max-width:36%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 @container stage (max-width:520px){.ph-cmp span{display:none}} /* 좁은 화면: 두 사진의 이름은 사진 위 날짜표로 (밀대 옆 이름은 잘려 「…」만 남는다) */
 .ph-mk{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;width:30px;height:30px;border:2px solid var(--red);border-radius:50%;color:var(--red);font:800 13px/1 var(--f-web);background:rgba(255,255,255,.35);pointer-events:none}
