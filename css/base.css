@@ -560,7 +560,7 @@ button.ab-c.log:hover{border-color:#5d6a76}
 /* 좁은 화면(휴대폰)에선 여섯 칸 표가 옆으로 넘쳐 반이 가려진다: 사람별 목록으로 바꾸고 칸마다 시각 꼬리표를 단다 */
 @container stage (max-width:520px){.doc.alibi{padding-left:12px;padding-right:12px}.doc.alibi .ab{margin-inline:-4px;overflow-x:visible}.ab-row{display:block;min-width:0}.ab .ab-head{display:none}.ab-who{position:static;margin:0;padding:2px 0 5px;box-shadow:none;background:none}.ab-tk{display:flex;flex-direction:column;min-width:0}.ab-c{order:var(--o,0);align-self:stretch}.ab-at{display:block;margin-bottom:2px;font:11.5px/1.3 var(--f-mono);color:var(--ink-soft)}}
 .ab-help{margin:2px 0 8px;font:12px var(--f-mono);color:var(--ink-soft)}
-.ab-back-w{margin:0 0 20px} /* 얼굴 머리줄은 위로 18px 끌어올려 붙는다 (.per-h.has-face): 그만큼 띄워야 단추 아랫단이 안 가린다 */
+.ab-back-w{margin:0 0 24px} /* 얼굴 머리줄은 위로 18px 끌어올려 붙는다 (.per-h.has-face): 그만큼 띄워야 단추 아랫단이 안 가린다 */
 .ab-back{display:inline-block;padding:6px 10px;border:1px solid currentColor;border-radius:3px;background:none;color:inherit;opacity:.72;font:12px/1.2 var(--f-mono);cursor:pointer;white-space:nowrap}
 .ab-back:hover,.ab-back:focus-visible{opacity:1}
 @media (pointer:coarse){.tab{padding-top:11px;padding-bottom:10px}.ab-back{padding:10px 12px}} /* 손가락으로 누르는 화면: 탭과 돌아가기 단추를 누르기 쉬운 높이로 */
