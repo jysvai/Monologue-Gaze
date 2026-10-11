@@ -953,10 +953,12 @@
   const abBroke = (r, c) => !!(c.ask && r.who && abKeys(c).some(k => (ST.asked[r.who] || []).includes(k + '!') && isPressAsk(C.people[r.who], k) && !isSoft(C.people[r.who], k))); // 떠올려 고친 대답(soft)은 거짓이 아니다 — 탐문처럼 줄을 긋지 않는다
   function alibiHtml(s) {
     if (!s) return '';
-    const sl = s.slots || [], n = sl.length || 1, span = c => { const [a, b] = [].concat(c.at ?? 0); return `grid-column:${+a + 1} / ${(b ?? a) + 2}`; };
+    const sl = s.slots || [], n = sl.length || 1, span = c => { const [a, b] = [].concat(c.at ?? 0); return `grid-column:${+a + 1} / ${(b ?? a) + 2};--o:${+a}`; };
+    // 칸마다 시각 꼬리표: 넓은 화면에선 숨기고, 좁은 화면(표 대신 사람별 목록)에서만 보인다
+    const when = c => { const [a, b] = [].concat(c.at ?? 0); return `<span class="ab-at">${inline(sl[a] ?? '')}${b != null && b !== a ? ` – ${inline(sl[b] ?? '')}` : ''}</span>`; };
     const rows = (s.rows || []).map(r => ({ r, cs: (r.cells || []).filter(c => abShown(r, c)) })).filter(({ r, cs }) => cs.length || (r.who && ST.asked[r.who]));
     const cell = (r, c) => {
-      const broke = abBroke(r, c), tx = broke ? `<s>${inline(c.t)}</s>${c.truth ? `<span class="ab-tr">${inline(c.truth)}</span>` : ''}` : inline(c.t);
+      const broke = abBroke(r, c), tx = when(c) + (broke ? `<s>${inline(c.t)}</s>${c.truth ? `<span class="ab-tr">${inline(c.truth)}</span>` : ''}` : inline(c.t));
       if (c.ask && !broke && !/!$/.test(c.ask)) return `<button type="button" class="ab-c said" style="${span(c)}" data-ab="${esc(r.who)}|${esc(abKeys(c).find(k => (ST.asked[r.who] || []).includes(k)) || abKeys(c)[0])}" title="${esc(T`${pname(C.people[r.who])}에게 이 말을 따진다`)}">${tx}</button>`;
       const nt = c.f && thNote(c);
       return nt ? `<button type="button" class="ab-c log" style="${span(c)}" data-ab-note="${nt.id}">${tx}</button>` : `<span class="ab-c${c.ask ? (broke ? ' said broke' : ' said after') : ' log'}" style="${span(c)}">${tx}</span>`; // ask: 'k!' — 따진 뒤에 고쳐 한 말 (깨진 뒤에만 보이고, 더 따질 것은 없다)
