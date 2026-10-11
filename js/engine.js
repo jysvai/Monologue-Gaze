@@ -667,7 +667,7 @@
         <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div>${!press && vsOpen && !asked.includes(k + '!') ? `<p class="c-vs"><button type="button" class="chip vs${lv() <= 3 && isPressAsk(p, k) && ok((rawAns(p, k) || {}).need) ? ' again' : ''}" data-vs="${esc(k)}">${T('메모를 내민다')}</button></p>` : ''}${inl && e === PICK.k ? pickHtml(p) : ''}</div>`;
     }).join('');
     const abF = ST.view.abFrom, abS = abF && abF.pid === p.id && C.sources.find(x => x.id === abF.src && x.type === 'alibi' && srcVisible(x)); // 행적표에서 건너왔으면 돌아가는 단추
-    return `<article class="person skin-${esc(p.skin || 'talk')}"><header class="per-h${faceOf(p) ? ' has-face' : ''}">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}${patHtml(p)}</div>${abS ? `<button type="button" class="ab-back" data-src="${esc(abS.id)}">← ${esc(abS.name)}</button>` : ''}${recAge() && faceOf(p) ? '<span class="rec" aria-hidden="true"><i></i>REC <b class="rec-tc"></b></span>' : ''}</header>
+    return `<article class="person skin-${esc(p.skin || 'talk')}">${abS ? `<p class="ab-back-w"><button type="button" class="ab-back" data-src="${esc(abS.id)}">← ${esc(abS.name)}</button></p>` : ''}<header class="per-h${faceOf(p) ? ' has-face' : ''}">${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}${patHtml(p)}</div>${recAge() && faceOf(p) ? '<span class="rec" aria-hidden="true"><i></i>REC <b class="rec-tc"></b></span>' : ''}</header>
       <div class="per-tr" data-who="${esc(p.id)}">${tr}</div>
       ${PICK && PICK.pid === p.id && !inl ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}>${shut ? `<p class="vs-shut" tabindex="-1"><b>${esc(p.name)}</b> ${inline(ST.vs[p.id].last || '').replace(MIDACT, '<i class="c-mid">$&</i>')} <span>${T('— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.')}</span></p>` : ''}<p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」')}${liveOn() ? `<b class="lv-cost">${T` · 물을 때마다 ${hm(lcost('ask'))}`}</b>` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
   }
@@ -975,16 +975,20 @@
     const [pid, k] = arg.split('|'), p = C.people[pid];
     if (!p) return;
     const ps = C.sources.find(x => x.id === p.src);
-    ST.view.abFrom = { src: ST.view.src, pid }; // 그 사람 화면에 「← 행적표」: 휴대폰에선 행적표 탭이 탭 줄 밖으로 밀려 있다
+    const board = ST.view.src;
     if (ps && srcVisible(ps)) { keepPos(); ST.view.src = ps.id; }
     openItem({ t: 'person', id: pid });
+    ST.view.abFrom = { src: board, pid }; // 그 사람 화면에 「← 행적표」: 휴대폰에선 행적표 탭이 탭 줄 밖으로 밀려 있다 (다른 것을 펼치면 openItem 이 지운다)
     if (!clammed(p) && proof().length) PICK = { pid, k, inline: true }; // 입을 닫았거나 내밀 메모가 없으면 그 사람 화면까지만
     renderTabs(); renderList(); renderRead();
     // 그 대답을 읽기 칸 위쪽에 두고 한 번 짚는다 (맨 끝에 들은 다른 대답 밑에 고르는 칸만 뜨면 무엇을 따지는지 헷갈린다)
     const qa = $$('#paneRead .qa').find(q => q.dataset.qa === k || q.dataset.qa === k + '!'), pr = $('#paneRead'), hd = $('#paneRead .per-h');
     if (qa && pr) { pr.scrollTop += qa.getBoundingClientRect().top - pr.getBoundingClientRect().top - (hd ? hd.offsetHeight : 0) - 8; qa.classList.remove('ab-hit'); void qa.offsetWidth; qa.classList.add('ab-hit'); }
     const pk = $('#paneRead .press-pick'), touch = matchMedia('(pointer: coarse)').matches;
-    if (pk && (!qa || touch)) pk.scrollIntoView({ block: 'nearest' }); // 휴대폰은 대답 밑 한 화면 아래에 고르는 칸이 있다: 내밀 메모가 보이게
+    if (pk && pr && (!qa || touch)) { // 휴대폰은 대답 밑 한 화면 아래에 고르는 칸이 있다: 내밀 메모가 보이게 (읽기 칸만 굴린다. 고르는 칸 머리가 고정 머리줄 밑으로 들어가지 않을 만큼만)
+      const pb = pr.getBoundingClientRect(), r = pk.getBoundingClientRect(), over = r.bottom - pb.bottom;
+      if (over > 0) pr.scrollTop += Math.min(over + 8, r.top - pb.top - (hd ? hd.offsetHeight : 0) - 8);
+    }
     // 터치 화면에선 메모 찾기 칸에 초점을 주지 않는다 (자판이 올라와 메모 목록을 가린다)
     land(touch ? ['#paneRead .press-pick button', '#askChips .chip'] : ['#paneRead [data-press-filter]', '#askChips .chip'], true);
   }
@@ -2895,6 +2899,7 @@
     keepPos();
     ST.view.open = o;
     PICK = null;
+    ST.view.abFrom = null;
     if (o.t === 'person' && C.people[o.id]) { ST.asked[o.id] ||= []; CHIPS = null; renameKey(C.people[o.id].key); } // 만나서 첫마디를 들으면 수첩의 이름도 고쳐 적는다 // 찾아가 첫마디를 들었으면 목록의 빨간 표시는 걷힌다 (문서를 펼치면 걷히듯)
     save(); sfx('page');
     renderRead(); renderList();
