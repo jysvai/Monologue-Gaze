@@ -272,7 +272,8 @@
   // 「새로 열린 것 1」만으로는 어디를 봐야 할지 모른다 — 새것이 생긴 탭 이름을 붙인다
   function where(b, skip) {
     const by = {}; census(by);
-    const names = Object.keys(by).filter(id => id !== skip && by[id] > (b[id] || 0)).map(id => C.sources.find(x => x.id === id)).filter(Boolean).map(x => quote(plain(x.name)));
+    const srcs = Object.keys(by).filter(id => id !== skip && by[id] > (b[id] || 0)).map(id => C.sources.find(x => x.id === id)).filter(Boolean), names = srcs.map(x => quote(plain(x.name)));
+    tabPeek($('#srcTabs'), srcs.map(x => x.id)); // 이름만 대지 않고, 탭 줄 밖에 있으면 그 탭을 밀어 보여 준다
     return names.length ? ' — ' + names.slice(0, 2).join(', ') + (names.length > 2 ? ' …' : '') : '';
   }
   const opened = (n, b, skip) => T` · 새로 열린 것 ${n}` + where(b, skip); // skip: 방금 잠금을 푼 탭은 토스트 앞머리에 이미 이름이 있다
@@ -1499,7 +1500,7 @@
     tabEdge(bar);
     const ids = vis.map(s => s.id), seen = tabPeek.seen || {}, was = seen.c === C.id ? seen.ids : null;
     tabPeek.seen = { c: C.id, ids };
-    if (was) { const add = ids.filter(x => !was.includes(x)); if (add.length) tabPeek(bar, add[add.length - 1]); }
+    if (was) { const add = ids.filter(x => !was.includes(x)); if (add.length) tabPeek(bar, add); }
     const pl = $('#paneList'); if (pl && ST.view.src) { pl.setAttribute('aria-labelledby', 'tab-' + ST.view.src); } // 목록 칸 = 고른 탭의 내용
   }
   // 탭 이름이 긴 말(영어·독일어·러시아어)이라 넓은 화면에서도 넘치면: 고르지 않은 탭의 긴 이름부터 줄여 한 줄에 다 보이게 하고, 줄인 탭에는 온 이름을 말풍선으로
@@ -1524,18 +1525,27 @@
     else if (r.right > b.right - 8) bar.scrollLeft += r.right - (b.right - 8);
   }
   // 새로 열린 탭이 탭 줄 밖에 있으면 줄을 밀어 한 번 보여 주고 제자리로 (휴대폰에선 탭 서너 개가 오른쪽 밖에 있다. 알림만으로는 어디 생겼는지 모른다)
-  function tabPeek(bar, id) {
-    const t = bar.querySelector('#tab-' + CSS.escape(id)), b = bar.getBoundingClientRect();
-    if (!t || !b.width) return;
-    const r = t.getBoundingClientRect();
-    if (r.left >= b.left && r.right <= b.right) return;
-    const home = bar.scrollLeft, how = reduced() ? 'auto' : 'smooth';
-    const to = Math.max(0, Math.min(bar.scrollWidth - bar.clientWidth, home + (r.left < b.left ? r.left - b.left - 12 : r.right - b.right + 12)));
+  function tabPeek(bar, ids) {
+    const b = bar && bar.getBoundingClientRect();
+    if (!b || !b.width || !ST) return;
+    const rs = [].concat(ids).map(id => bar.querySelector('#tab-' + CSS.escape(id))).filter(Boolean).map(t => t.getBoundingClientRect());
+    if (!rs.length || rs.every(r => r.left >= b.left && r.right <= b.right)) return;
+    const busy = Date.now() < (tabPeek.until || 0), home = busy ? tabPeek.home : bar.scrollLeft, cw = bar.clientWidth, how = reduced() ? 'auto' : 'smooth';
+    // 줄 안의 자리로 바꿔, 새 탭들이 한 화면에 들어가면 함께, 넘치면 첫 탭만
+    const x0 = bar.scrollLeft - b.left;
+    let lo = Math.min(...rs.map(r => r.left)) + x0, hi = Math.max(...rs.map(r => r.right)) + x0;
+    if (hi - lo > cw - 24) { lo = rs[0].left + x0; hi = rs[0].right + x0; }
+    let to = home;
+    if (hi > to + cw - 12) to = hi - cw + 12;
+    if (lo < to + 12) to = lo - 12;
+    to = Math.max(0, Math.min(bar.scrollWidth - cw, to));
+    if (Math.abs(to - bar.scrollLeft) < 2) return;
     const src = ST.view.src;
     bar.scrollTo({ left: to, behavior: how });
     clearTimeout(tabPeek.t);
+    tabPeek.home = home;
     tabPeek.until = Date.now() + 1800; // 그동안 다시 그려도 고른 탭으로 되감지 않는다 (tabShow)
-    tabPeek.t = setTimeout(() => { if (bar.isConnected && ST && ST.view.src === src && Math.abs(bar.scrollLeft - to) < 24) bar.scrollTo({ left: home, behavior: how }); }, 1800); // 그사이 손으로 밀었거나 새 탭을 눌렀으면 그대로 둔다
+    tabPeek.t = setTimeout(() => { if (bar.isConnected && ST && ST.view.src === src && Math.abs(bar.scrollLeft - to) < 24) bar.scrollTo({ left: home, behavior: how }); }, 1800); // 그사이 손으로 밀었거나 새 탭을 눌렀으면 그대로
   }
   // 가려진 탭이 남은 쪽 끝을 흐리게 한다 (옆으로 밀면 더 있다는 표시)
   function tabEdge(bar) {
@@ -3572,7 +3582,7 @@
     document.addEventListener('mouseup', e => { if (SELQ && e.target === SELQ) e.preventDefault(); SELQ = null; });
     document.addEventListener('focusout', e => { if (CIPHL != null && e.target.closest && e.target.closest('[data-sym]') && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-sym]'))) cipherHl(null); });
     document.addEventListener('input', e => {
-      if (e.target.matches && e.target.matches('[data-ph-cut]')) { const id = e.target.dataset.phCut, ph = $$('.ph[data-ph]').find(p => p.dataset.ph === id); PHCUT.set(id, +e.target.value); if (ph) { ph.style.setProperty('--cut', e.target.value + '%'); ph.classList.add('seen', 'drag'); clearTimeout(ph._dt); ph._dt = setTimeout(() => ph.classList.remove('drag'), 1400); } return; } // 전후 대조: 앞서 찍은 사진을 어디까지 덮을지
+      if (e.target.matches && e.target.matches('[data-ph-cut]')) { const id = e.target.dataset.phCut, ph = $$('.ph[data-ph]').find(p => p.dataset.ph === id); PHCUT.set(id, +e.target.value); if (ph) { ph.style.setProperty('--cut', e.target.value + '%'); ph.classList.add('seen', 'drag'); clearTimeout(ph._dt); ph._dt = setTimeout(() => ph.classList.remove('drag'), 1400); const hn = ph.parentNode.querySelector('.ph-hint'); if (hn) hn.remove(); } return; } // 전후 대조: 앞서 찍은 사진을 어디까지 덮을지
       if (e.target.matches && e.target.matches('[data-qf]') && e.target.form) e.target.form.dataset.last = e.target.dataset.qf; // 조회 칸: 마지막으로 고쳐 쓴 칸 (runQuery)
       // 칸에 적는 소리: 노트북은 얕은 자판, 2006년 모니터와 90년대 종이 사건은 자판, 그 앞은 타자기, 1950년 앞은 연필 (소리 파일이 있을 때만, 너무 잦지 않게)
       if (C && S.sound && e.data && e.target.closest('.lock-phone')) dtmf(e.data.slice(-1));
