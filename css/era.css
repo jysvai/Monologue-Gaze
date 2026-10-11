@@ -78,13 +78,13 @@ body[data-age="now"] .pane-read.room{--room-head:#15181b;--room-ink:#f1f3f5;--ro
 .case-view[data-frame="laptop"] .pane-read.room .per-tr{box-shadow:0 2px 12px rgba(0,0,0,.35)}
 
 /* 녹화 표시: ● REC 와 흐른 시간 (js 가 1초마다) */
-.rec{position:absolute;right:4px;top:16px;display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border-radius:4px;background:rgba(0,0,0,.45);color:#f4f4f4;font:700 11px/1.2 var(--f-mono);letter-spacing:.08em;pointer-events:none}
-.rec i{width:8px;height:8px;border-radius:50%;background:#e5322b;animation:recBlink 1.6s steps(1) infinite}
-.rec b{font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:.04em}
-body[data-age="y2k"] .rec{border-radius:0;background:transparent;color:#fff;font:12px/1.2 var(--f-pixel);text-shadow:1px 1px 0 #000}
+.per-h .rec{position:absolute;right:4px;top:16px;display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border-radius:4px;background:rgba(0,0,0,.45);color:#f4f4f4;font:700 11px/1.2 var(--f-mono);letter-spacing:.08em;pointer-events:none}
+.per-h .rec i{width:8px;height:8px;border-radius:50%;background:#e5322b;animation:recBlink 1.6s steps(1) infinite}
+.per-h .rec b{font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+body[data-age="y2k"] .per-h .rec{border-radius:0;background:transparent;color:#fff;font:12px/1.2 var(--f-pixel);text-shadow:1px 1px 0 #000}
 .per-h.has-face.mini .rec{top:8px}
 .per-h:not(.has-face):has(.rec){position:relative}
 .per-h:has(.rec)>div{padding-right:120px}
-@media (max-width:720px){.rec{top:8px;padding:2px 6px;font-size:10px}.per-h:has(.rec)>div{padding-right:0}.per-h:has(.rec) h3{padding-right:96px}}
+@media (max-width:720px){.per-h .rec{top:8px;padding:2px 6px;font-size:10px}.per-h:has(.rec)>div{padding-right:0}.per-h:has(.rec) h3{padding-right:96px}}
 @keyframes recBlink{50%{opacity:.15}}
-@media (prefers-reduced-motion:reduce){.rec i{animation:none}}
+@media (prefers-reduced-motion:reduce){.per-h .rec i{animation:none}}

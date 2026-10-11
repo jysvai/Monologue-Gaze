@@ -947,7 +947,7 @@
    * 칸은 그 대답을 들으면(ask) · 그 사실이 든 메모를 적으면(f) · 조건이 차면(need) 나타난다. 어긋나는 칸을 엔진이 짚어 주지는 않는다.
    * 들은 말 칸을 누르면 그 사람에게 가서 그 대답에 메모를 내민다 (탐문과 같은 따지기). 깨뜨린 말에는 줄을 긋고 truth 를 적는다 */
   const abShown = (r, c) => c.ask ? !!r.who && (ST.asked[r.who] || []).some(e => e === c.ask || e === c.ask + '!') : c.f ? !!thNote(c) : ok(c.need);
-  const abBroke = (r, c) => !!(c.ask && r.who && (ST.asked[r.who] || []).includes(c.ask + '!') && isPressAsk(C.people[r.who], c.ask));
+  const abBroke = (r, c) => !!(c.ask && r.who && (ST.asked[r.who] || []).includes(c.ask + '!') && isPressAsk(C.people[r.who], c.ask) && !isSoft(C.people[r.who], c.ask)); // 떠올려 고친 대답(soft)은 거짓이 아니다 — 탐문처럼 줄을 긋지 않는다
   function alibiHtml(s) {
     if (!s) return '';
     const sl = s.slots || [], n = sl.length || 1, span = c => { const [a, b] = [].concat(c.at ?? 0); return `grid-column:${+a + 2} / ${(b ?? a) + 3}`; };
@@ -958,7 +958,7 @@
       const nt = c.f && thNote(c);
       return nt ? `<button type="button" class="ab-c log" style="${span(c)}" data-ab-note="${nt.id}">${tx}</button>` : `<span class="ab-c${c.ask ? ' said broke' : ' log'}" style="${span(c)}">${tx}</span>`;
     };
-    const grid = `grid-template-columns:minmax(76px,.8fr) repeat(${n},minmax(84px,1fr))`;
+    const grid = `grid-template-columns:minmax(64px,.6fr) repeat(${n},minmax(84px,1fr))`;
     const head = `<div class="ab-row ab-head" style="${grid}" aria-hidden="true"><span></span>${sl.map(x => `<span class="ab-slot">${inline(x)}</span>`).join('')}</div>`;
     const body = rows.map(({ r, cs }) => `<div class="ab-row${r.who ? '' : ' logs'}" style="${grid}"><p class="ab-who">${r.who ? esc(pname(C.people[r.who])) : inline(r.label || '')}</p>${cs.length ? cs.map(c => cell(r, c)).join('') : `<span class="ab-none" style="grid-column:2 / ${n + 2}">${T('아직 이 시각에 대해 들은 말이 없다.')}</span>`}</div>`).join('');
     return `<article class="doc skin-${esc(s.skin || 'board')} alibi"><header class="doc-h"><h3 class="doc-t">${inline(s.title || s.name)}</h3>${s.meta ? `<p class="doc-m">${inline(s.meta)}</p>` : ''}</header>

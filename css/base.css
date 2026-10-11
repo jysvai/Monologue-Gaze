@@ -543,7 +543,7 @@ button.n-lead{cursor:pointer}
 .ab-slot{font:12px/1.3 var(--f-mono);color:var(--ink-soft);text-align:center;border-bottom:2px solid rgba(0,0,0,.18);padding-bottom:3px}
 .ab-who{position:sticky;left:-10px;z-index:1;grid-column:1;grid-row:1;align-self:stretch;margin:0 0 0 -10px;padding:6px 6px 0 10px;background:var(--ab-bg);font:700 13px/1.35 var(--f-web);color:var(--ink);word-break:keep-all}
 .ab-row.logs .ab-who{font-weight:400;color:var(--ink-soft);font-family:var(--f-mono);font-size:12px}
-.ab-c{display:block;min-width:0;margin:0;padding:6px 8px;border:1px solid rgba(0,0,0,.16);border-radius:3px;background:#fbf6e6;color:var(--ink);font:13px/1.45 var(--f-web);text-align:left;word-break:keep-all;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.ab-c{display:block;min-width:0;margin:0;padding:5px 7px;border:1px solid rgba(0,0,0,.16);border-radius:3px;background:#fbf6e6;color:var(--ink);font:12.5px/1.42 var(--f-web);text-align:left;word-break:keep-all;overflow-wrap:anywhere;box-shadow:0 1px 2px rgba(0,0,0,.1)}
 .ab-c.said{border-left:4px solid #b9a77a}
 .ab-c.log{background:#eef0f2;border-left:4px solid #7d8a96}
 button.ab-c{cursor:pointer}
@@ -597,6 +597,7 @@ button.ab-c.log:hover{border-color:#5d6a76}
 .ph-cmp{display:flex;align-items:center;gap:8px;margin:0 0 6px;font:12px var(--f-mono);color:var(--ink-soft)}
 .ph-cmp input{flex:1;min-width:60px;margin:0;accent-color:var(--red);cursor:ew-resize}
 .ph-cmp span{max-width:36%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+@container stage (max-width:520px){.ph-cmp span{display:none}} /* 좁은 화면: 두 사진의 이름은 사진 위 날짜표로 (밀대 옆 이름은 잘려 「…」만 남는다) */
 .ph-mk{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;width:30px;height:30px;border:2px solid var(--red);border-radius:50%;color:var(--red);font:800 13px/1 var(--f-web);background:rgba(255,255,255,.35);pointer-events:none}
 .ph-miss{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border:1px solid rgba(40,40,40,.6);border-radius:50%;pointer-events:none;animation:phmiss .7s ease-out forwards}
 @keyframes phmiss{from{transform:scale(.4);opacity:1}to{transform:scale(1.6);opacity:0}}
