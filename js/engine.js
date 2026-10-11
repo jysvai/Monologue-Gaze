@@ -1525,27 +1525,30 @@
     else if (r.right > b.right - 8) bar.scrollLeft += r.right - (b.right - 8);
   }
   // 새로 열린 탭이 탭 줄 밖에 있으면 줄을 밀어 한 번 보여 주고 제자리로 (휴대폰에선 탭 서너 개가 오른쪽 밖에 있다. 알림만으로는 어디 생겼는지 모른다)
-  function tabPeek(bar, ids) {
+  function tabPeek(bar, ids, back) {
     const b = bar && bar.getBoundingClientRect();
     if (!b || !b.width || !ST) return;
-    const rs = [].concat(ids).map(id => bar.querySelector('#tab-' + CSS.escape(id))).filter(Boolean).map(t => t.getBoundingClientRect());
-    if (!rs.length || rs.every(r => r.left >= b.left && r.right <= b.right)) return;
-    const busy = Date.now() < (tabPeek.until || 0), home = busy ? tabPeek.home : bar.scrollLeft, cw = bar.clientWidth, how = reduced() ? 'auto' : 'smooth';
-    // 줄 안의 자리로 바꿔, 새 탭들이 한 화면에 들어가면 함께, 넘치면 첫 탭만
+    const how = reduced() ? 'auto' : 'smooth', busy = Date.now() < (tabPeek.until || 0);
+    const home = back != null ? back : busy ? tabPeek.home : bar.scrollLeft, cw = bar.clientWidth;
+    // 지금 줄 밖에 있는 새 탭만: 한 화면에 들어가면 함께, 넘치면 첫 탭부터 하나씩 차례로 (사이에 다른 탭이 끼어 있으면 둘이 한 화면에 안 든다)
+    const hid = [].concat(ids).map(id => [id, bar.querySelector('#tab-' + CSS.escape(id))]).filter(([, t]) => t).map(([id, t]) => [id, t.getBoundingClientRect()]).filter(([, r]) => r.left < b.left || r.right > b.right);
+    if (!hid.length) { if (back != null) bar.scrollTo({ left: back, behavior: how }); return; }
     const x0 = bar.scrollLeft - b.left;
-    let lo = Math.min(...rs.map(r => r.left)) + x0, hi = Math.max(...rs.map(r => r.right)) + x0;
-    if (hi - lo > cw - 24) { lo = rs[0].left + x0; hi = rs[0].right + x0; }
-    let to = home;
+    let lo = Math.min(...hid.map(([, r]) => r.left)) + x0, hi = Math.max(...hid.map(([, r]) => r.right)) + x0, rest = [];
+    if (hi - lo > cw - 24) { lo = hid[0][1].left + x0; hi = hid[0][1].right + x0; rest = hid.slice(1).map(([id]) => id); }
+    let to = bar.scrollLeft;
     if (hi > to + cw - 12) to = hi - cw + 12;
     if (lo < to + 12) to = lo - 12;
     to = Math.max(0, Math.min(bar.scrollWidth - cw, to));
-    if (Math.abs(to - bar.scrollLeft) < 2) return;
     const src = ST.view.src;
     bar.scrollTo({ left: to, behavior: how });
     clearTimeout(tabPeek.t);
     tabPeek.home = home;
     tabPeek.until = Date.now() + 1800; // 그동안 다시 그려도 고른 탭으로 되감지 않는다 (tabShow)
-    tabPeek.t = setTimeout(() => { if (bar.isConnected && ST && ST.view.src === src && Math.abs(bar.scrollLeft - to) < 24) bar.scrollTo({ left: home, behavior: how }); }, 1800); // 그사이 손으로 밀었거나 새 탭을 눌렀으면 그대로
+    tabPeek.t = setTimeout(() => { // 그사이 손으로 밀었거나 새 탭을 눌렀으면 그대로
+      if (!bar.isConnected || !ST || ST.view.src !== src || Math.abs(bar.scrollLeft - to) >= 24) return;
+      if (rest.length) tabPeek(bar, rest, home); else bar.scrollTo({ left: home, behavior: how });
+    }, 1800);
   }
   // 가려진 탭이 남은 쪽 끝을 흐리게 한다 (옆으로 밀면 더 있다는 표시)
   function tabEdge(bar) {
