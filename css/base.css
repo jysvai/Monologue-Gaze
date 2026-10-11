@@ -758,6 +758,8 @@ body:has(.case-view[data-graphic])::before{background:radial-gradient(ellipse at
 .per-h.has-face.mini{padding:8px 0 6px}
 .per-h.has-face.mini .face.lg{width:56px;height:70px}
 .per-h.has-face.mini>div>p{display:none}
+.per-back{display:none}
+@container stage (max-width:700px){.per-h.has-face.mini .per-back{display:inline-flex;align-items:center;justify-content:center;flex:none;width:36px;height:36px;border:1px solid currentColor;border-radius:3px;background:none;color:inherit;opacity:.75;font:18px/1 var(--f-web);cursor:pointer}} /* 좁은 화면의 긴 탐문: 「← 목록으로」는 위로 밀려 가고, 줄어든 얼굴 머리줄만 붙어 있다 */
 @media (max-width:720px){.per-h.has-face.mini{padding:5px 0 4px}.per-h.has-face.mini .face.lg{width:44px;height:55px}}
 /* 작아진 얼굴도 몸짓이 나오는 동안은 크게 (scale 은 흠칫 · 도리질의 transform 과 따로 겹친다). 자리는 그대로라 글이 밀리지 않는다 */
 .per-h.has-face.mini .face.lg{transform-origin:0 0;transition:scale .3s ease-in}

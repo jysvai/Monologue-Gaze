@@ -100,6 +100,7 @@ MG.I18N.put("en", "ui", {
 "수첩을 펴 보인다": "shows the notebook",
 "수첩을 내민다": "holds out the notebook",
 "메모를 내민다": "Hold out a note",
+"목록으로": "Back to list",
 "— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.": "— has stopped talking. Note something new and you can press again.",
 " · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」": " · If an answer clashes with the records, use “Hold out a note” under it",
 " · 물을 때마다 {0}": " · each question takes {0}",
