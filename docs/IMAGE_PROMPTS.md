@@ -1,7 +1,7 @@
 # Monologue Gaze — 이미지 프롬프트 모음
 
 > 이 파일은 `node tools/prompts.js` 로 자동 생성됩니다. 프롬프트를 고치려면 각 사건 파일(`cases/*.js`)의 `art` 항목을 고친 뒤 다시 생성하세요.
-총 **251장**.
+총 **257장**.
 
 
 ## 쓰는 법
@@ -131,7 +131,7 @@ Delivery rider's proof-of-delivery photo: a white plastic takeout bag with two s
 
 ## CASE 01 · 화이트게이트의 편지 (1888, 런던 이스트엔드 화이트게이트 (가상 지명))
 
-- 사건 파일: `cases/c01-london-1888.js` · 이미지 16장 · 난이도 ★★★
+- 사건 파일: `cases/c01-london-1888.js` · 이미지 17장 · 난이도 ★★★
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 19th-century British newspaper wood engraving, dense cross-hatched black ink on off-white newsprint, Victorian London East End c.1888: gas-lit fog, wet cobblestones, soot-dark brick. Evidence items are drawn like engraved catalogue plates with the same hatching. Figures only as silhouettes, from behind or with faces hidden in shadow. No faces, no blood, no wounds, no bodies, no readable text, no real brands.
@@ -229,6 +229,13 @@ An open common lodging-house register on a scrubbed kitchen table, columns ruled
 A short length of red cotton thread tied in a small knot, laid on a plain white evidence card with a blank paper label, on a police surgeon's wooden table beside a magnifying glass, clinical still life. The thread is bright red, the only colour in the image, as if hand-tinted.
 ```
 - **꼭 보여야 할 것**: 실은 붉은색 (흑백 판화라도 실만 붉게)
+
+### c01/sk_backroom — 정밀 관찰 스케치
+- 저장 경로: `img/c01/sk_backroom.webp` · 비율: 3:2
+```
+A Victorian police detective's scene sketch, redrawn in pen for an inquest: the small back room of an East End public house that a vigilance patrol uses as its night headquarters, on the grey morning of 28 October 1888. Black ink with careful cross-hatching on yellowed paper, like a 19th-century wood-engraving study, monochrome. Seen at eye level from the doorway from the bar, looking at the far wall; empty of people. Left: a small cast-iron fireplace grate with cold ash, and beside it on the floor a black iron coal scuttle heaped above the rim with lumps of coal, fire tongs leaning on it. Upper left: a peg rail with two white cloth armbands hanging. Left half of the far wall: a narrow shelf with exactly five small hand lanterns in a row. Centre: a plain wooden table with two chairs; on it an open logbook (illegible hatching), an ink bottle with one dip pen, a small oil lamp. Right of centre: the closed plank back door with a big iron box lock and keyhole, and a small two-pane glazed fanlight directly above it. Right: a tall plain cupboard with a padlocked tin collection box with a coin slot on top. No people, no writing, no inset panels, no window views.
+```
+- **꼭 보여야 할 것**: 왼쪽 난로 옆 석탄 통은 테두리 위까지 석탄이 수북 · 선반 위 손등불 정확히 다섯 · 벽 못에 흰 완장 둘 · 닫힌 뒷문과 그 위 채광창, 큰 상자 자물쇠 · 탁자 위 펼친 일지·잉크병·펜·등잔 · 오른쪽 벽장 위 자물쇠 채운 모금함 · 사람·글자 없음
 
 ### c01/map — 지도 (글자는 게임이 얹는다)
 - 저장 경로: `img/c01/map.webp` · 비율: 4:3
@@ -343,7 +350,7 @@ A new hand-forged iron box lock for a farmhouse door with two large iron keys, l
 ```
 Police inspection photograph, February 1923, inside the dim timber barn of a remote Bavarian farm, taken from just inside the big front door. On the straw-strewn earth floor in the foreground, three dark pools of frozen blood soaked deep into the straw, each marked with a small white numbered card; from each pool a wide swept trail runs through the straw back to the far corner, bare earth showing along it, its edges smeared dark. In that corner a heap of hay with an unhinged wooden plank door laid flat on top of it and a fourth numbered card; from under the edge of the hay only one stiff forearm in a dark woollen sleeve shows, the hand turned down. On the inner wooden post, below waist height, fine dark spatter; on the underside of the low crossbeam overhead a single line of elongated drops. Hobnailed boot prints pressed into the frozen surface of the nearest pool. On the plank wall a tool rack holding a pitchfork, a shovel and an axe, with one empty peg. Grey winter light through the open door, frost on the beams, no people standing.
 ```
-- **꼭 보여야 할 것**: 앞쪽 짚 바닥의 언 핏자국 웅덩이 셋 (번호표) · 웅덩이마다 안쪽 구석까지 짚이 쓸린 넓은 자국 · 구석 건초 더미 위에 얹힌 문짝과 그 밑으로 나온 소매 입은 아래팔 하나 · 안쪽 기둥 허리 아래 비산흔과 들보 아랫면의 한 줄 핏방울 · 웅덩이 위 징 박은 장화 자국 · 연장 걸이의 빈 못
+- **꼭 보여야 할 것**: 앞쪽 짚 바닥의 언 핏자국 웅덩이 셋 (번호표) · 웅덩이마다 안쪽 구석까지 짚이 쓸린 넓은 자국 · 구석 건초 더미 위에 얹힌 문짝과 그 밑으로 나온 소맷자락에 덮인 아래팔 하나 · 안쪽 기둥 허리 아래 비산흔과 들보 아랫면의 한 줄 핏방울 · 웅덩이 위 징 박은 장화 자국 · 연장 걸이의 빈 못
 - 주의: 시신은 건초와 문짝에 덮인 채 아래팔 하나까지만. 상처·얼굴은 보이지 않게.
 
 ### c02/autopsy_table — 검안 소견 — 헛간 타작마당 널판 위, 흰 천을 덮은 네 사람 🔞 열람 주의
@@ -372,7 +379,7 @@ A court clerk's pencil sketch from February 1923 of a Bavarian farmhouse cow sta
 
 ## CASE 03 · 백난초 사건 (1935, 경성 종로 3정목 뒤 수남골 (가상 골목))
 
-- 사건 파일: `cases/c03-gyeongseong-1930s.js` · 이미지 11장 · 난이도 ★★★
+- 사건 파일: `cases/c03-gyeongseong-1930s.js` · 이미지 12장 · 난이도 ★★★
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 Colonial-era Gyeongseong (Seoul), autumn 1935. Newspaper pictures look like 1930s Korean newspaper halftone photographs on cheap yellowed newsprint: coarse dot screen, heavy black ink, slight misregistration, faded contrast. Police photographs look like grainy silver gelatin prints with soft vignetting. Tiled-roof hanok shopfronts, narrow dirt alleys, electric poles, trams, paper-covered lattice doors. People only as silhouettes, from behind or blurred. No faces, no blood, no bodies, no readable text or signage, no real brands.
@@ -427,6 +434,13 @@ Police photograph of a small old iron safe standing in the corner of a Korean ro
 ```
 Police photograph of a small stone well with a wooden frame and a wet wooden bucket on a rope in a cramped shared backyard between two hanok shops, two back doors facing each other, a brushwood fence behind, damp ground, grey morning light.
 ```
+
+### c03/ph_anbang — 정밀 관찰 — 시신을 옮긴 뒤의 보춘당 안방 전경
+- 저장 경로: `img/c03/ph_anbang.webp` · 비율: 3:2
+```
+A grainy sepia-toned silver gelatin police photograph from 1935: the record photograph of a small Korean ondol bedroom in the back of a herbal medicine shop, taken the morning after a death from the doorway, one wide view of the whole room, the body already removed, nobody in the frame, yellow oiled-paper floor. Left third: a paper lattice sliding back door slid open a third, and through the gap a cramped back yard in grey daylight with a small round stone well, a wooden crossbar frame and a wooden bucket on a rope, and across the yard the closed wooden back door of the neighbouring house. Center foreground on the floor: a flat square silk floor cushion lying a little askew in front of a low dark lacquered table. On the table, center-right: the same 1930s wooden cathedral-style vacuum-tube radio as on the folder cover, its small round tuning dial still lit and glowing, and beside it a round brass ashtray full of ash and cigarette ends. Back wall center: a low dark wooden chest with brass fittings with only one white porcelain jar on top, nothing else. Right corner: a small black iron safe with its heavy door swung wide open to the right, top shelf empty, a gold pocket watch with chain, a small round wooden seal box and a thin bankbook on the middle shelf, a few coins at the bottom. Heavy grain, sepia toning, dark vignetting, worn pale border, flat harsh flash.
+```
+- **꼭 보여야 할 것**: 왼쪽 열린 미닫이 너머 우물(나무 틀·두레박)과 옆집 뒷문 · 가운데 앞 방석 · 상 위 라디오 (다이얼 불 켜짐) · 라디오 옆 재가 담긴 놋쇠 재떨이 · 뒤쪽 반닫이 위엔 백자 항아리 하나뿐 (축음기·레코드판 없음) · 오른쪽 구석 열린 금고: 위 칸 빔, 가운데 칸 회중시계·인감 함·통장, 아래 동전 · 사람·시신·글자 없음
 
 ### c03/b_sewing — 압수 장부 — 전당포 선반의 재봉틀
 - 저장 경로: `img/c03/b_sewing.webp` · 비율: 4:3
@@ -558,7 +572,7 @@ A detective's hand-drawn map of a Tokyo suburb in 1968, pencil and coloured penc
 
 ## CASE 05 · 모래시계의 편지 (1968–1969, 캘리포니아 카브릴로 만 연안 (가상 지명))
 
-- 사건 파일: `cases/c05-westcoast-1969.js` · 이미지 18장 · 난이도 ★★★★
+- 사건 파일: `cases/c05-westcoast-1969.js` · 이미지 19장 · 난이도 ★★★★
 - **혐오감 주의 사건 (빨간 별)**: 폴더 표지에는 게임이 「혐오감 주의」 스티커를 붙이고 흐리게 처리한다. 🔞 그림은 흐리게 가려진 채 나오고 눌러야 보인다. **수위** — 범행 흔적은 진하게: 벽의 비산흔, 바닥의 낙하흔, 닦아 낸 호 모양 자국, 줄눈·배수구에 스민 피, 피가 밴 포대·봉투, 루미놀 반응. 시신은 천·방수포·포대·봉투에 가려진 채로, 손·아래팔·발, 비닐 너머 비치는 팔다리 윤곽, 매듭에 걸린 머리카락 정도까지. 절단면·장기·상처·죽은 사람의 얼굴은 넣지 않는다. 생성 AI 가 거절하면 한 단계 낮춰(예: 손 → 비닐 너머 윤곽) 다시 만들고 저장한다.
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
@@ -652,6 +666,13 @@ A single sheet of cheap white letter paper, folded in quarters and flattened, ph
 ```
 - **꼭 보여야 할 것**: 편지 속 암호문과 같은 기호 · 같은 순서 (암호문에서 바로 그린 그림 — 새로 생성하지 않는다)
 
+### c05/ph_haley — 정밀 관찰 사진
+- 저장 경로: `img/c05/ph_haley.webp` · 비율: 3:2
+```
+Black-and-white 35mm police file photograph, Kodak Tri-X, heavy grain, taken before sunrise on a foggy Sunday in late August 1969 in a tiny Northern California coastal village, eye level from the far side of a quiet empty street. Centre: a small single-storey clapboard post office, three concrete steps up to a closed glass-panelled double door with its roller blinds pulled all the way down, a bare flagpole with no flag. Left of centre, at the foot of the steps: a 1960s curbside mail collection box with a rounded top on four short legs, a pull-down slot and a small blank metal plate screwed on just below the slot; immediately to its right, almost touching, a coin-operated newspaper vending box of the same height with a thick stack of folded Sunday papers behind its glass. On the sidewalk at the foot of the newspaper box, two short pieces of cut white twine and a crumpled wrapper sheet. Right: an early-1960s sedan parked in front of the wooden house next door, its windshield and roof evenly beaded with dew, untouched, no badge on the grille. Left edge: a wooden utility pole with a streetlight still glowing; fog over the sea and rocks beyond, no sun in the sky. No people, no readable text, no logos or emblems.
+```
+- **꼭 보여야 할 것**: 왼쪽 가운데 우체통 (투입구 밑 쇠판, 글자 없음) · 바로 오른쪽에 붙어 선 신문함 (유리 너머 일요일판) · 신문함 발치의 잘린 노끈 두 가닥과 겉종이 · 가운데 블라인드 내린 우체국 유리문 · 오른쪽 이슬 앉은 승용차 (와이퍼 자국 없음) · 사람 없음 · 해 없음 (서쪽 바다)
+
 ### c05/env_ref — 대조 감정 시료
 - 저장 경로: `img/c05/env_ref.webp` · 비율: 16:9
 ```
@@ -723,21 +744,21 @@ Newspaper photograph of a remote rocky valley above a small Norwegian west-coast
 Police close-up photograph of the screw-on cup lid of a 1960s vacuum flask lying in wet purple heather on a rocky Norwegian hillside, a dark coffee stain inside the cup, a blank evidence number card beside it. Overcast light, 35mm black-and-white film.
 ```
 
-### c06/scene_hollow — 현장 사진 3호 — 바위 비탈 밑 불탄 자리 (방수포로 덮은 시신) 🔞 열람 주의
+### c06/scene_hollow — 현장 사진 3호 — 바위 비탈 밑 불탄 자리 (방수포를 허리까지 걷은 시신). 잔혹 표현을 끄면 끝까지 덮은 판(scene_hollow_mild) 🔞 열람 주의
 - 저장 경로: `img/c06/scene_hollow.webp` · 비율: 4:3
 ```
-Black-and-white 1969 Norwegian police scene photograph on 35mm Tri-X, overcast afternoon after rain, wet rock: the foot of a steep grey boulder slope where a shallow hollow in the heather has burned. A ring about two metres across of heather burned down to black ash and stubble, singed brown tips beyond it, and on the rock face above a tongue of black soot rising to head height. In the middle of the ring a human form lies on its back under a grey canvas tarp, only its outline showing: the arms bent at the elbows and raised in front of the chest so the tarp tents up over them, the knees slightly bent. Around it, each with a small blank white numbered card: the black wire skeleton of a burnt folding umbrella by the right shoulder, two small opaque 1960s polyethylene bottles (squat, white and brown, like household cleaner flasks, not clear water bottles) melted into shapeless blackened lumps, lying on the ash about half a metre beyond the foot end of the tarp and clearly separate from it, a charred matchbox wedged in a rock crack above the head. The muddy rubber boots of a policeman at the frame edge, raindrops beading on the tarp, heavy grain.
+Black-and-white 1969 Norwegian police scene photograph on 35mm Tri-X, overcast afternoon after rain, wet rock: the foot of a steep grey boulder slope where a shallow hollow in the heather has burned. A ring about two metres across of heather burned down to black ash and stubble, singed brown tips beyond it, and on the rock face above a tongue of black soot rising to head height. In the middle of the ring a human form lies on its back, the grey canvas tarp folded back from the head end to about the hips: the exposed upper body burned black like charcoal, clothing burned to curled ash flakes, the surface cracked like burnt bark, both forearms raised stiffly in front of the chest with blackened clenched fists (the heat "boxer" pose), the head turned away toward the rock and crusted with ash so no face shows. Around it, each with a small blank white numbered card: the black wire skeleton of a burnt folding umbrella by the right shoulder, two small opaque 1960s polyethylene bottles (squat, white and brown, like household cleaner flasks, not clear water bottles) melted into shapeless blackened lumps, lying on the ash about half a metre beyond the foot end of the tarp and clearly separate from it, a charred matchbox wedged in a rock crack above the head. The muddy rubber boots of a policeman at the frame edge, raindrops beading on the tarp, heavy grain.
 ```
-- **꼭 보여야 할 것**: 지름 2m쯤 까맣게 탄 히스 고리 · 바위 벽을 사람 키만큼 타고 오른 그을음 · 방수포 아래로 가슴 앞에 들린 두 팔의 윤곽 · 번호표가 붙은 우산 뼈대(어깨 곁)·녹은 병 둘(발치)·성냥갑(머리 위 바위틈)
-- 주의: 방수포는 끝까지 덮인 채로. 탄 피부·살·상처·얼굴은 보이지 않게.
+- **꼭 보여야 할 것**: 지름 2m쯤 까맣게 탄 히스 고리 · 바위 벽을 사람 키만큼 타고 오른 그을음 · 허리까지 걷은 방수포 · 까맣게 탄 윗몸과 가슴 앞에 들린 두 팔·쥔 주먹 (얼굴은 안 보임) · 번호표가 붙은 우산 뼈대(어깨 곁)·녹은 병 둘(발치)·성냥갑(머리 위 바위틈)
+- 주의: 얼굴은 보이지 않게 (돌려 있거나 재에 덮이게). 알몸·성적인 것 없이. 흑백만.
 
-### c06/autopsy_sheet — 시립병원 병리과 부검실 — 흰 천 아래 오그라든 형체 🔞 열람 주의
+### c06/autopsy_sheet — 시립병원 병리과 부검실 — 천을 허리까지 내린 탄 시신. 잔혹 표현을 끄면 끝까지 덮은 판(autopsy_sheet_mild) 🔞 열람 주의
 - 저장 경로: `img/c06/autopsy_sheet.webp` · 비율: 4:3
 ```
-Black-and-white 1969 photograph of a small Norwegian hospital pathology room: white tiled walls, a single enamel lamp hanging low over a steel autopsy table. On the table a body lies completely covered by a white sheet, and the shape under the sheet is wrong: the cloth is lifted over forearms bent at the elbows and raised in front of the chest with the hands clenched, and over knees slightly drawn up. Grey-black soot smudges have come through the cloth over the chest and where the face would be. On a side tray a blank dental chart form showing only printed tooth outlines, a dental mirror and probe; a hanging scale and a folded stack of clean towels (no specimen jars, no organs anywhere in the room); a pathologist in a white coat seen from behind writing at a desk by a tall window. Cold daylight, grain.
+Black-and-white 1969 photograph of a small Norwegian hospital pathology room: white tiled walls, a single enamel lamp hanging low over a steel autopsy table. On the table a body lies with the white sheet drawn down to the waist: the upper body charred black and cracked, the forearms rigidly raised in front of the chest and bent at the elbows with blackened clenched fists. A small folded white cloth lies over the face and head, grey with soot seeping through, so no face shows. Soot and ash have come off onto the sheet around the body. On a side tray a blank dental chart form showing only printed tooth outlines, a dental mirror and probe; a hanging scale and a folded stack of clean towels (no specimen jars, no organs anywhere in the room); a pathologist in a white coat seen from behind writing at a desk by a tall window. Cold daylight, grain.
 ```
-- **꼭 보여야 할 것**: 천이 가슴 앞으로 들린 두 팔과 조금 굽은 무릎 위로 솟아 있다 · 가슴과 얼굴 자리에 배어 나온 그을음 · 옆 쟁반의 치과 차트(치아 그림만)와 치경
-- 주의: 천은 끝까지 덮인 채로. 탄 피부·살·상처·얼굴은 보이지 않게. 차트에 읽히는 글자 없이.
+- **꼭 보여야 할 것**: 허리까지 내린 천 · 까맣게 탄 윗몸과 가슴 앞에 들린 두 팔·쥔 주먹 · 얼굴을 덮은 작은 천에 밴 그을음 · 옆 쟁반의 치과 차트(치아 그림만)와 치경
+- 주의: 얼굴은 작은 천으로 덮어 보이지 않게. 알몸·성적인 것 없이. 차트에 읽히는 글자 없이.
 
 ### c06/suitcases — 역 보관소 가방 두 개의 내용물
 - 저장 경로: `img/c06/suitcases.webp` · 비율: 4:3
@@ -796,7 +817,7 @@ A small roadside petrol station on a rural Norwegian road in 1969: a white woode
 
 ## CASE 07 · 송월각 장부 (1971, 서울 서하구 버들개 (가상 지명))
 
-- 사건 파일: `cases/c07-seoul-1970.js` · 이미지 13장 · 난이도 ★★★
+- 사건 파일: `cases/c07-seoul-1970.js` · 이미지 14장 · 난이도 ★★★
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 1971 Seoul in black-and-white: Tri-X 35mm police and press photography, coarse grain, harsh on-camera flash or dim tungsten light, slight motion blur, printed look with a coarse newspaper halftone dot screen and yellowed newsprint tones where it appears in a newspaper. Early-1970s Korean details: unpaved riverside embankment roads, willow trees, wooden utility poles, tile-roofed hanok and tin-roofed shacks, late-1960s four-door sedans with round headlights. No faces (backs, silhouettes or out-of-focus figures only), no readable text, no logos or emblems, no blood or injuries.
@@ -828,6 +849,13 @@ Black-and-white police evidence photo at grey dawn: a dark late-1960s four-door 
 ```
 Black-and-white close evidence photo inside the back seat footwell of a 1960s sedan: worn rubber floor mat, a single filtered cigarette butt lying on it, a hand-drawn white arrow on the print pointing at the butt, harsh direct flash, deep shadows under the seat, grainy.
 ```
+
+### c07/ph_crown — 감식 사진 — 뒷문을 연 크라운, 오른쪽 뒤에서
+- 저장 경로: `img/c07/ph_crown.webp` · 비율: 3:2
+```
+Black-and-white 35mm police forensic photograph, grey overcast October morning in 1971 Seoul, Tri-X grain, soft daylight plus on-camera flash. A black late-1960s four-door sedan parked at the edge of an unpaved dirt road, seen from its right rear three-quarter at chest height, the whole car in frame, nose at the left. The rear right door is swung wide open toward the camera: on its light grey vinyl inner panel, a few dark smudges of wet mud near the inside handle (no handprint). On the black ribbed rubber mat of the rear right footwell lies one single white filter cigarette butt. The front right window is lowered half way, glass intact. Both right tyres fully inflated. The rear licence plate is caked with dried dirt, unreadable. The river is behind the camera, no water visible. Beyond the road: dry fields and reeds, two wooden utility poles, and fifty metres away a small tin-roofed shack shop with a bare bulb under the eave and a box-shaped public telephone on its wall, above the car bonnet at the left. A bare willow at the left edge. No people, no faces, no text, no logos or emblems.
+```
+- **꼭 보여야 할 것**: 오른쪽 뒤 3/4 · 열린 오른쪽 뒷문 안쪽 손잡이 둘레의 진흙 자국 · 뒷좌석 오른쪽 발판의 흰 꽁초 하나 · 반쯤 내린 조수석 창 (유리 성함) · 바람 찬 바퀴 · 흙 덮인 뒤 번호판 (글자 없음) · 왼쪽 길 건너 판잣집 가게와 공중전화 · 강물 안 보임
 
 ### c07/handbag — 유류품 사진 — 검정 비닐 핸드백과 내용물
 - 저장 경로: `img/c07/handbag.webp` · 비율: 4:3
@@ -886,7 +914,7 @@ Black-and-white photo of a modest tile-roofed single-storey house in an early-19
 
 ## CASE 08 · 목소리의 지도 (1991, 서울 한울구 새터·가람 (가상 지명))
 
-- 사건 파일: `cases/c08-seoul-1991.js` · 이미지 15장 · 난이도 ★★★★
+- 사건 파일: `cases/c08-seoul-1991.js` · 이미지 16장 · 난이도 ★★★★
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 Early-1990s Seoul, shot on a consumer compact 35mm film camera: color negative film look, on-camera flash at night, slight green-orange color cast from sodium street lamps, visible grain, soft focus; police evidence photos are flat flash on grey paper; newspaper images are coarse black-and-white halftone. 1991 Korean street details: card-and-coin public phone booths, an elevated steel subway bridge, red-brick multi-family houses, small corner shops with sliding aluminium-glass doors, tangled utility wires, a church bell tower with a red neon cross. No faces (backs, silhouettes or blurred figures only), no readable text, no logos or brand marks.
@@ -919,6 +947,13 @@ A detective's hand-drawn district map from Seoul in 1991, black felt pen and a r
 ```
 Dusk photo in 1991 Seoul: two glass-and-aluminium public telephone booths standing side by side under a massive elevated steel subway bridge, the lit window of a small corner shop next to them, a church bell tower with a red neon cross in the distant background, wet pavement, a lone figure in a work jacket seen from behind inside one booth with a handkerchief raised to his mouth, on-camera flash falloff, grain.
 ```
+
+### c08/ph_booth — 정밀 관찰 사진
+- 저장 경로: `img/c08/ph_booth.webp` · 비율: 3:2
+```
+Early-1990s Seoul police photograph on colour negative film, taken with a compact 35mm camera and its on-camera flash at dusk in light drizzle, from INSIDE a glass-and-aluminium public telephone booth, looking out through the rain-speckled glass panes across a two-lane street. Left foreground: the booth's inner side wall with a plain beige card-only public telephone, handset in its cradle with a coiled metal cord, a narrow slot for a magnetic phone card and a small dark LCD window above a push-button keypad, no coin slot, a small empty metal shelf below; the flash makes the phone and the aluminium frames bright. Across the top of the frame: the dark riveted steel underside of a massive elevated subway bridge spanning right over the booth, one thick riveted steel pillar just outside the left glass. Across the wet street: a low pale concrete school wall with a closed iron gate, just behind it a pole with two metal horn loudspeakers, and a dark three-storey school building with rows of unlit windows. Above the school roofline in the distance, centre: a red-brick church bell tower with an open arched belfry where a bronze bell hangs, a glowing red neon cross on top. Right edge: the lit sliding aluminium-glass door of a tiny corner shop right beside the booth, a small CRT television glowing on a shelf inside. No people, no readable text, no logos.
+```
+- **꼭 보여야 할 것**: 왼쪽 앞 카드식 전화기 (카드 구멍 · 작은 숫자 창 · 동전 구멍 없음) · 위쪽을 가로지르는 철교 밑면과 왼쪽 유리 밖 철교 기둥 · 길 건너 학교 담장과 기둥의 나팔 스피커 둘 · 학교 지붕 너머 종탑 (열린 종루 안 쇠종 · 붉은 네온 십자가) · 오른쪽 가게 유리문 안 켜진 텔레비전 (화면엔 아무것도 알아볼 수 없게) · 사람 없음 · 글자 없음
 
 ### c08/rail — 신문 사진 — 새터역과 가람역을 잇는 2호선 철교
 - 저장 경로: `img/c08/rail.webp` · 비율: 4:3
@@ -1125,7 +1160,7 @@ Police canvass snapshot at night, 2006: an older brick house with a tall externa
 
 ## CASE 10 · 마지막 통화 (2014, 해진시 신항 일대 (가상 항구 도시))
 
-- 사건 파일: `cases/c10-harbor-2014.js` · 이미지 10장 · 난이도 ★★★★
+- 사건 파일: `cases/c10-harbor-2014.js` · 이미지 11장 · 난이도 ★★★★
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 Stills from a 2014 Korean provincial port city. Dashcam and CCTV frames: wide-angle fisheye distortion, low-light sensor noise, sodium-vapor orange streetlights, smeared headlight flare, H.264 compression blocking, slightly washed-out blacks. Smartphone photos: early-2010s phone camera, over-sharpened, mild HDR haze, cool grey sea light. Wet concrete, container cranes, apartment parking lots. No on-screen timestamps or overlays, no readable text or license plates, no logos, no identifiable faces (people only from behind or as silhouettes), nothing graphic.
@@ -1180,7 +1215,7 @@ Smartphone photo of a worn navy baseball cap with a small white rectangular numb
 Smartphone snapshot of a private room in a Korean seaside raw-fish restaurant: low table crowded with a big sashimi platter, side dishes, green soju bottles and beer glasses, several men seen only from behind or cropped at the shoulders, warm fluorescent light, a little motion blur. No faces, no readable labels.
 ```
 
-### c10/crates — 나에게 보내기 사진 — 냉동창고 안 상자를 바꿔 담은 흔적 (동기)
+### c10/crates — 혼자 남은 대화방에 올린 사진 — 냉동창고 안 상자를 바꿔 담은 흔적 (동기)
 - 저장 경로: `img/c10/crates.webp` · 비율: 4:3
 ```
 Dim smartphone photo taken inside a cold-storage warehouse at night: stacks of brown cardboard boxes with foreign-language printing (illegible) on one side and fresh plain white boxes on the other, frozen fish being moved between them, frost haze, harsh ceiling lights, taken hurriedly and slightly tilted. No readable text, no logos.
@@ -1191,6 +1226,13 @@ Dim smartphone photo taken inside a cold-storage warehouse at night: stacks of b
 ```
 Overcast daytime smartphone photo of an unfinished container pier in a Korean port: temporary fencing, unlit lamp posts, piles of concrete tetrapods along the breakwater, grey sea, gulls, distant cranes. Bleak and empty.
 ```
+
+### c10/gate_cam — 정밀 관찰 사진
+- 저장 경로: `img/c10/gate_cam.webp` · 비율: 4:3
+```
+Fixed security-camera still at a few minutes after midnight, the asphalt wet from drizzle. The camera is mounted high on a pole at the main vehicle gate of a 2000s Korean high-rise apartment complex and looks into the complex along the exit lane. In the centre a boxy black mid-size SUV with a two-bar black roof rack drives toward the camera, about to pass under a raised red-and-white striped barrier arm, seen almost head-on; headlights on, the licence plate blown out to a plain white smear with no characters, plain grille with no badge. In the lower bumper two round fog lamps: the one on the right side of the image lit and throwing light onto the wet asphalt, the one on the left side of the image dead, a dark hole with a cracked lens. Behind the windshield two dark faceless shapes: the driver on the right side of the image with pale hands on the wheel, a passenger on the left side of the image in a puffy padded winter jacket. At the right edge a small white guard booth with a lit window and an empty office chair, a yellow-and-black barrier motor box beside it. Background: the internal road curving away, parked cars, 15-storey towers with a few lit windows, sodium-orange streetlights, bare trees. 2014 low-resolution colour CCTV look, noise, compression blocking, washed-out blacks; a plain dark band across the top for the on-screen timestamp.
+```
+- **꼭 보여야 할 것**: 가운데 정면으로 다가오는 검은 SUV · 지붕의 두 줄 루프랙 · 범퍼 안개등: 화면 오른쪽만 켜짐, 왼쪽은 렌즈가 깨져 꺼짐 · 앞유리 너머 운전석(화면 오른쪽, 핸들 위 두 손)과 조수석(화면 왼쪽, 부푼 패딩)의 얼굴 없는 윤곽 · 올라간 빨강·흰 차단기 · 오른쪽 경비실 창 안의 빈 의자 · 하얗게 날아간 번호판 · 위 띠의 시각 「CH03」「2014-11-22 00:16:05」 (PIL 로 넣음)
 
 ## CASE 11 · 물길을 거슬러 (1986, 은천시 목골동 · 은천강 (가상 지명))
 
@@ -1277,7 +1319,7 @@ Top-down black-and-white evidence photograph under flat flash: a wet navy quilte
 ```
 - **꼭 보여야 할 것**: 잠바 등판이 위로 (지퍼 안 보이게). 왼쪽 깃·어깨의 흐름흔, 등판 아래의 넓은 문질린 혈흔에 흰 톱밥과 반짝이는 가루
 
-### c11/butcher_floor — 우성정육점 검증 뒤 가게 안 — 톱밥 바닥과 도마 🔞 열람 주의
+### c11/butcher_floor — 우성정육점 검증 중 가게 안 — 압수 꼬리표를 단 뼈톱, 톱밥 바닥과 도마 🔞 열람 주의
 - 저장 경로: `img/c11/butcher_floor.webp` · 비율: 4:3
 ```
 Night flash photograph inside a tiny 1980s Korean market butcher shop after a police search, no people: a sawdust-covered cement floor, a scarred round wooden chopping block with dark dried stains, a row of empty steel meat hooks on a rail, a hand bone saw hanging on the tiled wall, a pile of empty white rice sacks in the corner, small paper evidence tags on string, harsh flash, grain.
@@ -1472,7 +1514,7 @@ Close-up of a 1990s Japanese dedicated word processor on an evidence table, its 
 Black-and-white 1994 newspaper halftone photo of an old wooden Tokyo public bathhouse with a temple-like tiled gable roof and a tall brick chimney, standing alone between empty fenced vacant lots after a land-assembly buyout, a short cloth curtain at the entrance, a stack of scrap firewood by the side wall, late-afternoon light, curtain lettering illegible.
 ```
 
-### c12/boiler — 가마 일지 첨부 — 가시와유 보일러실 아궁이와 장작 🔞 열람 주의
+### c12/boiler — 감식 보고 첨부 — 가시와유 보일러실 아궁이와 장작 🔞 열람 주의
 - 저장 경로: `img/c12/boiler.webp` · 비율: 4:3
 ```
 Interior of a cramped 1994 Tokyo bathhouse boiler room lit by camera flash: a soot-blackened iron firebox door of a wood-fired water heater with a low orange glow, split scrap firewood stacked to waist height, an iron poker leaning against the wall, a concrete floor with a hose drain, dozens of fine dried dark brown spatter dots on the whitewashed wall 40 to 70 cm above the floor beside the door, their little tails pointing upward, a forensic scale ruler taped beside them, and a line of round dried drip stains leading across the floor from the firebox toward the doorway.
@@ -1653,7 +1695,7 @@ Top-down photo on a grey police desk under fluorescent light: a cheap black smar
 ```
 - **꼭 보여야 할 것**: 증거 봉투 속 휴대폰 · 종이 쇼핑백 · 책상 가장자리의 귤 한 개
 
-### c14/oksun — 권옥순 휴대폰 사진 — 골목을 걸어 나가는 남학생 뒷모습 (흔들림)
+### c14/oksun — 권옥순 휴대폰 사진 — 골목을 걸어 나가는 남학생 뒷모습 (창유리 너머)
 - 저장 경로: `img/c14/oksun.webp` · 비율: 4:3
 ```
 Shaky smartphone photo taken through a slightly dirty window of a low-rise Korean villa: a narrow alley below, a tall slim teenage boy seen from behind walking away, black long padded coat down to the knees, white sneakers with a thin red stripe at the heel, a dark paper shopping bag in his right hand. Motion blur, grey late-morning light, no face visible.
@@ -1688,7 +1730,7 @@ Photo of an old worn Korean savings passbook lying open on a floral vinyl tablec
 ```
 - **꼭 보여야 할 것**: 포스트잇 글씨는 흐리게 · 돋보기안경
 
-### c14/calendar — 거실 벽 달력 뒷장 — 피해자의 볼펜 메모
+### c14/calendar — 현관 안쪽 벽 달력 뒷장 — 피해자의 볼펜 메모
 - 저장 경로: `img/c14/calendar.webp` · 비율: 4:3
 ```
 Smartphone photo of the back of a paper wall calendar page flipped up in an old Korean living room, covered with dense lines of blue ballpoint handwriting from an elderly hand (illegible), a beige landline telephone on a small cabinet below. Soft window light.
@@ -1776,7 +1818,7 @@ Smartphone photo taken at night from a building entrance toward a narrow dead-en
 ### c15/cctv_lane — 구청 방범카메라 — 21:31 골목 입구로 들어오는 흰 박스카
 - 저장 경로: `img/c15/cctv_lane.webp` · 비율: 4:3
 ```
-High-angle fixed CCTV frame at night of the entrance of a narrow residential alley in a Korean neighborhood: a white boxy compact car entering the alley with its headlights on, the glare hiding the plate, damp asphalt, low villa walls on both sides, a single streetlight, grainy low-light noise, heavy compression, slight fisheye. No on-screen text or timestamps.
+High-angle fixed CCTV frame at night of the entrance of a narrow residential alley in a Korean neighborhood: a white boxy compact car with no badges entering the alley with its headlights on, the glare hiding the plate, dry matte asphalt with no puddles (the shower comes later), low villa walls on both sides, a single streetlight, grainy low-light noise, heavy compression, slight fisheye. No on-screen text or timestamps.
 ```
 
 ### c15/helmet_cam — 최우빈 헬멧 카메라 21:39 — 골목 안쪽의 흰 박스카, 고개 숙이는 운전자

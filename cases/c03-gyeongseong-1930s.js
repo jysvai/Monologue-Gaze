@@ -33,6 +33,24 @@
     sources: [
       { id: 'paper', type: 'archive', name: '청구일보 조사부 스크랩', skin: 'news', paper: '靑丘日報', desc: '조선인 일간지 청구일보의 소화 10년 가을치 스크랩. 세로쓰기 기사는 옆으로 밀어 가며 읽는다.', placeholder: '사람, 가게, 동네…', start: ['d_n1106'], startLabel: '스크랩북 첫 장' },
       { id: 'police', type: 'list', name: '종로경찰서 수사 서류', skin: 'report', desc: '京城鍾路警察署 사법계 서류철. 일본어 원문을 조선어로 옮긴 사본이다. 누구의, 무슨 서류인지 수첩에 적히면 여기 꽂힌다.' },
+      { id: 'ph', type: 'photo', name: '현장 원판', need: ['k_radio'], desc: '종로서 사법계가 안방을 찍은 원판을 크게 뽑은 것. 확대경을 대고 눈에 걸리는 곳을 누른다.', scenes: [
+        { id: 'sc_anbang', title: '보춘당 안방', meta: '11월 5일 오전 · 종로서 사법계 촬영 · 확대 인화', art: 'ph_anbang',
+          intro: ['시신을 옮긴 뒤, 안방 문지방에 사진기를 세우고 방 전체를 한 장에 담았다. 물건은 발견 때 자리 그대로다.'], spots: [
+            { id: 'sp_radio', x: 63.5, y: 49.5, r: 7, label: '라디오 수신기', body: [
+              '[[라디오]] 스위치는 켜진 채이고, 다이얼 창에 불이 들어와 있다. 바늘은 제2방송(조선말 방송) 자리.',
+              '아침 여섯 시 반, 박만수가 안방 문을 열었을 때 이미 이대로였다.'] },
+            { id: 'sp_chest', x: 49.5, y: 24, r: 8, label: '반닫이 위', body: [
+              { p: '반닫이 위에는 백자 항아리 하나뿐이다. 방 안 어디에도 [[축음기]]나 레코드판은 없다. 소리를 내는 물건은 라디오 하나.', f: 'f_no_gramophone' },
+              { note: '사진 뒷면에 김 순사의 연필 글씨: 「점원에게 물음 — 축음기는 들인 적 없음.」' }] },
+            { id: 'sp_door', x: 23.5, y: 28, r: 9, label: '뒷마당 쪽 미닫이', body: [
+              '[[뒷마당 우물|k_well]]로 나가는 미닫이가 열려 있다. 문틈으로 우물 틀과 두레박, 우물 건너 [[서광양복점]] 뒷문이 보인다.',
+              '방석에 앉아 라디오 쪽을 보면 이 문이 등 뒤가 된다.'] },
+            { id: 'sp_safe', x: 84.5, y: 39, r: 9, label: '열린 금고', body: [
+              '[[금고]] 문이 활짝 열려 있다. 가운데 칸에 금측 회중시계와 인감 함, 저금 통장이 그대로 있다. 아래 칸엔 동전 몇 닢.',
+              '위 칸은 텅 비었다. 지폐도 [[차용증]] 묶음도 없다.'] },
+            { id: 'sp_ash', x: 77, y: 60.5, r: 5, label: '놋쇠 재떨이', body: [
+              '라디오 옆 놋쇠 재떨이. 둔기가 될 만큼 묵직한 놋그릇이다. 그런데 재와 꽁초가 담긴 그대로이고, 상 위에도 방바닥에도 흘린 재가 없다.'] },
+          ] }] },
       { id: 'wire', type: 'query', name: '전보 뢰신지 청구', skin: 'telegram', button: '사본 청구', foundLabel: '받아 온 뢰신지 사본',
         desc: '종로·광화문우편국에 전보 뢰신지(賴信紙) 사본을 청구한다. 보낸 사람과 받는 사람(받는 곳)을 대면 우편국 서기가 원부에서 찾아 준다.',
         none: '우편국 서기가 접수 원부를 한참 뒤적이다 고개를 젓는다. 원부에 적힌 대로, 보낸 사람과 받는 사람의 이름을 대 달라고 한다.',
@@ -559,6 +577,11 @@
       p_well: { use: '현장 사진 — 두 집이 같이 쓰는 뒷마당 우물', ratio: '4:3',
         svg: ht('#bfb49a', '<ellipse cx="100" cy="96" rx="40" ry="12" fill="#4a4034"/><rect x="60" y="96" width="80" height="30" fill="#6b5e4a"/><ellipse cx="100" cy="96" rx="30" ry="8" fill="#1d1914"/><path d="M60 60 H140 M64 60 V96 M136 60 V96" stroke="#3a3228" stroke-width="3"/><rect x="140" y="110" width="18" height="16" fill="#3a3228"/><g stroke="#6b5e4a" stroke-width="2"><path d="M4 40 V150 M14 40 V150 M186 40 V150 M196 40 V150"/></g>', '뒷마당 우물'),
         prompt: 'Police photograph of a small stone well with a wooden frame and a wet wooden bucket on a rope in a cramped shared backyard between two hanok shops, two back doors facing each other, a brushwood fence behind, damp ground, grey morning light.' },
+      ph_anbang: { use: '정밀 관찰 — 시신을 옮긴 뒤의 보춘당 안방 전경', ratio: '3:2', alt: '보춘당 안방. 왼쪽에 뒷마당 쪽으로 열린 미닫이와 우물, 가운데 방석, 라디오와 재떨이가 놓인 상, 뒤쪽 반닫이, 오른쪽 구석의 열린 금고.',
+        svg: `<svg viewBox="0 0 300 200" role="img" aria-label="보춘당 안방 감식 사진">${DOTS}<rect width="300" height="200" fill="#5a4c3a"/><path d="M0 104 H300 V200 H0Z" fill="#8a7a5e"/><rect x="0" y="0" width="40" height="150" fill="#3a3026"/><g stroke="#6b5a44" stroke-width="2"><path d="M8 6 V140 M20 6 V140 M32 6 V140 M2 40 H38 M2 80 H38"/></g><rect x="40" y="0" width="38" height="120" fill="#a49a84"/><rect x="48" y="14" width="22" height="40" fill="#5e5242"/><ellipse cx="57" cy="78" rx="15" ry="5" fill="#3b3329"/><rect x="42" y="78" width="30" height="16" fill="#6b5e4a"/><path d="M44 46 H70 M46 46 V78 M68 46 V78" stroke="#2e271f" stroke-width="2"/><rect x="52" y="52" width="10" height="9" fill="#7a5a3a"/><rect x="86" y="38" width="67" height="38" fill="#2e251c"/><circle cx="114" cy="57" r="5" fill="#a08850"/><ellipse cx="114" cy="31" rx="7" ry="8" fill="#d8d0bc"/><rect x="222" y="42" width="48" height="76" fill="#1f1c19"/><rect x="228" y="50" width="36" height="62" fill="#120f0d"/><path d="M230 70 H262 M230 90 H262" stroke="#3a352e" stroke-width="2"/><circle cx="238" cy="85" r="3" fill="#c9a85a"/><path d="M270 42 L292 50 V122 L270 118Z" fill="#2c2925"/><path d="M162 112 H262 V120 H162Z" fill="#241d16"/><path d="M166 120 V140 M258 120 V140" stroke="#241d16" stroke-width="4"/>${radioSet(172, 80, 0.45, '#3e2c1c', '#b9a67c')}<circle cx="190" cy="105" r="2.4" fill="#fff3c8"/><ellipse cx="231" cy="112" rx="10" ry="3.5" fill="#b8954e"/><path d="M92 148 L156 140 L170 166 L104 176Z" fill="#4a3c30"/><rect width="300" height="200" fill="url(#c03d)"/></svg>`,
+        prompt: 'A grainy sepia-toned silver gelatin police photograph from 1935: the record photograph of a small Korean ondol bedroom in the back of a herbal medicine shop, taken the morning after a death from the doorway, one wide view of the whole room, the body already removed, nobody in the frame, yellow oiled-paper floor. Left third: a paper lattice sliding back door slid open a third, and through the gap a cramped back yard in grey daylight with a small round stone well, a wooden crossbar frame and a wooden bucket on a rope, and across the yard the closed wooden back door of the neighbouring house. Center foreground on the floor: a flat square silk floor cushion lying a little askew in front of a low dark lacquered table. On the table, center-right: the same 1930s wooden cathedral-style vacuum-tube radio as on the folder cover, its small round tuning dial still lit and glowing, and beside it a round brass ashtray full of ash and cigarette ends. Back wall center: a low dark wooden chest with brass fittings with only one white porcelain jar on top, nothing else. Right corner: a small black iron safe with its heavy door swung wide open to the right, top shelf empty, a gold pocket watch with chain, a small round wooden seal box and a thin bankbook on the middle shelf, a few coins at the bottom. Heavy grain, sepia toning, dark vignetting, worn pale border, flat harsh flash.',
+        must: '왼쪽 열린 미닫이 너머 우물(나무 틀·두레박)과 옆집 뒷문 · 가운데 앞 방석 · 상 위 라디오 (다이얼 불 켜짐) · 라디오 옆 재가 담긴 놋쇠 재떨이 · 뒤쪽 반닫이 위엔 백자 항아리 하나뿐 (축음기·레코드판 없음) · 오른쪽 구석 열린 금고: 위 칸 빔, 가운데 칸 회중시계·인감 함·통장, 아래 동전 · 사람·시신·글자 없음',
+        swap: 'svg', raster: true },
       b_sewing: { use: '압수 장부 — 전당포 선반의 재봉틀', ratio: '4:3',
         svg: ht('#8a7c62', '<rect y="104" width="200" height="46" fill="#5a4c38"/><path d="M50 104 V70 H120 V60 Q120 50 130 50 H150 V104 H136 V66 H64 V104Z" fill="#1f1c18"/><rect x="40" y="104" width="120" height="8" fill="#2a2520"/><circle cx="150" cy="74" r="10" fill="none" stroke="#1f1c18" stroke-width="3"/><rect x="60" y="116" width="26" height="14" fill="#e7dcb8" transform="rotate(-8 73 123)"/>', '재봉틀'),
         prompt: 'A black cast-iron treadle sewing machine head with gold-painted decoration (no brand name) on a shelf in a 1930s pawnshop storeroom, a paper pawn tag tied to its handwheel, other pawned goods blurred behind, dim window light.' },

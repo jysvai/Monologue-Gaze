@@ -96,6 +96,21 @@
             reward: { keys: ['k_dawnbox'] }, ok: '감정 결과 일치 — 같은 손',
             solveNeed: ['k_withheld', 'k_sandruns', 'k_misprint', 'k_scanner'] },
         ] },
+      { id: 'ph', type: 'photo', name: '수사과 사진철', need: ['k_dawnbox'], desc: '수사과가 확인하러 나가서 찍어 온 사진. 사진 속을 눌러 눈에 걸리는 곳을 찾는다.',
+        scenes: [
+          { id: 'sc_haley', title: '포트 헤일리 우체국 앞 — 일요일 새벽', meta: '1969년 9월 7일 (일) 06:20 · 놀턴 경찰서 수사과 촬영 · 흑백 인화', art: 'ph_haley',
+            intro: [
+              '세 우체국의 회신을 받고, 수사과가 마지막 소인이 찍힌 포트 헤일리로 갔다. 일요일 해 뜨기 전, 길 건너편에서 찍었다.',
+              { note: '수사과 메모: 산타 레이나 · 밀브룩 우체국 앞도 같은 배치. 사진은 이 한 장.' },
+            ],
+            spots: [
+              { id: 'sp_pair', x: 38.3, y: 61.3, r: 5, label: '우체통 옆 신문함', body: [{ p: '우체통 오른쪽에 쿠리어 신문함이 붙어 서 있다. 둘 사이는 한 뼘이다. 유리 너머로 이날 새벽에 들어온 일요일판이 두툼하게 쌓여 있다.', f: 'f_mailbox' }] },
+              { id: 'sp_plate', x: 29, y: 56.8, r: 5, label: '우체통 앞면의 쇠판', body: ['투입구 밑에 붙은 수거 시각 판. 사진으로는 글자가 뭉개진다.', { p: '수사과가 옮겨 적은 것 — 「평일 오전 9시 · 토요일 오후 1시 · 일요일과 공휴일에는 수거 없음」. 토요일 오후 1시에 걷어 간 뒤로는 월요일 아침까지 이 통을 아무도 열지 않는다.', f: 'f_postmark' }] },
+              { id: 'sp_twine', x: 39.8, y: 71.8, r: 5, label: '신문함 발치', body: ['잘린 흰 노끈 두 가닥과 구겨진 겉종이. 판 묶음을 이 자리에서 풀어 신문함에 채웠다. 판을 채우는 사람은 우체통 투입구와 팔 하나 거리에 선다.'] },
+              { id: 'sp_door', x: 50.7, y: 45.9, r: 6, label: '우체국 유리문', body: ['문 두 짝에 블라인드가 끝까지 내려와 있다. 일요일에는 문을 열지 않는다. 일요일에 이 마을에서 편지를 부칠 데는 계단 밑 [[우체통|k_dawnbox]] 하나뿐이다.'] },
+              { id: 'sp_car', x: 88, y: 58, r: 8, label: '옆집 앞 승용차', body: ['앞유리와 지붕에 밤이슬이 고르게 앉았다. 와이퍼 자국도 손자국도 없다. 밤새 그 자리에서 움직이지 않은 차다.', { note: '수사과 메모: 옆집 우체국장의 차. 토요일 저녁부터 서 있었음.' }] },
+            ] },
+        ] },
       { id: 'haul', type: 'query', name: '배송부 배차 대장', need: ['k_roster', 'k_dawnbox'], skin: 'ledger',
         desc: '도크 스트리트 창고 사무실의 일요일판 배차 대장. 오스굿 부장이 청하는 날짜의 장만 사본으로 떼어 준다. 일요일 날짜를 정확히 대야 한다.',
         fields: [{ id: 'date', label: '일요일 날짜', placeholder: '예: 1968.12.08' }],
@@ -589,7 +604,7 @@
         steps: [
           { f: 'f_same_hand', t: '감식과: 편지 (1)·(2)·(4)는 같은 손. 셋 다 월요일 아침 수거분 — 주말 사이 그 마을 우체국 앞 우체통에 들어갔다.', hint: '모래시계 이름으로 온 편지 가운데 진짜는?' },
           { f: 'f_route7', t: '쿠리어 일요일판 7번 노선이 새벽에 산타 레이나 · 밀브룩 · 포트 헤일리를 돈다. 소인이 찍힌 세 마을이다.', hint: '세 마을을 한 번에 도는 것이 있나?' },
-          { f: 'f_mailbox', t: '오스굿: 7번 트럭은 세 마을 우체국 앞 신문함에 판을 넣는다 — 산타 레이나 02:40, 밀브룩 03:50, 포트 헤일리 05:40. 우체통이 신문함 바로 옆이다.', hint: '그 우체통 옆에 새벽마다 서는 것은?' },
+          { f: 'f_mailbox', t: '7번 트럭은 세 마을 우체국 앞 신문함에 판을 넣는다 — 산타 레이나 02:40, 밀브룩 03:50, 포트 헤일리 05:40. 우체통이 신문함 바로 옆이다.', hint: '그 우체통 옆에 새벽마다 서는 것은?' },
           { f: ['f_roster7', 'f_swap'], t: '배차 대장 — 편지가 부쳐진 일요일, 7번 트럭은 본래 담당 델가도 대신 칼 브레넌이 몰았다. 바꿔 달라고 한 것도 브레넌이다.', hint: '편지가 부쳐진 일요일, 그 노선을 몬 사람은?' },
         ],
         a: '편지는 일요일 새벽, 7번 트럭이 판을 넣는 세 마을 우체국 앞 우체통에서 부쳐졌다. 그 일요일에 7번을 몬 사람은 칼 브레넌이다.' },
@@ -698,6 +713,10 @@
         svg: '<svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#e9e3d2"/><g fill="none" stroke="#253a8c" stroke-width="2"><circle cx="30" cy="40" r="8"/><path d="M50 48 l8 -16 l8 16z"/><path d="M76 32 h14 v16 h-14z"/><circle cx="110" cy="40" r="8"/><path d="M104 40 h12 M110 34 v12"/><path d="M130 32 l14 16 M144 32 l-14 16"/><path d="M30 80 l8 16 l8 -16z"/><path d="M60 80 v16 M54 96 h12"/><circle cx="90" cy="88" r="8"/><path d="M114 80 l6 8 l-6 8 l-6 -8z"/></g></svg>',
         prompt: 'A single sheet of cheap white letter paper, folded in quarters and flattened, photographed from above on a grey board: six uneven lines of small geometric symbols hand-drawn in blue ballpoint (half-filled circles, crossed circles, triangles up and down, diagonal crosses, diamonds, crosshairs, bow-ties, a squared cross, an hourglass at the end), no letters or readable words. This picture was rendered straight from the cipher text in the letter; do not regenerate it.',
         must: '편지 속 암호문과 같은 기호 · 같은 순서 (암호문에서 바로 그린 그림 — 새로 생성하지 않는다)' },
+      ph_haley: { use: '정밀 관찰 사진', alt: '포트 헤일리 우체국 앞 — 일요일 새벽 흑백 사진', ratio: '3:2', swap: 'svg', raster: true,
+        svg: '<svg viewBox="0 0 300 200" role="img" aria-label="포트 헤일리 우체국 앞, 일요일 새벽 흑백 사진"><rect width="300" height="200" fill="#9a9a94"/><path d="M0 72 Q40 62 92 74 V130 H0Z" fill="#7d807c"/><rect y="130" width="300" height="20" fill="#6e6f6a"/><rect y="150" width="300" height="50" fill="#4c4d4a"/><path d="M92 62 L150 40 L208 62Z" fill="#c9c6bc"/><rect x="98" y="62" width="104" height="58" fill="#bdbab0"/><rect x="110" y="72" width="18" height="24" fill="#3f403d"/><rect x="172" y="72" width="18" height="24" fill="#3f403d"/><rect x="138" y="74" width="28" height="36" fill="#55564f"/><path d="M152 74V110M138 88h28" stroke="#8a8a84"/><rect x="132" y="110" width="40" height="12" fill="#8d8b84"/><rect x="194" y="10" width="2.4" height="112" fill="#d8d6ce"/><rect x="8" y="0" width="12" height="142" fill="#2e2c28"/><circle cx="40" cy="14" r="5" fill="#f2f0e6"/><path d="M76 143V108Q76 98 89 98Q102 98 102 108V143Z" fill="#2c2d2b"/><rect x="80" y="104" width="18" height="3" fill="#111"/><rect x="83" y="112" width="11" height="5" fill="#8a8a84"/><rect x="104" y="106" width="22" height="37" fill="#3b3c38"/><rect x="108" y="116" width="14" height="16" fill="#d8d6cc"/><path d="M108 120h14M108 124h14M108 128h14" stroke="#999" stroke-width=".8"/><path d="M110 146q3-2 6 0M118 146q3 2 6 0" stroke="#eee" fill="none"/><path d="M129 140l5-2 3 3-4 2z" fill="#ddd"/><path d="M228 146V118L240 100H290L300 108V146Z" fill="#5a5b57"/><path d="M244 102H286L296 114H240Z" fill="#8f908a"/><circle cx="252" cy="146" r="7" fill="#1e1e1c"/></svg>',
+        prompt: 'Black-and-white 35mm police file photograph, Kodak Tri-X, heavy grain, taken before sunrise on a foggy Sunday in late August 1969 in a tiny Northern California coastal village, eye level from the far side of a quiet empty street. Centre: a small single-storey clapboard post office, three concrete steps up to a closed glass-panelled double door with its roller blinds pulled all the way down, a bare flagpole with no flag. Left of centre, at the foot of the steps: a 1960s curbside mail collection box with a rounded top on four short legs, a pull-down slot and a small blank metal plate screwed on just below the slot; immediately to its right, almost touching, a coin-operated newspaper vending box of the same height with a thick stack of folded Sunday papers behind its glass. On the sidewalk at the foot of the newspaper box, two short pieces of cut white twine and a crumpled wrapper sheet. Right: an early-1960s sedan parked in front of the wooden house next door, its windshield and roof evenly beaded with dew, untouched, no badge on the grille. Left edge: a wooden utility pole with a streetlight still glowing; fog over the sea and rocks beyond, no sun in the sky. No people, no readable text, no logos or emblems.',
+        must: '왼쪽 가운데 우체통 (투입구 밑 쇠판, 글자 없음) · 바로 오른쪽에 붙어 선 신문함 (유리 너머 일요일판) · 신문함 발치의 잘린 노끈 두 가닥과 겉종이 · 가운데 블라인드 내린 우체국 유리문 · 오른쪽 이슬 앉은 승용차 (와이퍼 자국 없음) · 사람 없음 · 해 없음 (서쪽 바다)' },
       /* 감식과 감정서 도해 — 대조 감정용, SVG 전용 */
       env_ref: { svg: ENV({ ink: BLUE, flip: true, folds: 3, bend: true }), use: '대조 감정 시료', alt: '기준 편지 — 봉투와 접은 편지지', ratio: '16:9', prompt: 'Evidence photograph on a grey board, 1969: on the left a plain white envelope, front side, addressed in blue ballpoint block capitals (the address itself blurred and unreadable), a postage stamp at the upper right glued UPSIDE DOWN (its picture clearly inverted), a round postmark with wavy cancel lines beside it; the envelope bulges. On the right the letter sheet taken out and opened, showing its crease pattern: folded three times across and then once down the middle. Flat light, grain.', must: '파란 볼펜 대문자 (읽히지 않게) · 오른쪽 위 거꾸로 붙은 우표 · 편지지 접힌 자국 가로 세 번 + 세로 한 번 · 불룩한 봉투', swap: 'svg', raster: true },
       env_typed: { svg: ENV({ typed: true, flip: false, folds: 2, bend: false }), use: '대조 감정 시료', alt: '편지 (3) — 봉투와 접은 편지지', ratio: '16:9', prompt: 'Evidence photograph on a grey board, 1969: on the left a plain white envelope, front side, its address TYPEWRITTEN (unreadable), the postage stamp at the upper right glued upright and straight, a round postmark beside it; the envelope lies flat. On the right the letter sheet opened, creased by only two folds across. Flat light, grain.', must: '타자로 친 주소 (읽히지 않게) · 똑바로 붙은 우표 · 편지지 가로로 두 번만 접은 자국', swap: 'svg', raster: true },

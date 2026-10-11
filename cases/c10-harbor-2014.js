@@ -45,6 +45,22 @@
         ],
         none: '회신된 기록이 없다. 번호판 한 글자만 틀려도 조회되지 않는다.', foundLabel: '조회해 둔 차량' },
       { id: 'cam', type: 'list', name: '영상 캡처', skin: 'card', desc: '블랙박스와 CCTV에서 뽑은 정지 화면. 제보가 들어오면 늘어난다.' },
+      { id: 'ph', type: 'photo', name: '영상 판독', need: ['k_plate'], desc: '한울아파트 관리사무소가 차단기 기록과 함께 넘긴 정문 CCTV 파일. 멈춘 화면을 눌러 걸리는 곳을 찾는다.', scenes: [
+        { id: 'sc_gate', title: '한울아파트 정문 CCTV · 출구 쪽', meta: '11.22 00:16:05 · CH03 · 관리사무소 제공 2014.12.03', art: 'gate_cam',
+          intro: ['차단기 기록의 00:16 출차에 맞춰 멈춘 화면. 단지 안쪽을 보는 카메라라 나가는 차는 앞모습으로 잡힌다.'],
+          spots: [
+            { id: 'sp_g_time', x: 85.7, y: 9, r: 11, label: '화면 위 시각', body: [
+              { p: '2014-11-22 00:16:05. 번호판은 불빛에 하얗게 날아갔지만, 같은 시각 차단기 서버에 [[12가 3471]] 출차가 찍혀 있다. 01:52에는 같은 차가 다시 들어오는 뒷모습이 잡혔다.', f: 'f_gate_out' }] },
+            { id: 'sp_g_fog', x: 35.7, y: 79.4, r: 5, label: '앞 범퍼의 안개등', keys: ['k_foglamp'], body: [
+              { p: '범퍼 아래 [[안개등]] 둘 가운데 화면 오른쪽 것만 켜져 있다. 왼쪽 것은 렌즈가 깨진 채 까맣다. 마주 보는 화면이라 왼쪽이 차의 오른쪽, 조수석 쪽이다.', f: 'f_bang_foglamp' }] },
+            { id: 'sp_g_seat', x: 43.5, y: 44.5, r: 6, label: '앞유리 너머', body: [
+              '운전석에 한 사람, 조수석에 한 사람. 얼굴은 어둠에 묻혔다. 조수석 사람은 어깨가 둥글게 부푼 패딩 차림이다.'] },
+            { id: 'sp_g_rack', x: 50.8, y: 29.7, r: 7, label: '지붕', body: [
+              '지붕에 검은 가로대가 두 줄 걸쳐 있다. [[루프랙|k_suv]]이다.'] },
+            { id: 'sp_g_booth', x: 95.6, y: 34, r: 5.5, label: '경비실 창', body: [
+              '경비실 창에 불은 켜져 있는데 의자가 비어 있다. 등록 차량은 차단기가 번호판을 읽고 저절로 열어 준다.'] },
+          ] },
+      ] },
       { id: 'tl', type: 'timeline', name: '사건 재구성', need: ['k_plate'], title: '11월 21일 밤 ~ 22일 새벽', meta: '형사과 화이트보드 · 흩어진 기록의 시각을 한 줄로', openLabel: '재구성 판 펼치기',
         slots: ['23:52', '23:58', '00:09', '00:14', '00:16', '00:34', '00:47', '01:21'],
         events: [
@@ -570,6 +586,10 @@
         prompt: 'Dim smartphone photo taken inside a cold-storage warehouse at night: stacks of brown cardboard boxes with foreign-language printing (illegible) on one side and fresh plain white boxes on the other, frozen fish being moved between them, frost haze, harsh ceiling lights, taken hurriedly and slightly tilted. No readable text, no logos.' },
       pier_day: { use: '카페 민원 글 사진 — 신항 3부두 공사 현장 낮 풍경', ratio: '16:9', svg: cam(`<rect width="200" height="90" fill="#9fb0bd"/><rect y="90" width="200" height="60" fill="#6f7b82"/><g fill="#5a646b"><rect x="20" y="50" width="4" height="40"/><rect x="60" y="50" width="4" height="40"/><rect x="100" y="50" width="4" height="40"/></g><g fill="#c9c3b3"><path d="M130 90 l10 -10 l10 10z"/><path d="M146 90 l10 -10 l10 10z"/><path d="M162 90 l10 -10 l10 10z"/></g>`, '#9fb0bd'),
         prompt: 'Overcast daytime smartphone photo of an unfinished container pier in a Korean port: temporary fencing, unlit lamp posts, piles of concrete tetrapods along the breakwater, grey sea, gulls, distant cranes. Bleak and empty.' },
+      gate_cam: { use: '정밀 관찰 사진', alt: '한울아파트 정문 CCTV 정지 화면 — 차단기를 지나 나가는 검은 SUV', ratio: '4:3', swap: 'svg', raster: true,
+        svg: cam(`<path d="M40 150 L88 46 L112 46 L170 150Z" fill="#24272b"/><path d="M118 96 L104 22" stroke="#e8e4dc" stroke-width="3"/><path d="M114 74 L111 60 M108 46 L106 34" stroke="#c0392b" stroke-width="3"/><rect x="116" y="92" width="8" height="18" fill="#d8b52a"/><rect x="168" y="30" width="32" height="82" fill="#cfc9bc"/><rect x="174" y="40" width="22" height="26" fill="#efe8d0"/><rect x="183" y="52" width="8" height="10" fill="#33363b"/><rect x="74" y="54" width="52" height="66" rx="5" fill="#0b0c0e"/><path d="M82 50 H118" stroke="#30343a" stroke-width="2.5"/><rect x="79" y="60" width="42" height="20" rx="2" fill="#24272c"/><circle cx="89" cy="70" r="3.5" fill="#15171a"/><circle cx="111" cy="70" r="3.5" fill="#15171a"/><circle cx="83" cy="96" r="4" fill="#fff4d0"/><circle cx="117" cy="96" r="4" fill="#fff4d0"/><rect x="93" y="106" width="14" height="5" fill="#ecebe4"/><circle cx="83" cy="110" r="2.2" fill="#202225" stroke="#55585c" stroke-width=".6"/><circle cx="117" cy="110" r="2.2" fill="#fff0bf"/><ellipse cx="117" cy="126" rx="10" ry="3" fill="#fff0bf" opacity=".18"/>${lamp(30, 40)}${lamp(150, 34)}`, '#0e1114'),
+        prompt: 'Fixed security-camera still at a few minutes after midnight, the asphalt wet from drizzle. The camera is mounted high on a pole at the main vehicle gate of a 2000s Korean high-rise apartment complex and looks into the complex along the exit lane. In the centre a boxy black mid-size SUV with a two-bar black roof rack drives toward the camera, about to pass under a raised red-and-white striped barrier arm, seen almost head-on; headlights on, the licence plate blown out to a plain white smear with no characters, plain grille with no badge. In the lower bumper two round fog lamps: the one on the right side of the image lit and throwing light onto the wet asphalt, the one on the left side of the image dead, a dark hole with a cracked lens. Behind the windshield two dark faceless shapes: the driver on the right side of the image with pale hands on the wheel, a passenger on the left side of the image in a puffy padded winter jacket. At the right edge a small white guard booth with a lit window and an empty office chair, a yellow-and-black barrier motor box beside it. Background: the internal road curving away, parked cars, 15-storey towers with a few lit windows, sodium-orange streetlights, bare trees. 2014 low-resolution colour CCTV look, noise, compression blocking, washed-out blacks; a plain dark band across the top for the on-screen timestamp.',
+        must: '가운데 정면으로 다가오는 검은 SUV · 지붕의 두 줄 루프랙 · 범퍼 안개등: 화면 오른쪽만 켜짐, 왼쪽은 렌즈가 깨져 꺼짐 · 앞유리 너머 운전석(화면 오른쪽, 핸들 위 두 손)과 조수석(화면 왼쪽, 부푼 패딩)의 얼굴 없는 윤곽 · 올라간 빨강·흰 차단기 · 오른쪽 경비실 창 안의 빈 의자 · 하얗게 날아간 번호판 · 위 띠의 시각 「CH03」「2014-11-22 00:16:05」 (PIL 로 넣음)' },
     },
     css: `[data-case="c10"] .skin-chat .doc-h{background:#d6e2e8}
 [data-case="c10"][data-frame="laptop"] .screen{--f-web:var(--f-sys)}
