@@ -79,6 +79,43 @@
           { p: '판 아래쪽 세 칸 — 1.29 (월) 아침: 주보 없어짐, 굴뚝 연기, 숲길 어귀의 흰 말 썰매. 1.29 (월) 저녁: 켈바흐 여관 숙박부에 장 손님 한 줄, 말과 썰매는 뒤 마구간. 2.3 (토) 밤: 소 울음.', f: 'f_tl_monday' },
         ],
         ok: '열흘이 이어졌다', solveNeed: ['k_schuldschein', 'k_hausierer', 'k_milch', 'k_rottmayr', 'k_hubmann', 'k_zeitung', 'k_schlitten', 'k_stern'] },
+      { id: 'ab', type: 'alibi', name: '행적표', skin: 'board', need: ['!f_milk|!f_smoke|!f_pfaenzl_claim|!f_knauer_claim|!f_sledge|!f_inn|!f_arrest|!f_hut'],
+        title: '1월 25일부터 29일까지 — 관계인 행적 대조표', meta: 'Tgb.-Nr. 41/1923 · 오버뢰딩 초소',
+        desc: '관계인들이 그 주에 어디 있었다고 했는지, 숙박부와 유치장 장부에는 무엇이 적혔는지를 날짜별로 맞대어 적은 표.',
+        intro: ['관계인이 있었다고 한 곳과 숙박부·장부·수색 기록에 적힌 것을 날짜별로 옮겨 적음. 진술은 들은 그대로 적었음.'],
+        slots: ['1.25 (목)', '1.26 (금)', '1.27 (토)', '1.28 (일)', '1.29 (월) 아침', '1.29 (월) 저녁'],
+        rows: [
+          { who: 'p_knauer', cells: [
+            { at: [1, 5], t: '26일 오후 켈바흐로 나가 골데너 슈테른에 묵었다 · 목요일 장이 끝나고 돌아왔다', ask: 'k_freitag|k_stern', truth: '1.29 (월) 19:40 도착 · 말과 썰매째 — 슈테른 숙박부' },
+            { at: [1, 5], t: '금요일부터 월요일까진 숲 오두막에서 혼자 나무를 했다 · 슈테른엔 월요일에 갔다', ask: 'k_freitag!|k_stern!' },
+            { at: [0, 5], t: '겨울 내내 숲 오두막에서 나무를 했다 · 요 며칠 전까지 드나들었다', ask: 'k_huette', truth: '27일 밤 큰눈 뒤로 숲길에 드나든 자국 없음 — 오두막 수색' },
+          ] },
+          { label: '골데너 슈테른 숙박부', cells: [
+            { at: 5, t: '19:40 크나우어 · 말과 썰매는 뒤 마구간', f: 'f_inn' },
+          ] },
+          { label: '오두막 수색 기록', cells: [
+            { at: [2, 5], t: '27일 밤 큰눈 뒤로 숲길에 드나든 자국 없음 · 새로 팬 나무 없음, 화덕 재는 오래 식음', f: 'f_hut' },
+          ] },
+          { who: 'p_gerstl', cells: [
+            { at: 1, t: '오전, 대문에서 로자에게 편지를 건넸다', ask: 'k_rosa|k_freitag' },
+            { at: 4, t: '굴뚝에 연기 · 토요일 주보는 가져갔다', ask: 'k_haselod' },
+            { at: 4, t: '숲길 어귀에 흰 말 썰매 · 사람은 못 봤다', ask: 'k_schlitten' },
+          ] },
+          { who: 'p_hubmann', cells: [
+            { at: 1, t: '아침, 로자가 우유를 가져왔다', ask: 'k_milch|k_freitag' },
+            { at: 2, t: '로자가 안 왔다 · 눈 때문인 줄 알았다', ask: 'k_milch' },
+            { at: 3, t: '성당 가는 길에 굴뚝 연기를 봤다', ask: 'k_haselod' },
+          ] },
+          { who: 'p_pfaenzl', cells: [
+            { at: [0, 4], t: '그 주엔 켈바흐 누이 집에 있었다', ask: 'k_freitag', truth: '1.25 22:10 ~ 1.29 09:00 켈바흐 유치장 — 유치장 장부' },
+          ] },
+          { label: '켈바흐 유치장 장부', cells: [
+            { at: [0, 4], t: '1.25 22:10 알로이스 펜츨 들어옴 · 여관 싸움 · 1.29 09:00 나감', f: 'f_arrest' },
+          ] },
+          { who: 'p_magdalena', cells: [
+            { at: 1, t: '켈바흐 빵집에서 새벽 세 시부터 반죽했다', ask: 'k_freitag' },
+          ] },
+        ] },
       { id: 'ask', type: 'people', name: '탐문', desc: '1923년 2월 둘째 주. 수첩에 이름이 적힌 사람만 찾아갈 수 있다.' },
     ],
     keywords: {
