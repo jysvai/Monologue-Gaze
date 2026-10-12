@@ -166,6 +166,8 @@ body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,
 
 .cab-foot .credit{margin-top:4px;font-size:11px;opacity:.9}
 .cab-foot .credit a{color:inherit}
+.cab-foot .thanks{flex-basis:100%;max-width:none;margin-top:0}
+.cab-foot .thanks a{white-space:nowrap} /* itch 이름에 든 하이픈에서 갈라지지 않게 */ /* 팔로워 명단: 맨 아래 한 줄을 통째로 (명단이 길어져도 위 줄의 「기록 지우기」 자리는 그대로) */
 .cab-foot .unsaved{flex-basis:100%;max-width:none;color:#a4382c;font-weight:700} /* 저장이 막힌 브라우저: 알림 한 번이 다른 알림에 덮여도 기록실에는 늘 적혀 있게 */
 
 /* 그림 크게 보기 */

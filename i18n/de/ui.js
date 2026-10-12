@@ -390,6 +390,7 @@ MG.I18N.put("de", "ui", {
 "모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.": "Alle Fälle sind neue Geschichten, die nur das Motiv eines realen ungelösten Falls aufgreifen. Sämtliche Personen, Orte, Institutionen und Websites sind frei erfunden und stehen in keiner Verbindung zu realen Personen oder Opfern.",
 "목소리": "Stimmen",
 "효과음": "Soundeffekte",
+"itch.io에서 팔로우해 주신 고마운 분들": "Danke an alle, die auf itch.io folgen:",
 "내 기록 지우기": "Meine Einträge löschen",
 "서랍 맨 밑에서 편지 한 통이 밀려 나왔다": "Ganz unten aus der Schublade ist ein Brief hervorgerutscht",
 "담당 · {0}": "Im Dienst · {0}",
