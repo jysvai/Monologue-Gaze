@@ -90,3 +90,37 @@ body[data-age="y2k"] .per-h .rec{border-radius:0;background:transparent;color:#f
 @container stage (max-width:700px){.per-h.has-face.mini .rec b{display:none}.per-h.has-face.mini:has(.rec) h3{padding-right:62px}} /* 줄어든 머리줄에 「←」가 들어가면 이름 칸이 모자라다: REC 시간 숫자는 접는다 */
 @keyframes recBlink{50%{opacity:.15}}
 @media (prefers-reduced-motion:reduce){.per-h .rec i{animation:none}}
+
+/* ───────── 사건마다 그린 방과 책상 (img/<사건>/bg_room · bg_desk — js caseBg 가 body 에 --case-room · --case-desk 와 has-room · has-desk 를 붙인다) ─────────
+ * 같은 시대라도 사건마다 다른 곳이다: 1968년 미즈오서 취조실과 1969년 헬레순 경찰서는 같은 방이 아니다.
+ * 방: 탐문 칸 맨 위에 무대 배경처럼 깔고, 아래로 갈수록 그 방의 빛깔(--room-base)로 스민다 — 휴대폰에서 칸이 길게 늘어나도 그림은 위에만
+ * 책상: 책상 바닥 전체, 그리고 종이 사건은 문서를 펼치는 칸도 그 사건의 책상 위 */
+body.has-desk[data-screen="case"]{background-image:linear-gradient(rgba(8,7,6,.5),rgba(8,7,6,.66)),var(--case-desk);background-size:cover;background-position:center;background-attachment:fixed}
+@media (min-width:721px){body.has-desk .case-view[data-frame="papers"] .pane-read[data-open="doc"]{background:linear-gradient(rgba(0,0,0,.06),rgba(0,0,0,.14)),var(--case-desk) center/cover no-repeat}}
+body.has-room .pane-read.room{isolation:isolate;--room-ink:#f3eee2;--room-soft:#d9d0bd;background:var(--room-base,#1c1b19)}
+body.has-room .pane-read.room::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:0;aspect-ratio:3/2;background:var(--case-room) center top/cover no-repeat;-webkit-mask-image:linear-gradient(#000 38%,transparent 96%);mask-image:linear-gradient(#000 38%,transparent 96%);pointer-events:none}
+/* 얼굴 머리줄: 맨 위에서는 방이 비치게 (칸 위쪽과 같은 자리의 그림), 내려 읽어 줄어들면 방 윗줄을 어둡게 깐 띠 */
+body.has-room .pane-read.room .per-h.has-face{background:var(--case-room) -18px 0/calc(100% + 36px) auto no-repeat;box-shadow:none}
+body.has-room .pane-read.room .per-h.has-face.mini{background:linear-gradient(rgba(0,0,0,.42),rgba(0,0,0,.42)),var(--case-room) center 18%/cover no-repeat;box-shadow:0 10px 12px -12px rgba(0,0,0,.6)}
+@media (max-width:720px){body.has-room .pane-read.room .per-h.has-face:not(.mini){background-position:-10px 0;background-size:calc(100% + 20px) auto}}
+/* 이름표: 어떤 그림 위에서도 읽히게 이름 뒤에만 어두운 판 */
+body.has-room .pane-read.room .per-h.has-face>div{padding:6px 12px 7px;border-radius:4px;background:rgba(14,12,10,.58);text-shadow:0 1px 2px rgba(0,0,0,.6)}
+body.has-room .pane-read.room .per-h.has-face.mini>div{background:none;padding:0}
+body.has-room .pane-read.room .ab-back{text-shadow:0 1px 3px rgba(0,0,0,.9)}
+/* 사건마다 방 아래쪽 빛깔 (그림의 탁자 쪽에서 뽑은 색: tools 없이 손으로 맞춘다) */
+body[data-case="c00"]{--room-base:#382c21}
+body[data-case="c01"]{--room-base:#1d1108}
+body[data-case="c02"]{--room-base:#27180d}
+body[data-case="c03"]{--room-base:#1d120a}
+body[data-case="c04"]{--room-base:#231b15}
+body[data-case="c05"]{--room-base:#22140b}
+body[data-case="c06"]{--room-base:#2c221c}
+body[data-case="c07"]{--room-base:#1e140b}
+body[data-case="c08"]{--room-base:#232322}
+body[data-case="c09"]{--room-base:#262322}
+body[data-case="c10"]{--room-base:#242729}
+body[data-case="c11"]{--room-base:#221815}
+body[data-case="c12"]{--room-base:#211a17}
+body[data-case="c13"]{--room-base:#2e3132}
+body[data-case="c14"]{--room-base:#221914}
+body[data-case="c15"]{--room-base:#281a12}

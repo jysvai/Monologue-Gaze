@@ -1721,7 +1721,8 @@
     if (fd && rows() > fd.n) { const fb = el.querySelector('.lv-feed .doc-b'); [...fb.children].slice(fd.n).forEach(x => x.classList.add('fresh')); } // 보던 방에 들어온 말은 알림이 따로 안 뜨니, 방 안에서 잠깐 밝혀 둔다
     if (fd && (rows() > fd.n || fd.pill)) { if (fd.low) el.scrollTop = el.scrollHeight; else newBelow(el); }
     $('#stageBody').classList.toggle('reading', !!(o && h));
-    el.classList.toggle('room', !!(o && o.t === 'person' && h) && ageOf(C) !== 'old'); // 탐문: 읽는 칸이 그 시대의 방 (1960년 전 사건은 종이 그대로)
+    el.classList.toggle('room', !!(o && o.t === 'person' && h) && (ageOf(C) !== 'old' || document.body.classList.contains('has-room'))); // 탐문: 읽는 칸이 그 사건의 방 (방 그림이 없는 1960년 전 사건은 종이 그대로)
+    el.dataset.open = o && h ? o.t : ''; // 무엇을 펼쳤나: 종이 사건의 문서는 그 사건 책상 위에 (css/era.css)
     recTick();
     const ph = el.querySelector('.per-h.has-face'); if (ph && wasMini) ph.classList.add('mini'); el.style.scrollPaddingTop = ph ? ph.getBoundingClientRect().height + 8 + 'px' : ''; // 붙박이 얼굴 칸 밑으로 짚는다 (scrollIntoView 가 메모 고르기 머리 등을 얼굴 뒤에 숨기지 않게)
     edges();
@@ -2310,8 +2311,18 @@
   // 시대 (css/era.css): 책상·기록철·수첩·탐문하는 방이 바뀐다. 사건 data 의 age 가 있으면 그것으로
   const ageOf = c => c.age || (y => y < 1960 ? 'old' : y < 1980 ? 'mid' : y < 2000 ? 'late' : y < 2010 ? 'y2k' : 'now')(parseInt(c.year, 10) || 2000);
   const recAge = () => !!C && /^(y2k|now)$/.test(ageOf(C)); // 진술을 녹화하는 시대: 탐문 얼굴 칸에 ● REC 와 흐른 시간
+  // 사건마다 그린 탐문하는 방(img/<사건>/bg_room)과 수사 책상(bg_desk): css/era.css 가 --case-room · --case-desk 로 깐다. 같은 시대라도 사건마다 다른 곳이다
+  function caseBg() {
+    const b = document.body;
+    ['room', 'desk'].forEach(k => {
+      const u = C && MG.images[`${C.id}/bg_${k}`];
+      if (u) b.style.setProperty('--case-' + k, 'url("' + new URL(u, document.baseURI).href + '")'); else b.style.removeProperty('--case-' + k);
+      b.classList.toggle('has-' + k, !!u);
+    });
+    if (C) b.dataset.case = C.id; else delete b.dataset.case;
+  }
   function renderCase() {
-    document.body.dataset.screen = 'case'; document.body.dataset.age = ageOf(C); applyTs();
+    document.body.dataset.screen = 'case'; document.body.dataset.age = ageOf(C); caseBg(); applyTs();
     if (gore() && MG.sound && MG.sound.preload) MG.sound.preload(['sfx/dread_envelope']); // 끔찍한 기록을 처음 펼칠 때 날 소리
     app.innerHTML = `${deskProps()}${gore() ?`<div class="gore-bg" aria-hidden="true">${stains(C.id + 'bg', 5, 'aacb', true)}</div>` : ''}<div class="case-view" data-case="${esc(C.id)}" data-frame="${esc(C.frame || 'papers')}" data-era="${(y => y < 1945 ? 'old' : y < 1980 ? 'mid' : '')(parseInt(C.year, 10) || 2000)}"${gore() ? ' data-graphic' : ''}>
       <main class="stage" aria-label="${T`조사 자료`}">
@@ -2391,7 +2402,7 @@
   function warnScreen(c, again) {
     C = null; ST = null; S.current = null; save();
     if (MG.mood) MG.mood.leave();
-    document.body.dataset.screen = 'cabinet'; delete document.body.dataset.age;
+    document.body.dataset.screen = 'cabinet'; delete document.body.dataset.age; caseBg();
     document.title = 'Monologue Gaze';
     app.innerHTML = `<div class="cw"><div class="cw-card" role="region" aria-labelledby="cwH" tabindex="-1">${S.mild ? '' : stains(c.id + 'cw', 2, 'acd', 'corner')}<p class="cw-t">${T`혐오감 주의`}</p><h2 id="cwH">CASE ${pad(c.no)} ${quote(esc(c.title))} ${starsHtml(c)}</h2>
       <p>${esc(c.warn || T('이 사건 기록에는 시신 훼손 같은 잔혹한 내용과 강한 묘사가 들어 있습니다.'))}</p><p class="cw-s">${T`모든 인물과 사건은 지어낸 것입니다. 불편하면 언제든 기록실로 돌아가도 됩니다. 핏자국, 가림 없는 사진, 참혹한 묘사와 소리는 「잔혹 표현」 단추로 끌 수 있습니다. 끄면 사진은 가려지고 기록은 건조한 판으로 바뀝니다.`}</p><p>${mildBtn()}</p>
@@ -2494,7 +2505,7 @@
     stopTalk(); if (MG.sound) MG.sound.stopVoice(); // 추궁 도중 기록실로 나가도 그 사람 목소리가 기록실까지 따라오지 않는다
     C = null; ST = null; S.current = null; save();
     if (MG.mood) MG.mood.leave();
-    document.body.dataset.screen = 'cabinet'; delete document.body.dataset.age;
+    document.body.dataset.screen = 'cabinet'; delete document.body.dataset.age; caseBg();
     document.title = 'Monologue Gaze';
     const main = MG.cases.filter(c => c.kind !== 'tutorial' && !c.live); // M 의 서랍: 미제 기록
     const live = MG.cases.filter(c => c.live); // 당직: 지금 강력2팀에 떨어진 사건
