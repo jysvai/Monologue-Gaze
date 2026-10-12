@@ -149,6 +149,18 @@
     st.cens ??= [];
     st.m ??= false;
     st.nid ??= 0;
+    if (!st.mg1 && !st.solved && st.notes.length) { // 같은 사실을 따로따로 적어 둔 예전 메모는 처음 메모 하나에 출처로 합친다 (보고서·추궁에 붙여 둔 메모는 그대로)
+      const used = new Set([...Object.values(st.report.claims), ...Object.values(st.held || {})].map(String)), first = {};
+      st.notes = st.notes.filter(n => {
+        const k = n.f && first[n.f];
+        if (!n.f || !k) { if (n.f) first[n.f] = n; return true; }
+        if (used.has(String(n.id))) return true;
+        (k.also ||= []).push({ ref: n.ref, src: n.src }, ...(n.also || []));
+        if (st.sus) st.sus = [...new Set(st.sus.map(x => (String(x) === String(n.id) ? k.id : x)))];
+        return false;
+      });
+      st.mg1 = true;
+    }
     if (c.live) { st.live ??= { t: 0, req: {}, fd: {}, fx: [], rd: {} }; st.live.fx ??= []; st.live.rd ??= {}; }
     return st;
   }
@@ -315,7 +327,9 @@
   const IC_TICK = '<svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.6 8.4c1.4.9 2.4 2.1 3.2 3.6 1.8-4.2 4.3-7.3 7.6-9.3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   // ✎ 는 증거가 되는 줄(f)과 사건을 쓴 사람이 적어 둘 만하다고 표시한 줄(pin)에만 붙는다 — 보이는 문장마다 적다 보면 수첩이 쓸모없는 메모로 차서 보고서를 맞출 수 없다
   // 같은 말을 두 번 들으면 (처음 대답 · 따진 뒤 되풀이한 대답) 메모는 하나 — 메모 고르기 · 보고서에 같은 줄이 겹쳐 보이지 않게
-  const noteAt = ref => { const p = PIN[ref]; return ST.notes.findIndex(n => n.ref === ref || (p && p.f && n.f === p.f && n.t === p.t)); };
+  // 같은 사실을 다른 곳에서 또 들은 줄은 그 메모에 출처(also)로 붙는다 — 그 줄도 적힌 것으로 본다
+  const noteAt = ref => { const p = PIN[ref]; return ST.notes.findIndex(n => n.ref === ref || (n.also || []).some(a => a.ref === ref) || (p && p.f && n.f === p.f && n.t === p.t)); };
+  const refsOf = n => [n.ref, ...(n.also || []).map(a => a.ref)];
   function pinBtn(ref, t, f, src, keep) {
     if (NOPIN) return '';
     PIN[ref] = { t: plain(t).trim(), f: f || null, src };
@@ -422,6 +436,8 @@
 
   const rawAns = (p, k) => { let a = p.ask && p.ask[k]; if (a == null && k === p.key) a = p.self; return a; };
   const isCond = a => a && !Array.isArray(a) && typeof a === 'object' && 'need' in a;
+  // 대답에 새 단서가 들었나: 메모가 되는 줄(f) · 새 단어([[ ]]) · 받아 적는 사실(take) · 조건이 걸린 대답 (탐문 칩 차례에 쓴다)
+  const meaty = a => (a == null ? false : typeof a === 'string' ? a.includes('[[') : Array.isArray(a) ? a.some(meaty) : typeof a === 'object' && !!(a.f || (a.take || []).length || (a.keys || []).length || 'need' in a || meaty(a.a) || meaty(a.else) || meaty(a.p)));
   // 수첩을 내밀기 전에 먼저 그냥 묻는다 — 처음 듣는 사람에게 「처음 하신 말씀과 다릅니다」가 나가지 않게. 기억을 되살리는 soft 도 먼저 듣고, 메모는 플레이어가 골라 내민다
   // 같은 기록(!f)으로 이미 털어놓은 사람은, 그 기록에 걸린 다른 낱말을 처음 물어도 다시 시치미 떼지 않는다
   const pressedOn = (p, a) => (ST.asked[p.id] || []).some(e => { if (!e.endsWith('!')) return false; const b = rawAns(p, e.slice(0, -1)); return isCond(b) && (b.need || []).some(n => n[0] === '!' && (a.need || []).includes(n)); });
@@ -480,7 +496,9 @@
     return `<span class="ava${big ? ' lg' : ''}" style="--c:${esc(p.color || '#6b6155')}">${esc(p.initial || p.name[0])}</span>`;
   }
   // 이 사람과 얽힌 단어: 그 사람이 한 대답에 나온 단어가 가장 가깝고 (꺼낸 말이 다음 물음으로), 다음이 직함·있는 곳·소개에 든 단어,
-  // 그다음 읽은 기록에서 그 사람과 한 덩이에 함께 나온 단어 (덩이가 작을수록 가깝다). ★3 은 그 사람이 따로 할 말이 있는 단어도 조금 앞으로
+  // 그다음 읽은 기록에서 그 사람과 한 덩이에 함께 나온 단어 (덩이가 작을수록 가깝다). 무엇보다 대답에 새 단서가 든 물음
+  // (메모가 되는 사실 · 새 단어 · 메모로 따질 거리)이 앞으로 — 사건이 나아가는 물음이 접힌 칸에 묻히면 결국 다 펼쳐 놓고 눌러 보게 된다.
+  // 사람마다 대답할 단어는 15~30개라 「대답이 있다」만으로는 가려지지 않고, 새 단서가 든 물음은 한 사람에 0~9개다
   function tieOf(p) {
     const t = {}, add = (k, w) => { t[k] = (t[k] || 0) + w; };
     if (rawAns(p, p.key) != null) add(p.key, 2);
@@ -493,7 +511,7 @@
       const w = Math.min(1.5, 4 / Math.max(1, b.k.size - 1));
       b.k.forEach(k => add(k, w));
     });
-    if (lv() <= 3) Object.keys(p.ask || {}).forEach(k => add(k, 1));
+    Object.entries(p.ask || {}).forEach(([k, a]) => add(k, meaty(a) ? 6 : 1));
     return t;
   }
   // 사람을 펼칠 때: 그 사람과 얽힌, 아직 묻지 않은 단어 몇 개만 앞줄에 — 수첩의 단어를 한꺼번에 다 늘어놓으면 아무거나 눌러 보게 된다.
@@ -699,7 +717,7 @@
         <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div>${!press && vsOpen && !asked.includes(k + '!') ? `<p class="c-vs"><button type="button" class="chip vs${lv() <= 3 && isPressAsk(p, k) && ok((rawAns(p, k) || {}).need) ? ' again' : ''}" data-vs="${esc(k)}">${T('메모를 내민다')}</button></p>` : ''}${inl && e === PICK.k ? pickHtml(p) : ''}</div>`;
     }).join('');
     const abF = ST.view.abFrom, abS = abF && abF.pid === p.id && C.sources.find(x => x.id === abF.src && x.type === 'alibi' && srcVisible(x)); // 행적표에서 건너왔으면 돌아가는 단추
-    return `<article class="person skin-${esc(p.skin || 'talk')}">${abS ? `<p class="ab-back-w"><button type="button" class="ab-back" data-src="${esc(abS.id)}">← ${esc(abS.name)}</button></p>` : ''}<header class="per-h${faceOf(p) ? ' has-face' : ''}">${faceOf(p) ? `<button type="button" class="per-back" data-back aria-label="${esc(T('목록으로'))}" title="${esc(T('목록으로'))}">←</button>` : ''}${portrait(p, true)}<div><h3>${esc(p.name)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}${patHtml(p)}</div>${recAge() && faceOf(p) ? '<span class="rec" aria-hidden="true"><i></i>REC <b class="rec-tc"></b></span>' : ''}</header>
+    return `<article class="person skin-${esc(p.skin || 'talk')}">${abS ? `<p class="ab-back-w"><button type="button" class="ab-back" data-src="${esc(abS.id)}">← ${esc(abS.name)}</button></p>` : ''}<header class="per-h${faceOf(p) ? ' has-face' : ''}">${faceOf(p) ? `<button type="button" class="per-back" data-back aria-label="${esc(T('목록으로'))}" title="${esc(T('목록으로'))}">←</button>` : ''}${portrait(p, true)}<div><h3>${esc(p.name).replace(/-/g, '\u2011')}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}${patHtml(p)}</div>${recAge() && faceOf(p) ? '<span class="rec" aria-hidden="true"><i></i>REC <b class="rec-tc"></b></span>' : ''}</header>
       <div class="per-tr" data-who="${esc(p.id)}">${tr}</div>
       ${PICK && PICK.pid === p.id && !inl ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}>${shut ? `<p class="vs-shut" tabindex="-1"><b>${esc(p.name)}</b> ${inline(ST.vs[p.id].last || '').replace(MIDACT, '<i class="c-mid">$&</i>')} <span>${T('— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.')}</span></p>` : ''}<p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」')}${liveOn() ? `<b class="lv-cost">${T` · 물을 때마다 ${hm(lcost('ask'))}`}</b>` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
   }
@@ -1954,8 +1972,9 @@
     }); });
     C.solution.claims.forEach(cl => {
       const acc = cl.accept || [], hits = pool.filter(n => acc.some(w => fIs(n.f, w)));
-      const two = new Set(hits.map(n => n.src || '')).size >= 2;
-      hits.forEach(n => { const by = two ? hits.filter(x => x !== n && (x.src || '') !== (n.src || '')) : []; if (by.length || broke.has(String(n.id))) put(n, 'rep', { by, broke: broke.has(String(n.id)) }); });
+      const srcs = n => [...new Set([n.src || '', ...(n.also || []).map(a => a.src || '')])]; // 같은 사실을 다른 곳에서도 들었으면 그 메모 하나로도 두 기록이 받친다
+      const two = new Set(hits.flatMap(srcs)).size >= 2;
+      hits.forEach(n => { const mine = srcs(n), by = two ? hits.filter(x => x !== n && srcs(x).some(s => !mine.includes(s))) : [], both = mine.length >= 2; if (by.length || both || broke.has(String(n.id))) put(n, 'rep', { by, both, broke: broke.has(String(n.id)) }); });
     });
     return m;
   }
@@ -1970,6 +1989,7 @@
     if (e.vs.length) { const who = [...new Set(e.vs.map(v => v.pid))].map(id => pname(C.people[id])); out.push(lv() >= 5 ? T('들은 진술과 어긋난다') : T`${who.join('·')}의 대답과 어긋난다`); }
     const by = [...new Set(e.rep.flatMap(r => r.by.map(x => noteNo(x.id))))].filter(n => n && !skip.includes(n)).sort((a, b) => a - b);
     if (by.length) out.push(T`${by.slice(0, 5).join('·')}번 메모와 맞물린다`);
+    if (!by.length && e.rep.some(r => r.both)) out.push(T('다른 곳에서도 같은 사실이 나왔다'));
     if (e.rep.some(r => r.broke)) out.push(T('진술을 깨뜨린 기록이다'));
     return out.join(' · ');
   }
@@ -2081,6 +2101,7 @@
     const sol = C.solution;
     const onRep = {}; // 보고서 주장에 증거로 붙인 메모: 끝에 주장 번호를 빨간 연필로 (지우면 그 칸이 빈다는 것도 보이게)
     sol.claims.forEach((cl, i) => { const v = ST.report.claims[cl.id]; if (v !== '' && v != null) (onRep[String(v)] ||= []).push(i + 1); });
+    const alsoMark = n => { const w = [...new Set((n.also || []).map(a => a.src).filter(x => x && x !== n.src))]; return w.length ? `<small class="n-also">${T`같은 사실 · ${w.join(', ')}`}</small>` : ''; }; // 같은 사실을 또 들은 곳
     const repMark = n => { const u = onRep[String(n.id)]; if (!u) return ''; const t = T`${FORM().title} ${u.join('·')}번에 붙인 메모`; return `<span class="n-rep" role="img" aria-label="${t}" data-tip="${t}">${u.join('·')}</span>`; };
     const LM = ST.solved ? new Map() : leadMap(), nLead = LM.size, nSus = notes.filter(isSus).length;
     if (NBF === 'lead' && !nLead || NBF === 'sus' && !nSus) NBF = '';
@@ -2099,7 +2120,7 @@
       </section>
       <section class="ruled nb-sec${NBF ? ' f-' + NBF : ''}"><h3 class="hh">${T`메모 <small>${notes.length}</small>`}${fb('lead', nLead, T`유력 ${nLead}`)}${fb('sus', nSus, T`의심 ${nSus}`)}</h3>${notes.length >= 6 && !ST.solved ? `<p class="nb-jump-row"><button type="button" class="nb-jump" data-open-rep>${esc(FORM().open)} →</button></p>` : ''}
         ${(C.tips || []).length ? `<ol class="notes">${C.tips.map(t => `<li class="tip">※ ${inline(t)}</li>`).join('')}</ol>` : notes.length ? '' : T('<ol class="notes"><li class="tip">아직 적은 메모가 없다.</li></ol>')}
-        ${noteGroups(notes).map(g => `<details class="ng${g.items.some(([n]) => LM.has(n.id)) ? ' has-lead' : ''}${g.items.some(([n]) => isSus(n)) ? ' has-sus' : ''}" data-ng="${esc(g.src)}"${NGSHUT.has(C.id + '|' + g.src) && !NBF ? '' : ' open'}><summary><span class="ng-t">${esc(g.src)}</span> <small>${g.items.length}</small></summary><ol class="notes">${g.items.map(([n, i]) => `<li data-nid="${n.id}"${LM.has(n.id) || isSus(n) ? ` class="${[LM.has(n.id) ? 'lead' : '', isSus(n) ? 'sus' : ''].join(' ').trim()}"` : ''} style="--r:${(hash(n.ref) % 5 - 2) * 0.25}deg"><span class="n">${i + 1}.</span> ${esc(n.t)}${repMark(n)}${LM.has(n.id) ? leadMark(LM.get(n.id), 'button').replace('class="n-lead"', `class="n-lead" data-lead="${n.id}"`) : ''}${susB(n, i)}<button type="button" class="del" data-del="${n.id}" aria-label="${T`메모 ${i + 1} 지우기`}">×</button></li>`).join('')}</ol></details>`).join('')}
+        ${noteGroups(notes).map(g => `<details class="ng${g.items.some(([n]) => LM.has(n.id)) ? ' has-lead' : ''}${g.items.some(([n]) => isSus(n)) ? ' has-sus' : ''}" data-ng="${esc(g.src)}"${NGSHUT.has(C.id + '|' + g.src) && !NBF ? '' : ' open'}><summary><span class="ng-t">${esc(g.src)}</span> <small>${g.items.length}</small></summary><ol class="notes">${g.items.map(([n, i]) => `<li data-nid="${n.id}"${LM.has(n.id) || isSus(n) ? ` class="${[LM.has(n.id) ? 'lead' : '', isSus(n) ? 'sus' : ''].join(' ').trim()}"` : ''} style="--r:${(hash(n.ref) % 5 - 2) * 0.25}deg"><span class="n">${i + 1}.</span> ${esc(n.t)}${alsoMark(n)}${repMark(n)}${LM.has(n.id) ? leadMark(LM.get(n.id), 'button').replace('class="n-lead"', `class="n-lead" data-lead="${n.id}"`) : ''}${susB(n, i)}<button type="button" class="del" data-del="${n.id}" aria-label="${T`메모 ${i + 1} 지우기`}">×</button></li>`).join('')}</ol></details>`).join('')}
       </section>
       <section class="ruled nb-sec nb-rep"><h3 class="hh">${esc(FORM().title)}</h3>
         <p class="rep-sum">${T`${esc(FORM().short)} <b>${ST.report.culprit && C.keywords[ST.report.culprit] ? esc(kl(ST.report.culprit)) : '—'}</b> · 증거 <b>${sol.claims.filter(cl => ST.report.claims[cl.id] && (ST.notes.some(n => String(n.id) === String(ST.report.claims[cl.id])) || (ST.solved && ST.report.kept && ST.report.kept[String(ST.report.claims[cl.id])]))).length}</b> / ${sol.claims.length}`}</p>
@@ -2888,15 +2909,27 @@
   }
   // 수첩에 옮겨 적기 (여러 줄을 한 번에). 읽는 칸에서 저절로 적은 것도, ✎ 를 눌러 적은 것도 여기로
   function collect(refs) {
-    const BY = {}, before = census(BY), had = proof().length, ids = [];
+    const BY = {}, before = census(BY), had = proof().length, ids = [], more = [];
     refs.forEach(ref => {
       const p = PIN[ref];
       if (!p || noteAt(ref) >= 0) return;
-      ST.notes.push({ id: ++ST.nid, ref, t: p.t, f: p.f, src: p.src }); ids.push(ST.nid);
       if (ST.drop) ST.drop = ST.drop.filter(x => x !== ref);
+      // 같은 사실을 다른 기록·다른 사람에게서 또 들으면 메모를 늘리지 않고 그 메모에 출처만 더한다 (수첩이 같은 말로 차지 않게)
+      const same = p.f && ST.notes.find(n => n.f === p.f);
+      if (same) { (same.also ||= []).push({ ref, src: p.src }); if (!more.includes(same.id)) more.push(same.id); return; }
+      ST.notes.push({ id: ++ST.nid, ref, t: p.t, f: p.f, src: p.src }); ids.push(ST.nid);
     });
-    if (!ids.length) return;
+    if (!ids.length && !more.length) return;
     save();
+    if (!ids.length) { // 출처만 더했다: 그 메모에 형광펜 한 번
+      sfx('ink');
+      $$('.pin').forEach(b => { if (refs.includes(b.dataset.pin)) { b.classList.add('on'); b.innerHTML = IC_TICK; b.setAttribute('aria-label', T('수첩에 적음')); b.dataset.tip = T('수첩에 적음'); } });
+      renderNotebook();
+      more.forEach(id => { const li = $(`.notes li[data-nid="${id}"]`); if (!li) return; const d = li.closest('details'); if (d && !d.open) { NGSHUT.delete(C.id + '|' + d.dataset.ng); d.open = true; } li.classList.remove('again'); void li.offsetWidth; li.classList.add('again'); });
+      toast(T`메모 ${more.map(noteNo).join('·')}번 — 다른 곳에서도 같은 사실이 나왔다`);
+      liveSync(); leadNews();
+      return;
+    }
     if (census() > before) cue('clue'); else sfx('ink');
     $$('.pin').forEach(b => { if (refs.includes(b.dataset.pin)) { b.classList.add('on'); b.innerHTML = IC_TICK; b.setAttribute('aria-label', T('수첩에 적음')); b.dataset.tip = T('수첩에 적음'); } });
     renderNotebook();
@@ -2959,12 +2992,12 @@
     if (n && !ST.solved) UNDO = { c: C.id, n, at: ST.notes.indexOf(n), cl: Object.keys(ST.report.claims).filter(k => String(ST.report.claims[k]) === String(id)) };
     const to = had && (sib ? `.notes li[data-nid="${sib.dataset.nid}"] .del` : grp ? `.ng[data-ng="${CSS.escape(grp.dataset.ng)}"] > summary` : '');
     ST.notes = ST.notes.filter(x => x.id !== id);
-    if (n && n.f) (ST.drop ||= []).push(n.ref); // 지운 증거 줄은 읽어도 다시 적지 않는다 (✎ 를 누르면 다시 적힌다)
+    if (n && n.f) (ST.drop ||= []).push(...refsOf(n)); // 지운 증거 줄은 읽어도 다시 적지 않는다 (✎ 를 누르면 다시 적힌다). 같은 사실을 들은 다른 줄도
     // 종결된 보고서는 결재가 끝난 서류: 수첩에서 메모를 지워도 보고서에 붙은 증거는 그대로 남는다 (지운 메모의 글은 보고서 쪽에 옮겨 둔다)
     if (ST.solved) { if (n && Object.values(ST.report.claims).some(v => String(v) === String(id))) (ST.report.kept ||= {})[String(id)] = { id: n.id, t: n.t, src: n.src }; }
     else Object.keys(ST.report.claims).forEach(k => { if (String(ST.report.claims[k]) === String(id)) ST.report.claims[k] = ''; });
     save();
-    if (n) $$('.pin').forEach(b => { if (b.dataset.pin === n.ref) { b.classList.remove('on'); b.innerHTML = IC_PEN; b.setAttribute('aria-label', T('수첩에 적기')); b.dataset.tip = T('수첩에 적기'); } });
+    if (n) $$('.pin').forEach(b => { if (refsOf(n).includes(b.dataset.pin)) { b.classList.remove('on'); b.innerHTML = IC_PEN; b.setAttribute('aria-label', T('수첩에 적기')); b.dataset.tip = T('수첩에 적기'); } });
     renderRep();
     const f = to && ($(to) || $('[data-open-rep]'));
     if (f && (document.activeElement === document.body || !document.activeElement)) f.focus({ preventScroll: true });
@@ -2976,7 +3009,7 @@
     const u = UNDO; UNDO = null;
     if (!u || !C || C.id !== u.c || ST.notes.some(x => x.id === u.n.id)) return;
     ST.notes.splice(Math.min(u.at, ST.notes.length), 0, u.n);
-    if (u.n.f && ST.drop) { const i = ST.drop.lastIndexOf(u.n.ref); if (i >= 0) ST.drop.splice(i, 1); }
+    if (u.n.f && ST.drop) refsOf(u.n).forEach(r => { const i = ST.drop.lastIndexOf(r); if (i >= 0) ST.drop.splice(i, 1); });
     u.cl.forEach(k => { if (!ST.report.claims[k]) ST.report.claims[k] = u.n.id; });
     save(); refreshAll(); renderRep();
     land(`.notes li[data-nid="${u.n.id}"] .del`, true);
