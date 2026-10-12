@@ -98,7 +98,7 @@
 @media (hover:hover){.lv-waitrow button:hover{opacity:1;background:rgba(0,0,0,.05)}}
 
 /* 종결 뒤: 수사에 든 시간 */
-.lv-fin{margin:8px 0 0;font:12px var(--f-mono);letter-spacing:.03em;opacity:.8}
+.lv-fin{clear:both;margin:8px 0 0;font:12px var(--f-mono);letter-spacing:.03em;opacity:.8} /* 결말의 얼굴 사진과 종결 도장 사이 좁은 틈에 끼면 영어 낱말이 「investigati/on」처럼 잘린다: 그 밑으로 */
 
 /* ───────── 기록실: 당직 · 현행 사건 ───────── */
 .duty{margin-top:44px}

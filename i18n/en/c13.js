@@ -777,6 +777,7 @@ MG.I18N.put("en", "c13", {
 "8vuk91a0hx": "Somebody stuck something under my AC unit? Oh my… Nobody even walks that alley at night.",
 "rvo8oorg4w": "The alley out front? Nobody walks it at night. It's pitch dark apart from the light at the shop's back door.",
 "o0mc199k3n": "The convenience store fella came by last month, asked could he turn the camera behind his store toward my wall, on account of the trash. Right where my AC unit is. I told him go ahead.",
+"1zf42522mb3": "A stakeout? That is police business. If you need a parking spot, you can have one. I have my church group at seven.",
 "1iedyni8ldy": "I gave 'em the parking spot at six-thirty and went to my church cell group at seven. Got back after nine. Kept my phone in my bag the whole time.",
 "t8erbiafwf": "Mr. Oh? Real friendly. Always at that store, even nights. But he's been looking awful worn lately.",
 "1bxq0m5n6p7": "What's that, now? My grandkid sends my text messages for me.",
