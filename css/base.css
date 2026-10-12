@@ -771,3 +771,6 @@ body:has(.case-view[data-graphic])::before{background:radial-gradient(ellipse at
 .per-h.has-face.mini.pop>div{translate:50px 0;transition:translate .16s ease-out}
 @media (max-width:720px){.per-h.has-face.mini.pop>div{translate:40px 0}}
 @media (prefers-reduced-motion:reduce){.per-h.has-face.mini.pop .face.lg{scale:none}.per-h.has-face.mini.pop>div{translate:none}}
+/* 탐문: 그 사람과 얽힌 단어 몇 개 뒤에 접어 둔 수첩의 나머지 단어를 펼치는 단추 — 단어 칩과 헷갈리지 않게 손글씨 대신 작은 활자, 테두리만 */
+.chip.fold{border-style:solid;border-color:rgba(80,64,40,.45);background:none;font:13px/1.35 var(--f-web);opacity:.9}
+@media (hover:hover){.chip.fold:hover{background:rgba(0,0,0,.05)}}

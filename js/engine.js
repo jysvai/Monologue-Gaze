@@ -479,24 +479,51 @@
     if (p.art && C.art[p.art]) return `<span class="per-art${big ? ' lg' : ''}">${art(p.art)}</span>`;
     return `<span class="ava${big ? ' lg' : ''}" style="--c:${esc(p.color || '#6b6155')}">${esc(p.initial || p.name[0])}</span>`;
   }
-  // 사람을 펼칠 때: 아직 묻지 않은 단어를 앞에, 물어본 것은 뒤로. 펼쳐 둔 동안에는 차례를 그대로 둔다 (누를 때마다 칩이 손 밑에서 움직이지 않게)
+  // 이 사람과 얽힌 단어: 그 사람이 한 대답에 나온 단어가 가장 가깝고 (꺼낸 말이 다음 물음으로), 다음이 직함·있는 곳·소개에 든 단어,
+  // 그다음 읽은 기록에서 그 사람과 한 덩이에 함께 나온 단어 (덩이가 작을수록 가깝다). ★3 은 그 사람이 따로 할 말이 있는 단어도 조금 앞으로
+  function tieOf(p) {
+    const t = {}, add = (k, w) => { t[k] = (t[k] || 0) + w; };
+    if (rawAns(p, p.key) != null) add(p.key, 2);
+    bagOf([p.role, p.where, p.intro || []]).k.forEach(k => add(k, 2));
+    nudgeIndex().forEach(b => {
+      if (!b.seen()) return;
+      if (b.ask && b.ask.p === p.id) return b.k.forEach(k => add(k, 3));
+      if (b.go && b.go.t === 'person' && b.go.id === p.id) return; // 그 사람의 소개 덩이는 위에서 셌다
+      if (!b.k.has(p.key)) return;
+      const w = Math.min(1.5, 4 / Math.max(1, b.k.size - 1));
+      b.k.forEach(k => add(k, w));
+    });
+    if (lv() <= 3) Object.keys(p.ask || {}).forEach(k => add(k, 1));
+    return t;
+  }
+  // 사람을 펼칠 때: 그 사람과 얽힌, 아직 묻지 않은 단어 몇 개만 앞줄에 — 수첩의 단어를 한꺼번에 다 늘어놓으면 아무거나 눌러 보게 된다.
+  // 나머지는 「수첩의 다른 단어 N개」 뒤에 접어 두고 (펼치면 무엇이든 물을 수 있다), 물어본 것은 맨 뒤. 펼쳐 둔 동안에는 차례를 그대로 둔다 (누를 때마다 칩이 손 밑에서 움직이지 않게)
   let CHIPS = null;
+  const CHIP_FRONT = 8;
   function chipOrder(p, ks) {
     if (!CHIPS || CHIPS.id !== C.id + '|' + p.id) {
-      const asked = ST.asked[p.id] || [], fresh = ks.filter(k => !asked.includes(askEntry(p, k)));
-      CHIPS = { id: C.id + '|' + p.id, keys: [...fresh, ...ks.filter(k => !fresh.includes(k))], cut: fresh.length };
+      const asked = ST.asked[p.id] || [], tie = tieOf(p), age = k => ST.keys.indexOf(k);
+      const fresh = ks.filter(k => !asked.includes(askEntry(p, k))).sort((a, b) => (tie[b] || 0) - (tie[a] || 0) || age(b) - age(a)); // 얽힘이 같으면 최근에 적은 단어부터
+      const front = fresh.filter(k => tie[k] > 0).slice(0, CHIP_FRONT);
+      fresh.filter(k => !front.includes(k)).slice(0, Math.max(0, 5 - front.length)).forEach(k => front.push(k)); // 얽힌 단어가 적으면 최근 단어로 다섯까지는 채운다
+      CHIPS = { id: C.id + '|' + p.id, keys: [...fresh, ...ks.filter(k => !fresh.includes(k))], cut: fresh.length, front: new Set(front), open: false };
     }
-    const extra = ks.filter(k => !CHIPS.keys.includes(k)); // 이야기 도중에 새로 적은 단어는 아직 묻지 않은 단어 끝에
-    if (extra.length) { CHIPS.keys.splice(CHIPS.cut, 0, ...extra); CHIPS.cut += extra.length; }
+    const extra = ks.filter(k => !CHIPS.keys.includes(k)); // 이야기 도중에 새로 적은 단어는 아직 묻지 않은 단어 끝에, 앞줄에 (방금 들은 말에서 나온 단어다)
+    if (extra.length) { CHIPS.keys.splice(CHIPS.cut, 0, ...extra); CHIPS.cut += extra.length; extra.forEach(k => CHIPS.front.add(k)); }
+    const nk = NUDGE && NUDGE.c === C.id && /^ask:/.test(NUDGE.key || '') && NUDGE.key.slice(4).split('|'); // 「짚어 보기」가 이 사람에게 물으라고 짚은 단어는 늘 앞줄에
+    if (nk && nk[0] === p.id) CHIPS.front.add(nk[1].replace(/!$/, ''));
     return CHIPS.keys.filter(k => ks.includes(k));
   }
   function askChips(p) {
     const asked = ST.asked[p.id] || [];
     const ord = chipOrder(p, ST.keys.filter(k => C.keywords[k] && (k !== p.key || rawAns(p, k) != null)));
-    return ord.map(k => { // 제 이름은 따로 할 말(self)이 있을 때만 묻는다 — 없으면 「모르겠다」가 되돌아와 어색하다
+    const chip = (k, hid) => { // 제 이름은 따로 할 말(self)이 있을 때만 묻는다 — 없으면 「모르겠다」가 되돌아와 어색하다
       const state = asked.includes(k) || asked.includes(askEntry(p, k)) ? ' done' : ''; // 메모로 따질 대답이 남았어도 칩은 「물어봄」 — 따지는 것은 그 대답 밑에서
-      return `<button type="button" class="chip${state}" data-ask="${k}">${esc(kl(k))}${state ? T('<span class="sr"> (물어봄)</span>') : ''}</button>`; // 흐림은 눈에만 보이니 말로도
-    }).join('');
+      return `<button type="button" class="chip${state}" data-ask="${k}"${hid ? ' hidden' : ''}>${esc(kl(k))}${state ? T('<span class="sr"> (물어봄)</span>') : ''}</button>`; // 흐림은 눈에만 보이니 말로도
+    };
+    const front = ord.filter(k => CHIPS.front.has(k)), rest = ord.filter(k => !CHIPS.front.has(k));
+    if (!rest.length) return front.map(k => chip(k)).join('');
+    return front.map(k => chip(k)).join('') + `<button type="button" class="chip fold" data-chips-more aria-expanded="${CHIPS.open}">${CHIPS.open ? T('접기') : T`수첩의 다른 단어 ${rest.length}개`}</button>` + rest.map(k => chip(k, !CHIPS.open)).join('');
   }
   /* 탐문은 대화처럼: 내가 묻는 말풍선 → 상대가 한 글자씩 답한다. 앞의 (…) 는 몸짓, 「— 」 로 시작하면 내가 끼어든 말 */
   const jong = w => { // 받침이 있나 (조사 고르기)
@@ -1722,7 +1749,7 @@
     if (fd && (rows() > fd.n || fd.pill)) { if (fd.low) el.scrollTop = el.scrollHeight; else newBelow(el); }
     $('#stageBody').classList.toggle('reading', !!(o && h));
     el.classList.toggle('room', !!(o && o.t === 'person' && h) && (ageOf(C) !== 'old' || document.body.classList.contains('has-room'))); // 탐문: 읽는 칸이 그 사건의 방 (방 그림이 없는 1960년 전 사건은 종이 그대로)
-    el.dataset.open = o && h ? o.t : ''; // 무엇을 펼쳤나: 종이 사건의 문서는 그 사건 책상 위에 (css/era.css)
+    el.dataset.view = o && h ? o.t : ''; // 무엇을 펼쳤나: 종이 사건의 문서는 그 사건 책상 위에 (css/era.css). data-open 은 기록실 폴더의 「사건 열기」라 쓰지 않는다
     recTick();
     const ph = el.querySelector('.per-h.has-face'); if (ph && wasMini) ph.classList.add('mini'); el.style.scrollPaddingTop = ph ? ph.getBoundingClientRect().height + 8 + 'px' : ''; // 붙박이 얼굴 칸 밑으로 짚는다 (scrollIntoView 가 메모 고르기 머리 등을 얼굴 뒤에 숨기지 않게)
     edges();
@@ -3468,6 +3495,11 @@
       if ((el = t.closest('[data-ph]'))) return photoClick(el, e);
       if ((el = t.closest('[data-press-note]'))) return choosePress(el.dataset.pressNote);
       if (t.closest('[data-press-cancel]')) { const k = PICK && PICK.k; PICK = null; renderRead(); land([k ? `#paneRead [data-vs="${k}"]` : '', '#askChips .chip'].filter(Boolean), true); const vb = k && $(`#paneRead [data-vs="${k}"]`); if (vb) vb.scrollIntoView({ block: 'nearest' }); return; } // 그만두면 방금 그 대답의 「메모를 내민다」로
+      if ((el = t.closest('[data-chips-more]'))) { // 접어 둔 수첩의 다른 단어를 펼치거나 접는다 (펼친 채로 두면 이 사람을 보는 동안 그대로)
+        CHIPS.open = !CHIPS.open; const o = ST.view.open, box = $('#askChips');
+        if (box && o && o.t === 'person') { box.innerHTML = askChips(C.people[o.id]); const b = $('#askChips [data-chips-more]'); if (b) b.focus(); }
+        return;
+      }
       if ((el = t.closest('[data-ask]'))) return ask(el.dataset.ask);
       if ((el = t.closest('[data-search]'))) return search(el.dataset.search);
       if ((el = t.closest('[data-chip]'))) return chip(el.dataset.chip);

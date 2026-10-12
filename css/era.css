@@ -96,7 +96,7 @@ body[data-age="y2k"] .per-h .rec{border-radius:0;background:transparent;color:#f
  * 방: 탐문 칸 맨 위에 무대 배경처럼 깔고, 아래로 갈수록 그 방의 빛깔(--room-base)로 스민다 — 휴대폰에서 칸이 길게 늘어나도 그림은 위에만
  * 책상: 책상 바닥 전체, 그리고 종이 사건은 문서를 펼치는 칸도 그 사건의 책상 위 */
 body.has-desk[data-screen="case"]{background-image:linear-gradient(rgba(8,7,6,.5),rgba(8,7,6,.66)),var(--case-desk);background-size:cover;background-position:center;background-attachment:fixed}
-@media (min-width:721px){body.has-desk .case-view[data-frame="papers"] .pane-read[data-open="doc"]{background:linear-gradient(rgba(0,0,0,.06),rgba(0,0,0,.14)),var(--case-desk) center/cover no-repeat}}
+@media (min-width:721px){body.has-desk .case-view[data-frame="papers"] .pane-read[data-view="doc"]{background:linear-gradient(rgba(0,0,0,.06),rgba(0,0,0,.14)),var(--case-desk) center/cover no-repeat}}
 body.has-room .pane-read.room{isolation:isolate;--room-ink:#f3eee2;--room-soft:#d9d0bd;background:var(--room-base,#1c1b19)}
 body.has-room .pane-read.room::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:0;aspect-ratio:3/2;background:var(--case-room) center top/cover no-repeat;-webkit-mask-image:linear-gradient(#000 38%,transparent 96%);mask-image:linear-gradient(#000 38%,transparent 96%);pointer-events:none}
 /* 얼굴 머리줄: 맨 위에서는 방이 비치게 (칸 위쪽과 같은 자리의 그림), 내려 읽어 줄어들면 방 윗줄을 어둡게 깐 띠 */
