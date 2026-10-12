@@ -512,6 +512,10 @@
     if (extra.length) { CHIPS.keys.splice(CHIPS.cut, 0, ...extra); CHIPS.cut += extra.length; extra.forEach(k => CHIPS.front.add(k)); }
     const nk = NUDGE && NUDGE.c === C.id && /^ask:/.test(NUDGE.key || '') && NUDGE.key.slice(4).split('|'); // 「짚어 보기」가 이 사람에게 물으라고 짚은 단어는 늘 앞줄에
     if (nk && nk[0] === p.id) CHIPS.front.add(nk[1].replace(/!$/, ''));
+    // 앞줄을 거의 다 물었으면 다음으로 얽힌 단어를 앞줄 끝에 채운다 (접힌 칸을 열지 않아도 이야기가 이어지게) — 이미 있던 칩은 제자리
+    const asked = ST.asked[p.id] || [], open = k => ks.includes(k) && !asked.includes(k) && !asked.includes(askEntry(p, k));
+    const left = [...CHIPS.front].filter(open).length;
+    if (left < 4) CHIPS.keys.filter(k => open(k) && !CHIPS.front.has(k)).slice(0, 4 - left).forEach(k => CHIPS.front.add(k));
     return CHIPS.keys.filter(k => ks.includes(k));
   }
   function askChips(p) {
