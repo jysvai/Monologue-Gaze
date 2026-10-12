@@ -752,7 +752,7 @@ MG.I18N.put("en", "c09", {
 "1bdb2bzw7so": "So-ra remembered the parcel. “He said it first — ‘Here for your parcel, miss?’”",
 "1prdh7jdnwp": "So-ra knows nothing about a parcel. Does she really not remember?",
 "ahivvd4rh1": "Hanbit Express handover record: Oct. 14, 19:10, parcel for Min○○ (223-9, semi-basement) left at No. 217-3, 2F. Signed: “Yuk”.",
-"9pgna6wssr": "Where was So-ra’s parcel left that day? What does the courier depot’s handover log say?",
+"tsergpyg1k": "Is there a record with his address on it?",
 "8iptsd9irw": "For the parcel. That evening So-ra’s parcel was left at No. 217-3, 2F. He spoke first: “Here for your parcel, miss?”",
 "2d2ihguvtzs": "Where in Eungol-dong is a house like that?",
 "1b1kcpvp35a": "Photo of 217-3: one concrete base step, seven iron treads, the landing, then five going the other way. Thirteen in all.",

@@ -752,7 +752,7 @@ MG.I18N.put("de", "c09", {
 "1bdb2bzw7so": "So-ra erinnerte sich an das Paket. „Er hat zuerst gefragt: ‚Sie sind die junge Frau, die das Paket abholen will, oder?‘“",
 "1prdh7jdnwp": "So-ra weiß von keinem Paket. Erinnert sie sich wirklich nicht?",
 "ahivvd4rh1": "Abgabeprotokoll Hanbit: 14. Oktober, 19:10, Paket für Min○○ (223-9, Souterrain) bei Nr. 217-3, OG abgegeben. Unterschrift: „Yuk“.",
-"9pgna6wssr": "Wo wurde So-ras Paket an dem Tag abgegeben? Was steht im Übergabebuch der Zustellbasis?",
+"tsergpyg1k": "Gibt es eine Unterlage, in der seine Adresse steht?",
 "8iptsd9irw": "Wegen des Pakets. An dem Abend war So-ras Paket bei Nr. 217-3, OG abgegeben worden. Er sprach sie zuerst an: „Sie sind die junge Frau, die das Paket abholen will, oder?“",
 "2d2ihguvtzs": "Wo in Eungol-dong steht so ein Haus?",
 "1b1kcpvp35a": "Foto von 217-3: eine Betonstufe als Sockel, sieben eiserne Trittstufen, der Treppenabsatz, dann fünf in Gegenrichtung. Insgesamt dreizehn.",
