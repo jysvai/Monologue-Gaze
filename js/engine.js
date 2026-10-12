@@ -1012,7 +1012,8 @@
    * 들은 말 칸을 누르면 그 사람에게 가서 그 대답에 메모를 내민다 (탐문과 같은 따지기). 깨뜨린 말에는 줄을 긋고 truth 를 적는다 */
   // ask 는 'k_a|k_b' 처럼 여럿일 수 있다: 같은 말을 다른 물음으로도 들으면 (어느 쪽을 깨도 줄을 긋는다)
   const abKeys = c => String(c.ask).split('|');
-  const abShown = (r, c) => c.ask ? !!r.who && abKeys(c).some(k => (ST.asked[r.who] || []).some(e => e === k || e === k + '!')) : c.f ? !!thNote(c) : ok(c.need);
+  // 들은 말만 적힌다: 같은 기록으로 이미 털어놓은 사람에게 처음 물어 곧장 털어놓은 물음(k! 만 있음)은 그 앞의 거짓말을 들은 적이 없다
+  const abShown = (r, c) => c.ask ? !!r.who && abKeys(c).some(k => (ST.asked[r.who] || []).includes(k)) : c.f ? !!thNote(c) : ok(c.need);
   const abBroke = (r, c) => !!(c.ask && r.who && abKeys(c).some(k => (ST.asked[r.who] || []).includes(k + '!') && isPressAsk(C.people[r.who], k) && !isSoft(C.people[r.who], k))); // 떠올려 고친 대답(soft)은 거짓이 아니다 — 탐문처럼 줄을 긋지 않는다
   function alibiHtml(s) {
     if (!s) return '';
@@ -3293,7 +3294,8 @@
     const [xid, q, r] = arg.split('|').map((v, i) => (i ? +v : v));
     const inCell = p => Math.min(3, Math.floor(p.x / 25)) === q && Math.min(2, Math.floor(p.y / (100 / 3))) === r;
     // 가운데가 이 칸에 든 것부터, 없으면 동그라미가 이 칸에 걸친 것 (칸 경계에 걸친 지점을 그 옆 칸에서만 찾을 수 있으면 「이미 찾았다」에 가려진다)
-    const touch = p => { const x0 = q * 25, y0 = r * 100 / 3, cx = Math.max(x0, Math.min(p.x, x0 + 25)), cy = Math.max(y0, Math.min(p.y, y0 + 100 / 3)); return Math.hypot(p.x - cx, p.y - cy) <= (p.r || 7); };
+    const ph = $(`[data-ph="${CSS.escape(xid)}"]`), k = ph && ph.clientWidth ? ph.clientHeight / ph.clientWidth : 0.75; // 동그라미 반지름은 사진 너비 기준 (photoClick 과 같게)
+    const touch = p => { const x0 = q * 25, y0 = r * 100 / 3, cx = Math.max(x0, Math.min(p.x, x0 + 25)), cy = Math.max(y0, Math.min(p.y, y0 + 100 / 3)); return Math.hypot(p.x - cx, (p.y - cy) * k) <= (p.r || 7); };
     if (photoFind(xid, inCell) || photoFind(xid, touch)) return;
     const x = C._scenes[xid], old = x && sceneSpots(x).find(sp => ST.unl.includes(sp.id) && inCell(sp)); // 이미 찾은 것만 있는 칸
     toast(old ? T`이 칸에서는 이미 찾았다: ${plain(old.label)}` : T('이 칸에는 눈에 걸리는 것이 없다'));

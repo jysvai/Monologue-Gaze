@@ -701,6 +701,7 @@ MG.I18N.put("de", "c09", {
 "xp1lwiy5ym": "(schweigt lange) … Das war wohl meine Mutter. Die ruft abends manchmal vom Land aus an.",
 "5ljpltjypx": "— Unbeantwortete Anrufe stehen nicht im Verbindungsnachweis. Um 22:17 Uhr hat in dem Haus jemand abgenommen, 1 Minute 12 Sekunden lang.",
 "1uzn3f3r6am": "Festnetz? Wer benutzt das heute noch. Das Ding ist so gut wie überflüssig.",
+"1axvy3gj5ae": "(Der Blick geht zur Treppe.) …Ein paar hab ich weggeräumt. Wenn's kalt wird, ist Schluss mit dem Beet. Wann genau, weiß ich doch nicht mehr.",
 "248smrzq2a8": "Wenn's kalt wird, ist Schluss mit dem Beet. Und der Schrank war alt, den hab ich weggeworfen. Was ist daran seltsam?",
 "15es0h6g749": "— Und das Telefon?",
 "d7rnscppu6": "… War kaputt.",
