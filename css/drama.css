@@ -101,6 +101,7 @@
 .ng[open]>summary::before{transform:rotate(90deg)}
 .ng>summary small{font-size:15px;opacity:.8}
 .ng-t{display:inline-block;max-width:calc(100% - 3.4em);overflow:hidden;text-overflow:ellipsis;vertical-align:top} /* 긴 문서 이름은 말줄임, 메모 수는 끝까지 보인다 */
+.ng>summary{height:auto;min-height:32px;white-space:normal;text-overflow:clip}.ng-t{display:inline;max-width:none;overflow:visible} /* 긴 문서 이름(전보 · 텔렉스 머리)은 줄을 바꿔 다 보인다 — 줄 높이가 공책 줄과 같아 줄이 어긋나지 않는다 */
 
 /* ───────── 단서 발견 효과 ───────── */
 #app.cue-clue .stage-frame{animation:cueClue .9s ease-out}

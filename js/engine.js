@@ -322,7 +322,9 @@
   const noteAt = ref => { const p = PIN[ref]; return ST.notes.findIndex(n => n.ref === ref || (p && p.f && n.f === p.f && n.t === p.t)); };
   function pinBtn(ref, t, f, src, keep) {
     if (NOPIN) return '';
-    PIN[ref] = { t: plain(t).trim(), f: f || null, src };
+    // memoAt: 전보처럼 날짜·시각·접수국이 제목에만 있는 기록은 메모에 제목의 「— 」 뒤를 앞에 붙인다 (메모만 보고도 언제 어디서 온 것인지)
+    const d0 = C && C.docs[String(ref).split('#')[0]], at = d0 && d0.memoAt ? plain(d0.title).replace(/^[^—]*—+\s*(.)/, (m, c) => c.toUpperCase()) : ''; // 「received …」 → 「Received …」
+    PIN[ref] = { t: (at ? at + ' · ' : '') + plain(t).trim(), f: f || null, src };
     if (ST) { const h = ST.notes.find(n => n.ref === ref && !n.t); if (h) { h.t = PIN[ref].t; save(); } }
     const on = noteAt(ref) >= 0;
     if (!f && !keep && !on) { delete PIN[ref]; return ''; }
@@ -625,7 +627,7 @@
     const list = groups.map(([g, t, ns]) => ns.length || (g === 'sus' && !(ST.sus || []).length) ? `<details class="pk-g pk-${g}" data-pk-g="${g}"${G[g] ?? (g === 'lead' || g === 'sus') ? ' open' : ''}><summary>${t} <small>${ns.length}</small></summary>${ns.length ? ns.map(opt).join('') : `<p class="pk-hint">${T('수첩의 메모 끝 「?」를 누르면 의심으로 표시해 둔다. 표시한 메모는 여기 따로 모인다.')}</p>`}</details>` : '').join('');
     return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
       <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${groups[0][2].length ? '' : `<p class="pk-hint pk-nolead">${partFit ? T('이 대답에 들이밀 만한 메모는 있지만, 함께 맞댈 기록이 아직 모자라다.') : T('이 사람이 한 말과 어긋나 보이는 메모는 아직 수첩에 없다.')}</p>`}${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
-      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${T('이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.')}</p>` : ''}${PICK.other ? `<p class="vs-part">${T('이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.')}</p>` : ''}${PICK.later ? `<p class="vs-part">${T('이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 다른 것부터 물어본다.')}</p>` : ''}
+      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${T('이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.')}</p>` : ''}${PICK.other ? `<p class="vs-part">${T('이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.')}</p>` : ''}${PICK.later ? `<p class="vs-part">${PICK.laterK ? T`이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 「${esc(kl(PICK.laterK))}」부터 물어본다.` : T('이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 다른 것부터 물어본다.')}</p>` : ''}
       ${groups[0][2].length ? `<p class="vs-left">${T`엉뚱한 메모를 ${VS_MAX() - ((vsOf(p) || {}).n || 0)}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.`}</p>` : ''}</div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
   }
   // 고르는 칸을 다시 그린다: 찾던 낱말 · 목록을 굴린 자리는 그대로 (메모가 많아도 방금 누른 메모가 제자리에 남게)
@@ -663,6 +665,7 @@
     const fitAsk = [...Object.keys(p.ask || {}), ...(p.key ? [p.key] : [])].filter(k2 => k2 !== k && isPressAsk(p, k2) && wantOf(k2).some(w => fIs(n.f, w)));
     PICK.other = !fits && !near && ((leadMap().get(n.id) || { vs: [] }).vs.some(v => v.pid === p.id && v.k !== k) || fitAsk.some(k2 => heard.includes(k2))); // 유력한 메모를 같은 사람의 다른 대답에 댔다 — 길은 맞으니 헛짚기로 치지 않고 그 대답 쪽으로
     PICK.later = !fits && !near && !PICK.other && fitAsk.length > 0;
+    PICK.laterK = PICK.later && lv() < 5 ? fitAsk.find(k2 => !heard.includes(k2) && ST.keys.includes(k2)) || null : null; // 수첩에 있는 단어면 무엇부터 물을지 댄다 (★5 는 대지 않는다)
     PICK.miss = fits ? (isSoft(p, k) ? T('(메모를 한참 들여다본다)') : T('(메모를 보고 잠시 멈칫한다)')) // 몸짓만: 하오체로 말하는 사람이 존댓말로 되묻지 않게 (밑의 줄이 무엇이 모자란지 알려 준다)
       : near ? near.a : missLine(p, isSoft(p, k), (tmp().nope ||= {})[p.id] = ((tmp().nope[p.id] ?? -1) + 1)); // 고르는 칸을 다시 열어도 같은 말만 되풀이하지 않게: 사람마다 센다 // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다 (헛짚기로 치지 않는다)
     sfx('miss');
@@ -1085,7 +1088,7 @@
     return `<article class="doc skin-${esc(x.skin || 'lab')}"><header class="doc-h"><p class="doc-k">${T`대조 감정`}</p><h3 class="doc-t">${inline(x.title)}</h3>${x.meta ? `<p class="doc-m">${inline(x.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(x.intro, `${x.id}@i`, plain(x.title))}
         <div class="cmp-ev"><p class="cmp-lab">${esc(ev.label || T('대조할 증거'))}</p>${ev.art ? `<div class="cmp-art">${art(ev.art, 'art', true)}</div>` : ''}${ev.t ? `<p class="cmp-d">${inline(ev.t)}</p>` : ''}</div>
-        <p class="cmp-q">${inline(x.q || T('어느 것과 일치하는가?'))}</p>
+        <p class="cmp-q">${inline(x.q || T('어느 것과 일치하는가?'))}${liveOn() && !solved && !wait && lcost('compare') > 0 ? `<small class="rq-cost">${T`한 번 맡기는 데 ${hm(lcost('compare'))} — 맞든 틀리든 시간이 흐른다`}</small>` : ''}</p>
         <div class="cmp-opts">${(x.options || []).map(opt).join('')}</div>
         <p class="c-msg">${esc(msg)}</p>${!solved && x.hint && fails >= hintAt ? `<p class="lock-h2">${inline(x.hint)}</p>` : ''}
         ${solved ? `<div class="c-done">${blocks(x.solved, `${x.id}@s`, plain(x.title))}</div>` : ''}</div></article>`;
@@ -1499,7 +1502,7 @@
       if (!hits.length) res += C.sources.filter(o => o.id !== s.id && o.type === 'archive' && srcVisible(o)).map(o => [o, archiveHits(o, q).length]).filter(x => x[1])
         .map(([o, n]) => `<p class="res-else"><button type="button" class="nb-jump" data-src="${esc(o.id)}" data-srcq="${esc(q)}">${T`${esc(o.name)}에는 ${n}건 있다`} →</button></p>`).join('');
     }
-    const start = (s.start || []).map(id => C.docs[id]).filter(d => d && ok(d.need));
+    const start = (s.start || []).map(id => C.docs[id]).filter(d => d && ok(d.need) && !hits.includes(d)); // 찾은 것 칸에 이미 뜬 기록은 「처음부터 있던 자료」에 다시 적지 않는다
     // 앞서 찾아 열어 본 것은 검색을 새로 해도 남겨 둔다 — 같은 날짜를 여러 장부에서 맞대 보려고 매번 다시 찾지 않게
     const past = C._srcDocs[s.id].filter(d => ok(d.need) && ST.seen.includes(d.id) && !hits.includes(d) && !start.includes(d));
     const chips = keyChips(s);
@@ -1571,10 +1574,11 @@
   function tabFit(bar) {
     // 먼저 탭 여백을 좁히고, 그래도 넘치면 고르지 않은 탭의 이름을 반 글자씩 줄여 남는 자리를 다 쓴다
     const over = () => bar.scrollWidth > bar.clientWidth + 1;
-    bar.classList.remove('t0', 'tcut'); bar.style.removeProperty('--tab-max');
+    bar.classList.remove('t0', 'tcut', 't1'); bar.style.removeProperty('--tab-max');
     if (bar.clientWidth >= 600 && over()) {
       bar.classList.add('t0');
       if (over()) { bar.classList.add('tcut'); for (let em = 13; em >= 6 && over(); em -= 0.5) bar.style.setProperty('--tab-max', em + 'em'); }
+      if (over()) { bar.classList.add('t1'); for (let em = 6; em >= 5 && over(); em -= 0.5) bar.style.setProperty('--tab-max', em + 'em'); } // 탭이 아홉 개쯤 되면 여백을 한 번 더 좁힌다 (옆으로 밀리는 화살표보다 낫다)
     }
     bar.querySelectorAll('.tab').forEach(t => { const x = t.querySelector('.tab-t'); if (x && x.scrollWidth > x.clientWidth + 1) t.dataset.tip = x.textContent; else delete t.dataset.tip; });
   }

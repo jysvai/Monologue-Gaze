@@ -126,3 +126,4 @@
 @media (prefers-reduced-motion:reduce){.lv-step{animation:lvStepR 2.4s step-end forwards}@keyframes lvStepR{to{opacity:0}}}
 .rq-no .rq-cost{display:block;margin-top:4px;font-size:.88em;opacity:.75} /* ★5 기각: 다시 올리면 드는 시간 */
 .submit-row .rq-cost{margin-left:10px;font-size:.85em;opacity:.7;white-space:nowrap} /* 올리기 전에: 신청서를 쓰는 데 드는 시간 */
+.cmp-q .rq-cost{display:block;margin-top:3px;font-size:.82em;font-weight:400;opacity:.7} /* 현행 사건의 감정 대조: 고르기 전에 드는 시간 */

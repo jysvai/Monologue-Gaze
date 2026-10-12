@@ -182,6 +182,7 @@ img{max-width:100%}
 .tab-lock{font:10px var(--f-mono);padding:1px 5px;border:1px solid currentColor;opacity:.7}
 .tab-t{overflow:hidden;text-overflow:ellipsis}
 .src-tabs.t0 .tab{padding-left:10px;padding-right:10px;letter-spacing:0}
+.src-tabs.t1 .tab{padding-left:7px;padding-right:7px;gap:4px}
 .src-tabs.tcut .tab:not(.on) .tab-t{max-width:var(--tab-max,10.5em)}
 .tab-new{flex:none;width:7px;height:7px;margin-left:-1px;border-radius:50%;background:var(--red);box-shadow:0 0 0 1.5px rgba(255,250,235,.55)} /* 새로 열린 자료가 있는 탭 (js renderTabs) */
 .case-view:is([data-frame="laptop"],[data-frame="crt"]) .tab-new{background:#e5483b;box-shadow:0 0 0 1.5px rgba(255,255,255,.7)}

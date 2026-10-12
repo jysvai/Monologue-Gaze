@@ -86,7 +86,7 @@ body[data-age="y2k"] .per-h .rec{border-radius:0;background:transparent;color:#f
 .per-h.has-face.mini .rec{top:8px}
 .per-h:not(.has-face):has(.rec){position:relative}
 .per-h:has(.rec)>div{padding-right:120px}
-@media (max-width:720px){.per-h .rec{top:8px;padding:2px 6px;font-size:10px}.per-h:has(.rec)>div{padding-right:0}.per-h:has(.rec) h3{padding-right:96px}}
+@media (max-width:720px){.per-h .rec{top:8px;padding:2px 6px;font-size:10px}.per-h .rec b{display:none}.per-h:has(.rec)>div{padding-right:0}.per-h:has(.rec) h3{padding-right:52px}} /* 휴대폰: REC 시간 숫자는 접고 빨간 점과 REC 만 — 이름(「イ・サンミン」)이 둘로 갈리지 않게 */
 @container stage (max-width:700px){.per-h.has-face.mini .rec b{display:none}.per-h.has-face.mini:has(.rec) h3{padding-right:62px}} /* 줄어든 머리줄에 「←」가 들어가면 이름 칸이 모자라다: REC 시간 숫자는 접는다 */
 @keyframes recBlink{50%{opacity:.15}}
 @media (prefers-reduced-motion:reduce){.per-h .rec i{animation:none}}

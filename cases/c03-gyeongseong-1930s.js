@@ -278,25 +278,25 @@
       ] },
 
       /* ───────── 전보 뢰신지철 ───────── */
-      d_t_kang: { src: 'wire', need: ['k_daeseoso'], title: '전보 — 11월 2일 15:20 종로우편국 접수', meta: '발신: 수남골 보춘당 → 수신: 경성지방법원 앞 [[한 대서소]] · 시내 전보', body: [
+      d_t_kang: { src: 'wire', memoAt: true, need: ['k_daeseoso'], title: '전보 — 11월 2일 15:20 종로우편국 접수', meta: '발신: 수남골 보춘당 → 수신: 경성지방법원 앞 [[한 대서소]] · 시내 전보', body: [
         { p: 'ジヨ ノ ケン イツカ サシオサヘ テツヅキ タノム ホウシユンダウ', cls: 'kana', nopin: true },
         { p: '[번역] 서(徐) 건, 5일 차압 절차 부탁함. 보춘당', f: 'f_kang_wire' },
         { note: '뢰신지 필적: 점원 박만수 (주인의 말을 받아 씀). 요금 현금.' },
       ] },
-      d_t_seo: { src: 'wire', need: ['k_seobrother'], title: '전보 — 11월 4일 21:20 종로우편국 접수', meta: '발신: 수남골 서광양복점 서기룡 → 수신: [[평양]]부 [[서기봉]]', body: [
+      d_t_seo: { src: 'wire', memoAt: true, need: ['k_seobrother'], title: '전보 — 11월 4일 21:20 종로우편국 접수', meta: '발신: 수남골 서광양복점 서기룡 → 수신: [[평양]]부 [[서기봉]]', body: [
         { p: 'カネ デキタ タ ウルナ クルニ オヨバズ リウ', cls: 'kana', nopin: true },
         { p: '[번역] 돈 마련됐다. 논 팔지 마라. 올 것 없다. 룡', f: 'f_seo_wire' },
         { note: '야간 전신 창구 기록: 21시 20분 접수. 발신인이 직접 씀. 요금 현금.', f: 'f_seo_wire' },
       ] },
-      d_t_brother: { src: 'wire', need: ['k_seobrother'], title: '전보 — 11월 5일 08:10 평양우편국 접수', meta: '발신: 평양부 서기봉 → 수신: 경성 수남골 서광양복점 서기룡', body: [
+      d_t_brother: { src: 'wire', memoAt: true, need: ['k_seobrother'], title: '전보 — 11월 5일 08:10 평양우편국 접수', meta: '발신: 평양부 서기봉 → 수신: 경성 수남골 서광양복점 서기룡', body: [
         { p: 'ナンノ カネカ シラセヨ ホウ', cls: 'kana', nopin: true },
         { p: '[번역] 무슨 돈이냐. 알려 다오. 봉', f: 'f_brother_reply' },
       ] },
-      d_t_oh: { src: 'wire', need: ['k_gaeseong'], title: '전보 — 11월 4일 21:48 광화문우편국 접수', meta: '발신: 오순덕 → 수신: [[개성]]부 오 씨 댁', body: [
+      d_t_oh: { src: 'wire', memoAt: true, need: ['k_gaeseong'], title: '전보 — 11월 4일 21:48 광화문우편국 접수', meta: '발신: 오순덕 → 수신: [[개성]]부 오 씨 댁', body: [
         { p: 'ハウソウ トチユウ キレタガ ブジ シンパイスルナ ジユントク', cls: 'kana', nopin: true },
         { p: '[번역] 방송 도중 끊겼으나 무사함. 걱정 마시라. 순덕', f: 'f_oh_wire' },
       ] },
-      d_t_mido: { src: 'wire', title: '전보 — 11월 4일 14:05 인천우편국 접수', meta: '발신: 인천 미두취인소 앞 모 중개점 → 수신: 수남골 [[송학여관]] 투숙객 정○○', body: [
+      d_t_mido: { src: 'wire', memoAt: true, title: '전보 — 11월 4일 14:05 인천우편국 접수', meta: '발신: 인천 미두취인소 앞 모 중개점 → 수신: 수남골 [[송학여관]] 투숙객 정○○', body: [
         { p: 'コメ サガル スグ ウレ', cls: 'kana', nopin: true },
         '[번역] 쌀값 내림. 곧 팔라.',
         { note: '송학여관 투숙객 앞. 사건과의 관계는 확인되지 않음.' },

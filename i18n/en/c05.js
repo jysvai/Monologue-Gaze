@@ -60,7 +60,7 @@ MG.I18N.put("en", "c05", {
 "183tql80yjp": "Three envelopes from the same writer — Santa Reina, Dec 16; Millbrook, May 5; Port Haley, Aug 18. All three are Monday-morning pickups: each went into that town's mailbox after the last Saturday-afternoon collection and before the first Monday collection. All three post offices replied — each town has just one public mailbox, [[the mailbox in front of the post office|k_dawnbox]].",
 "23g45i6pahb": "Lab memo: in all three, a single sheet was folded three times, bent once more, and pushed in while still thicker than the envelope's mouth. On all three envelopes, both corners of the opening are stretched.",
 "2bz09gqwad8": "Analysis: match — same hand",
-"19rk5g0c8w9": "Detective Bureau Photos",
+"19rk5g0c8w9": "Squad Photos",
 "1ft0cyzora3": "Photos the detective bureau took when they went out to check. Click inside a photo to find what catches your eye.",
 "vbiwjp5xxh": "Port Haley Post Office — Sunday, Before Dawn",
 "282fm64jmld": "Sunday, September 7, 1969, 06:20 · taken by the Knowlton P.D. Detective Bureau · black-and-white print",
