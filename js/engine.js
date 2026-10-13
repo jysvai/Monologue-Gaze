@@ -136,6 +136,7 @@
     st.report ??= { culprit: '', claims: {} };
     st.report.claims ??= {};
     st.report.with ??= {};
+    st.play ??= { ms: 0, part: !!(st.solved || st.notes.length || Object.keys(st.asked).length) };
     st.tries ??= 0;
     st.solved ??= false;
     st.unl ??= [];
@@ -229,6 +230,7 @@
 
   /* ───────── runtime state ───────── */
   let app = null;
+  let ACT = Date.now(); // 마지막으로 손을 댄 때 (사건에 쓴 시간은 그 뒤 2분까지만 센다)
   let C = null;      // current case
   let ST = null;     // current case state
   let PIN = {};      // ref -> { t, f, src }
@@ -1999,7 +2001,7 @@
     const dl = C.live && C.live.deadline, dlSeen = dl && (late || ok(dl.need)); // 끝내 몰랐던 기한은 말하지 않는다
     const cjk = /^(ja|zh)$/.test(MG.I18N.lang), dlName = esc(dl && dl.label || T('기한')); // 일본어·중국어는 전각 괄호
     const fin = C.live && ST.live ? `<p class="lv-fin">${T`수사 개시부터 ${hm(ST.live.t)}${dlSeen ? ` · ${late ? T('기한 넘김') : T('기한 안에 종결')}${cjk ? `<small>（${dlName}）</small>` : ` <small>(${dlName})</small>`}` : ''}`}</p>` : '';
-    return `${mug}<div class="stamp${fresh ? ' fresh' : ''}"><div>${T`사건<br>종결<small>${esc(sol.stamp || '')}</small>`}</div></div>${fin}<div class="epi">${epi}</div>${hunchTrailHtml()}${clearedHtml()}${shareHtml()}${rateHtml()}${sol.next ? nextHtml(sol.next) : ''}`;
+    return `${mug}<div class="stamp${fresh ? ' fresh' : ''}"><div>${T`사건<br>종결<small>${esc(sol.stamp || '')}</small>`}</div></div>${fin}${playMin() ? `<p class="play-t">${playLine()}</p>` : ''}<div class="epi">${epi}</div>${hunchTrailHtml()}${clearedHtml()}${shareHtml()}${rateHtml()}${sol.next ? nextHtml(sol.next) : ''}`;
   }
   // 의심 표시 (ST.hunch — 수첩 메모의 「의심」 표시 ST.sus 와는 다른 것): 인물 화면에서 한 사람에게만 「의심」을 걸어 둔다 (아무것도 맞춰 보지 않는다 — 플레이어의 짐작을 적어 두는 것).
   // 걸 때마다 그때 쥔 메모 수와 함께 차례를 남기고, 종결하면 결말 밑에 의심이 어떻게 옮겨 갔는지 한 줄로. 의심하던 사람이 「의문」으로 빠지면 형사가 한마디 (hero/susout)
@@ -2035,11 +2037,13 @@
   // 자랑할 만한 것만: 짚어 보기 없이 · 보고서 한 번에 (연습 사건은 빼고)
   const badges = () => C.kind === 'tutorial' ? [] : [ST.nudges ? '' : T('짚어 보기 없이 종결'), (ST.tries || 1) === 1 ? T('보고서 한 번에 통과') : ''].filter(Boolean);
   const scrawlOf = () => (C.brief && C.brief.scrawl ? plain(C.brief.scrawl) : '');
+  const playMin = () => (ST.play && !ST.play.part && ST.play.ms >= 60000 ? Math.round(ST.play.ms / 60000) : 0);
+  const playLine = () => (playMin() ? T`이 사건에 쓴 시간 약 ${playMin()}분` : '');
   function shareText() {
     const head = `Monologue Gaze · CASE ${pad(C.no)} ${plain(C.title)}${C.kind !== 'tutorial' && C.stars ? ' ' + '★'.repeat(C.stars) : ''}`;
     const live = C.live && ST.live ? ' · ' + T`수사 ${hm(ST.live.t)}` : '';
     const b = badges(), q = scrawlOf();
-    return `${head}${q ? `\n"${q}"` : ''}\n${T`종결 · 보고서 제출 ${ST.tries || 1}회 · 짚어 보기 ${ST.nudges || 0}회`}${live}${b.length ? `\n✔ ${b.join(' · ')}` : ''}\n${ITCH_URL} #MonologueGaze`;
+    return `${head}${q ? `\n"${q}"` : ''}\n${T`종결 · 보고서 제출 ${ST.tries || 1}회 · 짚어 보기 ${ST.nudges || 0}회`}${live}${playMin() ? '\n' + playLine() : ''}${b.length ? `\n✔ ${b.join(' · ')}` : ''}\n${ITCH_URL} #MonologueGaze`;
   }
   const rateHtml = () => (S.rateOff ? '' : `<p class="epi-rate">${T('이 사건이 마음에 드셨다면 <a href="https://jysvai.itch.io/monologue-gaze/rate?source=game" target="_blank" rel="noopener">itch.io에 별점</a>을 남겨 주세요.')}</p>`);
   const shareHtml = () => `<p class="epi-share"><button type="button" class="epi-sh" data-card>${T('결과 카드 저장')}</button><button type="button" class="epi-sh" data-share>${T('결과 복사')}</button><a class="epi-sh" href="https://x.com/intent/post?text=${encodeURIComponent(shareText())}" target="_blank" rel="noopener">${T('X에 올리기')}</a></p>`;
@@ -2049,7 +2053,7 @@
     const g = cv.getContext('2d'), cs = getComputedStyle(document.documentElement), fam = v => cs.getPropertyValue(v).trim() || 'serif';
     const fDoc = fam('--f-doc'), fType = fam('--f-type'), fMono = fam('--f-mono'), fHand = fam('--f-hand');
     const title = plain(C.title), stars = C.kind !== 'tutorial' && C.stars ? '★'.repeat(C.stars) + '☆'.repeat(Math.max(0, 5 - C.stars)) : '';
-    const rows = [T`보고서 제출 ${ST.tries || 1}회 · 짚어 보기 ${ST.nudges || 0}회`, C.live && ST.live ? T`수사 ${hm(ST.live.t)}` : ''].filter(Boolean);
+    const rows = [T`보고서 제출 ${ST.tries || 1}회 · 짚어 보기 ${ST.nudges || 0}회`, C.live && ST.live ? T`수사 ${hm(ST.live.t)}` : '', playLine()].filter(Boolean);
     const stampT = T('사건 종결');
     try { await Promise.all([`800 44px ${fDoc}`, `22px ${fType}`, `20px ${fMono}`, `28px ${fHand}`].map(f => document.fonts.load(f, title + rows.join('') + stampT + scrawlOf() + badges().join('') + 'CASE Monologue Gaze'))); } catch (e) { /* 글꼴을 못 불러도 기본 글꼴로 그린다 */ }
     const shadow = (b, y) => { g.shadowColor = 'rgba(0,0,0,.55)'; g.shadowBlur = b; g.shadowOffsetY = y; }, plainShadow = () => { g.shadowColor = 'transparent'; g.shadowBlur = 0; g.shadowOffsetY = 0; };
@@ -3859,8 +3863,14 @@
       const k = C.id + '|' + d.dataset.ng;
       if (d.open) NGSHUT.delete(k); else NGSHUT.add(k);
     }, true);
-    document.addEventListener('pointerdown', () => { PTR = true; }, true);
-    document.addEventListener('keydown', () => { PTR = false; }, true);
+    document.addEventListener('pointerdown', () => { PTR = true; ACT = Date.now(); }, true);
+    document.addEventListener('keydown', () => { PTR = false; ACT = Date.now(); }, true);
+    document.addEventListener('wheel', () => { ACT = Date.now(); }, { capture: true, passive: true });
+    setInterval(() => {
+      if (!C || !ST || ST.solved || !ST.play || document.hidden || Date.now() - ACT > 120000) return;
+      ST.play.ms += 15000;
+      if (ST.play.ms % 60000 === 0) save();
+    }, 15000);
     document.addEventListener('change', e => {
       if (e.target.closest('[data-pname]')) return renamePlayer(e.target.value);
       if (e.target.matches('[data-lang]')) return MG.I18N.set(e.target.value);

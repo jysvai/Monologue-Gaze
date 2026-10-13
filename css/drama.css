@@ -371,3 +371,4 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 .hunch-trail>span{display:block;font-size:.88em;opacity:.7}
 .hunch-trail b.hit{color:var(--red)}
 .hunch-trail small{opacity:.65}
+.play-t{clear:both;margin:8px 0 0;font:12px var(--f-mono);letter-spacing:.03em;opacity:.8} /* 이 사건에 쓴 시간 (종결 도장 밑) */
