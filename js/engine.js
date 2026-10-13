@@ -1836,7 +1836,8 @@
   // 칸은 어느 사건에나 있다 (칸이 있는 것만 보고 공범이 있다고 짐작하지 않게). 혼자 한 일이면 비워 둔 채로 올려야 맞는다
   const WITH = () => [['acc', T('공범')], ['hid', T('알고도 감춤')]];
   const withOf = () => Object.fromEntries(Object.entries(ST.report.with || {}).filter(([k, v]) => v && k !== ST.report.culprit && C.keywords[k]));
-  const withSame = () => { const a = withOf(), b = C.solution.with || {}, ka = Object.keys(a); return ka.length === Object.keys(b).length && ka.every(k => b[k] === a[k]); };
+  // withOk: { 단어 id: ['', 'acc', …] } — 적어도 안 적어도 되는 사람 (예: 시키는 대로 돈을 나른 열일곱 살)
+  const withSame = () => { const a = withOf(), sol = C.solution, w = sol.with || {}, okw = sol.withOk || {}; return [...new Set([...Object.keys(a), ...Object.keys(w), ...Object.keys(okw)])].filter(k => k !== ST.report.culprit).every(k => (okw[k] || [w[k] || '']).includes(a[k] || '')); };
   function withSec(persons, shut) {
     const mine = withOf(), cand = persons.filter(k => k !== ST.report.culprit), role = v => (WITH().find(w => w[0] === v) || [])[1] || '';
     if (shut) { const ks = Object.keys(mine); return ks.length ? `<section class="rep-sec rep-with"><h4>${T('함께 엮인 사람')}</h4><p class="rep-w-done">${ks.map(k => `<b>${esc(kl(k))}</b> — ${esc(role(mine[k]))}`).join(' · ')}</p></section>` : ''; }
@@ -2118,9 +2119,9 @@
     if (!x || !cl) return null;
     return { x, ns: x.done ? [...new Set(x.t.steps.map(thNote).filter(Boolean))].filter(n => (cl.accept || []).some(w => fIs(n.f, w))) : [] };
   }
-  function thWho(k) { // ★5 는 범인 칸에 「의문 n」을 달지 않는다 (뺀 사람의 「뺌」만) — 누구를 지목할지는 결론들을 읽고 플레이어가 정한다
+  function thWho(k) { // ★5 는 범인 칸에 「의문 n」을 달지 않는다 (뺀 사람의 「범인 아님」만 — 범인이 아니라는 것뿐, 공범·감춘 사람일 수는 있다) — 누구를 지목할지는 결론들을 읽고 플레이어가 정한다
     const x = thView().find(v => v.done && ((v.t.who === k && lv() < 5) || v.t.out === k));
-    return !x ? '' : x.t.out === k ? `<span class="rep-th-who out">${T`뺌 · 의문 ${x.no}`}</span>` : `<span class="rep-th-who">${T`의문 ${x.no}`}</span>`;
+    return !x ? '' : x.t.out === k ? `<span class="rep-th-who out">${T`범인 아님 · 의문 ${x.no}`}</span>` : `<span class="rep-th-who">${T`의문 ${x.no}`}</span>`;
   }
   function threadNews(delay = 900) {
     const ts = (C && C.threads) || [];

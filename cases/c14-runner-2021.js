@@ -911,6 +911,7 @@
     ],
     solution: {
       culprit: 'k_seok',
+      with: { k_taeo: 'acc' }, withOk: { k_siwoo: ['', 'acc', 'hid'] }, // 링크를 돌리고 이름을 내준 태오는 공범. 돈을 나른 열일곱 살 시우는 적어도 안 적어도 된다
       form: { title: '구속영장 신청서', culprit: '피의자', short: '피의자', submit: '영장 신청', open: '신청서 쓰기',
         lead: '수거책 아이들 위에서 아이들을 고르고 움직인 사람을 피의자로 적는다. 범죄사실마다 소명 메모를 하나씩 붙인다.',
         judging: '신청서를 올렸다. 당직 검사가 한 장씩 넘긴다…' },

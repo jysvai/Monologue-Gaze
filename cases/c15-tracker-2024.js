@@ -766,6 +766,7 @@
     ],
     solution: {
       culprit: 'k_minjae',
+      with: { k_junhyuk: 'acc' }, // 함께 엮인 사람: 위치를 넘기고 골목에서 기다리라고 시킨 사람
       form: { title: '긴급체포서', culprit: '피의자', short: '피의자', submit: '체포 승인 요청', open: '체포서 쓰기', lead: '다솜을 데려간 사람을 특정하고, 항목마다 근거 메모를 붙인다. 승인이 떨어지면 수색조가 바로 움직인다.', judging: '체포서를 올렸다. 팀장이 한 줄씩 짚어 읽는다…' },
       claims: [
         { id: 'c1', q: '21시 47분, 그 골목에 있던 차', accept: ['f_plate_photo', 'f_helmet_car', 'f_gps_scene', 'f_strap'], near: '딱 한 군데가 어긋난다. 21시 47분 그 골목에 서 있던 차가 어느 차인지 — 번호든 위치 기록이든, 그 차를 집어내는 기록인가?' },

@@ -390,6 +390,10 @@ function check(c) {
     if (k === sol.culprit) err(`solution.with "${k}" 가 범인과 같다`);
     if (!['acc', 'hid'].includes(r)) err(`solution.with "${k}": 역할은 acc(공범) · hid(알고도 감춤)`);
   });
+  Object.entries(sol.withOk || {}).forEach(([k, rs]) => {
+    if (!K[k] || K[k].type !== 'person') err(`solution.withOk "${k}" 가 사람 단어가 아님`);
+    if (!Array.isArray(rs) || !rs.length || rs.some(r => !['', 'acc', 'hid'].includes(r))) err(`solution.withOk "${k}": ['', 'acc', 'hid'] 가운데에서 고른 배열`);
+  });
   if (!Array.isArray(sol.claims) || sol.claims.length < 3) err('solution.claims 는 3개 이상');
   (sol.claims || []).forEach(cl => {
     if (!cl.id || !cl.q) err(`claim ${cl.id}: id 와 q 필요`);

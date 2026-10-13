@@ -287,7 +287,7 @@ MG.I18N.put("en", "ui", {
 "유력 — {0}": "Lead — {0}",
 "유력! 메모 {0}번 — {1}": "Lead! Note {0} — {1}",
 "유력! 메모 {0}번": "Lead! Note {0}",
-"뺌 · 의문 {0}": "Ruled out · Question {0}",
+"범인 아님 · 의문 {0}": "Not the culprit · Question {0}",
 "의문 {0} 풀림 — {1}": "Question {0} solved — {1}",
 "새 의문 — {0}": "New question — {0}",
 "의문 {0} — 빈칸 하나를 채웠다 ({1}/{2})": "Question {0} — one gap filled ({1}/{2})",

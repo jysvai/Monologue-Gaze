@@ -287,7 +287,7 @@ MG.I18N.put("de", "ui", {
 "유력 — {0}": "Spur — {0}",
 "유력! 메모 {0}번 — {1}": "Spur! Notiz {0} — {1}",
 "유력! 메모 {0}번": "Spur! Notiz {0}",
-"뺌 · 의문 {0}": "Ausgeschlossen · Frage {0}",
+"범인 아님 · 의문 {0}": "Nicht der Täter · Frage {0}",
 "의문 {0} 풀림 — {1}": "Frage {0} geklärt — {1}",
 "새 의문 — {0}": "Neue Frage — {0}",
 "의문 {0} — 빈칸 하나를 채웠다 ({1}/{2})": "Frage {0} — eine Lücke gefüllt ({1}/{2})",
