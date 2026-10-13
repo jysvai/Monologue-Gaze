@@ -1445,6 +1445,8 @@
     return c.length ? Math.min(...c) : null;
   }
   // 다음 것을 기다리면 (보이는) 기한을 넘기게 되는가
+  // 지금 올리면 회신이 알고 있는 기한 뒤에 닿는 신청서 (기한을 아직 모르면 말하지 않는다)
+  const etaLate = r => { const L = ST.live, dl = C.live && C.live.deadline; return !!(L && !ST.solved && !L.late && dl && ok(dl.need) && L.t <= dl.at && L.t + (r.eta != null ? r.eta : 120) > dl.at); };
   function waitsPast() {
     if (!liveOn() || ST.solved || ST.live.late) return false;
     const dl = C.live.deadline, nd = nextDue();
@@ -1530,7 +1532,7 @@
     const st = r => reqState(r.id);
     const btn = (r, meta, cls) => `<button type="button" class="item rq-i${cls ? ' ' + cls : ''}${o && o.t === 'req' && o.id === r.id ? ' on' : ''}" data-req="${esc(r.id)}"><span class="item-t">${esc(plain(r.title))}</span><span class="item-m">${meta}</span></button>`;
     const draft = items.filter(r => !st(r) || st(r).st === 'no'), wait = items.filter(r => st(r) && st(r).st === 'wait'), done = items.filter(r => st(r) && st(r).st === 'done');
-    return `${draft.length ? `<p class="res-n">${ST.solved ? T('올리지 않은 신청서') : T('쓸 수 있는 신청서')}</p>${draft.map(r => btn(r, `${esc(r.kind || T('요청'))}${ST.solved ? '' : T` · 회신까지 약 ${hm(r.eta != null ? r.eta : 120)}`}${st(r) ? T(' · 기각됨') : ''}`, st(r) ? 'no' : '')).join('')}` : ''}
+    return `${draft.length ? `<p class="res-n">${ST.solved ? T('올리지 않은 신청서') : T('쓸 수 있는 신청서')}</p>${draft.map(r => btn(r, `${esc(r.kind || T('요청'))}${ST.solved ? '' : T` · 회신까지 약 ${hm(r.eta != null ? r.eta : 120)}`}${!ST.solved && etaLate(r) ? T(' · 기한 뒤에 닿는다') : ''}${st(r) ? T(' · 기각됨') : ''}`, st(r) ? 'no' : '')).join('')}` : ''}
       ${wait.length ? `<p class="res-n">${ST.solved ? T('회신 전에 종결') : T`회신 기다리는 중`}</p>${wait.map(r => btn(r, ST.solved ? T('회신 전에 사건 종결') : T`회신 예정 ${esc(lstamp(st(r).due))}`, 'wait')).join('')}${waitRow(T('회신 기다리기'))}` : ''}
       ${done.length ? `<p class="res-n">${T`도착한 회신`}</p>${done.map(r => (C.docs[r.doc] ? itemBtn(C.docs[r.doc]) : '')).join('')}` : ''}`;
   }
@@ -1549,7 +1551,7 @@
       foot = `${no}${pick}<p class="submit-row"><button type="button" class="btn-hand" data-rq-go="${esc(r.id)}">${esc(r.button || (q ? T('다시 신청하기') : T('신청서 올리기')))}</button><small class="rq-cost">${T`신청서를 쓰는 데 ${hm(lcost('write'))}`}</small><span class="c-msg"></span></p>`; // 기각돼도 쓴 시간은 돌아오지 않는다: 올리기 전에 안다
     }
     return `<article class="doc skin-${esc(r.skin || 'form')} rq"><header class="doc-h"><p class="doc-k">${esc(r.kind || T('수사 요청'))}</p><h3 class="doc-t">${inline(r.title)}</h3>${r.meta ? `<p class="doc-m">${inline(r.meta)}</p>` : ''}</header>
-      <div class="doc-b">${blocks(r.intro, `${r.id}@i`, plain(r.title))}<table class="rq-t"><tbody>${row(T('신청'), r.by || T('강력2팀'))}${row(T('수신'), r.to)}${row(T('대상'), r.target)}${row(T('요청 내용'), r.what)}${row(T('회신까지'), r.eta != null ? T('약 ') + hm(r.eta) : '')}</tbody></table>${foot}</div></article>`;
+      <div class="doc-b">${blocks(r.intro, `${r.id}@i`, plain(r.title))}<table class="rq-t"><tbody>${row(T('신청'), r.by || T('강력2팀'))}${row(T('수신'), r.to)}${row(T('대상'), r.target)}${row(T('요청 내용'), r.what)}${row(T('회신까지'), (r.eta != null ? T('약 ') + hm(r.eta) : '') + (etaLate(r) && !(reqState(r.id) || {}).st ? T(' · 기한 뒤에 닿는다') : ''))}</tbody></table>${foot}</div></article>`;
   }
   function submitReq(id) {
     const r = reqById(id);

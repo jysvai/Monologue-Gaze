@@ -177,6 +177,7 @@ MG.I18N.put("en", "ui", {
 "쓸 수 있는 신청서": "Requests you can file",
 "요청": "Request",
 " · 회신까지 약 {0}": " · reply in about {0}",
+" · 기한 뒤에 닿는다": " · arrives after the deadline",
 " · 기각됨": " · rejected",
 "회신 전에 종결": "Closed before the reply",
 "회신 기다리는 중": "Awaiting reply",
