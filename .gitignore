@@ -9,3 +9,4 @@ dist/
 
 # tools/i18n.js src <part> - 같은 실수로 생기는 파일
 /-
+__pycache__/
