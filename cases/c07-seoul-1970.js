@@ -681,7 +681,7 @@
     ],
     solution: {
       culprit: 'k_seok',
-      with: { k_mansik: 'hid' }, // 함께 엮인 사람: 시키는 대로 차를 세우고, 돈을 받고 대신 자백한 운전사
+      with: { k_mansik: 'hid' }, withOk: { k_mansik: ['hid', 'acc'], k_no: ['', 'hid'], k_gu: ['', 'hid'] }, // 함께 엮인 사람: 시키는 대로 차를 세우고, 돈을 받고 대신 자백한 운전사 (공범으로 적어도 된다). 봉투를 나른 노봉출, 덮이는 것을 보고만 있던 구태섭은 적어도 안 적어도 된다
       claims: [
         { id: 'c1', q: '총이 발사된 자리', accept: ['f_angle', 'f_butt', 'f_backdoor_mud'], near: '딱 한 군데가 어긋난다. 조서대로라면 운전석에서 쏜 것이다. 총알이 들어간 방향과 차 안에 남은 것은 다른 자리를 말하지 않나?' },
         { id: 'c2', q: '총성이 울린 시각', accept: ['f_bang_tv', 'f_tv_sched', 'f_patrol_bang', 'f_recon_bang'], near: '딱 한 군데가 어긋난다. 차 시계가 아니라, 그 소리를 들은 사람들이 무엇에 맞춰 시각을 기억했나?' },

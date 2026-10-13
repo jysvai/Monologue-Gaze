@@ -780,6 +780,7 @@
     ],
     solution: {
       culprit: 'k_ham',
+      withOk: { k_gil: ['', 'hid'] }, // 시키는 대로 거짓말하고 재를 강에 버린 길용수는 알고도 감춘 것으로 적어도 된다 (안 적어도 된다)
       claims: [
         { id: 'c1', q: '몸을 가른 곳', accept: ['f_nacre', 'f_lumi_type'], near: '한 군데가 어긋난다. 그 바닥의 피나 톱밥이, 다른 누구 것이 아니라 피해자와 그 공방을 잇는다고 보여 주는 메모인가?' },
         { id: 'c2', q: '쓰인 도구', accept: ['f_saw_match', 'f_hardware', 'f_newsaw', 'f_sawmark'], near: '한 군데가 어긋난다. 뼈에 남은 자국이 어떤 날의 것인지, 그리고 그 공방에서 그런 톱이 사라지거나 새로 들어온 흔적이 있는가?' },

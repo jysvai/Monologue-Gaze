@@ -1080,7 +1080,7 @@ MG.I18N.put("en", "c14", {
 "rukt92w7r7": "The person who took the money out of terminal locker No. 47 that morning",
 "h740lam0wu": "One thing doesn't fit. Is it a record that caught who opened locker 47 that morning? A key, a camera, a route.",
 "mujo3d7yzb": "The person who actually controlled the account the victim's money flowed through",
-"10py2ronf8m": "One thing doesn't fit. The account holder only opened the account. Where the money ended up, who logged in and got the codes?",
+"d82wd41xai": "One thing doesn't fit. A name on the account doesn't make that person the one who moved the money. Where the money ended up, who logged in and got the codes?",
 "1btsdgcovfz": "One thing doesn't fit. Follow the money to the end — ask the exchange the bank reply points to, and you get the number and the connection that actually ran the account.",
 "9lxqycrzr2": "Why the culprit was able to pick out those kids",
 "1bohpa9sunq": "One thing doesn't fit. What did the culprit know about those kids? Something they owed him.",

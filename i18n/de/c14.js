@@ -1080,7 +1080,7 @@ MG.I18N.put("de", "c14", {
 "rukt92w7r7": "Die Person, die an jenem Vormittag das Geld aus Schließfach 47 am Busbahnhof geholt hat",
 "h740lam0wu": "Genau eine Stelle stimmt nicht. Ist es eine Aufzeichnung darüber, wer an dem Vormittag Schließfach 47 geöffnet hat? Schlüssel, Kamera oder Weg.",
 "mujo3d7yzb": "Die Person, die das Konto, auf das das Schadensgeld floss, tatsächlich bedient hat",
-"10py2ronf8m": "Eine Stelle passt nicht. Der Kontoinhaber hat das Konto nur eröffnet. Wer hat sich dort, wo das Geld am Ende landete, eingeloggt und die Codes bekommen?",
+"d82wd41xai": "Eine Stelle passt nicht. Wessen Name auf dem Konto steht, der hat das Geld noch nicht bewegt. Wer hat sich dort, wo das Geld am Ende landete, eingeloggt und die Codes bekommen?",
 "1btsdgcovfz": "Eine Stelle passt nicht. Dem Geld bis zum Ende folgen — ein Ersuchen an die Börse, auf die die Bankauskunft zeigt, liefert die Nummer und den Anschluss, von denen aus das Konto wirklich bedient wurde.",
 "9lxqycrzr2": "Warum der Täter gerade diese Jugendlichen aussuchen konnte",
 "1bohpa9sunq": "Genau eine Stelle stimmt nicht. Was wusste der Täter über diese Jugendlichen? Etwas, das sie ihm schuldeten.",
