@@ -757,6 +757,37 @@
     pr.style.scrollPaddingTop = hgt() + 8 + 'px';
   }
   function faceHit() { const h = $('#paneRead .per-h.has-face'); if (!h || reduced()) return; facePop(1900); h.classList.remove('hit'); void h.offsetWidth; h.classList.add('hit'); setTimeout(() => h.classList.remove('hit'), 1600); }
+  // 마주 앉은 장면: 추궁이 통한 순간과 사건을 닫는 순간의 범인만, 그 사람이 테이블 건너 의자에 앉은 그림을 잠깐 크게 띄운다
+  // 추궁: img/<사건>/scene_<사람 id>_<그 대답의 react>.webp (flustered · surprised · angry · cold · afraid · sad), 없으면 그 사람의 다른 추궁 그림.
+  // 종결: scene_<범인 id>_end.webp — 범인의 성격대로 화를 내거나 억울해하거나 울거나 넋이 나간다. 대사는 아래 읽는 칸에도 그대로 나오므로 화면 읽기 프로그램에는 감춘다. 누르거나 키를 치면 닫힌다
+  let SCENE = null;
+  function sceneOff() {
+    const s = SCENE; SCENE = null;
+    if (!s) return;
+    clearTimeout(s.t); document.removeEventListener('keydown', s.key, true);
+    s.el.classList.add('out'); setTimeout(() => s.el.remove(), reduced() ? 0 : 320);
+  }
+  function sceneFile(p, kind) {
+    const I = MG.images || {}, pre = `${C.id}/scene_${p.id}_`;
+    if (I[pre + kind] || kind === 'end') return I[pre + kind] || null;
+    const k = Object.keys(I).find(x => x.startsWith(pre) && x !== pre + 'end');
+    return k ? I[k] : null;
+  }
+  function sceneCut(p, kind, lines, ms) {
+    const file = p && sceneFile(p, kind);
+    if (!file) return;
+    sceneOff();
+    const el = document.createElement('div');
+    el.className = `scene-cut s-${kind}`; el.setAttribute('aria-hidden', 'true');
+    el.innerHTML = `<figure><img src="${esc(file)}" alt="" decoding="async"><figcaption><b>${esc(p.name)}</b>${lines.map(x => `<span${x.me ? ' class="me"' : ''}>${esc(x.t)}</span>`).join('')}</figcaption></figure>`;
+    document.body.appendChild(el);
+    const s = SCENE = { el, key: e => { if (!/^(Shift|Control|Alt|Meta|Tab)$/.test(e.key)) sceneOff(); } };
+    el.addEventListener('click', sceneOff);
+    document.addEventListener('keydown', s.key, true);
+    s.t = setTimeout(sceneOff, ms);
+  }
+  // 추궁이 통한 대답: 말풍선 글을 차례대로 (그 사이 내가 한 말은 me — 흐리게). 몸짓 · 메모 표시는 뺀다
+  const sceneLines = qa => [...qa.querySelectorAll('.c-ans .c-bub')].map(b => { const c = b.querySelector('.c-t').cloneNode(true); c.querySelectorAll('[data-pin],[aria-hidden="true"]').forEach(x => x.remove()); return { t: c.textContent.replace(/\s+/g, ' ').trim(), me: b.classList.contains('me') }; }).filter(x => x.t);
   function faceTell() { if (reduced()) return; faceBeat(110); setTimeout(() => faceBeat(110), 330); faceAnim('flinch', 700); }
   function faceSet(el, c, r) {
     if (r != null && String(r) !== el.dataset.r) { el.dataset.r = r; if (r > 0 && !reduced()) { el.classList.remove('jolt'); void el.offsetWidth; el.classList.add('jolt'); } }
@@ -932,7 +963,12 @@
     }
     document.body.appendChild(st); setTimeout(() => st.remove(), 1900);
     const t = playTalk(qa, { p, lead: 600000 }); // 대답은 내 말이 끝난 뒤
-    const go = () => { if (t && TALK === t && qa.isConnected) { t.finish(true); $$('#paneRead .face.lg').forEach(el => faceSet(el, 0, faceRow(p))); if (!soft) faceHit(); playTalk(qa, { p, voice: `v/${C.id}/${p.id}/${k}`, lead: 1000 }); } };
+    const go = () => {
+      if (!(t && TALK === t && qa.isConnected)) return;
+      t.finish(true); $$('#paneRead .face.lg').forEach(el => faceSet(el, 0, faceRow(p)));
+      if (!soft) { faceHit(); const ls = sceneLines(qa), n = ls.reduce((m, x) => m + x.t.length, 0); sceneCut(p, (rawAns(p, k) || {}).react || 'flustered', ls, Math.min(9000, Math.max(3400, 2400 + n * 60))); }
+      playTalk(qa, { p, voice: `v/${C.id}/${p.id}/${k}`, lead: 1000 });
+    };
     setTimeout(() => {
       if (t && (TALK !== t || !qa.isConnected)) return;
       const hv = MG.sound && !p.young ? MG.sound.voice('hero/' + pressKey(p, k)) : null; // 녹음된 추궁은 존댓말이라 미성년에게는 소리 없이
@@ -2435,7 +2471,7 @@
   function openCase(id, intro) {
     const c = MG.byId[id];
     if (!c) return cabinet();
-    stopTalk(); if (MG.sound) MG.sound.stopVoice();
+    stopTalk(); sceneOff(); if (MG.sound) MG.sound.stopVoice();
     caseFonts(c);
     if (c.graphic && !cs(c).cw) return warnScreen(c);
     C = c; ST = cs(c); VERDICT = ''; pointAt = null;
@@ -2565,7 +2601,7 @@
   }
 
   function cabinet(showRoster) {
-    clearNotes(); unguard(); applyTs();
+    clearNotes(); unguard(); applyTs(); sceneOff();
     stopTalk(); if (MG.sound) MG.sound.stopVoice(); // 추궁 도중 기록실로 나가도 그 사람 목소리가 기록실까지 따라오지 않는다
     C = null; ST = null; S.current = null; save();
     if (MG.mood) MG.mood.leave();
@@ -3376,6 +3412,7 @@
           if (document.activeElement === document.body) { box.tabIndex = -1; box.focus({ preventScroll: true }); } // 키보드로 올렸으면 결말부터 읽히게
         }
         repFace('caught', 800); // 맞았으면 무너진 얼굴로 바뀌며 움찔
+        { const cp = Object.values(C.people || {}).find(x => x.key === C.solution.culprit); if (cp) setTimeout(() => { if (C === c0 && ST === s0) sceneCut(cp, 'end', [], 3800); }, 900); } // 그리고 테이블 건너의 범인
         cue('solved', T('사건 종결')); say(T('사건 종결')); renderBar(); renderList(); // 아래 줄의 시계도 「종결」로, 목록 칸의 「회신 기다리기」도 걷는다
         if (MG.sound) setTimeout(() => { if (C === c0 && ST === s0) MG.sound.hero('solved'); }, 2000);
       } else if (wrong === 0) toast(T('이미 닫힌 사건이다'));

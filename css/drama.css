@@ -321,3 +321,22 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 .th-a1{display:block;padding-left:22px;color:var(--red);font:19px/32px var(--f-hand)} /* 접힌 풀린 의문: 내린 결론은 보이게 (펼치면 밑의 .th-a 로) */
 .th>details[open]>summary .th-a1{display:none}
 .per-ask-t .lv-cost{color:var(--red);font-weight:700} /* 현행 사건: 물을 때마다 드는 시간은 눈에 띄게 (기한을 모르고 물음을 늘어놓지 않게) */
+/* 마주 앉은 장면 (추궁이 통한 순간 · 종결한 순간의 범인): 테이블 건너 의자에 앉은 그림을 잠깐 크게. 대사는 그림 아래 대화창 */
+.scene-cut{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(12,9,7,.78);cursor:pointer;animation:sceneIn .38s ease-out both}
+.scene-cut.out{animation:sceneOut .3s ease-in both}
+.scene-cut figure{position:relative;margin:0;width:min(1120px,100%,calc((100vh - 32px) * 1.5));box-shadow:0 18px 60px rgba(0,0,0,.6);overflow:hidden;border-radius:3px}
+.scene-cut img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;animation:scenePush 6s ease-out both}
+.scene-cut figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 28px 22px;background:linear-gradient(to top,rgba(14,10,7,.94) 55%,rgba(14,10,7,0));color:#f2e8d6;font:clamp(17px,1.7vw,21px)/1.6 var(--f-doc)}
+.scene-cut figcaption b{display:inline-block;margin-bottom:6px;padding:2px 12px;background:#f2e8d6;color:#2a2118;font:700 15px/1.5 var(--f-doc);letter-spacing:.04em}
+.scene-cut figcaption span{display:block;max-width:62em;text-wrap:pretty}
+.scene-cut.s-end figcaption{padding-top:30px}
+@keyframes sceneIn{from{opacity:0}}
+@keyframes sceneOut{to{opacity:0}}
+@keyframes scenePush{from{transform:scale(1.06)}to{transform:scale(1)}}
+@media (max-width:700px){
+  .scene-cut{padding:0;align-content:center}
+  .scene-cut figure{width:100%;border-radius:0}
+  .scene-cut figcaption{position:static;padding:12px 16px 16px;background:#140e0a;font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){.scene-cut,.scene-cut.out,.scene-cut img{animation:none}}
+.scene-cut figcaption span.me{color:#b8ab95;padding-left:1.2em;font-size:.92em}
