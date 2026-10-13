@@ -132,6 +132,9 @@ img{max-width:100%}
 .f-going small{display:block;margin-top:3px;font-size:16px;text-align:right;color:#4a3f33}
 .f-next{animation:write .9s .5s ease-out both}
 @media (prefers-reduced-motion:reduce){.f-next{animation:none}}
+/* 받은 링크(?case=)의 사건 폴더: 빨간 점선과 손글씨 꼬리표 */
+.folder.pointed{outline:2px dashed var(--red);outline-offset:6px}
+.f-point{position:absolute;left:10px;bottom:-30px;z-index:2;white-space:nowrap;padding:2px 8px;font:18px/1.2 var(--f-hand);color:var(--red);background:rgba(250,244,228,.92);transform:rotate(3deg);box-shadow:0 1px 3px rgba(0,0,0,.25)}
 .mbox{margin-top:40px;max-width:760px}
 .mbox h2{margin:0;font:400 30px/1.1 var(--f-hand);color:#efe4c9}
 .mbox-sub{margin:4px 0 12px;font-size:13px;color:#a99a7e}

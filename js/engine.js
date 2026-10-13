@@ -233,6 +233,7 @@
   let PIN = {};      // ref -> { t, f, src }
   let NOPIN = false;
   let VERDICT = '';
+  let pointAt = null; // 받은 링크(?case=)가 가리키는 사건 — 사건을 하나 열면 잊는다
   // 이번 창에서만 기억하는 것(잠금에 틀린 횟수 · 재구성의 제자리 표시 · 고른 소명 메모 · 이미 만난 사람)은 사건마다 따로 둔다.
   // 다른 사건에 같은 이름의 칸(talk · tl · rq_cctv · p_park …)이 있어도 섞이지 않게. 「이 사건 처음부터」면 함께 비운다
   const TEMP = {};
@@ -2437,7 +2438,7 @@
     stopTalk(); if (MG.sound) MG.sound.stopVoice();
     caseFonts(c);
     if (c.graphic && !cs(c).cw) return warnScreen(c);
-    C = c; ST = cs(c); VERDICT = '';
+    C = c; ST = cs(c); VERDICT = ''; pointAt = null;
     clearTimeout(toastTimer); const tb = document.getElementById('toast'); if (tb) tb.classList.remove('on'); // 앞 사건에서 뜬 알림(「메모 22번」 따위)이 다음 사건까지 따라오지 않게
     S.current = id; save();
     document.title = `CASE ${pad(c.no)} ${quote(c.title)} — Monologue Gaze`;
@@ -2598,7 +2599,7 @@
         <span class="f-tab">CASE ${pad(c.no)}</span>
         <span class="f-body"><span class="f-kind">${kind} · ${esc(c.year)} ${c.kind === 'tutorial' ? T('<span class="stars t">연습</span>') : starsHtml(c)}</span><span class="f-label"><span class="f-title">${esc(c.title)}</span><span class="f-place">${esc(c.place)}</span></span>
         <span class="f-motif">${esc(c.motif || '')}</span>${c.length ? `<span class="f-len">${esc(c.length)}</span>` : ''}
-        ${status === 'done' ? `<span class="f-stamp${newDone.includes(c.id) ? ' fresh' : ''}">${T`종결`}</span>` : status === 'going' ? `<span class="f-going">${T`수사 중${stop ? `<small>${stop}</small>` : ''}`}</span>` : c.id === nextId ? `<span class="f-going f-next">${T`다음은 여기부터`}</span>` : ''}</span></button>`;
+        ${status === 'done' ? `<span class="f-stamp${newDone.includes(c.id) ? ' fresh' : ''}">${T`종결`}</span>` : status === 'going' ? `<span class="f-going">${T`수사 중${stop ? `<small>${stop}</small>` : ''}`}</span>` : c.id === nextId ? `<span class="f-going f-next">${T`다음은 여기부터`}</span>` : ''}${c.id === pointAt ? `<span class="f-point">${T`받은 링크의 사건`}</span>` : ''}</span></button>`;
     };
     const intro = S.intro ? '' : `<div class="intro"><p>${T`서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.`}</p><p>${T`서랍 속에는 한 세기에 걸친 미제 기록 ${numk(main.length)} 건. 신문 스크랩, 진술서, 편지, 사진. 선배가 끝내 풀지 못하고 두고 간 것들이다.`}</p><p class="intro-hand">${T`처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장`}</p><button type="button" class="btn-hand" data-intro-ok>${T`서랍을 연다`}</button></div>`;
     const letter = allShut ? `<article class="m-letter${newLetter ? ' fresh' : ''}"><h3>${T`서랍 맨 밑의 편지`}</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p>${mWho()}</article>` : '';
@@ -2624,6 +2625,9 @@
     // 막 종결한 사건이면 그 폴더까지 내려가 도장을 찍는다
     const fresh = $('.f-stamp.fresh');
     if (fresh) { setTimeout(() => { fresh.closest('.folder').scrollIntoView({ block: 'center', behavior: reduced() ? 'auto' : 'smooth' }); }, 150); setTimeout(() => sfx('stamp'), 700); }
+    // 받은 링크(?case=)의 사건: 그 폴더를 표시해 두고 거기까지 내려간다. 여는 것은 사람이 (연습 사건 · 잔혹 표현 확인을 건너뛰지 않게)
+    const pf = pointAt && !fresh && S.intro ? $(`.folder[data-open="${pointAt}"]`) : null;
+    if (pf) { pf.classList.add('pointed'); setTimeout(() => pf.scrollIntoView({ block: 'center', behavior: reduced() ? 'auto' : 'smooth' }), 150); }
     // 마지막 서랍을 막 닫았으면: 도장 다음에 편지가 나왔다고 알리고, 편지는 눈에 들어오는 순간 서랍 밑에서 밀려 나온다
     const ml = $('.m-letter.fresh');
     if (ml) {
@@ -3736,8 +3740,14 @@
     // 새로 고침하면 브라우저가 전에 보던 자리로 스크롤을 되돌린다. 누가 앉았는지 묻는 명부가 위에 가려지면 안 되므로 그때만 맨 위에서
     const ask = roster().list.length > 1;
     try { history.scrollRestoration = ask ? 'manual' : 'auto'; } catch (e) { /* ignore */ }
+    // 받은 링크의 사건 (?case=c05): 기록실에서 그 폴더를 짚어 준다. 주소에서는 걷어 내 새로 고침하면 평소대로
+    try {
+      const u = new URL(location.href), q = u.searchParams.get('case');
+      if (q && MG.byId[q]) pointAt = q;
+      if (u.searchParams.has('case')) { u.searchParams.delete('case'); history.replaceState(history.state, '', u.href); }
+    } catch (e) { /* 옛 브라우저 */ }
     if (ask) { cabinet('ask'); window.scrollTo(0, 0); }
-    else if (S.current && MG.byId[S.current]) openCase(S.current); else cabinet();
+    else if (S.current && MG.byId[S.current] && (!pointAt || pointAt === S.current)) openCase(S.current); else cabinet();
   };
   MG.state = () => S;
   MG.sfx = kind => sfx(kind); // 여는 장면(js/mood.js)의 무전 소리
