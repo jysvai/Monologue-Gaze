@@ -325,7 +325,7 @@ const SHOTS = [
   ['04-euncheon-2006.jpg', 'c09'], ['05-live-2023.jpg', 'c13'], ['10-across-the-table-1888.jpg', 'scene'], ['08-interview-room-1888.jpg', 'interview'], ['09-whereabouts-board-c05.jpg', 'board'],
   ['11-others-involved.jpg', 'with'], ['00-records-room.jpg', 'room'],
 ];
-const VIDEO = {}; // 언어별 영상이 생기면 여기에 (지금은 영어 화면 하나)
+const VIDEO = { ja: 'gameplay-ja' }; // 언어별 영상 (없는 언어는 영어 화면) — <이름>.mp4 와 <이름>-poster.jpg
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const url = l => `${SITE}${l}/`;
@@ -368,7 +368,7 @@ function page(l) {
     sameAs: [ITCH, GIT, SITE], offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     availableLanguage: ['ko', 'en', 'ja', 'zh-Hans', 'ru', 'de'],
   };
-  const video = VIDEO[l] || 'gameplay-en.mp4';
+  const video = VIDEO[l] || 'gameplay-en';
   const fonts = 'family=Special+Elite&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500' + (FONT[l] ? '&family=' + FONT[l] : '');
   return `<!doctype html>
 <!-- 자동 생성: node tools/landing.js — 이 파일을 직접 고치지 말고 tools/landing.js 를 고친다 -->
@@ -411,7 +411,7 @@ ${alt}
 </header>
 
 <figure class="reel">
-<video src="../press/media/${video}" poster="../press/media/gameplay-en-poster.jpg" controls playsinline preload="none" width="1280" height="760"></video>
+<video src="../press/media/${video}.mp4" poster="../press/media/${video}-poster.jpg" controls playsinline preload="none" width="1280" height="760"></video>
 <figcaption>${esc(t.video)}</figcaption>
 </figure>
 
