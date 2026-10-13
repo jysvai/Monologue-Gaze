@@ -3561,7 +3561,10 @@
         { // 그리고 테이블 건너의 범인: 마지막 추궁 → 결말 그림, 함께 엮인 사람이 있으면 그 사람도 차례로. 종결의 한마디는 그 뒤에
           const per = k => Object.values(C.people || {}).find(x => x.key === k), here = () => C === c0 && ST === s0;
           const cp = per(C.solution.culprit), ws = Object.keys(C.solution.with || {}).map(per).filter(Boolean);
-          const after = () => { if (!here()) return; ws.forEach((p, i) => setTimeout(() => { if (here()) sceneCut(p, 'end', [], 3000); }, i * 3300)); if (MG.sound) setTimeout(() => { if (here()) MG.sound.hero('solved'); }, ws.length * 3300 + 300); };
+          // 함께 엮인 사람: 무엇으로 엮였는지(공범 · 알고도 감춤)와, 메모로 깨졌던 말이 있으면 마지막 한 줄
+          const wLines = p => { const w = (C.solution.with || {})[p.key], lab = (WITH().find(x => x[0] === (typeof w === 'string' ? w : w && w.k)) || [])[1], e = [...(ST.asked[p.id] || [])].reverse().find(x => x.endsWith('!') && isPressAsk(p, x.slice(0, -1)));
+            return [...(lab ? [{ t: lab, me: true }] : []), ...(e ? ansLines(p, e.slice(0, -1)).filter(x => !x.me).slice(-1) : [])]; };
+          const after = () => { if (!here()) return; ws.forEach((p, i) => setTimeout(() => { if (here()) sceneCut(p, 'end', wLines(p), 4000); }, i * 4300)); if (MG.sound) setTimeout(() => { if (here()) MG.sound.hero('solved'); }, ws.length * 4300 + 300); };
           setTimeout(() => { if (!here()) return; if (cp) confront(cp, after); else after(); }, 1100);
         }
       } else if (wrong === 0) toast(T('이미 닫힌 사건이다'));
