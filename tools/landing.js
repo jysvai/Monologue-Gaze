@@ -60,12 +60,12 @@ const L = {
     kicker: 'Free browser game · 16 cases · 1888–2025',
     tag: 'A detective game where you solve cases by reading the records.',
     play: 'Play in your browser', itch: 'itch.io page',
-    video: 'How it plays, 26 s',
+    video: 'Gameplay, 1 min',
     about: ['About', 'A drawer of cold cases'],
     p: [
       'You are a new detective in Violent Crimes Unit 2 at Seoul Seobu Police Station. M, a senior member of the unit, has transferred out and left you the key to a desk drawer of unsolved cases going back more than a hundred years.',
       'There is no map to walk around. Each case comes as the documents of its period: a halfpenny paper in 1888 London, police files and telegrams from 1930s Gyeongseong, a guest ledger in 1971 Seoul, a police PC in 2006, a group chat in 2023. Click an underlined word to write it in your notebook, then search the archives with it or ask the people involved about it.',
-      'To close a case you file a report. You name the culprit and attach an evidence note to each claim, and the case closes once all of it is right. After the twelve cold cases are closed you can read the letter M left behind.',
+      'To close a case you file a report. You name the culprit, mark anyone who took part or covered it up, and attach an evidence note to each claim, and the case closes once all of it is right. After the twelve cold cases are closed you can read the letter M left behind.',
     ],
     facts: [
       ['Price', 'Free'],
@@ -79,7 +79,7 @@ const L = {
     features: [
       'Read the documents of each period: newspapers, statements, letters, telegrams, ledgers, transcripts, old personal homepages and messenger logs.',
       'Keep a notebook of words and search with them. A word you have not found yet has to be typed in full, so you cannot skip ahead.',
-      'Interview people face to face. Each one has a painted portrait. Hold out a note that contradicts what they said and their story changes; after a few wrong notes they stop talking.',
+      'Interview people face to face. Each one has a painted portrait. Hold out a note that contradicts what they said and their story changes; after a few wrong notes they stop talking. When a note breaks a statement, the scene cuts to them across the interview table.',
       'A whereabouts board sets what each person said about the night next to what the records caught, hour by hour.',
       'Open questions on the notebook’s first page fill in as you find things.',
       'Use each era’s tools: handwriting, footprint and voiceprint comparison, vehicle and phone lookups, close study of scene photos, cipher work, case timelines.',
@@ -92,7 +92,7 @@ const L = {
     groups: ['Practice case', 'Cold cases', 'Live cases'], practice: 'practice',
     note: 'Red stars mark cases with graphic descriptions and crime scene photos showing bodies. The Graphic content switch in the records room covers the photos and swaps the text for a toned-down version with the same clues. Every case is a new story that borrows only motifs from real unsolved cases; all people, places and organizations are fictional.',
     sh: ['Screenshots', 'On screen'],
-    cap: { interview: 'Interviewing a witness', room: 'The records room', board: 'The whereabouts board' },
+    cap: { interview: 'Interviewing a witness', room: 'The records room', board: 'The whereabouts board', scene: 'A statement breaks across the table', with: 'The report: others involved' },
     cr: ['Credits', 'How it was made'],
     credits: 'Images were generated with AI and checked one by one against the case records. Voices: ElevenLabs. Sound effects: CC0 recordings from Freesound and Kenney. The text and code were written with AI assistance.',
     foot: ['Press kit', 'itch.io', 'Source (GitHub)'],
@@ -104,12 +104,12 @@ const L = {
     kicker: '무료 웹 게임 · 사건 16건 · 1888–2025',
     tag: '기록을 읽어 사건을 푸는 추리 게임.',
     play: '브라우저에서 하기', itch: 'itch.io 페이지',
-    video: '플레이 방법, 26초',
+    video: '플레이 영상, 1분',
     about: ['소개', '미제 사건 서랍'],
     p: [
       '서울서부경찰서 강력2팀의 신입 형사가 되어, 전출 간 선배 M이 서랍에 남기고 간 미제 사건 기록을 연다. 백 년 넘게 거슬러 올라가는 사건들이다.',
       '직접 걸어 다니지 않는다. 사건마다 그 시대의 기록이 온다. 1888년 런던의 반 페니 신문, 1930년대 경성의 경찰 서류와 전보, 1971년 서울의 숙박부, 2006년의 경찰 PC, 2023년의 단체 대화방. 밑줄 친 단어를 눌러 수첩에 적고, 그 단어로 기록을 찾거나 사람에게 묻는다.',
-      '수사 보고서에 범인을 고르고 주장마다 증거 메모를 붙인다. 전부 맞아야 사건이 종결된다. 미제 사건 열두 건을 모두 종결하면 M이 남긴 편지를 읽을 수 있다.',
+      '수사 보고서에 범인을 고르고, 함께 저지르거나 알고도 감춘 사람이 있으면 그 사람도 적고, 주장마다 증거 메모를 붙인다. 전부 맞아야 사건이 종결된다. 미제 사건 열두 건을 모두 종결하면 M이 남긴 편지를 읽을 수 있다.',
     ],
     facts: [
       ['가격', '무료'],
@@ -123,7 +123,7 @@ const L = {
     features: [
       '그 시대의 기록을 읽는다. 신문, 진술서, 편지, 전보, 숙박부, 녹취록, 미니홈피, 메신저.',
       '단어를 수첩에 적고 그 단어로 찾는다. 아직 찾지 못한 단어는 끝까지 쳐 넣어야 나오므로 건너뛸 수 없다.',
-      '사람을 찾아가 탐문한다. 저마다 그려진 얼굴로 대답한다. 그 말과 어긋나는 메모를 내밀면 말이 바뀌고, 엉뚱한 메모를 몇 번 내밀면 입을 닫는다.',
+      '사람을 찾아가 탐문한다. 저마다 그려진 얼굴로 대답한다. 그 말과 어긋나는 메모를 내밀면 말이 바뀌고, 엉뚱한 메모를 몇 번 내밀면 입을 닫는다. 메모로 말이 깨지면 테이블 건너편에 앉은 그 사람의 모습이 뜬다.',
       '행적표에는 그날 누가 어디 있었다고 했는지와 기록에 남은 것이 시각별로 나란히 적힌다.',
       '수첩 첫 장의 의문은 찾은 것만큼 빈칸이 채워진다.',
       '시대마다 조사 도구가 따로 있다. 필적·족적·성문 대조 감정, 차량·전화번호 조회, 현장 사진 정밀 관찰, 암호 해독, 사건 재구성.',
@@ -136,7 +136,7 @@ const L = {
     groups: ['연습 사건', '미제 사건', '현행 사건'], practice: '연습',
     note: '별이 빨간 사건에는 잔혹한 묘사와 시신이 드러난 현장 사진이 나온다. 기록실의 「잔혹 표현」 단추로 끄면 사진은 가려지고 글은 건조한 판으로 바뀐다. 단서는 같다. 모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기이고, 인물·장소·기관은 모두 허구다.',
     sh: ['스크린숏', '화면'],
-    cap: { interview: '목격자 탐문', room: '기록실', board: '행적표' },
+    cap: { interview: '목격자 탐문', room: '기록실', board: '행적표', scene: '메모로 깨진 진술, 마주 앉은 사람', with: '보고서의 「함께 엮인 사람」 칸' },
     cr: ['크레디트', '만든 방법'],
     credits: '그림은 AI로 만들고 사건 기록과 한 장씩 대조해 고쳤다. 목소리는 ElevenLabs, 효과음은 Freesound·Kenney의 CC0 녹음이다. 글과 코드는 AI의 도움을 받아 썼다.',
     foot: ['보도 자료 (영어)', 'itch.io', '소스 코드 (GitHub)'],
@@ -148,12 +148,12 @@ const L = {
     kicker: '無料ブラウザゲーム · 16事件 · 1888–2025',
     tag: '記録を読んで事件を解く推理ゲーム。',
     play: 'ブラウザで遊ぶ', itch: 'itch.io のページ',
-    video: '遊び方、26秒',
+    video: 'プレイ映像、1分',
     about: ['概要', '未解決事件の引き出し'],
     p: [
       'ソウル西部警察署 強行犯二係の新人刑事として、異動した先輩Mが引き出しに残していった未解決事件の記録を開く。百年以上さかのぼる事件だ。',
       '現場を歩き回ることはない。事件ごとに、その時代の記録が届く。1888年ロンドンの半ペニー新聞、1930年代京城の警察書類と電報、1971年ソウルの宿泊台帳、2006年の警察のパソコン、2023年のグループチャット。下線の引かれた言葉を押して手帳に書き留め、その言葉で記録を探したり、関係者に尋ねたりする。',
-      '捜査報告書で犯人を選び、主張ごとに証拠メモを添える。すべて正しければ事件は解決となる。未解決事件12件をすべて解決すると、Mが残した手紙を読める。',
+      '捜査報告書で犯人を選び、共犯や知っていて隠した者がいればその人も記し、主張ごとに証拠メモを添える。すべて正しければ事件は解決となる。未解決事件12件をすべて解決すると、Mが残した手紙を読める。',
     ],
     facts: [
       ['価格', '無料'],
@@ -167,7 +167,7 @@ const L = {
     features: [
       'その時代の記録を読む。新聞、供述調書、手紙、電報、宿泊台帳、録取記録、昔の個人ホームページ、メッセンジャー。',
       '言葉を手帳に書き留め、その言葉で探す。まだ見つけていない言葉は最後まで打ち込まないと出てこないので、先回りはできない。',
-      '関係者に聞き込みをする。相手にはそれぞれ描かれた顔がある。話と食い違うメモを突きつけると話が変わり、見当違いのメモを重ねると口を閉ざす。',
+      '関係者に聞き込みをする。相手にはそれぞれ描かれた顔がある。話と食い違うメモを突きつけると話が変わり、見当違いのメモを重ねると口を閉ざす。メモで証言が崩れると、机の向こうに座るその人の姿が映る。',
       '行動表には、その日だれがどこにいたと言ったかと、記録に残ったことが時刻ごとに並ぶ。',
       '手帳の最初のページにある「疑問」は、見つけたぶんだけ空欄が埋まっていく。',
       '時代ごとに捜査の道具がある。筆跡・足跡・声紋の鑑定、車両・電話番号の照会、現場写真の精査、暗号解読、事件の再構成。',
@@ -180,7 +180,7 @@ const L = {
     groups: ['練習事件', '未解決事件', '現行事件'], practice: '練習',
     note: '赤い星の事件には残酷な描写と、遺体が写った現場写真が出てくる。記録室の「残酷表現」ボタンでオフにすると、写真は隠され、文章は抑えた版に変わる。手がかりは同じ。すべての事件は実在の未解決事件のモチーフだけを借りた創作で、人物・場所・機関はすべて架空のもの。',
     sh: ['スクリーンショット', '画面'],
-    cap: { interview: '目撃者への聞き込み', room: '記録室', board: '行動表' },
+    cap: { interview: '目撃者への聞き込み', room: '記録室', board: '行動表', scene: 'メモで崩れた証言、向かいに座る相手', with: '報告書の「共に関わった者」欄' },
     cr: ['クレジット', '制作について'],
     credits: '画像はAIで生成し、事件の記録と一枚ずつ照らし合わせて直した。音声はElevenLabs、効果音はFreesoundとKenneyのCC0録音。文章とコードはAIの助けを借りて書いた。',
     foot: ['プレスキット（英語）', 'itch.io', 'ソースコード（GitHub）'],
@@ -192,12 +192,12 @@ const L = {
     kicker: '免费浏览器游戏 · 16起案件 · 1888–2025',
     tag: '一款靠阅读档案破案的推理游戏。',
     play: '在浏览器中开始', itch: 'itch.io 页面',
-    video: '玩法演示，26秒',
+    video: '游戏实录，1分钟',
     about: ['简介', '一抽屉悬案'],
     p: [
       '你是首尔西部警察署重案二组的新人刑警。调走的前辈M把一抽屉悬案档案的钥匙留给了你，最早的案子要追溯到一百多年前。',
       '不用四处走动。每起案件都以那个年代的档案呈现：1888年伦敦的半便士小报、1930年代京城的警察文书和电报、1971年首尔的住宿登记簿、2006年的警用电脑、2023年的群聊。点击带下划线的词记入笔记本，再用它检索档案，或去问相关的人。',
-      '在调查报告里选出凶手，并为每条主张附上证据笔记。全部正确才能结案。12起悬案全部结案后，可以读到M留下的信。',
+      '在调查报告里选出凶手，若有共犯或知情隐瞒的人也一并写上，并为每条主张附上证据笔记。全部正确才能结案。12起悬案全部结案后，可以读到M留下的信。',
     ],
     facts: [
       ['价格', '免费'],
@@ -211,7 +211,7 @@ const L = {
     features: [
       '阅读那个年代的档案：报纸、口供、信件、电报、住宿登记簿、笔录、旧个人主页和聊天记录。',
       '把词记进笔记本，再用它检索。还没找到的词必须完整输入才会出现，没法跳步。',
-      '当面问询相关的人。每个人都有一张画出来的脸。拿出与其说法矛盾的笔记，说法就会改变；拿错几次笔记，对方就不再开口。',
+      '当面问询相关的人。每个人都有一张画出来的脸。拿出与其说法矛盾的笔记，说法就会改变；拿错几次笔记，对方就不再开口。笔记一旦戳破证词，画面就会切到坐在桌子对面的那个人。',
       '行踪表按时间把每个人自称当时在哪里，和档案里记下的内容并排列出。',
       '笔记本首页的「疑点」会随着你的发现一格格填满。',
       '每个年代都有自己的调查工具：笔迹、足迹、声纹比对，车辆和电话号码查询，现场照片细查，密码破译，案件重建。',
@@ -224,7 +224,7 @@ const L = {
     groups: ['练习案件', '悬案', '现案'], practice: '练习',
     note: '红色星级的案件包含血腥描写和露出遗体的现场照片。用档案室里的「血腥内容」按钮关闭后，照片会被遮住，文字换成克制的版本，线索不变。所有案件都只借用真实悬案的母题，是全新的故事，人物、地点和机构均为虚构。',
     sh: ['截图', '画面'],
-    cap: { interview: '问询目击者', room: '档案室', board: '行踪表' },
+    cap: { interview: '问询目击者', room: '档案室', board: '行踪表', scene: '被笔记戳破的证词，坐在对面的人', with: '报告里的“一同牵涉的人”一栏' },
     cr: ['制作', '制作方式'],
     credits: '图像由AI生成，并逐张对照案件档案修改。语音来自ElevenLabs，音效是Freesound和Kenney的CC0录音。文字和代码在AI协助下写成。',
     foot: ['媒体资料（英文）', 'itch.io', '源代码（GitHub）'],
@@ -236,12 +236,12 @@ const L = {
     kicker: 'Бесплатная браузерная игра · 16 дел · 1888–2025',
     tag: 'Детектив, в котором дела раскрывают чтением документов.',
     play: 'Играть в браузере', itch: 'Страница на itch.io',
-    video: 'Как играть, 26 с',
+    video: 'Как это выглядит в игре, 1 мин',
     about: ['Об игре', 'Ящик с нераскрытыми делами'],
     p: [
       'Вы только что пришли во 2-ю группу по тяжким преступлениям полицейского участка Сеул-Собу. После перевода M в другой участок вам достаётся ключ от ящика стола с нераскрытыми делами, самым старым из которых больше ста лет.',
       'Ходить никуда не нужно. Каждое дело приходит в виде документов своего времени: грошовая газета Лондона 1888 года, полицейские бумаги и телеграммы Кёнсона 1930-х, книга постояльцев Сеула 1971 года, полицейский компьютер 2006 года, групповой чат 2023 года. Нажмите на подчёркнутое слово, чтобы записать его в блокнот, а потом ищите по нему в архивах или спрашивайте о нём людей.',
-      'В рапорте о расследовании вы называете виновного и прикладываете к каждому утверждению заметку-доказательство. Дело закрывается, только когда всё верно. Когда закрыты все двенадцать нераскрытых дел, можно прочитать письмо от M.',
+      'В рапорте о расследовании вы называете виновного, отмечаете соучастников и тех, кто знал и скрыл, и прикладываете к каждому утверждению заметку-доказательство. Дело закрывается, только когда всё верно. Когда закрыты все двенадцать нераскрытых дел, можно прочитать письмо от M.',
     ],
     facts: [
       ['Цена', 'Бесплатно'],
@@ -255,7 +255,7 @@ const L = {
     features: [
       'Читаете документы эпохи: газеты, показания, письма, телеграммы, книги постояльцев, протоколы, старые личные страницы и переписку в мессенджере.',
       'Записываете слова в блокнот и ищете по ним. Слово, которое вы ещё не нашли, нужно набрать целиком, поэтому забежать вперёд не получится.',
-      'Опрашиваете людей лично. У каждого своё нарисованное лицо. Предъявите заметку, которая противоречит их словам, и рассказ изменится. После нескольких неверных заметок человек замолчит.',
+      'Опрашиваете людей лично. У каждого своё нарисованное лицо. Предъявите заметку, которая противоречит их словам, и рассказ изменится. После нескольких неверных заметок человек замолчит. Когда заметка разбивает показания, вы видите этого человека напротив, за столом для допроса.',
       'Таблица передвижений по часам ставит рядом то, где люди, по их словам, были, и то, что зафиксировали документы.',
       'Вопросы на первой странице блокнота заполняются по мере того, как вы что-то находите.',
       'В каждой эпохе свои инструменты: сравнение почерка, следов и голосов, проверка машин и телефонных номеров, изучение снимков с места, расшифровка, восстановление хода событий.',
@@ -268,7 +268,7 @@ const L = {
     groups: ['Учебное дело', 'Нераскрытые дела', 'Оперативные дела'], practice: 'учебное',
     note: 'Дела с красными звёздами содержат жестокие описания и снимки с места преступления, на которых видны тела. Переключатель «Жестокие сцены» в архиве скрывает снимки и заменяет текст сдержанной версией с теми же уликами. Все дела — новые истории, которые берут у реальных нераскрытых дел только мотивы; все люди, места и организации вымышлены.',
     sh: ['Скриншоты', 'Экран'],
-    cap: { interview: 'Опрос свидетеля', room: 'Архив', board: 'Таблица передвижений' },
+    cap: { interview: 'Опрос свидетеля', room: 'Архив', board: 'Таблица передвижений', scene: 'Показания рушатся — человек напротив', with: 'Рапорт: графа «Причастные»' },
     cr: ['Создание', 'Как это сделано'],
     credits: 'Изображения созданы с помощью ИИ и сверены с материалами дел по одному. Голоса: ElevenLabs. Звуковые эффекты: записи CC0 с Freesound и Kenney. Текст и код написаны с помощью ИИ.',
     foot: ['Пресс-кит (англ.)', 'itch.io', 'Исходный код (GitHub)'],
@@ -280,12 +280,12 @@ const L = {
     kicker: 'Kostenloses Browserspiel · 16 Fälle · 1888–2025',
     tag: 'Ein Detektivspiel, in dem Sie Fälle lösen, indem Sie die Akten lesen.',
     play: 'Im Browser spielen', itch: 'Seite auf itch.io',
-    video: 'So wird gespielt, 26 s',
+    video: 'Spielszenen, 1 Min.',
     about: ['Über das Spiel', 'Eine Schublade voller ungelöster Fälle'],
     p: [
       'Sie sind neu im Team 2 des Gewaltdezernats im Polizeirevier Seoul-Seobu. M, schon länger im Team, ist versetzt worden und hat Ihnen den Schlüssel zu einer Schreibtischschublade mit ungelösten Fällen hinterlassen, die mehr als hundert Jahre zurückreichen.',
       'Herumlaufen müssen Sie nicht. Jeder Fall kommt als Akten seiner Zeit: ein Halfpenny-Blatt im London von 1888, Polizeipapiere und Telegramme aus dem Gyeongseong der 1930er, ein Gästebuch im Seoul von 1971, ein Polizei-PC von 2006, ein Gruppenchat von 2023. Klicken Sie ein unterstrichenes Wort an, um es ins Notizbuch zu schreiben, und suchen Sie damit in den Archiven oder fragen Sie die Beteiligten danach.',
-      'Im Ermittlungsbericht benennen Sie den Täter und belegen jede Behauptung mit einer Beweisnotiz. Der Fall ist erst gelöst, wenn alles stimmt. Sind alle zwölf ungelösten Fälle abgeschlossen, können Sie den Brief von M lesen.',
+      'Im Ermittlungsbericht benennen Sie den Täter, vermerken Mittäter und Mitwisser, die es vertuscht haben, und belegen jede Behauptung mit einer Beweisnotiz. Der Fall ist erst gelöst, wenn alles stimmt. Sind alle zwölf ungelösten Fälle abgeschlossen, können Sie den Brief von M lesen.',
     ],
     facts: [
       ['Preis', 'Kostenlos'],
@@ -299,7 +299,7 @@ const L = {
     features: [
       'Akten der jeweiligen Zeit lesen: Zeitungen, Aussagen, Briefe, Telegramme, Gästebücher, Protokolle, alte private Homepages und Messenger-Verläufe.',
       'Wörter ins Notizbuch schreiben und damit suchen. Ein Wort, das Sie noch nicht gefunden haben, müssen Sie vollständig eintippen, Vorgreifen ist also nicht möglich.',
-      'Die Beteiligten persönlich befragen. Jede Person hat ein gemaltes Gesicht. Halten Sie eine Notiz vor, die einer Aussage widerspricht, und die Geschichte ändert sich. Nach mehreren falschen Notizen schweigt die Person.',
+      'Die Beteiligten persönlich befragen. Jede Person hat ein gemaltes Gesicht. Halten Sie eine Notiz vor, die einer Aussage widerspricht, und die Geschichte ändert sich. Nach mehreren falschen Notizen schweigt die Person. Bricht eine Notiz eine Aussage, sitzt Ihnen die Person am Vernehmungstisch gegenüber.',
       'Die Aufenthaltstafel stellt Stunde für Stunde nebeneinander, wo jemand nach eigener Aussage war und was die Akten festhalten.',
       'Die Fragen auf der ersten Seite des Notizbuchs füllen sich mit dem, was Sie finden.',
       'Die Werkzeuge jeder Epoche nutzen: Handschrift-, Fußabdruck- und Stimmvergleich, Fahrzeug- und Telefonabfragen, genaue Prüfung von Tatortfotos, Entschlüsselung, Rekonstruktion des Ablaufs.',
@@ -312,7 +312,7 @@ const L = {
     groups: ['Übungsfall', 'Ungelöste Fälle', 'Echtzeitfälle'], practice: 'Übung',
     note: 'Fälle mit roten Sternen enthalten drastische Beschreibungen und Tatortfotos, auf denen Leichen zu sehen sind. Der Schalter „Drastische Inhalte“ im Archiv deckt die Fotos ab und ersetzt den Text durch eine zurückhaltende Fassung mit denselben Hinweisen. Alle Fälle sind neue Geschichten, die von echten ungelösten Fällen nur Motive leihen; alle Personen, Orte und Einrichtungen sind erfunden.',
     sh: ['Screenshots', 'Bilder'],
-    cap: { interview: 'Befragung eines Zeugen', room: 'Das Archiv', board: 'Die Aufenthaltstafel' },
+    cap: { interview: 'Befragung eines Zeugen', room: 'Das Archiv', board: 'Die Aufenthaltstafel', scene: 'Eine Aussage bricht am Vernehmungstisch', with: 'Der Bericht: weitere Beteiligte' },
     cr: ['Mitwirkende', 'Wie es gemacht wurde'],
     credits: 'Die Bilder wurden mit KI erzeugt und einzeln mit den Fallakten abgeglichen. Stimmen: ElevenLabs. Geräusche: CC0-Aufnahmen von Freesound und Kenney. Text und Code entstanden mit Unterstützung von KI.',
     foot: ['Pressemappe (Englisch)', 'itch.io', 'Quellcode (GitHub)'],
@@ -322,10 +322,10 @@ const L = {
 /* 스크린숏: press/media 의 그림 (사건 번호가 있는 것은 그 사건의 연도 · 장소를 그대로 붙인다) */
 const SHOTS = [
   ['01-london-1888.jpg', 'c01'], ['02-gyeongseong-1935.jpg', 'c03'], ['06-tokyo-1968.jpg', 'c04'], ['03-seoul-1971.jpg', 'c07'],
-  ['04-euncheon-2006.jpg', 'c09'], ['05-live-2023.jpg', 'c13'], ['08-interview-room-1888.jpg', 'interview'], ['09-whereabouts-board-c05.jpg', 'board'],
-  ['00-records-room.jpg', 'room'],
+  ['04-euncheon-2006.jpg', 'c09'], ['05-live-2023.jpg', 'c13'], ['10-across-the-table-1888.jpg', 'scene'], ['08-interview-room-1888.jpg', 'interview'], ['09-whereabouts-board-c05.jpg', 'board'],
+  ['11-others-involved.jpg', 'with'], ['00-records-room.jpg', 'room'],
 ];
-const VIDEO = { ja: 'how-it-plays-ja.mp4' };
+const VIDEO = {}; // 언어별 영상이 생기면 여기에 (지금은 영어 화면 하나)
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const url = l => `${SITE}${l}/`;
@@ -368,7 +368,7 @@ function page(l) {
     sameAs: [ITCH, GIT, SITE], offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     availableLanguage: ['ko', 'en', 'ja', 'zh-Hans', 'ru', 'de'],
   };
-  const video = VIDEO[l] || 'how-it-plays-en.mp4';
+  const video = VIDEO[l] || 'gameplay-en.mp4';
   const fonts = 'family=Special+Elite&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500' + (FONT[l] ? '&family=' + FONT[l] : '');
   return `<!doctype html>
 <!-- 자동 생성: node tools/landing.js — 이 파일을 직접 고치지 말고 tools/landing.js 를 고친다 -->
@@ -411,7 +411,7 @@ ${alt}
 </header>
 
 <figure class="reel">
-<video src="../press/media/${video}" poster="../press/media/how-it-plays-en-poster.jpg" controls muted playsinline preload="none" width="1280" height="720"></video>
+<video src="../press/media/${video}" poster="../press/media/gameplay-en-poster.jpg" controls playsinline preload="none" width="1280" height="760"></video>
 <figcaption>${esc(t.video)}</figcaption>
 </figure>
 
