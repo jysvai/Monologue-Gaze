@@ -775,6 +775,13 @@
     s.el.classList.add('out'); setTimeout(() => s.el.remove(), reduced() ? 0 : 320);
     if (TOAST_LATER) { const x = TOAST_LATER; TOAST_LATER = null; setTimeout(() => { if (!SCENE) toast(...x); }, 360); }
   }
+  // 사람 화면을 열면 그 사람의 마주 앉은 그림(결말 그림은 빼고)을 미리 받아 둔다 — 추궁이 통한 순간 그림이 늦게 뜨지 않게
+  const PRE = new Set();
+  function scenePre(p) {
+    if (!p || ST.solved || typeof Image !== 'function') return;
+    const I = MG.images || {}, pre = `${C.id}/scene_${p.id}_`;
+    Object.keys(I).filter(k => k.startsWith(pre) && k !== pre + 'end' && !PRE.has(k)).forEach(k => { PRE.add(k); const im = new Image(); im.decoding = 'async'; im.src = I[k]; });
+  }
   function sceneFile(p, kind) {
     const I = MG.images || {}, pre = `${C.id}/scene_${p.id}_`;
     if (I[pre + kind] || kind === 'end') return I[pre + kind] || null;
@@ -1877,6 +1884,7 @@
     const el = $('#paneRead');
     const o = ST.view.open;
     { const was = READ_WHO; READ_WHO = o && o.t === 'person' ? o.id : null; if (was && !READ_WHO) { const s0 = ST; setTimeout(() => { if (ST === s0) monoNews(); }, 1500); } }
+    if (READ_WHO) scenePre(C.people[READ_WHO]);
     let h;
     if (o && o.t === 'doc' && C.docs[o.id]) h = docHtml(C.docs[o.id]);
     else if (o && o.t === 'person' && C.people[o.id]) h = personHtml(C.people[o.id]);
