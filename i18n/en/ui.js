@@ -473,6 +473,7 @@ MG.I18N.put("en", "ui", {
 " (어긋난 곳: {0}군데)": " (Points that don't hold up: {0})",
 "범인과 증거는 들어맞는다. 누가 함께 엮였는지, 아니면 혼자 한 일인지 — 거기가 어긋난다.": "The culprit and the evidence hold up. Who else was involved, or whether anyone was — that is where it falls apart.",
 "아직 이야기가 이어지지 않는다. 더 쫓아가 보자.": "The story doesn't hold together yet. Keep digging.",
+"지목한 사람이 이 일에 엮인 것은 맞다. 그래도 직접 한 사람은 아니다.": "The person you named is part of this. But they are not the one who did it.",
 "수첩에 아직 모자란 기록이 있다. 더 쫓아가 본다.": "Something is still missing from the notebook. Keep digging.",
 "지목할 사람이 아직 수첩에 없다.": "The person to name is not in the notebook yet.",
 "이미 닫힌 사건이다": "This case is already closed",

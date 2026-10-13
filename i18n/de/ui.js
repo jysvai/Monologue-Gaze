@@ -473,6 +473,7 @@ MG.I18N.put("de", "ui", {
 " (어긋난 곳: {0}군데)": " (unstimmige Punkte: {0})",
 "범인과 증거는 들어맞는다. 누가 함께 엮였는지, 아니면 혼자 한 일인지 — 거기가 어긋난다.": "Täter und Beweise passen. Wer sonst beteiligt war, oder ob überhaupt jemand — da hakt es.",
 "아직 이야기가 이어지지 않는다. 더 쫓아가 보자.": "Noch fügt sich die Geschichte nicht zusammen. Weiter dranbleiben.",
+"지목한 사람이 이 일에 엮인 것은 맞다. 그래도 직접 한 사람은 아니다.": "Die Person, die Sie benannt haben, ist darin verwickelt. Aber getan hat sie es nicht.",
 "수첩에 아직 모자란 기록이 있다. 더 쫓아가 본다.": "Im Notizbuch fehlt noch etwas. Weiter dranbleiben.",
 "지목할 사람이 아직 수첩에 없다.": "Die Person, die zu benennen ist, steht noch nicht im Notizbuch.",
 "이미 닫힌 사건이다": "Dieser Fall ist schon abgeschlossen",
