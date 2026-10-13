@@ -325,7 +325,7 @@ const SHOTS = [
   ['04-euncheon-2006.jpg', 'c09'], ['05-live-2023.jpg', 'c13'], ['10-across-the-table-1888.jpg', 'scene'], ['08-interview-room-1888.jpg', 'interview'], ['09-whereabouts-board-c05.jpg', 'board'],
   ['11-others-involved.jpg', 'with'], ['00-records-room.jpg', 'room'],
 ];
-const VIDEO = { ja: 'gameplay-ja' }; // 언어별 영상 (없는 언어는 영어 화면) — <이름>.mp4 와 <이름>-poster.jpg
+const VIDEO = { ja: 'gameplay-ja', ko: 'gameplay-ko' }; // 언어별 영상 (없는 언어는 영어 화면) — <이름>.mp4 와 <이름>-poster.jpg
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const url = l => `${SITE}${l}/`;
