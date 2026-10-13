@@ -789,6 +789,53 @@
   }
   // 추궁이 통한 대답: 말풍선 글을 차례대로 (그 사이 내가 한 말은 me — 흐리게). 몸짓 · 메모 표시는 뺀다
   const sceneLines = qa => [...qa.querySelectorAll('.c-ans .c-bub')].map(b => { const c = b.querySelector('.c-t').cloneNode(true); c.querySelectorAll('[data-pin],[aria-hidden="true"]').forEach(x => x.remove()); return { t: c.textContent.replace(/\s+/g, ' ').trim(), me: b.classList.contains('me') }; }).filter(x => x.t);
+  // 마지막 추궁: 맞는 보고서를 올리면, 주장마다 붙인 메모가 한 장씩 범인 앞에 놓이고 그 메모를 내밀었을 때 범인이 한 말이 다시 나온다.
+  // 그 메모로 깨진 대답이 없으면 메모만. 마지막은 범인의 결말 그림 (scene_<id>_end). 누르면 다음 장, Esc 는 끝까지 건너뛴다
+  function pressFor(p, facts, used) {
+    const asked = ST.asked[p.id] || [];
+    const ks = Object.keys(p.ask || {}).filter(k => {
+      const a = rawAns(p, k);
+      return !used.has(k) && isPressAsk(p, k) && !(a && a.soft) && (a.need || []).some(n => n.split('|').some(x => x[0] === '!' && facts.some(f => f && fIs(f, x.slice(1)))));
+    });
+    return ks.find(k => asked.includes(k + '!')) || ks[0] || null;
+  }
+  const ansLines = (p, k) => [].concat((rawAns(p, k) || {}).a || []).map(gv).map(b => (typeof b === 'string' ? b : b && typeof b.p === 'string' ? b.p : '')).filter(Boolean)
+    .map(t => ({ t: plain(t).replace(DASH, '').replace(/\s+/g, ' ').trim(), me: DASH.test(t) })).filter(x => x.t);
+  function confront(cp, done) {
+    const sol = C.solution, used = new Set(), I = MG.images || {};
+    const beats = sol.claims.map((cl, j) => {
+      const n = ST.notes.find(x => String(x.id) === String(ST.report.claims[cl.id]));
+      if (!n) return null;
+      const k = pressFor(cp, [n.f], used); // 그 메모로 깨진 대답만 (같은 주장의 다른 메모로 깨진 말을 끌어오면 메모와 말이 어긋난다)
+      if (k) used.add(k);
+      const react = k && (rawAns(cp, k) || {}).react;
+      return { n, q: `${j + 1}. ${plain(cl.q)}`, lines: k ? ansLines(cp, k) : [], img: sceneFile(cp, react || 'flustered') };
+    }).filter(Boolean);
+    const end = sceneFile(cp, 'end');
+    if (!beats.length || !end || reduced()) { if (end) sceneCut(cp, 'end', [], 3800); return done && setTimeout(done, end ? 4100 : 0); }
+    sceneOff();
+    const el = document.createElement('div');
+    el.className = 'scene-cut confront'; el.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(el);
+    let i = -1, t = 0, over = false;
+    const fin = () => { if (over) return; over = true; clearTimeout(t); document.removeEventListener('keydown', key, true); el.classList.add('out'); setTimeout(() => el.remove(), 320); if (done) setTimeout(done, 350); };
+    const next = () => {
+      clearTimeout(t);
+      if (++i > beats.length) return fin();
+      if (i === beats.length) { // 결말
+        el.innerHTML = `<figure class="cf-end"><img src="${esc(end)}" alt=""><figcaption><b>${esc(cp.name)}</b></figcaption></figure>`;
+        t = setTimeout(fin, 3800); return;
+      }
+      const b = beats[i], len = b.lines.reduce((m, x) => m + x.t.length, 0) + String(b.n.t).length / 2;
+      el.innerHTML = `<figure><img src="${esc(b.img || end)}" alt=""><p class="cf-memo"><span class="n">${esc(b.q)}</span> ${esc(plain(b.n.t))}</p><figcaption><b>${esc(cp.name)}</b>${b.lines.map(x => `<span${x.me ? ' class="me"' : ''}>${esc(x.t)}</span>`).join('')}</figcaption><p class="cf-step">${i + 1} / ${beats.length}</p></figure>`;
+      sfx('page');
+      t = setTimeout(next, Math.min(8500, Math.max(3600, 2400 + len * 55)));
+    };
+    const key = e => { if (e.key === 'Escape') { e.preventDefault(); fin(); } else if (!/^(Shift|Control|Alt|Meta|Tab)$/.test(e.key)) { e.preventDefault(); next(); } };
+    el.addEventListener('click', next);
+    document.addEventListener('keydown', key, true);
+    next();
+  }
   function faceTell() { if (reduced()) return; faceBeat(110); setTimeout(() => faceBeat(110), 330); faceAnim('flinch', 700); }
   function faceSet(el, c, r) {
     if (r != null && String(r) !== el.dataset.r) { el.dataset.r = r; if (r > 0 && !reduced()) { el.classList.remove('jolt'); void el.offsetWidth; el.classList.add('jolt'); } }
@@ -3453,9 +3500,13 @@
           if (document.activeElement === document.body) { box.tabIndex = -1; box.focus({ preventScroll: true }); } // 키보드로 올렸으면 결말부터 읽히게
         }
         repFace('caught', 800); // 맞았으면 무너진 얼굴로 바뀌며 움찔
-        { const per = k => Object.values(C.people || {}).find(x => x.key === k); [C.solution.culprit, ...Object.keys(C.solution.with || {})].map(per).filter(Boolean).forEach((p, i) => setTimeout(() => { if (C === c0 && ST === s0) sceneCut(p, 'end', [], i ? 3000 : 3800); }, 900 + i * 4100)); } // 그리고 테이블 건너의 범인 (함께 엮인 사람이 있으면 그 사람도 차례로)
         cue('solved', T('사건 종결')); say(T('사건 종결')); renderBar(); renderList(); // 아래 줄의 시계도 「종결」로, 목록 칸의 「회신 기다리기」도 걷는다
-        if (MG.sound) setTimeout(() => { if (C === c0 && ST === s0) MG.sound.hero('solved'); }, 2000);
+        { // 그리고 테이블 건너의 범인: 마지막 추궁 → 결말 그림, 함께 엮인 사람이 있으면 그 사람도 차례로. 종결의 한마디는 그 뒤에
+          const per = k => Object.values(C.people || {}).find(x => x.key === k), here = () => C === c0 && ST === s0;
+          const cp = per(C.solution.culprit), ws = Object.keys(C.solution.with || {}).map(per).filter(Boolean);
+          const after = () => { if (!here()) return; ws.forEach((p, i) => setTimeout(() => { if (here()) sceneCut(p, 'end', [], 3000); }, i * 3300)); if (MG.sound) setTimeout(() => { if (here()) MG.sound.hero('solved'); }, ws.length * 3300 + 300); };
+          setTimeout(() => { if (!here()) return; if (cp) confront(cp, after); else after(); }, 1100);
+        }
       } else if (wrong === 0) toast(T('이미 닫힌 사건이다'));
       else {
         cue('miss'); say(VERDICT); showVerdict();

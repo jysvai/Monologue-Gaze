@@ -344,3 +344,10 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 .btn-hand.ready{animation:repReady 1.1s ease-in-out 3}
 @keyframes repReady{50%{transform:translateY(-2px);box-shadow:0 0 0 5px rgba(176,40,32,.22)}}
 @media (prefers-reduced-motion:reduce){.btn-hand.ready{animation:none;outline:2px solid var(--red);outline-offset:2px}}
+/* 마지막 추궁: 붙인 메모가 한 장씩 범인 앞에 놓인다 */
+.scene-cut .cf-memo{position:absolute;left:26px;top:24px;max-width:min(560px,62%);margin:0;padding:10px 14px 12px;background:#f3ead2;color:#2a2118;font:15px/1.55 var(--f-doc);box-shadow:0 8px 22px rgba(0,0,0,.5);transform:rotate(-1.2deg);animation:cfIn .45s cubic-bezier(.2,.8,.2,1) both}
+.scene-cut .cf-memo .n{display:block;margin-bottom:2px;color:var(--red);font:700 13px/1.4 var(--f-doc);letter-spacing:.04em}
+.scene-cut .cf-step{position:absolute;right:16px;top:12px;margin:0;color:#f2e8d6;font:13px/1 var(--f-doc);opacity:.7;text-shadow:0 1px 3px #000}
+.scene-cut.confront figcaption span{animation:sceneIn .5s .3s ease-out both}
+@keyframes cfIn{from{opacity:0;transform:translate(-34px,-8px) rotate(-4deg)}}
+@media (prefers-reduced-motion:reduce){.scene-cut .cf-memo,.scene-cut.confront figcaption span{animation:none}}
