@@ -624,11 +624,13 @@
     const groups = [['lead', T('유력 — 이 사람이 한 말 어딘가와 어긋나는 메모 (이 대답과는 다를 수도 있다)'), pool.filter(mine)], ['sus', T('의심 — 내가 표시해 둔 메모'), pool.filter(n => !mine(n) && isSus(n))],
       ['talk', T('탐문에서 들은 말'), rest.filter(heardNote).sort((a, b) => (heardNote(a) === p.id) - (heardNote(b) === p.id))], ['rec', T('기록에서 찾은 것'), rest.filter(n => !heardNote(n))]];
     // 유력·의심 밖의 메모는 접어 둔다: 유력이 있으면 그것부터, 없으면 어느 메모로도 지금 들은 말은 깨지지 않는다 (펼쳐 두면 아무거나 눌러 참을성만 깎는다)
-    const list = groups.map(([g, t, ns]) => ns.length || (g === 'sus' && !(ST.sus || []).length) ? `<details class="pk-g pk-${g}" data-pk-g="${g}"${G[g] ?? (g === 'lead' || g === 'sus') ? ' open' : ''}><summary>${t} <small>${ns.length}</small></summary>${ns.length ? ns.map(opt).join('') : `<p class="pk-hint">${T('수첩의 메모 끝 「?」를 누르면 의심으로 표시해 둔다. 표시한 메모는 여기 따로 모인다.')}</p>`}</details>` : '').join('');
+    // ★5 는 유력 묶음도 「어긋나는 메모가 없다」는 말도 없다 — 다 펼쳐 두고, 어느 메모인지는 플레이어가 고른다
+    const hard = lv() >= 5;
+    const list = groups.map(([g, t, ns]) => ns.length || (g === 'sus' && !(ST.sus || []).length) ? `<details class="pk-g pk-${g}" data-pk-g="${g}"${G[g] ?? (g === 'lead' || g === 'sus' || hard) ? ' open' : ''}><summary>${t} <small>${ns.length}</small></summary>${ns.length ? ns.map(opt).join('') : `<p class="pk-hint">${T('수첩의 메모 끝 「?」를 누르면 의심으로 표시해 둔다. 표시한 메모는 여기 따로 모인다.')}</p>`}</details>` : '').join('');
     return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
-      <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${groups[0][2].length ? '' : `<p class="pk-hint pk-nolead">${partFit ? T('이 대답에 들이밀 만한 메모는 있지만, 함께 맞댈 기록이 아직 모자라다.') : T('이 사람이 한 말과 어긋나 보이는 메모는 아직 수첩에 없다.')}</p>`}${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
+      <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${groups[0][2].length || hard ? '' : `<p class="pk-hint pk-nolead">${partFit ? T('이 대답에 들이밀 만한 메모는 있지만, 함께 맞댈 기록이 아직 모자라다.') : T('이 사람이 한 말과 어긋나 보이는 메모는 아직 수첩에 없다.')}</p>`}${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
       ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${T('이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.')}</p>` : ''}${PICK.other ? `<p class="vs-part">${T('이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.')}</p>` : ''}${PICK.later ? `<p class="vs-part">${PICK.laterK ? T`이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 「${esc(kl(PICK.laterK))}」부터 물어본다.` : T('이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 다른 것부터 물어본다.')}</p>` : ''}
-      ${groups[0][2].length ? `<p class="vs-left">${T`엉뚱한 메모를 ${VS_MAX() - ((vsOf(p) || {}).n || 0)}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.`}</p>` : ''}</div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
+      ${groups[0][2].length || hard ? `<p class="vs-left">${T`엉뚱한 메모를 ${VS_MAX() - ((vsOf(p) || {}).n || 0)}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.`}</p>` : ''}</div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
   }
   // 고르는 칸을 다시 그린다: 찾던 낱말 · 목록을 굴린 자리는 그대로 (메모가 많아도 방금 누른 메모가 제자리에 남게)
   function pickRefresh() {
@@ -663,14 +665,14 @@
     // 이 사람의 다른 추궁 갈래에 맞는 메모: 들은 대답이면 그쪽으로, 아직 묻지 않은 것이면 그것부터 물어 오게 — 어느 쪽이든 길은 맞으니 헛짚기로 치지 않는다
     const heard = ST.asked[p.id] || [], wantOf = k2 => { const r = rawAns(p, k2) || {}; return r.take || (r.need || []).flatMap(x => x.split('|')).filter(x => x[0] === '!').map(x => x.slice(1)); };
     const fitAsk = [...Object.keys(p.ask || {}), ...(p.key ? [p.key] : [])].filter(k2 => k2 !== k && isPressAsk(p, k2) && wantOf(k2).some(w => fIs(n.f, w)));
-    PICK.other = !fits && !near && ((leadMap().get(n.id) || { vs: [] }).vs.some(v => v.pid === p.id && v.k !== k) || fitAsk.some(k2 => heard.includes(k2))); // 유력한 메모를 같은 사람의 다른 대답에 댔다 — 길은 맞으니 헛짚기로 치지 않고 그 대답 쪽으로
+    PICK.other = !fits && !near && ((leadMap(true).get(n.id) || { vs: [] }).vs.some(v => v.pid === p.id && v.k !== k) || fitAsk.some(k2 => heard.includes(k2))); // 유력한 메모를 같은 사람의 다른 대답에 댔다 — 길은 맞으니 헛짚기로 치지 않고 그 대답 쪽으로
     PICK.later = !fits && !near && !PICK.other && fitAsk.length > 0;
     PICK.laterK = PICK.later && lv() < 5 ? fitAsk.find(k2 => !heard.includes(k2) && ST.keys.includes(k2)) || null : null; // 수첩에 있는 단어면 무엇부터 물을지 댄다 (★5 는 대지 않는다)
     PICK.miss = fits ? (isSoft(p, k) ? T('(메모를 한참 들여다본다)') : T('(메모를 보고 잠시 멈칫한다)')) // 몸짓만: 하오체로 말하는 사람이 존댓말로 되묻지 않게 (밑의 줄이 무엇이 모자란지 알려 준다)
       : near ? near.a : missLine(p, isSoft(p, k), (tmp().nope ||= {})[p.id] = ((tmp().nope[p.id] ?? -1) + 1)); // 고르는 칸을 다시 열어도 같은 말만 되풀이하지 않게: 사람마다 센다 // close: 갈래는 맞는데 날짜가 다른 메모 — 그 사람이 그 어긋남을 짚는다 (헛짚기로 치지 않는다)
     sfx('miss');
     const react = fits || near || PICK.other || PICK.later ? 'flinch' : 'nope'; // 얼굴은 다시 그린 뒤에 (먼저 걸면 다시 그리면서 사라진다)
-    const noLead = !proof().some(x => (leadMap().get(x.id) || { vs: [] }).vs.some(v => v.pid === p.id)); // 이 사람의 말과 어긋나는 메모가 수첩에 하나도 없으면 (고르는 칸이 그렇다고 알려 준다) 헛짚어도 참을성은 깎지 않는다
+    const noLead = lv() < 5 && !proof().some(x => (leadMap().get(x.id) || { vs: [] }).vs.some(v => v.pid === p.id)); // 이 사람의 말과 어긋나는 메모가 수첩에 하나도 없으면 (고르는 칸이 그렇다고 알려 준다) 헛짚어도 참을성은 깎지 않는다. ★5 는 알려 주지 않으니 늘 깎는다
     if (!fits && !near && !PICK.other && !PICK.later && !noLead) {
       const v = (ST.vs ||= {})[p.id] ||= { n: 0 };
       v.n++;
@@ -1967,8 +1969,9 @@
   //  vs  — 들은 진술과 어긋나는 메모: 그 진술을 깨는 데 걸린 메모가 다 수첩에 있고, 아직 따지지 않았을 때 (진술을 들어야 붙는다)
   //  rep — 보고서에 쓸 메모: 같은 주장을 서로 다른 기록 둘 이상이 받치거나, 그 메모로 누군가의 진술을 깨뜨렸을 때
   // 어디에도 안 쓰이는 곁가지 메모에는 끝내 붙지 않는다. 어느 사람·어느 주장인지는 ★ 에 따라 덜 말한다
-  function leadMap() {
-    const m = new Map(), pool = proof();
+  // ★5 는 진술을 깨뜨린 메모에만 찍는다 — 어느 메모가 무엇과 어긋나는지, 어느 메모끼리 맞물리는지는 플레이어가 맞대 본다 (all: 화면 말고 판정에 쓸 때는 다 센다)
+  function leadMap(all) {
+    const m = new Map(), pool = proof(), hard = !all && lv() >= 5;
     const put = (n, k, v) => { const e = m.get(n.id) || { vs: [], rep: [] }; e[k].push(v); m.set(n.id, e); };
     const wantOf = a => a.take || (a.need || []).flatMap(x => x.split('|')).filter(x => x[0] === '!').map(x => x.slice(1));
     const broke = new Set(); // 진술을 깨뜨린 메모 (추궁에서 내밀어 통한 것)
@@ -1977,12 +1980,12 @@
       if (!isPressAsk(p, k)) return;
       if (e.endsWith('!')) { const h = (ST.held || {})[`${p.id}|${e}`]; if (h != null) broke.add(String(h)); else pool.forEach(n => { if (wantOf(rawAns(p, k)).some(w => fIs(n.f, w))) broke.add(String(n.id)); }); return; }
       const a = rawAns(p, k);
-      if (asked.includes(k + '!') || !ok(a.need)) return;
+      if (hard || asked.includes(k + '!') || !ok(a.need)) return;
       pool.forEach(n => { if (wantOf(a).some(w => fIs(n.f, w))) put(n, 'vs', { pid: p.id, k }); });
     }); });
     C.solution.claims.forEach(cl => {
       const acc = cl.accept || [], hits = pool.filter(n => acc.some(w => fIs(n.f, w)));
-      const two = new Set(hits.map(n => n.src || '')).size >= 2;
+      const two = !hard && new Set(hits.map(n => n.src || '')).size >= 2;
       hits.forEach(n => { const by = two ? hits.filter(x => x !== n && (x.src || '') !== (n.src || '')) : []; if (by.length || broke.has(String(n.id))) put(n, 'rep', { by, broke: broke.has(String(n.id)) }); });
     });
     return m;
@@ -2040,8 +2043,8 @@
     if (!x || !cl) return null;
     return { x, ns: x.done ? [...new Set(x.t.steps.map(thNote).filter(Boolean))].filter(n => (cl.accept || []).some(w => fIs(n.f, w))) : [] };
   }
-  function thWho(k) {
-    const x = thView().find(v => v.done && (v.t.who === k || v.t.out === k));
+  function thWho(k) { // ★5 는 범인 칸에 「의문 n」을 달지 않는다 (뺀 사람의 「뺌」만) — 누구를 지목할지는 결론들을 읽고 플레이어가 정한다
+    const x = thView().find(v => v.done && ((v.t.who === k && lv() < 5) || v.t.out === k));
     return !x ? '' : x.t.out === k ? `<span class="rep-th-who out">${T`뺌 · 의문 ${x.no}`}</span>` : `<span class="rep-th-who">${T`의문 ${x.no}`}</span>`;
   }
   function threadNews(delay = 900) {
@@ -2068,7 +2071,7 @@
     setTimeout(() => { if (C === c0 && !ST.solved) { toast(msg, 3400); sfx(newDone.length ? 'match' : 'write'); } }, delay);
   }
   // 사람을 짚거나 빼 준 의문이 풀리면, 「풀림」 옆에 그 사람의 얼굴 (뺀 사람은 흐리게)
-  const thFace = t => { const k = t.who || t.out, per = k && Object.values(C.people || {}).find(x => x.key === k); return per && faceOf(per) ? portrait(per).replace('class="face"', `class="face th-face${t.out ? ' out' : ''}"`) : ''; };
+  const thFace = t => { const k = t.out || (lv() < 5 && t.who), per = k && Object.values(C.people || {}).find(x => x.key === k); return per && faceOf(per) ? portrait(per).replace('class="face"', `class="face th-face${t.out ? ' out' : ''}"`) : ''; };
   function thHtml() {
     const V = thView();
     if (!V.length) return '';
@@ -2078,7 +2081,7 @@
     const step = (x, s, j) => {
       // 따질 말을 아직 듣지 못했으면 그 말을 앞질러 옮기지 않는다 (「긁힌 데 하나 없다는 말, 맞나?」가 그 사람을 만나기도 전에 보이지 않게)
       const unheard = s.press && thAlt(s).every(([pid, k]) => !(ST.asked[pid] || []).includes(k));
-      const who = unheard && C.people[thAlt(s)[0][0]], known = who && ST.keys.includes(who.key) && (who.key !== C.solution.culprit || (ST.asked[who.id] || []).some(e => e.endsWith('!'))); // 아는 사람이면 이름까지 (누구에게 더 물을지는 알려 준다). 범인은 그 사람의 말을 한 번 깨뜨리기 전까지는 이름을 대지 않는다 (「잠복은 어디서 샜나?」 밑에 범인 이름이 먼저 뜨지 않게)
+      const who = unheard && C.people[thAlt(s)[0][0]], known = who && lv() < 5 && ST.keys.includes(who.key) && (who.key !== C.solution.culprit || (ST.asked[who.id] || []).some(e => e.endsWith('!'))); // 아는 사람이면 이름까지 (누구에게 더 물을지는 알려 준다 — ★5 는 대지 않는다). 범인은 그 사람의 말을 한 번 깨뜨리기 전까지는 이름을 대지 않는다 (「잠복은 어디서 샜나?」 밑에 범인 이름이 먼저 뜨지 않게)
       const tk = s.press && thAlt(s)[0][1], topic = known && lv() <= 3 && ST.keys.includes(tk); // ★3 은 무엇을 물을지까지
       if (!x.got[j]) return `<li class="th-gap">${esc(unheard ? (topic ? T`${pname(who)}에게 「${kl(tk)}」 이야기를 아직 듣지 못했다.` : known ? T`${pname(who)}에게서 아직 듣지 못한 말이 있다.` : T('아직 듣지 못한 말이 있다.')) : s.hint || '……')}</li>`;
       const n = thNote(s);
