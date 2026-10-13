@@ -389,6 +389,7 @@ MG.I18N.put("zh", "ui", {
 "국내": "国内",
 "<span class=\"f-warn\">혐오감 주의</span>": "<span class=\"f-warn\">不适内容预警</span>",
 "<span class=\"stars t\">연습</span>": "<span class=\"stars t\">练习</span>",
+"걸린 시간 {0}분": "用时 {0} 分钟",
 "수사 중{0}": "侦查中{0}",
 "다음은 여기부터": "接下来从这里开始",
 "받은 링크의 사건": "分享链接里的案件",

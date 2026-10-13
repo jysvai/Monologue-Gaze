@@ -389,6 +389,7 @@ MG.I18N.put("en", "ui", {
 "국내": "Domestic",
 "<span class=\"f-warn\">혐오감 주의</span>": "<span class=\"f-warn\">Disturbing content</span>",
 "<span class=\"stars t\">연습</span>": "<span class=\"stars t\">Practice</span>",
+"걸린 시간 {0}분": "took {0} min",
 "수사 중{0}": "In progress{0}",
 "다음은 여기부터": "Start here next",
 "받은 링크의 사건": "From the shared link",
