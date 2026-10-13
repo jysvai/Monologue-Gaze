@@ -1682,7 +1682,7 @@
       return k.some(x => !was.includes(x));
     };
     if (first) C.sources.forEach(s => { kn[s.id] = srcKeys(s); });
-    bar.innerHTML = vis.map(s => { const b = tabBadge(s); return `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" tabindex="${s.id === ST.view.src ? 0 : -1}" aria-controls="paneList" id="tab-${esc(s.id)}" data-src="${esc(s.id)}"><span class="tab-t">${esc(s.name)}</span>${s.lock && !ST.unl.includes(s.id) ? T('<span class="tab-lock">잠김</span>') : ''}${b || (fresh(s) ? T('<span class="tab-new" role="img" aria-label="새로 열린 자료"></span>') : '')}</button>`; }).join('');
+    bar.innerHTML = vis.map(s => { const b = tabBadge(s); return `<button type="button" role="tab" class="tab${s.id === ST.view.src ? ' on' : ''}" aria-selected="${s.id === ST.view.src}" tabindex="${s.id === ST.view.src ? 0 : -1}" aria-controls="paneList" id="tab-${esc(s.id)}" data-src="${esc(s.id)}" title="${esc(s.name)}"><span class="tab-t">${esc(s.name)}</span>${s.lock && !ST.unl.includes(s.id) ? T('<span class="tab-lock">잠김</span>') : ''}${b || (fresh(s) ? T('<span class="tab-new" role="img" aria-label="새로 열린 자료"></span>') : '')}</button>`; }).join('');
     tabShow(bar);
     tabEdge(bar);
     const ids = vis.map(s => s.id), seen = tabPeek.seen || {}, was = seen.c === C.id ? seen.ids : null;
