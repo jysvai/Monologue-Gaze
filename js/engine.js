@@ -768,12 +768,17 @@
   // 종결: scene_<범인 id>_end.webp — 범인의 성격대로 화를 내거나 억울해하거나 울거나 넋이 나간다. 대사는 아래 읽는 칸에도 그대로 나오므로 화면 읽기 프로그램에는 감춘다. 누르거나 키를 치면 닫힌다
   let READ_WHO = null; // 읽는 칸에 펼쳐 둔 사람 (사람 화면을 떠나면 그 앞에서 미뤄 둔 혼잣말을 한 번 본다)
   let SCENE = null, CUTS = 0, TOAST_LATER = null; // TOAST_LATER: 마주 앉은 장면이 떠 있는 동안 온 알림 (장면 자막을 가리지 않게 걷힌 뒤에)
+  function flushToast() {
+    if (!TOAST_LATER) return;
+    const x = TOAST_LATER, c0 = C; TOAST_LATER = null;
+    setTimeout(() => { if (C !== c0 || !C) return; if (SCENE) TOAST_LATER ||= x; else toast(...x); }, 360);
+  }
   function sceneOff() {
     const s = SCENE; SCENE = null;
     if (!s) return;
     clearTimeout(s.t); document.removeEventListener('keydown', s.key, true); if (s.stop) s.stop();
     s.el.classList.add('out'); setTimeout(() => s.el.remove(), reduced() ? 0 : 320);
-    if (TOAST_LATER) { const x = TOAST_LATER; TOAST_LATER = null; setTimeout(() => { if (!SCENE) toast(...x); }, 360); }
+    flushToast();
   }
   // 사람 화면을 열면 그 사람의 마주 앉은 그림(결말 그림은 빼고)을 미리 받아 둔다 — 추궁이 통한 순간 그림이 늦게 뜨지 않게
   const PRE = new Set();
@@ -843,7 +848,7 @@
     let i = -1, over = false;
     const hush = () => { if (MG.sound) MG.sound.stopVoice(); };
     const S = SCENE = { el, t: 0, stop: () => { over = true; hush(); } }; // 사건을 떠나면 sceneOff 가 걷는다 (그때는 done 도 부르지 않는다)
-    const fin = () => { if (over) return; over = true; hush(); if (SCENE === S) SCENE = null; clearTimeout(S.t); document.removeEventListener('keydown', key, true); el.classList.add('out'); setTimeout(() => el.remove(), 320); if (done) setTimeout(done, 350); };
+    const fin = () => { if (over) return; over = true; hush(); if (SCENE === S) { SCENE = null; flushToast(); } clearTimeout(S.t); document.removeEventListener('keydown', key, true); el.classList.add('out'); setTimeout(() => el.remove(), 320); if (done) setTimeout(done, 350); };
     const next = () => {
       if (over) return;
       clearTimeout(S.t); hush();
@@ -861,7 +866,7 @@
           if (over || i !== me) return;
           if (j >= b.vo.length) { clearTimeout(S.t); S.t = setTimeout(next, 1400); return; }
           const v = MG.sound.voice(b.vo[j]);
-          if (!v) return;
+          if (!v) { if (j) { clearTimeout(S.t); S.t = setTimeout(next, 1400); } return; }
           if (j === 0) { clearTimeout(S.t); S.t = setTimeout(next, 20000); }
           v.done.then(() => setTimeout(() => say(j + 1), 250));
         };
