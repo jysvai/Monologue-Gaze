@@ -37,7 +37,7 @@ const check = (label, html, mustHave) => {
   if (LANG !== 'ko') String(html).replace(/<[^>]*>/g, ' ').replace(/[^\s<>]*[가-힣][^\s<>]*/g, w => { if (!hangul.has(w)) hangul.set(w, label); return w; });
   if (/undefined|NaN|\[object Object\]/.test(html)) bad.push('undefined/NaN/object');
   const x = html.match(/class="kw-x">[^<]*/g); if (x) bad.push('unresolved kw: ' + x.join(', '));
-  if (mustHave && !html.includes(mustHave)) bad.push('missing: ' + mustHave);
+  if (mustHave && !html.replace(/‑/g, '-').includes(mustHave)) bad.push('missing: ' + mustHave); // 이름의 붙임표는 줄이 안 갈리는 붙임표(‑)로 그린다
   if (bad.length) { problems++; console.log('✗', label, bad.join(' | ')); }
 };
 
