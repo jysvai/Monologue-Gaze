@@ -765,12 +765,14 @@
   // 마주 앉은 장면: 추궁이 통한 순간과 사건을 닫는 순간의 범인만, 그 사람이 테이블 건너 의자에 앉은 그림을 잠깐 크게 띄운다
   // 추궁: img/<사건>/scene_<사람 id>_<그 대답의 react>.webp (flustered · surprised · angry · cold · afraid · sad), 없으면 그 사람의 다른 추궁 그림.
   // 종결: scene_<범인 id>_end.webp — 범인의 성격대로 화를 내거나 억울해하거나 울거나 넋이 나간다. 대사는 아래 읽는 칸에도 그대로 나오므로 화면 읽기 프로그램에는 감춘다. 누르거나 키를 치면 닫힌다
-  let SCENE = null;
+  let READ_WHO = null; // 읽는 칸에 펼쳐 둔 사람 (사람 화면을 떠나면 그 앞에서 미뤄 둔 혼잣말을 한 번 본다)
+  let SCENE = null, CUTS = 0, TOAST_LATER = null; // TOAST_LATER: 마주 앉은 장면이 떠 있는 동안 온 알림 (장면 자막을 가리지 않게 걷힌 뒤에)
   function sceneOff() {
     const s = SCENE; SCENE = null;
     if (!s) return;
     clearTimeout(s.t); document.removeEventListener('keydown', s.key, true); if (s.stop) s.stop();
     s.el.classList.add('out'); setTimeout(() => s.el.remove(), reduced() ? 0 : 320);
+    if (TOAST_LATER) { const x = TOAST_LATER; TOAST_LATER = null; setTimeout(() => { if (!SCENE) toast(...x); }, 360); }
   }
   function sceneFile(p, kind) {
     const I = MG.images || {}, pre = `${C.id}/scene_${p.id}_`;
@@ -786,7 +788,7 @@
     sceneOff();
     const el = document.createElement('div');
     el.className = `scene-cut s-${kind}`; el.setAttribute('aria-hidden', 'true');
-    el.innerHTML = `<figure><img src="${esc(file)}" alt="" decoding="async"><figcaption><b>${esc(p.name)}</b>${lines.map(x => `<span${x.me ? ' class="me"' : ''}>${esc(x.t)}</span>`).join('')}</figcaption></figure>`;
+    el.innerHTML = `<figure><img src="${esc(file)}" alt="" decoding="async"><figcaption><b>${esc(p.name)}</b>${lines.map(x => `<span${x.me ? ' class="me"' : ''}>${esc(x.t)}</span>`).join('')}</figcaption>${++CUTS <= 3 ? `<p class="cut-hint">${T('누르면 넘어간다')}</p>` : ''}</figure>`;
     document.body.appendChild(el);
     const s = SCENE = { el, key: e => { if (sceneKey(e)) { sceneEat(e); sceneOff(); } } };
     el.addEventListener('click', sceneOff);
@@ -821,7 +823,7 @@
       const k = pressFor(cp, [n.f], used); // 그 메모로 깨진 대답만 (같은 주장의 다른 메모로 깨진 말을 끌어오면 메모와 말이 어긋난다)
       if (k) used.add(k);
       const react = k && (rawAns(cp, k) || {}).react;
-      const lines = k ? ansLines(cp, k) : [];
+      const lines = k ? ansLines(cp, k) : [{ t: j % 2 ? T('(대답이 없다)') : T('(말없이 메모를 내려다본다)') }];
       return { n, q: `${j + 1}. ${plain(cl.q)}`, lines, vo: ansVoices(cp, k, lines), img: sceneFile(cp, react || 'flustered') };
     }).filter(Boolean);
     const end = sceneFile(cp, 'end');
@@ -843,9 +845,9 @@
         S.t = setTimeout(fin, 3800); return;
       }
       const b = beats[i], len = b.lines.reduce((m, x) => m + x.t.length, 0) + String(b.n.t).length / 2;
-      el.innerHTML = `<figure><img src="${esc(b.img || end)}" alt=""><p class="cf-memo"><span class="n">${esc(b.q)}</span> ${esc(plain(b.n.t))}</p><figcaption><b>${esc(cp.name)}</b>${b.lines.map(x => `<span${x.me ? ' class="me"' : ''}>${esc(x.t)}</span>`).join('')}</figcaption><p class="cf-step">${i + 1} / ${beats.length}</p></figure>`;
+      el.innerHTML = `<figure><img src="${esc(b.img || end)}" alt=""><p class="cf-memo"><span class="n">${esc(b.q)}</span> ${esc(plain(b.n.t))}</p><figcaption><b>${esc(cp.name)}</b>${b.lines.map(x => `<span${x.me ? ' class="me"' : ''}>${esc(x.t)}</span>`).join('')}</figcaption><p class="cf-step">${i + 1} / ${beats.length}${i === 0 ? ` · ${T('누르면 다음 장 · Esc 건너뛰기')}` : ''}</p></figure>`;
       sfx('page');
-      S.t = setTimeout(next, Math.min(8500, Math.max(3600, 2400 + len * 55)));
+      S.t = setTimeout(next, Math.min(6500, Math.max(3200, 2000 + len * 45)));
       if (b.vo.length) { // 녹음된 말이면 다 들은 뒤에 넘긴다 (목소리가 안 나면 글 길이대로)
         const me = i, say = j => {
           if (over || i !== me) return;
@@ -1042,7 +1044,7 @@
     const go = () => {
       if (!(t && TALK === t && qa.isConnected)) return;
       t.finish(true); $$('#paneRead .face.lg').forEach(el => faceSet(el, 0, faceRow(p)));
-      if (!soft) { faceHit(); const ls = sceneLines(qa), n = ls.reduce((m, x) => m + x.t.length, 0); sceneCut(p, (rawAns(p, k) || {}).react || 'flustered', ls, Math.min(9000, Math.max(3400, 2400 + n * 60))); }
+      if (!soft) { faceHit(); const ls = sceneLines(qa), n = ls.reduce((m, x) => m + x.t.length, 0); sceneCut(p, (rawAns(p, k) || {}).react || 'flustered', ls, Math.min(7000, Math.max(3000, 1800 + n * 50))); }
       playTalk(qa, { p, voice: `v/${C.id}/${p.id}/${k}`, lead: 1000 });
     };
     setTimeout(() => {
@@ -1871,6 +1873,7 @@
   function renderRead() {
     const el = $('#paneRead');
     const o = ST.view.open;
+    { const was = READ_WHO; READ_WHO = o && o.t === 'person' ? o.id : null; if (was && !READ_WHO) { const s0 = ST; setTimeout(() => { if (ST === s0) monoNews(); }, 1500); } }
     let h;
     if (o && o.t === 'doc' && C.docs[o.id]) h = docHtml(C.docs[o.id]);
     else if (o && o.t === 'person' && C.people[o.id]) h = personHtml(C.people[o.id]);
@@ -2173,7 +2176,9 @@
   function monoNews() {
     if (!C || !ST || ST.solved || JUDGING || !MG.sound) return;
     const m = ST.mono ||= {}, sol = C.solution, got = proof();
-    const full = ST.keys.includes(sol.culprit) && sol.claims.every(cl => got.some(n => (cl.accept || []).some(w => fIs(n.f, w))));
+    const cp = Object.values(C.people || {}).find(p => p.key === sol.culprit), cpPress = cp && Object.keys(cp.ask || {}).some(k => isPressAsk(cp, k));
+    const full = ST.keys.includes(sol.culprit) && sol.claims.every(cl => got.some(n => (cl.accept || []).some(w => fIs(n.f, w))))
+      && (!cpPress || (ST.asked[cp.id] || []).some(x => x.endsWith('!')));
     if (full) {
       if (m.close) return;
       m.close = 1; save(); MG.sound.hero('close');
@@ -2185,10 +2190,12 @@
       const a = rawAns(p, k);
       return ST.keys.includes(k) && isPressAsk(p, k) && (a.need || []).some(n => n.includes('!')) && ok(a.need) && !(ST.asked[p.id] || []).includes(k + '!');
     }).map(k => p.id + ':' + k));
-    const fresh = open.filter(x => !(m.seen || []).includes(x)), o = ST.view.open;
-    if (fresh.length) { m.seen = [...(m.seen || []), ...fresh]; save(); }
-    if (!fresh.length || (o && o.t === 'person') || Date.now() - (m.at || 0) < 180000) return;
-    m.at = Date.now(); save();
+    const o = ST.view.open, here = o && o.t === 'person' ? o.id + ':' : null;
+    const fresh = open.filter(x => !(m.seen || []).includes(x)), mine = here ? fresh.filter(x => x.startsWith(here)) : [];
+    if (mine.length) { m.seen = [...(m.seen || []), ...mine]; save(); }
+    const rest = fresh.filter(x => !mine.includes(x));
+    if (!rest.length || here || Date.now() - (m.at || 0) < 180000) return;
+    m.seen = [...(m.seen || []), ...rest]; m.at = Date.now(); save();
     MG.sound.hero(Math.random() < .5 ? 'askmore1' : 'askmore2');
   }
   function leadLit() {
@@ -3015,6 +3022,7 @@
   // 화면 읽기 프로그램에만 들리는 한 줄 (판정처럼 칸을 새로 그리며 바뀌는 말은 새로 그린 칸에서 읽히지 않으므로 여기로)
   function say(t) { const b = statusBox('srSay', 'sr'); b.textContent = ''; if (t) setTimeout(() => { b.textContent = t; }, 60); }
   function toast(msg, ms, act) {
+    if (SCENE && !act) { TOAST_LATER = [msg, ms]; return; }
     const t = statusBox('toast', 'toast');
     t.textContent = msg;
     t.classList.toggle('act', !!act); // act: [단추 글, 누르면 할 일] — 지운 메모 되살리기처럼
@@ -3092,6 +3100,7 @@
     if (!quiet) toast(T`수첩에 적었다: ${asWas() && asWas()[id] ? asWas()[id] : shown}${gained > 0 ? opened(gained, BY) : ''}`);
     liveSync();
     if (C.threads && !ST.solved) threadNews(1500); // 단어로 열리는 의문은 그 단어를 적은 그때 (다음 메모까지 쌓였다가 한꺼번에 쏟아지지 않게)
+    if (!quiet) { const s0 = ST; setTimeout(() => { if (ST === s0 && !(TALK && TALK.alive())) monoNews(); }, 2400); }
   }
   function pin(ref) {
     const p = PIN[ref];
@@ -3461,7 +3470,8 @@
     if (li && !(MG.writeIn && MG.writeIn(li, { duration: 500 }))) li.classList.add('fresh');
     // 눌러서 찾은 것은 이미 본 것: 그 설명 속 증거 줄은 사진 밑까지 내려 읽지 않아도 곧 수첩에 (찾았는데 메모가 없다고 헷갈리지 않게)
     const c0 = C, refs = li ? $$('.pin:not(.on)', li).map(b => b.dataset.pin).filter(r => PIN[r] && PIN[r].f && !(ST.drop || []).includes(r)) : [];
-    if (refs.length) setTimeout(() => { if (C === c0 && li.isConnected) collect(refs); }, 900);
+    const s0 = ST; // 곧바로 다른 자리를 또 찾아 목록이 다시 그려져도 (li 가 바뀌어도) 적을 것은 적는다
+    if (refs.length) setTimeout(() => { if (C === c0 && ST === s0) collect(refs); }, 900);
     return true;
   }
   function photoClick(el, e) {
@@ -3565,9 +3575,9 @@
         { // 그리고 테이블 건너의 범인: 마지막 추궁 → 결말 그림, 함께 엮인 사람이 있으면 그 사람도 차례로. 종결의 한마디는 그 뒤에
           const per = k => Object.values(C.people || {}).find(x => x.key === k), here = () => C === c0 && ST === s0;
           const cp = per(C.solution.culprit), ws = Object.keys(C.solution.with || {}).map(per).filter(Boolean);
-          // 함께 엮인 사람: 무엇으로 엮였는지(공범 · 알고도 감춤)와, 메모로 깨졌던 말이 있으면 마지막 한 줄
-          const wLines = p => { const w = (C.solution.with || {})[p.key], lab = (WITH().find(x => x[0] === (typeof w === 'string' ? w : w && w.k)) || [])[1], e = [...(ST.asked[p.id] || [])].reverse().find(x => x.endsWith('!') && isPressAsk(p, x.slice(0, -1)));
-            return [...(lab ? [{ t: lab, me: true }] : []), ...(e ? ansLines(p, e.slice(0, -1)).filter(x => !x.me).slice(-1) : [])]; };
+          // 함께 엮인 사람: 무엇으로 엮였는지 (공범 · 알고도 감춤)
+          const wLines = p => { const w = (C.solution.with || {})[p.key], lab = (WITH().find(x => x[0] === (typeof w === 'string' ? w : w && w.k)) || [])[1];
+            return lab ? [{ t: lab, me: true }] : []; };
           const after = () => { if (!here()) return; ws.forEach((p, i) => setTimeout(() => { if (here()) sceneCut(p, 'end', wLines(p), 4000); }, i * 4300)); if (MG.sound) setTimeout(() => { if (here()) MG.sound.hero('solved'); }, ws.length * 4300 + 300); };
           setTimeout(() => { if (!here()) return; if (cp) confront(cp, after); else after(); }, 1100);
         }
