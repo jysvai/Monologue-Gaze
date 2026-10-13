@@ -275,6 +275,7 @@ MG.I18N.put("de", "ui", {
 "사건<br>종결<small>{0}</small>": "Fall<br>gelöst<small>{0}</small>",
 "짐작을 적어 둘 뿐, 아무것도 맞춰 보지 않는다. 한 사람만 걸 수 있다.": "Hält nur Ihre Vermutung fest; nichts wird geprüft. Immer nur eine Person.",
 "의심하는 중": "Verdächtigt",
+"의심 걸기": "Verdächtigen",
 "{0} — 의심을 걸어 둔다": "{0} — als Verdacht vermerkt",
 "의심을 내려놓는다": "Verdacht fallen gelassen",
 "의심한 차례": "Wen Sie verdächtigt haben, der Reihe nach",

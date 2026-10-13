@@ -101,7 +101,7 @@ body.has-room .pane-read.room{isolation:isolate;--room-ink:#f3eee2;--room-soft:#
 body.has-room .pane-read.room::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:0;aspect-ratio:3/2;background:var(--case-room) center top/cover no-repeat;-webkit-mask-image:linear-gradient(#000 38%,transparent 96%);mask-image:linear-gradient(#000 38%,transparent 96%);pointer-events:none}
 /* 얼굴 머리줄: 맨 위에서는 방이 비치게 (칸 위쪽과 같은 자리의 그림), 내려 읽어 줄어들면 방 윗줄을 어둡게 깐 띠 */
 body.has-room .pane-read.room .per-h.has-face{background:none;box-shadow:none} /* 그림은 칸의 ::before 하나 — 머리줄에 다시 그리면 위에 「← 목록으로」 줄이 있을 때 방이 두 번 이어 붙는다 */
-body.has-room .pane-read.room .per-h.has-face.mini{background:linear-gradient(rgba(0,0,0,.42),rgba(0,0,0,.42)),var(--case-room) center 18%/cover no-repeat;box-shadow:0 10px 12px -12px rgba(0,0,0,.6)}
+body.has-room .pane-read.room .per-h.has-face:is(.mini,.stuck){background:linear-gradient(rgba(0,0,0,.42),rgba(0,0,0,.42)),var(--case-room) center 18%/cover no-repeat;box-shadow:0 10px 12px -12px rgba(0,0,0,.6)}
 /* 이름표: 어떤 그림 위에서도 읽히게 이름 뒤에만 어두운 판 */
 body.has-room .pane-read.room .per-h.has-face>div{padding:6px 12px 7px;border-radius:4px;background:rgba(14,12,10,.72);text-shadow:0 1px 2px rgba(0,0,0,.6)}
 body.has-room .pane-read.room .per-h.has-face.mini>div{background:none;padding:0}

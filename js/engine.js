@@ -754,6 +754,7 @@
   function faceMini(pr) {
     const h = pr.querySelector('.per-h.has-face');
     if (!h) return;
+    h.classList.toggle('stuck', pr.scrollTop > 2); // 줄기 전에도 글이 밑으로 지나가면 칸에 바탕을 깐다 (이름 판 너머로 말풍선이 비치지 않게)
     const on = h.classList.contains('mini'), want = on ? pr.scrollTop > 24 : pr.scrollTop > 140;
     if (want === on) return;
     const hgt = () => h.getBoundingClientRect().height, h0 = hgt(), t0 = pr.scrollTop; // 글자 크기(zoom)를 먹은 실제 높이
@@ -2011,14 +2012,14 @@
   // 의심 표시 (ST.hunch — 수첩 메모의 「의심」 표시 ST.sus 와는 다른 것): 인물 화면에서 한 사람에게만 「의심」을 걸어 둔다 (아무것도 맞춰 보지 않는다 — 플레이어의 짐작을 적어 두는 것).
   // 걸 때마다 그때 쥔 메모 수와 함께 차례를 남기고, 종결하면 결말 밑에 의심이 어떻게 옮겨 갔는지 한 줄로. 의심하던 사람이 「의문」으로 빠지면 형사가 한마디 (hero/susout)
   const hunchAble = k => { const w = C.keywords[k] || {}; return w.type === 'person' && !w.nick && !w.victim && !(w.victimIf || []).some(okOne) && ST.keys.includes(k); };
-  const hunchBtn = p => (!p.key || ST.solved || !hunchAble(p.key)) ? '' : (on => ` <button type="button" class="hunch-tog${on ? ' on' : ''}" data-hunch="${esc(p.key)}" aria-pressed="${on}" title="${esc(T('짐작을 적어 둘 뿐, 아무것도 맞춰 보지 않는다. 한 사람만 걸 수 있다.'))}">${on ? T('의심하는 중') : T('의심')}</button>`)(!!(ST.hunch && ST.hunch.k === p.key));
+  const hunchBtn = p => (!p.key || ST.solved || !hunchAble(p.key)) ? '' : (on => ` <button type="button" class="hunch-tog${on ? ' on' : ''}" data-hunch="${esc(p.key)}" aria-pressed="${on}" title="${esc(T('짐작을 적어 둘 뿐, 아무것도 맞춰 보지 않는다. 한 사람만 걸 수 있다.'))}">${on ? T('의심하는 중') : T('의심 걸기')}</button>`)(!!(ST.hunch && ST.hunch.k === p.key));
   function hunchToggle(k) {
     if (!C || ST.solved) return;
     const s = ST.hunch ||= { k: null, trail: [] };
     if (s.k === k) s.k = null;
     else { s.k = k; s.trail.push({ k, n: proof().length }); if (s.trail.length > 12) s.trail.splice(0, s.trail.length - 12); }
     save(); sfx('ink');
-    $$('[data-hunch]').forEach(b => { const on = b.dataset.hunch === s.k; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); b.textContent = on ? T('의심하는 중') : T('의심'); });
+    $$('[data-hunch]').forEach(b => { const on = b.dataset.hunch === s.k; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); b.textContent = on ? T('의심하는 중') : T('의심 걸기'); });
     $$('.item.person').forEach(b => { const p = C.people[b.dataset.person]; b.classList.toggle('hunch', !!(p && s.k && p.key === s.k)); });
     say(s.k ? T`${kl(k)} — 의심을 걸어 둔다` : T('의심을 내려놓는다'));
   }

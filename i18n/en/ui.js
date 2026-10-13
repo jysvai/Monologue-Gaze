@@ -275,6 +275,7 @@ MG.I18N.put("en", "ui", {
 "사건<br>종결<small>{0}</small>": "Case<br>closed<small>{0}</small>",
 "짐작을 적어 둘 뿐, 아무것도 맞춰 보지 않는다. 한 사람만 걸 수 있다.": "Only notes down your hunch; nothing is checked. One person at a time.",
 "의심하는 중": "Suspected",
+"의심 걸기": "Suspect",
 "{0} — 의심을 걸어 둔다": "{0} — marked as your suspect",
 "의심을 내려놓는다": "Suspicion dropped",
 "의심한 차례": "Who you suspected, in order",
