@@ -184,7 +184,7 @@
     clearTimeout(capT);
     el.textContent = t; el.classList.remove('on'); el.classList.toggle('top', !!top); void el.offsetWidth; el.classList.add('on');
     const hide = ms => { if (my === capN) capT = setTimeout(() => { if (my === capN) el.classList.remove('on'); }, ms); };
-    if (v) v.done.then(() => hide(900)); else hide(1500 + t.length * 80);
+    if (v) v.done.then(() => hide(1200)); else hide(Math.max(3500, 1600 + t.length * 90)); // 목소리가 없으면 글 길이대로, 짧은 말도 3.5초는 둔다
   }
   function hero(k) {
     const t = MG.T((A().say || {})['hero/' + k]); // 목소리는 한국어 그대로, 자막만 고른 언어로

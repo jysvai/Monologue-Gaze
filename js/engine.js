@@ -2195,8 +2195,10 @@
     const cp = Object.values(C.people || {}).find(p => p.key === sol.culprit), cpPress = cp && Object.keys(cp.ask || {}).some(k => isPressAsk(cp, k));
     const full = ST.keys.includes(sol.culprit) && sol.claims.every(cl => got.some(n => (cl.accept || []).some(w => fIs(n.f, w))))
       && (!cpPress || (ST.asked[cp.id] || []).some(x => x.endsWith('!')));
+    const later = () => { const s0 = ST; setTimeout(() => { if (ST === s0) monoNews(); }, 1500); }; // 마주 앉은 장면이 떠 있으면 걷힌 뒤에 (장면 자막과 겹치거나 곧바로 가려지지 않게)
     if (full) {
       if (m.close) return;
+      if (SCENE) return later();
       m.close = 1; save(); MG.sound.hero('close');
       $$('[data-open-rep]').forEach(b => { b.classList.remove('ready'); void b.offsetWidth; b.classList.add('ready'); });
       return;
@@ -2211,6 +2213,7 @@
     if (mine.length) { m.seen = [...(m.seen || []), ...mine]; save(); }
     const rest = fresh.filter(x => !mine.includes(x));
     if (!rest.length || here || Date.now() - (m.at || 0) < 180000) return;
+    if (SCENE) return later();
     m.seen = [...(m.seen || []), ...rest]; m.at = Date.now(); save();
     MG.sound.hero(Math.random() < .5 ? 'askmore1' : 'askmore2');
   }
@@ -2277,7 +2280,7 @@
     const s0 = ST;
     const susOut = n => setTimeout(() => { // 대답이 나오는 중이면 끝날 때까지 조금씩 미룬다 (곧바로 다음 것을 물어도 놓치지 않게)
       if (C !== c0 || ST !== s0 || ST.solved) return;
-      if (TALK && TALK.alive()) { if (n < 10) susOut(n + 1); return; }
+      if ((TALK && TALK.alive()) || SCENE) { if (n < 10) susOut(n + 1); return; }
       MG.sound.hero('susout');
     }, n ? 1500 : delay + 2600);
     if (sk && MG.sound && newDone.some(id => (by(id).t || {}).out === sk)) susOut(0);
