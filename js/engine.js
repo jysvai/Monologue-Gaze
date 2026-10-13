@@ -2262,7 +2262,12 @@
     setTimeout(() => { if (C === c0 && !ST.solved) { toast(msg, 3400); sfx(newDone.length ? 'match' : 'write'); } }, delay);
     const sk = ST.hunch && ST.hunch.k; // 의심하던 사람이 이번에 풀린 의문으로 빠졌으면
     const s0 = ST;
-    if (sk && MG.sound && newDone.some(id => (by(id).t || {}).out === sk)) setTimeout(() => { if (C === c0 && ST === s0 && !ST.solved && !(TALK && TALK.alive())) MG.sound.hero('susout'); }, delay + 2600);
+    const susOut = n => setTimeout(() => { // 대답이 나오는 중이면 끝날 때까지 조금씩 미룬다 (곧바로 다음 것을 물어도 놓치지 않게)
+      if (C !== c0 || ST !== s0 || ST.solved) return;
+      if (TALK && TALK.alive()) { if (n < 10) susOut(n + 1); return; }
+      MG.sound.hero('susout');
+    }, n ? 1500 : delay + 2600);
+    if (sk && MG.sound && newDone.some(id => (by(id).t || {}).out === sk)) susOut(0);
   }
   // 사람을 짚거나 빼 준 의문이 풀리면, 「풀림」 옆에 그 사람의 얼굴 (뺀 사람은 흐리게)
   const thFace = t => { const k = t.out || (lv() < 5 && t.who), per = k && Object.values(C.people || {}).find(x => x.key === k); return per && faceOf(per) ? portrait(per).replace('class="face"', `class="face th-face${t.out ? ' out' : ''}"`) : ''; };
