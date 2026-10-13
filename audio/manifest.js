@@ -307,6 +307,9 @@ window.MG.audio = {
   "hero/match3": "그래, 여기서 이어지는구나.",
   "hero/accuse": "범인은… 이 사람입니다.",
   "hero/wrong": "…아직 뭔가 빠져 있어.",
-  "hero/solved": "사건 종결. 선배, 하나 닫았습니다."
+  "hero/solved": "사건 종결. 선배, 하나 닫았습니다.",
+  "hero/askmore1": "탐문을 이어 해 보자.",
+  "hero/askmore2": "…이건 직접 가서 다시 물어봐야겠어.",
+  "hero/close": "이제 사건을 끝낼 시간이다."
  }
 };

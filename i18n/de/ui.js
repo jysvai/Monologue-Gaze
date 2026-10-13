@@ -480,5 +480,8 @@ MG.I18N.put("de", "ui", {
 "그래, 여기서 이어지는구나.": "Ja, hier hängt es zusammen.",
 "범인은… 이 사람입니다.": "Die Spur führt… zu dieser Person.",
 "…아직 뭔가 빠져 있어.": "…Da fehlt noch etwas.",
-"사건 종결. 선배, 하나 닫았습니다.": "Fall abgeschlossen. Wieder eine Akte zu, M."
+"사건 종결. 선배, 하나 닫았습니다.": "Fall abgeschlossen. Wieder eine Akte zu, M.",
+"탐문을 이어 해 보자.": "Weiter mit den Befragungen.",
+"…이건 직접 가서 다시 물어봐야겠어.": "…Das muss ich noch einmal persönlich fragen.",
+"이제 사건을 끝낼 시간이다.": "Zeit, den Fall abzuschließen."
 });

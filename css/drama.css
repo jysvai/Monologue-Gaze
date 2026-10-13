@@ -340,3 +340,7 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 }
 @media (prefers-reduced-motion:reduce){.scene-cut,.scene-cut.out,.scene-cut img{animation:none}}
 .scene-cut figcaption span.me{color:#b8ab95;padding-left:1.2em;font-size:.92em}
+/* 「이제 사건을 끝낼 시간이다」: 보고서 버튼이 몇 번 들썩인다 */
+.btn-hand.ready{animation:repReady 1.1s ease-in-out 3}
+@keyframes repReady{50%{transform:translateY(-2px);box-shadow:0 0 0 5px rgba(176,40,32,.22)}}
+@media (prefers-reduced-motion:reduce){.btn-hand.ready{animation:none;outline:2px solid var(--red);outline-offset:2px}}

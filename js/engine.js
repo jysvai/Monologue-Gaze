@@ -2047,6 +2047,31 @@
     if (!C || !ST || ST.solved) return;
     threadNews(leadLit() ? 3900 : 900); // 「유력!」 알림과 겹치지 않게 의문 알림은 그 뒤에
   }
+  // 형사의 혼잣말 (자막 · 목소리 hero/close · hero/askmore1~2): 보고서의 칸마다 붙일 메모와 범인으로 적을 사람이 다 갖춰지면 「이제 사건을 끝낼 시간이다」 (사건마다 한 번),
+  // 아직 모자란데 찾아갈 수 있는 사람의 진술 가운데 지금 쥔 메모로 깨뜨릴 것이 새로 생기면 「탐문을 이어 해 보자」 (새로 생길 때만, 3분에 한 번까지 · 사람 앞에 있을 때는 말하지 않는다).
+  // ★5 는 끝낼 때만 — 어디를 보라고 짚지 않는다
+  let MONO_AT = 0;
+  function monoNews() {
+    if (!C || !ST || ST.solved || JUDGING || !MG.sound) return;
+    const m = ST.mono ||= {}, sol = C.solution, got = proof();
+    const full = ST.keys.includes(sol.culprit) && sol.claims.every(cl => got.some(n => (cl.accept || []).some(w => fIs(n.f, w))));
+    if (full) {
+      if (m.close) return;
+      m.close = 1; save(); MG.sound.hero('close');
+      $$('[data-open-rep]').forEach(b => { b.classList.remove('ready'); void b.offsetWidth; b.classList.add('ready'); });
+      return;
+    }
+    if (lv() >= 5) return;
+    const open = Object.values(C.people || {}).filter(p => personVisible(p) && !clammed(p)).flatMap(p => Object.keys(p.ask || {}).filter(k => {
+      const a = rawAns(p, k);
+      return isPressAsk(p, k) && (a.need || []).some(n => n.includes('!')) && ok(a.need) && !(ST.asked[p.id] || []).includes(k + '!');
+    }).map(k => p.id + ':' + k));
+    const fresh = open.filter(x => !(m.seen || []).includes(x)), o = ST.view.open;
+    if (fresh.length) { m.seen = [...(m.seen || []), ...fresh]; save(); }
+    if (!fresh.length || (o && o.t === 'person') || Date.now() - MONO_AT < 180000) return;
+    MONO_AT = Date.now();
+    MG.sound.hero(Math.random() < .5 ? 'askmore1' : 'askmore2');
+  }
   function leadLit() {
     const LM = leadMap(), now = [...LM.keys()].map(String);
     if (!ST.lit) { ST.lit = now; save(); return false; } // 예전 기록을 처음 열 때는 조용히
@@ -2988,6 +3013,7 @@
     toast((ids.length > 1 ? T`메모 ${n0}~${ST.notes.length}번을 적었다` : T`메모 ${ST.notes.length}번을 적었다`) + (gained > 0 ? opened(gained, BY) : ''));
     liveSync();
     leadNews();
+    { const st0 = ST; setTimeout(() => { if (ST === st0 && !(TALK && TALK.alive())) monoNews(); }, 2800); } // 적은 것이 자리를 잡고, 「유력!」 알림이 지나간 뒤
   }
   // 읽으면 적힌다: 증거가 되는 줄(✎)이 읽는 칸에 다 들어와 잠깐 머물면 형사가 수첩에 옮겨 적는다 — 보이는 줄마다 눌러 적지 않아도 되게.
   // 나오는 중인 대답, 가려 둔 사진 설명, 지운 메모(drop)는 건너뛴다. 사진 설명처럼 ✎ 만 붙은 주석(pin)은 눌러야 적힌다
