@@ -778,3 +778,11 @@ body:has(.case-view[data-graphic])::before{background:radial-gradient(ellipse at
 /* 탐문: 그 사람과 얽힌 단어 몇 개 뒤에 접어 둔 수첩의 나머지 단어를 펼치는 단추 — 단어 칩과 헷갈리지 않게 손글씨 대신 작은 활자, 테두리만 */
 .chip.fold{border-style:solid;border-color:rgba(80,64,40,.45);background:none;font:13px/1.35 var(--f-web);opacity:.9}
 @media (hover:hover){.chip.fold:hover{background:rgba(0,0,0,.05)}}
+/* 보고서: 함께 엮인 사람 (공범 · 알고도 감춤) — 혼자 한 일이면 비워 둔다 */
+.rep-w-lead{margin:2px 0 8px;font-size:.92em;opacity:.78}
+.rep-w-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 18px}
+.rep-w-list label{display:inline-flex;align-items:center;gap:8px}
+.rep-w-list select{font:inherit;font-size:.92em;padding:2px 4px;border:1px solid currentColor;border-radius:3px;background:transparent;color:inherit}
+.rep-w-list select option{color:#222;background:#fff}
+.rep-w-list li.on span{color:var(--red);font-weight:700}
+.rep-w-done b{color:var(--red)}

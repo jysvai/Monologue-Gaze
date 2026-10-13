@@ -135,6 +135,7 @@
     st.asked ??= {};
     st.report ??= { culprit: '', claims: {} };
     st.report.claims ??= {};
+    st.report.with ??= {};
     st.tries ??= 0;
     st.solved ??= false;
     st.unl ??= [];
@@ -1831,6 +1832,18 @@
   let REPOPEN = null; // 메모 고르기가 펼쳐진 주장
   let NBF = ''; // 수첩 메모 거르기: '' · 'lead'(「유력!」 붙은 것만) · 'sus'(의심 표시한 것만)
   let PTR = false; // 마지막 손길이 마우스·손가락이었나 (키보드면 false)
+  // 함께 엮인 사람: 범인 말고도 함께 저지른 사람(acc · 공범)이나 알고도 숨기고 덮어 준 사람(hid · 알고도 감춤). 사건 data 의 solution.with = { 단어 id: 'acc' | 'hid' } — 없으면 혼자 한 일.
+  // 칸은 어느 사건에나 있다 (칸이 있는 것만 보고 공범이 있다고 짐작하지 않게). 혼자 한 일이면 비워 둔 채로 올려야 맞는다
+  const WITH = () => [['acc', T('공범')], ['hid', T('알고도 감춤')]];
+  const withOf = () => Object.fromEntries(Object.entries(ST.report.with || {}).filter(([k, v]) => v && k !== ST.report.culprit && C.keywords[k]));
+  const withSame = () => { const a = withOf(), b = C.solution.with || {}, ka = Object.keys(a); return ka.length === Object.keys(b).length && ka.every(k => b[k] === a[k]); };
+  function withSec(persons, shut) {
+    const mine = withOf(), cand = persons.filter(k => k !== ST.report.culprit), role = v => (WITH().find(w => w[0] === v) || [])[1] || '';
+    if (shut) { const ks = Object.keys(mine); return ks.length ? `<section class="rep-sec rep-with"><h4>${T('함께 엮인 사람')}</h4><p class="rep-w-done">${ks.map(k => `<b>${esc(kl(k))}</b> — ${esc(role(mine[k]))}`).join(' · ')}</p></section>` : ''; }
+    if (!cand.length) return '';
+    return `<section class="rep-sec rep-with"><h4 id="rh-with">${T('함께 엮인 사람')}</h4><p class="rep-w-lead">${T('범인 혼자가 아니라면: 함께 저지른 사람은 「공범」, 알고도 숨기거나 덮어 준 사람은 「알고도 감춤」. 혼자 한 일이면 비워 둔다.')}</p>
+      <ul class="rep-w-list" aria-labelledby="rh-with">${cand.map(k => `<li class="${mine[k] ? 'on' : ''}"><label><span>${esc(kl(k))}</span><select data-rep-with="${esc(k)}" aria-label="${esc(kl(k))}"><option value="">—</option>${WITH().map(([v, t]) => `<option value="${v}"${mine[k] === v ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select></label></li>`).join('')}</ul></section>`;
+  }
   const FORM = () => Object.assign({ title: T('수사 보고서'), culprit: T('범인은'), short: T('범인'), submit: T('보고서 올리기'), open: T('보고서 펼쳐 쓰기'), lead: T('범인을 고르고, 주장마다 증거가 될 메모를 하나씩 붙인다. 들어맞는 메모가 여럿이면 어느 것을 붙여도 된다.'), judging: T('보고서를 올렸다. 팀장이 한 장씩 넘긴다…') }, C.solution.form || {});
   // 결말 끝줄의 「→ …」 는 눌러서 기록실로 돌아가는 단추 (빨간 손글씨 그대로)
   function nextHtml(t) {
@@ -1870,7 +1883,7 @@
     return `<article class="doc skin-report rep-view"><header class="doc-h">${sign}<p class="doc-k">${esc(FM.title)}</p><h3 class="doc-t">${esc(C.title)}</h3><p class="doc-m">${esc(FM.lead)}</p></header>
       <div class="doc-b"><form id="rep" autocomplete="off"${shut ? ' class="shut"' : ''}>
         <section class="rep-sec"><h4 id="rh-culprit">${esc(FM.culprit)}</h4><div class="rep-people" role="radiogroup" aria-labelledby="rh-culprit">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => { const per = Object.values(C.people || {}).find(x => x.key === k) || kwFace(k), fc = per && faceOf(per), anyFace = Object.values(C.people || {}).some(faceOf); return `<label class="rep-per${anyFace ? ' has-face' : ''}${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}>${fc ? portrait(per) : anyFace ? `<span class="face none" aria-hidden="true">${esc(Array.from(plain(kl(k)))[0] || '?')}</span>` : ''}<b>${esc(kl(k))}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}${shut ? '' : thWho(k)}</label>`; }).join('') || T('<p class="rep-empty">수첩에 적힌 인물이 없다.</p>')}</div></section>
-        ${sol.claims.map(claim).join('')}
+        ${withSec(persons, shut)}${sol.claims.map(claim).join('')}
         <p class="submit-row">${shut ? `<span class="rep-filed">${esc(FM.filed || (C.frame === 'papers' ? T('종결 · 철해 둠') : T('결재 완료')))}</span>` : `<button type="submit" class="btn-hand">${esc(FM.submit)}</button>`}<span class="tries">${ST.tries ? T`올린 횟수 ${ST.tries}` : ''}</span></p>
       </form><p class="verdict">${esc(VERDICT)}</p>${ST.solved ? `<div class="rep-solved">${solvedHtml(false, true)}</div>` : ''}</div></article>`;
   }
@@ -3382,10 +3395,11 @@
     const has = id => ST.notes.some(n => String(n.id) === String(id));
     if (!ST.report.culprit || sol.claims.some(cl => !ST.report.claims[cl.id] || !has(ST.report.claims[cl.id]))) { VERDICT = T`빈칸이 남아 있다. ${fm.short}${josa(fm.short, '을', '를')} 고르고, 칸마다 메모를 붙여야 올릴 수 있다.`; renderRep(); showVerdict(); say(VERDICT); sfx('miss'); return; }
     // 방금 반려된 보고서를 한 칸도 고치지 않고 다시 올리면: 제출 횟수를 쓰지 않고 그렇다고만 알려 준다
-    const sig = JSON.stringify([ST.report.culprit, sol.claims.map(cl => String(ST.report.claims[cl.id]))]);
+    const sig = JSON.stringify([ST.report.culprit, sol.claims.map(cl => String(ST.report.claims[cl.id])), Object.entries(withOf()).sort()]);
     if (!ST.solved && ST.lastRep === sig) { VERDICT = T`방금 반려된 ${fm.title} 그대로다. 어딘가 고쳐서 올린다.`; renderRep(); showVerdict(); say(VERDICT); sfx('miss'); return; }
     ST.tries++;
-    const bad = ST.report.culprit === sol.culprit ? [] : [fm.short], badCl = [];
+    const bad = ST.report.culprit === sol.culprit ? [] : [fm.short], badCl = [], wBad = !withSame();
+    if (wBad) bad.push(T('함께 엮인 사람'));
     sol.claims.forEach((cl, i) => {
       const n = ST.notes.find(x => String(x.id) === String(ST.report.claims[cl.id]));
       if (!n || !(cl.accept || []).some(w => fIs(n.f, w))) { bad.push(T`${i + 1}번`); badCl.push(cl); }
@@ -3402,7 +3416,7 @@
     else {
       // 한 칸만 틀렸고 그 주장에 따로 적어 둔 말이 있으면 그것으로 (「어떻게 알았나」 같은 주장에 「그 사람을 가리키는가」는 엇나간 말이다)
       // 두 번째 제출부터는 near2 가 있으면 그것으로: 같은 말만 되풀이하면 어느 기록을 찾아야 하는지 끝내 모른다
-      VERDICT = wrong === 1 ? (badCl.length === 1 && ((ST.tries >= 2 && badCl[0].near2) || badCl[0].near)) || sol.near || T('딱 한 군데가 어긋난다.') : sol.far || T('아직 이야기가 이어지지 않는다. 더 쫓아가 보자.');
+      VERDICT = wrong === 1 && wBad ? sol.withNear || T('범인과 증거는 들어맞는다. 누가 함께 엮였는지, 아니면 혼자 한 일인지 — 거기가 어긋난다.') : wrong === 1 ? (badCl.length === 1 && ((ST.tries >= 2 && badCl[0].near2) || badCl[0].near)) || sol.near || T('딱 한 군데가 어긋난다.') : sol.far || T('아직 이야기가 이어지지 않는다. 더 쫓아가 보자.');
       // ★3 은 한 칸만 남았을 때 그 칸을 짚어 준다. 여러 칸이 틀렸을 때까지 칸을 알려 주면 칸마다 메모를 바꿔 끼워 찍기로 풀린다 (연습 사건만 전부 알려 준다)
       if (lv() <= 3 && (wrong === 1 || C.kind === 'tutorial')) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`;
       // 연습 사건은 여러 칸이 틀려도 칸마다 무엇을 대야 하는지 한 줄씩 (칸 번호만 보고 되는 대로 바꿔 끼우며 배우지 않게)
@@ -3438,7 +3452,7 @@
           if (document.activeElement === document.body) { box.tabIndex = -1; box.focus({ preventScroll: true }); } // 키보드로 올렸으면 결말부터 읽히게
         }
         repFace('caught', 800); // 맞았으면 무너진 얼굴로 바뀌며 움찔
-        { const cp = Object.values(C.people || {}).find(x => x.key === C.solution.culprit); if (cp) setTimeout(() => { if (C === c0 && ST === s0) sceneCut(cp, 'end', [], 3800); }, 900); } // 그리고 테이블 건너의 범인
+        { const per = k => Object.values(C.people || {}).find(x => x.key === k); [C.solution.culprit, ...Object.keys(C.solution.with || {})].map(per).filter(Boolean).forEach((p, i) => setTimeout(() => { if (C === c0 && ST === s0) sceneCut(p, 'end', [], i ? 3000 : 3800); }, 900 + i * 4100)); } // 그리고 테이블 건너의 범인 (함께 엮인 사람이 있으면 그 사람도 차례로)
         cue('solved', T('사건 종결')); say(T('사건 종결')); renderBar(); renderList(); // 아래 줄의 시계도 「종결」로, 목록 칸의 「회신 기다리기」도 걷는다
         if (MG.sound) setTimeout(() => { if (C === c0 && ST === s0) MG.sound.hero('solved'); }, 2000);
       } else if (wrong === 0) toast(T('이미 닫힌 사건이다'));
@@ -3739,6 +3753,8 @@
       if (e.target.matches('[data-lang]')) return MG.I18N.set(e.target.value);
       const rq = e.target.closest('[data-rq-pick]');
       if (rq && C) { tmp().rq[rq.dataset.rqPick] = rq.value; $$(`[data-rq-pick="${rq.dataset.rqPick}"]`).forEach(x => x.closest('.rep-opt').classList.toggle('on', x.checked)); sfx('ink'); return; }
+      const rw = e.target.closest('[data-rep-with]');
+      if (rw && C) { const w = ST.report.with ||= {}; if (rw.value) w[rw.dataset.repWith] = rw.value; else delete w[rw.dataset.repWith]; save(); sfx('ink'); renderRep(); return; }
       const s = e.target.closest('[data-rep]');
       if (!s || !C) return;
       // 마우스·손가락으로 고르면 목록을 접는다. 방향키로 고르는 중이면 펼쳐 둔다 (방향키는 옮기는 대로 골라지므로, 접으면 첫 메모에서 멈춘다 — 접기는 「접기」 단추로)

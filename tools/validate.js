@@ -384,6 +384,12 @@ function check(c) {
   const sol = c.solution;
   if (!sol.culprit || !K[sol.culprit]) err(`solution.culprit "${sol.culprit}" 가 단어 목록에 없음`);
   else if (K[sol.culprit].type !== 'person') err('solution.culprit 단어의 type 이 person 이 아님');
+  // 함께 엮인 사람 (보고서의 공범 · 알고도 감춤 칸): { 단어 id: 'acc' | 'hid' }
+  Object.entries(sol.with || {}).forEach(([k, r]) => {
+    if (!K[k] || K[k].type !== 'person') err(`solution.with "${k}" 가 사람 단어가 아님`);
+    if (k === sol.culprit) err(`solution.with "${k}" 가 범인과 같다`);
+    if (!['acc', 'hid'].includes(r)) err(`solution.with "${k}": 역할은 acc(공범) · hid(알고도 감춤)`);
+  });
   if (!Array.isArray(sol.claims) || sol.claims.length < 3) err('solution.claims 는 3개 이상');
   (sol.claims || []).forEach(cl => {
     if (!cl.id || !cl.q) err(`claim ${cl.id}: id 와 q 필요`);
@@ -542,6 +548,7 @@ function check(c) {
   let depth = 0;
   if (sol.culprit && !KN.has(sol.culprit)) err(`범인 단어 ${sol.culprit} 에 도달할 수 없음 → 보고서에서 고를 수 없다`);
   else if (sol.culprit) depth = Math.max(depth, roundK[sol.culprit] || 0);
+  Object.keys(sol.with || {}).forEach(k => { if (!KN.has(k)) err(`함께 엮인 사람 ${k} 에 도달할 수 없음 → 보고서에서 고를 수 없다`); });
   (sol.claims || []).forEach(cl => {
     const r = (cl.accept || []).filter(f => F.has(f)).map(f => roundF[f]);
     if (!r.length) err(`claim ${cl.id}: 인정 증거 중 도달 가능한 것이 없음 → 풀 수 없다`);
