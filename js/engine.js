@@ -678,7 +678,9 @@
     if (!fits && !near && !PICK.other && !PICK.later && !noLead) {
       const v = (ST.vs ||= {})[p.id] ||= { n: 0 };
       v.n++;
-      if (v.n >= VS_MAX()) { v.shut = proof().length; v.last = PICK.miss; PICK = null; save(); renderRead(); faceAnim('nope', 700); land(['#paneRead .vs-shut', '#askChips .chip']); return; }
+      if (v.n >= VS_MAX()) { v.shut = proof().length; v.last = PICK.miss; PICK = null; save(); renderRead(); faceAnim('nope', 700); land(['#paneRead .vs-shut', '#askChips .chip']);
+        sceneCut(p, 'angry', [{ t: plain(v.last).replace(/\s+/g, ' ').trim() }, { t: T('— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.'), me: true }].filter(x => x.t), 4200); // 입을 닫는 순간도 마주 앉은 그 사람으로 (그림이 있는 사람만)
+        return; }
     }
     save();
     pickRefresh();
