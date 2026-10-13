@@ -268,6 +268,14 @@ MG.I18N.put("de", "ui", {
 "기한 안에 종결": "Innerhalb der Frist abgeschlossen",
 "수사 개시부터 {0}{1}": "Seit Ermittlungsbeginn: {0}{1}",
 "사건<br>종결<small>{0}</small>": "Fall<br>gelöst<small>{0}</small>",
+"짐작을 적어 둘 뿐, 아무것도 맞춰 보지 않는다. 한 사람만 걸 수 있다.": "Hält nur Ihre Vermutung fest; nichts wird geprüft. Immer nur eine Person.",
+"의심하는 중": "Verdächtigt",
+"{0} — 의심을 걸어 둔다": "{0} — als Verdacht vermerkt",
+"의심을 내려놓는다": "Verdacht fallen gelassen",
+"의심한 차례": "Wen Sie verdächtigt haben, der Reihe nach",
+"메모 {0}개 때": "bei {0} Notizen",
+"— 이 의문은 풀지 않았다.": "— Diese Frage blieb offen.",
+"배제 기록 — 범인이 아니었던 사람들": "Ausgeschlossen — wer es nicht war",
 "짚어 보기 없이 종결": "Ohne Hinweise gelöst",
 "보고서 한 번에 통과": "Bericht beim ersten Mal angenommen",
 "수사 {0}": "Ermittlung {0}",
@@ -488,5 +496,6 @@ MG.I18N.put("de", "ui", {
 "사건 종결. 선배, 하나 닫았습니다.": "Fall abgeschlossen. Wieder eine Akte zu, M.",
 "탐문을 이어 해 보자.": "Weiter mit den Befragungen.",
 "…이건 직접 가서 다시 물어봐야겠어.": "…Das muss ich noch einmal persönlich fragen.",
-"이제 사건을 끝낼 시간이다.": "Zeit, den Fall abzuschließen."
+"이제 사건을 끝낼 시간이다.": "Zeit, den Fall abzuschließen.",
+"…이 사람은 아니었어. 처음부터 다시 짚어 보자.": "…Die Person war es nicht. Noch einmal von vorn."
 });

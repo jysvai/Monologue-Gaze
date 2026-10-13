@@ -310,6 +310,7 @@ window.MG.audio = {
   "hero/solved": "사건 종결. 선배, 하나 닫았습니다.",
   "hero/askmore1": "탐문을 이어 해 보자.",
   "hero/askmore2": "…이건 직접 가서 다시 물어봐야겠어.",
-  "hero/close": "이제 사건을 끝낼 시간이다."
+  "hero/close": "이제 사건을 끝낼 시간이다.",
+  "hero/susout": "…이 사람은 아니었어. 처음부터 다시 짚어 보자."
  }
 };

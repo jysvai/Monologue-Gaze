@@ -727,7 +727,7 @@
         <div class="c-ans">${chatLines(ansBlocks(p, e), `${p.id}@${e}`, src)}</div>${!press && vsOpen && !asked.includes(k + '!') ? `<p class="c-vs"><button type="button" class="chip vs${lv() <= 3 && isPressAsk(p, k) && ok((rawAns(p, k) || {}).need) ? ' again' : ''}" data-vs="${esc(k)}">${T('메모를 내민다')}</button></p>` : ''}${inl && e === PICK.k ? pickHtml(p) : ''}</div>`;
     }).join('');
     const abF = ST.view.abFrom, abS = abF && abF.pid === p.id && C.sources.find(x => x.id === abF.src && x.type === 'alibi' && srcVisible(x)); // 행적표에서 건너왔으면 돌아가는 단추
-    return `<article class="person skin-${esc(p.skin || 'talk')}">${abS ? `<p class="ab-back-w"><button type="button" class="ab-back" data-src="${esc(abS.id)}">← ${esc(abS.name)}</button></p>` : ''}<header class="per-h${faceOf(p) ? ' has-face' : ''}">${faceOf(p) ? `<button type="button" class="per-back" data-back aria-label="${esc(T('목록으로'))}" title="${esc(T('목록으로'))}">←</button>` : ''}${portrait(p, true)}<div><h3>${esc(p.name).replace(/-/g, '\u2011')}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}${patHtml(p)}</div>${recAge() && faceOf(p) ? '<span class="rec" aria-hidden="true"><i></i>REC <b class="rec-tc"></b></span>' : ''}</header>
+    return `<article class="person skin-${esc(p.skin || 'talk')}">${abS ? `<p class="ab-back-w"><button type="button" class="ab-back" data-src="${esc(abS.id)}">← ${esc(abS.name)}</button></p>` : ''}<header class="per-h${faceOf(p) ? ' has-face' : ''}">${faceOf(p) ? `<button type="button" class="per-back" data-back aria-label="${esc(T('목록으로'))}" title="${esc(T('목록으로'))}">←</button>` : ''}${portrait(p, true)}<div><h3>${esc(p.name).replace(/-/g, '\u2011')}${hunchBtn(p)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}${patHtml(p)}</div>${recAge() && faceOf(p) ? '<span class="rec" aria-hidden="true"><i></i>REC <b class="rec-tc"></b></span>' : ''}</header>
       <div class="per-tr" data-who="${esc(p.id)}">${tr}</div>
       ${PICK && PICK.pid === p.id && !inl ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}>${shut ? `<p class="vs-shut" tabindex="-1"><b>${esc(p.name)}</b> ${inline(ST.vs[p.id].last || '').replace(MIDACT, '<i class="c-mid">$&</i>')} <span>${T('— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.')}</span></p>` : ''}<p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」')}${liveOn() ? `<b class="lv-cost">${T` · 물을 때마다 ${hm(lcost('ask'))}`}</b>` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
   }
@@ -765,7 +765,7 @@
   function sceneOff() {
     const s = SCENE; SCENE = null;
     if (!s) return;
-    clearTimeout(s.t); document.removeEventListener('keydown', s.key, true);
+    clearTimeout(s.t); document.removeEventListener('keydown', s.key, true); if (s.stop) s.stop();
     s.el.classList.add('out'); setTimeout(() => s.el.remove(), reduced() ? 0 : 320);
   }
   function sceneFile(p, kind) {
@@ -774,6 +774,8 @@
     const k = Object.keys(I).find(x => x.startsWith(pre) && x !== pre + 'end');
     return k ? I[k] : null;
   }
+  const sceneKey = e => !(e.repeat || e.ctrlKey || e.metaKey || e.altKey || /^(Shift|Control|Alt|Meta|Tab|F\d+)$/.test(e.key));
+  const sceneEat = e => { if (/^(Escape|Enter| )$/.test(e.key)) { e.preventDefault(); e.stopPropagation(); } };
   function sceneCut(p, kind, lines, ms) {
     const file = p && sceneFile(p, kind);
     if (!file) return;
@@ -782,7 +784,7 @@
     el.className = `scene-cut s-${kind}`; el.setAttribute('aria-hidden', 'true');
     el.innerHTML = `<figure><img src="${esc(file)}" alt="" decoding="async"><figcaption><b>${esc(p.name)}</b>${lines.map(x => `<span${x.me ? ' class="me"' : ''}>${esc(x.t)}</span>`).join('')}</figcaption></figure>`;
     document.body.appendChild(el);
-    const s = SCENE = { el, key: e => { if (!/^(Shift|Control|Alt|Meta|Tab)$/.test(e.key)) sceneOff(); } };
+    const s = SCENE = { el, key: e => { if (sceneKey(e)) { sceneEat(e); sceneOff(); } } };
     el.addEventListener('click', sceneOff);
     document.addEventListener('keydown', s.key, true);
     s.t = setTimeout(sceneOff, ms);
@@ -800,7 +802,7 @@
     return ks.find(k => asked.includes(k + '!')) || ks[0] || null;
   }
   const ansLines = (p, k) => [].concat((rawAns(p, k) || {}).a || []).map(gv).map(b => (typeof b === 'string' ? b : b && typeof b.p === 'string' ? b.p : '')).filter(Boolean)
-    .map(t => ({ t: plain(t).replace(DASH, '').replace(/\s+/g, ' ').trim(), me: DASH.test(t) })).filter(x => x.t);
+    .map(t => ({ t: plain(t).replace(DASH, '').replace(/^\s*\([^)]*\)\s*/, '').replace(/\s+/g, ' ').trim(), me: DASH.test(t) })).filter(x => x.t);
   function confront(cp, done) {
     const sol = C.solution, used = new Set(), I = MG.images || {};
     const beats = sol.claims.map((cl, j) => {
@@ -817,21 +819,23 @@
     const el = document.createElement('div');
     el.className = 'scene-cut confront'; el.setAttribute('aria-hidden', 'true');
     document.body.appendChild(el);
-    let i = -1, t = 0, over = false;
-    const fin = () => { if (over) return; over = true; clearTimeout(t); document.removeEventListener('keydown', key, true); el.classList.add('out'); setTimeout(() => el.remove(), 320); if (done) setTimeout(done, 350); };
+    let i = -1, over = false;
+    const S = SCENE = { el, t: 0, stop: () => { over = true; } }; // 사건을 떠나면 sceneOff 가 걷는다 (그때는 done 도 부르지 않는다)
+    const fin = () => { if (over) return; over = true; if (SCENE === S) SCENE = null; clearTimeout(S.t); document.removeEventListener('keydown', key, true); el.classList.add('out'); setTimeout(() => el.remove(), 320); if (done) setTimeout(done, 350); };
     const next = () => {
-      clearTimeout(t);
+      if (over) return;
+      clearTimeout(S.t);
       if (++i > beats.length) return fin();
       if (i === beats.length) { // 결말
         el.innerHTML = `<figure class="cf-end"><img src="${esc(end)}" alt=""><figcaption><b>${esc(cp.name)}</b></figcaption></figure>`;
-        t = setTimeout(fin, 3800); return;
+        S.t = setTimeout(fin, 3800); return;
       }
       const b = beats[i], len = b.lines.reduce((m, x) => m + x.t.length, 0) + String(b.n.t).length / 2;
       el.innerHTML = `<figure><img src="${esc(b.img || end)}" alt=""><p class="cf-memo"><span class="n">${esc(b.q)}</span> ${esc(plain(b.n.t))}</p><figcaption><b>${esc(cp.name)}</b>${b.lines.map(x => `<span${x.me ? ' class="me"' : ''}>${esc(x.t)}</span>`).join('')}</figcaption><p class="cf-step">${i + 1} / ${beats.length}</p></figure>`;
       sfx('page');
-      t = setTimeout(next, Math.min(8500, Math.max(3600, 2400 + len * 55)));
+      S.t = setTimeout(next, Math.min(8500, Math.max(3600, 2400 + len * 55)));
     };
-    const key = e => { if (e.key === 'Escape') { e.preventDefault(); fin(); } else if (!/^(Shift|Control|Alt|Meta|Tab)$/.test(e.key)) { e.preventDefault(); next(); } };
+    const key = S.key = e => { if (!sceneKey(e)) return; sceneEat(e); if (e.key === 'Escape') fin(); else { e.preventDefault(); next(); } };
     el.addEventListener('click', next);
     document.addEventListener('keydown', key, true);
     next();
@@ -912,6 +916,7 @@
       if (heard.length) setTimeout(() => { if (ST === st0) collect([...new Set(heard)]); }, quiet ? 700 : 400);
       scanSoon(500);
       if (!quiet) leadNews(); // 방금 들은 진술과 어긋나는 메모가 수첩에 있으면 그때 알린다
+      if (!quiet) { const st0 = ST; setTimeout(() => { if (ST === st0 && !(TALK && TALK.alive())) monoNews(); }, 1800); } // 대답 속에서 마지막 증거를 얻었으면, 다 들은 뒤에 혼잣말 (대답이 나오는 동안은 건너뛰었으므로)
       if (!quiet && opt.tell) setTimeout(faceTell, 260);
     };
     TALK = me;
@@ -1610,7 +1615,7 @@
     // 아직 만나지 않은 사람은 수첩에 적힌 이름으로 (가게 점원 · 택시 기사처럼 이름을 모르고 찾아가는 사람)
     // 아직 안 만난 사람은 직함의 첫 마디만 — 「새터설비 사장 · 해솔건설 전 현장 소장」처럼 뒤에 붙은 내력은 만나서 들을 때까지 덮어 둔다
     const nameOf = pname, roleOf = p => { const r = p.role ? plain(p.role) : '', r1 = ST.asked[p.id] ? r : r.split(' · ')[0]; return r1 && norm(r1) !== norm(nameOf(p)) ? r1 : ''; };
-    return ps.map(p => `<button type="button" class="item person${o && o.t === 'person' && o.id === p.id ? ' on' : ''}${ST.asked[p.id] ? '' : ' new'}" data-person="${p.id}">${portrait(p)}<span class="item-t">${esc(nameOf(p))}${ST.asked[p.id] ? '' : T('<span class="sr"> (아직 안 만남)</span>')}</span>${roleOf(p) ? `<span class="item-m">${esc(roleOf(p))}</span>` : ''}</button>`).join('');
+    return ps.map(p => `<button type="button" class="item person${o && o.t === 'person' && o.id === p.id ? ' on' : ''}${ST.asked[p.id] ? '' : ' new'}${ST.hunch && ST.hunch.k && ST.hunch.k === p.key ? ' hunch' : ''}" data-person="${p.id}">${portrait(p)}<span class="item-t">${esc(nameOf(p))}${ST.asked[p.id] ? '' : T('<span class="sr"> (아직 안 만남)</span>')}</span>${roleOf(p) ? `<span class="item-m">${esc(roleOf(p))}</span>` : ''}</button>`).join('');
   }
   // 지도: 목록 칸에는 작은 지도(점만), 아무것도 펼치지 않았을 때는 읽기 칸에 크게(이름까지)
   function mapHtml(s, big) {
@@ -1973,7 +1978,36 @@
     const dl = C.live && C.live.deadline, dlSeen = dl && (late || ok(dl.need)); // 끝내 몰랐던 기한은 말하지 않는다
     const cjk = /^(ja|zh)$/.test(MG.I18N.lang), dlName = esc(dl && dl.label || T('기한')); // 일본어·중국어는 전각 괄호
     const fin = C.live && ST.live ? `<p class="lv-fin">${T`수사 개시부터 ${hm(ST.live.t)}${dlSeen ? ` · ${late ? T('기한 넘김') : T('기한 안에 종결')}${cjk ? `<small>（${dlName}）</small>` : ` <small>(${dlName})</small>`}` : ''}`}</p>` : '';
-    return `${mug}<div class="stamp${fresh ? ' fresh' : ''}"><div>${T`사건<br>종결<small>${esc(sol.stamp || '')}</small>`}</div></div>${fin}<div class="epi">${epi}</div>${shareHtml()}${rateHtml()}${sol.next ? nextHtml(sol.next) : ''}`;
+    return `${mug}<div class="stamp${fresh ? ' fresh' : ''}"><div>${T`사건<br>종결<small>${esc(sol.stamp || '')}</small>`}</div></div>${fin}<div class="epi">${epi}</div>${hunchTrailHtml()}${clearedHtml()}${shareHtml()}${rateHtml()}${sol.next ? nextHtml(sol.next) : ''}`;
+  }
+  // 의심 표시 (ST.hunch — 수첩 메모의 「의심」 표시 ST.sus 와는 다른 것): 인물 화면에서 한 사람에게만 「의심」을 걸어 둔다 (아무것도 맞춰 보지 않는다 — 플레이어의 짐작을 적어 두는 것).
+  // 걸 때마다 그때 쥔 메모 수와 함께 차례를 남기고, 종결하면 결말 밑에 의심이 어떻게 옮겨 갔는지 한 줄로. 의심하던 사람이 「의문」으로 빠지면 형사가 한마디 (hero/susout)
+  const hunchAble = k => { const w = C.keywords[k] || {}; return w.type === 'person' && !w.nick && !w.victim && !(w.victimIf || []).some(okOne) && ST.keys.includes(k); };
+  const hunchBtn = p => (!p.key || ST.solved || !hunchAble(p.key)) ? '' : (on => ` <button type="button" class="hunch-tog${on ? ' on' : ''}" data-hunch="${esc(p.key)}" aria-pressed="${on}" title="${esc(T('짐작을 적어 둘 뿐, 아무것도 맞춰 보지 않는다. 한 사람만 걸 수 있다.'))}">${on ? T('의심하는 중') : T('의심')}</button>`)(!!(ST.hunch && ST.hunch.k === p.key));
+  function hunchToggle(k) {
+    if (!C || ST.solved) return;
+    const s = ST.hunch ||= { k: null, trail: [] };
+    if (s.k === k) s.k = null;
+    else { s.k = k; s.trail.push({ k, n: proof().length }); if (s.trail.length > 12) s.trail.splice(0, s.trail.length - 12); }
+    save(); sfx('ink');
+    $$('[data-hunch]').forEach(b => { const on = b.dataset.hunch === s.k; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); b.textContent = on ? T('의심하는 중') : T('의심'); });
+    $$('.item.person').forEach(b => { const p = C.people[b.dataset.person]; b.classList.toggle('hunch', !!(p && s.k && p.key === s.k)); });
+    say(s.k ? T`${kl(k)} — 의심을 걸어 둔다` : T('의심을 내려놓는다'));
+  }
+  function hunchTrailHtml() {
+    const tr = (ST.hunch && ST.hunch.trail || []).filter((x, i, a) => C.keywords[x.k] && (i === 0 || a[i - 1].k !== x.k));
+    if (!tr.length) return '';
+    return `<p class="hunch-trail"><span>${T('의심한 차례')}</span> ${tr.map(x => `<b${x.k === C.solution.culprit ? ' class="hit"' : ''}>${esc(kl(x.k))}</b> <small>${T`메모 ${x.n}개 때`}</small>`).join(' → ')}</p>`;
+  }
+  // 배제 기록: 종결한 뒤 결말 밑에, 「의문」으로 범인이 아니라고 밝힌 사람들과 그 결론을 한 줄씩. 풀지 않은 의문은 「풀지 않았다」로 남겨 둔다 (다시 할 거리).
+  // 함께 엮였거나 적어도 되는 사람은 「범인이 아니었다」로만 묶이지 않게 뺀다
+  function clearedHtml() {
+    const sol = C.solution, inv = new Set([sol.culprit, ...Object.keys(sol.with || {}), ...Object.keys(sol.withOk || {})]), V = thView();
+    const rows = (C.threads || []).filter(t => t.out && !inv.has(t.out) && C.keywords[t.out]).map(t => {
+      const x = V.find(v => v.t.id === t.id), per = Object.values(C.people || {}).find(p => p.key === t.out), done = x && x.done;
+      return `<li class="${done ? 'done' : 'open'}">${per && faceOf(per) ? portrait(per) : ''}<p><b>${esc(kl(t.out))}</b> <span class="cl-q">${inline(t.q)}</span><span class="cl-a">${done ? inline(t.a) : T('— 이 의문은 풀지 않았다.')}</span></p></li>`;
+    });
+    return rows.length ? `<details class="cleared"><summary>${T('배제 기록 — 범인이 아니었던 사람들')} <small>${rows.length}</small></summary><ul>${rows.join('')}</ul></details>` : '';
   }
   // 종결한 사람이 결과를 옮겨 적을 수 있게: 범인·결말은 빼고 사건 번호, 제목, 별, 제출 횟수, 짚어 보기 횟수, 링크만
   const ITCH_URL = 'https://jysvai.itch.io/monologue-gaze';
@@ -2111,7 +2145,6 @@
   // 형사의 혼잣말 (자막 · 목소리 hero/close · hero/askmore1~2): 보고서의 칸마다 붙일 메모와 범인으로 적을 사람이 다 갖춰지면 「이제 사건을 끝낼 시간이다」 (사건마다 한 번),
   // 아직 모자란데 찾아갈 수 있는 사람의 진술 가운데 지금 쥔 메모로 깨뜨릴 것이 새로 생기면 「탐문을 이어 해 보자」 (새로 생길 때만, 3분에 한 번까지 · 사람 앞에 있을 때는 말하지 않는다).
   // ★5 는 끝낼 때만 — 어디를 보라고 짚지 않는다
-  let MONO_AT = 0;
   function monoNews() {
     if (!C || !ST || ST.solved || JUDGING || !MG.sound) return;
     const m = ST.mono ||= {}, sol = C.solution, got = proof();
@@ -2125,12 +2158,12 @@
     if (lv() >= 5) return;
     const open = Object.values(C.people || {}).filter(p => personVisible(p) && !clammed(p)).flatMap(p => Object.keys(p.ask || {}).filter(k => {
       const a = rawAns(p, k);
-      return isPressAsk(p, k) && (a.need || []).some(n => n.includes('!')) && ok(a.need) && !(ST.asked[p.id] || []).includes(k + '!');
+      return ST.keys.includes(k) && isPressAsk(p, k) && (a.need || []).some(n => n.includes('!')) && ok(a.need) && !(ST.asked[p.id] || []).includes(k + '!');
     }).map(k => p.id + ':' + k));
     const fresh = open.filter(x => !(m.seen || []).includes(x)), o = ST.view.open;
     if (fresh.length) { m.seen = [...(m.seen || []), ...fresh]; save(); }
-    if (!fresh.length || (o && o.t === 'person') || Date.now() - MONO_AT < 180000) return;
-    MONO_AT = Date.now();
+    if (!fresh.length || (o && o.t === 'person') || Date.now() - (m.at || 0) < 180000) return;
+    m.at = Date.now(); save();
     MG.sound.hero(Math.random() < .5 ? 'askmore1' : 'askmore2');
   }
   function leadLit() {
@@ -2192,6 +2225,9 @@
       : (x => T`의문 ${x.no} — 빈칸 하나를 채웠다 (${x.got.filter(Boolean).length}/${x.got.length})`)(by(idOf(newGot[0])));
     const c0 = C;
     setTimeout(() => { if (C === c0 && !ST.solved) { toast(msg, 3400); sfx(newDone.length ? 'match' : 'write'); } }, delay);
+    const sk = ST.hunch && ST.hunch.k; // 의심하던 사람이 이번에 풀린 의문으로 빠졌으면
+    const s0 = ST;
+    if (sk && MG.sound && newDone.some(id => (by(id).t || {}).out === sk)) setTimeout(() => { if (C === c0 && ST === s0 && !ST.solved && !(TALK && TALK.alive())) MG.sound.hero('susout'); }, delay + 2600);
   }
   // 사람을 짚거나 빼 준 의문이 풀리면, 「풀림」 옆에 그 사람의 얼굴 (뺀 사람은 흐리게)
   const thFace = t => { const k = t.out || (lv() < 5 && t.who), per = k && Object.values(C.people || {}).find(x => x.key === k); return per && faceOf(per) ? portrait(per).replace('class="face"', `class="face th-face${t.out ? ' out' : ''}"`) : ''; };
@@ -3612,6 +3648,7 @@
       if ((el = t.closest('.pk-g > summary'))) { if (PICK) (PICK.g ||= {})[el.parentNode.dataset.pkG] = !el.parentNode.open; return; } // 접고 편 묶음은 다시 그려도 그대로
       if ((el = t.closest('[data-lead-f]'))) { const on = el.getAttribute('aria-pressed') !== 'true', box = el.parentNode; el.setAttribute('aria-pressed', String(on)); box.classList.toggle('lead-only', on); box.querySelectorAll('.rep-grp').forEach(g => g.classList.toggle('no-lead', !g.querySelector('.rep-opt.lead'))); return; } // 고르는 칸: 유력한 메모만
       if ((el = t.closest('[data-lead]'))) return leadGo(el.dataset.lead);
+      if ((el = t.closest('[data-hunch]'))) return hunchToggle(el.dataset.hunch);
       if ((el = t.closest('[data-vs]'))) { const o = ST.view.open; if (!o || o.t !== 'person') return; stopTalk(); PICK = { pid: o.id, k: el.dataset.vs }; renderRead(); const pk = $('#paneRead .press-pick'); if (pk) pk.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' }); land(matchMedia('(pointer: coarse)').matches ? ['#paneRead .press-pick button'] : ['#paneRead [data-press-filter]'], true); return; } // 이 대답에 메모를 내민다 (터치 화면에선 찾기 칸에 초점을 주지 않는다: 자판이 메모를 가린다)
       if ((el = t.closest('[data-pin]'))) return pin(el.dataset.pin);
       if ((el = t.closest('[data-kw]'))) return addKey(el.dataset.kw, false, el.textContent);

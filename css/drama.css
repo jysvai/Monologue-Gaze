@@ -351,3 +351,23 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 .scene-cut.confront figcaption span{animation:sceneIn .5s .3s ease-out both}
 @keyframes cfIn{from{opacity:0;transform:translate(-34px,-8px) rotate(-4deg)}}
 @media (prefers-reduced-motion:reduce){.scene-cut .cf-memo,.scene-cut.confront figcaption span{animation:none}}
+/* 배제 기록 (종결 뒤): 범인이 아니라고 밝힌 사람들 */
+.cleared{margin:18px 0 6px;border-top:1px dashed rgba(43,40,35,.35);padding-top:10px}
+.cleared summary{cursor:pointer;font-weight:700}
+.cleared summary small{font-weight:400;opacity:.7}
+.cleared ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:10px}
+.cleared li{display:flex;gap:10px;align-items:flex-start}
+.cleared li .face{flex:none;filter:grayscale(.85);opacity:.8}
+.cleared li p{margin:0;line-height:1.55}
+.cleared li .cl-q{display:block;font-size:.92em;opacity:.75}
+.cleared li .cl-a{display:block}
+.cleared li.open .cl-a{opacity:.6;font-style:italic}
+/* 의심 표시: 인물 이름 옆 작은 단추 · 목록에서는 이름 옆 붉은 동그라미 · 종결 뒤 의심한 차례 */
+.hunch-tog{margin-left:8px;padding:1px 9px;border:1px dashed currentColor;border-radius:999px;background:transparent;color:inherit;font:12px/1.6 var(--f-doc);vertical-align:middle;opacity:.7;cursor:pointer}
+.hunch-tog:hover{opacity:1}
+.hunch-tog.on{border-style:solid;border-color:var(--red);color:var(--red);opacity:1;font-weight:700}
+.item.person.hunch .item-t::after{content:"";display:inline-block;width:9px;height:9px;margin-left:6px;border:2px solid var(--red);border-radius:50%;vertical-align:middle}
+.hunch-trail{margin:14px 0 4px;line-height:1.7}
+.hunch-trail>span{display:block;font-size:.88em;opacity:.7}
+.hunch-trail b.hit{color:var(--red)}
+.hunch-trail small{opacity:.65}

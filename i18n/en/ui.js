@@ -268,6 +268,14 @@ MG.I18N.put("en", "ui", {
 "기한 안에 종결": "Closed before the deadline",
 "수사 개시부터 {0}{1}": "Since the investigation opened: {0}{1}",
 "사건<br>종결<small>{0}</small>": "Case<br>closed<small>{0}</small>",
+"짐작을 적어 둘 뿐, 아무것도 맞춰 보지 않는다. 한 사람만 걸 수 있다.": "Only notes down your hunch; nothing is checked. One person at a time.",
+"의심하는 중": "Suspected",
+"{0} — 의심을 걸어 둔다": "{0} — marked as your suspect",
+"의심을 내려놓는다": "Suspicion dropped",
+"의심한 차례": "Who you suspected, in order",
+"메모 {0}개 때": "at {0} notes",
+"— 이 의문은 풀지 않았다.": "— You never settled this question.",
+"배제 기록 — 범인이 아니었던 사람들": "Ruled out — who it wasn't",
 "짚어 보기 없이 종결": "Closed without hints",
 "보고서 한 번에 통과": "Report accepted first time",
 "수사 {0}": "investigation {0}",
@@ -488,5 +496,6 @@ MG.I18N.put("en", "ui", {
 "사건 종결. 선배, 하나 닫았습니다.": "Case closed. That's one more, M.",
 "탐문을 이어 해 보자.": "Back to the interviews.",
 "…이건 직접 가서 다시 물어봐야겠어.": "…I need to go and ask about this in person.",
-"이제 사건을 끝낼 시간이다.": "Time to close this case."
+"이제 사건을 끝낼 시간이다.": "Time to close this case.",
+"…이 사람은 아니었어. 처음부터 다시 짚어 보자.": "…Not this one. Back to the start."
 });
