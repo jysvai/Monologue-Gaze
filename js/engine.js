@@ -803,8 +803,14 @@
     });
     return ks.find(k => asked.includes(k + '!')) || ks[0] || null;
   }
-  const ansLines = (p, k) => [].concat((rawAns(p, k) || {}).a || []).map(gv).map(b => (typeof b === 'string' ? b : b && typeof b.p === 'string' ? b.p : '')).filter(Boolean)
-    .map(t => ({ t: plain(t).replace(DASH, '').replace(/^\s*\([^)]*\)\s*/, '').replace(/\s+/g, ' ').trim(), me: DASH.test(t) })).filter(x => x.t);
+  const ansLines = (p, k) => [].concat((rawAns(p, k) || {}).a || []).map(gv).map((b, i) => ({ r: typeof b === 'string' ? b : b && typeof b.p === 'string' ? b.p : '', i })).filter(x => x.r)
+    .map(({ r, i }) => ({ t: plain(r).replace(DASH, '').replace(/^\s*\([^)]*\)\s*/, '').replace(/\s+/g, ' ').trim(), me: DASH.test(r), i })).filter(x => x.t);
+  // 그 대답에 녹음이 있으면 탐문 때와 같은 조각으로 (첫 조각은 키 그대로 span 줄, 나머지는 「키.번호」)
+  const ansVoices = (p, k, lines) => {
+    const snd = MG.sound, base = `v/${C.id}/${p.id}/${k}`, span = ((MG.audio || {}).span || {})[base] || 1;
+    if (!snd || !k) return [];
+    return [...new Set(lines.map(x => (x.i < span && snd.hasVoice(base) ? base : snd.hasVoice(`${base}.${x.i}`) ? `${base}.${x.i}` : '')).filter(Boolean))];
+  };
   function confront(cp, done) {
     const sol = C.solution, used = new Set(), I = MG.images || {};
     const beats = sol.claims.map((cl, j) => {
@@ -813,7 +819,8 @@
       const k = pressFor(cp, [n.f], used); // 그 메모로 깨진 대답만 (같은 주장의 다른 메모로 깨진 말을 끌어오면 메모와 말이 어긋난다)
       if (k) used.add(k);
       const react = k && (rawAns(cp, k) || {}).react;
-      return { n, q: `${j + 1}. ${plain(cl.q)}`, lines: k ? ansLines(cp, k) : [], img: sceneFile(cp, react || 'flustered') };
+      const lines = k ? ansLines(cp, k) : [];
+      return { n, q: `${j + 1}. ${plain(cl.q)}`, lines, vo: ansVoices(cp, k, lines), img: sceneFile(cp, react || 'flustered') };
     }).filter(Boolean);
     const end = sceneFile(cp, 'end');
     if (!beats.length || !end || reduced()) { if (end) sceneCut(cp, 'end', [], 3800); return done && setTimeout(done, end ? 4100 : 0); }
@@ -822,11 +829,12 @@
     el.className = 'scene-cut confront'; el.setAttribute('aria-hidden', 'true');
     document.body.appendChild(el);
     let i = -1, over = false;
-    const S = SCENE = { el, t: 0, stop: () => { over = true; } }; // 사건을 떠나면 sceneOff 가 걷는다 (그때는 done 도 부르지 않는다)
-    const fin = () => { if (over) return; over = true; if (SCENE === S) SCENE = null; clearTimeout(S.t); document.removeEventListener('keydown', key, true); el.classList.add('out'); setTimeout(() => el.remove(), 320); if (done) setTimeout(done, 350); };
+    const hush = () => { if (MG.sound) MG.sound.stopVoice(); };
+    const S = SCENE = { el, t: 0, stop: () => { over = true; hush(); } }; // 사건을 떠나면 sceneOff 가 걷는다 (그때는 done 도 부르지 않는다)
+    const fin = () => { if (over) return; over = true; hush(); if (SCENE === S) SCENE = null; clearTimeout(S.t); document.removeEventListener('keydown', key, true); el.classList.add('out'); setTimeout(() => el.remove(), 320); if (done) setTimeout(done, 350); };
     const next = () => {
       if (over) return;
-      clearTimeout(S.t);
+      clearTimeout(S.t); hush();
       if (++i > beats.length) return fin();
       if (i === beats.length) { // 결말
         el.innerHTML = `<figure class="cf-end"><img src="${esc(end)}" alt=""><figcaption><b>${esc(cp.name)}</b></figcaption></figure>`;
@@ -836,6 +844,17 @@
       el.innerHTML = `<figure><img src="${esc(b.img || end)}" alt=""><p class="cf-memo"><span class="n">${esc(b.q)}</span> ${esc(plain(b.n.t))}</p><figcaption><b>${esc(cp.name)}</b>${b.lines.map(x => `<span${x.me ? ' class="me"' : ''}>${esc(x.t)}</span>`).join('')}</figcaption><p class="cf-step">${i + 1} / ${beats.length}</p></figure>`;
       sfx('page');
       S.t = setTimeout(next, Math.min(8500, Math.max(3600, 2400 + len * 55)));
+      if (b.vo.length) { // 녹음된 말이면 다 들은 뒤에 넘긴다 (목소리가 안 나면 글 길이대로)
+        const me = i, say = j => {
+          if (over || i !== me) return;
+          if (j >= b.vo.length) { clearTimeout(S.t); S.t = setTimeout(next, 1400); return; }
+          const v = MG.sound.voice(b.vo[j]);
+          if (!v) return;
+          if (j === 0) { clearTimeout(S.t); S.t = setTimeout(next, 20000); }
+          v.done.then(() => setTimeout(() => say(j + 1), 250));
+        };
+        setTimeout(() => say(0), 700);
+      }
     };
     const key = S.key = e => { if (!sceneKey(e)) return; sceneEat(e); if (e.key === 'Escape') fin(); else { e.preventDefault(); next(); } };
     el.addEventListener('click', next);

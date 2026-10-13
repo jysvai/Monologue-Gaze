@@ -123,6 +123,9 @@
       src.onended = finish;
       startAt = c.currentTime;
       src.start(0, offset);
+      // 소리판이 멈춰 있으면 (브라우저가 아직 소리를 막고 있으면) onended 가 오지 않는다 — 그 길이만큼 지나면 끝난 셈 친다 (기다리는 연출이 멈추지 않게)
+      const me = src, left = (p.buf.duration - offset) * 1000;
+      setTimeout(() => { if (src === me && !over && c.state !== 'running') { src.onended = null; src = null; finish(); } }, left + 1200);
     }
     cur = v;
     hush(true);
