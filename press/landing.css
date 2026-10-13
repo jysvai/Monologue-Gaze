@@ -1,0 +1,70 @@
+/* 언어별 소개 페이지 (ko/ en/ ja/ zh/ ru/ de/ — tools/landing.js 가 만든다). 보도 자료(press/index.html)와 같은 책상·종이 */
+:root {
+  --wood: #20150e; --paper: #efe4cc; --paper-2: #e3d4b4; --ink: #2a2118;
+  --ink-2: #5d4c39; --rule: #c9b58f; --red: #9b2c22; --gold: #e2b877; --on-wood: #eadcc2; --on-wood-2: #bba88a;
+  --f-type: "Special Elite", "Courier New", monospace; --f-mono: "IBM Plex Mono", Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html { background: var(--wood); }
+body { margin: 0; color: var(--on-wood); font-size: 19px; line-height: 1.6; background: var(--wood) url("../img/_global/desk.webp") center top / 1600px auto repeat; padding-inline: 16px; padding-block: 0 64px; }
+a { color: var(--gold); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.wrap { max-width: 1080px; margin: 0 auto; }
+header { padding-block: 56px 28px; }
+.kicker { font: 500 13px/1.4 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--on-wood-2); margin: 0 0 10px; }
+h1 { font: 400 clamp(44px, 8vw, 88px)/1 var(--f-type); margin: 0 0 14px; color: #f4ead6; }
+.tag { font-style: italic; font-size: clamp(19px, 2.4vw, 24px); margin: 0 0 26px; color: var(--paper-2); max-width: 40ch; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 0 0 18px; }
+.btn { display: inline-block; font: 400 18px/1 var(--f-type); color: var(--wood); background: var(--gold); padding: 13px 20px 12px; text-decoration: none; border-radius: 2px; }
+.btn.ghost { background: transparent; color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
+.langs { font: 400 15px/1.7 var(--f-mono); color: var(--on-wood-2); margin: 0; }
+.langs b { color: var(--on-wood); font-weight: 500; }
+.reel { margin: 8px 0 40px; max-width: 860px; }
+video { width: 100%; height: auto; display: block; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+figcaption { font: 400 14px/1.45 var(--f-mono); color: var(--on-wood-2); margin-top: 8px; }
+.sheet { background: var(--paper) url("../img/_global/paper.webp") center / 900px auto; color: var(--ink); padding: clamp(20px, 4vw, 44px); box-shadow: 0 14px 40px rgba(0,0,0,.5); border-radius: 2px; margin-bottom: 40px; }
+.sheet h2 { font: 400 28px/1.2 var(--f-type); margin: 0 0 16px; color: var(--ink); }
+.sheet h2 small { font: 500 12px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 6px; }
+.sheet a { color: var(--red); }
+.cols { display: grid; grid-template-columns: 1fr 300px; gap: 36px; align-items: start; }
+.prose p, p.prose { margin: 0 0 14px; max-width: 64ch; }
+dl.facts { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; font-size: 17px; }
+dl.facts dt { font: 500 12px/1.9 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+dl.facts dd { margin: 0; }
+ul.feat { margin: 0; padding-left: 1.1em; }
+ul.feat li { margin-bottom: 8px; max-width: 70ch; }
+.tablewrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 17px; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font: 500 12px var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; }
+td.no, td.yr { font: 400 15px var(--f-mono); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sheet a.case { color: var(--ink); font-weight: 600; text-decoration-color: var(--rule); }
+.sheet a.case:hover { color: var(--red); }
+td .line { display: block; font-size: 16px; font-style: italic; color: var(--ink-2); margin-top: 3px; max-width: 60ch; }
+td .len { display: block; font: 400 13px/1.5 var(--f-mono); color: var(--ink-2); margin-top: 3px; }
+.stars { color: var(--ink-2); letter-spacing: .05em; white-space: nowrap; }
+.stars.red { color: var(--red); }
+tr.group td { font: 400 15px var(--f-type); color: var(--red); padding-top: 18px; border-bottom-color: transparent; }
+.shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.shots a { display: block; color: var(--ink-2); text-decoration: none; }
+.shots img { width: 100%; height: auto; display: block; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+.shots span { display: block; font: 400 13px/1.4 var(--f-mono); margin-top: 6px; }
+.note { font-size: 16px; color: var(--ink-2); margin: 16px 0 0; }
+footer { font: 400 14px/1.6 var(--f-mono); color: var(--on-wood-2); }
+@media (max-width: 760px) {
+  .cols, .shots { grid-template-columns: 1fr; }
+  body { font-size: 18px; }
+  /* 좁은 화면: 표 대신 사건마다 한 덩이 — 번호 옆에 제목·첫 줄, 그 아래 연도, 장소·시간, 별 */
+  thead { display: none; }
+  table, tbody, tr, td { display: block; }
+  tr { display: grid; grid-template-columns: 2.2em 1fr; column-gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  td { border: 0; padding: 0; grid-column: 2; }
+  td.no { grid-column: 1; grid-row: 1 / span 4; }
+  td.yr { margin-top: 6px; }
+  tr.group { border-bottom: 0; padding-bottom: 0; }
+  tr.group td { grid-column: 1 / -1; padding-top: 8px; }
+}
+/* 한·중·일: 기울임 글꼴이 없어 억지로 눕히지 않고, 글줄 폭은 글자 수(em)로 */
+:lang(ko) .tag, :lang(ja) .tag, :lang(zh-Hans) .tag, :lang(ko) td .line, :lang(ja) td .line, :lang(zh-Hans) td .line { font-style: normal; }
+:lang(ko) .prose p, :lang(ja) .prose p, :lang(zh-Hans) .prose p { max-width: 36em; }
+:lang(ko) .tag, :lang(ja) .tag, :lang(zh-Hans) .tag { max-width: 24em; }

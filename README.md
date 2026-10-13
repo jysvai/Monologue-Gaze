@@ -3,7 +3,8 @@
 > 시간은 흐르지만, 새겨진 기록은 거짓말을 하지 않는다.
 
 **English:** A free detective game that runs in the browser. A detective who transferred out left you a drawer of cold case files. You read the records of each case (newspapers, statements, letters, chat logs), write words in your notebook, and use them to search the archive and question people. 16 cases, from London in 1888 to Seoul in 2025. Playable in English, Japanese, Simplified Chinese, Russian, German and Korean.
-**Play:** https://jysvai.itch.io/monologue-gaze · **Press kit:** https://jysvai.github.io/Monologue-Gaze/press/
+**Play:** https://jysvai.itch.io/monologue-gaze · in the browser: https://jysvai.github.io/Monologue-Gaze/ · **Press kit:** https://jysvai.github.io/Monologue-Gaze/press/
+**About the game:** [English](https://jysvai.github.io/Monologue-Gaze/en/) · [한국어](https://jysvai.github.io/Monologue-Gaze/ko/) · [日本語](https://jysvai.github.io/Monologue-Gaze/ja/) · [中文](https://jysvai.github.io/Monologue-Gaze/zh/) · [Русский](https://jysvai.github.io/Monologue-Gaze/ru/) · [Deutsch](https://jysvai.github.io/Monologue-Gaze/de/)
 
 기록을 읽어 사건을 푸는 웹 추리 게임. 1888년부터 2014년까지의 미제 사건 열두 건과 수사 시계가 도는 현행 사건 세 건이 들어 있다.
 플레이어는 서울서부경찰서 강력2팀의 신입 형사가 되어, 전임자 M이 남긴 서랍 속 사건 파일을 연다.
