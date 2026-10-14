@@ -752,6 +752,8 @@ MG.I18N.put("en", "c13", {
 "3hpuld9lfh": "Dawn Bakery, Saesol-dong",
 "hpb0fl2n2c": "(Still in her apron) When he didn't show at four, I called him. In two years that boy was never once late.",
 "cod9v8vyr0": "That night I was asleep too. I came in to the bakery at four in the morning, and when Do-ha didn't show I called and texted. That's all.",
+"2cgfldh8c1o": "(Puts a finger on the time in the note) Twelve-eighteen? He should have been asleep by then. A boy who gets up at half past three.",
+"2e5bjxvhv5z": "That navy padded jacket — I bought it for him last winter, because the walk to work before dawn was so cold. This year, as soon as it turned cold, that was the first thing he got out.",
 "zb8yhmhax4": "Two years since he got his baking certificate and came to us. His salt bread's better than mine now. He was saving up, so lunch was always leftover bread…",
 "1o5em7ylkqv": "He said he'd open his own place before thirty. He'd already picked the name for the sign.",
 "1jgkzm3b7uq": "He couldn't sleep. Everyone who works before dawn is like that. I told him to see a doctor, but the sleep clinic's only open weekday daytimes, and that's when Do-ha has to sleep.",

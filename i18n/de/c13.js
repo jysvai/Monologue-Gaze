@@ -752,6 +752,8 @@ MG.I18N.put("de", "c13", {
 "3hpuld9lfh": "Bäckerei Morgenstund, Saesol-dong",
 "hpb0fl2n2c": "(Hat nicht einmal die Schürze abgelegt) Um vier war er nicht da, da hab ich angerufen. Do-ha ist in zwei Jahren kein einziges Mal zu spät gekommen.",
 "cod9v8vyr0": "In der Nacht habe ich auch geschlafen. Um vier Uhr früh kam ich in die Bäckerei, und als Do-ha nicht da war, habe ich angerufen und geschrieben. Das ist alles.",
+"2cgfldh8c1o": "(Legt den Finger auf die Uhrzeit in der Notiz) Zwölf Uhr achtzehn? Da hätte er schlafen müssen. Ein Junge, der um halb vier aufsteht.",
+"2e5bjxvhv5z": "Die dunkelblaue Daunenjacke hab ich ihm letzten Winter gekauft, weil ihm der Weg zur Arbeit frühmorgens so kalt war. Dieses Jahr, kaum dass es kalt wurde, hat er die als Erstes rausgeholt.",
 "zb8yhmhax4": "Mit dem Gesellenbrief ist er zu uns gekommen, das ist jetzt zwei Jahre her. Salzbrötchen backt er inzwischen besser als ich. Er hat gespart, zu Mittag gab's bei ihm immer nur übriges Brot…",
 "1o5em7ylkqv": "Vor dreißig wollte er seinen eigenen Laden aufmachen. Den Namen fürs Schild hatte er schon ausgesucht.",
 "1jgkzm3b7uq": "Er konnte nicht schlafen. Das geht allen so, die frühmorgens arbeiten. Ich hab ihm gesagt, er soll zum Arzt, aber die Schlafklinik hat nur werktags tagsüber auf, und genau da muss Do-ha schlafen.",
