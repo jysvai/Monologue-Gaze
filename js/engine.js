@@ -634,7 +634,7 @@
     return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
       <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${groups[0][2].length || hard ? '' : `<p class="pk-hint pk-nolead">${partFit ? T('이 대답에 들이밀 만한 메모는 있지만, 함께 맞댈 기록이 아직 모자라다.') : T('이 사람이 한 말과 어긋나 보이는 메모는 아직 수첩에 없다.')}</p>`}${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
       ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${hard ? T('이것만으로는 아직 따질 수 없다. 수첩에 기록이 더 있어야 한다.') : T('이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.')}</p>` : ''}${PICK.other ? `<p class="vs-part">${T('이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.')}</p>` : ''}${PICK.later ? `<p class="vs-part">${PICK.laterK ? T`이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 「${esc(kl(PICK.laterK))}」부터 물어본다.` : T('이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 다른 것부터 물어본다.')}</p>` : ''}
-      ${groups[0][2].length || hard ? `<p class="vs-left">${T`엉뚱한 메모를 ${VS_MAX() - ((vsOf(p) || {}).n || 0)}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.`}</p>` : ''}</div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
+      ${groups[0][2].length || hard ? `<p class="vs-left">${(left => left === 1 ? T('엉뚱한 메모를 한 번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.') : T`엉뚱한 메모를 ${left}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.`)(VS_MAX() - ((vsOf(p) || {}).n || 0))}</p>` : ''}</div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
   }
   // 고르는 칸을 다시 그린다: 찾던 낱말 · 목록을 굴린 자리는 그대로 (메모가 많아도 방금 누른 메모가 제자리에 남게)
   function pickRefresh() {
@@ -2143,6 +2143,7 @@
   }
   // 메모는 어디서 적었는지(문서·사람)끼리 묶는다. 접어 둔 묶음은 기억한다
   const NGSHUT = new Set();
+  const TIPSOPEN = new Map(); // 수첩 쓰는 법 (안내가 셋 넘는 사건): 메모가 넷이 되면 접는다 — 플레이어가 펴거나 접은 뒤로는 그대로 (사건마다)
   const proof = () => ST.notes.filter(n => n.f); // 보고서·추궁·신청서에 내밀 수 있는 메모 (예전에 아무 문장이나 적던 때의 메모는 빼고)
   // 메모 글: 원문 목록의 번호(「2. 제2방송…」)는 떼고 보인다 — 메모 번호와 겹쳐 「15. 2. …」로 읽히지 않게 (「10. 14.」 같은 날짜는 그대로)
   const memoT = n => String(n.t || n.src || '').replace(/^\s*\d{1,2}[.)]\s+(?=\D)/, '');
@@ -2371,7 +2372,7 @@
         ${groups.map(([t, a]) => `<p class="kg"><span class="kg-t">${ktypeName(t)}</span> ${a.map(k => `<button type="button" class="kchip" data-chip="${k}">${esc(kl(k))}</button>`).join(' ')}</p>`).join('')}
       </section>
       <section class="ruled nb-sec${NBF ? ' f-' + NBF : ''}"><h3 class="hh">${T`메모 <small>${notes.length}</small>`}${fb('lead', nLead, T`유력 ${nLead}`)}${fb('sus', nSus, T`의심 ${nSus}`)}</h3>${notes.length >= 6 && !ST.solved ? `<p class="nb-jump-row"><button type="button" class="nb-jump" data-open-rep>${esc(FORM().open)} →</button></p>` : ''}
-        ${(C.tips || []).length ? `<ol class="notes">${C.tips.map(t => `<li class="tip">※ ${inline(t)}</li>`).join('')}</ol>` : notes.length ? '' : T('<ol class="notes"><li class="tip">아직 적은 메모가 없다.</li></ol>')}
+        ${(C.tips || []).length ? (ol => C.tips.length > 2 ? `<details class="ng nb-tips"${(TIPSOPEN.get(C.id) ?? notes.length <= 3) ? ' open' : ''}><summary><span class="ng-t">${T('※ 수첩 쓰는 법')}</span> <small>${C.tips.length}</small></summary>${ol}</details>` : ol)(`<ol class="notes">${C.tips.map(t => `<li class="tip">※ ${inline(t)}</li>`).join('')}</ol>`) : notes.length ? '' : T('<ol class="notes"><li class="tip">아직 적은 메모가 없다.</li></ol>')}
         ${noteGroups(notes).map(g => `<details class="ng${g.items.some(([n]) => LM.has(n.id)) ? ' has-lead' : ''}${g.items.some(([n]) => isSus(n)) ? ' has-sus' : ''}" data-ng="${esc(g.src)}"${NGSHUT.has(C.id + '|' + g.src) && !NBF ? '' : ' open'}><summary><span class="ng-t">${esc(g.src)}</span> <small>${g.items.length}</small></summary><ol class="notes">${g.items.map(([n, i]) => `<li data-nid="${n.id}"${LM.has(n.id) || isSus(n) ? ` class="${[LM.has(n.id) ? 'lead' : '', isSus(n) ? 'sus' : ''].join(' ').trim()}"` : ''} style="--r:${(hash(n.ref) % 5 - 2) * 0.25}deg"><span class="n">${i + 1}.</span> ${esc(memoT(n))}${repMark(n)}${LM.has(n.id) ? leadMark(LM.get(n.id), 'button').replace('class="n-lead"', `class="n-lead" data-lead="${n.id}"`) : ''}${susB(n, i)}<button type="button" class="del" data-del="${n.id}" aria-label="${T`메모 ${i + 1} 지우기`}">×</button></li>`).join('')}</ol></details>`).join('')}
       </section>
       <section class="ruled nb-sec nb-rep"><h3 class="hh">${esc(FORM().title)}</h3>
@@ -3919,6 +3920,7 @@
     };
     MG._vwheel = vwheel;
     document.addEventListener('load', e => { if (e.target.tagName === 'IMG' && e.target.closest && e.target.closest('#paneRead, .map')) edges(); }, true); // 늦게 뜬 그림이 세로 신문을 밀어낸 때
+    document.addEventListener('click', e => { const sm = C && e.target.closest && e.target.closest('details.nb-tips > summary'); if (sm) TIPSOPEN.set(C.id, !sm.parentElement.open); }, true);
     document.addEventListener('toggle', e => {
       const d = e.target;
       if (!C || !d.matches || !d.matches('details[data-ng]')) return;

@@ -98,6 +98,8 @@ MG.I18N.put("de", "ui", {
 "이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 「{0}」부터 물어본다.": "Diese Person hat noch nichts gesagt, was diese Notiz widerlegen würde. Erst nach „{0}“ fragen.",
 "이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 다른 것부터 물어본다.": "Diese Person hat noch nichts gesagt, was diese Notiz widerlegen würde. Erst nach anderem fragen.",
 "엉뚱한 메모를 {0}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.": "Noch {0}-mal eine falsche Notiz, und die Person schweigt. Mit einer neuen Notiz lässt sich wieder nachhaken.",
+"엉뚱한 메모를 한 번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.": "Noch eine falsche Notiz, und die Person schweigt. Mit einer neuen Notiz lässt sich wieder nachhaken.",
+"※ 수첩 쓰는 법": "※ So funktioniert das Notizbuch",
 "(메모를 보고 잠시 멈칫한다)": "(Sieht auf die Notiz und stockt kurz)",
 "— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.": "— schweigt jetzt. Mit einer neuen Notiz lässt sich wieder nachhaken.",
 "{0} 탐문": "Befragung: {0}",
