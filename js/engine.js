@@ -314,7 +314,7 @@
     // 글자 없는 그림(지도·약도)에는 이름표를 게임이 얹는다: [글자, x%, y%(글자 밑줄), 'l'|'c'|'r']. labelStyle: 'axis' 면 도표의 눈금 글자처럼 (테두리 없이)
     const labs = file && a && a.labels ? `<span class="art-labs${a.labelStyle ? ' ' + esc(a.labelStyle) : ''}" aria-hidden="true">${a.labels.map(([t, x, y, al, sz]) => `<span class="art-lab${al === 'c' ? ' c' : al === 'r' ? ' r' : ''}" style="left:${+x}%;top:${+y}%${sz ? `;font-size:${+sz}cqw` : ''}">${esc(t)}</span>`).join('')}</span>` : ''; // sz: 글자 크기 (그림 너비의 %, labelStyle 이 있을 때)
     const body = file ? (labs ? `<span class="art-wrap">${img}${labs}</span>` : img) : typeof a === 'string' ? a : a.svg || '';
-    if (!(a && a.sensitive) || !ST || !S.mild) return body; // 잔혹 표현을 켜 두었으면 가리지 않고 바로 보인다 (사건 들머리의 혐오감 주의에서 이미 동의했다)
+    if (!(a && a.sensitive) || !ST || !S.mild || ik.endsWith('_mild')) return body; // 잔혹 표현을 켜 두었으면 가리지 않고 바로 보인다 (사건 들머리의 혐오감 주의에서 이미 동의했다). 천을 덮은 판(_mild)은 그 자체가 가린 그림이다
     return `<span class="cens" data-cens="${esc(key)}">${body}<span class="cens-l">${T`<b>열람 주의</b>잔혹 표현을 끈 상태`}</span></span>`;
   }
 
