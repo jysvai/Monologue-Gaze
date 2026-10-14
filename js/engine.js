@@ -2316,9 +2316,27 @@
     notes.forEach((n, i) => { const src = n.src || T('기타'); let g = groups.find(x => x.src === src); if (!g) groups.push(g = { src, items: [] }); g.items.push([n, i]); });
     return groups;
   }
+  // 잔혹 표현을 켜고 끄면 메모 글도 그 판으로: 적을 때의 판(gm)과 지금 판이 다르면 그 줄을 지금 판으로 다시 읽어 바꾼다 (맞대면 장면도 이 글을 쓴다)
+  function noteMode() {
+    if (!C.graphic) return;
+    const g = gore() ? 1 : 0, done = new Set();
+    let ch = 0;
+    ST.notes.forEach(n => {
+      if (n.gm === g || !n.ref || !n.t) return;
+      const ref = String(n.ref), base = ref.split('#')[0], at = base.indexOf('@'), p = at > 0 && C.people[base.slice(0, at)];
+      if (!done.has(base)) {
+        done.add(base);
+        try { if (p) chatLines(base.endsWith('@_') ? p.intro : ansBlocks(p, base.slice(at + 1)), base, T`${p.name} 탐문`); else if (C.docs[base]) docHtml(C.docs[base]); } catch (e) { /* 못 읽으면 적은 글 그대로 */ }
+      }
+      if (PIN[ref] && PIN[ref].t && PIN[ref].t !== n.t) n.t = PIN[ref].t;
+      n.gm = g; ch = 1;
+    });
+    if (ch) save();
+  }
   function renderNotebook() {
     const nb = $('#nb');
     if (!nb) return;
+    noteMode();
     ST.notes.forEach(n => { if (n.t || !n.ref) return; const d = C.docs[String(n.ref).split('#')[0]]; if (d && !PIN[n.ref]) try { docHtml(d); } catch (e) { /* 글은 출처 이름으로 대신 보인다 */ } }); // 글 없이 풀려 나온 메모: 그 기록의 줄을 다시 읽어 채운다 (pinBtn)
     const b = C.brief || {};
     const keys = ST.keys.filter(k => C.keywords[k]);
@@ -3144,7 +3162,7 @@
     refs.forEach(ref => {
       const p = PIN[ref];
       if (!p || noteAt(ref) >= 0) return;
-      ST.notes.push({ id: ++ST.nid, ref, t: p.t, f: p.f, src: p.src }); ids.push(ST.nid);
+      ST.notes.push({ id: ++ST.nid, ref, t: p.t, f: p.f, src: p.src, ...(C.graphic ? { gm: gore() ? 1 : 0 } : {}) }); ids.push(ST.nid);
       if (ST.drop) ST.drop = ST.drop.filter(x => x !== ref);
     });
     if (!ids.length) return;
