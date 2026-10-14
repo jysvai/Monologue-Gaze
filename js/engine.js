@@ -1281,7 +1281,7 @@
       <div class="doc-b">${blocks(x.intro, `${x.id}@i`, plain(x.title))}
         <div class="ph${bf ? ' cmp' : ''}${bf && PHCUT.has(x.id) ? ' seen' : ''}" data-ph="${esc(x.id)}"${bf ? ` style="--cut:${cut}%"` : ''}>${art(x.art, 'art', true)}${bf ? `<div class="ph-bef" aria-hidden="true">${art(bf.art, 'art bef', true)}</div><span class="ph-cutl" aria-hidden="true"></span><span class="ph-tag l" aria-hidden="true">${esc(plain(bf.label || T('앞서 찍은 사진')))}</span><span class="ph-tag r" aria-hidden="true">${esc(plain(x.now || T('지금')))}</span>` : ''}${marks}<div class="ph-grid"${PHGRID.has(x.id) ? '' : ' hidden'}>${cells.join('')}</div></div>
         ${bf ? `<p class="ph-cmp"><span>${esc(plain(bf.label || T('앞서 찍은 사진')))}</span><input type="range" min="0" max="100" step="1" value="${cut}" data-ph-cut="${esc(x.id)}" aria-label="${esc(T`두 사진의 경계 — 왼쪽은 ${plain(bf.label || T('앞서 찍은 사진'))}`)}"><span>${esc(plain(x.now || T('지금')))}</span></p>` : ''}
-        <p class="ph-bar"><span>${T`찾은 것 ${found.length}${lv() >= 5 ? '' : ` / ${tot}`}`}</span><button type="button" data-ph-grid="${esc(x.id)}" aria-pressed="${PHGRID.has(x.id)}">${T`칸을 나눠 살피기`}</button></p>${phHint ? `<p class="ph-hint">${T('밀대를 옮기면 지금 사진의 가려진 쪽도 보인다.')}</p>` : ''}
+        <p class="ph-bar"><span>${T`찾은 것 ${found.length}${lv() >= 5 ? '' : ` / ${tot}`}`}</span><button type="button" data-ph-grid="${esc(x.id)}" aria-pressed="${PHGRID.has(x.id)}">${T`칸을 나눠 살피기`}</button></p>${C.kind === 'tutorial' && bf && !found.length ? `<p class="ph-hint">${T('가운데 밀대를 옮기면 예전 사진과 견줘 볼 수 있다. 눈에 걸리는 곳은 직접 눌러 살핀다.')}</p>` : ''}${phHint ? `<p class="ph-hint">${T('밀대를 옮기면 지금 사진의 가려진 쪽도 보인다.')}</p>` : ''}
         <ol class="ph-found">${found.map(sp => `<li><p class="ph-l">${inline(sp.label)}</p>${blocks(sp.body, `${sp.id}@b`, plain(x.title))}</li>`).join('')}</ol></div></article>`;
   }
 
@@ -1903,7 +1903,7 @@
     else if (o && o.t === 'req' && reqById(o.id)) h = requestHtml(reqById(o.id));
     else if (o && o.t === 'feed' && C.sources.find(s => s.id === o.id)) h = feedHtml(C.sources.find(s => s.id === o.id));
     else if (curSrc() && curSrc().type === 'map' && srcOpen(curSrc()) && !narrow()) { const s = curSrc(); h = `<div class="map-read">${s.desc ? `<p class="map-desc">${inline(s.desc)}</p>` : ''}${mapHtml(s, true)}</div>`; }
-    else h = `<div class="read-empty"><p>${inline(C.emptyRead || T('왼쪽에서 자료를 고르면 여기에 펼쳐진다.'))}</p></div>`;
+    else h = `<div class="read-empty"><p>${curSrc() && curSrc().type === 'people' && srcOpen(curSrc()) ? T('왼쪽에서 만날 사람을 고른다.') : inline(C.emptyRead || T('왼쪽에서 자료를 고르면 여기에 펼쳐진다.'))}</p></div>`; // 탐문 탭에서는 사건 안내 대신 사람을 고르라고 (왼쪽이 사람 목록이다)
     // 보던 단톡방에 새 말이 오면: 맨 아래를 보고 있었으면 따라 내려가고, 위의 말을 읽던 중이면 그 자리에 두고 「새 메시지 ↓」만 (메신저처럼)
     const rows = () => { const b = el.querySelector('.lv-feed .doc-b'); return b ? b.children.length : 0; };
     const fd = o && o.t === 'feed' && el.dataset.fd === o.id ? { low: el.scrollHeight - el.clientHeight - el.scrollTop < 80, n: rows(), pill: !!el.querySelector('.lv-more') } : null;
