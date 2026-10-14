@@ -91,6 +91,7 @@ MG.I18N.put("en", "ui", {
 "메모 찾기": "Search notes",
 "이 대답에 들이밀 만한 메모는 있지만, 함께 맞댈 기록이 아직 모자라다.": "A note here could answer this, but the record to set beside it isn’t in the notebook yet.",
 "이 사람이 한 말과 어긋나 보이는 메모는 아직 수첩에 없다.": "Nothing in the notebook yet looks like it contradicts what this person said.",
+"기억을 되살릴 만한 메모를 보여 준다. 잘못 보여 줘도 입을 닫지는 않는다.": "Show a note that might jog their memory. A wrong one won't make them stop talking.",
 "그 낱말이 든 메모가 없다.": "No note contains that word.",
 "이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.": "This note looks right, but the record to set beside it isn’t in the notebook yet. Find that first.",
 "이것만으로는 아직 따질 수 없다. 수첩에 기록이 더 있어야 한다.": "Not enough to press them with yet. The notebook needs more on record first.",

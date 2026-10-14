@@ -91,6 +91,7 @@ MG.I18N.put("de", "ui", {
 "메모 찾기": "Notizen durchsuchen",
 "이 대답에 들이밀 만한 메모는 있지만, 함께 맞댈 기록이 아직 모자라다.": "Eine Notiz könnte diese Antwort widerlegen, aber der Beleg, den man daneben legen muss, fehlt noch im Notizbuch.",
 "이 사람이 한 말과 어긋나 보이는 메모는 아직 수첩에 없다.": "Im Notizbuch steht noch nichts, was dem Gesagten erkennbar widerspricht.",
+"기억을 되살릴 만한 메모를 보여 준다. 잘못 보여 줘도 입을 닫지는 않는다.": "Zeig eine Notiz, die der Erinnerung auf die Sprünge helfen könnte. Eine falsche bringt niemanden zum Schweigen.",
 "그 낱말이 든 메모가 없다.": "Keine Notiz enthält dieses Wort.",
 "이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.": "Diese Notiz scheint zu passen, aber der Beleg, der danebengehört, steht noch nicht im Notizbuch. Erst den finden.",
 "이것만으로는 아직 따질 수 없다. 수첩에 기록이 더 있어야 한다.": "Damit allein lässt sich noch nichts festnageln. Im Notizbuch muss erst mehr stehen.",
