@@ -628,12 +628,12 @@
     const groups = [['lead', T('유력 — 이 사람이 한 말 어딘가와 어긋나는 메모 (이 대답과는 다를 수도 있다)'), pool.filter(mine)], ['sus', T('의심 — 내가 표시해 둔 메모'), pool.filter(n => !mine(n) && isSus(n))],
       ['talk', T('탐문에서 들은 말'), rest.filter(heardNote).sort((a, b) => (heardNote(a) === p.id) - (heardNote(b) === p.id))], ['rec', T('기록에서 찾은 것'), rest.filter(n => !heardNote(n))]];
     // 유력·의심 밖의 메모는 접어 둔다: 유력이 있으면 그것부터, 없으면 어느 메모로도 지금 들은 말은 깨지지 않는다 (펼쳐 두면 아무거나 눌러 참을성만 깎는다)
-    // ★5 는 유력 묶음도 「어긋나는 메모가 없다」는 말도 없다 — 다 펼쳐 두고, 어느 메모인지는 플레이어가 고른다
+    // ★5 는 유력 묶음도 「어긋나는 메모가 없다」는 말도 없다 — 다 펼쳐 두고, 어느 메모인지는 플레이어가 고른다 (기록이 모자랄 때도 「이 메모로 될 것 같은데」라고 짚어 주지 않는다)
     const hard = lv() >= 5;
     const list = groups.map(([g, t, ns]) => ns.length || (g === 'sus' && !(ST.sus || []).length) ? `<details class="pk-g pk-${g}" data-pk-g="${g}"${G[g] ?? (g === 'lead' || g === 'sus' || hard) ? ' open' : ''}><summary>${t} <small>${ns.length}</small></summary>${ns.length ? ns.map(opt).join('') : `<p class="pk-hint">${T('수첩의 메모 끝 「?」를 누르면 의심으로 표시해 둔다. 표시한 메모는 여기 따로 모인다.')}</p>`}</details>` : '').join('');
     return `<div class="per-ask press-pick" role="group" aria-labelledby="pk-t"><p class="per-ask-t" id="pk-t">${T`「${esc(L)}」 — 어떤 메모를 내밀까?`} <button type="button" class="press-x" data-press-cancel>${T`그만두기`}</button></p>
       <input type="search" class="rep-filter" placeholder="${T`메모에서 낱말 찾기`}" data-press-filter aria-label="${T`메모 찾기`}"><div class="press-list">${groups[0][2].length || hard ? '' : `<p class="pk-hint pk-nolead">${partFit ? T('이 대답에 들이밀 만한 메모는 있지만, 함께 맞댈 기록이 아직 모자라다.') : T('이 사람이 한 말과 어긋나 보이는 메모는 아직 수첩에 없다.')}</p>`}${list}</div><p class="rep-empty press-none" hidden>${T`그 낱말이 든 메모가 없다.`}</p>
-      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${T('이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.')}</p>` : ''}${PICK.other ? `<p class="vs-part">${T('이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.')}</p>` : ''}${PICK.later ? `<p class="vs-part">${PICK.laterK ? T`이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 「${esc(kl(PICK.laterK))}」부터 물어본다.` : T('이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 다른 것부터 물어본다.')}</p>` : ''}
+      ${PICK.miss ? `<p class="press-no" role="status"><b>${esc(p.name)}</b> ${inline(PICK.miss).replace(MIDACT, '<i class="c-mid">$&</i>')}</p>` : ''}${PICK.part ? `<p class="vs-part">${hard ? T('이것만으로는 아직 따질 수 없다. 수첩에 기록이 더 있어야 한다.') : T('이 메모로 될 것 같은데, 함께 맞댈 기록이 아직 수첩에 없다. 그것부터 찾아 온다.')}</p>` : ''}${PICK.other ? `<p class="vs-part">${T('이 메모는 이 사람이 한 다른 대답과 맞대 볼 것.')}</p>` : ''}${PICK.later ? `<p class="vs-part">${PICK.laterK ? T`이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 「${esc(kl(PICK.laterK))}」부터 물어본다.` : T('이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 다른 것부터 물어본다.')}</p>` : ''}
       ${groups[0][2].length || hard ? `<p class="vs-left">${T`엉뚱한 메모를 ${VS_MAX() - ((vsOf(p) || {}).n || 0)}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.`}</p>` : ''}</div>`; // 거절은 목록 밑에 — 위에 끼우면 목록이 밀려 내려가 방금 누른 자리에 다른 메모가 온다
   }
   // 고르는 칸을 다시 그린다: 찾던 낱말 · 목록을 굴린 자리는 그대로 (메모가 많아도 방금 누른 메모가 제자리에 남게)
@@ -1218,7 +1218,7 @@
     return `<article class="doc skin-${esc(x.skin || 'lab')}"><header class="doc-h"><p class="doc-k">${T`대조 감정`}</p><h3 class="doc-t">${inline(x.title)}</h3>${x.meta ? `<p class="doc-m">${inline(x.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(x.intro, `${x.id}@i`, plain(x.title))}
         <div class="cmp-ev"><p class="cmp-lab">${esc(ev.label || T('대조할 증거'))}</p>${ev.art ? `<div class="cmp-art">${art(ev.art, 'art', true)}</div>` : ''}${ev.t ? `<p class="cmp-d">${inline(ev.t)}</p>` : ''}</div>
-        <p class="cmp-q">${inline(x.q || T('어느 것과 일치하는가?'))}${liveOn() && !solved && !wait && lcost('compare') > 0 ? `<small class="rq-cost">${T`한 번 맡기는 데 ${hm(lcost('compare'))} — 맞든 틀리든 시간이 흐른다`}</small>` : ''}</p>
+        <p class="cmp-q">${inline(x.q || T('어느 것과 일치하는가?'))}${liveOn() && !solved && !wait && lcost('compare') > 0 ? `<small class="rq-cost">${T`한 번 맡기는 데 ${hm(lcost('compare'))} — 맞든 틀리든 시간이 흐른다`}</small>` : ''}${lv() >= 4 && !solved && !wait ? `<small class="rq-cost">${T('틀리면 새 단서를 하나 더 얻기 전까지 다시 맡길 수 없다.')}</small>` : ''}</p>
         <div class="cmp-opts">${(x.options || []).map(opt).join('')}</div>
         <p class="c-msg">${esc(msg)}</p>${!solved && x.hint && fails >= hintAt ? `<p class="lock-h2">${inline(x.hint)}</p>` : ''}
         ${solved ? `<div class="c-done">${blocks(x.solved, `${x.id}@s`, plain(x.title))}</div>` : ''}</div></article>`;
