@@ -1275,8 +1275,9 @@
     const marks = found.map((sp, i) => `<span class="ph-mk" style="left:${+sp.x}%;top:${+sp.y}%" aria-hidden="true">${i + 1}</span>`).join('');
     // 하나 남은 것이 앞 사진 밑에 가려져 있는데 밀대를 한 번도 옮기지 않았으면 한 줄로 일러 준다 (지금 사진에만 있는 것은 앞 사진 쪽에선 눈에 안 띈다)
     const left = sceneSpots(x).filter(sp => !found.includes(sp)), phHint = bf && !PHCUT.has(x.id) && left.length === 1 && found.length > 0 && left.every(sp => +sp.x < cut);
-    const cells = [];
-    for (let r = 0; r < 3; r++) for (let q = 0; q < 4; q++) cells.push(`<button type="button" class="ph-cell" data-ph-cell="${esc(x.id)}|${q}|${r}" aria-label="${T`${r + 1}행 ${q + 1}열 살피기`}"></button>`);
+    const cells = [], cellOf = sp => [Math.min(3, Math.floor(sp.x / 25)), Math.min(2, Math.floor(sp.y / (100 / 3)))] + ''; // photoCell 의 inCell 과 같은 칸 나누기
+    const more = new Set(found.map(cellOf).filter(c => left.some(sp => cellOf(sp) === c))); // 찾은 것이 있는 칸에 아직 찾을 것이 더 남았으면 「+」 (한 칸에 몇 개가 겹쳐 있으면 한 번 찾고 지나치기 쉽다). 칸 나누기는 스스로 켜는 도움이라 ★5 에서도
+    for (let r = 0; r < 3; r++) for (let q = 0; q < 4; q++) cells.push(`<button type="button" class="ph-cell${more.has(q + ',' + r) ? ' more' : ''}" data-ph-cell="${esc(x.id)}|${q}|${r}" aria-label="${T`${r + 1}행 ${q + 1}열 살피기`}"></button>`);
     return `<article class="doc skin-${esc(x.skin || 'photo')} scene"><header class="doc-h"><p class="doc-k">${T`정밀 관찰`}</p><h3 class="doc-t">${inline(x.title)}</h3>${x.meta ? `<p class="doc-m">${inline(x.meta)}</p>` : ''}</header>
       <div class="doc-b">${blocks(x.intro, `${x.id}@i`, plain(x.title))}
         <div class="ph${bf ? ' cmp' : ''}${bf && PHCUT.has(x.id) ? ' seen' : ''}" data-ph="${esc(x.id)}"${bf ? ` style="--cut:${cut}%"` : ''}>${art(x.art, 'art', true)}${bf ? `<div class="ph-bef" aria-hidden="true">${art(bf.art, 'art bef', true)}</div><span class="ph-cutl" aria-hidden="true"></span><span class="ph-tag l" aria-hidden="true">${esc(plain(bf.label || T('앞서 찍은 사진')))}</span><span class="ph-tag r" aria-hidden="true">${esc(plain(x.now || T('지금')))}</span>` : ''}${marks}<div class="ph-grid"${PHGRID.has(x.id) ? '' : ' hidden'}>${cells.join('')}</div></div>

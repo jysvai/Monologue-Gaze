@@ -631,6 +631,7 @@ button.ab-c.log:hover{border-color:#5d6a76}
 .ph-cell{border:1px dashed rgba(255,255,255,.55);background:rgba(0,0,0,.06);cursor:pointer}
 @media (hover:hover){.ph-cell:hover{background:rgba(255,255,255,.18)}}
 .ph-cell:focus-visible{background:rgba(255,255,255,.18)}
+.ph-cell.more{position:relative}.ph-cell.more::after{content:'+';position:absolute;right:4px;top:2px;font:700 15px/1 system-ui,sans-serif;color:#fff;text-shadow:0 0 3px rgba(0,0,0,.9)} /* 이 칸에서 찾은 것 말고도 더 있다 */
 .ph-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 8px;font:12px var(--f-mono);color:var(--ink-soft)}
 .ph-bar>span{white-space:nowrap} /* 「찾은 것 0 / 4」가 휴대폰에서 「/ 4」만 다음 줄로 넘어가지 않게 */
 .ph-hint{margin:-2px 0 8px;font:12px/1.5 var(--f-mono);color:var(--ink-soft)}
