@@ -622,7 +622,7 @@
     const pool = proof().reverse(), G = PICK.g ||= {};
     const ra = rawAns(p, k) || {}, want = ra.take || (ra.need || []).flatMap(x => x.split('|')).filter(x => x[0] === '!').map(x => x.slice(1));
     const partFit = isPressAsk(p, k) && pool.some(n => want.some(w => fIs(n.f, w))); // 맞는 메모는 있는데 함께 맞댈 기록이 모자란 때 — 「어긋나는 메모가 없다」고 하면 내밀었을 때 「될 것 같은데」와 어긋난다
-    const opt = n => `<button type="button" class="rep-opt press-opt${mine(n) ? ' lead' : ''}" data-press-note="${n.id}" title="${esc(n.t)}"><span class="n">${noteNo(n.id)}.</span> <span class="t">${esc(memoT(n))}</span> ${mine(n) ? `<span class="n-lead" role="img" aria-label="${T`유력 — ${pname(p)}의 대답과 어긋난다`}">${T('유력!')}</span> ` : isSus(n) ? `<span class="n-sus">${T('의심')}</span> ` : ''}<small class="src">— ${esc(n.src || '')}</small></button>`;
+    const opt = n => `<button type="button" class="rep-opt press-opt${mine(n) ? ' lead' : ''}" data-press-note="${n.id}" title="${esc(n.t)}"><span class="n">${noteNo(n.id)}.</span> ${mine(n) ? `<span class="n-lead" role="img" aria-label="${T`유력 — ${pname(p)}의 대답과 어긋난다`}">${T('유력!')}</span> ` : isSus(n) ? `<span class="n-sus">${T('의심')}</span> ` : ''}<span class="t">${esc(memoT(n))}</span> <small class="src">— ${esc(n.src || '')}</small></button>`;
     // 내밀 메모를 묶어서: 유력(이 사람의 대답과 어긋남) · 의심(내가 표시해 둔 것) · 탐문에서 들은 말 · 기록에서 찾은 것. 위 두 묶음이 있으면 아래 둘은 접어 둔다
     const rest = pool.filter(n => !mine(n) && !isSus(n));
     const groups = [['lead', T('유력 — 이 사람이 한 말 어딘가와 어긋나는 메모 (이 대답과는 다를 수도 있다)'), pool.filter(mine)], ['sus', T('의심 — 내가 표시해 둔 메모'), pool.filter(n => !mine(n) && isSus(n))],
@@ -3361,7 +3361,7 @@
       const BY = {}, before = census(BY);
       if (!ST.unl.includes(id)) ST.unl.push(id);
       (lock.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
-      save(); refreshAll(); if (C.docs[id]) renderList(); cue('unlock', T('열림')); // 목록은 문서가 펼쳐지기(본 것으로 치기) 전에 그려진다 — 한 번 더 그려 「새 자료」 점을 지운다 land(C.docs[id] ? ['#paneRead .doc-t', '#paneList .item.on'] : ['#paneList .item', '#srcTabs .tab.on']);
+      save(); refreshAll(); if (C.docs[id]) renderList(); cue('unlock', T('열림')); land(C.docs[id] ? ['#paneRead .doc-t', '#paneList .item.on'] : ['#paneList .item', '#srcTabs .tab.on']); // 목록은 문서가 펼쳐지기(본 것으로 치기) 전에 그려진다 — 한 번 더 그려 「새 자료」 점을 지운다
       const gained = census() - before;
       toast((lock.ok || T('열렸다.')) + (gained > 0 ? opened(gained, BY, id) : ''));
       liveSync();

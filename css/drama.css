@@ -250,12 +250,13 @@ button.press-opt{width:100%;text-align:left;color:inherit}
 @media (hover:hover){.nb-jump:hover{opacity:.75}}
 /* 고르는 목록에서 긴 메모(부검 소견 한 줄 따위)는 세 줄까지만 — 마흔 장 넘는 목록에서 한 장이 화면을 다 먹지 않게. 고른 것은 다 펼치고, 전문은 title 로 */
 .rep-opt:not(.on):not([hidden]){display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;overflow:hidden}
+.press-pick .rep-opt :is(.n-lead,.n-sus){margin:0 6px 0 2px} /* 따지는 칸은 표시를 메모 앞에: 여섯 줄을 넘는 메모가 잘려도 「유력!」은 남는다 */
 .press-pick .rep-opt:not(.on):not([hidden]){-webkit-line-clamp:6;line-clamp:6} /* 따지는 칸만 여섯 줄: 긴 메모 끝의 시각·장소와 「유력!」 표시, 출처 줄까지 보이게 (내밀 메모를 고르는 자리다) */
 .rep-opt:not(.on):not([hidden]):focus-within{display:block;-webkit-line-clamp:unset;line-clamp:none} /* 화살표로 옮겨 다니면 고르기 전에 끝까지 읽힌다 (마우스는 title 풍선으로) */
 .hh small.bump{display:inline-block;animation:nbump .7s ease-out}
 @keyframes nbump{0%{transform:scale(1);color:inherit}30%{transform:scale(1.5);color:var(--red)}100%{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.hh small.bump{animation:none}}
-body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.lv-fin){display:none} /* 올린 보고서 칸에 결말이 펼쳐져 있으면 수첩에는 도장과 다음 사건만 (같은 글이 두 번 보이지 않게) */
+body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.lv-fin,.play-t){display:none} /* 올린 보고서 칸에 결말이 펼쳐져 있으면 수첩에는 도장과 다음 사건만 (같은 글이 두 번 보이지 않게) */
 
 /* 의문: 수첩 맨 위 「지금 밝혀야 할 것」 — 찾아낸 빈칸은 잉크, 아직인 빈칸은 흐린 연필 물음. 줄은 공책 줄(32px)에 맞춘다 */
 .th-list{list-style:none;margin:0;padding:0}
@@ -371,7 +372,7 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 .hunch-trail>span{display:block;font-size:.88em;opacity:.7}
 .hunch-trail b.hit{color:var(--red)}
 .hunch-trail small{opacity:.65}
-.play-t{clear:both;margin:8px 0 0;font:12px var(--f-mono);letter-spacing:.03em;opacity:.8} /* 이 사건에 쓴 시간 (종결 도장 밑) */
+.play-t{clear:both;margin:8px 0 14px;font:12px var(--f-mono);letter-spacing:.03em;opacity:.8} /* 이 사건에 쓴 시간 (종결 도장 밑) */
 /* 마주 앉은 장면: 처음 몇 번은 넘길 수 있다는 것을 흐리게 */
 .scene-cut .cut-hint{position:absolute;right:16px;top:12px;margin:0;font:12px var(--f-mono);color:#f3ead8;opacity:.55;letter-spacing:.04em}
 body:has(.scene-cut) .mono-cap{bottom:auto;top:calc(20px + env(safe-area-inset-top,0px))} /* 마주 앉은 장면이 뜨면 속말 자막은 위로 비켜 선다 (장면 아래 자막을 가리지 않게) */
