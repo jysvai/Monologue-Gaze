@@ -128,6 +128,7 @@ img{max-width:100%}
 .f-motif{font:18px/1.2 var(--f-hand);color:#3c3020}
 .f-len{margin-top:auto;font:11px var(--f-type);color:#3f311c}
 .f-stamp{position:absolute;right:12px;bottom:14px;padding:4px 10px;border:3px double var(--red);color:var(--red);font:800 17px/1 var(--f-doc);transform:rotate(-12deg);opacity:.88;mix-blend-mode:multiply}
+.folder.done .f-len{padding-right:min(104px,42%)} /* 종결 도장 밑으로 「걸린 시간」이 들어가지 않게 (러시아어·독일어는 줄이 길다) */
 .f-going{position:absolute;right:12px;bottom:12px;font:20px/1 var(--f-hand);color:var(--red);transform:rotate(-4deg)}
 .f-going small{display:block;margin-top:3px;font-size:16px;text-align:right;color:#4a3f33}
 .f-next{animation:write .9s .5s ease-out both}

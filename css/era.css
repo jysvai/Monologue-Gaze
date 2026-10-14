@@ -80,6 +80,7 @@ body[data-age="now"] .pane-read.room{--room-head:#15181b;--room-ink:#f1f3f5;--ro
 
 /* 녹화 표시: ● REC 와 흐른 시간 (js 가 1초마다) */
 .per-h .rec{position:absolute;right:4px;top:16px;display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border-radius:4px;background:rgba(0,0,0,.45);color:#f4f4f4;font:700 11px/1.2 var(--f-mono);letter-spacing:.08em;pointer-events:none}
+.per-h:has(.rec) h3{padding-right:118px} /* 이름 줄이 REC 표시 밑으로 들어가지 않게: 이름이 길면 「의심 걸기」가 다음 줄로 */
 .per-h .rec i{width:8px;height:8px;border-radius:50%;background:#e5322b;animation:recBlink 1.6s steps(1) infinite}
 .per-h .rec b{font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:.04em}
 body[data-age="y2k"] .per-h .rec{border-radius:0;background:transparent;color:#fff;font:12px/1.2 var(--f-pixel);text-shadow:1px 1px 0 #000}
