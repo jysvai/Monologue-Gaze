@@ -2321,7 +2321,7 @@
     if (!C.graphic) return;
     const g = gore() ? 1 : 0, done = new Set();
     let ch = 0;
-    ST.notes.forEach(n => {
+    [...ST.notes, ...Object.values(ST.report.kept || {})].forEach(n => { // 종결 뒤 수첩에서 지워 보고서 쪽에 옮겨 둔 메모도
       if (n.gm === g || !n.ref || !n.t) return;
       const ref = String(n.ref), base = ref.split('#')[0], at = base.indexOf('@'), p = at > 0 && C.people[base.slice(0, at)];
       if (!done.has(base)) {
@@ -3232,7 +3232,7 @@
     ST.notes = ST.notes.filter(x => x.id !== id);
     if (n && n.f) (ST.drop ||= []).push(n.ref); // 지운 증거 줄은 읽어도 다시 적지 않는다 (✎ 를 누르면 다시 적힌다)
     // 종결된 보고서는 결재가 끝난 서류: 수첩에서 메모를 지워도 보고서에 붙은 증거는 그대로 남는다 (지운 메모의 글은 보고서 쪽에 옮겨 둔다)
-    if (ST.solved) { if (n && Object.values(ST.report.claims).some(v => String(v) === String(id))) (ST.report.kept ||= {})[String(id)] = { id: n.id, t: n.t, src: n.src }; }
+    if (ST.solved) { if (n && Object.values(ST.report.claims).some(v => String(v) === String(id))) (ST.report.kept ||= {})[String(id)] = { id: n.id, t: n.t, src: n.src, ref: n.ref, ...(n.gm != null ? { gm: n.gm } : {}) }; }
     else Object.keys(ST.report.claims).forEach(k => { if (String(ST.report.claims[k]) === String(id)) ST.report.claims[k] = ''; });
     save();
     if (n) $$('.pin').forEach(b => { if (b.dataset.pin === n.ref) { b.classList.remove('on'); b.innerHTML = IC_PEN; b.setAttribute('aria-label', T('수첩에 적기')); b.dataset.tip = T('수첩에 적기'); } });
