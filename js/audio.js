@@ -20,7 +20,9 @@
     'sfx/dread_envelope': 'audio/sfx/dread_envelope.mp3?v=de0c3e1f', 'sfx/radio_squelch': 'audio/sfx/radio_squelch.mp3?v=f222491f',
     'sfx/buzz_phone': 'audio/sfx/buzz_phone.mp3?v=201adbc0',
   };
-  const url = k => FOLEY[k] || A().files[k];
+  // 조연 목소리(tools/voices-vox.js)는 사건마다 한 파일에 이어 붙여 두고 clips 에 [파일, 시작 초, 길이 초] 로 적는다 (itch 는 파일 수가 1000개까지라)
+  const clip = k => (A().clips || {})[k] || null;
+  const url = k => FOLEY[k] || A().files[k] || (clip(k) || [])[0];
   // 자주 나는 잔소리(종이·연필·자판·타자기)
   const SMALL = /^sfx\/(pen|page|click|key|write|typewriter|tw1|oldkbd|kbd|tap)$/;
 
@@ -43,6 +45,7 @@
   function load(k) {
     const u = url(k);
     if (!u) return null;
+    k = u; // 같은 파일의 조각들은 한 번 받아 같이 쓴다
     if (!bufs[k]) {
       const c = ctx();
       if (!c) return null;
@@ -74,7 +77,8 @@
       let head = src;
       if (opt && opt.dark > 0) { const f = c.createBiquadFilter(); f.type = 'highshelf'; f.frequency.value = 3000; f.gain.value = -opt.dark; head = src.connect(f); }
       head.connect(g).connect(fx);
-      src.start();
+      const cp = clip(k);
+      if (cp) src.start(0, cp[1], cp[2]); else src.start();
     };
     if (p.buf) go(p.buf); else p.then(go);
     return true;
@@ -103,13 +107,14 @@
     const c = ctx(), p = load(k);
     if (!c || !p) return null;
     stopVoice();
+    const cp = clip(k), at = cp ? cp[1] : 0, len = () => (cp ? cp[2] : p.buf.duration);
     let src = null, startAt = 0, offset = 0, over = false, held = false, resolve;
     const done = new Promise(res => { resolve = res; });
     const v = {
       done, span: A().span[k] || 1,
       audio: {
-        get duration() { return p.buf ? p.buf.duration : NaN; },
-        get currentTime() { return src ? Math.min(offset + c.currentTime - startAt, p.buf.duration) : offset; },
+        get duration() { return p.buf ? len() : NaN; },
+        get currentTime() { return src ? Math.min(offset + c.currentTime - startAt, len()) : offset; },
       },
       halt() { over = true; if (src) { src.onended = null; try { src.stop(); } catch (e) { /* already stopped */ } src = null; } resolve(); },
       hold() { if (!src || over) return; offset = v.audio.currentTime; src.onended = null; try { src.stop(); } catch (e) { /* */ } src = null; held = true; },
@@ -122,9 +127,9 @@
       src = c.createBufferSource(); src.buffer = p.buf; src.connect(out);
       src.onended = finish;
       startAt = c.currentTime;
-      src.start(0, offset);
+      src.start(0, at + offset, len() - offset);
       // 소리판이 멈춰 있으면 (브라우저가 아직 소리를 막고 있으면) onended 가 오지 않는다 — 그 길이만큼 지나면 끝난 셈 친다 (기다리는 연출이 멈추지 않게)
-      const me = src, left = (p.buf.duration - offset) * 1000;
+      const me = src, left = (len() - offset) * 1000;
       setTimeout(() => { if (src === me && !over && c.state !== 'running') { src.onended = null; try { me.stop(); } catch (e) { /* 이미 멈춤 */ } src = null; finish(); } }, left + 1200);
     }
     cur = v;
@@ -157,7 +162,7 @@
     speaking = () => !!fa;
     stopVoice = () => { if (!fa) return; const a = fa; fa = null; a.pause(); if (a._done) a._done(); if (MG.mood) MG.mood.duck(false); };
     voice = k => {
-      const st = S(); if (!st.sound || st.voice === false) return null;
+      const st = S(); if (!st.sound || st.voice === false || clip(k)) return null; // 이어 붙인 조연 목소리는 Web Audio 로만 (조각을 잘라 틀 수 없다)
       const a = get(k); if (!a) return null;
       stopVoice(); fa = a;
       try { a.currentTime = 0; } catch (e) { /* not loaded yet */ }

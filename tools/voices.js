@@ -184,9 +184,20 @@ function writeManifest(list, tone, stale = () => false) {
   list.forEach(j => { if (!fs.existsSync(path.join(root, j.file))) return; if (stale(j)) { off++; return; } files[j.key] = j.file; if (j.span > 1) span[j.key] = j.span; });
   if (off) console.log(`다시 녹음할 때까지 뺀 목소리 ${off}개`);
   const lines = Object.fromEntries(Object.entries(LINES).map(([k, t]) => ['hero/' + k, t])); // 주인공 대사는 속말 자막으로도 띄운다
-  const body = `/* 자동 생성: node tools/voices.js — 목소리·효과음 파일 목록, 사람마다 말소리 높이, 주인공 대사 자막 */\nwindow.MG = window.MG || {};\nwindow.MG.audio = ${JSON.stringify({ files, span, tone: { hero: HERO.tone, ...tone }, say: lines }, null, 1)};\n`;
+  // 조연 목소리 (tools/voices-vox.js, VoxCPM2): 사건마다 한 파일에 이어 붙인 조각 [파일, 시작 초, 길이 초]
+  const VOX = path.join(OUT, 'vox-clips.json'), vox = fs.existsSync(VOX) ? JSON.parse(fs.readFileSync(VOX, 'utf8')) : { clips: {}, span: {} };
+  Object.assign(span, vox.span || {});
+  // 사건 대사(v/…)는 사건마다 한 파일(audio/voice/<사건>/lead.mp3)로 묶는다 — itch 는 파일이 1000개까지 (tools/voice-pack.js). 낱개 파일은 다시 녹음하는 단위로 남는다
+  const { pack } = require('./voice-pack'), lead = {};
+  for (const c of [...new Set(Object.keys(files).filter(k => k.startsWith('v/')).map(k => k.split('/')[1]))].sort()) {
+    const ks = Object.keys(files).filter(k => k.startsWith(`v/${c}/`)).sort();
+    Object.assign(lead, pack(ks.map(k => ({ key: k, file: path.join(root, files[k]) })), path.join(OUT, 'voice', c, 'lead.mp3')));
+    ks.forEach(k => delete files[k]);
+  }
+  vox.clips = { ...lead, ...(vox.clips || {}) };
+  const body = `/* 자동 생성: node tools/voices.js — 목소리·효과음 파일 목록, 사람마다 말소리 높이, 주인공 대사 자막, 조연 목소리 조각(clips) */\nwindow.MG = window.MG || {};\nwindow.MG.audio = ${JSON.stringify({ files, clips: vox.clips || {}, span, tone: { hero: HERO.tone, ...tone }, say: lines }, null, 1)};\n`;
   fs.writeFileSync(path.join(OUT, 'manifest.js'), body);
-  console.log(`audio/manifest.js — 파일 ${Object.keys(files).length}개 · 말소리 ${Object.keys(tone).length + 1}명`);
+  console.log(`audio/manifest.js — 파일 ${Object.keys(files).length}개 · 묶은 대사 ${Object.keys(vox.clips || {}).length}줄 · 말소리 ${Object.keys(tone).length + 1}명`);
 }
 
 // tools/voice-check.py 로 잰 가장 깊은 내려앉음 (반음, 없으면 0). 파이썬이 없으면 검사 없이 0
@@ -248,4 +259,4 @@ async function main() {
   writeManifest(list, tone, stale);
 }
 if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });
-module.exports = { jobs, sig, said_ };
+module.exports = { jobs, sig, said_, pickText, say, strip, bl, speak, DASH, CAST, writeManifest };

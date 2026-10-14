@@ -23,7 +23,7 @@ const MB = n => (n / 2 ** 20).toFixed(1) + 'MB';
 // 저장소에 올라간 파일과 아직 커밋하지 않은 새 파일. .gitignore 에 걸린 것은 git 이 먼저 뺀다.
 const listed = execFileSync('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard'], { cwd: root, encoding: 'utf8', maxBuffer: 64 * 2 ** 20 })
   .split('\0').filter(Boolean);
-const files = [...new Set(listed)]
+let files = [...new Set(listed)]
   .filter(f => (TOP.includes(f) || DIRS.some(d => f.startsWith(d))) && fs.existsSync(path.join(root, f)))
   .sort();
 const have = new Set(files);
@@ -42,6 +42,9 @@ for (const f of files) {
   if (f.endsWith('.css')) for (const [, u] of t.matchAll(/url\(\s*['"]?([^'")]+)/g)) if (local(u)) ref(path.posix.join(path.posix.dirname(f), u), f);
   for (const [p] of t.matchAll(/\b(?:img|audio)\/[\w./-]+\.(?:webp|png|jpe?g|gif|svg|mp3|ogg|wav|m4a)\b/g)) ref(p, f);
 }
+// 목소리는 사건마다 묶은 파일(lead.mp3 · sub.mp3)과 manifest 가 가리키는 것만: 낱개 대사 파일은 다시 녹음할 때 쓰는 원본이다 (tools/voice-pack.js)
+const loose = files.filter(f => f.startsWith('audio/voice/') && !refs.has(f));
+files = files.filter(f => !loose.includes(f));
 const missing = [...refs].filter(([p]) => !have.has(p)).map(([p, from]) => {
   const near = files.find(f => f.toLowerCase() === p.toLowerCase());
   return `  ${p}  (${from})` + (near ? ` — 실제 파일은 ${near}: 대소문자가 다르다` : fs.existsSync(path.join(root, p)) ? ' — .gitignore 에 걸려 빠졌다' : ' — 파일이 없다');
@@ -97,4 +100,4 @@ end.writeUInt32LE(0x06054b50, 0); end.writeUInt16LE(files.length, 8); end.writeU
 end.writeUInt32LE(cdSize, 12); end.writeUInt32LE(off, 16);
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
 fs.writeFileSync(OUT, Buffer.concat([...parts, ...central, end]));
-console.log(`${path.relative(root, OUT).replace(/\\/g, '/')} — 파일 ${files.length}개 · 풀면 ${MB(total)} · 묶음 ${MB(off + cdSize + 22)} · 가리키는 그림·소리 ${refs.size}개 모두 들어감`);
+console.log(`${path.relative(root, OUT).replace(/\\/g, '/')} — 파일 ${files.length}개 · 풀면 ${MB(total)} · 묶음 ${MB(off + cdSize + 22)} · 가리키는 그림·소리 ${refs.size}개 모두 들어감${loose.length ? ` · 묶어 둔 목소리의 낱개 원본 ${loose.length}개는 뺌` : ''}`);
