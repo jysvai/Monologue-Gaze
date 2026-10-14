@@ -2646,7 +2646,7 @@
     </div>`;
     PIN = {};
     { const pr = $('#paneRead'); if (pr && pr.addEventListener && MG._vwheel) pr.addEventListener('wheel', MG._vwheel, { passive: false }); } // 세로 신문: 휠을 읽는 방향으로
-    renderTabs(); renderList(); renderRead(); renderNotebook();
+    noteMode(); renderTabs(); renderList(); renderRead(); renderNotebook(); // 메모 글을 먼저 맞추고 그린다 (refreshAll 과 같은 까닭)
     if (!ST.lit || (C.threads && !ST.th)) leadNews(); // 예전 기록: 이미 맞물린 것·나와 있던 의문은 알리지 않고 적어 둔다
     if ($('.scr-clock')) { tickClock(); clockT ||= setInterval(tickClock, 15000); }
   }
@@ -3085,7 +3085,7 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => t.classList.remove('on'), ms || 2200);
   }
-  function refreshAll() { renderTabs(); renderList(); renderRead(); renderNotebook(); }
+  function refreshAll() { noteMode(); renderTabs(); renderList(); renderRead(); renderNotebook(); } // 메모 글(언어·잔혹 표현 판)을 먼저 맞춘다: 보고서 칸이 열린 채 언어를 바꿔도 그 칸이 옛 글로 그려지지 않게
 
   // 누른 말과 수첩에 적히는 이름이 다르면 둘 다 보인다 (「켈바흐 장」을 눌렀는데 「장날」만 뜨면 어디 갔나 찾게 된다)
   // 같은 말로 치는 것: 한쪽이 다른 쪽을 품을 때(「크로프트 씨」 · 「크로프트」), 아니면 짧은 쪽 글자 쌍의 7할 이상이 겹칠 때.
