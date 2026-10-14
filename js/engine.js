@@ -3592,11 +3592,11 @@
       if (lv() <= 3 && (wrong === 1 || C.kind === 'tutorial')) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`;
       // 연습 사건은 여러 칸이 틀려도 칸마다 무엇을 대야 하는지 한 줄씩 (칸 번호만 보고 되는 대로 바꿔 끼우며 배우지 않게)
       if (C.kind === 'tutorial' && wrong > 1) VERDICT += [ST.report.culprit !== sol.culprit && sol.culpritTip ? `${fm.short} — ${sol.culpritTip}` : '', ...badCl.map(cl => cl.tip ? `${T`${sol.claims.indexOf(cl) + 1}번`} — ${cl.tip}` : '')].filter(Boolean).map(x => '\n' + x).join('');
-      else if (ST.tries >= 3 && wrong === 1) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`; // ★4: 세 번째부터는 한 칸 남았을 때 그 칸을
+      else if (lv() > 3 && ST.tries >= 3 && wrong === 1) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`; // ★4: 세 번째부터는 한 칸 남았을 때 그 칸을 (★3 은 위에서 이미 짚었다)
       else if (ST.tries >= 2 && wrong > 1) VERDICT += T` (어긋난 곳: ${wrong}군데)`;
     }
     // 반려되면 수첩에 무엇이 모였는지도 한 줄: 아직 못 찾은 기록이 있으면 메모를 바꿔 끼우지 말고 더 쫓아가게, 다 모였으면 메모끼리 맞대 보게
-    if (wrong && C.kind !== 'tutorial') {
+    if (wrong && C.kind !== 'tutorial' && !(lv() < 5 && wrong === 1 && wBad)) { // 함께 엮인 사람 칸만 틀렸으면 위의 말이 그 칸을 짚었다 — 메모를 맞대 보라는 말은 엇나간다
       const lack = sol.claims.map((cl, i) => ((cl.accept || []).some(f => ST.notes.some(x => fIs(x.f, f))) ? 0 : i + 1)).filter(Boolean), who = ST.keys.includes(sol.culprit);
       const all = !lack.length && who;
       VERDICT += '\n' + (all ? T('쓸 메모는 수첩에 다 있다. 메모끼리 맞대 본다.')
