@@ -1057,7 +1057,8 @@
     const go = () => {
       if (!(t && TALK === t && qa.isConnected)) return;
       t.finish(true); $$('#paneRead .face.lg').forEach(el => faceSet(el, 0, faceRow(p)));
-      if (!soft) { faceHit(); const ls = sceneLines(qa), n = ls.reduce((m, x) => m + x.t.length, 0); sceneCut(p, (rawAns(p, k) || {}).react || 'flustered', ls, Math.min(7000, Math.max(3000, 1800 + n * 50))); }
+      const ra = rawAns(p, k) || {}, I = MG.images || {}, sk = soft && [ra.react, 'sad', 'surprised', 'afraid'].find(x => x && I[`${C.id}/scene_${p.id}_${x}`]); // 「확인」(잘못 안 것을 바로잡아 주는 추궁)은 슬프거나 놀란 얼굴 그림이 있는 사람만 — 당황한 얼굴은 거짓말이 들킨 때의 것
+      if (!soft || sk) { if (!soft) faceHit(); const ls = sceneLines(qa), n = ls.reduce((m, x) => m + x.t.length, 0); sceneCut(p, soft ? sk : ra.react || 'flustered', ls, Math.min(7000, Math.max(3000, 1800 + n * 50))); }
       playTalk(qa, { p, voice: `v/${C.id}/${p.id}/${k}`, lead: 1000 });
     };
     setTimeout(() => {
@@ -2032,9 +2033,13 @@
     if (s.k === k) s.k = null;
     else { s.k = k; s.trail.push({ k, n: proof().length }); if (s.trail.length > 12) s.trail.splice(0, s.trail.length - 12); }
     save(); sfx('ink');
-    $$('[data-hunch]').forEach(b => { const on = b.dataset.hunch === s.k; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); b.textContent = on ? T('의심하는 중') : T('의심 걸기'); });
-    $$('.item.person').forEach(b => { const p = C.people[b.dataset.person]; b.classList.toggle('hunch', !!(p && s.k && p.key === s.k)); });
+    hunchSync();
     say(s.k ? T`${kl(k)} — 의심을 걸어 둔다` : T('의심을 내려놓는다'));
+  }
+  function hunchSync() {
+    const hk = ST.hunch && ST.hunch.k;
+    $$('[data-hunch]').forEach(b => { const on = b.dataset.hunch === hk; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); b.textContent = on ? T('의심하는 중') : T('의심 걸기'); });
+    $$('.item.person').forEach(b => { const p = C.people[b.dataset.person]; b.classList.toggle('hunch', !!(p && hk && p.key === hk)); });
   }
   function hunchTrailHtml() {
     const tr = (ST.hunch && ST.hunch.trail || []).filter((x, i, a) => C.keywords[x.k] && (i === 0 || a[i - 1].k !== x.k));
@@ -2283,7 +2288,10 @@
       if ((TALK && TALK.alive()) || SCENE) { if (n < 10) susOut(n + 1); return; }
       MG.sound.hero('susout');
     }, n ? 1500 : delay + 2600);
-    if (sk && MG.sound && newDone.some(id => (by(id).t || {}).out === sk)) susOut(0);
+    if (sk && newDone.some(id => (by(id).t || {}).out === sk)) { // 빠진 사람에게 걸어 둔 의심은 내려놓는다 (의심한 차례는 그대로 남는다)
+      ST.hunch.k = null; save(); hunchSync();
+      if (MG.sound) susOut(0);
+    }
   }
   // 사람을 짚거나 빼 준 의문이 풀리면, 「풀림」 옆에 그 사람의 얼굴 (뺀 사람은 흐리게)
   const thFace = t => { const k = t.out || (lv() < 5 && t.who), per = k && Object.values(C.people || {}).find(x => x.key === k); return per && faceOf(per) ? portrait(per).replace('class="face"', `class="face th-face${t.out ? ' out' : ''}"`) : ''; };
@@ -3352,7 +3360,7 @@
       const BY = {}, before = census(BY);
       if (!ST.unl.includes(id)) ST.unl.push(id);
       (lock.keys || []).forEach(k => { if (!ST.keys.includes(k)) ST.keys.push(k); });
-      save(); refreshAll(); cue('unlock', T('열림')); land(C.docs[id] ? ['#paneRead .doc-t', '#paneList .item.on'] : ['#paneList .item', '#srcTabs .tab.on']);
+      save(); refreshAll(); if (C.docs[id]) renderList(); cue('unlock', T('열림')); // 목록은 문서가 펼쳐지기(본 것으로 치기) 전에 그려진다 — 한 번 더 그려 「새 자료」 점을 지운다 land(C.docs[id] ? ['#paneRead .doc-t', '#paneList .item.on'] : ['#paneList .item', '#srcTabs .tab.on']);
       const gained = census() - before;
       toast((lock.ok || T('열렸다.')) + (gained > 0 ? opened(gained, BY, id) : ''));
       liveSync();
