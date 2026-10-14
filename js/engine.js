@@ -1965,7 +1965,7 @@
       const tf = shut ? null : thFor(cl.id), top = tf ? tf.ns : [];
       const list = (top.length ? `<details class="rep-grp rep-th" open><summary>${T`의문 ${tf.x.no}에서 밝혀낸 것`} <small>${top.length}</small></summary>${top.map(n => opt(n, notes.indexOf(n))).join('')}</details>` : '')
         + groups.map(g => { const it = g.items.filter(([n]) => !top.includes(n)); return it.length ? `<details class="rep-grp" open><summary>${esc(g.src)} <small>${it.length}</small></summary>${it.map(([n, j]) => opt(n, j)).join('')}</details>` : ''; }).join('');
-      const thLine = !tf ? '' : tf.x.done ? `<p class="rep-th-a">${T`의문 ${tf.x.no}`} → ${esc(tf.x.t.a)}</p>` : `<p class="rep-th-hint">${T`의문 ${tf.x.no} 「${esc(tf.x.t.q)}」 — 빈칸이 남았다 (${tf.x.got.filter(Boolean).length}/${tf.x.got.length}).`}</p>`;
+      const thLine = !tf ? '' : tf.x.done ? `<p class="rep-th-a">${T`의문 ${tf.x.no}`} → ${esc(tf.x.t.a)}</p>` : `<p class="rep-th-hint">${T`의문 ${tf.x.no} 「${esc(tf.x.t.q)}」 — 빈칸 ${tf.x.got.length}개 중 ${tf.x.got.filter(Boolean).length}개를 채웠다.`}</p>`;
       return `<section class="rep-claim${cur ? ' filled' : ''}${open ? ' open' : ''}" data-claim="${esc(cl.id)}">
         <h4 id="rh-${esc(cl.id)}"><span class="no">${i + 1}</span> ${inline(cl.q)}</h4>${thLine}
         <div class="rep-pick">${cur ? `<p class="rep-memo"><span class="n">${notes.includes(cur) ? notes.indexOf(cur) + 1 + '.' : '—'}</span> ${esc(cur.t)} <span class="src">— ${esc(cur.src || '')}</span></p>` : T('<p class="rep-empty">아직 붙인 메모가 없다.</p>')}
@@ -1978,7 +1978,7 @@
     const sign = C.frame === 'crt' || C.frame === 'laptop' ? `<table class="rep-sign" aria-label="${T`결재`}"><tr><th>${T`담당`}</th><th>${T`팀장`}</th><th>${T`과장`}</th></tr><tr><td>${esc(who(me))}</td><td>${ST.solved ? T('<span class="ok">결재</span>') : back ? T('<span class="no">반려</span>') : ''}</td><td>${ST.solved ? T('<span class="ok">결재</span>') : ''}</td></tr></table>` : '';
     return `<article class="doc skin-report rep-view"><header class="doc-h">${sign}<p class="doc-k">${esc(FM.title)}</p><h3 class="doc-t">${esc(C.title)}</h3><p class="doc-m">${esc(FM.lead)}</p></header>
       <div class="doc-b"><form id="rep" autocomplete="off"${shut ? ' class="shut"' : ''}>
-        <section class="rep-sec"><h4 id="rh-culprit">${esc(FM.culprit)}</h4><div class="rep-people" role="radiogroup" aria-labelledby="rh-culprit">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => { const per = Object.values(C.people || {}).find(x => x.key === k) || kwFace(k), fc = per && faceOf(per), anyFace = Object.values(C.people || {}).some(faceOf); return `<label class="rep-per${anyFace ? ' has-face' : ''}${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}>${fc ? portrait(per) : anyFace ? `<span class="face none" aria-hidden="true">${esc(Array.from(plain(kl(k)))[0] || '?')}</span>` : ''}<b>${esc(kl(k))}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}${shut ? '' : thWho(k)}</label>`; }).join('') || T('<p class="rep-empty">수첩에 적힌 인물이 없다.</p>')}</div></section>
+        <section class="rep-sec"><h4 id="rh-culprit">${esc(FM.culprit)}</h4><div class="rep-people" role="radiogroup" aria-labelledby="rh-culprit">${(shut ? persons.filter(k => k === ST.report.culprit) : persons).map(k => { const per = Object.values(C.people || {}).find(x => x.key === k) || kwFace(k), fc = per && faceOf(per), anyFace = Object.values(C.people || {}).some(faceOf); return `<label class="rep-per${anyFace ? ' has-face' : ''}${ST.report.culprit === k ? ' on' : ''}"><input type="radio" name="rep-culprit" value="${k}" data-rep="culprit"${ST.report.culprit === k ? ' checked' : ''}${shut ? ' disabled' : ''}>${fc ? portrait(per) : anyFace ? `<span class="face none" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.6" r="4.3"/><path d="M3.6 23c0-5 3.8-8.4 8.4-8.4s8.4 3.4 8.4 8.4z"/></svg></span>` : ''}<b>${esc(kl(k))}</b>${roleOf(k) ? `<small>${esc(roleOf(k))}</small>` : ''}${shut ? '' : thWho(k)}</label>`; }).join('') || T('<p class="rep-empty">수첩에 적힌 인물이 없다.</p>')}</div></section>
         ${withSec(persons, shut)}${sol.claims.map(claim).join('')}
         <p class="submit-row">${shut ? `<span class="rep-filed">${esc(FM.filed || (C.frame === 'papers' ? T('종결 · 철해 둠') : T('결재 완료')))}</span>` : `<button type="submit" class="btn-hand">${esc(FM.submit)}</button>`}<span class="tries">${ST.tries ? T`올린 횟수 ${ST.tries}` : ''}</span></p>
       </form><p class="verdict">${esc(VERDICT)}</p>${ST.solved ? `<div class="rep-solved">${solvedHtml(false, true)}</div>` : ''}</div></article>`;
@@ -3212,7 +3212,8 @@
       const q = PIN[b.dataset.pin];
       if (!q || !q.f || (ST.drop || []).includes(b.dataset.pin) || b.closest('.wait,.typing,.qa.live,.press-pick,[hidden]')) return false;
       const line = b.closest('.b-p,.b-say,.b-msg,tr,li,figcaption,.c-bub,.c-act,.b-note,p') || b, r = line.getBoundingClientRect();
-      return r.height > 0 && ((r.top >= top - 2 && r.bottom <= bot + 2) || (r.height > bot - top - 60 && r.top < top + 60 && r.bottom > bot - 60)); // 줄이 다 보이거나, 칸보다 긴 줄은 칸을 거의 채울 때
+      const seen = Math.min(r.bottom, bot) - Math.max(r.top, top);
+      return r.height > 0 && (seen >= r.height * 0.8 - 2 || seen >= (bot - top) * 0.7); // 줄이 거의 다 보이거나, 긴 줄(글이 긴 언어의 장부 칸은 한 줄이 300px 넘게 길어진다)이 칸을 거의 채울 때
     }).map(b => b.dataset.pin);
     if (refs.length) collect([...new Set(refs)]);
   }
@@ -3290,7 +3291,7 @@
     if (!beside()) $('.stage').scrollIntoView({ block: 'start' }); // 수첩이 밑에 있으면 (수첩에서 열었을 수 있으니) 화면으로 올라간다
     // 처음 만나는 사람은 첫마디를 재생한다
     const p = o.t === 'person' && C.people[o.id];
-    if (p && !tmp().met.has(p.id)) { tmp().met.add(p.id); if (!(ST.asked[p.id] || []).length) playTalk($('.per-tr .qa-first'), { p, lead: 650 }); }
+    if (p && !tmp().met.has(p.id)) { tmp().met.add(p.id); if (!(ST.asked[p.id] || []).length) playTalk($('.per-tr .qa-first'), { p, lead: 650, voice: `v/${C.id}/${p.id}/_intro` }); } // 조연은 첫인사에 목소리 (tools/voices-vox.js)
   }
   function setQ(srcId, q) {
     ST.view.src = srcId; ST.view.q[srcId] = q;

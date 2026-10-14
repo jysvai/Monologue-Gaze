@@ -259,7 +259,7 @@ MG.I18N.put("en", "ui", {
 " <small class=\"rep-used\">· {0}번에 붙임</small>": " <small class=\"rep-used\">· attached to #{0}</small>",
 "의문 {0}에서 밝혀낸 것": "Established in Question {0}",
 "의문 {0}": "Question {0}",
-"의문 {0} 「{1}」 — 빈칸이 남았다 ({2}/{3}).": "Question {0} “{1}” — gaps remain ({2}/{3}).",
+"의문 {0} 「{1}」 — 빈칸 {2}개 중 {3}개를 채웠다.": "Question {0} “{1}” — {3} of {2} blanks filled.",
 "<p class=\"rep-empty\">아직 붙인 메모가 없다.</p>": "<p class=\"rep-empty\">No note attached yet.</p>",
 "다른 메모로 바꾸기": "Swap for another note",
 "메모에서 고르기": "Pick from notes",
