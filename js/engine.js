@@ -2326,19 +2326,21 @@
     return groups;
   }
   // 잔혹 표현을 켜고 끄면 메모 글도 그 판으로: 적을 때의 판(gm)과 지금 판이 다르면 그 줄을 지금 판으로 다시 읽어 바꾼다 (맞대면 장면도 이 글을 쓴다)
+  // 언어도 같다: 적을 때의 언어(lg)와 지금 언어가 다르면 다시 읽는다 (lg 가 없는 옛 메모는 한 번 읽어 맞춘다)
   function noteMode() {
-    if (!C.graphic) return;
-    const g = gore() ? 1 : 0, done = new Set();
+    const g = gore() ? 1 : 0, L = MG.I18N.lang, done = new Set();
     let ch = 0;
     [...ST.notes, ...Object.values(ST.report.kept || {})].forEach(n => { // 종결 뒤 수첩에서 지워 보고서 쪽에 옮겨 둔 메모도
-      if (n.gm === g || !n.ref || !n.t) return;
+      if ((!C.graphic || n.gm === g) && n.lg === L || !n.ref || !n.t) return;
       const ref = String(n.ref), base = ref.split('#')[0], at = base.indexOf('@'), p = at > 0 && C.people[base.slice(0, at)];
       if (!done.has(base)) {
         done.add(base);
         try { if (p) chatLines(base.endsWith('@_') ? p.intro : ansBlocks(p, base.slice(at + 1)), base, T`${p.name} 탐문`); else if (C.docs[base]) docHtml(C.docs[base]); } catch (e) { /* 못 읽으면 적은 글 그대로 */ }
       }
       if (PIN[ref] && PIN[ref].t && PIN[ref].t !== n.t) n.t = PIN[ref].t;
-      n.gm = g; ch = 1;
+      if (PIN[ref] && PIN[ref].src) n.src = PIN[ref].src;
+      if (C.graphic) n.gm = g;
+      n.lg = L; ch = 1;
     });
     if (ch) save();
   }
@@ -3171,7 +3173,7 @@
     refs.forEach(ref => {
       const p = PIN[ref];
       if (!p || noteAt(ref) >= 0) return;
-      ST.notes.push({ id: ++ST.nid, ref, t: p.t, f: p.f, src: p.src, ...(C.graphic ? { gm: gore() ? 1 : 0 } : {}) }); ids.push(ST.nid);
+      ST.notes.push({ id: ++ST.nid, ref, t: p.t, f: p.f, src: p.src, lg: MG.I18N.lang, ...(C.graphic ? { gm: gore() ? 1 : 0 } : {}) }); ids.push(ST.nid);
       if (ST.drop) ST.drop = ST.drop.filter(x => x !== ref);
     });
     if (!ids.length) return;
