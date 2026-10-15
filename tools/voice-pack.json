@@ -25,42 +25,42 @@
   }
  },
  "audio/voice/c00/sub.mp3": {
-  "sig": "33c5da6eb04da7009d106e701130a985",
+  "sig": "4f94081416b6d086499f344bbd570c95",
   "clips": {
    "v/c00/p_manager/_intro": [
-    "audio/voice/c00/sub.mp3?v=8f46eaa3",
+    "audio/voice/c00/sub.mp3?v=3425a06e",
     0.29,
-    5.852
+    4.849
    ],
    "v/c00/p_manager/k_delivery": [
-    "audio/voice/c00/sub.mp3?v=8f46eaa3",
-    6.372,
-    10.016
+    "audio/voice/c00/sub.mp3?v=3425a06e",
+    5.369,
+    8.28
    ],
    "v/c00/p_neighbor/_intro": [
-    "audio/voice/c00/sub.mp3?v=8f46eaa3",
-    16.617,
-    2.84
+    "audio/voice/c00/sub.mp3?v=3425a06e",
+    13.879,
+    2.829
    ],
    "v/c00/p_neighbor/k_door": [
-    "audio/voice/c00/sub.mp3?v=8f46eaa3",
-    19.687,
-    5.08
+    "audio/voice/c00/sub.mp3?v=3425a06e",
+    16.938,
+    5.881
    ],
    "v/c00/p_minji/_intro": [
-    "audio/voice/c00/sub.mp3?v=8f46eaa3",
-    24.998,
-    2.622
+    "audio/voice/c00/sub.mp3?v=3425a06e",
+    23.049,
+    2.682
    ],
    "v/c00/p_minji/k_dohyun": [
-    "audio/voice/c00/sub.mp3?v=8f46eaa3",
-    27.85,
-    5.88
+    "audio/voice/c00/sub.mp3?v=3425a06e",
+    25.961,
+    5.955
    ],
    "v/c00/p_dohyun/_intro": [
-    "audio/voice/c00/sub.mp3?v=8f46eaa3",
-    33.96,
-    3.762
+    "audio/voice/c00/sub.mp3?v=3425a06e",
+    32.146,
+    3.441
    ]
   }
  },
@@ -90,57 +90,57 @@
   }
  },
  "audio/voice/c01/sub.mp3": {
-  "sig": "1ef7b27505b96dca7f30cf9d4b8dfc5a",
+  "sig": "a9eedc9478932e339489326f0a88032a",
   "clips": {
    "v/c01/p_quarrell/_intro": [
-    "audio/voice/c01/sub.mp3?v=ac78dee6",
+    "audio/voice/c01/sub.mp3?v=32fb3f50",
     0.29,
-    8.541
+    8.683
    ],
    "v/c01/p_bill/_intro": [
-    "audio/voice/c01/sub.mp3?v=ac78dee6",
-    9.061,
-    7.82
+    "audio/voice/c01/sub.mp3?v=32fb3f50",
+    9.203,
+    7.548
    ],
    "v/c01/p_bill/k_rose": [
-    "audio/voice/c01/sub.mp3?v=ac78dee6",
-    17.11,
-    5.24
+    "audio/voice/c01/sub.mp3?v=32fb3f50",
+    16.981,
+    5.399
    ],
    "v/c01/p_bill/k_night27": [
-    "audio/voice/c01/sub.mp3?v=ac78dee6",
-    22.58,
-    11.814
+    "audio/voice/c01/sub.mp3?v=32fb3f50",
+    22.61,
+    13.694
    ],
    "v/c01/p_bill/k_cranewharf": [
-    "audio/voice/c01/sub.mp3?v=ac78dee6",
-    34.625,
-    11.814
+    "audio/voice/c01/sub.mp3?v=32fb3f50",
+    36.534,
+    13.694
    ],
    "v/c01/p_hannah/_intro": [
-    "audio/voice/c01/sub.mp3?v=ac78dee6",
-    46.669,
-    6.265
+    "audio/voice/c01/sub.mp3?v=32fb3f50",
+    50.458,
+    6.183
    ],
    "v/c01/p_hannah/k_bluelantern": [
-    "audio/voice/c01/sub.mp3?v=ac78dee6",
-    53.164,
-    7.89
+    "audio/voice/c01/sub.mp3?v=32fb3f50",
+    56.87,
+    8.813
    ],
    "v/c01/p_peggy/_intro": [
-    "audio/voice/c01/sub.mp3?v=ac78dee6",
-    61.284,
-    7.166
+    "audio/voice/c01/sub.mp3?v=32fb3f50",
+    65.914,
+    9.498
    ],
    "v/c01/p_peggy/k_bill": [
-    "audio/voice/c01/sub.mp3?v=ac78dee6",
-    68.68,
-    18.268
+    "audio/voice/c01/sub.mp3?v=32fb3f50",
+    75.642,
+    17.982
    ],
    "v/c01/p_dill/_intro": [
-    "audio/voice/c01/sub.mp3?v=ac78dee6",
-    87.177,
-    5.41
+    "audio/voice/c01/sub.mp3?v=32fb3f50",
+    93.854,
+    5.688
    ]
   }
  },
@@ -185,47 +185,47 @@
   }
  },
  "audio/voice/c02/sub.mp3": {
-  "sig": "bbb61a5fe116f857a75f28a28bb17999",
+  "sig": "6feada737f683627e79e83667106ce43",
   "clips": {
    "v/c02/p_gerstl/_intro": [
-    "audio/voice/c02/sub.mp3?v=e3457d8d",
+    "audio/voice/c02/sub.mp3?v=0fb4b218",
     0.29,
-    10.985
+    10.973
    ],
    "v/c02/p_hubmann/_intro": [
-    "audio/voice/c02/sub.mp3?v=e3457d8d",
-    11.505,
-    7.89
+    "audio/voice/c02/sub.mp3?v=0fb4b218",
+    11.493,
+    8.501
    ],
    "v/c02/p_hubmann/k_thekla": [
-    "audio/voice/c02/sub.mp3?v=e3457d8d",
-    19.624,
-    9.227
+    "audio/voice/c02/sub.mp3?v=0fb4b218",
+    20.224,
+    9.496
    ],
    "v/c02/p_magdalena/_intro": [
-    "audio/voice/c02/sub.mp3?v=e3457d8d",
-    29.081,
-    8.636
+    "audio/voice/c02/sub.mp3?v=0fb4b218",
+    29.95,
+    6.527
    ],
    "v/c02/p_magdalena/k_stall": [
-    "audio/voice/c02/sub.mp3?v=e3457d8d",
-    37.947,
-    10.358
+    "audio/voice/c02/sub.mp3?v=0fb4b218",
+    36.707,
+    10.374
    ],
    "v/c02/p_rottmayr/_intro": [
-    "audio/voice/c02/sub.mp3?v=e3457d8d",
-    48.535,
-    6.282
+    "audio/voice/c02/sub.mp3?v=0fb4b218",
+    47.311,
+    6.338
    ],
    "v/c02/p_rottmayr/k_rosa": [
-    "audio/voice/c02/sub.mp3?v=e3457d8d",
-    55.047,
-    6.04
+    "audio/voice/c02/sub.mp3?v=0fb4b218",
+    53.88,
+    8.245
    ],
    "v/c02/p_resl/_intro": [
-    "audio/voice/c02/sub.mp3?v=e3457d8d",
-    61.317,
-    6.2
+    "audio/voice/c02/sub.mp3?v=0fb4b218",
+    62.354,
+    5.489
    ]
   }
  },
@@ -285,42 +285,42 @@
   }
  },
  "audio/voice/c03/sub.mp3": {
-  "sig": "401efeb13e6d1ee5560b567c430cd3b7",
+  "sig": "5be465714328e276eeb85b59b4ac225d",
   "clips": {
    "v/c03/p_park/_intro": [
-    "audio/voice/c03/sub.mp3?v=b17c6660",
+    "audio/voice/c03/sub.mp3?v=2fb4a1de",
     0.29,
-    7.48
+    7.8
    ],
    "v/c03/p_park/k_song": [
-    "audio/voice/c03/sub.mp3?v=b17c6660",
-    8,
-    5.161
+    "audio/voice/c03/sub.mp3?v=2fb4a1de",
+    8.32,
+    5.4
    ],
    "v/c03/p_choi/_intro": [
-    "audio/voice/c03/sub.mp3?v=b17c6660",
-    13.391,
-    12.758
+    "audio/voice/c03/sub.mp3?v=2fb4a1de",
+    13.95,
+    15.772
    ],
    "v/c03/p_choi/k_nine": [
-    "audio/voice/c03/sub.mp3?v=b17c6660",
-    26.379,
-    8.554
+    "audio/voice/c03/sub.mp3?v=2fb4a1de",
+    29.952,
+    7.48
    ],
    "v/c03/p_kwak/_intro": [
-    "audio/voice/c03/sub.mp3?v=b17c6660",
-    35.163,
-    9.13
+    "audio/voice/c03/sub.mp3?v=2fb4a1de",
+    37.662,
+    7.953
    ],
    "v/c03/p_gil/_intro": [
-    "audio/voice/c03/sub.mp3?v=b17c6660",
-    44.524,
-    6.508
+    "audio/voice/c03/sub.mp3?v=2fb4a1de",
+    45.845,
+    6.747
    ],
    "v/c03/p_gil/k_jodk": [
-    "audio/voice/c03/sub.mp3?v=b17c6660",
-    51.261,
-    4.158
+    "audio/voice/c03/sub.mp3?v=2fb4a1de",
+    52.822,
+    4.083
    ]
   }
  },
@@ -360,52 +360,52 @@
   }
  },
  "audio/voice/c04/sub.mp3": {
-  "sig": "7b3648ac242c1ba28fb9f0f52679591f",
+  "sig": "4fc8aaeb53be1dbcf444d0b6161a55b8",
   "clips": {
    "v/c04/p_kitamura/_intro": [
-    "audio/voice/c04/sub.mp3?v=c6ba849a",
+    "audio/voice/c04/sub.mp3?v=c997f62c",
     0.29,
-    6.755
+    6.79
    ],
    "v/c04/p_kitamura/k_letters": [
-    "audio/voice/c04/sub.mp3?v=c6ba849a",
-    7.275,
-    9.24
+    "audio/voice/c04/sub.mp3?v=c997f62c",
+    7.31,
+    7.233
    ],
    "v/c04/p_kitamura/k_detour": [
-    "audio/voice/c04/sub.mp3?v=c6ba849a",
-    16.745,
-    7.64
+    "audio/voice/c04/sub.mp3?v=c997f62c",
+    14.774,
+    7.48
    ],
    "v/c04/p_kitamura/k_detour.2": [
-    "audio/voice/c04/sub.mp3?v=c6ba849a",
-    24.615,
-    4.094
+    "audio/voice/c04/sub.mp3?v=c997f62c",
+    22.484,
+    3.443
    ],
    "v/c04/p_ono/_intro": [
-    "audio/voice/c04/sub.mp3?v=c6ba849a",
-    28.939,
-    6.302
+    "audio/voice/c04/sub.mp3?v=c997f62c",
+    26.156,
+    5.878
    ],
    "v/c04/p_ono/k_nagano": [
-    "audio/voice/c04/sub.mp3?v=c6ba849a",
-    35.47,
-    9.973
+    "audio/voice/c04/sub.mp3?v=c997f62c",
+    32.264,
+    8.6
    ],
    "v/c04/p_genzo/_intro": [
-    "audio/voice/c04/sub.mp3?v=c6ba849a",
-    45.673,
-    5.219
+    "audio/voice/c04/sub.mp3?v=c997f62c",
+    41.094,
+    3.751
    ],
    "v/c04/p_shimada/_intro": [
-    "audio/voice/c04/sub.mp3?v=c6ba849a",
-    51.122,
-    8.005
+    "audio/voice/c04/sub.mp3?v=c997f62c",
+    45.075,
+    4.4
    ],
    "v/c04/p_shimada/k_detour": [
-    "audio/voice/c04/sub.mp3?v=c6ba849a",
-    59.357,
-    11.474
+    "audio/voice/c04/sub.mp3?v=c997f62c",
+    49.705,
+    8.87
    ]
   }
  },
@@ -440,47 +440,47 @@
   }
  },
  "audio/voice/c05/sub.mp3": {
-  "sig": "fd0bf22768359d28bb5ac684996a8f83",
+  "sig": "15c32ada052c8d515171827316f37cad",
   "clips": {
    "v/c05/p_lowell/_intro": [
-    "audio/voice/c05/sub.mp3?v=b46de8f1",
+    "audio/voice/c05/sub.mp3?v=03aa8f51",
     0.29,
-    6.84
+    7.614
    ],
    "v/c05/p_lowell/k_postmark": [
-    "audio/voice/c05/sub.mp3?v=b46de8f1",
-    7.36,
-    12.76
+    "audio/voice/c05/sub.mp3?v=03aa8f51",
+    8.134,
+    10.36
    ],
    "v/c05/p_dugan/_intro": [
-    "audio/voice/c05/sub.mp3?v=b46de8f1",
-    20.35,
-    3.943
+    "audio/voice/c05/sub.mp3?v=03aa8f51",
+    18.724,
+    4.676
    ],
    "v/c05/p_dugan/k_hourglass": [
-    "audio/voice/c05/sub.mp3?v=b46de8f1",
-    24.523,
-    7.65
+    "audio/voice/c05/sub.mp3?v=03aa8f51",
+    23.63,
+    6.996
    ],
    "v/c05/p_coyle/_intro": [
-    "audio/voice/c05/sub.mp3?v=b46de8f1",
-    32.403,
-    5.828
+    "audio/voice/c05/sub.mp3?v=03aa8f51",
+    30.856,
+    5.4
    ],
    "v/c05/p_coyle/k_dec14": [
-    "audio/voice/c05/sub.mp3?v=b46de8f1",
-    38.461,
-    10.488
+    "audio/voice/c05/sub.mp3?v=03aa8f51",
+    36.486,
+    10.613
    ],
    "v/c05/p_osgood/_intro": [
-    "audio/voice/c05/sub.mp3?v=b46de8f1",
-    49.179,
-    5.72
+    "audio/voice/c05/sub.mp3?v=03aa8f51",
+    47.329,
+    7.034
    ],
    "v/c05/p_delgado/_intro": [
-    "audio/voice/c05/sub.mp3?v=b46de8f1",
-    55.129,
-    4.691
+    "audio/voice/c05/sub.mp3?v=03aa8f51",
+    54.594,
+    4.969
    ]
   }
  },
@@ -510,47 +510,47 @@
   }
  },
  "audio/voice/c06/sub.mp3": {
-  "sig": "0433ea7b15705ee881a5ffeeaeeba936",
+  "sig": "9fc54a837ab023c621256a4104d999ef",
   "clips": {
    "v/c06/p_kari/_intro": [
-    "audio/voice/c06/sub.mp3?v=944e5ff9",
+    "audio/voice/c06/sub.mp3?v=a043fcc4",
     0.29,
-    11.154
+    12.28
    ],
    "v/c06/p_kari/k_per": [
-    "audio/voice/c06/sub.mp3?v=944e5ff9",
-    11.674,
-    6.454
+    "audio/voice/c06/sub.mp3?v=a043fcc4",
+    12.8,
+    7.731
    ],
    "v/c06/p_per/_intro": [
-    "audio/voice/c06/sub.mp3?v=944e5ff9",
-    18.358,
-    7.32
+    "audio/voice/c06/sub.mp3?v=a043fcc4",
+    20.761,
+    8.068
    ],
    "v/c06/p_randi/_intro": [
-    "audio/voice/c06/sub.mp3?v=944e5ff9",
-    25.908,
-    7.41
+    "audio/voice/c06/sub.mp3?v=a043fcc4",
+    29.059,
+    5.88
    ],
    "v/c06/p_randi/k_schlosser": [
-    "audio/voice/c06/sub.mp3?v=944e5ff9",
-    33.548,
-    10.425
+    "audio/voice/c06/sub.mp3?v=a043fcc4",
+    35.169,
+    9.042
    ],
    "v/c06/p_solveig/_intro": [
-    "audio/voice/c06/sub.mp3?v=944e5ff9",
-    44.203,
-    4.76
+    "audio/voice/c06/sub.mp3?v=a043fcc4",
+    44.441,
+    5.109
    ],
    "v/c06/p_solveig/k_taxi": [
-    "audio/voice/c06/sub.mp3?v=944e5ff9",
-    49.193,
-    12.518
+    "audio/voice/c06/sub.mp3?v=a043fcc4",
+    49.78,
+    9.456
    ],
    "v/c06/p_taxi/_intro": [
-    "audio/voice/c06/sub.mp3?v=944e5ff9",
-    61.941,
-    3.675
+    "audio/voice/c06/sub.mp3?v=a043fcc4",
+    59.466,
+    2.334
    ]
   }
  },
@@ -635,27 +635,27 @@
   }
  },
  "audio/voice/c07/sub.mp3": {
-  "sig": "4f859e95c285841e3610f8f928f02ccd",
+  "sig": "61fd46b869adee7aed3f2df1214ae117",
   "clips": {
    "v/c07/p_madam/_intro": [
-    "audio/voice/c07/sub.mp3?v=76ac3604",
+    "audio/voice/c07/sub.mp3?v=df7cb3f5",
     0.29,
-    5.847
+    5.914
    ],
    "v/c07/p_madam/k_second": [
-    "audio/voice/c07/sub.mp3?v=76ac3604",
-    6.367,
-    9.356
+    "audio/voice/c07/sub.mp3?v=df7cb3f5",
+    6.434,
+    10.458
    ],
    "v/c07/p_granny/_intro": [
-    "audio/voice/c07/sub.mp3?v=76ac3604",
-    15.953,
-    5.394
+    "audio/voice/c07/sub.mp3?v=df7cb3f5",
+    17.122,
+    4.737
    ],
    "v/c07/p_granny/k_gun": [
-    "audio/voice/c07/sub.mp3?v=76ac3604",
-    21.577,
-    12.201
+    "audio/voice/c07/sub.mp3?v=df7cb3f5",
+    22.089,
+    10.029
    ]
   }
  },
@@ -695,47 +695,47 @@
   }
  },
  "audio/voice/c08/sub.mp3": {
-  "sig": "8659079f9d84f0200bff050fa3e9eba6",
+  "sig": "5c46e8c1a299e4390f0f0bff93737410",
   "clips": {
    "v/c08/p_mother/_intro": [
-    "audio/voice/c08/sub.mp3?v=2773c83c",
+    "audio/voice/c08/sub.mp3?v=079b7f3c",
     0.29,
-    6.36
+    6.891
    ],
    "v/c08/p_mother/k_bell": [
-    "audio/voice/c08/sub.mp3?v=2773c83c",
-    6.88,
-    6.507
+    "audio/voice/c08/sub.mp3?v=079b7f3c",
+    7.411,
+    8.565
    ],
    "v/c08/p_driver/_intro": [
-    "audio/voice/c08/sub.mp3?v=2773c83c",
-    13.617,
-    3.031
+    "audio/voice/c08/sub.mp3?v=079b7f3c",
+    16.206,
+    4.12
    ],
    "v/c08/p_driver/k_pager": [
-    "audio/voice/c08/sub.mp3?v=2773c83c",
-    16.878,
-    8.12
+    "audio/voice/c08/sub.mp3?v=079b7f3c",
+    20.556,
+    7.593
    ],
    "v/c08/p_shop/_intro": [
-    "audio/voice/c08/sub.mp3?v=2773c83c",
-    25.228,
-    11.635
+    "audio/voice/c08/sub.mp3?v=079b7f3c",
+    28.379,
+    9.641
    ],
    "v/c08/p_shop/k_train": [
-    "audio/voice/c08/sub.mp3?v=2773c83c",
-    37.093,
-    6.617
+    "audio/voice/c08/sub.mp3?v=079b7f3c",
+    38.25,
+    6.52
    ],
    "v/c08/p_foreman/_intro": [
-    "audio/voice/c08/sub.mp3?v=2773c83c",
-    43.94,
-    5.24
+    "audio/voice/c08/sub.mp3?v=079b7f3c",
+    45,
+    6.482
    ],
    "v/c08/p_foreman/k_warehouse": [
-    "audio/voice/c08/sub.mp3?v=2773c83c",
-    49.41,
-    6.63
+    "audio/voice/c08/sub.mp3?v=079b7f3c",
+    51.712,
+    5.917
    ]
   }
  },
@@ -815,37 +815,37 @@
   }
  },
  "audio/voice/c09/sub.mp3": {
-  "sig": "5717d761c039fa14270487ba8772476c",
+  "sig": "2af3317e0b6fd27a435a3fc5d1b82a8f",
   "clips": {
    "v/c09/p_eunbi/_intro": [
-    "audio/voice/c09/sub.mp3?v=008113c5",
+    "audio/voice/c09/sub.mp3?v=39ffd5cf",
     0.29,
-    6.22
+    6.509
    ],
    "v/c09/p_eunbi/k_convstore": [
-    "audio/voice/c09/sub.mp3?v=008113c5",
-    6.74,
-    8.075
+    "audio/voice/c09/sub.mp3?v=39ffd5cf",
+    7.029,
+    6.52
    ],
    "v/c09/p_jinwoo/_intro": [
-    "audio/voice/c09/sub.mp3?v=008113c5",
-    15.045,
-    5.72
+    "audio/voice/c09/sub.mp3?v=39ffd5cf",
+    13.779,
+    6.733
    ],
    "v/c09/p_jinwoo/k_haeun": [
-    "audio/voice/c09/sub.mp3?v=008113c5",
-    20.995,
-    5.56
+    "audio/voice/c09/sub.mp3?v=39ffd5cf",
+    20.742,
+    4.658
    ],
    "v/c09/p_realtor/_intro": [
-    "audio/voice/c09/sub.mp3?v=008113c5",
-    26.785,
-    4.24
+    "audio/voice/c09/sub.mp3?v=39ffd5cf",
+    25.63,
+    5.71
    ],
    "v/c09/p_realtor/k_courier": [
-    "audio/voice/c09/sub.mp3?v=008113c5",
-    31.255,
-    9.426
+    "audio/voice/c09/sub.mp3?v=39ffd5cf",
+    31.57,
+    9.744
    ]
   }
  },
@@ -895,37 +895,37 @@
   }
  },
  "audio/voice/c10/sub.mp3": {
-  "sig": "ef2bb7ee386faedfd1051561d230615e",
+  "sig": "4da550c161b2b34d9d1376e66535d758",
   "clips": {
    "v/c10/p_sangmin/_intro": [
-    "audio/voice/c10/sub.mp3?v=6634c81d",
+    "audio/voice/c10/sub.mp3?v=93f47772",
     0.29,
-    4.858
+    5.08
    ],
    "v/c10/p_sangmin/k_hanul": [
-    "audio/voice/c10/sub.mp3?v=6634c81d",
-    5.378,
-    10.186
+    "audio/voice/c10/sub.mp3?v=93f47772",
+    5.6,
+    9.519
    ],
    "v/c10/p_okja/_intro": [
-    "audio/voice/c10/sub.mp3?v=6634c81d",
-    15.793,
-    8.44
+    "audio/voice/c10/sub.mp3?v=93f47772",
+    15.349,
+    11.32
    ],
    "v/c10/p_okja/k_suhyup": [
-    "audio/voice/c10/sub.mp3?v=6634c81d",
-    24.463,
-    5.191
+    "audio/voice/c10/sub.mp3?v=93f47772",
+    26.899,
+    3.886
    ],
    "v/c10/p_guard/_intro": [
-    "audio/voice/c10/sub.mp3?v=6634c81d",
-    29.884,
-    3.8
+    "audio/voice/c10/sub.mp3?v=93f47772",
+    31.015,
+    4.029
    ],
    "v/c10/p_guard/k_pier3": [
-    "audio/voice/c10/sub.mp3?v=6634c81d",
-    33.914,
-    9.068
+    "audio/voice/c10/sub.mp3?v=93f47772",
+    35.274,
+    6.635
    ]
   }
  },
@@ -975,47 +975,47 @@
   }
  },
  "audio/voice/c11/sub.mp3": {
-  "sig": "0367aca212ba13762905f8e879d14fad",
+  "sig": "c6a1203f7e72f56070c38f41ed1f481f",
   "clips": {
    "v/c11/p_jin/_intro": [
-    "audio/voice/c11/sub.mp3?v=9527c167",
+    "audio/voice/c11/sub.mp3?v=2612341c",
     0.29,
-    5.707
+    4.715
    ],
    "v/c11/p_jin/k_cheonghak": [
-    "audio/voice/c11/sub.mp3?v=9527c167",
-    6.227,
-    8.488
+    "audio/voice/c11/sub.mp3?v=2612341c",
+    5.235,
+    7.722
    ],
    "v/c11/p_han/_intro": [
-    "audio/voice/c11/sub.mp3?v=9527c167",
-    14.945,
-    5.65
+    "audio/voice/c11/sub.mp3?v=2612341c",
+    13.187,
+    5.559
    ],
    "v/c11/p_han/k_ilsubook": [
-    "audio/voice/c11/sub.mp3?v=9527c167",
-    20.825,
-    9.309
+    "audio/voice/c11/sub.mp3?v=2612341c",
+    18.976,
+    8.89
    ],
    "v/c11/p_yeom/_intro": [
-    "audio/voice/c11/sub.mp3?v=9527c167",
-    30.363,
-    8.56
+    "audio/voice/c11/sub.mp3?v=2612341c",
+    28.097,
+    6.949
    ],
    "v/c11/p_yeom/k_woo": [
-    "audio/voice/c11/sub.mp3?v=9527c167",
-    39.153,
-    10.52
+    "audio/voice/c11/sub.mp3?v=2612341c",
+    35.276,
+    7.078
    ],
    "v/c11/p_park/_intro": [
-    "audio/voice/c11/sub.mp3?v=9527c167",
-    49.903,
+    "audio/voice/c11/sub.mp3?v=2612341c",
+    42.584,
     3.96
    ],
    "v/c11/p_park/k_gil": [
-    "audio/voice/c11/sub.mp3?v=9527c167",
-    54.093,
-    11.609
+    "audio/voice/c11/sub.mp3?v=2612341c",
+    46.774,
+    9.714
    ]
   }
  },
@@ -1065,52 +1065,52 @@
   }
  },
  "audio/voice/c12/sub.mp3": {
-  "sig": "5e36411f6b710be9c1c0c1f13d280b89",
+  "sig": "f3c85848723b0ed94d1639f610fd0fd2",
   "clips": {
    "v/c12/p_takano/_intro": [
-    "audio/voice/c12/sub.mp3?v=9a63b111",
+    "audio/voice/c12/sub.mp3?v=af7fe82e",
     0.29,
-    8.357
+    7.513
    ],
    "v/c12/p_takano/k_cig": [
-    "audio/voice/c12/sub.mp3?v=9a63b111",
-    8.877,
-    12.04
+    "audio/voice/c12/sub.mp3?v=af7fe82e",
+    8.033,
+    8.44
    ],
    "v/c12/p_paperboy/_intro": [
-    "audio/voice/c12/sub.mp3?v=9a63b111",
-    21.147,
-    6.931
+    "audio/voice/c12/sub.mp3?v=af7fe82e",
+    16.703,
+    7.442
    ],
    "v/c12/p_ishiguro/_intro": [
-    "audio/voice/c12/sub.mp3?v=9a63b111",
-    28.308,
-    8.027
+    "audio/voice/c12/sub.mp3?v=af7fe82e",
+    24.375,
+    6.603
    ],
    "v/c12/p_ishiguro/k_bags": [
-    "audio/voice/c12/sub.mp3?v=9a63b111",
-    36.565,
-    6.061
+    "audio/voice/c12/sub.mp3?v=af7fe82e",
+    31.208,
+    6.36
    ],
    "v/c12/p_ogawa/_intro": [
-    "audio/voice/c12/sub.mp3?v=9a63b111",
-    42.856,
-    5.494
+    "audio/voice/c12/sub.mp3?v=af7fe82e",
+    37.798,
+    4.266
    ],
    "v/c12/p_ogawa/k_1014": [
-    "audio/voice/c12/sub.mp3?v=9a63b111",
-    48.58,
-    5.868
+    "audio/voice/c12/sub.mp3?v=af7fe82e",
+    42.294,
+    7.889
    ],
    "v/c12/p_kimura/_intro": [
-    "audio/voice/c12/sub.mp3?v=9a63b111",
-    54.679,
-    8.686
+    "audio/voice/c12/sub.mp3?v=af7fe82e",
+    50.414,
+    8.06
    ],
    "v/c12/p_toshie/_intro": [
-    "audio/voice/c12/sub.mp3?v=9a63b111",
-    63.595,
-    9.238
+    "audio/voice/c12/sub.mp3?v=af7fe82e",
+    58.703,
+    8.051
    ]
   }
  },
@@ -1185,27 +1185,27 @@
   }
  },
  "audio/voice/c13/sub.mp3": {
-  "sig": "2d682c43ba2e5d6c32d776a143859e27",
+  "sig": "eb6eee21ccf4b6e9c28b0f7ce43bbc6b",
   "clips": {
    "v/c13/p_choi/_intro": [
-    "audio/voice/c13/sub.mp3?v=4eb2dee3",
+    "audio/voice/c13/sub.mp3?v=9ed81645",
     0.29,
-    6.583
+    5.166
    ],
    "v/c13/p_choi/k_doha": [
-    "audio/voice/c13/sub.mp3?v=4eb2dee3",
-    7.103,
-    5.45
+    "audio/voice/c13/sub.mp3?v=9ed81645",
+    5.686,
+    5.554
    ],
    "v/c13/p_kim/_intro": [
-    "audio/voice/c13/sub.mp3?v=4eb2dee3",
-    12.783,
-    3.96
+    "audio/voice/c13/sub.mp3?v=9ed81645",
+    11.47,
+    3.757
    ],
    "v/c13/p_kim/k_alley": [
-    "audio/voice/c13/sub.mp3?v=4eb2dee3",
-    16.973,
-    6.66
+    "audio/voice/c13/sub.mp3?v=9ed81645",
+    15.457,
+    7.106
    ]
   }
  },
@@ -1260,42 +1260,42 @@
   }
  },
  "audio/voice/c14/sub.mp3": {
-  "sig": "998956fad099eb001d0a50a88f3b0e5d",
+  "sig": "846ff9f6e529e4fa4e236d6b5fae02df",
   "clips": {
    "v/c14/p_jeongrye/_intro": [
-    "audio/voice/c14/sub.mp3?v=c8139c4f",
+    "audio/voice/c14/sub.mp3?v=62741da3",
     0.29,
-    6.995
+    6.476
    ],
    "v/c14/p_jeongrye/k_fakedoc": [
-    "audio/voice/c14/sub.mp3?v=c8139c4f",
-    7.515,
-    8.019
+    "audio/voice/c14/sub.mp3?v=62741da3",
+    6.996,
+    8.12
    ],
    "v/c14/p_oksun/_intro": [
-    "audio/voice/c14/sub.mp3?v=c8139c4f",
-    15.764,
-    7.514
+    "audio/voice/c14/sub.mp3?v=62741da3",
+    15.346,
+    6.04
    ],
    "v/c14/p_oksun/k_gumgam": [
-    "audio/voice/c14/sub.mp3?v=c8139c4f",
-    23.508,
-    9.018
+    "audio/voice/c14/sub.mp3?v=62741da3",
+    21.616,
+    7.48
    ],
    "v/c14/p_eunju/_intro": [
-    "audio/voice/c14/sub.mp3?v=c8139c4f",
-    32.755,
-    5.72
+    "audio/voice/c14/sub.mp3?v=62741da3",
+    29.326,
+    3.851
    ],
    "v/c14/p_eunju/k_morning": [
-    "audio/voice/c14/sub.mp3?v=c8139c4f",
-    38.705,
-    9.479
+    "audio/voice/c14/sub.mp3?v=62741da3",
+    33.407,
+    10.14
    ],
    "v/c14/p_changhoon/_intro": [
-    "audio/voice/c14/sub.mp3?v=c8139c4f",
-    48.415,
-    3.949
+    "audio/voice/c14/sub.mp3?v=62741da3",
+    43.777,
+    4.28
    ]
   }
  },
@@ -1430,62 +1430,62 @@
   }
  },
  "audio/voice/c15/sub.mp3": {
-  "sig": "0a663b40df1bbf57117c0ddb92b0cae4",
+  "sig": "74ddcf729f4d6fff803bc8a543b30d9e",
   "clips": {
    "v/c15/p_harin/_intro": [
-    "audio/voice/c15/sub.mp3?v=b44c2719",
+    "audio/voice/c15/sub.mp3?v=21d1c7e5",
     0.29,
-    10.165
+    9.868
    ],
    "v/c15/p_harin/k_tonight": [
-    "audio/voice/c15/sub.mp3?v=b44c2719",
-    10.685,
-    4.886
+    "audio/voice/c15/sub.mp3?v=21d1c7e5",
+    10.388,
+    5.72
    ],
    "v/c15/p_woobin/_intro": [
-    "audio/voice/c15/sub.mp3?v=b44c2719",
-    15.8,
-    7.943
+    "audio/voice/c15/sub.mp3?v=21d1c7e5",
+    16.338,
+    7.083
    ],
    "v/c15/p_woobin/k_tonight": [
-    "audio/voice/c15/sub.mp3?v=b44c2719",
-    23.973,
-    5.523
+    "audio/voice/c15/sub.mp3?v=21d1c7e5",
+    23.651,
+    4.257
    ],
    "v/c15/p_woobin/k_tonight.2": [
-    "audio/voice/c15/sub.mp3?v=b44c2719",
-    29.727,
-    3.64
+    "audio/voice/c15/sub.mp3?v=21d1c7e5",
+    28.138,
+    3.552
    ],
    "v/c15/p_woobin/k_tonight.3": [
-    "audio/voice/c15/sub.mp3?v=b44c2719",
-    33.597,
-    5.315
+    "audio/voice/c15/sub.mp3?v=21d1c7e5",
+    31.919,
+    5.674
    ],
    "v/c15/p_woobin/k_boxcar": [
-    "audio/voice/c15/sub.mp3?v=b44c2719",
-    39.142,
-    10.291
+    "audio/voice/c15/sub.mp3?v=21d1c7e5",
+    37.823,
+    7.994
    ],
    "v/c15/p_woobin/k_dasom": [
-    "audio/voice/c15/sub.mp3?v=b44c2719",
-    49.663,
-    9.212
+    "audio/voice/c15/sub.mp3?v=21d1c7e5",
+    46.047,
+    8.12
    ],
    "v/c15/p_jisu/_intro": [
-    "audio/voice/c15/sub.mp3?v=b44c2719",
-    59.105,
-    5.206
+    "audio/voice/c15/sub.mp3?v=21d1c7e5",
+    54.397,
+    3.8
    ],
    "v/c15/p_jisu/k_tracker": [
-    "audio/voice/c15/sub.mp3?v=b44c2719",
-    64.541,
-    7.23
+    "audio/voice/c15/sub.mp3?v=21d1c7e5",
+    58.427,
+    7.16
    ],
    "v/c15/p_jisu/k_tracker.2": [
-    "audio/voice/c15/sub.mp3?v=b44c2719",
-    72.001,
-    3.64
+    "audio/voice/c15/sub.mp3?v=21d1c7e5",
+    65.817,
+    3.32
    ]
   }
  }

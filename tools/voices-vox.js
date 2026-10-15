@@ -20,6 +20,7 @@ const V = require('./voices');
 const DESC = require('./vox-cast');
 const TONE = require('./vox-tone');
 const { koNum } = require('./ko-num');
+const KEEP = new Set(require('./vox-keep'));
 const { pack: packFile } = require('./voice-pack');
 
 const root = path.join(__dirname, '..');
@@ -30,15 +31,15 @@ const CLIPS = path.join(root, 'audio', 'vox-clips.json');
 const SR = 44100, LUFS = -22.5; // 소리 크기는 ElevenLabs 대사와 같게 (tools/voice-post.js)
 // 씨앗: VOX_INTRO / VOX_INTRO_MORE (쉼표) 로 늘릴 수 있다 (잘 안 잡히는 목소리를 몇 사람만 다시 지을 때)
 const seedsOf = (v, d) => (v ? v.split(',').map(Number) : d);
-const STEPS = 16; // 확산 단계 (기본 10): 낱말이 덜 뭉개진다
-const INTRO_SEEDS = seedsOf(process.env.VOX_INTRO, [11, 23]), INTRO_MORE = seedsOf(process.env.VOX_INTRO_MORE, [37, 41, 53]), LINE_SEEDS = [5], MORE_SEEDS = seedsOf(process.env.VOX_LINE_MORE, [19, 41]);
+const STEPS = 12; // 확산 단계 (기본 10): 조금 올리면 낱말이 덜 뭉개진다 (16 은 한 번에 30초 넘게 걸렸다)
+const INTRO_SEEDS = seedsOf(process.env.VOX_INTRO, [11, 23, 37, 41]), INTRO_MORE = seedsOf(process.env.VOX_INTRO_MORE, [53, 67, 79]), LINE_SEEDS = [5, 19], MORE_SEEDS = seedsOf(process.env.VOX_LINE_MORE, [41, 53]);
 
 // 설명(tools/vox-cast.js)에서 성별 · 나이를 읽는다: "Elderly male voice, a man of about 65" / "A woman in her fifties"
 const NUM = { seventeen: 17, twenty: 20, 'twenty-three': 23, 'twenty-five': 25, 'twenty-seven': 27, 'thirty-one': 31, 'thirty-five': 35, fifty: 50, 'fifty-five': 55, 'sixty-four': 64, 'seventy-one': 71 };
 const DEC = { teens: 16, twenties: 25, thirties: 35, forties: 45, fifties: 55, sixties: 65, seventies: 75 };
 function meta(d) {
   const f = /^(elderly |young |teenage )?female\b/i.test(d) || (!/^(elderly |young |teenage )?(male|boy)\b/i.test(d) && /\b(woman|her|mother|madam|landlady|waitress|maid|hostess)\b/i.test(d));
-  let m = d.match(/about (\d+)/i), age = m ? +m[1] : null;
+  let m = d.match(/(?:about|of) (\d+)/i), age = m ? +m[1] : null;
   if (age == null && (m = d.match(/(early|mid|late)?\s*(teens|twenties|thirties|forties|fifties|sixties|seventies)/i))) age = DEC[m[2].toLowerCase()] + ({ early: -3, mid: 0, late: 3 }[(m[1] || 'mid').toLowerCase()]);
   if (age == null && (m = d.match(/(seventeen|twenty-three|twenty-five|twenty-seven|thirty-one|thirty-five|fifty-five|sixty-four|seventy-one|twenty|fifty)/i))) age = NUM[m[1].toLowerCase()];
   return { f, age: age || 40 };
@@ -70,13 +71,15 @@ function jobs() {
       });
     }
   }
-  // 숫자는 한글 읽기로 (VoxCPM2 는 「14일」을 엉뚱하게 읽는다), 어조 뒤에 나이에 맞는 빠르기와 또렷한 발음을 붙인다
-  return list.map(j => ({ ...j, text: koNum(j.text), tone: [TONE[j.key.slice(2)], pace(j), 'clear articulation, every word pronounced'].filter(Boolean).join(', ') }));
+  // 숫자는 한글 읽기로 (VoxCPM2 는 「14일」을 엉뚱하게 읽는다). 어조 뒤에 나이에 맞는 말 빠르기와 「탐문에 대답하는 말」을 붙인다
+  // ("clear articulation, every word pronounced" 를 붙였더니 글 읽는 소리가 났다: 관리인 A · B · C 견본에서 사용자가 이 말을 골랐다)
+  return list.map(j => ({ ...j, text: koNum(j.text), tone: [TONE[j.key.slice(2)], pace(j), TALK].filter(Boolean).join(', ') }));
 }
+const TALK = "answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses";
 // 나이 든 사람이 가볍고 빠르게 말하면 나이가 안 맞게 들린다 (어조가 빠르다고 한 줄은 그대로)
 function pace(j) {
   if (/fast|quick|hurried|rush|breathless/i.test(TONE[j.key.slice(2)] || '')) return '';
-  return j.age >= 60 ? 'speaking slowly and deliberately like an older person' : j.age >= 45 ? 'steady unhurried mature delivery' : '';
+  return j.age >= 60 ? 'the unhurried way an older person talks' : j.age >= 45 ? 'a settled mature way of talking' : '';
 }
 
 const safe = k => k.replace(/^v\//, '').replace(/[\\/]/g, '__');
@@ -109,14 +112,27 @@ const sexOk = (r, j) => r.f == null || (j.f ? r.f : r.m) >= 0.5;
 const ageOff = (r, j) => (r.age == null ? 0 : Math.max(0, Math.abs(r.age - j.age) - 6));
 // 또렷함: 받아쓰기가 낱말마다 얼마나 확신했는지 (Whisper 는 뭉개진 말도 앞뒤 뜻으로 채워 적으므로, 글자만 맞춰 보면 빠진 낱말을 못 잡는다)
 const blur = r => (r.pmean == null ? 0 : Math.max(0, 0.85 - r.pmean)) + (r.pmin != null && r.pmin < 0.3 ? 0.15 : 0);
+// 글 읽는 소리: 문장 안에서 음높이가 거의 오르내리지 않는다 (주연 ElevenLabs 평균 5.1 반음, 낭독은 2~3)
+const flat = r => (r.st_sd == null ? 0 : Math.max(0, 3.5 - r.st_sd));
+// 외치는 소리: 그 나이 · 성별의 높이 범위보다 반음 4개 넘게 높다 (게르스틀이 320Hz 로 「시끄럽다」)
+const shout = (r, j) => r.hz > band(j)[1] * 1.26;
+// 말 빠르기 (초당 음절): 나이 든 사람이 빠르면 나이가 안 맞고, 너무 느리면 처진다 (민지 「쫌 느려」)
+const rate = (r, j) => (r.talk ? (j.text.match(/[가-힣]/g) || []).length / r.talk : null);
+function rateOff(r, j) {
+  const v = rate(r, j); if (v == null || /fast|quick|hurried|rush|breathless/i.test(j.tone)) return 0;
+  const [lo, hi] = j.age >= 60 ? [2.8, 5.2] : j.age >= 45 ? [3.2, 6.0] : [3.6, 7.0];
+  return v < lo ? lo - v : v > hi ? v - hi : 0;
+}
 function score(r, j, want) {
   const [lo, hi] = band(j);
-  return r.sim - blur(r) - (sexOk(r, j) ? 0 : 0.6) - (r.hz < lo || r.hz > hi ? 0.2 : 0) - 0.012 * ageOff(r, j) - (r.gap > 1.0 ? 0.3 : 0) - (want ? 0.03 * semi(r.hz, want) : 0);
+  return r.sim - blur(r) - (sexOk(r, j) ? 0 : 0.6) - (r.hz < lo || r.hz > hi ? 0.15 : 0) - (shout(r, j) ? 0.3 : 0) - 0.05 * flat(r) - 0.08 * rateOff(r, j)
+    - 0.012 * ageOff(r, j) - (r.gap > 1.0 ? 0.3 : 0) - (want ? 0.03 * semi(r.hz, want) : 0);
 }
-// 더 지어 볼 줄: 글자가 어긋났거나 뭉개진 낱말이 있거나, 성별이 틀렸거나, (첫인사) 나이가 많이 다르거나, (대답) 첫인사와 높이가 많이 다르거나
-// 높이 범위는 견줄 때만 쓴다: 화내거나 놀라는 줄은 높이가 오르는 게 맞다
+// 더 지어 볼 줄: 글자가 어긋났거나 뭉개진 낱말이 있거나, 성별이 틀렸거나, 외치거나, 평평하게 읽거나, 빠르기가 나이에 안 맞거나,
+// (첫인사) 나이가 많이 다르거나, (대답) 첫인사와 높이가 많이 다르거나. 높이 범위 자체는 견줄 때만 쓴다: 화내거나 놀라는 줄은 높이가 오르는 게 맞다
 function weakOf(r, j, want) {
-  return r.sim < 0.9 || (r.pmin != null && r.pmin < 0.3) || !sexOk(r, j) || (j.intro ? ageOff(r, j) > 12 : semi(r.hz, want) > 5 || ageOff(r, j) > 15);
+  return r.sim < 0.9 || (r.pmin != null && r.pmin < 0.3) || !sexOk(r, j) || shout(r, j) || flat(r) > 1.2 || rateOff(r, j) > 1
+    || (j.intro ? ageOff(r, j) > 12 : semi(r.hz, want) > 5 || ageOff(r, j) > 15);
 }
 // 받아쓴 글도 숫자를 같은 규칙으로 읽어 견준다 (Whisper 는 「14일」처럼 숫자로 적는다)
 const bare = s => koNum(s).replace(/[^0-9A-Za-z가-힣]/g, '');
@@ -155,7 +171,7 @@ async function takes(list, said, make, wantOf, reuse) {
     fs.copyFileSync(path.join(dir, `${safe(j.key)}#${best.seed}.wav`), wavOf(j.key));
     said[j.key] = { t: j.text, d: DESC[j.who], o: j.tone, seed: best.seed, hz: best.hz, sim: best.sim, p: best.pmin, age: best.age, ...(j.intro ? {} : { a: said[introKey(j.who)].seed }) };
     const bad = weakOf(best, j, want);
-    console.log(`  ${bad ? '△' : '✓'} ${j.key} · ${best.sim} · 또렷 ${best.pmean}/${best.pmin} · ${best.hz}Hz · ${best.age}세(${j.age}) ${best.f >= 0.5 ? '여' : '남'}(${j.f ? '여' : '남'}) · ${best.secs}초${best.sim < 0.8 ? ` · 들린 말: ${best.heard}` : ''}`);
+    console.log(`  ${bad ? '△' : '✓'} ${j.key} · ${best.sim} · 또렷 ${best.pmean}/${best.pmin} · 오르내림 ${best.st_sd} · ${(rate(best, j) || 0).toFixed(1)}음절/초 · ${best.hz}Hz · ${best.age}세(${j.age}) ${best.f >= 0.5 ? '여' : '남'}(${j.f ? '여' : '남'}) · ${best.secs}초${best.sim < 0.8 ? ` · 들린 말: ${best.heard}` : ''}`);
     if (bad) weak.push(j);
   }
   fs.writeFileSync(SAID, JSON.stringify(Object.fromEntries(Object.entries(said).sort()), null, 1) + '\n');
@@ -193,9 +209,10 @@ async function main() {
   const said = fs.existsSync(SAID) ? JSON.parse(fs.readFileSync(SAID, 'utf8')) : {};
   fs.mkdirSync(CACHE, { recursive: true });
   const introRedo = new Set(list.filter(j => j.intro && redo.has(j.key)).map(j => j.who));
-  const fresh = j => !redo.has(j.key) && !introRedo.has(j.who) && fs.existsSync(wavOf(j.key)) && said[j.key] && said[j.key].t === j.text && said[j.key].d === DESC[j.who] && (said[j.key].o || '') === j.tone;
+  const kept = j => KEEP.has(j.who) && !redo.has(j.key) && fs.existsSync(wavOf(j.key)) && said[j.key] && said[j.key].t === j.text; // 고정한 사람은 글자가 같으면 그대로
+  const fresh = j => kept(j) || (!redo.has(j.key) && !introRedo.has(j.who) && fs.existsSync(wavOf(j.key)) && said[j.key] && said[j.key].t === j.text && said[j.key].d === DESC[j.who] && (said[j.key].o || '') === j.tone);
   const introOk = who => fresh(all.find(j => j.key === introKey(who)) || {});
-  const todo = list.filter(j => !fresh(j) || (!j.intro && (!introOk(j.who) || said[j.key].a !== (said[introKey(j.who)] || {}).seed)));
+  const todo = list.filter(j => !kept(j) && (!fresh(j) || (!j.intro && (!introOk(j.who) || said[j.key].a !== (said[introKey(j.who)] || {}).seed))));
   console.log(`조연 목소리: ${list.length}줄 (${new Set(list.map(j => j.who)).size}명) · 만들 것 ${todo.length}줄 (${todo.reduce((n, j) => n + j.text.length, 0)}자)`);
   if (dry) { todo.forEach(j => console.log(`${j.key}\t${j.text.slice(0, 80)}`)); return; }
   if (!packOnly && todo.length) {

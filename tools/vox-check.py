@@ -1,13 +1,14 @@
 """조연 목소리 검사 — 받아쓰기(Whisper)로 대본과 맞춰 보고, 음높이 중앙값을 잰다. tools/voices-vox.js 가 부른다.
 
   <venv python> tools/vox-check.py checks.json
-checks.json: [{ "key", "wav", "text" }] → 줄마다 {"key", "heard", "sim": 0~1, "pmin" · "pmean": 낱말 확신도, "hz", "secs", "gap": 가장 긴 침묵(초)}
+checks.json: [{ "key", "wav", "text" }] → 줄마다 {"key", "heard", "sim": 0~1, "pmin" · "pmean": 낱말 확신도, "hz", "st_sd": 오르내림(반음), "talk": 말소리 시간(초), "secs", "gap": 가장 긴 침묵(초)}
 """
 import difflib
 import json
 import re
 import sys
 
+import librosa
 import numpy as np
 import soundfile as sf
 import whisper
@@ -32,6 +33,20 @@ def pitch(x, sr):
         if r.max() > 0.6:
             f0.append(sr / (lo + r.argmax()))
     return float(np.median(f0)) if f0 else 0
+
+
+def melody(wav):
+    """음높이 중앙값(Hz), 문장 안 오르내림(반음 표준편차: 낮으면 평평하게 글 읽는 소리), 말소리가 난 시간(초)"""
+    y, _ = librosa.load(wav, sr=16000, mono=True)
+    yt, _ = librosa.effects.trim(y, top_db=35)
+    f0, vf, _ = librosa.pyin(yt, fmin=60, fmax=420, sr=16000, frame_length=1024)
+    f0 = f0[vf & ~np.isnan(f0)]
+    if len(f0) < 10:
+        return 0, 0, round(len(yt) / 16000, 2)
+    med = float(np.median(f0))
+    st = 12 * np.log2(f0 / med)
+    st = st[np.abs(st) < 10]  # 한 옥타브씩 튀는 잘못 잰 값은 뺀다
+    return round(med), round(float(np.std(st)), 2), round(len(yt) / 16000, 2)
 
 
 def longest_gap(x, sr):
@@ -62,9 +77,9 @@ def main():
         sim = difflib.SequenceMatcher(None, norm(it["text"]), norm(heard)).ratio()
         # 낱말마다 받아쓰기가 얼마나 확신했는지: 뭉개지거나 삼킨 낱말은 낮게 나온다
         probs = [w["probability"] for s in res["segments"] for w in s.get("words", [])]
-        x16 = x[:: max(1, sr // 16000)]
+        hz, st_sd, talk = melody(it["wav"])
         print(json.dumps({"key": it["key"], "heard": heard, "sim": round(sim, 3), "pmin": round(min(probs), 3) if probs else None, "pmean": round(sum(probs) / len(probs), 3) if probs else None,
-                          "hz": round(pitch(x16, 16000)), "secs": round(len(x) / sr, 2), "gap": round(longest_gap(x, sr), 2)}, ensure_ascii=False), flush=True)
+                          "hz": hz, "st_sd": st_sd, "talk": talk, "secs": round(len(x) / sr, 2), "gap": round(longest_gap(x, sr), 2)}, ensure_ascii=False), flush=True)
 
 
 if __name__ == "__main__":
