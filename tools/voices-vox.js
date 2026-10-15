@@ -130,10 +130,19 @@ function score(r, j, want) {
 }
 // 더 지어 볼 줄: 글자가 어긋났거나 뭉개진 낱말이 있거나, 성별이 틀렸거나, 외치거나, 평평하게 읽거나, 빠르기가 나이에 안 맞거나,
 // (첫인사) 나이가 많이 다르거나, (대답) 첫인사와 높이가 많이 다르거나. 높이 범위 자체는 견줄 때만 쓴다: 화내거나 놀라는 줄은 높이가 오르는 게 맞다
-function weakOf(r, j, want) {
-  return r.sim < 0.9 || (r.pmin != null && r.pmin < 0.3) || !sexOk(r, j) || shout(r, j) || flat(r) > 1.2 || rateOff(r, j) > 1
-    || (j.intro ? ageOff(r, j) > 12 : semi(r.hz, want) > 5 || ageOff(r, j) > 15);
+function why(r, j, want) {
+  const w = [];
+  if (r.sim < 0.9) w.push(`받아쓰기 ${r.sim}`);
+  if (r.pmin != null && r.pmin < 0.3) w.push(`뭉개진 낱말 ${r.pmin}`);
+  if (!sexOk(r, j)) w.push('성별');
+  if (shout(r, j)) w.push(`외침 ${r.hz}Hz`);
+  if (flat(r) > 1.2) w.push(`평평함 ${r.st_sd}`);
+  if (rateOff(r, j) > 1) w.push(`빠르기 ${rate(r, j).toFixed(1)}`);
+  if (ageOff(r, j) > (j.intro ? 12 : 15)) w.push(`나이 ${r.age}(${j.age})`);
+  if (!j.intro && want && semi(r.hz, want) > 5) w.push('첫인사와 높이 차');
+  return w;
 }
+const weakOf = (r, j, want) => why(r, j, want).length > 0;
 // 받아쓴 글도 숫자를 같은 규칙으로 읽어 견준다 (Whisper 는 「14일」처럼 숫자로 적는다)
 const bare = s => koNum(s).replace(/[^0-9A-Za-z가-힣]/g, '');
 function ratio(a, b) {
@@ -233,4 +242,4 @@ async function main() {
   pack(all);
 }
 if (require.main === module) main().catch(e => { console.error(e.message || e); process.exit(1); });
-module.exports = { jobs };
+module.exports = { jobs, ratio, why };
