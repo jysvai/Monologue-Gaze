@@ -19,6 +19,7 @@ const { load } = require('./validate');
 const V = require('./voices');
 const DESC = require('./vox-cast');
 const TONE = require('./vox-tone');
+const { koNum } = require('./ko-num');
 const { pack: packFile } = require('./voice-pack');
 
 const root = path.join(__dirname, '..');
@@ -29,6 +30,7 @@ const CLIPS = path.join(root, 'audio', 'vox-clips.json');
 const SR = 44100, LUFS = -22.5; // 소리 크기는 ElevenLabs 대사와 같게 (tools/voice-post.js)
 // 씨앗: VOX_INTRO / VOX_INTRO_MORE (쉼표) 로 늘릴 수 있다 (잘 안 잡히는 목소리를 몇 사람만 다시 지을 때)
 const seedsOf = (v, d) => (v ? v.split(',').map(Number) : d);
+const STEPS = 16; // 확산 단계 (기본 10): 낱말이 덜 뭉개진다
 const INTRO_SEEDS = seedsOf(process.env.VOX_INTRO, [11, 23]), INTRO_MORE = seedsOf(process.env.VOX_INTRO_MORE, [37, 41, 53]), LINE_SEEDS = [5], MORE_SEEDS = seedsOf(process.env.VOX_LINE_MORE, [19, 41]);
 
 // 설명(tools/vox-cast.js)에서 성별 · 나이를 읽는다: "Elderly male voice, a man of about 65" / "A woman in her fifties"
@@ -68,7 +70,13 @@ function jobs() {
       });
     }
   }
-  return list.map(j => ({ ...j, tone: TONE[j.key.slice(2)] || '' }));
+  // 숫자는 한글 읽기로 (VoxCPM2 는 「14일」을 엉뚱하게 읽는다), 어조 뒤에 나이에 맞는 빠르기와 또렷한 발음을 붙인다
+  return list.map(j => ({ ...j, text: koNum(j.text), tone: [TONE[j.key.slice(2)], pace(j), 'clear articulation, every word pronounced'].filter(Boolean).join(', ') }));
+}
+// 나이 든 사람이 가볍고 빠르게 말하면 나이가 안 맞게 들린다 (어조가 빠르다고 한 줄은 그대로)
+function pace(j) {
+  if (/fast|quick|hurried|rush|breathless/i.test(TONE[j.key.slice(2)] || '')) return '';
+  return j.age >= 60 ? 'speaking slowly and deliberately like an older person' : j.age >= 45 ? 'steady unhurried mature delivery' : '';
 }
 
 const safe = k => k.replace(/^v\//, '').replace(/[\\/]/g, '__');
@@ -99,14 +107,25 @@ const band = j => (j.f ? (j.age >= 56 ? [140, 235] : j.age >= 36 ? [155, 250] : 
 // 나이 · 성별 재기(vox-age.py)는 나이 든 목소리를 실제보다 젊게 재는 편이라 여러 번 지은 것끼리 견주는 데만 쓴다
 const sexOk = (r, j) => r.f == null || (j.f ? r.f : r.m) >= 0.5;
 const ageOff = (r, j) => (r.age == null ? 0 : Math.max(0, Math.abs(r.age - j.age) - 6));
+// 또렷함: 받아쓰기가 낱말마다 얼마나 확신했는지 (Whisper 는 뭉개진 말도 앞뒤 뜻으로 채워 적으므로, 글자만 맞춰 보면 빠진 낱말을 못 잡는다)
+const blur = r => (r.pmean == null ? 0 : Math.max(0, 0.85 - r.pmean)) + (r.pmin != null && r.pmin < 0.3 ? 0.15 : 0);
 function score(r, j, want) {
   const [lo, hi] = band(j);
-  return r.sim - (sexOk(r, j) ? 0 : 0.6) - (r.hz < lo || r.hz > hi ? 0.4 : 0) - 0.012 * ageOff(r, j) - (r.gap > 1.0 ? 0.3 : 0) - (want ? 0.03 * semi(r.hz, want) : 0);
+  return r.sim - blur(r) - (sexOk(r, j) ? 0 : 0.6) - (r.hz < lo || r.hz > hi ? 0.2 : 0) - 0.012 * ageOff(r, j) - (r.gap > 1.0 ? 0.3 : 0) - (want ? 0.03 * semi(r.hz, want) : 0);
 }
-// 더 지어 볼 줄: 받아쓰기가 어긋났거나, 성별이 틀렸거나, 높이가 범위를 벗어났거나, (첫인사) 나이가 많이 다르거나, (대답) 첫인사와 높이가 다르거나
+// 더 지어 볼 줄: 글자가 어긋났거나 뭉개진 낱말이 있거나, 성별이 틀렸거나, (첫인사) 나이가 많이 다르거나, (대답) 첫인사와 높이가 많이 다르거나
+// 높이 범위는 견줄 때만 쓴다: 화내거나 놀라는 줄은 높이가 오르는 게 맞다
 function weakOf(r, j, want) {
-  const [lo, hi] = band(j);
-  return r.sim < 0.8 || !sexOk(r, j) || r.hz < lo || r.hz > hi || (j.intro ? ageOff(r, j) > 12 : semi(r.hz, want) > 4 || ageOff(r, j) > 15); // 감정이 실리면 높이가 조금 오르내린다
+  return r.sim < 0.9 || (r.pmin != null && r.pmin < 0.3) || !sexOk(r, j) || (j.intro ? ageOff(r, j) > 12 : semi(r.hz, want) > 5 || ageOff(r, j) > 15);
+}
+// 받아쓴 글도 숫자를 같은 규칙으로 읽어 견준다 (Whisper 는 「14일」처럼 숫자로 적는다)
+const bare = s => koNum(s).replace(/[^0-9A-Za-z가-힣]/g, '');
+function ratio(a, b) {
+  a = bare(a); b = bare(b);
+  if (!a.length && !b.length) return 1;
+  const dp = new Array(b.length + 1).fill(0);
+  for (let i = 1; i <= a.length; i++) { let prev = 0; for (let k = 1; k <= b.length; k++) { const t = dp[k]; dp[k] = a[i - 1] === b[k - 1] ? prev + 1 : Math.max(dp[k], dp[k - 1]); prev = t; } }
+  return Math.round((2 * dp[b.length] / (a.length + b.length)) * 1000) / 1000;
 }
 
 // 한 묶음: 줄마다 여러 번 만들고 받아쓰기로 재어 가장 나은 것을 cache 에 둔다
@@ -124,6 +143,7 @@ async function takes(list, said, make, wantOf, reuse) {
   const cf = path.join(CACHE, 'checks.json');
   fs.writeFileSync(cf, JSON.stringify(runs.filter(r => ok.has(r.key)).map(r => ({ key: r.key, wav: r.out, text: r.text }))));
   const heard = Object.fromEntries((await py('vox-check.py', cf)).map(r => [r.key, r]));
+  for (const r of runs) if (heard[r.key]) heard[r.key].sim = ratio(heard[r.key].heard, r.text);
   for (const r of await py('vox-age.py', cf)) if (heard[r.key]) Object.assign(heard[r.key], { age: r.age, f: r.f, m: r.m });
   console.log(`  ${Math.round((Date.now() - t0) / 1000)}초`);
   const weak = [];
@@ -133,9 +153,9 @@ async function takes(list, said, make, wantOf, reuse) {
     if (!cand.length) { console.log('  ✗ 못 만듦', j.key); continue; }
     const best = cand.reduce((a, b) => (score(b, j, want) > score(a, j, want) ? b : a));
     fs.copyFileSync(path.join(dir, `${safe(j.key)}#${best.seed}.wav`), wavOf(j.key));
-    said[j.key] = { t: j.text, d: DESC[j.who], o: j.tone, seed: best.seed, hz: best.hz, sim: best.sim, age: best.age, ...(j.intro ? {} : { a: said[introKey(j.who)].seed }) };
+    said[j.key] = { t: j.text, d: DESC[j.who], o: j.tone, seed: best.seed, hz: best.hz, sim: best.sim, p: best.pmin, age: best.age, ...(j.intro ? {} : { a: said[introKey(j.who)].seed }) };
     const bad = weakOf(best, j, want);
-    console.log(`  ${bad ? '△' : '✓'} ${j.key} · ${best.sim} · ${best.hz}Hz · ${best.age}세(${j.age}) ${best.f >= 0.5 ? '여' : '남'}(${j.f ? '여' : '남'}) · ${best.secs}초${best.sim < 0.8 ? ` · 들린 말: ${best.heard}` : ''}`);
+    console.log(`  ${bad ? '△' : '✓'} ${j.key} · ${best.sim} · 또렷 ${best.pmean}/${best.pmin} · ${best.hz}Hz · ${best.age}세(${j.age}) ${best.f >= 0.5 ? '여' : '남'}(${j.f ? '여' : '남'}) · ${best.secs}초${best.sim < 0.8 ? ` · 들린 말: ${best.heard}` : ''}`);
     if (bad) weak.push(j);
   }
   fs.writeFileSync(SAID, JSON.stringify(Object.fromEntries(Object.entries(said).sort()), null, 1) + '\n');
@@ -183,12 +203,12 @@ async function main() {
     const tdir = path.join(CACHE, 'takes'), pre = new Set(todo.map(j => safe(j.key) + '#'));
     if (fs.existsSync(tdir)) for (const f of fs.readdirSync(tdir)) if (pre.has(f.slice(0, f.indexOf('#') + 1))) fs.unlinkSync(path.join(tdir, f)); // 옛 설명으로 지은 것과 섞이지 않게
     // 첫인사: 두 번 지어 보고, 성별 · 나이 · 높이 · 받아쓰기가 어긋나면 세 번 더 지어 다섯 개 중 가장 나은 것
-    const design = seeds => j => seeds.map(seed => ({ text: j.text, desc: DESC[j.who] + (j.tone ? ', ' + j.tone : ''), seed }));
+    const design = seeds => j => seeds.map(seed => ({ text: j.text, desc: DESC[j.who] + (j.tone ? ', ' + j.tone : ''), seed, steps: STEPS }));
     const weakIntro = intros.length ? await takes(intros, said, design(INTRO_SEEDS), () => 0) : [];
     if (weakIntro.length) await takes(weakIntro, said, design([...INTRO_SEEDS, ...INTRO_MORE]), () => 0, true);
     // 대답: 그 사람 견본의 목소리 결에 그 줄의 어조(vox-tone.js)를 얹어 한 번, 어긋나면 두 번 더 지어 셋 중 나은 것
     const ref = j => ({ ref: wavOf(introKey(j.who)), ref_text: said[introKey(j.who)].t, ...(j.tone ? { control: j.tone } : {}) });
-    const clone = seeds => j => seeds.map(seed => ({ text: j.text, seed, ...ref(j) }));
+    const clone = seeds => j => seeds.map(seed => ({ text: j.text, seed, steps: STEPS, ...ref(j) }));
     const rest = todo.filter(j => !j.intro && fs.existsSync(wavOf(introKey(j.who))) && said[introKey(j.who)]);
     const weak = rest.length ? await takes(rest, said, clone(LINE_SEEDS), j => said[introKey(j.who)].hz) : [];
     if (weak.length) await takes(weak, said, clone([...LINE_SEEDS, ...MORE_SEEDS]), j => said[introKey(j.who)].hz, true);

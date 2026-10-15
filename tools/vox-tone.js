@@ -4,14 +4,14 @@
  * 키: <사건>/<사람>/<질문 키>[.<줄>]  (첫인사는 _intro)
  */
 module.exports = {
-  'c00/p_manager/_intro': 'calm and polite but weary, speaking slowly with a quiet sigh',
-  'c00/p_manager/k_delivery': 'remembering with growing unease, slow and hushed, voice dropping sadly at the end',
+  'c00/p_manager/_intro': 'relaxed and natural, an old guard talking plainly to a detective, a little weary',
+  'c00/p_manager/k_delivery': 'remembering with growing unease, natural and plain, voice dropping at the end',
   'c00/p_neighbor/_intro': 'brisk and chatty, eager to talk, lively rising intonation',
   'c00/p_neighbor/k_door': 'suddenly remembering, surprised and animated, quick gossiping tone',
-  'c00/p_minji/_intro': 'quiet and sad, holding back tears',
-  'c00/p_minji/k_dohyun': 'sad and shaken, voice trembling, slowing down as she remembers',
+  'c00/p_minji/_intro': 'quietly sad but at a natural conversational pace, not slow',
+  'c00/p_minji/k_dohyun': 'sad and shaken, voice trembling slightly, natural conversational pace, not slow',
   'c00/p_dohyun/_intro': 'curt and irritated, defensive, short clipped words',
-  'c01/p_quarrell/_intro': 'firm and matter-of-fact, tired, a little exasperated at being asked again',
+  'c01/p_quarrell/_intro': 'calm, steady and matter-of-fact, tired, quietly exasperated',
   'c01/p_bill/_intro': 'angry and bitter, defensive, raising his voice, gruff',
   'c01/p_bill/k_rose': 'his anger draining away, sad and low, slow with a heavy heart',
   'c01/p_bill/k_night27': 'reluctant and ashamed, low grumbling voice with pauses, resigned',
@@ -20,7 +20,7 @@ module.exports = {
   'c01/p_hannah/k_bluelantern': 'sad and wistful, slow, recalling softly with a sigh',
   'c01/p_peggy/_intro': 'curt and defensive, hard dry tone, a hint of guilt',
   'c01/p_peggy/k_bill': 'her hardness softening, sad and quiet, slow and remorseful',
-  'c01/p_dill/_intro': 'nervous but friendly, a bit hesitant, trailing off at the end',
+  'c01/p_dill/_intro': 'a little nervous, recalling that night, trailing off at the end',
   'c02/p_gerstl/_intro': 'slow and plain, honest, calm and matter-of-fact',
   'c02/p_hubmann/_intro': 'blunt and gruff, slow, earthy and unbothered',
   'c02/p_hubmann/k_thekla': 'slow and thoughtful, low and sad as he remembers',

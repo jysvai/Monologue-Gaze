@@ -1,7 +1,7 @@
 """조연 목소리 검사 — 받아쓰기(Whisper)로 대본과 맞춰 보고, 음높이 중앙값을 잰다. tools/voices-vox.js 가 부른다.
 
   <venv python> tools/vox-check.py checks.json
-checks.json: [{ "key", "wav", "text" }] → 줄마다 {"key", "heard", "sim": 0~1, "hz", "secs", "gap": 가장 긴 침묵(초)}
+checks.json: [{ "key", "wav", "text" }] → 줄마다 {"key", "heard", "sim": 0~1, "pmin" · "pmean": 낱말 확신도, "hz", "secs", "gap": 가장 긴 침묵(초)}
 """
 import difflib
 import json
@@ -57,10 +57,14 @@ def main():
         x, sr = sf.read(it["wav"], dtype="float32")
         if x.ndim > 1:
             x = x.mean(axis=1)
-        heard = model.transcribe(it["wav"], language="ko", fp16=True)["text"].strip()
+        res = model.transcribe(it["wav"], language="ko", fp16=True, word_timestamps=True, condition_on_previous_text=False)
+        heard = res["text"].strip()
         sim = difflib.SequenceMatcher(None, norm(it["text"]), norm(heard)).ratio()
+        # 낱말마다 받아쓰기가 얼마나 확신했는지: 뭉개지거나 삼킨 낱말은 낮게 나온다
+        probs = [w["probability"] for s in res["segments"] for w in s.get("words", [])]
         x16 = x[:: max(1, sr // 16000)]
-        print(json.dumps({"key": it["key"], "heard": heard, "sim": round(sim, 3), "hz": round(pitch(x16, 16000)), "secs": round(len(x) / sr, 2), "gap": round(longest_gap(x, sr), 2)}, ensure_ascii=False), flush=True)
+        print(json.dumps({"key": it["key"], "heard": heard, "sim": round(sim, 3), "pmin": round(min(probs), 3) if probs else None, "pmean": round(sum(probs) / len(probs), 3) if probs else None,
+                          "hz": round(pitch(x16, 16000)), "secs": round(len(x) / sr, 2), "gap": round(longest_gap(x, sr), 2)}, ensure_ascii=False), flush=True)
 
 
 if __name__ == "__main__":
