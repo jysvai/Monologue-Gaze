@@ -101,6 +101,9 @@ tools/gen-images.js   (선택) OpenAI API 키가 있으면 프롬프트 전부�
 tools/voices.js       (선택) ElevenLabs 로 목소리·효과음을 만든다. 사람마다 목소리·말소리 높이 배정표가 들어 있다
 tools/voice-check.py  목소리 점검: 대사 도중 목소리가 툭 내려앉아 긁히는 곳을 두 가지 음높이 측정으로 찾는다 (voices.js 가 녹음할 때마다 불러, 걸리면 다시 받는다)
 tools/eleven.js       ElevenLabs API 호출 (키는 .env 의 ELEVENLABS_API_KEY, 저장소에는 올리지 않는다)
+tools/voices-vox.js   (선택) 조연 목소리를 VoxCPM2 로 로컬에서 만들어 사건마다 audio/voice/<사건>/sub.mp3 하나로 묶는다
+tools/vox-cast.js     조연 목소리 설명 (성별 · 나이를 맨 앞에), tools/vox-tone.js 는 줄마다의 어조
+tools/vox.py · vox-check.py · vox-age.py  VoxCPM2 로 짓기 · 받아쓰기와 음높이 재기 · 나이와 성별 재기 (voices-vox.js 가 부른다)
 tools/itch-zip.js     itch.io 에 올릴 zip: 게임에 쓰는 파일만 골라 dist/ 에 묶는다
 tools/i18n.js         번역: 원문 토막 뽑기, 번역 넣기(검사 포함), 언어·사건마다 빠진 곳 세기
 ```
@@ -123,6 +126,7 @@ node tools/itch-zip.js            # itch.io 에 올릴 dist/monologue-gaze-itch.
 - **목소리는 결정적인 순간에만**: 증거를 들이밀었을 때 바뀌는 진술(용의자·참고인 목소리), 형사가 끼어드는 추궁, 보고서를 올릴 때의 지목과 결론. 나머지 대사는 사람마다 높이가 다른 짧은 말소리로 한 글자씩 찍힌다.
 - 주인공의 결정적인 한마디는 목소리와 함께 화면 아래 속말 자막으로 뜬다.
 - 파일이 없으면 엔진이 합성음으로 대신한다. 새 대사를 만들려면 `.env` 에 `ELEVENLABS_API_KEY=...` 를 넣고 `node tools/voices.js --dry` 로 확인한 뒤 `node tools/voices.js` (없는 파일만 만든다).
+- **조연 목소리**: ElevenLabs 목소리가 없는 조연(63명)은 처음 만날 때의 첫인사와, 메모를 보여 줘서 끌어낸 대답을 [VoxCPM2](https://github.com/OpenBMB/VoxCPM) (Apache-2.0, 로컬) 로 만든 목소리로 한다. 한 사람 안에서 두 엔진을 섞지 않는다. 사람마다 목소리를 하나 지어 두고, 대사마다 그 목소리에 그 줄의 어조(`tools/vox-tone.js`)를 얹는다.
 - 목소리와 연필·종이·자판 소리: [ElevenLabs](https://elevenlabs.io) 로 생성 (무료 요금제라 출처를 밝히고 비상업적으로만 쓴다). 수사 효과음: Freesound·Kenney 의 CC0 녹음 (출처는 `audio/sfx/CREDITS.md`, 파일 목록은 `js/audio.js` 의 `FOLEY`).
 
 ## 이미지 넣기
