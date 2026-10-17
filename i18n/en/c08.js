@@ -774,7 +774,7 @@ MG.I18N.put("en", "c08", {
 "2c7chvxwfo": "I dug the foundations of that site with my own hands. Work's stopped there, you say? Does my heart good.",
 "1ncjqg6dlmm": "Church? I don't go to church.",
 "1jk4fghqnqx": "The church with the bell tower across the rail bridge? It rings that bell every evening, how could I not know it. I don't go.",
-"214yy5mm6sq": "Mr. Han? He drove President Baek's car. Often brought the boss out to the site. Didn't say much.",
+"1fhz33gk0j": "Han Gyeong-ho? Never heard the name. If he's a Haesol man, he must have come after I left.",
 "19mlac6qty3": "That picture looks like me? Anyone with glasses would look like it.",
 "28rx7g7z6xx": "Baek's pager number? I knew it back when I was site manager. Can't even remember it now.",
 "12nr14ksk4x": "Payphone cards? Who carries coins around these days?",

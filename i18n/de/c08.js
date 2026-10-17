@@ -774,7 +774,7 @@ MG.I18N.put("de", "c08", {
 "2c7chvxwfo": "Die Baugrube da habe ich eigenhändig ausgehoben. Dass der Bau jetzt stillsteht, freut mich richtig.",
 "1ncjqg6dlmm": "Kirche? Ich gehe nicht in die Kirche.",
 "1jk4fghqnqx": "Die Kirche mit dem Glockenturm hinter der Eisenbahnbrücke? Die läutet jeden Abend, wie soll ich die nicht kennen. Ich geh da nicht hin.",
-"214yy5mm6sq": "Fahrer Han? Der hat Chef Baeks Wagen gefahren. Hat den Chef oft zur Baustelle gebracht. Hat nicht viel geredet.",
+"1fhz33gk0j": "Han Gyeong-ho? Nie gehört, den Namen. Wenn er von Haesol ist, dann ist er nach mir gekommen.",
 "19mlac6qty3": "Das Bild soll mir ähnlich sehen? Jedem mit Brille sieht das ähnlich.",
 "28rx7g7z6xx": "Baeks Piepsernummer? Als Bauleiter kannte ich sie. Jetzt fällt sie mir nicht mal mehr ein.",
 "12nr14ksk4x": "Telefonkarten? Wer läuft heute noch mit Münzen herum?",

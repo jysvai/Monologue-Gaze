@@ -762,7 +762,7 @@ MG.I18N.put("en", "c06", {
 "2432r4wgavc": "— Here's Kripos's handwriting report. The “E.B.” in the filling-station ledger isn't Lie's p.p. signature. It's the same hand as your own signature on the harbor papers of October 4 and 11. And at 11:30 Lie was down at the Nordkai, signing papers.",
 "1oc4qgdkd7": "(is silent for a long while, then caps his fountain pen) …Lie was on the quay, and I was at the pump. She said that before chartering, she wanted to look down on the Nordkai berth from the Kvitdal slope. So I drove her to the trailhead.",
 "1n14izffltg": "That's as far as I'll go. The rest I'll say when my lawyer is here.",
-"4u9bs0c7vb": "Ola Lie is our clerk. A conscientious young man. Anything signed in my name, Lie takes care of.",
+"21lwk0jryr1": "Ola Lie is our clerk. A conscientious young man. When I'm out, anything signed in my name, Lie takes care of.",
 "6jswgvkgjq": "A Panamanian-flagged cargo ship. We act as her agents. She comes in every Saturday.",
 "234xjvmlts6": "(Studies the photo for a long time) …Every ship has old paint marks. Buying an old ship and renaming her is common enough.",
 "261tb2v5lkz": "The Vesle Terne sank in the North Sea. The insurance investigation was closed long ago.",
