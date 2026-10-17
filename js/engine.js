@@ -817,13 +817,14 @@
     const asked = ST.asked[p.id] || [];
     const ks = Object.keys(p.ask || {}).filter(k => {
       const a = rawAns(p, k);
-      const hit = w => facts.some(f => f && fIs(f, w)); // take 로 받는 메모도 (그 메모로 깨진 대답이면 다시 나와야 한다)
-      return !used.has(k) && isPressAsk(p, k) && !(a && a.soft) && ((a.need || []).some(n => n.split('|').some(x => x[0] === '!' && hit(x.slice(1)))) || (a.take || []).some(hit));
+      const hit = w => facts.some(f => f && fIs(f, w)); // take 가 있으면 받는 메모는 take 그대로 (탐문과 같게: need 의 f_swap 이 5월 메모까지 받아 12월 대답이 나오지 않게)
+      return !used.has(k) && isPressAsk(p, k) && !(a && a.soft) && ((a.take || []).length ? a.take.some(hit) : (a.need || []).some(n => n.split('|').some(x => x[0] === '!' && hit(x.slice(1)))));
     });
     return ks.find(k => asked.includes(k + '!')) || ks[0] || null;
   }
   const ansLines = (p, k) => [].concat((rawAns(p, k) || {}).a || []).map(gv).map((b, i) => ({ r: typeof b === 'string' ? b : b && typeof b.p === 'string' ? b.p : '', i })).filter(x => x.r)
-    .map(({ r, i }) => ({ t: plain(r).replace(DASH, '').replace(/^\s*\([^)]*\)\s*/, '').replace(MIDACT, ' ').replace(/\s+/g, ' ').replace(/\s+([.,!?…。、，！？])/g, '$1').trim(), me: DASH.test(r), i })).filter(x => x.t); // 말 도중의 몸짓도 뺀다 (자막에 괄호가 남지 않게)
+    .map(({ r, i }) => { const t0 = plain(r).replace(DASH, '').replace(/\s+/g, ' ').trim(), t = t0.replace(/^\s*[(（][^()（）]*[)）]\s*/, '').replace(MIDACT, ' ').replace(/\s+/g, ' ').replace(/\s+([.,!?…。、，！？])/g, '$1').trim();
+      return { t: t || (/^[(（][^()（）]*[)）]$/.test(t0) ? t0 : ''), me: DASH.test(r), i }; }).filter(x => x.t); // 말 도중의 몸짓은 뺀다 (자막에 괄호가 남지 않게). 몸짓뿐인 줄(대답 대신 안경을 닦는다)은 그대로 — 빼면 장면이 형사의 물음으로 끝난다
   // 그 대답에 녹음이 있으면 탐문 때와 같은 조각으로 (첫 조각은 키 그대로 span 줄, 나머지는 「키.번호」)
   const ansVoices = (p, k, lines) => {
     const snd = MG.sound, base = `v/${C.id}/${p.id}/${k}`, span = ((MG.audio || {}).span || {})[base] || 1;
