@@ -702,10 +702,10 @@
     solution: {
       culprit: 'k_brate',
       claims: [
-        { id: 'c1', q: '그녀가 누구였는지 보여 주는 기록', accept: ['f_brussels', 'f_anvers_id'] },
-        { id: 'c2', q: '동기', accept: ['f_vt_claim', 'f_repaint', 'f_cipher_vt'] },
-        { id: 'c3', q: '범인과 그녀를 잇는 기록', accept: ['f_callslip', 'f_phonebook', 'f_bumper', 'f_cipher_tlf'] },
-        { id: 'c4', q: '범인이 스스로 댄 행적과 어긋나는 기록', accept: ['f_fuel', 'f_sig', 'f_absent'] },
+        { id: 'c1', q: '그녀가 누구였는지 보여 주는 기록', accept: ['f_brussels', 'f_anvers_id'], near: '딱 한 군데가 어긋난다. 그녀가 지닌 여권의 번호를 내준 곳이나, 그녀가 일하던 곳에서 온 회신인가?' },
+        { id: 'c2', q: '동기', accept: ['f_vt_claim', 'f_repaint', 'f_cipher_vt'], near: '딱 한 군데가 어긋난다. 그녀가 노르웨이까지 와서 무엇을 쫓고 있었는지 적힌 기록인가? 그녀가 일하던 곳의 회신, 그녀가 남긴 쪽지, 그 배의 고물을 볼 것.' },
+        { id: 'c3', q: '범인과 그녀를 잇는 기록', accept: ['f_callslip', 'f_phonebook', 'f_bumper', 'f_cipher_tlf'], near: '딱 한 군데가 어긋난다. 그녀가 누구에게 전화를 걸었고, 누구의 차가 그녀 곁에 있었는지 적힌 기록인가?' },
+        { id: 'c4', q: '범인이 스스로 댄 행적과 어긋나는 기록', accept: ['f_fuel', 'f_sig', 'f_absent'], near: '딱 한 군데가 어긋난다. 범인이 그날 오전 있었다고 한 자리와, 같은 시각 다른 곳에 남은 서명을 맞대 볼 것.' },
       ],
       far: '반려. 서류가 그대로 되돌아왔다. 어디가 틀렸는지는 적혀 있지 않다.',
       stamp: 'Sak nr. 2213/69 · 재검토',

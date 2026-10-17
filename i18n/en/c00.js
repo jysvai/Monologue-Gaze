@@ -489,7 +489,7 @@ MG.I18N.put("en", "c00", {
 "glabgw75m8": "The person Seo-yun opened the door to that night.",
 "rw5i2ph485": "A record that shows when Seo-yun actually died",
 "hlmpww5g3v": "A record of what happened in Unit 504 that night, and that nothing was heard from Seo-yun after it.",
-"clt0kfkbe9": "One thing doesn't fit. Not when someone came or went — is it a record that nothing was heard from Seo-yun after that? Her own phone, a sound the neighbors heard, something left at the door.",
+"15311td6opb": "One thing doesn't fit. Is it a record of what happened in 504 that night, and that nothing was heard from Seo-yun after that? Her own phone, a sound the neighbors heard, something left at the door.",
 "62y7zxqdy9": "It wasn't Seo-yun who left the traces on the 11th and 12th",
 "16binnbqzuz": "A record that the post on the 11th and the order on the 12th came from a device that wasn't Seo-yun's.",
 "2bxujkk7dgx": "The culprit was in Unit 504 until late that night",

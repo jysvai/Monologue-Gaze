@@ -482,6 +482,7 @@ MG.I18N.put("de", "ui", {
 "{0}번": "Nr. {0}",
 "반려. 어디가 틀렸는지는 적혀 있지 않다.": "Zurückgegeben. Was falsch ist, steht nicht dabei.",
 "딱 한 군데가 어긋난다.": "Genau eine Stelle stimmt nicht.",
+"딱 한 군데가 어긋난다. 붙인 메모들이 함께 가리키는 사람이 지목한 사람과 같은가?": "Genau eine Stelle stimmt nicht. Ist die Person, auf die die angehefteten Notizen gemeinsam zeigen, dieselbe, die du benannt hast?",
 " (어긋난 칸: {0})": " (fehlerhaft: {0})",
 " (어긋난 곳: {0}군데)": " (unstimmige Punkte: {0})",
 "범인과 증거는 들어맞는다. 누가 함께 엮였는지, 아니면 혼자 한 일인지 — 거기가 어긋난다.": "Täter und Beweise passen. Wer sonst beteiligt war, oder ob überhaupt jemand — da hakt es.",

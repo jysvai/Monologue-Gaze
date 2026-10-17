@@ -745,7 +745,7 @@ MG.I18N.put("en", "c04", {
 "2dp7fzkuxd7": "One thing doesn't fit. Where was the culprit supposed to be around nine on the morning of the robbery, and were they actually there?",
 "bz2vonkd72": "Trace linking the threatening letters to the culprit",
 "1ujj14dq0ge": "One thing doesn't fit. Of the threatening letters' paper, postmark and lettering, does any of it come from the culprit's surroundings?",
-"1b138i3ecgj": "One thing doesn't fit. Does that note really point to that person?",
+"13h007syrxg": "One thing doesn't fit. Do the notes you attached all point to the person you named?",
 "1hxhpwqg5pc": "水尾署 特捜 43-017 · Reviewed",
 "1z8bsuk6943": "The first plan was the offertory box at Kurotaki Shrine. At the end of May, Irie Shoji wrote the threatening letters with stencil plates from the site storeroom and mailed them at the Sakae-cho Post Office on his lunch break. He brushed white lane paint over the used dark-green motorcycle he had bought at Yashiro Motors. The box on the carrier he made from the plywood of a \"Detour (迂回)\" sign lying about the storeroom, and the white helmet was a site hard hat in the same paint. Dressed as a motorcycle policeman, he reckoned, he could slip past even police lying in wait.",
 "su6xy329": "On the night of June 20, in the shrine woods, he counted the police lying in wait. That morning he had waved his flag and sent the bank's transport car down the waterworks wall road for the first time. A high wall on one side, fields on the other: around nine o'clock, no one passed that way.",

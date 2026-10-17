@@ -392,7 +392,7 @@
     solution: {
       culprit: 'k_jaehee', culpritTip: '그날 밤 서윤이 문을 열어 들인 사람.',
       claims: [
-        { id: 'c1', q: '서윤이 실제로 숨진 때를 보여 주는 기록', tip: '그날 밤 504호에서 무슨 일이 있었고, 그 뒤로 서윤에게서 아무 기척이 없었다는 기록.', accept: ['f_noise', 'f_door_night', 'f_bag', 'f_silence', 'f_neighbor_door', 'f_tl_night', 'f_phone_last'], near: '딱 한 군데가 어긋난다. 누가 드나든 때가 아니라, 그 뒤로 서윤에게서 아무 기척도 없었다는 기록인가? 서윤 자신의 휴대폰, 이웃이 들은 소리, 문 앞에 남은 것.' },
+        { id: 'c1', q: '서윤이 실제로 숨진 때를 보여 주는 기록', tip: '그날 밤 504호에서 무슨 일이 있었고, 그 뒤로 서윤에게서 아무 기척이 없었다는 기록.', accept: ['f_noise', 'f_door_night', 'f_bag', 'f_silence', 'f_neighbor_door', 'f_tl_night', 'f_phone_last'], near: '딱 한 군데가 어긋난다. 그날 밤 504호에서 무슨 일이 있었고, 그 뒤로 서윤에게서 아무 기척도 없었다는 기록인가? 서윤 자신의 휴대폰, 이웃이 들은 소리, 문 앞에 남은 것.' },
         { id: 'c2', q: '11일과 12일의 흔적을 남긴 것은 서윤이 아니다', tip: '11일 게시물과 12일 주문이 서윤이 아닌 다른 기기에서 나왔다는 기록.', accept: ['f_device', 'f_order'] },
         { id: 'c3', q: '범인이 그날 밤 늦게까지 504호에 있었다', tip: '그날 밤 들어온 사람이 언제 나갔는지 — 문이 안에서 열린 시각, 잠기는 소리를 들은 사람.', accept: ['f_door_night', 'f_neighbor_door', 'f_tl_night'] },
         { id: 'c4', q: '동기', tip: '두 사람 사이에 걸려 있던 것 — 서윤의 그림, 그 그림을 두고 오간 말.', accept: ['f_threat', 'f_sketch', 'f_hdd', 'f_hist'] },

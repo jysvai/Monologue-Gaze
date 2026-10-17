@@ -489,7 +489,7 @@ MG.I18N.put("de", "c00", {
 "glabgw75m8": "Die Person, der Seo-yun in jener Nacht die Tür geöffnet hat.",
 "rw5i2ph485": "Ein Beleg dafür, wann Seo-yun tatsächlich starb",
 "hlmpww5g3v": "Eine Notiz darüber, was in jener Nacht in Wohnung 504 geschah und dass danach von Seo-yun nichts mehr kam.",
-"clt0kfkbe9": "Genau eine Stelle stimmt nicht. Nicht wann jemand kam oder ging — ist es eine Notiz, dass von Seo-yun danach kein Lebenszeichen mehr kam? Ihr eigenes Handy, ein Geräusch, das die Nachbarn hörten, etwas, das vor der Tür liegen blieb.",
+"15311td6opb": "Genau eine Stelle stimmt nicht. Ist es eine Notiz darüber, was in jener Nacht in 504 geschah, und dass danach kein Lebenszeichen mehr von Seo-yun kam? Ihr eigenes Handy, ein Geräusch, das die Nachbarn hörten, etwas, das vor der Tür lag.",
 "62y7zxqdy9": "Die Spuren vom 11. und 12. stammen nicht von Seo-yun",
 "16binnbqzuz": "Eine Notiz, dass der Beitrag vom 11. und die Bestellung vom 12. von einem Gerät kamen, das nicht Seo-yun gehörte.",
 "2bxujkk7dgx": "Wer es getan hat, blieb in jener Nacht bis spät in Wohnung 504",

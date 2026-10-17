@@ -3643,24 +3643,27 @@
       if (!n || !(cl.accept || []).some(w => fIs(n.f, w))) { bad.push(T`${i + 1}번`); badCl.push(cl); }
     });
     const wrong = bad.length;
+    // 한 칸만 틀렸을 때의 말: 주장 칸이면 그 칸에 적어 둔 말 (두 번째부터 near2), 범인 칸이면 sol.near — 없으면 메모가 가리키는 사람과 맞대 보라고 (범인 칸이 틀렸는데 「딱 한 군데」만 하고 끝내지 않게)
+    const oneNear = again => badCl.length === 1 ? (again && badCl[0].near2) || badCl[0].near || badCl[0].near2 || T('딱 한 군데가 어긋난다.')
+      : sol.near || T('딱 한 군데가 어긋난다. 붙인 메모들이 함께 가리키는 사람이 지목한 사람과 같은가?');
     const fresh = wrong === 0 && !ST.solved;
     ST.lastRep = wrong ? sig : null;
     if (wrong === 0) { ST.solved = true; VERDICT = ''; }
     else if (lv() >= 5) {
       VERDICT = sol.far || T('반려. 어디가 틀렸는지는 적혀 있지 않다.');
-      if (ST.tries >= 5 && wrong === 1) VERDICT = ((badCl.length === 1 && (badCl[0].near2 || badCl[0].near)) || sol.near || T('딱 한 군데가 어긋난다.')) + T` (어긋난 칸: ${bad.join(', ')})`; // 다섯 번째부터: 한 칸만 남았으면 그 칸을 짚는다 (숫자만 보고 열 번 넘게 끼워 맞추지 않게)
+      if (ST.tries >= 5 && wrong === 1) VERDICT = oneNear(true) + T` (어긋난 칸: ${bad.join(', ')})`; // 다섯 번째부터: 한 칸만 남았으면 그 칸을 짚는다 (숫자만 보고 열 번 넘게 끼워 맞추지 않게)
       else if (ST.tries >= 2) VERDICT += T` (어긋난 곳: ${wrong}군데)`; // ★5 도 두 번째 반려부터는 몇 군데가 틀렸는지만 — 한 칸씩 바꿔 봐도 아무것도 알 수 없어 손을 놓지 않게
     }
     else {
       // 한 칸만 틀렸고 그 주장에 따로 적어 둔 말이 있으면 그것으로 (「어떻게 알았나」 같은 주장에 「그 사람을 가리키는가」는 엇나간 말이다)
       // 두 번째 제출부터는 near2 가 있으면 그것으로: 같은 말만 되풀이하면 어느 기록을 찾아야 하는지 끝내 모른다
-      VERDICT = wrong === 1 && wBad ? sol.withNear || T('범인과 증거는 들어맞는다. 누가 함께 엮였는지, 아니면 혼자 한 일인지 — 거기가 어긋난다.') : wrong === 1 ? (badCl.length === 1 && ((ST.tries >= 2 && badCl[0].near2) || badCl[0].near)) || sol.near || T('딱 한 군데가 어긋난다.') : sol.far || T('아직 이야기가 이어지지 않는다. 더 쫓아가 보자.');
+      VERDICT = wrong === 1 && wBad ? sol.withNear || T('범인과 증거는 들어맞는다. 누가 함께 엮였는지, 아니면 혼자 한 일인지 — 거기가 어긋난다.') : wrong === 1 ? oneNear(ST.tries >= 2) : sol.far || T('아직 이야기가 이어지지 않는다. 더 쫓아가 보자.');
       // 함께 엮인 사람을 범인으로 적었으면: 엮인 것은 맞다고만 (★5 는 말하지 않는다 — 위의 갈래)
       if (ST.report.culprit !== sol.culprit && Object.keys(sol.with || {}).includes(ST.report.culprit)) VERDICT += '\n' + T('지목한 사람이 이 일에 엮인 것은 맞다. 그래도 직접 한 사람은 아니다.');
       // ★3 은 한 칸만 남았을 때 그 칸을 짚어 준다. 여러 칸이 틀렸을 때까지 칸을 알려 주면 칸마다 메모를 바꿔 끼워 찍기로 풀린다 (연습 사건만 전부 알려 준다)
       if (lv() <= 3 && (wrong === 1 || C.kind === 'tutorial')) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`;
       // 연습 사건은 여러 칸이 틀려도 칸마다 무엇을 대야 하는지 한 줄씩 (칸 번호만 보고 되는 대로 바꿔 끼우며 배우지 않게)
-      if (C.kind === 'tutorial' && wrong > 1) VERDICT += [ST.report.culprit !== sol.culprit && sol.culpritTip ? `${fm.short} — ${sol.culpritTip}` : '', ...badCl.map(cl => cl.tip ? `${T`${sol.claims.indexOf(cl) + 1}번`} — ${cl.tip}` : '')].filter(Boolean).map(x => '\n' + x).join('');
+      if (C.kind === 'tutorial') VERDICT += [ST.report.culprit !== sol.culprit && sol.culpritTip && (wrong > 1 || !sol.near) ? `${fm.short} — ${sol.culpritTip}` : '', ...badCl.map(cl => cl.tip && (wrong > 1 || !cl.near) ? `${T`${sol.claims.indexOf(cl) + 1}번`} — ${cl.tip}` : '')].filter(Boolean).map(x => '\n' + x).join('');
       else if (lv() > 3 && ST.tries >= 3 && wrong === 1) VERDICT += T` (어긋난 칸: ${bad.join(', ')})`; // ★4: 세 번째부터는 한 칸 남았을 때 그 칸을 (★3 은 위에서 이미 짚었다)
       else if (ST.tries >= 2 && wrong > 1) VERDICT += T` (어긋난 곳: ${wrong}군데)`;
     }

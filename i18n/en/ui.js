@@ -482,6 +482,7 @@ MG.I18N.put("en", "ui", {
 "{0}번": "#{0}",
 "반려. 어디가 틀렸는지는 적혀 있지 않다.": "Returned. It doesn't say what was wrong.",
 "딱 한 군데가 어긋난다.": "Exactly one thing doesn’t fit.",
+"딱 한 군데가 어긋난다. 붙인 메모들이 함께 가리키는 사람이 지목한 사람과 같은가?": "One thing doesn't fit. Do the notes you attached all point to the person you named?",
 " (어긋난 칸: {0})": " ({0})",
 " (어긋난 곳: {0}군데)": " (Points that don't hold up: {0})",
 "범인과 증거는 들어맞는다. 누가 함께 엮였는지, 아니면 혼자 한 일인지 — 거기가 어긋난다.": "The culprit and the evidence hold up. Who else was involved, or whether anyone was — that is where it falls apart.",

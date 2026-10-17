@@ -745,7 +745,7 @@ MG.I18N.put("de", "c04", {
 "2dp7fzkuxd7": "Genau eine Stelle stimmt nicht. Wo sollte der Täter am Morgen der Tat gegen neun sein — und war er wirklich dort?",
 "bz2vonkd72": "Spuren, die die Drohbriefe mit dem Täter verbinden",
 "1ujj14dq0ge": "Genau eine Stelle stimmt nicht. Papier, Poststempel, Schriftform der Drohbriefe: Stammt etwas davon aus dem Umfeld des Täters?",
-"1b138i3ecgj": "Genau eine Stelle stimmt nicht. Deutet diese Notiz wirklich auf diese Person?",
+"13h007syrxg": "Genau eine Stelle stimmt nicht. Ist die Person, auf die die angehefteten Notizen gemeinsam zeigen, dieselbe, die du benannt hast?",
 "1hxhpwqg5pc": "水尾署 特捜 43-017 · Wiederaufnahme",
 "1z8bsuk6943": "Zuerst sollte das Geld hinter dem Opferstock des Kurotaki-Schreins übergeben werden. Ende Mai schrieb Irie Shōji die Drohbriefe mit den Schablonen aus dem Baustellenlager und gab sie in der Mittagspause beim Postamt Sakae-chō auf. Das gebrauchte dunkelgrüne Motorrad, das er bei Yashiro Motors gekauft hatte, pinselte er mit weißer Markierungsfarbe an. Die Kiste auf dem Gepäckträger zimmerte er aus dem Sperrholz eines „Umleitung (迂回)“-Schilds, das im Lager herumlag, und der weiße Helm war ein Bauhelm in derselben Farbe. Als Motorradpolizist, so dachte er, käme er auch zwischen den versteckten Polizisten hindurch.",
 "su6xy329": "Am Abend des 20. Juni zählte er im Wald des Schreins die versteckten Polizisten. Am Morgen desselben Tages hatte er mit seiner Flagge den Geldtransporter der Bank zum ersten Mal auf den Mauerweg am Wasserwerk geschickt. Auf der einen Seite stand die hohe Mauer, auf der anderen lagen Felder, und gegen neun Uhr war dort niemand unterwegs.",
