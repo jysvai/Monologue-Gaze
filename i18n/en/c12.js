@@ -770,7 +770,7 @@ MG.I18N.put("en", "c12", {
 "izecu3yoq1": "The cleaning grandpa? I run into him on my evening round sometimes. He's gruff, but in winter he always tells me to wear gloves.",
 "9n3a3wo7l1": "The college guy at the convenience store? He always rings me up when I buy bread after my round. Before dawn his eyes are half shut.",
 "1accvl50ety": "The butcher in the arcade west of the park? Since the article about the tip-off letter, the guys at the office don't talk about anything else. Same shop for thirty years, they say.",
-"2ecwdmszyx3": "That day I'd have gone to the agency at 4 a.m. and done my round too. Every day's the same, so nothing stands out.",
+"1tebz0x9h1y": "That day too I'd have headed out from the office at half past three and done my round. Every day's the same, so nothing stands out.",
 "18q02us7uo5": "I don't really know. I just deliver papers.",
 "5msjvabtd1": "All I know is the office and my route. I don't know about that.",
 "1p5vdh9y3ld": "(Stifles a yawn) After my round I'm busy sleeping, so I don't really know about that stuff.",

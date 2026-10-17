@@ -770,7 +770,7 @@ MG.I18N.put("de", "c12", {
 "izecu3yoq1": "Der Opa, der den Park fegt? Den treff ich manchmal bei der Abendausgabe. Er ist ein bisschen brummig, aber im Winter sagt er immer, ich soll Handschuhe anziehen.",
 "9n3a3wo7l1": "Der Student aus dem Laden? Wenn ich nach dem Austragen Brot kaufe, kassiert immer er. Frühmorgens hat er die Augen halb zu.",
 "1accvl50ety": "Die Metzgerei in der Ladenzeile westlich vom Park? Seit der Artikel über das anonyme Schreiben kam, reden auch die Männer im Zustellbüro nur noch davon. Den Laden soll es seit dreißig Jahren geben.",
-"2ecwdmszyx3": "An dem Tag bin ich auch um vier Uhr früh zur Verteilstelle und hab Zeitungen ausgetragen. Jeder Tag ist gleich, da bleibt nichts Besonderes hängen.",
+"1tebz0x9h1y": "An dem Tag bin ich auch um halb vier früh vom Zustellbüro los und hab Zeitungen ausgetragen. Jeder Tag ist gleich, da bleibt nichts Besonderes hängen.",
 "18q02us7uo5": "Weiß ich nicht so genau. Ich steck ja nur Zeitungen ein.",
 "5msjvabtd1": "Ich kenn nur das Zustellbüro und meine Runde. Davon weiß ich nichts.",
 "1p5vdh9y3ld": "(unterdrückt ein Gähnen) Nach dem Austragen muss ich schnell schlafen, von so was weiß ich nicht viel.",
