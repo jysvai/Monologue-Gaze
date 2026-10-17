@@ -3630,7 +3630,8 @@
     if (JUDGING) return;
     const sol = C.solution, c0 = C, s0 = ST, fm = FORM(); // 판정이 나오기 전에 다른 수사관 서랍으로 바뀌면 그 사람 화면에 이 결말을 띄우지 않는다
     const has = id => ST.notes.some(n => String(n.id) === String(id));
-    if (!ST.report.culprit || sol.claims.some(cl => !ST.report.claims[cl.id] || !has(ST.report.claims[cl.id]))) { VERDICT = T`빈칸이 남아 있다. ${fm.short}${josa(fm.short, '을', '를')} 고르고, 칸마다 메모를 붙여야 올릴 수 있다.`; renderRep(); showVerdict(); say(VERDICT); sfx('miss'); return; }
+    { const emp = sol.claims.map((cl, i) => (!ST.report.claims[cl.id] || !has(ST.report.claims[cl.id]) ? i + 1 : 0)).filter(Boolean); // 무엇이 비었는지만 말한다 (범인을 골라 둔 사람에게 「범인을 고르라」고 하지 않게)
+      if (!ST.report.culprit || emp.length) { VERDICT = !ST.report.culprit && emp.length ? T`빈칸이 남아 있다. ${fm.short}${josa(fm.short, '을', '를')} 고르고, 칸마다 메모를 붙여야 올릴 수 있다.` : emp.length ? T`빈칸이 남아 있다. ${emp.join('·')}번 칸에 메모를 붙여야 올릴 수 있다.` : T`${fm.short}${josa(fm.short, '을', '를')} 골라야 올릴 수 있다.`; renderRep(); showVerdict(); say(VERDICT); sfx('miss'); return; } }
     // 방금 반려된 보고서를 한 칸도 고치지 않고 다시 올리면: 제출 횟수를 쓰지 않고 그렇다고만 알려 준다
     const sig = JSON.stringify([ST.report.culprit, sol.claims.map(cl => String(ST.report.claims[cl.id])), Object.entries(withOf()).sort()]);
     if (!ST.solved && ST.lastRep === sig) { VERDICT = T`방금 반려된 ${fm.title} 그대로다. 어딘가 고쳐서 올린다.`; renderRep(); showVerdict(); say(VERDICT); sfx('miss'); return; }
@@ -4041,14 +4042,14 @@
       if (pq) { // 내밀 메모 찾기
         const w = pq.value.trim().toLowerCase(), box = pq.parentNode;
         let any = 0;
-        box.querySelectorAll('.pk-g').forEach(d => { let n = 0; d.querySelectorAll('.press-opt').forEach(o => { const hit = !w || o.textContent.toLowerCase().includes(w); o.hidden = !hit; n += hit; }); d.hidden = !!w && !n; if (w && n) d.open = true; any += n; });
+        box.querySelectorAll('.pk-g').forEach(d => { let n = 0; const gs = ((d.querySelector('summary') || {}).textContent || '').toLowerCase(); d.querySelectorAll('.press-opt').forEach(o => { const hit = !w || gs.includes(w) || o.textContent.toLowerCase().includes(w); o.hidden = !hit; n += hit; }); d.hidden = !!w && !n; if (w && n) d.open = true; any += n; });
         const none = box.querySelector('.press-none'); if (none) none.hidden = !!any;
         return;
       }
       const q = e.target.closest('[data-rep-filter]');
-      if (q) { // 메모 찾기: 낱말이 든 메모만 남긴다
+      if (q) { // 메모 찾기: 낱말이 든 메모만 남긴다 — 메모가 나온 기록의 이름으로도 (표의 한 줄만 옮긴 메모에는 기록 이름이 없다)
         const w = q.value.trim().toLowerCase(), box = q.parentNode;
-        box.querySelectorAll('.rep-grp').forEach(g => { let any = 0; g.querySelectorAll('.rep-opt').forEach(o => { const hit = !w || o.textContent.toLowerCase().includes(w); o.hidden = !hit; any += hit; }); g.hidden = !any; });
+        box.querySelectorAll('.rep-grp').forEach(g => { let any = 0; const gs = ((g.querySelector('summary') || {}).textContent || '').toLowerCase(); g.querySelectorAll('.rep-opt').forEach(o => { const hit = !w || gs.includes(w) || o.textContent.toLowerCase().includes(w); o.hidden = !hit; any += hit; }); g.hidden = !any; });
         const none = box.querySelector('.rep-none'); if (none) none.hidden = !!box.querySelector('.rep-grp:not([hidden])');
         return;
       }

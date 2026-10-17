@@ -476,6 +476,8 @@ MG.I18N.put("de", "ui", {
 "이 칸에서는 이미 찾았다: {0}": "In diesem Feld schon gefunden: {0}",
 "이 칸에는 눈에 걸리는 것이 없다": "In diesem Feld fällt nichts auf",
 "빈칸이 남아 있다. {0}{1} 고르고, 칸마다 메모를 붙여야 올릴 수 있다.": "Es gibt noch leere Felder. Erst „{0}“ bestimmen und jedem Punkt eine Notiz anheften, dann einreichen.",
+"빈칸이 남아 있다. {0}번 칸에 메모를 붙여야 올릴 수 있다.": "Es gibt noch leere Felder. Erst Punkt {0} eine Notiz anheften, dann einreichen.",
+"{0}{1} 골라야 올릴 수 있다.": "Erst „{0}“ bestimmen, dann einreichen.",
 "방금 반려된 {0} 그대로다. 어딘가 고쳐서 올린다.": "{0}: genau so eben zurückgegeben. Erst etwas ändern, dann einreichen.",
 "{0}번": "Nr. {0}",
 "반려. 어디가 틀렸는지는 적혀 있지 않다.": "Zurückgegeben. Was falsch ist, steht nicht dabei.",

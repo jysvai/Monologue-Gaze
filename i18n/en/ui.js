@@ -476,6 +476,8 @@ MG.I18N.put("en", "ui", {
 "이 칸에서는 이미 찾았다: {0}": "Already found in this section: {0}",
 "이 칸에는 눈에 걸리는 것이 없다": "Nothing catches the eye in this section",
 "빈칸이 남아 있다. {0}{1} 고르고, 칸마다 메모를 붙여야 올릴 수 있다.": "There are blanks left. Fill in “{0}” and attach a note to every item before submitting.",
+"빈칸이 남아 있다. {0}번 칸에 메모를 붙여야 올릴 수 있다.": "There are blanks left. Attach a note to item {0} before submitting.",
+"{0}{1} 골라야 올릴 수 있다.": "Choose “{0}” before submitting.",
 "방금 반려된 {0} 그대로다. 어딘가 고쳐서 올린다.": "This is the same {0} that was just returned. Change something before submitting.",
 "{0}번": "#{0}",
 "반려. 어디가 틀렸는지는 적혀 있지 않다.": "Returned. It doesn't say what was wrong.",
