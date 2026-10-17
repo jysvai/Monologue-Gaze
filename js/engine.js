@@ -2483,12 +2483,16 @@
     });
     out0.forEach(x => add(...x));
     unmet.filter(promising).forEach(meet);
-    // 3. 메모를 내밀 차례인 대답 — 들은 말이 기록과 어긋나고 그 메모가 이미 수첩에 있다. 단어 모으기보다 먼저 (블라인드 테스트에서 가장 잘 먹힌 짚기)
+    // 3. 메모를 내밀 차례인 대답 — 들은 말이 기록과 어긋나고 그 메모가 이미 수첩에 있다. ★3·4 는 단어 모으기보다 먼저 (블라인드 테스트에서 가장 잘 먹힌 짚기: 펼치면 그 대답으로 간다).
+    //    ★5 는 쪽지 첫 줄만 보이고 누구인지·펼치기가 없어서, 앞에 두면 「어긋나는 대답이 있다」만 되풀이하며 다른 길(신문·자료실 찾기)을 가린다 — 예전처럼 찾기 뒤에
     const people = Object.values(C.people).filter(p => personVisible(p) && ST.asked[p.id] != null);
-    people.forEach(p => ST.keys.forEach(k => {
-      const e = askEntry(p, k), asked = ST.asked[p.id] || [];
-      if (e.endsWith('!') && !asked.includes(e) && asked.includes(k)) { const ev = evidence(p, k)[0]; add(`press:${p.id}|${k}`, T('들은 대답 가운데 기록과 어긋나는 것이 있다.'), ev && ev.src ? T`${pname(p)} — 「${kl(k)}」에 한 대답 · 내밀 메모는 ${ev.src}에서` : T`${pname(p)} — 「${kl(k)}」에 한 대답`, { t: 'person', id: p.id, src: p.src, mark: 'q:' + k }); }
-    }));
+    const pressLeads = () => {
+      people.forEach(p => ST.keys.forEach(k => {
+        const e = askEntry(p, k), asked = ST.asked[p.id] || [];
+        if (e.endsWith('!') && !asked.includes(e) && asked.includes(k)) { const ev = evidence(p, k)[0]; add(`press:${p.id}|${k}`, T('들은 대답 가운데 기록과 어긋나는 것이 있다.'), ev && ev.src ? T`${pname(p)} — 「${kl(k)}」에 한 대답 · 내밀 메모는 ${ev.src}에서` : T`${pname(p)} — 「${kl(k)}」에 한 대답`, { t: 'person', id: p.id, src: p.src, mark: 'q:' + k }); }
+      }));
+    };
+    if (lv() < 5) pressLeads();
     // 2. 읽은 기록 속에 있는데 아직 수첩에 적지 않은 단어
     //    앞으로 이어지는 단어(그 말로 찾으면 나오는 기록이 있거나, 조건에 걸려 있거나, 누군가 그 말에 따로 대답하는 것)를 먼저 짚는다. 아무 데도 안 이어지는 단어부터 짚으면 헛걸음이 된다
     const words = []; seen.forEach(b => b.k.forEach(k => { if (!ST.keys.includes(k) && C.keywords[k] && !C._dead.has(k)) words.push([k, b]); }));
@@ -2504,6 +2508,7 @@
     vis.filter(s => s.type === 'archive').forEach(s => ST.keys.forEach(k => {
       if (C.keywords[k] && C._srcDocs[s.id].some(d => (d.need || []).length && ok(d.need) && (d.find || []).includes(k) && !ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)))) add(`find:${s.id}|${k}`, T`「${plain(s.name)}」에서 수첩의 단어로 아직 찾아보지 않은 것이 있다.`, quote(kl(k)), { t: 'find', src: s.id, id: k });
     }));
+    if (lv() >= 5) pressLeads();
     // 4. 탐문 — 새 단어나 쓸 만한 사실이 나올 물음 (메모를 내밀 차례인 대답은 앞에서 짚었다)
     people.forEach(p => ST.keys.forEach(k => {
       if (!C.keywords[k] || (k === p.key && rawAns(p, k) == null)) return;
