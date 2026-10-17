@@ -2307,6 +2307,9 @@
     // 풀리지 않은 의문이 많으면 셋만 펼쳐 둔다 (수첩이 몇 화면씩 늘어지지 않게): 빈칸 하나만 남은 것부터, 나머지는 새로 나온 것 — 다 풀어 가던 의문이 접혀 남은 한 칸을 잊지 않게
     const open = V.filter(x => !x.done), one = open.filter(x => x.got.filter(g => !g).length === 1).slice(-2);
     const nd = V.filter(x => x.done).length, LIVE = [...one, ...open.filter(x => !one.includes(x)).slice(-(3 - one.length))];
+    // 추궁으로 채운 칸: 누르면 그 말을 깬 사람의 탐문으로 (메모 번호 단추와 같은 자리라 눌러 보게 된다)
+    const pressTag = s => { const pid = (thAlt(s).find(([q, k]) => (ST.asked[q] || []).includes(k + '!')) || [])[0], p = pid && C.people[pid];
+      return p ? ` <button type="button" class="th-press" data-nudge-go="person|${esc(p.src || '')}|${esc(p.id)}" title="${esc(pname(p))}">${T('추궁')}</button>` : ` <span class="th-press">${T('추궁')}</span>`; };
     const step = (x, s, j) => {
       // 따질 말을 아직 듣지 못했으면 그 말을 앞질러 옮기지 않는다 (「긁힌 데 하나 없다는 말, 맞나?」가 그 사람을 만나기도 전에 보이지 않게)
       const unheard = s.press && thAlt(s).every(([pid, k]) => !(ST.asked[pid] || []).includes(k));
@@ -2314,7 +2317,7 @@
       const tk = s.press && thAlt(s)[0][1], topic = known && lv() <= 3 && ST.keys.includes(tk); // ★3 은 무엇을 물을지까지
       if (!x.got[j]) return `<li class="th-gap">${esc(unheard ? (topic ? T`${pname(who)}에게 「${kl(tk)}」 이야기를 아직 듣지 못했다.` : known ? T`${pname(who)}에게서 아직 듣지 못한 말이 있다.` : T('아직 듣지 못한 말이 있다.')) : s.hint || '……')}</li>`;
       const n = thNote(s);
-      return `<li class="th-got">${esc(s.t)}${n ? ` <button type="button" class="th-memo" data-th-memo="${n.id}" aria-label="${T`메모 ${noteNo(n.id)}번 보기`}">${noteNo(n.id)}</button>` : s.press ? ` <span class="th-press">${T('추궁')}</span>` : ''}</li>`;
+      return `<li class="th-got">${esc(s.t)}${n ? ` <button type="button" class="th-memo" data-th-memo="${n.id}" aria-label="${T`메모 ${noteNo(n.id)}번 보기`}">${noteNo(n.id)}</button>` : s.press ? pressTag(s) : ''}</li>`;
     };
     // 같은 글의 빈칸은 한 줄로 (「아직 듣지 못한 말이 있다.」가 두 줄 겹치면 고장처럼 보인다)
     const steps = x => {

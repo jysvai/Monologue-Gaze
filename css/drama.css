@@ -280,6 +280,7 @@ body:has(#paneRead .rep-solved .epi) #solvedBox :is(.epi,.epi-share,.epi-rate,.l
 .th-memo{display:inline-block;min-width:1.4em;margin-left:3px;padding:0 4px;border:1.2px solid rgba(101,95,82,.6);border-radius:50%;background:none;color:var(--pencil);font:16px/1.2 var(--f-hand);text-align:center;cursor:pointer;vertical-align:1px}
 @media (hover:hover){.th-memo:hover{border-color:var(--red);color:var(--red)}}
 .th-press{font:600 11px/1 var(--f-mono);letter-spacing:.04em;color:var(--pencil);vertical-align:2px}
+button.th-press{margin-left:3px;padding:2px 5px;border:1.2px solid rgba(101,95,82,.6);border-radius:3px;background:none;cursor:pointer}button.th-press:hover{border-color:var(--pencil)}
 .th-a{margin:0;padding-left:22px;color:var(--red);font:20px/32px var(--f-hand)}
 .th.lit{animation:noteAgain 1.6s ease-out}
 .th.lit .th-stamp{animation:leadStamp .55s cubic-bezier(.2,.8,.3,1.2) both}
