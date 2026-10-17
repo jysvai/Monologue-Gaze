@@ -325,13 +325,13 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
 .case-view[data-frame="laptop"] .screen .chip.done{border-color:transparent;background:#eef0f4;color:#5f6673;opacity:1}
 .case-view[data-frame="laptop"] .screen .chip.again{border-color:#d93025;background:#fdecea;color:#c62f24;box-shadow:none}
 /* 화면 속 안내 줄: 손글씨 대신 그 화면의 글씨 */
-.case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen :is(.per-ask-t,.res-none,.read-empty p,.q,.lock-h2,.cmp-q,.map-desc,.c-msg){font-family:var(--f-web);font-size:14px;line-height:1.5}
+.case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen :is(.per-ask-t,.res-none,.res-half,.read-empty p,.q,.lock-h2,.cmp-q,.map-desc,.c-msg){font-family:var(--f-web);font-size:14px;line-height:1.5}
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen .per-ask-t{font-weight:700;color:#1d2a44}
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen .per-ask-t small{font-family:var(--f-web);font-weight:400}
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen :is(.res-none,.read-empty p){color:#6b7280}
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen .cmp-q{font-weight:700}
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .screen .skin-photo .doc-t{font:700 15px/1.4 var(--f-web)}
-.case-view[data-frame="crt"] .screen :is(.per-ask-t,.res-none,.read-empty p,.q,.lock-h2,.cmp-q,.map-desc,.c-msg){font-size:13px}
+.case-view[data-frame="crt"] .screen :is(.per-ask-t,.res-none,.res-half,.read-empty p,.q,.lock-h2,.cmp-q,.map-desc,.c-msg){font-size:13px}
 /* 화면 속 보고서·신청서: 종이 서식 대신 경찰 전산 양식 — 칸마다 회색 머리줄, 손글씨 없이, 파란 올리기 단추, 머리에 결재란 */
 .case-view[data-frame="laptop"] .rep-view{--f-web:var(--f-sys);border-radius:4px;background:#fbfbf8;color:#1d1f22}
 .case-view[data-frame="crt"] .rep-view{border:1px solid #7f9db9;background:#fff;color:#111}

@@ -1231,12 +1231,22 @@
   /* ── 기록 조회 (query): 정확한 번호·이름을 넣어 대장을 조회한다 */
   // 이름을 성·이름 순서를 뒤집어 쳐도 (Deok-su Kang = Kang Deok-su) 같은 사람으로 찾는다: 낱말 두세 개면 거꾸로 한 번 더 맞춰 본다
   const flipWords = v => { const w = String(v ?? '').trim().split(/[\s,]+/).filter(Boolean); return w.length > 1 && w.length < 4 ? w.reverse().join(' ') : null; };
+  const qBare = v => String(v ?? '').replace(/\s*[(（][^()（）]*[)）]\s*$/, ''); // 「1968.12.15 (일)」 「31 007 (역 안내)」처럼 기록에 보이는 대로 옮겨 친 것
+  const qHon = v => qBare(v).replace(/\s*(댁|께|씨|님|에게|한테)$/, ''); // 「개성 어머니 댁」 「서 선생께」처럼 말하듯 붙인 꼬리
+  const qFits = (vals, v) => { const L = (Array.isArray(vals) ? vals : [vals]).map(norm); return [v, qBare(v), qHon(v)].some(x => L.includes(norm(x)) || (flipWords(x) != null && L.includes(norm(flipWords(x))))); };
   function queryHits(s, inp) {
     if (!Object.values(inp).some(v => norm(v))) return null;
-    const bare = v => String(v ?? '').replace(/\s*[(（][^()（）]*[)）]\s*$/, ''); // 「1968.12.15 (일)」 「31 007 (역 안내)」처럼 기록에 보이는 대로 옮겨 친 것
-    const hon = v => bare(v).replace(/\s*(댁|께|씨|님|에게|한테)$/, ''); // 「개성 어머니 댁」 「서 선생께」처럼 말하듯 붙인 꼬리
-    const fits = (vals, v) => { const L = (Array.isArray(vals) ? vals : [vals]).map(norm); return [v, bare(v), hon(v)].some(x => L.includes(norm(x)) || (flipWords(x) != null && L.includes(norm(flipWords(x))))); };
-    return (s.records || []).filter(r => Object.entries(r.match || {}).every(([f, vals]) => fits(vals, inp[f]))).map(r => r.doc).filter((id, i, a) => C.docs[id] && a.indexOf(id) === i);
+    return (s.records || []).filter(r => Object.entries(r.match || {}).every(([f, vals]) => qFits(vals, inp[f]))).map(r => r.doc).filter((id, i, a) => C.docs[id] && a.indexOf(id) === i);
+  }
+  // 두 칸을 대는 조회에서 한 칸만 맞았을 때: 어느 칸이 어긋났는지 (그 기록을 찾을 단어가 이미 수첩에 있을 때만 — 범인 이름을 넣어 떠보는 데 쓰이지 않게)
+  function queryHalf(s, inp) {
+    const fs = s.fields || []; if (fs.length < 2) return '';
+    for (const r of s.records || []) {
+      const d = C.docs[r.doc], m = r.match || {}; if (!d || !ok(d.need)) continue;
+      const ids = fs.map(f => f.id).filter(id => id in m), good = ids.filter(id => norm(inp[id]) && qFits(m[id], inp[id])), bad = ids.filter(id => !good.includes(id));
+      if (good.length && bad.length) { const lab = L => L.map(id => fs.find(f => f.id === id).label).join(' · '); return T`「${lab(good)}」 칸은 원부에 맞는 것이 있다. 「${lab(bad)}」 칸이 다르다.`; }
+    }
+    return '';
   }
   function queryList(s) {
     const inp = ST.view.qin[s.id] || {};
@@ -1246,7 +1256,7 @@
     const pick = f => f.pick ? [...new Set(Object.entries(C.keywords).filter(([id, k]) => ST.keys.includes(id) && f.pick.includes(k.type)).map(([id]) => String(kl(id))))] : []; // 수첩에 적힌 이름으로 (아직 만나지 못한 사람의 본이름을 앞질러 보이지 않게)
     const fields = (s.fields || []).map(f => { const L = pick(f), lid = `ql-${s.id}-${f.id}`; return `<label class="qf"><span>${esc(f.label)}</span><input data-qf="${esc(f.id)}" value="${esc(inp[f.id] || '')}" placeholder="${esc(f.placeholder || '')}" autocomplete="off"${L.length ? ` list="${esc(lid)}"` : ''}></label>${L.length ? `<datalist id="${esc(lid)}">${L.map(x => `<option value="${esc(x)}"></option>`).join('')}</datalist>` : ''}`; }).join('');
     let out = '';
-    if (res) out = res.filter(id => C.docs[id]).length ? `<p class="res-n">${T`조회 결과 ${res.filter(id => C.docs[id]).length}건`}</p>${res.filter(id => C.docs[id]).map(id => itemBtn(C.docs[id])).join('')}` : `<p class="res-none">${esc(s.none || T('해당하는 기록이 없다.'))}</p>`;
+    if (res) out = res.filter(id => C.docs[id]).length ? `<p class="res-n">${T`조회 결과 ${res.filter(id => C.docs[id]).length}건`}</p>${res.filter(id => C.docs[id]).map(id => itemBtn(C.docs[id])).join('')}` : `<p class="res-none">${esc(s.none || T('해당하는 기록이 없다.'))}</p>${(h => h ? `<p class="res-half">${esc(h)}</p>` : '')(queryHalf(s, inp))}`;
     return `<form class="q-f" data-query="${esc(s.id)}" data-slip="${esc(s.slip || s.name || '')}">${fields}<button type="submit">${esc(s.button || T('조회'))}</button></form>
       <div class="res">${out}</div>${found.length ? `<p class="res-n">${esc(s.foundLabel || T('조회해 둔 기록'))}</p>${found.map(itemBtn).join('')}` : ''}`;
   }
