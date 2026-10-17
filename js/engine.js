@@ -1983,7 +1983,7 @@
       const tf = shut ? null : thFor(cl.id), top = tf ? tf.ns : [];
       const list = (top.length ? `<details class="rep-grp rep-th" open><summary>${T`의문 ${tf.x.no}에서 밝혀낸 것`} <small>${top.length}</small></summary>${top.map(n => opt(n, notes.indexOf(n))).join('')}</details>` : '')
         + groups.map(g => { const it = g.items.filter(([n]) => !top.includes(n)); return it.length ? `<details class="rep-grp" open><summary>${esc(g.src)} <small>${it.length}</small></summary>${it.map(([n, j]) => opt(n, j)).join('')}</details>` : ''; }).join('');
-      const thLine = !tf ? '' : tf.x.done ? `<p class="rep-th-a">${T`의문 ${tf.x.no}`} → ${esc(tf.x.t.a)}</p>` : `<p class="rep-th-hint">${T`의문 ${tf.x.no} 「${esc(tf.x.t.q)}」 — 빈칸 ${tf.x.got.length}개 중 ${tf.x.got.filter(Boolean).length}개를 채웠다.`}</p>`;
+      const thLine = !tf ? '' : tf.x.done ? `<p class="rep-th-a">${T`의문 ${tf.x.no}`} → ${esc(tf.x.t.a)}</p>` : `<p class="rep-th-hint"><button type="button" class="th-go" data-th-go="${esc(tf.x.t.id)}">${T`의문 ${tf.x.no} 「${esc(tf.x.t.q)}」 — 빈칸 ${tf.x.got.length}개 중 ${tf.x.got.filter(Boolean).length}개를 채웠다.`}</button></p>`; // 누르면 수첩에서 그 의문을 펼쳐 빈칸 물음을 보여 준다
       return `<section class="rep-claim${cur ? ' filled' : ''}${open ? ' open' : ''}" data-claim="${esc(cl.id)}">
         <h4 id="rh-${esc(cl.id)}"><span class="no">${i + 1}</span> ${inline(cl.q)}</h4>${thLine}
         <div class="rep-pick">${cur ? `<p class="rep-memo"><span class="n">${notes.includes(cur) ? notes.indexOf(cur) + 1 + '.' : '—'}</span> ${esc(cur.t)} <span class="src">— ${esc(cur.src || '')}</span></p>` : T('<p class="rep-empty">아직 붙인 메모가 없다.</p>')}
@@ -3667,6 +3667,7 @@
       VERDICT += '\n' + (all ? T('쓸 메모는 수첩에 다 있다. 메모끼리 맞대 본다.')
         : lv() >= 5 ? T('수첩에 아직 모자란 기록이 있다. 더 쫓아가 본다.')
         : [who ? '' : T('지목할 사람이 아직 수첩에 없다.'), lack.length ? T`${lack.join('·')}번을 받칠 메모가 아직 수첩에 없다.` : ''].filter(Boolean).join(' '));
+      if (lv() < 5) lack.forEach(i => { const tf = thFor(sol.claims[i - 1].id); if (tf && !tf.x.done) THX.set(C.id + '|' + tf.x.t.id, true); }); // 메모가 없는 칸의 의문은 수첩에서 펼쳐 둔다 (접힌 채면 빈칸 물음이 안 보여 무엇을 찾을지 모른다)
     }
     save();
     // 연출: 지목 → 침묵 → 판정
@@ -3791,6 +3792,12 @@
         li.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); li.classList.remove('again'); void li.offsetWidth; li.classList.add('again'); return;
       }
       if ((el = t.closest('.th > details > summary'))) { const th = el.closest('.th'); THX.set(C.id + '|' + th.dataset.th, !el.parentNode.open); return; }
+      if ((el = t.closest('[data-th-go]'))) { // 보고서 칸의 의문 줄: 수첩에서 그 의문을 펼치고 그리로
+        THX.set(C.id + '|' + el.dataset.thGo, true); renderNotebook();
+        const nb = $('#nb'), li = nb && nb.querySelector(`.th[data-th="${CSS.escape(el.dataset.thGo)}"]`); if (!li) return;
+        nb.scrollTop += li.getBoundingClientRect().top - nb.getBoundingClientRect().top - 40; if (!beside()) li.scrollIntoView({ block: 'start' });
+        li.classList.remove('nudged'); void li.offsetWidth; li.classList.add('nudged'); return;
+      }
       if (t.closest('[data-nudge]')) return toggleNudge();
       if (t.closest('[data-nudge-more]')) { if (NUDGE) { NUDGE.more = true; renderNudge(); const g = $('#nudgeBox .nudge-go'); if (g && e.detail === 0) g.focus(); } return; }
       if ((el = t.closest('[data-nudge-go]'))) return nudgeGo(el.dataset.nudgeGo);

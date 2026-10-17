@@ -810,7 +810,7 @@ MG.I18N.put("en", "c09", {
 "10t7i6qkgoq": "The house that matches the survivor's memories",
 "j6ywkus725": "One thing doesn't fit. Is it a record that a house matches what the survivor remembered: the stairs, the sticker, the sounds?",
 "bv05vfxl5q": "Why the survivor followed him to that house that night",
-"av7ekt30su": "One thing doesn't fit. What took the survivor to that house that night? Was there a message that drew her there?",
+"k16f0o3gkk": "One thing doesn't fit. What took the survivor to that house that night? Somewhere there should be a record of what she went out to do.",
 "1556ci2knr2": "A record linking the two earlier victims to the culprit",
 "12d23ar7jmv": "One thing doesn't fit. Did the two earlier victims also have some contact with the culprit? Was it the same way?",
 "ekimcnv99y": "The culprit's account of that night is false",

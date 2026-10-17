@@ -810,7 +810,7 @@ MG.I18N.put("de", "c09", {
 "10t7i6qkgoq": "Das Haus, das zu den Erinnerungen der Überlebenden passt",
 "j6ywkus725": "Genau eine Stelle stimmt nicht. Ist es eine Notiz, dass ein Haus zu dem passt, woran sich die Überlebende erinnert: die Treppe, der Aufkleber, die Geräusche?",
 "bv05vfxl5q": "Warum die Überlebende in jener Nacht bis zu diesem Haus mitging",
-"av7ekt30su": "Genau eine Stelle stimmt nicht. Was hat die Überlebende in jener Nacht zu diesem Haus geführt? Gab es eine Nachricht, die sie dorthin gelockt hat?",
+"k16f0o3gkk": "Genau eine Stelle stimmt nicht. Was hat die Überlebende in jener Nacht zu diesem Haus geführt? Irgendwo muss festgehalten sein, wozu sie in der Nacht aus dem Haus ging.",
 "1556ci2knr2": "Aufzeichnungen, die die beiden früheren Opfer mit dem Täter verbinden",
 "12d23ar7jmv": "Genau eine Stelle stimmt nicht. Hatten auch die beiden früheren Opfer Kontakt mit dem Täter? Auf dieselbe Weise?",
 "ekimcnv99y": "Was der Täter über jene Nacht angibt, stimmt nicht",
