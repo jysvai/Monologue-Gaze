@@ -576,6 +576,7 @@ button.ab-c.log:hover{border-color:#5d6a76}
 .ab-back:hover,.ab-back:focus-visible{opacity:1}
 @media (pointer:coarse){.tab{padding-top:11px;padding-bottom:10px}.ab-back{padding:10px 12px}.snd{min-height:36px;padding:8px 12px}.back-list{min-height:40px}.chip,.nb-back{min-height:36px}} /* 손가락으로 누르는 화면: 탭과 돌아가기 단추를 누르기 쉬운 높이로 */
 .skin-board .ab-help{display:inline-block;padding:2px 8px;background:rgba(247,241,222,.92)} /* 코르크 위 글씨는 종이 띠 위에 */
+.skin-board .doc-b>.res-none,.case-view .screen .skin-board .doc-b>.res-none{display:inline-block;padding:4px 10px;background:rgba(247,241,222,.94);color:var(--ink-soft)} /* 빈 행적표의 안내도 종이 띠 위에 (코르크 위 회색 글씨는 안 읽힌다) */
 .qa.ab-hit{animation:abhit 1.8s ease-out}
 @keyframes abhit{0%,35%{background-color:rgba(214,160,40,.28)}100%{background-color:transparent}}
 @media (prefers-reduced-motion:reduce){.qa.ab-hit{animation:none;outline:2px solid rgba(214,160,40,.6)}}
