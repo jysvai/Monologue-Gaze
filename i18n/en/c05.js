@@ -784,7 +784,7 @@ MG.I18N.put("en", "c05", {
 "1xs0q1nvalz": "Which of the letters signed with the hourglass are genuine?",
 "38epgg0d19": "The Courier's Route 7 for the Sunday edition runs through Santa Reina, Millbrook and Port Haley before dawn — the three towns on the postmarks.",
 "1yncxlapti7": "Does anything make the rounds of all three towns?",
-"1mnzp0z97j8": "The Route 7 truck fills the newspaper boxes in front of the three post offices — Santa Reina 02:40, Millbrook 03:50, Port Haley 05:40. The mailbox stands right next to the newspaper box.",
+"14794qenjht": "Before dawn on Sundays, the Route 7 truck fills the newspaper boxes in front of the three post offices. The mailbox stands right next to the newspaper box.",
 "104oc36lbg": "What stops beside those mailboxes before dawn?",
 "v9nl9wsb44": "Roster book — on the Sunday a letter was mailed, the Route 7 truck was driven by Carl Brennan instead of its regular driver, Delgado. It was Brennan who asked to swap.",
 "1e16rx4z2r6": "On the Sunday a letter was mailed, who drove that route?",

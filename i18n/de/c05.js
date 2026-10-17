@@ -784,7 +784,7 @@ MG.I18N.put("de", "c05", {
 "1xs0q1nvalz": "Welche der Briefe mit der Sanduhr sind echt?",
 "38epgg0d19": "Die Route 7 der Courier-Sonntagsausgabe fährt vor Tagesanbruch durch Santa Reina, Millbrook und Port Haley — die drei Orte auf den Poststempeln.",
 "1yncxlapti7": "Gibt es etwas, das alle drei Orte auf einmal abfährt?",
-"1mnzp0z97j8": "Der Wagen der Route 7 füllt die Zeitungskästen vor den drei Postämtern — Santa Reina 02:40, Millbrook 03:50, Port Haley 05:40. Der Briefkasten steht jeweils gleich neben dem Zeitungskasten.",
+"14794qenjht": "Sonntags vor Tagesanbruch füllt der Wagen der Route 7 die Zeitungskästen vor den drei Postämtern. Der Briefkasten steht jeweils gleich neben dem Zeitungskasten.",
 "104oc36lbg": "Was hält vor Tagesanbruch neben diesen Briefkästen?",
 "v9nl9wsb44": "Dienstplanbuch — am Sonntag, an dem ein Brief aufgegeben wurde, fuhr Carl Brennan den Wagen der Route 7 anstelle des Stammfahrers Delgado. Um den Tausch gebeten hatte ebenfalls Brennan.",
 "1e16rx4z2r6": "Wer fuhr diese Route an dem Sonntag, an dem ein Brief aufgegeben wurde?",
