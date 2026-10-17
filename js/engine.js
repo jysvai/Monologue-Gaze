@@ -3027,7 +3027,7 @@
     const lines = HEROSAY[kind];
     if (lines && MG.sound) { HEROI = (HEROI + 1 + (Date.now() & 1)) % lines.length; const k = lines[HEROI], c0 = C, s0 = ST; setTimeout(() => { if (C === c0 && ST === s0) MG.sound.hero(k); }, 1300); }
   }
-  const whoBtn = open => `<button type="button" class="snd who" data-roster aria-expanded="${!!open}">${T`담당 · ${esc(who(roster().list.find(p => p.id === PID)))}`}</button>`;
+  const whoBtn = open => `<button type="button" class="snd who" data-roster aria-expanded="${!!open}" title="${esc(T`서랍은 수사관마다 따로다. 한 컴퓨터를 나눠 써도 남의 수첩을 이어 쓰지 않는다.`)}">${T`담당 · ${esc(who(roster().list.find(p => p.id === PID)))}`}</button>`;
   const mildBtn = () => `<button type="button" class="snd mild" data-mild aria-pressed="${!S.mild}">${S.mild ? T('잔혹 표현 꺼짐') : T('잔혹 표현 켜짐')}</button>`;
   const soundBtn = () => `<button type="button" class="snd" data-sound aria-pressed="${!!S.sound}">${S.sound ? T('소리 켜짐') : T('소리 꺼짐')}</button>${S.sound ? voiceBtn() + ambBtn() : ''}`;
   // 언어: 고르면 새로 불러온다 (js/i18n.js). 언어 이름은 늘 그 언어의 글자로
