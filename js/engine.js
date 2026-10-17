@@ -522,7 +522,7 @@
     if (!CHIPS || CHIPS.id !== C.id + '|' + p.id) {
       const asked = ST.asked[p.id] || [], tie = tieOf(p), age = k => ST.keys.indexOf(k);
       const fresh = ks.filter(k => !asked.includes(askEntry(p, k))).sort((a, b) => (tie[b] || 0) - (tie[a] || 0) || age(b) - age(a)); // 얽힘이 같으면 최근에 적은 단어부터
-      const front = fresh.filter(k => tie[k] > 0).slice(0, CHIP_FRONT);
+      const front = fresh.filter(k => tie[k] > 0 && !fallsIdle(p, askEntry(p, k))).slice(0, CHIP_FRONT); // 앞줄은 그 사람이 할 말이 있는 단어만 — 얽혔어도 늘 하는 핑계(idle)로 받을 단어는 접힌 칸으로
       fresh.filter(k => !front.includes(k)).slice(0, Math.max(0, 5 - front.length)).forEach(k => front.push(k)); // 얽힌 단어가 적으면 최근 단어로 다섯까지는 채운다
       CHIPS = { id: C.id + '|' + p.id, keys: [...fresh, ...ks.filter(k => !fresh.includes(k))], cut: fresh.length, front: new Set(front), open: false, hot: new Set(ks.filter(k => meaty(rawAns(p, k)))) };
     }
