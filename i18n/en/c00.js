@@ -29,7 +29,7 @@ MG.I18N.put("en", "c00", {
 "ax5e5ccujt": "As you read down a record, the detective copies the sentences worth noting into the notebook. In the report, you attach those notes as evidence.",
 "vy5m0gwv4r": "When a note ties in with another clue, it gets a red “Lead!” stamp. If a note looks suspicious to you, tap the “?” at its end to mark it as a “Doubt” yourself. When you tap “Hold out a note”, your notes come sorted into leads, doubts, what people told you, and what you found in the records.",
 "3u5z64eu2j": "At the top of the notebook, “Questions” lists what you need to establish right now. The gaps fill in as you read the records and ask people. Once every gap is filled, the conclusion is written down, and the notes for your report gather there too.",
-"1by95tihlp5": "In “Crime Scene Photos,” tap the photo itself to examine it. “Timeline” opens once a word for that night is in your notebook — listen to what people say, or read the comments on the boards. Move the cards with ▲▼ to match the times.",
+"arihd16oy1": "In “Crime Scene Photos,” tap the photo itself to examine it. “Timeline” opens once a word for that night is in your notebook — listen to what people say, or read the posts on the boards. Move the cards with ▲▼ to match the times.",
 "26c20r4jbbi": "“Whereabouts” opens with the same word. What people say about where they were, and what the records caught, fill in side by side under each time. If a statement clashes with something in the same column, tap it to hold out a note.",
 "2afn3vjepvy": "Nuri Search",
 "baxgq1qstd": "A search site, still logged in on the laptop's browser.",
