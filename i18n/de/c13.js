@@ -779,7 +779,7 @@ MG.I18N.put("de", "c13", {
 "8vuk91a0hx": "Unter mein Außengerät hat einer was geklebt? Ach Gott… In die Gasse geht nachts doch kein Mensch.",
 "rvo8oorg4w": "Die Gasse vorm Haus? Da geht nachts kein Mensch. Stockdunkel, bis auf das Licht an der Hintertür vom Laden.",
 "o0mc199k3n": "Der vom 24-Stunden-Laden kam letzten Monat und hat gefragt, ob er wegen dem Müll die Kamera hinterm Laden auf unsere Mauer richten darf. Genau dahin, wo mein Außengerät steht. Hab ja gesagt.",
-"1zf42522mb3": "Eine Observation? Das ist Sache der Polizei. Wenn Sie einen Parkplatz brauchen, bekommen Sie einen. Ich muss um sieben zum Hauskreis der Gemeinde.",
+"1zf42522mb3": "Observieren? Das ist Polizeisache. Wenn Sie 'nen Parkplatz brauchen, kriegen Sie einen. Ich muss um sieben zum Hauskreis von der Gemeinde.",
 "1iedyni8ldy": "Ich hab um halb sieben den Parkplatz freigemacht und bin um sieben zum Hauskreis von meiner Gemeinde. Nach neun war ich wieder da. Das Telefon war in der Tasche.",
 "t8erbiafwf": "Der Oh? Ein freundlicher Kerl. Ist nachts auch immer im Laden. Aber in letzter Zeit sieht er ganz schön mitgenommen aus.",
 "1bxq0m5n6p7": "Was soll'n das sein? Meine SMS schreibt mir sogar der Enkel.",

@@ -567,7 +567,7 @@ MG.I18N.put("de", "c01", {
 "16nqvtzka20": "Die Frauen kannte ich nicht. Hab nur gehört, was an den Docks so geredet wurde.",
 "1kmxe7ob8ys": "Ein brauner Schal, das ist der von Rose. Winter wie Sommer ist sie mit dem einen ausgekommen.",
 "1w73m2sk9y4": "(Die Hand, die über die Anker-Tätowierung reibt, hält still) …Das war's also. Donnerstagabend ist Rose bis ans Hafentor gekommen und hat nach mir gesucht.",
-"4y7fzith9v": "Sie wollt's der Zeitung melden, hat sie gesagt, und sich vom Schreiber einen Brief aufsetzen lassen. Sie hatte Angst im Gesicht, aber ich stand grad in der Schlange für den Tageslohn und hab nicht hingehört.",
+"rzj8asf6d7": "Sie wollt's der Zeitung melden, hat sie gesagt, und sich vom Schreiber einen Brief aufsetzen lassen. Sie hatte Angst im Gesicht, aber ich stand grad in der Schlange für den Tageslohn und hab nicht hingehört.",
 "1ofaygo9041": "Zwei Jahre haben wir zusammengelebt. Wenn ich bloß mit dem Saufen aufgehört hätte… (Schüttelt den Kopf) Zuletzt hat sie gesagt, sie schrubbt in fremden Häusern die Böden. Irgendwas hätte sie gesehen, und sie wollte es der Zeitung melden oder so, aber ich hab nicht hingehört.",
 "4d6jijo28o": "(Zieht den Ärmel über die Anker-Tätowierung) …In der Zelle war ich. Hätte vor dem Hafentor gelegen, haben sie gesagt.",
 "coybdoqmd1": "Wenn ich meinen Namen sag, kriegt's der Vorarbeiter mit, und die Arbeit bin ich los. Drum hab ich „Cody“ gesagt. Um 7 Uhr morgens haben sie mich laufen lassen. Das ist alles.",
