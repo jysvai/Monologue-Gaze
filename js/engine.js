@@ -2422,7 +2422,7 @@
   function nudgeIndex() {
     if (C._nix) return C._nix;
     const bags = [], br = C.brief || {};
-    bags.push({ ...bagOf([...(br.lines || []).map(l => l[1]), br.scrawl]), title: T('사건 개요'), go: null, seen: () => true }); // 수첩 맨 위 개요 카드
+    bags.push({ ...bagOf([...(br.lines || []).map(l => l[1]), br.scrawl]), title: T('사건 개요'), go: { t: 'brief' }, seen: () => true }); // 수첩 맨 위 개요 카드
     C.sources.forEach(s => bags.push({ ...bagOf([s.desc, s.intro || []]), title: plain(s.name), go: { t: 'src', src: s.id }, seen: () => srcVisible(s) })); // 탭 안내 글
     C.sources.forEach(s => [...(s.sets || []), ...(s.scenes || [])].forEach(x => bags.push({ ...bagOf([x.intro || [], x.meta]), title: plain(x.title), go: { t: s.type === 'photo' ? 'scene' : 'src', id: x.id, src: s.id }, seen: () => srcVisible(s) && ok(x.need) })));
     Object.values(C.docs).forEach(d => bags.push({ ...bagOf([d.title, d.meta, d.kicker, d.body || []]), title: plain(d.title), go: { t: 'doc', id: d.id, src: d.src }, seen: () => ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)) }));
@@ -2596,6 +2596,14 @@
   }
   function nudgeGo(v) {
     const [t, src, id, mark] = v.split('|');
+    if (t === 'brief') { // 수첩 맨 위 개요 카드: 수첩을 거기까지 올리고 그 단어를 깜빡인다
+      const nb = $('#nb'), br = nb && nb.querySelector('.brief'); if (!br) return;
+      nb.scrollTop += br.getBoundingClientRect().top - nb.getBoundingClientRect().top - 12;
+      if (!beside()) br.scrollIntoView({ block: 'start' });
+      const k = mark && mark.startsWith('k:') && $$('.kw', br).find(x => x.dataset.kw === mark.slice(2) && !x.classList.contains('on'));
+      if (k) { k.classList.remove('nudged'); void k.offsetWidth; k.classList.add('nudged'); }
+      return;
+    }
     if (src && C.sources.some(s => s.id === src && srcVisible(s))) { keepPos(); ST.view.src = src; }
     if (t === 'find' && C.keywords[id]) { setQ(src, kl(id)); if (narrow()) { ST.view.open = null; renderRead(); } } // 짚은 단어로 바로 찾아 준다
     else if (t === 'doc' || t === 'person' || t === 'req' || t === 'feed') openItem({ t, id }); // 단톡방은 방까지 연다 (탭만 바꾸면 말이 읽는 칸에 안 뜬다)
