@@ -602,7 +602,7 @@ MG.I18N.put("en", "c08", {
 "1q3lfimdy4": "His dad said from the start it was Mr. Han's doing. By day he'd shout and bluster, but at night he'd sit outside Jun-yeong's room.",
 "1rs1w2vnink": "It's his dad's company. Ever since the Garam-dong site stopped, he couldn't sleep. And then this…",
 "iqb7qtl0co": "Twice I packed a hundred million in used ten-thousand-won notes. The whole time I was counting, all I could see was Jun-yeong's face.",
-"3rjh8km252": "He was our first, so his dad handed out rice cakes to the whole neighborhood. We chose that for the number because no one in our family could ever forget it.",
+"1axy0zm5jcw": "He was our first, so his dad handed out rice cakes to the whole neighborhood. We chose that for the number because no one in our family could ever forget it. …The missing-person flyer the police handed out has his date of birth on it too.",
 "gce18xl7y3": "It's the place his dad's company stopped building halfway. To think Jun-yeong held out all those long days in a shed there… Just thinking about it, I can't breathe.",
 "1rymkqsqhyf": "(clasps her hands together) The foreman at the Garam-dong site? He was the first one there, in front of the shed, the night we found Jun-yeong.",
 "10rcb9lwfu2": "Jun-yeong says that after a long time alone, he heard the foreman's voice outside the door.",

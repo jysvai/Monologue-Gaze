@@ -602,7 +602,7 @@ MG.I18N.put("de", "c08", {
 "1q3lfimdy4": "Mein Mann hat von Anfang an gesagt, das war Fahrer Han. Tagsüber hat er große Töne gespuckt, nachts saß er vor Jun-yeongs Zimmer.",
 "1rs1w2vnink": "Das ist die Firma meines Mannes. Seit die Baustelle in Garam-dong stillsteht, konnte er nicht mehr schlafen. Und dann auch noch das …",
 "iqb7qtl0co": "Zweimal habe ich 100 Millionen in gebrauchten Zehntausendern gepackt. Beim Zählen hatte ich die ganze Zeit Jun-yeongs Gesicht vor Augen.",
-"3rjh8km252": "Er ist unser Erstgeborener, mein Mann hat damals in der ganzen Nachbarschaft Reiskuchen verteilt. Wir haben die Zahl genommen, weil sie in der Familie keiner je vergisst.",
+"1axy0zm5jcw": "Er ist unser Erstgeborener, mein Mann hat damals in der ganzen Nachbarschaft Reiskuchen verteilt. Wir haben die Zahl genommen, weil sie in der Familie keiner je vergisst. …Auf dem Vermisstenplakat, das die Polizei verteilt hat, steht sein Geburtsdatum auch.",
 "gce18xl7y3": "Die Baustelle, die die Firma meines Mannes nicht fertig bauen konnte. Dass Jun-yeong in dem Schuppen so viele Tage ausgehalten hat … wenn ich nur daran denke, kriege ich keine Luft.",
 "1rymkqsqhyf": "(Presst die Hände zusammen) Der Polier von der Baustelle Garam-dong? Er war in der Nacht, als wir Jun-yeong gefunden haben, als Erster vor dem Schuppen.",
 "10rcb9lwfu2": "Jun-yeong sagt, er war lange allein, und dann hat er draußen vor der Tür die Stimme des Poliers gehört.",
