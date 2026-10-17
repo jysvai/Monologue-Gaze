@@ -1639,6 +1639,9 @@
       // 여기엔 없어도 다른 철에 있으면 그리로 건너가는 길을 (같은 말을 그 철에서 찾은 것으로)
       if (!hits.length) res += C.sources.filter(o => o.id !== s.id && o.type === 'archive' && srcVisible(o)).map(o => [o, archiveHits(o, q).length]).filter(x => x[1])
         .map(([o, n]) => `<p class="res-else"><button type="button" class="nb-jump" data-src="${esc(o.id)}" data-srcq="${esc(q)}">${T`${esc(o.name)}에는 ${n}건 있다`} →</button></p>`).join('');
+      // 이 말로 목록 철(봉투·서류철)에 새 기록이 들어왔으면 그쪽으로도 — 그 탭의 빨간 점만으로는 이 검색과 이어지는 줄 모른다
+      if (!hits.length) { const ks = matchKeys(q); res += C.sources.filter(o => o.id !== s.id && o.type === 'list' && srcVisible(o) && srcOpen(o) && C._srcDocs[o.id].some(d => ok(d.need) && !ST.seen.includes(d.id) && (d.need || []).some(n => String(n).split('|').some(x => ks.includes(x)))))
+        .map(o => `<p class="res-else"><button type="button" class="nb-jump" data-src="${esc(o.id)}">${T`${esc(o.name)}에 이 말로 새로 들어온 기록이 있다`} →</button></p>`).join(''); }
     }
     const start = (s.start || []).map(id => C.docs[id]).filter(d => d && ok(d.need) && !hits.includes(d)); // 찾은 것 칸에 이미 뜬 기록은 「처음부터 있던 자료」에 다시 적지 않는다
     // 앞서 찾아 열어 본 것은 검색을 새로 해도 남겨 둔다 — 같은 날짜를 여러 장부에서 맞대 보려고 매번 다시 찾지 않게

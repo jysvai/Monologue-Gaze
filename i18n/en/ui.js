@@ -225,6 +225,7 @@ MG.I18N.put("en", "ui", {
 "'{0}'에 대한 검색 결과가 없습니다.": "No results for '{0}'.",
 "「{0}」에 해당하는 자료가 없다.": "Nothing on file for “{0}”.",
 "{0}에는 {1}건 있다": "{0} has {1}",
+"{0}에 이 말로 새로 들어온 기록이 있다": "{0} has a new record for this word",
 "찾을 단어": "Search term",
 "{0} 검색어": "Search {0}",
 "검색": "Search",

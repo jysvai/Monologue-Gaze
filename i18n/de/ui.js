@@ -225,6 +225,7 @@ MG.I18N.put("de", "ui", {
 "'{0}'에 대한 검색 결과가 없습니다.": "Keine Ergebnisse für „{0}“.",
 "「{0}」에 해당하는 자료가 없다.": "Zu „{0}“ liegt nichts vor.",
 "{0}에는 {1}건 있다": "In „{0}“: {1} Treffer",
+"{0}에 이 말로 새로 들어온 기록이 있다": "In „{0}“ gibt es einen neuen Eintrag zu diesem Wort",
 "찾을 단어": "Suchbegriff",
 "{0} 검색어": "Suchbegriff: {0}",
 "검색": "Suchen",
