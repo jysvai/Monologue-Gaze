@@ -648,7 +648,7 @@ MG.I18N.put("en", "c03", {
 "1b7o02jmi18": "I pointed out the outage to Seo Gi-ryong. “Then what I heard must have been a gramophone. The old man must have put on a changgeuk record.”",
 "pqtknkoy57": "The radio through the wall — was it really playing at that hour?",
 "3u76nlix70": "Park Man-su: there was no gramophone at Bochundang.",
-"1u1ofl7oq9a": "Was there anything at Bochundang besides the radio that could make a sound?",
+"xgs8c39rnh": "What was in the inner room at Bochundang that night?",
 "hsqecu47xo": "I put it to Seo Gi-ryong that the changgeuk never went out at 9:15 p.m. “I must have misread the clock.” If he was in the shop until nearly ten, he couldn't have caught the 9:40 streetcar. No answer.",
 "p25liyakoj": "Hearing Simcheongga at half past nine and then leaving — does the timing add up?",
 "1y1koq26g8v": "No. From 9:05 to 9:50 p.m. nothing came out of the radio, and there was no gramophone at Bochundang. The old man answering “All right, all right” at half past nine was made up too.",

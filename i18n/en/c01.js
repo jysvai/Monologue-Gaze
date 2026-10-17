@@ -839,7 +839,7 @@ MG.I18N.put("en", "c01", {
 "26umhud33yj": "Dill: after two o'clock, Croft came walking out of the dark down the alley. He said he'd gone for coal, but his hands were empty, and he was soaked through.",
 "1fk7gx5l88v": "What did the vigilance men coming back to the back room that night see?",
 "1rki2ek76o1": "The back-room coal scuttle wasn't short that night.",
-"1vx5jvxml11": "When was the back room's coal scuttle last filled?",
+"22lvbifn5ae": "What did the back room look like that night?",
 "1wfsmix8fuy": "I put the business of the coal to Croft. “I went as far as the coal store and came back without any. Thought we were short. Must have been mistaken.”",
 "d8hremp7k3": "The coal scuttle running out early — is that really what happened?",
 "1h3xqrkony8": "Croft. Using the coal as his excuse, he locked the back room and went out, and only came back after two, empty-handed, out of the dark down the alley. The way back from the coal shed to the back door runs past the entrance to the court.",

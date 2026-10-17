@@ -648,7 +648,7 @@ MG.I18N.put("de", "c03", {
 "1b7o02jmi18": "Ich habe Seo Gi-ryong auf den Sendeausfall hingewiesen. „Dann war das, was ich gehört hab, wohl das Grammophon. Der alte Herr wird eine Changgeuk-Platte aufgelegt haben.“",
 "pqtknkoy57": "Das Radio hinter der Wand — lief es zu der Zeit wirklich?",
 "3u76nlix70": "Park Man-su: Im Bochundang gab es kein Grammophon.",
-"1u1ofl7oq9a": "Gab es im Bochundang außer dem Radio noch etwas, das Töne machen konnte?",
+"xgs8c39rnh": "Was stand in jener Nacht im hinteren Zimmer des Bochundang?",
 "hsqecu47xo": "Ich habe Seo Gi-ryong vorgehalten, dass das Changgeuk um 21:15 Uhr gar nicht gesendet wurde. „Hab mich wohl in der Uhr geirrt.“ War er bis fast zehn im Laden, kann er die Straßenbahn um 21:40 Uhr nicht genommen haben. Keine Antwort.",
 "p25liyakoj": "Um halb zehn das Simcheongga gehört und dann gegangen — geht das zeitlich auf?",
 "1y1koq26g8v": "Nein. Von 21:05 bis 21:50 Uhr kam nichts aus dem Radio, und ein Grammophon gab es im Bochundang nicht. Dass der alte Herr um halb zehn „Schon gut, schon gut“ geantwortet habe, ist ebenfalls erfunden.",

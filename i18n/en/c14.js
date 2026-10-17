@@ -1064,7 +1064,7 @@ MG.I18N.put("en", "c14", {
 "dsdxr31082": "Shown the link, Tae-o admitted sending it to Si-woo and Hyun-su. He'd been told passing it to the kids would take 500k off his debt. He won't say who told him.",
 "1yzo4glbt1c": "“Don't know anything about high-paying gigs” — really?",
 "1wh6dt7pks4": "The exchange account in Tae-o's name was opened at the office at the end of October. Only his ID and face were shot on his phone; the rest was done on the branch manager's phone.",
-"ctbpsg9tol": "Who was using Tae-o's name?",
+"2zv3nc6hgs": "When and where was the account in Tae-o's name opened?",
 "oslkvu3g49": "Tae-o is a rider who passed the link around and lent his name. That account was run from the branch manager's phone.",
 "1svz2k07xun": "How did K know Si-woo's situation?",
 "jhp974c2fl": "In their first chat, K named Si-woo's debt: “3.2 mil.” “No need to tell your mom either.”",

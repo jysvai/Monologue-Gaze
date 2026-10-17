@@ -811,7 +811,7 @@ MG.I18N.put("en", "c05", {
 "2hh6x86gu6": "Line trace — the pay phone beside the gas station at 212 Dock Street. When the patrol car got there, delivery trucks were loading at the warehouse dock across the street.",
 "gtr2d61av0": "How far did the phone company trace the line?",
 "15gmtj1ezrd": "Circulation time cards that night — Brennan 00:31. On the other Saturdays that month he punched in between 23:48 and 23:55.",
-"8jehv09uil": "When did the men at the warehouse across the street come in that night?",
+"de0kn5c0n3": "Near where the call was made, was there anywhere that kept a record of the time?",
 "4aapirjcs7": "Shown the time card, Brennan said: “One minute late, then. I was getting coffee at the gas station across the street.” Asked about the phone, he only repeated the part about the coffee.",
 "keaff9cjwt": "Never been late, he says. Was that true that night too?",
 "1buqtbflfcg": "The call came at 12:18 a.m. from the pay phone across the street from the warehouse. Brennan punched in thirteen minutes later, and says himself that he stopped at that gas station.",

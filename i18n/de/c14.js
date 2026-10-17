@@ -1064,7 +1064,7 @@ MG.I18N.put("de", "c14", {
 "dsdxr31082": "Mit dem Link konfrontiert, gab Tae-o zu, ihn an Si-u und Hyeon-su geschickt zu haben. Fürs Weiterschicken an die Jüngeren sollten fünfhunderttausend von seinen Schulden abgehen. Von wem das kam, sagt er nicht.",
 "1yzo4glbt1c": "„Top-Nebenjob? Keine Ahnung“ — wirklich?",
 "1wh6dt7pks4": "Das Börsenkonto auf Tae-os Namen wurde Ende Oktober im Büro angelegt. Mit Tae-os Handy wurden nur Ausweis und Gesicht fotografiert, der Rest lief über das Handy des Filialleiters.",
-"ctbpsg9tol": "Wer hat Tae-os Namen benutzt?",
+"2zv3nc6hgs": "Wann und wo wurde das Konto auf Tae-os Namen eröffnet?",
 "oslkvu3g49": "Tae-o ist ein Fahrer, der den Link weitergab und seinen Namen hergab. Bedient wurde das Konto vom Handy des Filialleiters.",
 "1svz2k07xun": "Woher kannte K Si-us Lage?",
 "jhp974c2fl": "Schon im ersten Chat nannte K Si-us Schulden: „3,2 Mio.“ „Deiner Mutter musst du nix sagen.“",

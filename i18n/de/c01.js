@@ -839,7 +839,7 @@ MG.I18N.put("de", "c01", {
 "26umhud33yj": "Dill: Nach zwei Uhr kam Croft aus dem Dunkel weiter hinten in der Gasse. Er sei Kohle holen gewesen, sagte er, hatte aber nichts in den Händen und war klatschnass.",
 "1fk7gx5l88v": "Was haben die Bürgerwehrleute gesehen, die in jener Nacht zum Hinterzimmer zurückkamen?",
 "1rki2ek76o1": "Der Kohleneimer im Hinterzimmer war in dieser Nacht nicht knapp.",
-"1vx5jvxml11": "Wann wurde der Kohleneimer im Hinterzimmer gefüllt?",
+"22lvbifn5ae": "Wie sah das Hinterzimmer in jener Nacht aus?",
 "1wfsmix8fuy": "Ich habe Croft die Sache mit der Kohle vorgehalten. „Ich bin bis zum Kohlenschuppen und mit leeren Händen zurück. Dachte, die Kohle wär knapp. Hab mich wohl geirrt.“",
 "d8hremp7k3": "Der Kohleneimer sei früh leer gewesen — stimmt das wirklich?",
 "1h3xqrkony8": "Croft. Unter dem Vorwand mit der Kohle schloss er das Hinterzimmer ab und ging hinaus; erst nach zwei kam er mit leeren Händen aus dem Dunkel weiter hinten in der Gasse zurück. Der Weg vom Kohlenschuppen zurück zur Hintertür führt am Eingang zum Court vorbei.",
