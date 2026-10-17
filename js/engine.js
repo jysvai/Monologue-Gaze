@@ -2468,6 +2468,8 @@
       && ([...b.k].some(x => C.keywords[x] && !ST.keys.includes(x) && opens(x)) || [...b.f].some(f => [...useful].some(w => fIs(f, w)) && !noted(f))));
     const unmet = Object.values(C.people).filter(p => personVisible(p) && srcVisible(C.sources.find(s => s.id === p.src) || {}) && ST.asked[p.id] == null);
     const meet = p => add('meet:' + p.id, T('아직 찾아가 보지 않은 사람이 있다.'), pname(p), { t: 'person', id: p.id, src: p.src });
+    // 단어도 메모도 없는 기록(곁가지 · 분위기 글)은 다른 짚을 곳이 다 떨어진 뒤에 — 막힌 사람을 헛걸음시키지 않게 (끝내는 다 짚는다)
+    const later = [], out0 = [], plainDoc = d => { const b = bags.find(x => x.go && x.go.t === 'doc' && x.go.id === d.id); return !!b && !b.f.size && ![...b.k].some(k => C.keywords[k] && !ST.keys.includes(k)); };
     // 1. 보이는데 아직 펼치지 않은 기록, 만나면 앞이 열리는 사람
     vis.forEach(s => {
       const docs = [];
@@ -2477,8 +2479,9 @@
       if (s.type === 'query') docs.push(...(ST.found[s.id] || []).map(id => C.docs[id]).filter(Boolean));
       if (s.type === 'request') docs.push(...(s.items || []).filter(r => { const q = reqState(r.id); return q && q.st === 'done'; }).map(r => C.docs[r.doc]).filter(Boolean));
       if (s.type === 'feed' && ST.live) docs.push(...(s.items || []).filter(it => it.doc && it.id in ST.live.fd).map(it => C.docs[it.doc]).filter(Boolean)); // 단톡방에 온 첨부
-      docs.filter(d => (!d.lock || ST.unl.includes(d.id)) && !ST.seen.includes(d.id)).forEach(d => add('doc:' + d.id, T`「${plain(s.name)}」에 아직 펼쳐 보지 않은 기록이 있다.`, quote(plain(d.title)), { t: 'doc', id: d.id, src: s.id }));
+      docs.filter(d => (!d.lock || ST.unl.includes(d.id)) && !ST.seen.includes(d.id)).forEach(d => (plainDoc(d) ? later : out0).push(['doc:' + d.id, T`「${plain(s.name)}」에 아직 펼쳐 보지 않은 기록이 있다.`, quote(plain(d.title)), { t: 'doc', id: d.id, src: s.id }]));
     });
+    out0.forEach(x => add(...x));
     unmet.filter(promising).forEach(meet);
     // 2. 읽은 기록 속에 있는데 아직 수첩에 적지 않은 단어
     //    앞으로 이어지는 단어(그 말로 찾으면 나오는 기록이 있거나, 조건에 걸려 있거나, 누군가 그 말에 따로 대답하는 것)를 먼저 짚는다. 아무 데도 안 이어지는 단어부터 짚으면 헛걸음이 된다
@@ -2543,8 +2546,10 @@
     // 9. 현행 사건 — 올릴 수 있는 신청서, 기다리면 오는 것
     if (liveOn()) {
       reqItems().forEach(r => { const q = reqState(r.id), s = C.sources.find(x => x.id === r.src); if (s && srcVisible(s) && ok(r.need) && (!q || q.st === 'no') && (!(r.why || []).length || r.why.some(noted))) add('req:' + r.id, T`「${plain(s.name)}」에 올릴 수 있는 신청서가 있다.`, quote(plain(r.title)), { t: 'req', id: r.id, src: r.src }); });
+      later.forEach(x => add(...x)); later.length = 0; // 현행 사건: 기다리기보다는 앞
       if (nextDue() != null) add('wait', T('지금은 기다릴 차례다. 회신이나 새 소식이 오고 있다.'), T('화면 아래 단추로 시간을 넘길 수 있다.'), null);
     }
+    later.forEach(x => add(...x));
     return out;
   }
   function nudgeHtml() {
