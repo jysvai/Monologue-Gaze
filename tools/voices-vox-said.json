@@ -74,46 +74,46 @@
  },
  "v/c01/p_bill/_intro": {
   "t": "난 로즈한테 손끝 하나 안 댔소. 그날 밤 싸운 건 맞소. 사 펜스 달라길래 없다고 했지. 진짜로 없었으니까.",
-  "d": "Male voice, a dock labourer of about 45, deep gravelly masculine voice, bitter and stubborn",
-  "o": "angry and bitter, defensive, raising his voice, gruff, a settled mature way of talking, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
-  "seed": 23,
-  "hz": 105,
+  "d": "Male voice, a dock labourer of about 40, deep gravelly masculine voice, bitter and stubborn",
+  "o": "angry and bitter, defensive, raising his voice, gruff, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
+  "seed": 41,
+  "hz": 124,
   "sim": 1,
-  "p": 0.723,
-  "age": 53.4
+  "p": 0.854,
+  "age": 35.5
  },
  "v/c01/p_bill/k_cranewharf": {
   "t": "…유치장이었소. 부두 정문 앞에 쓰러져 있었다더군. 내 이름을 대면 십장 귀에 들어가 일자리가 날아가오. 그래서 코디라고 했지. 아침 일곱 시에 풀려났소. 그게 다요.",
-  "d": "Male voice, a dock labourer of about 45, deep gravelly masculine voice, bitter and stubborn",
-  "o": "reluctant and ashamed at first, then bitter and stubborn, a gruff dock worker, a settled mature way of talking, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
-  "seed": 79,
-  "hz": 90,
+  "d": "Male voice, a dock labourer of about 40, deep gravelly masculine voice, bitter and stubborn",
+  "o": "reluctant and ashamed at first, then bitter and stubborn, a gruff dock worker, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
+  "seed": 19,
+  "hz": 105,
   "sim": 1,
-  "p": 0.723,
-  "age": 47.5,
-  "a": 23
+  "p": 0.789,
+  "age": 29,
+  "a": 41
  },
  "v/c01/p_bill/k_night27": {
   "t": "…유치장이었소. 부두 정문 앞에 쓰러져 있었다더군. 내 이름을 대면 십장 귀에 들어가 일자리가 날아가오. 그래서 코디라고 했지. 아침 일곱 시에 풀려났소. 그게 다요.",
-  "d": "Male voice, a dock labourer of about 45, deep gravelly masculine voice, bitter and stubborn",
-  "o": "reluctant and ashamed at first, then bitter and stubborn, a gruff dock worker, a settled mature way of talking, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
-  "seed": 79,
-  "hz": 90,
+  "d": "Male voice, a dock labourer of about 40, deep gravelly masculine voice, bitter and stubborn",
+  "o": "reluctant and ashamed at first, then bitter and stubborn, a gruff dock worker, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
+  "seed": 19,
+  "hz": 105,
   "sim": 1,
-  "p": 0.723,
-  "age": 47.5,
-  "a": 23
+  "p": 0.789,
+  "age": 29,
+  "a": 41
  },
  "v/c01/p_bill/k_rose": {
   "t": "…그 얘기였구려. 목요일 저녁에 로즈가 부두 정문까지 날 찾아왔었소.",
-  "d": "Male voice, a dock labourer of about 45, deep gravelly masculine voice, bitter and stubborn",
-  "o": "his anger draining away, sad and low, slow with a heavy heart, a settled mature way of talking, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
-  "seed": 79,
-  "hz": 100,
+  "d": "Male voice, a dock labourer of about 40, deep gravelly masculine voice, bitter and stubborn",
+  "o": "his anger draining away, sad and low, slow with a heavy heart, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
+  "seed": 53,
+  "hz": 135,
   "sim": 1,
-  "p": 0.698,
-  "age": 51.4,
-  "a": 23
+  "p": 0.866,
+  "age": 31.2,
+  "a": 41
  },
  "v/c01/p_dill/_intro": {
   "t": "그 밤 비가 추적추적 왔지요. 핍스랑 한 바퀴 돌고 뒷방으로 돌아갔는데…",
@@ -210,24 +210,24 @@
  },
  "v/c02/p_magdalena/_intro": {
   "t": "마그달레나 뷔르츠예요. 지난 십일월까지 하젤외드에서 일했어요. 지금은 켈바흐 빵집에 있어요.",
-  "d": "Female voice, a former farm maid of 22 now working at a bakery, plain warm mid-low voice of a simple country young woman, straightforward",
+  "d": "Female voice, a former farm maid of 24 now working at a bakery, plain warm mid-low voice of a simple country young woman, straightforward",
   "o": "plain and straightforward, slightly uneasy, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
-  "seed": 37,
-  "hz": 212,
-  "sim": 0.949,
-  "p": 0.729,
-  "age": 26.4
+  "seed": 41,
+  "hz": 239,
+  "sim": 0.935,
+  "p": 0.601,
+  "age": 23.7
  },
  "v/c02/p_magdalena/k_stall": {
   "t": "누가 짐승들을 먹였다고요? …로자 아가씨는 여물을 한 끼에 쇠스랑으로 세 번, 꼭 세어서 주셨어요. 구유 밖으로 흘리면 저를 꾸중하셨고요.",
-  "d": "Female voice, a former farm maid of 22 now working at a bakery, plain warm mid-low voice of a simple country young woman, straightforward",
+  "d": "Female voice, a former farm maid of 24 now working at a bakery, plain warm mid-low voice of a simple country young woman, straightforward",
   "o": "surprised, then remembering plainly, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
   "seed": 19,
-  "hz": 243,
-  "sim": 0.944,
-  "p": 0.814,
-  "age": 33.4,
-  "a": 37
+  "hz": 295,
+  "sim": 0.981,
+  "p": 0.599,
+  "age": 35.8,
+  "a": 41
  },
  "v/c02/p_resl/_intro": {
   "t": "오버마이어예요. 장 손님은 도착한 날 제 손으로 숙박부에 적어요. 우리 집 규칙이에요.",
@@ -314,24 +314,24 @@
  },
  "v/c03/p_park/_intro": {
   "t": "제가 아침에 문을 열었습니다. 영감님은 안방 라디오 앞에 엎드려 계셨고… 라디오 스위치는 켜진 채였어요.",
-  "d": "Male voice, a shop clerk man of about 25, clear adult male voice, polite and shaken",
+  "d": "Male voice, a shop clerk man of about 22, clear adult male voice, polite and shaken",
   "o": "shaken and upset but respectful, voice unsteady with shock, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
-  "seed": 11,
-  "hz": 163,
+  "seed": 37,
+  "hz": 147,
   "sim": 1,
-  "p": 0.922,
-  "age": 23.7
+  "p": 0.735,
+  "age": 27.9
  },
  "v/c03/p_park/k_song": {
   "t": "첫 곡 도중에 끊겼다고요? …그럼 영감님은 그 노래를 끝까지 못 들으셨겠네요.",
-  "d": "Male voice, a shop clerk man of about 25, clear adult male voice, polite and shaken",
+  "d": "Male voice, a shop clerk man of about 22, clear adult male voice, polite and shaken",
   "o": "sad and quiet, low voice catching in his throat, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
   "seed": 19,
-  "hz": 161,
+  "hz": 142,
   "sim": 1,
-  "p": 0.937,
-  "age": 35.3,
-  "a": 11
+  "p": 0.919,
+  "age": 36,
+  "a": 37
  },
  "v/c04/p_genzo/_intro": {
   "t": "경찰이 벌써 세 번째요. 오월 말에 이백오십 씨씨 중고 한 대 판 건 맞소.",
@@ -722,45 +722,45 @@
  },
  "v/c09/p_eunbi/_intro": {
   "t": "소라 대학 동기예요. 그날 밤 문자 주고받은 게 저예요. 폰은 형사님께 드렸어요.",
-  "d": "Female voice, a university student woman of about 21, soft grown-up woman voice, worried",
+  "d": "Female voice, a university student woman of about 23, soft grown-up woman voice, worried",
   "o": "worried and soft, sad, a little shaky, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
   "seed": 23,
-  "hz": 287,
+  "hz": 281,
   "sim": 1,
-  "p": 0.808,
-  "age": 28.6
+  "p": 0.841,
+  "age": 29.4
  },
  "v/c09/p_eunbi/k_convstore": {
   "t": "열 시 이십육 분이요… 저는 그때 소라 답장만 기다리고 있었어요. 오 분 뒤에 소라야? 하고 보냈고요.",
-  "d": "Female voice, a university student woman of about 21, soft grown-up woman voice, worried",
+  "d": "Female voice, a university student woman of about 23, soft grown-up woman voice, worried",
   "o": "sad and choked up, slow, voice breaking, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
-  "seed": 5,
-  "hz": 285,
+  "seed": 19,
+  "hz": 299,
   "sim": 0.974,
-  "p": 0.503,
-  "age": 28,
+  "p": 0.453,
+  "age": 32.2,
   "a": 23
  },
  "v/c09/p_jinwoo/_intro": {
   "t": "선영이랑은 유월에 헤어졌어요. 방명록에 험한 말 쓴 건… 할 말이 없어요.",
-  "d": "Male voice, a man of about 25, low adult male voice, ashamed",
+  "d": "Male voice, a man of about 30, low adult male voice, ashamed",
   "o": "ashamed and embarrassed, low, mumbling, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
-  "seed": 37,
-  "hz": 88,
+  "seed": 11,
+  "hz": 161,
   "sim": 0.964,
-  "p": 0.691,
-  "age": 33.1
+  "p": 0.88,
+  "age": 43.1
  },
  "v/c09/p_jinwoo/k_haeun": {
   "t": "택배를 찾으러 가던 길이었어요? …뉴스엔 그런 말이 없었어요.",
-  "d": "Male voice, a man of about 25, low adult male voice, ashamed",
+  "d": "Male voice, a man of about 30, low adult male voice, ashamed",
   "o": "shocked and sad, quiet, stunned, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
   "seed": 19,
-  "hz": 90,
+  "hz": 135,
   "sim": 1,
-  "p": 0.914,
-  "age": 30.1,
-  "a": 37
+  "p": 0.875,
+  "age": 42,
+  "a": 11
  },
  "v/c09/p_realtor/_intro": {
   "t": "은골동에서 부동산만 스무 해야. 이 동네 집이라면 내가 제일 잘 알지.",
@@ -1067,13 +1067,13 @@
  },
  "v/c14/p_changhoon/_intro": {
   "t": "고모 일로 오셨죠. 제가 의심받는 거 알아요. 돈 빌려 달라 했으니까.",
-  "d": "Male voice, a car mechanic of about 35, plain low masculine voice, defensive but honest",
-  "o": "defensive but honest, plain, a little resigned, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
+  "d": "Male voice, a middle-aged car mechanic of about 47, plain low masculine voice of a man in his late forties, defensive but honest",
+  "o": "defensive but honest, plain, a little resigned, a settled mature way of talking, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
   "seed": 11,
-  "hz": 141,
+  "hz": 135,
   "sim": 1,
-  "p": 0.323,
-  "age": 31
+  "p": 0.892,
+  "age": 36.8
  },
  "v/c14/p_eunju/_intro": {
   "t": "제가 밤에 일해요. 애가 밤에 뭘 하는지 몰랐어요. 제 탓이에요.",
@@ -1119,45 +1119,45 @@
  },
  "v/c14/p_oksun/_intro": {
   "t": "내가 신고했어. 정례 언니가 그러더라고, 금감원 직원한테 돈 맡겼다고. 그런 게 어딨어.",
-  "d": "Elderly female voice, a neighbour woman of about 65, lively frank aged voice, protective",
+  "d": "Elderly female voice, a neighbour woman of about 74, lively frank aged voice, protective",
   "o": "indignant and protective, lively and frank, raised voice, the unhurried way an older person talks, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
   "seed": 11,
-  "hz": 183,
-  "sim": 1,
-  "p": 0.781,
-  "age": 48
+  "hz": 178,
+  "sim": 0.971,
+  "p": 0.543,
+  "age": 60.4
  },
  "v/c14/p_oksun/k_gumgam": {
   "t": "화요일 오후였어. 벽 너머로 언니 목소리가 한참 들렸어. 네, 과장님. 네, 네 하고.",
-  "d": "Elderly female voice, a neighbour woman of about 65, lively frank aged voice, protective",
+  "d": "Elderly female voice, a neighbour woman of about 74, lively frank aged voice, protective",
   "o": "surprised, then animated and worried, the unhurried way an older person talks, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
-  "seed": 5,
-  "hz": 157,
+  "seed": 53,
+  "hz": 227,
   "sim": 1,
-  "p": 0.602,
-  "age": 54.4,
+  "p": 0.701,
+  "age": 55.4,
   "a": 11
  },
  "v/c15/p_harin/_intro": {
   "t": "이십일 시 사십사분에 전화가 왔는데 샤워 중이었어요. 이십이 시 칠분에 다시 걸었는데 안 받아요. 다솜이는 집에 도착하면 무조건 톡하는 애예요. 무조건요.",
-  "d": "Female voice, a nurse woman of about 25, grown-up woman voice, breathless and anxious",
+  "d": "Female voice, a nurse woman of about 32, grown-up woman voice, breathless and anxious",
   "o": "anxious and breathless, urgent, talking fast, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
-  "seed": 11,
-  "hz": 255,
+  "seed": 37,
+  "hz": 229,
   "sim": 1,
-  "p": 0.894,
-  "age": 31.9
+  "p": 0.57,
+  "age": 24.3
  },
  "v/c15/p_harin/k_tonight": {
   "t": "이십일 시 사십오분이면… 제가 다솜이 전화 못 받은 지 일분 뒤예요.",
-  "d": "Female voice, a nurse woman of about 25, grown-up woman voice, breathless and anxious",
+  "d": "Female voice, a nurse woman of about 32, grown-up woman voice, breathless and anxious",
   "o": "stunned and sad, voice breaking, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
-  "seed": 5,
-  "hz": 273,
-  "sim": 0.962,
-  "p": 0.681,
-  "age": 23.9,
-  "a": 11
+  "seed": 19,
+  "hz": 244,
+  "sim": 0.885,
+  "p": 0.502,
+  "age": 28.5,
+  "a": 37
  },
  "v/c15/p_jisu/_intro": {
   "t": "제가 다솜 씨 담당이었어요. …기록은 다 드릴게요. 물어보세요.",
