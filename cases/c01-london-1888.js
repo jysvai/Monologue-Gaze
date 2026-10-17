@@ -694,9 +694,9 @@
     solution: {
       culprit: 'k_croft',
       claims: [
-        { id: 'c1', q: '「매듭장이」 편지가 어디서 나왔는지 보여 주는 기록', accept: ['f_misprint', 'f_correction', 'f_letter_cut', 'f_slip_paper', 'f_hand_match'] },
-        { id: 'c2', q: '그 시각 범인은 자기가 있었다고 한 곳에 없었다', accept: ['f_door_locked', 'f_pair_wait', 'f_log_after'] },
-        { id: 'c3', q: '범인만 알 수 있었던 것', accept: ['f_croft_wrist', 'f_thread_cuff', 'f_vane_wrist', 'f_vane_out'] },
+        { id: 'c1', q: '「매듭장이」 편지가 어디서 나왔는지 보여 주는 기록', accept: ['f_misprint', 'f_correction', 'f_letter_cut', 'f_slip_paper', 'f_hand_match'], near: '딱 한 군데가 어긋난다. 그 편지는 어디서 나왔나? 편지에 쓰인 이름이 처음 실린 곳이나, 편지의 글자와 종이를 견줄 기록인가?' },
+        { id: 'c2', q: '그 시각 범인은 자기가 있었다고 한 곳에 없었다', accept: ['f_door_locked', 'f_pair_wait', 'f_log_after'], near: '딱 한 군데가 어긋난다. 범인이 그 시각 있었다고 한 자리를 그때 보거나 적은 사람이 남긴 기록인가?' },
+        { id: 'c3', q: '범인만 알 수 있었던 것', accept: ['f_croft_wrist', 'f_thread_cuff', 'f_vane_wrist', 'f_vane_out'], near: '딱 한 군데가 어긋난다. 시신의 어디에 무엇이 있었고, 그것을 맨 먼저 입에 올리거나 글로 쓴 사람은 누구인가?' },
         { id: 'c4', q: '동기', accept: ['f_rose_letter', 'f_fund_ledger', 'f_fund_gap'], near: '딱 한 군데가 어긋난다. 기금을 누가 맡았다는 것만으로는 동기가 되지 않는다. 그 돈에 무슨 일이 있었고, 누가 그걸 알았나?', near2: '딱 한 군데가 어긋난다. 현상금 기금 장부는 압수품 속에 있고, 결산은 신문 공고란에도 났다. 화요일 밤에 센 돈이 수요일 아침 은행에 그대로 들어갔나?' },
       ],
       stamp: '1888-Q-341 · 재검토',
