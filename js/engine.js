@@ -2483,23 +2483,28 @@
     });
     out0.forEach(x => add(...x));
     unmet.filter(promising).forEach(meet);
+    // 3. 메모를 내밀 차례인 대답 — 들은 말이 기록과 어긋나고 그 메모가 이미 수첩에 있다. 단어 모으기보다 먼저 (블라인드 테스트에서 가장 잘 먹힌 짚기)
+    const people = Object.values(C.people).filter(p => personVisible(p) && ST.asked[p.id] != null);
+    people.forEach(p => ST.keys.forEach(k => {
+      const e = askEntry(p, k), asked = ST.asked[p.id] || [];
+      if (e.endsWith('!') && !asked.includes(e) && asked.includes(k)) { const ev = evidence(p, k)[0]; add(`press:${p.id}|${k}`, T('들은 대답 가운데 기록과 어긋나는 것이 있다.'), ev && ev.src ? T`${pname(p)} — 「${kl(k)}」에 한 대답 · 내밀 메모는 ${ev.src}에서` : T`${pname(p)} — 「${kl(k)}」에 한 대답`, { t: 'person', id: p.id, src: p.src, mark: 'q:' + k }); }
+    }));
     // 2. 읽은 기록 속에 있는데 아직 수첩에 적지 않은 단어
     //    앞으로 이어지는 단어(그 말로 찾으면 나오는 기록이 있거나, 조건에 걸려 있거나, 누군가 그 말에 따로 대답하는 것)를 먼저 짚는다. 아무 데도 안 이어지는 단어부터 짚으면 헛걸음이 된다
     const words = []; seen.forEach(b => b.k.forEach(k => { if (!ST.keys.includes(k) && C.keywords[k] && !C._dead.has(k)) words.push([k, b]); }));
     // 이어지는 단어끼리는 더 많이 여는 것부터: 탭·기록·지도 자리를 한꺼번에 여는 단어가 기록 한 건 찾는 단어보다 앞 (읽은 차례로만 짚으면 막힌 데와 상관없는 단어를 먼저 짚는다)
     const shut = gates().filter(n => !ok(n)), reach = k => shut.filter(n => n.some(x => String(x).split('|').includes(k))).length * 2 + Object.values(C.docs).filter(d => (d.find || []).includes(k) && !ST.seen.includes(d.id)).length;
-    [...words.filter(([k]) => opens(k)).sort((x, y) => reach(y[0]) - reach(x[0])), ...words.filter(([k]) => !opens(k))].forEach(([k, b]) => add('word:' + k, b.go && b.go.t === 'person' ? T('들은 대답 속에 아직 수첩에 적지 않은 단어가 있다.') : T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${kl(k)}」`, b.go));
+    // 쓸모 있는 단어: 기록을 찾거나 막힌 데를 열거나, 아직 안 만난 사람이거나, 누군가 그 말에 새 단어·쓸 사실·메모를 내밀 대답을 갖고 있거나, 의문의 추궁 칸에 걸린 것. 나머지는 맨 뒤로 (헛걸음 단어부터 짚지 않게)
+    const useful2 = new Set([...useful, ...(C.threads || []).flatMap(t => t.steps.flatMap(x => (x.f ? [].concat(x.f) : [])))]);
+    const worth = k => reach(k) > 0 || Object.values(C.people).some(p => (p.key === k && ST.asked[p.id] == null) || isCond(rawAns(p, k))) || (C.threads || []).some(t => t.steps.some(x => x.press && thAlt(x).some(([, kk]) => kk === k)))
+      || bags.some(b => b.ask && (b.ask.e === k || b.ask.e === k + '!') && ([...b.k].some(x => x !== k && C.keywords[x] && !ST.keys.includes(x)) || [...b.f].some(f => [...useful2].some(w => fIs(f, w)) && !noted(f))));
+    [...words.filter(([k]) => opens(k)).sort((x, y) => reach(y[0]) - reach(x[0])), ...words.filter(([k]) => !opens(k))].forEach(([k, b]) => (worth(k) ? add : (...x) => later.push(x))('word:' + k, b.go && b.go.t === 'person' ? T('들은 대답 속에 아직 수첩에 적지 않은 단어가 있다.') : T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${kl(k)}」`, b.go && { ...b.go, mark: 'k:' + k }));
     unmet.forEach(meet); // 만나도 아직 새로 나올 게 없는 사람은 적지 않은 단어 뒤에
     // 조건이 풀려 자료실에 새로 나온 기록(누구를 만나거나 무엇을 알아낸 뒤에야 찾히는 것)은 탐문보다 먼저 — 곁가지 추궁을 먼저 짚으면 앞길이 가려진다
     vis.filter(s => s.type === 'archive').forEach(s => ST.keys.forEach(k => {
       if (C.keywords[k] && C._srcDocs[s.id].some(d => (d.need || []).length && ok(d.need) && (d.find || []).includes(k) && !ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)))) add(`find:${s.id}|${k}`, T`「${plain(s.name)}」에서 수첩의 단어로 아직 찾아보지 않은 것이 있다.`, quote(kl(k)), { t: 'find', src: s.id, id: k });
     }));
-    // 3·4. 탐문 — 수첩을 내밀어 다시 물을 것, 새 단어나 쓸 만한 사실이 나올 물음
-    const people = Object.values(C.people).filter(p => personVisible(p) && ST.asked[p.id] != null);
-    people.forEach(p => ST.keys.forEach(k => {
-      const e = askEntry(p, k), asked = ST.asked[p.id] || [];
-      if (e.endsWith('!') && !asked.includes(e) && asked.includes(k)) { const ev = evidence(p, k)[0]; add(`press:${p.id}|${k}`, T('들은 대답 가운데 기록과 어긋나는 것이 있다.'), ev && ev.src ? T`${pname(p)} — 「${kl(k)}」에 한 대답 · 내밀 메모는 ${ev.src}에서` : T`${pname(p)} — 「${kl(k)}」에 한 대답`, { t: 'person', id: p.id, src: p.src }); }
-    }));
+    // 4. 탐문 — 새 단어나 쓸 만한 사실이 나올 물음 (메모를 내밀 차례인 대답은 앞에서 짚었다)
     people.forEach(p => ST.keys.forEach(k => {
       if (!C.keywords[k] || (k === p.key && rawAns(p, k) == null)) return;
       const e = askEntry(p, k);
@@ -2564,7 +2569,7 @@
     }
     NUDGE.key = n.key;
     const more = lv() < 5 && n.b;
-    const go = n.go ? `<button type="button" class="nudge-go" data-nudge-go="${esc([n.go.t, n.go.src || '', n.go.id || ''].join('|'))}">${T`펼치기`}</button>` : '';
+    const go = n.go ? `<button type="button" class="nudge-go" data-nudge-go="${esc([n.go.t, n.go.src || '', n.go.id || '', n.go.mark || ''].join('|'))}">${T`펼치기`}</button>` : '';
     return `<div class="nudge" role="status"><p class="nudge-a">${esc(n.a)}</p>${more ? (NUDGE.more ? `<p class="nudge-b">${esc(n.b)} ${go}</p>` : `<button type="button" class="nudge-more" data-nudge-more>${T`더 짚어 보기`}</button>`) : ''}</div>`;
   }
   function nudgeRow() { const box = nudgeHtml(); return `<div class="nudge-row"><button type="button" class="nudge-btn" data-nudge aria-expanded="${!!box}" aria-controls="nudgeBox">${T`막혔을 때 짚어 보기`}</button><div id="nudgeBox">${box}</div></div>`; }
@@ -2580,7 +2585,7 @@
     renderNudge();
   }
   function nudgeGo(v) {
-    const [t, src, id] = v.split('|');
+    const [t, src, id, mark] = v.split('|');
     if (src && C.sources.some(s => s.id === src && srcVisible(s))) { keepPos(); ST.view.src = src; }
     if (t === 'find' && C.keywords[id]) { setQ(src, kl(id)); if (narrow()) { ST.view.open = null; renderRead(); } } // 짚은 단어로 바로 찾아 준다
     else if (t === 'doc' || t === 'person' || t === 'req') openItem({ t, id });
@@ -2588,6 +2593,17 @@
     else { const s = curSrc(); ST.view.open = s && (s.type === 'cipher' || s.type === 'timeline' || s.type === 'alibi') ? { t: s.type, id: s.id } : narrow() ? null : ST.view.open; save(); renderRead(); }
     renderTabs(); renderList();
     if (!beside()) $('.stage').scrollIntoView({ block: 'start' });
+    if (mark) setTimeout(() => markAt(mark), 450);
+  }
+  // 짚은 자리로: 대답(q:물은 것)이나 단어(k:단어) — 대화 기록 맨 아래나 문서 첫머리에 떨어뜨려 두고 손으로 찾게 하지 않는다
+  function markAt(mark) {
+    const pr = $('#paneRead'); if (!pr) return;
+    const [m, key] = [mark.slice(0, 1), mark.slice(2)];
+    const find = () => (m === 'q' ? $$('.per-tr .qa', pr).find(x => x.dataset.qa === key) : $$('.kw', pr).find(x => x.dataset.kw === key && !x.classList.contains('on')));
+    const go = () => { const el = find(); if (!el) return null; const hh = (($('.per-h.has-face', pr) || { getBoundingClientRect: () => ({ height: 0 }) }).getBoundingClientRect().height); pr.scrollTop += el.getBoundingClientRect().top - pr.getBoundingClientRect().top - 12 - hh - (m === 'k' ? 60 : 0); return el; };
+    const el = go(); if (!el) return;
+    const fl = m === 'q' ? 'flash' : 'again'; el.classList.remove(fl); void el.offsetWidth; el.classList.add(fl);
+    setTimeout(go, 500); // 읽으면 적히는 메모로 칸 높이가 바뀌면 한 번 더 맞춘다
   }
 
   /* ───────── screens ───────── */

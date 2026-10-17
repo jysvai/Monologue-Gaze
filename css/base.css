@@ -454,7 +454,7 @@ button.n-lead{cursor:pointer}
 .notes li.arm{background:rgba(176,52,42,.08)} /* 보고서에 붙인 메모의 × 를 한 번 누른 때: 한 번 더 누르면 지워진다 */
 .notes li.arm .del{opacity:1;color:var(--red)}
 .notes li.fresh,.kchip.fresh{animation:write .9s ease-out both}
-.notes li.again,.kchip.again{animation:noteAgain 1.4s ease-out} /* 이미 적은 줄을 다시 눌렀을 때: 형광펜이 한 번 지나간다 */
+.notes li.again,.kchip.again,.kw.again{animation:noteAgain 1.4s ease-out} /* 이미 적은 줄을 다시 눌렀을 때: 형광펜이 한 번 지나간다 */
 .kw.hitw{animation:noteAgain 2.6s .25s ease-out} /* 검색 결과에서 연 문서: 찾은 말 위로 형광펜이 한 번 */
 @keyframes noteAgain{0%,35%{background:rgba(255,212,84,.5)}100%{background:transparent}}
 .notes li.gone{pointer-events:none;text-decoration:line-through 2px var(--pencil);animation:strikeOut .42s ease-in both}
