@@ -824,6 +824,7 @@ MG.I18N.put("de", "c11", {
 "1y8fc01t2wg": "Herr Woo? (Senkt die Stimme) Jemand will ihn am Freitagabend jener Woche in der [[Zeltkneipe|k_pocha]] an der Gabelung in Galbat gesehen haben. Er soll bis spät allein Soju getrunken haben.",
 "um1h1wkdju": "Galbat… da kam doch der erste Sack raus. Wohin er danach ist, weiß keiner.",
 "1ccjkocg002": "Vor dem Zentralmarkt, im Obergeschoss. Die Geschäftsleute vom Markt sind alle unsere Gäste. Auch Direktor Jin von Daewon Handel.",
+"14jansw3g95": "Kommissar So? Der kam in dem Winter und hat lange nach der Streichholzschachtel gefragt. Dann kam er nicht mehr. Später hab ich nur gehört, dass er zur Verkehrspolizei versetzt wurde.",
 "2g3blns7pik": "Direktor Jin redet nur über Geld. Nachdem Herr Pyeon weg war, kam ein neuer Kassierer, und der bestellt nicht mal einen Ssanghwa-Tee.",
 "2e6bxy7awg5": "Auf dem Markt sagen alle, Herr Woo war’s. Ich… weiß nicht.",
 "djb9yxsptb": "Cheonghak? Die Werkstatt in Mokgol, die Perlmuttschränke macht? Herr Pyeon hat einmal gesagt: „Der Lackmöbelmacher in Mokgol macht mir Ärger.“",

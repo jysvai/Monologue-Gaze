@@ -824,6 +824,7 @@ MG.I18N.put("en", "c11", {
 "1y8fc01t2wg": "Mr. Woo? (Lowers her voice) Someone says they saw Mr. Woo at the [[tent bar|k_pocha]] at the Galbat junction that Friday night. Drinking soju alone till late, they said.",
 "um1h1wkdju": "Galbat… that's where the first sack turned up, isn't it? Nobody knows where he went after that.",
 "1ccjkocg002": "Second floor, across from the Central Market. All the market bosses are our customers. Mr. Jin from Daewon Trading, too.",
+"14jansw3g95": "Detective So? He came that winter and asked about the matchbox for a long time. Then he stopped coming. All I heard later was that he'd been moved to traffic.",
 "2g3blns7pik": "Mr. Jin only ever talks about money. After Mr. Pyeon passed, a new collector came, and he doesn't even order ssanghwa tea.",
 "2e6bxy7awg5": "The market people all say Mr. Woo did it. Me… I don't know.",
 "djb9yxsptb": "Cheonghak? The place in Mokgol that makes inlaid cabinets? Mr. Pyeon did say once, “That lacquer man in Mokgol is giving me grief.”",
