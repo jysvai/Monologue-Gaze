@@ -3458,7 +3458,7 @@
       toast(T`해독했다${gained > 0 ? opened(gained, BY) : ''}`);
     } else {
       sfx('miss');
-      sayMsg((s.feedback || (lv() >= 5 ? 'none' : 'count')) === 'none' ? T('아직 문장이 되지 않는다.') : T`기호 ${syms.length}개 중 ${right}개가 맞는 것 같다.`);
+      sayMsg((s.feedback || (lv() >= 5 ? 'none' : 'count')) === 'none' ? T('아직 문장이 되지 않는다.') : T`기호 ${syms.length}개 중 ${right}개가 맞다.`);
     }
   }
   // 대조·재구성 결과 한 줄: 같은 말이 되풀이돼도 다시 맞춰 봤다는 게 보이게 새로 적는다
@@ -3530,7 +3530,7 @@
     tmp().tl[sid] = lv() <= 3 ? hit : [];
     renderRead();
     sfx('miss');
-    sayMsg(lv() >= 5 ? T('아직 앞뒤가 맞지 않는다.') : T`${o.length}개 중 ${hit.length}개가 제자리인 것 같다.`);
+    sayMsg(lv() >= 5 ? T('아직 앞뒤가 맞지 않는다.') : T`${o.length}개 중 ${hit.length}개가 제자리다.`);
   }
   function pickCompare(arg) {
     const [xid, oid] = arg.split('|');
