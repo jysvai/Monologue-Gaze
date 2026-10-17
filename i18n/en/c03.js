@@ -702,7 +702,7 @@ MG.I18N.put("en", "c03", {
 "ssfi74ba03": "At 9:05 p.m., the vacuum tube in the transmitter at Jeongdong broke. The song was cut off as if with a knife, and Sunamgol was quiet for 45 minutes. Seo Gi-ryong took the cash and the IOUs from the safe, washed the iron and his hands at the well, and at 9:20, at the window of the Jongno Post Office, wired his brother in Pyongyang: “Money raised.”",
 "2dld2baujqy": "He trusted the listings on page 4 of the paper. Changgeuk from 9:15 p.m. So he said, “At half past nine I heard ‘Simcheongga,’ and the old man even answered.” Because of those words, the time of the crime was set after half past nine, and the waitress who had been alone from 9:40 appeared in the papers as a suspect. The next morning he redeemed his sewing machine with four 10-won notes.",
 "qt9hv4xab5": "The broadcast outage ran as a brief on page 2 of the evening edition of November 5. No article connected this brief with the murder story on page 3 the next day. Oh Sun-deok stood before the microphone again the following spring. Her first song was “Supyo Bridge in the Rain.”",
-"g81fs8b7jc": "As you close the file, a thick envelope postmarked Shōwa 43 slides out from underneath. Katakana drawn along a ruler. → Back to the records room, on to CASE 04.",
+"g81fs8b7jc": "Under the closed file lies a thick envelope postmarked Shōwa 43. Katakana drawn along a ruler. → Back to the records room, on to CASE 04.",
 "2215g004twt": "Records room folder cover — a 1930s vacuum-tube radio with an evidence tag, and telegram forms",
 "12nc58w833x": "Photo for the Nov. 4 listings — antenna towers of the Gyeongseong Broadcasting Station, Jeongdong",
 "1d3l9wwsafs": "Arts page, Oct. 20 — a singer at the microphone (from behind)",
