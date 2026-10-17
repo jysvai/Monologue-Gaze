@@ -705,7 +705,7 @@ MG.I18N.put("en", "c09", {
 "8rj2a94vw9": "The girl never came. I put it out by the door the next morning.",
 "7kc37u2hqm": "Parcels? These days the drivers leave them at any old house… I don't really take them. Too much trouble.",
 "xp1lwiy5ym": "(silent for a long while) …It would've been my mother. She calls from the countryside at night sometimes.",
-"5ljpltjypx": "— Missed calls don't show up on the record. At 10:17, somebody in that house picked up and talked for 1 minute 12 seconds.",
+"2g0powu4sbx": "— Missed calls don't show up on the record. At 10:17, somebody in that house picked up that call and talked for 1 minute 12 seconds.",
 "1uzn3f3r6am": "The home phone? Who uses a home phone these days. Might as well not have one.",
 "1axvy3gj5ae": "(A glance toward the stairs.) …I cleared a few away. Once it gets cold, that's the end of the patch. How am I supposed to remember when?",
 "248smrzq2a8": "Once it gets cold, that's the end of the vegetable patch. And the wardrobe was old, so I threw it out. What's strange about that?",

@@ -755,7 +755,7 @@ MG.I18N.put("de", "c07", {
 "283f5faorh9": "Büro des Verwaltungsdirektors in der Zentrale der Daeyang Industrie · vor dem Fenster ein Baukran",
 "1vv5i0mp61m": "(Blickt auf den Kran draußen und dreht dann den Stuhl herum) Warum rühren Sie in einer abgeschlossenen Sache herum? Es gibt sogar ein Urteil.",
 "gciolu5c3g": "Wenn einen die Ausgangssperre erwischt, bleibt man die Nacht über im Songwolgak. So auch in der Nacht. Rausgegangen bin ich erst, als die Sperre aufgehoben war.",
-"1lr8yxokcms": "Wenn es um das Kennzeichen geht: Ich sagte doch, mein Schlüssel steckt immer. Wer auch immer damit weggefahren ist, ich war im Zimmer.",
+"1dtaf42tt64": "Wenn es um das Kennzeichen geht: Mein Schlüssel steckt immer im Wagen. Wer auch immer damit weggefahren ist, ich war im Zimmer.",
 "36xq11wxfo": "An dem Abend habe ich ab neun im Orchideenzimmer einen Gast bewirtet. Bis die Ausgangssperre vorbei war, habe ich keinen Schritt hinausgetan.",
 "1sxyfqz9kua": "— Der Gast, den Sie als Zeugen nennen, ist um 22:40 Uhr früher aufgebrochen und mit seinem eigenen Wagen vom Songwolgak weggefahren. Danach kann niemand bezeugen, dass Sie im Zimmer waren.",
 "1ctvbojpaib": "(dreht den Stuhl zum Fenster) …Was der Herr Amtsleiter gemacht hat, fragen Sie den Herrn Amtsleiter. Ich war im Zimmer.",

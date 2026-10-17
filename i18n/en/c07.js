@@ -755,7 +755,7 @@ MG.I18N.put("en", "c07", {
 "283f5faorh9": "General Affairs Manager's office, Daeyang Enterprises head office · a construction crane outside the window",
 "1vv5i0mp61m": "(Stops watching the crane outside and turns his chair around) Why dig up a closed case? There's been a verdict.",
 "gciolu5c3g": "If curfew catches you, you spend the night at Songwolgak. That night too. I didn't leave till curfew lifted.",
-"1lr8yxokcms": "If this is about the plate number, I told you, my keys are always in the car. Whoever took it out, I was in my room.",
+"1dtaf42tt64": "If this is about the plate number, my key is always left in the car. Whoever took it out, I was in my room.",
 "36xq11wxfo": "That night I was entertaining a guest in the Orchid Room from nine. I didn't set foot outside until curfew lifted.",
 "1sxyfqz9kua": "— That guest you call your witness got up early at 10:40 p.m. and left the Songwolgak in his own car. After that, no one can say you were in the room.",
 "1ctvbojpaib": "(swivels his chair toward the window) …Ask the director about the director's movements. I was in the room.",
