@@ -2438,7 +2438,7 @@
       if (s.type === 'timeline' || s.type === 'cipher') bags.push({ ...bagOf([s.solved || []]), title: plain(s.title || s.name), go, seen: () => ST.unl.includes(s.id) });
       (s.sets || []).forEach(x => bags.push({ ...bagOf([x.solved || []]), title: plain(x.title), go, seen: () => ST.unl.includes(x.id) }));
       (s.scenes || []).forEach(x => (x.spots || []).forEach(sp => bags.push({ ...bagOf([sp.body || []]), title: plain(x.title), go: { t: 'scene', id: x.id, src: s.id }, seen: () => ST.unl.includes(sp.id) })));
-      (s.type === 'feed' ? s.items || [] : []).forEach(it => bags.push({ ...bagOf([it.msg]), title: plain(s.name), go, seen: () => !!(ST.live && it.id in ST.live.fd), ...(it.f ? { f: new Set([it.f, ...bagOf([it.msg]).f]) } : {}) }));
+      (s.type === 'feed' ? s.items || [] : []).forEach(it => bags.push({ ...bagOf([it.msg]), title: plain(s.name), go: { t: 'feed', id: s.id, src: s.id }, seen: () => !!(ST.live && it.id in ST.live.fd), ...(it.f ? { f: new Set([it.f, ...bagOf([it.msg]).f]) } : {}) }));
     });
     return (C._nix = bags);
   }
@@ -2522,8 +2522,13 @@
     gates().forEach(need => {
       const miss = need.filter(n => !okOne(n));
       if (!miss.length || !miss.every(n => n[0] === '!')) return;
-      miss.forEach(n => { const h = factHome(n.slice(1)); if (h) add('fact:' + n.slice(1), T('읽은 기록 가운데 수첩에 적어 둘 대목이 남아 있다.'), T`「${h.title}」의 한 대목`, h.go); });
+      miss.forEach(n => { const h = factHome(n.slice(1)); if (h) add('fact:' + n.slice(1), T('읽은 기록 가운데 수첩에 적어 둘 대목이 남아 있다.'), T`「${h.title}」의 한 대목`, h.go && { ...h.go, mark: 'p:' + n.slice(1) }); });
     });
+    // 의문의 빈칸 가운데 이미 읽은 기록·들은 대답 속에 있는 것 — 훑어 넘겨 적히지 않은 줄. 「더 열 것이 없다」고 하고 끝내지 않게
+    thView().filter(x => !x.done).forEach(x => x.t.steps.forEach((st, j) => {
+      if (x.got[j] || !st.f) return;
+      for (const f of [].concat(st.f)) { const h = factHome(f); if (h && h.go) { add('fact:' + f, T('읽은 기록 가운데 수첩에 적어 둘 대목이 남아 있다.'), T`「${h.title}」의 한 대목`, { ...h.go, mark: 'p:' + f }); break; } }
+    }));
     reqItems().forEach(r => { // 소명 메모가 모자란 신청서
       const q = reqState(r.id);
       if (!ok(r.need) || (q && q.st !== 'no') || !(r.why || []).length || r.why.some(noted)) return;
@@ -2588,7 +2593,7 @@
     const [t, src, id, mark] = v.split('|');
     if (src && C.sources.some(s => s.id === src && srcVisible(s))) { keepPos(); ST.view.src = src; }
     if (t === 'find' && C.keywords[id]) { setQ(src, kl(id)); if (narrow()) { ST.view.open = null; renderRead(); } } // 짚은 단어로 바로 찾아 준다
-    else if (t === 'doc' || t === 'person' || t === 'req') openItem({ t, id });
+    else if (t === 'doc' || t === 'person' || t === 'req' || t === 'feed') openItem({ t, id }); // 단톡방은 방까지 연다 (탭만 바꾸면 말이 읽는 칸에 안 뜬다)
     else if (t === 'scene') openItem({ t: 'photo', id });
     else { const s = curSrc(); ST.view.open = s && (s.type === 'cipher' || s.type === 'timeline' || s.type === 'alibi') ? { t: s.type, id: s.id } : narrow() ? null : ST.view.open; save(); renderRead(); }
     renderTabs(); renderList();
@@ -2599,10 +2604,12 @@
   function markAt(mark) {
     const pr = $('#paneRead'); if (!pr) return;
     const [m, key] = [mark.slice(0, 1), mark.slice(2)];
-    const find = () => (m === 'q' ? $$('.per-tr .qa', pr).find(x => x.dataset.qa === key) : $$('.kw', pr).find(x => x.dataset.kw === key && !x.classList.contains('on')));
+    const line = b => b.closest('.b-p,.b-say,.b-msg,tr,li,figcaption,.c-bub,.c-act,.b-note,p') || b;
+    const find = () => (m === 'q' ? $$('.per-tr .qa', pr).find(x => x.dataset.qa === key) : m === 'p' ? (b => b && line(b))($$('.pin', pr).find(b => { const q = PIN[b.dataset.pin]; return q && q.f && fIs(q.f, key); }))
+      : $$('.kw', pr).find(x => x.dataset.kw === key && !x.classList.contains('on')));
     const go = () => { const el = find(); if (!el) return null; const hh = (($('.per-h.has-face', pr) || { getBoundingClientRect: () => ({ height: 0 }) }).getBoundingClientRect().height); pr.scrollTop += el.getBoundingClientRect().top - pr.getBoundingClientRect().top - 12 - hh - (m === 'k' ? 60 : 0); return el; };
     const el = go(); if (!el) return;
-    const fl = m === 'q' ? 'flash' : 'again'; el.classList.remove(fl); void el.offsetWidth; el.classList.add(fl);
+    const fl = m === 'q' ? 'flash' : 'nudged'; el.classList.remove(fl); void el.offsetWidth; el.classList.add(fl);
     setTimeout(go, 500); // 읽으면 적히는 메모로 칸 높이가 바뀌면 한 번 더 맞춘다
   }
 
