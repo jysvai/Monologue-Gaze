@@ -2266,7 +2266,7 @@
   }
   function thWho(k) { // ★5 는 범인 칸에 「의문 n」을 달지 않는다 (뺀 사람의 「범인 아님」만 — 범인이 아니라는 것뿐, 공범·감춘 사람일 수는 있다) — 누구를 지목할지는 결론들을 읽고 플레이어가 정한다
     const x = thView().find(v => v.done && ((v.t.who === k && lv() < 5) || v.t.out === k));
-    return !x ? '' : x.t.out === k ? `<span class="rep-th-who out">${T`범인 아님 · 의문 ${x.no}`}</span>` : `<span class="rep-th-who">${T`의문 ${x.no}`}</span>`;
+    return !x ? '' : x.t.out === k ? `<span class="rep-th-who out">${T`범인 아님 · 의문 ${x.no}`}</span>` : `<span class="rep-th-who">${T`의문 ${x.no}의 결론`}</span>`;
   }
   function threadNews(delay = 900) {
     const ts = (C && C.threads) || [];

@@ -261,6 +261,7 @@ MG.I18N.put("de", "ui", {
 " <small class=\"rep-used\">· {0}번에 붙임</small>": " <small class=\"rep-used\">· angeheftet an Nr. {0}</small>",
 "의문 {0}에서 밝혀낸 것": "In Frage {0} geklärt",
 "의문 {0}": "Frage {0}",
+"의문 {0}의 결론": "Antwort auf Frage {0}",
 "의문 {0} 「{1}」 — 빈칸 {2}개 중 {3}개를 채웠다.": "Frage {0} „{1}“ — {3} von {2} Lücken gefüllt.",
 "<p class=\"rep-empty\">아직 붙인 메모가 없다.</p>": "<p class=\"rep-empty\">Noch keine Notiz angeheftet.</p>",
 "다른 메모로 바꾸기": "Andere Notiz wählen",
