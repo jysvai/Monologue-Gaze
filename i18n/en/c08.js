@@ -842,7 +842,7 @@ MG.I18N.put("en", "c08", {
 "2et4rctre73": "Where the threatening calls came from",
 "8xtzqess9z": "One thing doesn't fit. What does the sound behind the call point to? There is only one place in this neighborhood that makes it.",
 "xfikvdu74k": "On the days the calls came, the culprit was close to that payphone",
-"wjbsv2f6zz": "One thing doesn't fit. It has to be a record from the culprit's side, not the side the call came from. Where the culprit was and what he did on a day a call came, or whether someone saw him by that booth.",
+"hmx6v10mac": "One thing doesn't fit. It has to be a record left on the culprit's side. Where the culprit was and what they did on a day a call came, or whether anyone saw them by that booth.",
 "1xj3yxgejd7": "One thing doesn't fit. Who looks after that booth? Find the shop in the Payphone Register, and set what the shop's people say, or the shop's own book, against it.",
 "cn1pq9cxfh": "The culprit's voice and verbal tic",
 "lzs0ccuiqb": "One thing doesn't fit. Whose way of talking matches the turn of phrase on the tape?",

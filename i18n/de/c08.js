@@ -842,7 +842,7 @@ MG.I18N.put("de", "c08", {
 "2et4rctre73": "Woher die Erpresseranrufe kamen",
 "8xtzqess9z": "Genau eine Stelle stimmt nicht. Worauf deutet das Geräusch im Hintergrund des Anrufs? Es gibt in diesem Viertel nur einen Ort, der so klingt.",
 "xfikvdu74k": "An den Tagen der Anrufe war der Täter in der Nähe dieses Münztelefons",
-"wjbsv2f6zz": "Genau eine Stelle stimmt nicht. Es muss eine Notiz von der Seite des Täters sein, nicht von der Seite des Anrufs. Wo er an einem Anruftag war und was er tat — oder ob ihn jemand an dieser Zelle gesehen hat.",
+"hmx6v10mac": "Genau eine Stelle stimmt nicht. Es muss eine Notiz sein, die auf der Seite des Täters entstanden ist. Wo der Täter an einem Anruftag war und was er tat — oder ob jemand den Täter an dieser Zelle gesehen hat.",
 "1xj3yxgejd7": "Genau eine Stelle stimmt nicht. Wer kümmert sich um diese Zelle? Den Laden im Verzeichnis öffentlicher Fernsprecher finden und mit dem abgleichen, was die Leute dort sagen, oder mit dem Buch des Ladens.",
 "cn1pq9cxfh": "Stimme und Redensart des Täters",
 "lzs0ccuiqb": "Genau eine Stelle stimmt nicht. Wessen Redeweise passt zu der Floskel auf dem Band?",

@@ -1076,7 +1076,7 @@ MG.I18N.put("en", "c11", {
 "1mbt4up0uyt": "What he says about the truck.",
 "1zabimfcl5u": "He meant to slip away to Seoul at 4 a.m. on the 15th without his creditors knowing, and sent the apprentice off to the inn so he could pack. That truck was canceled at 3:10 a.m. by a phone call from Ham Deok-gyu himself.",
 "1as69cw28ba": "Where the body was cut up",
-"1487wuo2p7m": "One thing doesn't fit. Does that note tie the blood or sawdust on that floor to the victim and that workshop, and not to someone else?",
+"maa964i9nf": "One thing doesn't fit. Does that note show that the blood or sawdust on that floor ties the victim to that workshop?",
 "27cvwwy3cqw": "The tool used",
 "1u3c03ekpp7": "One thing doesn't fit. What kind of blade left the marks on the bone, and did a saw like that go missing from the workshop, or a new one turn up?",
 "25h0wsca974": "When and where the sacks went into the water",

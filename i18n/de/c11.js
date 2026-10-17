@@ -1076,7 +1076,7 @@ MG.I18N.put("de", "c11", {
 "1mbt4up0uyt": "Was er zum Transporter sagt.",
 "1zabimfcl5u": "Er wollte am 15. um vier Uhr früh heimlich vor seinen Gläubigern nach Seoul verschwinden; den Lehrling schickte er ins Gasthaus, um zu packen. Der Transporter wurde um 3:10 Uhr abgesagt, telefonisch von Ham Deok-gyu selbst.",
 "1as69cw28ba": "Wo der Körper zerteilt wurde",
-"1487wuo2p7m": "Eine Stelle passt nicht. Zeigt diese Notiz, dass das Blut oder Sägemehl auf dem Boden das Opfer mit der Werkstatt verbindet — und nicht jemand anderen?",
+"maa964i9nf": "Eine Stelle passt nicht. Zeigt diese Notiz, dass das Blut oder Sägemehl auf dem Boden das Opfer mit der Werkstatt verbindet?",
 "27cvwwy3cqw": "Das Werkzeug",
 "1u3c03ekpp7": "Eine Stelle passt nicht. Von was für einem Sägeblatt stammen die Spuren am Knochen — und ist in der Werkstatt eine solche Säge verschwunden oder eine neue aufgetaucht?",
 "25h0wsca974": "Wann und wo die Säcke ins Wasser kamen",
