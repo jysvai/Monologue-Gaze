@@ -2380,7 +2380,7 @@
       <article class="brief"><svg class="clip" viewBox="0 0 24 64" aria-hidden="true"><path d="M8 20 V50 a6 6 0 0 0 12 0 V12 a8 8 0 0 0 -16 0 V46" fill="none" stroke="#8d918f" stroke-width="2.6" stroke-linecap="round"/></svg>
         ${gore() ? `<span class="brief-blood" aria-hidden="true">${stains(C.id + 'brief', 1, 'bd', true)}</span>` : ''}<h2>${esc(b.title || C.title)} <small>${esc(b.no || '')}</small></h2>
         <dl>${(b.lines || []).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${inline(v)}</dd>`).join('')}</dl>${b.scrawl ? `<p class="scrawl">${inline(b.scrawl)}</p>` : ''}${ST.solved ? `<span class="brief-st">${T('종결')}</span>` : ''}</article>
-      ${thHtml()}
+      ${thHtml()}${ST.solved ? '' : `<div class="ruled nb-sec nb-nudge">${nudgeRow()}</div>`}
       <section class="ruled nb-sec"><h3 class="hh">${T`단어 <small>${keys.length}</small>`}</h3>${!ST.solved && C.kind !== 'tutorial' && ST.keys.every(k => (C.start || []).includes(k)) ? `<p class="kg-tip">${T('※ 기록 속 점선 밑줄 단어를 누르면 여기 적힌다. 적은 단어로 자료를 찾고, 사람에게 묻는다.')}</p>` : ''}
         ${groups.map(([t, a]) => `<p class="kg"><span class="kg-t">${ktypeName(t)}</span> ${a.map(k => `<button type="button" class="kchip" data-chip="${k}">${esc(kl(k))}</button>`).join(' ')}</p>`).join('')}
       </section>
@@ -2392,7 +2392,6 @@
         <p class="rep-sum">${T`${esc(FORM().short)} <b>${ST.report.culprit && C.keywords[ST.report.culprit] ? esc(kl(ST.report.culprit)) : '—'}</b> · 증거 <b>${sol.claims.filter(cl => ST.report.claims[cl.id] && (ST.notes.some(n => String(n.id) === String(ST.report.claims[cl.id])) || (ST.solved && ST.report.kept && ST.report.kept[String(ST.report.claims[cl.id])]))).length}</b> / ${sol.claims.length}`}</p>
         <p class="submit-row"><button type="button" class="btn-hand" data-open-rep>${esc(ST.solved ? T`올린 ${FORM().title} 보기` : FORM().open)}</button><span class="tries">${ST.tries ? T`올린 횟수 ${ST.tries}` : ''}</span></p>
         <p class="verdict">${esc(VERDICT)}</p>
-        ${ST.solved ? '' : nudgeRow()}
         <div id="solvedBox">${ST.solved ? solvedHtml(false) : ''}</div>
       </section>
       <footer class="nb-foot"><button type="button" class="reset" data-reset>${T`이 사건 처음부터`}</button><p>${esc(C.disclaimer || T('실제 미제 사건의 모티프만 빌린 창작입니다. 인물·장소·기관은 모두 지어낸 것입니다.'))}</p></footer>`;
