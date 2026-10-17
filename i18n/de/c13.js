@@ -63,6 +63,7 @@ MG.I18N.put("de", "c13", {
 "1px607p1jej": "Anruf vom Team für verdächtige Transaktionen bei CoinNaru! Auf Jeong U-jins Konto gab es um 00:41 einen Login und einen Versuch, Coins auszuzahlen. Gerät: Windows-PC, IP 211.xx.xx.47.",
 "7e55ql8726": "Auf TagesJob ist eine neue Anzeige online. Dringend, Bahnhof Haram, 50.000 pro Auftrag. Es gibt schon Bewerber.",
 "srv4ig6l9e": "Screenshot Stellenanzeige",
+"1dcpg5rxx2": "Noch zweieinhalb Stunden bis zwölf. Wenn du einen Antrag stellst, dann jetzt.",
 "26uxv0k5xgc": "Das „check“ kam vor dem Foto? Dann hatte der Kerl die Gasse im Blick.",
 "2fgcec4tqt3": "Die Antwort zum IP-Anschluss ist da. Es ist der Anschluss des Ladens.",
 "wo2awagzsf": "Mit dem Anschluss allein nageln wir keinen fest. Prüf nach, wer zu diesen Zeiten im Laden war, und dann schreib den Antrag.",

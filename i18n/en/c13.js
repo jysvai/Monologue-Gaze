@@ -63,6 +63,7 @@ MG.I18N.put("en", "c13", {
 "1px607p1jej": "CoinNaru's fraud team called! Someone logged into Jeong Woo-jin's account at 00:41 and tried a coin withdrawal. Device: Windows PC, IP 211.○○.○○.47.",
 "7e55ql8726": "New ad up on DayGigs. Urgent, Haram Station, 50k a job. There are applicants already.",
 "srv4ig6l9e": "Job ad screenshot",
+"1dcpg5rxx2": "Two and a half hours till noon. If you're putting in a request, put it in now.",
 "26uxv0k5xgc": "The “confirmed” came before the photo? Then that guy was watching the alley.",
 "2fgcec4tqt3": "The IP subscriber reply is in. It's the store's line.",
 "wo2awagzsf": "A line alone won't pin it on a person. Work out who was in that store at those times, then write the application.",
