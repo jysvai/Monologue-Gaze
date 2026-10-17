@@ -857,6 +857,7 @@ MG.I18N.put("de", "c13", {
 "vp8759w2gt": "Nach den Login-Zeiten 03:12 und 05:20 gefragt, antwortete der Inhaber nicht und wischte weiter die Theke ab.",
 "126m51t48ba": "„Ich komm ja kaum mit DoranTalk klar“ — stimmt das?",
 "1059w1wjotu": "Alle Logins von Gerät B in den frühen Morgenstunden an Freitagen und Samstagen fallen in Nächte, in denen Oh Seung-cheol allein Nachtschicht hatte.",
+"nrg92ul6n5": "Beschuldigter und Belege passen. Was nicht stimmt, ist der Abschnitt „Weitere Beteiligte“. Wer die Tabletten selbst abgeholt, in der Gasse abgelegt und die Koordinaten geschickt hat — wo steht diese Person im Antrag?",
 "nfu4iz9f2n": "Antrag auf Haftbefehl",
 "jvjn1ftmkv": "Haftbefehl beantragen",
 "21dp3kzjhg8": "Antrag schreiben",
