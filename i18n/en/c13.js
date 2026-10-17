@@ -831,7 +831,7 @@ MG.I18N.put("en", "c13", {
 "28p0a65w8c4": "Shown the exchange's reply, Woo-jin said he only ever got two or three hundred thousand won at a time. ₩28 million went through the account in two months.",
 "1cn3yt02zg6": "“I don't have an exchange account” — is that right?",
 "6exl6ioj0n": "At 00:41, two hours after Woo-jin's arrest, someone logged into his account from a Windows PC and tried to withdraw.",
-"o44u8lfm79": "After Woo-jin was caught, did anything still move in his name?",
+"ei8ntevoz4": "Is there any sign that someone other than Woo-jin got into the account in his name?",
 "15yr85lwho7": "Woo-jin was a runner taking pin photos. The account in his name kept moving from another PC after he was arrested.",
 "2cmx4warq8b": "Where did the stakeout leak?",
 "1he1ms4cuvb": "Two people outside the team knew about the stakeout in advance: Kim Sun-rye at 18:30 (one parking space), the Haru Mart owner at 19:58 (window seat · back-door key).",

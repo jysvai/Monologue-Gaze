@@ -831,7 +831,7 @@ MG.I18N.put("de", "c13", {
 "28p0a65w8c4": "Mit der Antwort der Börse konfrontiert, sagte U-jin, er habe jedes Mal nur zwei-, dreihunderttausend Won bekommen. Über das Konto liefen in zwei Monaten 28 Millionen Won.",
 "1cn3yt02zg6": "„So was wie ein Börsenkonto hab ich nicht“ — stimmt das?",
 "6exl6ioj0n": "Um 00:41, zwei Stunden nach U-jins Festnahme, gab es auf seinem Konto einen Login von einem Windows-PC und einen Auszahlungsversuch.",
-"o44u8lfm79": "Hat sich nach U-jins Festnahme noch etwas auf seinen Namen bewegt?",
+"ei8ntevoz4": "Gibt es Spuren, dass jemand anders als Woo-jin in das Konto auf seinen Namen gelangt ist?",
 "15yr85lwho7": "U-jin war ein Läufer, der die Ablageorte fotografierte. Das Konto auf seinen Namen wurde auch nach seiner Festnahme von einem anderen PC aus bedient.",
 "2cmx4warq8b": "Wo ist die Observation durchgesickert?",
 "1he1ms4cuvb": "Außerhalb des Teams wussten vorher zwei Personen von der Observation: Kim Sun-rye um 18:30 (ein Parkplatz) und der Harumart-Inhaber um 19:58 (Fensterplatz · Schlüssel zur Hintertür).",
