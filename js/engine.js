@@ -435,8 +435,9 @@
   const isCond = a => a && !Array.isArray(a) && typeof a === 'object' && 'need' in a;
   // 대답에 새 단서가 들었나: 메모가 되는 줄(f) · 새 단어([[ ]]) · 받아 적는 사실(take) (탐문 칩 차례에 쓴다).
   // 조건이 걸린 대답은 지금 나올 쪽만 본다 — 메모를 내밀어야 털어놓는 물음은 그 메모를 쥐었을 때 앞으로 (처음부터 앞에 두면 범인 줄만 할 말이 많아 티가 난다)
+  // 메모(!f)가 걸린 물음은 그 메모를 쥐면 털어놓는 말이 평문이어도 앞으로 (목격자의 「확인」은 대개 새 단어 없이 기억만 보탠다)
   const meaty = a => (a == null ? false : typeof a === 'string' ? a.includes('[[') : Array.isArray(a) ? a.some(meaty) : typeof a !== 'object' ? false
-    : isCond(a) ? (ok(a.need) ? !!(a.take || []).length || meaty(a.a) : meaty(a.else)) : !!(a.f || (a.take || []).length || (a.keys || []).length || meaty(a.a) || meaty(a.p)));
+    : isCond(a) ? (ok(a.need) ? !!(a.take || []).length || (a.need || []).some(n => n.split('|').some(x => x[0] === '!')) || meaty(a.a) : meaty(a.else)) : !!(a.f || (a.take || []).length || (a.keys || []).length || meaty(a.a) || meaty(a.p)));
   // 수첩을 내밀기 전에 먼저 그냥 묻는다 — 처음 듣는 사람에게 「처음 하신 말씀과 다릅니다」가 나가지 않게. 기억을 되살리는 soft 도 먼저 듣고, 메모는 플레이어가 골라 내민다
   // 같은 기록(!f)으로 이미 털어놓은 사람은, 그 기록에 걸린 다른 낱말을 처음 물어도 다시 시치미 떼지 않는다
   const pressedOn = (p, a) => (ST.asked[p.id] || []).some(e => { if (!e.endsWith('!')) return false; const b = rawAns(p, e.slice(0, -1)); return isCond(b) && (b.need || []).some(n => n[0] === '!' && (a.need || []).includes(n)); });
@@ -605,7 +606,7 @@
   const MISS = () => [T('(메모를 훑어본다) 이게 그 얘기하고 무슨 상관입니까?'), T('(어깨를 으쓱한다) 그걸 보여 주셔도 드릴 말씀은 같습니다.'), T('…그 메모로 뭘 말씀하시려는 건지 모르겠군요.')];
   const MISS_SOFT = () => [T('(메모를 한참 들여다본다) …글쎄요, 이걸로는 떠오르는 게 없는데요.'), T('(고개를 갸웃한다) 이건 제가 말씀드린 거하고는 다른 얘기 같은데요.')];
   // 틀린 메모를 내밀면: 몸짓 하나 + 그 사람이 평소 모른다고 할 때 쓰는 말 — 부두 인부와 여고생이 같은 존댓말로 손사래 치지 않게
-  const GLANCE = () => [T('(메모를 훑어보더니 도로 밀어 놓는다)'), T('(메모를 힐끗 보고 고개를 젓는다)'), T('(메모와 당신을 번갈아 본다)')];
+  const GLANCE = () => [T('(메모를 훑어보더니 도로 밀어 놓는다)'), T('(메모를 힐끗 보고 고개를 젓는다)'), T('(메모와 형사의 얼굴을 번갈아 본다)')];
   const GLANCE_SOFT = () => [T('(메모를 한참 들여다본다)'), T('(메모를 읽고 나서 고개를 갸웃한다)')];
   function missLine(p, soft, n) {
     // 제 몸짓이 앞에 붙은 줄은 그 몸짓에 기대어 말하는 일이 있다 (「…아직도 꺼져 있어요」는 전화를 거는 몸짓이 있어야 말이 된다) — 말만으로 서는 줄을 먼저 쓴다
@@ -816,12 +817,13 @@
     const asked = ST.asked[p.id] || [];
     const ks = Object.keys(p.ask || {}).filter(k => {
       const a = rawAns(p, k);
-      return !used.has(k) && isPressAsk(p, k) && !(a && a.soft) && (a.need || []).some(n => n.split('|').some(x => x[0] === '!' && facts.some(f => f && fIs(f, x.slice(1)))));
+      const hit = w => facts.some(f => f && fIs(f, w)); // take 로 받는 메모도 (그 메모로 깨진 대답이면 다시 나와야 한다)
+      return !used.has(k) && isPressAsk(p, k) && !(a && a.soft) && ((a.need || []).some(n => n.split('|').some(x => x[0] === '!' && hit(x.slice(1)))) || (a.take || []).some(hit));
     });
     return ks.find(k => asked.includes(k + '!')) || ks[0] || null;
   }
   const ansLines = (p, k) => [].concat((rawAns(p, k) || {}).a || []).map(gv).map((b, i) => ({ r: typeof b === 'string' ? b : b && typeof b.p === 'string' ? b.p : '', i })).filter(x => x.r)
-    .map(({ r, i }) => ({ t: plain(r).replace(DASH, '').replace(/^\s*\([^)]*\)\s*/, '').replace(/\s+/g, ' ').trim(), me: DASH.test(r), i })).filter(x => x.t);
+    .map(({ r, i }) => ({ t: plain(r).replace(DASH, '').replace(/^\s*\([^)]*\)\s*/, '').replace(MIDACT, ' ').replace(/\s+/g, ' ').replace(/\s+([.,!?…。、，！？])/g, '$1').trim(), me: DASH.test(r), i })).filter(x => x.t); // 말 도중의 몸짓도 뺀다 (자막에 괄호가 남지 않게)
   // 그 대답에 녹음이 있으면 탐문 때와 같은 조각으로 (첫 조각은 키 그대로 span 줄, 나머지는 「키.번호」)
   const ansVoices = (p, k, lines) => {
     const snd = MG.sound, base = `v/${C.id}/${p.id}/${k}`, span = ((MG.audio || {}).span || {})[base] || 1;
@@ -1379,11 +1381,12 @@
     const off = () => { if (pr.scrollHeight - pr.clientHeight - pr.scrollTop < 40) { b.remove(); pr.removeEventListener('scroll', off); } };
     pr.addEventListener('scroll', off, { passive: true });
   }
-  // 새 소식: 화면 오른쪽 위에 휴대폰 알림처럼 (누르면 그곳으로). 사건을 여는 장면이 떠 있으면 그 장면이 걷힌 뒤에 (제목 위로 알림이 덮이지 않게)
+  // 새 소식: 화면 오른쪽 위에 휴대폰 알림처럼 (누르면 그곳으로). 사건을 여는 장면이나 마주 앉은 장면이 떠 있으면 그 장면이 걷힌 뒤에 (제목 · 그림 위로 알림이 덮이지 않게)
   function notify(news) {
     const cid = C && C.id;
     setTimeout(() => {
       if (!C || C.id !== cid) return;
+      if (SCENE) { const wait = () => { if (!C || C.id !== cid) return; if (SCENE) return void setTimeout(wait, 600); notifyNow(news); }; return void setTimeout(wait, 600); } // 마주 앉은 장면이 떠 있으면 걷힌 뒤에 (그림 위로 알림이 덮이지 않게)
       if (!document.querySelector('.case-intro')) return notifyNow(news);
       const go = () => { document.removeEventListener('mg:intro-out', go); if (C && C.id === cid) setTimeout(() => notifyNow(news), 350); };
       document.addEventListener('mg:intro-out', go);
@@ -3633,7 +3636,8 @@
           const per = k => Object.values(C.people || {}).find(x => x.key === k), here = () => C === c0 && ST === s0;
           const cp = per(C.solution.culprit), ws = Object.keys(C.solution.with || {}).map(per).filter(Boolean);
           // 함께 엮인 사람: 무엇으로 엮였는지 (공범 · 알고도 감춤)
-          const wLines = p => { const w = (C.solution.with || {})[p.key], lab = (WITH().find(x => x[0] === (typeof w === 'string' ? w : w && w.k)) || [])[1];
+          const wLines = p => { const w = (C.solution.with || {})[p.key], mine = withOf()[p.key], okw = (C.solution.withOk || {})[p.key]; // 맞다고 받아 준 쪽으로 적었으면 그 이름 그대로 (「알고도 감춤」도 받는 사람을 「공범」으로 바꿔 부르지 않게)
+            const lab = (WITH().find(x => x[0] === (mine && okw && okw.includes(mine) ? mine : typeof w === 'string' ? w : w && w.k)) || [])[1];
             return lab ? [{ t: lab, me: true }] : []; };
           const after = () => { if (!here()) return; ws.forEach((p, i) => setTimeout(() => { if (here()) sceneCut(p, 'end', wLines(p), 4000); }, i * 4300)); if (MG.sound) setTimeout(() => { if (here()) MG.sound.hero('solved'); }, ws.length * 4300 + 300); };
           setTimeout(() => { if (!here()) return; if (cp) confront(cp, after); else after(); }, 1100);

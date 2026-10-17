@@ -74,7 +74,7 @@ MG.I18N.put("en", "ui", {
 "(고개를 갸웃한다) 이건 제가 말씀드린 거하고는 다른 얘기 같은데요.": "(Tilts their head) That seems to be about something else, not what I told you.",
 "(메모를 훑어보더니 도로 밀어 놓는다)": "(skims the note, then pushes it back)",
 "(메모를 힐끗 보고 고개를 젓는다)": "(a glance at the note, a shake of the head)",
-"(메모와 당신을 번갈아 본다)": "(looks from the note to you and back)",
+"(메모와 형사의 얼굴을 번갈아 본다)": "(looks from the note to the detective's face and back)",
 "(메모를 한참 들여다본다)": "(studies the note for a long moment)",
 "(메모를 읽고 나서 고개를 갸웃한다)": "(reads the note through, puzzled)",
 "유력 — {0}의 대답과 어긋난다": "Lead — clashes with what {0} said",
