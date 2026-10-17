@@ -794,6 +794,7 @@ MG.I18N.put("en", "c14", {
 "104fi7cpysb": "I went at nine, the minute the savings bank opened, took it out, then came home and waited. The bell rang around ten-forty. And the whole time, Section Chief Kim stayed on the phone with me.",
 "15a5q5e707g": "I've lived here twenty years. The hallway camera's a fake. They put up a dummy to save on the maintenance fee.",
 "971g1tvw4": "Dallim? The place with the kids on motorbikes? Behind the market. Their flyers are stuck in every mailbox.",
+"9txzrqn5pa": "The grandmother in Darae-dong? (takes her hand off the bag of tangerines) …She got that call too? Eighty-one, she's even older than me. Where do they find the numbers of old women like us?",
 "mext58315j": "My husband's gone, my son's gone off to Australia. When you live alone, a phone call is a welcome thing. That's the trouble.",
 "1jvx6iibjlg": "(Looks up at the calendar on the wall) Dates and times, I don't keep track. These days I'm in this room all day.",
 "latfnelix0": "I wouldn't know that. What does an old woman know.",

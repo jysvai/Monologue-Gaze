@@ -794,6 +794,7 @@ MG.I18N.put("de", "c14", {
 "104fi7cpysb": "Um neun, gleich als die Sparkasse aufmachte, bin ich hin und hab's abgehoben, dann zu Hause gewartet. Gegen zehn Uhr vierzig hat's geklingelt. Die ganze Zeit war dieser Referatsleiter Kim am Telefon dran.",
 "15a5q5e707g": "Ich wohne seit zwanzig Jahren hier. Die Kamera im Flur ist nicht echt. Eine Attrappe, um Nebenkosten zu sparen, heißt es.",
 "971g1tvw4": "Dallim? Wo die Jungs mit den Rollern sind? Hinterm Markt. Die Flyer stecken in jedem Briefkasten.",
+"9txzrqn5pa": "Die alte Frau in Darae-dong? (nimmt die Hand von der Mandarinentüte) …Die hat auch so einen Anruf gekriegt? Einundachtzig, die ist ja noch älter als ich. Wo kriegen die bloß die Nummern von uns alten Frauen her?",
 "mext58315j": "Mein Mann ist gestorben, mein Sohn ist nach Australien. Wenn man allein lebt, freut man sich über jeden Anruf. Das ist das Problem.",
 "1jvx6iibjlg": "(Schaut zum Wandkalender hoch) Daten und Uhrzeiten, da kenn ich mich nicht aus. Ich sitz jetzt den ganzen Tag in diesem Zimmer.",
 "latfnelix0": "Das weiß ich nicht. Was weiß so eine alte Frau schon.",
