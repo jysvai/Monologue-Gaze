@@ -384,6 +384,7 @@ s{text-decoration:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://w
 /* 결재란: 담당 · 팀장 · 과장. 종이 기록철에는 없다 (붉은 동그라미 자리가 대신한다) */
 .rep-sign{display:none}
 .case-view:is([data-frame="crt"],[data-frame="laptop"]) .rep-sign{display:table;float:right;margin:0 0 6px 12px;border-collapse:collapse;font:11px/1.2 var(--f-web);text-align:center}
+.rep-view .doc-h .doc-t{overflow-wrap:normal} /* 결재란 옆이 좁으면 낱말을 쪼개지 말고 결재란 밑으로 내린다 ("Mandarin/e") */
 .rep-sign th{padding:3px 6px;border:1px solid #9aa0a6;background:#eef0f2;font-weight:700;color:#3b4148}
 .rep-sign td{width:54px;height:40px;padding:2px;border:1px solid #9aa0a6;background:#fff;color:#3b4148;vertical-align:middle;word-break:keep-all}
 .rep-sign span{display:inline-grid;place-items:center;width:34px;height:34px;border:2px solid currentColor;border-radius:50%;font:800 11px/1 var(--f-doc);transform:rotate(-12deg);-webkit-mask-image:var(--inkmask);mask-image:var(--inkmask);-webkit-mask-size:140px;mask-size:140px}

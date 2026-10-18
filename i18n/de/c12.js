@@ -1041,7 +1041,7 @@ MG.I18N.put("de", "c12", {
 "pyxna3e7m3": "Und die Säge der Metzgerei?",
 "1w8ggghughl": "An jenem Morgen war Kimura auf der Auktion in Minatohama. Auch die Säge passt nicht. Er scheidet aus.",
 "lj02weau94": "Der Weg dessen, der im Morgengrauen die Beutel brachte",
-"fzhasjdnhp": "Genau eine Stelle stimmt nicht. Wo die Beutel lagen, reicht nicht. Wohin führen die Spuren dessen, womit sie gebracht wurden — Reifen oder Stiefel —, und die Augen, die den Mann vor Tagesanbruch gesehen haben?",
+"fzhasjdnhp": "Genau eine Stelle stimmt nicht. Wo die Beutel lagen, reicht nicht. Wohin führen die Spuren dessen, womit sie gebracht wurden — Reifen oder Stiefel —, und die Augen, die diese Person vor Tagesanbruch gesehen haben?",
 "xhfdzmdf2v": "Wo die Leiche gewaschen und zerteilt wurde",
 "1er4kf2sr4r": "Genau eine Stelle stimmt nicht. Wo die Leiche gewaschen und zerteilt wurde, ist viel Wasser und Blut geflossen. Worauf zeigen das Wasser in den Beuteln, der Abfluss oder die Aufzeichnung, dass in jener Nacht Wasser erhitzt wurde?",
 "1bnl4lh6nng": "Was diese Hände gelernt haben",

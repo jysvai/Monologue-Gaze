@@ -840,7 +840,7 @@ MG.I18N.put("en", "c05", {
 "1us1ukvxf6j": "What only the letter writer could have known",
 "16ws318zc5f": "One thing doesn't fit. The letters knew something the police never made public. What is in both the scene report and a letter, but never ran in the papers?",
 "1qw6p69ruru": "What the cipher gave away",
-"vnmf233pv0": "One thing doesn't fit. Which line of the decoded cipher is the killer telling you what he does for a living?",
+"vnmf233pv0": "One thing doesn't fit. Which line of the decoded cipher does the killer give away their own trade?",
 "2dlk2reotw6": "One thing doesn't fit. Check whether the notes you attached all point to the same person you named.",
 "1q3lzvvme1w": "KNOWLTON P.D. 68-1214 · REVIEWED",
 "1x4s9liqpzn": "Carl Brennan wrote his letters in neat block capitals. Before dawn on Sunday, driving Truck 7, he dropped them in the mailbox whenever he left papers in front of a post office in the towns up north. The Monday-morning postmarks pointed to Santa Reina, Millbrook and Port Haley, one after another.",

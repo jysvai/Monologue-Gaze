@@ -834,7 +834,7 @@ MG.I18N.put("de", "c05", {
 "6ik2c29umv": "Die Leuchtturmstraße sei nur der Weg nach Norden – und am frühen Morgen des 17. August?",
 "olfynnnet5": "Carl Brennan. Am frühen Morgen des 17. August fuhr er mit dem Wagen der Route 7 an vier Streifenwagen vorbei, und zwei Tage später kam ein Brief: „Ich bin an ihnen vorbeigekommen.“",
 "5s8dwn8ir0": "Der Weg, auf dem die Briefe aufgegeben wurden, und der Täter",
-"1j8k71bubqo": "Genau eine Stelle stimmt nicht. War es an jedem Tag, an dem ein Brief aufgegeben wurde, derselbe Mann, der die Route tatsächlich fuhr? Such eine Aufstellung, wer sie an welchem Tag fuhr.",
+"1j8k71bubqo": "Genau eine Stelle stimmt nicht. War es an jedem Tag, an dem ein Brief aufgegeben wurde, dieselbe Person, die die Route tatsächlich fuhr? Such eine Aufstellung, wer sie an welchem Tag fuhr.",
 "1yp5judqipo": "Der Anruf bei der Polizei in jener Nacht und der Täter",
 "1ohhjonjpbh": "Genau eine Stelle stimmt nicht. Woher der Anruf in jener Nacht kam und wo der Täter laut den Unterlagen zu der Zeit war: Ist es eine Notiz, in der beides zusammenpasst?",
 "1us1ukvxf6j": "Was nur der Briefschreiber wissen konnte",
