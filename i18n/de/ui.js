@@ -102,7 +102,7 @@ MG.I18N.put("de", "ui", {
 "엉뚱한 메모를 한 번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.": "Noch eine falsche Notiz, und die Person schweigt. Mit einer neuen Notiz lässt sich wieder nachhaken.",
 "※ 수첩 쓰는 법": "※ So funktioniert das Notizbuch",
 "(메모를 보고 잠시 멈칫한다)": "(Sieht auf die Notiz und stockt kurz)",
-"— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.": "— schweigt jetzt. Mit einer neuen Notiz lässt sich wieder nachhaken.",
+"— 입을 닫았다. 새 메모를 적어 오거나, 다른 기록과 사람을 몇 군데 더 돌아보고 오면 다시 따질 수 있다.": "— schweigt jetzt. Mit einer neuen Notiz oder nachdem du dich bei ein paar anderen Unterlagen und Leuten umgesehen hast, lässt sich wieder nachhaken.",
 "{0} 탐문": "Befragung: {0}",
 "모순": "Widerspruch",
 "수첩을 펴 보인다": "zeigt das Notizbuch",

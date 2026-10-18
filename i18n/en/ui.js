@@ -102,7 +102,7 @@ MG.I18N.put("en", "ui", {
 "엉뚱한 메모를 한 번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.": "One more wrong note and they stop talking. Note something new and you can press again.",
 "※ 수첩 쓰는 법": "※ How the notebook works",
 "(메모를 보고 잠시 멈칫한다)": "(Glances at the note and stops for a moment)",
-"— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.": "— has stopped talking. Note something new and you can press again.",
+"— 입을 닫았다. 새 메모를 적어 오거나, 다른 기록과 사람을 몇 군데 더 돌아보고 오면 다시 따질 수 있다.": "— has stopped talking. Note something new, or look around a few other records and people, and you can press again.",
 "{0} 탐문": "Interview: {0}",
 "모순": "Contradiction",
 "수첩을 펴 보인다": "shows the notebook",

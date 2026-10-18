@@ -452,7 +452,9 @@
     if (!n) return '<span class="per-pat" hidden></span>';
     return `<span class="per-pat" role="img" aria-label="${T`참을성 ${max - n} / ${max}`}"><span class="pat-t">${T('참을성')}</span>${Array.from({ length: max }, (_, i) => `<i${i < max - n ? ' class="on"' : ''}></i>`).join('')}</span>`;
   }
-  const vsOf = p => { const v = (ST.vs ||= {})[p.id]; if (v && v.shut != null && proof().length > v.shut) { delete ST.vs[p.id]; return null; } return v || null; };
+  // 다시 말을 받는 때: 내밀 메모가 늘었거나, 다른 기록·사람을 세 군데 더 돌아보고 왔을 때 (수첩이 다 찬 뒤에 입을 닫으면 메모가 더 늘 수 없어 영영 막힌다)
+  const actN = p => ST.seen.length + Object.entries(ST.asked || {}).reduce((s, [id, a]) => s + (id === p.id ? 0 : a.length), 0);
+  const vsOf = p => { const v = (ST.vs ||= {})[p.id]; if (v && v.shut != null && (proof().length > v.shut || (v.act != null && actN(p) >= v.act + 3))) { delete ST.vs[p.id]; return null; } return v || null; };
   const clammed = p => { const v = vsOf(p); return !!(v && v.shut != null); };
   // idle 이 여러 줄이면 돌아가며 한 줄씩 — 모르는 걸 스무 번 물어도 똑같은 말만 되풀이하지 않게 (앞서 모른다고 한 횟수로 고르니 다시 그려도 같은 줄)
   const fallsIdle = (p, e) => { const k = e.replace(/!$/, ''), a = rawAns(p, k); if (p.idleT && (C.keywords[k] || {}).type === 'time') return false; return a == null || (isCond(a) && !e.endsWith('!') && a.else == null); };
@@ -681,8 +683,8 @@
     if (!fits && !near && !PICK.other && !PICK.later && !noLead && !isSoft(p, k)) { // 목격자에게 기억을 되살리려 보여 준 메모(soft)는 헛짚어도 참을성을 깎지 않는다
       const v = (ST.vs ||= {})[p.id] ||= { n: 0 };
       v.n++;
-      if (v.n >= VS_MAX()) { v.shut = proof().length; v.last = PICK.miss; PICK = null; save(); renderRead(); faceAnim('nope', 700); land(['#paneRead .vs-shut', '#askChips .chip']);
-        sceneCut(p, 'angry', [{ t: plain(v.last).replace(/\s+/g, ' ').trim() }, { t: T('— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.'), me: true }].filter(x => x.t), 4200); // 입을 닫는 순간도 마주 앉은 그 사람으로 (그림이 있는 사람만)
+      if (v.n >= VS_MAX()) { v.shut = proof().length; v.act = actN(p); v.last = PICK.miss; PICK = null; save(); renderRead(); faceAnim('nope', 700); land(['#paneRead .vs-shut', '#askChips .chip']);
+        sceneCut(p, 'angry', [{ t: plain(v.last).replace(/\s+/g, ' ').trim() }, { t: T('— 입을 닫았다. 새 메모를 적어 오거나, 다른 기록과 사람을 몇 군데 더 돌아보고 오면 다시 따질 수 있다.'), me: true }].filter(x => x.t), 4200); // 입을 닫는 순간도 마주 앉은 그 사람으로 (그림이 있는 사람만)
         return; }
     }
     save();
@@ -734,7 +736,7 @@
     const abF = ST.view.abFrom, abS = abF && abF.pid === p.id && C.sources.find(x => x.id === abF.src && x.type === 'alibi' && srcVisible(x)); // 행적표에서 건너왔으면 돌아가는 단추
     return `<article class="person skin-${esc(p.skin || 'talk')}">${abS ? `<p class="ab-back-w"><button type="button" class="ab-back" data-src="${esc(abS.id)}">← ${esc(abS.name)}</button></p>` : ''}<header class="per-h${faceOf(p) ? ' has-face' : ''}">${faceOf(p) ? `<button type="button" class="per-back" data-back aria-label="${esc(T('목록으로'))}" title="${esc(T('목록으로'))}">←</button>` : ''}${portrait(p, true)}<div><h3>${esc(p.name).replace(/-/g, '\u2011')}${hunchBtn(p)}</h3>${p.role ? `<p>${inline(p.role)}</p>` : ''}${p.where ? `<p class="per-w">${inline(p.where)}</p>` : ''}${patHtml(p)}</div>${recAge() && faceOf(p) ? '<span class="rec" aria-hidden="true"><i></i>REC <b class="rec-tc"></b></span>' : ''}</header>
       <div class="per-tr" data-who="${esc(p.id)}">${tr}</div>
-      ${PICK && PICK.pid === p.id && !inl ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}>${shut ? `<p class="vs-shut" tabindex="-1"><b>${esc(p.name)}</b> ${inline(ST.vs[p.id].last || '').replace(MIDACT, '<i class="c-mid">$&</i>')} <span>${T('— 입을 닫았다. 새 메모를 적어 오면 다시 따질 수 있다.')}</span></p>` : ''}<p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」')}${liveOn() ? `<b class="lv-cost">${T` · 물을 때마다 ${hm(lcost('ask'))}`}</b>` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
+      ${PICK && PICK.pid === p.id && !inl ? pickHtml(p) : ''}<div class="per-ask"${PICK && PICK.pid === p.id ? ' hidden' : ''}>${shut ? `<p class="vs-shut" tabindex="-1"><b>${esc(p.name)}</b> ${inline(ST.vs[p.id].last || '').replace(MIDACT, '<i class="c-mid">$&</i>')} <span>${T('— 입을 닫았다. 새 메모를 적어 오거나, 다른 기록과 사람을 몇 군데 더 돌아보고 오면 다시 따질 수 있다.')}</span></p>` : ''}<p class="per-ask-t">${T`무엇을 물어볼까? <small>수첩의 단어${T(' · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」')}${liveOn() ? `<b class="lv-cost">${T` · 물을 때마다 ${hm(lcost('ask'))}`}</b>` : ''}</small>`}</p><div class="chips" id="askChips">${askChips(p)}</div></div></article>`;
   }
 
   /* 대화 재생: 몸짓은 스르르, 말은 한 글자씩(사람마다 다른 말소리). 목소리가 있는 말풍선은 재생 시각에 맞춰 찍는다. 누르면 건너뛴다 */
