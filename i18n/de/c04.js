@@ -189,7 +189,7 @@ MG.I18N.put("de", "c04", {
 "8tos6cfmye": "Das von der Sonderkommission veröffentlichte [[Phantombild|k_montage]]. Es wurde aus den Aussagen der vier Besatzungsmitglieder zusammengesetzt.",
 "g0uz5ey7z5": "Laut der von der Kommission veröffentlichten Beschreibung ist der Mann etwa 20 bis 25 Jahre alt, 165 bis 170 cm groß, hat ein schmales Gesicht und trug einen weißen Helm und eine schwarze Lederjacke. Er sprach reines Hochjapanisch.",
 "1tneo815pls": "Ein leitender Beamter der Kommission sagte: „Verlassen Sie sich nicht zu sehr auf das Phantombild. Jeder der vier hat das Gesicht ein wenig anders gesehen.“",
-"1t9kpgjtfkd": "Austausch der Wasserleitungen an der Kreuzung Sakae-chō — Verkehrsbeschränkungen ab Ende Juni",
+"2c7wvaq2o4s": "Austausch der Wasserleitungen an der Kreuzung Sakae-chō — Verkehrsbeschränkungen ab 20. Juni",
 "1otob44aile": "Morgenausgabe, Samstag, 18. Mai 1968 · Seite 5",
 "qf23auh5z4": "Das Wasseramt der Stadt Mizuo tauscht vom 20. dieses Monats bis zum 10. Juli im Bereich der Kreuzung [[Sakae-chō|k_sakae]] alte Wasserleitungen aus. Ab dem 20. Juni, wenn die Kreuzungsmitte aufgegraben wird, steht nur noch eine Fahrspur zur Verfügung. Geschäftsfahrzeuge werden von 8 bis 10 Uhr morgens über die nördliche Landstraße umgeleitet; auf den schmalen Mauerweg am Wasserwerk werden nur Fahrzeuge gelassen, die zum Osttor der Fabrik fahren.",
 "8mt088wulk": "Ausführende Firma ist [[Daitō Bau|k_daito]]. Die Erneuerung der Fahrbahnmarkierungen nach Abschluss der Arbeiten sowie die Verkehrsregelung an der Baustelle übernimmt der Subunternehmer [[Minami Linienbau|k_minami]].",

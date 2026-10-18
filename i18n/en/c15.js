@@ -946,7 +946,7 @@ MG.I18N.put("en", "c15", {
 "fvp89bq2kt": "That number, at that hour?",
 "18ju84o0kge": "Pointed to 21:47, when the passenger door opened, Min-jae said, “I only wanted to talk.”",
 "1zzld4cfi7n": "“Didn't go anywhere near Mirinae-dong”?",
-"24f5n641vav": "Seong Min-jae. From 21:28 he was in that alley, in a NubiCar rented in his own name.",
+"u6ifv4gipj": "Seong Min-jae. Driving a NubiCar rented in his own name, he reached the Mirinae Villa area at 21:28 and stood in that alley from 21:31 to 21:48.",
 "hwth3879i6": "Emergency Arrest Report",
 "1x2p8xfadw0": "Suspect",
 "110o066elqb": "Request arrest approval",

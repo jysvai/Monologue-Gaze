@@ -946,7 +946,7 @@ MG.I18N.put("de", "c15", {
 "fvp89bq2kt": "Diese Nummer, zu dieser Zeit?",
 "18ju84o0kge": "Auf 21:47 angesprochen, als die Beifahrertür aufging, sagte Min-jae: „Ich wollte nur mit ihr reden.“",
 "1zzld4cfi7n": "„Nicht mal in der Nähe von Mirinae-dong“?",
-"24f5n641vav": "Seong Min-jae. Er war ab 21:28 in der Gasse, in einem NubiCar, den er auf seinen eigenen Namen gemietet hatte.",
+"u6ifv4gipj": "Seong Min-jae. Mit einem NubiCar, den er auf seinen eigenen Namen gemietet hatte, kam er um 21:28 in die Nähe der Mirinae Villa und stand von 21:31 bis 21:48 in der Gasse.",
 "hwth3879i6": "Vorläufige Festnahme",
 "1x2p8xfadw0": "Tatverdächtiger",
 "110o066elqb": "Festnahme genehmigen lassen",

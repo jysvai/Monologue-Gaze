@@ -666,7 +666,7 @@ MG.I18N.put("en", "c07", {
 "1fnn3f08ko8": "That night? I was stuck in the Plum Blossom Room. For anything about the phones, ask [[Miss Oh|k_operator]] on the switchboard. That girl writes everything down.",
 "g1mebovpsn": "For each room we write the guests' epithets and the times they came in and went out. Epithets, not names. That's our courtesy to the guests.",
 "20xw6u2m8tm": "After Ok-hui left, I kept it up myself. The handwriting's different, isn't it?",
-"a0z3usjn0n": "Manager Seok from Daeyang. Two or three times a month he entertained guests in the Orchid Room. Always put it on Daeyang's account.",
+"2geuw20iq89": "Manager Seok from Daeyang. Three or four times a month — lately every Friday — he entertained guests in the Orchid Room. Always put it on Daeyang's account.",
 "1dq9030o219": "He smokes nothing but foreign cigarettes. I'd say, what'll you do if there's a crackdown, and he'd act like he never heard me.",
 "1t4j6rr6qbi": "(Lowers her voice) I can't say that gentleman's name. Go by what's in the ledger.",
 "1ge4lh96dv6": "It's the innermost room. Right by the back gate off the courtyard. It's the room guests use when they'd rather not be seen.",

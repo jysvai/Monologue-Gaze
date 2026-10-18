@@ -189,7 +189,7 @@ MG.I18N.put("en", "c04", {
 "8tos6cfmye": "The [[composite photo|k_montage]] released by the investigation headquarters, put together from the statements of the four crew members.",
 "g0uz5ey7z5": "According to headquarters, the man is about 20 to 25, 165–170 cm tall, with a narrow face, and wore a white helmet and a black leather jacket. He spoke standard Japanese.",
 "1tneo815pls": "One senior officer at headquarters said, “Don't lean too heavily on the composite. Each of the four saw a slightly different face.”",
-"1t9kpgjtfkd": "Water Mains to Be Replaced at Sakae-cho Crossing — Traffic Restricted from Late June",
+"2c7wvaq2o4s": "Water Mains to Be Replaced at Sakae-cho Crossing — Traffic Restricted from June 20",
 "1otob44aile": "Sat., May 18, 1968 · Morning edition · p. 5",
 "qf23auh5z4": "The Mizuo City Water Bureau will replace old water mains around the [[Sakae-cho|k_sakae]] crossing from the 20th until July 10. From June 20, when the middle of the crossing is dug up, only one lane will be open. Between 8 and 10 a.m., business vehicles will be directed to detour by the northern highway, and only vehicles bound for the factory's east gate will be let onto the narrow waterworks wall road.",
 "8mt088wulk": "The work has been contracted to [[Daito Construction|k_daito]]. Repainting the road markings afterward and directing traffic at the site will be handled by the subcontractor [[Minami Line Industries|k_minami]].",

@@ -666,7 +666,7 @@ MG.I18N.put("de", "c07", {
 "1fnn3f08ko8": "Die Nacht? Ich war die ganze Zeit im Pflaumenblütenzimmer. Nach Anrufen fragen Sie besser [[Fräulein Oh|k_operator]] von der Vermittlung. Die schreibt alles auf.",
 "g1mebovpsn": "Für jedes Zimmer schreiben wir auf, wie der Gast angesprochen wird und wann er kommt und geht. Einen Titel statt des Namens. Das gebietet der Respekt vor dem Gast.",
 "20xw6u2m8tm": "Nachdem Ok-hee gegangen war, habe ich weitergeschrieben. Die Schrift ist anders, nicht wahr?",
-"a0z3usjn0n": "Direktor Seok von Daeyang. Zwei-, dreimal im Monat hat er im Orchideenzimmer Gäste bewirtet. Immer auf Rechnung Daeyang.",
+"2geuw20iq89": "Direktor Seok von Daeyang. Drei-, viermal im Monat, zuletzt jeden Freitag, hat er im Orchideenzimmer Gäste bewirtet. Immer auf Rechnung Daeyang.",
 "1dq9030o219": "Der Herr raucht nur ausländische Zigaretten. Ich hab ihn gefragt, was er machen will, wenn eine Kontrolle kommt — er hat gar nicht hingehört.",
 "1t4j6rr6qbi": "(Senkt die Stimme) Den Namen dieses Herrn nehme ich nicht in den Mund. Halten Sie sich an das, was im Buch steht.",
 "1ge4lh96dv6": "Das hinterste Zimmer. Es liegt gleich am Hintertor zum Hof. Das nehmen Gäste, die nicht gesehen werden wollen.",
