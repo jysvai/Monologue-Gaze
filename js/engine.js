@@ -1157,7 +1157,9 @@
     const sl = s.slots || [], n = sl.length || 1, span = c => { const [a, b] = [].concat(c.at ?? 0); return `grid-column:${+a + 1} / ${(b ?? a) + 2};--o:${+a}`; };
     // 칸마다 시각 꼬리표: 넓은 화면에선 숨기고, 좁은 화면(표 대신 사람별 목록)에서만 보인다
     const when = c => { const [a, b] = [].concat(c.at ?? 0); return `<span class="ab-at">${inline(sl[a] ?? '')}${b != null && b !== a ? ` – ${inline(sl[b] ?? '')}` : ''}</span>`; };
-    const rows = (s.rows || []).map(r => ({ r, cs: (r.cells || []).filter(c => abShown(r, c)) })).filter(({ r, cs }) => cs.length || (r.who && ST.asked[r.who]));
+    // 줄은 처음 찾아간 차례로 (찾아간 적 없는 줄은 앞에, 파일 차례대로) — 범인 줄이 늘 같은 자리에 서지 않게
+    const met = Object.keys(ST.asked), mo = r => (r.who ? met.indexOf(r.who) : -1);
+    const rows = (s.rows || []).map(r => ({ r, cs: (r.cells || []).filter(c => abShown(r, c)) })).filter(({ r, cs }) => cs.length || (r.who && ST.asked[r.who])).sort((a, b) => mo(a.r) - mo(b.r));
     const cell = (r, c) => {
       const broke = abBroke(r, c), tx = when(c) + (broke ? `<s>${inline(c.t)}</s>${c.truth ? `<span class="ab-tr">${inline(c.truth)}</span>` : ''}` : inline(c.t));
       if (c.ask && !broke && !/!$/.test(c.ask)) return `<button type="button" class="ab-c said" style="${span(c)}" data-ab="${esc(r.who)}|${esc(abKeys(c).find(k => (ST.asked[r.who] || []).includes(k)) || abKeys(c)[0])}" title="${esc(T`${pname(C.people[r.who])}에게 이 말을 따진다`)}">${tx}</button>`;
@@ -1668,7 +1670,9 @@
     return docs.length ? docs.map(itemBtn).join('') : `<p class="res-none">${esc(s.empty || T('아직 아무것도 없다.'))}</p>`;
   }
   function peopleList(s) {
-    const ps = Object.values(C.people).filter(p => p.src === s.id && personVisible(p));
+    // 이름을 알게 된 차례로 줄 세운다 — 사건 파일에 적힌 차례대로 두면 늘 맨 끝에 서는 사람이 생긴다
+    const ko = p => (p.key ? ST.keys.indexOf(p.key) : -1);
+    const ps = Object.values(C.people).filter(p => p.src === s.id && personVisible(p)).sort((a, b) => ko(a) - ko(b));
     const o = ST.view.open;
     if (!ps.length) return `<p class="res-none">${esc(s.empty || T('아직 찾아갈 사람이 없다. 이름을 알아내야 한다.'))}</p>`;
     // 아직 만나지 않은 사람은 수첩에 적힌 이름으로 (가게 점원 · 택시 기사처럼 이름을 모르고 찾아가는 사람)

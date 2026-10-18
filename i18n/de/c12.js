@@ -90,7 +90,7 @@ MG.I18N.put("de", "c12", {
 "24mdwrm8emt": "04:31 — Im 24-Stunden-Laden am Bahnhof werden Packband und Dosenkaffee gekauft",
 "2eq6228y003": "3 Beutel landen in Korb 6 am Teich",
 "1zg56dhanmm": "8 Beutel landen in den Körben 1, 2 und 3 am Osttor",
-"1suv69l28u3": "04:44 — Ein Lastenfahrrad verlässt den Park durchs Osttor und biegt Richtung Einkaufsstraße ab",
+"178d35e1fog": "Ein Lastenfahrrad verlässt den Park durchs Osttor",
 "e9yxk5dm3b": "06:02 — Takano sieht den ersten Beutel in Korb 1",
 "13sf0xkc9ei": "Alles passt zusammen. Der Weg der Beutel ist zu erkennen",
 "2b48088uq33": "Die Reihenfolge an der Tafel: Als der Junge um 04:05 vorbeikam, waren die Körbe leer. Zuerst gefüllt: Korb 5 am Teich und die Körbe 8 und 9 am Westtor (von der Sprenganlage nass). 04:31 Packband und Dosenkaffee im 24-Stunden-Laden am Bahnhof. Danach Korb 6 (nur die Innenwand nass), zuletzt die Körbe 1, 2 und 3 am Osttor (trocken · oben in Korb 3 die leere Dose). Um 04:44 verließ das Lastenfahrrad den Park durchs Osttor und bog Richtung [[Einkaufsstraße von 2-chōme|k_nichome]] ab.",

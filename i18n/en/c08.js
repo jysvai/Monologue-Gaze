@@ -742,7 +742,7 @@ MG.I18N.put("en", "c08", {
 "17jgrlrsx29": "(slaps the dust out of his work gloves) Can't help you there. You'd get the same answer from anybody on the site.",
 "bzvpa7mp7b": "Nothing I can add on that. If it were about Jun-yeong, I'd help any way I could.",
 "23pc15ykpy2": "Owner of Saeteo Plumbing · former site manager, Haesol Construction",
-"1sdr8aj25h1": "Office above Saeteo Grocery · dust settled on the desk phone",
+"4i8de82u8e": "Saeteo Plumbing office · dust settled on the desk phone",
 "16yaqk9fs3w": "(adjusts his new glasses frames) If this is about Haesol, I've nothing to say. I was done with that lot long ago. And since last October I've been at the [[Daejeon site|k_daejeon]].",
 "16fe8lzaszy": "How would I know that family's son's birthday? I don't even know his face.",
 "26dqzjuckxh": "(Taps the date on the copy of the attendance book) That's not the 4th written there.",

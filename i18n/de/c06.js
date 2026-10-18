@@ -741,7 +741,7 @@ MG.I18N.put("de", "c06", {
 "z9xu4frx22": "(Seufzt in den Hörer) Ich bin auf Dienstreise, mir schwirrt der Kopf. Ich weiß es nicht.",
 "9m838ocjgy": "(Im Hörer raschelt Papier) … Nein, in meinem Notizbuch steht nichts dergleichen.",
 "1fezja3qajy": "Hallo? Die Verbindung ist schlecht … Jedenfalls weiß ich davon nichts.",
-"22414ja5lmu": "Inhaber der Schiffsagentur Brate · ehem. Inhaber der Reederei Havbris",
+"2b3s0j47pde": "Inhaber der Schiffsagentur Brate",
 "2978qakohpi": "Nordkai 5 · Büro der Agentur",
 "lppy1ec58k": "Einar Brate. Ich betreibe eine Schiffsagentur am Nordkai. Von der Sache mit der Ausländerin habe ich in der Zeitung gelesen.",
 "18fh9o4y7s1": "Ich bin hier geboren und aufgewachsen. Auch das Schiff meines Vaters lief von diesem Kai aus.",

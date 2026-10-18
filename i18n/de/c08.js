@@ -742,7 +742,7 @@ MG.I18N.put("de", "c08", {
 "17jgrlrsx29": "(Klopft die Arbeitshandschuhe aus) Nie gehört. Da kriegen Sie von jedem auf der Baustelle dieselbe Antwort.",
 "bzvpa7mp7b": "Dazu kann ich nichts beitragen. Ginge es um Jun-yeong, würde ich helfen, wo ich kann.",
 "23pc15ykpy2": "Chef von Saeteo-Haustechnik · ehem. Bauleiter bei Haesol Bau",
-"1sdr8aj25h1": "Büro im Obergeschoss des Saeteo-Super · Staub auf dem Telefon auf dem Schreibtisch",
+"4i8de82u8e": "Büro von Saeteo-Haustechnik · Staub auf dem Telefon auf dem Schreibtisch",
 "16yaqk9fs3w": "(Rückt das neue Brillengestell zurecht) Zu Haesol habe ich nichts zu sagen. Mit denen bin ich längst fertig. Seit Oktober letzten Jahres war ich auf der [[Baustelle Daejeon|k_daejeon]].",
 "16fe8lzaszy": "Woher soll ich den Geburtstag von deren Sohn kennen? Ich weiß nicht mal, wie er aussieht.",
 "26dqzjuckxh": "(Tippt mit dem Finger auf das Datum in der Kopie des Anwesenheitsbuchs) Da steht doch nicht der Vierte.",

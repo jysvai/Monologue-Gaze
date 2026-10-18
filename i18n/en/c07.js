@@ -58,7 +58,7 @@ MG.I18N.put("en", "c07", {
 "2d7irlpioca": "Move the cards with ▲▼ into the order things happened that night. The times on the left are exactly as written in the various papers. Which card goes with which time, you have to work out by going through the papers.",
 "ubq5i4vq64": "Trust the times written in the ledgers, logs and listings before the times people tell you.",
 "2gb7umk7zjm": "Outside line from the accounts office — a 4-minute call with a newspaper's city desk",
-"1vke1meunj2": "A driver hands over his car key and is told, “Go on home early tonight.”",
+"2a9uhxz6krf": "A driver goes home early",
 "t83cnceurh": "One Orchid Room guest leaves early by the back gate in his own car",
 "ltyilqkqz2": "Bae Ok-hui leaves the Songwolgak by the back gate in the Crown",
 "f5gv2uklmz": "A call from outside — the Orchid Room bell rings three times, but no one answers",

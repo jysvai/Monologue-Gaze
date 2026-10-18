@@ -58,7 +58,7 @@ MG.I18N.put("de", "c07", {
 "2d7irlpioca": "Die Karten mit ▲▼ verschieben und in die Reihenfolge bringen, in der sich alles in jener Nacht zugetragen hat. Die Uhrzeiten links stehen genau so in den Unterlagen. Welche Karte zu welcher Uhrzeit gehört, muss man in den Akten herausfinden.",
 "ubq5i4vq64": "Den Zeiten in Büchern, Protokollen und im Fernsehprogramm eher trauen als den Zeiten, die jemand angibt.",
 "2gb7umk7zjm": "Amtsgespräch aus der Buchhaltung — 4 Minuten mit der Lokalredaktion einer Zeitung",
-"1vke1meunj2": "Ein Fahrer gibt den Autoschlüssel ab und bekommt zu hören: „Machen Sie heute früher Schluss.“",
+"2a9uhxz6krf": "Ein Fahrer macht früher Schluss",
 "t83cnceurh": "Ein Gast aus dem Orchideenzimmer bricht früher auf und fährt im eigenen Wagen durchs Hintertor davon",
 "ltyilqkqz2": "Bae Ok-hee verlässt das Songwolgak im Crown durchs Hintertor",
 "f5gv2uklmz": "Ein Anruf von außen — im Orchideenzimmer klingelt es dreimal, niemand hebt ab",

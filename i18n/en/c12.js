@@ -90,7 +90,7 @@ MG.I18N.put("en", "c12", {
 "24mdwrm8emt": "04:31 — Packing tape and a can of coffee are bought at the convenience store by the station",
 "2eq6228y003": "3 bags go into Bin 6 by the pond",
 "1zg56dhanmm": "8 bags go into Bins 1, 2 and 3 at the east gate",
-"1suv69l28u3": "04:44 — The cargo bike leaves by the east gate and turns toward the shopping street",
+"178d35e1fog": "The cargo bike leaves by the east gate",
 "e9yxk5dm3b": "06:02 — Takano sees the first bag in Bin 1",
 "13sf0xkc9ei": "It all fits together. You can see the path the bags took",
 "2b48088uq33": "The order on the blackboard — at 04:05, when the boy went by, the bins were empty. The first to fill were Bin 5 by the pond and Bins 8 and 9 at the west gate (soaked by the sprinklers). At 04:31, packing tape and a can of coffee at the convenience store by the station. Then Bin 6 (only the inside walls wet), and last Bins 1, 2 and 3 at the east gate (dry · an empty can on top in Bin 3). At 04:44 the cargo bike left by the east gate and turned toward the [[2-chome shopping street|k_nichome]].",

@@ -741,7 +741,7 @@ MG.I18N.put("en", "c06", {
 "z9xu4frx22": "(A sigh down the line) I'm on the road and it's all rather hectic. I don't know.",
 "9m838ocjgy": "(Pages rustling down the line) …No, there's nothing like that in my notebook.",
 "1fezja3qajy": "Hello? The line's very faint… Anyway, I don't know about that.",
-"22414ja5lmu": "Director, Brate Shipping Agency · former director, Havbris Shipping",
+"2b3s0j47pde": "Director, Brate Shipping Agency",
 "2978qakohpi": "Nordkai 5 · agency office",
 "lppy1ec58k": "Einar Brate. I run a shipping agency on Nordkai. I read about that foreign woman in the paper.",
 "18fh9o4y7s1": "I was born and raised here. My father's ship sailed from this harbor too.",
