@@ -1034,7 +1034,7 @@ MG.I18N.put("de", "c11", {
 "l5vr28sgfy": "Negativ der Werkstatt Cheonghak: Nur der Zementboden rund um den Abfluss ist kreisförmig weiß ausgebleicht, als wäre er mit Lauge geschrubbt worden.",
 "vsy21v5ntl": "Der Boden auf dem Foto.",
 "ng6b9trbmy": "Luminol in der ehemaligen Werkstatt Cheonghak, März ’87: Die aus den Fugen am Abfluss gekratzte Probe ist Menschenblut, Gruppe B.",
-"2bd6emp5bax": "Und wenn man den Boden besprüht?",
+"2d3l8osh1ql": "Bei ausgeschaltetem Licht wurde der Boden besprüht. Was kam zum Vorschein?",
 "1lmbbjei489": "Foto im Dunkeln vom selben Tag: auf dem Werkzeugbrett eine Reaktion in Form einer Säge. Blattlänge etwa 27 cm.",
 "1xp3w1u7dpi": "Das Werkzeugbrett.",
 "xhh6xkxv6x": "Die Perlmuttwerkstatt Cheonghak in Mokgol. Das Paulownia-Sägemehl und der Perlmuttstaub stammen von dort, und in den Fugen am Abfluss blieb Blut der Gruppe B zurück, wie bei Pyeon Sang-gu.",

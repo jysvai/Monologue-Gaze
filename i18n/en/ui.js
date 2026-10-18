@@ -514,7 +514,7 @@ MG.I18N.put("en", "ui", {
 "맞아떨어진다.": "It fits.",
 "그래, 여기서 이어지는구나.": "Right, so this is where it connects.",
 "범인은… 이 사람입니다.": "The culprit is… this person.",
-"…아직 뭔가 빠져 있어.": "…Something's still missing.",
+"…아직 뭔가 빠져 있어.": "…Something still doesn't fit.",
 "사건 종결. 선배, 하나 닫았습니다.": "Case closed. That's one more, M.",
 "탐문을 이어 해 보자.": "Back to the interviews.",
 "…이건 직접 가서 다시 물어봐야겠어.": "…I need to go and ask about this in person.",

@@ -2510,6 +2510,11 @@
       }));
     };
     if (lv() < 5) pressLeads();
+    const findLeads = pick => vis.filter(s => s.type === 'archive').forEach(s => ST.keys.forEach(k => {
+      if (C.keywords[k] && C._srcDocs[s.id].some(d => pick(d) && (d.need || []).length && ok(d.need) && (d.find || []).includes(k) && !ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)))) add(`find:${s.id}|${k}`, T`「${plain(s.name)}」에서 수첩의 단어로 아직 찾아보지 않은 것이 있다.`, quote(kl(k)), { t: 'find', src: s.id, id: k });
+    }));
+    // 새로 찾히는 기록에 보고서·앞길에 쓸 사실이 들었으면 적지 않은 단어보다 먼저 — 미끼 번지를 찾는 단어를 짚느라 그 기록을 가리지 않게
+    findLeads(d => { const b = bags.find(x => x.go && x.go.t === 'doc' && x.go.id === d.id); return !!b && [...b.f].some(f => [...useful].some(w => fIs(f, w)) && !noted(f)); });
     // 2. 읽은 기록 속에 있는데 아직 수첩에 적지 않은 단어
     //    앞으로 이어지는 단어(그 말로 찾으면 나오는 기록이 있거나, 조건에 걸려 있거나, 누군가 그 말에 따로 대답하는 것)를 먼저 짚는다. 아무 데도 안 이어지는 단어부터 짚으면 헛걸음이 된다
     const words = []; seen.forEach(b => b.k.forEach(k => { if (!ST.keys.includes(k) && C.keywords[k] && !C._dead.has(k)) words.push([k, b]); }));
@@ -2522,9 +2527,7 @@
     [...words.filter(([k]) => opens(k)).sort((x, y) => reach(y[0]) - reach(x[0])), ...words.filter(([k]) => !opens(k))].forEach(([k, b]) => (worth(k) ? add : (...x) => later.push(x))('word:' + k, b.go && b.go.t === 'person' ? T('들은 대답 속에 아직 수첩에 적지 않은 단어가 있다.') : T('읽은 기록 속에 아직 수첩에 적지 않은 단어가 있다.'), T`「${b.title}」 속 「${kl(k)}」`, b.go && { ...b.go, mark: 'k:' + k }));
     unmet.forEach(meet); // 만나도 아직 새로 나올 게 없는 사람은 적지 않은 단어 뒤에
     // 조건이 풀려 자료실에 새로 나온 기록(누구를 만나거나 무엇을 알아낸 뒤에야 찾히는 것)은 탐문보다 먼저 — 곁가지 추궁을 먼저 짚으면 앞길이 가려진다
-    vis.filter(s => s.type === 'archive').forEach(s => ST.keys.forEach(k => {
-      if (C.keywords[k] && C._srcDocs[s.id].some(d => (d.need || []).length && ok(d.need) && (d.find || []).includes(k) && !ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)))) add(`find:${s.id}|${k}`, T`「${plain(s.name)}」에서 수첩의 단어로 아직 찾아보지 않은 것이 있다.`, quote(kl(k)), { t: 'find', src: s.id, id: k });
-    }));
+    findLeads(() => true);
     if (lv() >= 5) pressLeads();
     // 4. 탐문 — 새 단어나 쓸 만한 사실이 나올 물음 (메모를 내밀 차례인 대답은 앞에서 짚었다)
     people.forEach(p => ST.keys.forEach(k => {
@@ -2597,8 +2600,10 @@
       n = { key: 'done', a: T`더 열어 볼 기록은 없다. 적은 메모로 ${fm.title}${josa(fm.title, '을', '를')} 쓴다.`, b: empty.length ? T`${empty.join('·')}번을 받칠 메모가 아직 수첩에 없다.` : T('쓸 메모는 수첩에 다 있다. 메모끼리 맞대 본다.') };
     }
     if (NUDGE.key !== n.key) { NUDGE.n = ST.notes.length; NUDGE.t = ST.live ? ST.live.t : null; }
+    // ★5 는 첫 줄만 — 다만 같은 곳을 세 번째 짚어 달라고 하면 그때는 어디인지까지 (블라인드 테스트: 첫 줄만 되풀이 듣다 손을 놓았다)
+    if (NUDGE.key == null) { const r = ST.nudgeRep || {}; ST.nudgeRep = { k: n.key, n: r.k === n.key ? (r.n || 0) + 1 : 1 }; }
     NUDGE.key = n.key;
-    const more = lv() < 5 && n.b;
+    const more = (lv() < 5 || (ST.nudgeRep && ST.nudgeRep.k === n.key && ST.nudgeRep.n >= 3)) && n.b;
     const go = n.go ? `<button type="button" class="nudge-go" data-nudge-go="${esc([n.go.t, n.go.src || '', n.go.id || '', n.go.mark || ''].join('|'))}">${T`펼치기`}</button>` : '';
     return `<div class="nudge" role="status"><p class="nudge-a">${esc(n.a)}</p>${more ? (NUDGE.more ? `<p class="nudge-b">${esc(n.b)} ${go}</p>` : `<button type="button" class="nudge-more" data-nudge-more>${T`더 짚어 보기`}</button>`) : ''}</div>`;
   }

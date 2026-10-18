@@ -1034,7 +1034,7 @@ MG.I18N.put("en", "c11", {
 "l5vr28sgfy": "Cheonghak workshop negative: only the cement floor around the drain has faded to a white circle, as if scrubbed with lye.",
 "vsy21v5ntl": "The floor in the photo.",
 "ng6b9trbmy": "Luminol at the former Cheonghak workshop, March ’87: the samples scraped from the grout lines by the drain are human blood, type B.",
-"2bd6emp5bax": "And if that floor is sprayed?",
+"2d3l8osh1ql": "With the lights off, that floor was sprayed. What showed up?",
 "1lmbbjei489": "Darkroom photo from the same day: a saw-shaped reaction on the tool-rack board. Blade about 27 cm.",
 "1xp3w1u7dpi": "The tool-rack board.",
 "xhh6xkxv6x": "The Cheonghak Lacquerware workshop in Mokgol. The paulownia sawdust and mother-of-pearl dust are that workshop's, and type B blood, the same as Pyeon Sang-gu's, was left in the grout lines by the drain.",
