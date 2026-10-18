@@ -486,7 +486,7 @@ MG.I18N.put("de", "c02", {
 "iaw91mpmlx": "Durch Ehevertrag von 1884 im Miteigentum der Ehefrau",
 "5qul7wzas1": "[[Tannenschlag|k_tannenschlag]], Tannenwald 3,4 ha",
 "k806xhzmuh": "~~Michael Moosbauer~~ → [[Valentin Knauer|k_knauer]] (Unterröding · Holz- und Viehhändler)",
-"27tfvjyyni2": "Übergang am 16. Oktober 1922. Kaufpreis laut privatem Vertrag der Beteiligten",
+"1lzhfi7mk0m": "Eigentumsumschreibung am 16. Oktober 1922. Kaufpreis laut privatem Vertrag der Beteiligten",
 "1i04oxhd769": "Pl.-Nr.",
 "h6u1ozz81j": "Grundstück",
 "1tguzn2975l": "Eigentümer",

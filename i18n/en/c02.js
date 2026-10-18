@@ -486,7 +486,7 @@ MG.I18N.put("en", "c02", {
 "iaw91mpmlx": "Held jointly with wife under 1884 marriage contract",
 "5qul7wzas1": "[[Tannenschlag|k_tannenschlag]] fir wood, 3.4 hectares",
 "k806xhzmuh": "~~Michael Moosbauer~~ → [[Valentin Knauer|k_knauer]] (Unterröding · timber and cattle dealer)",
-"27tfvjyyni2": "Transferred October 16, 1922. Price per private contract between the parties",
+"1lzhfi7mk0m": "Title registered October 16, 1922. Price per private contract between the parties",
 "1i04oxhd769": "Parcel No.",
 "h6u1ozz81j": "Land",
 "1tguzn2975l": "Owner",
