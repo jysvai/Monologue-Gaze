@@ -1302,7 +1302,8 @@
   }
 
   /* ───────── 실시간 수사 (live) ─────────
-   * 지금 벌어지는 사건: 시계가 간다. C.live = { start: [년, 월, 일, 시, 분], deadline: { at: 분, label, who, miss }, cost: { … } }
+   * 지금 벌어지는 사건: 시계가 간다. C.live = { start: [년, 월, 일, 시, 분], deadline: { at: 분, label, who, miss, pre?, preNeed? }, cost: { … } }
+   * pre: need 가 채워지기 전, 팀장이 말로 정해 준 기한의 이름 (preNeed 의 말이 온 뒤부터 시계 옆에 뜬다 — 무엇이 풀리는지는 아직 모르지만 언제까지인지는 안다)
    * 시간은 행동만큼 흐른다 (문서를 처음 읽기·탐문·검색·조회·감정). 영장·공문은 소명 자료(수첩 메모)를 붙여 신청하고,
    * 받아들여지면 eta 분 뒤에 회신이 온다. 단톡방(feed)에는 시간이 지나거나 조건이 채워지면 새 말이 온다. */
   const LIVE_COST = { doc: 8, ask: 15, search: 4, query: 12, compare: 40, timeline: 10, photo: 6, write: 20 };
@@ -1477,11 +1478,13 @@
   }
   // 다음 것을 기다리면 (보이는) 기한을 넘기게 되는가
   // 지금 올리면 회신이 알고 있는 기한 뒤에 닿는 신청서 (기한을 아직 모르면 말하지 않는다)
-  const etaLate = r => { const L = ST.live, dl = C.live && C.live.deadline; return !!(L && !ST.solved && !L.late && dl && ok(dl.need) && L.t <= dl.at && L.t + (r.eta != null ? r.eta : 120) > dl.at); };
+  const dlKnown = () => { const d = C.live && C.live.deadline; return !!d && (ok(d.need) || (!!d.pre && ok(d.preNeed || []))); };
+  const dlLabel = () => { const d = C.live.deadline; return ok(d.need) ? d.label || T('기한') : d.pre; };
+  const etaLate = r => { const L = ST.live, dl = C.live && C.live.deadline; return !!(L && !ST.solved && !L.late && dl && dlKnown() && L.t <= dl.at && L.t + (r.eta != null ? r.eta : 120) > dl.at); };
   function waitsPast() {
     if (!liveOn() || ST.solved || ST.live.late) return false;
     const dl = C.live.deadline, nd = nextDue();
-    return !!(dl && ok(dl.need) && nd != null && ST.live.t <= dl.at && nd > dl.at);
+    return !!(dl && dlKnown() && nd != null && ST.live.t <= dl.at && nd > dl.at);
   }
   let waitT = 0; // 시간 보내기를 연달아 눌러 몇 시간을 한꺼번에 건너뛰지 않게: 누른 뒤 잠깐은 다시 받지 않는다 (단추 글자가 바뀌며 자리가 밀린다)
   function waitNext() {
@@ -1496,13 +1499,13 @@
   }
   // 화면 아래 줄: 수사 시계 · 기한 · 기다리기
   function liveBar() {
-    const L = ST.live, dl = C.live.deadline && ok(C.live.deadline.need) ? C.live.deadline : null, t = L.t, nd = nextDue(); // 기한은 need 가 채워져야 보인다
+    const L = ST.live, dl = dlKnown() ? C.live.deadline : null, t = L.t, nd = nextDue(); // 기한은 need (또는 pre 의 preNeed) 가 채워져야 보인다
     const left = dl ? dl.at - t : 0;
     const waits = Object.values(L.req).filter(q => q.st === 'wait').map(q => q.due);
     const pend = waits.length && nd === Math.min(...waits); // 「회신 기다리기」는 다음에 오는 것이 회신일 때만 (먼저 단톡방 말이 끼면 「시간 보내기」)
     const over = waitsPast(); // 이번 기다림이 기한을 넘긴다: 단추를 붉게, 한 번 더 눌러야 간다
     const d0 = liveDate(0), d1 = liveDate(t), dday = Math.round((new Date(d1.getFullYear(), d1.getMonth(), d1.getDate()) - new Date(d0.getFullYear(), d0.getMonth(), d0.getDate())) / 864e5); // 달력 날짜로 센다 (자정을 넘기면 D+1)
-    return `<div class="scr-bar live"><span class="lv-clock"><b>D+${dday}</b> ${esc(lstamp(t))}</span>${dl ? `<span class="lv-dl${ST.solved ? ' done' : left < 0 ? ' over' : left < 360 ? ' hot' : ''}">${esc(dl.label || T('기한'))} · ${ST.solved ? T('종결') : left >= 0 ? T`${hm(left)} 남음` : T`${hm(-left)} 넘김`}</span>` : ''}${nd != null && !ST.solved ? `<button type="button" class="lv-wait${over ? ' over' : ''}" data-wait>${pend ? T('회신 기다리기') : T('시간 보내기')} · ${hm(nd - t)}${over ? T(' · 기한 넘김') : ''}</button>` : ''}</div>`;
+    return `<div class="scr-bar live"><span class="lv-clock"><b>D+${dday}</b> ${esc(lstamp(t))}</span>${dl ? `<span class="lv-dl${ST.solved ? ' done' : left < 0 ? ' over' : left < 360 ? ' hot' : ''}">${esc(dlLabel())} · ${ST.solved ? T('종결') : left >= 0 ? T`${hm(left)} 남음` : T`${hm(-left)} 넘김`}</span>` : ''}${nd != null && !ST.solved ? `<button type="button" class="lv-wait${over ? ' over' : ''}" data-wait>${pend ? T('회신 기다리기') : T('시간 보내기')} · ${hm(nd - t)}${over ? T(' · 기한 넘김') : ''}</button>` : ''}</div>`;
   }
   function renderBar() {
     if (!liveOn()) return;
@@ -2040,8 +2043,8 @@
     const stamped = arr => (arr || []).map(b => (typeof b === 'string' ? when(b) : b && typeof b.p === 'string' ? { ...b, p: when(b.p), ...(typeof b.gore === 'string' ? { gore: when(b.gore) } : {}) } : b));
     const epi = blocks(stamped(late && sol.late ? sol.late : sol.epilogue), 'epi', T('결말'));
     NOPIN = false;
-    const dl = C.live && C.live.deadline, dlSeen = dl && (late || ok(dl.need)); // 끝내 몰랐던 기한은 말하지 않는다
-    const cjk = /^(ja|zh)$/.test(MG.I18N.lang), dlName = esc(dl && dl.label || T('기한')); // 일본어·중국어는 전각 괄호
+    const dl = C.live && C.live.deadline, dlSeen = dl && (late || dlKnown()); // 끝내 몰랐던 기한은 말하지 않는다
+    const cjk = /^(ja|zh)$/.test(MG.I18N.lang), dlName = esc(dl && (dlKnown() ? dlLabel() : dl.label) || T('기한')); // 일본어·중국어는 전각 괄호
     const fin = C.live && ST.live ? `<p class="lv-fin">${T`수사 개시부터 ${hm(ST.live.t)}${dlSeen ? ` · ${late ? T('기한 넘김') : T('기한 안에 종결')}${cjk ? `<small>（${dlName}）</small>` : ` <small>(${dlName})</small>`}` : ''}`}</p>` : '';
     return `${mug}<div class="stamp${fresh ? ' fresh' : ''}"><div>${T`사건<br>종결<small>${esc(sol.stamp || '')}</small>`}</div></div>${fin}${playMin() ? `<p class="play-t">${playLine()}</p>` : ''}<div class="epi">${epi}</div>${hunchTrailHtml()}${clearedHtml()}${shareHtml()}${rateHtml()}${sol.next ? nextHtml(sol.next) : ''}`;
   }

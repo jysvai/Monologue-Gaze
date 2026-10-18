@@ -5,6 +5,7 @@ MG.I18N.put("en", "c14", {
 "1fo908g59ym": "Inspired by the common pattern of 2020s voice-phishing cash-collector cases (fiction)",
 "az66g87x5": "About 45 min",
 "2cymgfn8sqp": "Crypto withdrawal lock lifts",
+"10xea8hcmps": "Team Leader's deadline · before lunch tomorrow",
 "1z5l5g93czz": "Team Leader",
 "b5ap3wqdsa": "It's 12:31 p.m. The CoinNaru withdrawal lock has lifted. Moving it all to an overseas wallet takes a few minutes. We'll still catch the people.",
 "1osedeq1e72": "Thursday afternoon, November 18, 2021, Gaon Police Station. The hallway outside the interview recording room smells of tangerines.",

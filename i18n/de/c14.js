@@ -5,6 +5,7 @@ MG.I18N.put("de", "c14", {
 "1fo908g59ym": "Motiv: das gemeinsame Muster von Telefonbetrugsfällen mit Geldabholern in den 2020er-Jahren (erfunden)",
 "az66g87x5": "ca. 45 Min.",
 "2cymgfn8sqp": "Krypto-Auszahlungssperre endet",
+"10xea8hcmps": "Frist des Gruppenleiters · morgen vor Mittag",
 "1z5l5g93czz": "Gruppenleiter",
 "b5ap3wqdsa": "12:31 Uhr. Die Auszahlungssperre bei CoinNaru ist aufgehoben. Bis alles auf einer Wallet im Ausland ist, dauert es ein paar Minuten. Die Leute kriegen wir trotzdem.",
 "1osedeq1e72": "Donnerstag, 18. November 2021, nachmittags, Polizeirevier Gaon. Auf dem Flur vor dem Video-Vernehmungsraum riecht es nach Mandarinen.",

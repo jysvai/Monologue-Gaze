@@ -109,7 +109,7 @@ MG.I18N.put("de", "ui", {
 "수첩을 내민다": "hält das Notizbuch hin",
 "메모를 내민다": "Notiz vorhalten",
 "목록으로": "Zur Liste",
-" · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」": " · Passt eine Antwort nicht zu den Akten: darunter „Notiz vorhalten“",
+" · 대답이 기록과 어긋나면 그 밑의 「메모를 내민다」": " · passt eine Antwort nicht zu den Akten, darunter „Notiz vorhalten“ wählen",
 " · 물을 때마다 {0}": " · jede Frage kostet {0}",
 "무엇을 물어볼까? <small>수첩의 단어{0}{1}</small>": "Was soll ich fragen? <small>Wörter aus dem Notizbuch{0}{1}</small>",
 "누르면 넘어간다": "Klicken zum Weitermachen",

@@ -609,7 +609,7 @@ MG.I18N.put("de", "c05", {
 "xun0q0qawq": "Die Leute kenne ich nicht. Ich habe nur im Courier davon gelesen.",
 "2gljaax1e97": "… Also gut. Den getippten Brief habe ich geschrieben. Ich konnte nicht mit ansehen, wie die Zeitung die Briefe eines Irren auf die Titelseite bringt, da wollte ich sie einmal hereinlegen. Das ist alles.",
 "bfvxk2w1y4": "Wie oft soll ich noch sagen, dass ich in der Nacht des 3. Mai im Gefängnis war?",
-"5rlvw57vgi": "Schreibmaschinen? In meiner Straße hat jedes zweite Haus eine. Sie verdächtigen meine?",
+"5rlvw57vgi": "Schreibmaschinen? In meiner Straße hat jedes zweite Haus eine. Und ausgerechnet meine verdächtigen Sie?",
 "jc0gbz7u6v": "Die Nacht des 3. Mai? Da war ich in einer Bar in der Main Street etwas laut und habe dann im [[County-Gefängnis|k_jail]] geschlafen. Die Polizei hat das Gefängnisbuch schon durchgesehen.",
 "8r1tjgjrs": "Norris? Morris? Falsch lag die Zeitung, nicht ich.",
 "21losyesvum": "Dieser Sanduhr-Kerl ist ein Feigling. Traut sich nicht einmal, seinen Namen zu nennen.",
