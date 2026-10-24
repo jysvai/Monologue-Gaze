@@ -3,6 +3,7 @@
  * SDK 가 없거나 꺼진 곳(로컬 파일 · 다른 도메인)에서는 아무것도 하지 않아 평소처럼 localStorage 에 쓴다. */
 (function () {
   var MG = window.MG = window.MG || {};
+  MG.portal = 'crazygames'; // SDK 를 못 받아도(광고 차단 등) 이 판에서는 다른 곳을 알리지 않고 잔혹 표현을 꺼 둔 채로 시작한다 (js/engine.js)
   var sdk = window.CrazyGames && window.CrazyGames.SDK;
   if (!sdk || sdk.environment === 'disabled') return;
   MG.crazy = sdk;

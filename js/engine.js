@@ -97,9 +97,11 @@
    * 수사관마다 서랍(저장 칸)을 따로 둔다. 한 브라우저를 여럿이 나눠 써도 남의 기록을 이어 하지 않게.
    * 첫 수사관(p0)은 예전 저장 칸을 그대로 써서, 명부가 생기기 전의 기록도 이어진다. */
   const KEY = 'mg-save-v1', ROSTER = 'mg-roster-v1';
-  const blank = () => ({ cases: {}, current: null, intro: false });
+  const blank = () => Object.assign({ cases: {}, current: null, intro: false }, MG.portal ? { mild: true } : {}); // CrazyGames 판(PEGI 12)은 잔혹 표현을 꺼 둔 채로 시작한다
   const slot = id => (id === 'p0' ? KEY : KEY + '@' + id);
   const store = () => MG.store || localStorage; // CrazyGames 판은 SDK 의 data 모듈(js/crazy.js): 로그인한 사람은 다른 기기에서도 이어 한다
+  let PLAYING = false; // CrazyGames 판: 사건을 펼친 동안만 「플레이 중」으로 알린다 (SDK 의 gameplayStart · gameplayStop)
+  const playing = on => { if (!MG.crazy || PLAYING === on) return; PLAYING = on; try { MG.crazy.game[on ? 'gameplayStart' : 'gameplayStop'](); } catch (e) { /* SDK 꺼짐 */ } };
   // 저장소가 막힌 브라우저(사생활 보호 창·쿠키 차단)에서도 이 창 안에서는 명부를 기억한다 (새 서랍 받기가 헛돌지 않게)
   let RMEM = null, RBAD = false;
   function roster() { // 다른 탭이 명부를 고쳤을 수 있으니 쓸 때마다 새로 읽는다
@@ -2087,7 +2089,7 @@
     return rows.length ? `<details class="cleared"><summary>${T('배제 기록 — 범인이 아니었던 사람들')} <small>${rows.length}</small></summary><ul>${rows.join('')}</ul></details>` : '';
   }
   // 종결한 사람이 결과를 옮겨 적을 수 있게: 범인·결말은 빼고 사건 번호, 제목, 별, 제출 횟수, 짚어 보기 횟수, 링크만
-  const ITCH_URL = 'https://jysvai.itch.io/monologue-gaze';
+  const ITCH_URL = MG.portal ? '' : 'https://jysvai.itch.io/monologue-gaze'; // CrazyGames 판은 다른 곳을 알리지 않는다 (별점 · 팔로우 · X 공유도 뺀다)
   // 자랑할 만한 것만: 짚어 보기 없이 · 보고서 한 번에 (연습 사건은 빼고)
   const badges = () => C.kind === 'tutorial' ? [] : [ST.nudges ? '' : T('짚어 보기 없이 종결'), (ST.tries || 1) === 1 ? T('보고서 한 번에 통과') : ''].filter(Boolean);
   const scrawlOf = () => (C.brief && C.brief.scrawl ? plain(C.brief.scrawl) : '');
@@ -2097,10 +2099,10 @@
     const head = `Monologue Gaze · CASE ${pad(C.no)} ${plain(C.title)}${C.kind !== 'tutorial' && C.stars ? ' ' + '★'.repeat(C.stars) : ''}`;
     const live = C.live && ST.live ? ' · ' + T`수사 ${hm(ST.live.t)}` : '';
     const b = badges(), q = scrawlOf();
-    return `${head}${q ? `\n"${q}"` : ''}\n${T`종결 · 보고서 제출 ${ST.tries || 1}회 · 짚어 보기 ${ST.nudges || 0}회`}${live}${playMin() ? '\n' + playLine() : ''}${b.length ? `\n✔ ${b.join(' · ')}` : ''}\n${ITCH_URL} #MonologueGaze`;
+    return `${head}${q ? `\n"${q}"` : ''}\n${T`종결 · 보고서 제출 ${ST.tries || 1}회 · 짚어 보기 ${ST.nudges || 0}회`}${live}${playMin() ? '\n' + playLine() : ''}${b.length ? `\n✔ ${b.join(' · ')}` : ''}${ITCH_URL ? `\n${ITCH_URL} #MonologueGaze` : ''}`;
   }
-  const rateHtml = () => (S.rateOff ? '' : `<p class="epi-rate">${T('이 사건이 마음에 드셨다면 <a href="https://jysvai.itch.io/monologue-gaze/rate?source=game" target="_blank" rel="noopener">itch.io에 별점</a>을 남겨 주세요.')}</p>`);
-  const shareHtml = () => `<p class="epi-share"><button type="button" class="epi-sh" data-card>${T('결과 카드 저장')}</button><button type="button" class="epi-sh" data-share>${T('결과 복사')}</button><a class="epi-sh" href="https://x.com/intent/post?text=${encodeURIComponent(shareText())}" target="_blank" rel="noopener">${T('X에 올리기')}</a></p>`;
+  const rateHtml = () => (S.rateOff || MG.portal ? '' : `<p class="epi-rate">${T('이 사건이 마음에 드셨다면 <a href="https://jysvai.itch.io/monologue-gaze/rate?source=game" target="_blank" rel="noopener">itch.io에 별점</a>을 남겨 주세요.')}</p>`);
+  const shareHtml = () => `<p class="epi-share"><button type="button" class="epi-sh" data-card>${T('결과 카드 저장')}</button><button type="button" class="epi-sh" data-share>${T('결과 복사')}</button>${MG.portal ? '' : `<a class="epi-sh" href="https://x.com/intent/post?text=${encodeURIComponent(shareText())}" target="_blank" rel="noopener">${T('X에 올리기')}</a>`}</p>`;
   // 종결 결과 카드: 사건 사진 · 종결 도장 · 기록을 한 장 그림으로 (휴대폰은 공유 창, 컴퓨터는 내려받기). 범인·결말은 넣지 않는다
   async function resultCard() {
     const W = 1200, H = 630, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
@@ -2158,7 +2160,7 @@
     g.restore();
     // 아래 줄: 게임 이름과 주소
     g.fillStyle = '#efe3c8'; g.font = `34px ${fType}`; g.textBaseline = 'alphabetic'; g.fillText('Monologue Gaze', 56, H - 40);
-    g.fillStyle = '#bda983'; g.font = `18px ${fMono}`; g.textAlign = 'right'; g.fillText(ITCH_URL.replace(/^https:\/\//, ''), W - 56, H - 44);
+    if (ITCH_URL) { g.fillStyle = '#bda983'; g.font = `18px ${fMono}`; g.textAlign = 'right'; g.fillText(ITCH_URL.replace(/^https:\/\//, ''), W - 56, H - 44); }
     const blob = await new Promise(r => cv.toBlob(r, 'image/png'));
     if (!blob) return void toast(T('그림을 만들지 못했다.'));
     const name = `monologue-gaze-case${pad(C.no)}.png`, file = typeof File === 'function' ? new File([blob], name, { type: 'image/png' }) : null;
@@ -2759,6 +2761,7 @@
   function openCase(id, intro) {
     const c = MG.byId[id];
     if (!c) return cabinet();
+    playing(true);
     stopTalk(); sceneOff(); if (MG.sound) MG.sound.stopVoice();
     caseFonts(c);
     if (c.graphic && !cs(c).cw) return warnScreen(c);
@@ -2889,6 +2892,7 @@
   }
 
   function cabinet(showRoster) {
+    playing(false);
     clearNotes(); unguard(); applyTs(); sceneOff();
     stopTalk(); if (MG.sound) MG.sound.stopVoice(); // 추궁 도중 기록실로 나가도 그 사람 목소리가 기록실까지 따라오지 않는다
     C = null; ST = null; S.current = null; save();
@@ -2929,7 +2933,7 @@
     const letter = allShut ? `<article class="m-letter${newLetter ? ' fresh' : ''}"><h3>${T`서랍 맨 밑의 편지`}</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p>${mWho()}</article>` : '';
     // 사건을 하나라도 닫은 사람에게만 (기록실에만, 사건 안에는 넣지 않는다). itch 는 별점·댓글이 쌓인 게임을 목록에 더 자주 올린다. 닫으면 다시 안 나온다
     const solvedAny = MG.cases.some(c => S.cases[c.id] && S.cases[c.id].solved); // 연습 사건(CASE 00)만 닫은 사람에게도: 긴 사건 하나를 끝까지 가는 사람은 적다
-    const rate = solvedAny && !S.rateOff ? `<p class="cab-rate">${T('재미있으셨다면 <a href="https://jysvai.itch.io/monologue-gaze/rate?source=game" target="_blank" rel="noopener">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 별점이 쌓이면 다른 사람들도 이 기록실을 찾기 쉬워집니다.')}<button type="button" class="cab-rate-x" data-rate-off aria-label="${T('이 안내 닫기')}">×</button></p>` : '';
+    const rate = solvedAny && !S.rateOff && !MG.portal ?`<p class="cab-rate">${T('재미있으셨다면 <a href="https://jysvai.itch.io/monologue-gaze/rate?source=game" target="_blank" rel="noopener">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 별점이 쌓이면 다른 사람들도 이 기록실을 찾기 쉬워집니다.')}<button type="button" class="cab-rate-x" data-rate-off aria-label="${T('이 안내 닫기')}">×</button></p>` : '';
     const hero = MG.images['_global/hero'];
     // itch.io 에서 팔로우해 준 사람들 (팔로우한 차례대로). 새로 생기면 뒤에 붙인다 — 기록실 맨 아래 한 줄을 통째로 쓰니 명단이 길어져도 위 줄은 그대로
     const thanks = ['hyperfixuals', 'chloemoarbes', 'Natalios_n'].map(n => `<a href="https://itch.io/profile/${n}" target="_blank" rel="noopener">${n}</a>`).join('&nbsp;· '); // 가운뎃점은 앞 이름에 붙여 줄 끝에 홀로 남지 않게
@@ -2944,7 +2948,7 @@
       ${live.length ? `<section class="duty" aria-label="${T`현행 사건`}"><h2 class="duty-h">${T`당직 · 현행 사건`}</h2><p class="duty-sub">${T`몇 해 전 실제로 돌았던 현행 사건을 그날 그 시각부터 다시 돌리는 당직 훈련이다. 지원으로 붙은 형사 자리에 앉는다. 문서를 읽고 묻고 조회할 때마다 수사 시계가 돈다.`}</p><div class="drawer">${live.map(folder).join('')}</div></section>` : ''}
       ${mList.length ? `<section class="mbox"><h2>${T`M의 메모`}</h2><p class="mbox-sub">${T`기록 여백과 화면에 붙은 포스트잇에 남아 있던, 선배의 글씨.`}</p><ul>${mList.map(c => `<li${newM.includes(c.id) ? ' class="fresh"' : ''}><span class="mbox-case">CASE ${pad(c.no)}</span> ${esc(plain(c._m))}</li>`).join('')}</ul></section>` : ''}
       ${letter}
-      <footer class="cab-foot">${unsaved ? T('<p class="unsaved" role="note">이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다.</p>') : ''}<p>${T`모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.`}</p><p class="credit">${T`목소리`} <a href="https://elevenlabs.io" target="_blank" rel="noopener">elevenlabs.io</a> · ${T`효과음`} <a href="https://freesound.org" target="_blank" rel="noopener">Freesound</a>·<a href="https://kenney.nl" target="_blank" rel="noopener">Kenney</a> (CC0)</p><button type="button" class="reset" data-wipe>${roster().list.length > 1 ? T('내 기록 지우기') : T('모든 기록 지우기')}</button><p class="credit thanks">${T`itch.io에서 팔로우해 주신 고마운 분들`} ${thanks}</p></footer>
+      <footer class="cab-foot">${unsaved ? T('<p class="unsaved" role="note">이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다.</p>') : ''}<p>${T`모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.`}</p><p class="credit">${T`목소리`} <a href="https://elevenlabs.io" target="_blank" rel="noopener">elevenlabs.io</a> · ${T`효과음`} <a href="https://freesound.org" target="_blank" rel="noopener">Freesound</a>·<a href="https://kenney.nl" target="_blank" rel="noopener">Kenney</a> (CC0)</p><button type="button" class="reset" data-wipe>${roster().list.length > 1 ? T('내 기록 지우기') : T('모든 기록 지우기')}</button>${MG.portal ? '' : `<p class="credit thanks">${T`itch.io에서 팔로우해 주신 고마운 분들`} ${thanks}</p>`}</footer>
     </div>`;
     // 막 종결한 사건이면 그 폴더까지 내려가 도장을 찍는다
     const fresh = $('.f-stamp.fresh');

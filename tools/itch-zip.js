@@ -26,7 +26,12 @@ const SWAP = new Map();
 if (CRAZY) {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8'), at = '<script src="js/i18n.js"></script>';
   if (!html.includes(at)) { console.error(`index.html 에 ${at} 이 없다`); process.exit(1); }
-  SWAP.set('index.html', Buffer.from(html.replace(at, '<script src="https://sdk.crazygames.com/crazygames-sdk-v3.js"></script>\n<script src="js/crazy.js"></script>\n' + at), 'utf8'));
+  // 다른 주소를 가리키는 머리말(canonical · og:url · 구조화 데이터)과 자바스크립트가 꺼졌을 때의 github 링크도 걷어 낸다: 이 판은 CrazyGames 안에서만 돈다
+  const out = html.replace(at, '<script src="https://sdk.crazygames.com/crazygames-sdk-v3.js"></script>\n<script src="js/crazy.js"></script>\n' + at)
+    .replace(/<meta property="og:url"[^>]*>\n?/, '').replace(/<link rel="canonical"[^>]*>\n?/, '')
+    .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\n?/, '').replace(/\n<p class="nojs">Monologue Gaze: [^\n]*<\/p>/, '');
+  if (/jysvai\.github\.io\/Monologue-Gaze\/(?:"|ko\/)|itch\.io/.test(out.replace(/<meta property="og:image"[^>]*>/, ''))) { console.error('CrazyGames 판 index.html 에 다른 곳을 가리키는 링크가 남았다'); process.exit(1); }
+  SWAP.set('index.html', Buffer.from(out, 'utf8'));
 }
 const MB = n => (n / 2 ** 20).toFixed(1) + 'MB';
 
