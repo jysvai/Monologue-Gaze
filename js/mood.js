@@ -245,7 +245,7 @@
   function showIntro(c, m) {
     hideIntro();
     const el = document.createElement('div');
-    el.className = 'case-intro' + (c.graphic ? ' graphic' : '') + (c.live ? ' live' : '');
+    el.className = 'case-intro' + (c.graphic ? ' graphic' + (MG.state && MG.state().mild ? ' mild' : '') : '') + (c.live ? ' live' : '');
     el.dataset.case = c.id; // 여는 장면 제목도 그 사건·시대 글꼴로 (css 의 [data-case] 규칙)
     el.dataset.era = (y => y < 1945 ? 'old' : y < 1980 ? 'mid' : '')(parseInt(c.year, 10) || 2000);
     el.setAttribute('role', 'dialog');

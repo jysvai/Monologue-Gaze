@@ -2127,7 +2127,7 @@
       if (ar > pw / ph) { sw = img.height * pw / ph; sx = (img.width - sw) / 2; } else { sh = img.width * ph / pw; sy = (img.height - sh) / 2; }
       g.save(); g.translate(305, 300); g.rotate(-0.045);
       shadow(30, 14); g.fillStyle = '#f3eee0'; g.fillRect(-pw / 2 - 14, -ph / 2 - 14, pw + 28, ph + 56); plainShadow();
-      if (C.graphic) g.filter = 'sepia(.25) blur(5px) brightness(.8)';
+      if (C.graphic) g.filter = S.mild ? 'grayscale(1) sepia(.2) blur(5px) brightness(.8)' : 'sepia(.25) blur(5px) brightness(.8)'; // 잔혹 표현을 껐으면 표지 사진의 붉은 얼룩도 보이지 않게 흑백으로
       g.drawImage(img, sx, sy, sw, sh, -pw / 2, -ph / 2, pw, ph); g.filter = 'none';
       g.restore();
     }
@@ -2923,7 +2923,7 @@
       const coverFile = MG.images[`${c.id}/cover_s`] || MG.images[`${c.id}/cover`]; // 폴더 표지는 작게 (cover_s)
       const cover = coverFile ? `<img src="${esc(coverFile)}" alt="" loading="lazy" decoding="async">` : c.art && c.art.cover ? (typeof c.art.cover === 'string' ? c.art.cover : c.art.cover.svg || '') : '';
       return `<button type="button" class="folder ${status}${c.kind === 'tutorial' ? ' tutorial' : ''}" data-open="${esc(c.id)}" style="--tilt:${(hash(c.id) % 7 - 3) * 0.4}deg">
-        ${cover ? `<span class="f-cover${c.graphic ? ' graphic' : ''}" aria-hidden="true">${cover}</span>` : ''}${c.graphic && !S.mild ? `<span class="f-blood" aria-hidden="true">${stains(c.id + 'f', 2, 'dac', false)}</span>` : ''}${c.graphic ? T('<span class="f-warn">혐오감 주의</span>') : ''}
+        ${cover ? `<span class="f-cover${c.graphic ? ' graphic' + (S.mild ? ' mild' : '') : ''}" aria-hidden="true">${cover}</span>` : ''}${c.graphic && !S.mild ? `<span class="f-blood" aria-hidden="true">${stains(c.id + 'f', 2, 'dac', false)}</span>` : ''}${c.graphic ? T('<span class="f-warn">혐오감 주의</span>') : ''}
         <span class="f-tab">CASE ${pad(c.no)}</span>
         <span class="f-body"><span class="f-kind">${kind} · ${esc(c.year)} ${c.kind === 'tutorial' ? T('<span class="stars t">연습</span>') : starsHtml(c)}</span><span class="f-label"><span class="f-title">${esc(c.title)}</span><span class="f-place">${esc(c.place)}</span></span>
         <span class="f-motif">${esc(c.motif || '')}</span>${c.length ? `<span class="f-len"><span class="nw">${esc(c.length)}</span>${st && st.solved && st.play && !st.play.part && st.play.ms >= 60000 ? ` · <span class="nw">${T`걸린 시간 ${Math.round(st.play.ms / 60000)}분`}</span>` : ''}</span>` : ''}
