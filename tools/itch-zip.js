@@ -13,6 +13,7 @@
 const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
+const vm = require('vm');
 const { execFileSync } = require('child_process');
 
 const root = path.join(__dirname, '..');
@@ -32,6 +33,16 @@ if (CRAZY) {
     .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\n?/, '').replace(/\n<p class="nojs">Monologue Gaze: [^\n]*<\/p>/, '');
   if (/jysvai\.github\.io\/Monologue-Gaze\/(?:"|ko\/)|itch\.io/.test(out.replace(/<meta property="og:image"[^>]*>/, ''))) { console.error('CrazyGames 판 index.html 에 다른 곳을 가리키는 링크가 남았다'); process.exit(1); }
   SWAP.set('index.html', Buffer.from(out, 'utf8'));
+  // ElevenLabs 로 만든 소리(manifest 의 files: 주인공 대사와 효과음, clips 가운데 lead.mp3: 주연 대사)는 뺀다. 무료 플랜으로 만들어 상업적으로 쓸 수 없는데,
+  // CrazyGames 는 광고로 버는 곳이다 (개발자 약관 7.1). 빠진 소리는 엔진이 자막·말소리·합성음으로 대신한다 (js/audio.js). 유료 플랜으로 다시 녹음하면 이 거르기를 걷어 낸다.
+  // 조연 목소리(VoxCPM2, Apache-2.0, sub.mp3)와 CC0 효과음(js/audio.js 의 FOLEY)은 그대로 둔다.
+  const mf = fs.readFileSync(path.join(root, 'audio', 'manifest.js'), 'utf8'), head = mf.indexOf('window.MG.audio = ');
+  const box = { window: {} };
+  vm.runInNewContext(mf, box);
+  const a = box.window.MG.audio;
+  a.files = {};
+  a.clips = Object.fromEntries(Object.entries(a.clips || {}).filter(([, c]) => !/\/lead\.mp3(?:\?|$)/.test(c[0])));
+  SWAP.set('audio/manifest.js', Buffer.from(mf.slice(0, head) + 'window.MG.audio = ' + JSON.stringify(a, null, 1) + ';\n', 'utf8'));
 }
 const MB = n => (n / 2 ** 20).toFixed(1) + 'MB';
 
@@ -48,7 +59,7 @@ const have = new Set(files);
 const refs = new Map(); // 경로 → 처음 나온 파일
 const ref = (p, from) => { p = p.split(/[?#]/)[0]; if (p && !refs.has(p)) refs.set(p, from); };
 const local = u => !/^(?:[a-z]+:|\/\/|#|%23|\/)/i.test(u); // %23 = data URI 속 SVG 의 url(#필터)
-const text = f => fs.readFileSync(path.join(root, f), 'utf8');
+const text = f => SWAP.has(f) ? SWAP.get(f).toString('utf8') : fs.readFileSync(path.join(root, f), 'utf8');
 const bare = t => t.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|\s)\/\/.*$/gm, '$1'); // 주석 속 예시 경로는 세지 않는다
 for (const [, u] of text('index.html').matchAll(/\b(?:src|href)="([^"]+)"/g)) if (local(u)) ref(u, 'index.html');
 for (const i of JSON.parse(text('manifest.webmanifest')).icons || []) ref(i.src, 'manifest.webmanifest');
@@ -59,7 +70,8 @@ for (const f of files) {
   for (const [p] of t.matchAll(/\b(?:img|audio)\/[\w./-]+\.(?:webp|png|jpe?g|gif|svg|mp3|ogg|wav|m4a)\b/g)) ref(p, f);
 }
 // 목소리는 사건마다 묶은 파일(lead.mp3 · sub.mp3)과 manifest 가 가리키는 것만: 낱개 대사 파일은 다시 녹음할 때 쓰는 원본이다 (tools/voice-pack.js)
-const loose = files.filter(f => f.startsWith('audio/voice/') && !refs.has(f));
+// CrazyGames 판은 효과음도 가리키는 것만 (위에서 manifest 의 ElevenLabs 효과음을 걷어 냈다)
+const loose = files.filter(f => (f.startsWith('audio/voice/') || CRAZY && /^audio\/sfx\/[^/]+\.mp3$/.test(f)) && !refs.has(f));
 files = files.filter(f => !loose.includes(f));
 const missing = [...refs].filter(([p]) => !have.has(p)).map(([p, from]) => {
   const near = files.find(f => f.toLowerCase() === p.toLowerCase());
@@ -116,4 +128,4 @@ end.writeUInt32LE(0x06054b50, 0); end.writeUInt16LE(files.length, 8); end.writeU
 end.writeUInt32LE(cdSize, 12); end.writeUInt32LE(off, 16);
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
 fs.writeFileSync(OUT, Buffer.concat([...parts, ...central, end]));
-console.log(`${path.relative(root, OUT).replace(/\\/g, '/')} — 파일 ${files.length}개 · 풀면 ${MB(total)} · 묶음 ${MB(off + cdSize + 22)} · 가리키는 그림·소리 ${refs.size}개 모두 들어감${loose.length ? ` · 묶어 둔 목소리의 낱개 원본 ${loose.length}개는 뺌` : ''}`);
+console.log(`${path.relative(root, OUT).replace(/\\/g, '/')} — 파일 ${files.length}개 · 풀면 ${MB(total)} · 묶음 ${MB(off + cdSize + 22)} · 가리키는 그림·소리 ${refs.size}개 모두 들어감${loose.length ? ` · ${CRAZY ? '쓰지 않는 소리 파일' : '묶어 둔 목소리의 낱개 원본'} ${loose.length}개는 뺌` : ''}`);
