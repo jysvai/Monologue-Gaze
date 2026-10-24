@@ -17,7 +17,7 @@
     frame: 'laptop',
     live: {
       start: [2023, 11, 18, 3, 0],
-      deadline: { at: 1980, need: ['k_reopen'], label: '다음 물량이 풀리기 전', who: '한 팀장', miss: '일요일 12시. 달빛약방이 다시 열렸다. 공지 맨 위에 🎁, 그 아래 드라퍼 모집.' },
+      deadline: { at: 1980, need: ['k_reopen'], label: '다음 물량이 풀리기 전', pre: '다음 물량이 풀리기 전', preNeed: ['#f04'], preVague: true, who: '한 팀장', miss: '일요일 12시. 달빛약방이 다시 열렸다. 공지 맨 위에 🎁, 그 아래 드라퍼 모집.' },
     },
     mood: { light: 'fluoro', amb: ['hum', 'city'], line: '2023년 11월 18일 토요일 새벽 세 시. 당직실 형광등 아래로 출동 지령이 떨어진다.' },
     tag: '**당직 · 현행 사건** · 2023-하람-1118 · 하람경찰서 형사과 마약수사팀 · 수사용 노트북',

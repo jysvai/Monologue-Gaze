@@ -666,7 +666,7 @@ MG.I18N.put("de", "c03", {
 "17gwiuw40ma": "Telegramm des Bochundang vom 2. November an die Schreibstube Han gegenüber dem Gericht: „Sache Seo (徐): Pfändung am 5. bitte einleiten.“",
 "1y66lawkekb": "Das Telegramm, das der alte Herr kurz vor der Frist schickte?",
 "1hl1k4zy924": "Pfandhaus Yamashiro: Auch die Nähmaschine, die Seo Gi-ryong im August versetzt hatte, verfiel am 5. November.",
-"x21uyyo00d": "Gab es auch im Pfandhaus etwas, das am selben Tag fällig war?",
+"8scyyf5tp4": "Was steht im Verfallsbuch des Pfandhauses Yamashiro?",
 "26eliy3b6yp": "Ich habe Seo Gi-ryong das Zinsbuch vorgehalten. „250 Yen… ja, geliehen hab ich sie. Am 5. war die Frist. Na und? Ich wollte zahlen. Mein Bruder hatte versprochen zu helfen.“",
 "7y9sl8bisy": "Nur „ein paar Schulden“ — stimmt das?",
 "dvqxsekmuy": "Seo Gi-ryong. Am 5. November sollten wegen der 250 Yen, die er dem Bochundang schuldete, seine Ladenkaution und sein Inventar gepfändet werden, und am selben Tag verfiel seine Nähmaschine im Pfandhaus.",

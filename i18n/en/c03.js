@@ -666,7 +666,7 @@ MG.I18N.put("en", "c03", {
 "17gwiuw40ma": "Telegram sent by Bochundang on November 2 to the Han Scrivener's Office in front of the court: “Seo (徐) matter. Please proceed with seizure on 5th.”",
 "1y66lawkekb": "The telegram the master sent as the due date approached?",
 "1hl1k4zy924": "Yamashiro Pawnshop: the sewing machine Seo Gi-ryong pledged in August was also due to be forfeited on November 5.",
-"x21uyyo00d": "Was anything at the pawnshop due on the same day?",
+"8scyyf5tp4": "What is listed in the Yamashiro pawnshop’s forfeiture ledger?",
 "26eliy3b6yp": "I held the loan ledger up to Seo Gi-ryong. “250 won… Yes, I borrowed it. The 5th was the deadline. So what? I was going to pay. My brother had promised to help.”",
 "7y9sl8bisy": "Only “a few debts” — is that true?",
 "dvqxsekmuy": "Seo Gi-ryong. On November 5 his shop deposit and fixtures were to be seized over the 250 won he owed Bochundang, and the same day his sewing machine at the pawnshop would be forfeited.",

@@ -772,7 +772,7 @@ MG.I18N.put("en", "c09", {
 "16nruwnpcsr": "Where was the courier, Koo Tae-hyun, that night?",
 "2dx6iwaij6": "Koo Tae-hyun’s mini-homepage, Oct. 14 20:55: “skipping night loading”. Not what he said about being at the depot.",
 "2c6g9ruyobg": "What did he post himself that night?",
-"h7gptks6i7": "Koo Tae-hyun, who said he was “doing night loading at the depot,” changed his story: not the depot, the Eungol PC Bang.",
+"ofrmem9w9i": "Koo Tae-hyun, who said he was “doing night loading at the depot,” changed his story: that night he was at the Eungol PC Bang.",
 "zc15izt7ub": "He says he was doing night loading at the depot that night. Is that true?",
 "zqyw7dlpvk": "PC bang records: bike_taehyun, seat 23 right in front of the counter, 20:48–01:40. Clerk: “He never went out once.”",
 "2fpan9ewfki": "What record is there of where he actually spent that night?",

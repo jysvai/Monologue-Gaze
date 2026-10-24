@@ -431,7 +431,7 @@ MG.I18N.put("de", "c00", {
 "1laqb7q952s": "Auch als wir zusammen waren, hat sie mir so was kaum erzählt.",
 "22cwoydh2yy": "(weicht dem Blick aus) Fragen Sie jemand anderen. Außer mir hatte sie genug Leute um sich.",
 "d2474m9qyd": "Ist sie wirklich erst nach dem 12. gestorben?",
-"1y5sb9pwrle": "Der Post vom 11. kam nicht von Seo-yuns Handy, sondern vom „iPad von JH“, aus Goyang in der Provinz Gyeonggi.",
+"3t6sx1ace4": "Der Post vom 11. wurde vom Gerät „iPad von JH“ abgesetzt, eingeloggt aus Goyang in der Provinz Gyeonggi.",
 "2epxe4ryyds": "Was steht in der Liste der Geräte, die in Seo-yuns Konto angemeldet sind?",
 "2fxek6ilfok": "Die Reisbrei-Bestellung vom 12. kam ebenfalls vom „iPad von JH“.",
 "1uixpb8fa0d": "Und die Bestellung vom 12. im Bestellverlauf der Liefer-App?",

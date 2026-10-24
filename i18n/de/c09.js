@@ -772,7 +772,7 @@ MG.I18N.put("de", "c09", {
 "16nruwnpcsr": "Wo war der Paketfahrer Gu Tae-hyeon in jener Nacht?",
 "2dx6iwaij6": "Gu Tae-hyeons Minihomepage, 14.10., 20:55: „Nachtverladung geschwänzt“. Das passt nicht zu seiner Aussage, er sei im Depot gewesen.",
 "2c6g9ruyobg": "Was hat er an dem Abend selbst gepostet?",
-"h7gptks6i7": "Gu Tae-hyeon, der angeblich „im Depot bei der Nachtverladung“ war, korrigierte sich: nicht im Depot, sondern im Internetcafé Eungol.",
+"ofrmem9w9i": "Gu Tae-hyeon, der angeblich „im Depot bei der Nachtverladung“ war, korrigierte sich: In jener Nacht war er im Internetcafé Eungol.",
 "zc15izt7ub": "In der Nacht will er im Depot bei der Nachtverladung gewesen sein. Stimmt das?",
 "zqyw7dlpvk": "Protokoll des Internetcafés: bike_taehyun, Platz 23 direkt vor der Theke, 20:48–01:40. Aushilfe: „Er ist kein einziges Mal rausgegangen.“",
 "2fpan9ewfki": "Was verzeichnet der Ort, an dem er in jener Nacht tatsächlich war?",

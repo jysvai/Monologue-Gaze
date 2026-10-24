@@ -1482,11 +1482,13 @@
   // 지금 올리면 회신이 알고 있는 기한 뒤에 닿는 신청서 (기한을 아직 모르면 말하지 않는다)
   const dlKnown = () => { const d = C.live && C.live.deadline; return !!d && (ok(d.need) || (!!d.pre && ok(d.preNeed || []))); };
   const dlLabel = () => { const d = C.live.deadline; return ok(d.need) ? d.label || T('기한') : d.pre; };
-  const etaLate = r => { const L = ST.live, dl = C.live && C.live.deadline; return !!(L && !ST.solved && !L.late && dl && dlKnown() && L.t <= dl.at && L.t + (r.eta != null ? r.eta : 120) > dl.at); };
+  // 언제까지인지도 아는가: preVague 는 「다음 물량 풀리기 전」처럼 기한이 있다는 것만 들은 때 — 남은 시간은 세지 않고, 기다림이 기한을 넘긴다는 경고도 하지 않는다
+  const dlTimed = () => { const d = C.live && C.live.deadline; return !!d && (ok(d.need) || (!!d.pre && !d.preVague && ok(d.preNeed || []))); };
+  const etaLate = r => { const L = ST.live, dl = C.live && C.live.deadline; return !!(L && !ST.solved && !L.late && dl && dlTimed() && L.t <= dl.at && L.t + (r.eta != null ? r.eta : 120) > dl.at); };
   function waitsPast() {
     if (!liveOn() || ST.solved || ST.live.late) return false;
     const dl = C.live.deadline, nd = nextDue();
-    return !!(dl && dlKnown() && nd != null && ST.live.t <= dl.at && nd > dl.at);
+    return !!(dl && dlTimed() && nd != null && ST.live.t <= dl.at && nd > dl.at);
   }
   let waitT = 0; // 시간 보내기를 연달아 눌러 몇 시간을 한꺼번에 건너뛰지 않게: 누른 뒤 잠깐은 다시 받지 않는다 (단추 글자가 바뀌며 자리가 밀린다)
   function waitNext() {
@@ -1502,12 +1504,12 @@
   // 화면 아래 줄: 수사 시계 · 기한 · 기다리기
   function liveBar() {
     const L = ST.live, dl = dlKnown() ? C.live.deadline : null, t = L.t, nd = nextDue(); // 기한은 need (또는 pre 의 preNeed) 가 채워져야 보인다
-    const left = dl ? dl.at - t : 0;
+    const left = dl ? dl.at - t : 0, vague = dl && !dlTimed();
     const waits = Object.values(L.req).filter(q => q.st === 'wait').map(q => q.due);
     const pend = waits.length && nd === Math.min(...waits); // 「회신 기다리기」는 다음에 오는 것이 회신일 때만 (먼저 단톡방 말이 끼면 「시간 보내기」)
     const over = waitsPast(); // 이번 기다림이 기한을 넘긴다: 단추를 붉게, 한 번 더 눌러야 간다
     const d0 = liveDate(0), d1 = liveDate(t), dday = Math.round((new Date(d1.getFullYear(), d1.getMonth(), d1.getDate()) - new Date(d0.getFullYear(), d0.getMonth(), d0.getDate())) / 864e5); // 달력 날짜로 센다 (자정을 넘기면 D+1)
-    return `<div class="scr-bar live"><span class="lv-clock"><b>D+${dday}</b> ${esc(lstamp(t))}</span>${dl ? `<span class="lv-dl${ST.solved ? ' done' : left < 0 ? ' over' : left < 360 ? ' hot' : ''}">${esc(dlLabel())} · ${ST.solved ? T('종결') : left >= 0 ? T`${hm(left)} 남음` : T`${hm(-left)} 넘김`}</span>` : ''}${nd != null && !ST.solved ? `<button type="button" class="lv-wait${over ? ' over' : ''}" data-wait>${pend ? T('회신 기다리기') : T('시간 보내기')} · ${hm(nd - t)}${over ? T(' · 기한 넘김') : ''}</button>` : ''}</div>`;
+    return `<div class="scr-bar live"><span class="lv-clock"><b>D+${dday}</b> ${esc(lstamp(t))}</span>${dl ? `<span class="lv-dl${ST.solved ? ' done' : vague ? '' : left < 0 ? ' over' : left < 360 ? ' hot' : ''}">${esc(dlLabel())} · ${ST.solved ? T('종결') : vague ? T('언제인지 모름') : left >= 0 ? T`${hm(left)} 남음` : T`${hm(-left)} 넘김`}</span>` : ''}${nd != null && !ST.solved ? `<button type="button" class="lv-wait${over ? ' over' : ''}" data-wait>${pend ? T('회신 기다리기') : T('시간 보내기')} · ${hm(nd - t)}${over ? T(' · 기한 넘김') : ''}</button>` : ''}</div>`;
   }
   function renderBar() {
     if (!liveOn()) return;
@@ -2929,7 +2931,7 @@
     const rate = solvedAny && !S.rateOff ? `<p class="cab-rate">${T('재미있으셨다면 <a href="https://jysvai.itch.io/monologue-gaze/rate?source=game" target="_blank" rel="noopener">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 별점이 쌓이면 다른 사람들도 이 기록실을 찾기 쉬워집니다.')}<button type="button" class="cab-rate-x" data-rate-off aria-label="${T('이 안내 닫기')}">×</button></p>` : '';
     const hero = MG.images['_global/hero'];
     // itch.io 에서 팔로우해 준 사람들 (팔로우한 차례대로). 새로 생기면 뒤에 붙인다 — 기록실 맨 아래 한 줄을 통째로 쓰니 명단이 길어져도 위 줄은 그대로
-    const thanks = ['hyperfixuals', 'chloemoarbes'].map(n => `<a href="https://itch.io/profile/${n}" target="_blank" rel="noopener">${n}</a>`).join('&nbsp;· '); // 가운뎃점은 앞 이름에 붙여 줄 끝에 홀로 남지 않게
+    const thanks = ['hyperfixuals', 'chloemoarbes', 'Natalios_n'].map(n => `<a href="https://itch.io/profile/${n}" target="_blank" rel="noopener">${n}</a>`).join('&nbsp;· '); // 가운뎃점은 앞 이름에 붙여 줄 끝에 홀로 남지 않게
     // 종결·현행·M의 메모 셈은 연습 사건 다음 사건을 연 뒤부터: 처음 온 사람에게 「종결 0 / 12」는 뜻 모를 숫자다 (연습 사건은 셈에 들지 않는다)
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
@@ -3688,6 +3690,9 @@
       VERDICT += '\n' + (all ? T('쓸 메모는 수첩에 다 있다. 메모끼리 맞대 본다.')
         : lv() >= 5 ? T('수첩에 아직 모자란 기록이 있다. 더 쫓아가 본다.')
         : [who ? '' : T('지목할 사람이 아직 수첩에 없다.'), lack.length ? T`${lack.join('·')}번을 받칠 메모가 아직 수첩에 없다.` : ''].filter(Boolean).join(' '));
+      // 빈칸을 받칠 기록이 아직 오지 않은 회신에 들었으면 그 회신을 댄다 — 범인을 잘못 짚어서인지 회신을 기다려야 하는지 가려지게 (★5 는 이름 없이)
+      const waitDoc = lack.length && ST.live ? reqItems().filter(r => { const q = reqState(r.id); if (!q || q.st !== 'wait' || !r.doc) return false; const b = nudgeIndex().find(x => x.go && x.go.t === 'doc' && x.go.id === r.doc); return !!b && lack.some(i => (sol.claims[i - 1].accept || []).some(f => [...b.f].some(x => fIs(x, f)))); }) : [];
+      if (waitDoc.length) VERDICT += (/^(ja|zh)$/.test(MG.I18N.lang) ? '' : ' ') + (lv() >= 5 ? T('기다리는 회신 가운데 그 기록이 들었을 만한 것이 있다.') : T`기다리는 회신에 그 기록이 들었을 수 있다: ${waitDoc.map(r => `「${plain(r.title)}」`).join(', ')}`);
       if (lv() < 5) lack.forEach(i => { const tf = thFor(sol.claims[i - 1].id); if (tf && !tf.x.done) THX.set(C.id + '|' + tf.x.t.id, true); }); // 메모가 없는 칸의 의문은 수첩에서 펼쳐 둔다 (접힌 채면 빈칸 물음이 안 보여 무엇을 찾을지 모른다)
     }
     save();

@@ -431,7 +431,7 @@ MG.I18N.put("en", "c00", {
 "1laqb7q952s": "Even when we were together, she didn't really tell me stuff like that.",
 "22cwoydh2yy": "(looks away) Ask someone else about that. There were plenty of people in her life besides me.",
 "d2474m9qyd": "Did she really die after the 12th?",
-"1y5sb9pwrle": "The post on the 11th didn’t come from Seo-yun’s phone. It was posted from “JH’s iPad”, in Goyang, Gyeonggi Province.",
+"3t6sx1ace4": "The post on the 11th was made from “JH’s iPad”, connecting from Goyang, Gyeonggi Province.",
 "2epxe4ryyds": "What does the list of devices logged in to Seo-yun's account show?",
 "2fxek6ilfok": "The rice porridge order on the 12th also came from “JH’s iPad”.",
 "1uixpb8fa0d": "In the delivery app's order history, what about the order on the 12th?",
