@@ -27,11 +27,11 @@ const SWAP = new Map();
 if (CRAZY) {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8'), at = '<script src="js/i18n.js"></script>';
   if (!html.includes(at)) { console.error(`index.html 에 ${at} 이 없다`); process.exit(1); }
-  // 다른 주소를 가리키는 머리말(canonical · og:url · 구조화 데이터)과 자바스크립트가 꺼졌을 때의 github 링크도 걷어 낸다: 이 판은 CrazyGames 안에서만 돈다
+  // 다른 주소를 가리키는 머리말(canonical · og:url · og:image · 구조화 데이터)과 자바스크립트가 꺼졌을 때의 github 링크도 걷어 낸다: 이 판은 CrazyGames 안에서만 돈다
   const out = html.replace(at, '<script src="https://sdk.crazygames.com/crazygames-sdk-v3.js"></script>\n<script src="js/crazy.js"></script>\n' + at)
-    .replace(/<meta property="og:url"[^>]*>\n?/, '').replace(/<link rel="canonical"[^>]*>\n?/, '')
+    .replace(/<meta property="og:(?:url|image(?::\w+)?)"[^>]*>\n?/g, '').replace(/<link rel="canonical"[^>]*>\n?/, '')
     .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\n?/, '').replace(/\n<p class="nojs">Monologue Gaze: [^\n]*<\/p>/, '');
-  if (/jysvai\.github\.io\/Monologue-Gaze\/(?:"|ko\/)|itch\.io/.test(out.replace(/<meta property="og:image"[^>]*>/, ''))) { console.error('CrazyGames 판 index.html 에 다른 곳을 가리키는 링크가 남았다'); process.exit(1); }
+  if (/jysvai\.github\.io|itch\.io/.test(out)) { console.error('CrazyGames 판 index.html 에 다른 곳을 가리키는 링크가 남았다'); process.exit(1); }
   SWAP.set('index.html', Buffer.from(out, 'utf8'));
   // ElevenLabs 로 만든 소리(manifest 의 files: 주인공 대사와 효과음, clips 가운데 lead.mp3: 주연 대사)는 뺀다. 무료 플랜으로 만들어 상업적으로 쓸 수 없는데,
   // CrazyGames 는 광고로 버는 곳이다 (개발자 약관 7.1). 빠진 소리는 엔진이 자막·말소리·합성음으로 대신한다 (js/audio.js). 유료 플랜으로 다시 녹음하면 이 거르기를 걷어 낸다.
