@@ -27,6 +27,23 @@ CC0: https://creativecommons.org/publicdomain/zero/1.0/
 | `radio_squelch.mp3` | 현행 사건을 열 때 무전 | 무전 끝의 치익 | [End radio transmission](https://freesound.org/people/ReadeOnly/sounds/47646/) · ReadeOnly · CC0 |
 | `buzz_phone.mp3` | 현행 사건 단톡방 알림 | 휴대폰이 유리 탁자 위에서 드르륵 두 번 | [cell phone vibrate glass_loopable.wav](https://freesound.org/people/mobaudio/sounds/384487/) · mobaudio · CC0 |
 
+## CrazyGames 판의 적는 소리·딸깍 (`cc0/` · 2026-10-24)
+
+CrazyGames 판(`node tools/itch-zip.js --crazy`)은 아래 ElevenLabs 소리를 쓸 수 없어서(무료 플랜은 상업적 사용 불가) 같은 이름의 CC0 녹음으로 바꿔 담는다. itch 판에는 들어가지 않는다.
+다듬기: 앞 무음을 자르고 원래 소리 길이에 맞춰 자른 뒤 짧게 페이드 · 한 채널 · 44.1kHz · 최대 크기를 원래 ElevenLabs 파일에 맞춤 (`write` 는 +3dB, `tw1` 은 -2dB 더) · mp3 96kbps.
+
+| 파일 | 무슨 소리 | 원본 · 녹음한 사람 · 라이선스 |
+|---|---|---|
+| `cc0/pen.mp3` | 연필이 종이를 긁는 0.18초 | [notepad_pencil writing.wav](https://freesound.org/people/ekfink/sounds/235503/) · ekfink · CC0 |
+| `cc0/write.mp3` | 연필로 한 단어 쓰기 | [writing - pencil - wide 03.wav](https://freesound.org/people/Anthousai/sounds/337091/) · Anthousai · CC0 |
+| `cc0/typewriter.mp3` | 타자기 자판 | [Vintage Typewriter](https://freesound.org/people/VishwaJay/sounds/652588/) · VishwaJay · CC0 |
+| `cc0/tw1.mp3` | 타자기 자판 한 번 | [Typewriter - single key - type 1.wav](https://freesound.org/people/yottasounds/sounds/380138/) · yottasounds · CC0 |
+| `cc0/oldkbd.mp3` · `cc0/kbd.mp3` | 기계식 자판 치기 (같은 녹음의 다른 대목) | [CMPTKey_Mechanical Computer Keyboard Typing](https://freesound.org/people/harrisonlace/sounds/859264/) · harrisonlace · CC0 |
+| `cc0/tap.mp3` | 노트북 자판 | [Laptop Keyboard](https://freesound.org/people/bassboybg/sounds/346589/) · bassboybg · CC0 |
+| `cc0/page.mp3` | 종이 한 장 넘김 | [Page Turn 05](https://freesound.org/people/LilMati/sounds/397552/) · LilMati · CC0 |
+| `cc0/click.mp3` | 딸깍 | `click_001.ogg` · [Kenney Interface Sounds](https://kenney.nl/assets/interface-sounds) · Kenney Vleugels · CC0 |
+| `cc0/key.mp3` | 자판 한 번 | [keypress.wav](https://freesound.org/people/CaptainYulef/sounds/641243/) · CaptainYulef · CC0 |
+
 ## ElevenLabs 로 만든 소리 (tools/voices.js 의 SFX)
 
 `pen` `write` `typewriter` `tw1` `oldkbd` `kbd` `tap` `page` `click` `key` — 적는 소리·넘기는 소리·딸깍. 지금도 쓴다.

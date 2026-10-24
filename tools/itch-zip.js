@@ -40,7 +40,10 @@ if (CRAZY) {
   const box = { window: {} };
   vm.runInNewContext(mf, box);
   const a = box.window.MG.audio;
-  a.files = {};
+  // 자주 나는 적는 소리·딸깍만은 같은 이름의 CC0 녹음으로 바꿔 담는다 (audio/sfx/cc0/, 출처는 audio/sfx/CREDITS.md). 주소 뒤 ?v= 는 내용 해시
+  a.files = Object.fromEntries(['pen', 'write', 'typewriter', 'tw1', 'oldkbd', 'kbd', 'tap', 'page', 'click', 'key']
+    .map(k => [k, path.join(root, 'audio', 'sfx', 'cc0', k + '.mp3')]).filter(([, f]) => fs.existsSync(f))
+    .map(([k, f]) => ['sfx/' + k, `audio/sfx/cc0/${k}.mp3?v=${require('crypto').createHash('md5').update(fs.readFileSync(f)).digest('hex').slice(0, 8)}`]));
   a.clips = Object.fromEntries(Object.entries(a.clips || {}).filter(([, c]) => !/\/lead\.mp3(?:\?|$)/.test(c[0])));
   SWAP.set('audio/manifest.js', Buffer.from(mf.slice(0, head) + 'window.MG.audio = ' + JSON.stringify(a, null, 1) + ';\n', 'utf8'));
 }
@@ -70,8 +73,8 @@ for (const f of files) {
   for (const [p] of t.matchAll(/\b(?:img|audio)\/[\w./-]+\.(?:webp|png|jpe?g|gif|svg|mp3|ogg|wav|m4a)\b/g)) ref(p, f);
 }
 // 목소리는 사건마다 묶은 파일(lead.mp3 · sub.mp3)과 manifest 가 가리키는 것만: 낱개 대사 파일은 다시 녹음할 때 쓰는 원본이다 (tools/voice-pack.js)
-// CrazyGames 판은 효과음도 가리키는 것만 (위에서 manifest 의 ElevenLabs 효과음을 걷어 냈다)
-const loose = files.filter(f => (f.startsWith('audio/voice/') || CRAZY && /^audio\/sfx\/[^/]+\.mp3$/.test(f)) && !refs.has(f));
+// 효과음도 가리키는 것만: CrazyGames 판은 위에서 manifest 의 ElevenLabs 효과음을 걷어 냈고, itch 판은 CrazyGames 용 cc0/ 를 쓰지 않는다
+const loose = files.filter(f => (f.startsWith('audio/voice/') || /^audio\/sfx\/.+\.mp3$/.test(f)) && !refs.has(f));
 files = files.filter(f => !loose.includes(f));
 const missing = [...refs].filter(([p]) => !have.has(p)).map(([p, from]) => {
   const near = files.find(f => f.toLowerCase() === p.toLowerCase());
@@ -128,4 +131,4 @@ end.writeUInt32LE(0x06054b50, 0); end.writeUInt16LE(files.length, 8); end.writeU
 end.writeUInt32LE(cdSize, 12); end.writeUInt32LE(off, 16);
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
 fs.writeFileSync(OUT, Buffer.concat([...parts, ...central, end]));
-console.log(`${path.relative(root, OUT).replace(/\\/g, '/')} — 파일 ${files.length}개 · 풀면 ${MB(total)} · 묶음 ${MB(off + cdSize + 22)} · 가리키는 그림·소리 ${refs.size}개 모두 들어감${loose.length ? ` · ${CRAZY ? '쓰지 않는 소리 파일' : '묶어 둔 목소리의 낱개 원본'} ${loose.length}개는 뺌` : ''}`);
+console.log(`${path.relative(root, OUT).replace(/\\/g, '/')} — 파일 ${files.length}개 · 풀면 ${MB(total)} · 묶음 ${MB(off + cdSize + 22)} · 가리키는 그림·소리 ${refs.size}개 모두 들어감${loose.length ? ` · 쓰지 않는 소리 파일(목소리의 낱개 원본 포함) ${loose.length}개는 뺌` : ''}`);
