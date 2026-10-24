@@ -87,6 +87,8 @@
   }
   Array.prototype.forEach.call(document.querySelectorAll('link[rel="stylesheet"][href^="css/"]'), function (l) { sheet(l, 0); });
   function start(data) {
+    var w = window.MG && window.MG.wait; // CrazyGames 판(js/crazy.js): SDK 저장소가 준비된 뒤에 연다
+    if (w && w.then) { delete window.MG.wait; return w.then(function () { start(data); }, function () { start(data); }); }
     core(function () { again(function () {
       try { window.MG.I18N.ready(function () { boot(data); }); } catch (e) { boot(data); } // 고른 언어의 꾸러미를 받은 뒤에 연다
     }); });

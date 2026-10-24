@@ -6,6 +6,8 @@
  * 윈도는 대소문자를 가리지 않아 로컬에서는 열려도, itch.io 는 가려서 그 파일만 빠진다.
  * itch.io 한도: 파일 1,000개 · 한 파일 200MB · 모두 500MB · 경로 240자 (https://itch.io/docs/creators/html5)
  * 사용: node tools/itch-zip.js
+ *       node tools/itch-zip.js --crazy   CrazyGames 판 (dist/monologue-gaze-crazy.zip): index.html 에 SDK 와 js/crazy.js 를 끼워 진행 저장을 SDK 로
+ * CrazyGames 한도: 파일 1,500개 · SDK 를 쓰면 모두 250MB (https://docs.crazygames.com/requirements/intro/)
  */
 'use strict';
 const fs = require('fs');
@@ -14,10 +16,18 @@ const zlib = require('zlib');
 const { execFileSync } = require('child_process');
 
 const root = path.join(__dirname, '..');
-const OUT = path.join(root, 'dist', 'monologue-gaze-itch.zip');
+const CRAZY = process.argv.includes('--crazy');
+const OUT = path.join(root, 'dist', CRAZY ? 'monologue-gaze-crazy.zip' : 'monologue-gaze-itch.zip');
 const TOP = ['index.html', 'manifest.webmanifest', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png'];
 const DIRS = ['css/', 'js/', 'cases/', 'i18n/', 'img/', 'audio/', 'fonts/']; // i18n/: 다른 언어 꾸러미 (js/i18n.js 가 고른 언어의 것만 부른다)
-const LIMIT = { files: 1000, file: 200 * 2 ** 20, total: 500 * 2 ** 20, name: 240 };
+const LIMIT = CRAZY ? { files: 1500, file: 250 * 2 ** 20, total: 250 * 2 ** 20, name: 240 } : { files: 1000, file: 200 * 2 ** 20, total: 500 * 2 ** 20, name: 240 };
+// 묶을 때만 바꿔 넣는 파일: CrazyGames 판은 언어 스크립트보다 먼저 SDK 와 저장 연결(js/crazy.js)을 부른다
+const SWAP = new Map();
+if (CRAZY) {
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8'), at = '<script src="js/i18n.js"></script>';
+  if (!html.includes(at)) { console.error(`index.html 에 ${at} 이 없다`); process.exit(1); }
+  SWAP.set('index.html', Buffer.from(html.replace(at, '<script src="https://sdk.crazygames.com/crazygames-sdk-v3.js"></script>\n<script src="js/crazy.js"></script>\n' + at), 'utf8'));
+}
 const MB = n => (n / 2 ** 20).toFixed(1) + 'MB';
 
 // 저장소에 올라간 파일과 아직 커밋하지 않은 새 파일. .gitignore 에 걸린 것은 git 이 먼저 뺀다.
@@ -25,6 +35,7 @@ const listed = execFileSync('git', ['ls-files', '-z', '--cached', '--others', '-
   .split('\0').filter(Boolean);
 let files = [...new Set(listed)]
   .filter(f => (TOP.includes(f) || DIRS.some(d => f.startsWith(d))) && fs.existsSync(path.join(root, f)))
+  .filter(f => CRAZY || f !== 'js/crazy.js') // itch 판에는 SDK 연결을 넣지 않는다
   .sort();
 const have = new Set(files);
 
@@ -51,7 +62,7 @@ const missing = [...refs].filter(([p]) => !have.has(p)).map(([p, from]) => {
 });
 
 // itch.io 한도
-const sizes = files.map(f => fs.statSync(path.join(root, f)).size);
+const sizes = files.map(f => SWAP.has(f) ? SWAP.get(f).length : fs.statSync(path.join(root, f)).size);
 const total = sizes.reduce((a, b) => a + b, 0);
 const over = [];
 if (files.length > LIMIT.files) over.push(`  파일 ${files.length}개 — 한도 ${LIMIT.files}개`);
@@ -62,7 +73,7 @@ files.forEach((f, i) => {
 });
 if (missing.length || over.length) {
   if (missing.length) console.error('빠진 파일:\n' + missing.join('\n'));
-  if (over.length) console.error('itch.io 한도를 넘는다:\n' + over.join('\n'));
+  if (over.length) console.error((CRAZY ? 'CrazyGames' : 'itch.io') + ' 한도를 넘는다:\n' + over.join('\n'));
   process.exit(1);
 }
 
@@ -75,7 +86,7 @@ const parts = [], central = [];
 let off = 0;
 files.forEach(f => {
   const full = path.join(root, f);
-  const data = fs.readFileSync(full);
+  const data = SWAP.get(f) || fs.readFileSync(full);
   const name = Buffer.from(f, 'utf8');
   const packed = zlib.deflateRawSync(data, { level: 9 });
   const store = packed.length >= data.length;

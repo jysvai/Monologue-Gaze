@@ -99,21 +99,22 @@
   const KEY = 'mg-save-v1', ROSTER = 'mg-roster-v1';
   const blank = () => ({ cases: {}, current: null, intro: false });
   const slot = id => (id === 'p0' ? KEY : KEY + '@' + id);
+  const store = () => MG.store || localStorage; // CrazyGames 판은 SDK 의 data 모듈(js/crazy.js): 로그인한 사람은 다른 기기에서도 이어 한다
   // 저장소가 막힌 브라우저(사생활 보호 창·쿠키 차단)에서도 이 창 안에서는 명부를 기억한다 (새 서랍 받기가 헛돌지 않게)
   let RMEM = null, RBAD = false;
   function roster() { // 다른 탭이 명부를 고쳤을 수 있으니 쓸 때마다 새로 읽는다
     let r = null;
-    try { r = JSON.parse(localStorage.getItem(ROSTER) || 'null'); } catch (e) { RBAD = true; }
+    try { r = JSON.parse(store().getItem(ROSTER) || 'null'); } catch (e) { RBAD = true; }
     if (RBAD && RMEM) r = JSON.parse(JSON.stringify(RMEM));
     if (!r || !Array.isArray(r.list) || !r.list.length) r = { list: [{ id: 'p0', name: '', no: 1 }], cur: 'p0', n: 2 };
     if (!r.list.some(p => p.id === r.cur)) r.cur = r.list[0].id;
     return r;
   }
-  const saveRoster = r => { RMEM = JSON.parse(JSON.stringify(r)); try { localStorage.setItem(ROSTER, JSON.stringify(r)); } catch (e) { RBAD = true; } };
+  const saveRoster = r => { RMEM = JSON.parse(JSON.stringify(r)); try { store().setItem(ROSTER, JSON.stringify(r)); } catch (e) { RBAD = true; } };
   const who = p => (p && p.name) || T`수사관 ${p ? p.no : 1}`;
   function load(id) {
     try {
-      const d = JSON.parse(localStorage.getItem(slot(id)) || 'null');
+      const d = JSON.parse(store().getItem(slot(id)) || 'null');
       if (d && typeof d === 'object' && d.cases) return Object.assign(blank(), d);
     } catch (e) { /* storage unavailable */ }
     return blank();
@@ -125,7 +126,7 @@
   // 의문은 무엇으로 열리든(메모 · 단어 · 풀린 자물쇠 · 대조 · 회신) 기록이 바뀐 조금 뒤에 한 번 더 살핀다 — 바로 알리는 곳(메모 적기 · 대답 끝 · 단어 · 새 소식)이 놓친 것까지
   let THT = 0;
   const thSoon = () => { if (!C || !C.threads || !ST || ST.solved) return; clearTimeout(THT); const c0 = C; THT = setTimeout(() => { if (C === c0) threadNews(); }, 1200); };
-  const save = () => { if (SYNC) return; thSoon(); try { localStorage.setItem(slot(PID), JSON.stringify(S)); } catch (e) { if (!unsaved) { unsaved = true; setTimeout(() => toast(T('이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다'), 6000), 900); } } };
+  const save = () => { if (SYNC) return; thSoon(); try { store().setItem(slot(PID), JSON.stringify(S)); } catch (e) { if (!unsaved) { unsaved = true; setTimeout(() => toast(T('이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다'), 6000), 900); } } };
 
   function cs(c) {
     const st = (S.cases[c.id] = S.cases[c.id] || {});
@@ -2854,7 +2855,7 @@
     if (id === PID || !r.list.some(p => p.id === id)) return;
     r.list = r.list.filter(p => p.id !== id);
     saveRoster(r);
-    try { localStorage.removeItem(slot(id)); } catch (e) { /* ignore */ }
+    try { store().removeItem(slot(id)); } catch (e) { /* ignore */ }
     toggleRoster(true);
     if (r.list.length < 2) { const w = $('[data-wipe]'); if (w) w.textContent = T('모든 기록 지우기'); }
   }
@@ -4089,6 +4090,7 @@
 
   /* ───────── boot ───────── */
   MG.boot = function (data) {
+    if (MG.store) { PID = roster().cur; S = load(PID); } // CrazyGames 판: SDK 저장소는 이 파일을 읽은 뒤에야 준비된다 — 열기 전에 명부와 서랍을 거기서 다시 읽는다
     if (data && data.S && data.S.cases) S = data.S;
     MG.cases.sort((a, b) => a.no - b.no);
     MG.cases.forEach(MG.I18N.applyCase); // 다른 언어면 번역을 원문 위에 덮는다 (prep 이 단어 이름을 읽기 전에)
