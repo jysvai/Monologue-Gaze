@@ -196,7 +196,8 @@
     const html = document.documentElement;
     html.lang = lang;
     const md = document.querySelector('meta[name="description"]'); if (md && DESC[lang]) md.setAttribute('content', DESC[lang]);
-    (FONTS[lang] || []).forEach(href => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); });
+    const local = window.MG && window.MG.localFonts; // 바깥 서버에 묻지 않는 판 (tools/font-pack.js 가 받아 둔 fonts/local/lang-*.css)
+    (FONTS[lang] ? (local ? [`fonts/local/lang-${lang === 'de' ? 'en' : lang}.css`] : FONTS[lang]) : []).forEach(href => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); });
     const b = document.querySelector('#app .boot');
     if (b && BOOT[lang]) b.textContent = BOOT[lang];
   }

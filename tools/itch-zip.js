@@ -20,19 +20,29 @@ const { execFileSync } = require('child_process');
 const root = path.join(__dirname, '..');
 const PORTAL = process.argv.includes('--portal');
 const NO11 = process.argv.includes('--no-elevenlabs');
-const OUT = path.join(root, 'dist', `monologue-gaze-${PORTAL ? 'portal' : 'itch'}${NO11 ? '-no11' : ''}.zip`);
+const LOCAL = process.argv.includes('--local-fonts');
+if (LOCAL && !PORTAL) { console.error('--local-fonts 는 --portal 과 함께'); process.exit(1); }
+if (LOCAL && !fs.existsSync(path.join(root, 'fonts', 'local', 'boot.css'))) { console.error('fonts/local 이 없다 — node tools/font-pack.js 를 먼저'); process.exit(1); }
+const OUT = path.join(root, 'dist', `monologue-gaze-${PORTAL ? 'portal' : 'itch'}${LOCAL ? '-local' : ''}${NO11 ? '-no11' : ''}.zip`);
 const TOP = ['index.html', 'manifest.webmanifest', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png'];
 const DIRS = ['css/', 'js/', 'cases/', 'i18n/', 'img/', 'audio/', 'fonts/']; // i18n/: 다른 언어 꾸러미 (js/i18n.js 가 고른 언어의 것만 부른다)
-const LIMIT = { files: 1000, file: 200 * 2 ** 20, total: 500 * 2 ** 20, name: 240 };
+// --portal 판: Game Jolt · PLiCy · freem! 은 파일 수 한도를 밝혀 두지 않았다 (받아 둔 글꼴을 넣으면 1,400개쯤)
+const LIMIT = { files: PORTAL ? 2000 : 1000, file: 200 * 2 ** 20, total: 500 * 2 ** 20, name: 240 };
 // 묶을 때만 바꿔 넣는 파일
 const SWAP = new Map();
 if (PORTAL) {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8'), at = '<script src="js/i18n.js"></script>';
   if (!html.includes(at)) { console.error(`index.html 에 ${at} 이 없다`); process.exit(1); }
   // 다른 주소를 가리키는 머리말(canonical · og:url · og:image · 구조화 데이터)과 자바스크립트가 꺼졌을 때의 github 링크도 걷어 낸다: 이 판은 올린 사이트 안에서만 돈다
-  const out = html.replace(at, '<script>window.MG = window.MG || {}; MG.portal = true;</script>\n' + at)
+  let out = html.replace(at, `<script>window.MG = window.MG || {}; MG.portal = true;${LOCAL ? ' MG.localFonts = true;' : ''}</script>\n` + at)
     .replace(/<meta property="og:(?:url|image(?::\w+)?)"[^>]*>\n?/g, '').replace(/<link rel="canonical"[^>]*>\n?/, '')
     .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\n?/, '').replace(/\n<p class="nojs">Monologue Gaze: [^\n]*<\/p>/, '');
+  if (LOCAL) { // 글꼴도 바깥에서 받지 않는다: 미리 연결(preconnect)을 걷고, 공통 글꼴 두 줄을 받아 둔 boot.css 한 줄로 (사건·언어 글꼴은 엔진·js/i18n.js 가 MG.localFonts 를 보고)
+    out = out.replace(/<link rel="preconnect" href="https:\/\/[^"]+"[^>]*>\n?/g, '');
+    let n = 0;
+    out = out.replace(/<link rel="stylesheet" data-gf[^>]*>\n?/g, () => (n++ ? '' : '<link rel="stylesheet" href="fonts/local/boot.css">\n'));
+    if (!n || /fonts\.googleapis|fonts\.gstatic|jsdelivr/.test(out)) { console.error('--local-fonts 판 index.html 에 바깥 글꼴 주소가 남았다'); process.exit(1); }
+  }
   if (/jysvai\.github\.io|itch\.io/.test(out)) { console.error('--portal 판 index.html 에 다른 곳을 가리키는 링크가 남았다'); process.exit(1); }
   SWAP.set('index.html', Buffer.from(out, 'utf8'));
 }
@@ -49,6 +59,7 @@ if (NO11) {
     .map(k => [k, path.join(root, 'audio', 'sfx', 'cc0', k + '.mp3')]).filter(([, f]) => fs.existsSync(f))
     .map(([k, f]) => ['sfx/' + k, `audio/sfx/cc0/${k}.mp3?v=${require('crypto').createHash('md5').update(fs.readFileSync(f)).digest('hex').slice(0, 8)}`]));
   a.clips = Object.fromEntries(Object.entries(a.clips || {}).filter(([, c]) => !/\/lead\.mp3(?:\?|$)/.test(c[0])));
+  a.no11 = true; // 기록실 맨 아래 크레딧에서 ElevenLabs 를 뺀다 (js/engine.js) — 목소리가 든 판은 무료 플랜 조건대로 밝혀 둔다
   SWAP.set('audio/manifest.js', Buffer.from(mf.slice(0, head) + 'window.MG.audio = ' + JSON.stringify(a, null, 1) + ';\n', 'utf8'));
 }
 const MB = n => (n / 2 ** 20).toFixed(1) + 'MB';
@@ -56,7 +67,9 @@ const MB = n => (n / 2 ** 20).toFixed(1) + 'MB';
 // 저장소에 올라간 파일과 아직 커밋하지 않은 새 파일. .gitignore 에 걸린 것은 git 이 먼저 뺀다.
 const listed = execFileSync('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard'], { cwd: root, encoding: 'utf8', maxBuffer: 64 * 2 ** 20 })
   .split('\0').filter(Boolean);
-let files = [...new Set(listed)]
+// fonts/local/ (tools/font-pack.js 가 받아 둔 글꼴)은 .gitignore 에 걸려 있어 --local-fonts 판에만 직접 넣는다
+const walk = d => fs.readdirSync(path.join(root, d), { withFileTypes: true }).flatMap(e => e.isDirectory() ? walk(d + '/' + e.name) : [d + '/' + e.name]);
+let files = [...new Set([...listed, ...(LOCAL ? walk('fonts/local') : [])])]
   .filter(f => (TOP.includes(f) || DIRS.some(d => f.startsWith(d))) && fs.existsSync(path.join(root, f)))
   .sort();
 const have = new Set(files);
@@ -96,7 +109,7 @@ files.forEach((f, i) => {
 });
 if (missing.length || over.length) {
   if (missing.length) console.error('빠진 파일:\n' + missing.join('\n'));
-  if (over.length) console.error('itch.io 한도를 넘는다:\n' + over.join('\n'));
+  if (over.length) console.error((PORTAL ? '--portal 판' : 'itch.io') + ' 한도를 넘는다:\n' + over.join('\n'));
   process.exit(1);
 }
 

@@ -2749,6 +2749,7 @@
     if (!need.length) return;
     need.forEach(k => { fontOn[k] = 1; });
     const link = href => { if (fontOn[href]) return; fontOn[href] = 1; const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); };
+    if (MG.localFonts) return need.forEach(k => link(`fonts/local/f-${k}.css`)); // 바깥 서버에 묻지 않는 판: 게임 글자만 담아 받아 둔 글꼴 (tools/font-pack.js)
     const g = need.filter(k => typeof FONTS[k] === 'string');
     if (g.length) link('https://fonts.googleapis.com/css2?' + g.map(k => 'family=' + FONTS[k]).join('&') + '&display=swap');
     need.filter(k => FONTS[k] && FONTS[k].css).forEach(k => link(FONTS[k].css)); // 같은 주소(Pretendard·갈무리)는 한 번만
@@ -2944,7 +2945,7 @@
       ${live.length ? `<section class="duty" aria-label="${T`현행 사건`}"><h2 class="duty-h">${T`당직 · 현행 사건`}</h2><p class="duty-sub">${T`몇 해 전 실제로 돌았던 현행 사건을 그날 그 시각부터 다시 돌리는 당직 훈련이다. 지원으로 붙은 형사 자리에 앉는다. 문서를 읽고 묻고 조회할 때마다 수사 시계가 돈다.`}</p><div class="drawer">${live.map(folder).join('')}</div></section>` : ''}
       ${mList.length ? `<section class="mbox"><h2>${T`M의 메모`}</h2><p class="mbox-sub">${T`기록 여백과 화면에 붙은 포스트잇에 남아 있던, 선배의 글씨.`}</p><ul>${mList.map(c => `<li${newM.includes(c.id) ? ' class="fresh"' : ''}><span class="mbox-case">CASE ${pad(c.no)}</span> ${esc(plain(c._m))}</li>`).join('')}</ul></section>` : ''}
       ${letter}
-      <footer class="cab-foot">${unsaved ? T('<p class="unsaved" role="note">이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다.</p>') : ''}<p>${T`모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.`}</p><p class="credit">${MG.portal ? '' : `${T`목소리`} <a href="https://elevenlabs.io" target="_blank" rel="noopener">elevenlabs.io</a> · `}${T`효과음`} <a href="https://freesound.org" target="_blank" rel="noopener">Freesound</a>·<a href="https://kenney.nl" target="_blank" rel="noopener">Kenney</a> (CC0)</p><button type="button" class="reset" data-wipe>${roster().list.length > 1 ? T('내 기록 지우기') : T('모든 기록 지우기')}</button>${MG.portal ? '' : `<p class="credit thanks">${T`itch.io에서 팔로우해 주신 고마운 분들`} ${thanks}</p>`}</footer>
+      <footer class="cab-foot">${unsaved ? T('<p class="unsaved" role="note">이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다.</p>') : ''}<p>${T`모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.`}</p><p class="credit">${(MG.audio || {}).no11 ? '' :`${T`목소리`} <a href="https://elevenlabs.io" target="_blank" rel="noopener">elevenlabs.io</a> · `}${T`효과음`} <a href="https://freesound.org" target="_blank" rel="noopener">Freesound</a>·<a href="https://kenney.nl" target="_blank" rel="noopener">Kenney</a> (CC0)</p><button type="button" class="reset" data-wipe>${roster().list.length > 1 ? T('내 기록 지우기') : T('모든 기록 지우기')}</button>${MG.portal ? '' : `<p class="credit thanks">${T`itch.io에서 팔로우해 주신 고마운 분들`} ${thanks}</p>`}</footer>
     </div>`;
     // 막 종결한 사건이면 그 폴더까지 내려가 도장을 찍는다
     const fresh = $('.f-stamp.fresh');
