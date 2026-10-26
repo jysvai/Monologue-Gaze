@@ -13,6 +13,8 @@ html[lang="ru"]{
   --l-hand:"Caveat",; --l-hand2:"Marck Script",; --l-hand3:"Pangolin",;
   --l-serif:"PT Serif",; --l-old:"Old Standard TT",; --l-brush:"Old Standard TT",;
   --l-sans:"PT Sans",; --l-mono:"PT Mono",; --l-type:"IBM Plex Mono",;
+  /* 갈무리11 에는 키릴 문자가 없어 2006년 PC·폴더폰 화면의 러시아어가 굴림으로 빠진다. 도트 글꼴 가운데 키릴이 있는 DotGothic16 을 앞에 (도스·도트 프린터의 고정폭은 그대로) */
+  --f-pixel:"DotGothic16","Galmuri11","Gulim","Dotum","Nanum Gothic",sans-serif;
 }
 html[lang="ja"]{
   --l-hand:"Klee One",; --l-hand2:"Zen Kurenaido",; --l-hand3:"Yomogi",;
