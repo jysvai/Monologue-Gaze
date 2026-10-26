@@ -865,13 +865,15 @@
       const b = beats[i], len = b.lines.reduce((m, x) => m + x.t.length, 0) + String(b.n.t).length / 2;
       el.innerHTML = `<figure><img src="${esc(b.img || end)}" alt=""><p class="cf-memo"><span class="n">${esc(b.q)}</span> ${esc(plain(b.n.t))}</p><figcaption><b>${esc(cp.name)}</b>${b.lines.map(x => `<span${x.me ? ' class="me"' : ''}>${esc(x.t)}</span>`).join('')}</figcaption><p class="cf-step">${i + 1} / ${beats.length}${i === 0 ? ` · ${T('누르면 다음 장 · Esc 건너뛰기')}` : ''}</p></figure>`;
       sfx('page');
-      S.t = setTimeout(next, Math.min(6500, Math.max(3200, 2000 + len * 45)));
-      if (b.vo.length) { // 녹음된 말이면 다 들은 뒤에 넘긴다 (목소리가 안 나면 글 길이대로)
+      // 읽을 시간: 글자가 넓게 퍼지는 언어는 같은 말이 두세 배 길다 (기각 알림과 같은 셈). 6.5초에서 끊으면 영어·러시아어의 긴 장은 다 읽기 전에 넘어갔다
+      const wide = /^(ko|ja|zh)/.test(MG.I18N.lang) ? 1 : 2.4, read = Math.min(11000, Math.max(3200, 2000 + len * 60 / wide)), t0 = Date.now();
+      S.t = setTimeout(next, read);
+      if (b.vo.length) { // 녹음된 말이면 다 들은 뒤에 넘긴다 (목소리가 안 나면 글 길이대로) — 번역 자막이 목소리보다 길면 읽을 시간까지는 둔다
         const me = i, say = j => {
           if (over || i !== me) return;
-          if (j >= b.vo.length) { clearTimeout(S.t); S.t = setTimeout(next, 1400); return; }
+          if (j >= b.vo.length) { clearTimeout(S.t); S.t = setTimeout(next, Math.max(1400, read - (Date.now() - t0))); return; }
           const v = MG.sound.voice(b.vo[j]);
-          if (!v) { if (j) { clearTimeout(S.t); S.t = setTimeout(next, 1400); } return; }
+          if (!v) { if (j) { clearTimeout(S.t); S.t = setTimeout(next, Math.max(1400, read - (Date.now() - t0))); } return; }
           if (j === 0) { clearTimeout(S.t); S.t = setTimeout(next, 20000); }
           v.done.then(() => setTimeout(() => say(j + 1), 250));
         };

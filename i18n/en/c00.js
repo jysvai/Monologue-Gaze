@@ -395,7 +395,7 @@ MG.I18N.put("en", "c00", {
 "di4s0gmfy7": "I was at my booth the whole time, both days, the 11th and 12th. Everyone saw me.",
 "64hcxqvre2": "Busan? What about it? That whole week I was only going back and forth between Seoul and Ilsan.",
 "ierjakzn3t": "(Bites her lip) …It's not like I checked the clock on my way out. It was around ten, I'm telling you.",
-"b2ramagu85": "— There's no record of the door opening around ten. That night the door opened once from inside, at 11:26.",
+"b2ramagu85": "— There's no record of the door opening around ten. That night the door opened once from inside, at 11:26 p.m.",
 "2bixjpywl8n": "(Looks away) …So you're saying I'm lying?",
 "1q91v6e52jy": "I got there at 9:30 and left at 10. How many times do I have to say it?",
 "27a6duj38fh": "— That porridge on the 12th was ordered from “JH’s iPad.”",
