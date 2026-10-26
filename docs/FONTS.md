@@ -34,7 +34,7 @@
 | 1980~90년대 신문 제호 · 전단 제목 | `--f-bhs` (bhs) | 검은고딕 Black Han Sans | OFL · Google Fonts |
 | 1980~90년대 도스·워드프로세서 화면, 삐삐 음성사서함 안내 | `--f-dos` (dos) | Neo둥근모 NeoDunggeunmo — **16px 배수** | OFL · jsDelivr `gh/neodgm/neodgm-webfont@1.601` |
 | 1990년대 도트 프린터 출력 | `--f-dotprint` (dotprint) | 갈무리 모노11 GalmuriMono11 — **12px** | OFL · jsDelivr `npm/galmuri@2.40.3` |
-| 2000년대 굴림 비트맵 화면(윈도 XP), 폴더폰 문자, 미니홈피 본문 | `--f-pixel` (pixel) | 갈무리11 Galmuri11 — **12px** | OFL · jsDelivr `npm/galmuri@2.40.3` |
+| 2000년대 굴림 비트맵 화면(윈도 XP), 폴더폰 문자, 미니홈피 본문 | `--f-pixel` (pixel) | 갈무리11 Galmuri11 — **12px** (굵은 파일에 키릴이 없어 러시아어는 `fonts/ru-pixel.woff2` = 보통 굵기의 키릴만 떼어 「MG Pixel Cyr」로 이름을 바꾼 것이 받친다) | OFL · jsDelivr `npm/galmuri@2.40.3` |
 | 2000년대 미니홈피 글꼴 아이템 (제목) | `--f-gamja` (gamja) | 감자꽃 Gamja Flower | OFL · Google Fonts |
 | 2010~20년대 윈도·안드로이드·경찰 전산 · 엑셀 · PC 메신저 (맑은 고딕 결) | `--f-sys` (sys) | Noto Sans KR | OFL · Google Fonts |
 | 2020년대 웹·앱 (노트북 화면 기본) | `--f-ui` (ui) | Pretendard (가변, 동적 조각) | OFL · jsDelivr `npm/pretendard@1.3.9` |

@@ -13,9 +13,11 @@ html[lang="ru"]{
   --l-hand:"Caveat",; --l-hand2:"Marck Script",; --l-hand3:"Pangolin",;
   --l-serif:"PT Serif",; --l-old:"Old Standard TT",; --l-brush:"Old Standard TT",;
   --l-sans:"PT Sans",; --l-mono:"PT Mono",; --l-type:"IBM Plex Mono",;
-  /* 갈무리11 에는 키릴 문자가 없어 2006년 PC·폴더폰 화면의 러시아어가 굴림으로 빠진다. 도트 글꼴 가운데 키릴이 있는 DotGothic16 을 앞에 (도스·도트 프린터의 고정폭은 그대로) */
-  --f-pixel:"DotGothic16","Galmuri11","Gulim","Dotum","Nanum Gothic",sans-serif;
+  --f-pixel:"Galmuri11","MG Pixel Cyr","Gulim","Dotum","Nanum Gothic",sans-serif;
 }
+/* 갈무리11 보통 굵기에는 키릴 문자가 있는데 굵은 파일(Galmuri11-Bold)에는 없어, 굵은 러시아어(2006년 PC 목록 제목·탭)만 굴림으로 빠졌다.
+ * 보통 굵기의 키릴 글자만 떼어 이름을 바꿔 둔 것 (fonts/ru-pixel.woff2, 갈무리 2.40.3 · OFL). 굵게는 브라우저가 덧칠한다. DotGothic16 은 키릴을 전각 폭으로 그려 탭 이름이 잘렸다 */
+@font-face{font-family:"MG Pixel Cyr";src:url(../fonts/ru-pixel.woff2) format("woff2");font-weight:400;font-display:swap;unicode-range:U+0400-045F}
 html[lang="ja"]{
   --l-hand:"Klee One",; --l-hand2:"Zen Kurenaido",; --l-hand3:"Yomogi",;
   --l-serif:"Noto Serif JP",; --l-old:"New Tegomin",; --l-sans:"Noto Sans JP",; --l-heavy:"Dela Gothic One",;

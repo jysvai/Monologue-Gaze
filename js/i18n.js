@@ -186,7 +186,7 @@
   const GF = 'https://fonts.googleapis.com/css2?display=swap&family=';
   const FONTS = {
     en: [GF + 'Caveat:wght@400;600&family=Shadows+Into+Light&family=Patrick+Hand&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Old+Standard+TT:wght@400;700&family=PT+Mono'],
-    ru: [GF + 'Caveat:wght@400;600&family=Marck+Script&family=Pangolin&family=PT+Serif:wght@400;700&family=Old+Standard+TT:wght@400;700&family=PT+Sans:wght@400;700&family=PT+Mono&family=IBM+Plex+Mono:wght@400;600&family=DotGothic16'],
+    ru: [GF + 'Caveat:wght@400;600&family=Marck+Script&family=Pangolin&family=PT+Serif:wght@400;700&family=Old+Standard+TT:wght@400;700&family=PT+Sans:wght@400;700&family=PT+Mono&family=IBM+Plex+Mono:wght@400;600'],
     ja: [GF + 'Klee+One:wght@400;600&family=Zen+Kurenaido&family=Yomogi&family=Noto+Serif+JP:wght@400;700&family=New+Tegomin&family=Noto+Sans+JP:wght@400;700&family=Dela+Gothic+One&family=M+PLUS+1+Code&family=DotGothic16'],
     zh: [GF + 'Long+Cang&family=ZCOOL+KuaiLe&family=Noto+Serif+SC:wght@400;700&family=ZCOOL+XiaoWei&family=Noto+Sans+SC:wght@400;700&family=ZCOOL+QingKe+HuangYou&family=Ma+Shan+Zheng',
       'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css', 'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css'],
