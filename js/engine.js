@@ -2262,7 +2262,10 @@
     renderNotebook();
     fresh.forEach(id => { const li = $(`.notes li[data-nid="${id}"]`); if (!li) return; const d = li.closest('details'); if (d && !d.open) d.open = true; li.classList.remove('lit'); void li.offsetWidth; li.classList.add('lit'); });
     const nums = fresh.map(noteNo).filter(Boolean).sort((a, b) => a - b), e = LM.get(ST.notes[nums[0] - 1].id);
-    setTimeout(() => { if (!ST.solved) { toast(leadTip(e, nums) ? T`유력! 메모 ${nums.join('·')}번 — ${e.vs.length ? T('들은 진술과 어긋난다') : leadTip(e, nums).split(' · ')[0]}` : T`유력! 메모 ${nums.join('·')}번`, 3000); /* 알림에는 누구의 말인지 대지 않는다 (메모의 「유력!」에 손을 대면 나온다) — 누구에게 내밀지까지 알려 주면 추궁이 찾아보기가 된다 */ sfx('match'); } }, 900);
+    // 함께 맞물린 메모끼리는 짝 번호를 지우므로 (leadTip skip) 「유력! 메모 1·2번」만 남아 무슨 뜻인지 모른다 — 그때는 서로 맞물린다고. 처음 한 번은 도장을 누르면 무엇이 나오는지도
+    const tip = leadTip(e, nums), why = tip ? (e.vs.length ? T('들은 진술과 어긋난다') : tip.split(' · ')[0]) : nums.length > 1 ? T('서로 맞물린다') : '', first = !S.leadTip;
+    if (first) { S.leadTip = true; save(); }
+    setTimeout(() => { if (!ST.solved) { toast((why ? T`유력! 메모 ${nums.join('·')}번 — ${why}` : T`유력! 메모 ${nums.join('·')}번`) + (first ? ' ' + T('(수첩의 「유력!」 도장을 누르면 무엇과 이어지는지 짚어 준다)') : ''), first ? 6500 : 3000); /* 알림에는 누구의 말인지 대지 않는다 (메모의 「유력!」에 손을 대면 나온다) — 누구에게 내밀지까지 알려 주면 추궁이 찾아보기가 된다 */ sfx('match'); } }, 900);
     return true;
   }
 
@@ -3390,6 +3393,7 @@
     renderTabs(); renderList();
     const hit = n && $('.arch .res .item, .arch .res .res-none'); // 수첩 칩이 많아지면 결과가 화면 밑으로 밀린다 — 첫 결과가 보이게
     if (hit) { const b = hit.getBoundingClientRect(); if (b.top < 0 || b.bottom > innerHeight - 90) hit.scrollIntoView({ block: 'center', behavior: reduced() ? 'auto' : 'smooth' }); } // 화면 아래 증거물 꼬리표에 가리지 않게
+    if (n) $$('.arch .res .item').forEach(el => el.classList.add('hit')); // 결과는 왼쪽 목록에 나오고 오른쪽은 보던 기록 그대로라, 찾은 것에 한 번 테를 둘러 눈이 가게
     if (n && !again) { const src = C.sources.find(x => x.id === srcId); advance('search', src && archiveHits(src, q).length ? undefined : 1); } // 한 번 찾아본 말을 다시 찾는 데는 수사 시간이 들지 않는다 (결과를 다시 펼칠 뿐) · 아무것도 안 나온 검색은 1분만 (표기를 바꿔 몇 번 쳐 보다 시계가 한 시간씩 가지 않게)
   }
   function search(kid) {
