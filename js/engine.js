@@ -621,7 +621,7 @@
     return a + (/[）]$/.test(a) ? '' : ' ') + b;
   }
   function pickHtml(p) {
-    const k = PICK.k, L = kl(k), LM = leadMap(), mine = n => (LM.get(n.id) || { vs: [] }).vs.some(v => v.pid === p.id); // 도장은 이 사람의 진술과 어긋나는 메모에만
+    const k = PICK.k, L = kl(k), LM = leadMap(), mine = n => (LM.get(n.id) || { vs: [] }).vs.some(v => v.pid === p.id && v.k === k); // 도장은 지금 따지는 이 대답과 어긋나는 메모에만 (같은 사람의 다른 대답에 쓸 메모까지 찍으면 일곱 장이 다 「유력!」이라 고를 수가 없었다)
     const pool = proof().reverse(), G = PICK.g ||= {};
     const ra = rawAns(p, k) || {}, want = ra.take || (ra.need || []).flatMap(x => x.split('|')).filter(x => x[0] === '!').map(x => x.slice(1));
     const partFit = isPressAsk(p, k) && pool.some(n => want.some(w => fIs(n.f, w))); // 맞는 메모는 있는데 함께 맞댈 기록이 모자란 때 — 「어긋나는 메모가 없다」고 하면 내밀었을 때 「될 것 같은데」와 어긋난다
@@ -1325,6 +1325,13 @@
   const feedName = id => { const s = C.sources.find(x => x.id === id); return s ? s.name : T('단톡방'); };
   const firstFeed = () => { const s = C.sources.find(x => x.type === 'feed'); return s && s.id; };
 
+  // 수첩 쓰는 법 맨 앞 줄: 무엇에 수사 시간이 얼마나 드는지 (사건마다 다른 cost 값 그대로, 그 사건에 있는 일만). 해 보기 전에는 시계 옆 「+8분」으로만 알 수 있었다
+  function liveTip() {
+    const has = t => C.sources.some(x => x.type === t);
+    const L = [[T('처음 펴는 기록'), 'doc'], [T('묻기 · 메모 내밀기'), 'ask'], has('archive') && [T('검색'), 'search'], has('query') && [T('조회'), 'query'], has('request') && [T('신청서 올리기'), 'write'], has('compare') && [T('감정 맡기기'), 'compare'], has('timeline') && [T('타임라인 맞춰 보기'), 'timeline'], has('photo') && [T('사진 처음 펴기'), 'photo']]
+      .filter(x => x && lcost(x[1]) > 0).map(([l, k]) => `${l} ${hm(lcost(k))}`);
+    return T`수사 시계 — ${L.join(' · ')}. 한 번 본 기록을 다시 펴는 데는 시간이 들지 않는다.`;
+  }
   let stepMin = 0; // 방금 한 일에 든 시간: 시계 옆에 잠깐 「+15분」으로 (무엇에 얼마가 드는지 몸으로 알게)
   function advance(kind, min) {
     if (!liveOn() || ST.solved) return liveSync();
@@ -2399,7 +2406,7 @@
     if (NBF === 'lead' && !nLead || NBF === 'sus' && !nSus) NBF = '';
     const fb = (f, n, label) => n ? ` <button type="button" class="lead-f${f === 'sus' ? ' sus-f' : ''}" data-nbf="${f}" aria-pressed="${NBF === f}">${label}</button>` : '';
     const susB = (n, i) => ST.solved ? '' : `<button type="button" class="sus${isSus(n) ? ' on' : ''}" data-sus="${n.id}" aria-pressed="${isSus(n)}" aria-label="${isSus(n) ? T`메모 ${i + 1} 의심 표시 풀기` : T`메모 ${i + 1} 의심으로 표시`}">${isSus(n) ? T('의심') : '?'}</button>`;
-    const top = nb.firstChild ? nb.scrollTop : 0;
+    const top = nb.firstChild ? nb.scrollTop : 0, tips = [...(liveOn() && !ST.solved ? [liveTip()] : []), ...(C.tips || [])];
     nb.innerHTML = `
       <div class="nb-rings" aria-hidden="true"></div>
       <div class="nb-top"><button type="button" class="nb-back" data-cabinet>${T`← 기록실`}</button><span class="nb-case"><span class="nb-id">${starsHtml(C)} CASE ${pad(C.no)}</span><span class="nb-ctl">${tsBtn()}${soundBtn()}${C.graphic ? mildBtn() : ''}</span></span></div>
@@ -2411,7 +2418,7 @@
         ${groups.map(([t, a]) => `<p class="kg"><span class="kg-t">${ktypeName(t)}</span> ${a.map(k => `<button type="button" class="kchip" data-chip="${k}">${esc(kl(k))}</button>`).join(' ')}</p>`).join('')}
       </section>
       <section class="ruled nb-sec${NBF ? ' f-' + NBF : ''}"><h3 class="hh">${T`메모 <small>${notes.length}</small>`}${fb('lead', nLead, T`유력 ${nLead}`)}${fb('sus', nSus, T`의심 ${nSus}`)}</h3>${notes.length >= 6 && !ST.solved ? `<p class="nb-jump-row"><button type="button" class="nb-jump" data-open-rep>${esc(FORM().open)} →</button></p>` : ''}
-        ${(C.tips || []).length ? (ol => C.tips.length > 2 ? `<details class="ng nb-tips"${(TIPSOPEN.get(C.id) ?? notes.length <= 3) ? ' open' : ''}><summary><span class="ng-t">${T('※ 수첩 쓰는 법')}</span> <small>${C.tips.length}</small></summary>${ol}</details>` : ol)(`<ol class="notes">${C.tips.map(t => `<li class="tip">※ ${inline(t)}</li>`).join('')}</ol>`) : notes.length ? '' : T('<ol class="notes"><li class="tip">아직 적은 메모가 없다.</li></ol>')}
+        ${tips.length ? (ol => tips.length > 2 ? `<details class="ng nb-tips"${(TIPSOPEN.get(C.id) ?? notes.length <= 3) ? ' open' : ''}><summary><span class="ng-t">${T('※ 수첩 쓰는 법')}</span> <small>${tips.length}</small></summary>${ol}</details>` : ol)(`<ol class="notes">${tips.map(t => `<li class="tip">※ ${inline(t)}</li>`).join('')}</ol>`) : notes.length ? '' : T('<ol class="notes"><li class="tip">아직 적은 메모가 없다.</li></ol>')}
         ${noteGroups(notes).map(g => `<details class="ng${g.items.some(([n]) => LM.has(n.id)) ? ' has-lead' : ''}${g.items.some(([n]) => isSus(n)) ? ' has-sus' : ''}" data-ng="${esc(g.src)}"${NGSHUT.has(C.id + '|' + g.src) && !NBF ? '' : ' open'}><summary><span class="ng-t">${esc(g.src)}</span> <small>${g.items.length}</small></summary><ol class="notes">${g.items.map(([n, i]) => `<li data-nid="${n.id}"${LM.has(n.id) || isSus(n) ? ` class="${[LM.has(n.id) ? 'lead' : '', isSus(n) ? 'sus' : ''].join(' ').trim()}"` : ''} style="--r:${(hash(n.ref) % 5 - 2) * 0.25}deg"><span class="n">${i + 1}.</span> ${esc(memoT(n))}${repMark(n)}${LM.has(n.id) ? leadMark(LM.get(n.id), 'button').replace('class="n-lead"', `class="n-lead" data-lead="${n.id}"`) : ''}${susB(n, i)}<button type="button" class="del" data-del="${n.id}" aria-label="${T`메모 ${i + 1} 지우기`}">×</button></li>`).join('')}</ol></details>`).join('')}
       </section>
       <section class="ruled nb-sec nb-rep"><h3 class="hh">${esc(FORM().title)}</h3>
@@ -3768,7 +3775,7 @@
     if (!el.classList.contains('arm')) {
       const orig = el.textContent;
       el.classList.add('arm'); el.textContent = label;
-      setTimeout(() => { el.classList.remove('arm'); el.textContent = orig; }, 3000);
+      setTimeout(() => { el.classList.remove('arm'); el.textContent = orig; }, 4500); // 바뀐 글(「한 번 더 누르면 …」)을 읽고 누를 만큼
       return;
     }
     fn();
