@@ -628,7 +628,7 @@
     const opt = n => `<button type="button" class="rep-opt press-opt${mine(n) ? ' lead' : ''}" data-press-note="${n.id}" title="${esc(n.t)}"><span class="n">${noteNo(n.id)}.</span> ${mine(n) ? `<span class="n-lead" role="img" aria-label="${T`유력 — ${pname(p)}의 대답과 어긋난다`}">${T('유력!')}</span> ` : isSus(n) ? `<span class="n-sus">${T('의심')}</span> ` : ''}<span class="t">${esc(memoT(n))}</span> <small class="src">— ${esc(n.src || '')}</small></button>`;
     // 내밀 메모를 묶어서: 유력(이 사람의 대답과 어긋남) · 의심(내가 표시해 둔 것) · 탐문에서 들은 말 · 기록에서 찾은 것. 위 두 묶음이 있으면 아래 둘은 접어 둔다
     const rest = pool.filter(n => !mine(n) && !isSus(n));
-    const groups = [['lead', T('유력 — 이 사람이 한 말 어딘가와 어긋나는 메모 (이 대답과는 다를 수도 있다)'), pool.filter(mine)], ['sus', T('의심 — 내가 표시해 둔 메모'), pool.filter(n => !mine(n) && isSus(n))],
+    const groups = [['lead', T('유력 — 이 대답과 어긋나는 메모'), pool.filter(mine)], ['sus', T('의심 — 내가 표시해 둔 메모'), pool.filter(n => !mine(n) && isSus(n))],
       ['talk', T('탐문에서 들은 말'), rest.filter(heardNote).sort((a, b) => (heardNote(a) === p.id) - (heardNote(b) === p.id))], ['rec', T('기록에서 찾은 것'), rest.filter(n => !heardNote(n))]];
     // 유력·의심 밖의 메모는 접어 둔다: 유력이 있으면 그것부터, 없으면 어느 메모로도 지금 들은 말은 깨지지 않는다 (펼쳐 두면 아무거나 눌러 참을성만 깎는다)
     // ★5 는 유력 묶음도 「어긋나는 메모가 없다」는 말도 없다 — 다 펼쳐 두고, 어느 메모인지는 플레이어가 고른다 (기록이 모자랄 때도 「이 메모로 될 것 같은데」라고 짚어 주지 않는다)
@@ -1328,8 +1328,12 @@
   // 수첩 쓰는 법 맨 앞 줄: 무엇에 수사 시간이 얼마나 드는지 (사건마다 다른 cost 값 그대로, 그 사건에 있는 일만). 해 보기 전에는 시계 옆 「+8분」으로만 알 수 있었다
   function liveTip() {
     const has = t => C.sources.some(x => x.type === t);
-    const L = [[T('처음 펴는 기록'), 'doc'], [T('묻기 · 메모 내밀기'), 'ask'], has('archive') && [T('검색'), 'search'], has('query') && [T('조회'), 'query'], has('request') && [T('신청서 올리기'), 'write'], has('compare') && [T('감정 맡기기'), 'compare'], has('timeline') && [T('타임라인 맞춰 보기'), 'timeline'], has('photo') && [T('사진 처음 펴기'), 'photo']]
-      .filter(x => x && lcost(x[1]) > 0).map(([l, k]) => `${l} ${hm(lcost(k))}`);
+    const one = (l, k) => `${l} ${hm(lcost(k))}`, w = lcost('write');
+    const L = [lcost('doc') > 0 && one(T('처음 펴는 기록'), 'doc'), lcost('ask') > 0 && one(T('묻기나 메모 내밀기'), 'ask'),
+      has('archive') && lcost('search') > 0 && T`검색 ${hm(lcost('search'))} (안 나오면 ${hm(1)})`, // 헛걸음 검색은 1분 (setQ)
+      has('query') && lcost('query') > 0 && one(T('조회'), 'query'),
+      has('request') && w > 0 && (lv() >= 5 ? T`신청서 올리기 ${hm(w)} (다시 올리면 ${hm(w + 60)})` : one(T('신청서 올리기'), 'write')), // ★5 는 기각된 것을 다시 올리는 데 한 시간 더 (submitReq)
+      has('compare') && lcost('compare') > 0 && one(T('감정 맡기기'), 'compare'), has('timeline') && lcost('timeline') > 0 && one(T('타임라인 맞춰 보기'), 'timeline'), has('photo') && lcost('photo') > 0 && one(T('사진 처음 펴기'), 'photo')].filter(Boolean);
     return T`수사 시계 — ${L.join(' · ')}. 한 번 본 기록을 다시 펴는 데는 시간이 들지 않는다.`;
   }
   let stepMin = 0; // 방금 한 일에 든 시간: 시계 옆에 잠깐 「+15분」으로 (무엇에 얼마가 드는지 몸으로 알게)
