@@ -127,12 +127,12 @@
 @keyframes cueStamp{0%{opacity:0;transform:rotate(-12deg) scale(1.12)}12%{opacity:.85;transform:rotate(-12deg) scale(1)}70%{opacity:.8;transform:rotate(-12deg) scale(1)}100%{opacity:0;transform:rotate(-12deg) scale(1)}} /* 도장은 쾅 내려찍지 않고 살짝 눌러 찍힌다 */
 
 /* 주인공 속말 자막 */
-.mono-cap{position:fixed;left:50%;bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:94;max-width:min(640px,calc(100vw - 32px));padding:6px 18px 5px;transform:translate(-50%,8px);opacity:0;pointer-events:none;background:rgba(14,14,16,.78);color:#efe6cf;font:23px/1.3 var(--f-hand);text-align:center;border-radius:3px;box-shadow:0 8px 24px rgba(0,0,0,.4);transition:opacity .35s,transform .35s,bottom .25s}
+.mono-cap{position:fixed;left:50%;bottom:max(calc(64px + env(safe-area-inset-bottom,0px)),var(--cap-lift,0px));z-index:94;max-width:min(640px,calc(100vw - 32px));padding:6px 18px 5px;transform:translate(-50%,8px);opacity:0;pointer-events:none;background:rgba(14,14,16,.78);color:#efe6cf;font:23px/1.3 var(--f-hand);text-align:center;border-radius:3px;box-shadow:0 8px 24px rgba(0,0,0,.4);transition:opacity .35s,transform .35s,bottom .25s}
 .mono-cap::before{content:"— ";opacity:.6}
 .mono-cap.on{opacity:1;transform:translate(-50%,0)}
 .mono-cap.top{top:calc(2px + env(safe-area-inset-top,0px));bottom:auto!important;font-size:19px;padding:4px 14px 3px} /* 노트북 탭 줄에 걸치지 않게 낮고 작게 */
-/* 아래쪽 알림 쪽지가 떠 있으면 그 키(--toast-h, 엔진 toast)만큼 위로 비켜 선다 — 여러 줄 쪽지가 자막을 덮지 않게 */
-body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,0px)),calc(34px + var(--toast-h,40px) + env(safe-area-inset-bottom,0px)))}
+/* 아래쪽 알림 쪽지가 떠 있으면 그 키(--toast-h, 엔진 toast)만큼 위로 비켜 선다 — 여러 줄 쪽지가 자막을 덮지 않게. --cap-lift: 노트북 시계 줄 위로 (js/audio.js caption) */
+body:has(#toast.on) .mono-cap{bottom:max(calc(64px + env(safe-area-inset-bottom,0px)),calc(34px + var(--toast-h,40px) + env(safe-area-inset-bottom,0px)),var(--cap-lift,0px))}
 
 
 @media (prefers-reduced-motion:reduce){

@@ -187,7 +187,12 @@
     const el = capBox();
     const my = ++capN;
     clearTimeout(capT);
-    el.textContent = t; el.classList.remove('on'); el.classList.toggle('top', !!top); void el.offsetWidth; el.classList.add('on');
+    el.textContent = t; el.classList.remove('on'); el.classList.toggle('top', !!top);
+    // 노트북 화면 아래 시계 줄이 자막 자리에 걸리면 그 줄 위로 비켜 선다 (1366×768 처럼 낮은 화면에서 시계를 덮지 않게)
+    const bar = !top && document.querySelector('.case-view .scr-bar'), r = bar && bar.getBoundingClientRect(), foot = innerHeight - 64; // 자막 아래 끝 (css/drama.css 의 bottom 64px)
+    if (r && r.height && r.top < foot && r.bottom > foot - el.offsetHeight) el.style.setProperty('--cap-lift', Math.ceil(innerHeight - r.top + 6) + 'px');
+    else el.style.removeProperty('--cap-lift');
+    void el.offsetWidth; el.classList.add('on');
     const hide = ms => { if (my === capN) capT = setTimeout(() => { if (my === capN) el.classList.remove('on'); }, ms); };
     if (v) v.done.then(() => hide(1200)); else hide(Math.max(3500, 1600 + t.length * 90)); // 목소리가 없으면 글 길이대로, 짧은 말도 3.5초는 둔다
   }
@@ -218,5 +223,6 @@
   document.addEventListener('pointerdown', function once() { ctx(); warm(); document.removeEventListener('pointerdown', once); }, { passive: true });
 
   const preload = ks => { if (S().sound) ks.forEach(k => url(k) && load(k)); }; // 곧 날 소리를 미리 받아 둔다 (처음 한 번이 늦어 건너뛰지 않게)
-  MG.sound = { play, voice, stopVoice, hasVoice, speaking: () => speaking(), blip, tone, hero, caption, warm, preload, line: k => MG.T((A().say || {})['hero/' + k] || '') };
+  const voiced = pre => [A().files, A().clips || {}].some(o => Object.keys(o).some(k => k.startsWith(pre))); // 소리를 꺼 두었어도 녹음이 있는지 (「v/사건/사람/」)
+  MG.sound = { play, voice, stopVoice, hasVoice, voiced, speaking: () => speaking(), blip, tone, hero, caption, warm, preload, line: k => MG.T((A().say || {})['hero/' + k] || '') };
 })();

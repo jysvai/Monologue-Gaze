@@ -456,6 +456,8 @@ MG.I18N.put("de", "ui", {
 "메모를 지웠다.": "Notiz gelöscht.",
 "되살리기": "Rückgängig",
 "이 사건에는 단어로 찾아볼 검색창이 없다 — 단어는 사람을 펼쳐 두고 물을 때 쓴다": "In diesem Fall gibt es kein Suchfeld für Wörter — Wörter dienen hier zum Befragen von Personen",
+"이 사람의 대답은 목소리로도 녹음되어 있습니다.": "Die Antworten dieser Person gibt es auch als Sprachaufnahme.",
+"소리 켜기": "Ton einschalten",
 "열림": "Geöffnet",
 "열렸다.": "Offen.",
 "해독": "Entschlüsselt",

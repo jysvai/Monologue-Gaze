@@ -2926,9 +2926,10 @@
     };
     const intro = S.intro ? '' : `<div class="intro"><p>${T`서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.`}</p><p>${T`서랍 속에는 한 세기에 걸친 미제 기록 ${numk(main.length)} 건. 신문 스크랩, 진술서, 편지, 사진. 선배가 끝내 풀지 못하고 두고 간 것들이다.`}</p><p class="intro-hand">${T`처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장`}</p><button type="button" class="btn-hand" data-intro-ok>${T`서랍을 연다`}</button></div>`;
     const letter = allShut ? `<article class="m-letter${newLetter ? ' fresh' : ''}"><h3>${T`서랍 맨 밑의 편지`}</h3>${(MG.finale || []).map(p => `<p>${esc(p.replace(/{n}/g, numk(main.length)).replace(/{next}/g, numk(main.length + 1)))}</p>`).join('')}<p class="m-sig">— M</p>${mWho()}</article>` : '';
-    // 사건을 하나라도 닫은 사람에게만 (기록실에만, 사건 안에는 넣지 않는다). itch 는 별점·댓글이 쌓인 게임을 목록에 더 자주 올린다. 닫으면 다시 안 나온다
+    // 사건을 하나라도 닫았거나 모두 10분 넘게 붙잡은 사람에게만 (기록실에만, 사건 안에는 넣지 않는다). itch 는 별점·댓글이 쌓인 게임을 목록에 더 자주 올린다. 닫으면 다시 안 나온다
     const solvedAny = MG.cases.some(c => S.cases[c.id] && S.cases[c.id].solved); // 연습 사건(CASE 00)만 닫은 사람에게도: 긴 사건 하나를 끝까지 가는 사람은 적다
-    const rate = solvedAny && !S.rateOff && !MG.portal ? `<p class="cab-rate">${T('재미있으셨다면 <a href="https://jysvai.itch.io/monologue-gaze/rate?source=game" target="_blank" rel="noopener">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 별점이 쌓이면 다른 사람들도 이 기록실을 찾기 쉬워집니다.')}<button type="button" class="cab-rate-x" data-rate-off aria-label="${T('이 안내 닫기')}">×</button></p>` : '';
+    const played = MG.cases.reduce((m, c) => m + ((S.cases[c.id] && S.cases[c.id].play && S.cases[c.id].play.ms) || 0), 0); // 연습 사건이 25분이라, 닫기 전에 기록실로 나온 사람도 묻는다
+    const rate = (solvedAny || played >= 600000) && !S.rateOff && !MG.portal ? `<p class="cab-rate">${T('재미있으셨다면 <a href="https://jysvai.itch.io/monologue-gaze/rate?source=game" target="_blank" rel="noopener">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 별점이 쌓이면 다른 사람들도 이 기록실을 찾기 쉬워집니다.')}<button type="button" class="cab-rate-x" data-rate-off aria-label="${T('이 안내 닫기')}">×</button></p>` : '';
     const hero = MG.images['_global/hero'];
     // itch.io 에서 팔로우해 준 사람들 (팔로우한 차례대로). 새로 생기면 뒤에 붙인다 — 기록실 맨 아래 한 줄을 통째로 쓰니 명단이 길어져도 위 줄은 그대로
     const thanks = ['hyperfixuals', 'chloemoarbes', 'Natalios_n'].map(n => `<a href="https://itch.io/profile/${n}" target="_blank" rel="noopener">${n}</a>`).join('&nbsp;· '); // 가운뎃점은 앞 이름에 붙여 줄 끝에 홀로 남지 않게
@@ -3095,6 +3096,13 @@
   const whoBtn = open => `<button type="button" class="snd who" data-roster aria-expanded="${!!open}" title="${esc(T`서랍은 수사관마다 따로다. 한 컴퓨터를 나눠 써도 남의 수첩을 이어 쓰지 않는다.`)}">${T`담당 · ${esc(who(roster().list.find(p => p.id === PID)))}`}</button>`;
   const mildBtn = () => `<button type="button" class="snd mild" data-mild aria-pressed="${!S.mild}">${S.mild ? T('잔혹 표현 꺼짐') : T('잔혹 표현 켜짐')}</button>`;
   const soundBtn = () => `<button type="button" class="snd" data-sound aria-pressed="${!!S.sound}">${S.sound ? T('소리 켜짐') : T('소리 꺼짐')}</button>${S.sound ? voiceBtn() + ambBtn() : ''}`;
+  const setSound = on => {
+    S.sound = on; save();
+    $$('[data-sound]').forEach(el => { if (el.parentNode) el.parentNode.querySelectorAll('[data-voice],[data-amb]').forEach(b => b.remove()); el.outerHTML = soundBtn(); });
+    if (!on && MG.sound) MG.sound.stopVoice();
+    if (on) sfx('pen');
+    if (MG.mood) MG.mood.sound();
+  };
   // 언어: 고르면 새로 불러온다 (js/i18n.js). 언어 이름은 늘 그 언어의 글자로
   const langSel = () => `<label class="snd lang"><select data-lang aria-label="${T`언어`} · Language">${MG.I18N.langs.map(([id, n]) => `<option value="${id}" lang="${id}"${id === MG.I18N.lang ? ' selected' : ''}>${n}</option>`).join('')}</select></label>`;
   const voiceBtn = () => `<button type="button" class="snd voice" data-voice aria-pressed="${S.voice !== false}">${S.voice !== false ? T('목소리 켜짐') : T('목소리 꺼짐')}</button>`;
@@ -3421,6 +3429,11 @@
     if (fresh) playAsk(p, e);
     else if (qa) { qa.classList.remove('flash'); void qa.offsetWidth; qa.classList.add('flash'); }
     if (fresh) advance('ask');
+    // 소리를 꺼 둔 채(처음 온 사람은 꺼진 채로 시작한다) 목소리가 녹음된 사람에게 처음 물으면 한 번만 알린다. 앞 알림(새 질문 등)이 지나간 뒤에
+    if (fresh && !S.sound && !S.voiceTip && MG.sound && MG.sound.voiced(`v/${C.id}/${p.id}/`)) {
+      S.voiceTip = true; save();
+      setTimeout(() => { if (!S.sound) toast(T('이 사람의 대답은 목소리로도 녹음되어 있습니다.'), 9000, [T('소리 켜기'), () => setSound(true)]); }, 2600);
+    }
   }
   function chip(k) {
     const o = ST.view.open;
@@ -3776,7 +3789,7 @@
       if ((el = t.closest('[data-tsize]'))) { S.ts = (tsOf() + 1) % 3; save(); applyTs(); const host = el.parentNode; el.outerHTML = tsBtn(); const nb = host && host.querySelector('[data-tsize]'); if (nb) nb.focus({ preventScroll: true }); return; } // 한 번 더 누르면 다음 크기로 (초점은 같은 단추에)
       if ((el = t.closest('[data-newsdir]'))) { S.hnews = !S.hnews; save(); renderRead(); const nb = $('#paneRead [data-newsdir]'); if (nb) { nb.focus({ preventScroll: true }); nb.scrollIntoView({ block: 'nearest' }); } return; } // 세로 기사 ↔ 가로로 펴 읽기
       if ((el = t.closest('[data-amb]'))) { S.amb = S.amb !== true; save(); el.outerHTML = ambBtn(); if (MG.mood) MG.mood.sound(); return; }
-      if ((el = t.closest('[data-sound]'))) { S.sound = !S.sound; save(); if (el.parentNode) el.parentNode.querySelectorAll('[data-voice],[data-amb]').forEach(b => b.remove()); if (!S.sound && MG.sound) MG.sound.stopVoice(); el.outerHTML = soundBtn(); if (S.sound) sfx('pen'); if (MG.mood) MG.mood.sound(); return; }
+      if (t.closest('[data-sound]')) return setSound(!S.sound);
       if (t.closest('[data-roster]')) return toggleRoster();
       if ((el = t.closest('[data-player]'))) return usePlayer(el.dataset.player);
       if ((el = t.closest('[data-drop]'))) return armed(el, T('한 번 더 누르면 그 서랍이 비워진다'), () => dropPlayer(el.dataset.drop));
