@@ -27,9 +27,9 @@ CC0: https://creativecommons.org/publicdomain/zero/1.0/
 | `radio_squelch.mp3` | 현행 사건을 열 때 무전 | 무전 끝의 치익 | [End radio transmission](https://freesound.org/people/ReadeOnly/sounds/47646/) · ReadeOnly · CC0 |
 | `buzz_phone.mp3` | 현행 사건 단톡방 알림 | 휴대폰이 유리 탁자 위에서 드르륵 두 번 | [cell phone vibrate glass_loopable.wav](https://freesound.org/people/mobaudio/sounds/384487/) · mobaudio · CC0 |
 
-## CrazyGames 판의 적는 소리·딸깍 (`cc0/` · 2026-10-24)
+## ElevenLabs 소리를 뺀 판의 적는 소리·딸깍 (`cc0/` · 2026-10-24)
 
-CrazyGames 판(`node tools/itch-zip.js --crazy`)은 아래 ElevenLabs 소리를 쓸 수 없어서(무료 플랜은 상업적 사용 불가) 같은 이름의 CC0 녹음으로 바꿔 담는다. itch 판에는 들어가지 않는다.
+ElevenLabs 소리를 뺀 판(`node tools/itch-zip.js --no-elevenlabs`, 광고 수익을 나누는 곳에 올릴 때)은 아래 ElevenLabs 소리를 쓸 수 없어서(무료 플랜은 상업적 사용 불가) 같은 이름의 CC0 녹음으로 바꿔 담는다. 보통 판에는 들어가지 않는다.
 다듬기: 앞 무음을 자르고 원래 소리 길이에 맞춰 자른 뒤 짧게 페이드 · 한 채널 · 44.1kHz · 최대 크기를 원래 ElevenLabs 파일에 맞춤 (`write` 는 +3dB, `tw1` 은 -2dB 더) · mp3 96kbps.
 
 | 파일 | 무슨 소리 | 원본 · 녹음한 사람 · 라이선스 |

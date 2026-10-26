@@ -6,8 +6,9 @@
  * 윈도는 대소문자를 가리지 않아 로컬에서는 열려도, itch.io 는 가려서 그 파일만 빠진다.
  * itch.io 한도: 파일 1,000개 · 한 파일 200MB · 모두 500MB · 경로 240자 (https://itch.io/docs/creators/html5)
  * 사용: node tools/itch-zip.js
- *       node tools/itch-zip.js --crazy   CrazyGames 판 (dist/monologue-gaze-crazy.zip): index.html 에 SDK 와 js/crazy.js 를 끼워 진행 저장을 SDK 로
- * CrazyGames 한도: 파일 1,500개 · SDK 를 쓰면 모두 250MB (https://docs.crazygames.com/requirements/intro/)
+ *       node tools/itch-zip.js --portal          다른 사이트에 올릴 판 (dist/monologue-gaze-portal.zip — Game Jolt · PLiCy · freem!):
+ *         itch 별점 · 팔로우 · X 공유와 다른 주소를 가리키는 머리말을 빼고, 잔혹 표현을 꺼 둔 채로 시작한다 (MG.portal)
+ *       --no-elevenlabs  ElevenLabs 로 만든 소리를 뺀다 (무료 플랜은 상업적 사용 불가: 광고 수익을 나누는 곳에 올릴 때)
  */
 'use strict';
 const fs = require('fs');
@@ -17,24 +18,27 @@ const vm = require('vm');
 const { execFileSync } = require('child_process');
 
 const root = path.join(__dirname, '..');
-const CRAZY = process.argv.includes('--crazy');
-const OUT = path.join(root, 'dist', CRAZY ? 'monologue-gaze-crazy.zip' : 'monologue-gaze-itch.zip');
+const PORTAL = process.argv.includes('--portal');
+const NO11 = process.argv.includes('--no-elevenlabs');
+const OUT = path.join(root, 'dist', `monologue-gaze-${PORTAL ? 'portal' : 'itch'}${NO11 ? '-no11' : ''}.zip`);
 const TOP = ['index.html', 'manifest.webmanifest', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png'];
 const DIRS = ['css/', 'js/', 'cases/', 'i18n/', 'img/', 'audio/', 'fonts/']; // i18n/: 다른 언어 꾸러미 (js/i18n.js 가 고른 언어의 것만 부른다)
-const LIMIT = CRAZY ? { files: 1500, file: 250 * 2 ** 20, total: 250 * 2 ** 20, name: 240 } : { files: 1000, file: 200 * 2 ** 20, total: 500 * 2 ** 20, name: 240 };
-// 묶을 때만 바꿔 넣는 파일: CrazyGames 판은 언어 스크립트보다 먼저 SDK 와 저장 연결(js/crazy.js)을 부른다
+const LIMIT = { files: 1000, file: 200 * 2 ** 20, total: 500 * 2 ** 20, name: 240 };
+// 묶을 때만 바꿔 넣는 파일
 const SWAP = new Map();
-if (CRAZY) {
+if (PORTAL) {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8'), at = '<script src="js/i18n.js"></script>';
   if (!html.includes(at)) { console.error(`index.html 에 ${at} 이 없다`); process.exit(1); }
-  // 다른 주소를 가리키는 머리말(canonical · og:url · og:image · 구조화 데이터)과 자바스크립트가 꺼졌을 때의 github 링크도 걷어 낸다: 이 판은 CrazyGames 안에서만 돈다
-  const out = html.replace(at, '<script src="https://sdk.crazygames.com/crazygames-sdk-v3.js"></script>\n<script src="js/crazy.js"></script>\n' + at)
+  // 다른 주소를 가리키는 머리말(canonical · og:url · og:image · 구조화 데이터)과 자바스크립트가 꺼졌을 때의 github 링크도 걷어 낸다: 이 판은 올린 사이트 안에서만 돈다
+  const out = html.replace(at, '<script>window.MG = window.MG || {}; MG.portal = true;</script>\n' + at)
     .replace(/<meta property="og:(?:url|image(?::\w+)?)"[^>]*>\n?/g, '').replace(/<link rel="canonical"[^>]*>\n?/, '')
     .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\n?/, '').replace(/\n<p class="nojs">Monologue Gaze: [^\n]*<\/p>/, '');
-  if (/jysvai\.github\.io|itch\.io/.test(out)) { console.error('CrazyGames 판 index.html 에 다른 곳을 가리키는 링크가 남았다'); process.exit(1); }
+  if (/jysvai\.github\.io|itch\.io/.test(out)) { console.error('--portal 판 index.html 에 다른 곳을 가리키는 링크가 남았다'); process.exit(1); }
   SWAP.set('index.html', Buffer.from(out, 'utf8'));
-  // ElevenLabs 로 만든 소리(manifest 의 files: 주인공 대사와 효과음, clips 가운데 lead.mp3: 주연 대사)는 뺀다. 무료 플랜으로 만들어 상업적으로 쓸 수 없는데,
-  // CrazyGames 는 광고로 버는 곳이다 (개발자 약관 7.1). 빠진 소리는 엔진이 자막·말소리·합성음으로 대신한다 (js/audio.js). 유료 플랜으로 다시 녹음하면 이 거르기를 걷어 낸다.
+}
+if (NO11) {
+  // ElevenLabs 로 만든 소리(manifest 의 files: 주인공 대사와 효과음, clips 가운데 lead.mp3: 주연 대사)는 뺀다. 무료 플랜으로 만들어 상업적으로 쓸 수 없다.
+  // 빠진 소리는 엔진이 자막·말소리·합성음으로 대신한다 (js/audio.js). 유료 플랜으로 다시 녹음하면 이 거르기를 걷어 낸다.
   // 조연 목소리(VoxCPM2, Apache-2.0, sub.mp3)와 CC0 효과음(js/audio.js 의 FOLEY)은 그대로 둔다.
   const mf = fs.readFileSync(path.join(root, 'audio', 'manifest.js'), 'utf8'), head = mf.indexOf('window.MG.audio = ');
   const box = { window: {} };
@@ -54,7 +58,6 @@ const listed = execFileSync('git', ['ls-files', '-z', '--cached', '--others', '-
   .split('\0').filter(Boolean);
 let files = [...new Set(listed)]
   .filter(f => (TOP.includes(f) || DIRS.some(d => f.startsWith(d))) && fs.existsSync(path.join(root, f)))
-  .filter(f => CRAZY || f !== 'js/crazy.js') // itch 판에는 SDK 연결을 넣지 않는다
   .sort();
 const have = new Set(files);
 
@@ -73,7 +76,7 @@ for (const f of files) {
   for (const [p] of t.matchAll(/\b(?:img|audio)\/[\w./-]+\.(?:webp|png|jpe?g|gif|svg|mp3|ogg|wav|m4a)\b/g)) ref(p, f);
 }
 // 목소리는 사건마다 묶은 파일(lead.mp3 · sub.mp3)과 manifest 가 가리키는 것만: 낱개 대사 파일은 다시 녹음할 때 쓰는 원본이다 (tools/voice-pack.js)
-// 효과음도 가리키는 것만: CrazyGames 판은 위에서 manifest 의 ElevenLabs 효과음을 걷어 냈고, itch 판은 CrazyGames 용 cc0/ 를 쓰지 않는다
+// 효과음도 가리키는 것만: --no-elevenlabs 판은 위에서 manifest 의 ElevenLabs 효과음을 걷어 냈고, 보통 판은 그 대신 넣는 cc0/ 를 쓰지 않는다
 const loose = files.filter(f => (f.startsWith('audio/voice/') || /^audio\/sfx\/.+\.mp3$/.test(f)) && !refs.has(f));
 files = files.filter(f => !loose.includes(f));
 const missing = [...refs].filter(([p]) => !have.has(p)).map(([p, from]) => {
@@ -93,7 +96,7 @@ files.forEach((f, i) => {
 });
 if (missing.length || over.length) {
   if (missing.length) console.error('빠진 파일:\n' + missing.join('\n'));
-  if (over.length) console.error((CRAZY ? 'CrazyGames' : 'itch.io') + ' 한도를 넘는다:\n' + over.join('\n'));
+  if (over.length) console.error('itch.io 한도를 넘는다:\n' + over.join('\n'));
   process.exit(1);
 }
 

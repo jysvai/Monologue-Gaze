@@ -97,26 +97,23 @@
    * 수사관마다 서랍(저장 칸)을 따로 둔다. 한 브라우저를 여럿이 나눠 써도 남의 기록을 이어 하지 않게.
    * 첫 수사관(p0)은 예전 저장 칸을 그대로 써서, 명부가 생기기 전의 기록도 이어진다. */
   const KEY = 'mg-save-v1', ROSTER = 'mg-roster-v1';
-  const blank = () => Object.assign({ cases: {}, current: null, intro: false }, MG.portal ? { mild: true } : {}); // CrazyGames 판(PEGI 12)은 잔혹 표현을 꺼 둔 채로 시작한다
+  const blank = () => Object.assign({ cases: {}, current: null, intro: false }, MG.portal ? { mild: true } : {}); // 다른 사이트에 올린 판(freem!·PLiCy 는 전 연령)은 잔혹 표현을 꺼 둔 채로 시작한다 (tools/itch-zip.js --portal)
   const slot = id => (id === 'p0' ? KEY : KEY + '@' + id);
-  const store = () => MG.store || localStorage; // CrazyGames 판은 SDK 의 data 모듈(js/crazy.js): 로그인한 사람은 다른 기기에서도 이어 한다
-  let PLAYING = false; // CrazyGames 판: 사건을 펼친 동안만 「플레이 중」으로 알린다 (SDK 의 gameplayStart · gameplayStop)
-  const playing = on => { if (!MG.crazy || PLAYING === on) return; PLAYING = on; try { MG.crazy.game[on ? 'gameplayStart' : 'gameplayStop'](); } catch (e) { /* SDK 꺼짐 */ } };
   // 저장소가 막힌 브라우저(사생활 보호 창·쿠키 차단)에서도 이 창 안에서는 명부를 기억한다 (새 서랍 받기가 헛돌지 않게)
   let RMEM = null, RBAD = false;
   function roster() { // 다른 탭이 명부를 고쳤을 수 있으니 쓸 때마다 새로 읽는다
     let r = null;
-    try { r = JSON.parse(store().getItem(ROSTER) || 'null'); } catch (e) { RBAD = true; }
+    try { r = JSON.parse(localStorage.getItem(ROSTER) || 'null'); } catch (e) { RBAD = true; }
     if (RBAD && RMEM) r = JSON.parse(JSON.stringify(RMEM));
     if (!r || !Array.isArray(r.list) || !r.list.length) r = { list: [{ id: 'p0', name: '', no: 1 }], cur: 'p0', n: 2 };
     if (!r.list.some(p => p.id === r.cur)) r.cur = r.list[0].id;
     return r;
   }
-  const saveRoster = r => { RMEM = JSON.parse(JSON.stringify(r)); try { store().setItem(ROSTER, JSON.stringify(r)); } catch (e) { RBAD = true; } };
+  const saveRoster = r => { RMEM = JSON.parse(JSON.stringify(r)); try { localStorage.setItem(ROSTER, JSON.stringify(r)); } catch (e) { RBAD = true; } };
   const who = p => (p && p.name) || T`수사관 ${p ? p.no : 1}`;
   function load(id) {
     try {
-      const d = JSON.parse(store().getItem(slot(id)) || 'null');
+      const d = JSON.parse(localStorage.getItem(slot(id)) || 'null');
       if (d && typeof d === 'object' && d.cases) return Object.assign(blank(), d);
     } catch (e) { /* storage unavailable */ }
     return blank();
@@ -128,7 +125,7 @@
   // 의문은 무엇으로 열리든(메모 · 단어 · 풀린 자물쇠 · 대조 · 회신) 기록이 바뀐 조금 뒤에 한 번 더 살핀다 — 바로 알리는 곳(메모 적기 · 대답 끝 · 단어 · 새 소식)이 놓친 것까지
   let THT = 0;
   const thSoon = () => { if (!C || !C.threads || !ST || ST.solved) return; clearTimeout(THT); const c0 = C; THT = setTimeout(() => { if (C === c0) threadNews(); }, 1200); };
-  const save = () => { if (SYNC) return; thSoon(); try { store().setItem(slot(PID), JSON.stringify(S)); } catch (e) { if (!unsaved) { unsaved = true; setTimeout(() => toast(T('이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다'), 6000), 900); } } };
+  const save = () => { if (SYNC) return; thSoon(); try { localStorage.setItem(slot(PID), JSON.stringify(S)); } catch (e) { if (!unsaved) { unsaved = true; setTimeout(() => toast(T('이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다'), 6000), 900); } } };
 
   function cs(c) {
     const st = (S.cases[c.id] = S.cases[c.id] || {});
@@ -2089,7 +2086,7 @@
     return rows.length ? `<details class="cleared"><summary>${T('배제 기록 — 범인이 아니었던 사람들')} <small>${rows.length}</small></summary><ul>${rows.join('')}</ul></details>` : '';
   }
   // 종결한 사람이 결과를 옮겨 적을 수 있게: 범인·결말은 빼고 사건 번호, 제목, 별, 제출 횟수, 짚어 보기 횟수, 링크만
-  const ITCH_URL = MG.portal ? '' : 'https://jysvai.itch.io/monologue-gaze'; // CrazyGames 판은 다른 곳을 알리지 않는다 (별점 · 팔로우 · X 공유도 뺀다)
+  const ITCH_URL = MG.portal ? '' : 'https://jysvai.itch.io/monologue-gaze'; // 다른 사이트에 올린 판은 itch 를 알리지 않는다 (별점 · 팔로우 · X 공유도 뺀다)
   // 자랑할 만한 것만: 짚어 보기 없이 · 보고서 한 번에 (연습 사건은 빼고)
   const badges = () => C.kind === 'tutorial' ? [] : [ST.nudges ? '' : T('짚어 보기 없이 종결'), (ST.tries || 1) === 1 ? T('보고서 한 번에 통과') : ''].filter(Boolean);
   const scrawlOf = () => (C.brief && C.brief.scrawl ? plain(C.brief.scrawl) : '');
@@ -2761,7 +2758,6 @@
   function openCase(id, intro) {
     const c = MG.byId[id];
     if (!c) return cabinet();
-    playing(true);
     stopTalk(); sceneOff(); if (MG.sound) MG.sound.stopVoice();
     caseFonts(c);
     if (c.graphic && !cs(c).cw) return warnScreen(c);
@@ -2858,7 +2854,7 @@
     if (id === PID || !r.list.some(p => p.id === id)) return;
     r.list = r.list.filter(p => p.id !== id);
     saveRoster(r);
-    try { store().removeItem(slot(id)); } catch (e) { /* ignore */ }
+    try { localStorage.removeItem(slot(id)); } catch (e) { /* ignore */ }
     toggleRoster(true);
     if (r.list.length < 2) { const w = $('[data-wipe]'); if (w) w.textContent = T('모든 기록 지우기'); }
   }
@@ -2892,7 +2888,6 @@
   }
 
   function cabinet(showRoster) {
-    playing(false);
     clearNotes(); unguard(); applyTs(); sceneOff();
     stopTalk(); if (MG.sound) MG.sound.stopVoice(); // 추궁 도중 기록실로 나가도 그 사람 목소리가 기록실까지 따라오지 않는다
     C = null; ST = null; S.current = null; save();
@@ -4094,7 +4089,6 @@
 
   /* ───────── boot ───────── */
   MG.boot = function (data) {
-    if (MG.store) { PID = roster().cur; S = load(PID); } // CrazyGames 판: SDK 저장소는 이 파일을 읽은 뒤에야 준비된다 — 열기 전에 명부와 서랍을 거기서 다시 읽는다
     if (data && data.S && data.S.cases) S = data.S;
     MG.cases.sort((a, b) => a.no - b.no);
     MG.cases.forEach(MG.I18N.applyCase); // 다른 언어면 번역을 원문 위에 덮는다 (prep 이 단어 이름을 읽기 전에)
