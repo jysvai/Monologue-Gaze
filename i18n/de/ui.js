@@ -408,7 +408,7 @@ MG.I18N.put("de", "ui", {
 "받은 링크의 사건": "Fall aus dem geteilten Link",
 "서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.": "Polizeirevier Seoul-Seobu, Gewaltdezernat, Team 2. <b>M</b> – lange im Team, jetzt ans Revier Euncheon versetzt – hat den Schlüssel zu einer Schreibtischschublade dagelassen.",
 "서랍 속에는 한 세기에 걸친 미제 기록 {0} 건. 신문 스크랩, 진술서, 편지, 사진. 선배가 끝내 풀지 못하고 두고 간 것들이다.": "In der Schublade: {0} ungelöste Fallakten aus einem ganzen Jahrhundert. Zeitungsausschnitte, Aussagen, Briefe, Fotos. Alles, was M nie lösen konnte und zurückgelassen hat.",
-"처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장": "Beim ersten Mal mit CASE 00 anfangen. Dort lernen, wie man ermittelt. — Teamleiter",
+"처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장": "Zuerst CASE 00. Dort das Ermitteln lernen. — Teamleiter",
 "서랍을 연다": "Schublade öffnen",
 "서랍 맨 밑의 편지": "Der Brief ganz unten in der Schublade",
 "재미있으셨다면 <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 별점이 쌓이면 다른 사람들도 이 기록실을 찾기 쉬워집니다.": "Wenn es Ihnen gefallen hat, <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">bewerten Sie das Spiel auf itch.io</a> oder hinterlassen Sie einen Kommentar. Mit mehr Bewertungen finden auch andere dieses Archiv leichter.",

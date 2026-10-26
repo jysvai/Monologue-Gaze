@@ -408,7 +408,7 @@ MG.I18N.put("en", "ui", {
 "받은 링크의 사건": "From the shared link",
 "서울서부경찰서 강력2팀. 은천서로 전출 간 선배 <b>M</b>이 책상 서랍 열쇠 하나를 남기고 갔다.": "Seoul Seobu Police Station, Violent Crimes Unit 2. <b>M</b>, a senior detective transferred to Euncheon Station, left behind the key to a desk drawer.",
 "서랍 속에는 한 세기에 걸친 미제 기록 {0} 건. 신문 스크랩, 진술서, 편지, 사진. 선배가 끝내 풀지 못하고 두고 간 것들이다.": "Inside the drawer: {0} unsolved case files spanning a century. Newspaper clippings, statements, letters, photographs. The ones M never managed to solve and left behind.",
-"처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장": "If this is your first time, start with CASE 00. Learn how to investigate there. — Team leader",
+"처음이면 CASE 00부터. 조사하는 법을 거기서 익힐 것. — 팀장": "New here? CASE 00 first. Learn the job there. — Team leader",
 "서랍을 연다": "Open the drawer",
 "서랍 맨 밑의 편지": "The letter at the bottom of the drawer",
 "재미있으셨다면 <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">itch.io에서 별점</a>이나 댓글을 남겨 주세요. 별점이 쌓이면 다른 사람들도 이 기록실을 찾기 쉬워집니다.": "If you enjoyed it, please <a href=\"https://jysvai.itch.io/monologue-gaze/rate?source=game\" target=\"_blank\" rel=\"noopener\">rate it on itch.io</a> or leave a comment. Ratings help other people find this records room.",

@@ -2219,7 +2219,7 @@
   // 새로 맞물린 단서를 알린다: 수첩에서 그 메모에 도장이 찍히고, 한 줄 알림. 이미 알린 메모는 다시 알리지 않는다 (ST.lit)
   function leadNews() {
     if (!C || !ST || ST.solved) return;
-    threadNews(leadLit() ? 3900 : 900); // 「유력!」 알림과 겹치지 않게 의문 알림은 그 뒤에
+    const ms = leadLit(); threadNews(ms ? ms + 900 : 900); // 「유력!」 알림과 겹치지 않게 의문 알림은 그 뒤에 (그 알림이 떠 있는 동안 + 0.9초)
   }
   // 형사의 혼잣말 (자막 · 목소리 hero/close · hero/askmore1~2): 보고서의 칸마다 붙일 메모와 범인으로 적을 사람이 다 갖춰지면 「이제 사건을 끝낼 시간이다」 (사건마다 한 번),
   // 아직 모자란데 찾아갈 수 있는 사람의 진술 가운데 지금 쥔 메모로 깨뜨릴 것이 새로 생기면 「탐문을 이어 해 보자」 (새로 생길 때만, 3분에 한 번까지 · 사람 앞에 있을 때는 말하지 않는다).
@@ -2254,9 +2254,9 @@
   }
   function leadLit() {
     const LM = leadMap(), now = [...LM.keys()].map(String);
-    if (!ST.lit) { ST.lit = now; save(); return false; } // 예전 기록을 처음 열 때는 조용히
+    if (!ST.lit) { ST.lit = now; save(); return 0; } // 예전 기록을 처음 열 때는 조용히 · 알렸으면 그 알림이 떠 있는 시간(ms)을 돌려준다
     const fresh = now.filter(id => !ST.lit.includes(id));
-    if (!fresh.length) return false;
+    if (!fresh.length) return 0;
     ST.lit = [...new Set([...ST.lit, ...fresh])];
     save();
     renderNotebook();
@@ -2266,7 +2266,7 @@
     const tip = leadTip(e, nums), why = tip ? (e.vs.length ? T('들은 진술과 어긋난다') : tip.split(' · ')[0]) : nums.length > 1 ? T('서로 맞물린다') : '', first = !S.leadTip;
     if (first) { S.leadTip = true; save(); }
     setTimeout(() => { if (!ST.solved) { toast((why ? T`유력! 메모 ${nums.join('·')}번 — ${why}` : T`유력! 메모 ${nums.join('·')}번`) + (first ? ' ' + T('(수첩의 「유력!」 도장을 누르면 무엇과 이어지는지 짚어 준다)') : ''), first ? 6500 : 3000); /* 알림에는 누구의 말인지 대지 않는다 (메모의 「유력!」에 손을 대면 나온다) — 누구에게 내밀지까지 알려 주면 추궁이 찾아보기가 된다 */ sfx('match'); } }, 900);
-    return true;
+    return first ? 6500 : 3000;
   }
 
   /* ───────── 의문: 지금 밝혀야 할 것 ─────────
