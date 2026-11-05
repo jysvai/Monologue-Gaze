@@ -3,7 +3,7 @@
 엔진(js/engine.js faceOf)은 그 파일이 있으면 이니셜 대신 얼굴을 보인다. 칸: 가로 3칸(그대로 · 눈 감음 · 입 벌림) × 줄(평소 · 흔들림 · 무너짐), 칸은 4:5.
 흔들림은 추궁이 통한 뒤, 무너짐은 사건을 닫은 뒤의 범인 — 줄이 하나뿐이면 늘 평소 얼굴이다.
 
-만드는 순서 (원본은 img/_src/<사건>/face/<사람 id>/ 에 둔다 — git·zip 밖):
+만드는 순서 (원본은 img/_src/<사건>/face/<사람 id>/ 에 둔다 — git·zip 밖. 2026-11-05 까지의 원본은 같은 크기 .webp 로 줄여 두었다):
   1. 기본 초상 calm.png (정사각, 눈 뜨고 입 다문 얼굴, 단색 바탕) 을 그린다.
   2. 그림 편집 도구(agy 의 image-generator, Codex 그림 도구)로 calm.png 를 고쳐 눈 감은 판 · 입 벌린 판을 받는다.
   3. merge 로 고친 곳만 골라 붙인다 → blink.png · talk.png. 나머지 픽셀이 calm 그대로라 칸을 바꿔도 흔들리지 않는다.
@@ -85,12 +85,17 @@ def crop_box(size, eye):
     return (x0, y0, x0 + cw, y0 + ch)
 
 
+def pic(d, name):  # 2026-11-05 이전 원본은 같은 크기의 .webp 로 줄여 두었다 — .png 가 없으면 그것을
+    p = os.path.join(d, name + '.png')
+    return p if os.path.exists(p) else os.path.join(d, name + '.webp')
+
+
 def sheet(d, out, rows=None):
     names = ['calm', 'shaken', 'broken']
-    rows = rows or [r for r in names if os.path.exists(os.path.join(d, r + '.png'))]
-    base = load(os.path.join(d, 'calm.png'))
-    if os.path.exists(os.path.join(d, 'blink.png')):
-        blink = load(os.path.join(d, 'blink.png'), (base.shape[1], base.shape[0]))
+    rows = rows or [r for r in names if os.path.exists(pic(d, r))]
+    base = load(pic(d, 'calm'))
+    if os.path.exists(pic(d, 'blink')):
+        blink = load(pic(d, 'blink'), (base.shape[1], base.shape[0]))
         _, keep = change_mask(base, blink)
         ys, xs = np.nonzero(keep)
         eye = (xs.mean(), ys.mean())
@@ -101,10 +106,10 @@ def sheet(d, out, rows=None):
     for r, row in enumerate(rows):
         pre = '' if row == 'calm' else row + '_'
         for c, kind in enumerate(['', 'blink', 'talk']):
-            f = os.path.join(d, (row if kind == '' else pre + kind) + '.png')
+            f = pic(d, row if kind == '' else pre + kind)
             if not os.path.exists(f):
-                f = os.path.join(d, row + '.png')  # 없는 칸은 그 줄의 기본 얼굴로
-            im = Image.open(f).convert('RGB').resize(Image.open(os.path.join(d, 'calm.png')).size, LANCZOS).crop(box).resize((FW, FH), LANCZOS)
+                f = pic(d, row)  # 없는 칸은 그 줄의 기본 얼굴로
+            im = Image.open(f).convert('RGB').resize(Image.open(pic(d, 'calm')).size, LANCZOS).crop(box).resize((FW, FH), LANCZOS)
             S.paste(im, (c * FW, r * FH))
     S.save(out, 'WEBP', quality=80, method=6)
     print(json.dumps({'out': out, 'rows': rows, 'crop': box, 'eye': [int(eye[0]), int(eye[1])], 'bytes': os.path.getsize(out)}))
