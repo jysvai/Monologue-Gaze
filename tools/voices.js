@@ -92,16 +92,9 @@ const LINES = {
 };
 
 // 효과음 (초 단위 길이)
-// clue·match·confess·solved·find·unlock·gore·bonesaw 는 만든 뒤 ffmpeg 로 줄이고 짧게 다듬었다 (2026-10-09: 「두두둥 하고 요란하게 뜬다」는 피드백 — confess 는 첫 북 한 번, match·solved 는 앞 0.6초). 파일이 있으면 다시 만들지 않는다
+// 파일이 있으면 다시 만들지 않는다. clue·match·confess·miss·solved·unlock·find·dread·gore·flies·creak·crackle·static 은 실제 녹음(js/audio.js FOLEY)으로 바뀌거나
+// 배경음에서 빠져 엔진이 틀지 않으므로 여기서도 빼고 파일을 지웠다 (2026-11-05)
 const SFX = {
-  clue: ['a single soft low taiko drum hit with a faint paper rustle, subtle discovery cue for a detective game, no music', 1.4],
-  match: ['two heavy taiko drum hits, dum... dum, followed by a deep cinematic sub boom and a short rising swell, evidence confirmed sting, no melody', 3],
-  confess: ['tense heartbeat thumps speeding up, then a sharp dark orchestral hit with low brass, dramatic interrogation confession sting, no melody', 3.5],
-  miss: ['a dull muted wooden thud with a short low descending tone, wrong answer, subtle and dry', 1],
-  solved: ['a heavy rubber stamp slammed onto paper, then a deep resolving taiko drum roll and a low warm brass swell, case closed', 4],
-  unlock: ['an old metal lock clicking open with a heavy latch, followed by one soft low drum hit', 1.6],
-  find: ['a vintage camera shutter click and a quick pencil circling scribble on paper', 1],
-  dread: ['a dark low drone swell with a distant metallic scrape and a faint breath, horror reveal, no music', 3],
   // 적는 소리 (엔진의 inkKind 가 사건 시대로 고른다). 받은 뒤 잘라 내고 고음을 깎았다 — 지우고 다시 받으면 쇳소리가 섞일 수 있으니 파형을 보고 넣을 것
   pen: ['one soft graphite pencil stroke on paper, close and quiet, no metal', 0.2],
   write: ['a soft graphite pencil quickly writing one short word on paper in a notebook, gentle papery strokes, close and quiet, dry room, no metal, no ringing', 0.5],
@@ -113,13 +106,8 @@ const SFX = {
   page: ['a single old paper page turned quickly', 0.6],
   click: ['a single soft computer mouse button click, dry and close, no echo', 0.5],
   key: ['one single keystroke on an old heavy mechanical computer keyboard, dry and close, no echo', 0.5],
-  // 빨간 별 사건 (잔혹 표현 켜짐): 끔찍한 기록을 처음 펼칠 때, 그리고 사건 배경에 이따금
-  gore: ['a sudden swarm of flies lifting off close to the ear, a low dissonant cello scrape and one heavy wet drip, horror discovery stinger, no melody', 3.5],
+  // 빨간 별 사건 (잔혹 표현 켜짐): CASE 11·12 의 루미놀 조서를 처음 펼칠 때 (sting: 'bonesaw'). 만든 뒤 ffmpeg 로 줄이고 짧게 다듬었다
   bonesaw: ['a hand saw rasping slowly back and forth through bone, muffled as if heard through a thin wall, a wet crack at the end, then silence, no music', 4],
-  flies: ['a few flies buzzing slowly around something rotting in a cold quiet room, drifting close past the ear and away, no music', 6],
-  creak: ['an old wooden barn door creaking slowly on rusted hinges in a winter wind, a loose chain knocking faintly, no music', 5],
-  crackle: ['charred wood still hissing and crackling faintly in cold mountain mist after a fire has burned out, a gust of wind, no music', 5],
-  static: ['a car radio left on in a parked car at night, soft hissing static between stations, the engine ticking as it cools, lonely, no music', 5],
 };
 
 const strip = s => String(s || '').replace(/\[\[([^\]|]+)(\|[^\]]+)?\]\]/g, '$1').replace(/\*\*|~~/g, '');

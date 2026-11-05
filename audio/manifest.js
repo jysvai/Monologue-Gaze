@@ -2,14 +2,6 @@
 window.MG = window.MG || {};
 window.MG.audio = {
  "files": {
-  "sfx/clue": "audio/sfx/clue.mp3",
-  "sfx/match": "audio/sfx/match.mp3",
-  "sfx/confess": "audio/sfx/confess.mp3",
-  "sfx/miss": "audio/sfx/miss.mp3",
-  "sfx/solved": "audio/sfx/solved.mp3",
-  "sfx/unlock": "audio/sfx/unlock.mp3",
-  "sfx/find": "audio/sfx/find.mp3",
-  "sfx/dread": "audio/sfx/dread.mp3",
   "sfx/pen": "audio/sfx/pen.mp3",
   "sfx/write": "audio/sfx/write.mp3",
   "sfx/typewriter": "audio/sfx/typewriter.mp3",
@@ -20,12 +12,7 @@ window.MG.audio = {
   "sfx/page": "audio/sfx/page.mp3",
   "sfx/click": "audio/sfx/click.mp3",
   "sfx/key": "audio/sfx/key.mp3",
-  "sfx/gore": "audio/sfx/gore.mp3",
   "sfx/bonesaw": "audio/sfx/bonesaw.mp3",
-  "sfx/flies": "audio/sfx/flies.mp3",
-  "sfx/creak": "audio/sfx/creak.mp3",
-  "sfx/crackle": "audio/sfx/crackle.mp3",
-  "sfx/static": "audio/sfx/static.mp3",
   "hero/press1": "audio/voice/hero/press1.mp3",
   "hero/press2": "audio/voice/hero/press2.mp3",
   "hero/press3": "audio/voice/hero/press3.mp3",

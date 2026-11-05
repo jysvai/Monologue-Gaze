@@ -48,6 +48,7 @@ ElevenLabs 소리를 뺀 판(`node tools/itch-zip.js --no-elevenlabs`, 광고 �
 
 `pen` `write` `typewriter` `tw1` `oldkbd` `kbd` `tap` `page` `click` `key` — 적는 소리·넘기는 소리·딸깍. 지금도 쓴다.
 
-`clue` `match` `confess` `miss` `solved` `unlock` `find` `dread` `gore` `bonesaw` `flies` `creak` `crackle` `static` — 엔진이 더는 틀지 않는다
-(북·낮은 울림·공포 효과음이라 위의 실제 녹음으로 바꿨다). 파일을 지우면 `node tools/voices.js` 가 없는 효과음을 다시 만들며 크레딧을 쓰므로,
-지울 때는 tools/voices.js 의 SFX 에서 먼저 뺄 것.
+`bonesaw` — 빨간 별 사건 CASE 11·12 에서 잔혹 표현을 켜고 루미놀 조서를 처음 펼칠 때 (사건 파일의 `sting: 'bonesaw'`). 지금도 쓴다.
+
+`clue` `match` `confess` `miss` `solved` `unlock` `find` `dread` `gore` `flies` `creak` `crackle` `static` 은 엔진이 더는 틀지 않아
+(북·낮은 울림·공포 효과음이라 위의 실제 녹음으로 바꿨고, 녹음된 배경음은 뺐다) SFX 목록에서 빼고 파일을 지웠다 (2026-11-05).

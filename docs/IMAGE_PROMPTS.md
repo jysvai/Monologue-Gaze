@@ -1,7 +1,7 @@
 # Monologue Gaze — 이미지 프롬프트 모음
 
 > 이 파일은 `node tools/prompts.js` 로 자동 생성됩니다. 프롬프트를 고치려면 각 사건 파일(`cases/*.js`)의 `art` 항목을 고친 뒤 다시 생성하세요.
-총 **260장**.
+총 **258장**.
 
 
 ## 쓰는 법
@@ -1037,7 +1037,7 @@ A 1991 photocopied missing-person flyer lying on a police desk: the student ID p
 
 ## CASE 09 · 열세 칸 (2006, 은천시 은골동 (가상 지명))
 
-- 사건 파일: `cases/c09-seoul-2006.js` · 이미지 19장 · 난이도 ★★★★
+- 사건 파일: `cases/c09-seoul-2006.js` · 이미지 17장 · 난이도 ★★★★
 - **공통 스타일** (각 프롬프트 뒤에 붙이기):
 ```
 Photo taken in 2006 with a cheap compact digital camera: 3-megapixel, visible sensor noise, flat on-camera flash at night with dark falloff behind the subject, slightly blown highlights, cool white balance, mild JPEG blockiness, casual amateur framing like a Korean mini-homepage photo album or a police canvass snapshot. Seoul low-rise residential alleys of the late 1980s–90s: red-brick multi-family houses with external iron staircases. People only from behind, blurred or out of frame; no faces, no readable text, no logos, nothing graphic.
@@ -1119,28 +1119,16 @@ Close flash photo of an old varnished wooden apartment door with a brass keyhole
 Cluttered home workshop of a picture framer in 2006: many empty wooden frame mouldings and backing boards leaning against a papered wall, a pot of wheat-starch paste and wide brushes on newspaper, rolls of silk mounting fabric, warm incandescent light mixed with flash. No people, no artwork visible inside the frames.
 ```
 
-### c09/house217 — 일제 탐문 카드 사진 — 217-3
-- 저장 경로: `img/c09/house217.webp` · 비율: 4:3
-```
-Police canvass snapshot at night, 2006: an old red-brick two-story multi-family house with an external iron staircase of thirteen steps that turns once at a small landing, soil stains and a few styrofoam crumbs on the landing, a varnished wooden door at the top with a pale round mark where a sticker was peeled off. Harsh on-camera flash, dark background.
-```
-
 ### c09/house204 — 일제 탐문 카드 사진 — 204-11
 - 저장 경로: `img/c09/house204.webp` · 비율: 4:3
 ```
 Police canvass snapshot at night, 2006: a light-brick multi-family house with a straight external iron staircase of twelve steps and no landing, a newly installed metal door with a digital keypad lock at the top, rolled-up old linoleum by the wall. Harsh flash.
 ```
 
-### c09/house219 — 일제 탐문 카드 사진 — 219-8
-- 저장 경로: `img/c09/house219.webp` · 비율: 4:3
-```
-Police canvass snapshot at night, 2006: a multi-family house with a poured concrete external staircase that turns once, three potted red geraniums on the landing, a door at the top with a small yellow square newspaper-subscription sticker. Harsh flash.
-```
-
 ### c09/house226 — 일제 탐문 카드 사진 — 226-2
 - 저장 경로: `img/c09/house226.webp` · 비율: 4:3
 ```
-Police canvass snapshot at night, 2006: a multi-family house on an uphill alley with a long external iron staircase turning once, many potted plants crowded in the small front yard below, a metal door with keypad lock. Harsh flash.
+Police canvass snapshot at night, 2006: a multi-family house on an uphill alley with a straight poured-concrete external staircase and a black iron handrail, no landing and no turn, many potted plants crowded in the small front yard below, a metal door with a keypad lock at the top. Harsh flash.
 ```
 
 ### c09/ph217 — 정밀 관찰 사진
@@ -1284,7 +1272,7 @@ Cold dawn on the muddy bank of a slow, misty river in a 1986 provincial Korean c
 1986 Korean newspaper halftone photograph on an overcast afternoon: a plain concrete city bridge on square piers over a slow river, two policemen in a small wooden rowboat at the third pier reaching with a boat hook toward a closed white sack snagged on the pier, a long row of onlookers in winter jackets lined along the bridge railing seen from behind, flat grey light, halftone dots.
 ```
 
-### c11/news_shop — 신문 사진 — 셔터를 반쯤 내린 시장 정육점
+### c11/news_shop — 신문 사진 — 셔터를 반쯤 내린 시장 정육점 🔞 열람 주의
 - 저장 경로: `img/c11/news_shop.webp` · 비율: 4:3
 ```
 1986 Korean newspaper halftone photograph at dusk in a crowded traditional market alley: the corrugated steel shutter of a small butcher shop half lowered, a bare bulb glowing inside over empty meat hooks, two plainclothes detectives in trench coats seen from behind leading away a stocky man in a white apron, market women watching from their stalls, flash, heavy contrast.
