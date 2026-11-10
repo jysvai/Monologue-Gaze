@@ -2950,7 +2950,7 @@
     const hero = MG.images['_global/hero'];
     // itch.io 에서 팔로우해 준 사람들 (팔로우한 차례대로). 새로 생기면 뒤에 붙인다 — 기록실 맨 아래 한 줄을 통째로 쓰니 명단이 길어져도 위 줄은 그대로
     const ext = (u, t) => (MG.portal ? t : `<a href="${u}" target="_blank" rel="noopener">${t}</a>`); // 다른 사이트에 올린 판은 바깥으로 나가는 링크 없이 이름만 (freem! 은 웹사이트로 넘어가는 게임을 받지 않는다)
-    const thanks = ['hyperfixuals', 'chloemoarbes', 'Natalios_n'].map(n => `<a href="https://itch.io/profile/${n}" target="_blank" rel="noopener">${n}</a>`).join('&nbsp;· '); // 가운뎃점은 앞 이름에 붙여 줄 끝에 홀로 남지 않게
+    const thanks = ['hyperfixuals', 'chloemoarbes', 'Natalios_n', 'Angelina2662'].map(n => `<a href="https://itch.io/profile/${n}" target="_blank" rel="noopener">${n}</a>`).join('&nbsp;· '); // 가운뎃점은 앞 이름에 붙여 줄 끝에 홀로 남지 않게
     // 종결·현행·M의 메모 셈은 연습 사건 다음 사건을 연 뒤부터: 처음 온 사람에게 「종결 0 / 12」는 뜻 모를 숫자다 (연습 사건은 셈에 들지 않는다)
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
