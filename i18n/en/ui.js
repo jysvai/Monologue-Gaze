@@ -435,6 +435,7 @@ MG.I18N.put("en", "ui", {
 "모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.": "Every case is a new story that borrows only the motif of a real unsolved case. All people, places, institutions and websites are fictional and unrelated to any real person or victim.",
 "목소리": "Voices",
 "효과음": "Sound effects",
+"문의·제보": "Contact & bug reports:",
 "내 기록 지우기": "Erase my records",
 "itch.io에서 팔로우해 주신 고마운 분들": "With thanks to everyone who followed on itch.io:",
 "서랍 맨 밑에서 편지 한 통이 밀려 나왔다": "A letter slid out from the bottom of the drawer",

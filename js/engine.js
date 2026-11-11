@@ -2951,7 +2951,9 @@
     // itch.io 에서 팔로우해 준 사람들 (팔로우한 차례대로). 새로 생기면 뒤에 붙인다 — 기록실 맨 아래 한 줄을 통째로 쓰니 명단이 길어져도 위 줄은 그대로
     const ext = (u, t) => (MG.portal ? t : `<a href="${u}" target="_blank" rel="noopener">${t}</a>`); // 다른 사이트에 올린 판은 바깥으로 나가는 링크 없이 이름만 (freem! 은 웹사이트로 넘어가는 게임을 받지 않는다)
     // 표시 이름과 프로필 주소가 다른 사람은 [이름, 주소]로 적는다 (Pss.TT074 의 프로필은 itch.io/profile/psstt074, 이름 그대로 넣으면 404)
-    const thanks = ['hyperfixuals', 'chloemoarbes', 'Natalios_n', 'Angelina2662', 'fanttom87', ['Pss.TT074', 'psstt074']].map(n => [].concat(n)).map(([n, id = n]) => `<a href="https://itch.io/profile/${id}" target="_blank" rel="noopener">${n}</a>`).join('&nbsp;· '); // 가운뎃점은 앞 이름에 붙여 줄 끝에 홀로 남지 않게
+    // 문의·제보 메일 (2026-11-11). 주소를 통째로 적어 두지 않는다 — 소스를 긁어 가는 스팸 봇이 줍지 않게. 다른 사이트에 올린 판은 링크 없이 글자로만
+    const mail = ['yunseok1312', 'gmail.com'].join('@'), mailTo = MG.portal ? mail : `<a href="mailto:${mail}">${mail}</a>`;
+    const thanks = ['hyperfixuals','chloemoarbes', 'Natalios_n', 'Angelina2662', 'fanttom87', ['Pss.TT074', 'psstt074']].map(n => [].concat(n)).map(([n, id = n]) => `<a href="https://itch.io/profile/${id}" target="_blank" rel="noopener">${n}</a>`).join('&nbsp;· '); // 가운뎃점은 앞 이름에 붙여 줄 끝에 홀로 남지 않게
     // 종결·현행·M의 메모 셈은 연습 사건 다음 사건을 연 뒤부터: 처음 온 사람에게 「종결 0 / 12」는 뜻 모를 숫자다 (연습 사건은 셈에 들지 않는다)
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
@@ -2963,7 +2965,7 @@
       ${live.length ? `<section class="duty" aria-label="${T`현행 사건`}"><h2 class="duty-h">${T`당직 · 현행 사건`}</h2><p class="duty-sub">${T`몇 해 전 실제로 돌았던 현행 사건을 그날 그 시각부터 다시 돌리는 당직 훈련이다. 지원으로 붙은 형사 자리에 앉는다. 문서를 읽고 묻고 조회할 때마다 수사 시계가 돈다.`}</p><div class="drawer">${live.map(folder).join('')}</div></section>` : ''}
       ${mList.length ? `<section class="mbox"><h2>${T`M의 메모`}</h2><p class="mbox-sub">${T`기록 여백과 화면에 붙은 포스트잇에 남아 있던, 선배의 글씨.`}</p><ul>${mList.map(c => `<li${newM.includes(c.id) ? ' class="fresh"' : ''}><span class="mbox-case">CASE ${pad(c.no)}</span> ${esc(plain(c._m))}</li>`).join('')}</ul></section>` : ''}
       ${letter}
-      <footer class="cab-foot">${unsaved ? T('<p class="unsaved" role="note">이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다.</p>') : ''}<p>${T`모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.`}</p><p class="credit">${(MG.audio || {}).no11 ? '' :`${T`목소리`} ${ext('https://elevenlabs.io', 'elevenlabs.io')} · `}${T`효과음`} ${ext('https://freesound.org', 'Freesound')}·${ext('https://kenney.nl', 'Kenney')} (CC0)</p><button type="button" class="reset" data-wipe>${roster().list.length > 1 ? T('내 기록 지우기') : T('모든 기록 지우기')}</button>${MG.portal ? '' : `<p class="credit thanks">${T`itch.io에서 팔로우해 주신 고마운 분들`} ${thanks}</p>`}</footer>
+      <footer class="cab-foot">${unsaved ? T('<p class="unsaved" role="note">이 브라우저가 기록 저장을 막고 있다 — 창을 닫으면 수사가 사라진다.</p>') : ''}<p>${T`모든 사건은 실제 미제 사건의 모티프만 빌려 새로 지은 이야기입니다. 등장하는 인물·장소·기관·사이트는 모두 허구이며, 실제 인물이나 피해자와 관계가 없습니다.`}</p><p class="credit">${(MG.audio || {}).no11 ? '' :`${T`목소리`} ${ext('https://elevenlabs.io', 'elevenlabs.io')} · `}${T`효과음`} ${ext('https://freesound.org', 'Freesound')}·${ext('https://kenney.nl', 'Kenney')} (CC0)</p><p class="credit">${T`문의·제보`} ${mailTo}</p><button type="button" class="reset" data-wipe>${roster().list.length > 1 ? T('내 기록 지우기') : T('모든 기록 지우기')}</button>${MG.portal ? '' : `<p class="credit thanks">${T`itch.io에서 팔로우해 주신 고마운 분들`} ${thanks}</p>`}</footer>
     </div>`;
     // 막 종결한 사건이면 그 폴더까지 내려가 도장을 찍는다
     const fresh = $('.f-stamp.fresh');
