@@ -136,14 +136,14 @@
   "age": 53.8
  },
  "v/c01/p_hannah/k_bluelantern": {
-  "t": "한 시 이십분이라… 로즈가 내 화로 앞에 온 게 그 조금 뒤였수. 십오분 종이 울리고 얼마 안 돼서.",
+  "t": "한 시 이십분이라… 로즈가 내 화로 앞에 온 게 그 조금 뒤였수. 반 종이 울리기 전이었지.",
   "d": "Female voice, a weathered street seller woman in her late fifties, low warm husky voice of an older woman, plain-spoken and kind",
   "o": "sad and wistful, slow, recalling softly with a sigh, a settled mature way of talking, answering a detective's question in person, casual spoken conversation, not reading aloud, natural pauses",
   "seed": 5,
-  "hz": 172,
+  "hz": 164,
   "sim": 1,
-  "p": 0.832,
-  "age": 48.9,
+  "p": 0.621,
+  "age": 44,
   "a": 53
  },
  "v/c01/p_peggy/_intro": {

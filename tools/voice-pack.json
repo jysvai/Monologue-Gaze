@@ -90,56 +90,56 @@
   }
  },
  "audio/voice/c01/sub.mp3": {
-  "sig": "657918bdd00726768170e96474b75d9b",
+  "sig": "f434ad41f75d9c960e488678045e1ab2",
   "clips": {
    "v/c01/p_quarrell/_intro": [
-    "audio/voice/c01/sub.mp3?v=4f9b885f",
+    "audio/voice/c01/sub.mp3?v=053c100f",
     0.29,
     8.683
    ],
    "v/c01/p_bill/_intro": [
-    "audio/voice/c01/sub.mp3?v=4f9b885f",
+    "audio/voice/c01/sub.mp3?v=053c100f",
     9.203,
     7.09
    ],
    "v/c01/p_bill/k_rose": [
-    "audio/voice/c01/sub.mp3?v=4f9b885f",
+    "audio/voice/c01/sub.mp3?v=053c100f",
     16.522,
     5.048
    ],
    "v/c01/p_bill/k_night27": [
-    "audio/voice/c01/sub.mp3?v=4f9b885f",
+    "audio/voice/c01/sub.mp3?v=053c100f",
     21.8,
     14.957
    ],
    "v/c01/p_bill/k_cranewharf": [
-    "audio/voice/c01/sub.mp3?v=4f9b885f",
+    "audio/voice/c01/sub.mp3?v=053c100f",
     36.986,
     14.957
    ],
    "v/c01/p_hannah/_intro": [
-    "audio/voice/c01/sub.mp3?v=4f9b885f",
+    "audio/voice/c01/sub.mp3?v=053c100f",
     52.173,
     6.183
    ],
    "v/c01/p_hannah/k_bluelantern": [
-    "audio/voice/c01/sub.mp3?v=4f9b885f",
+    "audio/voice/c01/sub.mp3?v=053c100f",
     58.586,
-    8.813
+    8.101
    ],
    "v/c01/p_peggy/_intro": [
-    "audio/voice/c01/sub.mp3?v=4f9b885f",
-    67.629,
+    "audio/voice/c01/sub.mp3?v=053c100f",
+    66.917,
     9.498
    ],
    "v/c01/p_peggy/k_bill": [
-    "audio/voice/c01/sub.mp3?v=4f9b885f",
-    77.357,
+    "audio/voice/c01/sub.mp3?v=053c100f",
+    76.645,
     17.982
    ],
    "v/c01/p_dill/_intro": [
-    "audio/voice/c01/sub.mp3?v=4f9b885f",
-    95.569,
+    "audio/voice/c01/sub.mp3?v=053c100f",
+    94.857,
     5.688
    ]
   }

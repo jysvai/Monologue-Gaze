@@ -695,7 +695,7 @@ MG.I18N.put("de", "c01", {
 "16jvsa6cqd7": "Ich hatte auch in der Nacht mein Öfchen an der Kirchenecke am Brennen. Rose saß allein auf den Stufen, da hab ich ihr eine halbe Kartoffel gegeben. Nicht lange danach kam einer und hat sie mitgenommen. Ich hab mich vor der Pfeife erschreckt und bin erst kurz vor halb drei ins Blue Lantern rein.",
 "125e4bvyqvi": "Matrose? Einen großen Kerl hab ich nicht gesehen. Der war klein und breit in den Schultern.",
 "9sxnndkxof": "So 'ne weiße Armbinde sieht man von Weitem. Drum gehen die Frauen ja auch vertrauensvoll mit.",
-"1ddaig5zdb6": "(Hört auf, die Kartoffeln zu rollen) Zwanzig nach eins… Rose kam kurz danach an mein Öfchen. Nicht lang, nachdem die Glocke Viertel geschlagen hatte.",
+"2ahgc4waroz": "(Hört auf, die Kartoffeln zu rollen) Zwanzig nach eins… Rose kam kurz danach an mein Öfchen. Die Glocke hatte noch nicht halb geschlagen.",
 "1hfo2uowfdi": "Sie hätten sie rausgeschmissen, weil sie keine 4 Pence hatte, hat sie gesagt. Da hab ich ihr 'ne halbe Kartoffel in die Hand gedrückt und gesagt, sie soll sich unters Vordach auf die Stufen setzen. Wo der Schein von meinem Öfchen hinreicht.",
 "hkczw4jdar": "Bett Nummer 4 im Blue Lantern, das ist meins. Kurz vor halb drei bin ich rein. Die Pfeife hat mir Angst gemacht.",
 "rnw9sombqk": "Wenn Sie wissen wollen, wie's um Rose stand, fragen Sie die Nachtverwalterin, [[Peggy Toll|k_peggy]]. Die hat sie ja rausgeschickt.",

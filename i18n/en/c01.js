@@ -695,7 +695,7 @@ MG.I18N.put("en", "c01", {
 "16jvsa6cqd7": "I had my brazier going at the church corner that night, same as always. Rose was sitting on the steps alone, so I gave her half a potato. Not long after, somebody came and took her off. Me, the whistle frightened me, and I didn't go in to the Blue Lantern till near half past two.",
 "125e4bvyqvi": "Sailor? I never saw no tall man. That one was short, and broad in the shoulder.",
 "9sxnndkxof": "You can see a white armband from way off. That's why the women trust them and go along.",
-"1ddaig5zdb6": "(stops rolling the potatoes) Twenty past one… Rose come up to my stove just after that. Not long after the bell struck the quarter.",
+"2ahgc4waroz": "(stops rolling the potatoes) Twenty past one… Rose come up to my stove just after that. Bell hadn't struck the half yet.",
 "1hfo2uowfdi": "Said she'd been turned out for want of fourpence, so I pressed half a potato in her hand and told her to sit on the steps under the porch. Where the light from my stove reached.",
 "hkczw4jdar": "I have bed 4 at the Blue Lantern. I went in close on half past two. The whistle frightened me.",
 "rnw9sombqk": "If you want to know how Rose was fixed, ask the night deputy, [[Peggy Toll|k_peggy]]. She's the one turned her out.",
