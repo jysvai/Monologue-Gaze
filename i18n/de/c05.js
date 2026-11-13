@@ -61,7 +61,7 @@ MG.I18N.put("de", "c05", {
 "23g45i6pahb": "Notiz des Labors: In allen drei Fällen wurde ein einzelner Briefbogen dreimal gefaltet, noch einmal geknickt und so, dicker als die Umschlagöffnung, hineingeschoben. Bei allen drei Umschlägen sind beide Ecken der Öffnung ausgeweitet.",
 "2bz09gqwad8": "Gutachten: Übereinstimmung — dieselbe Hand",
 "19rk5g0c8w9": "Fotos der Kriminalabteilung",
-"1ft0cyzora3": "Fotos, die die Kriminalabteilung bei Nachprüfungen vor Ort gemacht hat. Ins Foto tippen, wo etwas auffällt.",
+"1ft0cyzora3": "Fotos, die die Kriminalabteilung bei Nachprüfungen vor Ort gemacht hat. Ins Foto klicken, wo etwas auffällt.",
 "vbiwjp5xxh": "Postamt Port Haley — Sonntag vor Tagesanbruch",
 "282fm64jmld": "Sonntag, 7. September 1969, 06:20 · aufgenommen von der Kriminalabteilung der Polizei Knowlton · Schwarzweißabzug",
 "18hmxx4p375": "Nach den Antworten der drei Postämter fuhr die Kriminalabteilung nach Port Haley, woher der letzte Poststempel stammt. Aufgenommen am Sonntag vor Sonnenaufgang, von der anderen Straßenseite.",

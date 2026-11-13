@@ -149,7 +149,7 @@ MG.I18N.put("de", "c15", {
 "22o3l2tgflb": "Kein Treffer. Schon bei einem falschen Zeichen erscheint nichts.",
 "2ojimd1ltc": "Bereits abgefragt",
 "2fg32ewxezr": "Fotos",
-"1oxwumsuzl4": "Fotos der Spurensicherung. Auf das Foto tippen, um Auffälliges zu finden.",
+"1oxwumsuzl4": "Fotos der Spurensicherung. Auf das Foto klicken, um Auffälliges zu finden.",
 "1psb9dmro1v": "Auto des Opfers · Parkplatz Wohnhaus Mirinae",
 "1j4455rtwz4": "21.11. 23:05, Spurensicherung · von hinten aufgenommen",
 "dxe5ur5qo1": "21:54 Streife 21",

@@ -28,7 +28,7 @@ MG.I18N.put("de", "c12", {
 "q4k8eatszt": "Berichte, Gutachten, Protokolle sowie freiwillig vorgelegte Bücher und Aufzeichnungen. Im Lauf der Ermittlung kommen weitere Unterlagen hinzu.",
 "1hge5zxattk": "Noch nichts abgeheftet.",
 "dtbrxvcfgt": "Tatortfotos",
-"ihig2ct0jw": "Tatortfotos der Spurensicherung und Luminolaufnahmen, im Dunkeln gemacht. Ein Foto antippen und nach Auffälligem suchen.",
+"ihig2ct0jw": "Tatortfotos der Spurensicherung und Luminolaufnahmen, im Dunkeln gemacht. Ein Foto anklicken und nach Auffälligem suchen.",
 "1wlbfnmb7h6": "Abfallkörbe am Osttor",
 "1fsmw2y3c54": "14. Oktober, 07:10 · Aufnahme der Spurensicherung",
 "8ft4depkh5": "Sandweg innen am Osttor. Draußen vor dem Tor liegt die Einkaufsstraße von 2-chōme; folgt man dem Weg, kommt man zum Teich. Die Beutel sind bereits abtransportiert.",

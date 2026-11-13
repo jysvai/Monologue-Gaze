@@ -131,7 +131,7 @@ MG.I18N.put("de", "c13", {
 "1co8kha0rpv": "Saebit Telecom",
 "14sbghp2kxe": "Die Antwort zum IP-Anschluss ist eingegangen.",
 "2fg32ewxezr": "Tatortfotos",
-"1zs27otgjzb": "Fotos der Spurensicherung und Fotos aus den Ermittlungen. Direkt ins Bild tippen, um es zu untersuchen.",
+"1zs27otgjzb": "Fotos der Spurensicherung und Fotos aus den Ermittlungen. Direkt ins Bild klicken, um es zu untersuchen.",
 "1x6yuaa2sv8": "Apartment 804 · Do-has Schreibtisch",
 "1pfqbksnmr": "18.11. 02:55 · Aufnahme der Polizeiwache vor Ort",
 "1ah52ifr1c": "Der Schreibtisch, so wie der Rettungsdienst ihn zurückgelassen hat.",

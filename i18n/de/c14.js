@@ -156,7 +156,7 @@ MG.I18N.put("de", "c14", {
 "1ezn4rsbguu": "Vernehmung",
 "165qnjqtf0l": "Vernehmungsraum, Telefon, vor Ort. Vorladen lässt sich nur, wer mit Namen im Notizbuch steht. Minderjährige werden nur im Beisein der Erziehungsberechtigten vernommen.",
 "2fg32ewxezr": "Fotos",
-"1zuqpzvg3mp": "Tatortfotos und Videostandbilder von Frauen & Jugend und vom Busbahnhof. Direkt ins Bild tippen, um es zu untersuchen.",
+"1zuqpzvg3mp": "Tatortfotos und Videostandbilder von Frauen & Jugend und vom Busbahnhof. Direkt ins Bild klicken, um es zu untersuchen.",
 "1nkigqw07rv": "Wohnanlage Haengbok, Haus 2, vor Nr. 103",
 "li8apnrbdn": "18.11. 12:35 · aufgenommen vom Team Frauen & Jugend",
 "ft2f82bk9i": "Bis zu dieser Schwelle ist die alte Dame gekommen und hat die Einkaufstüte übergeben.",

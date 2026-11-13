@@ -33,7 +33,7 @@ MG.I18N.put("de", "c07", {
 "1cy47t2lmhv": "Ein Album mit Zeitungsausschnitten, die jemand eingeklebt hat. Sogar Anzeigenseiten und das Fernsehprogramm sind dabei.",
 "167kfzulp78": "Wort aus einem Artikel",
 "1319r9drhj6": "Spurenfotos",
-"27xxtpmazlm": "Negative, die bei der Nachermittlung in der Filmdose des Erkennungsdienstes auftauchten, groß abgezogen. Direkt ins Foto tippen, um es abzusuchen.",
+"27xxtpmazlm": "Negative, die bei der Nachermittlung in der Filmdose des Erkennungsdienstes auftauchten, groß abgezogen. Direkt ins Foto klicken, um es abzusuchen.",
 "2926lun11b4": "Negativ Nr. 11 — Der Crown von hinten rechts",
 "4dtvjr8v6p": "Erkennungsdienst Revier Seoha · 23. Oktober 1971, gegen 07:30 Uhr · 35 mm schwarzweiß · im Frühjahr 1972 neu abgezogen",
 "1lmm0pmq7d9": "In der Akte kleben nur drei Tatortfotos. Bei der Nachermittlung fand sich in der Filmdose des Erkennungsdienstes ein Film mit Negativen von jenem Morgen. Dieses Bild entstand bei der Tatortbefundung von hinten rechts, mit offener hinterer Tür, und wurde groß abgezogen.",

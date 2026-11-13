@@ -31,7 +31,7 @@ MG.I18N.put("de", "c01", {
 "jdabrvt6pn": "Q-Division",
 "1qxardamn3x": "Berichte und Aussagen der Q-Division (Whitegate) der Metropolitan Police. Ein Schriftstück taucht hier auf, sobald im Notizbuch steht, von wem es ist und worum es geht.",
 "15c10u84wed": "Skizzen",
-"qvd2ocr8zu": "Von Inspektor Redman bei seinen Ermittlungen mit Bleistift gezeichnet und für die Leichenschau mit der Feder nachgezogen. Die Zeichnung antippen und untersuchen.",
+"qvd2ocr8zu": "Von Inspektor Redman bei seinen Ermittlungen mit Bleistift gezeichnet und für die Leichenschau mit der Feder nachgezogen. Die Zeichnung anklicken und untersuchen.",
 "1i60oqnqxkh": "Skizze — Hinterzimmer des Three Keys",
 "k0er65ql3y": "Morgen des 28. Oktober · Inspektor Redman · Bleistiftskizze, mit der Feder ins Reine gezeichnet",
 "z99hz6nl1s": "Der Morgen, an dem er sich die Hintertür ansah, in der der Zeuge [[Croft|k_croft]] gestanden haben will. Wirt Gannon schloss mit seinem eigenen Schlüssel auf, und der Inspektor stellte sich in die Tür zum Schankraum und zeichnete das Hinterzimmer.",

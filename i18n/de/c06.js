@@ -31,7 +31,7 @@ MG.I18N.put("de", "c06", {
 "24sfv9e9r3c": "Anfragen und Antworten über das Interpol-Büro in Oslo.",
 "2eij2g3ioi1": "Noch keine Anfrage verschickt.",
 "1fx069qyvi2": "Fotos",
-"2egew6y74wj": "Fotos des Erkennungsdienstes. Antippen, um die Gegenstände einzeln zu untersuchen.",
+"2egew6y74wj": "Fotos des Erkennungsdienstes. Anklicken, um die Gegenstände einzeln zu untersuchen.",
 "2de8du4bjhv": "Noch keine Beweismittelfotos.",
 "yvrvm1871i": "Beweismittel Nr. 11–12 — Inhalt der zwei Koffer",
 "2evqbjd1zmj": "23.10.1969 · Erkennungsdienst · auf dem Tisch ausgelegt, von oben aufgenommen",
