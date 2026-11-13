@@ -178,7 +178,7 @@ MG.I18N.put("de", "c08", {
 "2d59i09h6pm": "Fernmeldeamt Saeteo",
 "1le9y6go1y1": ["Fernmeldeamt","Bereich Saeteo","Amtsbereich"],
 "2bcayehnpqm": "Baustelle Daejeon",
-"16m5jgxfo16": ["Daejeon","Saetteul","Baugebiet Saetteul"],
+"1b5huc8ik0c": ["Daejeon","Saetteul","Baugebiet Saetteul","Anwesenheitsliste","Stundenzettel","Anwesenheit"],
 "13q1d2hw6e": "Haesol Bau",
 "7g25nuf2cr": ["Haesol","Haesol Generalbau"],
 "151srlxvtw9": "Dongnim-Universität",

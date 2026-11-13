@@ -178,7 +178,7 @@ MG.I18N.put("en", "c08", {
 "2d59i09h6pm": "Saeteo Exchange",
 "1le9y6go1y1": ["telephone office","exchange","exchange area","Saeteo exchange area","Saeteo Telephone Office","phone company"],
 "2bcayehnpqm": "Daejeon site",
-"16m5jgxfo16": ["Daejeon","Saetteul district","Saetteul"],
+"1b5huc8ik0c": ["Daejeon","Saetteul district","Saetteul","attendance book","timesheet","attendance"],
 "13q1d2hw6e": "Haesol Construction",
 "7g25nuf2cr": ["Haesol","Haesol General Construction"],
 "151srlxvtw9": "Dongrim Univ.",

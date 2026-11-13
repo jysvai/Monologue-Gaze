@@ -180,7 +180,7 @@
       k_solmaru: { label: '솔마루 시장', type: 'place', alias: ['솔마루', '솔마루동'] },
       k_site: { label: '가람동 현장', type: 'place', alias: ['가람동', '공사 현장'] },
       k_exch: { label: '새터전화국', type: 'place', alias: ['전화국', '새터 관내', '관내'] },
-      k_daejeon: { label: '대전 현장', type: 'place', alias: ['대전', '새뜰지구'] },
+      k_daejeon: { label: '대전 현장', type: 'place', alias: ['대전', '새뜰지구', '출근부', '현장 출근부'] },
       k_haesol: { label: '해솔건설', type: 'place', alias: ['해솔', '해솔종합건설'] },
       k_univ: { label: '동림대', type: 'place', alias: ['동림대학교', '건축공학과'] },
       k_haneul: { label: '한울일보', type: 'place', alias: ['광고란', '신문 광고'] },
