@@ -70,6 +70,7 @@
 .skin-news .doc-t{margin-top:10px;font:900 24px/1.3 var(--f-old);text-align:center}
 .skin-news .doc-m{text-align:center}
 .skin-news .doc-b{font:15.5px/1.9 var(--f-old);letter-spacing:.025em;text-align:justify;word-break:normal} /* 옛 신문 단은 글자 단위로 끊어 양쪽을 맞춘다 */
+html:is([lang="en"],[lang="ru"],[lang="de"]) .skin-news .doc-b{-webkit-hyphens:auto;hyphens:auto} /* 낱말 단위 언어는 좁은 두 단에 양쪽을 맞추면 긴 낱말 앞뒤로 틈이 벌어진다 (「Инспектор   Редмен   из」) — 하이픈으로 나눈다 */
 @container stage (min-width:900px){.skin-news .doc-b{column-count:2;column-gap:28px;column-rule:1px solid rgba(0,0,0,.2)}}
 .skin-news .b-img{break-inside:avoid;filter:grayscale(1) contrast(1.1)}
 .skin-news .b-h{font-family:var(--f-old);text-align:center}
