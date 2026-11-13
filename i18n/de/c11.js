@@ -31,7 +31,7 @@ MG.I18N.put("de", "c11", {
 "9lbu50fego": "Revier Euncheon 86-Gewalt-411. Auf dem Deckel: „Soko aufgelöst · 10. Januar 1987“. Hinten sind Anlagen der Wiederaufnahme eingelegt.",
 "n0scq09tmp": "Personen, Orte, Dinge…",
 "1w66b3jteai": "Erstes Blatt der Akte",
-"21e6ie487nt": "Aufenthaltstafel",
+"21e6ie487nt": "Alibitafel",
 "12xy3sv6r8s": "Nacht des 14. November — wer war wo",
 "zcv54t4yla": "86-Gewalt-411, Wiederaufnahme · März 1987",
 "wijntjzng1": "Wo die Leute in jener Nacht gewesen sein wollen, nach Uhrzeit neben das gestellt, was Register und Bücher verzeichnen.",

@@ -107,7 +107,7 @@ MG.I18N.put("de", "c08", {
 "1do77xwwlxf": "Befund des Stimmlabors: Das „shimai“ in Mitschnitt ④ und das „shimai“ in der Aufnahme von Tak Sang-won stimmen überein: Reichweite des Zischens, Abstand der Klangstreifen, Heiserkeit und fallender Auslaut. Mit hoher Wahrscheinlichkeit dieselbe Stimme. Außer der Dämpfung durch den bedeckten Mund keine Unterschiede feststellbar.",
 "f492katl75": "Nachtrag: Ein Stimmabdruck allein bestimmt noch keinen Täter. Zusammen mit den übrigen Unterlagen bewerten.",
 "1f83ukv2qhn": "Gutachten: Übereinstimmung",
-"21e6ie487nt": "Aufenthaltstafel",
+"21e6ie487nt": "Alibitafel",
 "911gaxdq01": "4. bis 29. November — Gegenüberstellung der Aufenthalte der Beteiligten",
 "tg11g3qexv": "Revier Hanul 91-Gewalt-1104 · Neuuntersuchung, Frühjahr 1992",
 "lhvswyx3yw": "Eine Tafel, die nach Datum gegenüberstellt, wo die Beteiligten am Abend des Verschwindens und an den Tagen der Erpresseranrufe gewesen sein wollen und was Bücher und Akten verzeichnen.",

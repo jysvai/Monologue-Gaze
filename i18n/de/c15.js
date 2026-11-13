@@ -207,7 +207,7 @@ MG.I18N.put("de", "c15", {
 "2fwxrsjf5py": "Rekonstruktion — 21:31 weißer Kastenwagen fährt in die Gasse, wartet mit laufendem Motor · 21:45 Da-som fotografiert das Auto · 21:47 Notruf über die Watch · 21:50 Schauer · 22:05 NubiCar hält im Abschnitt Saneop-ro 180–196 · 22:11 das am Haus zurückgebliebene Handy geht aus · 22:41 Rückgabe in der Zone Bahnhof Garam · 22:58 Klingel an Wohnung 1203 im Apartmenthaus Hanbit.",
 "2cs9vz7gm94": "Hinweis — Vom Ende der Saneop-ro bis zum Bahnhof Garam gut 15 Minuten mit dem Auto, vom Bahnhof Garam bis zum Apartmenthaus Hanbit gut 12 Minuten mit dem Taxi.",
 "26m9et9cvsz": "Die Nacht fügt sich zu einer Linie",
-"21e6ie487nt": "Aufenthaltstafel",
+"21e6ie487nt": "Alibitafel",
 "2025lrdqudy": "Nacht des 21. November — wer war wo",
 "n5ru4tauef": "2024-Garam-112-58817 · Ermittlungsteam Frauen und Jugend",
 "tbbk915mm7": "Wo jeder in der Nacht gewesen sein will und was in den zurückgeschickten Unterlagen steht, nach Uhrzeit nebeneinander.",

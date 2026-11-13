@@ -1,6 +1,6 @@
 /* 자동 생성: node tools/i18n.js put de c07 — Deutsch · 사건 c07: 한국어 글 한 토막의 지문 → 번역 */
 MG.I18N.put("de", "c07", {
-"14a4ujciu0g": "Songwolgak-Bücher",
+"14a4ujciu0g": "Salonbücher",
 "1t6p6nl3pvk": "Beodeulgae, Seoha-gu, Seoul (fiktiver Ort)",
 "1p7s5pa4yek": "Motiv: der Todesfall von 1970, in den Mächtige verwickelt sein sollen",
 "27ltrko0gu3": "ca. 35 Min.",
@@ -68,7 +68,7 @@ MG.I18N.put("de", "c07", {
 "1jth1mzlh3o": "Reihenfolge auf der Tafel — 21:38 Amtsgespräch Buchhaltung · 22:00 Autoschlüssel · 22:40 ein Gast aus dem Orchideenzimmer geht früher · 23:05 Crown fährt durchs Hintertor ab · 23:15 Klingeln im Orchideenzimmer ohne Antwort · 23:20 „Peng“ vom Fluss · 23:26 Wagen ohne Licht passiert die Kreuzung · 23:48 Orchideenzimmer nach Hause, 1 Min. Bei der Nachermittlung mit dem Auto von der Naru-Kreuzung zum Hintertor des Songwolgak gefahren: 11 Minuten.",
 "25htc4tzm7n": "Die Karte „Peng“ liegt auf dem Feld 23:20. In Kang Man-siks erster Vernehmung steht 23:50 Uhr.",
 "1f09epqpt5m": "Bleistift am Rand der Tafel — eine Zeile, die nicht mehr auf die Tafel kam: 23:55, Amtsanruf über das [[Zweigamt Beodeulgae|k_bunkuk]] → Orchideenzimmer.",
-"21e6ie487nt": "Aufenthaltstafel",
+"21e6ie487nt": "Alibitafel",
 "11dvpzitczt": "Nacht des 22. Oktober — Gegenüberstellung der Aufenthalte der Beteiligten",
 "16mva0eurey": "Revier Seoha 71-K-1022 · Nachermittlung, Frühjahr 1972",
 "1rle6x3brzq": "Eine Tafel, die nach Uhrzeit gegenüberstellt, wo die Beteiligten in jener Nacht gewesen sein wollen und was Bücher und Protokolle verzeichnen.",

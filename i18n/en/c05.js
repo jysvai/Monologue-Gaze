@@ -22,7 +22,7 @@ MG.I18N.put("en", "c05", {
 "1dh760qmwea": "About 1,100 tips · 3 suspects questioned and released",
 "2cm979avkg0": "Was the letter writer really there?",
 "14y26gkoubv": "Separate what ran in the paper from what never did.",
-"qcal39b07o": "Newsroom Mail",
+"qcal39b07o": "Letters",
 "2enge1eu0ol": "Copies of the letters addressed to the Knowlton Courier city desk. The mailroom copied down the postmarks from the envelopes.",
 "f1uzlg1c8u": "Morgue",
 "2dlj2vw2682": "The paper's clipping library (the morgue). Clipping envelopes are pulled by word.",

@@ -84,7 +84,7 @@ MG.I18N.put("de", "c10", {
 "nnfwv95437": "Rekonstruktion — 23:52 Fahrer steigt aus · 23:58 12ga 3471 Einfahrt Haupttor · 00:09 Anruf von 5821, 3 Min. · 00:14 Opfer auf dem Beifahrersitz des SUV · 00:16 12ga 3471 Ausfahrt Haupttor · 00:34 12ga 3471 Mautstelle (Richtung Neuhafen) · 00:47 letztes Signal vom Handy des Opfers an Pier 3 · 01:21 12ga 3471 Mautstelle (Richtung Innenstadt).",
 "1h39lkqnmqd": "Hinweis — Vom Haupttor der Wohnanlage Hanul bis zur Mautstelle Neuhafen über die Haejin-Brücke gut 15 Minuten mit dem Auto. Der Rückweg (Mautstelle 01:21 → Haupttor 01:52) dauerte über 30 Minuten; wo der Wagen dazwischen stand, zeigt keine Aufzeichnung.",
 "xbhsun7w7h": "Die Uhrzeiten fügen sich zu einer lückenlosen Reihe",
-"21e6ie487nt": "Aufenthaltstafel",
+"21e6ie487nt": "Alibitafel",
 "2025lrdqudy": "Nacht des 21. November — wer war wo",
 "l7s7jtky8r": "Was ich gehört habe und die Uhrzeiten aus den Aufzeichnungen, nebeneinander in Halbstundenspalten.",
 "y8bzidzjfk": "Erst Myeong-su, dann Eun-ho fuhren mit Fahrern los, Bang etwa 10 Minuten später",

@@ -128,7 +128,7 @@ MG.I18N.put("de", "c14", {
 "vvlmyl6ait": "Geschäftsbücher · Druckprotokoll des Multifunktionsdruckers · Krafträder, Helme, Handschuhe u. a.",
 "24zwmctj9o7": "Es fehlt ein sachlicher Beweis, der das Büro mit der Tat verbindet. Beizufügen ist etwas, das zeigt, dass Geräte der Filiale, ein Filialfahrzeug oder die Nummer des Filialleiters für die Tat benutzt wurden.",
 "2c2g4rjujd": "Durchsuchung im Dallim-Büro abgeschlossen. Filialleiter war anwesend, freiwillige Herausgabe seines Handys verweigert. Lade die Liste hoch.",
-"21e6ie487nt": "Aufenthaltstafel",
+"21e6ie487nt": "Alibitafel",
 "ysq32gg43u": "Vormittag des 18. November — wer war wo",
 "1ac505fz2vu": "Fall 2021-Gaon-3108 · Betrug 2",
 "17txesjbuk1": "Wo jeder an dem Vormittag gewesen sein will und was in den zurückgeschickten Unterlagen steht, nach Uhrzeit nebeneinander.",

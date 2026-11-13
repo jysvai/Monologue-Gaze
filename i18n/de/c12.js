@@ -153,7 +153,7 @@ MG.I18N.put("de", "c12", {
 "7pxrqczqzc": "Chargennummer · Telefonnummer · Pagernummer · Mitgliedsnummer",
 "26ujpm6pet1": "Antwort: Zu dieser Nummer liegt nichts vor.",
 "10gs0qlbjm4": "Erhaltene Antworten",
-"21e6ie487nt": "Aufenthaltstafel",
+"21e6ie487nt": "Alibitafel",
 "1g5d766j95a": "12. Oktober (Mi), nachts – 14. Oktober (Fr), frühmorgens — wer war wo",
 "1yi01bpp1iv": "Sonderkommission · Gegenüberstellung der Aufenthalte der Beteiligten",
 "1sgfx6mjvaw": "Eine Tafel, die nach Datum und Tageszeit nebeneinanderstellt, wo die Beteiligten gewesen sein wollen und was Bücher und Aufzeichnungen festhalten.",

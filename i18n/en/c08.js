@@ -32,7 +32,7 @@ MG.I18N.put("en", "c08", {
 "1n2xqqox08r": "Solmaru Market entrance",
 "1vd2rfoq29c": "Garam-dong site",
 "nectq5tjxa": "Saeteo Station, Exit 2",
-"21xn54ek03z": "District Booth Photos",
+"21xn54ek03z": "Booth Photos",
 "250e7xrib40": "Once the trace had narrowed things down to the Saeteo Exchange area, the violent crimes squad went round the area's payphones one by one and photographed them. In each booth they stood where a caller holds the receiver and took one shot of the view outside. Click the photo to examine it.",
 "2faid1ejh2o": "No photo to take out yet. There are more than forty. The booth's neighborhood has to be written in your notebook before you can find it in the envelope.",
 "1jelwy1kj0m": "Inside the Booth at Saeteo Station Exit 2",

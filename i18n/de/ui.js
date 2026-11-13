@@ -251,7 +251,7 @@ MG.I18N.put("de", "ui", {
 "<span class=\"tab-new\" role=\"img\" aria-label=\"새로 열린 자료\"></span>": "<span class=\"tab-new\" role=\"img\" aria-label=\"Neu freigeschaltet\"></span>",
 "해독지 펼치기": "Entschlüsselungsbogen öffnen",
 "재구성 판 펼치기": "Rekonstruktionstafel öffnen",
-"행적표 펼치기": "Aufenthaltstafel aufschlagen",
+"행적표 펼치기": "Alibitafel aufschlagen",
 "왼쪽에서 만날 사람을 고른다.": "Links auswählen, mit wem gesprochen werden soll.",
 "왼쪽에서 자료를 고르면 여기에 펼쳐진다.": "Links ein Dokument wählen, um es hier zu öffnen.",
 "← 목록으로": "← Zur Liste",

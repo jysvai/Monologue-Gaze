@@ -93,7 +93,7 @@ MG.I18N.put("de", "c02", {
 "265z803cpbo": "Alle neun Karten stecken an ihrem Platz. Vom Morgen des 24. Januar bis zur Nacht des 3. Februar.",
 "t6bl61l6eg": "Die drei unteren Felder — 29.1. (Mo) morgens: Wochenblatt verschwunden, Rauch aus dem Kamin, Schimmelschlitten am Anfang des Waldwegs. 29.1. (Mo) abends: im Fremdenbuch des Kelbacher Gasthofs eine Zeile, ein Marktgast, Pferd und Schlitten im hinteren Stall. 3.2. (Sa) nachts: das Vieh brüllt.",
 "2h7n78z6zk": "Die zehn Tage sind lückenlos",
-"21e6ie487nt": "Aufenthaltstafel",
+"21e6ie487nt": "Alibitafel",
 "g78dxfn8gf": "25. bis 29. Januar — Gegenüberstellung der Aufenthalte der Beteiligten",
 "2bw4lk37zbi": "Tgb.-Nr. 41/1923 · Gendarmerie-Station Oberröding",
 "g2p1csfcvi": "Eine Tafel, die nach Datum gegenüberstellt, wo die Beteiligten in jener Woche gewesen sein wollen und was Fremdenbuch und Arrestbuch verzeichnen.",

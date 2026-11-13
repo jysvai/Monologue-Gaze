@@ -1,6 +1,6 @@
 /* 자동 생성: node tools/i18n.js put en c07 — English · 사건 c07: 한국어 글 한 토막의 지문 → 번역 */
 MG.I18N.put("en", "c07", {
-"14a4ujciu0g": "Songwolgak Ledgers",
+"14a4ujciu0g": "Salon Ledgers",
 "1t6p6nl3pvk": "Beodeulgae, Seoha-gu, Seoul (fictional place)",
 "1p7s5pa4yek": "Inspired by a 1970 death in which powerful men were suspected of involvement",
 "27ltrko0gu3": "About 35 min",
@@ -24,7 +24,7 @@ MG.I18N.put("en", "c07", {
 "1dmml9jqruf": "Every paper talked about the [[guests in the ledger|k_rumor]]. No record of any inquiry in that direction.",
 "2aaztsnylz1": "Why did the driver confess? Who fired that night?",
 "2c4b4oe1siq": "Line up the times for that night across every ledger and log.",
-"25dpbjchysw": "Investigation File",
+"25dpbjchysw": "Case File",
 "m68iu0uxso": "Coarse-paper file from the Seoha Police Station investigation section. On the cover: “71-Crim-1022 · Sent to prosecution.”",
 "n0scq09tmp": "People, places, things…",
 "1w66b3jteai": "Front page of the file",
@@ -32,7 +32,7 @@ MG.I18N.put("en", "c07", {
 "24egrvsgtxx": "Saehan Ilbo",
 "1cy47t2lmhv": "A scrapbook of newspaper clippings someone cut out and pasted in. Even ad pages and the TV listings are in it.",
 "167kfzulp78": "A word from the articles",
-"1319r9drhj6": "Forensic Photos",
+"1319r9drhj6": "Lab Photos",
 "27xxtpmazlm": "Negatives found in the forensics unit's film tin during the reinvestigation, printed large. Click inside the photo to examine it.",
 "2926lun11b4": "Negative No. 11 — The Crown from the Right Rear",
 "4dtvjr8v6p": "Seoha Stn. forensics unit · Oct 23, 1971, around 07:30 · 35mm black-and-white · reprinted spring 1972",

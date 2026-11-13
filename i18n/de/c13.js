@@ -204,7 +204,7 @@ MG.I18N.put("de", "c13", {
 "289qt35jvif": "Am 6. Oktober liegen am Fuß der Mauer drei abgeladene Säcke mit Essensmüll, einer ist aufgerissen. Am 17. November sind sie weggeräumt.",
 "2ivewp88x6": "Unter dem Sockel des Außengeräts",
 "3uktirj5j7": "Auf beiden Fotos klebt schwarzes Isolierband im Spalt unter dem Sockel. Schon am 6. Oktober hat Jeong U-jin unter diesem Gerät Ware abgelegt.",
-"21e6ie487nt": "Aufenthaltstafel",
+"21e6ie487nt": "Alibitafel",
 "ctoaxrus6b": "Nacht zum 18. November — wer war wo",
 "1a3uvttzh23": "2023-Haram-1118 · Drogenfahndung",
 "i5x3qmx5v": "Wo jeder von Freitagnacht bis Samstagfrüh gewesen sein will und was in den Unterlagen steht, nach Uhrzeit nebeneinander.",
