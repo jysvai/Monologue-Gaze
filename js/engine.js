@@ -2953,7 +2953,7 @@
     // 표시 이름과 프로필 주소가 다른 사람은 [이름, 주소]로 적는다 (Pss.TT074 의 프로필은 itch.io/profile/psstt074, 이름 그대로 넣으면 404)
     // 문의·제보 메일 (2026-11-11). 주소를 통째로 적어 두지 않는다 — 소스를 긁어 가는 스팸 봇이 줍지 않게. 다른 사이트에 올린 판은 링크 없이 글자로만
     const mail = ['yunseok1312', 'gmail.com'].join('@'), mailTo = MG.portal ? mail : `<a href="mailto:${mail}">${mail}</a>`;
-    const thanks = ['hyperfixuals','chloemoarbes', 'Natalios_n', 'Angelina2662', 'fanttom87', ['Pss.TT074', 'psstt074']].map(n => [].concat(n)).map(([n, id = n]) => `<a href="https://itch.io/profile/${id}" target="_blank" rel="noopener">${n}</a>`).join('&nbsp;· '); // 가운뎃점은 앞 이름에 붙여 줄 끝에 홀로 남지 않게
+    const thanks = ['hyperfixuals','chloemoarbes', 'Natalios_n', 'Angelina2662', 'fanttom87', ['Pss.TT074', 'psstt074'], ['Mavkaaaa', 'mavkaaaa']].map(n => [].concat(n)).map(([n, id = n]) => `<a href="https://itch.io/profile/${id}" target="_blank" rel="noopener">${n}</a>`).join('&nbsp;· '); // 가운뎃점은 앞 이름에 붙여 줄 끝에 홀로 남지 않게
     // 종결·현행·M의 메모 셈은 연습 사건 다음 사건을 연 뒤부터: 처음 온 사람에게 「종결 0 / 12」는 뜻 모를 숫자다 (연습 사건은 셈에 들지 않는다)
     app.innerHTML = `<div class="cabinet">
       ${hero ? `<div class="cab-hero" aria-hidden="true"><img src="${esc(hero)}" alt="" decoding="async" fetchpriority="high"></div>` : ''}
