@@ -900,7 +900,7 @@ MG.I18N.put("de", "c02", {
 "n57vvu2h9r": "Genau eine Stelle stimmt nicht. Legt diese Notiz den Tag fest, an dem die vier starben?",
 "rd584dndl8": "Belege, dass nach dem Tod der vier noch jemand auf dem Hof war",
 "t8ondg3x2x": "Genau eine Stelle stimmt nicht. Ist es eine Notiz, dass auf dem Hof nach dem Tod der vier weitergearbeitet wurde? Wer hat den Kamin rauchen lassen, das Vieh gefüttert, den Briefkasten geleert?",
-"1bammo2lyuy": "Belege gegen die eigenen Angaben des Täters über seinen Verbleib",
+"1bammo2lyuy": "Belege, die den selbst angegebenen Verbleib widerlegen",
 "2jyjyx1kno": "Genau eine Stelle stimmt nicht. Wo will Valentin Knauer in dieser Woche gewesen sein? Ist es eine Notiz mit einem Datum, das nicht zu seinen Worten passt?",
 "a16h21lxi5": "Motiv",
 "2e6q4rz26yv": "Genau eine Stelle stimmt nicht. Die Geldbündel wurden nicht angerührt. Halte das, was in der Kassette übrig war, gegen Michaels Hausbuch.",

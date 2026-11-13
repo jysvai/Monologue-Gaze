@@ -845,7 +845,7 @@ MG.I18N.put("de", "c01", {
 "1h3xqrkony8": "Croft. Unter dem Vorwand mit der Kohle schloss er das Hinterzimmer ab und ging hinaus; erst nach zwei kam er mit leeren Händen aus dem Dunkel weiter hinten in der Gasse zurück. Der Weg vom Kohlenschuppen zurück zur Hintertür führt am Eingang zum Court vorbei.",
 "19ajfdmozzy": "Ein Beleg, woher die „Knotsman“-Briefe stammen",
 "w1suu06sv7": "Genau eine Stelle stimmt nicht. Woher stammt der Brief? Ist es ein Beleg dafür, wo der Name aus dem Brief zuerst gedruckt stand, oder einer, mit dem man Buchstaben und Papier des Briefs vergleichen kann?",
-"lyd009xau3": "Der Täter war zur fraglichen Zeit nicht dort, wo er gewesen sein will",
+"lyd009xau3": "Die eigene Ortsangabe für die fragliche Zeit stimmt nicht",
 "ok3b51u0fy": "Genau eine Stelle stimmt nicht. Ist es ein Beleg von jemandem, der den Ort, an dem der Täter zu der Zeit gewesen sein will, damals gesehen oder notiert hat?",
 "gbnp81ga9c": "Etwas, das nur der Täter wissen konnte",
 "rrsw2yuh3r": "Genau eine Stelle stimmt nicht. Was fand sich wo an der Leiche, und wer hat es als Erster ausgesprochen oder aufgeschrieben?",

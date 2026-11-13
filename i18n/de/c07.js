@@ -913,7 +913,7 @@ MG.I18N.put("de", "c07", {
 "rayjemn3qf": "Genau eine Stelle stimmt nicht. Laut Protokoll hat er vom Fahrersitz aus geschossen. Nach dem Schusskanal und dem, was im Wagen zurückblieb: Wurde wirklich von dort geschossen?",
 "8xzgi484li": "Wann der Schuss fiel",
 "nw8gxupzgi": "Genau eine Stelle stimmt nicht. Woran haben sich die Leute, die den Schuss hörten, bei der Uhrzeit orientiert?",
-"w2x6buadop": "Zur Tatzeit war der Täter nicht dort, wo er angeblich war",
+"w2x6buadop": "Zur Tatzeit nicht am selbst angegebenen Ort",
 "1bheu279nsj": "Genau eine Stelle stimmt nicht. Seok Tae-ho sagte, er sei in seinem Zimmer im Songwolgak gewesen. Ist es eine Notiz, dass er zu der Zeit nicht dort war?",
 "vdc0eirrfy": "Warum der Fahrer gestand und schwieg",
 "i6b457c6g2": "Genau eine Stelle stimmt nicht. Ist es eine Notiz darüber, warum Kang Man-sik schwieg? Sieh dir an, was nach dem Schuss auf der Seite seiner Familie festgehalten wurde.",
