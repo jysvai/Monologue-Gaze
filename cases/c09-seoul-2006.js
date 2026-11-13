@@ -170,7 +170,7 @@
       k_choi: { label: '최 권사', type: 'person', role: '219-8 1층에 사는 교회 권사', alias: ['최 권사님', '권사님'] },
       k_byun: { label: '변재호', type: 'person', role: '204-11 2층 세입자 (35)', alias: ['재호'] },
       k_eungol: { label: '은골동', type: 'place', alias: ['은골동 사람들'] },
-      k_market: { label: '은골시장', type: 'place', alias: ['시장', '은골시장 정류장', '2번 골목'] },
+      k_market: { label: '은골시장', type: 'place', alias: ['시장', '은골시장 정류장', '2번 골목', '상인회', '순찰', '순찰일지', '방범대'] },
       k_pyogu: { label: '은골표구', type: 'place', alias: ['표구집', '표구사', '표구'] },
       k_pcbang: { label: '은골PC방', type: 'place', alias: ['PC방', '피시방'] },
       k_convstore: { label: '편의점', type: 'place', alias: ['24시 편의점'] },

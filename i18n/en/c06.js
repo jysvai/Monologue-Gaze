@@ -110,7 +110,7 @@ MG.I18N.put("en", "c06", {
 "21e6ie487nt": "Whereabouts",
 "htewjyy7oh": "Saturday, October 18 — Whereabouts of Persons Concerned, Compared",
 "1qjfyfx04as": "Sak nr. 2213/69 · Criminal Division",
-"261y6nka61h": "A sheet setting, by the hour, where the persons concerned said they were on Saturday the 18th against what the ledgers and records show.",
+"261y6nka61h": "A sheet setting out, hour by hour, where everyone involved said they were on Saturday the 18th against what the ledgers and records show.",
 "hz2flc2z2m": "What was heard in questioning and the times written in ledgers and records, transcribed side by side. Each column runs from its time until the time of the next.",
 "18nq1gs74du": "At the trailhead by bus at half past nine · not a single car in the lot",
 "jqsop9khng": "Got to the hut around 12:40",

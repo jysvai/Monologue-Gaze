@@ -35,7 +35,7 @@ MG.I18N.put("en", "c11", {
 "12xy3sv6r8s": "Night of Nov. 14 — Who Was Where",
 "zcv54t4yla": "86-VC-411 re-investigation · March 1987",
 "wijntjzng1": "Where people said they were that night, set hour by hour against what the registers and ledgers wrote down.",
-"29qhw3pfakc": "What was said in the interviews and the times written in the registers and ledgers, copied side by side into each column. Statements are written down as heard.",
+"29qhw3pfakc": "What was said in the interviews and the times written in the registers and ledgers, copied side by side into each column. Statements are written down word for word.",
 "tm9mb6e2tl": "15th 02:00",
 "1c177tb7t5r": "Mr. Pyeon came in a little after 7 p.m. · ssanghwa tea",
 "1y439d9ln0w": "A little after 8 p.m., a call: “I'm on my way” · left for the No. 11 bus to Mokgol",
