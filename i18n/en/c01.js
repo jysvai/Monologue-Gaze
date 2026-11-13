@@ -794,7 +794,7 @@ MG.I18N.put("en", "c01", {
 "jc2kvz27ob": "How does the arrest report describe Cordell?",
 "23f6oqfoiu3": "Crane Wharf Station charge book: “W. Cody” brought in at 12:35 a.m., cautioned and released at 7:05 a.m. Anchor tattoo on the back of the left hand; dock labourer.",
 "1drsszvyzl3": "Are there records from the part of town where Cordell says he woke up?",
-"ife6dkrj65": "I held the charge book up to Cordell. “Cody” was him. He gave a false name so it wouldn't get back to the ganger.",
+"ife6dkrj65": "I confronted Cordell with the charge book. “Cody” was him. He gave a false name so it wouldn't get back to the ganger.",
 "2ema4lmq7ad": "Cordell says he woke up somewhere near the docks — does that hold up against the records?",
 "m59u4s5lp0": "From 12:35 a.m. until 7 in the morning, Cordell was in the cells at Crane Wharf Station. Ruled out.",
 "2vrjjcef87": "Where did the talk of a red thread on the wrist first come from?",

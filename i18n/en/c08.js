@@ -806,7 +806,7 @@ MG.I18N.put("en", "c08", {
 "pwp04v43q6": "Baek Man-ho pins it on Han Gyeong-ho. Does that fit the records?",
 "135d1ojhz6u": "At 18:00 on Nov. 12, when the kidnapper’s message was recorded, Han Gyeong-ho was in an interrogation room at the police station. He’s ruled out.",
 "1kysila8r5y": "Could Yeom Jin-u have made those calls?",
-"ejcucu02o3": "I held the bell article up to Yeom Jin-u. His boarding house is right behind the church. “When the call came at 9 p.m. on the 8th, I was in So-yeong’s room at their house.”",
+"ejcucu02o3": "I confronted Yeom Jin-u with the bell article. His boarding house is right behind the church. “When the call came at 9 p.m. on the 8th, I was in So-yeong’s room at their house.”",
 "1um3yx6cng9": "Yeom Jin-u says the church in Saeteo-dong doesn’t even ring its bell anymore. Is that true?",
 "17rbuxpk3e7": "Kang Mi-suk: Mr. Yeom taught in So-yeong’s room every Friday from 8 to 10 p.m. He never missed once.",
 "f03kq7kymn": "Who was in that house on Friday nights?",
