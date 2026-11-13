@@ -2012,7 +2012,7 @@
       const tf = shut ? null : thFor(cl.id), top = tf ? tf.ns : [];
       const list = (top.length ? `<details class="rep-grp rep-th" open><summary>${T`의문 ${tf.x.no}에서 밝혀낸 것`} <small>${top.length}</small></summary>${top.map(n => opt(n, notes.indexOf(n))).join('')}</details>` : '')
         + groups.map(g => { const it = g.items.filter(([n]) => !top.includes(n)); return it.length ? `<details class="rep-grp" open><summary>${esc(g.src)} <small>${it.length}</small></summary>${it.map(([n, j]) => opt(n, j)).join('')}</details>` : ''; }).join('');
-      const thLine = !tf ? '' : tf.x.done ? `<p class="rep-th-a">${T`의문 ${tf.x.no}`} → ${esc(tf.x.t.a)}</p>` : `<p class="rep-th-hint"><button type="button" class="th-go" data-th-go="${esc(tf.x.t.id)}">${T`의문 ${tf.x.no} 「${esc(tf.x.t.q)}」 — 빈칸 ${tf.x.got.length}개 중 ${tf.x.got.filter(Boolean).length}개를 채웠다.`}</button></p>`; // 누르면 수첩에서 그 의문을 펼쳐 빈칸 물음을 보여 준다
+      const thLine = !tf ? '' : tf.x.done ? `<p class="rep-th-a">${T`의문 ${tf.x.no}`} → ${esc(tf.x.t.a)}</p>` : `<p class="rep-th-hint"><button type="button" class="th-go" data-th-go="${esc(tf.x.t.id)}">${/^[「『“„«‘‚]/.test(tf.x.t.q) ? T`의문 ${tf.x.no} ${esc(tf.x.t.q)} — 빈칸 ${tf.x.got.length}개 중 ${tf.x.got.filter(Boolean).length}개를 채웠다.` : T`의문 ${tf.x.no} 「${esc(tf.x.t.q)}」 — 빈칸 ${tf.x.got.length}개 중 ${tf.x.got.filter(Boolean).length}개를 채웠다.`}</button></p>`; // 누르면 수첩에서 그 의문을 펼쳐 빈칸 물음을 보여 준다. 의문이 따옴표로 시작하면 (「9시 반에 … 들었다」는 말은 맞나?) 다시 감싸지 않는다 — 「「…」…」처럼 겹친다
       return `<section class="rep-claim${cur ? ' filled' : ''}${open ? ' open' : ''}" data-claim="${esc(cl.id)}">
         <h4 id="rh-${esc(cl.id)}"><span class="no">${i + 1}</span> ${inline(cl.q)}</h4>${thLine}
         <div class="rep-pick">${cur ? `<p class="rep-memo"><span class="n">${notes.includes(cur) ? notes.indexOf(cur) + 1 + '.' : '—'}</span> ${esc(cur.t)} <span class="src">— ${esc(cur.src || '')}</span></p>` : T('<p class="rep-empty">아직 붙인 메모가 없다.</p>')}
@@ -3626,6 +3626,11 @@
     save(); sfx('page');
     renderTabs(); renderList(); renderNotebook();
     if (hits && (hits.length === 1 || (hits.length > 1 && !narrow()))) openItem({ t: 'doc', id: hits[0] }); // 여럿이면 나란히 보는 화면에서만 첫 건을 (옆 칸에 앞서 조회한 기록이 남아 있지 않게)
+    else if (hits && !hits.length) {
+      // 없는 조회: 앞서 받아 온 사본이 가운데에 그대로 있으면 이번 조회의 결과로 읽힌다 — 닫고, 칸 밑으로 밀린 「없다」 줄을 보이게
+      const o = ST.view.open; if (o && o.t === 'doc' && C.docs[o.id] && C.docs[o.id].src === s.id) { ST.view.open = null; renderRead(); }
+      const m = $('.res .res-none'); if (m) { m.scrollIntoView({ block: 'nearest' }); say(m.textContent); }
+    }
     if (census() > before) { cue('clue'); toast(T`새로 열린 것 ${census() - before}` + where(BY)); }
     if (!again) advance('query');
   }
