@@ -1012,7 +1012,7 @@ MG.I18N.put("de", "c11", {
 "1pocnvb28at": "Der Mokgol-Anleger. Gegen zwei Uhr früh am 15. wurden die Säcke mit dem Handkarren dorthin gebracht und ins Wasser gelassen. Nur der beschwerte vierte blieb liegen, die anderen drei trieben flussabwärts.",
 "1dtl6hpscj1": "Wo war Woo Man-bok in dieser Nacht?",
 "20mh1svjojv": "Polizeiposten Galbat, Revier Hapyeong: Woo Man-bok am 14. um 22:40 in Gewahrsam, am 15. um 06:10 nach Einigung entlassen. Handgreiflichkeit in einer Zeltkneipe.",
-"1gvboprvxbg": "Diese Nacht, in einem anderen Revier.",
+"56q4jbxf5w": "Die Unterlagen zu dieser Nacht liegen in einem anderen Revier.",
 "wqd23p79fx": "Woo Man-bok, der „zu Hause geschlafen“ haben wollte, gab es vor dem Gewahrsamsbuch zu: Aus Scham habe er gelogen, und seine Frau habe ihm zuliebe ihre Aussage geändert.",
 "yca0a8e8q4": "Was er selbst sagt.",
 "21se2vf7x2h": "Die beschlagnahmte Knochensäge: Zahnabstand 1,4 mm, enge Schränkung. Das Blut auf dem Ladenboden ist kein Menschenblut.",

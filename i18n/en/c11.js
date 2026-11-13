@@ -1012,7 +1012,7 @@ MG.I18N.put("en", "c11", {
 "1pocnvb28at": "Mokgol Ferry. Around 2 a.m. on the 15th the sacks were brought there by handcart and put in the water. Only the weighted fourth stayed put; the other three drifted downstream.",
 "1dtl6hpscj1": "Where was Woo Man-bok that night?",
 "20mh1svjojv": "Galbat Substation, Hapyeong Police: Woo Man-bok into the holding cell at 22:40 on the 14th, out at 06:10 on the 15th after a settlement. A collar-grabbing fight at a tent bar.",
-"1gvboprvxbg": "That night, in another jurisdiction.",
+"56q4jbxf5w": "The records for that night are in another jurisdiction.",
 "wqd23p79fx": "Woo Man-bok, who said he “slept at home,” came clean when shown the substation log. He lied out of shame, and his wife changed her story to cover for him.",
 "yca0a8e8q4": "His own account.",
 "21se2vf7x2h": "The seized bone saw: teeth 1.4 mm apart, narrow set. The blood on the shop floor is not human.",
