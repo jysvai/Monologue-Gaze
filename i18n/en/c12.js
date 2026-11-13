@@ -28,7 +28,7 @@ MG.I18N.put("en", "c12", {
 "q4k8eatszt": "Reports, expert analyses, statements, and ledgers and logs submitted voluntarily. More papers come in as the investigation goes on.",
 "1hge5zxattk": "No papers filed yet.",
 "dtbrxvcfgt": "Scene Photos",
-"ihig2ct0jw": "Scene photos taken by the forensics team, and luminol photos taken in the dark. Tap a photo to find what catches your eye.",
+"ihig2ct0jw": "Scene photos taken by the forensics team, and luminol photos taken in the dark. Click a photo to find what catches your eye.",
 "1wlbfnmb7h6": "East gate trash bins",
 "1fsmw2y3c54": "October 14, 07:10 · photographed by the forensics team",
 "8ft4depkh5": "The sand path just inside the east gate. Outside the gate is the 2-chome shopping street; follow the path in and you reach the pond. The bags have already been taken away.",

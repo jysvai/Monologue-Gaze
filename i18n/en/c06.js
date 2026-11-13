@@ -31,7 +31,7 @@ MG.I18N.put("en", "c06", {
 "24sfv9e9r3c": "Inquiries and replies routed through Interpol's Oslo bureau.",
 "2eij2g3ioi1": "No inquiries sent yet.",
 "1fx069qyvi2": "Photos",
-"2egew6y74wj": "Evidence photographs taken by the forensics team. Tap to examine them one by one.",
+"2egew6y74wj": "Evidence photographs taken by the forensics team. Click to examine them one by one.",
 "2de8du4bjhv": "No evidence photographs taken yet.",
 "yvrvm1871i": "Exhibits 11–12 — Contents of the two suitcases",
 "2evqbjd1zmj": "Oct 23, 1969 · Forensics · laid out on a table, shot from above",

@@ -33,7 +33,7 @@ MG.I18N.put("en", "c07", {
 "1cy47t2lmhv": "A scrapbook of newspaper clippings someone cut out and pasted in. Even ad pages and the TV listings are in it.",
 "167kfzulp78": "A word from the articles",
 "1319r9drhj6": "Forensic Photos",
-"27xxtpmazlm": "Negatives found in the forensics unit's film tin during the reinvestigation, printed large. Tap inside the photo to examine it.",
+"27xxtpmazlm": "Negatives found in the forensics unit's film tin during the reinvestigation, printed large. Click inside the photo to examine it.",
 "2926lun11b4": "Negative No. 11 — The Crown from the Right Rear",
 "4dtvjr8v6p": "Seoha Stn. forensics unit · Oct 23, 1971, around 07:30 · 35mm black-and-white · reprinted spring 1972",
 "1lmm0pmq7d9": "Only three scene photographs are attached to the file. During the reinvestigation, a roll of negatives shot that morning turned up in the forensics unit's film tin. This frame, taken from the Crown's right rear with the back door open during the on-site inspection, has been printed large.",

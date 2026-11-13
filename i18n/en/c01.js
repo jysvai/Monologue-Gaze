@@ -31,7 +31,7 @@ MG.I18N.put("en", "c01", {
 "jdabrvt6pn": "Q Division",
 "1qxardamn3x": "Reports and statements from the Metropolitan Police, Q Division (Whitegate). A paper turns up here once your notebook says whose it is and what it is.",
 "15c10u84wed": "Sketches",
-"qvd2ocr8zu": "Drawn in pencil by Inspector Redman in the course of his inquiries, then gone over in pen to be laid before the inquest. Tap the drawing to examine it.",
+"qvd2ocr8zu": "Drawn in pencil by Inspector Redman in the course of his inquiries, then gone over in pen to be laid before the inquest. Click the drawing to examine it.",
 "1i60oqnqxkh": "Sketch — The Three Keys Back Room",
 "k0er65ql3y": "Morning of 28 Oct · Inspector Redman · pencil sketch, fair copy in pen",
 "z99hz6nl1s": "The morning he went to look at the back door where the witness [[Croft|k_croft]] said he had stood. The landlord, Gannon, let him in with his own key, and the inspector stood in the doorway from the bar and drew the back room.",

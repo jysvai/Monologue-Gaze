@@ -149,7 +149,7 @@ MG.I18N.put("en", "c15", {
 "22o3l2tgflb": "No results. Get one character wrong and nothing comes up.",
 "2ojimd1ltc": "Records already looked up",
 "2fg32ewxezr": "Photos",
-"1oxwumsuzl4": "Scene photos uploaded by the forensics team. Tap the photo to find what catches your eye.",
+"1oxwumsuzl4": "Scene photos uploaded by the forensics team. Click the photo to find what catches your eye.",
 "1psb9dmro1v": "Victim's car · Mirinae Villa parking lot",
 "1j4455rtwz4": "Taken Nov 21 23:05 by the forensics team · from behind the car",
 "dxe5ur5qo1": "21:54 Patrol 21",

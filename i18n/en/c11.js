@@ -129,7 +129,7 @@ MG.I18N.put("en", "c11", {
 "2gj2u8hdcnw": "The line on the blackboard — 20:45 off the bus at the terminus; 21:00–22:00 breathing stops; around 02:00 the handcart on the embankment path and the splashes; 07:20 on the 16th the first sack. From around 02:00 on the 15th to 07:20 on the 16th: a little over twenty-nine hours. At 150 m an hour, twenty-nine hours comes to about 4.4 km.",
 "s4y6c4taqi": "Copied onto one side of the blackboard, the holding-cell log: in 14th 22:40 · out 15th 06:10.",
 "3ydfnhxs8d": "Photo File",
-"g0fwfrcn90": "Forensics unit photos, newspaper negatives, re-investigation darkroom shots. Tap whatever catches your eye.",
+"g0fwfrcn90": "Forensics unit photos, newspaper negatives, re-investigation darkroom shots. Click whatever catches your eye.",
 "1co5bke8rmw": "No photos to pull yet. A negative is fetched from storage once what it shows is in the notebook.",
 "2duereqb2w7": "Matchbox — Infrared Photo",
 "2a37qbmqz4k": "Forensics unit · Dec 3, 1986 · 3 prints",

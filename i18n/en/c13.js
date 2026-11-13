@@ -131,7 +131,7 @@ MG.I18N.put("en", "c13", {
 "1co8kha0rpv": "Saebit Telecom",
 "14sbghp2kxe": "The IP subscriber reply has arrived.",
 "2fg32ewxezr": "Scene Photos",
-"1zs27otgjzb": "Forensic photos and photos taken during the investigation. Tap inside a photo to examine it.",
+"1zs27otgjzb": "Forensic photos and photos taken during the investigation. Click inside a photo to examine it.",
 "1x6yuaa2sv8": "Unit 804 · Do-ha's desk",
 "1pfqbksnmr": "Nov 18 02:55 · photographed on scene by the patrol unit",
 "1ah52ifr1c": "The desk just as it was when the paramedics left.",

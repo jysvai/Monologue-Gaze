@@ -156,7 +156,7 @@ MG.I18N.put("en", "c14", {
 "1ezn4rsbguu": "Interviews",
 "165qnjqtf0l": "Interview room, phone, on site. Only people whose names are in the notebook can be called in. Minors are questioned only with a guardian present.",
 "2fg32ewxezr": "Photos",
-"1zuqpzvg3mp": "Scene photos and CCTV captures handed over by the juvenile unit and the terminal. Tap inside the photos to examine them.",
+"1zuqpzvg3mp": "Scene photos and CCTV captures handed over by the juvenile unit and the terminal. Click inside the photos to examine them.",
 "1nkigqw07rv": "Front door of Haengbok Villa Bldg 2, Unit 103",
 "li8apnrbdn": "Nov 18 12:35 · taken by the Women & Juvenile Investigation Team",
 "ft2f82bk9i": "She came out as far as this threshold to hand over the shopping bag.",

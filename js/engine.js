@@ -1667,13 +1667,18 @@
     const scr = C.frame !== 'papers'; // 화면 속 검색창은 소프트웨어의 말투, 종이 자료실은 서고 담당의 말투
     if (q) {
       hits = archiveHits(s, q);
-      res = hits.length ? `<p class="res-n">${scr ? T`'${esc(q)}' 검색 결과 ${hits.length}건` : T`「${esc(q)}」 ${hits.length}건`}</p>${hits.map(itemBtn).join('')}` : `<p class="res-none">${scr ? T`'${esc(q)}'에 대한 검색 결과가 없습니다.` : T`「${esc(q)}」에 해당하는 자료가 없다.`}${s.none ? ' ' + inline(s.none) : ''}</p>`;
-      // 여기엔 없어도 다른 철에 있으면 그리로 건너가는 길을 (같은 말을 그 철에서 찾은 것으로)
-      if (!hits.length) res += C.sources.filter(o => o.id !== s.id && o.type === 'archive' && srcVisible(o)).map(o => [o, archiveHits(o, q).length]).filter(x => x[1])
-        .map(([o, n]) => `<p class="res-else"><button type="button" class="nb-jump" data-src="${esc(o.id)}" data-srcq="${esc(q)}">${T`${esc(o.name)}에는 ${n}건 있다`} →</button></p>`).join('');
-      // 이 말로 목록 철(봉투·서류철)에 새 기록이 들어왔으면 그쪽으로도 — 그 탭의 빨간 점만으로는 이 검색과 이어지는 줄 모른다
-      if (!hits.length) { const ks = matchKeys(q); res += C.sources.filter(o => o.id !== s.id && o.type === 'list' && srcVisible(o) && srcOpen(o) && C._srcDocs[o.id].some(d => ok(d.need) && !ST.seen.includes(d.id) && (d.need || []).some(n => String(n).split('|').some(x => ks.includes(x)))))
-        .map(o => `<p class="res-else"><button type="button" class="nb-jump" data-src="${esc(o.id)}">${T`${esc(o.name)}에 이 말로 새로 들어온 기록이 있다`} →</button></p>`).join(''); }
+      let els = '';
+      if (!hits.length) {
+        // 여기엔 없어도 다른 철에 있으면 그리로 건너가는 길을 (같은 말을 그 철에서 찾은 것으로)
+        els = C.sources.filter(o => o.id !== s.id && o.type === 'archive' && srcVisible(o)).map(o => [o, archiveHits(o, q).length]).filter(x => x[1])
+          .map(([o, n]) => `<p class="res-else"><button type="button" class="nb-jump" data-src="${esc(o.id)}" data-srcq="${esc(q)}">${T`${esc(o.name)}에는 ${n}건 있다`} →</button></p>`).join('');
+        // 이 말로 목록 철(봉투·서류철)에 새 기록이 들어왔으면 그쪽으로도 — 그 탭의 빨간 점만으로는 이 검색과 이어지는 줄 모른다
+        const ks = matchKeys(q);
+        els += C.sources.filter(o => o.id !== s.id && o.type === 'list' && srcVisible(o) && srcOpen(o) && C._srcDocs[o.id].some(d => ok(d.need) && !ST.seen.includes(d.id) && (d.need || []).some(n => String(n).split('|').some(x => ks.includes(x)))))
+          .map(o => `<p class="res-else"><button type="button" class="nb-jump" data-src="${esc(o.id)}">${T`${esc(o.name)}에 이 말로 새로 들어온 기록이 있다`} →</button></p>`).join('');
+      }
+      // 다른 철로 가는 길이 있으면 서고 담당의 「다른 이름으로 찾아보라」는 말은 뺀다 — 같이 뜨면 막다른 길로 읽혀 바로 밑의 길을 지나친다
+      res = hits.length ? `<p class="res-n">${scr ? T`'${esc(q)}' 검색 결과 ${hits.length}건` : T`「${esc(q)}」 ${hits.length}건`}</p>${hits.map(itemBtn).join('')}` : `<p class="res-none">${scr ? T`'${esc(q)}'에 대한 검색 결과가 없습니다.` : T`「${esc(q)}」에 해당하는 자료가 없다.`}${s.none && !els ? ' ' + inline(s.none) : ''}</p>${els}`;
     }
     const start = (s.start || []).map(id => C.docs[id]).filter(d => d && ok(d.need) && !hits.includes(d)); // 찾은 것 칸에 이미 뜬 기록은 「처음부터 있던 자료」에 다시 적지 않는다
     // 앞서 찾아 열어 본 것은 검색을 새로 해도 남겨 둔다 — 같은 날짜를 여러 장부에서 맞대 보려고 매번 다시 찾지 않게
@@ -2355,7 +2360,7 @@
       const unheard = s.press && thAlt(s).every(([pid, k]) => !(ST.asked[pid] || []).includes(k));
       const who = unheard && C.people[thAlt(s)[0][0]], known = who && lv() < 5 && ST.keys.includes(who.key) && (who.key !== C.solution.culprit || (ST.asked[who.id] || []).some(e => e.endsWith('!'))); // 아는 사람이면 이름까지 (누구에게 더 물을지는 알려 준다 — ★5 는 대지 않는다). 범인은 그 사람의 말을 한 번 깨뜨리기 전까지는 이름을 대지 않는다 (「잠복은 어디서 샜나?」 밑에 범인 이름이 먼저 뜨지 않게)
       const tk = s.press && thAlt(s)[0][1], topic = known && lv() <= 3 && ST.keys.includes(tk); // ★3 은 무엇을 물을지까지
-      if (!x.got[j]) return `<li class="th-gap">${esc(unheard ? (topic ? T`${pname(who)}에게 「${kl(tk)}」 이야기를 아직 듣지 못했다.` : known ? T`${pname(who)}에게서 아직 듣지 못한 말이 있다.` : T('아직 듣지 못한 말이 있다.')) : s.hint || '……')}</li>`;
+      if (!x.got[j]) return `<li class="th-gap">${esc(unheard ? (topic ? T`${pnameIn(who)}에게 「${kl(tk)}」 이야기를 아직 듣지 못했다.` : known ? T`${pnameIn(who)}에게서 아직 듣지 못한 말이 있다.` : T('아직 듣지 못한 말이 있다.')) : s.hint || '……')}</li>`;
       const n = thNote(s);
       return `<li class="th-got">${esc(s.t)}${n ? ` <button type="button" class="th-memo" data-th-memo="${n.id}" aria-label="${T`메모 ${noteNo(n.id)}번 보기`}">${noteNo(n.id)}</button>` : s.press ? pressTag(s) : ''}</li>`;
     };
@@ -3225,7 +3230,9 @@
   // heard: false — 가게 이름으로만 불리는 사람(「새터슈퍼」 「기무라 정육점」)은 가게 이름 대신 이름표를 적는다
   const unsaid = (said, id) => { const k = C.keywords[id] || {}; return !!said && k.type === 'person' && !k.nick && !k.victim && k.heard !== false && !covers(said, k.label, roleToks(id)); };
   function kl(id) { const k = C.keywords[id], m = asWas(); return k ? (m && m[id]) || k.label : id; }
-  function pname(p) { if (ST.asked[p.id]) return p.name; const s = String(kl(p.key)); return s.charAt(0).toLocaleUpperCase() + s.slice(1); } // 아직 안 만난 사람은 수첩에 적힌 이름으로 (영어의 「farmhand」처럼 소문자로 적혔으면 이름답게 첫 글자만 크게)
+  function pname(p) { if (ST.asked[p.id]) return p.name; const s = String(kl(p.key)); return s.charAt(0).toLocaleUpperCase() + s.slice(1); }
+  // 문장 가운데의 이름: 영어에서 아직 이름을 모르는 사람(「farmhand」처럼 소문자로 적힌 말)은 「the farmhand」로 — 첫 글자만 키우면 성처럼 읽힌다
+  function pnameIn(p) { if (ST.asked[p.id] || MG.I18N.lang !== 'en') return pname(p); const s = String(kl(p.key)); return /^[a-z]/.test(s) ? 'the ' + s : pname(p); } // 아직 안 만난 사람은 수첩에 적힌 이름으로 (영어의 「farmhand」처럼 소문자로 적혔으면 이름답게 첫 글자만 크게)
   function renameKey(id) {
     const m = asWas(), k = C.keywords[id];
     if (!m || !m[id] || !k) return false;
