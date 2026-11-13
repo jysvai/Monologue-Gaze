@@ -99,7 +99,7 @@ MG.I18N.put("en", "ui", {
 "이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 「{0}」부터 물어본다.": "You haven't yet heard anything from this person that this note would contradict. Ask about “{0}” first.",
 "이 메모로 따질 만한 말을 이 사람에게서 아직 듣지 못했다. 다른 것부터 물어본다.": "You haven't yet heard anything from this person that this note would contradict. Ask about other things first.",
 "엉뚱한 메모를 한 번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.": "One more wrong note and they stop talking. Note something new and you can press again.",
-"엉뚱한 메모를 {0}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.": "Wrong notes left before they stop talking: {0}. Note something new and you can press again.",
+"엉뚱한 메모를 {0}번 더 내밀면 입을 닫는다. 새 메모를 적어 오면 다시 따질 수 있다.": "Strikes left before they clam up: {0}. Note something new and you can press again.",
 "(메모를 보고 잠시 멈칫한다)": "(Glances at the note and stops for a moment)",
 "— 입을 닫았다. 새 메모를 적어 오거나, 다른 기록과 사람을 몇 군데 더 돌아보고 오면 다시 따질 수 있다.": "— has stopped talking. Note something new, or look around a few other records and people, and you can press again.",
 "{0} 탐문": "Interview: {0}",
