@@ -725,7 +725,7 @@ MG.I18N.put("de", "c13", {
 "yocqzfyn0r": "— Wo ist das Lager?",
 "1p4wx3d0ils": "Die Paketstation am Bahnhof Haram. Fach und PIN kommen jeden Tag neu.",
 "1abj2z3gp5j": "Die Gasse in Saesol? Da bin ich mit dem Scooter schon mal durchgefahren.",
-"xnxk7togbe": "Ich hab nie sein Gesicht gesehen. Auch nie seine Stimme gehört.",
+"xnxk7togbe": "Ich hab nie ein Gesicht gesehen. Auch nie eine Stimme gehört.",
 "13c16v1p9c2": "Aber eins ist komisch. Wenn ich in der Gasse Saesol-Mitte was ablege, kommt schon ein „check“, bevor ich das Foto geschickt hab. Als würde der irgendwo zuschauen. Woanders ist das nicht so.",
 "pl8wz9oupm": "(Hält sein Handy hoch) Ich hab mich nur mit dem hier eingeloggt. Gerät B? …Sind aber dieselben Tage, an denen der Lagerwart mich die Codes vorlesen ließ.",
 "1fjhdt1u9oe": "Mein Konto? Das hab ich gemacht, um meinen Lohn zu kriegen. Der Lagerwart wollte den Bestätigungscode aus der SMS, und den hab ich ihm gesagt. Zum Verknüpfen für die Bezahlung, hieß es.",
