@@ -815,7 +815,7 @@ MG.I18N.put("en", "c01", {
 "85g6h6p9x6": "Handwriting examination: the three letters and the slip signed “C.V.” are in the same hand.",
 "1xciemxq9w1": "Is there a sample to set against the handwriting of the letters?",
 "e6bltl1h30": "I put it to Vane that the letters came out of the Star's own newsroom. “So you've matched it that far.” The week the Knotsman first appeared, he says, sales went up threefold.",
-"2fk7uc4geol": "The reporter says he only received the letters and printed them. Is that so?",
+"vyzyf47x1a": "The reporter says he only received the letters and printed them. Is that so? Read the letters through to the end, down to the paper they are written on.",
 "1yszkmutwg5": "The Knotsman letters came from the Star's newsroom. Cyril Vane wrote them on newsroom copy paper and posted them to his own paper.",
 "1219f1dufa": "Between 1:30 and 2:00 a.m., who was in the back room of the Three Keys?",
 "1nzjz3xbsbs": "Quarrell's pocketbook: at 1:29 and 1:43 a.m. the back door of the Three Keys was locked. The back room was dark.",
