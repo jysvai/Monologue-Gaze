@@ -176,7 +176,7 @@ MG.I18N.put("de", "c12", {
 "1ckl9o639nw": "Saeki weder gesehen noch kontaktiert, seit meine Mutter im September zusammengebrochen ist",
 "pke4b8mtqk": "12., 21:47 „2330“ vom rosa Telefon des Kashiwa-yu an Saekis Pager — Pagerempfangsdaten",
 "23e797s90ur": "Ruhetag · Kessel nicht angeheizt · den ganzen Tag bei Mutter im Krankenhaus",
-"12uc94u5ex5": "Kessel 03:10–21:30 angeheizt · 3× Wasserwechsel — Kesselbuch · Besuchsliste 19:10–19:40",
+"12uc94u5ex5": "Kessel 03:10–21:30 angeheizt · 3× Wasserwechsel — Kesselbuch · Besuchsprotokoll 19:10–19:40",
 "1vwobd7wgjk": "Frühmorgens geschlafen · Kessel wird erst um zwei Uhr nachmittags angeheizt",
 "20gzxy5t1jb": "04:31 Konbini am Bahnhof, Kunde mit tropfenden Stiefeln — Verkäufer",
 "1ihrcx3sl2p": "Kesselbuch des Kashiwa-yu",
