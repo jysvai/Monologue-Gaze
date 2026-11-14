@@ -869,7 +869,7 @@ MG.I18N.put("de", "c02", {
 "fil17m96mo": "Wenn das Papiergeld nicht angerührt wurde — worum ging es dann?",
 "38nad6x6nk": "Geldkassette: 612.000 Mark in Scheinen, noch gebündelt. Nur zwei Schuldscheine: der von Neff (1919) und der von Huber (1921).",
 "h578441pmm": "Was lag noch in der Geldkassette?",
-"2kqc2n83ev": "Michaels Hausbuch, 14. Oktober 1922: Wald Tannenschlag an V.K. übergeben. Ein Drittel bar, der Rest der Wert von 80 Zentner Roggen zum Lichtmesspreis. Ein Schein — in der Truhe.",
+"2kqc2n83ev": "Michaels Hausbuch, 14. Oktober 1922: Wald Tannenschlag an V.K. übergeben. Ein Drittel bar, der Rest der Wert von 80 Zentner Roggen zum Tagespreis an Lichtmess. Ein Schein — in der Truhe.",
 "26hffuqqx4p": "Wie standen die Rechnungen des Bauern?",
 "25pyus6nfwg": "Schrannenpreise Kelbach: Roggen am 14. Oktober 2.900 Mark je Zentner, am 1. Februar auf dem Lichtmessmarkt 48.000 Mark.",
 "morbusphxe": "Wie haben sich die Getreidepreise inzwischen entwickelt?",
