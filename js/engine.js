@@ -681,9 +681,10 @@
     const react = fits || near || PICK.other || PICK.later ? 'flinch' : 'nope'; // 얼굴은 다시 그린 뒤에 (먼저 걸면 다시 그리면서 사라진다)
     const noLead = lv() < 5 && !proof().some(x => (leadMap().get(x.id) || { vs: [] }).vs.some(v => v.pid === p.id)); // 이 사람의 말과 어긋나는 메모가 수첩에 하나도 없으면 (고르는 칸이 그렇다고 알려 준다) 헛짚어도 참을성은 깎지 않는다. ★5 는 알려 주지 않으니 늘 깎는다
     if (!fits && !near && !PICK.other && !PICK.later && !noLead && !isSoft(p, k)) { // 목격자에게 기억을 되살리려 보여 준 메모(soft)는 헛짚어도 참을성을 깎지 않는다
-      const v = (ST.vs ||= {})[p.id] ||= { n: 0 };
-      v.n++;
-      if (v.n >= VS_MAX()) { v.shut = proof().length; v.act = actN(p); v.last = PICK.miss; PICK = null; save(); renderRead(); faceAnim('nope', 700); land(['#paneRead .vs-shut', '#askChips .chip']);
+      const v = (ST.vs ||= {})[p.id] ||= { n: 0 }, pair = `${k}|${n.id}`;
+      const again = (v.tried ||= []).includes(pair); // 같은 대답에 같은 메모를 또 내밀면 한 번 헛짚은 것으로 친다 (참을성을 두 번 깎지 않는다)
+      if (!again) { v.tried.push(pair); v.n++; }
+      if (!again && v.n >= VS_MAX()) { v.shut = proof().length; v.act = actN(p); v.last = PICK.miss; PICK = null; save(); renderRead(); faceAnim('nope', 700); land(['#paneRead .vs-shut', '#askChips .chip']);
         sceneCut(p, 'angry', [{ t: plain(v.last).replace(/\s+/g, ' ').trim() }, { t: T('— 입을 닫았다. 새 메모를 적어 오거나, 다른 기록과 사람을 몇 군데 더 돌아보고 오면 다시 따질 수 있다.'), me: true }].filter(x => x.t), 4200); // 입을 닫는 순간도 마주 앉은 그 사람으로 (그림이 있는 사람만)
         return; }
     }
