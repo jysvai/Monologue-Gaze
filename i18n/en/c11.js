@@ -1053,7 +1053,7 @@ MG.I18N.put("en", "c11", {
 "u827sgcq2z": "Did Pyeon Sang-gu write down a number somewhere?",
 "1gwpcguqo3i": "Euncheon 2-7341: subscriber Ham Deok-gyu, business Cheonghak Lacquerware, a workshop down an alley in Mokgol-dong.",
 "2dk13wau8ln": "Whose phone is that number?",
-"29g1espqth2": "Ham Deok-gyu, who said there had been “no call,” said in front of the record: “He called, yes. Around eight. I told him to come.” He says the man never came.",
+"29g1espqth2": "Ham Deok-gyu, who had said the man “didn’t call, either,” said in front of the record: “He called, yes. Around eight. I told him to come.” He says the man never came.",
 "11y03i5akut": "What the number's owner says.",
 "1wt8y5pzp14": "What Gil Yong-su saw when he came back to Cheonghak on the morning of the 15th: overnight, something in the workshop had been burned or washed away.",
 "7d2bf6dv6c": "The next morning — who saw what?",

@@ -890,7 +890,7 @@ MG.I18N.put("en", "c07", {
 "oewsqeqgjq": "What did the man who drives Seok Tae-ho’s car do that night?",
 "67s4njkafm": "Switchboard log: at 23:15 a call came from his wife. The Orchid Room bell rang three times; no one answered.",
 "2ffhihdfca6": "What became of the call put through to the Orchid Room around then? Check the switchboard log.",
-"1yoz2kmx2hs": "I confronted Seok Tae-ho with the switchboard log. “That’s because I was in the toilet.” From 11:15 p.m. until he called his wife back at 11:48 p.m.",
+"1yoz2kmx2hs": "I confronted Seok Tae-ho with the switchboard log. “It’s because I was in the toilet.” From 11:15 p.m. until he called his wife back at 11:48 p.m.",
 "3tygd9eoqo": "Seok Tae-ho says he took every call to the Orchid Room. Is that right?",
 "1img3jtizgh": "No. Mr. Songhak left at 22:40, and Seok Tae-ho took the Corona key at 10 p.m. At 11:15 there was no one in the Orchid Room.",
 "1hizieg174": "Why did Kang Man-sik confess, and not even appeal?",
