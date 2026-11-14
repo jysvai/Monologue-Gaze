@@ -91,7 +91,7 @@
           deny: '피해자가 보낸 곳은 거래소 밖 개인 지갑이다. 코인나루가 답할 수 있는 건 코인나루 안의 주소뿐이다.', eta: 360, doc: 'd_exchange',
           feed: { who: '코인나루', msg: '협조 요청 회신이 도착했다.' } },
         { id: 'rq_freeze', kind: '지급정지', title: '지급정지 요청 — 코인나루 회원 계정', by: '하람서 마약수사팀', to: '코인나루 준법감시팀', target: '입금 주소 3Kx9…Qe41의 회원 계정',
-          what: '출금 정지 · 이후 접속과 출금 시도 즉시 통보', need: ['#rq_exchange'], why: ['f_exchange_member', 'f_chain_deposit'], deny: '멈출 계정이 특정되지 않았다.', eta: 30, doc: 'd_freeze',
+          what: '출금 정지 · 이후 접속과 출금 시도 즉시 통보', need: ['#rq_exchange'], why: ['f_exchange_member', 'f_chain_deposit'], deny: '멈출 계정이 특정되지 않았다. 코인나루 회신에서 그 계정이 적힌 줄을 수첩에 적어 붙일 것.', eta: 30, doc: 'd_freeze',
           feed: { who: '코인나루', msg: '지급정지 조치 완료.' } },
         { id: 'rq_wphone', kind: '압수·수색·검증영장', title: '압수·수색·검증영장 신청 — 정우진 휴대폰', by: '하람서 마약수사팀', to: '하람지방검찰청 → 하람지방법원', target: '체포 현장에서 압수한 [[정우진]] 휴대폰 1대',
           what: '페이퍼 대화 · 사진 · 구인 앱 기록 추출', need: ['k_woojin', '@1180'], why: ['f_arrest_pills', 'f_woojin_admit', 'f_confirm_early', 'f_cctv_photo'], deny: '이 휴대폰에 범죄의 증거가 들어 있다는 소명이 없다.', eta: 150, doc: 'd_wphone',

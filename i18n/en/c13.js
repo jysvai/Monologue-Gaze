@@ -112,7 +112,7 @@ MG.I18N.put("en", "c13", {
 "2b0t405s20z": "Withdrawal Freeze Request — CoinNaru Member Account",
 "1gssqy67dy3": "Member account behind deposit address 3Kx9…Qe41",
 "15pixp1s7c7": "Freeze withdrawals · notify immediately of any later login or withdrawal attempt",
-"1wxa6ryjucw": "The account to freeze has not been identified.",
+"13o0qesuuho": "The account to freeze has not been identified. Write the row of the CoinNaru reply that names the account in the notebook and attach it.",
 "1i66d3n0nxg": "Withdrawal freeze in place.",
 "1fg0t1c2wvv": "Search, seizure & inspection warrant",
 "1tchwpziock": "Application for Search, Seizure and Inspection Warrant — Jeong Woo-jin's Phone",
