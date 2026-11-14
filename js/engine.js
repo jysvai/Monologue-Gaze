@@ -1208,7 +1208,7 @@
   const progress = () => ST.keys.length + new Set(ST.notes.map(n => n.f).filter(Boolean)).size;
   function compareList(s) {
     const sets = (s.sets || []).filter(x => ok(x.need));
-    if (!sets.length) return `<p class="res-none">${esc(s.empty || T('아직 맡길 감정이 없다.'))}</p>`;
+    if (!sets.length) return `<p class="res-none">${esc(s.empty || T('아직 맡길 감정이 없다. 감정할 증거의 이름을 기록에서 눌러 수첩에 적어 두면 여기로 올라온다.'))}</p>`;
     const o = ST.view.open;
     return sets.map(x => `<button type="button" class="item${o && o.t === 'compare' && o.id === x.id ? ' on' : ''}${ST.seen.includes(x.id) ? '' : ' new'}" data-cmp="${esc(x.id)}"><span class="item-t">${ST.unl.includes(x.id) ? '✓ ' : ''}${esc(plain(x.title))}${NEWSR(x.id)}</span>${x.meta ? `<span class="item-m">${esc(plain(x.meta))}</span>` : ''}</button>`).join('');
   }

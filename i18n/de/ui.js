@@ -128,7 +128,7 @@ MG.I18N.put("de", "ui", {
 "아직 이 시각에 대해 들은 말이 없다.": "Zu diesen Stunden noch nichts gehört.",
 "들은 말 칸을 누르면 그 사람에게 가서 메모를 내민다.": "Eine Aussage wählen, um zu der Person zu gehen und eine Notiz vorzulegen.",
 "아직 표에 올릴 말이 없다. 사람들에게 그 시각에 어디 있었는지 물어본다.": "Noch nichts für die Tafel. Fragen Sie die Leute, wo sie zu der Zeit waren.",
-"아직 맡길 감정이 없다.": "Noch nichts zur Begutachtung.",
+"아직 맡길 감정이 없다. 감정할 증거의 이름을 기록에서 눌러 수첩에 적어 두면 여기로 올라온다.": "Noch nichts zur Begutachtung. Erst wenn der Name eines Beweisstücks aus den Unterlagen im Notizbuch steht, taucht es hier auf.",
 "이것과 일치": "Diese passt",
 "감정 결과 불일치. 다시 맡기려면 새 단서가 하나 더 있어야 한다.": "Gutachten: keine Übereinstimmung. Für einen neuen Auftrag braucht es erst eine weitere Spur.",
 "불일치 {0}회.": "Keine Übereinstimmung ({0}×).",

@@ -128,7 +128,7 @@ MG.I18N.put("en", "ui", {
 "아직 이 시각에 대해 들은 말이 없다.": "Nothing heard yet about these hours.",
 "들은 말 칸을 누르면 그 사람에게 가서 메모를 내민다.": "Select a statement to go to that person and show a note.",
 "아직 표에 올릴 말이 없다. 사람들에게 그 시각에 어디 있었는지 물어본다.": "Nothing to put on the board yet. Ask people where they were at the time.",
-"아직 맡길 감정이 없다.": "Nothing to send for analysis yet.",
+"아직 맡길 감정이 없다. 감정할 증거의 이름을 기록에서 눌러 수첩에 적어 두면 여기로 올라온다.": "Nothing to send for analysis yet. Click the name of a piece of evidence in the records to put it in the notebook, and it comes up here.",
 "이것과 일치": "Matches this",
 "감정 결과 불일치. 다시 맡기려면 새 단서가 하나 더 있어야 한다.": "Analysis: no match. You'll need one more new lead before sending it again.",
 "불일치 {0}회.": "No match ×{0}.",
