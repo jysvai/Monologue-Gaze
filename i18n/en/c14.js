@@ -379,7 +379,7 @@ MG.I18N.put("en", "c14", {
 "1rdsls0xplc": "His own phone (locked)",
 "26zg13ozqse": "A second phone — blank handset with only a prepaid SIM, locked · he calls it the “[[work phone|k_workphone]]”",
 "1lix23hftua": "Gaon Bus Terminal storage locker receipt — [[No. 47|k_receipt]] · 11:08 · 3 hours, 3,000 won",
-"1d1nmddorrm": "Wallet — student ID, 4,000 won in cash, transit card, one folded [[Dallim Call pay statement|k_settle]] (2nd week of October)",
+"1d1nmddorrm": "Wallet — student ID, 4,000 won in cash, transit card, one folded [[Dallim pay statement|k_settle]] (2nd week of October)",
 "17qhw97oqdx": "A tangerine (coat pocket)",
 "w0fb1q1sge": "Two [[Paper|k_paper]] messenger notifications on the work phone's lock screen — sender [[Manager K|k_k]]. The previews show only “where are you” and “?”. Notifications keep coming after 11:40.",
 "rmacqrcmmm": "Both the work phone and his own phone kept powered on (to monitor notifications). Request forensics only with guardian consent.",
