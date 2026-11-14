@@ -98,7 +98,7 @@ MG.I18N.put("en", "c13", {
 "1jb6bpmomii": "HaramKick Co., Ltd. — Operations",
 "vuaolmw3tm": "The scooter parked in the Saesol Central alley, Nov 17 22:00–22:30",
 "14mk3ws2mvk": "Renter · payment details · route",
-"1efnk3xeqsk": "Nothing shows that a HaramKick was in that alley at that time.",
+"1774vv2wy51": "Nothing shows that a HaramKick was in that alley at that time. If it is on footage, write that row in the notebook and attach it.",
 "1bdx07fj0x4": "HaramKick replied — we have the renter.",
 "1j4zicrcfv": "Crypto cooperation",
 "4jhreepoku": "Request for Cooperation — Crypto Exchange",

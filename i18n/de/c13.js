@@ -98,7 +98,7 @@ MG.I18N.put("de", "c13", {
 "1jb6bpmomii": "HaramKick GmbH, Betriebsteam",
 "vuaolmw3tm": "Fahrzeug, das am 17.11. zwischen 22:00 und 22:30 in der Gasse Saesol-Mitte stand",
 "14mk3ws2mvk": "Mieter · Zahlungsdaten · Fahrtroute",
-"1efnk3xeqsk": "Kein Beleg, dass zu dieser Zeit ein HaramKick in dieser Gasse stand.",
+"1774vv2wy51": "Nichts belegt, dass zu der Zeit ein HaramKick in der Gasse war. Wenn er auf einer Aufnahme ist: die Zeile ins Notizbuch übernehmen und beifügen.",
 "1bdx07fj0x4": "Antwort von HaramKick — wir haben den Mieter.",
 "1j4zicrcfv": "Krypto-Auskunft",
 "4jhreepoku": "Auskunftsersuchen an eine Kryptobörse",
