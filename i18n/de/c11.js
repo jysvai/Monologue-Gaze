@@ -406,7 +406,7 @@ MG.I18N.put("de", "c11", {
 "1jmjfl617ai": "※ Vergleichsproben für die Sägespuren: Knochensäge (Beschlagnahme Metzgerei Useong), Bandsäge (Sägewerk Mokgol), Metallsäge und Zugsäge (handelsüblich).",
 "v4dbkf8ey1": "Gutachten (Nr. 86-RM-1167)",
 "1i7h67dvoie": "Bericht vom 28. November 1986 · Untersuchungsmaterial: Beschlagnahme Metzgerei Useong · aus der Schublade des Dezernatsleiters",
-"1cowpg8jqd1": "[[Knochensäge|k_bonesaw]] 1",
+"1cowpg8jqd1": "1 [[Knochensäge|k_bonesaw]]",
 "clrq6mo920": "Zahnabstand 1,4 mm · westliche Bauart, schneidet auf Stoß · enge Schränkung",
 "picy6l4yzl": "3 Messer",
 "cqvphr3emx": "Keine Reaktion auf Menschenblut",
