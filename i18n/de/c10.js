@@ -657,7 +657,7 @@ MG.I18N.put("de", "c10", {
 "1uhgj1pxfha": "Wann fuhr der Wagen in die Anlage und wieder hinaus?",
 "2zun3zqhtx": "Hi-Pass der Mautstelle Neuhafen: 00:34 Richtung Neuhafen, 01:21 Richtung Innenstadt. Zwischen 00:00 und 01:00 fuhr kein anderer Pkw in den Neuhafen.",
 "1vuw9ifyr10": "Welche Wagen fuhren um diese Zeit in den Neuhafen?",
-"jxryye7r3a": "Bang Geun-tae sagte, er sei in der Nacht „nicht da“ gewesen; vor den Daten der Mautstelle berief er sich auf einen Alarm am Kühlaggregat. Was er 47 Minuten lang tat, sagt er nicht.",
+"jxryye7r3a": "Bang Geun-tae, der „an dem Abend nicht im Neuhafen“ gewesen sein wollte, berief sich vor den Daten der Mautstelle auf einen Alarm am Kühlaggregat. Was er 47 Minuten lang tat, sagt er nicht.",
 "156e2yy9msd": "Sagt der Halter, er sei in der Nacht im Neuhafen gewesen?",
 "5ukfqd16ff": "Rekonstruktion: 00:09 Anruf → 00:14 Beifahrersitz des SUV → 00:16 Ausfahrt am Tor → 00:34 Mautstelle → 00:47 letztes Handysignal an Pier 3 → 01:21 Mautstelle.",
 "1vhh15q0bym": "Und wenn man die verstreuten Uhrzeiten in eine Reihe legt?",
