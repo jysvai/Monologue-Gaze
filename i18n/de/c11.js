@@ -1071,7 +1071,7 @@ MG.I18N.put("de", "c11", {
 "4y9lnq18rq": "Ham Deok-gyu, der „früh schlafen gegangen“ sein wollte, während Yong-su auf dem Dachboden war, änderte vor dem Register seine Aussage: Er habe gepackt, um sich frühmorgens heimlich vor den Gläubigern davonzumachen. „Aber ich bin nicht gefahren.“",
 "12gfywcj7s0": "Was der Werkstattinhaber sagt.",
 "10nto56v71d": "Auftragsbuch Transportdienst Euncheon: Sa., 15., 04:00, Cheonghak in Mokgol → Seoul, 12 Perlmuttschränke, „frühmorgens, leise“. Um 03:10 vom Auftraggeber selbst telefonisch abgesagt.",
-"laamcfuzjv": "Das Fahrtenbuch.",
+"laamcfuzjv": "Das Auftragsbuch.",
 "1nqphew3ptt": "Ham Deok-gyu, der „nie“ einen Transporter bestellt haben wollte, sagte vor dem Auftragsbuch: „Dass ich den Transporter bestellt hab, stimmt, und dass ich abgesagt hab, auch.“",
 "1mbt4up0uyt": "Was er zum Transporter sagt.",
 "1zabimfcl5u": "Er wollte am 15. um vier Uhr früh heimlich vor seinen Gläubigern nach Seoul verschwinden; den Lehrling schickte er ins Gasthaus, um zu packen. Der Transporter wurde um 3:10 Uhr abgesagt, telefonisch von Ham Deok-gyu selbst.",

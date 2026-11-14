@@ -791,7 +791,7 @@ MG.I18N.put("en", "c01", {
 "zh6fdar7d6": "The only one who claims to have seen a sailor is Croft. The man who took Rose away at about 1:45 a.m. wore a white armband. The sailor is ruled out.",
 "2fwf9fdxa86": "Where was Bill Cordell that night?",
 "1yzo3mh380f": "Cordell has an anchor tattooed on the back of his left hand. He can't account for himself after 11:50 on the night of the 27th.",
-"jc2kvz27ob": "How does the arrest report describe Cordell?",
+"laa1acbrtm": "How does the first report on the case describe Cordell?",
 "23f6oqfoiu3": "Crane Wharf Station charge book: “W. Cody” brought in at 12:35 a.m., cautioned and released at 7:05 a.m. Anchor tattoo on the back of the left hand; dock labourer.",
 "1drsszvyzl3": "Are there records from the part of town where Cordell says he woke up?",
 "ife6dkrj65": "I confronted Cordell with the charge book. “Cody” was him. He gave a false name so it wouldn't get back to the ganger.",

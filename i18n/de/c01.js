@@ -791,7 +791,7 @@ MG.I18N.put("de", "c01", {
 "zh6fdar7d6": "Den Matrosen will nur Croft gesehen haben. Rose wurde gegen 1:45 Uhr von einem Mann mit weißer Armbinde mitgenommen. Der Matrose scheidet aus.",
 "2fwf9fdxa86": "Wo war Bill Cordell in dieser Nacht?",
 "1yzo3mh380f": "Cordell hat eine Anker-Tätowierung auf dem linken Handrücken. Über seinen Verbleib nach 23:50 Uhr am 27. kann er nichts sagen.",
-"jc2kvz27ob": "Wie wird Cordell im Festnahmebericht beschrieben?",
+"laa1acbrtm": "Wie wird Cordell im ersten Bericht zum Fall beschrieben?",
 "23f6oqfoiu3": "Arrestbuch der Wache Crane Wharf: „W. Cody“ um 0:35 Uhr eingeliefert, um 7:05 Uhr früh verwarnt und entlassen. Anker-Tätowierung auf dem linken Handrücken, Hafenarbeiter.",
 "1drsszvyzl3": "Was steht in den Aufzeichnungen aus der Gegend, in der Cordell aufgewacht sein will?",
 "ife6dkrj65": "Ich habe Cordell das Arrestbuch vorgehalten. „Cody“ war er. Er hat einen falschen Namen angegeben, damit der Vorarbeiter nichts erfährt.",
