@@ -477,7 +477,7 @@ MG.I18N.put("de", "c05", {
 "1ct5td3fqgr": "Posten bezogen. Je 2 Wagen auf beiden Seiten der Leuchtturmstraße",
 "1pwjhgwtzcy": "1 Pkw — Liebespaar. Kontrolliert und weggeschickt",
 "1epjzyhc67l": "Keine Vorkommnisse",
-"y3mxkf5ab2": "1 Lieferwagen des Knowlton Courier fährt nach Norden durch — Zustellung Sonntagsausgabe. Nicht kontrolliert",
+"y3mxkf5ab2": "Ein Lieferwagen des Knowlton Courier fährt nach Norden durch — Zustellung Sonntagsausgabe. Nicht kontrolliert",
 "275m2m9ycsw": "Derselbe Lieferwagen fährt zurück nach Süden",
 "1mb7sy7eu7i": "Abzug",
 "ilfnjwp6qy": "Routenplan — Route 7 (Sonntagsausgabe)",

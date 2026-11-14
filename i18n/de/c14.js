@@ -464,7 +464,7 @@ MG.I18N.put("de", "c14", {
 "w0lioyfxn8": "18.11. 17:42 · Obermeister Bae · vor Haus 312, Darae-Jugong Siedlung 3",
 "21j9k54h7cv": "17:26 aus dem Observationsfahrzeug — Eingang Haus 312, Siedlung 3",
 "1x1ydjro1td": "[[Seo Bok-nam|k_bongnam]] (81, w) kommt mit Bankumschlag nach Hause — auf dem Video der Siedlung gesehen (15:40 Barabhebung von 15 Mio. Won bei der Sparkasse Darae)",
-"87xymqoj4x": "1 Junge in schwarzer Daunenjacke betritt Haus 312 — auf dem Treppenabsatz im 3. Stock, direkt unter ihrer Wohnung (4. Stock), festgehalten",
+"87xymqoj4x": "Ein Junge in schwarzer Daunenjacke betritt Haus 312 — auf dem Treppenabsatz im 3. Stock, direkt unter ihrer Wohnung (4. Stock), festgehalten",
 "1vi8da69lw4": "Besuch bei Frau Seo Bok-nam — Bargeld unberührt. Sie telefoniert gerade (Gegenseite 02-****-8800) — zum Auflegen gebracht",
 "1etvx85neof": "Festgehaltener Schüler [[Lee Hyeon-su|k_hyunsu]] (16) — Erziehungsberechtigte verständigt · Übergabe an Frauen & Jugend",
 "3zhnumulat": "Der Herr von der Finanzaufsicht hat gesagt, ich soll auf keinen Fall die Tür aufmachen. Aber er hat gesagt, ein Schüler kommt, und bei einem Schüler dachte ich, das ist in Ordnung.",

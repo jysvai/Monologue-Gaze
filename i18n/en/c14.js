@@ -464,7 +464,7 @@ MG.I18N.put("en", "c14", {
 "w0lioyfxn8": "Nov 18 17:42 · Sgt. Bae · outside Building 312, Darae Jugong Complex 3",
 "21j9k54h7cv": "17:26 from the stakeout car — entrance of Building 312, Complex 3",
 "1x1ydjro1td": "[[Seo Bok-nam|k_bongnam]] (81, F) returns home carrying a bank envelope — seen on complex CCTV (15 million won cash withdrawal at Darae Savings Bank at 15:40)",
-"87xymqoj4x": "1 male student in a black padded coat enters Building 312 — secured on the 3rd-floor landing just below her apartment (4th floor)",
+"87xymqoj4x": "A male student in a black padded coat enters Building 312 — secured on the 3rd-floor landing just below her apartment (4th floor)",
 "1vi8da69lw4": "Visit to Seo Bok-nam's home — cash untouched. Her phone on a call (other party 02-****-8800) — had her hang up",
 "1etvx85neof": "Secured student [[Lee Hyun-su|k_hyunsu]] (16) — guardian contacted · handed over to the juvenile unit",
 "3zhnumulat": "The FSS man said never to open the door. But he said a student was coming, and I thought a student would be all right.",

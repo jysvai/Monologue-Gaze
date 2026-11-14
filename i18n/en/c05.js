@@ -477,7 +477,7 @@ MG.I18N.put("en", "c05", {
 "1ct5td3fqgr": "In position. 2 cars on each side of the lighthouse road",
 "1pwjhgwtzcy": "1 sedan — a couple. Checked and sent on their way",
 "1epjzyhc67l": "All quiet",
-"y3mxkf5ab2": "1 Knowlton Courier delivery truck passes, northbound — Sunday edition delivery. Not stopped",
+"y3mxkf5ab2": "A Knowlton Courier delivery truck passes, northbound — Sunday edition delivery. Not stopped",
 "275m2m9ycsw": "Same truck heads back south",
 "1mb7sy7eu7i": "Pulled out",
 "ilfnjwp6qy": "Delivery Route Sheet — Route 7 (Sunday Edition)",
