@@ -457,7 +457,7 @@ MG.I18N.put("de", "c03", {
 "1n3hhpxnrb1": "Zwei Nächte war ich auf dem Polizeirevier Jongno. Sie haben immer wieder dasselbe gefragt.",
 "20ue5sz7xes": "Der Schwarze Schwan ist in Honmachi. Da verkehren viele Japaner.",
 "2do9pcw9gs3": "Nach meinem Lied kam das „Simcheongga“ von Meistersängerin Han Un-seon und ihrer Truppe. Im Warteraum hab ich sie nur kurz begrüßt.",
-"1bs7h29pcs3": "Das Programm, in dem mein Name steht. Neun Uhr, „Supyo-Brücke im Regen“. Ich hab's ausgeschnitten und auch meiner Mutter geschickt.",
+"1bs7h29pcs3": "Das Programm, in dem mein Name steht. Neun Uhr, „Die Supyo-Brücke im Regen“. Ich hab's ausgeschnitten und auch meiner Mutter geschickt.",
 "r2m6465z9e": "Die Gasse zum Bochundang. Den Weg bin ich immer gegangen, um meine Schulden abzuzahlen, ich mag ihn nicht.",
 "mbg8lmdtn7": "Neun Uhr? Da bin ich ans Mikrofon getreten. Ich hatte das erste Lied noch nicht halb gesungen, da brach es ab.",
 "1jiol2hj6u0": "Midori? Sie arbeitet mit mir im Schwarzen Schwan. Jeden Tag schneidet sie die Zeitungen aus, in denen ich stehe, und bringt sie mir.",

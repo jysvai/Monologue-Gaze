@@ -814,7 +814,7 @@ MG.I18N.put("de", "c05", {
 "gtr2d61av0": "Wie weit hat die Telefongesellschaft die Leitung zurückverfolgt?",
 "15gmtj1ezrd": "Stempelkarten des Vertriebs in jener Nacht — Brennan 00:31. An den anderen Samstagen des Monats stempelte er zwischen 23:48 und 23:55.",
 "de0kn5c0n3": "Gab es in der Nähe der Stelle, von der aus angerufen wurde, einen Ort, an dem die Uhrzeit festgehalten wird?",
-"4aapirjcs7": "Als ich Brennan die Stempelkarte vorhielt, sagte er: „Eine Minute zu spät also. Ich habe mir drüben an der Tankstelle einen Kaffee geholt.“ Auf die Frage nach dem Telefon wiederholte er nur die Sache mit dem Kaffee.",
+"4aapirjcs7": "Als ich Brennan die Stempelkarte vorhielt, sagte er: „Eine Minute zu spät also. Ich habe mir drüben an der Tankstelle einen Kaffee aus dem Automaten geholt.“ Auf die Frage nach dem Telefon wiederholte er nur die Sache mit dem Kaffee.",
 "keaff9cjwt": "Nie zu spät gewesen – stimmt das auch für jene Nacht?",
 "1buqtbflfcg": "Der Anruf kam um 0:18 Uhr vom Münztelefon gegenüber dem Lager. Brennan stempelte dreizehn Minuten später ein und sagt selbst, er sei an dieser Tankstelle gewesen.",
 "1clar1gcujx": "Delgado ist der Stammfahrer der Route 7. Welche Route fuhr er an dem Wochenende, an dem ein Brief aufgegeben wurde?",

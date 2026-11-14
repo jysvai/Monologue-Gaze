@@ -925,7 +925,7 @@ MG.I18N.put("de", "c15", {
 "28y35c51anz": "21:38: Ein Liefermotorrad mit einer kleinen Kamera am Helm fuhr in die Gasse und um 21:41 wieder hinaus.",
 "790zw0m3c0": "Was fuhr um diese Zeit durch die Gasse?",
 "1l9js1tml1e": "U-bin, der behauptet hatte, „nicht in Mirinae-dong“ gewesen zu sein, gab eine Tteokbokki-Lieferung um 21:38 zu und übergab das Video seiner Helmkamera.",
-"73xq3o0044": "Sein „nicht da gewesen“?",
+"73xq3o0044": "Sein „nicht in Mirinae-dong“?",
 "siaexfwrpd": "Auch U-bin sah hinten in der Gasse ein weißes Auto mit laufendem Motor. Als er vorbeifuhr, senkte der Mann am Steuer den Kopf.",
 "1ezkk14bf1z": "„Kann mich an kein weißes Auto erinnern“?",
 "2bsn3vtedjt": "U-bin war um 21:38 für eine Lieferung in der Gasse und fuhr um 21:41 weg, sechs Minuten vor dem Notruf von der Watch. Er scheidet aus.",

@@ -1022,7 +1022,7 @@ MG.I18N.put("de", "c12", {
 "216v273eyxg": "Kesselbuch des Kashiwa-yu: Am Do, dem 13., einem Ruhetag, um 03:10 angeheizt, um 21:30 aus. 3 Wasserwechsel, 31 Bündel Brennholz. An allen anderen Ruhetagen leer.",
 "lu0b3myr2j": "Und der Kessel an dem Tag?",
 "1puvbf8bbhz": "Hayama Shinji, der „am 13. nicht einmal angeheizt“ haben wollte, änderte seine Aussage und nannte es einen „großen Hausputz“. Warum dreimal das Wasser gewechselt: „Wenn’s dreckig ist, wechselt man’s.“",
-"1lzl2bep86b": "„Am 13. nicht mal angeheizt“?",
+"1lzl2bep86b": "„Am 13. nicht einmal angeheizt“?",
 "216ufnq61vd": "Luminol im Waschraum des Kashiwa-yu: Das Blut ist bis in den Siphon des Abflusses geflossen.",
 "ifila6uiu1": "Wohin das Wasser abfloss.",
 "1afq7wg0xq3": "Im Kashiwa-yu. Am Ruhetag, dem 13., brannte der Kessel von vor Tagesanbruch bis in die Nacht, das Wasser wurde dreimal gewechselt. Im Siphon des Waschraums blieben Menschenblut der Gruppe B und Knochenstaub zurück.",

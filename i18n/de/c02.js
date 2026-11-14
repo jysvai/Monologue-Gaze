@@ -890,7 +890,7 @@ MG.I18N.put("de", "c02", {
 "1hgo3p4uqo9": "Goldener Stern: Knauer kam erst am Montagabend, dem 29., mit Pferd und Schlitten an.",
 "hx6vo1l6x5": "Wann ist er wirklich im Gasthof abgestiegen?",
 "21olxsxwzmg": "Ich habe Knauer vorgehalten, an welchem Tag er wirklich im Stern ankam. „Dann war's halt der Montag. Davor war ich draußen in meiner Hütte im Wald. Holz machen.“",
-"mitlas4gv0": "„Seit Freitag“ dort übernachtet — passt das zu den Aufzeichnungen?",
+"mitlas4gv0": "„Ab Freitag“ dort übernachtet — passt das zu den Aufzeichnungen?",
 "1gt6weeeid0": "Hütte im Tannenschlag: keine Fußspuren im Schnee vor der Tür, kein frisch gespaltenes Holz, die Asche im Ofen lange kalt. Seit dem starken Schneefall am 27. keine Spuren auf diesem Waldweg.",
 "1tz4fx5tyvr": "Hat jemand die Waldhütte in Augenschein genommen?",
 "1yw1zsime3t": "Die zehn Tage: Am Montagmorgen, dem 29., ein Schimmelschlitten am Anfang des Waldwegs; am Abend desselben Tages eine Zeile für einen Marktgast im Fremdenbuch des Kelbacher Gasthofs.",
