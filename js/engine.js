@@ -2535,7 +2535,16 @@
         if (e.endsWith('!') && !asked.includes(e) && asked.includes(k)) { const ev = evidence(p, k)[0]; add(`press:${p.id}|${k}`, T('들은 대답 가운데 기록과 어긋나는 것이 있다.'), ev && ev.src ? T`${pname(p)} — 「${kl(k)}」에 한 대답 · 내밀 메모는 ${ev.src}에서` : T`${pname(p)} — 「${kl(k)}」에 한 대답`, { t: 'person', id: p.id, src: p.src, mark: 'q:' + k }); }
       }));
     };
-    if (lv() < 5) pressLeads();
+    // 펼쳐 둔 의문에 남은 칸이 「메모를 내밀 대답」인데, 그 사람에게 그 말을 아직 묻지 않았다 — 묻는 것부터 짚는다 (T203: 다른 사람 대답 속 단어를 짚는 동안, 엉뚱한 대답에 메모를 내밀며 헤맸다)
+    const threadAsks = () => thView().filter(x => !x.done).forEach(x => x.t.steps.forEach((st, j) => {
+      if (x.got[j] || !st.press) return;
+      thAlt(st).forEach(([pid, k]) => {
+        const p = C.people[pid], asked = ST.asked[pid];
+        if (!p || asked == null || !personVisible(p) || !C.keywords[k] || !ST.keys.includes(k) || asked.includes(k) || asked.includes(k + '!')) return;
+        add(`ask:${pid}|${askEntry(p, k)}`, T('수첩의 단어로 아직 물어보지 않은 것이 있다.'), T`${pname(p)} — 「${kl(k)}」`, { t: 'person', id: pid, src: p.src });
+      });
+    }));
+    if (lv() < 5) { pressLeads(); threadAsks(); }
     const findLeads = pick => vis.filter(s => s.type === 'archive').forEach(s => ST.keys.forEach(k => {
       if (C.keywords[k] && C._srcDocs[s.id].some(d => pick(d) && (d.need || []).length && ok(d.need) && (d.find || []).includes(k) && !ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)))) add(`find:${s.id}|${k}`, T`「${plain(s.name)}」에서 수첩의 단어로 아직 찾아보지 않은 것이 있다.`, quote(kl(k)), { t: 'find', src: s.id, id: k });
     }));
@@ -2554,7 +2563,7 @@
     unmet.forEach(meet); // 만나도 아직 새로 나올 게 없는 사람은 적지 않은 단어 뒤에
     // 조건이 풀려 자료실에 새로 나온 기록(누구를 만나거나 무엇을 알아낸 뒤에야 찾히는 것)은 탐문보다 먼저 — 곁가지 추궁을 먼저 짚으면 앞길이 가려진다
     findLeads(() => true);
-    if (lv() >= 5) pressLeads();
+    if (lv() >= 5) { pressLeads(); threadAsks(); }
     // 4. 탐문 — 새 단어나 쓸 만한 사실이 나올 물음 (메모를 내밀 차례인 대답은 앞에서 짚었다)
     people.forEach(p => ST.keys.forEach(k => {
       if (!C.keywords[k] || (k === p.key && rawAns(p, k) == null)) return;
