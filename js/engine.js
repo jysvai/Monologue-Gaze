@@ -2544,7 +2544,19 @@
         add(`ask:${pid}|${askEntry(p, k)}`, T('수첩의 단어로 아직 물어보지 않은 것이 있다.'), T`${pname(p)} — 「${kl(k)}」`, { t: 'person', id: pid, src: p.src });
       });
     }));
-    if (lv() < 5) { pressLeads(); threadAsks(); }
+    // 펼쳐 둔 의문의 빈칸이 아직 찾지 못한 사진 속 자리에 있다 — 그 사진부터 (T205: 힌트가 가리킨 발자국 사진만 다시 보며 9분을 헤맸는데, 짚어 보기는 그 자리를 맨 끝에야 짚었다)
+    const threadSpots = () => thView().filter(x => !x.done).forEach(x => x.t.steps.forEach((st, j) => {
+      if (x.got[j] || !st.f) return;
+      const want = [].concat(st.f);
+      vis.filter(s => s.type === 'photo').forEach(s => (s.scenes || []).forEach(sc => {
+        if (!ok(sc.need)) return;
+        (sc.spots || []).forEach(sp => {
+          if (ST.unl.includes(sp.id) || !ok(sp.need)) return;
+          if ([...bagOf([sp.body || [], { f: sp.f }]).f].some(f => want.some(w => fIs(f, w)))) add('spot:' + sp.id, T`「${plain(sc.title)}」에 아직 찾지 못한 곳이 있다.`, sp.label ? quote(plain(sp.label)) : '', { t: 'scene', id: sc.id, src: s.id });
+        });
+      }));
+    }));
+    if (lv() < 5) { pressLeads(); threadAsks(); threadSpots(); }
     const findLeads = pick => vis.filter(s => s.type === 'archive').forEach(s => ST.keys.forEach(k => {
       if (C.keywords[k] && C._srcDocs[s.id].some(d => pick(d) && (d.need || []).length && ok(d.need) && (d.find || []).includes(k) && !ST.seen.includes(d.id) && (!d.lock || ST.unl.includes(d.id)))) add(`find:${s.id}|${k}`, T`「${plain(s.name)}」에서 수첩의 단어로 아직 찾아보지 않은 것이 있다.`, quote(kl(k)), { t: 'find', src: s.id, id: k });
     }));
@@ -2563,7 +2575,7 @@
     unmet.forEach(meet); // 만나도 아직 새로 나올 게 없는 사람은 적지 않은 단어 뒤에
     // 조건이 풀려 자료실에 새로 나온 기록(누구를 만나거나 무엇을 알아낸 뒤에야 찾히는 것)은 탐문보다 먼저 — 곁가지 추궁을 먼저 짚으면 앞길이 가려진다
     findLeads(() => true);
-    if (lv() >= 5) { pressLeads(); threadAsks(); }
+    if (lv() >= 5) { pressLeads(); threadAsks(); threadSpots(); }
     // 4. 탐문 — 새 단어나 쓸 만한 사실이 나올 물음 (메모를 내밀 차례인 대답은 앞에서 짚었다)
     people.forEach(p => ST.keys.forEach(k => {
       if (!C.keywords[k] || (k === p.key && rawAns(p, k) == null)) return;

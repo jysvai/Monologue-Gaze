@@ -1013,7 +1013,7 @@ MG.I18N.put("en", "c12", {
 "1iohs6es4zu": "The firewood cargo bike in the Kashiwa-yu back yard: a plaster cast of its tread matches the tracks on the sand path at the east gate.",
 "2di9mix41e6": "A bike that fits the tire tracks.",
 "9nferjcozj": "Black rubber boots in the Kashiwa-yu back yard: wavy sole pattern, 27 cm. Same as the prints in the mud by Bin 1.",
-"u8ejyfktxj": "The footprints by Bin 1.",
+"1lymtlsfemn": "Footwear that fits the prints by Bin 1.",
 "awrigvdhig": "Hayama Shinji, who said he “was asleep before dawn on Friday,” was shown the clerk's account. He stared into the firebox for a long while, then: “Am I the only one round here who wears boots?”",
 "sqj0xtq84f": "“Asleep before dawn on Friday”?",
 "kjsqre4to2": "Kashiwa-yu's cargo bike and boots. Hayama Shinji, who has run Kashiwa-yu alone since his mother went into hospital, brought the bags that morning.",
