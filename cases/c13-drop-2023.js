@@ -94,7 +94,7 @@
           what: '출금 정지 · 이후 접속과 출금 시도 즉시 통보', need: ['#rq_exchange'], why: ['f_exchange_member', 'f_chain_deposit'], deny: '멈출 계정이 특정되지 않았다. 코인나루 회신에서 그 계정이 적힌 줄을 수첩에 적어 붙일 것.', eta: 30, doc: 'd_freeze',
           feed: { who: '코인나루', msg: '지급정지 조치 완료.' } },
         { id: 'rq_wphone', kind: '압수·수색·검증영장', title: '압수·수색·검증영장 신청 — 정우진 휴대폰', by: '하람서 마약수사팀', to: '하람지방검찰청 → 하람지방법원', target: '체포 현장에서 압수한 [[정우진]] 휴대폰 1대',
-          what: '페이퍼 대화 · 사진 · 구인 앱 기록 추출', need: ['k_woojin', '@1180'], why: ['f_arrest_pills', 'f_woojin_admit', 'f_confirm_early', 'f_cctv_photo'], deny: '이 휴대폰에 범죄의 증거가 들어 있다는 소명이 없다.', eta: 150, doc: 'd_wphone',
+          what: '페이퍼 대화 · 사진 · 구인 앱 기록 추출', need: ['k_woojin', '@1180'], why: ['f_arrest_pills', 'f_woojin_admit', 'f_confirm_early', 'f_cctv_photo'], deny: '이 휴대폰에 범죄의 증거가 들어 있다는 소명이 없다. 이 휴대폰으로 일을 받고 보고했다는 기록이나 본인의 진술을 붙일 것.', eta: 150, doc: 'd_wphone',
           feed: { who: '디지털포렌식', msg: '정우진 휴대폰 추출 결과 올립니다.' } },
         { id: 'rq_ip', kind: '통신자료', title: '통신자료 제공 요청 — IP 가입자 조회', by: '하람서 마약수사팀', to: '새빛텔레콤 (주말 당직)', target: 'IP 211.○○.○○.47 · 거래소 기록의 접속 시각',
           intro: [{ note: '주말이라 통신사 회신이 늦다. 먼저 올려 두고 다른 일을 한다.' }],

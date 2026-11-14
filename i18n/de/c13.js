@@ -119,7 +119,7 @@ MG.I18N.put("de", "c13", {
 "2d5asyttpp5": "Staatsanwaltschaft Haram → Amtsgericht Haram",
 "mjye69qpj4": "1 Handy von [[Jeong U-jin|k_woojin]], bei der Festnahme sichergestellt",
 "d0vx1tboo1": "Extraktion: Paper-Chats · Fotos · Daten der Job-App",
-"2cvwn3tsr64": "Nicht begründet, dass sich auf diesem Handy Beweise für eine Straftat befinden.",
+"84gzy91iss": "Nicht begründet, dass sich auf diesem Handy Beweise für eine Straftat befinden. Eine Aufzeichnung oder seine eigene Aussage beifügen, dass er über dieses Handy Aufträge bekam und Rückmeldung gab.",
 "2dtgirkm79m": "Extraktion von Jeong U-jins Handy ist fertig, lade hoch.",
 "2cxq02q5zmw": "Bestandsdaten",
 "19e3yrxvezz": "Bestandsdatenauskunft — Anschlussinhaber einer IP",

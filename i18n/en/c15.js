@@ -131,7 +131,7 @@ MG.I18N.put("en", "c15", {
 "1906ggdqafu": "Mobile carrier (urgent request · court approval after the fact)",
 "1rtkxgedoxp": "Phone registered to [[Seong Min-jae|k_minjae]] (010-****-5076)",
 "2g2925hihhg": "Cell-tower connection records since Nov 21 20:00",
-"1jpvjy2q2pk": "Nothing shows a link between this person and tonight.",
+"1wjx1dobl9w": "Nothing shows a link between this person and tonight. Attach a record of something rented or linked in this person's name tonight.",
 "26evcoz5v1c": "Cell-tower reply for 5076.",
 "uzidlncgsw": "Case Search",
 "2dhldqdd9d2": "Garam Police Station · Case & report history",

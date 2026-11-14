@@ -119,7 +119,7 @@ MG.I18N.put("en", "c13", {
 "2d5asyttpp5": "Haram District Prosecutors' Office → Haram District Court",
 "mjye69qpj4": "1 phone belonging to [[Jeong Woo-jin|k_woojin]], seized at the scene of arrest",
 "d0vx1tboo1": "Extraction of Paper chats · photos · job-app records",
-"2cvwn3tsr64": "Nothing shows that this phone holds evidence of a crime.",
+"84gzy91iss": "Nothing shows that this phone holds evidence of a crime. Attach a record, or his own statement, showing that he took jobs and reported back on this phone.",
 "2dtgirkm79m": "Uploading the extraction results from Jeong Woo-jin's phone.",
 "2cxq02q5zmw": "Subscriber data",
 "19e3yrxvezz": "Request for Subscriber Data — IP Subscriber Lookup",

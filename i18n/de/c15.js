@@ -131,7 +131,7 @@ MG.I18N.put("de", "c15", {
 "1906ggdqafu": "Mobilfunkanbieter (Eilersuchen · Genehmigung wird nachgereicht)",
 "1rtkxgedoxp": "Handy auf den Namen [[Seong Min-jae|k_minjae]] (010-****-5076)",
 "2g2925hihhg": "Funkzellendaten ab 21.11. 20:00",
-"1jpvjy2q2pk": "Ein Zusammenhang zwischen dieser Person und dem heutigen Geschehen ist nicht belegt.",
+"1wjx1dobl9w": "Ein Zusammenhang zwischen dieser Person und dem heutigen Geschehen ist nicht belegt. Eine Aufzeichnung beifügen, in der etwas steht, das heute auf den Namen dieser Person gemietet oder verbunden wurde.",
 "26evcoz5v1c": "Funkzellendaten zur 5076.",
 "uzidlncgsw": "Fallsuche",
 "2dhldqdd9d2": "Polizeirevier Garam · Fälle und Anzeigen",

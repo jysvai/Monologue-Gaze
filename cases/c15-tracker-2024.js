@@ -85,7 +85,7 @@
           intro: [{ note: '야간 당직 검사를 거쳐 판사에게 간다. 소명이 약하면 새벽에 전화가 되돌아온다.' }],
           need: ['#rq_tracker'], why: ['f_tracker_owner', 'f_share'], deny: '과거 신고 이력만으로는 오늘 일과 대상자 휴대폰의 관련성이 소명되지 않는다. 대상자는 전자장치 기록상 집에 있었다.', eta: 180, doc: 'd_exphone', keys: ['k_debt'], feed: { who: '박 경사', msg: '영장 발부, 집행 끝. 권준혁 폰 추출본 올립니다.' } },
         { id: 'rq_minjae_loc', kind: '통신사실확인자료 (긴급)', title: '통신사실확인자료 제공 요청 — 기지국 위치', by: '여성청소년수사팀', to: '통신사 (긴급 요청 · 사후 허가)', target: '[[성민재]] 명의 휴대폰 (010-****-5076)', what: '11.21 20:00 이후 기지국 접속 기록',
-          need: ['k_minjae'], why: ['f_renter', 'f_share'], deny: '이 사람과 오늘 일의 관련성이 소명되지 않았다.', eta: 45, doc: 'd_minjae_loc', feed: { who: '막내 윤서', msg: '5076 기지국 회신입니다.' } },
+          need: ['k_minjae'], why: ['f_renter', 'f_share'], deny: '이 사람과 오늘 일의 관련성이 소명되지 않았다. 오늘 이 사람 명의로 빌리거나 이어진 것이 적힌 기록을 붙일 것.', eta: 45, doc: 'd_minjae_loc', feed: { who: '막내 윤서', msg: '5076 기지국 회신입니다.' } },
       ] },
       { id: 'db', type: 'archive', name: '사건 검색', skin: 'ledger', paper: '가람경찰서 · 사건·신고 이력', desc: '경찰 내부망의 신고·사건 이력 검색. 이름, 사건, 날짜로 찾는다.', placeholder: '이름 · 사건 · 날짜', start: ['d_history'], startLabel: '피해자 관련 이력' },
       { id: 'q', type: 'query', name: '조회', skin: 'ledger', need: ['k_car'], button: '조회',
