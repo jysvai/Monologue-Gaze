@@ -142,7 +142,7 @@ MG.I18N.put("de", "c13", {
 "uxa6yet76m": "Ein Zip-Beutel, kleiner als eine Handfläche. Darin noch 1 weiße, runde Tablette. Auf einer Seite eine [[Halbmond-Prägung|k_moon]].",
 "kmo8z5c4ut": "※ Nicht mit bloßen Händen berührt. Samt Beutel sichergestellt.",
 "1qfru58kfxr": "Zerknüllter Kassenbon",
-"uxav7zoqn7": "[[Harumart Saesol-Mitte|k_harumart]] · Inhaber [[Oh Seung-cheol|k_oh]] · 2023-11-18 00:24 · Milch 200 ml 1 · Banane 1 · Summe 2.600 Won",
+"uxav7zoqn7": "[[Harumart Saesol-Mitte|k_harumart]] · Inhaber [[Oh Seung-cheol|k_oh]] · 2023-11-18 00:24 · 1× Milch 200 ml · 1× Banane · Summe 2.600 Won",
 "1wvdd7isxxp": "Haftzettel",
 "1hhycjx4zbq": "„[[Schlafklinik|k_clinic]] — nur werktags 13–17 Uhr 😭“",
 "4xjgadbxyl": "„Am 25. hat Mama Geburtstag!! Tortenboden üben“",
