@@ -903,7 +903,7 @@ MG.I18N.put("de", "c02", {
 "1bammo2lyuy": "Belege, die den selbst angegebenen Verbleib widerlegen",
 "2jyjyx1kno": "Genau eine Stelle stimmt nicht. Wo will Valentin Knauer in dieser Woche gewesen sein? Ist es eine Notiz mit einem Datum, das nicht zu seinen Worten passt?",
 "a16h21lxi5": "Motiv",
-"2e6q4rz26yv": "Genau eine Stelle stimmt nicht. Die Geldbündel wurden nicht angerührt. Halte das, was in der Kassette übrig war, gegen Michaels Hausbuch.",
+"2e6q4rz26yv": "Genau eine Stelle stimmt nicht. Die Geldbündel wurden nicht angerührt. Das, was in der Kassette übrig war, gegen Michaels Hausbuch halten.",
 "2o1rbyaqht": "Tgb.-Nr. 41/1923 · Nachprüfung",
 "1e3c2qzb1q3": "Im Oktober 1922 kaufte Valentin Knauer den Wald im Tannenschlag. Zwei Drittel des Preises sollte er mit dem „Wert von 80 Zentner Roggen, an Lichtmess nach Tagespreis“ bezahlen, und er stellte darüber einen Schein aus. Die Schuld, im Herbst 230.000 Mark, lag um den Lichtmessmarkt bei über drei Millionen Mark. Der Schein war nicht notariell beurkundet und existierte nur in einem Stück, in Michaels Kassette.",
 "xha3otfq1t": "Seit dem Herbst stieg der Roggen von Monat zu Monat. Von da an beobachtete Knauer den Hof von der Waldhütte aus und schlich sich ein paarmal auf den Dachboden. Das waren die Schritte, die Magdalena hörte. Am 12. Januar verweigerte Moosbauer ihm die Stundung; ein paar Tage später nahm er den Schlüssel vom Türstock.",

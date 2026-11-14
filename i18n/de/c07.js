@@ -916,7 +916,7 @@ MG.I18N.put("de", "c07", {
 "w2x6buadop": "Zur Tatzeit nicht am selbst angegebenen Ort",
 "1bheu279nsj": "Genau eine Stelle stimmt nicht. Seok Tae-ho sagte, er sei in seinem Zimmer im Songwolgak gewesen. Ist es eine Notiz, dass er zu der Zeit nicht dort war?",
 "vdc0eirrfy": "Warum der Fahrer gestand und schwieg",
-"i6b457c6g2": "Genau eine Stelle stimmt nicht. Ist es eine Notiz darüber, warum Kang Man-sik schwieg? Sieh dir an, was nach dem Schuss auf der Seite seiner Familie festgehalten wurde.",
+"i6b457c6g2": "Genau eine Stelle stimmt nicht. Ist es eine Notiz darüber, warum Kang Man-sik schwieg? Ansehen, was nach dem Schuss auf der Seite seiner Familie festgehalten wurde.",
 "13rjsd6funf": "Revier Seoha 71-K-1022 · Wiederaufnahme",
 "1a6u6bmt7x7": "Am 22. Oktober um 21:38 Uhr rief Bae Ok-hee vom Telefon der Buchhaltung aus die Lokalredaktion der Saehan Ilbo an. Übergeben wollte sie die Abschrift des Daeyang-Kontobuchs. An jedem mit „※“ markierten Tag ging eine Rechnung hinaus, zehnmal so hoch wie die Zeche, und wer die Differenz im Umschlag an den Gast im Orchideenzimmer weitergab, war Seok Tae-ho.",
 "emv3w7j7lm": "Um 22 Uhr vergewisserte sich Seok Tae-ho im Telefonzimmer, wohin der Anruf gegangen war, und nahm Fahrer Noh den Schlüssel des Corona ab. Kang Man-sik sagte er nur: „Halten Sie am Ufer bei den Weiden. Ich habe etwas unter vier Augen zu besprechen.“ Um 23:04 Uhr fuhr er mit dem Corona voraus ans Ufer, schaltete das Licht aus und wartete. Um 23:20 Uhr, als die Serie „Das Fährmädchen“ zu Ende war und die Nachrichtenmusik einsetzte, fiel auf dem Rücksitz des Crown ein einziger Schuss. Der braune Aktenumschlag verschwand im Corona ohne Licht in Richtung Stadt.",
