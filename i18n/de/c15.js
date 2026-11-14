@@ -85,7 +85,7 @@ MG.I18N.put("de", "c15", {
 "himve8jxtd": "Ortungszentrale des Justizministeriums",
 "hjwb0npjch": "[[Kwon Jun-hyeok|k_junhyuk]] (Schutzanordnung · trägt elektronische Fußfessel)",
 "wcdyrotmcn": "Standort, Alarme und Gerätestatus ab 21.11. 18:00",
-"uesk04v5d2": "Der Beschluss über die Fußfessel ist nicht belegt. Den Inhalt des Beschlusses anhängen.",
+"2a2whutk208": "Nichts belegt einen Beschluss über eine elektronische Fußfessel. Die Zeile aus dem Beschluss über die Schutzanordnungen ins Notizbuch übernehmen und beifügen.",
 "fsv93xfv7a": "Die Antwort der Ortungszentrale ist da.",
 "1z04zbtcgxe": "Freiwillige Herausgabe",
 "2c46jbjtjzg": "Ersuchen um freiwillige Herausgabe: Zutrittsprotokoll und Aufzugsvideo",

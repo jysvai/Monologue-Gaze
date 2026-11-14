@@ -85,7 +85,7 @@ MG.I18N.put("en", "c15", {
 "himve8jxtd": "Ministry of Justice Location Monitoring Center",
 "hjwb0npjch": "[[Kwon Jun-hyeok|k_junhyuk]] (provisional order · wearing an electronic monitor)",
 "wcdyrotmcn": "Location, alerts and device status since Nov 21 18:00",
-"uesk04v5d2": "Nothing shows an order to wear an electronic monitor. Attach the terms of the order.",
+"2a2whutk208": "Nothing shows an order to wear an electronic monitor. Find that line in the court's provisional order, write it in the notebook and attach it.",
 "fsv93xfv7a": "Reply from the monitoring center.",
 "1z04zbtcgxe": "Voluntary submission",
 "2c46jbjtjzg": "Request for Voluntary Submission — Entry Logs & Elevator Footage",
