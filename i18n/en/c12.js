@@ -97,7 +97,7 @@ MG.I18N.put("en", "c12", {
 "2ckfabyjd9k": "From 04:05 to 04:44: 39 minutes.",
 "4f5lkfs436": "Lab Matches",
 "1afma9kd6jt": "Send evidence and samples to the Forensic Science Lab together and find out which ones match. After one mismatch, you can't send it again until you find a new lead.",
-"162gjfit0ys": "Not enough samples collected to compare yet.",
+"mfc775llsq": "Not enough samples collected to compare yet. Click the name of a piece of evidence in the records to put it in the notebook, and it comes up here.",
 "1tyngsap397": "Bone cut surfaces and saws",
 "lfxdsyknqs": "Department of Forensic Medicine · Forensic Lab, Physics Section",
 "1vbdvyuq46c": "A silicone cast was taken of the cut surface of the left shinbone. Pig bones of the same thickness were test-cut with four kinds of saw and laid side by side.",

@@ -208,7 +208,7 @@ MG.I18N.put("de", "c14", {
 "1xpj9ssghoi": "Abgefragte Nummern",
 "2d14r6rgptd": "Gutachten",
 "1u9jt8og175": "Beweisstück und Vergleichsproben gehen zusammen an die Kriminaltechnik, die feststellt, was übereinstimmt. Nach einem Fehlschlag erst wieder möglich, wenn es eine neue Spur gibt.",
-"2dfp76uku4b": "Noch nicht genug Proben für einen Auftrag.",
+"qn99doxsqb": "Noch nicht genug Proben für einen Auftrag. Erst wenn der Name eines Beweisstücks aus den Unterlagen im Notizbuch steht, taucht es hier auf.",
 "1531ro91l99": "Druckspuren der gefälschten Bescheinigung",
 "keuatnqk7": "Kriminaltechnik, Urkundenprüfung · 4 Laserausdrucke",
 "112qa67lzrg": "Die Bescheinigung vom Schuhschrank der alten Dame. Die Spuren auf dem Papier werden mit Ausdrucken von Orten verglichen, an denen der Junge ein und aus geht.",

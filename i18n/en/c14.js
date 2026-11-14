@@ -208,7 +208,7 @@ MG.I18N.put("en", "c14", {
 "1xpj9ssghoi": "Numbers looked up",
 "2d14r6rgptd": "Lab Results",
 "1u9jt8og175": "Send the evidence and samples to the forensics section together to find a match. After one mismatch, you can't send it again until you have a new lead.",
-"2dfp76uku4b": "No samples collected to send yet.",
+"qn99doxsqb": "No samples collected to send yet. Click the name of a piece of evidence in the records to put it in the notebook, and it comes up here.",
 "1531ro91l99": "Print marks on the forged certificate",
 "keuatnqk7": "Forensics · document examination · 4 laser printouts",
 "112qa67lzrg": "The certificate left on her shoe cabinet. Compare the marks on it with printouts from places the boy spends time.",

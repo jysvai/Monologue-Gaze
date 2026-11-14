@@ -97,7 +97,7 @@ MG.I18N.put("de", "c12", {
 "2ckfabyjd9k": "Von 04:05 bis 04:44: 39 Minuten.",
 "4f5lkfs436": "Gutachten",
 "1afma9kd6jt": "Beweisstücke und Vergleichsproben gehen zusammen an das Kriminaltechnische Institut, das feststellt, was übereinstimmt. Liegt man einmal daneben, ist ein neuer Auftrag erst nach einer neuen Spur möglich.",
-"162gjfit0ys": "Noch keine Proben zum Vergleichen beisammen.",
+"mfc775llsq": "Noch keine Proben zum Vergleichen beisammen. Erst wenn der Name eines Beweisstücks aus den Unterlagen im Notizbuch steht, taucht es hier auf.",
 "1tyngsap397": "Knochenschnitt und Säge",
 "lfxdsyknqs": "Rechtsmedizin · Kriminaltechnik, Physikabteilung",
 "1vbdvyuq46c": "Von der Schnittfläche des linken Schienbeins wurde ein Silikonabdruck genommen. Daneben liegen Probeschnitte an gleich dicken Schweineknochen, gemacht mit vier verschiedenen Sägen.",
